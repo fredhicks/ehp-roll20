@@ -1,0 +1,76 @@
+						<input type="hidden" name="attr_SkillStyle" value="">
+						<div class="SkillMinimax">
+							<fieldset class="repeating_skills">
+								<div class="highlight">
+									<input type="hidden" name="attr_skill"><input type="hidden" name="attr_bonus" value="0"><input type="hidden" name="attr_rating"><input type="hidden" name="attr_rating-word">
+
+									<b><span data-i18n="minimize"></span>:</b> <input name="attr_minimize" type="number" value="0" min="0" max="4">
+
+									<b><span data-i18n="maximize"></span>:</b> <input name="attr_maximize" type="number" value="0" min="0" max="4">
+
+									<button type="roll" value="&{template:fateroll} {{theme=@{theme}}} {{name=@{character_name}: @{skill}}} {{roll=[[@{rating}+@{bonus}+@{Show-Diceprompts}+@{dice}dF-@{netmin}+@{netmax}]]}}" name="roll_SkillRoll">
+										<b><span name="attr_skill"></span></b>:
+										<span name="attr_rating-word"></span> &nbsp;
+
+									<span>
+										<input type="hidden" name="attr_netmin" value="0" class="hideAllBut">
+										<span class="icon iblock">–</span>
+										<span class="icon iblock">–</span>
+										<span class="icon iblock">–</span>
+										<span class="icon iblock">–</span>
+									</span>
+
+									<span>
+										<input type="hidden" name="attr_netmax" value="0" class="hideAllBut">
+										<span class="icon iblock">+</span>
+										<span class="icon iblock">+</span>
+										<span class="icon iblock">+</span>
+										<span class="icon iblock">+</span>
+									</span>
+
+									<span>
+										<input type="hidden" name="attr_dice" value="4" class="hideAllBut">
+										<span class="icon iblock">?</span>
+										<span class="icon iblock">?</span>
+										<span class="icon iblock">?</span>
+										<span class="icon iblock">?</span>
+									</span>
+
+
+									</button>
+
+								</div>
+							</fieldset>
+						</div> <!-- /SkillList -->
+						
+						
+						
+						
+on("change:repeating_skills:minimize change:repeating_skills:maximize", function(e) {
+	log("minimax trigger: "); log(e);
+	var prefix = e.sourceAttribute.replace(/_m[ai][xn]imize$/,"_");
+	log("minimax prefix: " + prefix);
+	var minid = prefix + "minimize";
+	var maxid = prefix + "maximize";
+	var netminid = prefix + "netmin";
+	var netmaxid = prefix + "netmax";
+	var diceid = prefix + "dice";
+	var gets = [ minid, maxid, diceid ];
+	getAttrs(gets,function(v) {
+		var attrs = {};
+		var max = Number(v[maxid]);
+		var min = Number(v[minid]);
+		if ( max > min ) {
+			max = max - min;
+			min = 0;
+		} else {
+			min = min - max;
+			max = 0;
+		}
+		var dice = 4 - max - min;
+		attrs[netminid] = min;
+		attrs[netmaxid] = max;
+		attrs[diceid] = dice;
+		setAttrs(attrs);
+	});
+});
