@@ -1,0 +1,194 @@
+<script type="text/worker">
+
+	var verbose = true;
+
+	var echo = function(value) {
+		// console.log('/====================\\');
+		if ( verbose ) { console.log(value); }
+		// console.log('\\====================/');
+	};
+
+	var d6 = function() {
+		return Math.floor( Math.random() * 6 ) +1;
+	};
+	
+	echo("Loading");
+
+	on("clicked:preproll", function() {
+		echo("clicked");
+		getAttrs(["discipline","exhaustion","madness"],function(s) {
+		echo(s);
+			var d = Number(s["discipline"]);
+			var e = Number(s["exhaustion"]);
+			var m = Number(s["madness"]);
+			var ds = [0,0,0,0,0,0];
+			var es = [0,0,0,0,0,0];
+			var ms = [0,0,0,0,0,0];
+			var suc = 0;
+			var attrs = {};
+			echo(`Discipline: ${d}`);
+			for(var i = 0; i < d; i++ ) {
+				var die = d6();
+				if ( die < 4 ) { suc++; }
+				ds[i] = die;
+			}
+			ds = ds.sort(function(a,b) { return b-a; });
+			echo(ds);
+			echo(`Exhaustion: ${e}`);
+			for(var i = 0; i < e; i++ ) {
+				var die = d6();
+				if ( die < 4 ) { suc++; }
+				es[i] = die;
+			}
+			es = es.sort(function(a,b) { return b-a; });
+			echo(es);
+			echo(`Madness: ${m}`);
+			for(var i = 0; i < m; i++ ) {
+				var die = d6();
+				if ( die < 4 ) { suc++; }
+				ms[i] = die;
+			}
+			ms = ms.sort(function(a,b) { return b-a; });
+			echo(ms);
+			echo(`${suc} successes`);
+			// Discipline beats Madness; Madness beats Exhaustion; Exhaustion beats Pain.
+			var dom = "";
+			var dis = true;
+			var mad = true;
+			var exh = true;
+			for(var i = 0; i < 6; i++) {
+				echo(`D ${dis} ${ds[i]} E ${exh} ${es[i]} M ${mad} ${ms[i]}`);
+				if ( ds[i] === 0 && ms[i] === 0 && es[i] === 0 ) {
+					break;
+				} else if ( dis && mad && exh && ds[i] === ms[i] && ds[i] === es[i] ) {
+					echo(1);
+					continue;
+				} else if ( dis && mad && !exh && ds[i] === ms[i] ) {
+					echo(2);
+					continue;
+				} else if ( dis && exh && !mad && ds[i] === es[i] ) {
+					echo(3);
+					continue;
+				} else if ( exh && mad && !dis && es[i] === ms[i] ) {
+					echo(4);
+					continue;
+				} else if ( dis && mad && !exh && ds[i] > ms[i] ) {
+					echo(2.1);
+					dom = "Discipline"; break;
+				} else if ( dis && exh && !mad && ds[i] > es[i] ) {
+					echo(3.1);
+					dom = "Discipline"; break;
+				} else if ( exh && mad && !dis && es[i] > ms[i] ) {
+					echo(4.1);
+					dom = "Exhaustion"; break;
+				} else if ( dis && mad && !exh && ds[i] < ms[i] ) {
+					echo(2.2);
+					dom = "Madness"; break;
+				} else if ( dis && exh && !mad && ds[i] < es[i] ) {
+					echo(3.2);
+					dom = "Exhaustion"; break;
+				} else if ( exh && mad && !dis && es[i] < ms[i] ) {
+					echo(4.2);
+					dom = "Madness"; break;
+				} else if ( dis && exh && mad && ds[i] > ms[i] && ds[i] > es[i] ) {
+					echo(5);
+					dom = "Discipline"; break;
+				} else if ( dis && exh && mad && ms[i] > ds[i] && ms[i] > es[i] ) {
+					echo(6);
+					dom = "Madness"; break;
+				} else if ( dis && exh && mad && es[i] > ds[i] && es[i] > ms[i] ) { 
+					echo(7);
+					dom = "Exhaustion"; break;
+				} else if ( dis && exh && ds[i] === es[i] && ds[i] > ms[i] ) {
+					echo(8);
+					// Then madness drops out of the race
+					mad = false; continue;
+				} else if ( dis && mad && ds[i] === ms[i] && ds[i] > es[i] ) {
+					// Then exhaution drops out of the race
+					echo(9);
+					exh = false; continue;
+				} else if ( exh && dis && es[i] === ds[i] && es[i] > ms[i] ) {
+					// Then madness drops out of the race
+					echo(10);
+					mad = false; continue;
+				} else if ( exh && mad && es[i] === ms[i] && es[i] > ds[i] ) {
+					// Then discipline drops out of the race
+					echo(11);
+					dis = false; continue;
+				} else if ( mad && dis && ms[i] === ds[i] && ms[i] > es[i] ) {
+					// Then exhaustion drops out of the race
+					echo(12);
+					exh = false; continue;
+				} else if ( mad && exh && ms[i] === es[i] && ms[i] > ds[i] ) {
+					// Then discipline drops out of the race
+					echo(13);
+					dis = false; continue;
+				}
+				echo("Far Side");
+			}
+			if ( dom === "" ) {
+				// Then we've exited with at least two pools tied with each other.
+				// We need to disqualify things where they've dropped out, following 
+				// the tiebreaker D > M > E > P
+				if ( dis ) { dom = "Discipline (wins tie)"; }
+				else if ( mad ) { dom = "Madness (wins tie)"; }
+				else if ( exh ) { dom = "Exhaustion (wins tie)"; }
+			}
+			echo(`Dominance: ${dom}`);
+			attrs["dominant"] = dom;
+			attrs["successes"] = suc;
+			attrs["ddie1"] = ds[0];
+			attrs["ddie2"] = ds[1];
+			attrs["ddie3"] = ds[2];
+			attrs["mdie1"] = ms[0];
+			attrs["mdie2"] = ms[1];
+			attrs["mdie3"] = ms[2];
+			attrs["mdie4"] = ms[3];
+			attrs["mdie5"] = ms[4];
+			attrs["mdie6"] = ms[5];
+			attrs["edie1"] = es[0];
+			attrs["edie2"] = es[1];
+			attrs["edie3"] = es[2];
+			attrs["edie4"] = es[3];
+			attrs["edie5"] = es[4];
+			attrs["edie6"] = es[5];
+			setAttrs(attrs);
+			echo(attrs);
+		});
+	});
+</script>
+
+D: <input type="number" name="attr_discipline" min=0 max=3 value=3>
+E: <input type="number" name="attr_exhaustion" min=0 max=6 value=1>
+M: <input type="number" name="attr_madness" min=0 max=6 value=1>
+
+<button type="action" name="act_preproll">
+	Prepare Roll
+</button>
+
+<hr>
+
+Successes: <input type="number" name="attr_successes" value="" size=3>
+<br/>
+Dominant: <input type="text" name="attr_dominant" value="" size=3>
+<br/>
+D dice: <input type="number" name="attr_ddie1" value="" size=3>
+<input type="number" name="attr_ddie2" value="" size=3>
+<input type="number" name="attr_ddie3" value="" size=3>
+<br/>
+E dice: 
+<input type="number" name="attr_edie1" value="" size=3>
+<input type="number" name="attr_edie2" value="" size=3>
+<input type="number" name="attr_edie3" value="" size=3>
+<input type="number" name="attr_edie4" value="" size=3>
+<input type="number" name="attr_edie5" value="" size=3>
+<input type="number" name="attr_edie6" value="" size=3>
+<br/>
+M dice:
+<input type="number" name="attr_mdie1" value="" size=3>
+<input type="number" name="attr_mdie2" value="" size=3>
+<input type="number" name="attr_mdie3" value="" size=3>
+<input type="number" name="attr_mdie4" value="" size=3>
+<input type="number" name="attr_mdie5" value="" size=3>
+<input type="number" name="attr_mdie6" value="" size=3>
+<br/>
