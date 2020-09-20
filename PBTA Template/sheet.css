@@ -1,0 +1,806 @@
+.sheet-aaaaainterceptor {}
+
+.sheet-whole button[type="roll"]:before {
+	content: '';
+}
+
+.sheet-whole button[type="roll"] {
+	font-size: 100%;
+}
+
+
+.sheet-bigname {
+	font-size: 18px;
+}
+
+.sheet-2d6-button-nofloat .sheet-bigname {
+	vertical-align: 3px;
+	padding-right: 6px;
+}
+
+.sheet-bignumber {
+	font-size: 36px;
+	font-weight: bold;
+}
+
+input[type="number"].sheet-bignumber {
+	width: 1.5em;
+}
+
+.sheet-bignumber.sheet-make-plus {
+	font-size: 30px;
+}
+
+.sheet-centered {
+	text-align: center;
+}
+
+.sheet-columns {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	align-items: stretch;
+	align-content: stretch;
+}
+
+/* these two will let us have a gap between the columns but not to the left of them */
+
+.sheet-columns {
+	/* margin-left: -24px;
+	width: calc(100% + 24px); */
+}
+
+.sheet-columns .sheet-wide {
+	margin-left: 12px;
+	padding-left: 12px;
+	border-left: 1px dotted #999999;
+	margin-right: 12px;
+	padding-right: 12px;
+	border-right: 1px dotted #999999;
+}
+
+.sheet-columns .sheet-narrow {
+	flex-grow: 0;
+	flex-shrink: 0;
+	/* flex-basis: 15%; */
+	width: 125px;
+	max-width: 125px;
+	min-width: 125px;
+}
+
+.sheet-columns .sheet-standard {
+	flex-grow: 0;
+	flex-shrink: 0;
+	width: 225px;
+	max-width: 225px;
+	min-width: 225px;
+	/* flex-basis: 25%; */
+}
+
+.sheet-columns .sheet-wide {
+	flex-grow: 1;
+	flex-shrink: 1;
+	min-width: 350px;
+	/* flex-basis: 60%; */
+}
+
+.sheet-condition {
+	text-indent: -18px;
+	margin-left: 18px;
+	margin-block-end: 6px;
+}
+
+.sheet-tooltip .sheet-tooltip-pop,
+.sheet-condition .sheet-condition-pop {
+	visibility: hidden;
+	border: 1px solid #999999;
+	background-color: #eeeeee;
+	text-align: left;
+	padding: 6px; 
+	border-radius: 6px;
+	position: absolute;
+	z-index: 1;
+	width: 200px;
+	top: 100%;
+	left: 50%;
+	margin-left: -95px;
+	box-shadow: 0px 3px 6px #999999;
+	font-size: 90%;
+}
+
+.sheet-narrow .sheet-tooltip-pop {
+	margin-left: -60px;
+}
+
+.sheet-tooltip .sheet-tooltip-pop::after,
+.sheet-condition .sheet-condition-pop::after {
+	content: " ";
+	position: absolute;
+	bottom: 100%;
+	left: 0%;
+	margin-left: 4px;
+	border-width: 4px;
+	border-style: solid;
+	border-color: transparent transparent black transparent;
+}
+
+.sheet-tooltip:hover .sheet-tooltip-pop,
+.sheet-condition:hover .sheet-condition-pop {
+	visibility: visible;
+}
+
+/* Relative position for outer container necessary in order for inner container to render! That was a frustrated discovery. */
+
+.sheet-condition,
+.sheet-tooltip {
+	position: relative;
+}
+
+.sheet-condition .sheet-condition-penalty {
+	display: none;
+}
+
+.sheet-condition input[name="attr_marked"]:checked ~ .sheet-condition-penalty {
+	display: block;
+}
+
+.sheet-condition div {
+	text-indent: 0px;
+}
+
+/* 
+
+.sheet-condition .sheet-condition-penalty,
+.sheet-condition .sheet-condition-clearance {
+	display: none;
+}
+
+.sheet-condition input[name="attr_marked"]:checked ~ .sheet-condition-penalty,
+.sheet-condition-popper:hover .sheet-condition-penalty,
+.sheet-condition-popper:hover .sheet-condition-clearance {
+	display: block;
+}
+
+*/
+
+.sheet-devarea {
+	height: 20px;
+	overflow: hidden;
+	margin-top: 24px;
+	border: 1px solid black;
+	background: #fffff8;
+	padding: 6px; 
+}
+
+.sheet-devarea:hover {
+	height: auto;
+}
+
+.sheet-bold {
+	font-weight: bold;
+}
+
+.sheet-buttonless {
+	border: none;
+	background: none;
+	color: black;
+	font-weight: normal;
+	text-align: left;
+	padding: 0px;
+}
+
+.sheet-buttonless:hover,
+input.sheet-popmenu-select[value=""] + button:hover,
+.sheet-popmenu-box .repitem:hover {
+	background: black;
+	color: white;
+}
+
+.sheet-popmenu-box.sheet-no-hover .repitem:hover {
+	background: #eeeeee;
+	color: black;
+}
+
+input.sheet-popmenu-select[value=""] + button {
+	color: #999999;
+}
+
+.sheet-popmenu input[type="text"] {
+	width: 200px;
+	max-width: 200px;
+}
+
+.sheet-examples-list {
+	font-size: 90%;
+	font-style: italic;
+	padding-left: 6px;
+	display: none;
+}
+
+.sheet-popmenu-box .sheet-examples-list {
+	width: 200px;
+	max-width: 200px;
+}
+
+.sheet-float-right {
+	float: right;
+}
+
+textarea:focus ~ div.sheet-examples-list,
+input:focus + div.sheet-examples-list /* ,
+div:hover > div.sheet-examples-list */ {
+	display: block;
+}
+
+.sheet-fill-the-blank, .sheet-fill-in-the-blank {
+	text-indent: 0px;
+}
+
+.sheet-fillme {
+	border: none;
+	border-bottom: 0.5px solid #eeeeee;
+	border-radius: 6px;
+	padding-left: 0px;
+	margin-left: 0px;
+	margin-bottom: 6px;
+}
+
+.sheet-fillme:focus, .sheet-fillme:hover {
+	border-bottom: 0.5px solid #999999;
+	box-shadow: 0px 3px 6px #999999;
+}
+
+.sheet-fillme:focus {
+	padding-left: 3px;
+}
+
+.sheet-fullwidth {
+	width: 100%;
+}
+
+input.sheet-hide-on-yes[value="yes"] + * {
+	display: none;
+}
+
+input.sheet-hide-on-no[value="no"] + * {
+	display: none;
+}
+
+input.sheet-hide-on-null[value=""] + * {
+	display: none;
+}
+
+input.sheet-hide-on-zero[value="0"] + * {
+	display: none;
+}
+
+input.sheet-make-plus + span.sheet-make-plus:before {
+	content: "+";
+}
+
+input.sheet-make-plus[value^="-"] + span.sheet-make-plus:before {
+	content: "";
+}
+
+.sheet-mod-state-button[value="forward"] + button:before {
+	font-family: "Pictos";
+	font-style: normal;
+	font-weight: normal;
+	content: ']';
+}
+
+.sheet-mod-state-button[value="ongoing"] + button:before {
+	font-family: "Pictos";
+	font-style: normal;
+	font-weight: normal;
+	content: '1';
+}
+
+.sheet-mod-state-button + button > span {
+	display: none;
+}
+
+.sheet-mod-state-button + button:hover > span,
+.sheet-mod-state-button + button:focus > span {
+	display: inline;
+}
+
+.sheet-move {
+	text-indent: -18px;
+	margin-left: 18px;
+	margin-block-end: 6px;
+}
+
+.sheet-move .sheet-indented {
+	text-indent: 1em;
+}
+
+.sheet-move ul {
+	text-indent: 0px;
+}
+
+.sheet-move ul li {
+	margin-left: 24px;
+}
+
+input.sheet-collapse-on-unchecked,
+input.sheet-collapse-on-checked {
+	display: none;
+}
+
+.sheet-rolltemplate-sharemove .sheet-move,
+input.sheet-collapse-on-unchecked + .sheet-move-compressor,
+input.sheet-collapse-on-checked:checked + .sheet-move-compressor,
+.sheet-moves-all .sheet-move-compressor {
+	max-height: 40px;
+	overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 0%, transparent 100%);
+}
+
+.sheet-rolltemplate-sharemove:hover .sheet-move,
+input.sheet-collapse-on-unchecked:checked + .sheet-move-compressor ,
+input.sheet-collapse-on-checked + .sheet-move-compressor,
+.sheet-moves-all:hover .sheet-move-compressor {
+	max-height: none;
+	-webkit-mask-image: none;
+	mask-image: none;
+	overflow: visible;
+}
+
+.sheet-nocontrol .repcontrol {
+	display: none;
+}
+
+/*
+<div class="one-line-mod">
+	<div class="minimum">
+		<input type="checkbox" name="attr_rollmod" value="yes">
+	</div>
+	<div class="minimum">
+		<input type="hidden" name="attr_condition-id" value="">
+		<input type="hidden" name="attr_modifier" value="" class="make-plus"><span class="make-plus"></span><input type="number" name="attr_modifier" value="0" class="fillme plus-enabled">
+	</div>
+	<div class="minimum">
+		<input type="hidden" name="attr_state" value="forward" class="mod-state-button">
+		<button type="action" name="act_state" class="buttonless"><span name="attr_state"></span></button>
+	</div>
+	<div class="stretch">
+		<input type="text" name="attr_target" value="" class="fillme">
+	</div>
+	<div class="minimum">
+		<input type="hidden" name="attr_used" value="no" class="hide-on-no">
+		<button type="action" name="act_trash" class="buttonless trashit"></button>
+	</div>
+</div>
+*/
+
+.sheet-one-line {
+	white-space: nowrap;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	align-items: center;
+	align-content: stretch;
+}
+
+.sheet-one-line > div {
+	padding-right: 6px;
+}
+
+.sheet-one-line > div.sheet-unpadded {
+	padding-right: 2px;
+}
+
+.sheet-one-line .sheet-minimum {
+	flex-grow: 0;
+	flex-shrink: 1;
+}
+
+.sheet-one-line .sheet-stretch {
+	flex-grow: 1;
+	flex-shrink: 1;
+}
+
+.sheet-one-line input {
+	width: auto;
+}
+
+.sheet-one-line .sheet-stretch input[type="text"] {
+	width: 100%;
+}
+
+.sheet-one-line input.sheet-plus-enabled {
+	width: 1em;
+}
+
+.sheet-one-line input.sheet-make-plus[value^="-"] ~ input.sheet-plus-enabled {
+	width: 1.5em;
+}
+
+.sheet-one-line input.sheet-make-plus[value^="-"] ~ input.sheet-plus-enabled:hover,
+.sheet-one-line input.sheet-plus-enabled:hover,
+.sheet-one-line input.sheet-make-plus[value^="-"] ~ input.sheet-plus-enabled:focus,
+.sheet-one-line input.sheet-plus-enabled:focus {
+	width: 3.5em;
+}
+
+/* Chrome, Safari, Edge, Opera */
+.sheet-one-line input.sheet-plus-enabled::-webkit-outer-spin-button,
+.sheet-one-line input.sheet-plus-enabled::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.sheet-one-line input.sheet-plus-enabled:hover::-webkit-outer-spin-button,
+.sheet-one-line input.sheet-plus-enabled:hover::-webkit-inner-spin-button,
+.sheet-one-line input.sheet-plus-enabled:focus::-webkit-outer-spin-button,
+.sheet-one-line input.sheet-plus-enabled:focus::-webkit-inner-spin-button {
+  -webkit-appearance: auto;
+  margin: inherit;
+}
+
+/* Firefox */
+input.sheet-plus-enabled[type=number] {
+  -moz-appearance: textfield;
+}
+
+input.sheet-plus-enabled[type=number]:hover,
+input.sheet-plus-enabled[type=number]:focus {
+  -moz-appearance: auto;
+}
+
+.sheet-one-line input[type="checkbox"] {
+	vertical-align: 0px;
+}
+
+.sheet-one-line .sheet-buttonless,
+.sheet-one-line span.sheet-make-plus {
+	vertical-align: 3px;
+}
+
+.sheet-pictos {
+	font-family: 'Pictos';
+}
+
+.sheet-popmenu,
+.sheet-popmenu-box {
+	display: inline-block
+}
+
+.sheet-popmenu repcontainer {
+	margin-top: 0px;
+	padding-top: 0px;
+}
+
+.sheet-popmenu-box {
+	font-size: 12px;
+	vertical-align: middle;
+	text-align: left;
+	width: 200px;
+	max-width: 200px;
+	height: 1px;
+	z-index: 1;
+	display: none;
+}
+
+.sheet-popmenu-box button {
+	display: none;
+	width: 100%;
+	z-index: 1;
+}
+
+.sheet-popmenu-box .sheet-checkline {
+	text-align: left; 
+	margin-left: 1.5em;
+	text-indent: -1.5em;
+}
+
+.sheet-popmenu:hover .sheet-popmenu-box {
+	display: inline-block;
+	background: #eeeeee;
+	position: absolute;
+	width: auto;
+	height: auto;
+	z-index: 1;
+	border: .5px solid #999999;
+	padding: 6px;
+	box-shadow: 3px 3px 6px #999999;
+	border-radius: 3px 3px 6px 6px
+}
+
+.sheet-popmenu-rightside {
+	right: 20px;
+}
+
+.sheet-popmenu:hover .sheet-popmenu-box button {
+	display: inline-block;
+}
+
+.sheet-popmenu-trigger {
+	margin-bottom: 0px;
+	padding-bottom: 0px;
+}
+
+.sheet-popmenu-righthand .sheet-popmenu-trigger:after,
+.sheet-popmenu-trigger:before {
+	font-family: "Pictos";
+	font-style: normal;
+	font-weight: normal;
+	content: 'l';
+	margin-right: 6px;
+	padding: 1px;
+	color: #999999;
+}
+
+.sheet-popmenu-righthand .sheet-popmenu-trigger:before {
+	content: '';
+	margin-right: 0px;
+}
+
+.sheet-popmenu-righthand .sheet-popmenu-trigger:after {
+	margin-left: 6px;
+}
+
+.sheet-popmenu:hover .sheet-popmenu-trigger:before,
+.sheet-popmenu:hover .sheet-popmenu-trigger:after {
+	color: white; 
+	background: black;
+}
+
+button[type="roll"].sheet-2d6-button.sheet-no-dice:after,
+button[type="roll"].sheet-2d6-button-nofloat.sheet-no-dice:after {
+	content: '';
+} 
+
+button[type="roll"].sheet-2d6-button.sheet-no-dice,
+button[type="roll"].sheet-2d6-button-nofloat.sheet-no-dice {
+	text-align: left;
+	margin-left: 0px;
+} 
+
+.sheet-narrow button[type="roll"].sheet-2d6-button.sheet-no-dice,
+.sheet-narrow button[type="roll"].sheet-2d6-button-nofloat.sheet-no-dice {
+	text-align: left;
+	margin-left: -6px;
+} 
+
+button[type="roll"].sheet-sharemove, 
+button[type="roll"].sheet-2d6-button, 
+button[type="roll"].sheet-2d6-button-nofloat {
+	background: transparent;
+	border-style: none;
+	margin: 0px;
+	margin-left: 6px;
+	padding: 0px;
+}
+
+button[type="roll"].sheet-sharemove, 
+button[type="roll"].sheet-2d6-button {
+	float: right;
+}
+
+button[type="roll"].sheet-sharemove:after {
+	font-family: "Pictos";
+	font-style: normal;
+	text-transform: uppercase;
+	font-weight: normal;
+	content: 'R';
+}
+
+button[type="roll"].sheet-2d6-button:after, 
+button[type="roll"].sheet-2d6-button-nofloat:after {
+	content: 'Fa';
+	font-family: 'dicefontd6';
+	font-size: 116%;
+}
+
+.sheet-result {
+	margin-left: 30px;
+}
+
+.sheet-result ul {
+	margin-left: 0px;
+	margin-block-end: 3px;
+}
+
+.sheet-result ul li {
+	margin-left: 10px;
+}
+
+.sheet-rolltemplate-2d6-roll {
+	border: 1px solid black;
+	background-color: white;
+	padding: 6px;
+	box-shadow: 3px 3px 6px #999999;
+	border-radius: 3px 3px 6px 6px;
+}
+
+.sheet-rolltemplate-2d6-roll .sheet-topline {
+	padding: 6px;
+	margin-top: -6px;
+	margin-left: -6px;
+	margin-right: -6px;
+	background-color: black;
+	color: white;
+}
+
+/*
+.sheet-rolltemplate-2d6-roll div {
+	padding: 2px;
+	border: 1px solid red;
+}
+*/
+
+.sheet-rolltemplate-2d6-roll .sheet-clearance {
+	clear: both;
+}
+
+.sheet-rolltemplate-2d6-roll .sheet-dice {
+	min-height: 48px;
+	text-align: right;
+}
+
+/*
+<span class="inlinerollresult showtip tipsy-n-right" original-title="<img src=&quot;/images/quantumrollwhite.png&quot; class=&quot;inlineqroll&quot;> Rolling 2d6+1+0 = (<span class=&quot;basicdiceroll&quot;>2</span>+<span class=&quot;basicdiceroll&quot;>2</span>)+1+0">5</span>
+*/
+
+.sheet-rolltemplate-2d6-roll .sheet-dice .sheet-dieroll-roll {
+	min-height: 48px;
+	min-width: 60px;
+	padding-top: 18px;
+}
+
+.sheet-rolltemplate-2d6-roll .sheet-dice .sheet-dieroll-roll .inlinerollresult {
+	background: none;
+	border: none;
+	text-align: center;
+	vertical-align: middle;
+	font-size: 48px;
+	padding-top: 18px;
+}
+
+.sheet-rolltemplate-2d6-roll .sheet-dice .sheet-dieroll-title {
+	display: block;
+	text-align: right;
+}
+
+.sheet-rolltemplate-2d6-roll .sheet-dice .sheet-dieroll-hit,
+.sheet-rolltemplate-2d6-roll .sheet-dice .sheet-dieroll-mixed,
+.sheet-rolltemplate-2d6-roll .sheet-dice .sheet-dieroll-miss {
+	float: left;
+	display: inline-block;
+	min-width: 48px;
+	text-align: center;
+	vertical-align: bottom;
+}
+
+.sheet-rolltemplate-sharemove {
+	border: 1px solid black;
+	background-color: white;
+	padding: 6px;
+	box-shadow: 3px 3px 6px #999999;
+	border-radius: 3px 3px 6px 6px;
+}
+
+.sheet-rolltemplate-sharemove .sheet-move {
+	text-indent: 0px;
+	margin-left: 0px;
+	margin-block-end: 6px;
+}
+
+.sheet-rolltemplate-sharemove .sheet-move .sheet-indented {
+	text-indent: 1em;
+}
+
+.sheet-rolltemplate-sharemove .sheet-move ul {
+	text-indent: 0px;
+}
+
+.sheet-rolltemplate-sharemove .sheet-move ul li {
+	margin-left: 24px;
+}
+
+.sheet-rolltemplate-sharemove .sheet-result {
+	margin-left: 42px;
+	text-indent: -30px;
+}
+
+.sheet-rolltemplate-sharemove .sheet-result ul {
+	margin-left: 0px;
+	margin-block-end: 3px;
+	text-indent: 0px;
+}
+
+.sheet-rolltemplate-sharemove .sheet-result ul li {
+	margin-left: 0px;
+}
+
+.sheet-rolltemplate-sharemove .sheet-space-above,
+.sheet-space-above {
+	padding-top: 6px; 
+}
+
+.sheet-rolltemplate-sharemove .sheet-topline {
+	padding: 6px;
+	margin-top: -6px;
+	margin-left: -6px;
+	margin-right: -6px;
+	background-color: black;
+	color: white;
+}
+
+.sheet-show-on-unchecked-combo {
+	display: none;
+}
+
+input.sheet-show-on-yes-combo[value="yes"] + input.sheet-show-on-unchecked-combo + div {
+	display: block;
+}
+
+input.sheet-show-on-yes-combo:not([value="yes"]) + input.sheet-show-on-unchecked-combo + div {
+	display: none;
+}
+
+input.sheet-show-on-yes-combo + input.sheet-show-on-unchecked-combo:checked + div {
+	display: none;
+}
+
+.sheet-space-below {
+	padding-bottom: 6px; 
+}
+
+.sheet-section-head {
+	margin-top: 12px;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.sheet-section-subhead {
+	margin-top: 6px;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.sheet-trashit:after {
+	font-family: "Pictos";
+	font-style: normal;
+	font-weight: normal;
+	content: '#';
+}
+
+.sheet-topname {
+	font-size: 24px;
+	font-weight: bold;
+	width: 100%;
+}
+
+.sheet-toprow {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.sheet-whole {
+	color: black;
+}
+
+textarea {
+	height: 24pt;
+	margin-bottom: 0px;
+}
+
+ul {
+	margin-block-end: 6px;
+}
+
+/*
+
+input.sheet-pkey[value=""] + .sheet-whole {
+	color: #999999;
+}
+
+*/
