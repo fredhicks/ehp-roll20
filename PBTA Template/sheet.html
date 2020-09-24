@@ -6,6 +6,22 @@ You have changed the type to sheet worker.
 
 	var uniqueids = {};
 
+	var logs = 0;
+
+	var prefixedLogging = false;
+
+	var log = function(t,c) {
+		logs++;
+		if ( prefixedLogging ) {
+			if ( typeof c === "undefined" ) {
+				console.log(`${logs}:`);
+			} else {
+				console.log(`${logs} - ${c}:`)
+			}
+		}
+		console.log(t);
+	};
+	
 	var generateActuallyUniqueRowID = function() {
 		var generated = generateRowID();
 		while ( uniqueids[generated] === true ) {
@@ -16,6 +32,18 @@ You have changed the type to sheet worker.
 		uniqueids[generated] = true;
 		return generated;
 	};
+	
+	var gTBK = function(t) {
+		var result = getTranslationByKey(t);
+		// log(`${t} -> ${result}`,"translation")
+		if ( result === false ) {
+			log("could not translate: " + t);
+			return "UNTRANSLATED ["+t+"]";
+		} else {
+			if ( result === "" ) { return ""; }
+			else { return result; }
+		}
+	};
 
 	// data
 
@@ -23,6 +51,8 @@ You have changed the type to sheet worker.
 	
 	// For TSL, all playbooks have identical advancement options, so that's the reduced-case I'll implement here.
 	// Advances model will need to be expanded for other playbooks when supporting other PBTA
+	
+	// English data here, translation will occur internal to functions
 	
 	var advances = [
 		{
@@ -51,13 +81,21 @@ You have changed the type to sheet worker.
 			text: "Live happily ever after",
 		}
 	];
-	
+
 	var looks = {
 		demeanor: "Demeanor",
 		clothes: "Clothes",
 		sword: "Sword"
 	};
 	
+	// Do I want to process the internationalization outside of various handlers? I feel like keeping them inside the handlers means it doesn't try until it's needed, and most of the translation only happens during a one-time setup, with a few small exceptions. 
+
+	/*
+	for(var [k,v] of Object.entries(looks)) {
+		looks[k] = gTBK(v);
+	}
+	*/
+
 	var stats = {
 		daring: "Daring",
 		grace: "Grace",
@@ -220,7 +258,6 @@ You have changed the type to sheet worker.
 		{
 			name: "Influence With a String",
 			body: "At any time, spend a String on someone to do one of the following:",
-			preamble: "", // a second paragraph usually introducing a set of options
 			bullets: [
 				"Offer them an XP to do something (don’t spend the String if they refuse the temptation)",
 				"Find out what it will take to get them to do what you want (for an NPC, spending the String means they may simply agree)",
@@ -252,7 +289,7 @@ You have changed the type to sheet worker.
 			mixedbullets: [
 				"It takes something from you, either knowledge, reputation, or something physical",
 				"You mark a Condition",
-				""
+				"It gains a String on you"
 			],
 			rolled: "yes", // default no; if yes, there will be a roll button
 			rolldefault: "spirit" 
@@ -260,7 +297,6 @@ You have changed the type to sheet worker.
 		{
 			name: "End of Session",
 			body: "Each player marks XP if, during the session:",
-			preamble: "", // a second paragraph usually introducing a set of options
 			bullets: [
 				"Any PC confessed their love",
 				"Any PC de-escalated a violent situation",
@@ -462,13 +498,14 @@ You have changed the type to sheet worker.
 	// Initialize when first opening the sheet, or when the initializing field is changed appropriately.
 
 	on("sheet:opened change:pbinitialized", function() {
-		console.log("sheet:opened");
+		log("sheet:opened");
 		getAttrs(["pbinitialized"], function(values) {
 			var attrs = { "pbinitialized": "yes" };
 			if ( values.pbinitialized !== "yes" ) {
-				console.log("pbinitialized is not yes");
+				log("pbinitialized is not yes");
 				if ( values.pbinitialized === "reset" ) {
-					console.log("Will use idarray length here.");
+					log("Will use idarray length here.");
+					attrs["movesinstructions"] = "";
 					getSectionIDs("repeating_playbooks", function(idarray) {
 						for(var i=0; i < idarray.length; i++ ) {
 							removeRepeatingRow("repeating_playbooks_"+idarray[i]);
@@ -515,11 +552,11 @@ You have changed the type to sheet worker.
 						}
 					});
 					attrs["playbook-current-row"] = "";
-					attrs["starting-chosen"] = "no";
+					attrs["starting-chosen"] = "0";
 					attrs["experience"] = 0; attrs["xp1"] = 0; attrs["xp2"] = 0; attrs["xp3"] = 0; attrs["xp4"] = 0; attrs["xp5"] = 0;
 				}
 				attrs["playbook-key"] = "";
-				attrs["playbook-name"] = "Choose a playbook!";
+				attrs["playbook-name"] = gTBK("Choose a playbook!");
 				attrs["experience_max"] = xpmax;
 				var stringid = "repeating_strings_" + generateActuallyUniqueRowID();
 				attrs[`${stringid}_used`] = "no"; // Creates our starter String entry
@@ -532,48 +569,59 @@ You have changed the type to sheet worker.
 					var pbidkey = pbidpre + "key";
 					var pbidname = pbidpre + "name";
 					attrs[pbidkey] = id;
-					attrs[pbidname] = value["name"];
+					attrs[pbidname] = gTBK(value["name"]);
 
 					// We also need to create all the moves for all the playbooks within the data model, so they're available for selection. 
 					if ( typeof value["moves"] !== "undefined" ) {
-						console.log("We have defined moves.");
+						log("We have defined moves.");
 						var mymoves = value["moves"];
-						console.log(mymoves);
+						log(mymoves);
 						for(var i=0; i < mymoves.length; i++ ) {
+							if ( i === 0 ) {
+								// then we need to insert a subheader that identifies the playbook moves
+								// this is a solo entry that doesn't actually contain a move, needs its own id
+								var subid = generateActuallyUniqueRowID();
+								var subidpre = "repeating_moves_" + subid + "_";
+								attrs[`${subidpre}playbook`] = id;
+								attrs[`${subidpre}subheader`] = gTBK(playbooks[id].name) + " " + gTBK("Playbook Moves");
+								attrs[`${subidpre}pbdefault`] = "yes";
+								attrs[`${subidpre}pbother`] = "yes";
+								attrs[`${subidpre}show`] = "no";
+							}
 							var mymove = mymoves[i];
 							var moveid = generateActuallyUniqueRowID();
 							var moveidpre = "repeating_moves_" + moveid + "_";
-							attrs[`${moveidpre}name`] = mymove.name;
+							attrs[`${moveidpre}name`] = gTBK(mymove.name);
 							attrs[`${moveidpre}playbook`] = id; // the playbook key value
-							attrs[`${moveidpre}body`] = mymove.body;
+							attrs[`${moveidpre}body`] = gTBK(mymove.body);
 							attrs[`${moveidpre}taken`] = "";
-							if ( typeof mymove.header !== "undefined" ) { attrs[`${moveidpre}header`] = mymove.header; }
-							if ( typeof mymove.subheader !== "undefined" ) { attrs[`${moveidpre}subheader`] = mymove.subheader; }
+							if ( typeof mymove.header !== "undefined" ) { attrs[`${moveidpre}header`] = gTBK(mymove.header); }
+							if ( typeof mymove.subheader !== "undefined" ) { attrs[`${moveidpre}subheader`] = gTBK(mymove.subheader); }
 							if ( typeof mymove.pbdefault !== "undefined" ) { attrs[`${moveidpre}pbdefault`] = mymove.pbdefault; }
 							if ( typeof mymove.pbother !== "undefined" ) { attrs[`${moveidpre}pbother`] = mymove.pbother; }
-							if ( typeof mymove.preamble !== "undefined" ) { attrs[`${moveidpre}preamble`] = mymove.preamble; }
-							if ( typeof mymove.end !== "undefined" ) { attrs[`${moveidpre}end`] = mymove.end; }
-							if ( typeof mymove.hit !== "undefined" ) { attrs[`${moveidpre}hit`] = mymove.hit; }
-							if ( typeof mymove.mixed !== "undefined" ) { attrs[`${moveidpre}mixed`] = mymove.mixed; }
-							if ( typeof mymove.miss !== "undefined" ) { attrs[`${moveidpre}miss`] = mymove.miss; }
-							if ( typeof mymove.alternative !== "undefined" ) { attrs[`${moveidpre}alternative`] = mymove.alternative; }
-							if ( typeof mymove.althit !== "undefined" ) { attrs[`${moveidpre}althit`] = mymove.althit; }
-							if ( typeof mymove.altmixed !== "undefined" ) { attrs[`${moveidpre}altmixed`] = mymove.altmixed; }
-							if ( typeof mymove.altmiss !== "undefined" ) { attrs[`${moveidpre}altmiss`] = mymove.altmiss; }
+							if ( typeof mymove.preamble !== "undefined" ) { attrs[`${moveidpre}preamble`] = gTBK(mymove.preamble); }
+							if ( typeof mymove.end !== "undefined" ) { attrs[`${moveidpre}end`] = gTBK(mymove.end); }
+							if ( typeof mymove.hit !== "undefined" ) { attrs[`${moveidpre}hit`] = gTBK(mymove.hit); }
+							if ( typeof mymove.mixed !== "undefined" ) { attrs[`${moveidpre}mixed`] = gTBK(mymove.mixed); }
+							if ( typeof mymove.miss !== "undefined" ) { attrs[`${moveidpre}miss`] = gTBK(mymove.miss); }
+							if ( typeof mymove.alternative !== "undefined" ) { attrs[`${moveidpre}alternative`] = gTBK(mymove.alternative); }
+							if ( typeof mymove.althit !== "undefined" ) { attrs[`${moveidpre}althit`] = gTBK(mymove.althit); }
+							if ( typeof mymove.altmixed !== "undefined" ) { attrs[`${moveidpre}altmixed`] = gTBK(mymove.altmixed); }
+							if ( typeof mymove.altmiss !== "undefined" ) { attrs[`${moveidpre}altmiss`] = gTBK(mymove.altmiss); }
 							if ( typeof mymove.rolled !== "undefined" && mymove.rolled === "yes" ) { 
-								console.log("This is a rolled move.");
+								log("This is a rolled move.");
 								var rc = "";
 								if ( typeof mymove.rolldefault !== "undefined" ) {
-									console.log("There is a default attribute");
+									log("There is a default attribute");
 									if ( typeof stats[mymove.rolldefault] !== "undefined" ) {
-										rc = "|" + stats[mymove.rolldefault] + " (Default),@{stat_" + mymove.rolldefault + "}";
+										rc = "|" + gTBK(stats[mymove.rolldefault]) + " " + gTBK("(Default)") + ",@{stat_" + mymove.rolldefault + "}";
 									}
 								} 
 								// building a string like |Sharp (Default),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}
 								for(var [statkey,statname] of Object.entries(stats)) {
-									rc = rc + "|" + statname + ",@{stat_" + statkey + "}";
+									rc = rc + "|" + gTBK(statname) + ",@{stat_" + statkey + "}";
 								}
-								console.log(rc);
+								log(rc);
 								attrs[`${moveidpre}rollconfig`] = rc;
 							}
 							// Now the expanding modulars: the blanks, and the bullets 
@@ -581,9 +629,9 @@ You have changed the type to sheet worker.
 							for(var j=0; j < 5; j++) {
 								if ( typeof mymove.blanks !== "undefined" ) { 
 									if ( typeof mymove.blanks[j] !== "undefined" ) {
-										attrs[`${moveidpre}blankname${j}`] = mymove.blanks[j].name;
+										attrs[`${moveidpre}blankname${j}`] = gTBK(mymove.blanks[j].name);
 										if ( typeof mymove.blanks[j].suggestions !== "undefined" ) {
-											attrs[`${moveidpre}blanksuggestions${j}`] = mymove.blanks[j].suggestions; 
+											attrs[`${moveidpre}blanksuggestions${j}`] = gTBK(mymove.blanks[j].suggestions); 
 										}
 									}
 								}
@@ -594,7 +642,7 @@ You have changed the type to sheet worker.
 										var flist = mymove[fkey];
 										var nosattheend = fkey.substring(0,fkey.length-1);
 										if ( typeof flist[j] !== "undefined" ) { // Then there's a bullet at this position in this list
-											attrs[`${moveidpre}${nosattheend}${j}`] = flist[j];
+											attrs[`${moveidpre}${nosattheend}${j}`] = gTBK(flist[j]);
 										}
 									}
 								}
@@ -605,40 +653,45 @@ You have changed the type to sheet worker.
 				// Here endeth the move creation section
 
 				// We also need to create all the basic moves. These are very similar to playbook moves, but we're gonna replicate code in case differences emerge over development.
-				/* But it's completely fucked, so let's fuck it in the ear. */
+
+				var basicids = {};
+
 				for(var i=0; i < basicmoves.length; i++ ) {
 					var basicmove = basicmoves[i];
 					var moveid = generateActuallyUniqueRowID();
 					var moveidpre = "repeating_moves_" + moveid + "_";
-					if ( typeof basicmove.name !== "undefined" ) { attrs[`${moveidpre}name`] = basicmove.name; }
-					if ( typeof basicmove.body !== "undefined" ) { attrs[`${moveidpre}body`] = basicmove.body; }
+					if ( typeof basicmove.name !== "undefined" ) { 
+						attrs[`${moveidpre}name`] = gTBK(basicmove.name); 
+						basicids[attrs[`${moveidpre}name`]] = moveid; // helps us map for later
+					}
+					if ( typeof basicmove.body !== "undefined" ) { attrs[`${moveidpre}body`] = gTBK(basicmove.body); }
 					attrs[`${moveidpre}taken`] = "yes";
 					attrs[`${moveidpre}show`] = "yes";
-					if ( typeof basicmove.preamble !== "undefined" ) { attrs[`${moveidpre}preamble`] = basicmove.preamble; }
-					if ( typeof basicmove.header !== "undefined" ) { attrs[`${moveidpre}header`] = basicmove.header; }
-					if ( typeof basicmove.subheader !== "undefined" ) { attrs[`${moveidpre}subheader`] = basicmove.subheader; }
-					if ( typeof basicmove.end !== "undefined" ) { attrs[`${moveidpre}end`] = basicmove.end; }
-					if ( typeof basicmove.hit !== "undefined" ) { attrs[`${moveidpre}hit`] = basicmove.hit; }
-					if ( typeof basicmove.mixed !== "undefined" ) { attrs[`${moveidpre}mixed`] = basicmove.mixed; }
-					if ( typeof basicmove.miss !== "undefined" ) { attrs[`${moveidpre}miss`] = basicmove.miss; }
-					if ( typeof basicmove.alternative !== "undefined" ) { attrs[`${moveidpre}alternative`] = basicmove.alternative; }
-					if ( typeof basicmove.althit !== "undefined" ) { attrs[`${moveidpre}althit`] = basicmove.althit; }
-					if ( typeof basicmove.altmixed !== "undefined" ) { attrs[`${moveidpre}altmixed`] = basicmove.altmixed; }
-					if ( typeof basicmove.altmiss !== "undefined" ) { attrs[`${moveidpre}altmiss`] = basicmove.altmiss; }
+					if ( typeof basicmove.header !== "undefined" ) { attrs[`${moveidpre}header`] = gTBK(basicmove.header); }
+					if ( typeof basicmove.subheader !== "undefined" ) { attrs[`${moveidpre}subheader`] = gTBK(basicmove.subheader); }
+					if ( typeof basicmove.preamble !== "undefined" ) { attrs[`${moveidpre}preamble`] = gTBK(basicmove.preamble); }
+					if ( typeof basicmove.end !== "undefined" ) { attrs[`${moveidpre}end`] = gTBK(basicmove.end); }
+					if ( typeof basicmove.hit !== "undefined" ) { attrs[`${moveidpre}hit`] = gTBK(basicmove.hit); }
+					if ( typeof basicmove.mixed !== "undefined" ) { attrs[`${moveidpre}mixed`] = gTBK(basicmove.mixed); }
+					if ( typeof basicmove.miss !== "undefined" ) { attrs[`${moveidpre}miss`] = gTBK(basicmove.miss); }
+					if ( typeof basicmove.alternative !== "undefined" ) { attrs[`${moveidpre}alternative`] = gTBK(basicmove.alternative); }
+					if ( typeof basicmove.althit !== "undefined" ) { attrs[`${moveidpre}althit`] = gTBK(basicmove.althit); }
+					if ( typeof basicmove.altmixed !== "undefined" ) { attrs[`${moveidpre}altmixed`] = gTBK(basicmove.altmixed); }
+					if ( typeof basicmove.altmiss !== "undefined" ) { attrs[`${moveidpre}altmiss`] = gTBK(basicmove.altmiss); }
 					if ( typeof basicmove.rolled !== "undefined" && basicmove.rolled === "yes" ) { 
-						console.log("This is a rolled move.");
+						log("This is a rolled move.");
 						var rc = "";
 						if ( typeof basicmove.rolldefault !== "undefined" ) {
-							console.log("There is a default attribute");
+							log("There is a default attribute");
 							if ( typeof stats[basicmove.rolldefault] !== "undefined" ) {
-								rc = "|" + stats[basicmove.rolldefault] + " (Default),@{stat_" + basicmove.rolldefault + "}";
+								rc = "|" + stats[basicmove.rolldefault] + " " + gTBK("(Default)") + ",@{stat_" + basicmove.rolldefault + "}";
 							}
 						} 
 						// building a string like |Sharp (Default),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}
 						for(var [statkey,statname] of Object.entries(stats)) {
-							rc = rc + "|" + statname + ",@{stat_" + statkey + "}";
+							rc = rc + "|" + gTBK(statname) + ",@{stat_" + statkey + "}";
 						}
-						console.log(rc);
+						log(rc);
 						attrs[`${moveidpre}rollconfig`] = rc;
 					}
 					// Now the expanding modulars: the blanks, and the bullets 
@@ -646,9 +699,9 @@ You have changed the type to sheet worker.
 					for(var j=0; j < 5; j++) {
 						if ( typeof basicmove.blanks !== "undefined" ) { 
 							if ( typeof basicmove.blanks[j] !== "undefined" ) {
-								attrs[`${moveidpre}blankname${j}`] = basicmove.blanks[j].name;
+								attrs[`${moveidpre}blankname${j}`] = gTBK(basicmove.blanks[j].name);
 								if ( typeof basicmove.blanks[j].suggestions !== "undefined" ) {
-									attrs[`${moveidpre}blanksuggestions${j}`] = basicmove.blanks[j].suggestions; 
+									attrs[`${moveidpre}blanksuggestions${j}`] = gTBK(basicmove.blanks[j].suggestions); 
 								}
 							}
 						}
@@ -659,7 +712,7 @@ You have changed the type to sheet worker.
 								var flist = basicmove[fkey];
 								var nosattheend = fkey.substring(0,fkey.length-1);
 								if ( typeof flist[j] !== "undefined" ) { // Then there's a bullet at this position in this list
-									attrs[`${moveidpre}${nosattheend}${j}`] = flist[j];
+									attrs[`${moveidpre}${nosattheend}${j}`] = gTBK(flist[j]);
 								}
 							}
 						}
@@ -671,8 +724,8 @@ You have changed the type to sheet worker.
 					var lookpre = "repeating_looks_" + newid + "_";
 					var lookkey = lookpre + "key";
 					var lookname = lookpre + "name";
-					attrs[lookkey] = id;
-					attrs[lookname] = value;
+					attrs[lookkey] = gTBK(id);
+					attrs[lookname] = gTBK(value);
 				}
 				var rc = "";
 				for(var [id,value] of Object.entries(stats) ) {
@@ -682,20 +735,32 @@ You have changed the type to sheet worker.
 					var statname = statpre + "name";
 					var statdesc = statpre + "description";
 					attrs[statkey] = id;
-					attrs[statname] = value;
-					attrs[statdesc] = sdesc[id];
+					attrs[statname] = gTBK(value);
+					attrs[statdesc] = gTBK(sdesc[id]);
 					// building a string like |@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}
-					rc = rc + "|" + value + ",@{stat_" + id + "}";
+					rc = rc + "|" + gTBK(value) + ",@{stat_" + id + "}";
 				}
 				attrs["stats-query"] = rc;
+				// usefully, conditions creation comes after moves creation, so we can map these to their affected moves too
 				for(var [id,value] of Object.entries(conditions) ) {
 					var newid = generateActuallyUniqueRowID();
 					var conpre = "repeating_conditions_" + newid + "_";
 					for(var [fid,fval] of Object.entries(value)) {
 						var fkey = conpre + fid;
 						attrs[fkey] = fval;
-						if ( fid === "name" ) { attrs[`condition-${fval}`] = "no"; }
-						if ( fid === "penalized" ) { attrs[`condition-penalty-${fval}`] = 0; }
+						if ( fid === "name" ) { var fvt = gTBK(fval); attrs[fkey] = fvt; attrs[`condition-${fvt}`] = "no"; }
+						if ( fid === "penalized" ) { 
+							var fvt = gTBK(fval); attrs[fkey] = fvt; 
+							attrs[`condition-penalty-${fvt}`] = 0;
+							if ( typeof basicids[fvt] !== "undefined" ) {
+								var movefieldid = basicids[fvt];
+								attrs[`${conpre}moveid`] = movefieldid; // build that link 
+								attrs[`${movefieldid}conditionid`] = newid; // build that link other direction
+								attrs[`${movefieldid}condition-marked`] = "no"; // Initialize
+								attrs[`${movefieldid}modifier-marked`] = gTBK("Modifier is not marked."); // Initialize
+							}
+						}
+						if ( fid === "clearwhen" ) { var fvt = gTBK(fval); attrs[fkey] = fvt; }
 					}
 				}
 				for(var i = 0; i < advances.length; i++) {
@@ -705,11 +770,11 @@ You have changed the type to sheet worker.
 					var tid = apre + "text";
 					// var lid = apre + "notelabel";
 					var pid = apre + "preamble";
-					attrs[tid] = advance.text;
-					if ( typeof advance.preamble !== "undefined" ) { attrs[pid] = advance.preamble; }
-					// if ( typeof advance.notelabel !== "undefined" ) { attrs[lid] = advance.notelabel; }
+					attrs[tid] = gTBK(advance.text);
+					if ( typeof advance.preamble !== "undefined" ) { attrs[pid] = gTBK(advance.preamble); }
+					// if ( typeof advance.notelabel !== "undefined" ) { attrs[lid] = gTBK(advance.notelabel); }
 				}
-				console.log(attrs);
+				log(attrs);
 				setAttrs(attrs);
 			}
 		});
@@ -732,7 +797,7 @@ You have changed the type to sheet worker.
 			attrs["playbook-current-row"] = rowprefix;
 			attrs["movesinstructions"] = "";
 			if ( typeof playbooks[a[keyid]].movesinstructions !== "undefined" ) {
-				attrs["movesinstructions"] = playbooks[a[keyid]].movesinstructions;
+				attrs["movesinstructions"] = gTBK(playbooks[a[keyid]].movesinstructions);
 			}
 			setAttrs(attrs);
 
@@ -765,9 +830,9 @@ You have changed the type to sheet worker.
 			// starting stats section
 
 			var mystarts = playbooks[a[keyid]].startstats;
-			console.log(mystarts);
-			console.log(a[keyid]);
-			console.log(playbooks[a[keyid]]);
+			log(mystarts);
+			log(a[keyid]);
+			log(playbooks[a[keyid]]);
 
 			// Clear out any existing starting stats sets, they don't matter
 			getSectionIDs("repeating_startingstats", function(idarray) {
@@ -793,7 +858,7 @@ You have changed the type to sheet worker.
 							mytext = mytext+", ";
 						}
 						myset = myset+statkey+":"+value;
-						mytext = mytext+stats[statkey]+" ";
+						mytext = mytext+gTBK(stats[statkey])+" ";
 						if ( Number(value) > 0 ) {
 							mytext = mytext+"+";
 						} else if ( Number(value) == 0 ) {
@@ -811,7 +876,7 @@ You have changed the type to sheet worker.
 			// Moves section 
 
 			getSectionIDs("moves", function(mf) {
-				console.log(mf);
+				log(mf);
 				var mfields = [];
 				for(var i=0; i < mf.length; i++ ) {
 					mfields[i*4] = "repeating_moves_" + mf[i] + "_playbook";
@@ -844,7 +909,7 @@ You have changed the type to sheet worker.
 							mattrs[showid] = "no"; // for now; eventually we may have differing behaviors depending on current display settings
 						}
 					}
-					console.log(mattrs);
+					log(mattrs);
 					setAttrs(mattrs);
 
 				});
@@ -858,7 +923,7 @@ You have changed the type to sheet worker.
 	
 	var moveoptions = ["alternative", "altbullet0", "altbullet1", "altbullet2", "altbullet3", "altbullet4", "althit", "althitbullet0", "althitbullet1", "althitbullet2", "althitbullet3", "althitbullet4", "altmiss", "altmissbullet0", "altmissbullet1", "altmissbullet2", "altmissbullet3", "altmissbullet4", "altmixed", "altmixedbullet0", "altmixedbullet1", "altmixedbullet2", "altmixedbullet3", "altmixedbullet4", "blankname0", "blankname1", "blankname2", "blankname3", "blankname4", "bullet0", "bullet1", "bullet2", "bullet3", "bullet4", "end", "hit", "hitbullet0", "hitbullet1", "hitbullet2", "hitbullet3", "hitbullet4", "miss", "missbullet0", "missbullet1", "missbullet2", "missbullet3", "missbullet4", "mixed", "mixedbullet0", "mixedbullet1", "mixedbullet2", "mixedbullet3", "mixedbullet4", "preamble"]; // special cases: "blank0", "blank1", "blank2", "blank3", "blank4"
 	
-	on("change:repeating_moves:name", function(e) {
+	on("change:repeating_moves:name", function(e) { // if a name is changed, then the move's been created, so we should make sure to prep its share button
 		var moveprefix = (e.sourceAttribute).slice(0,-4); // Strips off the 'name'
 		var grabs = []; var sets = {};
 		for(var i=0; i < moveoptions.length; i++) {
@@ -882,7 +947,7 @@ You have changed the type to sheet worker.
 	
 	on("clicked:movefilter-pbmoves", function() {
 		getSectionIDs("moves", function(mf) {
-			console.log(mf);
+			log(mf);
 			var mfields = ["playbook-key"];
 			for(var i=0; i < mf.length; i++ ) {
 				mfields[i*3+1] = "repeating_moves_" + mf[i] + "_playbook";
@@ -902,7 +967,7 @@ You have changed the type to sheet worker.
 						mattrs[showid] = "no";
 					}
 				}
-				console.log(mattrs);
+				log(mattrs);
 				setAttrs(mattrs);
 			});
 		});
@@ -910,7 +975,7 @@ You have changed the type to sheet worker.
 	
 	on("clicked:movefilter-takenonly", function() {
 		getSectionIDs("moves", function(mf) {
-			console.log(mf);
+			log(mf);
 			var mfields = ["playbook-key"];
 			for(var i=0; i < mf.length; i++ ) {
 				mfields[i*3+1] = "repeating_moves_" + mf[i] + "_playbook";
@@ -930,7 +995,7 @@ You have changed the type to sheet worker.
 						mattrs[showid] = "no";
 					}
 				}
-				console.log(mattrs);
+				log(mattrs);
 				setAttrs(mattrs);
 			});
 		});
@@ -938,7 +1003,7 @@ You have changed the type to sheet worker.
 	
 	on("clicked:movefilter-allmoves", function() {
 		getSectionIDs("moves", function(mf) {
-			console.log(mf);
+			log(mf);
 			var mfields = ["playbook-key"];
 			for(var i=0; i < mf.length; i++ ) {
 				mfields[i*3+1] = "repeating_moves_" + mf[i] + "_playbook";
@@ -954,7 +1019,7 @@ You have changed the type to sheet worker.
 					var showid = "repeating_moves_" + mf[i] + "_show";
 					mattrs[showid] = "yes"; // Show everything.
 				}
-				console.log(mattrs);
+				log(mattrs);
 				setAttrs(mattrs);
 			});
 		});
@@ -964,7 +1029,7 @@ You have changed the type to sheet worker.
 		var rowprefix = (e.sourceAttribute).slice(0,-16); // Strips off the 'movefilter-onepb'
 		getAttrs([`${rowprefix}key`], function(kf) {
 			getSectionIDs("moves", function(mf) {
-				console.log(mf);
+				log(mf);
 				var mfields = ["playbook-key"];
 				for(var i=0; i < mf.length; i++ ) {
 					mfields[i*3+1] = "repeating_moves_" + mf[i] + "_playbook";
@@ -986,9 +1051,39 @@ You have changed the type to sheet worker.
 							mattrs[showid] = "no";
 						}
 					}
-					console.log(mattrs);
+					log(mattrs);
 					setAttrs(mattrs);
 				});
+			});
+		});
+	});
+
+	on("change:movefilter-hidebasic", function() {
+		getSectionIDs("moves", function(mf) {
+			log(mf);
+			var mfields = ["playbook-key","movefilter-hidebasic"];
+			for(var i=0; i < mf.length; i++ ) {
+				mfields[i*2+2] = "repeating_moves_" + mf[i] + "_playbook";
+				mfields[i*2+3] = "repeating_moves_" + mf[i] + "_header"; // if this is not null or empty, then we need to do a little extra
+			}
+			getAttrs(mfields, function(ma) {
+				var mattrs = {};
+				for(var i=0; i < mf.length; i++) {
+					var mbookid = "repeating_moves_" + mf[i] + "_playbook"; var mbook = ma[mbookid];
+					var headid = "repeating_moves_" + mf[i] + "_header"; var head = ma[headid];
+					var takeid = "repeating_moves_" + mf[i] + "_taken";
+					var showid = "repeating_moves_" + mf[i] + "_show";
+					var state = "yes";
+					if ( typeof ma["movefilter-hidebasic"] !== "undefined" && ma["movefilter-hidebasic"] === "yes" ) {
+						state = "no";
+					}
+					if ( mbook === "" ) { // If it has no playbook, it's a basic move; for this handler, these are the only moves we care about
+						mattrs[showid] = state;
+						mattrs[takeid] = state;
+					}
+				}
+				log(mattrs);
+				setAttrs(mattrs);
 			});
 		});
 	});
@@ -998,41 +1093,44 @@ You have changed the type to sheet worker.
 	on("clicked:repeating_startingstats:choose-startingstats", function(e) {
 		var rowprefix = (e.sourceAttribute).slice(0,-20); // Strips off the 'choose-startingstats'
 		var setid = rowprefix + "set";
-		getAttrs([setid], function(a) {
-			var statspec = a[setid];
-			var statmap = {};
-			console.log("statspec, splitting");
-			var statspeclist = statspec.toString().split(/ /);
-			console.log(statspec);
-			for(var j=0; j < statspeclist.length; j++ ) {
-				var parts = statspeclist[j].toString().split(/:/);
-				var statkey = parts[0];
-				var statval = parts[1];
-				statmap[statkey] = statval;
-			}
-			console.log(statmap);
-			getSectionIDs("stats", function(sf) {
-				console.log(sf);
-				var sfields = [];
-				for(var i=0; i < sf.length; i++ ) {
-					sfields[i] = "repeating_stats_" + sf[i] + "_key";
+		getAttrs(["starting-chosen", setid], function(a) {
+			if ( typeof a["starting-chosen"] === "undefined" || a["starting-chosen"] === "0" ) { // Then we may proceed, otherwise buttons are locked
+				var statspec = a[setid];
+				var statmap = {};
+				log("statspec, splitting");
+				var statspeclist = statspec.toString().split(/ /);
+				log(statspec);
+				for(var j=0; j < statspeclist.length; j++ ) {
+					var parts = statspeclist[j].toString().split(/:/);
+					var statkey = parts[0];
+					var statval = parts[1];
+					statmap[statkey] = statval;
 				}
-				console.log(sfields);
-				getAttrs(sfields,function(sa) {
-					console.log(sa);
-					var sattrs = { "starting-chosen": "yes" };
-					for(var i=0; i < sfields.length; i++) {
-						var key = sa[sfields[i]];
-						if ( typeof statmap[key] !== "undefined" ) {
-							var rateid = "repeating_stats_" + sf[i] + "_rating";
-							sattrs[rateid] = statmap[key];
-						}
+				log(statmap);
+				getSectionIDs("stats", function(sf) {
+					log(sf);
+					var sfields = [];
+					for(var i=0; i < sf.length; i++ ) {
+						sfields[i] = "repeating_stats_" + sf[i] + "_key";
 					}
-					console.log(sattrs);
-					setAttrs(sattrs);
+					log(sfields);
+					getAttrs(sfields,function(sa) {
+						log(sa);
+						var sattrs = { "starting-chosen": "yes" };
+						for(var i=0; i < sfields.length; i++) {
+							var key = sa[sfields[i]];
+							if ( typeof statmap[key] !== "undefined" ) {
+								var rateid = "repeating_stats_" + sf[i] + "_rating";
+								sattrs[rateid] = statmap[key];
+							}
+						}
+						log(sattrs);
+						setAttrs(sattrs);
+					});
 				});
-			});
-
+			} else {
+				log("Starting stat choice was already made, current stats menu is locked.");
+			}
 		});
 	});
 
@@ -1043,8 +1141,9 @@ You have changed the type to sheet worker.
 		var markedid = `${rowid}marked`;
 		var nameid = `${rowid}name`;
 		var penaltyid = `${rowid}penalty`;
+		var moveidid = `${rowid}moveid`;
 		var penalizedid = `${rowid}penalized`;
-		getAttrs([nameid,markedid,penaltyid,penalizedid],function(m) {
+		getAttrs([nameid,markedid,penaltyid,penalizedid,moveidid],function(m) {
 			var marked = m[markedid];
 			var name = m[nameid];
 			var penalty = m[penaltyid];
@@ -1058,28 +1157,41 @@ You have changed the type to sheet worker.
 				sattrs[`${modifierid}_modifier`] = penalty;
 				sattrs[`${modifierid}_state`] = "ongoing";
 				sattrs[`${modifierid}_target`] = penalized + ' ('+name+')';
+				if ( typeof m[moveidid] !== "undefined" && m[moveidid] !== "" ) {
+					var moveid = m[moveidid];
+					sattrs[`repeating_moves_${moveid}_condition-marked`] = "yes";
+					sattrs[`${modifierid}_moveid`] = moveid;
+					sattrs[`repeating_moves_${moveid}_modifier-marked`] = gTBK("Modifier is not marked.");
+					sattrs[`repeating_moves_${moveid}_modifierid`] = modifierid;
+				}
+				// We'll also want to flip a flag on the relevant basic move entry.
 				setAttrs(sattrs);
 			} else {
 				// then it is unmarked, and we need to make sure we do not retain a modifier matching it
-				// rowid contains the condition's id; we need to find all modifiers that match it
+				// rowid contains the condition's id; we need to find all modifiers that match it in case there was a misfire that caused it to get populated to the list twice
 				getSectionIDs("repeating_modifiers", function(idarray) {
 					var mids = [];
 					for(var i=0; i < idarray.length; i++ ) {
 						mids[i] = "repeating_modifiers_" + idarray[i] + "_condition-id";
 					}
 					getAttrs(mids,function(mdf) {
+						var u = {};
 						for(var i=0; i < idarray.length; i++ ) {
 							if ( mdf[mids[i]] === rowid ) {
 								// reality is, this should work but doesn't because roll20 can't be bothered to fire off its own remove event, so, workaround time
 								// removeRepeatingRow("repeating_modifiers_"+idarray[i]);
 								var uid = "repeating_modifiers_"+idarray[i]+"_used";
 								var mid = "repeating_modifiers_"+idarray[i]+"_modifier";
-								var u = {};
 								u[uid] = "delete";
 								u[mid] = "0";
-								setAttrs(u);
 							}
 						}
+						// We also need to attend to flipping off the flag that was on the associated move, if any
+						if ( typeof m[moveidid] !== "undefined" && m[moveidid] !== "" ) {
+							var moveid = m[moveidid];
+							u[`repeating_moves_${moveid}_condition-marked`] = "no";
+						}
+						setAttrs(u);
 					});
 				});
 			}
@@ -1087,6 +1199,42 @@ You have changed the type to sheet worker.
 	});
 	
 	// Modifiers stuff
+
+	
+	// act_mark-modifier
+
+	on("clicked:repeating_moves:mark-modifier", function(e) {
+		var rowid = (e.sourceAttribute).slice(0,-13); // Strips off the 'mark-modifier';
+		var modidid = rowid + "modifierid";
+		log("mark-modifier button clicked");
+		log(modidid);
+		getAttrs([modidid], function(m) {
+			var modifierid = m[modidid];
+			log(m);
+			log(modifierid);
+			if ( typeof modifierid !== "undefined" && modifierid !== "" ) {
+				// Then I've hopefully got a valid modifier here, and I can mess with its clicking. But, that also means I need to getAttrs a second time. ZOD ZOD FUCKING ZOD FRED
+				var rollmodid = modifierid + "_rollmod";
+				log(`modifierid is ${modifierid} so rollmodid is ${rollmodid}`);
+				getAttrs([rollmodid], function(r) {
+					log(r);
+					if ( typeof r[rollmodid] !== "undefined" && r[rollmodid] !== "" ) {
+						log("there was a valid rollmod value");
+						var rollmod = r[rollmodid];
+						var mats = {};
+						if ( rollmod === "yes" ) {
+							mats[rollmodid] = "no";
+						} else {
+							mats[rollmodid] = "yes";
+						}
+						setAttrs(mats);
+					} else {
+						log("there was no valid rollmod value");
+					}
+				});
+			}
+		});
+	});
 
 	/* attr_state, act_state */
 
@@ -1134,56 +1282,64 @@ You have changed the type to sheet worker.
 
 	on("clicked:repeating_modifiers:state", function(e) {
 		var rowid = (e.sourceAttribute).slice(0,-5); // Strips off the 'state';
-		console.log(`Toggling state for modifier ${rowid}`);
+		log(`Toggling state for modifier ${rowid}`);
 		var stateid = `${rowid}state`; // attr_state and act_state effectively have the same id, I think? but let's reconstruct.
+		var statenid = `${rowid}statename`; // grab the name of the state too
 		getAttrs([stateid],function(s) {
-			console.log(s);
+			log(s);
 			var sattrs = {};
 			if ( s[stateid] === "forward" ) {
 				sattrs[stateid] = "ongoing";
+				sattrs[statenid] = gTBK("ongoing");
 			} else {
 				sattrs[stateid] = "forward";
+				sattrs[statenid] = gTBK("forward");
 			}
-			console.log(sattrs);
+			log(sattrs);
 			setAttrs(sattrs);
 		});
 	});
 
 	on("clicked:repeating_modifiers:trash", function(e) {
 		var rowid = (e.sourceAttribute).slice(0,-6); // Strips off the '_trash';
-		console.log(`Setting deletion flag for modifier ${rowid}`);
+		log(`Setting deletion flag for modifier ${rowid}`);
 		var sattrs = {};
 		sattrs[`${rowid}_used`] = "delete";
 		sattrs[`${rowid}_modifier`] = "0"; // This'll make sure the totalling handler will fire off
 		setAttrs(sattrs); // Please trigger the handler
 	});
-	
-	on("change:repeating_modifiers remove:repeating_modifiers", function() {
-		console.log("change detected in repeating_modifiers");
+
+	// this had a blanket change:repeating_modifiers originally, don't think that's right
+
+	on("change:repeating_modifiers:rollmod change:repeating_modifiers:modifier remove:repeating_modifiers", function() { 
+		log("consequential change detected in repeating_modifiers");
 		// We need to examine whether any entries count as unused, and if there are multiples, remove them, and if there are none, add one.
 		var mlist = []; var mflist = [];
 		getSectionIDs("repeating_modifiers", function(idarray) {
-			console.log("got the ID list");
-			console.log(idarray);
+			log("got the ID list");
+			log(idarray);
 			for(var i=0; i < idarray.length; i++ ) {
 				mlist[i] = "repeating_modifiers_"+idarray[i];
-				mflist[i*4] = mlist[i] + "_used";
-				mflist[i*4+1] = mlist[i] + "_rollmod";
-				mflist[i*4+2] = mlist[i] + "_target"; 
-				mflist[i*4+3] = mlist[i] + "_modifier"; 
+				mflist[i*5] = mlist[i] + "_used";
+				mflist[i*5+1] = mlist[i] + "_rollmod";
+				mflist[i*5+2] = mlist[i] + "_target"; 
+				mflist[i*5+3] = mlist[i] + "_modifier"; 
+				mflist[i*5+4] = mlist[i] + "_moveid"; 
 			}
-			console.log("assembled list");
-			console.log(mlist);
+			log("assembled list");
+			log(mlist);
 			var sattrs = {};
 			if ( mlist.length > 0 ) {
-				console.log("list is not empty, so we parse");
+				log("list is not empty, so we parse");
 				getAttrs(mflist, function(mf) {
 					var keeper = false;
+					var tally = 0;
 					for(var i=0; i < mlist.length; i++ ) {
 						var usedid = mlist[i] + "_used"; var used = mf[usedid];
 						var rollmodid = mlist[i] + "_rollmod"; var rollmod = mf[rollmodid];
 						var targetid = mlist[i] + "_target"; var target = mf[targetid];
 						var modifierid = mlist[i] + "_modifier"; var modifier = mf[modifierid];
+						var moveidid = mlist[i] + "_moveid"; var moveid = mf[moveidid];
 						if ( used === "delete" ) {
 							removeRepeatingRow(mlist[i],{silent:true}); 
 						} else if (
@@ -1199,58 +1355,81 @@ You have changed the type to sheet worker.
 								keeper = true;
 								sattrs[usedid] = "no"; 
 							}
-						} else {
+						} else { 
 							sattrs[usedid] = "yes";
+							// if we're here, we can also figure out the total of checkmarked stuff
+							if ( typeof rollmod !== "undefined" && rollmod === "yes" ) { 
+								var mod = 0;
+								if ( typeof modifier !== "undefined" ) {
+									mod = parseInt(modifier);
+									if ( isNaN(mod) ) {
+										mod = 0;
+									}
+									tally = tally + mod;
+								}
+								// we should make a note in the appropriate move
+								if ( typeof moveid !== "undefined" && moveid !== "" ) {
+									sattrs[`repeating_moves_${moveid}_modifier-marked`] = gTBK("Modifier is marked.");								
+									sattrs[`repeating_moves_${moveid}_modifierid`] = mlist[i]; // store the modifier's ID on the move								
+								} else {
+									log("no moveid");
+								}
+							} else if ( typeof moveid !== "undefined" && moveid !== "" ) {
+								// rollmod isn't yes, so if there's an associated move, its modifier is not marked
+								sattrs[`repeating_moves_${moveid}_modifier-marked`] = gTBK("Modifier is not marked.");
+							}
 						}
 					}
+					// We've exited the for loop, so we can set the modifier tally.
+					sattrs["modifier-tally"] = tally;
 					// At this point if keeper = true, we don't need to create a new row; if false, we do.
 					// Or, if there are no entries, we need to create one, because there always needs to be at least one.
 					if ( ! keeper || mlist.length === 0 ) {
 						var modifierid = "repeating_modifiers_" + generateActuallyUniqueRowID();
 						sattrs[`${modifierid}_used`] = "no"; // Creates our a new modifier entry
 					}
-					console.log("Setting attributes for modifiers");
-					console.log(sattrs);
+					log("Setting attributes for modifiers");
+					log(sattrs);
 					setAttrs(sattrs,{silent:true}); // We don't need to trigger a bunch of runs through this handler because we're setting attributes *with* this handler.
 				});
 			} else { // I suspect if there's no array, getAttrs doesn't bother to fire off its callback, which is a shame because I expected it to.
-				console.log("list is empty, so we create");
+				log("list is empty, so we create");
 				var modifierid = "repeating_modifiers_" + generateActuallyUniqueRowID();
 				sattrs[`${modifierid}_used`] = "no"; // Creates our a new modifier entry
-				console.log(sattrs);
+				log(sattrs);
 				setAttrs(sattrs,{silent:true}); // We don't need to trigger a bunch of runs through this handler because we're setting attributes *with* this handler.
 			}
 		});
 	});
-
+	
 	// Strings stuff
 
 	on("clicked:repeating_strings:trash", function(e) {
 		var rowid = (e.sourceAttribute).slice(0,-6); // Strips off the '_trash';
-		console.log(`Setting deletion flag for string ${rowid}`);
+		log(`Setting deletion flag for string ${rowid}`);
 		var sattrs = {};
 		sattrs[`${rowid}_used`] = "delete";
 		setAttrs(sattrs); // Please trigger the fucking handler
 	});
 
 	on("change:repeating_strings remove:repeating_strings", function() {
-		console.log("change detected in repeating_strings");
+		log("change detected in repeating_strings");
 		// We need to examine whether any entries count as unused, and if there are multiples, remove them, and if there are none, add one.
 		var slist = []; var sflist = [];
 		getSectionIDs("repeating_strings", function(idarray) {
-			console.log("got the ID list");
-			console.log(idarray);
+			log("got the ID list");
+			log(idarray);
 			for(var i=0; i < idarray.length; i++ ) {
 				slist[i] = "repeating_strings_"+idarray[i];
 				sflist[i*6] = slist[i] + "_used";
 				sflist[i*6+1] = slist[i] + "_check1"; sflist[i*6+2] = slist[i] + "_check2"; sflist[i*6+3] = slist[i] + "_check3"; sflist[i*6+4] = slist[i] + "_check4";
 				sflist[i*6+5] = slist[i] + "_target";
 			}
-			console.log("assembled list");
-			console.log(slist);
+			log("assembled list");
+			log(slist);
 			var sattrs = {};
 			if ( slist.length > 0 ) {
-				console.log("list is not empty, so we parse");
+				log("list is not empty, so we parse");
 				getAttrs(sflist, function(sf) {
 					var keeper = false;
 					for(var i=0; i < slist.length; i++ ) {
@@ -1285,15 +1464,15 @@ You have changed the type to sheet worker.
 						var stringid = "repeating_strings_" + generateActuallyUniqueRowID();
 						sattrs[`${stringid}_used`] = "no"; // Creates our a new String entry
 					}
-					console.log("Setting attributes for strings");
-					console.log(sattrs);
+					log("Setting attributes for strings");
+					log(sattrs);
 					setAttrs(sattrs,{silent:true}); // We don't need to trigger a bunch of runs through this handler because we're setting attributes *with* this handler.
 				});
 			} else { // I suspect if there's no array, getAttrs doesn't bother to fire off its callback, which is a shame because I expected it to.
-				console.log("list is empty, so we create");
+				log("list is empty, so we create");
 				var stringid = "repeating_strings_" + generateActuallyUniqueRowID();
 				sattrs[`${stringid}_used`] = "no"; // Creates our a new String entry
-				console.log(sattrs);
+				log(sattrs);
 				setAttrs(sattrs,{silent:true}); // We don't need to trigger a bunch of runs through this handler because we're setting attributes *with* this handler.
 			}
 		});
@@ -1301,11 +1480,13 @@ You have changed the type to sheet worker.
 
 	// Modifiers and Roll Button Adjustments
 
+	var rwm = gTBK("roll with modifier");
+
 	on("change:rollprompt-mods change:rollprompt-query change:modifier-tally", function() {
-		console.log("We've got a change in roll prompt configuration");
+		log("We've got a change in roll prompt configuration");
 		getAttrs(["rollprompt-mods","rollprompt-query","modifier-tally"], function(f) {
-			console.log(f);
-			var defaultconfig = "?{roll with modifier +/-?|0}";
+			log(f);
+			var defaultconfig = "?{" + rwm + " +/-?|0}";
 			var usemods = "1";
 			if ( typeof f["rollprompt-mods"] === "undefined" || f["rollprompt-mods"] !== "1") {
 				usemods = "0";
@@ -1319,11 +1500,11 @@ You have changed the type to sheet worker.
 				tally = f["modifier-tally"];
 			}
 			var attrs = {};
-			console.log(`usemods ${usemods} doquery ${doquery} tally ${tally}`);
+			log(`usemods ${usemods} doquery ${doquery} tally ${tally}`);
 			if ( usemods === "1" ) {
 				if ( doquery === "1" ) {
 					// Use standard default config
-					attrs["rollprompt"] = "?{roll with modifier +/-?|"+tally+"}";
+					attrs["rollprompt"] = "?{" + rwm + "+/-?|"+tally+"}";
 				} else {
 					// We don't want to be bothered by it at all
 					attrs["rollprompt"] = tally; // just add the tally
@@ -1338,41 +1519,6 @@ You have changed the type to sheet worker.
 				}
 			}
 			setAttrs(attrs);
-		});
-	});
-	
-	on("change:repeating_modifiers:rollmod change:repeating_modifiers:modifier remove:repeating_modifiers", function() {
-		console.log("Either a modifier was checked or unchecked, or a modifier row was removed");
-		getSectionIDs("repeating_modifiers", function(idarray) {
-			var mlist = [];
-			for(var i=0; i < idarray.length; i++ ) {
-				var rowid = "repeating_modifiers_"+idarray[i];
-				var rowpre = rowid + "_";
-				mlist[i*2] = rowpre + "rollmod";
-				mlist[i*2+1] = rowpre + "modifier";
-			}
-			console.log(mlist);
-			getAttrs(mlist,function(m) {
-				console.log(m);
-				var tally = 0;
-				for(var i=0; i < idarray.length; i++ ) {
-					var rowid = "repeating_modifiers_"+idarray[i];
-					var rowpre = rowid + "_";
-					var checkid = rowpre + "rollmod"; var check = m[checkid];
-					if ( typeof check !== "undefined" && check === "yes" ) {
-						var modid = rowpre + "modifier"; var mod = 0;
-						if ( typeof m[modid] !== "undefined" ) {
-							mod = parseInt(m[modid]);
-							if ( isNaN(mod) ) {
-								mod = 0;
-							}
-							tally = tally + mod;
-						}
-					}
-				}
-				console.log("this is the tally: "+tally);
-				setAttrs({"modifier-tally": tally});
-			});
 		});
 	});
 
@@ -1413,9 +1559,10 @@ You have changed the type to sheet worker.
 		var rowprefix = (e.sourceAttribute).slice(0,-6); // strips off 'marked';
 		var mid = rowprefix + "marked";
 		var pdid = rowprefix + "penalized";
+		var moveidid = rowprefix + "moveid";
 		var pnid = rowprefix + "penalty";
 		var nid = rowprefix + "name";
-		getAttrs([mid,pdid,pnid,nid], function(a) {
+		getAttrs([mid,pdid,pnid,nid,moveidid], function(a) {
 			var cats = {};
 			var catname = "condition-" + a[nid];
 			var marked = "no";
@@ -1427,6 +1574,7 @@ You have changed the type to sheet worker.
 				penalty = Number(a[pnid]);
 			}
 			cats[catpen] = penalty;
+			log("here come the cats"); log(cats);
 			setAttrs(cats);
 		});
 	});
@@ -1567,7 +1715,7 @@ You have changed the type to sheet worker.
 				<div class="sheet-dieroll-roll">{{roll}}</div>
 		</div>
 		<div class="sheet-dieroll-title">
-			<span>Up Beat</span>!
+			<span data-i18n="Up Beat"></span>!
 		</div>
 			{{/rollGreater() roll 9}}
 			{{#rollBetween() roll 7 9}}
@@ -1575,7 +1723,7 @@ You have changed the type to sheet worker.
 				<div class="sheet-dieroll-roll">{{roll}}</div>
 		</div>
 		<div class="sheet-dieroll-title">
-			<span>Mixed Beat</span>
+			<span data-i18n="Mixed Beat"></span>
 		</div>
 			{{/rollBetween() roll 7 9}}
 			{{#rollLess() roll 7}}
@@ -1583,10 +1731,10 @@ You have changed the type to sheet worker.
 				<div class="sheet-dieroll-roll">{{roll}}</div>
 		</div>
 		<div class="sheet-dieroll-title">
-			<span>Down Beat</span>
+			<span data-i18n="Down Beat"></span>
 		</div>
 		<div>
-			<i><span>Make sure to mark experience!</span></i>
+			<i><span data-i18n="Make sure to mark experience!"></span></i>
 		</div>
 			{{/rollLess() roll 7}}
 		<div class="sheet-clearance"></div>
@@ -1599,7 +1747,7 @@ You have changed the type to sheet worker.
 	{{/allprops()}}
 </rolltemplate>
 
-<input type="hidden" name="attr_rollprompt" value="?{roll with modifier +/-?|0}">
+<input type="hidden" name="attr_rollprompt" value="?{^{roll with modifier} +/-?|0}">
 <input type="hidden" name="attr_playbook-key" class="pkey" value="">
 
 <div class="whole">
@@ -1610,7 +1758,7 @@ You have changed the type to sheet worker.
 
 	<div class="toprow">
 		<div class="nocontrol popmenu">
-			<div class="popmenu-trigger"><span class="bold">Playbook:</span> <span name="attr_playbook-name"></span></div>
+			<div class="popmenu-trigger"><span class="bold"><span data-i18n="Playbook"></span>:</span> <span name="attr_playbook-name"></span></div>
 			<div class="popmenu-box"><fieldset class="repeating_playbooks">
 				<input type="hidden" name="attr_key" value="">
 				<input type="hidden" name="attr_name" value="">
@@ -1623,20 +1771,28 @@ You have changed the type to sheet worker.
 		</div>
 		<!-- input type="hidden" name="attr_starting-chosen" value="no" class="hide-on-yes" -->
 		<div class="nocontrol popmenu">
-			<div class="popmenu-trigger"><span class="bold">Starting Stats</span></div>
+			<div class="popmenu-trigger"><span class="bold"><span data-i18n="Starting Stats"></span></div>
 			<div class="popmenu-box">
-				<div>Pick one of these sets (overwrites current ratings), then add 1 to two different stats.</div>
-				<fieldset class="repeating_startingstats">
+				<div><span data-i18n="Pick one of these sets (overwrites current ratings), then add 1 to two different stats."></span></div>
+				
+				<input type="hidden" name="attr_starting-chosen" value="0" class="hide-on-yes"><div><fieldset class="repeating_startingstats">
 					<input type="hidden" name="attr_set" value="">
 					<input type="hidden" name="attr_text" value="">
 					<button type="action" name="act_choose-startingstats" class="buttonless">
 						<span name="attr_text" class="bold"></span>
 					</button>
-				</fieldset>
+				</fieldset></div>
+				<input type="checkbox" name="attr_starting-chosen" value="yes">
+				<input type="hidden" name="attr_starting-chosen" value="0" class="hide-on-zero hide-on-null"><span>
+					<span data-i18n="Choice made and locked"></span>
+				</span>
+				<input type="hidden" name="attr_starting-chosen" value="0" class="hide-on-yes"><span>
+					<span data-i18n="Lock menu to prevent overwrite"></span>
+				</span>
 			</div>
 		</div>
 		<div class="nocontrol popmenu">
-			<div class="popmenu-trigger"><span class="bold">Aesthetics</span></div>
+			<div class="popmenu-trigger"><span class="bold"><span data-i18n="Aesthetics"></span></span></div>
 			<div class="popmenu-box no-hover">
 				<fieldset class="repeating_looks">
 					<input type="hidden" name="attr_key" value="">
@@ -1651,7 +1807,7 @@ You have changed the type to sheet worker.
 			</div>
 		</div>
 		<div>
-			<span class="bold">Pronouns: </span>
+			<span class="bold"><span data-i18n="Pronouns"></span>: </span>
 			<input type="text" name="attr_pronouns" value="" class="fillme">
 		</div>
 	</div> <!-- /class=toprow -->
@@ -1672,9 +1828,8 @@ You have changed the type to sheet worker.
 							</button>
 						</div>
 						<div class="tooltip-pop">
-							<div class="bold"><span name="attr_name"></span></div>
+							<div class="bold"><span name="attr_name"></span>: <input type="number" name="attr_rating" value="" min="-9" max="9" class="fillme"></div>
 							<div><span name="attr_description"></span></div>
-							<div>Set: <input type="number" name="attr_rating" value="" min="-9" max="9" class="fillme"></div>
 						</div>
 					</div>
 				</fieldset>
@@ -1683,7 +1838,7 @@ You have changed the type to sheet worker.
 			<!-- This can be replicated (look in the Javascript above for more to do) for a harm track, etc, if needed -->
 			<div class="tooltip">
 				<div class="section-head">
-					Experience
+					<span data-i18n="Experience"></span>
 				</div>
 				<div>
 					<input type="hidden" name="attr_experience" value="0">
@@ -1695,16 +1850,16 @@ You have changed the type to sheet worker.
 					<input type="checkbox" name="attr_xp5" value="1">
 				</div>
 				<div class="tooltip-pop">
-					Receive experience (XP) whenever you roll a 6- or when a move tells you to mark XP. A PC can spend XP to take an Advance; consult that section for more.
+					<span data-i18n="Receive experience (XP) whenever you roll a 6- or when a move tells you to mark XP. A PC can spend XP to take an Advance; consult that section for more."></span>
 				</div>
 			</div>
 
 			<div class="tooltip">
 				<div class="section-head">
-					Advances
+					<span data-i18n="Advances"></span>
 				</div>
 				<div>
-					Mouse over for your options.
+					<span data-i18n="Mouse over for your options."></span>
 				</div>
 				<div class="nocontrol tooltip-pop">
 					<fieldset class="repeating_advances">
@@ -1721,49 +1876,48 @@ You have changed the type to sheet worker.
 		<div class="wide">
 
 			<div class="section-head">
-				Special Features
+				<span data-i18n="Special Features"></span>
 			</div>
 
 			<div class="section-head">
 				<div class="popmenu">
 					<div class="popmenu-trigger"></div>
 					<div class="popmenu-box">
-						<div><button type="action" name="act_movefilter-pbmoves" class="buttonless"><span class="bold">My Playbook's Moves Only</span></button></div>
-						<div><button type="action" name="act_movefilter-takenonly" class="buttonless"><span class="bold">Hide Untaken Moves</span></button></div>
-						<div><button type="action" name="act_movefilter-allmoves" class="buttonless"><span class="bold">Show Every Move</span></button></div>
+						<div><button type="action" name="act_movefilter-pbmoves" class="buttonless"><span class="bold"><span data-i18n="My Playbook's Moves Only"></span></span></button></div>
+						<div><button type="action" name="act_movefilter-takenonly" class="buttonless"><span class="bold"><span data-i18n="Hide Untaken Moves"></span></span></button></div>
+						<div><button type="action" name="act_movefilter-allmoves" class="buttonless"><span class="bold"><span data-i18n="Show Every Move"></span></span></button></div>
+						<div class="popmenu-section"><input type="checkbox" name="attr_movefilter-hidebasic" value="yes"> <span class="bold"><span data-i18n="Hide Basic Moves"></span></span></button></div>
+						<div class="bold popmenu-section"><span data-i18n="Individual Playbook Moves"></span></div>
 						<div class="nocontrol"><fieldset class="repeating_playbooks">
 							<input type="hidden" name="attr_key" value="">
 							<input type="hidden" name="attr_name" value="">
-							<div><button type="action" name="act_movefilter-onepb" class="buttonless"><span class="bold">Show <span name="attr_name"></span> Moves</span></button></div>
+							<div><button type="action" name="act_movefilter-onepb" class="buttonless">&nbsp; <span class="bold"><span name="attr_name"></span></span></button></div>
 						</fieldset></div>
 					</div>
-				</div><!-- don't want a space here -->Moves
+				</div><!-- don't want a space here --><span data-i18n="Moves"></span>
 			</div>
 			<input type="hidden" name="attr_movesinstructions" value="" class="hide-on-null">
 			<div>
 				<i>
 					<span name="attr_movesinstructions"></span>
 				</i>
-			</div>
+				</div>
 			<div class="nocontrol moves-all">
 				<fieldset class="repeating_moves">
-					<input type="hidden" name="attr_header" value="" class="hide-on-null">
-					<div class="section-head"><span name="attr_header"></span></div>
-					<input type="hidden" name="attr_subheader" value="" class="hide-on-null">
-					<div class="section-subhead"><span name="attr_subheader"></span></div>
+					<input type="hidden" name="attr_header" value="" class="hide-on-null"><div><input type="hidden" name="attr_show" value="no" class="hide-on-no"><div class="section-head"><span name="attr_header"></span></div></div>
+					<input type="hidden" name="attr_subheader" value="" class="hide-on-null"><div><input type="hidden" name="attr_show" value="no" class="hide-on-no"><div class="section-subhead"><span name="attr_subheader"></span></div></div>
 					<input type="hidden" name="attr_body" value="">
 					<input type="hidden" name="attr_pbother" value="yes">
 					<input type="hidden" name="attr_pbdefault" value="no">
 					<input type="hidden" name="attr_name" value="" class="hide-on-null">
 					<div class="hide-the-move-when-it-has-no-name">
-						<input type="checkbox" name="attr_taken" value="yes" class="collapse-on-unchecked">
 						<div class="move-compressor"><input type="hidden" name="attr_show" value="no" class="hide-on-no"><div class="move">
-							<button type="roll" class="sharemove" value="&{template:sharemove} {{name=@{name} (@{playbook})}} {{body=@{body}}} @{shareoptions} }"></button><input type="hidden" name="attr_shareoptions" value="">
+							<button type="roll" class="sharemove" style="margin-top: -1px;" value="&{template:sharemove} {{name=@{name} (@{playbook})}} {{body=@{body}}} @{shareoptions} }"></button><input type="hidden" name="attr_shareoptions" value="">
 							<input type="hidden" name="attr_rollconfig" value="" class="hide-on-null">
 							<button type="roll" class="sheet-2d6-button" value="&{template:2d6-roll} {{character=@{character_name}}} {{title=@{name}}} {{roll=[[2d6+?{@{name} using @{rollconfig}}+@{rollprompt}]]}}" name="roll_2d6"></button>
 							<input type="hidden" name="attr_playbook" value="" class="hide-on-null">
 							<input type="checkbox" name="attr_taken" value="yes">
-							<b><span name="attr_name"></span></b><input type="hidden" name="attr_playbook" value="" class="hide-on-null"><span> (<span name="attr_playbook"></span>)</span>: 
+							<span name="attr_name" class="bold"></span>:
 							<span name="attr_body"></span>
 							<input type="hidden" name="attr_preamble" class="hide-on-null" value=""><div class="indented"><span name="attr_preamble"></span></div>
 							<input type="hidden" name="attr_bullet0" class="hide-on-null" value=""><div><ul>
@@ -1959,7 +2113,15 @@ You have changed the type to sheet worker.
 							</div>
 							<input type="hidden" name="attr_pbdefault" value="no" class="show-on-yes-combo">
 							<input type="checkbox" name="attr_taken" value="yes" class="show-on-unchecked-combo">
-							<div class="bold indented">This move is marked by default for the <span name="attr_playbook"></span>.</div>
+							<div class="bold indented"><span data-i18n="This move is marked by default for its playbook."></span></div>
+							<input type="hidden" name="attr_modifier-marked" value="">
+							<input type="hidden" name="attr_modifierid" value="">
+							<input type="hidden" name="attr_condition-marked" value="no" class="hide-on-no">
+							<div class="indented"><button type="action" name="act_mark-modifier" class="buttonless">
+								<span class="pictos">!</span><span class="bold" data-i18n="Condition is active."></span>
+								<span class="bold" name="attr_modifier-marked"></span>
+								<span class="bold" data-i18n="Click to toggle."></span>
+							</button></div>
 						</div></div> <!-- /move /move-compressor -->
 					</div> <!-- /hide-the-move-when-it-has-no-name -->
 				</fieldset>
@@ -1971,11 +2133,11 @@ You have changed the type to sheet worker.
 				<div class="nocontrol popmenu">
 					<div class="popmenu-trigger"></div>
 					<div class="popmenu-box">
-						<input type="hidden" name="attr_rollprompt" value="?{roll with modifier +/-?|0}">
-						<div class="checkline"><input type="checkbox" name="attr_rollprompt-mods" value="1" checked> 2d6 buttons use checked mods</div>
-						<div class="checkline"><input type="checkbox" name="attr_rollprompt-query" value="1" checked> 2d6 buttons prompt for mods</div>
+						<input type="hidden" name="attr_rollprompt" value="?{^{roll with modifier} +/-?|0}">
+						<div class="checkline"><input type="checkbox" name="attr_rollprompt-mods" value="1" checked> <span data-i18n="2d6 buttons use checked mods"></span></div>
+						<div class="checkline"><input type="checkbox" name="attr_rollprompt-query" value="1" checked> <span data-i18n="2d6 buttons prompt for mods"></span></div>
 					</div>
-				</div><!-- don't want a space here -->Modifiers
+				</div><!-- don't want a space here --><span data-i18n="Modifiers"></span>
 			</div>
 			<div class="nocontrol">
 				<fieldset class="repeating_modifiers"><div class="one-line">
@@ -1987,8 +2149,9 @@ You have changed the type to sheet worker.
 						<input type="hidden" name="attr_modifier" value="" class="make-plus"><span class="make-plus"></span><input type="number" name="attr_modifier" value="0" class="fillme plus-enabled">
 					</div>
 					<div class="minimum">
+						<input type="hidden" name="attr_statename" value="forward">
 						<input type="hidden" name="attr_state" value="forward" class="mod-state-button">
-						<button type="action" name="act_state" class="buttonless"><span name="attr_state"></span></button>
+						<button type="action" name="act_state" class="buttonless"><span name="attr_statename"></span></button>
 					</div>
 					<div class="stretch">
 						<input type="text" name="attr_target" value="" class="fillme">
@@ -2001,16 +2164,16 @@ You have changed the type to sheet worker.
 				<input type="hidden" name="attr_modifier-tally" value="0">
 				<input type="hidden" name="attr_stats-query" value=""> <!-- populated during initialization -->
 				<div align="center">
-					<button type="roll" class="sheet-2d6-button-nofloat" value="&{template:2d6-roll} {{character=@{character_name}}} {{title=Roll with modifiers}} {{roll=[[2d6+?{@{modifier-tally} + @{stats-query}}+@{modifier-tally}]]}}" name="roll_2d6-mods"><span class="bold">Current tally: </span><span name="attr_modifier-tally"></span>&nbsp;</button>
+					<button type="roll" class="sheet-2d6-button-nofloat" value="&{template:2d6-roll} {{character=@{character_name}}} {{title=Roll with modifiers}} {{roll=[[2d6+?{@{modifier-tally} + @{stats-query}}+@{modifier-tally}]]}}" name="roll_2d6-mods"><span class="bold"><span data-i18n="Current tally"></span>: </span><span name="attr_modifier-tally"></span>&nbsp;</button>
 				</div>
 				<div align="center">
-					<button type="action" name="act_mods-checkall" class="buttonless">check all</button> / 
-					<button type="action" name="act_mods-uncheckall" class="buttonless">uncheck all</button>
+					<button type="action" name="act_mods-checkall" class="buttonless"><span data-i18n="check all"></span></button> / 
+					<button type="action" name="act_mods-uncheckall" class="buttonless"><span data-i18n="uncheck all"></span></button>
 				</div>
 			</div>
 
 			<div class="section-head">
-				Conditions
+				<span data-i18n="Conditions"></span>
 			</div>
 			<div class="nocontrol">
 				<fieldset class="repeating_conditions">
@@ -2019,12 +2182,13 @@ You have changed the type to sheet worker.
 						<input type="hidden" name="attr_name" value="">
 						<input type="hidden" name="attr_penalty" value="">
 						<input type="hidden" name="attr_penalized" value="">
+						<input type="hidden" name="attr_moveid" value="">
 						<input type="hidden" name="attr_clearwhen" value="">
 						<span name="attr_name" class="bold"></span>
-						<div class="condition-penalty"> <span name="attr_penalty"></span> to <span name="attr_penalized" class="bold"></span> </div>
+						<div class="condition-penalty"> <span name="attr_penalty"></span> <span data-i18n="to"></span> <span name="attr_penalized" class="bold"></span> </div>
 						<div class="condition-pop">
 							<div> <span name="attr_name" class="bold"></span> </div>
-							<div> <span name="attr_penalty"></span> to <span name="attr_penalized" class="bold"></span> </div>
+							<div> <span name="attr_penalty"></span> <span data-i18n="to"></span> <span name="attr_penalized" class="bold"></span> </div>
 							<div> <span name="attr_clearwhen"></span> </div>
 						</div>
 					</div>
@@ -2032,7 +2196,7 @@ You have changed the type to sheet worker.
 			</div>
 
 			<div class="section-head">
-				Strings
+				<span data-i18n="Strings"></span>
 			</div>
 			<div class="nocontrol">
 				<fieldset class="repeating_strings"><div class="one-line">
@@ -2059,7 +2223,7 @@ You have changed the type to sheet worker.
 			</div>
 
 			<div class="section-head">
-				Notes
+				<span data-i18n="Notes"></span>
 			</div>
 			<div>
 				<textarea name="attr_notes" style="height: 120px;"></textarea>
@@ -2072,7 +2236,7 @@ You have changed the type to sheet worker.
 	<hr/>
 	<font size="0.5">
 		<span>sheet version</span> 1.0.
-		<span>Thirsty Sword Lesbians is copyright Evil Hat Productions, LLC and April Kit Walsh.</span>
+		<span><span data-i18n="Thirsty Sword Lesbians is copyright Evil Hat Productions, LLC and April Kit Walsh."></span></span>
 	</font>
 	</div>
 
