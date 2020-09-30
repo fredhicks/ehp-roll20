@@ -100,13 +100,24 @@ input[type="number"].sheet-bignumber {
 	padding: 6px; 
 	border-radius: 6px;
 	position: absolute;
-	z-index: 1;
+	z-index: 2;
 	width: 200px;
 	top: 100%;
 	left: 50%;
 	margin-left: -95px;
 	box-shadow: 0px 3px 6px #999999;
 	font-size: 90%;
+}
+
+.sheet-tooltip.sheet-bio:hover, .sheet-tooltip.sheet-bio {
+	background-color: #eeeeee;
+	color: black;
+}
+
+.sheet-tooltip.sheet-bio .sheet-tooltip-pop {
+	margin-left: 0px;
+	background-color: black;
+	color: white;
 }
 
 .sheet-narrow .sheet-tooltip-pop {
@@ -186,6 +197,36 @@ input[type="number"].sheet-bignumber {
 	height: auto;
 }
 
+input[type="checkbox"].sheet-expand-toggle {
+	opacity: 0.0;
+	width: 80px;
+	height: 16px;
+	position: relative;
+	top: -3px;
+	left: 9px;
+	margin: -10px;
+	cursor: pointer;
+	z-index: 1;
+}
+
+.sheet-expand-toggle-container {
+	white-space: nowrap;
+	width: 80px;
+}
+
+.sheet-expand-toggle-container .sheet-expand-toggle ~ .sheet-expand-toggle-off,
+.sheet-expand-toggle-container .sheet-expand-toggle:checked ~ .sheet-expand-toggle-on {
+	display: initial;
+	opacity: 0.75;
+	text-align: left;
+	margin-left: -64px;
+}
+
+.sheet-expand-toggle-container .sheet-expand-toggle:checked ~ .sheet-expand-toggle-off,
+.sheet-expand-toggle-container .sheet-expand-toggle ~ .sheet-expand-toggle-on {
+	display: none;
+}
+
 .sheet-bold {
 	font-weight: bold;
 }
@@ -197,6 +238,14 @@ input[type="number"].sheet-bignumber {
 	font-weight: normal;
 	text-align: left;
 	padding: 0px;
+}
+
+input.sheet-popmenu-reveal + * {
+	display: none;
+}
+
+input.sheet-popmenu-reveal[value="yes"] + * {
+	display: block;
 }
 
 .sheet-buttonless:hover,
@@ -241,6 +290,7 @@ input.sheet-popmenu-select[value=""] + button {
 	float: right;
 }
 
+.sheet-fill-the-blank input.sheet-fillme:focus ~ div.sheet-suggestions,
 textarea:focus ~ div.sheet-examples-list,
 input:focus + div.sheet-examples-list {
 	display: block;
@@ -272,8 +322,13 @@ input:focus + div.sheet-examples-list {
 	width: 100%;
 }
 
+input.sheet-show-on-yes + *,
 input.sheet-hide-on-yes[value="yes"] + * {
 	display: none;
+}
+
+input.sheet-show-on-yes[value="yes"] + * {
+	display: initial;
 }
 
 input.sheet-hide-on-no[value="no"] + * {
@@ -317,6 +372,22 @@ input.sheet-make-plus[value^="-"] + span.sheet-make-plus:before {
 .sheet-mod-state-button + button:hover > span,
 .sheet-mod-state-button + button:focus > span {
 	display: inline;
+}
+
+/* Tried this, it looks shit */
+/* 
+div.sheet-move-whole {
+	max-height: 80px;
+	overflow: scroll;
+}
+*/
+
+.sheet-move-whole .sheet-move-extras {
+	display: none;
+}
+
+.sheet-move-whole:hover .sheet-move-extras {
+	display: initial;
 }
 
 .sheet-move {
@@ -504,14 +575,14 @@ input.sheet-plus-enabled[type=number]:focus {
 	width: 200px;
 	max-width: 200px;
 	height: 1px;
-	z-index: 1;
+	z-index: 2;
 	display: none;
 }
 
 .sheet-popmenu-box button {
 	display: none;
 	width: 100%;
-	z-index: 1;
+	z-index: 2;
 }
 
 .sheet-popmenu-box .sheet-checkline {
@@ -526,7 +597,7 @@ input.sheet-plus-enabled[type=number]:focus {
 	position: absolute;
 	width: auto;
 	height: auto;
-	z-index: 1;
+	z-index: 2;
 	border: .5px solid #999999;
 	padding: 6px;
 	box-shadow: 3px 3px 6px #999999;
@@ -770,6 +841,32 @@ input.sheet-show-on-yes-combo + input.sheet-show-on-unchecked-combo:checked + di
 	display: none;
 }
 
+/*
+	If long != "yes", display.
+	If long = "yes", consider long-expand.
+		If long-expand = checked, display
+		If long-expand != checked, hide
+		
+	long: show-on-yes-combo (currently)
+	long-expand: show-on-checked-combo
+*/
+
+.sheet-show-on-checked-combo {
+	display: none;
+}
+
+input.sheet-show-on-yes-combo + input.sheet-show-on-checked-combo + div {
+	display: none;
+}
+
+/* If the value is not yes and it's paired with show-on-checked, show it; if the value is yes and it's paired with a checked show-on-checked, show it */
+
+input.sheet-show-on-yes-combo:not([value="yes"]) + input.sheet-show-on-checked-combo + div,
+input.sheet-show-on-yes-combo[value="yes"] + input.sheet-show-on-checked-combo:checked + div {
+	display: block;
+}
+
+
 .sheet-space-below {
 	padding-bottom: 6px; 
 }
@@ -804,6 +901,15 @@ input.sheet-show-on-yes-combo + input.sheet-show-on-unchecked-combo:checked + di
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
+}
+
+.sheet-track {
+	text-align: center;
+	vertical-align: middle;
+}
+
+.sheet-track .sheet-bold {
+	vertical-align: 2px;
 }
 
 .sheet-whole {
