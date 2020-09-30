@@ -3093,13 +3093,13 @@
 
 		<div class="nocontrol popmenu">
 			<div class="popmenu-trigger"><span class="bold"><span data-i18n="Playbook"></span>:</span> <span name="attr_playbook-name"></span></div>
-			<div class="popmenu-box"><fieldset class="repeating_playbooks">
+			<div class="popmenu-box"><fieldset class="repeating_playbooks"><div class="popmenu-section">
 				<input type="hidden" name="attr_key" value="">
 				<input type="hidden" name="attr_name" value="">
 				<input type="hidden" name="attr_selected" value="" class="popmenu-select">
 				<button type="action" name="act_choose-playbook" class="buttonless">
 					<span data-i18n="Choose"></span>
-					<span name="attr_name" class="bold"></span>
+					<span name="attr_name" class="bold-uncolored"></span>
 					<span name="attr_selected" class="pictos"></span>
 				</button>
 				<input type="hidden" name="attr_bio" value="" class="hide-on-null">
@@ -3109,7 +3109,7 @@
 						<span name="attr_bio"></span>
 					</div>
 				</div>
-			</fieldset></div>
+			</div></fieldset></div>
 		</div>
 
 		<!-- input type="hidden" name="attr_starting-chosen" value="no" class="hide-on-yes" -->
@@ -3122,7 +3122,7 @@
 					<input type="hidden" name="attr_set" value="">
 					<input type="hidden" name="attr_text" value="">
 					<button type="action" name="act_choose-startingstats" class="buttonless">
-						<span name="attr_text" class="bold"></span>
+						<span name="attr_text" class="bold-uncolored"></span>
 					</button>
 				</fieldset></div>
 				<input type="checkbox" name="attr_starting-chosen" value="yes">
@@ -3224,19 +3224,19 @@
 				<div class="popmenu">
 					<div class="popmenu-trigger"><span data-i18n="Moves"></span></div>
 					<div class="popmenu-box">
-						<div><button type="action" name="act_movefilter-pbmoves" class="buttonless"><span class="bold"><span data-i18n="My Playbook's Moves Only"></span></span></button></div>
-						<div><button type="action" name="act_movefilter-allmoves" class="buttonless"><span class="bold"><span data-i18n="Show Every Move"></span></span></button></div>
-						<div><button type="action" name="act_movefilter-hideprohibited" class="buttonless"><span class="bold"><span data-i18n="Filter Out Moves I Can't Take"></span></span></button></div>
-						<div class="popmenu-section"><input type="checkbox" name="attr_movefilter-takenonly" value="yes"> <span class="bold"><span data-i18n="Hide Untaken Moves"></span></span></div>
-						<div><input type="checkbox" name="attr_movefilter-hidespecial" value="yes"> <span class="bold"><span data-i18n="Hide Special Features"></span></span></button></div>
-						<div><input type="checkbox" name="attr_movefilter-hideplaybook" value="yes"> <span class="bold"><span data-i18n="Hide Playbook Moves"></span></span></button></div>
-						<div><input type="checkbox" name="attr_movefilter-hidetruths" value="yes"> <span class="bold"><span data-i18n="Hide Truths of Heart and Blade"></span></span></button></div>
-						<div><input type="checkbox" name="attr_movefilter-hidebasic" value="yes"> <span class="bold"><span data-i18n="Hide Basic Moves"></span></span></button></div>
+						<div><button type="action" name="act_movefilter-pbmoves" class="buttonless"><span class="bold-uncolored"><span data-i18n="My Playbook's Moves Only"></span></span></button></div>
+						<div><button type="action" name="act_movefilter-allmoves" class="buttonless"><span class="bold-uncolored"><span data-i18n="Show Every Move"></span></span></button></div>
+						<div><button type="action" name="act_movefilter-hideprohibited" class="buttonless"><span class="bold-uncolored"><span data-i18n="Filter Out Moves I Can't Take"></span></span></button></div>
+						<div class="popmenu-section"><input type="checkbox" name="attr_movefilter-takenonly" value="yes"> <span class="bold-uncolored"><span data-i18n="Hide Untaken Moves"></span></span></div>
+						<div><input type="checkbox" name="attr_movefilter-hidespecial" value="yes"> <span class="bold-uncolored"><span data-i18n="Hide Special Features"></span></span></button></div>
+						<div><input type="checkbox" name="attr_movefilter-hideplaybook" value="yes"> <span class="bold-uncolored"><span data-i18n="Hide Playbook Moves"></span></span></button></div>
+						<div><input type="checkbox" name="attr_movefilter-hidetruths" value="yes"> <span class="bold-uncolored"><span data-i18n="Hide Truths of Heart and Blade"></span></span></button></div>
+						<div><input type="checkbox" name="attr_movefilter-hidebasic" value="yes"> <span class="bold-uncolored"><span data-i18n="Hide Basic Moves"></span></span></button></div>
 						<div class="bold popmenu-section"><span data-i18n="Individual Playbook Moves"></span></div>
 						<div class="nocontrol"><fieldset class="repeating_playbooks">
 							<input type="hidden" name="attr_key" value="">
 							<input type="hidden" name="attr_name" value="">
-							<div><button type="action" name="act_movefilter-onepb" class="buttonless">&nbsp; <span class="bold"><span name="attr_name"></span></span></button></div>
+							<div><button type="action" name="act_movefilter-onepb" class="buttonless">&nbsp; <span class="bold-uncolored"><span name="attr_name"></span></span></button></div>
 						</fieldset></div>
 					</div>
 				</div>
@@ -3296,7 +3296,7 @@
 									</li>
 								</ul></div>
 								<input type="hidden" name="attr_hit" class="hide-on-null" value=""><div class="result">
-									<b>10+:</b> <span name="attr_hit"></span>
+									<span class="bold">10+:</span> <span name="attr_hit"></span>
 									<input type="hidden" name="attr_hitbullet0" class="hide-on-null" value=""><div><ul>
 										<input type="hidden" name="attr_hitbullet0" class="hide-on-null" value=""><li>
 											<span name="attr_hitbullet0"></span>
@@ -3316,7 +3316,7 @@
 									</ul></div>
 								</div>
 								<input type="hidden" name="attr_mixed" class="hide-on-null" value=""><div class="result">
-									<b>7-9:</b> <span name="attr_mixed"></span>
+									<span class="bold">7-9:</span> <span name="attr_mixed"></span>
 									<input type="hidden" name="attr_mixedbullet0" class="hide-on-null" value=""><div><ul>
 										<input type="hidden" name="attr_mixedbullet0" class="hide-on-null" value=""><li>
 											<span name="attr_mixedbullet0"></span>
@@ -3336,7 +3336,7 @@
 									</ul></div>
 								</div>
 								<input type="hidden" name="attr_miss" class="hide-on-null" value=""><div class="result">
-									<b>6-:</b> <span name="attr_miss"></span>
+									<span class="bold">6-:</span> <span name="attr_miss"></span>
 									<input type="hidden" name="attr_missbullet0" class="hide-on-null" value=""><div><ul>
 										<input type="hidden" name="attr_missbullet0" class="hide-on-null" value=""><li>
 											<span name="attr_missbullet0"></span>
@@ -3374,7 +3374,7 @@
 									</li>
 								</ul></div>
 								<input type="hidden" name="attr_althit" class="hide-on-null" value=""><div class="result">
-									<b>10+:</b> <span name="attr_althit"></span>
+									<span class="bold">10+:</span> <span name="attr_althit"></span>
 									<input type="hidden" name="attr_althitbullet0" class="hide-on-null" value=""><div><ul>
 										<input type="hidden" name="attr_althitbullet0" class="hide-on-null" value=""><li>
 											<span name="attr_althitbullet0"></span>
@@ -3394,7 +3394,7 @@
 									</ul></div>
 								</div>
 								<input type="hidden" name="attr_altmixed" class="hide-on-null" value=""><div class="result">
-									<b>7-9:</b> <span name="attr_altmixed"></span>
+									<span class="bold">7-9:</span> <span name="attr_altmixed"></span>
 									<input type="hidden" name="attr_altmixedbullet0" class="hide-on-null" value=""><div><ul>
 										<input type="hidden" name="attr_altmixedbullet0" class="hide-on-null" value=""><li>
 											<span name="attr_altmixedbullet0"></span>
@@ -3414,7 +3414,7 @@
 									</ul></div>
 								</div>
 								<input type="hidden" name="attr_altmiss" class="hide-on-null" value=""><div class="result">
-									<b>6-:</b> <span name="attr_altmiss"></span>
+									<span class="bold">6-:</span> <span name="attr_altmiss"></span>
 									<input type="hidden" name="attr_altmissbullet0" class="hide-on-null" value=""><div><ul>
 										<input type="hidden" name="attr_altmissbullet0" class="hide-on-null" value=""><li>
 											<span name="attr_altmissbullet0"></span>
@@ -3436,7 +3436,7 @@
 								<input type="hidden" name="attr_end" class="hide-on-null" value=""><div class="indented"><span name="attr_end"></span></div>
 								<input type="hidden" name="attr_blankname0" class="hide-on-null" value=""><div class="fill-the-blank">
 									<input type="hidden" name="attr_checkbox0" value="no" class="hide-on-no hide-on-null"><input type="checkbox" name="attr_blankbox0" value="marked">
-									<b><span name="attr_blankname0"></span></b>:
+									<span class="bold" name="attr_blankname0"></span></b>:
 									<input type="text" name="attr_blank0" class="fillme">
 									<input type="hidden" name="attr_blanksuggestions0" class="hide-on-null" value=""><div class="suggestions examples-list">
 										<span name="attr_blanksuggestions0"></span>
@@ -3444,7 +3444,7 @@
 								</div>
 								<input type="hidden" name="attr_blankname1" class="hide-on-null" value=""><div class="fill-the-blank">
 									<input type="hidden" name="attr_checkbox1" value="no" class="hide-on-no hide-on-null"><input type="checkbox" name="attr_blankbox1" value="marked">
-									<b><span name="attr_blankname1"></span></b>:
+									<span class="bold" name="attr_blankname1"></span></b>:
 									<input type="text" name="attr_blank1" class="fillme">
 									<input type="hidden" name="attr_blanksuggestions1" class="hide-on-null" value=""><div class="suggestions examples-list">
 										<span name="attr_blanksuggestions1"></span>
@@ -3452,7 +3452,7 @@
 								</div>
 								<input type="hidden" name="attr_blankname2" class="hide-on-null" value=""><div class="fill-the-blank">
 									<input type="hidden" name="attr_checkbox2" value="no" class="hide-on-no hide-on-null"><input type="checkbox" name="attr_blankbox2" value="marked">
-									<b><span name="attr_blankname2"></span></b>:
+									<span class="bold" name="attr_blankname2"></span></b>:
 									<input type="text" name="attr_blank2" class="fillme">
 									<input type="hidden" name="attr_blanksuggestions2" class="hide-on-null" value=""><div class="suggestions examples-list">
 										<span name="attr_blanksuggestions2"></span>
@@ -3460,7 +3460,7 @@
 								</div>
 								<input type="hidden" name="attr_blankname3" class="hide-on-null" value=""><div class="fill-the-blank">
 									<input type="hidden" name="attr_checkbox3" value="no" class="hide-on-no hide-on-null"><input type="checkbox" name="attr_blankbox3" value="marked">
-									<b><span name="attr_blankname3"></span></b>:
+									<span class="bold" name="attr_blankname3"></span></b>:
 									<input type="text" name="attr_blank3" class="fillme">
 									<input type="hidden" name="attr_blanksuggestions3" class="hide-on-null" value=""><div class="suggestions examples-list">
 										<span name="attr_blanksuggestions3"></span>
@@ -3468,7 +3468,7 @@
 								</div>
 								<input type="hidden" name="attr_blankname4" class="hide-on-null" value=""><div class="fill-the-blank">
 									<input type="hidden" name="attr_checkbox4" value="no" class="hide-on-no hide-on-null"><input type="checkbox" name="attr_blankbox4" value="marked">
-									<b><span name="attr_blankname4"></span></b>:
+									<span class="bold" name="attr_blankname4"></span></b>:
 									<input type="text" name="attr_blank4" class="fillme">
 									<input type="hidden" name="attr_blanksuggestions4" class="hide-on-null" value=""><div class="suggestions examples-list">
 										<span name="attr_blanksuggestions4"></span>
@@ -3476,7 +3476,7 @@
 								</div>
 								<input type="hidden" name="attr_blankname5" class="hide-on-null" value=""><div class="fill-the-blank">
 									<input type="hidden" name="attr_checkbox5" value="no" class="hide-on-no hide-on-null"><input type="checkbox" name="attr_blankbox5" value="marked">
-									<b><span name="attr_blankname5"></span></b>:
+									<span class="bold" name="attr_blankname5"></span></b>:
 									<input type="text" name="attr_blank5" class="fillme">
 									<input type="hidden" name="attr_blanksuggestions5" class="hide-on-null" value=""><div class="suggestions examples-list">
 										<span name="attr_blanksuggestions5"></span>
@@ -3484,7 +3484,7 @@
 								</div>
 								<input type="hidden" name="attr_blankname6" class="hide-on-null" value=""><div class="fill-the-blank">
 									<input type="hidden" name="attr_checkbox6" value="no" class="hide-on-no hide-on-null"><input type="checkbox" name="attr_blankbox6" value="marked">
-									<b><span name="attr_blankname6"></span></b>:
+									<span class="bold" name="attr_blankname6"></span></b>:
 									<input type="text" name="attr_blank6" class="fillme">
 									<input type="hidden" name="attr_blanksuggestions6" class="hide-on-null" value=""><div class="suggestions examples-list">
 										<span name="attr_blanksuggestions6"></span>
@@ -3492,7 +3492,7 @@
 								</div>
 								<input type="hidden" name="attr_blankname7" class="hide-on-null" value=""><div class="fill-the-blank">
 									<input type="hidden" name="attr_checkbox7" value="no" class="hide-on-no hide-on-null"><input type="checkbox" name="attr_blankbox7" value="marked">
-									<b><span name="attr_blankname7"></span></b>:
+									<span class="bold" name="attr_blankname7"></span></b>:
 									<input type="text" name="attr_blank7" class="fillme">
 									<input type="hidden" name="attr_blanksuggestions7" class="hide-on-null" value=""><div class="suggestions examples-list">
 										<span name="attr_blanksuggestions7"></span>
@@ -3500,7 +3500,7 @@
 								</div>
 								<input type="hidden" name="attr_blankname8" class="hide-on-null" value=""><div class="fill-the-blank">
 									<input type="hidden" name="attr_checkbox8" value="no" class="hide-on-no hide-on-null"><input type="checkbox" name="attr_blankbox8" value="marked">
-									<b><span name="attr_blankname8"></span></b>:
+									<span class="bold" name="attr_blankname8"></span></b>:
 									<input type="text" name="attr_blank8" class="fillme">
 									<input type="hidden" name="attr_blanksuggestions8" class="hide-on-null" value=""><div class="suggestions examples-list">
 										<span name="attr_blanksuggestions8"></span>
@@ -3508,7 +3508,7 @@
 								</div>
 								<input type="hidden" name="attr_blankname9" class="hide-on-null" value=""><div class="fill-the-blank">
 									<input type="hidden" name="attr_checkbox9" value="no" class="hide-on-no hide-on-null"><input type="checkbox" name="attr_blankbox9" value="marked">
-									<b><span name="attr_blankname9"></span></b>:
+									<span class="bold" name="attr_blankname9"></span></b>:
 									<input type="text" name="attr_blank9" class="fillme">
 									<input type="hidden" name="attr_blanksuggestions9" class="hide-on-null" value=""><div class="suggestions examples-list">
 										<span name="attr_blanksuggestions9"></span>
