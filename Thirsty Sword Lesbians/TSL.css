@@ -1029,29 +1029,66 @@ input.sheet-show-on-yes-combo[value="yes"] + input.sheet-show-on-checked-combo:c
 	vertical-align: 2px;
 }
 
-.sheet-tracker-bar:after {
+input.sheet-tracker + .sheet-tracker-bar:before {
+	display: inline-block;
+	margin-left: 0px;
+	margin-right: 0px;
+	line-height: 14px;
+	text-align: center;
+	vertical-align: 0px;
 	width: 160px;
+	height: 16px;
 	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/art/tsl-tracker-0.png);
 }
 
-.sheet-tracker[value="0"] + .sheet-tracker-bar:after {
+input.sheet-tracker[value="0"] + .sheet-tracker-bar:before {
 	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/art/tsl-tracker-0.png);
 }
 
-.sheet-tracker[value="1"] + .sheet-tracker-bar:after {
+input.sheet-tracker[value="1"] + .sheet-tracker-bar:before {
 	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/art/tsl-tracker-1.png);
 }
 
-.sheet-tracker[value="2"] + .sheet-tracker-bar:after {
+input.sheet-tracker[value="2"] + .sheet-tracker-bar:before {
 	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/art/tsl-tracker-2.png);
 }
 
-.sheet-tracker[value="3"] + .sheet-tracker-bar:after {
+input.sheet-tracker[value="3"] + .sheet-tracker-bar:before {
 	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/art/tsl-tracker-3.png);
 }
 
-.sheet-tracker[value="4"] + .sheet-tracker-bar:after {
+input.sheet-tracker[value="4"] + .sheet-tracker-bar:before {
 	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/art/tsl-tracker-4.png);
+}
+
+input[type=number].sheet-tracker-number {
+	font-size: 16px;
+	width: 1em;
+}
+
+input[type=number].sheet-tracker-number:hover,
+input[type=number].sheet-tracker-number:focus {
+	font-size: 12px;
+	width: 3em;
+}
+
+.sheet-tracker-label {
+	font-size: 16px;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input.sheet-tracker-number::-webkit-outer-spin-button,
+input.sheet-tracker-number::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input.sheet-tracker-number:hover::-webkit-outer-spin-button,
+input.sheet-tracker-number:hover::-webkit-inner-spin-button,
+input.sheet-tracker-number:focus::-webkit-outer-spin-button,
+input.sheet-tracker-number:focus::-webkit-inner-spin-button {
+  -webkit-appearance: auto;
+  margin: inherit;
 }
 
 .sheet-whole {
@@ -1066,11 +1103,3 @@ textarea {
 ul {
 	margin-block-end: 6px;
 }
-
-/*
-
-input.sheet-pkey[value=""] + .sheet-whole {
-	color: #f8cccf;
-}
-
-*/
