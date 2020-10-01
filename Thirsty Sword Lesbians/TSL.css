@@ -14,6 +14,8 @@ Google font, doesn't work and in fact makes the whole sheet barf. Too bad.
 	--tsl-mild: #f8cccf;
 	--tsl-dark: #a23c43;
 	--tsl-faint-gradient: linear-gradient(90deg, #fceeef 0%, #ffffff 5%, #ffffff 95%, #fceeef 100%);
+
+	--logo-gradient: linear-gradient(0deg, #f26928 0%, #db4086 100%)
 }
 */
 
@@ -850,7 +852,8 @@ button[type="roll"].sheet-2d6-button-nofloat:after {
 
 .sheet-rolltemplate-2d6-roll {
 	border: 1px solid #e85761;
-	background-color: white;
+	background: linear-gradient(0deg, #f26928 0%, #db4086 100%);
+	/* background: url('https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/art/tsl-roll-bg.png') repeat-x; */
 	padding: 6px;
 	box-shadow: 3px 3px 6px #a23c43;
 	border-radius: 3px 3px 6px 6px;
@@ -861,8 +864,8 @@ button[type="roll"].sheet-2d6-button-nofloat:after {
 	margin-top: -6px;
 	margin-left: -6px;
 	margin-right: -6px;
-	background-color: #e85761;
 	color: white;
+	text-shadow: 0px 0px 6px #a23c43;
 }
 
 /*
@@ -898,11 +901,24 @@ button[type="roll"].sheet-2d6-button-nofloat:after {
 	vertical-align: middle;
 	font-size: 48px;
 	padding-top: 18px;
+	font-family: Arial;
 }
 
 .sheet-rolltemplate-2d6-roll .sheet-dice .sheet-dieroll-title {
 	display: block;
-	text-align: right;
+	text-align: center;
+	color: white;
+	font-family: 'Arial';
+	font-size: 24px;
+	font-weight: bold;
+	padding-top: 18px;
+}
+
+.sheet-rolltemplate-2d6-roll .sheet-dice .sheet-dieroll-reminder {
+	color: white;
+	font-style: italic;
+	text-align: center;
+	text-shadow: 0px 0px 6px #a23c43;
 }
 
 .sheet-rolltemplate-2d6-roll .sheet-dice .sheet-dieroll-hit,
@@ -913,6 +929,8 @@ button[type="roll"].sheet-2d6-button-nofloat:after {
 	min-width: 48px;
 	text-align: center;
 	vertical-align: bottom;
+	color: white;
+	text-shadow: 0px 0px 6px #a23c43;
 }
 
 .sheet-rolltemplate-sharemove {
@@ -968,6 +986,7 @@ button[type="roll"].sheet-2d6-button-nofloat:after {
 	margin-right: -6px;
 	background-color: #e85761;
 	color: white;
+	text-shadow: 0px 0px 6px #a23c43;
 }
 
 .sheet-show-on-unchecked-combo {
