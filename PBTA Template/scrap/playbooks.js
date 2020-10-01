@@ -754,7 +754,8 @@
 					pbother: "no"
 				},
 				{
-					name: "To Love and Lose: When you become Smitten with someone, say why, give them a String, and answer this question:",
+					name: "To Love and Lose"
+					body: "When you become Smitten with someone, say why, give them a String, and answer this question:",
 					bullets: ["Why would your romance never last?"],
 					pbdefault: "yes",
 					pbother: "no"
