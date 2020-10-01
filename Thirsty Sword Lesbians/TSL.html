@@ -1548,7 +1548,8 @@
 				attrs[`${stringid}_used`] = "no"; // Creates our starter String entry
 				var modifierid = "repeating_modifiers_" + generateActuallyUniqueRowID();
 				attrs[`${modifierid}_used`] = "no"; // Creates our starter modifier entry
-				attrs["rollprompt"] = "?{roll with modifier +/-?|0}"; // sets up our default rolling prompt
+				var rwm = gTBK("roll with modifier");
+				attrs["rollprompt"] = "?{"+rwm+"|0}"; // sets up our default rolling prompt
 				for(var [id,value] of Object.entries(playbooks) ) {
 					var newid = generateActuallyUniqueRowID();
 					var pbidpre = "repeating_playbooks_" + newid + "_";
@@ -2789,7 +2790,7 @@
 		log("We've got a change in roll prompt configuration");
 		getAttrs(["rollprompt-mods","rollprompt-query","modifier-tally"], function(f) {
 			log(f);
-			var defaultconfig = "?{" + rwm + " +/-?|0}";
+			var defaultconfig = "?{" + rwm + "|0}";
 			var usemods = "1";
 			if ( typeof f["rollprompt-mods"] === "undefined" || f["rollprompt-mods"] !== "1") {
 				usemods = "0";
@@ -2807,7 +2808,7 @@
 			if ( usemods === "1" ) {
 				if ( doquery === "1" ) {
 					// Use standard default config
-					attrs["rollprompt"] = "?{" + rwm + "+/-?|"+tally+"}";
+					attrs["rollprompt"] = "?{" + rwm + "|"+tally+"}";
 				} else {
 					// We don't want to be bothered by it at all
 					attrs["rollprompt"] = tally; // just add the tally
@@ -3075,7 +3076,7 @@
 	{{/allprops()}}
 </rolltemplate>
 
-<input type="hidden" name="attr_rollprompt" value="?{^{roll with modifier} +/-?|0}">
+<!-- input type="hidden" name="attr_rollprompt" value="?{Roll With Modifier}|0}" -->
 <input type="hidden" name="attr_playbook-key" class="pkey" value="">
 
 <input type="hidden" name="attr_pbinitialized" value="no" class="hide-on-yes">
@@ -3085,7 +3086,7 @@
 
 <div class="whole">
 
-	<img src="https://imgsrv.roll20.net/?src=https%3A//raw.githubusercontent.com/fredhicks/ehp-roll20/master/art/tsl-logo-faint.png" width="160" height="80" align="right">
+	<img src="https://imgsrv.roll20.net/?src=https%3A//raw.githubusercontent.com/fredhicks/ehp-roll20/master/art/tsl-logo.png" width="160" height="80" align="right">
 
 	<div class="toprow">
 	<input type="text" name="attr_character_name" class="topname fillme">
@@ -3153,7 +3154,7 @@
 		</div>
 		<div>
 			<span class="bold"><span data-i18n="Pronouns"></span>: </span>
-			<input type="text" name="attr_pronouns" value="" class="fillme">
+			<input type="text" name="attr_pronouns" value="" class="fillme" style="width: 120px">
 		</div>
 	</div> <!-- /class=toprow -->
 
@@ -3161,6 +3162,7 @@
 
 	<div class="columns">
 		<div class="narrow">
+
 			<div class="nocontrol">
 				<fieldset class="repeating_stats">
 					<input type="hidden" name="attr_key" value="">
@@ -3201,22 +3203,14 @@
 				</div>
 			</div>
 
-			<div class="tooltip">
-				<div class="section-head">
-					<span data-i18n="Advances"></span>
+			<div class="flexspacer"></div>
+
+			<div class="copyright-bloc">
+				<div class="copyright-statement">
+				<span>sheet version</span> 1.0.
+				<span><span data-i18n="Thirsty Sword Lesbians is copyright Evil Hat Productions, LLC and April Kit Walsh."></span></span>
 				</div>
-				<div>
-					<span data-i18n="Mouse over for your options."></span>
-				</div>
-				<div class="nocontrol tooltip-pop">
-					<fieldset class="repeating_advances">
-						<input type="hidden" name="attr_preamble" class="hide-on-null"><div class="space-below"><span name="attr_preamble"></span></div>
-						<div class="move">
-							<input type="checkbox" name="attr_taken" value="1" class="checkboxer"><span class="checkboxed"></span>
-							<input type="hidden" name="attr_text" value=""><span name="attr_text"></span>
-						</div>
-					</fieldset>
-				</div>
+				<img src="https://imgsrv.roll20.net/?src=https%3A//raw.githubusercontent.com/fredhicks/ehp-roll20/master/art/ehp-gsg-logos.png" width="120" height="36">
 			</div>
 
 		</div> <!-- class="narrow" column ends -->
@@ -3299,8 +3293,8 @@
 										<span name="attr_bullet4"></span>
 									</li>
 								</ul></div>
-								<input type="hidden" name="attr_hit" class="hide-on-null" value=""><div class="result">
-									<span class="bold">10+:</span> <span name="attr_hit"></span>
+								<input type="hidden" name="attr_hit" class="hide-on-null" value=""><div class="result hit">
+									<span name="attr_hit"></span>
 									<input type="hidden" name="attr_hitbullet0" class="hide-on-null" value=""><div><ul>
 										<input type="hidden" name="attr_hitbullet0" class="hide-on-null" value=""><li>
 											<span name="attr_hitbullet0"></span>
@@ -3319,7 +3313,7 @@
 										</li>
 									</ul></div>
 								</div>
-								<input type="hidden" name="attr_mixed" class="hide-on-null" value=""><div class="result">
+								<input type="hidden" name="attr_mixed" class="hide-on-null" value=""><div class="result mixed">
 									<span class="bold">7-9:</span> <span name="attr_mixed"></span>
 									<input type="hidden" name="attr_mixedbullet0" class="hide-on-null" value=""><div><ul>
 										<input type="hidden" name="attr_mixedbullet0" class="hide-on-null" value=""><li>
@@ -3339,7 +3333,7 @@
 										</li>
 									</ul></div>
 								</div>
-								<input type="hidden" name="attr_miss" class="hide-on-null" value=""><div class="result">
+								<input type="hidden" name="attr_miss" class="hide-on-null" value=""><div class="result miss">
 									<span class="bold">6-:</span> <span name="attr_miss"></span>
 									<input type="hidden" name="attr_missbullet0" class="hide-on-null" value=""><div><ul>
 										<input type="hidden" name="attr_missbullet0" class="hide-on-null" value=""><li>
@@ -3377,8 +3371,8 @@
 										<span name="attr_altbullet4"></span>
 									</li>
 								</ul></div>
-								<input type="hidden" name="attr_althit" class="hide-on-null" value=""><div class="result">
-									<span class="bold">10+:</span> <span name="attr_althit"></span>
+								<input type="hidden" name="attr_althit" class="hide-on-null" value=""><div class="result hit">
+									<span name="attr_althit"></span>
 									<input type="hidden" name="attr_althitbullet0" class="hide-on-null" value=""><div><ul>
 										<input type="hidden" name="attr_althitbullet0" class="hide-on-null" value=""><li>
 											<span name="attr_althitbullet0"></span>
@@ -3397,7 +3391,7 @@
 										</li>
 									</ul></div>
 								</div>
-								<input type="hidden" name="attr_altmixed" class="hide-on-null" value=""><div class="result">
+								<input type="hidden" name="attr_altmixed" class="hide-on-null" value=""><div class="result mixed">
 									<span class="bold">7-9:</span> <span name="attr_altmixed"></span>
 									<input type="hidden" name="attr_altmixedbullet0" class="hide-on-null" value=""><div><ul>
 										<input type="hidden" name="attr_altmixedbullet0" class="hide-on-null" value=""><li>
@@ -3417,7 +3411,7 @@
 										</li>
 									</ul></div>
 								</div>
-								<input type="hidden" name="attr_altmiss" class="hide-on-null" value=""><div class="result">
+								<input type="hidden" name="attr_altmiss" class="hide-on-null" value=""><div class="result miss">
 									<span class="bold">6-:</span> <span name="attr_altmiss"></span>
 									<input type="hidden" name="attr_altmissbullet0" class="hide-on-null" value=""><div><ul>
 										<input type="hidden" name="attr_altmissbullet0" class="hide-on-null" value=""><li>
@@ -3539,51 +3533,23 @@
 				</fieldset>
 			</div>
 
+			<div>
+				<div class="section-head">
+					<span data-i18n="Advances"></span>
+				</div>
+				<div class="nocontrol">
+					<fieldset class="repeating_advances">
+						<input type="hidden" name="attr_preamble" class="hide-on-null"><div class="space-below"><span name="attr_preamble"></span></div>
+						<div class="move">
+							<input type="checkbox" name="attr_taken" value="1" class="checkboxer"><span class="checkboxed"></span>
+							<input type="hidden" name="attr_text" value=""><span name="attr_text"></span>
+						</div>
+					</fieldset>
+				</div>
+			</div>
+
 		</div> <!-- class="wide" column ends -->
 		<div class="standard">
-
-			<div class="section-head">
-				<div class="nocontrol popmenu">
-					<div class="popmenu-trigger"><span data-i18n="Modifiers"></span></div>
-					<div class="popmenu-box">
-						<input type="hidden" name="attr_rollprompt" value="?{^{roll with modifier} +/-?|0}">
-						<div class="checkline"><input type="checkbox" name="attr_rollprompt-mods" value="1" checked class="checkboxer"><span class="checkboxed"></span> <span data-i18n="2d6 buttons use checked mods"></span></div>
-						<div class="checkline"><input type="checkbox" name="attr_rollprompt-query" value="1" checked class="checkboxer"><span class="checkboxed"></span> <span data-i18n="2d6 buttons prompt for mods"></span></div>
-					</div>
-				</div>
-			</div>
-			<div class="nocontrol">
-				<fieldset class="repeating_modifiers"><div class="one-line">
-					<div class="minimum">
-						<input type="checkbox" name="attr_rollmod" value="yes" class="checkboxer"><span class="checkboxed"></span>
-					</div>
-					<div class="minimum">
-						<input type="hidden" name="attr_condition-id" value="">
-						<input type="hidden" name="attr_modifier" value="" class="make-plus"><span class="make-plus"></span><input type="number" name="attr_modifier" value="0" class="fillme plus-enabled">
-					</div>
-					<div class="minimum">
-						<input type="hidden" name="attr_statename" value="forward">
-						<input type="hidden" name="attr_state" value="forward" class="mod-state-button">
-						<button type="action" name="act_state" class="buttonless"><span name="attr_statename"></span></button>
-					</div>
-					<div class="stretch">
-						<input type="text" name="attr_target" value="" class="fillme">
-					</div>
-					<div class="minimum">
-						<input type="hidden" name="attr_used" value="no" class="hide-on-no">
-						<button type="action" name="act_trash" class="buttonless trashit"></button>
-					</div>
-				</div></fieldset>
-				<input type="hidden" name="attr_modifier-tally" value="0">
-				<input type="hidden" name="attr_stats-query" value=""> <!-- populated during initialization -->
-				<div align="center">
-					<button type="roll" class="sheet-2d6-button-nofloat" value="&{template:2d6-roll} {{character=@{character_name}}} {{title=Roll with modifiers}} {{roll=[[2d6+?{@{modifier-tally} + @{stats-query}}+@{modifier-tally}]]}}" name="roll_2d6-mods"><span class="bold"><span data-i18n="Current tally"></span>: </span><span name="attr_modifier-tally"></span>&nbsp;</button>
-				</div>
-				<div align="center">
-					<button type="action" name="act_mods-checkall" class="buttonless"><span data-i18n="check all"></span></button> / 
-					<button type="action" name="act_mods-uncheckall" class="buttonless"><span data-i18n="uncheck all"></span></button>
-				</div>
-			</div>
 
 			<div class="section-head">
 				<div class="nocontrol popmenu">
@@ -3616,6 +3582,48 @@
 						</div>
 					</div>
 				</fieldset>
+			</div>
+
+			<div class="section-head">
+				<div class="nocontrol popmenu">
+					<div class="popmenu-trigger"><span data-i18n="Modifiers"></span></div>
+					<div class="popmenu-box">
+						<div class="checkline"><input type="checkbox" name="attr_rollprompt-mods" value="1" checked class="checkboxer"><span class="checkboxed"></span> <span data-i18n="2d6 buttons use checked mods"></span></div>
+						<div class="checkline"><input type="checkbox" name="attr_rollprompt-query" value="1" checked class="checkboxer"><span class="checkboxed"></span> <span data-i18n="2d6 buttons prompt for mods"></span></div>
+					</div>
+				</div>
+			</div>
+			<div class="nocontrol">
+				<fieldset class="repeating_modifiers"><div class="one-line modifier">
+					<div class="minimum">
+						<input type="checkbox" name="attr_rollmod" value="yes" class="checkboxer"><span class="checkboxed"></span>
+					</div>
+					<div class="minimum">
+						<input type="hidden" name="attr_condition-id" value="">
+						<input type="hidden" name="attr_modifier" value="" class="make-plus"><span class="make-plus"></span><input type="number" name="attr_modifier" value="0" class="fillme plus-enabled">
+					</div>
+					<div class="minimum">
+						<input type="hidden" name="attr_statename" value="forward">
+						<input type="hidden" name="attr_state" value="forward" class="mod-state-button">
+						<button type="action" name="act_state" class="buttonless"><span name="attr_statename"></span></button>
+					</div>
+					<div class="stretch">
+						<input type="text" name="attr_target" value="" class="fillme">
+					</div>
+					<div class="minimum">
+						<input type="hidden" name="attr_used" value="no" class="hide-on-no">
+						<button type="action" name="act_trash" class="buttonless trashit"></button>
+					</div>
+				</div></fieldset>
+				<input type="hidden" name="attr_modifier-tally" value="0">
+				<input type="hidden" name="attr_stats-query" value=""> <!-- populated during initialization -->
+				<div align="center">
+					<button type="roll" class="sheet-2d6-button-nofloat" value="&{template:2d6-roll} {{character=@{character_name}}} {{title=Roll with modifiers}} {{roll=[[2d6+?{@{modifier-tally} + @{stats-query}}+@{modifier-tally}]]}}" name="roll_2d6-mods"><span class="bold"><span data-i18n="Current tally"></span>: </span><span name="attr_modifier-tally"></span>&nbsp;</button>
+				</div>
+				<div align="center">
+					<button type="action" name="act_mods-checkall" class="buttonless"><span data-i18n="check all"></span></button> / 
+					<button type="action" name="act_mods-uncheckall" class="buttonless"><span data-i18n="uncheck all"></span></button>
+				</div>
 			</div>
 
 			<div class="section-head">
@@ -3657,29 +3665,4 @@
 	
 	</div> <!-- div containing the part of the sheet that disappears during initialization -->
 
-	<div>
-	<hr/>
-	<font size="0.5">
-		<span>sheet version</span> 1.0.
-		<span><span data-i18n="Thirsty Sword Lesbians is copyright Evil Hat Productions, LLC and April Kit Walsh."></span></span>
-	</font>
-	</div>
-
 </div> <!-- /class=whole (as in, the whole sheet) -->
-
-<div class="devarea">
-	Developer Area
-	<div>
-		Initialization <input type="text" name="attr_pbinitialized" value="no" class="fillme">
-	</div>
-	<div>
-		Playbook
-		<input type="text" name="attr_playbook-key" value="" class="fillme">
-		<input type="text" name="attr_playbook-name" value="" class="fillme">
-	</div>
-	<fieldset class="repeating_playbooks">
-		<span name="attr_selected" class="pictos"></span>
-		<span name="attr_name"></span>
-		<span name="attr_key"></span>
-	</fieldset>
-</div>

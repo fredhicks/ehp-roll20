@@ -20,7 +20,7 @@ Google font, doesn't work and in fact makes the whole sheet barf. Too bad.
 /* The emerging W3C standard that is currently Firefox-only */
 * {
   scrollbar-width: thin;
-  scrollbar-color: #e85761 #fceeef;
+  scrollbar-color: #f5bbbf linear-gradient(90deg, #fceeef 0%, #ffffff 50% #fceeef 100%);
 }
 
 /* Works on Chrome/Edge/Safari */
@@ -29,9 +29,10 @@ Google font, doesn't work and in fact makes the whole sheet barf. Too bad.
 }
 *::-webkit-scrollbar-track {
   background: #fceeef;
+	background: linear-gradient(90deg, #fceeef 0%, #ffffff 50%, #fceeef 100%);
 }
 *::-webkit-scrollbar-thumb {
-  background-color: #e85761;
+  background-color: #f5bbbf;
   border-radius: 20px;
   border: 3px solid #fceeef;
 }
@@ -39,12 +40,13 @@ Google font, doesn't work and in fact makes the whole sheet barf. Too bad.
 /* Roll20's class .ui-dialog .charsheet has padding of 10px, which I can't seem to override, so a workaround by making the margins negative. */
 
 .sheet-whole {
-	margin: -30px;
+	margin-right: -36px;
+	margin-left: -36px;
+	margin-top: -28px;
 	padding-left: 15px;
 	padding-top: 5px;
 	padding-right: 15px;
-	padding-bottom: 30px;
-	background: linear-gradient(90deg, #fceeef 0%, #ffffff 5%, #FFFFFF 95%, #fceeef 100%)
+	background: linear-gradient(90deg, #fceeef 0%, #ffffff 5%, #FFFFFF 95%, #fceeef 100%);
 }
 
 /* url('https://imgsrv.roll20.net/?src=https%3A//raw.githubusercontent.com/fredhicks/ehp-roll20/master/art/tsl-logo-faint.png') no-repeat 100% 108px/160px 80px fixed, 
@@ -110,7 +112,28 @@ input[type="number"].sheet-bignumber {
 	width: 125px;
 	max-width: 125px;
 	min-width: 125px;
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	align-content: stretch;
+	justify-content: space-between;
 }
+
+.sheet-flexspacer {
+	flex-grow: 10;
+}
+
+.sheet-copyright-bloc {
+	font-size: 8pt;
+	font-style: italic;
+	color: #ee8990;
+}
+
+.sheet-copyright-statement {
+	font-size: 8pt;
+	font-style: italic;
+}
+
 
 .sheet-columns .sheet-standard {
 	flex-grow: 0;
@@ -118,6 +141,9 @@ input[type="number"].sheet-bignumber {
 	width: 225px;
 	max-width: 225px;
 	min-width: 225px;
+	max-height: 552px;
+	overflow-x: hidden;
+	overflow-y: scroll;
 	/* flex-basis: 25%; */
 }
 
@@ -126,7 +152,8 @@ input[type="number"].sheet-bignumber {
 	flex-shrink: 1;
 	min-width: 350px;
 	/* flex-basis: 60%; */
-	max-height: 720px;
+	max-height: 552px;
+	height: 100%;
 	overflow-x: hidden;
 	overflow-y: scroll;
 }
@@ -235,15 +262,15 @@ input[type="checkbox"].sheet-checkboxer {
 	height: 16px;
 	position: relative;
 	top: -2px;
-	left: 7px;
+	left: 9px;
 	margin: -10px;
 	cursor: pointer;
 	z-index: 1;
 }
 
 input[type="checkbox"].sheet-checkboxer + span.sheet-checkboxed::before {
-	margin-right: -7px;
-	margin-left: 10px;
+	margin-right: -9px;
+	margin-left: 12px;
 	margin-top: 1px;
 	line-height: 14px;
 	text-align: center;
@@ -296,11 +323,11 @@ input[type="checkbox"].sheet-checkboxer:checked + span.sheet-checkboxed::before 
 
 .sheet-condition input[type="checkbox"].sheet-checkboxer {
 	top: -1px;
-	left: 8px;
+	left: 11px;
 }
 
 .sheet-condition input[type="checkbox"].sheet-checkboxer + span.sheet-checkboxed::before {
-	margin-left: 12px;
+	margin-left: 15px;
 	margin-right: -9px;
 }
 
@@ -654,9 +681,16 @@ input.sheet-plus-enabled[type=number]:focus {
 	vertical-align: 0px;
 }
 
-.sheet-one-line .sheet-buttonless,
+.sheet-one-line .sheet-buttonless {
+	vertical-align: 7px;
+}
+
 .sheet-one-line span.sheet-make-plus {
 	vertical-align: 0px;
+}
+
+.sheet-one-line.sheet-modifier span.sheet-make-plus {
+	vertical-align: 4px;
 }
 
 .sheet-pictos {
@@ -1003,11 +1037,24 @@ input.sheet-show-on-yes-combo[value="yes"] + input.sheet-show-on-checked-combo:c
 	border-bottom: .5px solid #fceeef;
 }
 
-.sheet-trashit:after {
+.sheet-buttonless.sheet-trashit:after {
 	font-family: "Pictos";
 	font-style: normal;
 	font-weight: normal;
-	content: '#';
+	content: 'D';
+	color: #f5bbbf;
+}
+
+.sheet-buttonless.sheet-trashit:hover {
+	background: none;
+	background-color: none;
+	color: #e85761;
+}
+
+.sheet-buttonless.sheet-trashit:hover:after {
+	content: 'D';
+	background: none;
+	background-color: none;
 	color: #e85761;
 }
 
@@ -1107,6 +1154,36 @@ input.sheet-tracker-number:focus::-webkit-inner-spin-button {
 	padding-left: 16px;
 	list-style: none;
 	vertical-align: top;
+}
+
+.sheet-result.sheet-hit {
+	background: url('https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/art/tsl-hit.png') no-repeat left top;
+	background-size: 24px 16px;
+	margin-left: 12px;
+	padding-left: 27px;
+	list-style: none;
+	vertical-align: top;
+	text-indent: 0;
+}
+
+.sheet-result.sheet-mixed {
+	background: url('https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/art/tsl-mixed.png') no-repeat left top;
+	background-size: 24px 16px;
+	margin-left: 12px;
+	padding-left: 27px;
+	list-style: none;
+	vertical-align: top;
+	text-indent: 0;
+}
+
+.sheet-result.sheet-miss {
+	background: url('https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/art/tsl-miss.png') no-repeat left top;
+	background-size: 24px 16px;
+	margin-left: 12px;
+	padding-left: 27px;
+	list-style: none;
+	vertical-align: top;
+	text-indent: 0;
 }
 
 textarea {
