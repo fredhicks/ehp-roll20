@@ -652,7 +652,7 @@ input.sheet-plus-enabled[type=number]:focus {
 
 .sheet-one-line .sheet-buttonless,
 .sheet-one-line span.sheet-make-plus {
-	vertical-align: 3px;
+	vertical-align: 0px;
 }
 
 .sheet-pictos {
@@ -1093,6 +1093,15 @@ input.sheet-tracker-number:focus::-webkit-inner-spin-button {
 
 .sheet-whole {
 	color: black;
+}
+
+.sheet-whole ul li {
+	background: url('https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/art/tsl-bullet.png') no-repeat left top;
+	background-size: 14px 14px;
+	margin-left: -7px;
+	padding-left: 16px;
+	list-style: none;
+	vertical-align: top;
 }
 
 textarea {
