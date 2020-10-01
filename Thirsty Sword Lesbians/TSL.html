@@ -3125,7 +3125,7 @@
 						<span name="attr_text" class="bold-uncolored"></span>
 					</button>
 				</fieldset></div>
-				<input type="checkbox" name="attr_starting-chosen" value="yes">
+				<input type="checkbox" name="attr_starting-chosen" value="yes" class="checkboxer"><span class="checkboxed"></span>
 				<input type="hidden" name="attr_starting-chosen" value="0" class="hide-on-zero hide-on-null"><span>
 					<span data-i18n="Choice made and locked"></span>
 				</span>
@@ -3185,14 +3185,14 @@
 				<div class="section-head">
 					<span data-i18n="Experience"></span>
 				</div>
-				<div>
+				<div class="xptrack">
 					<input type="hidden" name="attr_experience" value="0">
 					<input type="hidden" name="attr_experience_max" value="5">
-					<input type="checkbox" name="attr_xp1" value="1">
-					<input type="checkbox" name="attr_xp2" value="1">
-					<input type="checkbox" name="attr_xp3" value="1">
-					<input type="checkbox" name="attr_xp4" value="1">
-					<input type="checkbox" name="attr_xp5" value="1">
+					<input type="checkbox" name="attr_xp1" value="1" class="checkboxer"><span class="checkboxed"></span>
+					<input type="checkbox" name="attr_xp2" value="1" class="checkboxer"><span class="checkboxed"></span>
+					<input type="checkbox" name="attr_xp3" value="1" class="checkboxer"><span class="checkboxed"></span>
+					<input type="checkbox" name="attr_xp4" value="1" class="checkboxer"><span class="checkboxed"></span>
+					<input type="checkbox" name="attr_xp5" value="1" class="checkboxer"><span class="checkboxed"></span>
 				</div>
 				<div class="tooltip-pop">
 					<span data-i18n="Receive experience (XP) whenever you roll a 6- or when a move tells you to mark XP. A PC can spend XP to take an Advance; consult that section for more."></span>
@@ -3210,7 +3210,7 @@
 					<fieldset class="repeating_advances">
 						<input type="hidden" name="attr_preamble" class="hide-on-null"><div class="space-below"><span name="attr_preamble"></span></div>
 						<div class="move">
-							<input type="checkbox" name="attr_taken" value="1">
+							<input type="checkbox" name="attr_taken" value="1" class="checkboxer"><span class="checkboxed"></span>
 							<input type="hidden" name="attr_text" value=""><span name="attr_text"></span>
 						</div>
 					</fieldset>
@@ -3227,11 +3227,11 @@
 						<div><button type="action" name="act_movefilter-pbmoves" class="buttonless"><span class="bold-uncolored"><span data-i18n="My Playbook's Moves Only"></span></span></button></div>
 						<div><button type="action" name="act_movefilter-allmoves" class="buttonless"><span class="bold-uncolored"><span data-i18n="Show Every Move"></span></span></button></div>
 						<div><button type="action" name="act_movefilter-hideprohibited" class="buttonless"><span class="bold-uncolored"><span data-i18n="Filter Out Moves I Can't Take"></span></span></button></div>
-						<div class="popmenu-section"><input type="checkbox" name="attr_movefilter-takenonly" value="yes"> <span class="bold-uncolored"><span data-i18n="Hide Untaken Moves"></span></span></div>
-						<div><input type="checkbox" name="attr_movefilter-hidespecial" value="yes"> <span class="bold-uncolored"><span data-i18n="Hide Special Features"></span></span></button></div>
-						<div><input type="checkbox" name="attr_movefilter-hideplaybook" value="yes"> <span class="bold-uncolored"><span data-i18n="Hide Playbook Moves"></span></span></button></div>
-						<div><input type="checkbox" name="attr_movefilter-hidetruths" value="yes"> <span class="bold-uncolored"><span data-i18n="Hide Truths of Heart and Blade"></span></span></button></div>
-						<div><input type="checkbox" name="attr_movefilter-hidebasic" value="yes"> <span class="bold-uncolored"><span data-i18n="Hide Basic Moves"></span></span></button></div>
+						<div class="popmenu-section"><input type="checkbox" name="attr_movefilter-takenonly" value="yes" class="checkboxer"><span class="checkboxed"></span> <span class="bold-uncolored"><span data-i18n="Hide Untaken Moves"></span></span></div>
+						<div><input type="checkbox" name="attr_movefilter-hidespecial" value="yes" class="checkboxer"><span class="checkboxed"></span> <span class="bold-uncolored"><span data-i18n="Hide Special Features"></span></span></button></div>
+						<div><input type="checkbox" name="attr_movefilter-hideplaybook" value="yes" class="checkboxer"><span class="checkboxed"></span> <span class="bold-uncolored"><span data-i18n="Hide Playbook Moves"></span></span></button></div>
+						<div><input type="checkbox" name="attr_movefilter-hidetruths" value="yes" class="checkboxer"><span class="checkboxed"></span> <span class="bold-uncolored"><span data-i18n="Hide Truths of Heart and Blade"></span></span></button></div>
+						<div><input type="checkbox" name="attr_movefilter-hidebasic" value="yes" class="checkboxer"><span class="checkboxed"></span> <span class="bold-uncolored"><span data-i18n="Hide Basic Moves"></span></span></button></div>
 						<div class="bold popmenu-section"><span data-i18n="Individual Playbook Moves"></span></div>
 						<div class="nocontrol"><fieldset class="repeating_playbooks">
 							<input type="hidden" name="attr_key" value="">
@@ -3256,7 +3256,8 @@
 						<input type="hidden" name="attr_show" value="no" class="hide-on-no">
 						<div>
 							<span name="attr_tracklabel" class="bold label"></span>
-							<input type="number" value="1" max="4" min="0" class="fillme">
+							<input type="number" value="1" max="4" min="0" class="fillme tracker">
+							<span class="tracker-bar"></span>
 						</div>
 					</div>
 
@@ -3270,7 +3271,7 @@
 							<input type="hidden" name="attr_rollconfig" value="" class="hide-on-null">
 							<button type="roll" class="sheet-2d6-button" value="&{template:2d6-roll} {{character=@{character_name}}} {{title=@{name}}} {{roll=[[2d6+?{@{name} using @{rollconfig}}+@{rollprompt}]]}}" name="roll_2d6"></button>
 							<input type="hidden" name="attr_playbook" value="" class="hide-on-null">
-							<input type="checkbox" name="attr_taken" value="yes">
+							<span><input type="checkbox" name="attr_taken" value="yes" class="checkboxer"><span class="checkboxed"></span></span>
 							<span name="attr_name" class="bold"></span>:
 							<span name="attr_body"></span> 
 							<input type="hidden" name="attr_long" value="no" class="show-on-yes"><div class="expand-toggle-container"><input type="checkbox" name="attr_long-expand" value="yes" class="expand-toggle" checked><span class="expand-toggle-indicator"></span> <span class="expand-toggle-on">▼<span data-i18n="Show Less"></span></span><span class="expand-toggle-off">►<span data-i18n="Show More"></span></span></div>
@@ -3435,7 +3436,7 @@
 								</div>
 								<input type="hidden" name="attr_end" class="hide-on-null" value=""><div class="indented"><span name="attr_end"></span></div>
 								<input type="hidden" name="attr_blankname0" class="hide-on-null" value=""><div class="fill-the-blank">
-									<input type="hidden" name="attr_checkbox0" value="no" class="hide-on-no hide-on-null"><input type="checkbox" name="attr_blankbox0" value="marked">
+									<input type="hidden" name="attr_checkbox0" value="no" class="hide-on-no hide-on-null"><span><input type="checkbox" name="attr_blankbox0" value="marked" class="checkboxer"><span class="checkboxed"></span></span>
 									<span class="bold" name="attr_blankname0"></span></b>:
 									<input type="text" name="attr_blank0" class="fillme">
 									<input type="hidden" name="attr_blanksuggestions0" class="hide-on-null" value=""><div class="suggestions examples-list">
@@ -3443,7 +3444,7 @@
 									</div>
 								</div>
 								<input type="hidden" name="attr_blankname1" class="hide-on-null" value=""><div class="fill-the-blank">
-									<input type="hidden" name="attr_checkbox1" value="no" class="hide-on-no hide-on-null"><input type="checkbox" name="attr_blankbox1" value="marked">
+									<input type="hidden" name="attr_checkbox1" value="no" class="hide-on-no hide-on-null"><span><input type="checkbox" name="attr_blankbox1" value="marked" class="checkboxer"><span class="checkboxed"></span></span>
 									<span class="bold" name="attr_blankname1"></span></b>:
 									<input type="text" name="attr_blank1" class="fillme">
 									<input type="hidden" name="attr_blanksuggestions1" class="hide-on-null" value=""><div class="suggestions examples-list">
@@ -3451,7 +3452,7 @@
 									</div>
 								</div>
 								<input type="hidden" name="attr_blankname2" class="hide-on-null" value=""><div class="fill-the-blank">
-									<input type="hidden" name="attr_checkbox2" value="no" class="hide-on-no hide-on-null"><input type="checkbox" name="attr_blankbox2" value="marked">
+									<input type="hidden" name="attr_checkbox2" value="no" class="hide-on-no hide-on-null"><span><input type="checkbox" name="attr_blankbox2" value="marked" class="checkboxer"><span class="checkboxed"></span></span>
 									<span class="bold" name="attr_blankname2"></span></b>:
 									<input type="text" name="attr_blank2" class="fillme">
 									<input type="hidden" name="attr_blanksuggestions2" class="hide-on-null" value=""><div class="suggestions examples-list">
@@ -3459,7 +3460,7 @@
 									</div>
 								</div>
 								<input type="hidden" name="attr_blankname3" class="hide-on-null" value=""><div class="fill-the-blank">
-									<input type="hidden" name="attr_checkbox3" value="no" class="hide-on-no hide-on-null"><input type="checkbox" name="attr_blankbox3" value="marked">
+									<input type="hidden" name="attr_checkbox3" value="no" class="hide-on-no hide-on-null"><span><input type="checkbox" name="attr_blankbox3" value="marked" class="checkboxer"><span class="checkboxed"></span></span>
 									<span class="bold" name="attr_blankname3"></span></b>:
 									<input type="text" name="attr_blank3" class="fillme">
 									<input type="hidden" name="attr_blanksuggestions3" class="hide-on-null" value=""><div class="suggestions examples-list">
@@ -3467,7 +3468,7 @@
 									</div>
 								</div>
 								<input type="hidden" name="attr_blankname4" class="hide-on-null" value=""><div class="fill-the-blank">
-									<input type="hidden" name="attr_checkbox4" value="no" class="hide-on-no hide-on-null"><input type="checkbox" name="attr_blankbox4" value="marked">
+									<input type="hidden" name="attr_checkbox4" value="no" class="hide-on-no hide-on-null"><span><input type="checkbox" name="attr_blankbox4" value="marked" class="checkboxer"><span class="checkboxed"></span></span>
 									<span class="bold" name="attr_blankname4"></span></b>:
 									<input type="text" name="attr_blank4" class="fillme">
 									<input type="hidden" name="attr_blanksuggestions4" class="hide-on-null" value=""><div class="suggestions examples-list">
@@ -3475,7 +3476,7 @@
 									</div>
 								</div>
 								<input type="hidden" name="attr_blankname5" class="hide-on-null" value=""><div class="fill-the-blank">
-									<input type="hidden" name="attr_checkbox5" value="no" class="hide-on-no hide-on-null"><input type="checkbox" name="attr_blankbox5" value="marked">
+									<input type="hidden" name="attr_checkbox5" value="no" class="hide-on-no hide-on-null"><span><input type="checkbox" name="attr_blankbox5" value="marked" class="checkboxer"><span class="checkboxed"></span></span>
 									<span class="bold" name="attr_blankname5"></span></b>:
 									<input type="text" name="attr_blank5" class="fillme">
 									<input type="hidden" name="attr_blanksuggestions5" class="hide-on-null" value=""><div class="suggestions examples-list">
@@ -3483,7 +3484,7 @@
 									</div>
 								</div>
 								<input type="hidden" name="attr_blankname6" class="hide-on-null" value=""><div class="fill-the-blank">
-									<input type="hidden" name="attr_checkbox6" value="no" class="hide-on-no hide-on-null"><input type="checkbox" name="attr_blankbox6" value="marked">
+									<input type="hidden" name="attr_checkbox6" value="no" class="hide-on-no hide-on-null"><span><input type="checkbox" name="attr_blankbox6" value="marked" class="checkboxer"><span class="checkboxed"></span></span>
 									<span class="bold" name="attr_blankname6"></span></b>:
 									<input type="text" name="attr_blank6" class="fillme">
 									<input type="hidden" name="attr_blanksuggestions6" class="hide-on-null" value=""><div class="suggestions examples-list">
@@ -3491,7 +3492,7 @@
 									</div>
 								</div>
 								<input type="hidden" name="attr_blankname7" class="hide-on-null" value=""><div class="fill-the-blank">
-									<input type="hidden" name="attr_checkbox7" value="no" class="hide-on-no hide-on-null"><input type="checkbox" name="attr_blankbox7" value="marked">
+									<input type="hidden" name="attr_checkbox7" value="no" class="hide-on-no hide-on-null"><span><input type="checkbox" name="attr_blankbox7" value="marked" class="checkboxer"><span class="checkboxed"></span></span>
 									<span class="bold" name="attr_blankname7"></span></b>:
 									<input type="text" name="attr_blank7" class="fillme">
 									<input type="hidden" name="attr_blanksuggestions7" class="hide-on-null" value=""><div class="suggestions examples-list">
@@ -3499,7 +3500,7 @@
 									</div>
 								</div>
 								<input type="hidden" name="attr_blankname8" class="hide-on-null" value=""><div class="fill-the-blank">
-									<input type="hidden" name="attr_checkbox8" value="no" class="hide-on-no hide-on-null"><input type="checkbox" name="attr_blankbox8" value="marked">
+									<input type="hidden" name="attr_checkbox8" value="no" class="hide-on-no hide-on-null"><span><input type="checkbox" name="attr_blankbox8" value="marked" class="checkboxer"><span class="checkboxed"></span></span>
 									<span class="bold" name="attr_blankname8"></span></b>:
 									<input type="text" name="attr_blank8" class="fillme">
 									<input type="hidden" name="attr_blanksuggestions8" class="hide-on-null" value=""><div class="suggestions examples-list">
@@ -3507,7 +3508,7 @@
 									</div>
 								</div>
 								<input type="hidden" name="attr_blankname9" class="hide-on-null" value=""><div class="fill-the-blank">
-									<input type="hidden" name="attr_checkbox9" value="no" class="hide-on-no hide-on-null"><input type="checkbox" name="attr_blankbox9" value="marked">
+									<input type="hidden" name="attr_checkbox9" value="no" class="hide-on-no hide-on-null"><span><input type="checkbox" name="attr_blankbox9" value="marked" class="checkboxer"><span class="checkboxed"></span></span>
 									<span class="bold" name="attr_blankname9"></span></b>:
 									<input type="text" name="attr_blank9" class="fillme">
 									<input type="hidden" name="attr_blanksuggestions9" class="hide-on-null" value=""><div class="suggestions examples-list">
@@ -3537,20 +3538,21 @@
 
 		</div> <!-- class="wide" column ends -->
 		<div class="standard">
+
 			<div class="section-head">
 				<div class="nocontrol popmenu">
 					<div class="popmenu-trigger"><span data-i18n="Modifiers"></span></div>
 					<div class="popmenu-box">
 						<input type="hidden" name="attr_rollprompt" value="?{^{roll with modifier} +/-?|0}">
-						<div class="checkline"><input type="checkbox" name="attr_rollprompt-mods" value="1" checked> <span data-i18n="2d6 buttons use checked mods"></span></div>
-						<div class="checkline"><input type="checkbox" name="attr_rollprompt-query" value="1" checked> <span data-i18n="2d6 buttons prompt for mods"></span></div>
+						<div class="checkline"><input type="checkbox" name="attr_rollprompt-mods" value="1" checked class="checkboxer"><span class="checkboxed"></span> <span data-i18n="2d6 buttons use checked mods"></span></div>
+						<div class="checkline"><input type="checkbox" name="attr_rollprompt-query" value="1" checked class="checkboxer"><span class="checkboxed"></span> <span data-i18n="2d6 buttons prompt for mods"></span></div>
 					</div>
 				</div>
 			</div>
 			<div class="nocontrol">
 				<fieldset class="repeating_modifiers"><div class="one-line">
 					<div class="minimum">
-						<input type="checkbox" name="attr_rollmod" value="yes">
+						<input type="checkbox" name="attr_rollmod" value="yes" class="checkboxer"><span class="checkboxed"></span>
 					</div>
 					<div class="minimum">
 						<input type="hidden" name="attr_condition-id" value="">
@@ -3591,7 +3593,7 @@
 			<div class="nocontrol">
 				<fieldset class="repeating_conditions">
 					<div class="condition">
-						<input type="checkbox" name="attr_marked" value="yes">
+						<input type="checkbox" name="attr_marked" value="yes" class="checkboxer"><span class="checkboxed"></span>
 						<input type="hidden" name="attr_name" value="">
 						<input type="hidden" name="attr_penalty" value="">
 						<input type="hidden" name="attr_penalized" value="">
@@ -3619,16 +3621,16 @@
 			<div class="nocontrol">
 				<fieldset class="repeating_strings"><div class="one-line">
 					<div class="minimum unpadded">
-						<input type="checkbox" name="attr_check1" value="1">
+						<input type="checkbox" name="attr_check1" value="1" class="checkboxer"><span class="checkboxed"></span>
 					</div>
 					<div class="minimum unpadded">
-						<input type="checkbox" name="attr_check2" value="1">
+						<input type="checkbox" name="attr_check2" value="1" class="checkboxer"><span class="checkboxed"></span>
 					</div>
 					<div class="minimum unpadded">
-						<input type="checkbox" name="attr_check3" value="1">
+						<input type="checkbox" name="attr_check3" value="1" class="checkboxer"><span class="checkboxed"></span>
 					</div>
 					<div class="minimum">
-						<input type="checkbox" name="attr_check4" value="1">
+						<input type="checkbox" name="attr_check4" value="1" class="checkboxer"><span class="checkboxed"></span>
 					</div>
 					<div class="stretch">
 						<input type="text" name="attr_target" value="" class="fillme">
