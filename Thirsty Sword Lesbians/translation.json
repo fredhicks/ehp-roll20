@@ -136,7 +136,7 @@
 	"Restless Unseen cause a haunting": "Restless Unseen cause a haunting",
 	"roll with modifier": "roll with modifier",
 	"Shameless": "Shameless",
-	"Show Every Move": "Show Every Move",
+	"Show All Loaded Moves": "Show All Loaded Moves",
 	"Show": "Show",
 	"skill at arms, forcefulness": "skill at arms, forcefulness",
 	"Smitten": "Smitten",
@@ -447,7 +447,8 @@
 	"When you return to any town you’ve been to before, name a person with whom you shared intimacy here and say how you left things. If you left on bad terms, mark XP and the GM will tell you something interesting that has changed since you were last here.": "When you return to any town you’ve been to before, name a person with whom you shared intimacy here and say how you left things. If you left on bad terms, mark XP and the GM will tell you something interesting that has changed since you were last here.",
 	"Rrrip!": "Rrrip!",
 	"When you take or narrowly evade a physical blow from someone dangerous to you, you may declare that your clothes were damaged and are now practically indecent. For the remainder of the scene, when you roll a 10+ on any move against an NPC, you may declare that they have a crush on you (up to one NPC per roll and subject to GM discretion). Additionally, any PC who becomes Smitten with you during the remainder of the scene may mark XP.": "When you take or narrowly evade a physical blow from someone dangerous to you, you may declare that your clothes were damaged and are now practically indecent. For the remainder of the scene, when you roll a 10+ on any move against an NPC, you may declare that they have a crush on you (up to one NPC per roll and subject to GM discretion). Additionally, any PC who becomes Smitten with you during the remainder of the scene may mark XP.",
-	"To Love and Lose: When you become Smitten with someone, say why, give them a String, and answer this question:": "To Love and Lose: When you become Smitten with someone, say why, give them a String, and answer this question:",
+	"To Love and Lose": "To Love and Lose",
+	"When you become Smitten with someone, say why, give them a String, and answer this question:": "When you become Smitten with someone, say why, give them a String, and answer this question:",
 	"Why would your romance never last?": "Why would your romance never last?",
 	"Repartée": "Repartée",
 	"What would make you run away with me?": "What would make you run away with me?",
@@ -599,5 +600,8 @@
 	"Override penalty value": "Override penalty value",
 	"Number of Conditions marked": "Number of Conditions marked",
 	"When you fill your XP track, you gain an Advance from the list. If you’re playing a single session rather than an ongoing game, you earn an Advance every 3 XP instead of every 5.": "When you fill your XP track, you gain an Advance from the list. If you’re playing a single session rather than an ongoing game, you earn an Advance every 3 XP instead of every 5.",
+	"You may experience a short pause before your choice displays, slightly longer for playbooks that haven't been loaded yet! Please note that when displayed, moves will appear in your character sheet in the order in which you loaded them.": "You may experience a short pause before your choice displays, slightly longer for playbooks that haven't been loaded yet! Please note that when displayed, moves will appear in your character sheet in the order in which you loaded them.",
+	"Load and": "Load and",
+	"Load": "Load",
 	"__end__": "END OF JSON"
 }

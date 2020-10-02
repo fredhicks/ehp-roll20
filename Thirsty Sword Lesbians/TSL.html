@@ -1,52 +1,5 @@
 <script type="text/worker">
 
-	// Code testing reveals that the generateRowID function does not generate a unique ID 100% of the time when adding many rows at once, so we've got to 
-
-	var uniqueids = {};
-
-	var logs = 0;
-
-	var prefixedLogging = false;
-
-	var log = function(t,c) {
-		logs++;
-		if ( prefixedLogging ) {
-			if ( typeof c === "undefined" ) {
-				console.log(`${logs}:`);
-			} else {
-				console.log(`${logs} - ${c}:`)
-			}
-		}
-		console.log(t);
-	};
-	
-	var generateActuallyUniqueRowID = function() {
-		var generated = generateRowID();
-		while ( uniqueids[generated] === true ) {
-			log("generateActuallyUniqueRowID: " + generated + " is not a unique ID, trying again.");
-			generated = generateRowID();
-		}
-		// log("generateActuallyUniqueRowID: " + generated + " verified as unique, returning.");
-		uniqueids[generated] = true;
-		return generated;
-	};
-	
-	var gTBK = function(t) {
-		if ( typeof t === "undefined" ) {
-			return "";
-		} else {
-			var result = getTranslationByKey(t);
-			// log(`${t} -> ${result}`,"translation")
-			if ( result === false ) {
-				log("could not translate: " + t);
-				return "UNTRANSLATED ["+t+"]";
-			} else {
-				if ( result === "" ) { return ""; }
-				else { return result; }
-			}
-		}
-	};
-
 	// data
 
 	var xpmax = 5;
@@ -1069,7 +1022,7 @@
 					pbother: "no"
 				},
 				{
-					name: "To Love and Lose"
+					name: "To Love and Lose",
 					body: "When you become Smitten with someone, say why, give them a String, and answer this question:",
 					bullets: ["Why would your romance never last?"],
 					pbdefault: "yes",
@@ -1480,101 +1433,121 @@
 
 	// end BIG playbooks data set
 
-	// event handlers
+	// functions
+
+	// Code testing reveals that the generateRowID function does not generate a unique ID 100% of the time when adding many rows at once, so we've got to 
+
+	var uniqueids = {};
+
+	var logs = 0;
+
+	var prefixedLogging = true;
+
+	var log = function(t,c) {
+		logs = Date.now();
+		if ( prefixedLogging ) {
+			if ( typeof c === "undefined" ) {
+				console.log(`${logs}: ${t}`);
+			} else {
+				console.log(`${logs}: [${c}] ${t}`);
+			}
+		} else {
+			console.log(t);
+		}
+	};
 	
-	// Initialize when first opening the sheet, or when the initializing field is changed appropriately.
+	var setStatus = function(t) {
+		if ( typeof t !== "undefined" && t !== "" ) {
+			getAttrs(["status-message"],function(s) {
+				var m = s["status-message"];
+				setAttrs( { "status-message": `${m} ${t}` } );
+			});
+			log(t);
+		} else {
+			setAttrs( { "status-message": "" } );
+		}
+	};
+	
+	var generateActuallyUniqueRowID = function() {
+		var generated = generateRowID();
+		while ( uniqueids[generated] === true ) {
+			log("generateActuallyUniqueRowID: " + generated + " is not a unique ID, trying again.");
+			generated = generateRowID();
+		}
+		// log("generateActuallyUniqueRowID: " + generated + " verified as unique, returning.");
+		uniqueids[generated] = true;
+		return generated;
+	};
+	
+	var gTBK = function(t) {
+		if ( typeof t === "undefined" ) {
+			return "";
+		} else {
+			var result = getTranslationByKey(t);
+			// log(`${t} -> ${result}`,"translation")
+			if ( result === false ) {
+				log("could not translate: " + t);
+				return "UNTRANSLATED ["+t+"]";
+			} else {
+				if ( result === "" ) { return ""; }
+				else { return result; }
+			}
+		}
+	};
 
-	on("sheet:opened change:pbinitialized", function() {
-		log("Handler: sheet:opened change:pbinitialized");
-		log("sheet:opened");
-		getAttrs(["pbinitialized"], function(values) {
-			var attrs = { "pbinitialized": "yes" };
-			if ( values.pbinitialized !== "yes" ) { // the big if
-				log("pbinitialized is not yes");
-				if ( values.pbinitialized === "reset" ) {
-					log("Will use idarray length here.");
-					getSectionIDs("repeating_playbooks", function(idarray) {
-						for(var i=0; i < idarray.length; i++ ) {
-							removeRepeatingRow("repeating_playbooks_"+idarray[i]);
-						}
-					});
-					getSectionIDs("repeating_looks", function(idarray) {
-						for(var i=0; i < idarray.length; i++ ) {
-							removeRepeatingRow("repeating_looks_"+idarray[i]);
-						}
-					});
-					getSectionIDs("repeating_stats", function(idarray) {
-						for(var i=0; i < idarray.length; i++ ) {
-							removeRepeatingRow("repeating_stats_"+idarray[i]);
-						}
-					});
-					getSectionIDs("repeating_startingstats", function(idarray) {
-						for(var i=0; i < idarray.length; i++ ) {
-							removeRepeatingRow("repeating_startingstats_"+idarray[i]);
-						}
-					});
-					getSectionIDs("repeating_advances", function(idarray) {
-						for(var i=0; i < idarray.length; i++ ) {
-							removeRepeatingRow("repeating_advances_"+idarray[i]);
-						}
-					});
-					getSectionIDs("repeating_moves", function(idarray) {
-						for(var i=0; i < idarray.length; i++ ) {
-							removeRepeatingRow("repeating_moves_"+idarray[i]);
-						}
-					});
-					getSectionIDs("repeating_conditions", function(idarray) {
-						for(var i=0; i < idarray.length; i++ ) {
-							removeRepeatingRow("repeating_conditions_"+idarray[i]);
-						}
-					});
-					getSectionIDs("repeating_strings", function(idarray) {
-						for(var i=0; i < idarray.length; i++ ) {
-							removeRepeatingRow("repeating_strings_"+idarray[i]);
-						}
-					});
-					getSectionIDs("repeating_modifiers", function(idarray) {
-						for(var i=0; i < idarray.length; i++ ) {
-							removeRepeatingRow("repeating_modifiers_"+idarray[i]);
-						}
-					});
-					attrs["playbook-current-row"] = "";
-					attrs["starting-chosen"] = "0";
-					attrs["experience"] = 0; attrs["xp1"] = 0; attrs["xp2"] = 0; attrs["xp3"] = 0; attrs["xp4"] = 0; attrs["xp5"] = 0;
+	var loadPlaybookMoves = function(p,markDefaults) { // p is the playbook key!, markDefaults is an optional boolean
+		if ( typeof playbooks[p] !== "undefined" ) {
+			log(`called: loadPlaybookMoves(${p})`)
+			var pbook = playbooks[p];
+			console.log(pbook);
+			var attrs = {};
+			if ( typeof markDefaults === "undefined" || markDefaults !== true ) {
+				markDefaults = false;
+			}
+
+			// It's good to get to this step, but we need to check first to see if this playbook's already loaded up.
+			getSectionIDs("repeating_playbooks", function(ids) {
+				var pbf = [];
+				for(var i=0; i < ids.length; i++ ) {
+					var pbfpre = "repeating_playbooks_" + ids[i] + "_";
+					pbf[i*2] = pbfpre + "key";
+					pbf[i*2+1] = pbfpre + "loaded";
 				}
-				attrs["playbook-key"] = "";
-				attrs["playbook-name"] = gTBK("Choose a playbook!");
-				attrs["experience_max"] = xpmax;
-				var stringid = "repeating_strings_" + generateActuallyUniqueRowID();
-				attrs[`${stringid}_used`] = "no"; // Creates our starter String entry
-				var modifierid = "repeating_modifiers_" + generateActuallyUniqueRowID();
-				attrs[`${modifierid}_used`] = "no"; // Creates our starter modifier entry
-				var rwm = gTBK("roll with modifier");
-				attrs["rollprompt"] = "?{"+rwm+"|0}"; // sets up our default rolling prompt
-				for(var [id,value] of Object.entries(playbooks) ) {
-					var newid = generateActuallyUniqueRowID();
-					var pbidpre = "repeating_playbooks_" + newid + "_";
-					var pbidkey = pbidpre + "key";
-					var pbidname = pbidpre + "name";
-					attrs[pbidkey] = id;
-					attrs[pbidname] = gTBK(value["name"]);
-					var bioid = pbidpre + "bio";
-					if ( typeof value["bio"] !== "undefined" ) { attrs[bioid] = gTBK(value["bio"]); }
+				getAttrs(pbf, function(pdata) {
+					// need to search for load status and confirm
 
-					// We also need to create all the moves for all the playbooks within the data model, so they're available for selection. 
-					if ( typeof value["moves"] !== "undefined" ) {
-						log("We have defined moves.");
-						var mymoves = value["moves"];
-						log(mymoves);
-						var category = "special";
+					var loaded = "";
+					var pbookpre = "";
+					console.log(pdata);
+					for(var i=0; i < ids.length; i++ ) {
+						var pbfpre = "repeating_playbooks_" + ids[i] + "_";
+						var keyid = pbfpre + "key"; var loadid = pbfpre + "loaded";
+						log(`scanning pbfpre ${pbfpre} keyid ${keyid} loadid ${loadid}`);
+						if ( typeof pdata[keyid] !== "undefined" && pdata[keyid] === p ) {
+							// Then this is the playbook in question, let's see if it's loaded
+							if ( typeof pdata[loadid] !== "undefined" ) { // Should be a yes or no
+								pbookpre = pbfpre;
+								loaded = pdata[loadid];
+								if ( loaded === "" ) { loaded = "no"; } // if this is happening, but shouldn't, because we established the value as "no" during playbook setup. inexcusable that it's not coming through empty.
+								break; // No need to continue this for loop once we've found the playbook
+							}
+						}
+					}
+					log(`emerged from finding the playbook with loaded value of ${loaded}`);
+					console.log(pbook.moves);
+					if ( loaded === "no" && typeof pbook.moves !== "undefined" ) {
+						log(`configuring moves found for ${p}, ${pbookpre}`);
+						var attrs = {};
+						attrs[`${pbookpre}loaded`] = "yes";
+						var mymoves = pbook.moves;
+						var category = "special"; // special moves come first, get default category value
 						for(var i=0; i < mymoves.length; i++ ) {
-				
 							var mymove = mymoves[i];
 							var moveid = generateActuallyUniqueRowID();
 							var moveidpre = "repeating_moves_" + moveid + "_";
-
 							attrs[`${moveidpre}name`] = gTBK(mymove.name);
-							attrs[`${moveidpre}playbook`] = id; // the playbook key value
+							attrs[`${moveidpre}show`] = "yes"; // presumably, we're loading them so we should show them?
+							attrs[`${moveidpre}playbook`] = p; // the playbook key value
 							attrs[`${moveidpre}body`] = gTBK(mymove.body);
 							attrs[`${moveidpre}taken`] = "";
 							attrs[`${moveidpre}long`] = "no";
@@ -1585,17 +1558,18 @@
 								} else if ( mymove.subheader === "Truths of Heart and Blade" ) {
 									category = "truths"; // setting it for this and all subsequent moves until changed again
 								}
-								log(`Defined subheader: (${mymove.subheader}) (${id})`);
-								log(playbooks[id]);
-								attrs[`${moveidpre}subheader`] = gTBK(mymove.subheader) + " (" + gTBK(playbooks[id].name) + ")";
-								log(attrs[`${moveidpre}subheader`]);
-								log(playbooks[id]);
+								attrs[`${moveidpre}subheader`] = gTBK(mymove.subheader) + " (" + gTBK(playbooks[p].name) + ")";
 							}
 							attrs[`${moveidpre}category`] = category;
 							if ( typeof mymove.instructions !== "undefined" ) { attrs[`${moveidpre}instructions`] = gTBK(mymove.instructions); }
-							if ( typeof mymove.tracklabel !== "undefined" ) { attrs[`${moveidpre}tracklabel`] = gTBK(mymove.tracklabel); }
-							if ( typeof mymove.pbdefault !== "undefined" ) { attrs[`${moveidpre}pbdefault`] = mymove.pbdefault; }
+							if ( typeof mymove.pbdefault !== "undefined" ) { 
+								attrs[`${moveidpre}pbdefault`] = mymove.pbdefault; 
+								if ( mymove.pbdefault === "yes" && markDefaults ) {
+									attrs[`${moveidpre}taken`] = "yes";
+								}
+							}
 							if ( typeof mymove.pbother !== "undefined" ) { attrs[`${moveidpre}pbother`] = mymove.pbother; }
+							if ( typeof mymove.tracklabel !== "undefined" ) { attrs[`${moveidpre}tracklabel`] = gTBK(mymove.tracklabel); attrs[`${moveidpre}tracker`] = 1; }
 							if ( typeof mymove.preamble !== "undefined" ) { attrs[`${moveidpre}preamble`] = gTBK(mymove.preamble); attrs[`${moveidpre}long`] = "yes"; }
 							if ( typeof mymove.end !== "undefined" ) { attrs[`${moveidpre}end`] = gTBK(mymove.end); attrs[`${moveidpre}long`] = "yes"; }
 							if ( typeof mymove.hit !== "undefined" ) { attrs[`${moveidpre}hit`] = gTBK(mymove.hit); attrs[`${moveidpre}long`] = "yes"; }
@@ -1606,14 +1580,11 @@
 							if ( typeof mymove.altmixed !== "undefined" ) { attrs[`${moveidpre}altmixed`] = gTBK(mymove.altmixed); attrs[`${moveidpre}long`] = "yes"; }
 							if ( typeof mymove.altmiss !== "undefined" ) { attrs[`${moveidpre}altmiss`] = gTBK(mymove.altmiss); attrs[`${moveidpre}long`] = "yes"; }
 							if ( typeof mymove.rolled !== "undefined" && mymove.rolled === "yes" ) { 
-								log("This is a rolled move.");
 								var rc = "";
 								if ( typeof mymove.rolldefault !== "undefined" ) {
 									if ( typeof stats[mymove.rolldefault] !== "undefined" ) {
-										log(`There is a default attribute ${mymove.rolldefault}`);
 										rc = "|" + gTBK(stats[mymove.rolldefault]) + " " + gTBK("(Default)") + ",@{stat_" + mymove.rolldefault + "}";
 									} else if ( mymove.rolldefault === "conditions-marked" ) {
-										log(`There is a default of number of conditions marked`);
 										rc = "|" + gTBK("Number of Conditions marked") + " " + gTBK("(Default)") + ",@{" + mymove.rolldefault + "}";
 									} else {
 										log(`Was not able to parse ${mymove.rolldefault} as a rollable attribute`);
@@ -1623,7 +1594,6 @@
 								for(var [statkey,statname] of Object.entries(stats)) {
 									rc = rc + "|" + gTBK(statname) + ",@{stat_" + statkey + "}";
 								}
-								log(rc);
 								attrs[`${moveidpre}rollconfig`] = rc;
 							}
 							// Now the expanding modulars: the blanks, and the bullets 
@@ -1660,7 +1630,6 @@
 							}
 							// At this point attrs should contain a bunch of stuff we need to know in order to populate the shareoptions field. ZOD!
 							var options = "{{blank0=@{blank0}}} {{blank1=@{blank1}}} {{blank2=@{blank2}}} {{blank3=@{blank3}}} {{blank4=@{blank4}}} {{blank5=@{blank5}}} {{blank6=@{blank6}}} {{blank7=@{blank7}}} {{blank8=@{blank8}}} {{blank9=@{blank9}}} ";
-							log(`shareoptions: ${options}`);
 							var shareoptid = moveidpre + "shareoptions";
 							for(var j=0; j < moveoptions.length; j++) {
 								var moid = moveidpre + moveoptions[j];
@@ -1669,9 +1638,170 @@
 								}
 							}
 							attrs[shareoptid] = options;
+							// At this point we should be able to save the moves.
 						} // End for loop on all of the moves for this playbook
-					} // end if block for typeof value["moves"] !== "undefined"
+						setAttrs(attrs,{},function () {
+							log(`moves configured for ${p}`);
+						});
+					} // end if block for typeof pbook.moves !== "undefined"
+					else {
+						log(`did not load moves for ${p}; loaded = ${loaded}`);
+					}
+				});
+			});
+		}
+	};
+	// event handlers
+	
+	// Initialize when first opening the sheet, or when the initializing field is changed appropriately.
+
+	on("sheet:opened change:pbinitialized", function() {
+		log("Handler: sheet:opened change:pbinitialized");
+		getAttrs(["pbinitialized"], function(values) {
+			if ( values.pbinitialized === "reset" ) {
+				var attrs = { "pbinitialized": "no" };
+				attrs["playbook-current-row"] = "";
+				attrs["starting-chosen"] = "0";
+				attrs["experience"] = 0; attrs["xp1"] = 0; attrs["xp2"] = 0; attrs["xp3"] = 0; attrs["xp4"] = 0; attrs["xp5"] = 0;
+				log("resetting sheet");
+				getSectionIDs("repeating_playbooks", function(idarray) {
+					for(var i=0; i < idarray.length; i++ ) {
+						removeRepeatingRow("repeating_playbooks_"+idarray[i]);
+					}
+				});
+				getSectionIDs("repeating_looks", function(idarray) {
+					for(var i=0; i < idarray.length; i++ ) {
+						removeRepeatingRow("repeating_looks_"+idarray[i]);
+					}
+				});
+				getSectionIDs("repeating_stats", function(idarray) {
+					for(var i=0; i < idarray.length; i++ ) {
+						removeRepeatingRow("repeating_stats_"+idarray[i]);
+					}
+				});
+				getSectionIDs("repeating_startingstats", function(idarray) {
+					for(var i=0; i < idarray.length; i++ ) {
+						removeRepeatingRow("repeating_startingstats_"+idarray[i]);
+					}
+				});
+				getSectionIDs("repeating_advances", function(idarray) {
+					for(var i=0; i < idarray.length; i++ ) {
+						removeRepeatingRow("repeating_advances_"+idarray[i]);
+					}
+				});
+				getSectionIDs("repeating_conditions", function(idarray) {
+					for(var i=0; i < idarray.length; i++ ) {
+						removeRepeatingRow("repeating_conditions_"+idarray[i]);
+					}
+				});
+				getSectionIDs("repeating_strings", function(idarray) {
+					for(var i=0; i < idarray.length; i++ ) {
+						removeRepeatingRow("repeating_strings_"+idarray[i]);
+					}
+				});
+				getSectionIDs("repeating_modifiers", function(idarray) {
+					for(var i=0; i < idarray.length; i++ ) {
+						removeRepeatingRow("repeating_modifiers_"+idarray[i]);
+					}
+				});
+				// Moves are highest volume, so we use the callback to set the attributes that'll fire off the next stage.
+				getSectionIDs("repeating_moves", function(idarray) {
+					for(var i=0; i < idarray.length; i++ ) {
+						removeRepeatingRow("repeating_moves_"+idarray[i]);
+					}
+					log("moves removed");
+					setAttrs(attrs,{},function() { log("reset clause done"); }); // Set the resets after all this mess wraps up
+				});
+			} else if ( values.pbinitialized !== "yes" ) { // the big if
+
+				var initted = {};
+				initted["pbinitialized"] = "yes"; // set this early so we don't accidentally fire off the process twice
+				setAttrs(initted); // I figure once we've got the basic moves in, we should be able to admit we're done
+
+				log("Sheet is not initialized. Beginning process.");
+				var attrs = {};
+				attrs["playbook-key"] = "";
+				attrs["playbook-name"] = gTBK("Choose a playbook!");
+				attrs["experience_max"] = xpmax;
+				var stringid = "repeating_strings_" + generateActuallyUniqueRowID();
+				attrs[`${stringid}_used`] = "no"; // Creates our starter String entry
+				var modifierid = "repeating_modifiers_" + generateActuallyUniqueRowID();
+				attrs[`${modifierid}_used`] = "no"; // Creates our starter modifier entry
+				var rwm = gTBK("roll with modifier");
+				attrs["rollprompt"] = "?{"+rwm+"|0}"; // sets up our default rolling prompt
+				for(var [id,value] of Object.entries(looks) ) {
+					var newid = generateActuallyUniqueRowID();
+					var lookpre = "repeating_looks_" + newid + "_";
+					var lookkey = lookpre + "key";
+					var lookname = lookpre + "name";
+					attrs[lookkey] = gTBK(id);
+					attrs[lookname] = gTBK(value);
 				}
+				var rc = "";
+				for(var [id,value] of Object.entries(stats) ) {
+					var newid = generateActuallyUniqueRowID();
+					var statpre = "repeating_stats_" + newid + "_";
+					var statkey = statpre + "key";
+					var statname = statpre + "name";
+					var statdesc = statpre + "description";
+					var rating = statpre + "rating";
+					attrs[statkey] = id;
+					attrs[statname] = gTBK(value);
+					attrs[statdesc] = gTBK(sdesc[id]);
+					attrs[rating] = 0; // Give an initial value rather than letting them be empty; empty causes icky errors.
+					// building a string like |@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}
+					rc = rc + "|" + gTBK(value) + ",@{stat_" + id + "}";
+				}
+				attrs["stats-query"] = rc;
+				for(var i = 0; i < advances.length; i++) {
+					var newid = generateActuallyUniqueRowID();
+					var apre = "repeating_advances_" + newid + "_";
+					var advance = advances[i];
+					var tid = apre + "text";
+					// var lid = apre + "notelabel";
+					var pid = apre + "preamble";
+					attrs[tid] = gTBK(advance.text);
+					if ( typeof advance.preamble !== "undefined" ) { attrs[pid] = gTBK(advance.preamble); }
+					// if ( typeof advance.notelabel !== "undefined" ) { attrs[lid] = gTBK(advance.notelabel); }
+				}
+
+				// We can afford to pause here to set these attributes, then empty out the array to continue; it's no big deal if these ones run simultaneous to what's later, so async call is ok
+
+				setAttrs(attrs,{},function() { log("first-round initializations complete"); }); 
+
+				// Fresh array please
+
+				attrs = {};
+
+				for(var [id,value] of Object.entries(playbooks) ) {
+					var newid = generateActuallyUniqueRowID();
+					var pbidpre = "repeating_playbooks_" + newid + "_";
+					var pbidkey = pbidpre + "key";
+					var pbidname = pbidpre + "name";
+					var pbidloaded = pbidpre + "loaded";
+					attrs[pbidkey] = id;
+					attrs[pbidname] = gTBK(value["name"]);
+					attrs[pbidloaded] = "no";
+					var bioid = pbidpre + "bio";
+					if ( typeof value["bio"] !== "undefined" ) { attrs[bioid] = gTBK(value["bio"]); }
+
+					// This is where we used to create all the moves for all the playbooks.
+					// But it's smarter to load those piecemeal as-desired, so relocating.
+
+				}
+
+				log(`configuring playbooks list`);
+				setAttrs(attrs,{},function() {
+					log(`playbooks list configured`);
+				});
+				attrs = {};
+
+				// ZED? 
+				/*
+				var pbmoveattrs = attrs; // save the attributes object; will set later
+				attrs = {}; // empty it
+				*/
+
 				// Here endeth the move creation section
 
 				// We also need to create all the basic moves. These are very similar to playbook moves, but we're gonna replicate code in case differences emerge over development.
@@ -1681,7 +1811,7 @@
 				for(var i=0; i < basicmoves.length; i++ ) {
 					var basicmove = basicmoves[i];
 					var moveid = generateActuallyUniqueRowID();
-					var moveidpre = "repeating_moves_" + moveid + "_";
+					var moveidpre = "repeating_basic_" + moveid + "_";
 					attrs[`${moveidpre}category`] = "basic";
 					if ( typeof basicmove.name !== "undefined" ) { 
 						attrs[`${moveidpre}name`] = gTBK(basicmove.name); 
@@ -1703,10 +1833,8 @@
 					if ( typeof basicmove.altmixed !== "undefined" ) { attrs[`${moveidpre}altmixed`] = gTBK(basicmove.altmixed);  attrs[`${moveidpre}long`] = "yes"; }
 					if ( typeof basicmove.altmiss !== "undefined" ) { attrs[`${moveidpre}altmiss`] = gTBK(basicmove.altmiss); attrs[`${moveidpre}long`] = "yes"; }
 					if ( typeof basicmove.rolled !== "undefined" && basicmove.rolled === "yes" ) { 
-						log("This is a rolled move.");
 						var rc = "";
 						if ( typeof basicmove.rolldefault !== "undefined" ) {
-							log("There is a default attribute");
 							if ( typeof stats[basicmove.rolldefault] !== "undefined" ) {
 								rc = "|" + stats[basicmove.rolldefault] + " " + gTBK("(Default)") + ",@{stat_" + basicmove.rolldefault + "}";
 							}
@@ -1715,7 +1843,6 @@
 						for(var [statkey,statname] of Object.entries(stats)) {
 							rc = rc + "|" + gTBK(statname) + ",@{stat_" + statkey + "}";
 						}
-						log(rc);
 						attrs[`${moveidpre}rollconfig`] = rc;
 					}
 					// Now the expanding modulars: the blanks, and the bullets 
@@ -1743,32 +1870,30 @@
 							}
 						}
 					}
+
+					// At this point attrs should contain a bunch of stuff we need to know in order to populate the shareoptions field. ZOD!
+					var options = "{{blank0=@{blank0}}} {{blank1=@{blank1}}} {{blank2=@{blank2}}} {{blank3=@{blank3}}} {{blank4=@{blank4}}} {{blank5=@{blank5}}} {{blank6=@{blank6}}} {{blank7=@{blank7}}} {{blank8=@{blank8}}} {{blank9=@{blank9}}} ";
+					var shareoptid = moveidpre + "shareoptions";
+					for(var j=0; j < moveoptions.length; j++) {
+						var moid = moveidpre + moveoptions[j];
+						if ( typeof attrs[moid] !== "undefined" && attrs[moid] !== "" ) {
+							options = options + "{{"+moveoptions[j]+"=@{"+moveoptions[j]+"}}} ";
+						}
+					}
+					attrs[shareoptid] = options;
+
 				}
+
 				// Here endeth basic moves creation
-				for(var [id,value] of Object.entries(looks) ) {
-					var newid = generateActuallyUniqueRowID();
-					var lookpre = "repeating_looks_" + newid + "_";
-					var lookkey = lookpre + "key";
-					var lookname = lookpre + "name";
-					attrs[lookkey] = gTBK(id);
-					attrs[lookname] = gTBK(value);
-				}
-				var rc = "";
-				for(var [id,value] of Object.entries(stats) ) {
-					var newid = generateActuallyUniqueRowID();
-					var statpre = "repeating_stats_" + newid + "_";
-					var statkey = statpre + "key";
-					var statname = statpre + "name";
-					var statdesc = statpre + "description";
-					attrs[statkey] = id;
-					attrs[statname] = gTBK(value);
-					attrs[statdesc] = gTBK(sdesc[id]);
-					// building a string like |@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}
-					rc = rc + "|" + gTBK(value) + ",@{stat_" + id + "}";
-				}
-				attrs["stats-query"] = rc;
+
+				// ZED pbmoveattrs, basicmoveattrs
+
+				var basicmoveattrs = attrs; // save the attributes object; will set later
+				attrs = {}; // empty it
+
 				// usefully, conditions creation comes after moves creation, so we can map these to their affected moves too
 				attrs["conditions-penalty"] = -2;
+				log("configuring conditions");
 				for(var [id,value] of Object.entries(conditions) ) {
 					var newid = generateActuallyUniqueRowID();
 					var conpre = "repeating_conditions_" + newid + "_";
@@ -1782,7 +1907,7 @@
 						if ( fid === "penalized" ) { 
 							var fvt = gTBK(fval); attrs[fkey] = fvt; 
 							attrs[`condition-penalty-${fvt}`] = 0;
-							if ( typeof basicids[fvt] !== "undefined" ) {
+							if ( typeof basicids[fvt] !== "undefined" ) { // IMPORTANT! Needs access to the basicids object populated by the basic moves building effort. So conditions must execute sequentially after basic moves. Be careful not to populate basicids in something asynchronous.
 								var movefieldid = basicids[fvt];
 								attrs[`${conpre}moveid`] = movefieldid; // build that link 
 								attrs[`${movefieldid}conditionid`] = newid; // build that link other direction
@@ -1793,21 +1918,27 @@
 						if ( fid === "clearwhen" ) { var fvt = gTBK(fval); attrs[fkey] = fvt; }
 					}
 				}
-				for(var i = 0; i < advances.length; i++) {
-					var newid = generateActuallyUniqueRowID();
-					var apre = "repeating_advances_" + newid + "_";
-					var advance = advances[i];
-					var tid = apre + "text";
-					// var lid = apre + "notelabel";
-					var pid = apre + "preamble";
-					attrs[tid] = gTBK(advance.text);
-					if ( typeof advance.preamble !== "undefined" ) { attrs[pid] = gTBK(advance.preamble); }
-					// if ( typeof advance.notelabel !== "undefined" ) { attrs[lid] = gTBK(advance.notelabel); }
-				}
-				log(attrs);
-				setAttrs(attrs,{ silent:true },function() {
-					setAttrs({"suppress": "no"}); // We need to suppress certain handlers firing off while the rest of this happens.
-				}); // We don't really need to fire off anything here do we? So, silent. I just wish it actually worked as documented, but testing clearly indicates it doesn't.
+
+				// ZED?
+				setAttrs(attrs,{},function() {
+					log("done configuring conditions");
+				});
+
+				// Time-consuming-est stuff here?
+
+				log("configuring basic moves");
+				setAttrs(basicmoveattrs,{},function() {
+					log("basic moves configured");
+				});
+
+/*
+				log("configuring playbook moves");
+				setAttrs(pbmoveattrs,{},function() {
+					log("playbook moves configured");
+					log("sheet configuration should be complete");
+				});
+*/
+
 			} // end the big if
 		});
 	});
@@ -1828,19 +1959,13 @@
 			}
 			attrs[selectedid] = "S"; // S for a star, k for a heart
 			attrs["playbook-current-row"] = rowprefix;
-			
-			// following may no longer be relevant with the rework on instructions
-			/* attrs["movesinstructions"] = "";
-			if ( typeof playbooks[a[keyid]].movesinstructions !== "undefined" ) {
-				attrs["movesinstructions"] = gTBK(playbooks[a[keyid]].movesinstructions);
-			} 
-		 */
 			setAttrs(attrs);
 
 			// Looks section 
+			var pbkey = a[keyid];
+			var mylooks = playbooks[pbkey].look;
 
-			var mylooks = playbooks[a[keyid]].look;
-
+			log(`configuring looks for ${pbkey}`);
 			getSectionIDs("looks", function(lf) {
 				var lfields = [];
 				for(var i=0; i < lf.length; i++ ) {
@@ -1858,17 +1983,16 @@
 							lattrs[eid] = mylooks[key];
 						}
 					}
-					setAttrs(lattrs);
+					setAttrs(lattrs,{},function() { log(`looks for ${pbkey} configured`); });
 				});
 
 			});
 			
 			// starting stats section
 
+			log(`configuring starting stats for ${pbkey}`);
+
 			var mystarts = playbooks[a[keyid]].startstats;
-			log(mystarts);
-			log(a[keyid]);
-			log(playbooks[a[keyid]]);
 
 			// Clear out any existing starting stats sets, they don't matter
 			getSectionIDs("repeating_startingstats", function(idarray) {
@@ -1905,14 +2029,14 @@
 					starta[startset] = myset;
 					starta[starttext] = mytext;
 				}
-			
-				setAttrs(starta);
+				setAttrs(starta,{},function() { log(`starting stats for ${pbkey} configured`); });
 			}
 
 			// Moves section 
 
+			log(`configuring moves for ${pbkey}`);
+
 			getSectionIDs("moves", function(mf) {
-				log(mf);
 				var mfields = [];
 				for(var i=0; i < mf.length; i++ ) {
 					mfields[i*4] = "repeating_moves_" + mf[i] + "_playbook";
@@ -1922,7 +2046,10 @@
 				}
 
 				getAttrs(mfields, function(ma) {
+					log(`determining show/hide moves status for all moves, for ${pbkey}`);
 					var mattrs = {};
+					var found = false;
+					var pbook = attrs["playbook-key"];
 					for(var i=0; i < mf.length; i++) {
 						var mbookid = "repeating_moves_" + mf[i] + "_playbook"; var mbook = ma[mbookid];
 						var mdefid = "repeating_moves_" + mf[i] + "_pbdefault"; var mdef = ma[mdefid];
@@ -1939,15 +2066,23 @@
 						}
 						mattrs[`move-${mbook}-${mname}`] = ma[takeid]; // Set up the externalized tracking of moves
 						// Default to displaying only moves from the playbook
-						if ( mbook === attrs["playbook-key"] || ma[takeid] === "yes" ) { // If it's marked taken still/already at this point (after checking for playbook defaults), it should not be unmarked!
+						// If it's marked taken still/already at this point (after checking for playbook defaults), it should not be unmarked! But mbook === "" means a basic move, so don't deal with that.
+						if ( mbook === attrs["playbook-key"] ) { 
+							mattrs[showid] = "yes"; found = true; // want to make sure to signify when we've actually found a move for the targeted playbook, see use of found further below
+						} else if ( ma[takeid] === "yes" && mbook !== "" ) { 
 							mattrs[showid] = "yes";
-						} else {
+						} else if ( mbook !== "" )  { // skip basic moves; display as-is
 							mattrs[showid] = "no"; // for now; eventually we may have differing behaviors depending on current display settings
 						}
 					}
-					log(mattrs);
-					setAttrs(mattrs);
-
+					log(`setting visibility flags for ${pbkey}`);
+					setAttrs(mattrs,{},function() { log(`visibility flags set for ${pbkey}`); });
+					// But wait! If we didn't find any moves matching the targeted playbook, that means the playbook isn't loaded yet.
+					log(`found status is ${found}`);
+					console.log(found);
+					if ( ! found ) { 
+						loadPlaybookMoves(pbkey, true); // second argument indicates that any pbdefault === "yes" should be marked taken
+					}
 				});
 
 			});
@@ -1955,38 +2090,11 @@
 		});
 	});
 
-	// Sharing support for moves; we must be able to know when a field is blank, and not include it in the share formula.
-	
-/*	
-	// This is not firing off reliably. It may be best if this is not handled via a change handler, but rather in the setup. That has its challenges, but it's going to be better there.
-	on("change:repeating_moves:name", function(e) { // if a name is changed, then the move's been created, so we should make sure to prep its share button
-		log("Handler: change:repeating_moves:name");
-		var moveprefix = (e.sourceAttribute).slice(0,-4); // Strips off the 'name'
-		var grabs = []; var sets = {};
-		for(var i=0; i < moveoptions.length; i++) {
-			grabs[i] = moveprefix + moveoptions[i];
-		}
-		var shareoptid = moveprefix + "shareoptions";
-		getAttrs(grabs,function(m) {
-			var options = "{{blank0=@{blank0}}} {{blank1=@{blank1}}} {{blank2=@{blank2}}} {{blank3=@{blank3}}} {{blank4=@{blank4}}} ";
-			for(var i=0; i < moveoptions.length; i++) {
-				var id = moveprefix + moveoptions[i];
-				if ( typeof m[id] !== "undefined" && m[id] !== "" ) {
-					options = options + "{{"+moveoptions[i]+"=@{"+moveoptions[i]+"}}} ";
-				}
-			}
-			sets[shareoptid] = options;
-			setAttrs(sets);
-		});
-	});
-*/
-
 	// There are three additive-ish filter modes for moves
 	
 	on("clicked:movefilter-pbmoves", function() {
 		log("Handler: clicked:movefilter-pbmoves");
 		getSectionIDs("moves", function(mf) {
-			log(mf);
 			var mfields = ["playbook-key","movefilter-hidespecial","movefilter-hideplaybook","movefilter-hidetruths","movefilter-hidebasic","movefilter"];
 			var offset = mfields.length;
 			for(var i=0; i < mf.length; i++ ) {
@@ -2019,7 +2127,6 @@
 						mattrs[showid] = "no";
 					}
 				}
-				log(mattrs);
 				setAttrs(mattrs);
 			});
 		});
@@ -2028,7 +2135,6 @@
 	on("clicked:movefilter-allmoves", function() {
 		log("Handler: clicked:movefilter-allmoves");
 		getSectionIDs("moves", function(mf) {
-			log(mf);
 			var mfields = ["playbook-key","movefilter-hidespecial","movefilter-hideplaybook","movefilter-hidetruths","movefilter-hidebasic","movefilter"];
 			var offset = mfields.length;
 			for(var i=0; i < mf.length; i++ ) {
@@ -2057,7 +2163,6 @@
 						mattrs[showid] = "no";
 					}
 				}
-				log(mattrs);
 				setAttrs(mattrs);
 			});
 		});
@@ -2066,54 +2171,52 @@
 	on("clicked:repeating_playbooks:movefilter-onepb", function(e) {
 		log("Handler: clicked:repeating_playbooks:movefilter-onepb");
 		var rowprefix = (e.sourceAttribute).slice(0,-16); // Strips off the 'movefilter-onepb'
-		getAttrs([`${rowprefix}key`], function(kf) {
-			getSectionIDs("moves", function(mf) {
-				log(mf);
-				var mfields = ["playbook-key","movefilter-hidespecial","movefilter-hideplaybook","movefilter-hidetruths","movefilter-hidebasic","movefilter"];
-				var offset = mfields.length;
-				for(var i=0; i < mf.length; i++ ) {
-					mfields[i*4+offset] = "repeating_moves_" + mf[i] + "_playbook";
-					mfields[i*4+offset+1] = "repeating_moves_" + mf[i] + "_pbdefault";
-					mfields[i*4+offset+2] = "repeating_moves_" + mf[i] + "_taken";
-					mfields[i*4+offset+3] = "repeating_moves_" + mf[i] + "_category";
-				}
-				getAttrs(mfields, function(ma) {
-					var mattrs = { "movefilter-takenonly": "no" };
-					for(var i=0; i < mf.length; i++) {
-						var mbookid = "repeating_moves_" + mf[i] + "_playbook"; var mbook = ma[mbookid];
-						var mdefid  = "repeating_moves_" + mf[i] + "_pbdefault"; var mdef = ma[mdefid];
-						var takeid  = "repeating_moves_" + mf[i] + "_taken"; var taken = ma[takeid];
-						var catid   = "repeating_moves_" + mf[i] + "_category"; var cat = ma[catid];
-						var showid  = "repeating_moves_" + mf[i] + "_show";
-						if ( mbook === kf[`${rowprefix}key`] || ma[takeid] === "yes" ) { // If it's marked taken or it's in the active playbook or it's in the kf indicated playbook, show it
-							mattrs[showid] = "yes";
-							// unless...
-							if ( cat === "basic" && typeof ma["movefilter-hidebasic"] !== "undefined" && ma["movefilter-hidebasic"] === "yes" ) {
-								mattrs[showid] = "no";
-							} else if ( cat === "special" && typeof ma["movefilter-hidespecial"] !== "undefined" && ma["movefilter-hidespecial"] === "yes" ) {
-								mattrs[showid] = "no";
-							} else if ( cat === "playbook" && typeof ma["movefilter-hideplaybook"] !== "undefined" && ma["movefilter-hideplaybook"] === "yes" ) {
-								mattrs[showid] = "no";
-							} else if ( cat === "truths" && typeof ma["movefilter-hidetruths"] !== "undefined" && ma["movefilter-hidetruths"] === "yes" ) {
-								mattrs[showid] = "no";
-							}
-						} else if ( mbook === ma["playbook-key"] ) {
-							// Nothing happens; existing value should be left as-is. (Respecting user's prior choice for showing or not showing untakens in their own playbook.)
-						} else { // if it's not, hide it
-							mattrs[showid] = "no";
-						}
+		getAttrs([`${rowprefix}key`,`${rowprefix}loaded`], function(kf) {
+			if ( typeof kf[`${rowprefix}loaded`] !== "undefined" && kf[`${rowprefix}loaded`] === "yes" ) {
+				getSectionIDs("moves", function(mf) {
+					var mfields = ["playbook-key","movefilter-hidespecial","movefilter-hideplaybook","movefilter-hidetruths","movefilter-hidebasic","movefilter"];
+					var offset = mfields.length;
+					for(var i=0; i < mf.length; i++ ) {
+						mfields[i*4+offset] = "repeating_moves_" + mf[i] + "_playbook";
+						mfields[i*4+offset+1] = "repeating_moves_" + mf[i] + "_pbdefault";
+						mfields[i*4+offset+2] = "repeating_moves_" + mf[i] + "_taken";
+						mfields[i*4+offset+3] = "repeating_moves_" + mf[i] + "_category";
 					}
-					log(mattrs);
-					setAttrs(mattrs);
+					getAttrs(mfields, function(ma) {
+						var mattrs = { "movefilter-takenonly": "no" };
+						for(var i=0; i < mf.length; i++) {
+							var mbookid = "repeating_moves_" + mf[i] + "_playbook"; var mbook = ma[mbookid];
+							var mdefid  = "repeating_moves_" + mf[i] + "_pbdefault"; var mdef = ma[mdefid];
+							var takeid  = "repeating_moves_" + mf[i] + "_taken"; var taken = ma[takeid];
+							var catid   = "repeating_moves_" + mf[i] + "_category"; var cat = ma[catid];
+							var showid  = "repeating_moves_" + mf[i] + "_show";
+							if ( mbook === kf[`${rowprefix}key`] ) { // If in the kf indicated playbook, show it
+								mattrs[showid] = "yes";
+								// unless...
+								if ( cat === "basic" && typeof ma["movefilter-hidebasic"] !== "undefined" && ma["movefilter-hidebasic"] === "yes" ) {
+									mattrs[showid] = "no";
+								} else if ( cat === "special" && typeof ma["movefilter-hidespecial"] !== "undefined" && ma["movefilter-hidespecial"] === "yes" ) {
+									mattrs[showid] = "no";
+								} else if ( cat === "playbook" && typeof ma["movefilter-hideplaybook"] !== "undefined" && ma["movefilter-hideplaybook"] === "yes" ) {
+									mattrs[showid] = "no";
+								} else if ( cat === "truths" && typeof ma["movefilter-hidetruths"] !== "undefined" && ma["movefilter-hidetruths"] === "yes" ) {
+									mattrs[showid] = "no";
+								}
+							}
+						}
+						setAttrs(mattrs);
+					});
 				});
-			});
+			} else {
+				// If we're here, the playbook isn't loaded yet, so, let's do so.
+				loadPlaybookMoves(kf[`${rowprefix}key`]);
+			}
 		});
 	});
 
 	on("clicked:movefilter-hideprohibited", function() {
 		log("Handler: clicked:movefilter-hideprohibited");
 		getSectionIDs("moves", function(mf) {
-			log(mf);
 			var mfields = ["playbook-key"];
 			for(var i=0; i < mf.length; i++ ) {
 				mfields[i*3+1] = "repeating_moves_" + mf[i] + "_playbook";
@@ -2132,7 +2235,6 @@
 						mattrs[showid] = "no";
 					}
 				}
-				log(mattrs);
 				setAttrs(mattrs);
 			});
 		});
@@ -2174,7 +2276,6 @@
 	on("change:movefilter-takenonly", function() {
 		log("Handler: change:movefilter-takenonly");
 		getSectionIDs("moves", function(mf) {
-			log(mf);
 			var mfields = ["playbook-key","movefilter-takenonly"];
 			for(var i=0; i < mf.length; i++ ) {
 				mfields[i*2+2] = "repeating_moves_" + mf[i] + "_playbook";
@@ -2200,7 +2301,6 @@
 						}
 					}
 				}
-				log(mattrs);
 				setAttrs(mattrs);
 			});
 		});
@@ -2211,7 +2311,6 @@
 	on("change:movefilter-hidebasic", function() {
 		log("Handler: change:movefilter-hidebasic");
 		getSectionIDs("moves", function(mf) {
-			log(mf);
 			var mfields = ["playbook-key","movefilter-hidebasic"];
 			for(var i=0; i < mf.length; i++ ) {
 				mfields[i*2+2] = "repeating_moves_" + mf[i] + "_playbook";
@@ -2231,7 +2330,6 @@
 						mattrs[showid] = state;
 					}
 				}
-				log(mattrs);
 				setAttrs(mattrs);
 			});
 		});
@@ -2240,7 +2338,6 @@
 	on("change:movefilter-hidespecial", function() {
 		log("Handler: change:movefilter-hidespecial");
 		getSectionIDs("moves", function(mf) {
-			log(mf);
 			var mfields = ["playbook-key","movefilter-hidespecial"];
 			for(var i=0; i < mf.length; i++ ) {
 				mfields[i*2+2] = "repeating_moves_" + mf[i] + "_playbook";
@@ -2260,7 +2357,6 @@
 						mattrs[showid] = state;
 					}
 				}
-				log(mattrs);
 				setAttrs(mattrs);
 			});
 		});
@@ -2269,7 +2365,6 @@
 	on("change:movefilter-hidetruths", function() {
 		log("Handler: change:movefilter-hidetruths");
 		getSectionIDs("moves", function(mf) {
-			log(mf);
 			var mfields = ["playbook-key","movefilter-hidetruths"];
 			for(var i=0; i < mf.length; i++ ) {
 				mfields[i*2+2] = "repeating_moves_" + mf[i] + "_playbook";
@@ -2289,7 +2384,6 @@
 						mattrs[showid] = state;
 					}
 				}
-				log(mattrs);
 				setAttrs(mattrs);
 			});
 		});
@@ -2298,7 +2392,6 @@
 	on("change:movefilter-hideplaybook", function() {
 		log("Handler: change:movefilter-hideplaybook");
 		getSectionIDs("moves", function(mf) {
-			log(mf);
 			var mfields = ["playbook-key","movefilter-hideplaybook"];
 			for(var i=0; i < mf.length; i++ ) {
 				mfields[i*2+2] = "repeating_moves_" + mf[i] + "_playbook";
@@ -2318,7 +2411,6 @@
 						mattrs[showid] = state;
 					}
 				}
-				log(mattrs);
 				setAttrs(mattrs);
 			});
 		});
@@ -2334,25 +2426,19 @@
 			if ( typeof a["starting-chosen"] === "undefined" || a["starting-chosen"] === "0" ) { // Then we may proceed, otherwise buttons are locked
 				var statspec = a[setid];
 				var statmap = {};
-				log("statspec, splitting");
 				var statspeclist = statspec.toString().split(/ /);
-				log(statspec);
 				for(var j=0; j < statspeclist.length; j++ ) {
 					var parts = statspeclist[j].toString().split(/:/);
 					var statkey = parts[0];
 					var statval = parts[1];
 					statmap[statkey] = statval;
 				}
-				log(statmap);
 				getSectionIDs("stats", function(sf) {
-					log(sf);
 					var sfields = [];
 					for(var i=0; i < sf.length; i++ ) {
 						sfields[i] = "repeating_stats_" + sf[i] + "_key";
 					}
-					log(sfields);
 					getAttrs(sfields,function(sa) {
-						log(sa);
 						var sattrs = { "starting-chosen": "yes" };
 						for(var i=0; i < sfields.length; i++) {
 							var key = sa[sfields[i]];
@@ -2361,7 +2447,6 @@
 								sattrs[rateid] = statmap[key];
 							}
 						}
-						log(sattrs);
 						setAttrs(sattrs);
 					});
 				});
@@ -2388,7 +2473,6 @@
 						cats[penaltyid] = c["conditions-penalty"];
 					}
 				}
-				log(cats);
 				setAttrs(cats);
 			});
 		});
@@ -2420,10 +2504,10 @@
 				// We'll also want to flip a flag on the relevant basic move entry.
 				if ( typeof m[moveidid] !== "undefined" && m[moveidid] !== "" ) {
 					var moveid = m[moveidid];
-					sattrs[`repeating_moves_${moveid}_condition-marked`] = "yes";
+					sattrs[`repeating_basic_${moveid}_condition-marked`] = "yes";
 					sattrs[`${modifierid}_moveid`] = moveid;
-					sattrs[`repeating_moves_${moveid}_modifier-marked`] = gTBK("Modifier is not marked.");
-					sattrs[`repeating_moves_${moveid}_modifierid`] = modifierid;
+					sattrs[`repeating_basic_${moveid}_modifier-marked`] = gTBK("Modifier is not marked.");
+					sattrs[`repeating_basic_${moveid}_modifierid`] = modifierid;
 				}
 
 				// But before we can set our attributes we also need to make sure to update our tally, and make it accurate.
@@ -2467,7 +2551,7 @@
 						// We also need to attend to flipping off the flag that was on the associated move, if any
 						if ( typeof m[moveidid] !== "undefined" && m[moveidid] !== "" ) {
 							var moveid = m[moveidid];
-							u[`repeating_moves_${moveid}_condition-marked`] = "no";
+							u[`repeating_basic_${moveid}_condition-marked`] = "no";
 						}
 
 						// But before we can set our attributes we also need to make sure to update our tally, and make it accurate.
@@ -2499,24 +2583,18 @@
 	
 	// act_mark-modifier
 
-	on("clicked:repeating_moves:mark-modifier", function(e) {
-		log("Handler: clicked:repeating_moves:mark-modifier");
+	on("clicked:repeating_basic:mark-modifier", function(e) {
+		log("Handler: clicked:repeating_basic:mark-modifier");
 		var rowid = (e.sourceAttribute).slice(0,-13); // Strips off the 'mark-modifier';
 		var modidid = rowid + "modifierid";
-		log("mark-modifier button clicked");
-		log(modidid);
 		getAttrs([modidid], function(m) {
 			var modifierid = m[modidid];
-			log(m);
-			log(modifierid);
 			if ( typeof modifierid !== "undefined" && modifierid !== "" ) {
 				// Then I've hopefully got a valid modifier here, and I can mess with its clicking. But, that also means I need to getAttrs a second time. 
 				var rollmodid = modifierid + "_rollmod";
-				log(`modifierid is ${modifierid} so rollmodid is ${rollmodid}`);
 				getAttrs([rollmodid], function(r) {
 					log(r);
 					if ( typeof r[rollmodid] !== "undefined" && r[rollmodid] !== "" ) {
-						log("there was a valid rollmod value");
 						var rollmod = r[rollmodid];
 						var mats = {};
 						if ( rollmod === "yes" ) {
@@ -2582,11 +2660,9 @@
 	on("clicked:repeating_modifiers:state", function(e) {
 		log("Handler: clicked:repeating_modifiers:state");
 		var rowid = (e.sourceAttribute).slice(0,-5); // Strips off the 'state';
-		log(`Toggling state for modifier ${rowid}`);
 		var stateid = `${rowid}state`; // attr_state and act_state effectively have the same id, I think? but let's reconstruct.
 		var statenid = `${rowid}statename`; // grab the name of the state too
 		getAttrs([stateid],function(s) {
-			log(s);
 			var sattrs = {};
 			if ( s[stateid] === "forward" ) {
 				sattrs[stateid] = "ongoing";
@@ -2595,7 +2671,6 @@
 				sattrs[stateid] = "forward";
 				sattrs[statenid] = gTBK("forward");
 			}
-			log(sattrs);
 			setAttrs(sattrs);
 		});
 	});
@@ -2603,7 +2678,6 @@
 	on("clicked:repeating_modifiers:trash", function(e) {
 		log("Handler: clicked:repeating_modifiers:trash");
 		var rowid = (e.sourceAttribute).slice(0,-6); // Strips off the '_trash';
-		log(`Setting deletion flag for modifier ${rowid}`);
 		var sattrs = {};
 		sattrs[`${rowid}_used`] = "delete";
 		sattrs[`${rowid}_modifier`] = "0"; // This'll make sure the totalling handler will fire off
@@ -2614,12 +2688,9 @@
 
 	on("change:repeating_modifiers:rollmod change:repeating_modifiers:modifier remove:repeating_modifiers", function() { 
 		log("Handler: change:repeating_modifiers:rollmod change:repeating_modifiers:modifier remove:repeating_modifiers");
-		log("consequential change detected in repeating_modifiers");
 		// We need to examine whether any entries count as unused, and if there are multiples, remove them, and if there are none, add one.
 		var mlist = []; var mflist = [];
 		getSectionIDs("repeating_modifiers", function(idarray) {
-			log("got the ID list");
-			log(idarray);
 			for(var i=0; i < idarray.length; i++ ) {
 				mlist[i] = "repeating_modifiers_"+idarray[i];
 				mflist[i*5] = mlist[i] + "_used";
@@ -2628,11 +2699,8 @@
 				mflist[i*5+3] = mlist[i] + "_modifier"; 
 				mflist[i*5+4] = mlist[i] + "_moveid"; 
 			}
-			log("assembled list");
-			log(mlist);
 			var sattrs = {};
 			if ( mlist.length > 0 ) {
-				log("list is not empty, so we parse");
 				getAttrs(mflist, function(mf) {
 					var keeper = false;
 					var tally = 0;
@@ -2671,14 +2739,14 @@
 								}
 								// we should make a note in the appropriate move
 								if ( typeof moveid !== "undefined" && moveid !== "" ) {
-									sattrs[`repeating_moves_${moveid}_modifier-marked`] = gTBK("Modifier is marked.");								
-									sattrs[`repeating_moves_${moveid}_modifierid`] = mlist[i]; // store the modifier's ID on the move								
+									sattrs[`repeating_basic_${moveid}_modifier-marked`] = gTBK("Modifier is marked.");								
+									sattrs[`repeating_basic_${moveid}_modifierid`] = mlist[i]; // store the modifier's ID on the move								
 								} else {
 									log("no moveid");
 								}
 							} else if ( typeof moveid !== "undefined" && moveid !== "" ) {
 								// rollmod isn't yes, so if there's an associated move, its modifier is not marked
-								sattrs[`repeating_moves_${moveid}_modifier-marked`] = gTBK("Modifier is not marked.");
+								sattrs[`repeating_basic_${moveid}_modifier-marked`] = gTBK("Modifier is not marked.");
 							}
 						}
 					}
@@ -2690,15 +2758,11 @@
 						var modifierid = "repeating_modifiers_" + generateActuallyUniqueRowID();
 						sattrs[`${modifierid}_used`] = "no"; // Creates our a new modifier entry
 					}
-					log("Setting attributes for modifiers");
-					log(sattrs);
 					setAttrs(sattrs,{silent:true}); // We don't need to trigger a bunch of runs through this handler because we're setting attributes *with* this handler.
 				});
 			} else { // I suspect if there's no array, getAttrs doesn't bother to fire off its callback, which is a shame because I expected it to.
-				log("list is empty, so we create");
 				var modifierid = "repeating_modifiers_" + generateActuallyUniqueRowID();
 				sattrs[`${modifierid}_used`] = "no"; // Creates our a new modifier entry
-				log(sattrs);
 				setAttrs(sattrs,{silent:true}); // We don't need to trigger a bunch of runs through this handler because we're setting attributes *with* this handler.
 			}
 		});
@@ -2709,7 +2773,6 @@
 	on("clicked:repeating_strings:trash", function(e) {
 		log("Handler: clicked:repeating_strings:trash");
 		var rowid = (e.sourceAttribute).slice(0,-6); // Strips off the '_trash';
-		log(`Setting deletion flag for string ${rowid}`);
 		var sattrs = {};
 		sattrs[`${rowid}_used`] = "delete";
 		setAttrs(sattrs); // Please trigger the fucking handler
@@ -2717,23 +2780,17 @@
 
 	on("change:repeating_strings remove:repeating_strings", function() {
 		log("Handler: change:repeating_strings remove:repeating_strings");
-		log("change detected in repeating_strings");
 		// We need to examine whether any entries count as unused, and if there are multiples, remove them, and if there are none, add one.
 		var slist = []; var sflist = [];
 		getSectionIDs("repeating_strings", function(idarray) {
-			log("got the ID list");
-			log(idarray);
 			for(var i=0; i < idarray.length; i++ ) {
 				slist[i] = "repeating_strings_"+idarray[i];
 				sflist[i*6] = slist[i] + "_used";
 				sflist[i*6+1] = slist[i] + "_check1"; sflist[i*6+2] = slist[i] + "_check2"; sflist[i*6+3] = slist[i] + "_check3"; sflist[i*6+4] = slist[i] + "_check4";
 				sflist[i*6+5] = slist[i] + "_target";
 			}
-			log("assembled list");
-			log(slist);
 			var sattrs = {};
 			if ( slist.length > 0 ) {
-				log("list is not empty, so we parse");
 				getAttrs(sflist, function(sf) {
 					var keeper = false;
 					for(var i=0; i < slist.length; i++ ) {
@@ -2768,15 +2825,11 @@
 						var stringid = "repeating_strings_" + generateActuallyUniqueRowID();
 						sattrs[`${stringid}_used`] = "no"; // Creates our a new String entry
 					}
-					log("Setting attributes for strings");
-					log(sattrs);
 					setAttrs(sattrs,{silent:true}); // We don't need to trigger a bunch of runs through this handler because we're setting attributes *with* this handler.
 				});
 			} else { // I suspect if there's no array, getAttrs doesn't bother to fire off its callback, which is a shame because I expected it to.
-				log("list is empty, so we create");
 				var stringid = "repeating_strings_" + generateActuallyUniqueRowID();
 				sattrs[`${stringid}_used`] = "no"; // Creates our a new String entry
-				log(sattrs);
 				setAttrs(sattrs,{silent:true}); // We don't need to trigger a bunch of runs through this handler because we're setting attributes *with* this handler.
 			}
 		});
@@ -2788,9 +2841,7 @@
 
 	on("change:rollprompt-mods change:rollprompt-query change:modifier-tally", function() {
 		log("Handler: change:rollprompt-mods change:rollprompt-query change:modifier-tally");
-		log("We've got a change in roll prompt configuration");
 		getAttrs(["rollprompt-mods","rollprompt-query","modifier-tally"], function(f) {
-			log(f);
 			var defaultconfig = "?{" + rwm + "|0}";
 			var usemods = "1";
 			if ( typeof f["rollprompt-mods"] === "undefined" || f["rollprompt-mods"] !== "1") {
@@ -2805,7 +2856,6 @@
 				tally = f["modifier-tally"];
 			}
 			var attrs = {};
-			log(`usemods ${usemods} doquery ${doquery} tally ${tally}`);
 			if ( usemods === "1" ) {
 				if ( doquery === "1" ) {
 					// Use standard default config
@@ -2890,7 +2940,6 @@
 				penalty = Number(a[pnid]);
 			}
 			cats[catpen] = penalty;
-			log("here come the cats"); log(cats);
 			setAttrs(cats);
 		});
 	});
@@ -2910,180 +2959,11 @@
 
 </script>
 
-<rolltemplate class="sheet-rolltemplate-sharemove">
-	<div class="sheet-topline">
-		{{#name}}**{{name}}**{{/name}} <!--{{#playbook}}**({{playbook}}){{/playbook}}-->
-	</div>
-	<div class="sheet-move">
-		{{#body}}<div>{{body}}</div>{{/body}}
-		{{#preamble}}<div class="sheet-indented">{{preamble}}</div>{{/preamble}}
-		{{#bullet0}}
-			<ul>
-				<li>{{bullet0}}</li>
-				{{#bullet1}}<li>{{bullet1}}</li>{{/bullet1}}
-				{{#bullet2}}<li>{{bullet2}}</li>{{/bullet2}}
-				{{#bullet3}}<li>{{bullet3}}</li>{{/bullet3}}
-				{{#bullet4}}<li>{{bullet4}}</li>{{/bullet4}}
-			</ul>
-		{{/bullet0}}
-		{{#hit}}
-			<div class="sheet-result">
-				**10+:** {{hit}}
-				{{#hitbullet0}}
-					<ul>
-						<li>{{hitbullet0}}</li>
-						{{#hitbullet1}}<li>{{hitbullet1}}</li>{{/hitbullet1}}
-						{{#hitbullet2}}<li>{{hitbullet2}}</li>{{/hitbullet2}}
-						{{#hitbullet3}}<li>{{hitbullet3}}</li>{{/hitbullet3}}
-						{{#hitbullet4}}<li>{{hitbullet4}}</li>{{/hitbullet4}}
-					</ul>
-				{{/hitbullet0}}
-			</div>
-		{{/hit}}
-		{{#mixed}}
-			<div class="sheet-result">
-				**7-9:** {{mixed}}
-				{{#mixedbullet0}}
-					<ul>
-						<li>{{mixedbullet0}}</li>
-						{{#mixedbullet1}}<li>{{mixedbullet1}}</li>{{/mixedbullet1}}
-						{{#mixedbullet2}}<li>{{mixedbullet2}}</li>{{/mixedbullet2}}
-						{{#mixedbullet3}}<li>{{mixedbullet3}}</li>{{/mixedbullet3}}
-						{{#mixedbullet4}}<li>{{mixedbullet4}}</li>{{/mixedbullet4}}
-					</ul>
-				{{/mixedbullet0}}
-			</div>
-		{{/mixed}}
-		{{#miss}}
-			<div class="sheet-result">
-				**6-:** {{miss}}
-				{{#missbullet0}}
-					<ul>
-						<li>{{missbullet0}}</li>
-						{{#missbullet1}}<li>{{missbullet1}}</li>{{/missbullet1}}
-						{{#missbullet2}}<li>{{missbullet2}}</li>{{/missbullet2}}
-						{{#missbullet3}}<li>{{missbullet3}}</li>{{/missbullet3}}
-						{{#missbullet4}}<li>{{missbullet4}}</li>{{/missbullet4}}
-					</ul>
-				{{/missbullet0}}
-			</div>
-		{{/miss}}
-		{{#alternative}}<div class="sheet-indented">{{alternative}}</div>{{/alternative}}
-		{{#altbullet0}}
-			<ul>
-				<li>{{altbullet0}}</li>
-				{{#altbullet1}}<li>{{altbullet1}}</li>{{/altbullet1}}
-				{{#altbullet2}}<li>{{altbullet2}}</li>{{/altbullet2}}
-				{{#altbullet3}}<li>{{altbullet3}}</li>{{/altbullet3}}
-				{{#altbullet4}}<li>{{altbullet4}}</li>{{/altbullet4}}
-			</ul>
-		{{/altbullet0}}
-		{{#althit}}
-			<div class="sheet-result">
-				**10+:** {{althit}}
-				{{#althitbullet0}}
-					<ul>
-						<li>{{althitbullet0}}</li>
-						{{#althitbullet1}}<li>{{althitbullet1}}</li>{{/althitbullet1}}
-						{{#althitbullet2}}<li>{{althitbullet2}}</li>{{/althitbullet2}}
-						{{#althitbullet3}}<li>{{althitbullet3}}</li>{{/althitbullet3}}
-						{{#althitbullet4}}<li>{{althitbullet4}}</li>{{/althitbullet4}}
-					</ul>
-				{{/althitbullet0}}
-			</div>
-		{{/althit}}
-		{{#altmixed}}
-			<div class="sheet-result">
-				**7-9:** {{altmixed}}
-				{{#altmixedbullet0}}
-					<ul>
-						<li>{{altmixedbullet0}}</li>
-						{{#altmixedbullet1}}<li>{{altmixedbullet1}}</li>{{/altmixedbullet1}}
-						{{#altmixedbullet2}}<li>{{altmixedbullet2}}</li>{{/altmixedbullet2}}
-						{{#altmixedbullet3}}<li>{{altmixedbullet3}}</li>{{/altmixedbullet3}}
-						{{#altmixedbullet4}}<li>{{altmixedbullet4}}</li>{{/altmixedbullet4}}
-					</ul>
-				{{/altmixedbullet0}}
-			</div>
-		{{/altmixed}}
-		{{#altmiss}}
-			<div class="sheet-result">
-				**6-:** {{altmiss}}
-				{{#altmissbullet0}}
-					<ul>
-						<li>{{altmissbullet0}}</li>
-						{{#altmissbullet1}}<li>{{altmissbullet1}}</li>{{/altmissbullet1}}
-						{{#altmissbullet2}}<li>{{altmissbullet2}}</li>{{/altmissbullet2}}
-						{{#altmissbullet3}}<li>{{altmissbullet3}}</li>{{/altmissbullet3}}
-						{{#altmissbullet4}}<li>{{altmissbullet4}}</li>{{/altmissbullet4}}
-					</ul>
-				{{/altmissbullet0}}
-			</div>
-		{{/altmiss}}
-		{{#end}}<div class="sheet-indented">{{end}}</div>{{/end}}
-		{{#blankname0}}<div class="sheet-space-above">**{{blankname0}}**: {{#blank0}}{{blank0}}{{/blank0}}</div>{{/blankname0}}
-		{{#blankname1}}<div class="sheet-space-above">**{{blankname1}}**: {{#blank1}}{{blank1}}{{/blank1}}</div>{{/blankname1}}
-		{{#blankname2}}<div class="sheet-space-above">**{{blankname2}}**: {{#blank2}}{{blank2}}{{/blank2}}</div>{{/blankname2}}
-		{{#blankname3}}<div class="sheet-space-above">**{{blankname3}}**: {{#blank3}}{{blank3}}{{/blank3}}</div>{{/blankname3}}
-		{{#blankname4}}<div class="sheet-space-above">**{{blankname4}}**: {{#blank4}}{{blank4}}{{/blank4}}</div>{{/blankname4}}
-		{{#blankname5}}<div class="sheet-space-above">**{{blankname5}}**: {{#blank5}}{{blank5}}{{/blank5}}</div>{{/blankname5}}
-		{{#blankname6}}<div class="sheet-space-above">**{{blankname6}}**: {{#blank6}}{{blank6}}{{/blank6}}</div>{{/blankname6}}
-		{{#blankname7}}<div class="sheet-space-above">**{{blankname7}}**: {{#blank7}}{{blank7}}{{/blank7}}</div>{{/blankname7}}
-		{{#blankname8}}<div class="sheet-space-above">**{{blankname8}}**: {{#blank8}}{{blank8}}{{/blank8}}</div>{{/blankname8}}
-		{{#blankname9}}<div class="sheet-space-above">**{{blankname9}}**: {{#blank9}}{{blank9}}{{/blank9}}</div>{{/blankname9}}
-	</div>
-</rolltemplate>
+<input type="hidden" name="attr_status-message" value="" class="hide-on-null"><div style="text-align: center; margin-top: -20px; margin-bottom: 20px; border-bottom: 1px solid black;" class="bold"><span name="attr_status-message"></span></div>
 
-<rolltemplate class="sheet-rolltemplate-2d6-roll">
-	<div class="sheet-topline">
-		{{#character}}**{{character}}**:{{/character}}
-		{{#title}}**{{title}}**{{/title}}
-	</div>
-	<div class="sheet-dice">
-			{{#rollGreater() roll 9}}
-		<div class="sheet-dieroll-hit">
-				<div class="sheet-dieroll-roll">{{roll}}</div>
-		</div>
-		<div class="sheet-dieroll-title">
-			<span data-i18n="Up Beat"></span>!
-		</div>
-			{{/rollGreater() roll 9}}
-			{{#rollBetween() roll 7 9}}
-		<div class="sheet-dieroll-mixed">
-				<div class="sheet-dieroll-roll">{{roll}}</div>
-		</div>
-		<div class="sheet-dieroll-title">
-			<span data-i18n="Mixed Beat"></span>
-		</div>
-			{{/rollBetween() roll 7 9}}
-			{{#rollLess() roll 7}}
-		<div class="sheet-dieroll-miss">
-				<div class="sheet-dieroll-roll">{{roll}}</div>
-		</div>
-		<div class="sheet-dieroll-title">
-			<span data-i18n="Down Beat"></span>
-		</div>
-		<div class="sheet-clearance sheet-dieroll-reminder">
-			<span data-i18n="Make sure to mark experience!"></span>
-		</div>
-			{{/rollLess() roll 7}}
-		<div class="sheet-clearance"></div>
-	</div>
-</rolltemplate>
-
-<rolltemplate class="sheet-datadumper">
-	{{#allprops()}}
-		<div>**{{key}}:** {{value}} </div>
-	{{/allprops()}}
-</rolltemplate>
-
-<!-- input type="hidden" name="attr_rollprompt" value="?{Roll With Modifier}|0}" -->
 <input type="hidden" name="attr_playbook-key" class="pkey" value="">
 
-<input type="hidden" name="attr_pbinitialized" value="no" class="hide-on-yes">
-<div>
-	<span class="bold">Sheet is initializing, please wait ...</span>
-</div>
+<input type="hidden" name="attr_pbinitialized" value="no">
 
 <div class="whole">
 
@@ -3097,28 +2977,36 @@
 
 		<div class="nocontrol popmenu">
 			<div class="popmenu-trigger"><span class="bold"><span data-i18n="Playbook"></span>:</span> <span name="attr_playbook-name"></span></div>
-			<div class="popmenu-box"><fieldset class="repeating_playbooks"><div class="popmenu-section">
-				<input type="hidden" name="attr_key" value="">
-				<input type="hidden" name="attr_name" value="">
-				<input type="hidden" name="attr_selected" value="" class="popmenu-select">
-				<button type="action" name="act_choose-playbook" class="buttonless">
-					<span data-i18n="Choose"></span>
-					<span name="attr_name" class="bold-uncolored"></span>
-					<span name="attr_selected" class="pictos"></span>
-				</button>
-				<input type="hidden" name="attr_bio" value="" class="hide-on-null">
-				<div class="tooltip bio">
-					<div><span class="pictos">E</span> <span data-i18n="More about"></span> <span name="attr_name"></span></div>
-					<div class="tooltip-pop">
-						<span name="attr_bio"></span>
-					</div>
+			<div class="popmenu-box">
+				<div>
+					<span data-i18n="You may experience a short pause before your choice displays, slightly longer for playbooks that haven't been loaded yet! Please note that when displayed, moves will appear in your character sheet in the order in which you loaded them."></span>
 				</div>
-			</div></fieldset></div>
+				<fieldset class="repeating_playbooks">
+					<div class="popmenu-section">
+						<input type="hidden" name="attr_key" value="">
+						<input type="hidden" name="attr_name" value="">
+						<input type="hidden" name="attr_selected" value="" class="popmenu-select">
+						<button type="action" name="act_choose-playbook" class="buttonless">
+							<input type="hidden" name="attr_loaded" value="no" class="hide-on-yes"><span data-i18n="Load and"></span>
+							<span data-i18n="Choose"></span>
+							<span name="attr_name" class="bold-uncolored"></span>
+							<span name="attr_selected" class="pictos"></span>
+						</button>
+						<input type="hidden" name="attr_bio" value="" class="hide-on-null">
+						<div class="tooltip bio">
+							<div><span class="pictos">E</span> <span data-i18n="More about"></span> <span name="attr_name"></span></div>
+							<div class="tooltip-pop">
+								<span name="attr_bio"></span>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+			</div>
 		</div>
 
 		<!-- input type="hidden" name="attr_starting-chosen" value="no" class="hide-on-yes" -->
 		<div class="nocontrol popmenu">
-			<div class="popmenu-trigger"><span class="bold"><span data-i18n="Starting Stats"></span></div>
+			<div class="popmenu-trigger"><span class="bold"><span data-i18n="Starting Stats"></span></span></div>
 			<div class="popmenu-box">
 				<div><span data-i18n="Pick one of these sets (overwrites current ratings), then add 1 to two different stats."></span></div>
 				
@@ -3159,7 +3047,7 @@
 		</div>
 	</div> <!-- /class=toprow -->
 
-	<input type="hidden" name="attr_pbinitialized" value="no" class="show-on-yes"><div>
+	<!-- input type="hidden" name="attr_pbinitialized" value="no" class="show-on-yes" --><div>
 
 	<div class="columns">
 		<div class="narrow">
@@ -3222,18 +3110,18 @@
 					<div class="popmenu-trigger"><span data-i18n="Moves"></span></div>
 					<div class="popmenu-box">
 						<div><button type="action" name="act_movefilter-pbmoves" class="buttonless"><span class="bold-uncolored"><span data-i18n="My Playbook's Moves Only"></span></span></button></div>
-						<div><button type="action" name="act_movefilter-allmoves" class="buttonless"><span class="bold-uncolored"><span data-i18n="Show Every Move"></span></span></button></div>
+						<div><button type="action" name="act_movefilter-allmoves" class="buttonless"><span class="bold-uncolored"><span data-i18n="Show All Loaded Moves"></span></span></button></div>
 						<div><button type="action" name="act_movefilter-hideprohibited" class="buttonless"><span class="bold-uncolored"><span data-i18n="Filter Out Moves I Can't Take"></span></span></button></div>
 						<div class="popmenu-section"><input type="checkbox" name="attr_movefilter-takenonly" value="yes" class="checkboxer"><span class="checkboxed"></span> <span class="bold-uncolored"><span data-i18n="Hide Untaken Moves"></span></span></div>
-						<div><input type="checkbox" name="attr_movefilter-hidespecial" value="yes" class="checkboxer"><span class="checkboxed"></span> <span class="bold-uncolored"><span data-i18n="Hide Special Features"></span></span></button></div>
-						<div><input type="checkbox" name="attr_movefilter-hideplaybook" value="yes" class="checkboxer"><span class="checkboxed"></span> <span class="bold-uncolored"><span data-i18n="Hide Playbook Moves"></span></span></button></div>
-						<div><input type="checkbox" name="attr_movefilter-hidetruths" value="yes" class="checkboxer"><span class="checkboxed"></span> <span class="bold-uncolored"><span data-i18n="Hide Truths of Heart and Blade"></span></span></button></div>
-						<div><input type="checkbox" name="attr_movefilter-hidebasic" value="yes" class="checkboxer"><span class="checkboxed"></span> <span class="bold-uncolored"><span data-i18n="Hide Basic Moves"></span></span></button></div>
+						<div><input type="checkbox" name="attr_movefilter-hidespecial" value="yes" class="checkboxer"><span class="checkboxed"></span> <span class="bold-uncolored"><span data-i18n="Hide Special Features"></span></span></div>
+						<div><input type="checkbox" name="attr_movefilter-hideplaybook" value="yes" class="checkboxer"><span class="checkboxed"></span> <span class="bold-uncolored"><span data-i18n="Hide Playbook Moves"></span></span></div>
+						<div><input type="checkbox" name="attr_movefilter-hidetruths" value="yes" class="checkboxer"><span class="checkboxed"></span> <span class="bold-uncolored"><span data-i18n="Hide Truths of Heart and Blade"></span></span></div>
+						<div><input type="checkbox" name="attr_movefilter-hidebasic" value="yes" class="checkboxer"><span class="checkboxed"></span> <span class="bold-uncolored"><span data-i18n="Hide Basic Moves"></span></span></div>
 						<div class="bold popmenu-section"><span data-i18n="Individual Playbook Moves"></span></div>
 						<div class="nocontrol"><fieldset class="repeating_playbooks">
 							<input type="hidden" name="attr_key" value="">
 							<input type="hidden" name="attr_name" value="">
-							<div><button type="action" name="act_movefilter-onepb" class="buttonless">&nbsp; <span class="bold-uncolored"><span name="attr_name"></span></span></button></div>
+							<div><button type="action" name="act_movefilter-onepb" class="buttonless">&nbsp; <span class="bold-uncolored"><input type="hidden" name="attr_loaded" value="no" class="hide-on-yes"><span data-i18n="Load"></span> <input type="hidden" name="attr_loaded" value="no" class="hide-on-no"><span data-i18n="Show"></span> <span name="attr_name"></span></span></button></div>
 						</fieldset></div>
 					</div>
 				</div>
@@ -3253,7 +3141,7 @@
 						<input type="hidden" name="attr_show" value="no" class="hide-on-no">
 						<div>
 							<span name="attr_tracklabel" class="bold tracker-label"></span>
-							<input type="number" name="attr_tracker" max="4" min="0" class="fillme tracker-number">
+							<input type="number" name="attr_tracker" max="4" min="0" value="1" class="fillme tracker-number">
 							<input type="hidden" name="attr_tracker" class="tracker">
 							<span class="tracker-bar"></span>
 						</div>
@@ -3265,14 +3153,15 @@
 					<input type="hidden" name="attr_name" value="" class="hide-on-null">
 					<div class="move-whole">
 						<div class="move-compressor"><input type="hidden" name="attr_show" value="no" class="hide-on-no"><div class="move">
-							<button type="roll" class="sharemove" style="margin-top: -1px;" value="&{template:sharemove} {{name=@{name}}} {{playbook=@{playbook}}} {{body=@{body}}} @{shareoptions} }"></button><input type="hidden" name="attr_shareoptions" value="">
-							<input type="hidden" name="attr_rollconfig" value="" class="hide-on-null">
-							<button type="roll" class="sheet-2d6-button" value="&{template:2d6-roll} {{character=@{character_name}}} {{title=@{name}}} {{roll=[[2d6+?{@{name} using @{rollconfig}}+@{rollprompt}]]}}" name="roll_2d6"></button>
+							<div class="right-buttons">
+								<input type="hidden" name="attr_rollconfig" value="" class="hide-on-null">
+								<button type="roll" class="sheet-2d6-button-nofloat" value="&{template:2d6-roll} {{character=@{character_name}}} {{title=@{name}}} {{roll=[[2d6+?{@{name} using @{rollconfig}}+@{rollprompt}]]}}" name="roll_2d6"></button>
+								<button type="roll" class="sharemove" style="margin-top: -1px;" value="&{template:sharemove} {{name=@{name}}} {{playbook=@{playbook}}} {{body=@{body}}} @{shareoptions} }"></button><input type="hidden" name="attr_shareoptions" value="">
+							</div>
 							<input type="hidden" name="attr_playbook" value="" class="hide-on-null">
 							<span><input type="checkbox" name="attr_taken" value="yes" class="checkboxer"><span class="checkboxed"></span></span>
 							<span name="attr_name" class="bold"></span>:
 							<span name="attr_body"></span> 
-							<input type="hidden" name="attr_long" value="no" class="show-on-yes"><div class="expand-toggle-container"><input type="checkbox" name="attr_long-expand" value="yes" class="expand-toggle" checked><span class="expand-toggle-indicator"></span> <span class="expand-toggle-on">▼<span data-i18n="Show Less"></span></span><span class="expand-toggle-off">►<span data-i18n="Show More"></span></span></div>
 							<input type="hidden" name="attr_long" value="yes" class="show-on-yes-combo">
 							<input type="checkbox" name="attr_long-expand" value="yes" class="show-on-checked-combo" checked>
 							<div class="move-long">
@@ -3435,7 +3324,7 @@
 								<input type="hidden" name="attr_end" class="hide-on-null" value=""><div class="indented"><span name="attr_end"></span></div>
 								<input type="hidden" name="attr_blankname0" class="hide-on-null" value=""><div class="fill-the-blank">
 									<input type="hidden" name="attr_checkbox0" value="no" class="hide-on-no hide-on-null"><span><input type="checkbox" name="attr_blankbox0" value="marked" class="checkboxer"><span class="checkboxed"></span></span>
-									<span class="bold" name="attr_blankname0"></span></b>:
+									<span class="bold" name="attr_blankname0"></span>:
 									<input type="text" name="attr_blank0" class="fillme">
 									<input type="hidden" name="attr_blanksuggestions0" class="hide-on-null" value=""><div class="suggestions examples-list">
 										<span name="attr_blanksuggestions0"></span>
@@ -3443,7 +3332,7 @@
 								</div>
 								<input type="hidden" name="attr_blankname1" class="hide-on-null" value=""><div class="fill-the-blank">
 									<input type="hidden" name="attr_checkbox1" value="no" class="hide-on-no hide-on-null"><span><input type="checkbox" name="attr_blankbox1" value="marked" class="checkboxer"><span class="checkboxed"></span></span>
-									<span class="bold" name="attr_blankname1"></span></b>:
+									<span class="bold" name="attr_blankname1"></span>:
 									<input type="text" name="attr_blank1" class="fillme">
 									<input type="hidden" name="attr_blanksuggestions1" class="hide-on-null" value=""><div class="suggestions examples-list">
 										<span name="attr_blanksuggestions1"></span>
@@ -3451,7 +3340,7 @@
 								</div>
 								<input type="hidden" name="attr_blankname2" class="hide-on-null" value=""><div class="fill-the-blank">
 									<input type="hidden" name="attr_checkbox2" value="no" class="hide-on-no hide-on-null"><span><input type="checkbox" name="attr_blankbox2" value="marked" class="checkboxer"><span class="checkboxed"></span></span>
-									<span class="bold" name="attr_blankname2"></span></b>:
+									<span class="bold" name="attr_blankname2"></span>:
 									<input type="text" name="attr_blank2" class="fillme">
 									<input type="hidden" name="attr_blanksuggestions2" class="hide-on-null" value=""><div class="suggestions examples-list">
 										<span name="attr_blanksuggestions2"></span>
@@ -3459,7 +3348,7 @@
 								</div>
 								<input type="hidden" name="attr_blankname3" class="hide-on-null" value=""><div class="fill-the-blank">
 									<input type="hidden" name="attr_checkbox3" value="no" class="hide-on-no hide-on-null"><span><input type="checkbox" name="attr_blankbox3" value="marked" class="checkboxer"><span class="checkboxed"></span></span>
-									<span class="bold" name="attr_blankname3"></span></b>:
+									<span class="bold" name="attr_blankname3"></span>:
 									<input type="text" name="attr_blank3" class="fillme">
 									<input type="hidden" name="attr_blanksuggestions3" class="hide-on-null" value=""><div class="suggestions examples-list">
 										<span name="attr_blanksuggestions3"></span>
@@ -3467,7 +3356,7 @@
 								</div>
 								<input type="hidden" name="attr_blankname4" class="hide-on-null" value=""><div class="fill-the-blank">
 									<input type="hidden" name="attr_checkbox4" value="no" class="hide-on-no hide-on-null"><span><input type="checkbox" name="attr_blankbox4" value="marked" class="checkboxer"><span class="checkboxed"></span></span>
-									<span class="bold" name="attr_blankname4"></span></b>:
+									<span class="bold" name="attr_blankname4"></span>:
 									<input type="text" name="attr_blank4" class="fillme">
 									<input type="hidden" name="attr_blanksuggestions4" class="hide-on-null" value=""><div class="suggestions examples-list">
 										<span name="attr_blanksuggestions4"></span>
@@ -3475,7 +3364,7 @@
 								</div>
 								<input type="hidden" name="attr_blankname5" class="hide-on-null" value=""><div class="fill-the-blank">
 									<input type="hidden" name="attr_checkbox5" value="no" class="hide-on-no hide-on-null"><span><input type="checkbox" name="attr_blankbox5" value="marked" class="checkboxer"><span class="checkboxed"></span></span>
-									<span class="bold" name="attr_blankname5"></span></b>:
+									<span class="bold" name="attr_blankname5"></span>:
 									<input type="text" name="attr_blank5" class="fillme">
 									<input type="hidden" name="attr_blanksuggestions5" class="hide-on-null" value=""><div class="suggestions examples-list">
 										<span name="attr_blanksuggestions5"></span>
@@ -3483,7 +3372,7 @@
 								</div>
 								<input type="hidden" name="attr_blankname6" class="hide-on-null" value=""><div class="fill-the-blank">
 									<input type="hidden" name="attr_checkbox6" value="no" class="hide-on-no hide-on-null"><span><input type="checkbox" name="attr_blankbox6" value="marked" class="checkboxer"><span class="checkboxed"></span></span>
-									<span class="bold" name="attr_blankname6"></span></b>:
+									<span class="bold" name="attr_blankname6"></span>:
 									<input type="text" name="attr_blank6" class="fillme">
 									<input type="hidden" name="attr_blanksuggestions6" class="hide-on-null" value=""><div class="suggestions examples-list">
 										<span name="attr_blanksuggestions6"></span>
@@ -3491,7 +3380,7 @@
 								</div>
 								<input type="hidden" name="attr_blankname7" class="hide-on-null" value=""><div class="fill-the-blank">
 									<input type="hidden" name="attr_checkbox7" value="no" class="hide-on-no hide-on-null"><span><input type="checkbox" name="attr_blankbox7" value="marked" class="checkboxer"><span class="checkboxed"></span></span>
-									<span class="bold" name="attr_blankname7"></span></b>:
+									<span class="bold" name="attr_blankname7"></span>:
 									<input type="text" name="attr_blank7" class="fillme">
 									<input type="hidden" name="attr_blanksuggestions7" class="hide-on-null" value=""><div class="suggestions examples-list">
 										<span name="attr_blanksuggestions7"></span>
@@ -3499,7 +3388,7 @@
 								</div>
 								<input type="hidden" name="attr_blankname8" class="hide-on-null" value=""><div class="fill-the-blank">
 									<input type="hidden" name="attr_checkbox8" value="no" class="hide-on-no hide-on-null"><span><input type="checkbox" name="attr_blankbox8" value="marked" class="checkboxer"><span class="checkboxed"></span></span>
-									<span class="bold" name="attr_blankname8"></span></b>:
+									<span class="bold" name="attr_blankname8"></span>:
 									<input type="text" name="attr_blank8" class="fillme">
 									<input type="hidden" name="attr_blanksuggestions8" class="hide-on-null" value=""><div class="suggestions examples-list">
 										<span name="attr_blanksuggestions8"></span>
@@ -3507,20 +3396,13 @@
 								</div>
 								<input type="hidden" name="attr_blankname9" class="hide-on-null" value=""><div class="fill-the-blank">
 									<input type="hidden" name="attr_checkbox9" value="no" class="hide-on-no hide-on-null"><span><input type="checkbox" name="attr_blankbox9" value="marked" class="checkboxer"><span class="checkboxed"></span></span>
-									<span class="bold" name="attr_blankname9"></span></b>:
+									<span class="bold" name="attr_blankname9"></span>:
 									<input type="text" name="attr_blank9" class="fillme">
 									<input type="hidden" name="attr_blanksuggestions9" class="hide-on-null" value=""><div class="suggestions examples-list">
 										<span name="attr_blanksuggestions9"></span>
 									</div>
 								</div>
 							</div> <!-- /move-long -->
-							<div class="move-extras">
-								<input type="hidden" name="attr_pbdefault" value="no" class="show-on-yes-combo">
-								<input type="checkbox" name="attr_taken" value="yes" class="show-on-unchecked-combo">
-								<div class="bold indented"><span data-i18n="This move is marked by default for its playbook."></span></div>
-								<input type="hidden" name="attr_pbother" value="yes" class="hide-on-yes other-playbook">
-								<div class="bold indented"><span data-i18n="This move is not available for other playbooks."></span></div>
-							</div>
 							<input type="hidden" name="attr_modifier-marked" value="">
 							<input type="hidden" name="attr_modifierid" value="">
 							<input type="hidden" name="attr_condition-marked" value="no" class="hide-on-no">
@@ -3529,10 +3411,303 @@
 								<span class="bold" name="attr_modifier-marked"></span>
 								<span class="bold" data-i18n="Click to toggle."></span>
 							</button></div>
+							<div class="indented infobar">
+								<input type="hidden" name="attr_long" value="no" class="show-on-yes"><div class="expand-toggle-container"><input type="checkbox" name="attr_long-expand" value="yes" class="expand-toggle" checked><span class="expand-toggle-indicator"></span> <span class="expand-toggle-on">▲<span data-i18n="Show Less"></span></span><span class="expand-toggle-off">▼<span data-i18n="Show More"></span></span></div>
+								<input type="hidden" name="attr_pbdefault" value="no" class="show-on-yes-combo">
+								<input type="checkbox" name="attr_taken" value="yes" class="show-on-unchecked-combo">
+								<span>
+									<span class="pictos show-following-on-hover">2</span>
+									<span data-i18n="This move is marked by default for its playbook."></span>
+								</span>
+								<input type="hidden" name="attr_pbother" value="yes" class="hide-on-yes other-playbook">
+								<span class="pictos show-following-on-hover">!</span> <span data-i18n="This move is not available for other playbooks."></span>
+							</div>
 						</div></div> <!-- /move /move-compressor -->
 					</div> <!-- /move-whole -->
 				</fieldset>
 			</div>
+			<!-- Here ends the monster all-the-moves beast. Too bad we have to replicate it for the basics! -->
+
+			<!-- Here begins the BASIC MOVES section -->
+
+		<input type="checkbox" name="attr_movefilter-hidebasic" value="yes" class="hide-on-checked">
+		<div class="allbasic">
+			<div class="section-head">
+				<span data-i18n="Basic Moves"></span>
+			</div>
+			<div class="nocontrol moves-all">
+				<fieldset class="repeating_basic">
+					<input type="hidden" name="attr_subheader" value="" class="hide-on-null">
+					<div>
+						<input type="hidden" name="attr_show" value="no" class="hide-on-no">
+						<div class="section-subhead"><span name="attr_subheader"></span></div>
+					</div>
+					<input type="hidden" name="attr_instructions" value="" class="hide-on-null">
+					<div>
+						<input type="hidden" name="attr_show" value="no" class="hide-on-no">
+						<div><i><span name="attr_instructions"></span></i></div>
+					</div>
+					<input type="hidden" name="attr_tracklabel" value="" class="hide-on-null">
+					<div class="track">
+						<input type="hidden" name="attr_show" value="no" class="hide-on-no">
+						<div> <span name="attr_tracklabel" class="bold tracker-label"></span>
+							<input type="number" name="attr_tracker" max="4" min="0" value="1" class="fillme tracker-number">
+							<input type="hidden" name="attr_tracker" class="tracker"> <span class="tracker-bar"></span> </div>
+					</div>
+					<input type="hidden" name="attr_body" value="">
+					<input type="hidden" name="attr_pbother" value="yes">
+					<input type="hidden" name="attr_pbdefault" value="no">
+					<input type="hidden" name="attr_name" value="" class="hide-on-null">
+					<div class="move-whole">
+						<div class="move-compressor">
+							<input type="hidden" name="attr_show" value="no" class="hide-on-no">
+							<div class="move">
+								<div class="right-buttons">
+									<input type="hidden" name="attr_rollconfig" value="" class="hide-on-null">
+									<button type="roll" class="sheet-2d6-button-nofloat" value="&{template:2d6-roll} {{character=@{character_name}}} {{title=@{name}}} {{roll=[[2d6+?{@{name} using @{rollconfig}}+@{rollprompt}]]}}" name="roll_2d6"></button>
+									<button type="roll" class="sharemove" style="margin-top: -1px;" value="&{template:sharemove} {{name=@{name}}} {{playbook=@{playbook}}} {{body=@{body}}} @{shareoptions} }"></button>
+									<input type="hidden" name="attr_shareoptions" value=""> </div>
+								<span name="attr_name" class="bold"></span>: <span name="attr_body"></span>
+								<input type="hidden" name="attr_long" value="yes" class="show-on-yes-combo">
+								<input type="checkbox" name="attr_long-expand" value="yes" class="show-on-checked-combo" checked>
+								<div class="move-long">
+									<input type="hidden" name="attr_preamble" class="hide-on-null" value="">
+									<div class="indented"><span name="attr_preamble"></span></div>
+									<input type="hidden" name="attr_bullet0" class="hide-on-null" value="">
+									<div class="result">
+										<ul>
+											<input type="hidden" name="attr_bullet0" class="hide-on-null" value="">
+											<li> <span name="attr_bullet0"></span> </li>
+											<input type="hidden" name="attr_bullet1" class="hide-on-null" value="">
+											<li> <span name="attr_bullet1"></span> </li>
+											<input type="hidden" name="attr_bullet2" class="hide-on-null" value="">
+											<li> <span name="attr_bullet2"></span> </li>
+											<input type="hidden" name="attr_bullet3" class="hide-on-null" value="">
+											<li> <span name="attr_bullet3"></span> </li>
+											<input type="hidden" name="attr_bullet4" class="hide-on-null" value="">
+											<li> <span name="attr_bullet4"></span> </li>
+										</ul>
+									</div>
+									<input type="hidden" name="attr_hit" class="hide-on-null" value="">
+									<div class="result hit"> <span name="attr_hit"></span>
+										<input type="hidden" name="attr_hitbullet0" class="hide-on-null" value="">
+										<div>
+											<ul>
+												<input type="hidden" name="attr_hitbullet0" class="hide-on-null" value="">
+												<li> <span name="attr_hitbullet0"></span> </li>
+												<input type="hidden" name="attr_hitbullet1" class="hide-on-null" value="">
+												<li> <span name="attr_hitbullet1"></span> </li>
+												<input type="hidden" name="attr_hitbullet2" class="hide-on-null" value="">
+												<li> <span name="attr_hitbullet2"></span> </li>
+												<input type="hidden" name="attr_hitbullet3" class="hide-on-null" value="">
+												<li> <span name="attr_hitbullet3"></span> </li>
+												<input type="hidden" name="attr_hitbullet4" class="hide-on-null" value="">
+												<li> <span name="attr_hitbullet4"></span> </li>
+											</ul>
+										</div>
+									</div>
+									<input type="hidden" name="attr_mixed" class="hide-on-null" value="">
+									<div class="result mixed"> <span name="attr_mixed"></span>
+										<input type="hidden" name="attr_mixedbullet0" class="hide-on-null" value="">
+										<div>
+											<ul>
+												<input type="hidden" name="attr_mixedbullet0" class="hide-on-null" value="">
+												<li> <span name="attr_mixedbullet0"></span> </li>
+												<input type="hidden" name="attr_mixedbullet1" class="hide-on-null" value="">
+												<li> <span name="attr_mixedbullet1"></span> </li>
+												<input type="hidden" name="attr_mixedbullet2" class="hide-on-null" value="">
+												<li> <span name="attr_mixedbullet2"></span> </li>
+												<input type="hidden" name="attr_mixedbullet3" class="hide-on-null" value="">
+												<li> <span name="attr_mixedbullet3"></span> </li>
+												<input type="hidden" name="attr_mixedbullet4" class="hide-on-null" value="">
+												<li> <span name="attr_mixedbullet4"></span> </li>
+											</ul>
+										</div>
+									</div>
+									<input type="hidden" name="attr_miss" class="hide-on-null" value="">
+									<div class="result miss"> <span name="attr_miss"></span>
+										<input type="hidden" name="attr_missbullet0" class="hide-on-null" value="">
+										<div>
+											<ul>
+												<input type="hidden" name="attr_missbullet0" class="hide-on-null" value="">
+												<li> <span name="attr_missbullet0"></span> </li>
+												<input type="hidden" name="attr_missbullet1" class="hide-on-null" value="">
+												<li> <span name="attr_missbullet1"></span> </li>
+												<input type="hidden" name="attr_missbullet2" class="hide-on-null" value="">
+												<li> <span name="attr_missbullet2"></span> </li>
+												<input type="hidden" name="attr_missbullet3" class="hide-on-null" value="">
+												<li> <span name="attr_missbullet3"></span> </li>
+												<input type="hidden" name="attr_missbullet4" class="hide-on-null" value="">
+												<li> <span name="attr_missbullet4"></span> </li>
+											</ul>
+										</div>
+									</div>
+									<input type="hidden" name="attr_alternative" class="hide-on-null" value="">
+									<div class="indented"><span name="attr_alternative"></span></div>
+									<input type="hidden" name="attr_altbullet0" class="hide-on-null" value="">
+									<div class="result">
+										<ul>
+											<input type="hidden" name="attr_altbullet0" class="hide-on-null" value="">
+											<li> <span name="attr_altbullet0"></span> </li>
+											<input type="hidden" name="attr_altbullet1" class="hide-on-null" value="">
+											<li> <span name="attr_altbullet1"></span> </li>
+											<input type="hidden" name="attr_altbullet2" class="hide-on-null" value="">
+											<li> <span name="attr_altbullet2"></span> </li>
+											<input type="hidden" name="attr_altbullet3" class="hide-on-null" value="">
+											<li> <span name="attr_altbullet3"></span> </li>
+											<input type="hidden" name="attr_altbullet4" class="hide-on-null" value="">
+											<li> <span name="attr_altbullet4"></span> </li>
+										</ul>
+									</div>
+									<input type="hidden" name="attr_althit" class="hide-on-null" value="">
+									<div class="result hit"> <span name="attr_althit"></span>
+										<input type="hidden" name="attr_althitbullet0" class="hide-on-null" value="">
+										<div>
+											<ul>
+												<input type="hidden" name="attr_althitbullet0" class="hide-on-null" value="">
+												<li> <span name="attr_althitbullet0"></span> </li>
+												<input type="hidden" name="attr_althitbullet1" class="hide-on-null" value="">
+												<li> <span name="attr_althitbullet1"></span> </li>
+												<input type="hidden" name="attr_althitbullet2" class="hide-on-null" value="">
+												<li> <span name="attr_althitbullet2"></span> </li>
+												<input type="hidden" name="attr_althitbullet3" class="hide-on-null" value="">
+												<li> <span name="attr_althitbullet3"></span> </li>
+												<input type="hidden" name="attr_althitbullet4" class="hide-on-null" value="">
+												<li> <span name="attr_althitbullet4"></span> </li>
+											</ul>
+										</div>
+									</div>
+									<input type="hidden" name="attr_altmixed" class="hide-on-null" value="">
+									<div class="result mixed"> <span name="attr_altmixed"></span>
+										<input type="hidden" name="attr_altmixedbullet0" class="hide-on-null" value="">
+										<div>
+											<ul>
+												<input type="hidden" name="attr_altmixedbullet0" class="hide-on-null" value="">
+												<li> <span name="attr_altmixedbullet0"></span> </li>
+												<input type="hidden" name="attr_altmixedbullet1" class="hide-on-null" value="">
+												<li> <span name="attr_altmixedbullet1"></span> </li>
+												<input type="hidden" name="attr_altmixedbullet2" class="hide-on-null" value="">
+												<li> <span name="attr_altmixedbullet2"></span> </li>
+												<input type="hidden" name="attr_altmixedbullet3" class="hide-on-null" value="">
+												<li> <span name="attr_altmixedbullet3"></span> </li>
+												<input type="hidden" name="attr_altmixedbullet4" class="hide-on-null" value="">
+												<li> <span name="attr_altmixedbullet4"></span> </li>
+											</ul>
+										</div>
+									</div>
+									<input type="hidden" name="attr_altmiss" class="hide-on-null" value="">
+									<div class="result miss"> <span name="attr_altmiss"></span>
+										<input type="hidden" name="attr_altmissbullet0" class="hide-on-null" value="">
+										<div>
+											<ul>
+												<input type="hidden" name="attr_altmissbullet0" class="hide-on-null" value="">
+												<li> <span name="attr_altmissbullet0"></span> </li>
+												<input type="hidden" name="attr_altmissbullet1" class="hide-on-null" value="">
+												<li> <span name="attr_altmissbullet1"></span> </li>
+												<input type="hidden" name="attr_altmissbullet2" class="hide-on-null" value="">
+												<li> <span name="attr_altmissbullet2"></span> </li>
+												<input type="hidden" name="attr_altmissbullet3" class="hide-on-null" value="">
+												<li> <span name="attr_altmissbullet3"></span> </li>
+												<input type="hidden" name="attr_altmissbullet4" class="hide-on-null" value="">
+												<li> <span name="attr_altmissbullet4"></span> </li>
+											</ul>
+										</div>
+									</div>
+									<input type="hidden" name="attr_end" class="hide-on-null" value="">
+									<div class="indented"><span name="attr_end"></span></div>
+									<input type="hidden" name="attr_blankname0" class="hide-on-null" value="">
+									<div class="fill-the-blank">
+										<input type="hidden" name="attr_checkbox0" value="no" class="hide-on-no hide-on-null"><span><input type="checkbox" name="attr_blankbox0" value="marked" class="checkboxer"><span class="checkboxed"></span></span> <span class="bold" name="attr_blankname0"></span>:
+										<input type="text" name="attr_blank0" class="fillme">
+										<input type="hidden" name="attr_blanksuggestions0" class="hide-on-null" value="">
+										<div class="suggestions examples-list"> <span name="attr_blanksuggestions0"></span> </div>
+									</div>
+									<input type="hidden" name="attr_blankname1" class="hide-on-null" value="">
+									<div class="fill-the-blank">
+										<input type="hidden" name="attr_checkbox1" value="no" class="hide-on-no hide-on-null"><span><input type="checkbox" name="attr_blankbox1" value="marked" class="checkboxer"><span class="checkboxed"></span></span> <span class="bold" name="attr_blankname1"></span>:
+										<input type="text" name="attr_blank1" class="fillme">
+										<input type="hidden" name="attr_blanksuggestions1" class="hide-on-null" value="">
+										<div class="suggestions examples-list"> <span name="attr_blanksuggestions1"></span> </div>
+									</div>
+									<input type="hidden" name="attr_blankname2" class="hide-on-null" value="">
+									<div class="fill-the-blank">
+										<input type="hidden" name="attr_checkbox2" value="no" class="hide-on-no hide-on-null"><span><input type="checkbox" name="attr_blankbox2" value="marked" class="checkboxer"><span class="checkboxed"></span></span> <span class="bold" name="attr_blankname2"></span>:
+										<input type="text" name="attr_blank2" class="fillme">
+										<input type="hidden" name="attr_blanksuggestions2" class="hide-on-null" value="">
+										<div class="suggestions examples-list"> <span name="attr_blanksuggestions2"></span> </div>
+									</div>
+									<input type="hidden" name="attr_blankname3" class="hide-on-null" value="">
+									<div class="fill-the-blank">
+										<input type="hidden" name="attr_checkbox3" value="no" class="hide-on-no hide-on-null"><span><input type="checkbox" name="attr_blankbox3" value="marked" class="checkboxer"><span class="checkboxed"></span></span> <span class="bold" name="attr_blankname3"></span>:
+										<input type="text" name="attr_blank3" class="fillme">
+										<input type="hidden" name="attr_blanksuggestions3" class="hide-on-null" value="">
+										<div class="suggestions examples-list"> <span name="attr_blanksuggestions3"></span> </div>
+									</div>
+									<input type="hidden" name="attr_blankname4" class="hide-on-null" value="">
+									<div class="fill-the-blank">
+										<input type="hidden" name="attr_checkbox4" value="no" class="hide-on-no hide-on-null"><span><input type="checkbox" name="attr_blankbox4" value="marked" class="checkboxer"><span class="checkboxed"></span></span> <span class="bold" name="attr_blankname4"></span>:
+										<input type="text" name="attr_blank4" class="fillme">
+										<input type="hidden" name="attr_blanksuggestions4" class="hide-on-null" value="">
+										<div class="suggestions examples-list"> <span name="attr_blanksuggestions4"></span> </div>
+									</div>
+									<input type="hidden" name="attr_blankname5" class="hide-on-null" value="">
+									<div class="fill-the-blank">
+										<input type="hidden" name="attr_checkbox5" value="no" class="hide-on-no hide-on-null"><span><input type="checkbox" name="attr_blankbox5" value="marked" class="checkboxer"><span class="checkboxed"></span></span> <span class="bold" name="attr_blankname5"></span>:
+										<input type="text" name="attr_blank5" class="fillme">
+										<input type="hidden" name="attr_blanksuggestions5" class="hide-on-null" value="">
+										<div class="suggestions examples-list"> <span name="attr_blanksuggestions5"></span> </div>
+									</div>
+									<input type="hidden" name="attr_blankname6" class="hide-on-null" value="">
+									<div class="fill-the-blank">
+										<input type="hidden" name="attr_checkbox6" value="no" class="hide-on-no hide-on-null"><span><input type="checkbox" name="attr_blankbox6" value="marked" class="checkboxer"><span class="checkboxed"></span></span> <span class="bold" name="attr_blankname6"></span>:
+										<input type="text" name="attr_blank6" class="fillme">
+										<input type="hidden" name="attr_blanksuggestions6" class="hide-on-null" value="">
+										<div class="suggestions examples-list"> <span name="attr_blanksuggestions6"></span> </div>
+									</div>
+									<input type="hidden" name="attr_blankname7" class="hide-on-null" value="">
+									<div class="fill-the-blank">
+										<input type="hidden" name="attr_checkbox7" value="no" class="hide-on-no hide-on-null"><span><input type="checkbox" name="attr_blankbox7" value="marked" class="checkboxer"><span class="checkboxed"></span></span> <span class="bold" name="attr_blankname7"></span>:
+										<input type="text" name="attr_blank7" class="fillme">
+										<input type="hidden" name="attr_blanksuggestions7" class="hide-on-null" value="">
+										<div class="suggestions examples-list"> <span name="attr_blanksuggestions7"></span> </div>
+									</div>
+									<input type="hidden" name="attr_blankname8" class="hide-on-null" value="">
+									<div class="fill-the-blank">
+										<input type="hidden" name="attr_checkbox8" value="no" class="hide-on-no hide-on-null"><span><input type="checkbox" name="attr_blankbox8" value="marked" class="checkboxer"><span class="checkboxed"></span></span> <span class="bold" name="attr_blankname8"></span>:
+										<input type="text" name="attr_blank8" class="fillme">
+										<input type="hidden" name="attr_blanksuggestions8" class="hide-on-null" value="">
+										<div class="suggestions examples-list"> <span name="attr_blanksuggestions8"></span> </div>
+									</div>
+									<input type="hidden" name="attr_blankname9" class="hide-on-null" value="">
+									<div class="fill-the-blank">
+										<input type="hidden" name="attr_checkbox9" value="no" class="hide-on-no hide-on-null"><span><input type="checkbox" name="attr_blankbox9" value="marked" class="checkboxer"><span class="checkboxed"></span></span> <span class="bold" name="attr_blankname9"></span>:
+										<input type="text" name="attr_blank9" class="fillme">
+										<input type="hidden" name="attr_blanksuggestions9" class="hide-on-null" value="">
+										<div class="suggestions examples-list"> <span name="attr_blanksuggestions9"></span> </div>
+									</div>
+								</div>
+								<!-- /move-long -->
+								<input type="hidden" name="attr_modifier-marked" value="">
+								<input type="hidden" name="attr_modifierid" value="">
+								<input type="hidden" name="attr_condition-marked" value="no" class="hide-on-no">
+								<div class="indented">
+									<button type="action" name="act_mark-modifier" class="buttonless"> <span class="pictos">!</span><span class="bold" data-i18n="Condition is active."></span> <span class="bold" name="attr_modifier-marked"></span> <span class="bold" data-i18n="Click to toggle."></span> </button>
+								</div>
+								<div class="indented infobar">
+									<input type="hidden" name="attr_long" value="no" class="show-on-yes">
+									<div class="expand-toggle-container">
+										<input type="checkbox" name="attr_long-expand" value="yes" class="expand-toggle" checked><span class="expand-toggle-indicator"></span> <span class="expand-toggle-on">▲<span data-i18n="Show Less"></span></span><span class="expand-toggle-off">▼<span data-i18n="Show More"></span></span>
+									</div>
+							</div>
+						</div>
+						<!-- /move /move-compressor -->
+					</div>
+					<!-- /move-whole -->
+				</fieldset>
+			</div>
+		</div> <!-- /allbasic -->
+
+			<!-- Here ends the BASIC MOVES section -->
 
 			<div>
 				<div class="section-head">
@@ -3670,3 +3845,170 @@
 	</div> <!-- div containing the part of the sheet that disappears during initialization -->
 
 </div> <!-- /class=whole (as in, the whole sheet) -->
+
+<rolltemplate class="sheet-rolltemplate-sharemove">
+	<div class="sheet-topline">
+		{{#name}}**{{name}}**{{/name}} <!--{{#playbook}}**({{playbook}}){{/playbook}}-->
+	</div>
+	<div class="sheet-move">
+		{{#body}}<div>{{body}}</div>{{/body}}
+		{{#preamble}}<div class="sheet-indented">{{preamble}}</div>{{/preamble}}
+		{{#bullet0}}
+			<ul>
+				<li>{{bullet0}}</li>
+				{{#bullet1}}<li>{{bullet1}}</li>{{/bullet1}}
+				{{#bullet2}}<li>{{bullet2}}</li>{{/bullet2}}
+				{{#bullet3}}<li>{{bullet3}}</li>{{/bullet3}}
+				{{#bullet4}}<li>{{bullet4}}</li>{{/bullet4}}
+			</ul>
+		{{/bullet0}}
+		{{#hit}}
+			<div class="sheet-result">
+				**10+:** {{hit}}
+				{{#hitbullet0}}
+					<ul>
+						<li>{{hitbullet0}}</li>
+						{{#hitbullet1}}<li>{{hitbullet1}}</li>{{/hitbullet1}}
+						{{#hitbullet2}}<li>{{hitbullet2}}</li>{{/hitbullet2}}
+						{{#hitbullet3}}<li>{{hitbullet3}}</li>{{/hitbullet3}}
+						{{#hitbullet4}}<li>{{hitbullet4}}</li>{{/hitbullet4}}
+					</ul>
+				{{/hitbullet0}}
+			</div>
+		{{/hit}}
+		{{#mixed}}
+			<div class="sheet-result">
+				**7-9:** {{mixed}}
+				{{#mixedbullet0}}
+					<ul>
+						<li>{{mixedbullet0}}</li>
+						{{#mixedbullet1}}<li>{{mixedbullet1}}</li>{{/mixedbullet1}}
+						{{#mixedbullet2}}<li>{{mixedbullet2}}</li>{{/mixedbullet2}}
+						{{#mixedbullet3}}<li>{{mixedbullet3}}</li>{{/mixedbullet3}}
+						{{#mixedbullet4}}<li>{{mixedbullet4}}</li>{{/mixedbullet4}}
+					</ul>
+				{{/mixedbullet0}}
+			</div>
+		{{/mixed}}
+		{{#miss}}
+			<div class="sheet-result">
+				**6-:** {{miss}}
+				{{#missbullet0}}
+					<ul>
+						<li>{{missbullet0}}</li>
+						{{#missbullet1}}<li>{{missbullet1}}</li>{{/missbullet1}}
+						{{#missbullet2}}<li>{{missbullet2}}</li>{{/missbullet2}}
+						{{#missbullet3}}<li>{{missbullet3}}</li>{{/missbullet3}}
+						{{#missbullet4}}<li>{{missbullet4}}</li>{{/missbullet4}}
+					</ul>
+				{{/missbullet0}}
+			</div>
+		{{/miss}}
+		{{#alternative}}<div class="sheet-indented">{{alternative}}</div>{{/alternative}}
+		{{#altbullet0}}
+			<ul>
+				<li>{{altbullet0}}</li>
+				{{#altbullet1}}<li>{{altbullet1}}</li>{{/altbullet1}}
+				{{#altbullet2}}<li>{{altbullet2}}</li>{{/altbullet2}}
+				{{#altbullet3}}<li>{{altbullet3}}</li>{{/altbullet3}}
+				{{#altbullet4}}<li>{{altbullet4}}</li>{{/altbullet4}}
+			</ul>
+		{{/altbullet0}}
+		{{#althit}}
+			<div class="sheet-result">
+				**10+:** {{althit}}
+				{{#althitbullet0}}
+					<ul>
+						<li>{{althitbullet0}}</li>
+						{{#althitbullet1}}<li>{{althitbullet1}}</li>{{/althitbullet1}}
+						{{#althitbullet2}}<li>{{althitbullet2}}</li>{{/althitbullet2}}
+						{{#althitbullet3}}<li>{{althitbullet3}}</li>{{/althitbullet3}}
+						{{#althitbullet4}}<li>{{althitbullet4}}</li>{{/althitbullet4}}
+					</ul>
+				{{/althitbullet0}}
+			</div>
+		{{/althit}}
+		{{#altmixed}}
+			<div class="sheet-result">
+				**7-9:** {{altmixed}}
+				{{#altmixedbullet0}}
+					<ul>
+						<li>{{altmixedbullet0}}</li>
+						{{#altmixedbullet1}}<li>{{altmixedbullet1}}</li>{{/altmixedbullet1}}
+						{{#altmixedbullet2}}<li>{{altmixedbullet2}}</li>{{/altmixedbullet2}}
+						{{#altmixedbullet3}}<li>{{altmixedbullet3}}</li>{{/altmixedbullet3}}
+						{{#altmixedbullet4}}<li>{{altmixedbullet4}}</li>{{/altmixedbullet4}}
+					</ul>
+				{{/altmixedbullet0}}
+			</div>
+		{{/altmixed}}
+		{{#altmiss}}
+			<div class="sheet-result">
+				**6-:** {{altmiss}}
+				{{#altmissbullet0}}
+					<ul>
+						<li>{{altmissbullet0}}</li>
+						{{#altmissbullet1}}<li>{{altmissbullet1}}</li>{{/altmissbullet1}}
+						{{#altmissbullet2}}<li>{{altmissbullet2}}</li>{{/altmissbullet2}}
+						{{#altmissbullet3}}<li>{{altmissbullet3}}</li>{{/altmissbullet3}}
+						{{#altmissbullet4}}<li>{{altmissbullet4}}</li>{{/altmissbullet4}}
+					</ul>
+				{{/altmissbullet0}}
+			</div>
+		{{/altmiss}}
+		{{#end}}<div class="sheet-indented">{{end}}</div>{{/end}}
+		{{#blankname0}}<div class="sheet-space-above">**{{blankname0}}**: {{#blank0}}{{blank0}}{{/blank0}}</div>{{/blankname0}}
+		{{#blankname1}}<div class="sheet-space-above">**{{blankname1}}**: {{#blank1}}{{blank1}}{{/blank1}}</div>{{/blankname1}}
+		{{#blankname2}}<div class="sheet-space-above">**{{blankname2}}**: {{#blank2}}{{blank2}}{{/blank2}}</div>{{/blankname2}}
+		{{#blankname3}}<div class="sheet-space-above">**{{blankname3}}**: {{#blank3}}{{blank3}}{{/blank3}}</div>{{/blankname3}}
+		{{#blankname4}}<div class="sheet-space-above">**{{blankname4}}**: {{#blank4}}{{blank4}}{{/blank4}}</div>{{/blankname4}}
+		{{#blankname5}}<div class="sheet-space-above">**{{blankname5}}**: {{#blank5}}{{blank5}}{{/blank5}}</div>{{/blankname5}}
+		{{#blankname6}}<div class="sheet-space-above">**{{blankname6}}**: {{#blank6}}{{blank6}}{{/blank6}}</div>{{/blankname6}}
+		{{#blankname7}}<div class="sheet-space-above">**{{blankname7}}**: {{#blank7}}{{blank7}}{{/blank7}}</div>{{/blankname7}}
+		{{#blankname8}}<div class="sheet-space-above">**{{blankname8}}**: {{#blank8}}{{blank8}}{{/blank8}}</div>{{/blankname8}}
+		{{#blankname9}}<div class="sheet-space-above">**{{blankname9}}**: {{#blank9}}{{blank9}}{{/blank9}}</div>{{/blankname9}}
+	</div>
+</rolltemplate>
+
+<rolltemplate class="sheet-rolltemplate-2d6-roll">
+	<div class="sheet-topline">
+		{{#character}}**{{character}}**:{{/character}}
+		{{#title}}**{{title}}**{{/title}}
+	</div>
+	<div class="sheet-dice">
+			{{#rollGreater() roll 9}}
+		<div class="sheet-dieroll-hit">
+				<div class="sheet-dieroll-roll">{{roll}}</div>
+		</div>
+		<div class="sheet-dieroll-title">
+			<span data-i18n="Up Beat"></span>
+		</div>
+			{{/rollGreater() roll 9}}
+			{{#rollBetween() roll 7 9}}
+		<div class="sheet-dieroll-mixed">
+				<div class="sheet-dieroll-roll">{{roll}}</div>
+		</div>
+		<div class="sheet-dieroll-title">
+			<span data-i18n="Mixed Beat"></span>
+		</div>
+			{{/rollBetween() roll 7 9}}
+			{{#rollLess() roll 7}}
+		<div class="sheet-dieroll-miss">
+				<div class="sheet-dieroll-roll">{{roll}}</div>
+		</div>
+		<div class="sheet-dieroll-title">
+			<span data-i18n="Down Beat"></span>
+		</div>
+		<div class="sheet-clearance sheet-dieroll-reminder">
+			<span data-i18n="Make sure to mark experience!"></span>
+		</div>
+			{{/rollLess() roll 7}}
+		<div class="sheet-clearance"></div>
+	</div>
+</rolltemplate>
+
+<rolltemplate class="sheet-datadumper">
+	{{#allprops()}}
+		<div>**{{key}}:** {{value}} </div>
+	{{/allprops()}}
+</rolltemplate>
