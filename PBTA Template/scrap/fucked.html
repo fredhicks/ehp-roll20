@@ -1,4 +1,5 @@
 <script type="text/javascript">
+// <script type="text/worker">
 
 	// Code testing reveals that the generateRowID function does not generate a unique ID 100% of the time when adding many rows at once, so we've got to 
 
@@ -6,18 +7,31 @@
 
 	var logs = 0;
 
-	var prefixedLogging = false;
+	var prefixedLogging = true;
 
 	var log = function(t,c) {
-		logs++;
+		logs = Date.now();
 		if ( prefixedLogging ) {
 			if ( typeof c === "undefined" ) {
-				console.log(`${logs}:`);
+				console.log(`${logs}: ${t}`);
 			} else {
-				console.log(`${logs} - ${c}:`)
+				console.log(`${logs}: [${c}] ${t}`);
 			}
+		} else {
+			console.log(t);
 		}
-		console.log(t);
+	};
+	
+	var setStatus = function(t) {
+		if ( typeof t !== "undefined" && t !== "" ) {
+			getAttrs(["status-message"],function(s) {
+				var m = s["status-message"];
+				setAttrs( { "status-message": `${m} ${t}` } );
+			});
+			log(t);
+		} else {
+			setAttrs( { "status-message": "" } );
+		}
 	};
 	
 	var generateActuallyUniqueRowID = function() {
@@ -32,14 +46,18 @@
 	};
 	
 	var gTBK = function(t) {
-		var result = getTranslationByKey(t);
-		// log(`${t} -> ${result}`,"translation")
-		if ( result === false ) {
-			log("could not translate: " + t);
-			return "UNTRANSLATED ["+t+"]";
+		if ( typeof t === "undefined" ) {
+			return "";
 		} else {
-			if ( result === "" ) { return ""; }
-			else { return result; }
+			var result = getTranslationByKey(t);
+			// log(`${t} -> ${result}`,"translation")
+			if ( result === false ) {
+				log("could not translate: " + t);
+				return "UNTRANSLATED ["+t+"]";
+			} else {
+				if ( result === "" ) { return ""; }
+				else { return result; }
+			}
 		}
 	};
 
@@ -305,9 +323,16 @@
 		}
 	];
 
+	var moveoptions = ["alternative", "altbullet0", "altbullet1", "altbullet2", "altbullet3", "altbullet4", "althit", "althitbullet0", "althitbullet1", "althitbullet2", "althitbullet3", "althitbullet4", "altmiss", "altmissbullet0", "altmissbullet1", "altmissbullet2", "altmissbullet3", "altmissbullet4", "altmixed", "altmixedbullet0", "altmixedbullet1", "altmixedbullet2", "altmixedbullet3", "altmixedbullet4", "blankname0", "blankname1", "blankname2", "blankname3", "blankname4", "bullet0", "bullet1", "bullet2", "bullet3", "bullet4", "end", "hit", "hitbullet0", "hitbullet1", "hitbullet2", "hitbullet3", "hitbullet4", "miss", "missbullet0", "missbullet1", "missbullet2", "missbullet3", "missbullet4", "mixed", "mixedbullet0", "mixedbullet1", "mixedbullet2", "mixedbullet3", "mixedbullet4", "preamble"]; // special cases: "blank0", "blank1", "blank2", "blank3", "blank4"
+
+	// =============================================================================
+
+	// BIG playbooks data set
+	
 	var playbooks = {
 		"beast": { 
 			name: "The Beast",
+			bio: "The Beast follows their truth and their passions, which puts them in conflict with civilization and civilized norms. Unless they give up what makes them special and powerful, they cannot make themself acceptable to that civilized society. Their central conflict is living their truth versus fitting in with a dominant social order. Example Archetypes: Ranger Between Worlds, Bitten, Raised by Beasts",
 			look: {
 				demeanor: "wild demeanor, hungry demeanor, piercing demeanor",
 				clothes: "torn clothes, practical clothes, chitinous clothes, raider's clothes",
@@ -317,8 +342,34 @@
 				{ daring: 1, grace: 0, heart: 1, wit: -1, spirit: 0 },
 				{ daring: 1, grace: 1, heart: -1, wit: 0, spirit: 0 }
 			],
-			movesinstructions: "(start with the move marked and choose two more)",
 			moves: [
+				{
+					subheader: "Feral",
+					pbdefault: "yes",
+					pbother: "no"
+				},
+				{
+					name: "Feral",
+					tracklabel: "Feral",
+					body: "You may walk in civilized circles, but sooner or later your feral truth will come to the fore. Your Feral score starts at 1. If it hits 4, you can't hold back the beast any longer and you Transform. If your Feral drops to 0, you lose access to all your Beast playbook moves until it increases again. On the plus side, you're fitting in. You blend. You've assimilated.",
+					preamble: "Increase Feral when:",
+					bullets: [
+						"You express yourself in a shocking way through your appearance",
+						"You display intense emotion that society wants you to conceal"
+					],
+					alternative: "Decrease Feral when:",
+					altbullets: [
+						"You feel that your bestial nature has hurt someone you care about",
+						"You go along with an uncomfortable interaction to fit in"
+					],
+					pbdefault: "yes",
+					pbother: "no"
+				},
+				{
+					subheader: "Playbook Moves",
+					instructions: "(start with the move marked and choose two more)",
+					pbdefault: "yes"
+				},
 				{
 					name: "Transform",
 					body: "You have a bestial form, which you can assume at will and must assume whenever your Feral hits 4. When you do, tell everyone what the beast in you looks like, increase your Feral to 4 if it’s not there already, and roll +Daring:",
@@ -333,7 +384,8 @@
 						"You can move in ways no ordinary person could"
 					],
 					end: "You revert to your usual form when your Feral drops below 4. While transformed, you may mark a Condition to avoid reducing your Feral, as often as you like.",
-					pbdefault: "yes"
+					pbdefault: "yes",
+					pbother: "no"
 				},
 				{
 					name: "Big Dyke Energy",
@@ -349,7 +401,8 @@
 				},
 				{
 					name: "Tenacious Purpose",
-					body: "When you commit yourself to a specific goal, you may ask the GM once per scene how you could advance that goal in a way that violates “civilized” norms. Take +1 forward to act on the answer. If you refrain, it counts as an uncomfortable situation that reduces your Feral by 1 and you must mark a Condition."
+					body: "When you commit yourself to a specific goal, you may ask the GM once per scene how you could advance that goal in a way that violates “civilized” norms. Take +1 forward to act on the answer. If you refrain, it counts as an uncomfortable situation that reduces your Feral by 1 and you must mark a Condition.",
+					pbother: "no"
 				},
 				{
 					name: "Tracker",
@@ -357,24 +410,279 @@
 					rolled: "yes",
 					rolldefault: "heart"
 				},
+				{
+					subheader: "Truths of Heart and Blade",
+					pbdefault: "yes",
+					pbother: "no"
+				},
+				{
+					name: "Smitten Kitten",
+					body: "When you become Smitten with someone, say why, give them a String, and answer this question:",
+					bullets: [
+						"What have you done that you are sure they view as inappropriate?"
+					],
+					pbdefault: "yes",
+					pbother: "no"
+				},
+				{
+					name: "The Bloody Truth",
+					body: "When you Figure Out a Person in physical conflict, you may additionally ask one of these questions, even on a 6-:",
+					bullets: [
+						"What awakens the beast inside you?", "How could I get you to kiss me?"
+					],
+					pbdefault: "yes",
+					pbother: "no"
+				}
 			]
 		},
 		"chosen": { 
 			name: "The Chosen",
+			bio: "The Chosen playbook revolves around special status, relationships across social strata, and the crushing expectations of fate, family, or the adoring public. Their central conflict is inner truth versus crushing social expectations. Example Archetypes: Magical Princess, Pop Idol, Chosen One",
 			look: {
-				demeanor: "",
-				clothes: "",
-				sword: ""
-			}
+				demeanor: "Stoic demeanor, benevolent demeanor, authoritative demeanor",
+				clothes: "Fancy clothes, holy vestments, clothes denoting status",
+				sword: "A bejeweled sword, an ancestral sword, a holy sword"
+			},
+			startstats: [
+				{ daring: -1, grace: 1, heart: 1, wit: 0, spirit: 0 },
+				{ daring: 0, grace: 1, heart: 0, wit: 1, spirit: -1 }
+			],
+			moves: [
+				{
+					subheader: "Destiny",
+					pbdefault: "yes",
+					pbother: "no"
+				},
+				{
+					name: "Destiny",
+					body: "They keep telling you that you have a Destiny, but it’s not what your heart truly desires. What is it?",
+					preamble: "Destiny Examples:",
+					bullets: [
+						"Marry the Prince of Heteronormia",
+						"Be sacrificed to appease the Horror",
+						"Banish magic from the world",
+						"Melt the heart of the Undying One"
+					],
+					alternative: "Choose two Heroic Aspects and two Tragic Aspects from the following lists. When you act in accordance with one of your Aspects, check it off and take +1 forward. If it’s a Tragic Aspect, also mark XP. When all four Aspects are checked off, describe how your Destiny grows ever nearer, then erase the check marks and begin again.",
+					end: "You may fulfill your Destiny in the course of play, or reject it so firmly that you no longer feel pressure to fulfill it. This deserves a climactic scene either way, and trying to reject your Destiny draws the full wrath of your Aspects and those pressing you to fulfill it. Afterwards, choose a new Destiny, adopt a new playbook, or live happily ever after.",
+					blanks: [
+						{
+							name: "Heroic Aspect",
+							suggestions: "Portents & Prophecies, Spiritual Prowess, Heir to a Mystic Power, Prominent Suitors, Save Your World, Soother of Monsters, Help of the Masses, Chosen by a God, Legendary Skill",
+							checkbox: "yes"
+						},
+						{
+							name: "Heroic Aspect",
+							suggestions: "Portents & Prophecies, Spiritual Prowess, Heir to a Mystic Power, Prominent Suitors, Save Your World, Soother of Monsters, Help of the Masses, Chosen by a God, Legendary Skill",
+							checkbox: "yes"
+						},
+						{
+							name: "Tragic Aspect",
+							suggestions: "Love that Cannot Be, End of the Universe, Lose Those You Love, Arch-Nemesis, Bitter Rival, Betrayal, Seduced by Evil, Coveted Destiny, The End of Love Itself",
+							checkbox: "yes"
+						},
+						{
+							name: "Tragic Aspect",
+							suggestions: "Love that Cannot Be, End of the Universe, Lose Those You Love, Arch-Nemesis, Bitter Rival, Betrayal, Seduced by Evil, Coveted Destiny, The End of Love Itself",
+							checkbox: "yes"
+						}
+					],
+					pbdefault: "yes",
+					pbother: "no"
+				},
+				{
+					subheader: "Playbook Moves",
+					pbdefault: "yes",
+					instructions: "(start with the move marked and choose two more)"
+				},
+				{
+					name: "The Fated Day Approaches",
+					body: "Whenever you miss an opportunity to make progress towards your Destiny, choose 1:",
+					bullets: [
+						"Someone with power over you makes an uncomfortable demand in furtherance of your Destiny, backed by a threat",
+						"The PC you care about the most receives bad news or has an accident serious enough to make them Stagger"
+					],
+					end: "The GM will tell you the details, inspired by your Destiny. They may wait until a lull in the action to drop the consequences on you.",
+					pbdefault: "yes",
+					pbother: "no"
+				},
+				{
+					name: "Don’t You Know Who I Am?",
+					body: "When you meet someone who knows you by reputation (you decide), roll +Heart:",
+					hit: "Say two things they’ve heard about you",
+					mixed: "You say one, the GM says one",
+					rolled: "yes",
+					rolldefault: "heart",
+					pbdefault: "no"
+				},
+				{
+					name: "Entourage",
+					body: "You have a group of loyal attendants. Name three of them who accompany you and choose a trait for them: Dangerous, Fanatical, Resourceful, Charming",
+					preamble: "Choose a basic move. Your entourage grants you a +1 on rolls for this move when present. When you would Stagger, you may choose instead for one of your named Entourage to die. If you do, your Entourage gains a String on you.",
+					blanks: [
+						{
+							name: "Member Names"
+						},
+						{
+							name: "Entourage Trait",
+							suggestions: "Dangerous, Fanatical, Resourceful, Charming"
+						},
+						{
+							name: "Basic Move Receiving +1",
+							suggestions: "Fight, Defy Disaster, Entice, Figure Out a Person, Emotional Support, Call on a Toxic Power"
+						}
+					],
+					pbdefault: "no"
+				},
+				{
+					name: "Gossip",
+					body: "When you seek insight about a person by spending some time gossiping with those who know them, roll +Wit:",
+					hit: "You learn a dangerous secret and gain a String on the target. You may also ask a question from the Figure Out a Person move.",
+					mixed: "You may ask a question from the Figure Out a Person move.",
+					end: "Someone you speak to who is dangerous to you may ask a question of you from the same list.",
+					rolled: "yes",
+					rolldefault: "wit",
+					pbdefault: "no"
+				},
+				{
+					name: "Guidance from Above",
+					body: "When you petition a superior for guidance, they give you instructions and useful information. Mark XP or clear a Condition if you do as commanded. They gain a String on you if you do otherwise.",
+					pbdefault: "no"
+				},
+				{
+					name: "Help Me~~!",
+					body: "You’re a magnet for trouble and hunted by those who would use you for their own purposes. Others mark XP when they Defy Disaster that would otherwise befall you. In addition, whenever you’re captured, your captor reveals something they hope to achieve; gain a String on them and mark XP.",
+					pbdefault: "no"
+				},
+				{
+					name: "Know Your Place!",
+					body: "When someone dares insult you and you deliver a scathing retort, roll +Wit",
+					hit: "Word spreads of your sharp wit, take +1 forward, and they choose 1",
+					mixed: "They choose 1",
+					mixedbullets: [
+						"Back down",
+						"Make a fool of themself",
+						"Attack you"
+					],
+					rolled: "yes",
+					rolldefault: "wit",
+					pbdefault: "no"
+				},
+				{
+					subheader: "Truths of Heart and Blade",
+					pbdefault: "yes",
+					pbother: "no"
+				},
+				{
+					name: "Love Is Not My Destiny",
+					body: "When you become Smitten with someone, say why, give them a String, and answer this question:",
+					bullets: [ "How do our respective stations make it impossible to be together?" ],
+					pbdefault: "yes",
+					pbother: "no"
+				},
+				{
+					name: "Inescapable Conclusions",
+					body: "When you Figure Out a Person during a physical conflict, you may ask one additional question from this list, even on a 6-:",
+					bullets: [
+						"What do you hope for your future?", "What do you fear is your destiny?"
+					],
+					pbdefault: "yes",
+					pbother: "no"
+				}
+			]
 		},
 		"devoted": { 
 			name: "The Devoted",
+			bio: "The Devoted is a selfless protector, committed to a person or a cause. Their central conflict lies in pitting this devotion against self-care. Example Archetypes: Sidekick, Champion, Protective Friend",
 			look: {
-				demeanor: "",
-				clothes: "",
-				sword: ""
+				demeanor: "Hard demeanor, affectionate demeanor, alert demeanor",
+				clothes: "Armor, uniform, sturdy clothes",
+				sword: "A bestowed sword, a well-worn sword, a defensive sword"
 			},
+			startstats: [
+				{ daring: 1, grace: 0, heart: 0, wit: -1, spirit: 1 },
+				{ daring: 1, grace: 1, heart: -1, wit: 0, spirit: 0 }
+			],
 			moves: [
+				{
+					subheader: "Devotion",
+					pbdefault: "yes",
+					pbother: "no"
+				},
+				{
+					name: "Devotion",
+					body: "Choose a Devotion from the example lists or invent one of your own. What three tenets of your Devotion have you found yourself tempted to violate?",
+					preamble: "Mark a Condition if you act contrary to your Devotion, for instance by violating its tenets or disobeying a superior.",
+					end: "When you Defy Disaster, you may bring a subject of your Devotion with you safely.",
+					blanks: [
+						{
+							name: "My Devotion",
+							suggestions: "To a cause: Freedom, vengeance, justice, love, the gay agenda. To a person: A PC, a liege, an idol. To a higher power: A god, a sexy dragon, a sentient planet."
+						},
+						{
+							name: "Tenet 1" 
+						},
+						{
+							name: "Tenet 2" 
+						},
+						{
+							name: "Tenet 3" 
+						}
+					],
+					pbdefault: "yes",
+					pbother: "no"
+				},
+				{
+					name: "Last Stand",
+					body: "When you face a superior foe on behalf of your Devotion, you may roll +Conditions (the number of Conditions you have marked) instead of the normal stat to Fight or to Defy Disaster that’s about to befall someone else.",
+					rolled: "yes",
+					rolldefault: "conditions-marked",
+					pbdefault: "yes",
+					pbother: "no"
+				},
+				{
+					name: "What’s Best for Them",
+					body: "When you’re Smitten with someone, you may treat them as a subject of your Devotion. Also, when you take action to help them be romantic with someone other than you, mark XP.",
+					pbdefault: "yes",
+					pbother: "no"
+				},
+				{
+					subheader: "Playbook Moves",
+					pbdefault: "yes",
+					instructions: "(start with the move marked and choose two more)"
+				},
+				{
+					name: "Fanatical Self-Sacrifice",
+					body: "You may mark a Condition to prevent a Condition being inflicted on another. When you do, mark XP, and you may only clear that Condition by taking the associated destructive action. Mark it with an asterisk to remind yourself. Also, your Conditions only cause a –1 penalty to the associated basic moves (instead of –2).",
+					pbdefault: "yes"
+				},
+				{
+					name: "For the Cause!",
+					body: "When you Fight the enemy of your Devotion, you can suffer a Condition to choose an additional option from the Fight move, even if you roll a 6-. You can inflict a Condition a second time within a single Fight move this way.",
+					pbother: "no"
+				},
+				{
+					name: "Gallant Rescue",
+					body: "When you Defy Disaster that’s about to befall someone else, you can either gain a String on them or ask one of the following questions, even if you roll a 6-. You can only gain one String per scene in this way on any given person.",
+					rolled: "yes",
+					bullets: [
+						"How do you feel about my Devotion?",
+						"What secret pain lies in your heart?"
+					]
+				},
+				{
+					name: "Power of Conviction",
+					body: "When you Entice someone while extolling the virtues of your Devotion or invoking its authority, you may roll +Spirit instead of +Heart. A superior in your Devotion gains a String on you, representing your dependence.",
+					rolled: "yes",
+					rolldefault: "spirit",
+					pbother: "no"
+				},
+				{
+					name: "Lay on Hands",
+					body: "When you touch someone as part of Emotional Support, you heal their physical ailments. Tell them how your Devotion sustains you; they mark an XP if they validate your Devotion, and you gain a String on them if they criticize it.",
+					rolled: "yes",
+					pbother: "no"
+				},
 				{
 					name: "Loyal Steed",
 					body: "Name your steed and detail two strengths and two weaknesses from the lists given. When riding your steed, you may roll +Spirit to Fight and may take a person with you whenever you Defy Disaster.",
@@ -390,33 +698,315 @@
 							suggestions: "unusual diet, conspicuous, plodding, harmless, stubborn, collateral damage, vulnerable to something common"
 						}
 					]
+				},
+				{
+					name: "Toxic Devotion",
+					body: "Once per scene, when you forgive your Devotion for abusing you or make excuses for obvious problems with your Devotion, take +1 forward or mark XP. Also, once per scene, when you learn that another PC thinks your Devotion is problematic and you don’t defend it, mark a Condition and give them a String on you.",
+					pbother: "no"
+				},
+				{
+					subheader: "Truths of Heart and Blade",
+					pbdefault: "yes",
+					pbother: "no"
+				},
+				{
+					name: "My Heart is Not Mine to Give",
+					body: "When you become Smitten with someone, say why, give them a String, and answer this question:",
+					bullets: [ "How does pursuing them conflict with your Devotion?" ],
+					pbdefault: "yes",
+					pbother: "no"
+				},
+				{
+					name: "What Will You Fight For?",
+					body: "When you Figure Out a Person during a physical conflict, you may additionally ask one of these questions, even on a 6-:",
+					bullets: [ "What are you willing to risk death for?", "What kind of deeds earn your loyalty?" ],
+					pbdefault: "yes",
+					pbother: "no"
 				}
 			]
 		},
 		"infamous": { 
 			name: "The Infamous",
+			bio: "The Infamous once participated in wicked deeds, but they’ve become fiercely righteous in trying to atone. Their central conflict arises from the lasting consequences of their past actions and beliefs versus their new convictions. Will they repair the harm they caused, will they seek forgiveness, or will they despair? Will they find a new place to belong? Example Archetypes: Former Villain, Escaped Henchperson, Veteran of Dishonor",
 			look: {
-				demeanor: "",
-				clothes: "",
-				sword: ""
-			}
+				demeanor: "Haunted demeanor, challenging demeanor, disdainful demeanor",
+				clothes: "Dangerous clothes, unremarkable clothes, transgressive clothes",
+				sword: "A broken sword, a wicked sword, an enemy’s sword"
+			},
+			startstats: [
+				{ daring: 1, grace: -1, heart: 0, wit: 0, spirit: 1 },
+				{ daring: 1, grace: 0, heart: 0, wit: 1, spirit: -1 }
+			],
+			moves: [
+				{
+					subheader: "What Cannot Be Undone",
+					pbdefault: "yes",
+					pbother: "no"
+				},
+				{
+					name: "What Cannot Be Undone",
+					body: "You’ve hurt people, and they have no obligation to forgive you or engage with you.",
+					preamble: "Before defining Relationships in character creation, propose a wicked past that you think could be forgiven, and ask each PC this question:",
+					bullets: [
+						"What circumstances or subsequent deeds could make it possible to forgive this past?"
+					],
+					alternative: "If anyone hesitates or can’t answer the question, revisit your past and tone it down. You can tone down the gravity of your backstory by reducing the severity of your deeds or the agency you had in enacting them. Afterwards, answer these questions:",
+					altbullets: [
+						"What personal growth are you proud of?",
+						"What about your past causes you the most grief?",
+						"You swore to never again perform certain actions that could lead to harm. What are they? Examples include: Lying, stealing, accepting someone’s love, drawing blood, or breaking a promise. If you break your vow, you Stagger. Then decide whether to keep the vow or abandon it."
+					],
+					pbdefault: "yes",
+					pbother: "no"
+				},
+				{
+					subheader: "Playbook Moves",
+					pbdefault: "yes",
+					instructions: "(start with the moves marked and choose two more)"
+				},
+				{
+					name: "Wicked Past",
+					body: "When you hear about a villain for the first time, you may decide that you know them from your past. If so, give them a String on you to ask a question from the Figure Out a Person list and take +1 forward against them.",
+					pbdefault: "yes"
+				},
+				{
+					name: "Make It Right",
+					body: "When you allow yourself to be vulnerable to someone you hurt during your villainous past, they choose 1",
+					bullets: [
+						"Decline to engage; they gain a String on you",
+						"Lash out; you Stagger",
+						"Guide you; they mark XP and give you a task to help make amends",
+						"Show vulnerability; you take +1 forward to interact with them",
+						"Forgive you; you each clear a Condition and this move no longer triggers with this person"
+					],
+					pbdefault: "yes"
+				},
+				{
+					name: "Always Suspect",
+					body: "When you pretend to be a villain to win a villain’s trust, they trust you enough to offer you an opportunity and you gain a String on them. You must choose one of the following options:",
+					bullets: [ 
+						"Someone watching comes to the worst possible conclusion",
+						"The villain requires an act of villainy to prove your intentions first",
+						"The villain is only pretending to trust you and the opportunity is a trap"
+					]
+				},
+				{
+					name: "Talons of the Past",
+					body: "When you gain a String on someone associated with your villainous past, or vice versa, mark XP. The first time this happens for a given person, you each can define a secret or vulnerability you know about the other."
+				},
+				{
+					name: "They Can Change, Too",
+					body: "When you give up an advantage on someone dangerous because you believe they can mend their wicked ways, you can ask a question as if you’d Figured Them Out."
+				},
+				{
+					name: "Used to Disappointment",
+					body: "When you rely upon or trust someone else with something important, say how you expect them to let you down.",
+					bullets: [
+						"If they pleasantly surprise you, they gain a String on you",
+						"If they do as you expect, choose 1: they lose a String on you, or you gain a String on them",
+						"If they are somehow even worse than you expected, you have a choice: berate them and inflict a Condition, or swallow your loneliness and take a Condition yourself"
+					]
+				},
+				{
+					name: "What Makes a Home",
+					body: "If every other PC in a scene has a String on you, your Conditions cause you only a –1 penalty instead of a –2 to the associated basic moves."
+				},
+				{
+					name: "Who’s the Monster?",
+					body: "When you expose the hypocrisy of someone who is supposedly virtuous, roll +Daring:",
+					rolled: "yes",
+					rolldefault: "daring",
+					hit: "Gain a String on them and choose 1",
+					mixed: "Choose 1",
+					mixedbullets: [
+						"The wrongness of their act is exposed to all; they mark XP if they change their mind. If they don’t, they must attack you or take a Condition.",
+						"Your words sting; they take a Condition.",
+						"You impress an onlooker; gain a String on them."
+					]
+				},
+				{
+					subheader: "Truths of Heart and Blade",
+					pbdefault: "yes",
+					pbother: "no"
+				},
+				{
+					name: "Undeserving",
+					body: "When you become Smitten with someone, say why, give them a String, and answer this question:",
+					bullets: [
+						"Why do you think they would be wrong to forgive you?"
+					],
+					pbdefault: "yes",
+					pbother: "no"
+				},
+				{
+					name: "Your Wicked Heart",
+					body: "When you Figure Out a Person during physical conflict, you may additionally ask one of these questions, even on a 6-:",
+					bullets: [
+						"What are you most ashamed of?", "How could I get you to betray your ideals?"
+					],
+					pbdefault: "yes",
+					pbother: "no"
+				}
+			]
 		},
 		"nature witch": { 
 			name: "The Nature Witch",
+			bio: "The Nature Witch is deeply connected to their environment and less experienced when it comes to people. They’re either new to socializing or are newly exploring what it feels like to socialize as their true self. Their central conflict revolves around the growth that their explorations will require from them and those who love them. Example Archetypes: Oblivious Horse Girl, Beacon of Kindness, Plant Geek Babygay",
 			look: {
-				demeanor: "",
-				clothes: "",
-				sword: ""
-			}
+				demeanor: "Innocent demeanor, wise demeanor, sad demeanor",
+				clothes: "Modest clothes, rough clothes, simple clothes",
+				sword: "A wooden sword, a harmless sword, an elemental sword"
+			},
+			startstats: [
+				{ daring: -1, grace: 0, heart: 1, wit: 0, spirit: 1 },
+				{ daring: -1, grace: 1, heart: 0, wit: 0, spirit: 1 }
+			],
+			moves: [
+				{
+					subheader: "Curiosity",
+					pbdefault: "yes"
+				},
+				{
+					name: "Curiosity",
+					body: "Dealing with people feels new to you and you might be awkward, but you want to learn. What better way to learn than by doing?",
+					preamble: "Choose four Trials from the list. When you complete a chosen Trial, mark it and choose one: mark XP, clear a Condition, or take a String on someone involved. When your four chosen Trials are all fulfilled, reflect on what you’ve learned about yourself and pick four more. If you complete the entire list, choose the ones that meant the most to you and then evolve into a new form of life inspired by those experiences. Adopt a new playbook, remain a Nature Witch, or retire to live happily ever after.",
+					blanks: [
+						{
+							name: "Trial 1",
+							checkbox: "yes",
+							suggestions: "Ride a fantastical creature. Win a duel. Go somewhere no person has tread before. Fall in love. Stick up for yourself, though it breaks someone’s heart. Lose someone you care about. Befriend someone very different from you. Liberate something dangerous. Receive a rare gift from someone you respect. Experience an altered state with a friend. Fail at something that means the world to you. Reject a conviction you once held. Extend kindness to someone who doesn’t deserve it. Achieve a lost cause. Throw away something comfortable to pursue a dream. Kiss someone dangerous. Forgive someone who deserves forgiveness. Trust someone with your secrets, only to be betrayed. Shock someone with an unwelcome truth. Earn forgiveness for a misdeed."
+						},
+						{
+							name: "Trial 2",
+							checkbox: "yes",
+							suggestions: "Ride a fantastical creature. Win a duel. Go somewhere no person has tread before. Fall in love. Stick up for yourself, though it breaks someone’s heart. Lose someone you care about. Befriend someone very different from you. Liberate something dangerous. Receive a rare gift from someone you respect. Experience an altered state with a friend. Fail at something that means the world to you. Reject a conviction you once held. Extend kindness to someone who doesn’t deserve it. Achieve a lost cause. Throw away something comfortable to pursue a dream. Kiss someone dangerous. Forgive someone who deserves forgiveness. Trust someone with your secrets, only to be betrayed. Shock someone with an unwelcome truth. Earn forgiveness for a misdeed."
+						},
+						{
+							name: "Trial 3",
+							checkbox: "yes",
+							suggestions: "Ride a fantastical creature. Win a duel. Go somewhere no person has tread before. Fall in love. Stick up for yourself, though it breaks someone’s heart. Lose someone you care about. Befriend someone very different from you. Liberate something dangerous. Receive a rare gift from someone you respect. Experience an altered state with a friend. Fail at something that means the world to you. Reject a conviction you once held. Extend kindness to someone who doesn’t deserve it. Achieve a lost cause. Throw away something comfortable to pursue a dream. Kiss someone dangerous. Forgive someone who deserves forgiveness. Trust someone with your secrets, only to be betrayed. Shock someone with an unwelcome truth. Earn forgiveness for a misdeed."
+						},
+						{
+							name: "Trial 4",
+							checkbox: "yes",
+							suggestions: "Ride a fantastical creature. Win a duel. Go somewhere no person has tread before. Fall in love. Stick up for yourself, though it breaks someone’s heart. Lose someone you care about. Befriend someone very different from you. Liberate something dangerous. Receive a rare gift from someone you respect. Experience an altered state with a friend. Fail at something that means the world to you. Reject a conviction you once held. Extend kindness to someone who doesn’t deserve it. Achieve a lost cause. Throw away something comfortable to pursue a dream. Kiss someone dangerous. Forgive someone who deserves forgiveness. Trust someone with your secrets, only to be betrayed. Shock someone with an unwelcome truth. Earn forgiveness for a misdeed."
+						}
+					],
+					pbdefault: "yes",
+					pbother: "no"
+				},
+				{
+					subheader: "Playbook Moves",
+					pbdefault: "yes",
+					instructions: "(start with the move marked and choose two more)"
+				},
+				{
+					name: "Wild Friends",
+					body: "You can speak with animals and plants and may Influence them with Strings just like other NPCs. Near your home, or anywhere you have spent a long period of time, animal and plant friends are always nearby when you want them.",
+					pbdefault: "yes"
+				},
+				{
+					name: "Awaken the Wild",
+					body: "When you are in a safe position and attempt to commune with a place or non-sentient creature, roll +Spirit:",
+					rolled: "yes",
+					rolldefault: "spirit",
+					hit: "Choose 1",
+					mixed: "Choose 1, GM will offer you a hard choice or success at a cost",
+					mixedbullets: [
+						"You cleanse it of hurt, corruption, or sickness",
+						"You alter its behavior, ecosystem, or atmosphere to one you choose",
+						"You make it dangerous to a certain person or creature, or a type of person or creature"
+					],
+					end: "If you attempt this move while rushed or while distressed to the point of having three or more Conditions, it works as above, briefly, but afterwards the place or creature will fall dead and barren."
+				},
+				{
+					name: "Familiar",
+					body: "You have a cute animal as your loyal familiar. You can perceive the world through its senses whenever you choose and communicate with it at any distance. In addition, choose a basic move. When the familiar helps with that basic move or with Emotional Support, take +1 to your roll.",
+					blanks: [
+						{ 
+							name: "Basic Move",
+							suggestions: "Fight, Defy Disaster, Entice, Figure Out a Person, Call on a Toxic Power"
+						}
+					]
+				},
+				{
+					name: "I Ship It",
+					body: "When you want to make a match between two other people and talk up one to the other, roll +Heart:",
+					rolled: "yes",
+					rolldefault: "heart",
+					hit: "You may give the listener a String on the other person or give the other person a String on the listener",
+					mixed: "As above, and the listener can either take a String on you or give the other person a String on you",
+					end: "Anyone involved may mark XP if they become Smitten with anyone else involved, including the Witch (immediately or later this session, maximum of 1 XP per PC)."
+				},
+				{
+					name: "The Magic of Love",
+					body: "When you’re Smitten with someone and proudly extol the power of love, either of you may spend a String on the other to gain the use of one of their playbook moves for one scene."
+				},
+				{
+					name: "Nature’s Touch",
+					body: "When you touch someone and let the power of the natural world flow into them, roll +Spirit:",
+					rolled: "yes",
+					rolldefault: "spirit",
+					hit: "Choose 2",
+					mixed: "Choose 1",
+					mixedbullets: [
+						"They may give you a String on them to clear a Condition",
+						"They gain the ability to speak with plants and animals for the rest of the scene",
+						"They must answer one of the Figure Out a Person questions of your choice or else they take a Condition"
+					]
+				},
+				{
+					subheader: "Truths of Heart and Blade",
+					pbdefault: "yes",
+					pbother: "no"
+				},
+				{
+					name: "Love Conquers All",
+					body: "When you become Smitten with someone, say why, give them a String, and answer this question:",
+					bullets: ["What is a clear challenge to being with them that you’re overlooking because of your naivete?"],
+					pbdefault: "yes",
+					pbother: "no"
+				},
+				{
+					name: "Clear-Hearted Insight",
+					body: "When you Figure Out a Person during a physical conflict, you may additionally ask one of these questions, even on a 6-:",
+					bullets: ["What makes you feel loved?","What do you hope for the future?"],
+					pbdefault: "yes",
+					pbother: "no"
+				}
+			]
 		},
 		"scoundrel": { 
 			name: "The Scoundrel",
+			bio: "The Scoundrel is a hero of action and intense physicality. Their sword fights are punctuated by banter and flirtation and end in kisses as often as they end in bloodshed. Their central conflict lies in their urge to explore new horizons versus committing to purpose or security. Example Archetypes: Shimbo Pirate, Diva Fencing Champion, Dashing Jewel Thief",
 			look: {
-				demeanor: "",
-				clothes: "",
-				sword: ""
+				demeanor: "Playful demeanor, provocative demeanor, eyes only for you",
+				clothes: "Revealing clothes, flowing clothes, tight clothes, gaudy costume",
+				sword: "A flashy sword, a famous sword, a delicate sword"
 			},
+			startstats: [
+				{ daring: 1, grace: 1, heart: 0, wit: -1, spirit: 0 },
+				{ daring: 1, grace: 0, heart: -1, wit: 1, spirit: 0 }
+			],
 			moves: [
+				{
+					subheader: "Living in the Moment",
+					pbdefault: "yes",
+					pbother: "no"
+				},
+				{
+					name: "Living in the Moment",
+					body: "Why are you so fickle? Is there something you need to figure out about yourself, and you keep looking for it in other people instead? Are you afraid of the vulnerability that comes from investing in a relationship? Is your true love unattainable? Are you just that oblivious?",
+					preamble: "Choose something that you’ll be able to grow past to give your character an emotional story arc. You don’t need to figure it out immediately, and the Scoundrel themself may not know at all.",
+					blanks: [{name: "I may grow past"}],
+					pbdefault: "yes",
+					pbother: "no"
+				},
+				{
+					subheader: "Playbook Moves",
+					pbdefault: "yes",
+					instructions: "(start with the moves marked and choose two more)"
+				},
 				{
 					name: "Heat of the Moment",
 					body: "When you taunt someone into doing something they want to do but find unwise, roll +Daring:",
@@ -437,122 +1027,542 @@
 						"They take a Condition if they don't"
 					],
 					end: "For either a PC or an NPC, if you aren’t already Smitten with them, you may choose to treat a 7–9 result as a 10+ by choosing to become Smitten with the target.",
+					pbdefault: "yes",
+					pbother: "no"
+				},
+				{
+					name: "Lust at First Sight",
+					body: "When you become Smitten with someone you barely know, declare your undying love and give them a String on you. Lose your Smitten status with anyone who has no Strings on you. Take +1 forward to any act you think might impress your new interest.",
+					pbdefault: "yes",
+					pbother: "no"
+				},
+				{
+					name: "Shiny and New",
+					body: "When you give or receive Emotional Support in an intimate moment with someone new, you each mark XP or clear a Condition.",
 					pbdefault: "yes"
+				},
+				{
+					name: "Better to Seek Forgiveness",
+					body: "When you apologize to someone for your outrageous conduct and put yourself at their mercy, roll +Daring:",
+					rolled: "yes",
+					rolldefault: "daring",
+					hit: "You find out what it will take for them to forgive you and you each gain a String on the other. If they forgive you, you each clear a Condition.",
+					mixed: "You find out what it will take for them to forgive you. If you do it, you either take Strings on each other or they may clear a Condition, your choice."
+				},
+				{
+					name: "Fools Rush In",
+					body: "When you vault into a situation without forethought and wind up way over your head, give someone dangerous to you a String, mark XP, and take +1 forward to Defy Disaster."
+				},
+				{
+					name: "Impressive Swordplay",
+					body: "Whenever you roll a 7+ to Fight, you may gain a String on someone who is present and ask their player what it is about you that has impressed or intrigued them."
+				},
+				{
+					name: "The Main Attraction",
+					body: "When you make a dramatic entrance, roll +Grace:",
+					rolled: "yes", rolldefault: "grace",
+					hit: "Choose 2", mixed: "Choose 1",
+					mixedbullets: [
+						"All attention is focused on you for a moment",
+						"You hold the attention of one person for as long as you deliver a dramatic speech",
+						"Take a String on someone present",
+						"You take +1 forward"
+					]
+				},
+				{
+					name: "One in Every Port",
+					body: "When you return to any town you’ve been to before, name a person with whom you shared intimacy here and say how you left things. If you left on bad terms, mark XP and the GM will tell you something interesting that has changed since you were last here."
+				},
+				{
+					name: "Rrrip!",
+					body: "When you take or narrowly evade a physical blow from someone dangerous to you, you may declare that your clothes were damaged and are now practically indecent. For the remainder of the scene, when you roll a 10+ on any move against an NPC, you may declare that they have a crush on you (up to one NPC per roll and subject to GM discretion). Additionally, any PC who becomes Smitten with you during the remainder of the scene may mark XP."
+				},
+				{
+					subheader: "Truths of Heart and Blade",
+					pbdefault: "yes",
+					pbother: "no"
+				},
+				{
+					name: "To Love and Lose",
+					body: "When you become Smitten with someone, say why, give them a String, and answer this question:",
+					bullets: ["Why would your romance never last?"],
+					pbdefault: "yes",
+					pbother: "no"
+				},
+				{
+					name: "Repartée",
+					body: "When you Figure Out a Person during a physical conflict, you may additionally ask one of these questions, even on a 6-:",
+					bullets: ["What would make you run away with me?","Where did you learn to fight?"],
+					pbdefault: "yes",
+					pbother: "no"
 				}
-			],
+			]
 		},
 		"seeker": { 
 			name: "The Seeker",
+			bio: "The Seeker comes from a toxic society and has found a new community in which to belong and grow. Their central conflict pits tradition and upbringing against justice and developing their personal values. Example Archetypes: Immigrant from Heteronormia, Enclave-Raised, Privileged Background",
 			look: {
-				demeanor: "",
-				clothes: "",
-				sword: ""
-			}
+				demeanor: "Guarded demeanor, curious demeanor, uptight demeanor",
+				clothes: "Foreigner’s clothes, old-fashioned clothes, elaborate getup",
+				sword: "An ancient sword, a brand-new sword, “That’s not a sword!”"
+			},
+			startstats: [
+				{ daring: 1, grace: 0, heart: -1, wit: 1, spirit: 0 },
+				{ daring: 0, grace: 1, heart: 0, wit: -1, spirit: 1 }
+			],
+			moves: [
+				{
+					subheader: "Tradition, Commandments, Conviction",
+					pbdefault: "yes",
+					pbother: "no"
+				},
+				{
+					name: "Tradition",
+					tracklabel: "Tradition",
+					body: "Tradition is a measure of how you feel your Authority would judge your behavior.",
+					preamble: "Your Tradition starts at 1. Gain a point of Tradition whenever you make a personal sacrifice to act in accordance with your Commandments, to a maximum of 4. When you are at 4 Tradition, you incur a Condition each time you act contrary to your Commandments.",
+					end: "Spend Tradition at any time to temper the wrath of the Authority, or to take +1 forward to follow your Commandments or Call on a Toxic Power.",
+					pbdefault: "yes",
+					pbother: "no"
+				},
+				{
+					name: "Commandments",
+					body: "Describe the Authority that governed your upbringing and choose at least six Commandments the Authority has issued:",
+					blanks: [
+						{
+							name: "Commandment", checkbox: "yes",
+							suggestions: "Always answer an insult with a drawn sword. Never admit to your weak emotions. Always cover your sinful body. No intimacy until after a monogamous marriage. Never give when you can sell. Never let a weaker person fight their own battles. Never fight a weaker person’s battles. Always obey the Authority. Always obey a certain type of person (gender, race, class, belief, elders). Never go unchaperoned (or at all) with a certain type of person."
+						},
+						{
+							name: "Commandment", checkbox: "yes",
+							suggestions: "Always answer an insult with a drawn sword. Never admit to your weak emotions. Always cover your sinful body. No intimacy until after a monogamous marriage. Never give when you can sell. Never let a weaker person fight their own battles. Never fight a weaker person’s battles. Always obey the Authority. Always obey a certain type of person (gender, race, class, belief, elders). Never go unchaperoned (or at all) with a certain type of person."
+						},
+						{
+							name: "Commandment", checkbox: "yes",
+							suggestions: "Always answer an insult with a drawn sword. Never admit to your weak emotions. Always cover your sinful body. No intimacy until after a monogamous marriage. Never give when you can sell. Never let a weaker person fight their own battles. Never fight a weaker person’s battles. Always obey the Authority. Always obey a certain type of person (gender, race, class, belief, elders). Never go unchaperoned (or at all) with a certain type of person."
+						},
+						{
+							name: "Commandment", checkbox: "yes",
+							suggestions: "Always answer an insult with a drawn sword. Never admit to your weak emotions. Always cover your sinful body. No intimacy until after a monogamous marriage. Never give when you can sell. Never let a weaker person fight their own battles. Never fight a weaker person’s battles. Always obey the Authority. Always obey a certain type of person (gender, race, class, belief, elders). Never go unchaperoned (or at all) with a certain type of person."
+						},
+						{
+							name: "Commandment", checkbox: "yes",
+							suggestions: "Always answer an insult with a drawn sword. Never admit to your weak emotions. Always cover your sinful body. No intimacy until after a monogamous marriage. Never give when you can sell. Never let a weaker person fight their own battles. Never fight a weaker person’s battles. Always obey the Authority. Always obey a certain type of person (gender, race, class, belief, elders). Never go unchaperoned (or at all) with a certain type of person."
+						},
+						{
+							name: "Commandment", checkbox: "yes",
+							suggestions: "Always answer an insult with a drawn sword. Never admit to your weak emotions. Always cover your sinful body. No intimacy until after a monogamous marriage. Never give when you can sell. Never let a weaker person fight their own battles. Never fight a weaker person’s battles. Always obey the Authority. Always obey a certain type of person (gender, race, class, belief, elders). Never go unchaperoned (or at all) with a certain type of person."
+						}
+					],
+					pbdefault: "yes",
+					pbother: "no"
+				},
+				{
+					name: "Convictions",
+					body: "When you break a Commandment and repudiate it forever, mark its checkbox and mark XP. Write a Conviction expressing your new beliefs, something that contradicts the Commandment.",
+					preamble: "Each time you live up to a Conviction despite temptation or cost, reduce your Tradition by 1 and ask an onlooker if they agree with that Conviction. If they say yes, take a String on them and learn what holds them back from living up to it, if anything. If they say no, mark a Condition.",
+					end: "Convictions should be bold statements that stand in contrast to the Commandments. Refer to the suggestions for each blank for ideas.",
+					blanks: [
+						{
+							name: "Conviction",
+							suggestions: "I care for myself as I would my dearest friend. Fear will not stop me from speaking the truth of my heart. I will fight for the well-being of those targeted by the Authority, if they wish it. I will atone for the harm I’ve done by liberating others from the Authority. When I see something unjust, I will educate those who can learn to do better and challenge those who must be overcome."
+						},
+						{
+							name: "Conviction",
+							suggestions: "I care for myself as I would my dearest friend. Fear will not stop me from speaking the truth of my heart. I will fight for the well-being of those targeted by the Authority, if they wish it. I will atone for the harm I’ve done by liberating others from the Authority. When I see something unjust, I will educate those who can learn to do better and challenge those who must be overcome."
+						},
+						{
+							name: "Conviction",
+							suggestions: "I care for myself as I would my dearest friend. Fear will not stop me from speaking the truth of my heart. I will fight for the well-being of those targeted by the Authority, if they wish it. I will atone for the harm I’ve done by liberating others from the Authority. When I see something unjust, I will educate those who can learn to do better and challenge those who must be overcome."
+						},
+						{
+							name: "Conviction",
+							suggestions: "I care for myself as I would my dearest friend. Fear will not stop me from speaking the truth of my heart. I will fight for the well-being of those targeted by the Authority, if they wish it. I will atone for the harm I’ve done by liberating others from the Authority. When I see something unjust, I will educate those who can learn to do better and challenge those who must be overcome."
+						},
+						{
+							name: "Conviction",
+							suggestions: "I care for myself as I would my dearest friend. Fear will not stop me from speaking the truth of my heart. I will fight for the well-being of those targeted by the Authority, if they wish it. I will atone for the harm I’ve done by liberating others from the Authority. When I see something unjust, I will educate those who can learn to do better and challenge those who must be overcome."
+						},
+						{
+							name: "Conviction",
+							suggestions: "I care for myself as I would my dearest friend. Fear will not stop me from speaking the truth of my heart. I will fight for the well-being of those targeted by the Authority, if they wish it. I will atone for the harm I’ve done by liberating others from the Authority. When I see something unjust, I will educate those who can learn to do better and challenge those who must be overcome."
+						}
+					],
+					pbdefault: "yes",
+					pbother: "no"
+				},
+				{
+					subheader: "Playbook Moves",
+					pbdefault: "yes",
+					instructions: "(start with the move marked and choose two more)"
+				},
+				{
+					name: "People Are People",
+					body: "When you talk about your home, roll +Heart:",
+					rolled: "yes", rolldefault: "heart",
+					hit: "Choose 2", mixed: "Choose 1",
+					mixedbullets: [ "Admit a flaw about your home; gain +1 forward","Share something good about your home; clear a Condition","Lie about your home to impress a listener; take a String on them" ],
+					pbdefault: "yes"
+				},
+				{
+					name: "Hear Me!",
+					body: "When you shout one of your Convictions aloud in confrontation with those who hold a contrary belief, roll +Daring:",
+					rolled: "yes", rolldefault: "daring",
+					hit: "Ask 2", mixed: "Ask 1",
+					mixedbullets: [
+						"Why do you think you have to follow that belief?","What does it cost you to follow that belief?","What do you wish for that is contrary to that belief?"
+					]
+				},
+				{
+					name: "It Wasn’t All Bad",
+					body: "When you encounter someone whose perspective is different from that of your companions, share a relevant story from your home culture and roll +Spirit:",
+					rolled: "yes", rolldefault: "spirit",
+					hit: "Gain a String on them and either take +1 forward to interact with them or grant that +1 forward to a companion",
+					mixed: "Gain a String on them",
+					end: "In either case, they also tell you something interesting or useful about their upbringing."
+				},
+				{
+					name: "Listen and Learn",
+					body: "When you ask someone what you should do in an unfamiliar situation:",
+					bullets: ["If you follow their advice, take +1 forward and clear a Condition","If you follow their advice and it goes poorly, mark XP"]
+				},
+				{
+					name: "Proper Courtship",
+					body: "When you’re Smitten with someone and perform an elaborate and roundabout courtship ritual…",
+					bullets: ["If the recipient responds properly, you each get +1 forward to protect each other until either of you breaks a Commandment, and they gain a point of Tradition that they can spend for the same effects you can","If they don’t understand that you’re Smitten, give a String to an onlooker who does understand"],
+					pbother: "no"
+				},
+				{
+					name: "Silly Tourist",
+					body: "When you Figure Out a Person or Defy Disaster by playing the fool, you may additionally ask a question from this list, even on a 6-:",
+					bullets: ["What would make you laugh?","What hidden threat or opportunity am I missing?","How are you vulnerable?"]
+				},
+				{
+					name: "Stiff Upper Lip",
+					body: "You can spend a point of Tradition to ignore the -2 penalty caused by Conditions. This effect ends if you violate a Commandment or at the end of the scene. When the effect ends, take a Condition.",
+					pbother: "no"
+				},
+				{
+					subheader: "Truths of Heart and Blade",
+					pbdefault: "yes",
+					pbother: "no"
+				},
+				{
+					name: "I Don’t Belong",
+					body: "When you become Smitten with someone, say why, give them a String, and answer this question:",
+					bullets: [ "Which of your values do they openly violate or decry?" ],
+					pbdefault: "yes",
+					pbother: "no"
+				},
+				{
+					name: "Not So Different",
+					body: "When you Figure Out a Person during a physical conflict, you may additionally ask one of these questions, even on a 6-:",
+					bullets: ["What prejudice do you hold?","What tradition do you most value?"],
+					pbdefault: "yes",
+					pbother: "no"
+				}
+			]
 		},
 		"spooky witch": { 
 			name: "The Spooky Witch",
+			bio: "The Spooky Witch is a weirdo who does their own thing while craving connection. They’ve found that many monsters are quite friendly if you give them a chance, but befriending them brands you a monster, as well. Their central conflict lies in navigating pressures to conform versus their own desires or those of their monstrous friends. Example archetypes: Spell Dancer, Nerdy Alchemist, Speaker for the Unseen",
 			look: {
-				demeanor: "",
-				clothes: "",
-				sword: ""
+				demeanor: "Focused demeanor, playful demeanor, distant demeanor",
+				clothes: "Wispy clothes, darker-than-black clothes, specialized clothes",
+				sword: "An eldritch sword, a bone sword, a thirsty sword"
 			},
+			startstats: [
+				{ daring: 0, grace: 0, heart: -1, wit: 1, spirit: 1 },
+				{ daring: -1, grace: 1, heart: 0, wit: 0, spirit: 1 }
+			],
 			moves: [
 				{
+					subheader: "The Unseen",
+					pbdefault: "yes",
+					pbother: "no"
+				},
+				{
+					name: "The Unseen",
+					body: "The Unseen are mysterious beings most cannot perceive. Their very existence may be debated, but you know the truth, because they have spoken to you. You know that some are kind and some are dangerous, that they have abilities and limitations that differ from “normal” people, and that you find yourself in between.", 
+					preamble: "Work with your GM to define what the Unseen are—or what your Spooky Witch thinks they are. They could be friendly spirits, phase-shifted aliens, psychic remnants, glitched-out nanites, angry poltergeists, or something totally other. When did you first interact with them? What do you think they want?",
+					blanks: [ { name: "What the Unseen are like" } ],
+					pbdefault: "yes",
+					pbother: "no"
+				},
+				{
+					subheader: "Playbook Moves",
+					pbdefault: "yes",
+					instructions: "(start with the moves marked and choose two more)"
+				},
+				{
 					name: "Commune with the Unseen",
-					body: "When you perform a ritual to commune with the Unseen, give a dangerous Unseen a String on you and roll +Spirit:",
-					rolled: "yes",
-					rolldefault: "spirit",
+					body: "When you perform a ritual to commune with the Unseen, give a dangerous Unseen a String on you and roll +Spirit:", 
+					rolled: "yes", rolldefault: "spirit",
 					hit: "Choose 2",
 					hitbullets: [
 						"Hide something in the Unseen world",
 						"Learn something important from the Unseen",
 						"Temporarily alter the Unseen nature of a place",
-						"Ask a question from Figure Out a Person of anyone, anywhere, if you can name one of their deceased loved ones",
-						"Learn the recent history of an object you hold"
+						"Ask a question from Figure Out a Person of anyone, anywhere, if you can name one of their deceased loved ones","Learn the recent history of an object you hold"
 					],
 					mixed: "Choose 2 from the 10+ list, but choose 1 thing that goes awry",
-					mixedbullets: [
-						"Restless Unseen cause a haunting",
-						"Hungry Unseen destroy all non-sentient life in a small area",
-						"Stern Unseen judge you, inflicting a Condition"
-					],
+					mixedbullets: ["Restless Unseen cause a haunting","Hungry Unseen destroy all non-sentient life in a small area","Stern Unseen judge you, inflicting a Condition"],
+					pbdefault: "yes",
+					pbother: "no"
+				},
+				{
+					name: "I Like Snails!",
+					body: "When you are Smitten with someone and Figure Them Out, blurt out something weird and let them ask you a question from the list. Then ask them another question from the list, even on a 6-.",
+					pbdefault: "yes"
+				},
+				{
+					name: "Astral Dance", 
+					body: "When you dance across the boundary into the realm beyond, describe it and roll +Grace:",
+					rolled: "yes", rolldefault: "grace",
+					hit: "You and a small number of others who dance with you arrive at a distant destination of your choice.",
+					mixed: "You don’t arrive where you intend, you arrive almost too late, or you lose something important in the process. The GM will tell you which."
+				},
+				{
+					name: "Divination", 
+					body: "When you have time and safety to read the unseen truth of someone present, describe your divination process and what makes it conspicuous. The GM will tell you something interesting about the person or the obstacles they face that they don’t know. Then roll +Spirit:",
+					rolled: "yes", rolldefault: "spirit",
+					hit: "If you tell the truth, they clear a Condition. If you lie, gain a String on them.",
+					mixed: "They learn the truth and clear a Condition."
+				},
+				{
+					name: "Dreamwalk", 
+					body: "When you touch an unconscious, sleeping, or willing subject, you can see an impression of their thoughts and appear in their dreams. You may roll +Spirit to Figure Out or Entice them in this state.",
+					rolled: "yes", rolldefault: "spirit"
+				},
+				{
+					name: "Eerie Companion",
+					body: "You have a little pet monster or spirit. Choose two basic moves. The companion grants you +1 to these moves when it assists you, but its assistance is always obvious and alarming to ordinary people. In addition, you can speak with monsters.",
+					blanks: [
+						{
+							name: "Basic Move Receiving +1",
+							suggestions: "Fight, Defy Disaster, Entice, Figure Out a Person, Emotional Support, Call on a Toxic Power"
+						},
+						{
+							name: "Basic Move Receiving +1",
+							suggestions: "Fight, Defy Disaster, Entice, Figure Out a Person, Emotional Support, Call on a Toxic Power"
+						}
+					]
+				},
+				{
+					name: "Friends in Weird Places", 
+					body: "You are friends with some odd people. Folx that others might not consider people at all…",
+					preamble: "Name three of them. For each one, write down one thing they’re good at, one reason why everyone else is afraid of them, and what you like to do together when you hang out.",
+					end: "When you call on them for help, the GM tells you what they provide. Give them a String on you and mark the Favor next to their name. Whenever significant time passes, one of your friends with marked Favor will need help from you. Clear their Favor if you help, mark a Condition if you don’t.",
+					blanks: [
+						{ name: "1st friend", checkbox: "yes" }, { name: "Why everyone else is afraid of them" }, { name: "What we like to do together" },
+						{ name: "2nd friend", checkbox: "yes" }, { name: "Why everyone else is afraid of them" }, { name: "What we like to do together" },
+						{ name: "3rd friend", checkbox: "yes" }, { name: "Why everyone else is afraid of them" }, { name: "What we like to do together" }
+					]
+				},
+				{
+					name: "Talk Nerdy to Me",
+					body: "You may roll +Wit instead of +Heart to Entice someone. In addition, choose an area of study that holds special interest for you. You have top-tier knowledge of this area and are always prepared with an interesting fact, and sometimes even a useful fact, when you come across something within your expertise. The GM will provide the information or invite you to make something up.",
+					rolled: "yes", rolldefault: "wit"
+				},
+				{
+					name: "Witchfire",
+					body: "You may roll +Spirit instead of +Daring to Fight, but you’re very conspicuous when you do. The consequences of a 6- will be severe.",
+					rolled: "yes", rolldefault: "spirit"
+				},
+				{
+					subheader: "Truths of Heart and Blade",
+					pbdefault: "yes",
+					pbother: "no"
+				},
+				{
+					name: "Why Did I Bring up the Snails?",
+					body: "When you become Smitten with someone, say why, give them a String, and answer this question:",
+					bullets: ["What obvious thing about you are you sure would make them reject you?"],
+					pbdefault: "yes",
+					pbother: "no"
+				},
+				{
+					name: "Whispered Secrets",
+					body: "When you Figure Out a Person during a physical conflict, you may additionally ask one of these questions, even on a 6-:",
+					bullets: ["What makes you insecure?","What haunts you?"],
 					pbdefault: "yes",
 					pbother: "no"
 				}
-			],
+			]
 		},
 		"trickster": { 
 			name: "The Trickster",
+			bio: "The Trickster is devious and calculating. They fear closeness, sincerity, and vulnerability. If they show you the truth of their heart, they’ll be wearing a mask to do it. Their central conflict lies in desiring closeness while fearing vulnerability. Example Archetypes: Businesslike Spy, Endearing Charlatan, Cold Mastermind",
 			look: {
-				demeanor: "",
-				clothes: "",
-				sword: ""
-			}
+				demeanor: "Harmless demeanor, suspicious demeanor, mercurial demeanor",
+				clothes: "Hooded clothes, nondescript clothes, clothes to play a role",
+				sword: "A concealed sword, a venomous sword, a surprising sword"
+			},
+			startstats: [
+				{ daring: 1, grace: 0, heart: -1, wit: 1, spirit: 0 },
+				{ daring: 0, grace: 1, heart: -1, wit: 1, spirit: 0 }
+			],
+			moves: [
+				{
+					subheader: "Too Many Feelings",
+					pbdefault: "yes",
+					pbother: "no"
+				},
+				{
+					name: "Feelings", tracklabel: "Feelings",
+					body: "Your heart is as passionate as any other, but you bury it beneath layers of deception—until you can’t keep your feelings in any longer.",
+					preamble: "Start at 1 and increase your Feelings by 1 each time you gain a String, someone gains a String on you, or you mark a Condition. You may also choose to increase your Feelings any time you find yourself gasping or swooning over someone. Strings assigned during character creation don’t increase your Feelings.",
+					alternative: "When you open up to someone whose regard matters to you, reduce your Feelings by 2. When you secretly perform a loving act for someone, reduce your Feelings by 1.",
+					end: "If your Feelings track reaches 4, you can’t hold it in anymore. Tear off the mask and scream what you’ve been holding in, do what you’ve been afraid to do, and damn the consequences. You can give anyone present a String on you to gain a String on them. Stop when the consequences catch up with you, for good or ill. Afterwards, reduce your Feelings to 0 and clear a Condition. It feels good to get it out, at least in the moment.",
+					pbdefault: "yes",
+					pbother: "no"
+				},
+				{
+					subheader: "Playbook Moves",
+					pbdefault: "yes",
+					instructions: "(start with the moves marked and choose two more)"
+				},
+				{
+					name: "Ew, Feelings",
+					body: "When someone offers you Emotional Support and you refuse to open up, increase your Feelings by 1 and choose 1 from the listed options for that move as if they rolled 7–9. If they rolled 10+, they know they got through to you; they gain the benefits of a 10+ result as if you had opened up.",
+					pbdefault: "yes",
+					pbother: "no"
+				},
+				{
+					name: "The Mask", 
+					body: "When you seek to persuade an NPC of a lie about yourself, roll +Wit:",
+					rolled: "yes", rolldefault: "wit",
+					hit: "Choose 2",
+					mixed: "Choose 1",
+					mixedbullets: ["They believe a big lie", "The lie you have chosen is unexpectedly perfect, creating a new opportunity", "They give you the benefit of the doubt and remain convinced even if there is some evidence of your lie"],
+					end: "Additionally, whenever a PC Figures You Out, you can give false answers. You must increase your Feelings by 1 at the end of any scene where you do this.",
+					pbdefault: "yes"
+				},
+				{
+					name: "Center of the Web",
+					body: "When someone approaches you to get something from you or threaten you. Choose 1:",
+					bullets: ["Gain a String on them or they lose a String on you","Ask them a question from the Figure Out a Person move","+1 ongoing against them for the scene"]
+				},
+				{
+					name: "Deft Fingers",
+					body: "When you filch something from a person, roll +Grace:",
+					rolled: "yes", rolldefault: "grace",
+					hit: "Choose 2", mixed: "Choose 1",
+					mixedbullets: ["The item reveals a secret love or vulnerability","The item creates an opportunity (such as a map, key, or note)","The person doesn’t know you took it"]
+				},
+				{
+					name: "Devious Scheme",
+					body: "When others go along with your cunning plan, roll +Wit:",
+					rolled: "yes", rolldefault: "wit",
+					hit: "Twice during your plan, you may choose 1",
+					mixed: "Once during your plan, you may choose 1",
+					mixedbullets: ["Produce just the right object","Describe an unexpected weakness in an obstacle","Appear right behind someone at a crucial moment"]
+				},
+				{
+					name: "Knives behind the Mask",
+					body: "When someone reveals a secret about you in your presence, you’re prepared with a damaging secret about them. If you reveal it now in retaliation, they mark a Condition. If you keep the secret for the time being, gain a String on them."
+				},
+				{
+					name: "Play the Part",
+					body: "When you use someone else’s personal item or clothing to disguise yourself as them, roll +Daring:",
+					rolled: "yes", rolldefault: "daring",
+					hit: "While you remain so dressed, your disguise is perfect; only your words or deeds may expose you.",
+					mixed: "Someone sees through your disguise, but they don’t give you away just yet. Give them a String.",
+				},
+				{
+					subheader: "Truths of Heart and Blade",
+					pbdefault: "yes",
+					pbother: "no"
+				},
+				{
+					name: "A Beautiful Lie",
+					body: "When you become Smitten with someone, say why, give them a String, and answer this question:",
+					bullets: ["What secret do you have that you think would make them reject you if they knew?"],
+					pbdefault: "yes",
+					pbother: "no"
+				},
+				{
+					name: "I See through You",
+					body: "When you Figure Out a Person during a physical conflict, you may additionally ask one of these questions, even on a 6-:",
+					bullets: ["Who do you want me to be?","What are you most afraid of right now?"],
+					pbdefault: "yes",
+					pbother: "no"
+				}
+			]
 		}
 	};
+
+	// end BIG playbooks data set
 
 	// event handlers
 	
 	// Initialize when first opening the sheet, or when the initializing field is changed appropriately.
 
 	on("sheet:opened change:pbinitialized", function() {
-		log("sheet:opened");
+		log("Handler: sheet:opened change:pbinitialized");
 		getAttrs(["pbinitialized"], function(values) {
-			var attrs = { "pbinitialized": "yes" };
-			if ( values.pbinitialized !== "yes" ) {
-				log("pbinitialized is not yes");
-				if ( values.pbinitialized === "reset" ) {
-					log("Will use idarray length here.");
-					attrs["movesinstructions"] = "";
-					getSectionIDs("repeating_playbooks", function(idarray) {
-						for(var i=0; i < idarray.length; i++ ) {
-							removeRepeatingRow("repeating_playbooks_"+idarray[i]);
-						}
-					});
-					getSectionIDs("repeating_looks", function(idarray) {
-						for(var i=0; i < idarray.length; i++ ) {
-							removeRepeatingRow("repeating_looks_"+idarray[i]);
-						}
-					});
-					getSectionIDs("repeating_stats", function(idarray) {
-						for(var i=0; i < idarray.length; i++ ) {
-							removeRepeatingRow("repeating_stats_"+idarray[i]);
-						}
-					});
-					getSectionIDs("repeating_startingstats", function(idarray) {
-						for(var i=0; i < idarray.length; i++ ) {
-							removeRepeatingRow("repeating_startingstats_"+idarray[i]);
-						}
-					});
-					getSectionIDs("repeating_advances", function(idarray) {
-						for(var i=0; i < idarray.length; i++ ) {
-							removeRepeatingRow("repeating_advances_"+idarray[i]);
-						}
-					});
-					getSectionIDs("repeating_moves", function(idarray) {
-						for(var i=0; i < idarray.length; i++ ) {
-							removeRepeatingRow("repeating_moves_"+idarray[i]);
-						}
-					});
-					getSectionIDs("repeating_conditions", function(idarray) {
-						for(var i=0; i < idarray.length; i++ ) {
-							removeRepeatingRow("repeating_conditions_"+idarray[i]);
-						}
-					});
-					getSectionIDs("repeating_strings", function(idarray) {
-						for(var i=0; i < idarray.length; i++ ) {
-							removeRepeatingRow("repeating_strings_"+idarray[i]);
-						}
-					});
-					getSectionIDs("repeating_modifiers", function(idarray) {
-						for(var i=0; i < idarray.length; i++ ) {
-							removeRepeatingRow("repeating_modifiers_"+idarray[i]);
-						}
-					});
-					attrs["playbook-current-row"] = "";
-					attrs["starting-chosen"] = "0";
-					attrs["experience"] = 0; attrs["xp1"] = 0; attrs["xp2"] = 0; attrs["xp3"] = 0; attrs["xp4"] = 0; attrs["xp5"] = 0;
-				}
+			if ( values.pbinitialized === "reset" ) {
+				var attrs = { "pbinitialized": "no" };
+				attrs["playbook-current-row"] = "";
+				attrs["starting-chosen"] = "0";
+				attrs["experience"] = 0; attrs["xp1"] = 0; attrs["xp2"] = 0; attrs["xp3"] = 0; attrs["xp4"] = 0; attrs["xp5"] = 0;
+				log("resetting sheet");
+				getSectionIDs("repeating_playbooks", function(idarray) {
+					for(var i=0; i < idarray.length; i++ ) {
+						removeRepeatingRow("repeating_playbooks_"+idarray[i]);
+					}
+				});
+				getSectionIDs("repeating_looks", function(idarray) {
+					for(var i=0; i < idarray.length; i++ ) {
+						removeRepeatingRow("repeating_looks_"+idarray[i]);
+					}
+				});
+				getSectionIDs("repeating_stats", function(idarray) {
+					for(var i=0; i < idarray.length; i++ ) {
+						removeRepeatingRow("repeating_stats_"+idarray[i]);
+					}
+				});
+				getSectionIDs("repeating_startingstats", function(idarray) {
+					for(var i=0; i < idarray.length; i++ ) {
+						removeRepeatingRow("repeating_startingstats_"+idarray[i]);
+					}
+				});
+				getSectionIDs("repeating_advances", function(idarray) {
+					for(var i=0; i < idarray.length; i++ ) {
+						removeRepeatingRow("repeating_advances_"+idarray[i]);
+					}
+				});
+				getSectionIDs("repeating_conditions", function(idarray) {
+					for(var i=0; i < idarray.length; i++ ) {
+						removeRepeatingRow("repeating_conditions_"+idarray[i]);
+					}
+				});
+				getSectionIDs("repeating_strings", function(idarray) {
+					for(var i=0; i < idarray.length; i++ ) {
+						removeRepeatingRow("repeating_strings_"+idarray[i]);
+					}
+				});
+				getSectionIDs("repeating_modifiers", function(idarray) {
+					for(var i=0; i < idarray.length; i++ ) {
+						removeRepeatingRow("repeating_modifiers_"+idarray[i]);
+					}
+				});
+				// Moves are highest volume, so we use the callback to set the attributes that'll fire off the next stage.
+				getSectionIDs("repeating_moves", function(idarray) {
+					for(var i=0; i < idarray.length; i++ ) {
+						removeRepeatingRow("repeating_moves_"+idarray[i]);
+					}
+					log("moves removed");
+					setAttrs(attrs,{},function() { log("reset clause done"); }); // Set the resets after all this mess wraps up
+				});
+			} else if ( values.pbinitialized !== "yes" ) { // the big if
+
+				var initted = {};
+				initted["pbinitialized"] = "yes"; // set this early so we don't accidentally fire off the process twice
+				setAttrs(initted); // I figure once we've got the basic moves in, we should be able to admit we're done
+
+				log("Sheet is not initialized. Beginning process.");
+				var attrs = {};
 				attrs["playbook-key"] = "";
 				attrs["playbook-name"] = gTBK("Choose a playbook!");
 				attrs["experience_max"] = xpmax;
@@ -560,163 +1570,8 @@
 				attrs[`${stringid}_used`] = "no"; // Creates our starter String entry
 				var modifierid = "repeating_modifiers_" + generateActuallyUniqueRowID();
 				attrs[`${modifierid}_used`] = "no"; // Creates our starter modifier entry
-				attrs["rollprompt"] = "?{roll with modifier +/-?|0}"; // sets up our default rolling prompt
-				for(var [id,value] of Object.entries(playbooks) ) {
-					var newid = generateActuallyUniqueRowID();
-					var pbidpre = "repeating_playbooks_" + newid + "_";
-					var pbidkey = pbidpre + "key";
-					var pbidname = pbidpre + "name";
-					attrs[pbidkey] = id;
-					attrs[pbidname] = gTBK(value["name"]);
-
-					// We also need to create all the moves for all the playbooks within the data model, so they're available for selection. 
-					if ( typeof value["moves"] !== "undefined" ) {
-						log("We have defined moves.");
-						var mymoves = value["moves"];
-						log(mymoves);
-						for(var i=0; i < mymoves.length; i++ ) {
-							if ( i === 0 ) {
-								// then we need to insert a subheader that identifies the playbook moves
-								// this is a solo entry that doesn't actually contain a move, needs its own id
-								var subid = generateActuallyUniqueRowID();
-								var subidpre = "repeating_moves_" + subid + "_";
-								attrs[`${subidpre}playbook`] = id;
-								attrs[`${subidpre}subheader`] = gTBK(playbooks[id].name) + " " + gTBK("Playbook Moves");
-								attrs[`${subidpre}pbdefault`] = "yes";
-								attrs[`${subidpre}pbother`] = "yes";
-								attrs[`${subidpre}show`] = "no";
-							}
-							var mymove = mymoves[i];
-							var moveid = generateActuallyUniqueRowID();
-							var moveidpre = "repeating_moves_" + moveid + "_";
-							attrs[`${moveidpre}name`] = gTBK(mymove.name);
-							attrs[`${moveidpre}playbook`] = id; // the playbook key value
-							attrs[`${moveidpre}body`] = gTBK(mymove.body);
-							attrs[`${moveidpre}taken`] = "";
-							if ( typeof mymove.header !== "undefined" ) { attrs[`${moveidpre}header`] = gTBK(mymove.header); }
-							if ( typeof mymove.subheader !== "undefined" ) { attrs[`${moveidpre}subheader`] = gTBK(mymove.subheader); }
-							if ( typeof mymove.pbdefault !== "undefined" ) { attrs[`${moveidpre}pbdefault`] = mymove.pbdefault; }
-							if ( typeof mymove.pbother !== "undefined" ) { attrs[`${moveidpre}pbother`] = mymove.pbother; }
-							if ( typeof mymove.preamble !== "undefined" ) { attrs[`${moveidpre}preamble`] = gTBK(mymove.preamble); }
-							if ( typeof mymove.end !== "undefined" ) { attrs[`${moveidpre}end`] = gTBK(mymove.end); }
-							if ( typeof mymove.hit !== "undefined" ) { attrs[`${moveidpre}hit`] = gTBK(mymove.hit); }
-							if ( typeof mymove.mixed !== "undefined" ) { attrs[`${moveidpre}mixed`] = gTBK(mymove.mixed); }
-							if ( typeof mymove.miss !== "undefined" ) { attrs[`${moveidpre}miss`] = gTBK(mymove.miss); }
-							if ( typeof mymove.alternative !== "undefined" ) { attrs[`${moveidpre}alternative`] = gTBK(mymove.alternative); }
-							if ( typeof mymove.althit !== "undefined" ) { attrs[`${moveidpre}althit`] = gTBK(mymove.althit); }
-							if ( typeof mymove.altmixed !== "undefined" ) { attrs[`${moveidpre}altmixed`] = gTBK(mymove.altmixed); }
-							if ( typeof mymove.altmiss !== "undefined" ) { attrs[`${moveidpre}altmiss`] = gTBK(mymove.altmiss); }
-							if ( typeof mymove.rolled !== "undefined" && mymove.rolled === "yes" ) { 
-								log("This is a rolled move.");
-								var rc = "";
-								if ( typeof mymove.rolldefault !== "undefined" ) {
-									log("There is a default attribute");
-									if ( typeof stats[mymove.rolldefault] !== "undefined" ) {
-										rc = "|" + gTBK(stats[mymove.rolldefault]) + " " + gTBK("(Default)") + ",@{stat_" + mymove.rolldefault + "}";
-									}
-								} 
-								// building a string like |Sharp (Default),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}
-								for(var [statkey,statname] of Object.entries(stats)) {
-									rc = rc + "|" + gTBK(statname) + ",@{stat_" + statkey + "}";
-								}
-								log(rc);
-								attrs[`${moveidpre}rollconfig`] = rc;
-							}
-							// Now the expanding modulars: the blanks, and the bullets 
-							var mbullets = [ "bullets", "hitbullets", "mixedbullets", "missedbullets", "altbullets", "althitbullets", "altmixedbullets", "altmissedbullets" ];
-							for(var j=0; j < 5; j++) {
-								if ( typeof mymove.blanks !== "undefined" ) { 
-									if ( typeof mymove.blanks[j] !== "undefined" ) {
-										attrs[`${moveidpre}blankname${j}`] = gTBK(mymove.blanks[j].name);
-										if ( typeof mymove.blanks[j].suggestions !== "undefined" ) {
-											attrs[`${moveidpre}blanksuggestions${j}`] = gTBK(mymove.blanks[j].suggestions); 
-										}
-									}
-								}
-								// This will run us through the 7 modular bullet lists for this index (!!!!!!) 
-								for(var x=0; x < mbullets.length; x++) {
-									var fkey = mbullets[x];
-									if ( typeof mymove[fkey] !== "undefined" ) { // Then there's an bullet list of this type for this move
-										var flist = mymove[fkey];
-										var nosattheend = fkey.substring(0,fkey.length-1);
-										if ( typeof flist[j] !== "undefined" ) { // Then there's a bullet at this position in this list
-											attrs[`${moveidpre}${nosattheend}${j}`] = gTBK(flist[j]);
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-				// Here endeth the move creation section
-
-				// We also need to create all the basic moves. These are very similar to playbook moves, but we're gonna replicate code in case differences emerge over development.
-
-				var basicids = {};
-
-				for(var i=0; i < basicmoves.length; i++ ) {
-					var basicmove = basicmoves[i];
-					var moveid = generateActuallyUniqueRowID();
-					var moveidpre = "repeating_moves_" + moveid + "_";
-					if ( typeof basicmove.name !== "undefined" ) { 
-						attrs[`${moveidpre}name`] = gTBK(basicmove.name); 
-						basicids[attrs[`${moveidpre}name`]] = moveid; // helps us map for later
-					}
-					if ( typeof basicmove.body !== "undefined" ) { attrs[`${moveidpre}body`] = gTBK(basicmove.body); }
-					attrs[`${moveidpre}taken`] = "yes";
-					attrs[`${moveidpre}show`] = "yes";
-					if ( typeof basicmove.header !== "undefined" ) { attrs[`${moveidpre}header`] = gTBK(basicmove.header); }
-					if ( typeof basicmove.subheader !== "undefined" ) { attrs[`${moveidpre}subheader`] = gTBK(basicmove.subheader); }
-					if ( typeof basicmove.preamble !== "undefined" ) { attrs[`${moveidpre}preamble`] = gTBK(basicmove.preamble); }
-					if ( typeof basicmove.end !== "undefined" ) { attrs[`${moveidpre}end`] = gTBK(basicmove.end); }
-					if ( typeof basicmove.hit !== "undefined" ) { attrs[`${moveidpre}hit`] = gTBK(basicmove.hit); }
-					if ( typeof basicmove.mixed !== "undefined" ) { attrs[`${moveidpre}mixed`] = gTBK(basicmove.mixed); }
-					if ( typeof basicmove.miss !== "undefined" ) { attrs[`${moveidpre}miss`] = gTBK(basicmove.miss); }
-					if ( typeof basicmove.alternative !== "undefined" ) { attrs[`${moveidpre}alternative`] = gTBK(basicmove.alternative); }
-					if ( typeof basicmove.althit !== "undefined" ) { attrs[`${moveidpre}althit`] = gTBK(basicmove.althit); }
-					if ( typeof basicmove.altmixed !== "undefined" ) { attrs[`${moveidpre}altmixed`] = gTBK(basicmove.altmixed); }
-					if ( typeof basicmove.altmiss !== "undefined" ) { attrs[`${moveidpre}altmiss`] = gTBK(basicmove.altmiss); }
-					if ( typeof basicmove.rolled !== "undefined" && basicmove.rolled === "yes" ) { 
-						log("This is a rolled move.");
-						var rc = "";
-						if ( typeof basicmove.rolldefault !== "undefined" ) {
-							log("There is a default attribute");
-							if ( typeof stats[basicmove.rolldefault] !== "undefined" ) {
-								rc = "|" + stats[basicmove.rolldefault] + " " + gTBK("(Default)") + ",@{stat_" + basicmove.rolldefault + "}";
-							}
-						} 
-						// building a string like |Sharp (Default),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}
-						for(var [statkey,statname] of Object.entries(stats)) {
-							rc = rc + "|" + gTBK(statname) + ",@{stat_" + statkey + "}";
-						}
-						log(rc);
-						attrs[`${moveidpre}rollconfig`] = rc;
-					}
-					// Now the expanding modulars: the blanks, and the bullets 
-					var mbullets = [ "bullets", "hitbullets", "mixedbullets", "missedbullets", "altbullets", "althitbullets", "altmixedbullets", "altmissedbullets" ];
-					for(var j=0; j < 5; j++) {
-						if ( typeof basicmove.blanks !== "undefined" ) { 
-							if ( typeof basicmove.blanks[j] !== "undefined" ) {
-								attrs[`${moveidpre}blankname${j}`] = gTBK(basicmove.blanks[j].name);
-								if ( typeof basicmove.blanks[j].suggestions !== "undefined" ) {
-									attrs[`${moveidpre}blanksuggestions${j}`] = gTBK(basicmove.blanks[j].suggestions); 
-								}
-							}
-						}
-						// This will run us through the 7 modular bullet lists for this index (!!!!!!) 
-						for(var x=0; x < mbullets.length; x++) {
-							var fkey = mbullets[x];
-							if ( typeof basicmove[fkey] !== "undefined" ) { // Then there's an bullet list of this type for this move
-								var flist = basicmove[fkey];
-								var nosattheend = fkey.substring(0,fkey.length-1);
-								if ( typeof flist[j] !== "undefined" ) { // Then there's a bullet at this position in this list
-									attrs[`${moveidpre}${nosattheend}${j}`] = gTBK(flist[j]);
-								}
-							}
-						}
-					}
-				}
-				// Here endeth basic moves creation
+				var rwm = gTBK("roll with modifier");
+				attrs["rollprompt"] = "?{"+rwm+"|0}"; // sets up our default rolling prompt
 				for(var [id,value] of Object.entries(looks) ) {
 					var newid = generateActuallyUniqueRowID();
 					var lookpre = "repeating_looks_" + newid + "_";
@@ -739,27 +1594,6 @@
 					rc = rc + "|" + gTBK(value) + ",@{stat_" + id + "}";
 				}
 				attrs["stats-query"] = rc;
-				// usefully, conditions creation comes after moves creation, so we can map these to their affected moves too
-				for(var [id,value] of Object.entries(conditions) ) {
-					var newid = generateActuallyUniqueRowID();
-					var conpre = "repeating_conditions_" + newid + "_";
-					for(var [fid,fval] of Object.entries(value)) {
-						var fkey = conpre + fid;
-						attrs[fkey] = fval;
-						if ( fid === "name" ) { var fvt = gTBK(fval); attrs[fkey] = fvt; attrs[`condition-${fvt}`] = "no"; }
-						if ( fid === "penalized" ) { 
-							var fvt = gTBK(fval); attrs[fkey] = fvt; 
-							attrs[`condition-penalty-${fvt}`] = 0;
-							if ( typeof basicids[fvt] !== "undefined" ) {
-								var movefieldid = basicids[fvt];
-								attrs[`${conpre}moveid`] = movefieldid; // build that link 
-								attrs[`${movefieldid}conditionid`] = newid; // build that link other direction
-								attrs[`${movefieldid}condition-marked`] = "no"; // Initialize
-							}
-						}
-						if ( fid === "clearwhen" ) { var fvt = gTBK(fval); attrs[fkey] = fvt; }
-					}
-				}
 				for(var i = 0; i < advances.length; i++) {
 					var newid = generateActuallyUniqueRowID();
 					var apre = "repeating_advances_" + newid + "_";
@@ -771,15 +1605,260 @@
 					if ( typeof advance.preamble !== "undefined" ) { attrs[pid] = gTBK(advance.preamble); }
 					// if ( typeof advance.notelabel !== "undefined" ) { attrs[lid] = gTBK(advance.notelabel); }
 				}
-				log(attrs);
-				setAttrs(attrs);
-			}
+
+				// We can afford to pause here to set these attributes, then empty out the array to continue; it's no big deal if these ones run simultaneous to what's later, so async call is ok
+
+				setAttrs(attrs,{},function() { log("first-round initializations complete"); }); 
+
+				// Fresh array please
+
+				attrs = {};
+
+				for(var [id,value] of Object.entries(playbooks) ) {
+					var newid = generateActuallyUniqueRowID();
+					var pbidpre = "repeating_playbooks_" + newid + "_";
+					var pbidkey = pbidpre + "key";
+					var pbidname = pbidpre + "name";
+					attrs[pbidkey] = id;
+					attrs[pbidname] = gTBK(value["name"]);
+					var bioid = pbidpre + "bio";
+					if ( typeof value["bio"] !== "undefined" ) { attrs[bioid] = gTBK(value["bio"]); }
+
+					// We also need to create all the moves for all the playbooks within the data model, so they're available for selection. 
+					if ( typeof value["moves"] !== "undefined" ) {
+						var mymoves = value["moves"];
+						var category = "special";
+						for(var i=0; i < mymoves.length; i++ ) {
+				
+							var mymove = mymoves[i];
+							var moveid = generateActuallyUniqueRowID();
+							var moveidpre = "repeating_moves_" + moveid + "_";
+
+							attrs[`${moveidpre}name`] = gTBK(mymove.name);
+							attrs[`${moveidpre}playbook`] = id; // the playbook key value
+							attrs[`${moveidpre}body`] = gTBK(mymove.body);
+							attrs[`${moveidpre}taken`] = "";
+							attrs[`${moveidpre}long`] = "no";
+							if ( typeof mymove.header !== "undefined" ) { attrs[`${moveidpre}header`] = gTBK(mymove.header); }
+							if ( typeof mymove.subheader !== "undefined" ) {
+								if ( mymove.subheader === "Playbook Moves" ) {
+									category = "playbook"; // setting it for this and all subsequent moves until changed again
+								} else if ( mymove.subheader === "Truths of Heart and Blade" ) {
+									category = "truths"; // setting it for this and all subsequent moves until changed again
+								}
+								attrs[`${moveidpre}subheader`] = gTBK(mymove.subheader) + " (" + gTBK(playbooks[id].name) + ")";
+							}
+							attrs[`${moveidpre}category`] = category;
+							if ( typeof mymove.instructions !== "undefined" ) { attrs[`${moveidpre}instructions`] = gTBK(mymove.instructions); }
+							if ( typeof mymove.tracklabel !== "undefined" ) { attrs[`${moveidpre}tracklabel`] = gTBK(mymove.tracklabel); }
+							if ( typeof mymove.pbdefault !== "undefined" ) { attrs[`${moveidpre}pbdefault`] = mymove.pbdefault; }
+							if ( typeof mymove.pbother !== "undefined" ) { attrs[`${moveidpre}pbother`] = mymove.pbother; }
+							if ( typeof mymove.preamble !== "undefined" ) { attrs[`${moveidpre}preamble`] = gTBK(mymove.preamble); attrs[`${moveidpre}long`] = "yes"; }
+							if ( typeof mymove.end !== "undefined" ) { attrs[`${moveidpre}end`] = gTBK(mymove.end); attrs[`${moveidpre}long`] = "yes"; }
+							if ( typeof mymove.hit !== "undefined" ) { attrs[`${moveidpre}hit`] = gTBK(mymove.hit); attrs[`${moveidpre}long`] = "yes"; }
+							if ( typeof mymove.mixed !== "undefined" ) { attrs[`${moveidpre}mixed`] = gTBK(mymove.mixed); attrs[`${moveidpre}long`] = "yes"; }
+							if ( typeof mymove.miss !== "undefined" ) { attrs[`${moveidpre}miss`] = gTBK(mymove.miss); attrs[`${moveidpre}long`] = "yes"; }
+							if ( typeof mymove.alternative !== "undefined" ) { attrs[`${moveidpre}alternative`] = gTBK(mymove.alternative); attrs[`${moveidpre}long`] = "yes"; }
+							if ( typeof mymove.althit !== "undefined" ) { attrs[`${moveidpre}althit`] = gTBK(mymove.althit); attrs[`${moveidpre}long`] = "yes"; }
+							if ( typeof mymove.altmixed !== "undefined" ) { attrs[`${moveidpre}altmixed`] = gTBK(mymove.altmixed); attrs[`${moveidpre}long`] = "yes"; }
+							if ( typeof mymove.altmiss !== "undefined" ) { attrs[`${moveidpre}altmiss`] = gTBK(mymove.altmiss); attrs[`${moveidpre}long`] = "yes"; }
+							if ( typeof mymove.rolled !== "undefined" && mymove.rolled === "yes" ) { 
+								var rc = "";
+								if ( typeof mymove.rolldefault !== "undefined" ) {
+									if ( typeof stats[mymove.rolldefault] !== "undefined" ) {
+										rc = "|" + gTBK(stats[mymove.rolldefault]) + " " + gTBK("(Default)") + ",@{stat_" + mymove.rolldefault + "}";
+									} else if ( mymove.rolldefault === "conditions-marked" ) {
+										rc = "|" + gTBK("Number of Conditions marked") + " " + gTBK("(Default)") + ",@{" + mymove.rolldefault + "}";
+									} else {
+										log(`Was not able to parse ${mymove.rolldefault} as a rollable attribute`);
+									}
+								} 
+								// building a string like |Sharp (Default),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}
+								for(var [statkey,statname] of Object.entries(stats)) {
+									rc = rc + "|" + gTBK(statname) + ",@{stat_" + statkey + "}";
+								}
+								attrs[`${moveidpre}rollconfig`] = rc;
+							}
+							// Now the expanding modulars: the blanks, and the bullets 
+							// Currently blanks support up to 10, bullets support up to 5
+							for(var j=0; j < 10; j++) {
+								if ( typeof mymove.blanks !== "undefined" ) {
+									if ( typeof mymove.blanks[j] !== "undefined" ) {
+										attrs[`${moveidpre}long`] = "yes";
+										attrs[`${moveidpre}blankname${j}`] = gTBK(mymove.blanks[j].name);
+										if ( typeof mymove.blanks[j].suggestions !== "undefined" ) {
+											attrs[`${moveidpre}blanksuggestions${j}`] = gTBK(mymove.blanks[j].suggestions); 
+										}
+										if ( typeof mymove.blanks[j].checkbox !== "undefined" ) {
+											attrs[`${moveidpre}checkbox${j}`] = mymove.blanks[j].checkbox;
+										}
+									}
+								}
+							}
+							var mbullets = [ "bullets", "hitbullets", "mixedbullets", "missedbullets", "altbullets", "althitbullets", "altmixedbullets", "altmissedbullets" ];
+							for(var j=0; j < 5; j++) {
+								// This will run us through the 7 modular bullet lists for this index (!!!!!!) 
+								for(var x=0; x < mbullets.length; x++) {
+									var fkey = mbullets[x];
+									if ( typeof mymove[fkey] !== "undefined" ) { 
+										// Then there's an bullet list of this type for this move 
+										attrs[`${moveidpre}long`] = "yes";
+										var flist = mymove[fkey];
+										var nosattheend = fkey.substring(0,fkey.length-1);
+										if ( typeof flist[j] !== "undefined" ) { // Then there's a bullet at this position in this list
+											attrs[`${moveidpre}${nosattheend}${j}`] = gTBK(flist[j]);
+										}
+									}
+								}
+							}
+							// At this point attrs should contain a bunch of stuff we need to know in order to populate the shareoptions field. ZOD!
+							var options = "{{blank0=@{blank0}}} {{blank1=@{blank1}}} {{blank2=@{blank2}}} {{blank3=@{blank3}}} {{blank4=@{blank4}}} {{blank5=@{blank5}}} {{blank6=@{blank6}}} {{blank7=@{blank7}}} {{blank8=@{blank8}}} {{blank9=@{blank9}}} ";
+							var shareoptid = moveidpre + "shareoptions";
+							for(var j=0; j < moveoptions.length; j++) {
+								var moid = moveidpre + moveoptions[j];
+								if ( typeof attrs[moid] !== "undefined" && attrs[moid] !== "" ) {
+									options = options + "{{"+moveoptions[j]+"=@{"+moveoptions[j]+"}}} ";
+								}
+							}
+							attrs[shareoptid] = options;
+						} // End for loop on all of the moves for this playbook
+					} // end if block for typeof value["moves"] !== "undefined"
+					// log(`ending configuration for ${value.name}`);
+				}
+
+				// ZED?
+				var pbmoveattrs = attrs; // save the attributes object; will set later
+				attrs = {}; // empty it
+
+				// Here endeth the move creation section
+
+				// We also need to create all the basic moves. These are very similar to playbook moves, but we're gonna replicate code in case differences emerge over development.
+
+				var basicids = {};
+
+				log("configuring basic moves");
+				for(var i=0; i < basicmoves.length; i++ ) {
+					var basicmove = basicmoves[i];
+					var moveid = generateActuallyUniqueRowID();
+					var moveidpre = "repeating_moves_" + moveid + "_";
+					attrs[`${moveidpre}category`] = "basic";
+					if ( typeof basicmove.name !== "undefined" ) { 
+						attrs[`${moveidpre}name`] = gTBK(basicmove.name); 
+						basicids[attrs[`${moveidpre}name`]] = moveid; // helps us map for later
+					}
+					if ( typeof basicmove.body !== "undefined" ) { attrs[`${moveidpre}body`] = gTBK(basicmove.body); }
+					attrs[`${moveidpre}taken`] = "yes";
+					attrs[`${moveidpre}show`] = "yes";
+					attrs[`${moveidpre}long`] = "no";
+					if ( typeof basicmove.header !== "undefined" ) { attrs[`${moveidpre}header`] = gTBK(basicmove.header); }
+					if ( typeof basicmove.subheader !== "undefined" ) { attrs[`${moveidpre}subheader`] = gTBK(basicmove.subheader); }
+					if ( typeof basicmove.preamble !== "undefined" ) { attrs[`${moveidpre}preamble`] = gTBK(basicmove.preamble); attrs[`${moveidpre}long`] = "yes"; }
+					if ( typeof basicmove.end !== "undefined" ) { attrs[`${moveidpre}end`] = gTBK(basicmove.end); attrs[`${moveidpre}long`] = "yes"; }
+					if ( typeof basicmove.hit !== "undefined" ) { attrs[`${moveidpre}hit`] = gTBK(basicmove.hit); attrs[`${moveidpre}long`] = "yes"; }
+					if ( typeof basicmove.mixed !== "undefined" ) { attrs[`${moveidpre}mixed`] = gTBK(basicmove.mixed); attrs[`${moveidpre}long`] = "yes"; }
+					if ( typeof basicmove.miss !== "undefined" ) { attrs[`${moveidpre}miss`] = gTBK(basicmove.miss); attrs[`${moveidpre}long`] = "yes"; }
+					if ( typeof basicmove.alternative !== "undefined" ) { attrs[`${moveidpre}alternative`] = gTBK(basicmove.alternative);  attrs[`${moveidpre}long`] = "yes";}
+					if ( typeof basicmove.althit !== "undefined" ) { attrs[`${moveidpre}althit`] = gTBK(basicmove.althit);  attrs[`${moveidpre}long`] = "yes"; }
+					if ( typeof basicmove.altmixed !== "undefined" ) { attrs[`${moveidpre}altmixed`] = gTBK(basicmove.altmixed);  attrs[`${moveidpre}long`] = "yes"; }
+					if ( typeof basicmove.altmiss !== "undefined" ) { attrs[`${moveidpre}altmiss`] = gTBK(basicmove.altmiss); attrs[`${moveidpre}long`] = "yes"; }
+					if ( typeof basicmove.rolled !== "undefined" && basicmove.rolled === "yes" ) { 
+						var rc = "";
+						if ( typeof basicmove.rolldefault !== "undefined" ) {
+							if ( typeof stats[basicmove.rolldefault] !== "undefined" ) {
+								rc = "|" + stats[basicmove.rolldefault] + " " + gTBK("(Default)") + ",@{stat_" + basicmove.rolldefault + "}";
+							}
+						} 
+						// building a string like |Sharp (Default),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}
+						for(var [statkey,statname] of Object.entries(stats)) {
+							rc = rc + "|" + gTBK(statname) + ",@{stat_" + statkey + "}";
+						}
+						attrs[`${moveidpre}rollconfig`] = rc;
+					}
+					// Now the expanding modulars: the blanks, and the bullets 
+					var mbullets = [ "bullets", "hitbullets", "mixedbullets", "missedbullets", "altbullets", "althitbullets", "altmixedbullets", "altmissedbullets" ];
+					for(var j=0; j < 5; j++) {
+						if ( typeof basicmove.blanks !== "undefined" ) { 
+							if ( typeof basicmove.blanks[j] !== "undefined" ) {
+								attrs[`${moveidpre}long`] = "yes";
+								attrs[`${moveidpre}blankname${j}`] = gTBK(basicmove.blanks[j].name);
+								if ( typeof basicmove.blanks[j].suggestions !== "undefined" ) {
+									attrs[`${moveidpre}blanksuggestions${j}`] = gTBK(basicmove.blanks[j].suggestions); 
+								}
+							}
+						}
+						// This will run us through the 7 modular bullet lists for this index (!!!!!!) 
+						for(var x=0; x < mbullets.length; x++) {
+							var fkey = mbullets[x];
+							if ( typeof basicmove[fkey] !== "undefined" ) { // Then there's an bullet list of this type for this move
+								var flist = basicmove[fkey];
+								var nosattheend = fkey.substring(0,fkey.length-1);
+								if ( typeof flist[j] !== "undefined" ) { // Then there's a bullet at this position in this list
+									attrs[`${moveidpre}long`] = "yes";
+									attrs[`${moveidpre}${nosattheend}${j}`] = gTBK(flist[j]);
+								}
+							}
+						}
+					}
+				}
+				log("done configuring basic moves");
+
+				// Here endeth basic moves creation
+
+				// ZED pbmoveattrs, basicmoveattrs
+
+				var basicmoveattrs = attrs; // save the attributes object; will set later
+				attrs = {}; // empty it
+
+				// usefully, conditions creation comes after moves creation, so we can map these to their affected moves too
+				attrs["conditions-penalty"] = -2;
+				log("configuring conditions");
+				for(var [id,value] of Object.entries(conditions) ) {
+					var newid = generateActuallyUniqueRowID();
+					var conpre = "repeating_conditions_" + newid + "_";
+					for(var [fid,fval] of Object.entries(value)) {
+						var fkey = conpre + fid;
+						attrs[fkey] = fval;
+						if ( fid === "penalty" && attrs["conditions-penalty"] !== fval ) {
+							attrs["conditions-penalty"] = fval; // Set the default conditions penalty based on these values; will need to get smarter if there are ever varied values at setup time
+						}
+						if ( fid === "name" ) { var fvt = gTBK(fval); attrs[fkey] = fvt; attrs[`condition-${fvt}`] = "no"; }
+						if ( fid === "penalized" ) { 
+							var fvt = gTBK(fval); attrs[fkey] = fvt; 
+							attrs[`condition-penalty-${fvt}`] = 0;
+							if ( typeof basicids[fvt] !== "undefined" ) { // IMPORTANT! Needs access to the basicids object populated by the basic moves building effort. So conditions must execute sequentially after basic moves. Be careful not to populate basicids in something asynchronous.
+								var movefieldid = basicids[fvt];
+								attrs[`${conpre}moveid`] = movefieldid; // build that link 
+								attrs[`${movefieldid}conditionid`] = newid; // build that link other direction
+								attrs[`${movefieldid}condition-marked`] = "no"; // Initialize
+								attrs[`${movefieldid}modifier-marked`] = gTBK("Modifier is not marked."); // Initialize
+							}
+						}
+						if ( fid === "clearwhen" ) { var fvt = gTBK(fval); attrs[fkey] = fvt; }
+					}
+				}
+				// ZED?
+				setAttrs(attrs,{},function {
+					log("done configuring conditions");
+				});
+
+				log("configuring playbook moves");
+				setAttrs(pbmoveattrs,{},function() {
+					log("playbook moves configured");
+					log("configuring basic moves");
+					setAttrs(basicmoveattrs,{},function() {
+						log("basic moves configured");
+						log("sheet configuration should be complete");
+					});
+				});
+
+			} // end the big if
 		});
 	});
 
 	// Do everything that needs to be done when picking a playbook from the menu
 
 	on("clicked:repeating_playbooks:choose-playbook", function(e) {
+		log("Handler: clicked:repeating_playbooks:choose-playbook");
 		var rowprefix = (e.sourceAttribute).slice(0,-15); // Strips off the 'choose-playbook'
 		var keyid = rowprefix + "key";
 		var nameid = rowprefix + "name";
@@ -792,10 +1871,13 @@
 			}
 			attrs[selectedid] = "S"; // S for a star, k for a heart
 			attrs["playbook-current-row"] = rowprefix;
-			attrs["movesinstructions"] = "";
+			
+			// following may no longer be relevant with the rework on instructions
+			/* attrs["movesinstructions"] = "";
 			if ( typeof playbooks[a[keyid]].movesinstructions !== "undefined" ) {
 				attrs["movesinstructions"] = gTBK(playbooks[a[keyid]].movesinstructions);
-			}
+			} 
+		 */
 			setAttrs(attrs);
 
 			// Looks section 
@@ -827,9 +1909,6 @@
 			// starting stats section
 
 			var mystarts = playbooks[a[keyid]].startstats;
-			log(mystarts);
-			log(a[keyid]);
-			log(playbooks[a[keyid]]);
 
 			// Clear out any existing starting stats sets, they don't matter
 			getSectionIDs("repeating_startingstats", function(idarray) {
@@ -873,7 +1952,6 @@
 			// Moves section 
 
 			getSectionIDs("moves", function(mf) {
-				log(mf);
 				var mfields = [];
 				for(var i=0; i < mf.length; i++ ) {
 					mfields[i*4] = "repeating_moves_" + mf[i] + "_playbook";
@@ -906,9 +1984,7 @@
 							mattrs[showid] = "no"; // for now; eventually we may have differing behaviors depending on current display settings
 						}
 					}
-					log(mattrs);
 					setAttrs(mattrs);
-
 				});
 
 			});
@@ -918,9 +1994,10 @@
 
 	// Sharing support for moves; we must be able to know when a field is blank, and not include it in the share formula.
 	
-	var moveoptions = ["alternative", "altbullet0", "altbullet1", "altbullet2", "altbullet3", "altbullet4", "althit", "althitbullet0", "althitbullet1", "althitbullet2", "althitbullet3", "althitbullet4", "altmiss", "altmissbullet0", "altmissbullet1", "altmissbullet2", "altmissbullet3", "altmissbullet4", "altmixed", "altmixedbullet0", "altmixedbullet1", "altmixedbullet2", "altmixedbullet3", "altmixedbullet4", "blankname0", "blankname1", "blankname2", "blankname3", "blankname4", "bullet0", "bullet1", "bullet2", "bullet3", "bullet4", "end", "hit", "hitbullet0", "hitbullet1", "hitbullet2", "hitbullet3", "hitbullet4", "miss", "missbullet0", "missbullet1", "missbullet2", "missbullet3", "missbullet4", "mixed", "mixedbullet0", "mixedbullet1", "mixedbullet2", "mixedbullet3", "mixedbullet4", "preamble"]; // special cases: "blank0", "blank1", "blank2", "blank3", "blank4"
-	
+/*	
+	// This is not firing off reliably. It may be best if this is not handled via a change handler, but rather in the setup. That has its challenges, but it's going to be better there.
 	on("change:repeating_moves:name", function(e) { // if a name is changed, then the move's been created, so we should make sure to prep its share button
+		log("Handler: change:repeating_moves:name");
 		var moveprefix = (e.sourceAttribute).slice(0,-4); // Strips off the 'name'
 		var grabs = []; var sets = {};
 		for(var i=0; i < moveoptions.length; i++) {
@@ -939,38 +2016,162 @@
 			setAttrs(sets);
 		});
 	});
+*/
 
-	// There are three filter modes for moves
+	// There are three additive-ish filter modes for moves
 	
 	on("clicked:movefilter-pbmoves", function() {
+		log("Handler: clicked:movefilter-pbmoves");
 		getSectionIDs("moves", function(mf) {
-			log(mf);
+			var mfields = ["playbook-key","movefilter-hidespecial","movefilter-hideplaybook","movefilter-hidetruths","movefilter-hidebasic","movefilter"];
+			var offset = mfields.length;
+			for(var i=0; i < mf.length; i++ ) {
+				mfields[i*4+offset] = "repeating_moves_" + mf[i] + "_playbook";
+				mfields[i*4+offset+1] = "repeating_moves_" + mf[i] + "_pbdefault";
+				mfields[i*4+offset+2] = "repeating_moves_" + mf[i] + "_taken";
+				mfields[i*4+offset+3] = "repeating_moves_" + mf[i] + "_category";
+			}
+			getAttrs(mfields, function(ma) {
+				var mattrs = { "movefilter-takenonly": "no" };
+				for(var i=0; i < mf.length; i++) {
+					var mbookid = "repeating_moves_" + mf[i] + "_playbook"; var mbook = ma[mbookid];
+					var mdefid  = "repeating_moves_" + mf[i] + "_pbdefault"; var mdef = ma[mdefid];
+					var takeid  = "repeating_moves_" + mf[i] + "_taken"; var taken = ma[takeid];
+					var catid   = "repeating_moves_" + mf[i] + "_category"; var cat = ma[catid];
+					var showid  = "repeating_moves_" + mf[i] + "_show";
+					if ( mbook === ma["playbook-key"] || taken === "yes" ) { // If it's marked taken or it's in the active playbook, show it
+						mattrs[showid] = "yes";
+						// unless...
+						if ( cat === "basic" && typeof ma["movefilter-hidebasic"] !== "undefined" && ma["movefilter-hidebasic"] === "yes" ) {
+							mattrs[showid] = "no";
+						} else if ( cat === "special" && typeof ma["movefilter-hidespecial"] !== "undefined" && ma["movefilter-hidespecial"] === "yes" ) {
+							mattrs[showid] = "no";
+						} else if ( cat === "playbook" && typeof ma["movefilter-hideplaybook"] !== "undefined" && ma["movefilter-hideplaybook"] === "yes" ) {
+							mattrs[showid] = "no";
+						} else if ( cat === "truths" && typeof ma["movefilter-hidetruths"] !== "undefined" && ma["movefilter-hidetruths"] === "yes" ) {
+							mattrs[showid] = "no";
+						}
+					} else { // if it's not, hide it
+						mattrs[showid] = "no";
+					}
+				}
+				setAttrs(mattrs);
+			});
+		});
+	});
+
+	on("clicked:movefilter-allmoves", function() {
+		log("Handler: clicked:movefilter-allmoves");
+		getSectionIDs("moves", function(mf) {
+			var mfields = ["playbook-key","movefilter-hidespecial","movefilter-hideplaybook","movefilter-hidetruths","movefilter-hidebasic","movefilter"];
+			var offset = mfields.length;
+			for(var i=0; i < mf.length; i++ ) {
+				mfields[i*4+offset] = "repeating_moves_" + mf[i] + "_playbook";
+				mfields[i*4+offset+1] = "repeating_moves_" + mf[i] + "_pbdefault";
+				mfields[i*4+offset+2] = "repeating_moves_" + mf[i] + "_taken";
+				mfields[i*4+offset+3] = "repeating_moves_" + mf[i] + "_category";
+			}
+			getAttrs(mfields, function(ma) {
+				var mattrs = { "movefilter-takenonly": "no" };
+				for(var i=0; i < mf.length; i++) {
+					var mbookid = "repeating_moves_" + mf[i] + "_playbook"; var mbook = ma[mbookid];
+					var mdefid  = "repeating_moves_" + mf[i] + "_pbdefault"; var mdef = ma[mdefid];
+					var takeid  = "repeating_moves_" + mf[i] + "_taken"; var taken = ma[takeid];
+					var catid   = "repeating_moves_" + mf[i] + "_category"; var cat = ma[catid];
+					var showid  = "repeating_moves_" + mf[i] + "_show";
+					mattrs[showid] = "yes"; // Show everything.
+					// unless...
+					if ( cat === "basic" && typeof ma["movefilter-hidebasic"] !== "undefined" && ma["movefilter-hidebasic"] === "yes" ) {
+						mattrs[showid] = "no";
+					} else if ( cat === "special" && typeof ma["movefilter-hidespecial"] !== "undefined" && ma["movefilter-hidespecial"] === "yes" ) {
+						mattrs[showid] = "no";
+					} else if ( cat === "playbook" && typeof ma["movefilter-hideplaybook"] !== "undefined" && ma["movefilter-hideplaybook"] === "yes" ) {
+						mattrs[showid] = "no";
+					} else if ( cat === "truths" && typeof ma["movefilter-hidetruths"] !== "undefined" && ma["movefilter-hidetruths"] === "yes" ) {
+						mattrs[showid] = "no";
+					}
+				}
+				setAttrs(mattrs);
+			});
+		});
+	});
+
+	on("clicked:repeating_playbooks:movefilter-onepb", function(e) {
+		log("Handler: clicked:repeating_playbooks:movefilter-onepb");
+		var rowprefix = (e.sourceAttribute).slice(0,-16); // Strips off the 'movefilter-onepb'
+		getAttrs([`${rowprefix}key`], function(kf) {
+			getSectionIDs("moves", function(mf) {
+				var mfields = ["playbook-key","movefilter-hidespecial","movefilter-hideplaybook","movefilter-hidetruths","movefilter-hidebasic","movefilter"];
+				var offset = mfields.length;
+				for(var i=0; i < mf.length; i++ ) {
+					mfields[i*4+offset] = "repeating_moves_" + mf[i] + "_playbook";
+					mfields[i*4+offset+1] = "repeating_moves_" + mf[i] + "_pbdefault";
+					mfields[i*4+offset+2] = "repeating_moves_" + mf[i] + "_taken";
+					mfields[i*4+offset+3] = "repeating_moves_" + mf[i] + "_category";
+				}
+				getAttrs(mfields, function(ma) {
+					var mattrs = { "movefilter-takenonly": "no" };
+					for(var i=0; i < mf.length; i++) {
+						var mbookid = "repeating_moves_" + mf[i] + "_playbook"; var mbook = ma[mbookid];
+						var mdefid  = "repeating_moves_" + mf[i] + "_pbdefault"; var mdef = ma[mdefid];
+						var takeid  = "repeating_moves_" + mf[i] + "_taken"; var taken = ma[takeid];
+						var catid   = "repeating_moves_" + mf[i] + "_category"; var cat = ma[catid];
+						var showid  = "repeating_moves_" + mf[i] + "_show";
+						if ( mbook === kf[`${rowprefix}key`] || ma[takeid] === "yes" ) { // If it's marked taken or it's in the active playbook or it's in the kf indicated playbook, show it
+							mattrs[showid] = "yes";
+							// unless...
+							if ( cat === "basic" && typeof ma["movefilter-hidebasic"] !== "undefined" && ma["movefilter-hidebasic"] === "yes" ) {
+								mattrs[showid] = "no";
+							} else if ( cat === "special" && typeof ma["movefilter-hidespecial"] !== "undefined" && ma["movefilter-hidespecial"] === "yes" ) {
+								mattrs[showid] = "no";
+							} else if ( cat === "playbook" && typeof ma["movefilter-hideplaybook"] !== "undefined" && ma["movefilter-hideplaybook"] === "yes" ) {
+								mattrs[showid] = "no";
+							} else if ( cat === "truths" && typeof ma["movefilter-hidetruths"] !== "undefined" && ma["movefilter-hidetruths"] === "yes" ) {
+								mattrs[showid] = "no";
+							}
+						} else if ( mbook === ma["playbook-key"] ) {
+							// Nothing happens; existing value should be left as-is. (Respecting user's prior choice for showing or not showing untakens in their own playbook.)
+						} else { // if it's not, hide it
+							mattrs[showid] = "no";
+						}
+					}
+					setAttrs(mattrs);
+				});
+			});
+		});
+	});
+
+	on("clicked:movefilter-hideprohibited", function() {
+		log("Handler: clicked:movefilter-hideprohibited");
+		getSectionIDs("moves", function(mf) {
 			var mfields = ["playbook-key"];
 			for(var i=0; i < mf.length; i++ ) {
 				mfields[i*3+1] = "repeating_moves_" + mf[i] + "_playbook";
-				mfields[i*3+2] = "repeating_moves_" + mf[i] + "_pbdefault";
+				mfields[i*3+2] = "repeating_moves_" + mf[i] + "_pbother";
 				mfields[i*3+3] = "repeating_moves_" + mf[i] + "_taken";
 			}
 			getAttrs(mfields, function(ma) {
 				var mattrs = {};
 				for(var i=0; i < mf.length; i++) {
 					var mbookid = "repeating_moves_" + mf[i] + "_playbook"; var mbook = ma[mbookid];
-					var mdefid = "repeating_moves_" + mf[i] + "_pbdefault"; var mdef = ma[mdefid];
+					var moid = "repeating_moves_" + mf[i] + "_pbother"; var mo = ma[moid];
 					var takeid = "repeating_moves_" + mf[i] + "_taken";
 					var showid = "repeating_moves_" + mf[i] + "_show";
-					if ( mbook === ma["playbook-key"] || ma[takeid] === "yes" ) { // If it's marked taken or it's in the active playbook, show it
-						mattrs[showid] = "yes";
-					} else { // if it's not, hide it
+					if ( ma[takeid] !== "yes" && ma["playbook-key"] !== mbook && typeof mo !== "undefined" && mo === "no" ) {
+						// If it's not a taken move, pbother = no, and current playbook isn't this move's playbook, hide the move
 						mattrs[showid] = "no";
 					}
 				}
-				log(mattrs);
 				setAttrs(mattrs);
 			});
 		});
 	});
-	
+
+// Checkbox handlers for move filtering
+
+/*
 	on("clicked:movefilter-takenonly", function() {
+		log("Handler: clicked:movefilter-takenonly");
 		getSectionIDs("moves", function(mf) {
 			log(mf);
 			var mfields = ["playbook-key"];
@@ -997,89 +2198,146 @@
 			});
 		});
 	});
-	
-	on("clicked:movefilter-allmoves", function() {
+*/
+
+	on("change:movefilter-takenonly", function() {
+		log("Handler: change:movefilter-takenonly");
 		getSectionIDs("moves", function(mf) {
-			log(mf);
-			var mfields = ["playbook-key"];
+			var mfields = ["playbook-key","movefilter-takenonly"];
 			for(var i=0; i < mf.length; i++ ) {
-				mfields[i*3+1] = "repeating_moves_" + mf[i] + "_playbook";
-				mfields[i*3+2] = "repeating_moves_" + mf[i] + "_pbdefault";
-				mfields[i*3+3] = "repeating_moves_" + mf[i] + "_taken";
+				mfields[i*2+2] = "repeating_moves_" + mf[i] + "_playbook";
+				mfields[i*2+3] = "repeating_moves_" + mf[i] + "_taken";
 			}
 			getAttrs(mfields, function(ma) {
 				var mattrs = {};
+				var state = "yes";
+				if ( typeof ma["movefilter-takenonly"] !== "undefined" && ma["movefilter-takenonly"] === "yes" ) {
+					state = "no";
+				}
 				for(var i=0; i < mf.length; i++) {
 					var mbookid = "repeating_moves_" + mf[i] + "_playbook"; var mbook = ma[mbookid];
-					var mdefid = "repeating_moves_" + mf[i] + "_pbdefault"; var mdef = ma[mdefid];
-					var takeid = "repeating_moves_" + mf[i] + "_taken";
+					var takeid = "repeating_moves_" + mf[i] + "_taken"; var taken = ma[takeid];
 					var showid = "repeating_moves_" + mf[i] + "_show";
-					mattrs[showid] = "yes"; // Show everything.
+					// log(`for ${mf[i]} taken is ${taken}`);
+					if ( typeof taken === "undefined" || taken !== "yes" ) {
+						if ( state === "no" ) { 
+							mattrs[showid] = "no";
+						} else if ( state === "yes" && mbook === ma["playbook-key"] ) {
+							// If turned off, then the minimum is to show the current playbook's untaken moves. Other ones from outside the playbook will need to be re-revealed.
+							mattrs[showid] = "yes";
+						}
+					}
 				}
-				log(mattrs);
 				setAttrs(mattrs);
 			});
 		});
 	});
 
-	on("clicked:repeating_playbooks:movefilter-onepb", function(e) {
-		var rowprefix = (e.sourceAttribute).slice(0,-16); // Strips off the 'movefilter-onepb'
-		getAttrs([`${rowprefix}key`], function(kf) {
-			getSectionIDs("moves", function(mf) {
-				log(mf);
-				var mfields = ["playbook-key"];
-				for(var i=0; i < mf.length; i++ ) {
-					mfields[i*3+1] = "repeating_moves_" + mf[i] + "_playbook";
-					mfields[i*3+2] = "repeating_moves_" + mf[i] + "_pbdefault";
-					mfields[i*3+3] = "repeating_moves_" + mf[i] + "_taken";
-				}
-				getAttrs(mfields, function(ma) {
-					var mattrs = {};
-					for(var i=0; i < mf.length; i++) {
-						var mbookid = "repeating_moves_" + mf[i] + "_playbook"; var mbook = ma[mbookid];
-						var mdefid = "repeating_moves_" + mf[i] + "_pbdefault"; var mdef = ma[mdefid];
-						var takeid = "repeating_moves_" + mf[i] + "_taken";
-						var showid = "repeating_moves_" + mf[i] + "_show";
-						if ( mbook === kf[`${rowprefix}key`] || ma[takeid] === "yes" ) { // If it's marked taken or it's in the active playbook or it's in the kf indicated playbook, show it
-							mattrs[showid] = "yes";
-						} else if ( mbook === ma["playbook-key"] ) {
-							// Nothing happens; existing value should be left as-is. (Respecting user's prior choice for showing or not showing untakens in their playbook.)
-						} else { // if it's not, hide it
-							mattrs[showid] = "no";
-						}
-					}
-					log(mattrs);
-					setAttrs(mattrs);
-				});
-			});
-		});
-	});
+// These all address hiding things by their (hidden) category code: special, playbook, truths, and basic. Truths is specific to TSL, but I'm leaving it in the main code here because it's easy enough to scrub out as needed.
 
 	on("change:movefilter-hidebasic", function() {
+		log("Handler: change:movefilter-hidebasic");
 		getSectionIDs("moves", function(mf) {
-			log(mf);
 			var mfields = ["playbook-key","movefilter-hidebasic"];
 			for(var i=0; i < mf.length; i++ ) {
 				mfields[i*2+2] = "repeating_moves_" + mf[i] + "_playbook";
-				mfields[i*2+3] = "repeating_moves_" + mf[i] + "_header"; // if this is not null or empty, then we need to do a little extra
+				mfields[i*2+3] = "repeating_moves_" + mf[i] + "_category"; // if this is not null or empty, then we need to do a little extra
 			}
 			getAttrs(mfields, function(ma) {
 				var mattrs = {};
 				for(var i=0; i < mf.length; i++) {
 					var mbookid = "repeating_moves_" + mf[i] + "_playbook"; var mbook = ma[mbookid];
-					var headid = "repeating_moves_" + mf[i] + "_header"; var head = ma[headid];
-					var takeid = "repeating_moves_" + mf[i] + "_taken";
+					var catid = "repeating_moves_" + mf[i] + "_category"; var cat = ma[catid];
 					var showid = "repeating_moves_" + mf[i] + "_show";
 					var state = "yes";
 					if ( typeof ma["movefilter-hidebasic"] !== "undefined" && ma["movefilter-hidebasic"] === "yes" ) {
 						state = "no";
 					}
-					if ( mbook === "" ) { // If it has no playbook, it's a basic move; for this handler, these are the only moves we care about
+					if ( cat === "basic" ) { // For basic moves the logic is simple.
 						mattrs[showid] = state;
-						mattrs[takeid] = state;
 					}
 				}
-				log(mattrs);
+				setAttrs(mattrs);
+			});
+		});
+	});
+
+	on("change:movefilter-hidespecial", function() {
+		log("Handler: change:movefilter-hidespecial");
+		getSectionIDs("moves", function(mf) {
+			var mfields = ["playbook-key","movefilter-hidespecial"];
+			for(var i=0; i < mf.length; i++ ) {
+				mfields[i*2+2] = "repeating_moves_" + mf[i] + "_playbook";
+				mfields[i*2+3] = "repeating_moves_" + mf[i] + "_category"; // if this is not null or empty, then we need to do a little extra
+			}
+			getAttrs(mfields, function(ma) {
+				var mattrs = {};
+				for(var i=0; i < mf.length; i++) {
+					var mbookid = "repeating_moves_" + mf[i] + "_playbook"; var mbook = ma[mbookid];
+					var catid = "repeating_moves_" + mf[i] + "_category"; var cat = ma[catid];
+					var showid = "repeating_moves_" + mf[i] + "_show";
+					var state = "yes";
+					if ( typeof ma["movefilter-hidespecial"] !== "undefined" && ma["movefilter-hidespecial"] === "yes" ) {
+						state = "no";
+					}
+					if ( cat === "special" && ( state === "no" || ( state === "yes" && mbook === ma["playbook-key"] ) ) ) { // We can only toggle things back to visibility if they're part of the current playbook; but if it's hide them, hide them all
+						mattrs[showid] = state;
+					}
+				}
+				setAttrs(mattrs);
+			});
+		});
+	});
+
+	on("change:movefilter-hidetruths", function() {
+		log("Handler: change:movefilter-hidetruths");
+		getSectionIDs("moves", function(mf) {
+			var mfields = ["playbook-key","movefilter-hidetruths"];
+			for(var i=0; i < mf.length; i++ ) {
+				mfields[i*2+2] = "repeating_moves_" + mf[i] + "_playbook";
+				mfields[i*2+3] = "repeating_moves_" + mf[i] + "_category"; // if this is not null or empty, then we need to do a little extra
+			}
+			getAttrs(mfields, function(ma) {
+				var mattrs = {};
+				for(var i=0; i < mf.length; i++) {
+					var mbookid = "repeating_moves_" + mf[i] + "_playbook"; var mbook = ma[mbookid];
+					var catid = "repeating_moves_" + mf[i] + "_category"; var cat = ma[catid];
+					var showid = "repeating_moves_" + mf[i] + "_show";
+					var state = "yes";
+					if ( typeof ma["movefilter-hidetruths"] !== "undefined" && ma["movefilter-hidetruths"] === "yes" ) {
+						state = "no";
+					}
+					if ( cat === "truths" && ( state === "no" || ( state === "yes" && mbook === ma["playbook-key"] ) ) ) { // We can only toggle things back to visibility if they're part of the current playbook; but if it's hide them, hide them all
+						mattrs[showid] = state;
+					}
+				}
+				setAttrs(mattrs);
+			});
+		});
+	});
+
+	on("change:movefilter-hideplaybook", function() {
+		log("Handler: change:movefilter-hideplaybook");
+		getSectionIDs("moves", function(mf) {
+			var mfields = ["playbook-key","movefilter-hideplaybook"];
+			for(var i=0; i < mf.length; i++ ) {
+				mfields[i*2+2] = "repeating_moves_" + mf[i] + "_playbook";
+				mfields[i*2+3] = "repeating_moves_" + mf[i] + "_category"; // if this is not null or empty, then we need to do a little extra
+			}
+			getAttrs(mfields, function(ma) {
+				var mattrs = {};
+				for(var i=0; i < mf.length; i++) {
+					var mbookid = "repeating_moves_" + mf[i] + "_playbook"; var mbook = ma[mbookid];
+					var catid = "repeating_moves_" + mf[i] + "_category"; var cat = ma[catid];
+					var showid = "repeating_moves_" + mf[i] + "_show";
+					var state = "yes";
+					if ( typeof ma["movefilter-hideplaybook"] !== "undefined" && ma["movefilter-hideplaybook"] === "yes" ) {
+						state = "no";
+					}
+					if ( cat === "playbook" && ( state === "no" || ( state === "yes" && mbook === ma["playbook-key"] ) ) ) { // We can only toggle things back to visibility if they're part of the current playbook; but if it's hide them, hide them all
+						mattrs[showid] = state;
+					}
+				}
 				setAttrs(mattrs);
 			});
 		});
@@ -1088,31 +2346,26 @@
 	// A set of starting stats has been picked. Get going.
 
 	on("clicked:repeating_startingstats:choose-startingstats", function(e) {
+		log("Handler: clicked:repeating_startingstats:choose-startingstats");
 		var rowprefix = (e.sourceAttribute).slice(0,-20); // Strips off the 'choose-startingstats'
 		var setid = rowprefix + "set";
 		getAttrs(["starting-chosen", setid], function(a) {
 			if ( typeof a["starting-chosen"] === "undefined" || a["starting-chosen"] === "0" ) { // Then we may proceed, otherwise buttons are locked
 				var statspec = a[setid];
 				var statmap = {};
-				log("statspec, splitting");
 				var statspeclist = statspec.toString().split(/ /);
-				log(statspec);
 				for(var j=0; j < statspeclist.length; j++ ) {
 					var parts = statspeclist[j].toString().split(/:/);
 					var statkey = parts[0];
 					var statval = parts[1];
 					statmap[statkey] = statval;
 				}
-				log(statmap);
 				getSectionIDs("stats", function(sf) {
-					log(sf);
 					var sfields = [];
 					for(var i=0; i < sf.length; i++ ) {
 						sfields[i] = "repeating_stats_" + sf[i] + "_key";
 					}
-					log(sfields);
 					getAttrs(sfields,function(sa) {
-						log(sa);
 						var sattrs = { "starting-chosen": "yes" };
 						for(var i=0; i < sfields.length; i++) {
 							var key = sa[sfields[i]];
@@ -1121,7 +2374,6 @@
 								sattrs[rateid] = statmap[key];
 							}
 						}
-						log(sattrs);
 						setAttrs(sattrs);
 					});
 				});
@@ -1132,15 +2384,37 @@
 	});
 
 	// Conditions -> Modifiers
+
+	on("change:conditions-penalty", function() {
+		log("Handler: change:conditions-penalty");
+		getSectionIDs("conditions", function(f) {
+			var fields = ["conditions-penalty"];
+			for(var i=0; i < f.length; i++) {
+				fields[i+1] = "repeating_conditions_" + f[i] + "_penalty";
+			}
+			getAttrs(fields, function(c) {
+				var cats = {};
+				for(var i=0; i < f.length; i++) {
+					var penaltyid = fields[i+1];
+					if ( typeof c["conditions-penalty"] !== "undefined" && c[penaltyid] !== c["conditions-penalty"] ) {
+						cats[penaltyid] = c["conditions-penalty"];
+					}
+				}
+				setAttrs(cats);
+			});
+		});
+	});
 	
 	on("change:repeating_conditions:marked", function(e) {
+		log("Handler: change:repeating_conditions:marked");
 		var rowid = (e.sourceAttribute).slice(0,-6); // Strips off the 'marked';
 		var markedid = `${rowid}marked`;
 		var nameid = `${rowid}name`;
 		var penaltyid = `${rowid}penalty`;
 		var moveidid = `${rowid}moveid`;
 		var penalizedid = `${rowid}penalized`;
-		getAttrs([nameid,markedid,penaltyid,penalizedid,moveidid],function(m) {
+		var tcmid = "conditions-marked";
+		getAttrs([nameid, markedid, penaltyid, penalizedid, moveidid ],function(m) {
 			var marked = m[markedid];
 			var name = m[nameid];
 			var penalty = m[penaltyid];
@@ -1154,12 +2428,33 @@
 				sattrs[`${modifierid}_modifier`] = penalty;
 				sattrs[`${modifierid}_state`] = "ongoing";
 				sattrs[`${modifierid}_target`] = penalized + ' ('+name+')';
+				// We'll also want to flip a flag on the relevant basic move entry.
 				if ( typeof m[moveidid] !== "undefined" && m[moveidid] !== "" ) {
 					var moveid = m[moveidid];
 					sattrs[`repeating_moves_${moveid}_condition-marked`] = "yes";
+					sattrs[`${modifierid}_moveid`] = moveid;
+					sattrs[`repeating_moves_${moveid}_modifier-marked`] = gTBK("Modifier is not marked.");
+					sattrs[`repeating_moves_${moveid}_modifierid`] = modifierid;
 				}
-				// We'll also want to flip a flag on the relevant basic move entry.
-				setAttrs(sattrs);
+
+				// But before we can set our attributes we also need to make sure to update our tally, and make it accurate.
+				getSectionIDs("repeating_conditions", function(carray) {
+					var cids = [];
+					for ( var i=0; i < carray.length; i++ ) {
+						cids[i] = "repeating_conditions_" + carray[i] + "_marked";
+					}
+					getAttrs(cids,function(c) {
+						var tally = 0;
+						for ( var i=0; i < carray.length; i++ ) {
+							if ( typeof c[cids[i]] !== "undefined" && c[cids[i]] === "yes" ) {
+								tally++;
+							}
+						}
+						sattrs[tcmid] = tally;
+						setAttrs(sattrs);
+					});
+				});
+
 			} else {
 				// then it is unmarked, and we need to make sure we do not retain a modifier matching it
 				// rowid contains the condition's id; we need to find all modifiers that match it in case there was a misfire that caused it to get populated to the list twice
@@ -1185,7 +2480,25 @@
 							var moveid = m[moveidid];
 							u[`repeating_moves_${moveid}_condition-marked`] = "no";
 						}
-						setAttrs(u);
+
+						// But before we can set our attributes we also need to make sure to update our tally, and make it accurate.
+						getSectionIDs("repeating_conditions", function(carray) {
+							var cids = [];
+							for ( var i=0; i < carray.length; i++ ) {
+								cids[i] = "repeating_conditions_" + carray[i] + "_marked";
+							}
+							getAttrs(cids,function(c) {
+								var tally = 0;
+								for ( var i=0; i < carray.length; i++ ) {
+									if ( typeof c[cids[i]] !== "undefined" && c[cids[i]] === "yes" ) {
+										tally++;
+									}
+								}
+								u[tcmid] = tally;
+								setAttrs(u);
+							});
+						});
+
 					});
 				});
 			}
@@ -1194,9 +2507,41 @@
 	
 	// Modifiers stuff
 
+	
+	// act_mark-modifier
+
+	on("clicked:repeating_moves:mark-modifier", function(e) {
+		log("Handler: clicked:repeating_moves:mark-modifier");
+		var rowid = (e.sourceAttribute).slice(0,-13); // Strips off the 'mark-modifier';
+		var modidid = rowid + "modifierid";
+		getAttrs([modidid], function(m) {
+			var modifierid = m[modidid];
+			if ( typeof modifierid !== "undefined" && modifierid !== "" ) {
+				// Then I've hopefully got a valid modifier here, and I can mess with its clicking. But, that also means I need to getAttrs a second time. 
+				var rollmodid = modifierid + "_rollmod";
+				getAttrs([rollmodid], function(r) {
+					log(r);
+					if ( typeof r[rollmodid] !== "undefined" && r[rollmodid] !== "" ) {
+						var rollmod = r[rollmodid];
+						var mats = {};
+						if ( rollmod === "yes" ) {
+							mats[rollmodid] = "no";
+						} else {
+							mats[rollmodid] = "yes";
+						}
+						setAttrs(mats);
+					} else {
+						log("there was no valid rollmod value");
+					}
+				});
+			}
+		});
+	});
+
 	/* attr_state, act_state */
 
 	on("clicked:mods-checkall", function() {
+		log("Handler: clicked:mods-checkall");
 		getSectionIDs("repeating_modifiers", function(idarray) {
 			mlist = [];
 			for(var i=0; i < idarray.length; i++ ) {
@@ -1218,6 +2563,7 @@
 	});
 
 	on("clicked:mods-uncheckall", function() {
+		log("Handler: clicked:mods-uncheckall");
 		getSectionIDs("repeating_modifiers", function(idarray) {
 			mlist = [];
 			for(var i=0; i < idarray.length; i++ ) {
@@ -1239,12 +2585,11 @@
 	});
 
 	on("clicked:repeating_modifiers:state", function(e) {
+		log("Handler: clicked:repeating_modifiers:state");
 		var rowid = (e.sourceAttribute).slice(0,-5); // Strips off the 'state';
-		log(`Toggling state for modifier ${rowid}`);
 		var stateid = `${rowid}state`; // attr_state and act_state effectively have the same id, I think? but let's reconstruct.
 		var statenid = `${rowid}statename`; // grab the name of the state too
 		getAttrs([stateid],function(s) {
-			log(s);
 			var sattrs = {};
 			if ( s[stateid] === "forward" ) {
 				sattrs[stateid] = "ongoing";
@@ -1253,39 +2598,36 @@
 				sattrs[stateid] = "forward";
 				sattrs[statenid] = gTBK("forward");
 			}
-			log(sattrs);
 			setAttrs(sattrs);
 		});
 	});
 
 	on("clicked:repeating_modifiers:trash", function(e) {
+		log("Handler: clicked:repeating_modifiers:trash");
 		var rowid = (e.sourceAttribute).slice(0,-6); // Strips off the '_trash';
-		log(`Setting deletion flag for modifier ${rowid}`);
 		var sattrs = {};
 		sattrs[`${rowid}_used`] = "delete";
 		sattrs[`${rowid}_modifier`] = "0"; // This'll make sure the totalling handler will fire off
 		setAttrs(sattrs); // Please trigger the handler
 	});
 
-	on("change:repeating_modifiers:rollmod change:repeating_modifiers:modifier remove:repeating_modifiers", function() { // this had a blanket change:repeating_modifiers originally, don't think that's right
-		log("consequential change detected in repeating_modifiers");
+	// this had a blanket change:repeating_modifiers originally, don't think that's right
+
+	on("change:repeating_modifiers:rollmod change:repeating_modifiers:modifier remove:repeating_modifiers", function() { 
+		log("Handler: change:repeating_modifiers:rollmod change:repeating_modifiers:modifier remove:repeating_modifiers");
 		// We need to examine whether any entries count as unused, and if there are multiples, remove them, and if there are none, add one.
 		var mlist = []; var mflist = [];
 		getSectionIDs("repeating_modifiers", function(idarray) {
-			log("got the ID list");
-			log(idarray);
 			for(var i=0; i < idarray.length; i++ ) {
 				mlist[i] = "repeating_modifiers_"+idarray[i];
-				mflist[i*4] = mlist[i] + "_used";
-				mflist[i*4+1] = mlist[i] + "_rollmod";
-				mflist[i*4+2] = mlist[i] + "_target"; 
-				mflist[i*4+3] = mlist[i] + "_modifier"; 
+				mflist[i*5] = mlist[i] + "_used";
+				mflist[i*5+1] = mlist[i] + "_rollmod";
+				mflist[i*5+2] = mlist[i] + "_target"; 
+				mflist[i*5+3] = mlist[i] + "_modifier"; 
+				mflist[i*5+4] = mlist[i] + "_moveid"; 
 			}
-			log("assembled list");
-			log(mlist);
 			var sattrs = {};
 			if ( mlist.length > 0 ) {
-				log("list is not empty, so we parse");
 				getAttrs(mflist, function(mf) {
 					var keeper = false;
 					var tally = 0;
@@ -1294,6 +2636,7 @@
 						var rollmodid = mlist[i] + "_rollmod"; var rollmod = mf[rollmodid];
 						var targetid = mlist[i] + "_target"; var target = mf[targetid];
 						var modifierid = mlist[i] + "_modifier"; var modifier = mf[modifierid];
+						var moveidid = mlist[i] + "_moveid"; var moveid = mf[moveidid];
 						if ( used === "delete" ) {
 							removeRepeatingRow(mlist[i],{silent:true}); 
 						} else if (
@@ -1311,7 +2654,8 @@
 							}
 						} else { 
 							sattrs[usedid] = "yes";
-							if ( typeof rollmod !== "undefined" && rollmod === "yes" ) { // if we're here, we can also figure out the total of checkmarked stuff
+							// if we're here, we can also figure out the total of checkmarked stuff
+							if ( typeof rollmod !== "undefined" && rollmod === "yes" ) { 
 								var mod = 0;
 								if ( typeof modifier !== "undefined" ) {
 									mod = parseInt(modifier);
@@ -1320,6 +2664,16 @@
 									}
 									tally = tally + mod;
 								}
+								// we should make a note in the appropriate move
+								if ( typeof moveid !== "undefined" && moveid !== "" ) {
+									sattrs[`repeating_moves_${moveid}_modifier-marked`] = gTBK("Modifier is marked.");								
+									sattrs[`repeating_moves_${moveid}_modifierid`] = mlist[i]; // store the modifier's ID on the move								
+								} else {
+									log("no moveid");
+								}
+							} else if ( typeof moveid !== "undefined" && moveid !== "" ) {
+								// rollmod isn't yes, so if there's an associated move, its modifier is not marked
+								sattrs[`repeating_moves_${moveid}_modifier-marked`] = gTBK("Modifier is not marked.");
 							}
 						}
 					}
@@ -1331,15 +2685,11 @@
 						var modifierid = "repeating_modifiers_" + generateActuallyUniqueRowID();
 						sattrs[`${modifierid}_used`] = "no"; // Creates our a new modifier entry
 					}
-					log("Setting attributes for modifiers");
-					log(sattrs);
 					setAttrs(sattrs,{silent:true}); // We don't need to trigger a bunch of runs through this handler because we're setting attributes *with* this handler.
 				});
 			} else { // I suspect if there's no array, getAttrs doesn't bother to fire off its callback, which is a shame because I expected it to.
-				log("list is empty, so we create");
 				var modifierid = "repeating_modifiers_" + generateActuallyUniqueRowID();
 				sattrs[`${modifierid}_used`] = "no"; // Creates our a new modifier entry
-				log(sattrs);
 				setAttrs(sattrs,{silent:true}); // We don't need to trigger a bunch of runs through this handler because we're setting attributes *with* this handler.
 			}
 		});
@@ -1348,31 +2698,26 @@
 	// Strings stuff
 
 	on("clicked:repeating_strings:trash", function(e) {
+		log("Handler: clicked:repeating_strings:trash");
 		var rowid = (e.sourceAttribute).slice(0,-6); // Strips off the '_trash';
-		log(`Setting deletion flag for string ${rowid}`);
 		var sattrs = {};
 		sattrs[`${rowid}_used`] = "delete";
 		setAttrs(sattrs); // Please trigger the fucking handler
 	});
 
 	on("change:repeating_strings remove:repeating_strings", function() {
-		log("change detected in repeating_strings");
+		log("Handler: change:repeating_strings remove:repeating_strings");
 		// We need to examine whether any entries count as unused, and if there are multiples, remove them, and if there are none, add one.
 		var slist = []; var sflist = [];
 		getSectionIDs("repeating_strings", function(idarray) {
-			log("got the ID list");
-			log(idarray);
 			for(var i=0; i < idarray.length; i++ ) {
 				slist[i] = "repeating_strings_"+idarray[i];
 				sflist[i*6] = slist[i] + "_used";
 				sflist[i*6+1] = slist[i] + "_check1"; sflist[i*6+2] = slist[i] + "_check2"; sflist[i*6+3] = slist[i] + "_check3"; sflist[i*6+4] = slist[i] + "_check4";
 				sflist[i*6+5] = slist[i] + "_target";
 			}
-			log("assembled list");
-			log(slist);
 			var sattrs = {};
 			if ( slist.length > 0 ) {
-				log("list is not empty, so we parse");
 				getAttrs(sflist, function(sf) {
 					var keeper = false;
 					for(var i=0; i < slist.length; i++ ) {
@@ -1407,15 +2752,11 @@
 						var stringid = "repeating_strings_" + generateActuallyUniqueRowID();
 						sattrs[`${stringid}_used`] = "no"; // Creates our a new String entry
 					}
-					log("Setting attributes for strings");
-					log(sattrs);
 					setAttrs(sattrs,{silent:true}); // We don't need to trigger a bunch of runs through this handler because we're setting attributes *with* this handler.
 				});
 			} else { // I suspect if there's no array, getAttrs doesn't bother to fire off its callback, which is a shame because I expected it to.
-				log("list is empty, so we create");
 				var stringid = "repeating_strings_" + generateActuallyUniqueRowID();
 				sattrs[`${stringid}_used`] = "no"; // Creates our a new String entry
-				log(sattrs);
 				setAttrs(sattrs,{silent:true}); // We don't need to trigger a bunch of runs through this handler because we're setting attributes *with* this handler.
 			}
 		});
@@ -1426,10 +2767,9 @@
 	var rwm = gTBK("roll with modifier");
 
 	on("change:rollprompt-mods change:rollprompt-query change:modifier-tally", function() {
-		log("We've got a change in roll prompt configuration");
+		log("Handler: change:rollprompt-mods change:rollprompt-query change:modifier-tally");
 		getAttrs(["rollprompt-mods","rollprompt-query","modifier-tally"], function(f) {
-			log(f);
-			var defaultconfig = "?{" + rwm + " +/-?|0}";
+			var defaultconfig = "?{" + rwm + "|0}";
 			var usemods = "1";
 			if ( typeof f["rollprompt-mods"] === "undefined" || f["rollprompt-mods"] !== "1") {
 				usemods = "0";
@@ -1443,11 +2783,10 @@
 				tally = f["modifier-tally"];
 			}
 			var attrs = {};
-			log(`usemods ${usemods} doquery ${doquery} tally ${tally}`);
 			if ( usemods === "1" ) {
 				if ( doquery === "1" ) {
 					// Use standard default config
-					attrs["rollprompt"] = "?{" + rwm + "+/-?|"+tally+"}";
+					attrs["rollprompt"] = "?{" + rwm + "|"+tally+"}";
 				} else {
 					// We don't want to be bothered by it at all
 					attrs["rollprompt"] = tally; // just add the tally
@@ -1465,9 +2804,14 @@
 		});
 	});
 
+	// Externalizers
+	
+	// Initialization of the sheet does not fire off any of these, because it's silent:true.
+
 	// Externalize stats data
 	
 	on("change:repeating_stats:rating", function(e) {
+		log("Handler: change:repeating_stats:rating");
 		var rowprefix = (e.sourceAttribute).slice(0,-6); // strips off 'rating';
 		var rid = rowprefix + "rating";
 		var kid = rowprefix + "key";
@@ -1481,7 +2825,11 @@
 
 	// Externalize move selection data
 
-	on("change:repeating_moves:taken", function(e) {
+	// Don't think we can get away with this — too much chance of it getting fired off tons of times during setup
+
+	/*
+	on("change:repeating_moves:taken", function(e) { 
+		log("Handler: change:repeating_moves:taken");
 		var rowprefix = (e.sourceAttribute).slice(0,-5); // strips off 'taken';
 		var mid = rowprefix + "taken";
 		var pid = rowprefix + "playbook";
@@ -1495,16 +2843,19 @@
 			setAttrs(mats);
 		});
 	});
-
+	*/
+	
 	// Externalize conditions data
 	
 	on("change:repeating_conditions:marked", function(e) {
+		log("Handler: change:repeating_conditions:marked");
 		var rowprefix = (e.sourceAttribute).slice(0,-6); // strips off 'marked';
 		var mid = rowprefix + "marked";
 		var pdid = rowprefix + "penalized";
+		var moveidid = rowprefix + "moveid";
 		var pnid = rowprefix + "penalty";
 		var nid = rowprefix + "name";
-		getAttrs([mid,pdid,pnid,nid], function(a) {
+		getAttrs([mid,pdid,pnid,nid,moveidid], function(a) {
 			var cats = {};
 			var catname = "condition-" + a[nid];
 			var marked = "no";
@@ -1523,6 +2874,7 @@
 	// Externalize experience data
 	
 	on("change:xp1 change:xp2 change:xp3 change:xp4 change:xp5", function() {
+		log("Handler: change:xp1 change:xp2 change:xp3 change:xp4 change:xp5");
 		getAttrs(["xp1","xp2","xp3","xp4","xp5"], function(x) {
 			var sum = 0;
 			for(var i=1; i <= 5; i++) {
