@@ -184,8 +184,13 @@ input[type="number"].sheet-bignumber {
 	font-size: 90%;
 }
 
+.sheet-string .sheet-tooltip-pop,
 .sheet-condition .sheet-condition-pop {
 	width: 175px;
+}
+
+.sheet-string .sheet-tooltip-pop button {
+	z-index: 3;
 }
 
 .sheet-tooltip.sheet-bio:hover, .sheet-tooltip.sheet-bio {
@@ -224,6 +229,8 @@ input[type="number"].sheet-bignumber {
 	border-color: transparent transparent #f8cccf transparent;
 }
 
+.sheet-string.sheet-tooltip div:focus-within + .sheet-tooltip-pop,
+/* .sheet-string:hover .sheet-tooltip .sheet-tooltip-pop, */
 .sheet-tooltip:hover .sheet-tooltip-pop,
 .sheet-condition:hover .sheet-condition-pop {
 	visibility: visible;
@@ -405,6 +412,7 @@ input.sheet-popmenu-reveal[value="yes"] + * {
 }
 
 .sheet-buttonless:hover, 
+.sheet-buttonless:hover span,
 .sheet-buttonless:hover .sheet-bold,
 input.sheet-popmenu-select[value=""] + button:hover,
 .sheet-popmenu-box .repitem:hover {
@@ -479,6 +487,15 @@ input:focus + div.sheet-examples-list {
 	width: 100%;
 }
 
+
+input.sheet-show-on-checked, input.sheet-show-on-checked + * {
+	display: none;
+}
+
+input.sheet-show-on-checked:checked + * {
+	display: initial;
+}
+
 input.sheet-hide-on-checked, input.sheet-hide-on-checked:checked + * {
 	display: none;
 }
@@ -518,6 +535,7 @@ input.sheet-make-plus[value^="-"] + span.sheet-make-plus:before {
 	font-weight: normal;
 	content: ']';
 	color: #e85761;
+	background: white;
 }
 
 .sheet-mod-state-button[value="ongoing"] + button:before {
@@ -526,6 +544,7 @@ input.sheet-make-plus[value^="-"] + span.sheet-make-plus:before {
 	font-weight: normal;
 	content: '0';
 	color: #e85761;
+	background: white;
 }
 
 .sheet-mod-state-button + button > span {
@@ -536,11 +555,15 @@ input.sheet-make-plus[value^="-"] + span.sheet-make-plus:before {
 .sheet-mod-state-button + button:focus > span {
 	display: inline;
 	color: white;
+	background: #e85761;
 }
 
+.sheet-mod-state-button + button:hover,
+.sheet-mod-state-button + button:focus,
 .sheet-mod-state-button + button:hover:before,
 .sheet-mod-state-button + button:focus:before {
 	color: white;
+	background: #e85761;
 }
 
 /* Tried this, it looks shit */
@@ -1224,10 +1247,23 @@ input.sheet-tracker-number:focus::-webkit-inner-spin-button {
 	text-indent: 0;
 }
 
+.sheet-string .sheet-string-mask,
+.sheet-string .sheet-string-mask ~ .sheet-string-checked-reveal {
+	display: none;
+}
+
+.sheet-string-mask:checked ~ .sheet-string-checked-reveal {
+	display: block;
+}
+
 textarea {
 	height: 24pt;
 	margin-bottom: 0px;
 	width: calc( 100% - 12px ); /* Note to fred: the spaces between terms in calc are apparently meaningful and needed */
+}
+
+.sheet-smallbutton {
+	font-size: 12px;
 }
 
 ul {

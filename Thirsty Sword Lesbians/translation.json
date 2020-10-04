@@ -603,5 +603,15 @@
 	"You may experience a short pause before your choice displays, slightly longer for playbooks that haven't been loaded yet! Please note that when displayed, moves will appear in your character sheet in the order in which you loaded them.": "You may experience a short pause before your choice displays, slightly longer for playbooks that haven't been loaded yet! Please note that when displayed, moves will appear in your character sheet in the order in which you loaded them.",
 	"Load and": "Load and",
 	"Load": "Load",
+	"Consult the basic move “Influence with a String” for options to influence others for good or ill. Several basic and playbook moves also have effects upon spending a string.": "Consult the basic move “Influence with a String” for options to influence others for good or ill. Several basic and playbook moves also have effects upon spending a string.",
+	"Gaining a fourth String on someone triggers a String Advance. The basic moves reference contains details.": "Gaining a fourth String on someone triggers a String Advance. The basic moves reference contains details.",
+	"Quick String Spending Buttons": "Quick String Spending Buttons",
+	"+3 to a roll to Figure Out or Emotionally Support": "+3 to a roll to Figure Out or Emotionally Support",
+	"Spend on any other purpose for": "Spend on any other purpose for",
+	"Spend": "Spend",
+	"Other": "Other",
+	"Figure Out": "Figure Out",
+	"Time for a String Advance!": "Time for a String Advance!",
+	"Introduce yourself!": "Introduce yourself!",
 	"__end__": "END OF JSON"
 }

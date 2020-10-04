@@ -2500,6 +2500,8 @@
 				sattrs[`${modifierid}_condition-id`] = rowid;
 				sattrs[`${modifierid}_modifier`] = penalty;
 				sattrs[`${modifierid}_state`] = "ongoing";
+				sattrs[`${modifierid}_statename`] = gTBK("ongoing");
+
 				sattrs[`${modifierid}_target`] = penalized + ' ('+name+')';
 				// We'll also want to flip a flag on the relevant basic move entry.
 				if ( typeof m[moveidid] !== "undefined" && m[moveidid] !== "" ) {
@@ -2578,6 +2580,69 @@
 		});
 	});
 	
+	// Strings -> Modifiers
+	
+	on("clicked:repeating_strings:spend", function(e) {
+		log("Handler: clicked:repeating_strings:spend");
+		var rowprefix = (e.sourceAttribute).slice(0,-5); // Strips off the 'spend'
+		var checks = [`${rowprefix}check4`,`${rowprefix}check3`,`${rowprefix}check2`,`${rowprefix}check1`];
+		getAttrs(checks, function(check) {
+			var unmarkid = "";
+			for(var i = 0; i < checks.length; i++ ) {
+				if ( typeof check[checks[i]] !== "undefined" && check[checks[i]] === "1" ) {
+					unmarkid = checks[i]; break;
+				}
+			}
+			if ( unmarkid !== "" ) {
+				var attrs = {};
+				attrs[unmarkid] = 0;
+				setAttrs(attrs);
+			}
+		});
+		// _spend
+	});
+	
+	// Strings -> Modifiers
+	
+	on("clicked:repeating_strings:spend3forwardes clicked:repeating_strings:spend3forwardfo", function(e) {
+		log("Handler: clicked:repeating_strings:" + (e.sourceAttribute));
+		var rowprefix = (e.sourceAttribute).slice(0,-15); // Strips off the 'spend3forwardXX'
+		var movekey = (e.sourceAttribute).slice(-2); log(movekey);
+		var checks = [`${rowprefix}target`,`${rowprefix}check4`,`${rowprefix}check3`,`${rowprefix}check2`,`${rowprefix}check1`];
+		getAttrs(checks, function(check) {
+			var unmarkid = "";
+			for(var i = 1; i < checks.length; i++ ) {
+				if ( typeof check[checks[i]] !== "undefined" && check[checks[i]] === "1" ) {
+					unmarkid = checks[i]; break;
+				}
+			}
+			if ( unmarkid !== "" ) {
+				var attrs = {};
+				attrs[unmarkid] = 0; // That spends it
+				// now, create the modifier
+				var modid = "repeating_modifiers_" + generateActuallyUniqueRowID() + "_";
+				var stateid = `${modid}state`; // attr_state and act_state effectively have the same id, I think? but let's reconstruct.
+				var statenid = `${modid}statename`; // grab the name of the state too
+				var rmid = `${modid}rollmod`;
+				var mnid = `${modid}modifier`;
+				var tid = `${modid}target`;
+				attrs[stateid] = "forward";
+				attrs[statenid] = gTBK("forward");
+				attrs[rmid] = "yes";
+				attrs[mnid] = 3;
+				var move = "";
+				if ( movekey === "es" ) {
+					move = gTBK("Emotional Support");
+				} else if ( movekey === "fo" ) {
+					move = gTBK("Figure Out");
+				}
+				attrs[tid] = move + ' (' + check[`${rowprefix}target`] + ')';
+				setAttrs(attrs);
+			}
+		});
+		// _spend
+	});
+
 	// Modifiers stuff
 
 	
@@ -2693,22 +2758,30 @@
 		getSectionIDs("repeating_modifiers", function(idarray) {
 			for(var i=0; i < idarray.length; i++ ) {
 				mlist[i] = "repeating_modifiers_"+idarray[i];
-				mflist[i*5] = mlist[i] + "_used";
-				mflist[i*5+1] = mlist[i] + "_rollmod";
-				mflist[i*5+2] = mlist[i] + "_target"; 
-				mflist[i*5+3] = mlist[i] + "_modifier"; 
-				mflist[i*5+4] = mlist[i] + "_moveid"; 
+				mflist[i*6] = mlist[i] + "_used";
+				mflist[i*6+1] = mlist[i] + "_rollmod";
+				mflist[i*6+2] = mlist[i] + "_target"; 
+				mflist[i*6+3] = mlist[i] + "_modifier"; 
+				mflist[i*6+4] = mlist[i] + "_moveid"; 
+				mflist[i*6+5] = mlist[i] + "_statename";
 			}
+			mflist[idarray.length*6] = "rollprompt-mods";
 			var sattrs = {};
 			if ( mlist.length > 0 ) {
 				getAttrs(mflist, function(mf) {
 					var keeper = false;
 					var tally = 0;
+					var tallytext = ""; var tscount = 0;
+					var dostring = false;
+					if ( typeof mf["rollprompt-mods"] !== "undefined" && mf["rollprompt-mods"] === "1" ) {
+						dostring = true;
+					}
 					for(var i=0; i < mlist.length; i++ ) {
 						var usedid = mlist[i] + "_used"; var used = mf[usedid];
 						var rollmodid = mlist[i] + "_rollmod"; var rollmod = mf[rollmodid];
 						var targetid = mlist[i] + "_target"; var target = mf[targetid];
 						var modifierid = mlist[i] + "_modifier"; var modifier = mf[modifierid];
+						var snid = mlist[i] + "_statename"; var statename = mf[snid];
 						var moveidid = mlist[i] + "_moveid"; var moveid = mf[moveidid];
 						if ( used === "delete" ) {
 							removeRepeatingRow(mlist[i],{silent:true}); 
@@ -2736,6 +2809,10 @@
 										mod = 0;
 									}
 									tally = tally + mod;
+									// ZODDDD {{title=@{name}}} statename target modifier
+									tscount = tscount + 1;
+									var sign = ""; if ( mod > -1 ) { sign = "+"; }
+									tallytext = tallytext + " {{checked" + tscount + "=" + sign + mod + " " + statename + " " + target + "}}";
 								}
 								// we should make a note in the appropriate move
 								if ( typeof moveid !== "undefined" && moveid !== "" ) {
@@ -2750,8 +2827,7 @@
 							}
 						}
 					}
-					// We've exited the for loop, so we can set the modifier tally.
-					sattrs["modifier-tally"] = tally;
+
 					// At this point if keeper = true, we don't need to create a new row; if false, we do.
 					// Or, if there are no entries, we need to create one, because there always needs to be at least one.
 					if ( ! keeper || mlist.length === 0 ) {
@@ -2759,6 +2835,9 @@
 						sattrs[`${modifierid}_used`] = "no"; // Creates our a new modifier entry
 					}
 					setAttrs(sattrs,{silent:true}); // We don't need to trigger a bunch of runs through this handler because we're setting attributes *with* this handler.
+					var actualtext = "";
+					if ( dostring ) { actualtext = tallytext; }
+					setAttrs({"modifier-tally": tally, "modifier-tally-text": actualtext, "modifier-tally-text-memory": tallytext}); // but we do need the tally to trigger side-effects
 				});
 			} else { // I suspect if there's no array, getAttrs doesn't bother to fire off its callback, which is a shame because I expected it to.
 				var modifierid = "repeating_modifiers_" + generateActuallyUniqueRowID();
@@ -2841,7 +2920,7 @@
 
 	on("change:rollprompt-mods change:rollprompt-query change:modifier-tally", function() {
 		log("Handler: change:rollprompt-mods change:rollprompt-query change:modifier-tally");
-		getAttrs(["rollprompt-mods","rollprompt-query","modifier-tally"], function(f) {
+		getAttrs(["rollprompt-mods","rollprompt-query","modifier-tally","modifier-tally-text-memory"], function(f) {
 			var defaultconfig = "?{" + rwm + "|0}";
 			var usemods = "1";
 			if ( typeof f["rollprompt-mods"] === "undefined" || f["rollprompt-mods"] !== "1") {
@@ -2864,6 +2943,8 @@
 					// We don't want to be bothered by it at all
 					attrs["rollprompt"] = tally; // just add the tally
 				}
+				// That's all well and good, but let's make sure we also grab the tally text value and make that active again.
+				attrs["modifier-tally-text"] = f["modifier-tally-text-memory"]; // if we're not looking at modifiers for the tally, it should not send this stuff, so empty it
 			} else { // then usemods === 0; we don't tally, so this is simple action
 				if ( doquery === "1" ) {
 					// Use standard default config
@@ -2872,6 +2953,7 @@
 					// We don't want to be bothered by it at all
 					attrs["rollprompt"] = "";
 				}
+				attrs["modifier-tally-text"] = ""; // if we're not looking at modifiers for the tally, it should not send this stuff, so empty it
 			}
 			setAttrs(attrs);
 		});
@@ -2893,6 +2975,36 @@
 			var rats = {};
 			rats[ratname] = a[rid];
 			setAttrs(rats);
+		});
+	});
+	
+	on("change:repeating_stats", function() {
+		log("Handler: change:repeating_stats");
+		var summary = "";
+		// name, rating
+		getSectionIDs("repeating_stats", function (a) {
+			var sids = [];
+			for(var i = 0; i < a.length; i++) {
+				sids[i*2] = "repeating_stats_" + a[i] + "_name";
+				sids[i*2+1] = "repeating_stats_" + a[i] + "_rating";
+			}
+			getAttrs(sids,function(f) {
+				for(var i = 0; i < a.length; i++) {
+					var name = f[sids[i*2]];
+					var rating = f[sids[i*2+1]];
+					var mod = parseInt(rating);
+					if ( isNaN(mod) ) {
+						mod = 0;
+					}
+					if ( mod > 0 ) {
+						rating = "+" + rating;
+					} else if ( mod == 0 ) {
+						rating = "=" + rating;
+					}
+					summary = summary + `${name}${rating} `;
+				}
+				setAttrs({ "stats-summary": summary });
+			});
 		});
 	});
 
@@ -2957,6 +3069,29 @@
 		});
 	});
 
+	// Externalize looks
+	
+	on("change:repeating_looks", function(e) {
+		log("Handler: change:repeating_looks");
+		var aesthetics = "";
+		// name, desc
+		getSectionIDs("repeating_looks", function (a) {
+			var lids = [];
+			for(var i = 0; i < a.length; i++) {
+				lids[i*2] = "repeating_looks_" + a[i] + "_name";
+				lids[i*2+1] = "repeating_looks_" + a[i] + "_desc";
+			}
+			getAttrs(lids,function(f) {
+				for(var i = 0; i < a.length; i++) {
+					var name = f[lids[i*2]];
+					var desc = f[lids[i*2+1]];
+					aesthetics = aesthetics + `**${name}:** ${desc}.` + "\n";
+				}
+				setAttrs({ "aesthetics": aesthetics });
+			});
+		});
+	});
+
 </script>
 
 <input type="hidden" name="attr_status-message" value="" class="hide-on-null"><div style="text-align: center; margin-top: -20px; margin-bottom: 20px; border-bottom: 1px solid black;" class="bold"><span name="attr_status-message"></span></div>
@@ -2964,6 +3099,8 @@
 <input type="hidden" name="attr_playbook-key" class="pkey" value="">
 
 <input type="hidden" name="attr_pbinitialized" value="no">
+
+<input type="hidden" name="attr_rollprompt" value="">
 
 <div class="whole">
 
@@ -3026,7 +3163,7 @@
 				</span>
 			</div>
 		</div>
-		<div class="nocontrol popmenu">
+		<!-- div class="nocontrol popmenu">
 			<div class="popmenu-trigger"><span class="bold"><span data-i18n="Aesthetics"></span></span></div>
 			<div class="popmenu-box no-hover">
 				<fieldset class="repeating_looks">
@@ -3040,7 +3177,7 @@
 					</div>
 				</fieldset>
 			</div>
-		</div>
+		</div -->
 		<div>
 			<span class="bold"><span data-i18n="Pronouns"></span>: </span>
 			<input type="text" name="attr_pronouns" value="" class="fillme" style="width: 120px">
@@ -3058,7 +3195,7 @@
 					<input type="hidden" name="attr_name" value="">
 					<div class="tooltip">
 						<div class="section-head one-line">
-							<button type="roll" class="sheet-2d6-button-nofloat no-dice stretch bold" value="&{template:2d6-roll} {{character=@{character_name}}} {{title=@{name}}} {{roll=[[2d6+@{rating}+@{rollprompt}]]}}" name="roll_2d6">
+							<button type="roll" class="sheet-2d6-button-nofloat no-dice stretch bold" value="&{template:2d6-roll} {{character=@{character_name}}} {{title=@{name}}} {{roll=[[2d6+@{rating}+@{rollprompt}]]}} @{modifier-tally-text}" name="roll_2d6">
 								<span name="attr_name"></span>
 							</button>
 							<button type="roll" class="sheet-2d6-button-nofloat minimum bold" value="&{template:2d6-roll} {{character=@{character_name}}} {{title=@{name}}} {{roll=[[2d6+@{rating}+@{rollprompt}]]}}" name="roll_2d6">
@@ -3090,6 +3227,10 @@
 				<div class="tooltip-pop">
 					<span data-i18n="Receive experience (XP) whenever you roll a 6- or when a move tells you to mark XP. A PC can spend XP to take an Advance; consult that section for more."></span>
 				</div>
+			</div>
+
+			<div class="space-above smallbutton">
+				<button type="roll" class="sharemove" style="margin-top: -1px;" value="&{template:introducer} {{character=@{character_name}}} {{pronouns=@{pronouns}}} {{playbook=@{playbook-name}}} {{stats=@{stats-summary}}} {{aesthetics=@{aesthetics}}} }"><span data-i18n="Introduce yourself!" class="bold"></span> </button>
 			</div>
 
 			<div class="flexspacer"></div>
@@ -3155,7 +3296,7 @@
 						<div class="move-compressor"><input type="hidden" name="attr_show" value="no" class="hide-on-no"><div class="move">
 							<div class="right-buttons">
 								<input type="hidden" name="attr_rollconfig" value="" class="hide-on-null">
-								<button type="roll" class="sheet-2d6-button-nofloat" value="&{template:2d6-roll} {{character=@{character_name}}} {{title=@{name}}} {{roll=[[2d6+?{@{name} using @{rollconfig}}+@{rollprompt}]]}}" name="roll_2d6"></button>
+								<button type="roll" class="sheet-2d6-button-nofloat" value="&{template:2d6-roll} {{character=@{character_name}}} {{title=@{name}}} {{roll=[[2d6+?{@{name} using @{rollconfig}}+@{rollprompt}]]}} @{modifier-tally-text}" name="roll_2d6"></button>
 								<button type="roll" class="sharemove" style="margin-top: -1px;" value="&{template:sharemove} {{name=@{name}}} {{playbook=@{playbook}}} {{body=@{body}}} @{shareoptions} }"></button><input type="hidden" name="attr_shareoptions" value="">
 							</div>
 							<input type="hidden" name="attr_playbook" value="" class="hide-on-null">
@@ -3464,8 +3605,8 @@
 							<div class="move">
 								<div class="right-buttons">
 									<input type="hidden" name="attr_rollconfig" value="" class="hide-on-null">
-									<button type="roll" class="sheet-2d6-button-nofloat" value="&{template:2d6-roll} {{character=@{character_name}}} {{title=@{name}}} {{roll=[[2d6+?{@{name} using @{rollconfig}}+@{rollprompt}]]}}" name="roll_2d6"></button>
-									<button type="roll" class="sharemove" style="margin-top: -1px;" value="&{template:sharemove} {{name=@{name}}} {{playbook=@{playbook}}} {{body=@{body}}} @{shareoptions} }"></button>
+									<button type="roll" class="sheet-2d6-button-nofloat" value="&{template:2d6-roll} {{character=@{character_name}}} {{title=@{name}}} {{roll=[[2d6+?{@{name} using @{rollconfig}}+@{rollprompt}]]}} @{modifier-tally-text}" name="roll_2d6"></button>
+									<button type="roll" class="sharemove" style="margin-top: -1px;" value="&{template:sharemove} {{name=@{name}}} {{body=@{body}}} @{shareoptions} }"></button>
 									<input type="hidden" name="attr_shareoptions" value=""> </div>
 								<span name="attr_name" class="bold"></span>: <span name="attr_body"></span>
 								<input type="hidden" name="attr_long" value="yes" class="show-on-yes-combo">
@@ -3795,9 +3936,11 @@
 					</div>
 				</div></fieldset>
 				<input type="hidden" name="attr_modifier-tally" value="0">
+				<input type="hidden" name="attr_modifier-tally-text" value="">
+				<input type="hidden" name="attr_modifier-tally-text-memory" value="">
 				<input type="hidden" name="attr_stats-query" value=""> <!-- populated during initialization -->
 				<div align="center">
-					<button type="roll" class="sheet-2d6-button-nofloat" value="&{template:2d6-roll} {{character=@{character_name}}} {{title=Roll with modifiers}} {{roll=[[2d6+?{@{modifier-tally} + @{stats-query}}+@{modifier-tally}]]}}" name="roll_2d6-mods"><span class="bold"><span data-i18n="Current tally"></span>: </span><span name="attr_modifier-tally"></span>&nbsp;</button>
+					<button type="roll" class="sheet-2d6-button-nofloat" value="&{template:2d6-roll} {{character=@{character_name}}} {{title=Roll with modifiers}} {{roll=[[2d6+?{@{modifier-tally} + @{stats-query}}+@{modifier-tally}]]}} @{modifier-tally-text}" name="roll_2d6-mods"><span class="bold"><span data-i18n="Current tally"></span>: </span><span name="attr_modifier-tally"></span>&nbsp;</button>
 				</div>
 				<div align="center">
 					<button type="action" name="act_mods-checkall" class="buttonless"><span data-i18n="check all"></span></button> / 
@@ -3809,27 +3952,68 @@
 				<span data-i18n="Strings"></span>
 			</div>
 			<div class="nocontrol">
-				<fieldset class="repeating_strings"><div class="one-line">
-					<div class="minimum unpadded">
-						<input type="checkbox" name="attr_check1" value="1" class="checkboxer"><span class="checkboxed"></span>
+				<fieldset class="repeating_strings">
+					<div class="string">
+						<div class="one-line">
+							<div class="minimum unpadded">
+								<input type="checkbox" name="attr_check1" value="1" class="checkboxer"><span class="checkboxed"></span>
+							</div>
+							<div class="minimum unpadded">
+								<input type="checkbox" name="attr_check2" value="1" class="checkboxer"><span class="checkboxed"></span>
+							</div>
+							<div class="minimum unpadded">
+								<input type="checkbox" name="attr_check3" value="1" class="checkboxer"><span class="checkboxed"></span>
+							</div>
+							<div class="minimum">
+								<input type="checkbox" name="attr_check4" value="1" class="checkboxer"><span class="checkboxed"></span>
+							</div>
+							<div class="stretch">
+								<input type="text" name="attr_target" value="" class="fillme">
+							</div>
+							<div class="minimum">
+								<input type="hidden" name="attr_used" value="no" class="hide-on-no">
+								<button type="action" name="act_trash" class="buttonless trashit"></button>
+							</div>
+						</div>
+						<div style="white-space: normal; margin-top: -6px;">
+							<input type="checkbox" name="attr_check1" value="1" class="string-mask">
+							<input type="checkbox" name="attr_check2" value="1" class="string-mask">
+							<input type="checkbox" name="attr_check3" value="1" class="string-mask">
+							<input type="checkbox" name="attr_check4" value="1" class="string-mask">
+							<div class="string-checked-reveal smallbutton">
+								<span class="bold" data-i18n="Spend"></span>:
+								<button type="action" name="act_spend3forwardes" class="buttonless smallbutton">+3 <span data-i18n="Emotional Support"></span></button>
+								<button type="action" name="act_spend3forwardfo" class="buttonless smallbutton">+3 <span data-i18n="Figure Out"></span></button>
+								<button type="action" name="act_spend" class="buttonless smallbutton"><span data-i18n="Other"></span></button>
+							</div>
+							<input type="checkbox" name="attr_check4" value="1" class="show-on-checked">
+							<div class="fourth">
+								<span class="bold" data-i18n="Time for a String Advance!"></span>
+							</div>
+						</div>
+						
 					</div>
-					<div class="minimum unpadded">
-						<input type="checkbox" name="attr_check2" value="1" class="checkboxer"><span class="checkboxed"></span>
-					</div>
-					<div class="minimum unpadded">
-						<input type="checkbox" name="attr_check3" value="1" class="checkboxer"><span class="checkboxed"></span>
-					</div>
-					<div class="minimum">
-						<input type="checkbox" name="attr_check4" value="1" class="checkboxer"><span class="checkboxed"></span>
-					</div>
-					<div class="stretch">
-						<input type="text" name="attr_target" value="" class="fillme">
-					</div>
-					<div class="minimum">
-						<input type="hidden" name="attr_used" value="no" class="hide-on-no">
-						<button type="action" name="act_trash" class="buttonless trashit"></button>
-					</div>
-				</div></fieldset>
+				</fieldset>
+			</div>
+			<div>
+				<span data-i18n="Consult the basic move “Influence with a String” for options to influence others for good or ill. Several basic and playbook moves also have effects upon spending a string."></span> 
+				<span data-i18n="Gaining a fourth String on someone triggers a String Advance. The basic moves reference contains details."></span>
+			</div>
+
+			<div class="nocontrol">
+				<div class="section-head"><span class="bold"><span data-i18n="Aesthetics"></span></span></div>
+				<div>
+					<fieldset class="repeating_looks">
+						<input type="hidden" name="attr_key" value="">
+						<input type="hidden" name="attr_name" value="">
+						<input type="hidden" name="attr_examples" value="">
+						<div>
+							<div><span name="attr_name" class="bold"></span></div>
+							<input type="text" name="attr_desc" value="" class="fillme fullwidth">
+							<div class="examples-list"><span name="attr_examples"></span></div>
+						</div>
+					</fieldset>
+				</div>
 			</div>
 
 			<div class="section-head">
@@ -3999,15 +4183,24 @@
 		<div class="sheet-dieroll-title">
 			<span data-i18n="Down Beat"></span>
 		</div>
-		<div class="sheet-clearance sheet-dieroll-reminder">
+		<div class="sheet-clearance sheet-dieroll-reminder" style="margin-bottom: 6px;">
 			<span data-i18n="Make sure to mark experience!"></span>
 		</div>
 			{{/rollLess() roll 7}}
-		<div class="sheet-clearance"></div>
+		{{#allprops() character title roll}}
+			<div style="color: white; font: 90%; text-align: left;"><span style="font-family: Pictos">2</span> {{value}}</div>
+		{{/allprops() character title roll}}
+	<div class="sheet-clearance"></div>
 	</div>
 </rolltemplate>
 
-<rolltemplate class="sheet-datadumper">
+<rolltemplate class="sheet-rolltemplate-introducer">
+<div>**{{character}}, {{playbook}}** (*{{pronouns}}*)</div>
+<div>{{aesthetics}}</div>
+<div>*{{stats}}*</div>
+</rolltemplate>
+
+<rolltemplate class="sheet-rolltemplate-datadumper">
 	{{#allprops()}}
 		<div>**{{key}}:** {{value}} </div>
 	{{/allprops()}}
