@@ -1348,7 +1348,7 @@ ul {
 }
 
 .sheet-track-container input[type="radio"][value="4"]:checked + span::before {
-	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/art/tsl-track-on4.png);
+	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/art/tsl-track-on4-animated.gif);
 }
 
 
