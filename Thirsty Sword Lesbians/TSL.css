@@ -301,6 +301,8 @@ input[type="checkbox"].sheet-checkboxer:checked + span.sheet-checkboxed::before 
 
 /* Adjustments for other contexts */
 
+/*
+
 .sheet-xptrack input[type="checkbox"].sheet-checkboxer {
 	left: 10px;
 }
@@ -309,6 +311,8 @@ input[type="checkbox"].sheet-checkboxer:checked + span.sheet-checkboxed::before 
 	margin-right: -2px;
 	margin-left: 4px;
 }
+
+*/
 
 .sheet-popmenu-box input[type="checkbox"].sheet-checkboxer + span.sheet-checkboxed::before {
 	margin-right: 0px;
@@ -1269,3 +1273,49 @@ textarea {
 ul {
 	margin-block-end: 6px;
 }
+
+.sheet-xptrack, .sheet-xptrack .sheet-fillme {
+	text-align: center;
+	font-size: 24px;
+}
+
+.sheet-track-container {
+	text-align: center;
+	text-indent: 0;
+	margin-top: 6px;
+	white-space: nowrap;
+}
+
+.sheet-track-container input[type="radio"] {
+	opacity: 0.0;
+	width: 24px;
+	height: 24px;
+	position: relative;
+	top: -2px;
+	left: 10px;
+	margin: -10px;
+	cursor: pointer;
+	z-index: 1;
+}
+
+.sheet-track-container input[type="radio"] + span::before {
+	margin-right: -2px;
+	margin-left: -3px;
+	margin-top: 1px;
+	line-height: 22px;
+	text-align: center;
+	display: inline-block;
+	vertical-align: top;
+	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/art/checkbox-unchecked.png);
+	width: 22px;
+	height: 22px;
+	font-size: 12px;
+}
+
+.sheet-track-container input[type="radio"]:checked + span::before {
+	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/art/checkbox-checked-tsl.png);
+}
+
+
+
+

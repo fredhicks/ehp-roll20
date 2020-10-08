@@ -1662,7 +1662,7 @@
 				var attrs = { "pbinitialized": "no" };
 				attrs["playbook-current-row"] = "";
 				attrs["starting-chosen"] = "0";
-				attrs["experience"] = 0; attrs["xp1"] = 0; attrs["xp2"] = 0; attrs["xp3"] = 0; attrs["xp4"] = 0; attrs["xp5"] = 0;
+				attrs["experience"] = 0; /* attrs["xp1"] = 0; attrs["xp2"] = 0; attrs["xp3"] = 0; attrs["xp4"] = 0; attrs["xp5"] = 0; */
 				log("resetting sheet");
 				getSectionIDs("repeating_playbooks", function(idarray) {
 					for(var i=0; i < idarray.length; i++ ) {
@@ -2961,7 +2961,8 @@
 
 	// Externalizers
 	
-	// Initialization of the sheet does not fire off any of these, because it's silent:true.
+	// Initialization of the sheet does not fire off any of these, because it's silent:true. 
+	///// Actually that was once true but it was clear that roll20 isn't interested in the behavior of that setting being consistent, so I think this stuff does fire off now.
 
 	// Externalize stats data
 	
@@ -3010,26 +3011,95 @@
 
 	// Externalize move selection data
 
-	// Don't think we can get away with this — too much chance of it getting fired off tons of times during setup
-
-	/*
 	on("change:repeating_moves:taken", function(e) { 
 		log("Handler: change:repeating_moves:taken");
 		var rowprefix = (e.sourceAttribute).slice(0,-5); // strips off 'taken';
 		var mid = rowprefix + "taken";
 		var pid = rowprefix + "playbook";
 		var nid = rowprefix + "name";
-		getAttrs([mid,pid,nid], function(a) {
+		var tlid = rowprefix + "tracklabel";
+		var tid = rowprefix + "trackid";
+		getAttrs([mid,pid,nid,tlid,tid], function(a) {
 			var mats = {};
 			var matname = "move-" + a[pid] + "-" + a[nid]; // e.g., move-beast-Ferocious
 			var taken = "0";
-			if ( a[mid] === "yes" ) { taken = "yes"; }
+			if ( a[mid] === "yes" ) { taken = "yes"; } 
 			mats[matname] = taken;
+			// good place to also make tracklabel determinations
+			if ( typeof a[tlid] !== "undefined" && a[tlid] !== "" ) {
+				// then this has a track 
+				log("this move has a tracklabel set");
+				if ( taken === "yes" ) {
+					// Then we need to create a track with the track label value as the label
+					// also set the trackid on the original move, to cross-connect
+					// also set the rowprefix on the track in case we need cross connection the other direction
+					var trackid = "repeating_tracks_"+ generateActuallyUniqueRowID();
+					mats[tid] = trackid; 
+					mats[`${trackid}_name`] = a[tlid];
+					mats[`${trackid}_value`] = 1; // Starts at 1 always in TSL
+					mats[`${trackid}_moveid`] = rowprefix;
+					log("move is marked taken, so generating track entry");
+				} else if ( a[tid] !== "undefined" && a[tid] !== "" ) {
+					log("move is not marked taken, but has a trackid value, so removing that track entry");
+					// Then there's an existing track, but the move granting it is unmarked; time to get rid of it.
+					removeRepeatingRow(a[tid]); // a[tid] = repeating_tracks_<id>
+					mats[tid] = ""; // empty the trackid entry on the original move
+				}
+			}
 			setAttrs(mats);
 		});
 	});
-	*/
+
+	// Also build a summary of moves
 	
+	var bigscantimestamp = 0;
+
+	// In this particular case we super need it to also run on sheet open, as a way to quietly correct outdated moves summaries
+
+	on("change:repeating_moves:taken sheet:opened", function() {
+		log("Handler: change:repeating_moves:taken sheet:opened -- moves summary");
+		var now = Date.now();
+		if ( (now - bigscantimestamp) > 999 ) { 
+			log("Has been 1+ seconds since last moves summary calculation, summarizing");
+			// We are not willing to run this more often than once per second, even if it means things get a little out of date, because to do otherwise could impact sheet speed. Generally this won't be a problem except when multiple moves are getting marked by code at the same time, but player choices afterwards should occur at a slower pace, allowing catch-up.
+			bigscantimestamp = now;
+			getSectionIDs("repeating_moves", function(midlist) {
+				var mids = [];
+				for(var i = 0; i < midlist.length; i++) {
+					mids[i*2] = "repeating_moves_" + midlist[i] + "_name";
+					mids[i*2+1] = "repeating_moves_" + midlist[i] + "_taken";
+				}
+				console.log(mids);
+				getAttrs(mids,function(m) {
+					console.log(m);
+					var summary = "";
+					for(var i = 0; i < midlist.length; i++) {
+						var nameid = "repeating_moves_" + midlist[i] + "_name";
+						var takeid = "repeating_moves_" + midlist[i] + "_taken";
+						var taken = ""; var name = "";
+						if ( typeof m[nameid] === "undefined" || m[nameid] === "" ) {
+							log(`Name "${m[nameid]}" is undefined or empty`);
+							continue; // If it's an empty name, we have no business listing it
+						}
+						if ( typeof m[takeid] === "undefined" || m[takeid] !== "yes" ) {
+							log(`Value "${m[takeid]}" is undefined or not yes`);
+							continue; // If it's not taken, don't list it
+						}
+						name = m[nameid];
+						if ( summary !== "" ) {
+							summary = summary + ", ";
+						}
+						summary = summary + name;
+					}
+					log(`summary determined: ${summary}`);
+					setAttrs({ "movesummary": summary },{},function () { log("summary field set"); });
+				});
+			});
+		} else {
+			log("Skipping move summary due to simultaneous execution");
+		}
+	});
+
 	// Externalize conditions data
 	
 	on("change:repeating_conditions:marked", function(e) {
@@ -3053,19 +3123,6 @@
 			}
 			cats[catpen] = penalty;
 			setAttrs(cats);
-		});
-	});
-	
-	// Externalize experience data
-	
-	on("change:xp1 change:xp2 change:xp3 change:xp4 change:xp5", function() {
-		log("Handler: change:xp1 change:xp2 change:xp3 change:xp4 change:xp5");
-		getAttrs(["xp1","xp2","xp3","xp4","xp5"], function(x) {
-			var sum = 0;
-			for(var i=1; i <= 5; i++) {
-				if ( typeof x[`xp${i}`] !== "undefined" && x[`xp${i}`] == "1" ) { sum++; }
-			}
-			setAttrs({experience: sum});
 		});
 	});
 
@@ -3182,6 +3239,10 @@
 			<span class="bold"><span data-i18n="Pronouns"></span>: </span>
 			<input type="text" name="attr_pronouns" value="" class="fillme" style="width: 120px">
 		</div>
+		<input type="hidden" name="attr_movesummary" value="" class="hide-on-null">
+		<div class="smallbutton">
+			<button type="roll" class="sharemove" style="margin-top: -1px;" value="&{template:introducer} {{character=@{character_name}}} {{pronouns=@{pronouns}}} {{playbook=@{playbook-name}}} {{stats=@{stats-summary}}} {{aesthetics=@{aesthetics}}} {{moves=@{movesummary}}} }"><span data-i18n="Introduce yourself!" class="bold"></span> </button>
+		</div>
 	</div> <!-- /class=toprow -->
 
 	<!-- input type="hidden" name="attr_pbinitialized" value="no" class="show-on-yes" --><div>
@@ -3210,27 +3271,36 @@
 				</fieldset>
 			</div>
 
-			<!-- This can be replicated (look in the Javascript above for more to do) for a harm track, etc, if needed -->
 			<div class="tooltip">
 				<div class="section-head">
 					<span data-i18n="Experience"></span>
 				</div>
 				<div class="xptrack">
-					<input type="hidden" name="attr_experience" value="0">
+					<input type="number" name="attr_experience" value="0" min="0" class="fillme">
 					<input type="hidden" name="attr_experience_max" value="5">
-					<input type="checkbox" name="attr_xp1" value="1" class="checkboxer"><span class="checkboxed"></span>
-					<input type="checkbox" name="attr_xp2" value="1" class="checkboxer"><span class="checkboxed"></span>
-					<input type="checkbox" name="attr_xp3" value="1" class="checkboxer"><span class="checkboxed"></span>
-					<input type="checkbox" name="attr_xp4" value="1" class="checkboxer"><span class="checkboxed"></span>
-					<input type="checkbox" name="attr_xp5" value="1" class="checkboxer"><span class="checkboxed"></span>
 				</div>
 				<div class="tooltip-pop">
 					<span data-i18n="Receive experience (XP) whenever you roll a 6- or when a move tells you to mark XP. A PC can spend XP to take an Advance; consult that section for more."></span>
 				</div>
 			</div>
 
-			<div class="space-above smallbutton">
-				<button type="roll" class="sharemove" style="margin-top: -1px;" value="&{template:introducer} {{character=@{character_name}}} {{pronouns=@{pronouns}}} {{playbook=@{playbook-name}}} {{stats=@{stats-summary}}} {{aesthetics=@{aesthetics}}} }"><span data-i18n="Introduce yourself!" class="bold"></span> </button>
+			<div class="nocontrol">
+				<fieldset class="repeating_tracks">
+					<input type="hidden" name="attr_value" value="1">
+					<input type="hidden" name="attr_name" value="">
+					<input type="hidden" name="attr_moveid" value="">
+					<div class="section-head">
+						<span name="attr_name"></span>
+						(<span name="attr_value"></span>)
+					</div>
+					<div class="track-container">
+						<input type="radio" name="attr_value" value="0"><span></span>
+						<input type="radio" name="attr_value" value="1"><span></span>
+						<input type="radio" name="attr_value" value="2"><span></span>
+						<input type="radio" name="attr_value" value="3"><span></span>
+						<input type="radio" name="attr_value" value="4"><span></span>
+					</div>
+				</fieldset>
 			</div>
 
 			<div class="flexspacer"></div>
@@ -3277,15 +3347,6 @@
 					<input type="hidden" name="attr_instructions" value="" class="hide-on-null"><div>
 						<input type="hidden" name="attr_show" value="no" class="hide-on-no">
 						<div><i><span name="attr_instructions"></span></i></div>
-					</div>
-					<input type="hidden" name="attr_tracklabel" value="" class="hide-on-null"><div class="track">
-						<input type="hidden" name="attr_show" value="no" class="hide-on-no">
-						<div>
-							<span name="attr_tracklabel" class="bold tracker-label"></span>
-							<input type="number" name="attr_tracker" max="4" min="0" value="1" class="fillme tracker-number">
-							<input type="hidden" name="attr_tracker" class="tracker">
-							<span class="tracker-bar"></span>
-						</div>
 					</div>
 
 					<input type="hidden" name="attr_body" value="">
@@ -4195,9 +4256,10 @@
 </rolltemplate>
 
 <rolltemplate class="sheet-rolltemplate-introducer">
-<div>**{{character}}, {{playbook}}** (*{{pronouns}}*)</div>
-<div>{{aesthetics}}</div>
-<div>*{{stats}}*</div>
+<div style="border-top: 1px solid black;">**{{character}}, {{playbook}}** {{#pronouns}}(*{{pronouns}}*){{/pronouns}}</div>
+{{#stats}}<div>*{{stats}}*</div>{{/stats}}
+{{#moves}}<div>**<span data-i18n="Moves"></span>:** *{{moves}}*</div>{{/moves}}
+<div style="border-bottom: 1px solid black;">{{aesthetics}}</div>
 </rolltemplate>
 
 <rolltemplate class="sheet-rolltemplate-datadumper">
