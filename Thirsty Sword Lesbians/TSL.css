@@ -1306,14 +1306,49 @@ ul {
 	text-align: center;
 	display: inline-block;
 	vertical-align: top;
-	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/art/checkbox-unchecked.png);
 	width: 22px;
 	height: 22px;
 	font-size: 12px;
 }
 
-.sheet-track-container input[type="radio"]:checked + span::before {
-	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/art/checkbox-checked-tsl.png);
+.sheet-track-container input[type="radio"][value="0"] + span::before {
+	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/art/tsl-track-off0.png);
+}
+
+.sheet-track-container input[type="radio"][value="1"] + span::before {
+	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/art/tsl-track-off1.png);
+}
+
+.sheet-track-container input[type="radio"][value="2"] + span::before {
+	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/art/tsl-track-off2.png);
+}
+
+.sheet-track-container input[type="radio"][value="3"] + span::before {
+	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/art/tsl-track-off3.png);
+}
+
+.sheet-track-container input[type="radio"][value="4"] + span::before {
+	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/art/tsl-track-off4.png);
+}
+
+.sheet-track-container input[type="radio"][value="0"]:checked + span::before {
+	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/art/tsl-track-on0.png);
+}
+
+.sheet-track-container input[type="radio"][value="1"]:checked + span::before {
+	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/art/tsl-track-on1.png);
+}
+
+.sheet-track-container input[type="radio"][value="2"]:checked + span::before {
+	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/art/tsl-track-on2.png);
+}
+
+.sheet-track-container input[type="radio"][value="3"]:checked + span::before {
+	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/art/tsl-track-on3.png);
+}
+
+.sheet-track-container input[type="radio"][value="4"]:checked + span::before {
+	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/art/tsl-track-on4.png);
 }
 
 
