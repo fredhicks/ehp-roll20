@@ -3126,6 +3126,21 @@
 		});
 	});
 
+	// Externalize tracks data
+	
+	on("change:repeating_tracks:value", function(e) {
+		log("Handler: change:repeating_tracks:value");
+		var rowprefix = (e.sourceAttribute).slice(0,-5); // strips off 'value';
+		var vid = rowprefix + "value";
+		var nid = rowprefix + "name";
+		getAttrs([vid,nid], function(a) {
+			var tats = {};
+			var tatname = "track-" + a[nid];
+			tats[tatname] = a[vid];
+			setAttrs(tats);
+		});
+	});
+
 	// Externalize looks
 	
 	on("change:repeating_looks", function(e) {
