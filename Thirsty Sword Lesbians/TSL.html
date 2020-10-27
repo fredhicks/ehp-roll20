@@ -3262,6 +3262,8 @@
 
 	<!-- input type="hidden" name="attr_pbinitialized" value="no" class="show-on-yes" --><div>
 
+
+	<input type="hidden" name="attr_height" class="height" value="default">
 	<div class="columns">
 		<div class="narrow">
 
@@ -3318,11 +3320,30 @@
 				</fieldset>
 			</div>
 
+			<br/>
+
+			<div class="popmenu">
+				<div class="bold popmenu-trigger">
+					<span data-i18n="Sheet Height"></span>
+				</div>
+				<div class="popmenu-box">
+					<div>
+					<input type="radio" name="attr_height" class="height" value="default" checked> <span data-i18n="Default"></span>
+					</div>
+					<div>
+					<input type="radio" name="attr_height" class="height" value="tall"> <span data-i18n="Tall"></span>
+					</div>
+					<div>
+					<input type="radio" name="attr_height" class="height" value="max"> <span data-i18n="Max"></span>
+					</div>
+				</div>
+			</div>
+
 			<div class="flexspacer"></div>
 
 			<div class="copyright-bloc">
 				<div class="copyright-statement">
-				<span>sheet version</span> 1.0.
+				<span>sheet version</span> 1.0.1.
 				<span><span data-i18n="Thirsty Sword Lesbians is copyright Evil Hat Productions, LLC and April Kit Walsh."></span></span>
 				</div>
 				<img src="https://imgsrv.roll20.net/?src=https%3A//raw.githubusercontent.com/fredhicks/ehp-roll20/master/art/ehp-gsg-logos.png" width="120" height="36">
