@@ -130,7 +130,7 @@ input[type="checkbox"].sheet-triggerbox:checked + .sheet-optbar {
 
 input.sheet-compact,
 select.sheet-compact {
-	max-width: 90px;
+	max-width: 85px;
 }
 
 input.sheet-ultracompact,
@@ -606,6 +606,7 @@ input.sheet-icon[value="blank"] + span.sheet-icon::before {
 
 .sheet-pronounbox input {
 	text-align: center;
+	max-width: 90px;
 }
 
 .sheet-Bar div {
