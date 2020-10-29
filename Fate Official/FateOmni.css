@@ -130,7 +130,7 @@ input[type="checkbox"].sheet-triggerbox:checked + .sheet-optbar {
 
 input.sheet-compact,
 select.sheet-compact {
-	max-width: 85px;
+	max-width: 90px;
 }
 
 input.sheet-ultracompact,
