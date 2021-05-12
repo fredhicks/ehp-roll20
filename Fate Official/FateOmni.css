@@ -468,6 +468,7 @@ input.sheet-icon[value="blank"] + span.sheet-icon::before {
 	padding: 10px;
 }
 
+.sheet-ComboColumn .repcontrol,
 .sheet-AspectDisplay .repcontrol,
 .sheet-TrackDisplay .repcontrol,
 .sheet-StuntDisplay .repcontrol,
@@ -688,10 +689,26 @@ input.sheet-icon[value="blank"] + span.sheet-icon::before {
 	display: none;
 }
 
+.sheet-SkillColumnFirst,
+.sheet-SkillColumnSecond,
+.sheet-SkillColumnThird,
 .sheet-SkillNone,
 .sheet-SkillList,
 .sheet-SkillGrid {
 	display: none;
+}
+
+input[value=""] + .sheet-SkillColumnFirst,
+input[value="1"] + .sheet-SkillColumnFirst {
+	display: initial;
+}
+
+input[value="2"] + .sheet-SkillColumnSecond {
+	display: initial;
+}
+
+input[value="3"] + .sheet-SkillColumnThird {
+	display: initial;
 }
 
 input[value="none"] ~ .sheet-SkillNone {
@@ -1040,6 +1057,19 @@ input[type="checkbox"].sheet-deeptrigger:checked {
 
 input[type="checkbox"].sheet-deeptrigger:checked ~ * .sheet-deeptriggered {
 	display: initial;
+}
+
+/* Skill Combo Columns */
+
+.sheet-ComboColumns {
+	display: flex;
+}
+
+.sheet-ComboColumn {
+	flex-flow: column;
+	padding-right: 6px;
+	padding-left: 6px;
+	white-space: nowrap;
 }
 
 /* Corruption */
