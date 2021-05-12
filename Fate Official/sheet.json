@@ -63,6 +63,15 @@
 			"default": "1"
 		},
 		{
+			"attribute": "Show-Combinable",
+			"displayname": "Combinable Skills",
+			"displaytranslationkey": "combine-skills",
+			"type": "select",
+			"options": [ "Show|1", "Hide|0" ],
+			"optiontranslationkeys": [ "show", "hide" ],
+			"default": "0"
+		},
+		{
 			"attribute": "Show-Conditions",
 			"displayname": "Conditions",
 			"displaytranslationkey": "conditions",
