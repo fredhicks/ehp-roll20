@@ -1231,7 +1231,7 @@
 								<div class="fieldlabel" data-i18n="category header optional">Category Header (optional)</div>
 								<input name="attr_category" type="text" value="">
 								<div class="fieldlabel" data-i18n="label">Label</div>
-								<input name="attr_label" type="text" value="Aspect">
+								<input name="attr_label" type="text" value="">
 								<div class="fieldlabel" data-i18n="aspect">Aspect</div>
 								<input name="attr_aspect" type="text">
 								<div class="fieldlabel" data-i18n="flags">Flags</div>
@@ -1255,14 +1255,25 @@
 						<fieldset class="repeating_aspects">
 							<input type="hidden" name="attr_category" value="" class="hideIfNull"><div class="aspect-category"><span name="attr_category"></span></div>
 							<div class="aspect">
-								<div class="AspectLabelBar">
+								<input type="hidden" value="" name="attr_label" class="hideIfNull"><div class="AspectLabelBar">
 									<span class="label">
 										<span name="attr_label"></span>
-										<input type="hidden" value="" name="attr_flags" class="hideIfNull"><span>(<span name="attr_flags"></span>)</span>
 									</span>
+								</div>
+								<div>
+									<span class="deeptriggered"><input type="checkbox" class="triggerbox" name="attr_rollthis" value="1"><span>(+<span name="attr_rollvalue"></span>)</span></span>
+									<span class="deeptriggered"><input type="checkbox" class="checkbox" name="attr_rollthis" value="1"><span class="checkmark"></span></span>
+									<span name="attr_aspect" class="name"></span>
+									<input type="hidden" value="" name="attr_flags" class="hideIfNull"><span>(<span name="attr_flags"></span>)</span>
 									<span>
 										<input type="checkbox" class="checkbox" name="attr_options" value="1"><span class="optionsbox"></span>
 									</span>
+									<button type="roll" class="share" value="&{template:share} {{theme=@{theme}}} {{name=@{character_name}: @{label} @{flags} ^{aspect}}} {{text=***@{aspect}*** @{notes}}}"></button>
+									<input type="hidden" name="attr_label" value="">
+									<input type="hidden" name="attr_flags" value="">
+									<input type="hidden" name="attr_aspect" value="">
+									<input type="hidden" name="attr_notes" value="">
+									<input type="hidden" name="attr_rollvalue" value="1">
 								</div>
 								<input type="checkbox" name="attr_options" class="triggerbox" value="1">
 								<div class="AspectOptionsBox">
@@ -1292,17 +1303,6 @@
 											</div>
 										</div>
 									</div>
-								</div>
-								<div class="name">
-									<span class="deeptriggered"><input type="checkbox" class="checkbox" name="attr_rollthis" value="1"><span class="checkmark"></span></span>
-									<span name="attr_aspect"></span>
-									<input type="hidden" name="attr_label" value="">
-									<input type="hidden" name="attr_flags" value="">
-									<input type="hidden" name="attr_aspect" value="">
-									<input type="hidden" name="attr_notes" value="">
-									<button type="roll" class="share" value="&{template:share} {{theme=@{theme}}} {{name=@{character_name}: @{label} @{flags} ^{aspect}}} {{text=***@{aspect}*** @{notes}}}"></button>
-									<input type="hidden" name="attr_rollvalue" value="1">
-									<span class="deeptriggered"><input type="checkbox" class="triggerbox" name="attr_rollthis" value="1"><span>(+<span name="attr_rollvalue"></span>)</span></span>
 								</div>
 								<div class="notes">
 									<span name="attr_notes"></span>
