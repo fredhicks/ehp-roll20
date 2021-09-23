@@ -1,0 +1,103 @@
+<input type="number" name="attr_d" value="3">
+<input type="number" name="attr_e" value="1">
+<input type="number" name="attr_m" value="1">
+
+<button type="action" name="act_pool">Pool</button>
+
+<script type="text/worker">
+
+var rollD = function(d) {
+	var result = Math.floor((Math.random() * d) + 1);
+	log("d"+d+" = "+result);
+	return result;
+};
+
+on("clicked:pool", function(event) {
+	getAttrs(["d","e","m"], function(a) {
+		var ds = []; var es = []; var ms = [];
+		var dt = "discipline="; var et = "exhaustion="; var mt = "madness=";
+		var rtext = "&{template:default} {{name=@{character_name}}}";
+		var dominant = "";
+		var successes = 0;
+		var furthest = 0;
+		for(var i = 1 ; i <= a["d"] ; i++) {
+			ds[i-1] = rollD(6);
+			if ( i > furthest ) { furthest = i; }
+			if ( ds[i-1] <= 3 ) {
+				successes = successes + 1;
+			}
+		}
+		for(var i = 1 ; i <= a["e"] ; i++) {
+			es[i-1] = rollD(6);
+			if ( i > furthest ) { furthest = i; }
+			if ( es[i-1] <= 3 ) {
+				successes = successes + 1;
+			}
+		}
+		for(var i = 1 ; i <= a["m"] ; i++) {
+			ms[i-1] = rollD(6);
+			if ( i > furthest ) { furthest = i; }
+			if ( ms[i-1] <= 3 ) {
+				successes = successes + 1;
+			}
+		}
+		ds.sort(); es.sort(); ms.sort();
+		ds.reverse(); es.reverse(); ms.reverse();
+		for(var i = 1 ; i <= a["d"] ; i++) {
+			if ( i > 1 ) { dt = dt + " "; }
+			dt = dt + ds[i-1];
+		}
+		for(var i = 1 ; i <= a["e"] ; i++) {
+			if ( i > 1 ) { et = et + " "; }
+			et = et + es[i-1];
+		}
+		for(var i = 1 ; i <= a["m"] ; i++) {
+			if ( i > 1 ) { mt = mt + " "; }
+			mt = mt + ms[i-1];
+		}
+		for(var i = 1; i <= furthest; i++) {
+			var ndex = i-1;
+			var dis = 0; var exh = 0; var mad = 0;
+			if ( ds.length >= i ) { dis = ds[ndex]; }
+			if ( es.length >= i ) { exh = es[ndex]; }
+			if ( ms.length >= i ) { mad = ms[ndex]; }
+			if ( dis > exh && dis > mad ) {
+				dominant = "Discipline"; 
+				break;
+			}
+			if ( exh > dis && exh > mad ) {
+				dominant = "Exhaustion"; 
+				break;
+			}
+			if ( mad > dis && mad > exh ) {
+				dominant = "Madness"; 
+				break;
+			}
+			if ( dis == exh && dis == mad ) {
+				dominant = "Discipline (All Tie)"; 
+				continue;
+			}
+			if ( dis == exh && dis > mad ) {
+				dominant = "Discipline (and Exhaustion)"; 
+				ms = []; // take it out of the running
+				continue;
+			}
+			if ( dis == mad && dis > exh ) {
+				dominant = "Discipline (and Madness)";
+				es = []; // take it out of the running
+				continue;
+			}
+			if ( exh == mad && exh > dis ) {
+				dominant = "Madness (and Exhaustion)";
+				ds = []; // take it out of the running
+				continue;
+			}
+		}
+		rtext = `${rtext} {{${dt}}} {{${mt}}} {{${et}}} {{dominant=${dominant}}} {{successes=${successes}}}`;
+		startRoll(rtext, function(roll) {
+			finishRoll( roll.rollId );
+		});
+	});
+});
+
+</script>
