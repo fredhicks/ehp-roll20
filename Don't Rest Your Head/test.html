@@ -1,0 +1,127 @@
+<script type="text/worker">
+
+// Grabbed from https://app.roll20.net/forum/post/10346883/adventures-with-startroll
+
+const rollEscape = {
+    chars: {
+        '"': '%quot;',
+        ',': '%comma;',
+        ':': '%colon;',
+        '}': '%rcub;',
+        '{': '%lcub;',
+    },
+    escape(str) {
+        str = (typeof(str) === 'object') ? JSON.stringify(str) : (typeof(str) === 'string') ? str : null;
+        return (str) ? `${str}`.replace(new RegExp(`[${Object.keys(this.chars)}]`, 'g'), (r) => this.chars[r]) : null;
+    },
+    unescape(str) {
+        str = `${str}`.replace(new RegExp(`(${Object.values(this.chars).join('|')})`, 'g'), (r) => Object.entries(this.chars).find(e=>e[1]===r)[0]);
+        return JSON.parse(str);
+    }
+}
+
+on("clicked:pool", function(event) {
+	getAttrs(["d","e","m"], function(a) {
+		var rtext = "&{template:dryh} {{dominant=[[0]]}} {{successes=[[0]]}} " + event.htmlAttributes.value;
+		for(var i = 1 ; i <= a["d"] ; i++) {
+			rtext = rtext + " {{d" + i + "=[[d6]]}}";
+		}
+		for(var i = 1 ; i <= a["e"] ; i++) {
+			rtext = rtext + " {{e" + i + "=[[d6]]}}";
+		}
+		for(var i = 1 ; i <= a["m"] ; i++) {
+			rtext = rtext + " {{m" + i + "=[[d6]]}}";
+		}
+		log(rtext);
+		startRoll(rtext, function(roll) {
+			var pools = { successes: 0, dominant: "" };
+			var furthest = 0;
+			var ds = []; var ms = []; var es = [];
+			for(var i = 1 ; i <= a["d"] ; i++) {
+				var dkey = "d"+i;
+				var thisv = roll.results[dkey].rolls[0].results[0];
+				ds[i-1] = thisv;
+				if ( i > furthest ) { furthest = i; }
+				if ( thisv <= 3 ) { pools["successes"] = pools["successes"] + 1; }
+			}
+			for(var i = 1 ; i <= a["e"] ; i++) {
+				var ekey = "e"+i;
+				var thisv = roll.results[ekey].rolls[0].results[0];
+				es[i-1] = thisv;
+				if ( i > furthest ) { furthest = i; }
+				if ( thisv <= 3 ) { pools["successes"] = pools["successes"] + 1; }
+			}
+			for(var i = 1 ; i <= a["m"] ; i++) {
+				var mkey = "m"+i;
+				var thisv = roll.results[mkey].rolls[0].results[0];
+				ms[i-1] = thisv;
+				if ( i > furthest ) { furthest = i; }
+				if ( thisv <= 3 ) { pools["successes"] = pools["successes"] + 1; }
+			}
+			ds.sort(); es.sort(); ms.sort();
+			ds.reverse(); es.reverse(); ms.reverse();
+			for(var i = 1; i <= furthest; i++) {
+				var ndex = i-1;
+				var dis = 0; var exh = 0; var mad = 0;
+				if ( ds.length >= i ) { dis = ds[ndex]; }
+				if ( es.length >= i ) { exh = es[ndex]; }
+				if ( ms.length >= i ) { mad = ms[ndex]; }
+				if ( dis > exh && dis > mad ) {
+					pools["dominant"] = "Discipline"; 
+					break;
+				}
+				if ( exh > dis && exh > mad ) {
+					pools["dominant"] = "Exhaustion"; 
+					break;
+				}
+				if ( mad > dis && mad > exh ) {
+					pools["dominant"] = "Madness"; 
+					break;
+				}
+				if ( dis == exh && dis == mad ) {
+					pools["dominant"] = "Discipline (All Tie)"; 
+					continue;
+				}
+				if ( dis == exh && dis > mad ) {
+					pools["dominant"] = "Discipline (and Exhaustion)"; 
+					ms = []; // take it out of the running
+					continue;
+				}
+				if ( dis == mad && dis > exh ) {
+					pools["dominant"] = "Discipline (and Madness)";
+					es = []; // take it out of the running
+					continue;
+				}
+				if ( exh == mad && exh > dis ) {
+					pools["dominant"] = "Madness (and Exhaustion)";
+					ds = []; // take it out of the running
+					continue;
+				}
+			}
+			log(rollEscape.escape(pools));
+			finishRoll( roll.rollId, rollEscape.escape(pools) );
+		});
+	});
+});
+
+</script>
+
+<input type="number" name="attr_d" value="3">
+<input type="number" name="attr_e" value="1">
+<input type="number" name="attr_m" value="1">
+
+<button type="action" name="act_pool" value="{{name=@{character_name}}}">Pool</button>
+
+<rolltemplate class="sheet-rolltemplate-dryh">
+<h3>{{name}}</h3>
+<div>Successes: {{successes}}</div>
+<div>Dominant: {{dominant}}</div>
+<div>Successes: {{computed::successes}}</div>
+<div>Dominant: {{computed::dominant}}</div>
+
+</rolltemplate>
+
+
+<div style="margin-bottom: 6px;">Discipline: {{d1}} {{d2}} {{d3}}</div>
+<div style="margin-bottom: 6px;">Exhaustion: {{e1}} {{e2}} {{e3}} {{e4}} {{e5}} {{e6}} </div>
+<div style="margin-bottom: 6px;">Madness: {{m1}} {{m2}} {{m3}} {{m4}} {{m5}} {{m6}}</div>
