@@ -1932,31 +1932,31 @@
 </div> <!-- /Wrapper -->
 
 <rolltemplate class="sheet-rolltemplate-share">
-	<div {{#theme}}class="theme-{{theme}}"{{/theme}}>
+	<div {{#theme}}class="sheet-theme-{{theme}}"{{/theme}}>
 		{{#name}}
-			<div class="roll-name"><b>{{name}}</b></div>
+			<div class="sheet-roll-name"><b>{{name}}</b></div>
 		{{/name}}
 		{{#text}}
-			<div class="text">{{text}}</div>
+			<div class="sheet-text">{{text}}</div>
 		{{/text}}
 		{{#breaks}}
-			<div class="breaks">{{breaks}}</div>
+			<div class="sheet-breaks">{{breaks}}</div>
 		{{/breaks}}
 		{{#allprops() name text theme breaks}}
-			<div class="space-above">**{{key}}:** {{value}} </div>
+			<div class="sheet-space-above">**{{key}}:** {{value}} </div>
 		{{/allprops() name text theme breaks}}
 	</div>
 </rolltemplate>
 
 <rolltemplate class="sheet-rolltemplate-fateroll">
-	<div {{#theme}}class="theme-{{theme}}"{{/theme}}>
+	<div {{#theme}}class="sheet-theme-{{theme}}"{{/theme}}>
 		{{#name}}
-			<div class="roll-name"><b>{{name}}</b></div>
+			<div class="sheet-roll-name"><b>{{name}}</b></div>
 		{{/name}}
 		{{#roll}}
-			<div class="roll">
+			<div class="sheet-roll">
 				{{roll}}
-				<div class="word">
+				<div class="sheet-word">
 					{{#rollGreater() roll 16}}
 						<span data-i18n="beyond">Beyond</span>
 						<span data-i18n="rating-word8">Legendary</span>
