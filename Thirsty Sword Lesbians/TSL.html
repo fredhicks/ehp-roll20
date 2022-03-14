@@ -5235,9 +5235,9 @@
 							<span name="attr_selected" class="pictos"></span>
 						</button>
 						<input type="hidden" name="attr_bio" value="" class="hide-on-null">
-						<div class="tooltip bio">
+						<div class="tsl-tooltip bio">
 							<div><span class="pictos">E</span> <span data-i18n="More about"></span> <span name="attr_name"></span></div>
-							<div class="tooltip-pop">
+							<div class="tsl-tooltip-pop">
 								<span name="attr_bio"></span>
 							</div>
 						</div>
@@ -5289,7 +5289,7 @@
 				<fieldset class="repeating_stats">
 					<input type="hidden" name="attr_key" value="">
 					<input type="hidden" name="attr_name" value="">
-					<div class="tooltip">
+					<div class="tsl-tooltip">
 						<div class="section-head one-line">
 							<button type="roll" class="sheet-2d6-button-nofloat no-dice stretch bold" value="&{template:2d6-roll} {{character=@{character_name}}} {{title=@{name}}} {{roll=[[2d6+@{rating}+@{rollprompt}]]}} @{modifier-tally-text}" name="roll_2d6">
 								<span name="attr_name"></span>
@@ -5298,7 +5298,7 @@
 								<input type="hidden" name="attr_rating" value="0" class="make-plus"><span class="make-plus"></span><span name="attr_rating" class="minimum"></span>
 							</button>
 						</div>
-						<div class="tooltip-pop">
+						<div class="tsl-tooltip-pop">
 							<div class="bold"><span name="attr_name"></span>: <input type="number" name="attr_rating" value="" min="-9" max="9" class="fillme"></div>
 							<div><span name="attr_description"></span></div>
 						</div>
@@ -5306,7 +5306,7 @@
 				</fieldset>
 			</div>
 
-			<div class="tooltip">
+			<div class="tsl-tooltip">
 				<div class="section-head">
 					<span data-i18n="Experience"></span>
 				</div>
@@ -5314,7 +5314,7 @@
 					<input type="number" name="attr_experience" value="0" min="0" class="fillme">
 					<input type="hidden" name="attr_experience_max" value="5">
 				</div>
-				<div class="tooltip-pop">
+				<div class="tsl-tooltip-pop">
 					<span data-i18n="Receive experience (XP) whenever you roll a 6- or when a move tells you to mark XP. A PC can spend XP to take an Advance; consult that section for more."></span>
 				</div>
 			</div>
