@@ -1,0 +1,543 @@
+$playbooks: summoned, surge, found, shade, last, fallen, hungry
+$font: 'Nunito', sans-serif
+
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Cormorant:ital,wght@0,400;0,700;1,400;1,700&display=swap')
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0')
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,700;1,400;1,700&display=swap')
+
+:root, .sheet-rolltemplate-2d6-roll
+	--ak-fg: black
+	--ak-bg: white
+	--ak-pink: #82174a
+	--ak-alert: #046466
+	font-family: #{$font}
+
+.sheet-darkmode, .sheet-rolltemplate-darkmode
+	--ak-fg: white
+	--ak-bg: #1f1f1f
+	--ak-darkpink: #ac1d4a
+	--ak-mediumpink: #da255e
+	--ak-lightpink: #e5668e
+	--ak-pink: #bd66e5 
+	--ak-alert: #08c1c4
+	
+p,
+.ui-dialog .charsheet
+	font-family: #{$font}
+	font-size: 16px
+	color: var(--ak-fg) !important
+	background-color: var(--ak-bg)
+	line-height: unset
+
+.menu
+	position: fixed
+	width: calc(100% - 40px)
+	bottom: 0
+	background-color: var(--ak-bg)
+	border-top: 1px solid var(--ak-pink)
+	margin-left: -30px
+	padding-left: 30px
+	margin-right: -12px
+	margin-bottom: 0px
+	padding-bottom: 10px
+	padding-top: 12px
+	box-shadow: 0px -10px 8px var(--ak-bg)
+	z-index: 5
+	font-size: 14px
+.sheet-darkmode .menu
+	padding-bottom: 0px
+
+.largedialog 
+	.charsheet textarea.bio
+		height: 80px
+	.charsheet textarea.notes
+		font-size: 16px
+		height: 400px
+
+.ui-dialog .charsheet
+	.wrapper
+		padding-bottom: 60px
+		margin-top: -10px
+
+.sheet-darkmode .ui-dialog .charsheet
+	.wrapper
+		margin-top: 0px
+
+.ui-dialog .charsheet
+	ul
+		list-style: none
+		li
+			&::before
+				font-family: Pictos Custom
+				content: "t "
+				width: 21px
+				margin-left: -21px
+				color: var(--ak-pink)
+	p + ul
+		margin-top: -9px
+	input, select, textarea
+		color: var(--ak-fg)
+		background-color: var(--ak-bg)
+	textarea
+		border-color: var(--ak-pink)
+	a, a.icon
+		text-decoration: none
+		color: var(--ak-pink)
+	a.fglink
+		color: var(--ak-fg)
+	a:hover, a.icon:hover
+		color: var(--ak-fg)
+	button[type="roll"], button[type="action"], a, a.icon
+		&:hover, &.hfade:hover:before, &.colorized:hover:before, &.colorized:hover
+			color: var(--ak-fg)
+			background-color: var(--ak-bg)
+			text-shadow: 1px 1px var(--ak-bg), -1px 1px var(--ak-bg), 1px -1px var(--ak-bg), -1px -1px var(--ak-bg), 0 0 2px var(--ak-fg), 0 0 6px var(--ak-fg)
+		&:active, &.hfade:active:before, &.colorized:active:before, &.colorized:active
+			color: var(--ak-bg)
+			text-shadow: 1px 1px var(--ak-fg), -1px 1px var(--ak-fg), 1px -1px var(--ak-fg), -1px -1px var(--ak-fg), 0 0 2px var(--ak-fg), 0 0 6px var(--ak-fg)
+	button[type="roll"], button[type="action"], .icon
+		padding: 0px
+		font-size: 100%
+		margin: 0px 0px 0px 0px
+		line-height: unset
+		border: unset
+		background: unset
+		color: unset
+		text-shadow: unset
+		border-radius: unset
+		box-shadow: unset
+		vertical-align: unset
+		&:before
+			content: ''
+			font-family: 'Pictos'
+			vertical-align: 0px
+		&.hfade, &.hfade:before, &.colorized, &.colorized:before
+			color: var(--ak-pink)
+		&.hfade:before
+			font-size: 80%
+		&.expand:before
+			font-family: 'Material Symbols Outlined'
+			content: 'expand'
+			vertical-align: -2px
+		&.contract:before
+			font-family: 'Material Symbols Outlined'
+			content: 'compress'
+			vertical-align: -2px
+		&.contract.hfade:before
+			vertical-align: -4px
+		&.expand.hfade:before
+			vertical-align: -4px
+		&.view:before
+			font-family: 'Material Symbols Outlined'
+			content: 'visibility'
+			vertical-align: -3px
+		&.dismiss:before
+			font-family: 'Material Symbols Outlined'
+			content: 'visibility_off'
+			vertical-align: -3px
+		&.edit:before
+			content: 'p'
+		&.uparrow:before
+			content: '{'
+		&.downarrow:before
+			content: '}'
+		&.locked:before
+			content: '('
+		&.unlocked:before
+			content: ')'
+		&.dice:before
+			content: 'FA'
+			font-family: 'dicefontd6'
+			vertical-align: -1px
+			font-size: 110%
+		&.checked:before
+			font-family: 'Material Symbols Outlined'
+			content: 'check_box'
+			font-size: 110%
+			vertical-align: -4px
+		&.checked.hfade:before
+			font-size: 80%
+			vertical-align: -2px
+		&.unchecked:before
+			font-family: 'Material Symbols Outlined'
+			content: 'check_box_outline_blank'
+			font-size: 110%
+			vertical-align: -4px
+		&.unchecked.hfade:before
+			font-size: 80%
+			vertical-align: -2px
+		&.checked.tightright:before, &.unchecked.tightright:before
+			margin-right: -4px
+		&.vexpand:before
+			font-family: 'Material Symbols Outlined'
+			content: 'last_page'
+			font-size: 30px
+		&.vcontract:before
+			font-family: 'Material Symbols Outlined'
+			content: 'first_page'
+			font-size: 30px
+		&.rarrow:before
+			font-family: 'Material Symbols Outlined'
+			content: 'arrow_forward'
+			vertical-align: -2px
+		&.document:before
+			font-family: 'Material Symbols Outlined'
+			content: 'density_small'
+			vertical-align: -3px
+		&.add:before
+			font-family: 'Material Symbols Outlined'
+			content: 'add'
+			vertical-align: -2px
+		&.enact:before
+			font-family: 'Material Symbols Outlined'
+			content: 'clear_day'
+			vertical-align: -2px
+		&.warning:before
+			font-family: 'Material Symbols Outlined'
+			content: 'warning'
+			color: var(--ak-pink)
+			vertical-align: -2px
+		&.star:before
+			font-family: 'Material Symbols Outlined'
+			content: 'star'
+			color: var(--ak-pink)
+			vertical-align: -1px
+		&.alert:before
+			color: var(--ak-alert)
+	.titlebar button
+		width: 100%
+	.titlebar button:hover
+		width: 100%
+		background: var(--ak-pink)
+	input[type=text], input[type=number], select
+		border: none
+		border-bottom: 1px solid var(--ak-bg)
+		font-size: 18px
+		&:hover
+			border-bottom: 1px solid var(--ak-fg)
+	input.bigname
+			font-family: 'Amatic SC', cursive
+			font-weight: 700
+			font-size: 48px
+			padding-left: 0px
+			color: var(--ak-fg)
+	input.view 
+		&[value="1"] ~ .viewable
+			display: initial
+		&~ .viewable
+			display: none
+	input.nullview 
+		&[value="0"] ~ .viewable
+			display: none
+		&~ .viewable
+			display: initial
+	.columns, .topline
+		display: flex
+		flex-direction: row
+	.topline input[type="text"]
+		flex-grow: 1
+	.columns
+		.wide
+			flex-grow: 1
+			max-width: 100%
+		.middling
+			margin-right: 18px
+			width: 40%
+			flex-shrink: 0
+		.narrow
+			margin-right: 18px
+			width: 25%
+			flex-shrink: 0
+			select
+				width: 100%
+				height: 40px
+		.sidetab
+			width: 30px
+			padding-top: 6px
+			flex-grow: 0
+			flex-shrink: 0
+	.header, .subheader
+		margin-top: 12px
+		font-family: 'Amatic SC', cursive
+		display: flex
+		flex-direction: row
+		align-items: flex-start
+		.title
+			flex-grow: 1
+	.header
+		font-size: 36px
+		line-height: 36px
+		font-weight: 700
+		color: var(--ak-fg)
+		border-bottom: 0.5px solid var(--ak-pink)
+		&.fixed
+			margin-top: 16px
+	.subheader
+		font-size: 30px
+		line-height: 30px
+		font-weight: 400
+		color: var(--ak-fg)
+	.move, .bond, .checklist1box, .checklist2box
+		display: flex
+		flex-direction: row
+	.bond
+		margin-top: 10px
+		input[type="number"]
+			font-size: 16px
+			width: 50px
+			height: 18px
+			flex-shrink: 0
+			flex-grow: 0
+			text-align: right
+			border-bottom: 1px solid var(--ak-pink)
+		input[type="text"]
+			font-size: 16px
+			height: 18px
+			flex-shrink: 1
+			flex-grow: 1
+			width: 100%
+			border-bottom: 1px solid var(--ak-pink)
+	.bondzone
+		.btn
+			color: var(--ak-pink)
+			background: var(--ak-bg)
+			border-color: var(--ak-pink)
+			margin-top: 6px
+			text-shadow: unset
+			&:hover
+				color: var(--ak-fg)
+				border-color: var(--ak-fg)
+				background-color: var(--ak-bg)
+				text-shadow: 1px 1px var(--ak-bg), -1px 1px var(--ak-bg), 1px -1px var(--ak-bg), -1px -1px var(--ak-bg), 0 0 2px var(--ak-fg), 0 0 6px var(--ak-fg)
+				opacity: 1.0
+			&:active
+				color: var(--ak-bg)
+				border-color: var(--ak-fg)
+				text-shadow: 1px 1px var(--ak-fg), -1px 1px var(--ak-fg), 1px -1px var(--ak-fg), -1px -1px var(--ak-fg), 0 0 2px var(--ak-fg), 0 0 6px var(--ak-fg)
+	.bondspend
+		text-align: left
+		.spendline
+			height: 24px
+			overflow: hidden
+			white-space: nowrap
+			text-overflow: ellipsis
+			max-width: 300px
+			input[type="number"]
+				height: 21px
+				font-size: 16px
+				width: 50px
+				border-bottom: 1px solid var(--ak-pink)
+				text-align: right
+		.btn
+			display: none
+	.checklist1box, .checklist2box
+		.buttons
+			white-space: nowrap
+			padding-right: 6px
+			height: 24px
+			text-align: right
+			flex-shrink: 0
+			flex-grow: 0
+	.checklist1box .buttons
+		width: 18px
+	.checklist2box .buttons
+		width: 36px
+	.move .buttons
+		white-space: nowrap
+		padding-right: 6px
+		width: 36px
+		height: 24px
+		text-align: right
+		flex-shrink: 0
+		flex-grow: 0
+	input.checksonly ~ div input.checker + .move
+		display: flex
+	input.checksonly[value="1"] ~ div input.checker[value="0"] + .move
+		display: none !important // I don't like making this !important but for right now it's the only way for this one to take precedence over the other hiding-logic when it's active.
+	.movemark
+		display: none
+	.moveselector + .movemark + div input.checker + .move
+		display: none
+	.moveselector + .movemark[value="1"] + div input.checker + .move
+		display: flex
+	@each $pb in $playbooks
+		.moveselector[value=#{$pb}] + .movemark + div.pb#{$pb} input.checker + .move
+			display: flex
+	.pbid
+		font-size: 80%
+		line-height: 80%
+		font-style: italic
+	.pbselector
+		~ 
+			@each $pb in $playbooks
+				.pb#{$pb}
+					display: none
+		@each $pb in $playbooks
+			&[value=#{$pb}] ~ .pb#{$pb}
+				display: initial
+	.pbunselector
+		~ 
+			@each $pb in $playbooks
+				.pb#{$pb}
+					display: initial
+		@each $pb in $playbooks
+			&[value=#{$pb}] ~ .pb#{$pb}
+				display: none
+	.rollup
+		&~ .roller
+			display: none
+		&[value="0"] ~ .roller
+			display: none
+		&[value="1"] ~ .roller
+			display: initial
+	.toggle
+		&+ * + *, + *
+			display: none
+		&[value="0"]
+			&+ * + *
+				display: initial
+		&[value="1"]
+			&+ *
+				display: initial
+	.trigger, .term, .bold
+		font-weight: bold
+	.trigger, .term
+		color: var(--ak-pink)
+	.movename
+		font-weight: bold
+		font-variant: small-caps
+	.result
+		font-weight: bold
+		text-transform: uppercase
+		font-size: 90%
+		color: white
+		padding-left: 2px
+		padding-right: 2px
+		background-color: var(--ak-pink)
+	input.tokens
+		width: 100%
+		text-align: center
+		font-size: 300%
+		font-weight: bold
+	.minihead
+		margin-top: 6px
+		text-transform: uppercase
+		font-weight: bold
+	.instruction
+		font-size: 90%
+		// padding-left: 24px
+		font-style: italic
+		margin-bottom: 3px
+		color: var(--ak-pink)
+	.conditions 
+		.checklist1box, .checklist2box
+			.conditiontext
+				text-transform: capitalize
+				font-size: 16px
+				input[type="text"]
+					font-size: 16px
+					height: 18px
+					border-bottom: 1px solid var(--ak-pink)
+					width: 100%
+	.conditiontext
+		text-transform: capitalize
+	input.hidecheckboxesnotnull[value=""] ~ div input.masker 
+		&+ .checklist1box, &+ .checklist2box
+			display: flex
+	input.hidecheckboxesnotnull:not([value=""]) ~ div input.masker[value="0"]
+			&+ .checklist1box, &+ .checklist2box
+				display: none
+	input.hideempty
+		&[value=""] + *
+			display: none
+		&+ *
+			display: initial
+	input.colorizewhenactive[value="1"] + .tokens
+		color: var(--ak-pink)
+	button.topspace
+		margin-top: 6px
+
+.sheet-rolltemplate-2d6-roll,
+.sheet-rolltemplate-bondspend
+	font-family: #{$font}
+	font-size: 16px
+	color: var(--ak-fg)
+	background-color: var(--ak-bg)
+	line-height: unset
+
+.rollspend, .sheet-rolltemplate-2d6-roll .sheet-rollspend, .sheet-rolltemplate-bondspend .sheet-rollspend
+	padding: 6px
+	border: 1px solid var(--ak-pink)
+	background-color: var(--ak-bg)
+	color: var(--ak-fg)
+	// white-space: nowrap
+	text-align: left
+
+.ui-dialog .charsheet input[type="number"].narrower
+	width: 40px
+	height: 21px
+	border-bottom: 1px solid var(--ak-pink)
+
+.titlebar, .sheet-rolltemplate-2d6-roll .sheet-rollspend .sheet-titlebar, .sheet-rolltemplate-bondspend .sheet-rollspend .sheet-titlebar, .titlebar button span
+	color: white
+	font-size: 80%
+	font-weight: bold
+	text-align: center
+	text-transform: uppercase
+	margin-top: -6px
+	margin-left: -6px
+	margin-right: -6px
+	margin-bottom: 3px
+	background-color: var(--ak-pink)
+	
+.titlebar.subtitle
+	margin-top: 0px
+	margin-bottom: -6px
+
+input.spacetoggle[value="1"] + .titlebar.subtitle
+	margin-bottom: 3px
+
+.sheet-rolltemplate-2d6-roll .sheet-rollspend,
+.sheet-rolltemplate-bondspend .sheet-rollspend
+	text-align: center
+	.sheet-rollcontainer
+		padding-top: 10px
+		padding-bottom: 6px
+		.inlinerollresult
+			background: none
+			text-align: center
+			padding-left: 7px
+			padding-right: 7px
+		.sheet-perfect, .sheet-miss, .sheet-disastrous
+			.inlinerollresult
+				background: none
+				text-align: center
+				padding-left: 7px
+				padding-right: 7px
+		.sheet-perfect .inlinerollresult
+			border: 1px solid var(--ak-pink)
+			background-color: white
+			color: var(--ak-pink)
+		.sheet-miss .inlinerollresult
+			border: 1px solid var(--ak-pink)
+			background-color: black
+			color: white
+		.sheet-disastrous .inlinerollresult
+			border: 1px solid var(--ak-fg)
+			background-color: var(--ak-pink)
+			color: white
+	.sheet-rollresult
+		padding-bottom: 10px
+		font-weight: bold
+
+.footnote, .sheet-rolltemplate-2d6-roll .sheet-rollspend .sheet-footnote, .bondspend .footnote, .sheet-rolltemplate-bondspend .sheet-rollspend .sheet-footnote
+	font-size: 80%
+	line-height: 1
+	
+.spaceup
+	margin-top: 6px
+
+.spaceupmini
+	margin-top: 3px
+
+

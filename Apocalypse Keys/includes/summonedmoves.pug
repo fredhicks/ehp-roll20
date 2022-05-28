@@ -1,0 +1,151 @@
++move("Come On, Tough Guy","selectable")
+	p
+		+translate("When you go up against a colossal and otherworldly opponent,")(class="trigger")
+		+translate("tell everyone how you taunt them and keep their attention. Spend Darkness Tokens and roll.")
+		+rolldark("Come On, Tough Guy")
+	p
+		+translate("On an 8-10")(class="result")
+		+translate("you’ve got ‘em just where you want them.")(class="bold")
+		+translate("Choose two:")
+		ul
+			li
+				+translate("You give your allies a golden opportunity, choose one ally to gain")
+				+translate("1 Bond")(class="bold term")
+				+translate("with you")
+			li
+				+translate("Uncover")
+				+translate("a Key")(class="bold term")
+				+translate("at great cost")
+			li
+				+translate("Inflict")
+				+translate("2 Conditions")(class="bold term")
+				+translate("on them, but")
+				+headlink("take one","conditions")
+				+translate("in return")
+	p
+		+translate("On an 11+")(class="result")
+		+translate("you’re locked in an intense battle")(class="bold")
+		+translate("and you cannot stop until your opponent is destroyed. Choose one from above, and you can only pull back if a player agrees to spend")
+		+translate("1 Bond")(class="bold term")
+		+translate("to reach past your rage. If they don’t spend the Bond, you cannot stop fighting until your opponent is destroyed.")
+	p
+		+translate("On a 7-")(class="result")
+		+translate("your power overwhelms you,")(class="bold")
+		+translate("and you take on a colossal form as your prophecy comes to bear and leaves a permanent mark on you. The Keeper will tell you what happens next.")
++move("Borrowed Power","selectable")
+	p
+		+translate("Along the walls of the world beings of twisted power await your bidding.")
+	p
+		+translate("When you summon a creature from another world to help you,")(class="trigger")
+		+translate("spend Darkness Tokens and roll.")
+		+rolldark("Borrowed Power")
+	p
+		+translate("On an 8-10")(class="result")
+		+translate("the summoning wards hold and you have the upper hand for now.")(class="bold")
+		+translate("Choose one:")
+		ul
+			li
+				+translate("The summoned creature is fire and rage, violence and storm. They will destroy a vulnerable target before the summoning unravels.")
+			li
+				+translate("The summoned creature will answer any one question truthfully, take")
+				+headlink("1 Bond","bonds")(class="bold term")
+				+translate("with What the Darkness Demands of You.")
+			li
+				+translate("The summoned creature will uncover")
+				+translate("a Key")(class="bold term")
+				+translate("for you, at great cost to you. It shares an ominous warning before it fades away.")
+	p
+		+translate("On an 11+")(class="result")
+		+translate("you barely have this creature under control, it will do as you command but the wards will shatter soon after.")(class="bold")
+		+translate("Choose:")
+		ul
+			li
+				+translate("Choose one from above, but you have to exert your will and banish the creature before it can wreak havoc. Mark")
+				+headlink("1 Condition","conditions")(class="bold term")
+				+translate("or")
+				+ruin(1)
+			li
+				+translate("Choose one from above, but the creature will escape into the world and be forever free of your control. Gain")
+				+headlink("1 Bond","bonds")(class="bold term")
+				+translate("with What the Darkness Demands of You.")
+	p
+		+translate("On a 7-")(class="result")
+		+translate("something powerful and sinister hijacks the summoning and comes through,")(class="bold")
+		+translate("with no summoning wards to control it. The forbidden comes through. The Keeper will tell you what happens next.")
++move("We’re Family Now","selectable")
+	p
+		+translate("When someone spends")(class="trigger")
+		+translate("a Bond")(class="bold term")
+		+translate("with you to modify a roll by +1 or -1,")(class="trigger")
+		+translate("they choose:")
+		ul
+			li
+				+translate("The Bond instead grants +3 or a -3 bonus")
+			li
+				+translate("You gain")
+				+headlink("a new Bond","bonds")(class="bold term")
+				+translate("with them afterwards")
++move("Everything For You, My Love","selectable")
+	p
+		+translate("When you are about to mark your fifth box of Ruin,")(class="trigger")
+		+translate("you may choose to declare your love for the first time, or describe how love has changed you.")(class="bold")
+		+translate("Tell everyone how you bare your heart for all to see, spend Darkness Tokens and roll.")
+		+rolldark("Everything For You, My Love")
+	p
+		+translate("On an 8-10")(class="result")
+		+translate("you hold back the Harbinger within you and your heart shines through.")(class="bold")
+		+spendruin(99,"Erase your Ruin track")
+		+translate("and your love gains")
+		+translate("1 Bond")(class="bold term")
+		+translate("with you.")
+	p
+		+translate("On an 11+")(class="result")
+		+translate("you further entangle your beloved in your prophecy.")(class="bold")
+		+translate("If your beloved accepts your love and the burden of your prophecy,")
+		+spendruin(99,"erase your Ruin track.")
+		+translate("If they respond otherwise, or not at all, take that as a sign of rejection. Erase")
+		+spendruin(1)
+		+translate("and gain")
+		+headlink("1 Bond","bonds")(class="bold term")
+		+translate("with What the Darkness Demands of You.")
+	p
+		+translate("On a 7-")(class="result")
+		+translate("the Harbinger is unleashed and turns on the one you love,")(class="bold")
+		+translate("the Keeper will tell you what happens next.")
++move("Together We Are Destiny","selectable")
+	p
+		+translate("When you seek to defy your prophecy,")(class="trigger")
+		+translate("declare a new destiny.")(class="bold")
+		+translate("Ask each other player if they will defy prophecy with you. Roll, adding +1 for each player who says yes, to a maximum of +3. You cannot spend Darkness Tokens on this roll.")
+		+rollcustom("Together We Are Destiny")
+	p
+		+translate("On an 8-10")(class="result")
+		+translate("the prophecy weakens its hold on you for now,")(class="bold")
+		+translate("choose two:")
+		ul
+			li
+				+translate("Declare a new truth about your prophecy")
+			li
+				+translate("Reveal a crucial event that is going on outside of view")
+			li
+				+translate("Gain")
+				+headlink("1 Bond","bonds")(class="bold term")
+				+translate("with a PC or NPC that is central to the destiny you desire")
+	p
+		+translate("On an 11+")(class="result")
+		+translate("destiny and prophecy intertwine.")(class="bold")
+		+translate("Choose one from above and one from below.")
+		ul
+			li
+				+translate("Declare a dark secret about who you love most, they gain")
+				+translate("1 Bond")(class="bold term")
+				+translate("with What the Darkness Demands of You")
+			li
+				+translate("Reveal a sinister scheme that comes to fruition")
+			li
+				+translate("A part of your heart whispers that you can only delay the inevitable, mark")
+				+ruin(1)
+	p
+		+translate("On a 7-")(class="result")
+		+translate("your prophecy reasserts itself and grows crueller,")(class="bold")
+		+translate("the Keeper will tell you what happens next.")

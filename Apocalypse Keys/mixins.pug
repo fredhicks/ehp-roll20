@@ -1,0 +1,352 @@
+mixin translate(text)
+	span(data-i18n=text)&attributes(attributes) #{text}
+	| 
+
+mixin briefmove(movekey,pb,check)
+	- if ( typeof(check) == "undefined" ) { check = "yes"; }
+	- var movetext = movekey
+	- movekey = movekey.toLowerCase();
+	- movekey = movekey.replace(/[^a-z0-9]/g,"_");
+	- if ( check == "yes" )
+		input(type='hidden' name='attr_playbook' class='moveselector' value='')
+		input(type='hidden' name='attr_check_'+movekey class='movemark' value='0')
+	div(class='pb'+pb)
+		if ( check == "yes" )
+			input(type='hidden' name='attr_check_'+movekey class='checker' value="0")
+		div.move
+			div.buttons
+				- if ( check == "yes" )
+					input(type='hidden' name="attr_check_"+movekey value="0" class="toggle")
+					button.checked.colorized(type='action' name='act_uncheck' value=movekey)
+					button.unchecked.colorized(type='action' name='act_check' value=movekey)
+				input(type='hidden' name="attr_view_"+movekey value="0" class="toggle")
+				a.viewable(href="#jumpmove_"+movekey)
+					span.icon.document
+				button.view.colorized(type='action' name='act_view' value=movekey)
+			div.text
+				span
+					input(class="toggle" type="hidden" name="attr_view_"+movekey value="0")
+					a(href="#header"+movekey)(class="fglink")
+						+translate(movetext)
+					+translate(movetext)
+				input(type='hidden' name='attr_playbook' class='pbunselector' value='')
+				br
+				span(class='pb'+pb+' pbid')
+					| (
+					+translate(pb)
+					| )
+
+mixin move(movekey,selectable)
+	- var movetext = movekey
+	- movekey = movekey.toLowerCase();
+	- movekey = movekey.replace(/[^a-z0-9]/g,"_");
+	- if ( typeof(selectable) == "undefined" || selectable == "" ) { selectable = false; } else { selectable = true; }
+	.section
+		a(name="jumpmove_"+movekey)
+		input(type='hidden' name='attr_view_'+movekey value='0' class='view')
+		.viewable
+			+expandablesub(movetext,'dismiss','',selectable)
+				block
+
+mixin headlink(t,k)
+	- if ( typeof(k) == "undefined" || k == "" ) { k = t; }
+	- var key = k;
+	- key = key.toLowerCase();
+	- key = key.replace(/[^a-z0-9]/g,"_");
+	a(href="#header"+key)&attributes(attributes)
+		+translate(t)
+
+mixin expandable(t,s,dismiss,checkerbox,selectable)
+	- var key = t;
+	- key = key.toLowerCase();
+	- key = key.replace(/[^a-z0-9]/g,"_");
+	- if ( typeof(s) == "undefined" ) { s = ""; }
+	- if ( typeof(dismiss) == "undefined" || dismiss == "" ) { dismiss = false; } else { dismiss = true; }
+	- if ( typeof(selectable) == "undefined" || selectable == "" ) { selectable = false; } else { selectable = true; }
+	- if ( typeof(checkerbox) == "undefined" ) { checkerbox = ""; }
+	a(name="header"+key)
+	div(class=s+"header")
+		if ( selectable )
+			input(type='hidden' name="attr_check_"+key value="0" class="toggle")
+			button.checked.hfade(type='action' name='act_uncheck' value=key)
+			button.unchecked.hfade(type='action' name='act_check' value=key)
+		+translate(t)(class="title")
+		if ( checkerbox !== "" )
+			input(type='hidden' name="attr_check_"+checkerbox value="0" class="toggle")
+			button.checked.hfade(type='action' name='act_uncheck' value=checkerbox)
+			button.unchecked.hfade(type='action' name='act_check' value=checkerbox)
+		if ( dismiss )
+			button.dismiss.hfade(type='action' name='act_unview' value=key)
+			| &nbsp;
+		input(type='hidden' name="attr_expand_"+key value="1" class="toggle")
+		button.contract.hfade(type='action' name='act_contract' value=key)
+		button.expand.hfade(type='action' name='act_expand' value=key)
+	.section
+		input(type='hidden' name="attr_expand_"+key value="1" class="rollup")
+		.section.roller
+			block
+
+mixin expandablesub(t,d,c,s)
+	+expandable(t,"sub",d,c,s)
+		block
+
+mixin fixed(t,s)
+	- if ( typeof(s) == "undefined" ) { s = ""; }
+	- var key = t;
+	- key = key.toLowerCase();
+	- key = key.replace(/[^a-z0-9]/g,"_");
+	a(name="header"+key)
+	div(class=s+"header fixed")
+		+translate(t)(class="title")
+	.section
+		block
+
+mixin fixedsub(t)
+	+fixed(t,"sub")
+		block
+
+- var rolldarks = 0;
+
+mixin rolldark(t)
+	- rolldarks = rolldarks + 1;
+	div.rollspend
+		div.titlebar
+			input(type='hidden' name="attr_expand_rolldark"+rolldarks value="0" class="toggle")
+			button.contract(type='action' name='act_contract' value="rolldark"+rolldarks)
+				| &nbsp;&nbsp;&nbsp;&nbsp;
+				+translate("Spend and Roll")(class="bold")
+			button.expand(type='action' name='act_expand' value="rolldark"+rolldarks)
+				| &nbsp;&nbsp;&nbsp;&nbsp;
+				+translate("Spend and Roll")(class="bold")
+		input(type='hidden' name="attr_expand_rolldark"+rolldarks value="0" class="rollup")
+		.roller
+			div
+				button.dice(type='action' name='act_rolldicedark' value=t)
+				|
+				| +
+				input(name="attr_darkness_spend" value="0" min="0" max="3" type="number" class="narrower")
+				span.footnote
+					+translate("(max 3)")
+				button.dice(type='action' name='act_rolldicedark' value=t)
+			input(type="hidden" name="attr_view_recent_roll" value="0" class="toggle")
+			div.viewable
+				button.dismiss(type='action' name='act_unview' value="recent_roll")
+				input(type="hidden" name="attr_recent_roll" value="")
+				input(type="hidden" name="attr_recent_roll_result" value="")
+				+translate("Last roll")
+				| (
+				span(name="attr_recent_roll")
+				| ) = 
+				| 
+				span(name="attr_recent_roll_result")
+				+spendbondsbox(t)
+			div.footnote
+				input(name="attr_darkness_tokens" type="hidden")
+				span(name="attr_darkness_tokens")
+				| 
+				+translate("Darkness Tokens currently available.")
+				br
+				+translate("Enter the amount to spend and click the dice.")
+
+- var rollcustoms = 0;
+
+mixin rollcustom(t)
+	- rollcustoms = rollcustoms + 1;
+	div.rollspend
+		div.titlebar
+			input(type='hidden' name="attr_expand_rollcustom"+rollcustoms value="0" class="toggle")
+			button.contract(type='action' name='act_contract' value="rollcustom"+rollcustoms)
+				| &nbsp;&nbsp;
+				+translate("Custom Roll")(class="bold")
+			button.expand(type='action' name='act_expand' value="rollcustom"+rollcustoms)
+				| &nbsp;&nbsp;
+				+translate("Custom Roll")(class="bold")
+		input(type='hidden' name="attr_expand_rollcustom"+rollcustoms value="0" class="rollup")
+		.roller
+			div
+				button.dice(type='action' name='act_rolldicecustom' value=t)
+				|
+				| +
+				input(name="attr_custom_bonus" value="0" min="0" max="3" type="number" class="narrower")
+				span.footnote
+					+translate("(max 3)")
+			input(type="hidden" name="attr_view_recent_roll" value="0" class="view")
+			div.viewable
+				button.dismiss(type='action' name='act_unview' value="recent_roll")
+				input(type="hidden" name="attr_recent_roll" value="")
+				input(type="hidden" name="attr_recent_roll_result" value="")
+				+translate("Last roll")
+				| (
+				span(name="attr_recent_roll")
+				| ) = 
+				| 
+				span(name="attr_recent_roll_result")
+				+spendbondsbox(t)
+
+mixin spendbondsbox(t)
+	div
+		input(type='hidden' name="attr_expand_roll_bonds" value="1" class="spacetoggle")
+		.titlebar.subtitle
+			input(type='hidden' name="attr_expand_roll_bonds" value="1" class="toggle")
+			button.contract(type='action' name='act_contract' value="roll_bonds")
+				| &nbsp;&nbsp;
+				+translate("Spend bonds?")(class="bold")
+			button.expand(type='action' name='act_expand' value="roll_bonds")
+				| &nbsp;&nbsp;
+				+translate("Spend bonds?")(class="bold")
+		div
+			input(type='hidden' name="attr_expand_roll_bonds" value="1" class="rollup")
+			.roller
+				.bondspend.footnote
+					fieldset(class="repeating_bonds")
+						.spendline
+							| ( + or – )
+							input(type="hidden" name="attr_points")
+							input(type="hidden" name="attr_bondname")
+							input(type="number" name="attr_spend" class="narrower footnote" value="0")
+							|(
+							span(name="attr_points")
+							|)  
+							span(name="attr_bondname")
+				input(type="hidden" name="attr_bond_mod_summary")
+				input(type="hidden" name="attr_bond_mod" class="nullview")
+				.viewable
+					button.dice.bold.topspace(type='action' name='act_spendbonds' value=t)
+						+translate("Spend:")
+						span(name="attr_bond_mod_summary")
+					div(style="")
+						+translate("Once you commit to the adjustment, bonds will be reduced and the adjusted roll displayed in chat.")(class="footnote")
+						
+mixin minihead(title)
+	div.minihead
+		+translate(title)
+	div
+		block
+
+- var checkables = { "": 0 };
+mixin checkable(item,updatefield,checkgroup)
+	+multicheckable(item,1,updatefield,checkgroup)
+
+mixin multicheckable(item,qty,updatefield,checkgroup,maxq)
+	- if ( typeof(checkgroup) == "undefined" ) { checkgroup = ""; }
+	- if ( typeof(checkables[checkgroup]) == "undefined" ) { checkables[checkgroup] = 0; }
+	- if ( typeof(updatefield) == "undefined" ) { updatefield = ""; }
+	- if ( typeof(maxq) == "undefined" ) { maxq = qty; }
+	- var boxes = 0;
+	while boxes < qty
+		- boxes++;
+		- checkables[checkgroup] = checkables[checkgroup] + 1;
+		- var ckey = "checkable"+checkgroup+"_"+checkables[checkgroup];
+		input(type="hidden" name="attr_check_"+ckey value="0" class="masker")
+	- boxes = 0; checkables[checkgroup] = checkables[checkgroup] - qty;
+	div(class="checklist"+maxq+"box")
+		div.buttons
+			while boxes < qty
+				- boxes++;
+				- checkables[checkgroup] = checkables[checkgroup] + 1;
+				- var ckey = "checkable"+checkgroup+"_"+checkables[checkgroup];
+				- var vkey = ckey;
+				- if ( updatefield !== "" ) { vkey = ckey + "|" + updatefield + "=" + item; }
+				- var extra = "";
+				input(type='hidden' name="attr_check_"+ckey value="0" class="toggle")
+				if boxes < qty
+					- extra = " tightright";
+				button(class="checked"+extra type='action' name='act_unchecklist' value=vkey)
+				button(class="unchecked"+extra type='action' name='act_checklist' value=vkey)
+		div.text
+			+translate(item)
+
+- var blankcons = 0;
+mixin condition(con,blank,locked)
+	- var key = con;
+	- if ( typeof(blank) == "undefined" || blank == "" ) { blank = false; } else { var bpre = ""; if ( blank != true ) { bpre = blank; blank = true; } blankcons = blankcons + 1; key = "blank"+bpre+blankcons; }
+	- if ( typeof(locked) == "undefined" || locked == "" ) { locked = false; } else { locked == true; }
+	- key = key.toLowerCase();
+	- key = key.replace(/[^a-z0-9]/g,"_");
+	- ckey = "condition_"+key;
+	- bkey = ckey + "_text";
+	div.checklist1box
+		div.buttons
+			- if ( locked )
+				// Simply establish that this field is always checked, but don't provide buttons to make it toggle-able.
+				input(type='hidden' name="attr_check_"+ckey value="1")
+				span.icon.checked
+			- else
+				input(type='hidden' name="attr_check_"+ckey value="0" class="toggle")
+				- if ( blank )
+					button.checked(type='action' name='act_unchecklist' value=ckey+"|current_conditions=>"+bkey)
+					button.unchecked(type='action' name='act_checklist' value=ckey+"|current_conditions=>"+bkey)
+				- else
+					button.checked(type='action' name='act_unchecklist' value=ckey+"|current_conditions="+con)
+					button.unchecked(type='action' name='act_checklist' value=ckey+"|current_conditions="+con)
+		div.conditiontext
+			- if ( blank ) 
+				input(type='text' name="attr_"+bkey)
+			- else
+				+translate(con)
+
+mixin xp(n)
+	button.enact.colorized(type='action' name='act_addxp' value=n)
+		span.bold
+			| #{n}&nbsp;
+		+translate("XP")(class="bold")
+	| 
+		
+mixin spendxp(n)
+	button.enact.colorized(type='action' name='act_spendxp' value=n)
+		span.bold
+			| #{n}&nbsp;
+		+translate("XP")(class="bold")
+	| 
+
+mixin ruin(n)
+	button.enact.colorized(type='action' name='act_addruin' value=n)
+		span.bold
+			| #{n}&nbsp;
+		+translate("Ruin")(class="bold")
+	| 
+
+mixin spendruin(n,t)
+	button.enact.colorized(type='action' name='act_spendruin' value=n)
+		if typeof(t) == "undefined"
+			span.bold
+				| #{n}&nbsp;
+			+translate("Ruin")(class="bold")
+		else
+			+translate(t)&attributes(attributes)
+	| 
+
+mixin dark(n)
+	button.enact.colorized(type='action' name='act_adddark' value=n)
+		span.bold
+			| #{n}&nbsp;
+		- var tokens = "Tokens"
+		- if ( (parseInt(n)||0) == 1 ) { tokens = "Token"; }
+		+translate("Darkness "+tokens)(class="bold")
+	| 
+		
+mixin spenddark(n)
+	button.enact.colorized(type='action' name='act_spenddark' value=n)
+		span.bold
+			| #{n}&nbsp;
+		- var tokens = "Tokens"
+		- if ( (parseInt(n)||0) == 1 ) { tokens = "Token"; }
+		+translate("Darkness "+tokens)(class="bold")
+	| 
+
+mixin pbinstruct()
+	- var key = 'pbinstructions'
+	input(type='hidden' name='attr_view_'+key value='1' class='view')
+	.viewable
+		block
+		button.dismiss.colorized(type='action' name='act_unview' value=key)
+
+mixin movelink(t)
+	- var key = t;
+	- key = key.toLowerCase();
+	- key = key.replace(/[^a-z0-9]/g,"_");
+	span
+		input(class="toggle" type="hidden" name="attr_view_"+key value="0")
+		a(href="#header"+key)(class="icon document")
+			+translate(t)(class="movename bold")
+		+translate(t)(class="movename bold term")

@@ -1,0 +1,2511 @@
+
+<script type="text/worker">var gTBK = function(t) {
+	if ( typeof t === "undefined" ) {
+		return "";
+	} else {
+		var result = getTranslationByKey(t);
+		// log(`${t} -> ${result}`,"translation")
+		if ( result === false ) {
+			log("could not translate: " + t);
+			return "UNTRANSLATED ["+t+"]";
+		} else {
+			if ( result === "" ) { return ""; }
+			else { return result; }
+		}
+	}
+};
+
+const exclusives = {
+	"summoned": [ "Sometimes, I Get Angry" ]
+};
+
+on("change:playbook", function(event) {
+	log(event);
+	var nv;
+	if ( typeof(event.newValue) == "undefined" ) { nv = ""; } else { nv = event.newValue; }
+	log("changed playbook to " + nv );
+	var pbs = Object.keys(exclusives);
+	var a = {};
+	for(var i = 0; i < pbs.length; i++ ) {
+		if ( typeof(exclusives[pbs[i]]) !== "undefined" ) {
+			for(var j = 0; j < exclusives[pbs[i]].length; j++) {
+				var state = 0;
+				if ( nv == pbs[i] ) { // then it's the activated playbook
+					state = 1;
+				}
+				var movekey = exclusives[pbs[i]][j];
+				movekey = movekey.toLowerCase();
+				movekey = movekey.replace(/[^a-z0-9]/g,"_");
+				a["view_"+movekey] = state;
+			}
+		}
+	}
+	a.view_pbinstructions = 1;
+	log(a);
+	setAttrs(a);
+});
+
+on("clicked:expand", function(event) {
+	var what = event.htmlAttributes.value;
+	var atname = "expand_" + what;
+	var ats = {};
+	ats[atname] = 1;
+	setAttrs(ats);
+	log(what + " expanded");
+});
+
+on("clicked:contract", function(event) {
+	var what = event.htmlAttributes.value;
+	var atname = "expand_" + what;
+	var ats = {};
+	ats[atname] = 0;
+	setAttrs(ats);
+	log(what + " contract");
+});
+
+on("clicked:check", function(event) {
+	var what = event.htmlAttributes.value;
+	var atname = "check_" + what;
+	var view = "view_" + what;
+	var ats = {};
+	ats[atname] = 1;
+	ats[view] = 1;
+	setAttrs(ats);
+	log(what + " checked");
+});
+
+on("clicked:uncheck", function(event) {
+	var what = event.htmlAttributes.value;
+	var atname = "check_" + what;
+	var unview = "view_" + what;
+	var ats = {};
+	ats[atname] = 0;
+	ats[unview] = 0;
+	setAttrs(ats);
+	log(what + " unchecked");
+});
+
+on("clicked:checklist", function(event) {
+	var source = event.htmlAttributes.value;
+	var what = source.replace(/\|.*$/,"");
+	var atname = "check_" + what;
+	var ats = {};
+	ats[atname] = 1;
+	if ( what !== source ) { // then there was more
+		var field = source.replace(/^.*\|/,"");
+		var fname = field.replace(/=.*$/,"");
+		var fval = field.replace(/^.*=/,"");
+		var isblank = false;
+		var blankfield = fval.replace(/^>/,"");
+		var gets = [fname];
+		if ( blankfield !== fval ) {
+			isblank = true;
+			gets[1] = blankfield;
+		} else {
+			fval = gTBK(String(fval));
+		}
+		getAttrs(gets, function(f) {
+			if ( isblank ) { fval = f[blankfield].replace(/^ */,"").replace(/ *$/,""); }
+			if ( typeof(fval) !== "undefined" && fval !== "" ) {
+				if ( f[fname] == "" ) {
+					ats[fname] = fval;
+				} else {
+					ats[fname] = f[fname] + ", " + fval;
+				}
+				log(ats);
+				setAttrs(ats);
+			}
+		});
+	} else {
+		setAttrs(ats);
+	}
+	log(what + " checked");
+});
+
+on("clicked:unchecklist", function(event) {
+	var source = event.htmlAttributes.value;
+	var what = source.replace(/\|.*$/,"");
+	var atname = "check_" + what;
+	var ats = {};
+	ats[atname] = 0;
+	if ( what !== source ) { // then there was more
+		var field = source.replace(/^.*\|/,"");
+		var fname = field.replace(/=.*$/,"");
+		var fval = field.replace(/^.*=/,"");
+		var isblank = false;
+		var blankfield = fval.replace(/^>/,"");
+		var gets = [fname];
+		if ( blankfield !== fval ) {
+			isblank = true;
+			gets[1] = blankfield;
+		} else {
+			fval = gTBK(String(fval));
+		}
+		getAttrs(gets, function(f) {
+			if ( isblank ) { fval = f[blankfield].replace(/^ */,"").replace(/ *$/,""); }
+			if ( typeof(fval) !== "undefined" && fval !== "" ) {
+				if ( f[fname] == fval ) {
+					ats[fname] = "";
+				} else {
+					ats[fname] = f[fname];
+					ats[fname] = ats[fname].replace(fval + ", ",""); // if there's a comma after it
+					ats[fname] = ats[fname].replace(", " + fval,""); // if there's one before it
+				}
+				setAttrs(ats);
+				log(ats);
+			}
+		});
+	} else {
+		setAttrs(ats);
+	}
+	log(what + " unchecked");
+});
+
+
+on("change:condition_blank1_text change:condition_blank2_text change:condition_blank3_text change:condition_blank4_text change:condition_blank5_text change:condition_blank6_text", function(event) {
+		log(event);
+		var field = event.sourceAttribute; // condition_blank?_text
+		var cfield = "check_" + field.replace("_text",""); // check_condition_blank?
+		var pval = ""; var nval = "";
+		if ( typeof(event.previousValue) !== "undefined" ) {
+			pval = event.previousValue.replace(/^ */,"").replace(/ *$/,"");
+		}
+		if ( typeof(event.newValue) !== "undefined" ) {
+			nval = event.newValue.replace(/^ */,"").replace(/ *$/,"");
+		}
+		getAttrs([cfield,"current_conditions"], function(v) {
+			log(v);
+			var state = parseInt(v[cfield])||0;
+			var ats = {};
+			if ( state == 1 ) { // then it was changed while checked
+				var ccon = v.current_conditions;
+				log("changed while checked " + pval + " --> " + nval);
+				if ( ccon == pval ) { // then we just set it to the new value
+					ats.current_conditions = nval;
+				} else {
+					ats.current_conditions = ccon;
+					if ( pval !== "" ) {
+						ats.current_conditions = ats.current_conditions.replace(", " + pval,"").replace(pval + ", ",""); // if there's a comma after it or before it plus the thing, get rid of that, but only if pval is non-blank!
+					}
+					if ( nval !== "" ) {
+						ats.current_conditions = ats.current_conditions + ", " + nval;
+					}
+				}
+				log(ats);
+				setAttrs(ats);
+			}
+		});
+});
+
+
+on("clicked:view", function(event) {
+	var what = event.htmlAttributes.value;
+	var atname = "view_" + what;
+	var ats = {};
+	ats[atname] = 1;
+	setAttrs(ats);
+	log(what + " view");
+});
+
+on("clicked:unview", function(event) {
+	var what = event.htmlAttributes.value;
+	var atname = "view_" + what;
+	var ats = {};
+	ats[atname] = 0;
+	setAttrs(ats);
+	log(what + " unview");
+});
+
+on("sheet:opened change:darkness_spend change:darkness_tokens", function(event) {
+	getAttrs(["darkness_spend","darkness_tokens"], function(v) {
+		var current = parseInt(v.darkness_tokens)||0;
+		var spend = parseInt(v.darkness_spend)||0;
+		var a = {};
+		if ( spend > 3 ) { 
+			a.darkness_spend = 3;
+			spend = 3; 
+		}
+		if ( spend > current ) { 
+			a.darkness_spend = current;
+		}
+		if ( current > 4 ) {
+			a.torn_between_active = "1";
+		} else {
+			a.torn_between_active = "0";
+		}
+		setAttrs(a);
+	});
+});
+
+on("sheet:opened change:xp", function(event) {
+	getAttrs(["xp"], function(v) {
+		var current = parseInt(v.xp)||0;
+		var a = {};
+		if ( current > 7 ) {
+			a.xp_advance_active = "1";
+		} else {
+			a.xp_advance_active = "0";
+		}
+		setAttrs(a);
+	});
+});
+
+on("sheet:opened change:ruin", function(event) {
+	getAttrs(["ruin"], function(v) {
+		var current = parseInt(v.ruin)||0;
+		var a = {};
+		if ( current > 4 ) {
+			a.ruin_advance_active = "1";
+		} else {
+			a.ruin_advance_active = "0";
+		}
+		setAttrs(a);
+	});
+});
+
+on("clicked:rolldicedark", function(event) {
+	var title = event.htmlAttributes.value;
+	getAttrs(["darkness_spend","darkness_tokens"], function(v) {
+		var current = parseInt(v.darkness_tokens)||0;
+		var spend = parseInt(v.darkness_spend)||0;
+		if ( spend > 3 ) { spend = 3; }
+		if ( spend > current ) { spend = current; }
+		var exp = "2d6 + " + spend;
+		startRoll("&{template:2d6-roll} {{character=@{character_name}}} {{title="+title+"}} {{expression="+exp+"}} {{roll=[[2d6+"+spend+"]]}}", function(results) {
+			log(results);
+			var a = {};
+			a.darkness_tokens = current - spend;
+			a.darkness_spend = 0;
+			a.view_recent_roll = 1;
+			a.expand_roll_bonds = 0; // we don't need to see the bonds unless we want to
+			a.bond_mod_summary = "";
+			a.bond_mod_result = 0;
+			a.bond_mod = 0;
+			a.recent_roll_result = results.results.roll.result;
+			a.recent_roll = results.results.roll.expression;
+			getSectionIDs("bonds", function(s) {
+				var fields = [ "recent_roll_result" ];
+				for(var i=0; i < s.length; i++) {
+					a["repeating_bonds_" + s[i] + "_spend"] = 0;
+				}
+				setAttrs(a);
+				finishRoll(results.rollId);
+			});
+		});
+	});
+});
+
+// rolldicecustom is for dice rolls that don't involve spending darkness tokens
+
+on("clicked:rolldicecustom", function(event) {
+	var title = event.htmlAttributes.value;
+	getAttrs(["custom_bonus"], function(v) {
+		var bonus = parseInt(v.custom_bonus)||0;
+		if ( bonus > 3 ) { bonus = 3; }
+		var exp = "2d6 + " + bonus;
+		startRoll("&{template:2d6-roll} {{character=@{character_name}}} {{title="+title+"}} {{expression="+exp+"}} {{roll=[[2d6+"+bonus+"]]}}", function(results) {
+			log(results);
+			var a = {};
+			a.custom_bonus = 0;
+			a.view_recent_roll = 1;
+			a.expand_roll_bonds = 0; // we don't need to see the bonds unless we want to
+			a.bond_mod_summary = "";
+			a.bond_mod_result = 0;
+			a.bond_mod = 0;
+			a.recent_roll_result = results.results.roll.result;
+			a.recent_roll = results.results.roll.expression;
+			getSectionIDs("bonds", function(s) {
+				var fields = [ "recent_roll_result" ];
+				for(var i=0; i < s.length; i++) {
+					a["repeating_bonds_" + s[i] + "_spend"] = 0;
+				}
+				setAttrs(a);
+				finishRoll(results.rollId);
+			});
+		});
+	});
+});
+
+on("change:repeating_bonds:spend", function(e) {
+	// Strips off the "spend"
+	const rowprefix = (e.sourceAttribute).slice(0,-5); 
+	// Couple things to do here:
+	// • One is to make sure the amount is within the bounds of the 
+	//   limiting attr_points current value of the bond's strength
+	// • Another is to run through *all* of the rows in the set
+	//   to tally up the total spend and produce a text summary of it
+	var atlist = [ rowprefix+"spend", rowprefix+"points" ];
+	getAttrs(atlist, function(v) {
+		var a = {};
+		var spend = parseInt(v[rowprefix+"spend"])||0;
+		var points = parseInt(v[rowprefix+"points"])||0;
+		if ( spend !== 0 ) { // nothing to do if not spending
+			if ( Math.abs(spend) > points ) {
+				spend = points * spend / Math.abs(spend); // gets us the signage
+				a[rowprefix+"spend"] = spend;
+			}
+		}
+		setAttrs(a,"",function() {
+			// Now that we've corrected anything that needs correcting 
+			// We may proceed to summarizing the whole deal
+			getSectionIDs("bonds", function(s) {
+				var fields = [ "recent_roll_result" ];
+				for(var i=0; i < s.length; i++) {
+					fields[i*3+1] = "repeating_bonds_" + s[i] + "_bondname";
+					fields[i*3+2] = "repeating_bonds_" + s[i] + "_points";
+					fields[i*3+3] = "repeating_bonds_" + s[i] + "_spend";
+				}
+				getAttrs(fields, function(f) {
+					log(f);
+					var result = parseInt(f.recent_roll_result)||0;
+					var summary = "";
+					var mod = 0;
+					for(var i=0; i < s.length; i++) {
+						var bn = f["repeating_bonds_" + s[i] + "_bondname"];
+						var bs = f["repeating_bonds_" + s[i] + "_spend"];
+						bs = parseInt(bs)||0;
+						if ( bs != 0 ) {
+							if ( summary != "" ) { summary = summary + " "; }
+							if ( bs > 0 ) { summary = summary + "+ " }
+							if ( bs < 0 ) { summary = summary + "– " }
+							summary = summary + Math.abs(bs) + " (" + bn + ")";
+							mod = mod + bs;
+						}
+					}
+					if ( summary != "" ) { // then there is a nonzero spend
+						summary = result + " " + summary;
+						var newresult = result + mod;
+						summary = summary + " = " + newresult;
+					}
+					log(summary);
+					var c = {};
+					c["bond_mod_summary"] = summary;
+					c["bond_mod"] = newresult - result;
+					setAttrs(c);
+				});
+			});
+		});
+	});
+});
+
+on("clicked:spendbonds", function(event) {
+	var title = event.htmlAttributes.value;
+	// we *could* trust bond_mod, but maybe let's do an actual recalculation
+	// just in case. We'll need to adjust the spend field value anyway.
+	// I know, I know, we've got repeating code, but there are going to be
+	// differences in this one vs the one in change:repeating_bonds:spend
+	getSectionIDs("bonds", function(s) {
+		var fields = [ "recent_roll_result", "recent_roll" ];
+		for(var i=0; i < s.length; i++) {
+			fields[i*3+2] = "repeating_bonds_" + s[i] + "_bondname";
+			fields[i*3+3] = "repeating_bonds_" + s[i] + "_points";
+			fields[i*3+4] = "repeating_bonds_" + s[i] + "_spend";
+		}
+		getAttrs(fields, function(f) {
+			var result = parseInt(f.recent_roll_result)||0;
+			var summary = "";
+			var mod = 0;
+			var c = {};
+			for(var i=0; i < s.length; i++) {
+				var bn = f["repeating_bonds_" + s[i] + "_bondname"];
+				var bs = f["repeating_bonds_" + s[i] + "_spend"];
+				var bp = f["repeating_bonds_" + s[i] + "_points"];
+				bs = parseInt(bs)||0;
+				bp = parseInt(bp)||0;
+				if ( bs != 0 && Math.abs(bs) > bp ) { bs = bp * bs / Math.abs(bs); } // signage
+				if ( bs != 0 ) {
+					if ( summary != "" ) { summary = summary + " "; }
+					if ( bs > 0 ) { summary = summary + "+ " }
+					if ( bs < 0 ) { summary = summary + "– " }
+					summary = summary + Math.abs(bs) + " (" + bn + ")";
+					mod = mod + bs;
+					c["repeating_bonds_" + s[i] + "_spend"] = 0;
+					c["repeating_bonds_" + s[i] + "_points"] = bp - Math.abs(bs);
+				}
+			}
+			if ( summary != "" ) { // then there is a nonzero spend
+				summary = result + " " + summary;
+				var newresult = result + mod;
+				summary = summary + " = " + newresult;
+			}
+			log(c);
+			startRoll("&{template:bondspend} {{character=@{character_name}}} {{title="+title+"}} {{summary="+summary+"}} {{roll=[["+newresult+"]]}}", function(results) {
+				c["bond_mod_summary"] = ""; // blank it
+				c["bond_mod"] = 0; // zero this out
+				c["bond_mod_applied"] = mod;
+				c.recent_roll_result = newresult;
+				c.recent_roll = f.recent_roll;
+				if ( mod > -1 ) { c.recent_roll = c.recent_roll + "+"; }
+				c.recent_roll = c.recent_roll + mod;
+				c.expand_roll_bonds = 0; // collapse the bonds section, we don't need to be looking at it so much now.
+				setAttrs(c);
+				finishRoll(results.rollId);
+			});
+		});
+	});
+});
+
+on("clicked:addxp", function(event) {
+	var what = parseInt(event.htmlAttributes.value)||0;
+	var ats = {};
+	getAttrs(["xp"], function(v) {
+		var xp = parseInt(v.xp)||0;
+		xp = xp + what;
+		ats.xp = xp;
+		setAttrs(ats);
+	});
+});
+
+on("clicked:addruin", function(event) {
+	var what = parseInt(event.htmlAttributes.value)||0;
+	var ats = {};
+	getAttrs(["ruin"], function(v) {
+		var ruin = parseInt(v.ruin)||0;
+		ruin = ruin + what;
+		ats.ruin = ruin;
+		setAttrs(ats);
+	});
+});
+
+on("clicked:spendxp", function(event) {
+	var what = parseInt(event.htmlAttributes.value)||0;
+	var ats = {};
+	getAttrs(["xp"], function(v) {
+		var xp = parseInt(v.xp)||0;
+		xp = xp - what;
+		if ( xp < 0 ) { xp = 0; }
+		ats.xp = xp;
+		setAttrs(ats);
+	});
+});
+
+on("clicked:spendruin", function(event) {
+	var what = parseInt(event.htmlAttributes.value)||0;
+	var ats = {};
+	getAttrs(["ruin"], function(v) {
+		var ruin = parseInt(v.ruin)||0;
+		ruin = ruin - what;
+		if ( ruin < 0 ) { ruin = 0; }
+		ats.ruin = ruin;
+		setAttrs(ats);
+	});
+});
+
+on("clicked:adddark", function(event) {
+	var what = parseInt(event.htmlAttributes.value)||0;
+	var ats = {};
+	getAttrs(["darkness_tokens"], function(v) {
+		var dark = parseInt(v.darkness_tokens)||0;
+		dark = dark + what;
+		ats.darkness_tokens = dark;
+		setAttrs(ats);
+	});
+});
+
+on("clicked:spenddark", function(event) {
+	var what = parseInt(event.htmlAttributes.value)||0;
+	var ats = {};
+	getAttrs(["darkness_tokens"], function(v) {
+		var dark = parseInt(v.darkness_tokens)||0;
+		dark = dark - what;
+		if ( dark < 0 ) { dark = 0; }
+		ats.darkness_tokens = dark;
+		setAttrs(ats);
+	});
+});
+
+
+
+</script>
+<rolltemplate class="sheet-rolltemplate-2d6-roll">
+  <div class="rollspend">
+    <div class="titlebar">{{#title}}{{title}}{{/title}}</div>
+    <div class="rollcontainer">{{#rollGreater() roll 10}}<span class="disastrous">{{expression}} = {{roll}}</span>{{/rollGreater() roll 10}}
+      {{#rollBetween() roll 8 10}}<span class="perfect">{{expression}} = {{roll}}</span>{{/rollBetween() roll 8 10}}
+      {{#rollLess() roll 8}}<span class="miss">{{expression}} = {{roll}}</span>{{/rollLess() roll 8}}
+    </div>
+    <div class="rollresult">{{#rollGreater() roll 10}}<span data-i18n="Disastrous Success">Disastrous Success</span> {{/rollGreater() roll 10}}
+      {{#rollBetween() roll 8 10}}<span data-i18n="Perfect Hit">Perfect Hit</span> {{/rollBetween() roll 8 10}}
+      {{#rollLess() roll 8}}<span data-i18n="Miss">Miss</span> {{/rollLess() roll 8}}
+    </div>
+    <div class="footnote">{{#character}}{{character}}{{/character}}</div>
+  </div>
+</rolltemplate>
+<rolltemplate class="sheet-rolltemplate-bondspend">
+  <div class="rollspend">
+    <div class="titlebar">
+       {{#title}}{{title}}{{/title}}<br/><span data-i18n="Bond Spend Adjustment">Bond Spend Adjustment</span> 
+    </div>
+    <div class="rollcontainer">{{#summary}}{{summary}}{{/summary}}</div>
+    <div class="rollresult">{{#rollGreater() roll 10}}<span data-i18n="Disastrous Success">Disastrous Success</span> {{/rollGreater() roll 10}}
+      {{#rollBetween() roll 8 10}}<span data-i18n="Perfect Hit">Perfect Hit</span> {{/rollBetween() roll 8 10}}
+      {{#rollLess() roll 8}}<span data-i18n="Miss">Miss</span> {{/rollLess() roll 8}}
+    </div>
+    <div class="footnote">{{#character}}{{character}}{{/character}}</div>
+  </div>
+</rolltemplate>
+<div class="wrapper">
+  <div class="menu">
+    <div>
+      <input class="pbselector" type="hidden" name="attr_playbook" value=""/>
+      <div class="pbsummoned"><a class="bold fglink" href="#headerplaybook"><span data-i18n="summoned">summoned</span> </a>
+      </div>
+      <div class="pbsurge"><a class="bold fglink" href="#headerplaybook"><span data-i18n="surge">surge</span> </a>
+      </div>
+      <div class="pbfound"><a class="bold fglink" href="#headerplaybook"><span data-i18n="found">found</span> </a>
+      </div>
+      <div class="pbshade"><a class="bold fglink" href="#headerplaybook"><span data-i18n="shade">shade</span> </a>
+      </div>
+      <div class="pblast"><a class="bold fglink" href="#headerplaybook"><span data-i18n="last">last</span> </a>
+      </div>
+      <div class="pbfallen"><a class="bold fglink" href="#headerplaybook"><span data-i18n="fallen">fallen</span> </a>
+      </div>
+      <div class="pbhungry"><a class="bold fglink" href="#headerplaybook"><span data-i18n="hungry">hungry</span> </a>
+      </div>• 
+      <input type="hidden" name="attr_xp"/>
+      <input type="hidden" name="attr_ruin"/><span>
+        <input class="view" type="hidden" name="attr_torn_between_active" value="0"/><span class="viewable"><span class="icon star alert"></span></span></span><span name="attr_darkness_tokens"></span>&nbsp;<a class="bold fglink" href="#headerdarkness"><span data-i18n="Darkness Tokens">Darkness Tokens</span> </a>• <span>
+        <input class="view" type="hidden" name="attr_xp_advance_active" value="0"/><span class="viewable"><span class="icon star alert"></span></span></span><span name="attr_xp"></span>&nbsp;<a class="bold fglink" href="#headerexperience_and_ruin"><span data-i18n="XP">XP</span> </a>• <span>
+        <input class="view" type="hidden" name="attr_ruin_advance_active" value="0"/><span class="viewable"><span class="icon star alert"></span></span></span><span name="attr_ruin"></span>&nbsp;<a class="bold fglink" href="#headerexperience_and_ruin"><span data-i18n="Ruin">Ruin</span> </a>
+      <input class="hideempty" type="hidden" name="attr_current_conditions" value=""/><span>• <a class="bold fglink" href="#headerconditions"><span data-i18n="Conditions">Conditions</span> </a>: <span class="conditiontext" name="attr_current_conditions"></span></span>
+    </div>
+    <div class="spaceupmini"><a href="#headerplaybook"><span data-i18n="Playbook">Playbook</span> </a>• <a href="#headermoves"><span data-i18n="Moves">Moves</span> </a>• <span>
+        <input class="view" type="hidden" name="attr_torn_between_active" value="0"/><span class="viewable"><span class="icon star alert"></span></span></span><a href="#headerdarkness"><span data-i18n="Darkness">Darkness</span> </a>• <a href="#headerbonds"><span data-i18n="Bonds">Bonds</span> </a>• <a href="#headerconditions"><span data-i18n="Conditions">Conditions</span> </a>• <a href="#headerexperience_and_ruin"><span data-i18n="Experience and Ruin">Experience and Ruin</span> </a>• <span>
+        <input class="view" type="hidden" name="attr_xp_advance_active" value="0"/>
+        <input class="view" type="hidden" name="attr_ruin_advance_active" value="0"/><span class="viewable"><span class="icon star alert"></span></span></span><a href="#headeradvances"><span data-i18n="Advances">Advances</span> </a>• <a href="#headernotes"><span data-i18n="Notes">Notes</span> </a>• <a href="#headerremember_to___"><span data-i18n="Remember to...">Remember to...</span> </a>• <a href="#headerbio"><span data-i18n="Bio">Bio</span> </a>
+    </div>
+  </div>
+  <div class="topline">
+    <input class="bigname" type="text" name="attr_character_name"/>
+  </div>
+  <div class="columns">
+    <div class="narrow"><a name="headerplaybook"></a>
+      <div class="header"><span class="title" data-i18n="Playbook">Playbook</span> 
+        <input class="toggle" type="hidden" name="attr_expand_playbook" value="1"/>
+        <button class="contract hfade" type="action" name="act_contract" value="playbook"></button>
+        <button class="expand hfade" type="action" name="act_expand" value="playbook"></button>
+      </div>
+      <div class="section">
+        <input class="rollup" type="hidden" name="attr_expand_playbook" value="1"/>
+        <div class="section roller">
+          <select name="attr_playbook">
+            <option value="" data-i18n="choose a playbook"></option>
+            <option value="summoned" data-i18n="summoned">The summoned
+            </option>
+            <option value="surge" data-i18n="surge">The surge
+            </option>
+            <option value="found" data-i18n="found">The found
+            </option>
+            <option value="shade" data-i18n="shade">The shade
+            </option>
+            <option value="last" data-i18n="last">The last
+            </option>
+            <option value="fallen" data-i18n="fallen">The fallen
+            </option>
+            <option value="hungry" data-i18n="hungry">The hungry
+            </option>
+          </select>
+          <input class="pbselector" type="hidden" name="attr_playbook" value=""/>
+          <div class="pbsummoned">
+            <ul>
+              <li><span data-i18n="I wear the cruel crown of prophecy">I wear the cruel crown of prophecy</span> 
+              </li>
+              <li><span data-i18n="I embody the promise and inevitability of the apocalypse">I embody the promise and inevitability of the apocalypse</span> 
+              </li>
+              <li><span data-i18n="My power is blunt, aggressive, and demanding">My power is blunt, aggressive, and demanding</span> 
+              </li>
+              <li><span data-i18n="My heart yearns to love and be loved">My heart yearns to love and be loved</span> 
+              </li>
+            </ul>
+          </div>
+          <div class="pbsurge"></div>
+          <div class="pbfound"></div>
+          <div class="pbshade"></div>
+          <div class="pblast"></div>
+          <div class="pbfallen"></div>
+          <div class="pbhungry"></div><a name="headercharacter_creation_options"></a>
+          <div class="subheader"><span class="title" data-i18n="Character Creation Options">Character Creation Options</span> 
+            <input class="toggle" type="hidden" name="attr_expand_character_creation_options" value="1"/>
+            <button class="contract hfade" type="action" name="act_contract" value="character_creation_options"></button>
+            <button class="expand hfade" type="action" name="act_expand" value="character_creation_options"></button>
+          </div>
+          <div class="section">
+            <input class="rollup" type="hidden" name="attr_expand_character_creation_options" value="1"/>
+            <div class="section roller">
+              <input class="pbselector" type="hidden" name="attr_playbook" value=""/>
+              <div class="pbsummoned">
+                <div class="minihead"><span data-i18n="Your Name">Your Name</span> 
+                </div>
+                <div><span class="instruction" data-i18n="(choose one)">(choose one)</span> 
+                  <input class="masker" type="hidden" name="attr_check_checkable_1" value="0"/>
+                  <div class="checklist1box">
+                    <div class="buttons">
+                      <input class="toggle" type="hidden" name="attr_check_checkable_1" value="0"/>
+                      <button class="checked" type="action" name="act_unchecklist" value="checkable_1|character_name=a straightforward name"></button>
+                      <button class="unchecked" type="action" name="act_checklist" value="checkable_1|character_name=a straightforward name"></button>
+                    </div>
+                    <div class="text"><span data-i18n="a straightforward name">a straightforward name</span> 
+                    </div>
+                  </div>
+                  <input class="masker" type="hidden" name="attr_check_checkable_2" value="0"/>
+                  <div class="checklist1box">
+                    <div class="buttons">
+                      <input class="toggle" type="hidden" name="attr_check_checkable_2" value="0"/>
+                      <button class="checked" type="action" name="act_unchecklist" value="checkable_2|character_name=a name that conveys strength and power"></button>
+                      <button class="unchecked" type="action" name="act_checklist" value="checkable_2|character_name=a name that conveys strength and power"></button>
+                    </div>
+                    <div class="text"><span data-i18n="a name that conveys strength and power">a name that conveys strength and power</span> 
+                    </div>
+                  </div>
+                  <input class="masker" type="hidden" name="attr_check_checkable_3" value="0"/>
+                  <div class="checklist1box">
+                    <div class="buttons">
+                      <input class="toggle" type="hidden" name="attr_check_checkable_3" value="0"/>
+                      <button class="checked" type="action" name="act_unchecklist" value="checkable_3|character_name=a name that whispers of the world I come from"></button>
+                      <button class="unchecked" type="action" name="act_checklist" value="checkable_3|character_name=a name that whispers of the world I come from"></button>
+                    </div>
+                    <div class="text"><span data-i18n="a name that whispers of the world I come from">a name that whispers of the world I come from</span> 
+                    </div>
+                  </div>
+                  <input class="masker" type="hidden" name="attr_check_checkable_4" value="0"/>
+                  <div class="checklist1box">
+                    <div class="buttons">
+                      <input class="toggle" type="hidden" name="attr_check_checkable_4" value="0"/>
+                      <button class="checked" type="action" name="act_unchecklist" value="checkable_4|character_name=a name I was given by accident"></button>
+                      <button class="unchecked" type="action" name="act_checklist" value="checkable_4|character_name=a name I was given by accident"></button>
+                    </div>
+                    <div class="text"><span data-i18n="a name I was given by accident">a name I was given by accident</span> 
+                    </div>
+                  </div>
+                  <input class="masker" type="hidden" name="attr_check_checkable_5" value="0"/>
+                  <div class="checklist1box">
+                    <div class="buttons">
+                      <input class="toggle" type="hidden" name="attr_check_checkable_5" value="0"/>
+                      <button class="checked" type="action" name="act_unchecklist" value="checkable_5|character_name=a name I need to live up to one day"></button>
+                      <button class="unchecked" type="action" name="act_checklist" value="checkable_5|character_name=a name I need to live up to one day"></button>
+                    </div>
+                    <div class="text"><span data-i18n="a name I need to live up to one day">a name I need to live up to one day</span> 
+                    </div>
+                  </div>
+                </div>
+                <div class="minihead"><span data-i18n="Your Look">Your Look</span> 
+                </div>
+                <div><span class="instruction" data-i18n="(choose 1-3)">(choose 1-3)</span> 
+                  <input class="masker" type="hidden" name="attr_check_checkable_6" value="0"/>
+                  <div class="checklist1box">
+                    <div class="buttons">
+                      <input class="toggle" type="hidden" name="attr_check_checkable_6" value="0"/>
+                      <button class="checked" type="action" name="act_unchecklist" value="checkable_6|look=a trench coat that hides most of my monstrous form"></button>
+                      <button class="unchecked" type="action" name="act_checklist" value="checkable_6|look=a trench coat that hides most of my monstrous form"></button>
+                    </div>
+                    <div class="text"><span data-i18n="a trench coat that hides most of my monstrous form">a trench coat that hides most of my monstrous form</span> 
+                    </div>
+                  </div>
+                  <input class="masker" type="hidden" name="attr_check_checkable_7" value="0"/>
+                  <div class="checklist1box">
+                    <div class="buttons">
+                      <input class="toggle" type="hidden" name="attr_check_checkable_7" value="0"/>
+                      <button class="checked" type="action" name="act_unchecklist" value="checkable_7|look=eyes of the brightest gold"></button>
+                      <button class="unchecked" type="action" name="act_checklist" value="checkable_7|look=eyes of the brightest gold"></button>
+                    </div>
+                    <div class="text"><span data-i18n="eyes of the brightest gold">eyes of the brightest gold</span> 
+                    </div>
+                  </div>
+                  <input class="masker" type="hidden" name="attr_check_checkable_8" value="0"/>
+                  <div class="checklist1box">
+                    <div class="buttons">
+                      <input class="toggle" type="hidden" name="attr_check_checkable_8" value="0"/>
+                      <button class="checked" type="action" name="act_unchecklist" value="checkable_8|look=shattered horns"></button>
+                      <button class="unchecked" type="action" name="act_checklist" value="checkable_8|look=shattered horns"></button>
+                    </div>
+                    <div class="text"><span data-i18n="shattered horns">shattered horns</span> 
+                    </div>
+                  </div>
+                  <input class="masker" type="hidden" name="attr_check_checkable_9" value="0"/>
+                  <div class="checklist1box">
+                    <div class="buttons">
+                      <input class="toggle" type="hidden" name="attr_check_checkable_9" value="0"/>
+                      <button class="checked" type="action" name="act_unchecklist" value="checkable_9|look=a holy item my adopted parent gave me"></button>
+                      <button class="unchecked" type="action" name="act_checklist" value="checkable_9|look=a holy item my adopted parent gave me"></button>
+                    </div>
+                    <div class="text"><span data-i18n="a holy item my adopted parent gave me">a holy item my adopted parent gave me</span> 
+                    </div>
+                  </div>
+                  <input class="masker" type="hidden" name="attr_check_checkable_10" value="0"/>
+                  <div class="checklist1box">
+                    <div class="buttons">
+                      <input class="toggle" type="hidden" name="attr_check_checkable_10" value="0"/>
+                      <button class="checked" type="action" name="act_unchecklist" value="checkable_10|look=a part of my body is a weapon I’ll never use"></button>
+                      <button class="unchecked" type="action" name="act_checklist" value="checkable_10|look=a part of my body is a weapon I’ll never use"></button>
+                    </div>
+                    <div class="text"><span data-i18n="a part of my body is a weapon I’ll never use">a part of my body is a weapon I’ll never use</span> 
+                    </div>
+                  </div>
+                  <input class="masker" type="hidden" name="attr_check_checkable_11" value="0"/>
+                  <div class="checklist1box">
+                    <div class="buttons">
+                      <input class="toggle" type="hidden" name="attr_check_checkable_11" value="0"/>
+                      <button class="checked" type="action" name="act_unchecklist" value="checkable_11|look=the mark of my love who I betrayed"></button>
+                      <button class="unchecked" type="action" name="act_checklist" value="checkable_11|look=the mark of my love who I betrayed"></button>
+                    </div>
+                    <div class="text"><span data-i18n="the mark of my love who I betrayed">the mark of my love who I betrayed</span> 
+                    </div>
+                  </div>
+                  <input class="masker" type="hidden" name="attr_check_checkable_12" value="0"/>
+                  <div class="checklist1box">
+                    <div class="buttons">
+                      <input class="toggle" type="hidden" name="attr_check_checkable_12" value="0"/>
+                      <button class="checked" type="action" name="act_unchecklist" value="checkable_12|look=an empty and tarnished locket"></button>
+                      <button class="unchecked" type="action" name="act_checklist" value="checkable_12|look=an empty and tarnished locket"></button>
+                    </div>
+                    <div class="text"><span data-i18n="an empty and tarnished locket">an empty and tarnished locket</span> 
+                    </div>
+                  </div>
+                  <input class="masker" type="hidden" name="attr_check_checkable_13" value="0"/>
+                  <div class="checklist1box">
+                    <div class="buttons">
+                      <input class="toggle" type="hidden" name="attr_check_checkable_13" value="0"/>
+                      <button class="checked" type="action" name="act_unchecklist" value="checkable_13|look=something that hints at my struggle to be human"></button>
+                      <button class="unchecked" type="action" name="act_checklist" value="checkable_13|look=something that hints at my struggle to be human"></button>
+                    </div>
+                    <div class="text"><span data-i18n="something that hints at my struggle to be human">something that hints at my struggle to be human</span> 
+                    </div>
+                  </div>
+                </div>
+                <div class="minihead"><span data-i18n="Your Origin">Your Origin</span> 
+                </div>
+                <div><span class="instruction" data-i18n="(choose one)">(choose one)</span> 
+                  <input class="masker" type="hidden" name="attr_check_checkable_14" value="0"/>
+                  <div class="checklist1box">
+                    <div class="buttons">
+                      <input class="toggle" type="hidden" name="attr_check_checkable_14" value="0"/>
+                      <button class="checked" type="action" name="act_unchecklist" value="checkable_14|origin=I was summoned from hell to be the final door to the apocalypse"></button>
+                      <button class="unchecked" type="action" name="act_checklist" value="checkable_14|origin=I was summoned from hell to be the final door to the apocalypse"></button>
+                    </div>
+                    <div class="text"><span data-i18n="I was summoned from hell to be the final door to the apocalypse">I was summoned from hell to be the final door to the apocalypse</span> 
+                    </div>
+                  </div>
+                  <input class="masker" type="hidden" name="attr_check_checkable_15" value="0"/>
+                  <div class="checklist1box">
+                    <div class="buttons">
+                      <input class="toggle" type="hidden" name="attr_check_checkable_15" value="0"/>
+                      <button class="checked" type="action" name="act_unchecklist" value="checkable_15|origin=from the grasp of a cosmic horror that will remake us all"></button>
+                      <button class="unchecked" type="action" name="act_checklist" value="checkable_15|origin=from the grasp of a cosmic horror that will remake us all"></button>
+                    </div>
+                    <div class="text"><span data-i18n="from the grasp of a cosmic horror that will remake us all">from the grasp of a cosmic horror that will remake us all</span> 
+                    </div>
+                  </div>
+                  <input class="masker" type="hidden" name="attr_check_checkable_16" value="0"/>
+                  <div class="checklist1box">
+                    <div class="buttons">
+                      <input class="toggle" type="hidden" name="attr_check_checkable_16" value="0"/>
+                      <button class="checked" type="action" name="act_unchecklist" value="checkable_16|origin=from a nightmare realm that will crown me ruler of a broken world"></button>
+                      <button class="unchecked" type="action" name="act_checklist" value="checkable_16|origin=from a nightmare realm that will crown me ruler of a broken world"></button>
+                    </div>
+                    <div class="text"><span data-i18n="from a nightmare realm that will crown me ruler of a broken world">from a nightmare realm that will crown me ruler of a broken world</span> 
+                    </div>
+                  </div>
+                  <input class="masker" type="hidden" name="attr_check_checkable_17" value="0"/>
+                  <div class="checklist1box">
+                    <div class="buttons">
+                      <input class="toggle" type="hidden" name="attr_check_checkable_17" value="0"/>
+                      <button class="checked" type="action" name="act_unchecklist" value="checkable_17|origin=something else that describes the terrible world I came from and what it demands of this world"></button>
+                      <button class="unchecked" type="action" name="act_checklist" value="checkable_17|origin=something else that describes the terrible world I came from and what it demands of this world"></button>
+                    </div>
+                    <div class="text"><span data-i18n="something else that describes the terrible world I came from and what it demands of this world">something else that describes the terrible world I came from and what it demands of this world</span> 
+                    </div>
+                  </div>
+                </div>
+                <div class="minihead"><span data-i18n="What is the prophecy that haunts you?">What is the prophecy that haunts you?</span> 
+                </div>
+                <div><span class="instruction" data-i18n="(choose one)">(choose one)</span> 
+                  <input class="masker" type="hidden" name="attr_check_checkable_18" value="0"/>
+                  <div class="checklist1box">
+                    <div class="buttons">
+                      <input class="toggle" type="hidden" name="attr_check_checkable_18" value="0"/>
+                      <button class="checked" type="action" name="act_unchecklist" value="checkable_18|summoned_prophecy=I gather my acolytes from the weak and oppressed and turn them into the most fearsome Harbingers"></button>
+                      <button class="unchecked" type="action" name="act_checklist" value="checkable_18|summoned_prophecy=I gather my acolytes from the weak and oppressed and turn them into the most fearsome Harbingers"></button>
+                    </div>
+                    <div class="text"><span data-i18n="I gather my acolytes from the weak and oppressed and turn them into the most fearsome Harbingers">I gather my acolytes from the weak and oppressed and turn them into the most fearsome Harbingers</span> 
+                    </div>
+                  </div>
+                  <input class="masker" type="hidden" name="attr_check_checkable_19" value="0"/>
+                  <div class="checklist1box">
+                    <div class="buttons">
+                      <input class="toggle" type="hidden" name="attr_check_checkable_19" value="0"/>
+                      <button class="checked" type="action" name="act_unchecklist" value="checkable_19|summoned_prophecy=I take every nightmare that haunts humanity and paint a beautifully broken world from their fears"></button>
+                      <button class="unchecked" type="action" name="act_checklist" value="checkable_19|summoned_prophecy=I take every nightmare that haunts humanity and paint a beautifully broken world from their fears"></button>
+                    </div>
+                    <div class="text"><span data-i18n="I take every nightmare that haunts humanity and paint a beautifully broken world from their fears">I take every nightmare that haunts humanity and paint a beautifully broken world from their fears</span> 
+                    </div>
+                  </div>
+                  <input class="masker" type="hidden" name="attr_check_checkable_20" value="0"/>
+                  <div class="checklist1box">
+                    <div class="buttons">
+                      <input class="toggle" type="hidden" name="attr_check_checkable_20" value="0"/>
+                      <button class="checked" type="action" name="act_unchecklist" value="checkable_20|summoned_prophecy=I lose all my memories and emotions in order to become the weapon I was created to be"></button>
+                      <button class="unchecked" type="action" name="act_checklist" value="checkable_20|summoned_prophecy=I lose all my memories and emotions in order to become the weapon I was created to be"></button>
+                    </div>
+                    <div class="text"><span data-i18n="I lose all my memories and emotions in order to become the weapon I was created to be">I lose all my memories and emotions in order to become the weapon I was created to be</span> 
+                    </div>
+                  </div>
+                  <input class="masker" type="hidden" name="attr_check_checkable_21" value="0"/>
+                  <div class="checklist1box">
+                    <div class="buttons">
+                      <input class="toggle" type="hidden" name="attr_check_checkable_21" value="0"/>
+                      <button class="checked" type="action" name="act_unchecklist" value="checkable_21|summoned_prophecy=when I fall in love for the last time an ancient Door of Power will open in my heart and destroy the world"></button>
+                      <button class="unchecked" type="action" name="act_checklist" value="checkable_21|summoned_prophecy=when I fall in love for the last time an ancient Door of Power will open in my heart and destroy the world"></button>
+                    </div>
+                    <div class="text"><span data-i18n="when I fall in love for the last time an ancient Door of Power will open in my heart and destroy the world">when I fall in love for the last time an ancient Door of Power will open in my heart and destroy the world</span> 
+                    </div>
+                  </div>
+                  <input class="masker" type="hidden" name="attr_check_checkable_22" value="0"/>
+                  <div class="checklist1box">
+                    <div class="buttons">
+                      <input class="toggle" type="hidden" name="attr_check_checkable_22" value="0"/>
+                      <button class="checked" type="action" name="act_unchecklist" value="checkable_22|summoned_prophecy=something else I must defy at all cost to remain human"></button>
+                      <button class="unchecked" type="action" name="act_checklist" value="checkable_22|summoned_prophecy=something else I must defy at all cost to remain human"></button>
+                    </div>
+                    <div class="text"><span data-i18n="something else I must defy at all cost to remain human">something else I must defy at all cost to remain human</span> 
+                    </div>
+                  </div>
+                </div>
+                <div class="minihead"><span data-i18n="Your Powers of Darkness">Your Powers of Darkness</span> 
+                </div>
+                <div><span class="instruction" data-i18n="(choose two)">(choose two)</span> 
+                  <input class="masker" type="hidden" name="attr_check_checkable_23" value="0"/>
+                  <div class="checklist1box">
+                    <div class="buttons">
+                      <input class="toggle" type="hidden" name="attr_check_checkable_23" value="0"/>
+                      <button class="checked" type="action" name="act_unchecklist" value="checkable_23|powers=Colossal Strength"></button>
+                      <button class="unchecked" type="action" name="act_checklist" value="checkable_23|powers=Colossal Strength"></button>
+                    </div>
+                    <div class="text"><span data-i18n="Colossal Strength">Colossal Strength</span> 
+                    </div>
+                  </div>
+                  <input class="masker" type="hidden" name="attr_check_checkable_24" value="0"/>
+                  <div class="checklist1box">
+                    <div class="buttons">
+                      <input class="toggle" type="hidden" name="attr_check_checkable_24" value="0"/>
+                      <button class="checked" type="action" name="act_unchecklist" value="checkable_24|powers=Emotion Amplification"></button>
+                      <button class="unchecked" type="action" name="act_checklist" value="checkable_24|powers=Emotion Amplification"></button>
+                    </div>
+                    <div class="text"><span data-i18n="Emotion Amplification">Emotion Amplification</span> 
+                    </div>
+                  </div>
+                  <input class="masker" type="hidden" name="attr_check_checkable_25" value="0"/>
+                  <div class="checklist1box">
+                    <div class="buttons">
+                      <input class="toggle" type="hidden" name="attr_check_checkable_25" value="0"/>
+                      <button class="checked" type="action" name="act_unchecklist" value="checkable_25|powers=Supernatural Resistance"></button>
+                      <button class="unchecked" type="action" name="act_checklist" value="checkable_25|powers=Supernatural Resistance"></button>
+                    </div>
+                    <div class="text"><span data-i18n="Supernatural Resistance">Supernatural Resistance</span> 
+                    </div>
+                  </div>
+                  <input class="masker" type="hidden" name="attr_check_checkable_26" value="0"/>
+                  <div class="checklist1box">
+                    <div class="buttons">
+                      <input class="toggle" type="hidden" name="attr_check_checkable_26" value="0"/>
+                      <button class="checked" type="action" name="act_unchecklist" value="checkable_26|powers=Shadow Control"></button>
+                      <button class="unchecked" type="action" name="act_checklist" value="checkable_26|powers=Shadow Control"></button>
+                    </div>
+                    <div class="text"><span data-i18n="Shadow Control">Shadow Control</span> 
+                    </div>
+                  </div>
+                  <input class="masker" type="hidden" name="attr_check_checkable_27" value="0"/>
+                  <div class="checklist1box">
+                    <div class="buttons">
+                      <input class="toggle" type="hidden" name="attr_check_checkable_27" value="0"/>
+                      <button class="checked" type="action" name="act_unchecklist" value="checkable_27|powers=Weapons from Elsewhere"></button>
+                      <button class="unchecked" type="action" name="act_checklist" value="checkable_27|powers=Weapons from Elsewhere"></button>
+                    </div>
+                    <div class="text"><span data-i18n="Weapons from Elsewhere">Weapons from Elsewhere</span> 
+                    </div>
+                  </div>
+                </div>
+                <div class="minihead"><span data-i18n="What does the Darkness Demand of You?">What does the Darkness Demand of You?</span> 
+                </div>
+                <div><span class="instruction" data-i18n="(choose two)">(choose two)</span> 
+                  <input class="masker" type="hidden" name="attr_check_checkable_28" value="0"/>
+                  <div class="checklist1box">
+                    <div class="buttons">
+                      <input class="toggle" type="hidden" name="attr_check_checkable_28" value="0"/>
+                      <button class="checked" type="action" name="act_unchecklist" value="checkable_28|demands=to push away those I need most"></button>
+                      <button class="unchecked" type="action" name="act_checklist" value="checkable_28|demands=to push away those I need most"></button>
+                    </div>
+                    <div class="text"><span data-i18n="to push away those I need most">to push away those I need most</span> 
+                    </div>
+                  </div>
+                  <input class="masker" type="hidden" name="attr_check_checkable_29" value="0"/>
+                  <div class="checklist1box">
+                    <div class="buttons">
+                      <input class="toggle" type="hidden" name="attr_check_checkable_29" value="0"/>
+                      <button class="checked" type="action" name="act_unchecklist" value="checkable_29|demands=to yearn for a love that can never be mine"></button>
+                      <button class="unchecked" type="action" name="act_checklist" value="checkable_29|demands=to yearn for a love that can never be mine"></button>
+                    </div>
+                    <div class="text"><span data-i18n="to yearn for a love that can never be mine">to yearn for a love that can never be mine</span> 
+                    </div>
+                  </div>
+                  <input class="masker" type="hidden" name="attr_check_checkable_30" value="0"/>
+                  <div class="checklist1box">
+                    <div class="buttons">
+                      <input class="toggle" type="hidden" name="attr_check_checkable_30" value="0"/>
+                      <button class="checked" type="action" name="act_unchecklist" value="checkable_30|demands=to betray those who love me most"></button>
+                      <button class="unchecked" type="action" name="act_checklist" value="checkable_30|demands=to betray those who love me most"></button>
+                    </div>
+                    <div class="text"><span data-i18n="to betray those who love me most">to betray those who love me most</span> 
+                    </div>
+                  </div>
+                  <input class="masker" type="hidden" name="attr_check_checkable_31" value="0"/>
+                  <div class="checklist1box">
+                    <div class="buttons">
+                      <input class="toggle" type="hidden" name="attr_check_checkable_31" value="0"/>
+                      <button class="checked" type="action" name="act_unchecklist" value="checkable_31|demands=to despair as an immortal"></button>
+                      <button class="unchecked" type="action" name="act_checklist" value="checkable_31|demands=to despair as an immortal"></button>
+                    </div>
+                    <div class="text"><span data-i18n="to despair as an immortal">to despair as an immortal</span> 
+                    </div>
+                  </div>
+                  <input class="masker" type="hidden" name="attr_check_checkable_32" value="0"/>
+                  <div class="checklist1box">
+                    <div class="buttons">
+                      <input class="toggle" type="hidden" name="attr_check_checkable_32" value="0"/>
+                      <button class="checked" type="action" name="act_unchecklist" value="checkable_32|demands=to fall in love with a Harbinger of the apocalypse"></button>
+                      <button class="unchecked" type="action" name="act_checklist" value="checkable_32|demands=to fall in love with a Harbinger of the apocalypse"></button>
+                    </div>
+                    <div class="text"><span data-i18n="to fall in love with a Harbinger of the apocalypse">to fall in love with a Harbinger of the apocalypse</span> 
+                    </div>
+                  </div>
+                  <input class="masker" type="hidden" name="attr_check_checkable_33" value="0"/>
+                  <div class="checklist1box">
+                    <div class="buttons">
+                      <input class="toggle" type="hidden" name="attr_check_checkable_33" value="0"/>
+                      <button class="checked" type="action" name="act_unchecklist" value="checkable_33|demands=to embrace and strengthen my prophecy"></button>
+                      <button class="unchecked" type="action" name="act_checklist" value="checkable_33|demands=to embrace and strengthen my prophecy"></button>
+                    </div>
+                    <div class="text"><span data-i18n="to embrace and strengthen my prophecy">to embrace and strengthen my prophecy</span> 
+                    </div>
+                  </div>
+                  <input class="masker" type="hidden" name="attr_check_checkable_34" value="0"/>
+                  <div class="checklist1box">
+                    <div class="buttons">
+                      <input class="toggle" type="hidden" name="attr_check_checkable_34" value="0"/>
+                      <button class="checked" type="action" name="act_unchecklist" value="checkable_34|demands=something else that would break my heart and leave me empty"></button>
+                      <button class="unchecked" type="action" name="act_checklist" value="checkable_34|demands=something else that would break my heart and leave me empty"></button>
+                    </div>
+                    <div class="text"><span data-i18n="something else that would break my heart and leave me empty">something else that would break my heart and leave me empty</span> 
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="pbsurge"></div>
+              <div class="pbfound"></div>
+              <div class="pbshade"></div>
+              <div class="pblast"></div>
+              <div class="pbfallen"></div>
+              <div class="pbhungry"></div>
+            </div>
+          </div>
+        </div>
+      </div><a name="headerdarkness"></a>
+      <div class="header"><span class="title" data-i18n="Darkness">Darkness</span> 
+        <input class="toggle" type="hidden" name="attr_expand_darkness" value="1"/>
+        <button class="contract hfade" type="action" name="act_contract" value="darkness"></button>
+        <button class="expand hfade" type="action" name="act_expand" value="darkness"></button>
+      </div>
+      <div class="section">
+        <input class="rollup" type="hidden" name="attr_expand_darkness" value="1"/>
+        <div class="section roller"><span class="bold" data-i18n="Current Darkness Tokens">Current Darkness Tokens</span> 
+          <div>
+            <input class="colorizewhenactive" type="hidden" name="attr_torn_between_active" value="0"/>
+            <input class="tokens" type="number" value="0" min="0" name="attr_darkness_tokens"/>
+          </div>
+          <input class="view" type="hidden" name="attr_torn_between_active" value="0"/>
+          <div class="viewable"><span class="term" data-i18n="You are">You are</span> <span>
+              <input class="toggle" type="hidden" name="attr_view_torn_between" value="0"/><a class="icon document" href="#headertorn_between"><span class="movename bold" data-i18n="Torn Between">Torn Between</span> </a><span class="movename bold term" data-i18n="Torn Between">Torn Between</span> </span>&mdash;<span data-i18n="Choose between What the Darkness Demands of You and your mission.">Choose between What the Darkness Demands of You and your mission.</span> 
+          </div>
+          <div>
+            <div class="rollspend">
+              <div class="titlebar">
+                <input class="toggle" type="hidden" name="attr_expand_rolldark1" value="0"/>
+                <button class="contract" type="action" name="act_contract" value="rolldark1">&nbsp;&nbsp;&nbsp;&nbsp;<span class="bold" data-i18n="Spend and Roll">Spend and Roll</span> 
+                </button>
+                <button class="expand" type="action" name="act_expand" value="rolldark1">&nbsp;&nbsp;&nbsp;&nbsp;<span class="bold" data-i18n="Spend and Roll">Spend and Roll</span> 
+                </button>
+              </div>
+              <input class="rollup" type="hidden" name="attr_expand_rolldark1" value="0"/>
+              <div class="roller">
+                <div>
+                  <button class="dice" type="action" name="act_rolldicedark" value="Darkness Roll"></button>
+                  +
+                  <input class="narrower" name="attr_darkness_spend" value="0" min="0" max="3" type="number"/><span class="footnote"><span data-i18n="(max 3)">(max 3)</span> </span>
+                  <button class="dice" type="action" name="act_rolldicedark" value="Darkness Roll"></button>
+                </div>
+                <input class="toggle" type="hidden" name="attr_view_recent_roll" value="0"/>
+                <div class="viewable">
+                  <button class="dismiss" type="action" name="act_unview" value="recent_roll"></button>
+                  <input type="hidden" name="attr_recent_roll" value=""/>
+                  <input type="hidden" name="attr_recent_roll_result" value=""/><span data-i18n="Last roll">Last roll</span> (<span name="attr_recent_roll"></span>) = 
+                   <span name="attr_recent_roll_result"></span>
+                  <div>
+                    <input class="spacetoggle" type="hidden" name="attr_expand_roll_bonds" value="1"/>
+                    <div class="titlebar subtitle">
+                      <input class="toggle" type="hidden" name="attr_expand_roll_bonds" value="1"/>
+                      <button class="contract" type="action" name="act_contract" value="roll_bonds">&nbsp;&nbsp;<span class="bold" data-i18n="Spend bonds?">Spend bonds?</span> 
+                      </button>
+                      <button class="expand" type="action" name="act_expand" value="roll_bonds">&nbsp;&nbsp;<span class="bold" data-i18n="Spend bonds?">Spend bonds?</span> 
+                      </button>
+                    </div>
+                    <div>
+                      <input class="rollup" type="hidden" name="attr_expand_roll_bonds" value="1"/>
+                      <div class="roller">
+                        <div class="bondspend footnote">
+                          <fieldset class="repeating_bonds">
+                            <div class="spendline">( + or – )
+                              <input type="hidden" name="attr_points"/>
+                              <input type="hidden" name="attr_bondname"/>
+                              <input class="narrower footnote" type="number" name="attr_spend" value="0"/>(<span name="attr_points"></span>)  <span name="attr_bondname"></span>
+                            </div>
+                          </fieldset>
+                        </div>
+                        <input type="hidden" name="attr_bond_mod_summary"/>
+                        <input class="nullview" type="hidden" name="attr_bond_mod"/>
+                        <div class="viewable">
+                          <button class="dice bold topspace" type="action" name="act_spendbonds" value="Darkness Roll"><span data-i18n="Spend:">Spend:</span> <span name="attr_bond_mod_summary"></span>
+                          </button>
+                          <div><span class="footnote" data-i18n="Once you commit to the adjustment, bonds will be reduced and the adjusted roll displayed in chat.">Once you commit to the adjustment, bonds will be reduced and the adjusted roll displayed in chat.</span> 
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="footnote">
+                  <input name="attr_darkness_tokens" type="hidden"/><span name="attr_darkness_tokens"></span> <span data-i18n="Darkness Tokens currently available.">Darkness Tokens currently available.</span> <br/><span data-i18n="Enter the amount to spend and click the dice.">Enter the amount to spend and click the dice.</span> 
+                </div>
+              </div>
+            </div>
+          </div><a name="headergaining"></a>
+          <div class="subheader"><span class="title" data-i18n="Gaining">Gaining</span> 
+            <input class="toggle" type="hidden" name="attr_expand_gaining" value="1"/>
+            <button class="contract hfade" type="action" name="act_contract" value="gaining"></button>
+            <button class="expand hfade" type="action" name="act_expand" value="gaining"></button>
+          </div>
+          <div class="section">
+            <input class="rollup" type="hidden" name="attr_expand_gaining" value="1"/>
+            <div class="section roller"><span data-i18n="I gain 2-4 Darkness Tokens when I...">I gain 2-4 Darkness Tokens when I...</span> 
+              <input class="pbselector" type="hidden" name="attr_playbook" value=""/>
+              <div class="pbsummoned">
+                <ul>
+                  <li><span data-i18n="Feel unloved or abandoned">Feel unloved or abandoned</span> 
+                  </li>
+                  <li><span data-i18n="Overreact with violence">Overreact with violence</span> 
+                  </li>
+                  <li><span data-i18n="Ask someone to give me their best shot and not hold back">Ask someone to give me their best shot and not hold back</span> 
+                  </li>
+                  <li><span data-i18n="Ask someone to love me, and only ever me">Ask someone to love me, and only ever me</span> 
+                  </li>
+                  <li><span data-i18n="Embody a Condition that affects me">Embody a Condition that affects me</span> 
+                  </li>
+                </ul>
+              </div>
+              <div class="pbsurge"></div>
+              <div class="pbfound"></div>
+              <div class="pbshade"></div>
+              <div class="pblast"></div>
+              <div class="pbfallen"></div>
+              <div class="pbhungry"></div><span class="bold" data-i18n="Click to gain">Click to gain</span> <br/>
+              <button class="enact colorized" type="action" name="act_adddark" value="2"><span class="bold">2&nbsp;</span><span class="bold" data-i18n="Darkness Tokens">Darkness Tokens</span> 
+              </button> <br/>
+              <button class="enact colorized" type="action" name="act_adddark" value="3"><span class="bold">3&nbsp;</span><span class="bold" data-i18n="Darkness Tokens">Darkness Tokens</span> 
+              </button> <br/>
+              <button class="enact colorized" type="action" name="act_adddark" value="4"><span class="bold">4&nbsp;</span><span class="bold" data-i18n="Darkness Tokens">Darkness Tokens</span> 
+              </button> 
+            </div>
+          </div><a name="headerpowers"></a>
+          <div class="subheader"><span class="title" data-i18n="Powers">Powers</span> 
+            <input class="toggle" type="hidden" name="attr_expand_powers" value="1"/>
+            <button class="contract hfade" type="action" name="act_contract" value="powers"></button>
+            <button class="expand hfade" type="action" name="act_expand" value="powers"></button>
+          </div>
+          <div class="section">
+            <input class="rollup" type="hidden" name="attr_expand_powers" value="1"/>
+            <div class="section roller">
+              <textarea class="bio" name="attr_powers"></textarea>
+            </div>
+          </div><a name="headerdemands"></a>
+          <div class="subheader"><span class="title" data-i18n="Demands">Demands</span> 
+            <input class="toggle" type="hidden" name="attr_expand_demands" value="1"/>
+            <button class="contract hfade" type="action" name="act_contract" value="demands"></button>
+            <button class="expand hfade" type="action" name="act_expand" value="demands"></button>
+          </div>
+          <div class="section">
+            <input class="rollup" type="hidden" name="attr_expand_demands" value="1"/>
+            <div class="section roller">
+              <textarea class="bio" name="attr_demands"></textarea>
+            </div>
+          </div>
+        </div>
+      </div><a name="headerbonds"></a>
+      <div class="header"><span class="title" data-i18n="Bonds">Bonds</span> 
+        <input class="toggle" type="hidden" name="attr_expand_bonds" value="1"/>
+        <button class="contract hfade" type="action" name="act_contract" value="bonds"></button>
+        <button class="expand hfade" type="action" name="act_expand" value="bonds"></button>
+      </div>
+      <div class="section">
+        <input class="rollup" type="hidden" name="attr_expand_bonds" value="1"/>
+        <div class="section roller">
+          <div class="bondzone">
+            <fieldset class="repeating_bonds">
+              <div class="bond">
+                <input type="number" value="0" min="0" name="attr_points"/>
+                <input type="text" value="" name="attr_bondname"/>
+              </div>
+            </fieldset><a name="headerstarting_bonds_prompts"></a>
+            <div class="subheader"><span class="title" data-i18n="Starting Bonds Prompts">Starting Bonds Prompts</span> 
+              <input class="toggle" type="hidden" name="attr_expand_starting_bonds_prompts" value="1"/>
+              <button class="contract hfade" type="action" name="act_contract" value="starting_bonds_prompts"></button>
+              <button class="expand hfade" type="action" name="act_expand" value="starting_bonds_prompts"></button>
+            </div>
+            <div class="section">
+              <input class="rollup" type="hidden" name="attr_expand_starting_bonds_prompts" value="1"/>
+              <div class="section roller">
+                <input class="pbselector" type="hidden" name="attr_playbook" value=""/>
+                <div class="pbsummoned">
+                  <ul>
+                    <li><span data-i18n="You were there when I was summoned: what makes you afraid of me? (Gain 1 Bond with them)">You were there when I was summoned: what makes you afraid of me? (Gain 1 Bond with them)</span> 
+                    </li>
+                    <li><span data-i18n="Why can’t you tell me you love me? (Gain 2 Bonds with them)">Why can’t you tell me you love me? (Gain 2 Bonds with them)</span> 
+                    </li>
+                    <li><span data-i18n="Why am I tempted to give into what the Darkness Demands? (Gain 1 Bond with What the Darkness Demands of You)">Why am I tempted to give into what the Darkness Demands? (Gain 1 Bond with What the Darkness Demands of You)</span> 
+                    </li>
+                  </ul>
+                </div>
+                <div class="pbsurge"></div>
+                <div class="pbfound"></div>
+                <div class="pbshade"></div>
+                <div class="pblast"></div>
+                <div class="pbfallen"></div>
+                <div class="pbhungry"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div><a name="headerconditions"></a>
+      <div class="header"><span class="title" data-i18n="Conditions">Conditions</span> 
+        <input class="toggle" type="hidden" name="attr_expand_conditions" value="1"/>
+        <button class="contract hfade" type="action" name="act_contract" value="conditions"></button>
+        <button class="expand hfade" type="action" name="act_expand" value="conditions"></button>
+      </div>
+      <div class="section">
+        <input class="rollup" type="hidden" name="attr_expand_conditions" value="1"/>
+        <div class="section roller">
+          <div class="conditions">
+            <input class="pbselector" type="hidden" name="attr_playbook" value=""/>
+            <div class="pbsummoned">
+              <div class="checklist1box">
+                <div class="buttons">
+                  <input class="toggle" type="hidden" name="attr_check_condition_raging" value="0"/>
+                  <button class="checked" type="action" name="act_unchecklist" value="condition_raging|current_conditions=raging"></button>
+                  <button class="unchecked" type="action" name="act_checklist" value="condition_raging|current_conditions=raging"></button>
+                </div>
+                <div class="conditiontext"><span data-i18n="raging">raging</span> 
+                </div>
+              </div>
+              <div class="checklist1box">
+                <div class="buttons">
+                  <input class="toggle" type="hidden" name="attr_check_condition_lovelorn" value="0"/>
+                  <button class="checked" type="action" name="act_unchecklist" value="condition_lovelorn|current_conditions=lovelorn"></button>
+                  <button class="unchecked" type="action" name="act_checklist" value="condition_lovelorn|current_conditions=lovelorn"></button>
+                </div>
+                <div class="conditiontext"><span data-i18n="lovelorn">lovelorn</span> 
+                </div>
+              </div>
+              <div class="checklist1box">
+                <div class="buttons">
+                  <input class="toggle" type="hidden" name="attr_check_condition_obsessed" value="0"/>
+                  <button class="checked" type="action" name="act_unchecklist" value="condition_obsessed|current_conditions=obsessed"></button>
+                  <button class="unchecked" type="action" name="act_checklist" value="condition_obsessed|current_conditions=obsessed"></button>
+                </div>
+                <div class="conditiontext"><span data-i18n="obsessed">obsessed</span> 
+                </div>
+              </div>
+              <div class="checklist1box">
+                <div class="buttons">
+                  <input class="toggle" type="hidden" name="attr_check_condition_despairing" value="0"/>
+                  <button class="checked" type="action" name="act_unchecklist" value="condition_despairing|current_conditions=despairing"></button>
+                  <button class="unchecked" type="action" name="act_checklist" value="condition_despairing|current_conditions=despairing"></button>
+                </div>
+                <div class="conditiontext"><span data-i18n="despairing">despairing</span> 
+                </div>
+              </div>
+            </div>
+            <div class="pbsurge"></div>
+            <div class="pbfound"></div>
+            <div class="pbshade"></div>
+            <div class="pblast"></div>
+            <div class="pbfallen"></div>
+            <div class="pbhungry">
+              <div class="checklist1box">
+                <div class="buttons">
+                  <input class="toggle" type="hidden" name="attr_check_condition_raging" value="0"/>
+                  <button class="checked" type="action" name="act_unchecklist" value="condition_raging|current_conditions=raging"></button>
+                  <button class="unchecked" type="action" name="act_checklist" value="condition_raging|current_conditions=raging"></button>
+                </div>
+                <div class="conditiontext"><span data-i18n="raging">raging</span> 
+                </div>
+              </div>
+              <div class="checklist1box">
+                <div class="buttons">
+                  <input class="toggle" type="hidden" name="attr_check_condition_lonely" value="0"/>
+                  <button class="checked" type="action" name="act_unchecklist" value="condition_lonely|current_conditions=lonely"></button>
+                  <button class="unchecked" type="action" name="act_checklist" value="condition_lonely|current_conditions=lonely"></button>
+                </div>
+                <div class="conditiontext"><span data-i18n="lonely">lonely</span> 
+                </div>
+              </div>
+              <div class="checklist1box">
+                <div class="buttons">
+                  <input class="toggle" type="hidden" name="attr_check_condition_lustful" value="0"/>
+                  <button class="checked" type="action" name="act_unchecklist" value="condition_lustful|current_conditions=lustful"></button>
+                  <button class="unchecked" type="action" name="act_checklist" value="condition_lustful|current_conditions=lustful"></button>
+                </div>
+                <div class="conditiontext"><span data-i18n="lustful">lustful</span> 
+                </div>
+              </div>
+              <div class="checklist1box">
+                <div class="buttons">
+                  <input class="toggle" type="hidden" name="attr_check_condition_blank1" value="0"/>
+                  <button class="checked" type="action" name="act_unchecklist" value="condition_blank1|current_conditions=&gt;condition_blank1_text"></button>
+                  <button class="unchecked" type="action" name="act_checklist" value="condition_blank1|current_conditions=&gt;condition_blank1_text"></button>
+                </div>
+                <div class="conditiontext">
+                  <input type="text" name="attr_condition_blank1_text"/>
+                </div>
+              </div>
+              <div class="checklist1box">
+                <div class="buttons">
+                  <input class="toggle" type="hidden" name="attr_check_condition_blank2" value="0"/>
+                  <button class="checked" type="action" name="act_unchecklist" value="condition_blank2|current_conditions=&gt;condition_blank2_text"></button>
+                  <button class="unchecked" type="action" name="act_checklist" value="condition_blank2|current_conditions=&gt;condition_blank2_text"></button>
+                </div>
+                <div class="conditiontext">
+                  <input type="text" name="attr_condition_blank2_text"/>
+                </div>
+              </div>
+              <div class="checklist1box">
+                <div class="buttons">
+                  <input class="toggle" type="hidden" name="attr_check_condition_blank3" value="0"/>
+                  <button class="checked" type="action" name="act_unchecklist" value="condition_blank3|current_conditions=&gt;condition_blank3_text"></button>
+                  <button class="unchecked" type="action" name="act_checklist" value="condition_blank3|current_conditions=&gt;condition_blank3_text"></button>
+                </div>
+                <div class="conditiontext">
+                  <input type="text" name="attr_condition_blank3_text"/>
+                </div>
+              </div>
+            </div>
+            <div class="checklist1box">
+              <div class="buttons">
+                <!-- Simply establish that this field is always checked, but don't provide buttons to make it toggle-able.-->
+                <input type="hidden" name="attr_check_condition_blank4" value="1"/><span class="icon checked"></span>
+              </div>
+              <div class="conditiontext">
+                <input type="text" name="attr_condition_blank4_text"/>
+              </div>
+            </div>
+            <div class="checklist1box">
+              <div class="buttons">
+                <!-- Simply establish that this field is always checked, but don't provide buttons to make it toggle-able.-->
+                <input type="hidden" name="attr_check_condition_blank5" value="1"/><span class="icon checked"></span>
+              </div>
+              <div class="conditiontext">
+                <input type="text" name="attr_condition_blank5_text"/>
+              </div>
+            </div>
+          </div><a name="headerbreaking_point"></a>
+          <div class="subheader"><span class="title" data-i18n="Breaking Point">Breaking Point</span> 
+            <input class="toggle" type="hidden" name="attr_expand_breaking_point" value="1"/>
+            <button class="contract hfade" type="action" name="act_contract" value="breaking_point"></button>
+            <button class="expand hfade" type="action" name="act_expand" value="breaking_point"></button>
+          </div>
+          <div class="section">
+            <input class="rollup" type="hidden" name="attr_expand_breaking_point" value="1"/>
+            <div class="section roller"><span class="instruction" data-i18n="(when you mark your last named condition)">(when you mark your last named condition)</span> 
+              <input class="pbselector" type="hidden" name="attr_playbook" value=""/>
+              <div class="pbsummoned">
+                <p><span class="bold" data-i18n="You know that this world is not your own, and you will never belong here.">You know that this world is not your own, and you will never belong here.</span> <span data-i18n="The dream that is humanity can never belong to you. The darkness grips your heart and the world you were summoned from bleeds into this one. You are a beacon to what has been aching to reach this world.">The dream that is humanity can never belong to you. The darkness grips your heart and the world you were summoned from bleeds into this one. You are a beacon to what has been aching to reach this world.</span> 
+                </p>
+                <p><span class="bold" data-i18n="Describe what terrors are unleashed and how an aspect of your terrible prophecy comes to pass.">Describe what terrors are unleashed and how an aspect of your terrible prophecy comes to pass.</span> <span data-i18n="The Keeper will tell you how the world is now wounded, warped by what you allowed to come through.">The Keeper will tell you how the world is now wounded, warped by what you allowed to come through.</span> 
+                </p>
+              </div>
+              <div class="pbsurge"></div>
+              <div class="pbfound"></div>
+              <div class="pbshade"></div>
+              <div class="pblast"></div>
+              <div class="pbfallen"></div>
+              <div class="pbhungry"></div>
+            </div>
+          </div>
+        </div>
+      </div><a name="headerexperience_and_ruin"></a>
+      <div class="header"><span class="title" data-i18n="Experience and Ruin">Experience and Ruin</span> 
+        <input class="toggle" type="hidden" name="attr_expand_experience_and_ruin" value="1"/>
+        <button class="contract hfade" type="action" name="act_contract" value="experience_and_ruin"></button>
+        <button class="expand hfade" type="action" name="act_expand" value="experience_and_ruin"></button>
+      </div>
+      <div class="section">
+        <input class="rollup" type="hidden" name="attr_expand_experience_and_ruin" value="1"/>
+        <div class="section roller">
+          <div class="columns">
+            <div class="wide"><a name="headerexperience"></a>
+              <div class="subheader fixed"><span class="title" data-i18n="Experience">Experience</span> 
+              </div>
+              <div class="section"><span class="bold" data-i18n="Current XP">Current XP</span> 
+                <div>
+                  <input class="colorizewhenactive" type="hidden" name="attr_xp_advance_active" value="0"/>
+                  <input class="tokens" type="number" value="0" min="0" name="attr_xp"/>
+                </div>
+              </div>
+            </div>
+            <div class="wide"><a name="headerruin"></a>
+              <div class="subheader fixed"><span class="title" data-i18n="Ruin">Ruin</span> 
+              </div>
+              <div class="section"><span class="bold" data-i18n="Current Ruin">Current Ruin</span> 
+                <div>
+                  <input class="colorizewhenactive" type="hidden" name="attr_ruin_advance_active" value="0"/>
+                  <input class="tokens" type="number" value="0" min="0" name="attr_ruin"/>
+                </div>
+              </div>
+            </div>
+          </div><a name="headeryour_impulse"></a>
+          <div class="subheader"><span class="title" data-i18n="Your Impulse">Your Impulse</span> 
+            <input class="toggle" type="hidden" name="attr_expand_your_impulse" value="1"/>
+            <button class="contract hfade" type="action" name="act_contract" value="your_impulse"></button>
+            <button class="expand hfade" type="action" name="act_expand" value="your_impulse"></button>
+          </div>
+          <div class="section">
+            <input class="rollup" type="hidden" name="attr_expand_your_impulse" value="1"/>
+            <div class="section roller">
+              <div class="instruction">
+                <p><span class="trigger" data-i18n="At the start of every session,">At the start of every session,</span> <span data-i18n="choose one to explore during play.">choose one to explore during play.</span> 
+                </p>
+              </div>
+              <input class="pbselector" type="hidden" name="attr_playbook" value=""/>
+              <input class="hidecheckboxesnotnull" type="hidden" name="attr_chosenimpulse" value=""/>
+              <div class="pbsummoned">
+                <input class="masker" type="hidden" name="attr_check_checkablesummonedimpulse_1" value="0"/>
+                <div class="checklist1box">
+                  <div class="buttons">
+                    <input class="toggle" type="hidden" name="attr_check_checkablesummonedimpulse_1" value="0"/>
+                    <button class="checked" type="action" name="act_unchecklist" value="checkablesummonedimpulse_1|chosenimpulse=Did you fight against the prophecy that haunts you?"></button>
+                    <button class="unchecked" type="action" name="act_checklist" value="checkablesummonedimpulse_1|chosenimpulse=Did you fight against the prophecy that haunts you?"></button>
+                  </div>
+                  <div class="text"><span data-i18n="Did you fight against the prophecy that haunts you?">Did you fight against the prophecy that haunts you?</span> 
+                  </div>
+                </div>
+                <input class="masker" type="hidden" name="attr_check_checkablesummonedimpulse_2" value="0"/>
+                <div class="checklist1box">
+                  <div class="buttons">
+                    <input class="toggle" type="hidden" name="attr_check_checkablesummonedimpulse_2" value="0"/>
+                    <button class="checked" type="action" name="act_unchecklist" value="checkablesummonedimpulse_2|chosenimpulse=Did you learn something significant about your prophecy?"></button>
+                    <button class="unchecked" type="action" name="act_checklist" value="checkablesummonedimpulse_2|chosenimpulse=Did you learn something significant about your prophecy?"></button>
+                  </div>
+                  <div class="text"><span data-i18n="Did you learn something significant about your prophecy?">Did you learn something significant about your prophecy?</span> 
+                  </div>
+                </div>
+                <input class="masker" type="hidden" name="attr_check_checkablesummonedimpulse_3" value="0"/>
+                <div class="checklist1box">
+                  <div class="buttons">
+                    <input class="toggle" type="hidden" name="attr_check_checkablesummonedimpulse_3" value="0"/>
+                    <button class="checked" type="action" name="act_unchecklist" value="checkablesummonedimpulse_3|chosenimpulse=Did you entangle another monster with your prophecy?"></button>
+                    <button class="unchecked" type="action" name="act_checklist" value="checkablesummonedimpulse_3|chosenimpulse=Did you entangle another monster with your prophecy?"></button>
+                  </div>
+                  <div class="text"><span data-i18n="Did you entangle another monster with your prophecy?">Did you entangle another monster with your prophecy?</span> 
+                  </div>
+                </div>
+                <input class="masker" type="hidden" name="attr_check_checkablesummonedimpulse_4" value="0"/>
+                <div class="checklist1box">
+                  <div class="buttons">
+                    <input class="toggle" type="hidden" name="attr_check_checkablesummonedimpulse_4" value="0"/>
+                    <button class="checked" type="action" name="act_unchecklist" value="checkablesummonedimpulse_4|chosenimpulse=Did you try to hold on to your humanity, to great consequence?"></button>
+                    <button class="unchecked" type="action" name="act_checklist" value="checkablesummonedimpulse_4|chosenimpulse=Did you try to hold on to your humanity, to great consequence?"></button>
+                  </div>
+                  <div class="text"><span data-i18n="Did you try to hold on to your humanity, to great consequence?">Did you try to hold on to your humanity, to great consequence?</span> 
+                  </div>
+                </div>
+                <input class="masker" type="hidden" name="attr_check_checkablesummonedimpulse_5" value="0"/>
+                <div class="checklist1box">
+                  <div class="buttons">
+                    <input class="toggle" type="hidden" name="attr_check_checkablesummonedimpulse_5" value="0"/>
+                    <button class="checked" type="action" name="act_unchecklist" value="checkablesummonedimpulse_5|chosenimpulse=Did you give into the power of prophecy and strengthen it?"></button>
+                    <button class="unchecked" type="action" name="act_checklist" value="checkablesummonedimpulse_5|chosenimpulse=Did you give into the power of prophecy and strengthen it?"></button>
+                  </div>
+                  <div class="text"><span data-i18n="Did you give into the power of prophecy and strengthen it?">Did you give into the power of prophecy and strengthen it?</span> 
+                  </div>
+                </div>
+              </div>
+              <div class="pbsurge"></div>
+              <div class="pbfound"></div>
+              <div class="pbshade"></div>
+              <div class="pblast"></div>
+              <div class="pbfallen"></div>
+              <div class="pbhungry"></div>
+              <div class="instruction">
+                <p><span class="trigger" data-i18n="At the end of the session,">At the end of the session,</span> <span data-i18n="answer the question—if yes, mark">answer the question—if yes, mark</span> 
+                  <button class="enact colorized" type="action" name="act_addxp" value="1"><span class="bold">1&nbsp;</span><span class="bold" data-i18n="XP">XP</span> 
+                  </button> &nbsp;<span data-i18n="or">or</span> 
+                  <button class="enact colorized" type="action" name="act_addruin" value="1"><span class="bold">1&nbsp;</span><span class="bold" data-i18n="Ruin">Ruin</span> 
+                  </button> 
+                </p>
+              </div>
+            </div>
+          </div><a name="headerend_of_session"></a>
+          <div class="subheader"><span class="title" data-i18n="End of Session">End of Session</span> 
+            <input class="toggle" type="hidden" name="attr_expand_end_of_session" value="1"/>
+            <button class="contract hfade" type="action" name="act_contract" value="end_of_session"></button>
+            <button class="expand hfade" type="action" name="act_expand" value="end_of_session"></button>
+          </div>
+          <div class="section">
+            <input class="rollup" type="hidden" name="attr_expand_end_of_session" value="1"/>
+            <div class="section roller">
+              <div class="instruction">
+                <p><span class="trigger" data-i18n="At the end of the session,">At the end of the session,</span> <span data-i18n="answer all of these questions.">answer all of these questions.</span> 
+                </p>
+              </div>
+              <ul>
+                <li><span class="bold" data-i18n="Did you express your monstrous nature and/or express your humanity?">Did you express your monstrous nature and/or express your humanity?</span> <span data-i18n="If yes, mark">If yes, mark</span> 
+                  <button class="enact colorized" type="action" name="act_addxp" value="1"><span class="bold">1&nbsp;</span><span class="bold" data-i18n="XP">XP</span> 
+                  </button> 
+                </li>
+                <li><span class="bold" data-i18n="Did you learn something significant about yourself and/or your impending ruin?">Did you learn something significant about yourself and/or your impending ruin?</span> <span data-i18n="If yes, mark">If yes, mark</span> 
+                  <button class="enact colorized" type="action" name="act_addxp" value="1"><span class="bold">1&nbsp;</span><span class="bold" data-i18n="XP">XP</span> 
+                  </button> 
+                </li>
+                <li><span class="bold" data-i18n="Did you learn something significant about a fellow monster?">Did you learn something significant about a fellow monster?</span> <span data-i18n="If yes, mark">If yes, mark</span> 
+                  <button class="enact colorized" type="action" name="act_addxp" value="1"><span class="bold">1&nbsp;</span><span class="bold" data-i18n="XP">XP</span> 
+                  </button> 
+                </li>
+                <li><span class="bold" data-i18n="Did you uncover at least a Key of the Apocalypse or attempt to Unlock Doom’s Door?">Did you uncover at least a Key of the Apocalypse or attempt to Unlock Doom’s Door?</span> <span data-i18n="If no, mark">If no, mark</span> 
+                  <button class="enact colorized" type="action" name="act_addruin" value="1"><span class="bold">1&nbsp;</span><span class="bold" data-i18n="Ruin">Ruin</span> 
+                  </button> 
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div><a name="headeradvances"></a>
+      <div class="header"><span class="title" data-i18n="Advances">Advances</span> 
+        <input class="toggle" type="hidden" name="attr_expand_advances" value="1"/>
+        <button class="contract hfade" type="action" name="act_contract" value="advances"></button>
+        <button class="expand hfade" type="action" name="act_expand" value="advances"></button>
+      </div>
+      <div class="section">
+        <input class="rollup" type="hidden" name="attr_expand_advances" value="1"/>
+        <div class="section roller">
+          <div>
+            <input class="view" type="hidden" name="attr_xp_advance_active" value="0"/>
+            <div class="viewable">
+              <p><span data-i18n="You may spend">You may spend</span> 
+                <button class="enact colorized" type="action" name="act_spendxp" value="8"><span class="bold">8&nbsp;</span><span class="bold" data-i18n="XP">XP</span> 
+                </button>  <span data-i18n="for an XP advance.">for an XP advance.</span> 
+              </p>
+            </div>
+          </div>
+          <div>
+            <input class="view" type="hidden" name="attr_ruin_advance_active" value="0"/>
+            <div class="viewable">
+              <p><span data-i18n="You may spend">You may spend</span> 
+                <button class="enact colorized" type="action" name="act_spendruin" value="5"><span class="bold">5&nbsp;</span><span class="bold" data-i18n="Ruin">Ruin</span> 
+                </button>  <span data-i18n="for a Ruin advance.">for a Ruin advance.</span> 
+              </p>
+            </div>
+          </div><a name="headerxp_advances"></a>
+          <div class="subheader"><span class="title" data-i18n="XP Advances">XP Advances</span> 
+            <input class="toggle" type="hidden" name="attr_expand_xp_advances" value="1"/>
+            <button class="contract hfade" type="action" name="act_contract" value="xp_advances"></button>
+            <button class="expand hfade" type="action" name="act_expand" value="xp_advances"></button>
+          </div>
+          <div class="section">
+            <input class="rollup" type="hidden" name="attr_expand_xp_advances" value="1"/>
+            <div class="section roller">
+              <input class="pbselector" type="hidden" name="attr_playbook" value=""/>
+              <div class="pbsummoned">
+                <input class="masker" type="hidden" name="attr_check_checkablesummoned_xpadvance_1" value="0"/>
+                <input class="masker" type="hidden" name="attr_check_checkablesummoned_xpadvance_2" value="0"/>
+                <div class="checklist2box">
+                  <div class="buttons">
+                    <input class="toggle" type="hidden" name="attr_check_checkablesummoned_xpadvance_1" value="0"/>
+                    <button class="checked tightright" type="action" name="act_unchecklist" value="checkablesummoned_xpadvance_1"></button>
+                    <button class="unchecked tightright" type="action" name="act_checklist" value="checkablesummoned_xpadvance_1"></button>
+                    <input class="toggle" type="hidden" name="attr_check_checkablesummoned_xpadvance_2" value="0"/>
+                    <button class="checked" type="action" name="act_unchecklist" value="checkablesummoned_xpadvance_2"></button>
+                    <button class="unchecked" type="action" name="act_checklist" value="checkablesummoned_xpadvance_2"></button>
+                  </div>
+                  <div class="text"><span data-i18n="Take a new Summoned move">Take a new Summoned move</span> 
+                  </div>
+                </div>
+              </div>
+              <div class="pbsurge">
+                <input class="masker" type="hidden" name="attr_check_checkablesurge_xpadvance_1" value="0"/>
+                <input class="masker" type="hidden" name="attr_check_checkablesurge_xpadvance_2" value="0"/>
+                <div class="checklist2box">
+                  <div class="buttons">
+                    <input class="toggle" type="hidden" name="attr_check_checkablesurge_xpadvance_1" value="0"/>
+                    <button class="checked tightright" type="action" name="act_unchecklist" value="checkablesurge_xpadvance_1"></button>
+                    <button class="unchecked tightright" type="action" name="act_checklist" value="checkablesurge_xpadvance_1"></button>
+                    <input class="toggle" type="hidden" name="attr_check_checkablesurge_xpadvance_2" value="0"/>
+                    <button class="checked" type="action" name="act_unchecklist" value="checkablesurge_xpadvance_2"></button>
+                    <button class="unchecked" type="action" name="act_checklist" value="checkablesurge_xpadvance_2"></button>
+                  </div>
+                  <div class="text"><span data-i18n="Take a new Surge move">Take a new Surge move</span> 
+                  </div>
+                </div>
+              </div>
+              <div class="pbfound">
+                <input class="masker" type="hidden" name="attr_check_checkablefound_xpadvance_1" value="0"/>
+                <input class="masker" type="hidden" name="attr_check_checkablefound_xpadvance_2" value="0"/>
+                <div class="checklist2box">
+                  <div class="buttons">
+                    <input class="toggle" type="hidden" name="attr_check_checkablefound_xpadvance_1" value="0"/>
+                    <button class="checked tightright" type="action" name="act_unchecklist" value="checkablefound_xpadvance_1"></button>
+                    <button class="unchecked tightright" type="action" name="act_checklist" value="checkablefound_xpadvance_1"></button>
+                    <input class="toggle" type="hidden" name="attr_check_checkablefound_xpadvance_2" value="0"/>
+                    <button class="checked" type="action" name="act_unchecklist" value="checkablefound_xpadvance_2"></button>
+                    <button class="unchecked" type="action" name="act_checklist" value="checkablefound_xpadvance_2"></button>
+                  </div>
+                  <div class="text"><span data-i18n="Take a new Found move">Take a new Found move</span> 
+                  </div>
+                </div>
+              </div>
+              <div class="pbshade">
+                <input class="masker" type="hidden" name="attr_check_checkableshade_xpadvance_1" value="0"/>
+                <input class="masker" type="hidden" name="attr_check_checkableshade_xpadvance_2" value="0"/>
+                <div class="checklist2box">
+                  <div class="buttons">
+                    <input class="toggle" type="hidden" name="attr_check_checkableshade_xpadvance_1" value="0"/>
+                    <button class="checked tightright" type="action" name="act_unchecklist" value="checkableshade_xpadvance_1"></button>
+                    <button class="unchecked tightright" type="action" name="act_checklist" value="checkableshade_xpadvance_1"></button>
+                    <input class="toggle" type="hidden" name="attr_check_checkableshade_xpadvance_2" value="0"/>
+                    <button class="checked" type="action" name="act_unchecklist" value="checkableshade_xpadvance_2"></button>
+                    <button class="unchecked" type="action" name="act_checklist" value="checkableshade_xpadvance_2"></button>
+                  </div>
+                  <div class="text"><span data-i18n="Take a new Shade move">Take a new Shade move</span> 
+                  </div>
+                </div>
+              </div>
+              <div class="pblast">
+                <input class="masker" type="hidden" name="attr_check_checkablelast_xpadvance_1" value="0"/>
+                <input class="masker" type="hidden" name="attr_check_checkablelast_xpadvance_2" value="0"/>
+                <div class="checklist2box">
+                  <div class="buttons">
+                    <input class="toggle" type="hidden" name="attr_check_checkablelast_xpadvance_1" value="0"/>
+                    <button class="checked tightright" type="action" name="act_unchecklist" value="checkablelast_xpadvance_1"></button>
+                    <button class="unchecked tightright" type="action" name="act_checklist" value="checkablelast_xpadvance_1"></button>
+                    <input class="toggle" type="hidden" name="attr_check_checkablelast_xpadvance_2" value="0"/>
+                    <button class="checked" type="action" name="act_unchecklist" value="checkablelast_xpadvance_2"></button>
+                    <button class="unchecked" type="action" name="act_checklist" value="checkablelast_xpadvance_2"></button>
+                  </div>
+                  <div class="text"><span data-i18n="Take a new Last move">Take a new Last move</span> 
+                  </div>
+                </div>
+              </div>
+              <div class="pbfallen">
+                <input class="masker" type="hidden" name="attr_check_checkablefallen_xpadvance_1" value="0"/>
+                <input class="masker" type="hidden" name="attr_check_checkablefallen_xpadvance_2" value="0"/>
+                <div class="checklist2box">
+                  <div class="buttons">
+                    <input class="toggle" type="hidden" name="attr_check_checkablefallen_xpadvance_1" value="0"/>
+                    <button class="checked tightright" type="action" name="act_unchecklist" value="checkablefallen_xpadvance_1"></button>
+                    <button class="unchecked tightright" type="action" name="act_checklist" value="checkablefallen_xpadvance_1"></button>
+                    <input class="toggle" type="hidden" name="attr_check_checkablefallen_xpadvance_2" value="0"/>
+                    <button class="checked" type="action" name="act_unchecklist" value="checkablefallen_xpadvance_2"></button>
+                    <button class="unchecked" type="action" name="act_checklist" value="checkablefallen_xpadvance_2"></button>
+                  </div>
+                  <div class="text"><span data-i18n="Take a new Fallen move">Take a new Fallen move</span> 
+                  </div>
+                </div>
+              </div>
+              <div class="pbhungry">
+                <input class="masker" type="hidden" name="attr_check_checkablehungry_xpadvance_1" value="0"/>
+                <input class="masker" type="hidden" name="attr_check_checkablehungry_xpadvance_2" value="0"/>
+                <div class="checklist2box">
+                  <div class="buttons">
+                    <input class="toggle" type="hidden" name="attr_check_checkablehungry_xpadvance_1" value="0"/>
+                    <button class="checked tightright" type="action" name="act_unchecklist" value="checkablehungry_xpadvance_1"></button>
+                    <button class="unchecked tightright" type="action" name="act_checklist" value="checkablehungry_xpadvance_1"></button>
+                    <input class="toggle" type="hidden" name="attr_check_checkablehungry_xpadvance_2" value="0"/>
+                    <button class="checked" type="action" name="act_unchecklist" value="checkablehungry_xpadvance_2"></button>
+                    <button class="unchecked" type="action" name="act_checklist" value="checkablehungry_xpadvance_2"></button>
+                  </div>
+                  <div class="text"><span data-i18n="Take a new Hungry move">Take a new Hungry move</span> 
+                  </div>
+                </div>
+              </div>
+              <input class="masker" type="hidden" name="attr_check_checkablexpadvance_1" value="0"/>
+              <input class="masker" type="hidden" name="attr_check_checkablexpadvance_2" value="0"/>
+              <div class="checklist2box">
+                <div class="buttons">
+                  <input class="toggle" type="hidden" name="attr_check_checkablexpadvance_1" value="0"/>
+                  <button class="checked tightright" type="action" name="act_unchecklist" value="checkablexpadvance_1"></button>
+                  <button class="unchecked tightright" type="action" name="act_checklist" value="checkablexpadvance_1"></button>
+                  <input class="toggle" type="hidden" name="attr_check_checkablexpadvance_2" value="0"/>
+                  <button class="checked" type="action" name="act_unchecklist" value="checkablexpadvance_2"></button>
+                  <button class="unchecked" type="action" name="act_checklist" value="checkablexpadvance_2"></button>
+                </div>
+                <div class="text"><span data-i18n="Take a new DIVISION move">Take a new DIVISION move</span> 
+                </div>
+              </div>
+              <input class="masker" type="hidden" name="attr_check_checkablexpadvance_3" value="0"/>
+              <input class="masker" type="hidden" name="attr_check_checkablexpadvance_4" value="0"/>
+              <div class="checklist2box">
+                <div class="buttons">
+                  <input class="toggle" type="hidden" name="attr_check_checkablexpadvance_3" value="0"/>
+                  <button class="checked tightright" type="action" name="act_unchecklist" value="checkablexpadvance_3"></button>
+                  <button class="unchecked tightright" type="action" name="act_checklist" value="checkablexpadvance_3"></button>
+                  <input class="toggle" type="hidden" name="attr_check_checkablexpadvance_4" value="0"/>
+                  <button class="checked" type="action" name="act_unchecklist" value="checkablexpadvance_4"></button>
+                  <button class="unchecked" type="action" name="act_checklist" value="checkablexpadvance_4"></button>
+                </div>
+                <div class="text"><span data-i18n="Take a move from another playbook">Take a move from another playbook</span> 
+                </div>
+              </div>
+              <input class="masker" type="hidden" name="attr_check_checkablexpadvance_5" value="0"/>
+              <div class="checklist2box">
+                <div class="buttons">
+                  <input class="toggle" type="hidden" name="attr_check_checkablexpadvance_5" value="0"/>
+                  <button class="checked" type="action" name="act_unchecklist" value="checkablexpadvance_5"></button>
+                  <button class="unchecked" type="action" name="act_checklist" value="checkablexpadvance_5"></button>
+                </div>
+                <div class="text"><span data-i18n="Describe a new way to gain Darkness Tokens">Describe a new way to gain Darkness Tokens</span> 
+                </div>
+              </div>
+              <input class="masker" type="hidden" name="attr_check_checkablexpadvance_6" value="0"/>
+              <div class="checklist2box">
+                <div class="buttons">
+                  <input class="toggle" type="hidden" name="attr_check_checkablexpadvance_6" value="0"/>
+                  <button class="checked" type="action" name="act_unchecklist" value="checkablexpadvance_6"></button>
+                  <button class="unchecked" type="action" name="act_checklist" value="checkablexpadvance_6"></button>
+                </div>
+                <div class="text"><span data-i18n="Take a new Power of Darkness from your playbook">Take a new Power of Darkness from your playbook</span> 
+                </div>
+              </div>
+              <input class="masker" type="hidden" name="attr_check_checkablexpadvance_7" value="0"/>
+              <div class="checklist2box">
+                <div class="buttons">
+                  <input class="toggle" type="hidden" name="attr_check_checkablexpadvance_7" value="0"/>
+                  <button class="checked" type="action" name="act_unchecklist" value="checkablexpadvance_7"></button>
+                  <button class="unchecked" type="action" name="act_checklist" value="checkablexpadvance_7"></button>
+                </div>
+                <div class="text"><span data-i18n="Change your playbook">Change your playbook</span> 
+                </div>
+              </div>
+            </div>
+          </div><a name="headerruin_advances"></a>
+          <div class="subheader"><span class="title" data-i18n="Ruin Advances">Ruin Advances</span> 
+            <input class="toggle" type="hidden" name="attr_expand_ruin_advances" value="1"/>
+            <button class="contract hfade" type="action" name="act_contract" value="ruin_advances"></button>
+            <button class="expand hfade" type="action" name="act_expand" value="ruin_advances"></button>
+          </div>
+          <div class="section">
+            <input class="rollup" type="hidden" name="attr_expand_ruin_advances" value="1"/>
+            <div class="section roller">
+              <input class="masker" type="hidden" name="attr_check_checkableruinadvance_1" value="0"/>
+              <input class="masker" type="hidden" name="attr_check_checkableruinadvance_2" value="0"/>
+              <div class="checklist2box">
+                <div class="buttons">
+                  <input class="toggle" type="hidden" name="attr_check_checkableruinadvance_1" value="0"/>
+                  <button class="checked tightright" type="action" name="act_unchecklist" value="checkableruinadvance_1"></button>
+                  <button class="unchecked tightright" type="action" name="act_checklist" value="checkableruinadvance_1"></button>
+                  <input class="toggle" type="hidden" name="attr_check_checkableruinadvance_2" value="0"/>
+                  <button class="checked" type="action" name="act_unchecklist" value="checkableruinadvance_2"></button>
+                  <button class="unchecked" type="action" name="act_checklist" value="checkableruinadvance_2"></button>
+                </div>
+                <div class="text"><span data-i18n="Take a new Ruin Move">Take a new Ruin Move</span> 
+                </div>
+              </div>
+              <input class="masker" type="hidden" name="attr_check_checkableruinadvance_3" value="0"/>
+              <input class="masker" type="hidden" name="attr_check_checkableruinadvance_4" value="0"/>
+              <div class="checklist2box">
+                <div class="buttons">
+                  <input class="toggle" type="hidden" name="attr_check_checkableruinadvance_3" value="0"/>
+                  <button class="checked tightright" type="action" name="act_unchecklist" value="checkableruinadvance_3"></button>
+                  <button class="unchecked tightright" type="action" name="act_checklist" value="checkableruinadvance_3"></button>
+                  <input class="toggle" type="hidden" name="attr_check_checkableruinadvance_4" value="0"/>
+                  <button class="checked" type="action" name="act_unchecklist" value="checkableruinadvance_4"></button>
+                  <button class="unchecked" type="action" name="act_checklist" value="checkableruinadvance_4"></button>
+                </div>
+                <div class="text"><span data-i18n="Take Ruin Move from another playbook">Take Ruin Move from another playbook</span> 
+                </div>
+              </div>
+              <input class="masker" type="hidden" name="attr_check_checkableruinadvance_5" value="0"/>
+              <input class="masker" type="hidden" name="attr_check_checkableruinadvance_6" value="0"/>
+              <div class="checklist2box">
+                <div class="buttons">
+                  <input class="toggle" type="hidden" name="attr_check_checkableruinadvance_5" value="0"/>
+                  <button class="checked tightright" type="action" name="act_unchecklist" value="checkableruinadvance_5"></button>
+                  <button class="unchecked tightright" type="action" name="act_checklist" value="checkableruinadvance_5"></button>
+                  <input class="toggle" type="hidden" name="attr_check_checkableruinadvance_6" value="0"/>
+                  <button class="checked" type="action" name="act_unchecklist" value="checkableruinadvance_6"></button>
+                  <button class="unchecked" type="action" name="act_checklist" value="checkableruinadvance_6"></button>
+                </div>
+                <div class="text"><span data-i18n="Permanently mark a Condition">Permanently mark a Condition</span> 
+                </div>
+              </div>
+              <input class="masker" type="hidden" name="attr_check_checkableruinadvance_7" value="0"/>
+              <input class="masker" type="hidden" name="attr_check_checkableruinadvance_8" value="0"/>
+              <div class="checklist2box">
+                <div class="buttons">
+                  <input class="toggle" type="hidden" name="attr_check_checkableruinadvance_7" value="0"/>
+                  <button class="checked tightright" type="action" name="act_unchecklist" value="checkableruinadvance_7"></button>
+                  <button class="unchecked tightright" type="action" name="act_checklist" value="checkableruinadvance_7"></button>
+                  <input class="toggle" type="hidden" name="attr_check_checkableruinadvance_8" value="0"/>
+                  <button class="checked" type="action" name="act_unchecklist" value="checkableruinadvance_8"></button>
+                  <button class="unchecked" type="action" name="act_checklist" value="checkableruinadvance_8"></button>
+                </div>
+                <div class="text"><span data-i18n="Gain a new Ruin Condition">Gain a new Ruin Condition</span> 
+                </div>
+              </div>
+              <input class="masker" type="hidden" name="attr_check_checkableruinadvance_9" value="0"/>
+              <div class="checklist2box">
+                <div class="buttons">
+                  <input class="toggle" type="hidden" name="attr_check_checkableruinadvance_9" value="0"/>
+                  <button class="checked" type="action" name="act_unchecklist" value="checkableruinadvance_9"></button>
+                  <button class="unchecked" type="action" name="act_checklist" value="checkableruinadvance_9"></button>
+                </div>
+                <div class="text"><span data-i18n="Retire your character. You become a Harbinger of the apocalypse.">Retire your character. You become a Harbinger of the apocalypse.</span> 
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="wide"><a name="headermoves"></a>
+      <div class="header"><span class="title" data-i18n="Moves">Moves</span> 
+        <input class="toggle" type="hidden" name="attr_expand_moves" value="1"/>
+        <button class="contract hfade" type="action" name="act_contract" value="moves"></button>
+        <button class="expand hfade" type="action" name="act_expand" value="moves"></button>
+      </div>
+      <div class="section">
+        <input class="rollup" type="hidden" name="attr_expand_moves" value="1"/>
+        <div class="section roller">
+          <div class="columns">
+            <div class="sidetab">
+              <input class="toggle" type="hidden" name="attr_expand_movelist" value="1"/>
+              <button class="vcontract hfade" type="action" name="act_contract" value="movelist"></button>
+              <button class="vexpand hfade" type="action" name="act_expand" value="movelist"></button>
+            </div>
+            <input class="rollup" type="hidden" name="attr_expand_movelist" value="1"/>
+            <div class="middling roller">
+              <p></p>
+              <div>
+                <input class="pbselector" type="hidden" name="attr_playbook" value=""/>
+                <div class="pbsummoned">
+                  <input class="view" type="hidden" name="attr_view_pbinstructions" value="1"/>
+                  <div class="viewable"><span data-i18n="Choose one more Playbook Move, then choose either one of your Ruin Moves, or instead take a DIVISION move (make sure everyone knows which one).">Choose one more Playbook Move, then choose either one of your Ruin Moves, or instead take a DIVISION move (make sure everyone knows which one).</span> 
+                    <button class="dismiss colorized" type="action" name="act_unview" value="pbinstructions"></button>
+                  </div>
+                </div>
+                <div class="pbsurge"></div>
+                <div class="pbfound"></div>
+                <div class="pbshade"></div>
+                <div class="pblast"></div>
+                <div class="pbfallen"></div>
+                <div class="pbhungry"></div>
+              </div><a name="headerstarting_playbook_moves"></a>
+              <div class="subheader fixed"><span class="title" data-i18n="Starting Playbook Moves">Starting Playbook Moves</span> 
+              </div>
+              <div class="section">
+                <input class="pbselector" type="hidden" name="attr_playbook" value=""/>
+                <div class="pbsummoned">
+                  <div class="pbsummoned">
+                    <div class="move">
+                      <div class="buttons">
+                        <input class="toggle" type="hidden" name="attr_view_sometimes__i_get_angry" value="0"/><a class="viewable" href="#jumpmove_sometimes__i_get_angry"><span class="icon document"></span></a>
+                        <button class="view colorized" type="action" name="act_view" value="sometimes__i_get_angry"></button>
+                      </div>
+                      <div class="text"><span>
+                          <input class="toggle" type="hidden" name="attr_view_sometimes__i_get_angry" value="0"/><a class="fglink" href="#headersometimes__i_get_angry"><span data-i18n="Sometimes, I Get Angry">Sometimes, I Get Angry</span> </a><span data-i18n="Sometimes, I Get Angry">Sometimes, I Get Angry</span> </span>
+                        <input class="pbunselector" type="hidden" name="attr_playbook" value=""/><br/><span class="pbsummoned pbid">(<span data-i18n="summoned">summoned</span> )</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="pbsurge"></div>
+                <div class="pbfound"></div>
+                <div class="pbshade"></div>
+                <div class="pblast"></div>
+                <div class="pbfallen"></div>
+                <div class="pbhungry"></div>
+              </div><a name="headerplaybook_moves"></a>
+              <div class="subheader"><span class="title" data-i18n="Playbook Moves">Playbook Moves</span> 
+                <input class="toggle" type="hidden" name="attr_check_pbchecked" value="0"/>
+                <button class="checked hfade" type="action" name="act_uncheck" value="pbchecked"></button>
+                <button class="unchecked hfade" type="action" name="act_check" value="pbchecked"></button>
+                <input class="toggle" type="hidden" name="attr_expand_playbook_moves" value="1"/>
+                <button class="contract hfade" type="action" name="act_contract" value="playbook_moves"></button>
+                <button class="expand hfade" type="action" name="act_expand" value="playbook_moves"></button>
+              </div>
+              <div class="section">
+                <input class="rollup" type="hidden" name="attr_expand_playbook_moves" value="1"/>
+                <div class="section roller">
+                  <input class="checksonly" type="hidden" name="attr_check_pbchecked" value="1"/>
+                  <div class="pbsummoned">
+                    <input class="moveselector" type="hidden" name="attr_playbook" value=""/>
+                    <input class="movemark" type="hidden" name="attr_check_come_on__tough_guy" value="0"/>
+                    <div class="pbsummoned">
+                      <input class="checker" type="hidden" name="attr_check_come_on__tough_guy" value="0"/>
+                      <div class="move">
+                        <div class="buttons">
+                          <input class="toggle" type="hidden" name="attr_check_come_on__tough_guy" value="0"/>
+                          <button class="checked colorized" type="action" name="act_uncheck" value="come_on__tough_guy"></button>
+                          <button class="unchecked colorized" type="action" name="act_check" value="come_on__tough_guy"></button>
+                          <input class="toggle" type="hidden" name="attr_view_come_on__tough_guy" value="0"/><a class="viewable" href="#jumpmove_come_on__tough_guy"><span class="icon document"></span></a>
+                          <button class="view colorized" type="action" name="act_view" value="come_on__tough_guy"></button>
+                        </div>
+                        <div class="text"><span>
+                            <input class="toggle" type="hidden" name="attr_view_come_on__tough_guy" value="0"/><a class="fglink" href="#headercome_on__tough_guy"><span data-i18n="Come On, Tough Guy">Come On, Tough Guy</span> </a><span data-i18n="Come On, Tough Guy">Come On, Tough Guy</span> </span>
+                          <input class="pbunselector" type="hidden" name="attr_playbook" value=""/><br/><span class="pbsummoned pbid">(<span data-i18n="summoned">summoned</span> )</span>
+                        </div>
+                      </div>
+                    </div>
+                    <input class="moveselector" type="hidden" name="attr_playbook" value=""/>
+                    <input class="movemark" type="hidden" name="attr_check_borrowed_power" value="0"/>
+                    <div class="pbsummoned">
+                      <input class="checker" type="hidden" name="attr_check_borrowed_power" value="0"/>
+                      <div class="move">
+                        <div class="buttons">
+                          <input class="toggle" type="hidden" name="attr_check_borrowed_power" value="0"/>
+                          <button class="checked colorized" type="action" name="act_uncheck" value="borrowed_power"></button>
+                          <button class="unchecked colorized" type="action" name="act_check" value="borrowed_power"></button>
+                          <input class="toggle" type="hidden" name="attr_view_borrowed_power" value="0"/><a class="viewable" href="#jumpmove_borrowed_power"><span class="icon document"></span></a>
+                          <button class="view colorized" type="action" name="act_view" value="borrowed_power"></button>
+                        </div>
+                        <div class="text"><span>
+                            <input class="toggle" type="hidden" name="attr_view_borrowed_power" value="0"/><a class="fglink" href="#headerborrowed_power"><span data-i18n="Borrowed Power">Borrowed Power</span> </a><span data-i18n="Borrowed Power">Borrowed Power</span> </span>
+                          <input class="pbunselector" type="hidden" name="attr_playbook" value=""/><br/><span class="pbsummoned pbid">(<span data-i18n="summoned">summoned</span> )</span>
+                        </div>
+                      </div>
+                    </div>
+                    <input class="moveselector" type="hidden" name="attr_playbook" value=""/>
+                    <input class="movemark" type="hidden" name="attr_check_we_re_family_now" value="0"/>
+                    <div class="pbsummoned">
+                      <input class="checker" type="hidden" name="attr_check_we_re_family_now" value="0"/>
+                      <div class="move">
+                        <div class="buttons">
+                          <input class="toggle" type="hidden" name="attr_check_we_re_family_now" value="0"/>
+                          <button class="checked colorized" type="action" name="act_uncheck" value="we_re_family_now"></button>
+                          <button class="unchecked colorized" type="action" name="act_check" value="we_re_family_now"></button>
+                          <input class="toggle" type="hidden" name="attr_view_we_re_family_now" value="0"/><a class="viewable" href="#jumpmove_we_re_family_now"><span class="icon document"></span></a>
+                          <button class="view colorized" type="action" name="act_view" value="we_re_family_now"></button>
+                        </div>
+                        <div class="text"><span>
+                            <input class="toggle" type="hidden" name="attr_view_we_re_family_now" value="0"/><a class="fglink" href="#headerwe_re_family_now"><span data-i18n="We’re Family Now">We’re Family Now</span> </a><span data-i18n="We’re Family Now">We’re Family Now</span> </span>
+                          <input class="pbunselector" type="hidden" name="attr_playbook" value=""/><br/><span class="pbsummoned pbid">(<span data-i18n="summoned">summoned</span> )</span>
+                        </div>
+                      </div>
+                    </div>
+                    <input class="moveselector" type="hidden" name="attr_playbook" value=""/>
+                    <input class="movemark" type="hidden" name="attr_check_everything_for_you__my_love" value="0"/>
+                    <div class="pbsummoned">
+                      <input class="checker" type="hidden" name="attr_check_everything_for_you__my_love" value="0"/>
+                      <div class="move">
+                        <div class="buttons">
+                          <input class="toggle" type="hidden" name="attr_check_everything_for_you__my_love" value="0"/>
+                          <button class="checked colorized" type="action" name="act_uncheck" value="everything_for_you__my_love"></button>
+                          <button class="unchecked colorized" type="action" name="act_check" value="everything_for_you__my_love"></button>
+                          <input class="toggle" type="hidden" name="attr_view_everything_for_you__my_love" value="0"/><a class="viewable" href="#jumpmove_everything_for_you__my_love"><span class="icon document"></span></a>
+                          <button class="view colorized" type="action" name="act_view" value="everything_for_you__my_love"></button>
+                        </div>
+                        <div class="text"><span>
+                            <input class="toggle" type="hidden" name="attr_view_everything_for_you__my_love" value="0"/><a class="fglink" href="#headereverything_for_you__my_love"><span data-i18n="Everything For You, My Love">Everything For You, My Love</span> </a><span data-i18n="Everything For You, My Love">Everything For You, My Love</span> </span>
+                          <input class="pbunselector" type="hidden" name="attr_playbook" value=""/><br/><span class="pbsummoned pbid">(<span data-i18n="summoned">summoned</span> )</span>
+                        </div>
+                      </div>
+                    </div>
+                    <input class="moveselector" type="hidden" name="attr_playbook" value=""/>
+                    <input class="movemark" type="hidden" name="attr_check_together_we_are_destiny" value="0"/>
+                    <div class="pbsummoned">
+                      <input class="checker" type="hidden" name="attr_check_together_we_are_destiny" value="0"/>
+                      <div class="move">
+                        <div class="buttons">
+                          <input class="toggle" type="hidden" name="attr_check_together_we_are_destiny" value="0"/>
+                          <button class="checked colorized" type="action" name="act_uncheck" value="together_we_are_destiny"></button>
+                          <button class="unchecked colorized" type="action" name="act_check" value="together_we_are_destiny"></button>
+                          <input class="toggle" type="hidden" name="attr_view_together_we_are_destiny" value="0"/><a class="viewable" href="#jumpmove_together_we_are_destiny"><span class="icon document"></span></a>
+                          <button class="view colorized" type="action" name="act_view" value="together_we_are_destiny"></button>
+                        </div>
+                        <div class="text"><span>
+                            <input class="toggle" type="hidden" name="attr_view_together_we_are_destiny" value="0"/><a class="fglink" href="#headertogether_we_are_destiny"><span data-i18n="Together We Are Destiny">Together We Are Destiny</span> </a><span data-i18n="Together We Are Destiny">Together We Are Destiny</span> </span>
+                          <input class="pbunselector" type="hidden" name="attr_playbook" value=""/><br/><span class="pbsummoned pbid">(<span data-i18n="summoned">summoned</span> )</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="pbsurge"></div>
+                  <div class="pbfound"></div>
+                  <div class="pbshade"></div>
+                  <div class="pblast"></div>
+                  <div class="pbfallen"></div>
+                  <div class="pbhungry"></div>
+                </div>
+              </div><a name="headerruin_moves"></a>
+              <div class="subheader"><span class="title" data-i18n="Ruin Moves">Ruin Moves</span> 
+                <input class="toggle" type="hidden" name="attr_expand_ruin_moves" value="1"/>
+                <button class="contract hfade" type="action" name="act_contract" value="ruin_moves"></button>
+                <button class="expand hfade" type="action" name="act_expand" value="ruin_moves"></button>
+              </div>
+              <div class="section">
+                <input class="rollup" type="hidden" name="attr_expand_ruin_moves" value="1"/>
+                <div class="section roller">
+                  <input class="checksonly" type="hidden" name="attr_check_pbchecked" value="1"/>
+                  <div class="pbsummoned"></div>
+                  <div class="pbsurge"></div>
+                  <div class="pbfound"></div>
+                  <div class="pbshade"></div>
+                  <div class="pblast"></div>
+                  <div class="pbfallen"></div>
+                  <div class="pbhungry"></div>
+                </div>
+              </div><a name="headerdivision_moves"></a>
+              <div class="subheader"><span class="title" data-i18n="DIVISION Moves">DIVISION Moves</span> 
+                <input class="toggle" type="hidden" name="attr_expand_division_moves" value="1"/>
+                <button class="contract hfade" type="action" name="act_contract" value="division_moves"></button>
+                <button class="expand hfade" type="action" name="act_expand" value="division_moves"></button>
+              </div>
+              <div class="section">
+                <input class="rollup" type="hidden" name="attr_expand_division_moves" value="1"/>
+                <div class="section roller">
+                </div>
+              </div><a name="headerbasic_moves"></a>
+              <div class="subheader"><span class="title" data-i18n="Basic Moves">Basic Moves</span> 
+                <input class="toggle" type="hidden" name="attr_expand_basic_moves" value="1"/>
+                <button class="contract hfade" type="action" name="act_contract" value="basic_moves"></button>
+                <button class="expand hfade" type="action" name="act_expand" value="basic_moves"></button>
+              </div>
+              <div class="section">
+                <input class="rollup" type="hidden" name="attr_expand_basic_moves" value="1"/>
+                <div class="section roller">
+                </div>
+              </div>
+            </div>
+            <div class="wide">
+              <!-- Display of *these* moves is strictly governed by the sheet worker!-->
+              <div class="section"><a name="jumpmove_sometimes__i_get_angry"></a>
+                <input class="view" type="hidden" name="attr_view_sometimes__i_get_angry" value="0"/>
+                <div class="viewable"><a name="headersometimes__i_get_angry"></a>
+                  <div class="subheader"><span class="title" data-i18n="Sometimes, I Get Angry">Sometimes, I Get Angry</span> 
+                    <button class="dismiss hfade" type="action" name="act_unview" value="sometimes__i_get_angry"></button>&nbsp;
+                    <input class="toggle" type="hidden" name="attr_expand_sometimes__i_get_angry" value="1"/>
+                    <button class="contract hfade" type="action" name="act_contract" value="sometimes__i_get_angry"></button>
+                    <button class="expand hfade" type="action" name="act_expand" value="sometimes__i_get_angry"></button>
+                  </div>
+                  <div class="section">
+                    <input class="rollup" type="hidden" name="attr_expand_sometimes__i_get_angry" value="1"/>
+                    <div class="section roller">
+                      <p><span class="trigger"><span data-i18n="When you">When you</span> <span>
+                            <input class="toggle" type="hidden" name="attr_view_unleash_the_dark" value="0"/><a class="icon document" href="#headerunleash_the_dark"><span class="movename bold" data-i18n="Unleash the Dark">Unleash the Dark</span> </a><span class="movename bold term" data-i18n="Unleash the Dark">Unleash the Dark</span> </span><span data-i18n="through anger and violence,">through anger and violence,</span> </span><span data-i18n="take">take</span> 
+                        <button class="enact colorized" type="action" name="act_adddark" value="3"><span class="bold">3&nbsp;</span><span class="bold" data-i18n="Darkness Tokens">Darkness Tokens</span> 
+                        </button> <span data-i18n="before doing so.">before doing so.</span> 
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="section"><a name="jumpmove_come_on__tough_guy"></a>
+                <input class="view" type="hidden" name="attr_view_come_on__tough_guy" value="0"/>
+                <div class="viewable"><a name="headercome_on__tough_guy"></a>
+                  <div class="subheader">
+                    <input class="toggle" type="hidden" name="attr_check_come_on__tough_guy" value="0"/>
+                    <button class="checked hfade" type="action" name="act_uncheck" value="come_on__tough_guy"></button>
+                    <button class="unchecked hfade" type="action" name="act_check" value="come_on__tough_guy"></button><span class="title" data-i18n="Come On, Tough Guy">Come On, Tough Guy</span> 
+                    <button class="dismiss hfade" type="action" name="act_unview" value="come_on__tough_guy"></button>&nbsp;
+                    <input class="toggle" type="hidden" name="attr_expand_come_on__tough_guy" value="1"/>
+                    <button class="contract hfade" type="action" name="act_contract" value="come_on__tough_guy"></button>
+                    <button class="expand hfade" type="action" name="act_expand" value="come_on__tough_guy"></button>
+                  </div>
+                  <div class="section">
+                    <input class="rollup" type="hidden" name="attr_expand_come_on__tough_guy" value="1"/>
+                    <div class="section roller">
+                      <p><span class="trigger" data-i18n="When you go up against a colossal and otherworldly opponent,">When you go up against a colossal and otherworldly opponent,</span> <span data-i18n="tell everyone how you taunt them and keep their attention. Spend Darkness Tokens and roll.">tell everyone how you taunt them and keep their attention. Spend Darkness Tokens and roll.</span> 
+                        <div class="rollspend">
+                          <div class="titlebar">
+                            <input class="toggle" type="hidden" name="attr_expand_rolldark2" value="0"/>
+                            <button class="contract" type="action" name="act_contract" value="rolldark2">&nbsp;&nbsp;&nbsp;&nbsp;<span class="bold" data-i18n="Spend and Roll">Spend and Roll</span> 
+                            </button>
+                            <button class="expand" type="action" name="act_expand" value="rolldark2">&nbsp;&nbsp;&nbsp;&nbsp;<span class="bold" data-i18n="Spend and Roll">Spend and Roll</span> 
+                            </button>
+                          </div>
+                          <input class="rollup" type="hidden" name="attr_expand_rolldark2" value="0"/>
+                          <div class="roller">
+                            <div>
+                              <button class="dice" type="action" name="act_rolldicedark" value="Come On, Tough Guy"></button>
+                              +
+                              <input class="narrower" name="attr_darkness_spend" value="0" min="0" max="3" type="number"/><span class="footnote"><span data-i18n="(max 3)">(max 3)</span> </span>
+                              <button class="dice" type="action" name="act_rolldicedark" value="Come On, Tough Guy"></button>
+                            </div>
+                            <input class="toggle" type="hidden" name="attr_view_recent_roll" value="0"/>
+                            <div class="viewable">
+                              <button class="dismiss" type="action" name="act_unview" value="recent_roll"></button>
+                              <input type="hidden" name="attr_recent_roll" value=""/>
+                              <input type="hidden" name="attr_recent_roll_result" value=""/><span data-i18n="Last roll">Last roll</span> (<span name="attr_recent_roll"></span>) = 
+                               <span name="attr_recent_roll_result"></span>
+                              <div>
+                                <input class="spacetoggle" type="hidden" name="attr_expand_roll_bonds" value="1"/>
+                                <div class="titlebar subtitle">
+                                  <input class="toggle" type="hidden" name="attr_expand_roll_bonds" value="1"/>
+                                  <button class="contract" type="action" name="act_contract" value="roll_bonds">&nbsp;&nbsp;<span class="bold" data-i18n="Spend bonds?">Spend bonds?</span> 
+                                  </button>
+                                  <button class="expand" type="action" name="act_expand" value="roll_bonds">&nbsp;&nbsp;<span class="bold" data-i18n="Spend bonds?">Spend bonds?</span> 
+                                  </button>
+                                </div>
+                                <div>
+                                  <input class="rollup" type="hidden" name="attr_expand_roll_bonds" value="1"/>
+                                  <div class="roller">
+                                    <div class="bondspend footnote">
+                                      <fieldset class="repeating_bonds">
+                                        <div class="spendline">( + or – )
+                                          <input type="hidden" name="attr_points"/>
+                                          <input type="hidden" name="attr_bondname"/>
+                                          <input class="narrower footnote" type="number" name="attr_spend" value="0"/>(<span name="attr_points"></span>)  <span name="attr_bondname"></span>
+                                        </div>
+                                      </fieldset>
+                                    </div>
+                                    <input type="hidden" name="attr_bond_mod_summary"/>
+                                    <input class="nullview" type="hidden" name="attr_bond_mod"/>
+                                    <div class="viewable">
+                                      <button class="dice bold topspace" type="action" name="act_spendbonds" value="Come On, Tough Guy"><span data-i18n="Spend:">Spend:</span> <span name="attr_bond_mod_summary"></span>
+                                      </button>
+                                      <div><span class="footnote" data-i18n="Once you commit to the adjustment, bonds will be reduced and the adjusted roll displayed in chat.">Once you commit to the adjustment, bonds will be reduced and the adjusted roll displayed in chat.</span> 
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="footnote">
+                              <input name="attr_darkness_tokens" type="hidden"/><span name="attr_darkness_tokens"></span> <span data-i18n="Darkness Tokens currently available.">Darkness Tokens currently available.</span> <br/><span data-i18n="Enter the amount to spend and click the dice.">Enter the amount to spend and click the dice.</span> 
+                            </div>
+                          </div>
+                        </div>
+                      </p>
+                      <p><span class="result" data-i18n="On an 8-10">On an 8-10</span> <span class="bold" data-i18n="you’ve got ‘em just where you want them.">you’ve got ‘em just where you want them.</span> <span data-i18n="Choose two:">Choose two:</span> 
+                        <ul>
+                          <li><span data-i18n="You give your allies a golden opportunity, choose one ally to gain">You give your allies a golden opportunity, choose one ally to gain</span> <span class="bold term" data-i18n="1 Bond">1 Bond</span> <span data-i18n="with you">with you</span> 
+                          </li>
+                          <li><span data-i18n="Uncover">Uncover</span> <span class="bold term" data-i18n="a Key">a Key</span> <span data-i18n="at great cost">at great cost</span> 
+                          </li>
+                          <li><span data-i18n="Inflict">Inflict</span> <span class="bold term" data-i18n="2 Conditions">2 Conditions</span> <span data-i18n="on them, but">on them, but</span> <a href="#headerconditions"><span data-i18n="take one">take one</span> </a><span data-i18n="in return">in return</span> 
+                          </li>
+                        </ul>
+                      </p>
+                      <p><span class="result" data-i18n="On an 11+">On an 11+</span> <span class="bold" data-i18n="you’re locked in an intense battle">you’re locked in an intense battle</span> <span data-i18n="and you cannot stop until your opponent is destroyed. Choose one from above, and you can only pull back if a player agrees to spend">and you cannot stop until your opponent is destroyed. Choose one from above, and you can only pull back if a player agrees to spend</span> <span class="bold term" data-i18n="1 Bond">1 Bond</span> <span data-i18n="to reach past your rage. If they don’t spend the Bond, you cannot stop fighting until your opponent is destroyed.">to reach past your rage. If they don’t spend the Bond, you cannot stop fighting until your opponent is destroyed.</span> 
+                      </p>
+                      <p><span class="result" data-i18n="On a 7-">On a 7-</span> <span class="bold" data-i18n="your power overwhelms you,">your power overwhelms you,</span> <span data-i18n="and you take on a colossal form as your prophecy comes to bear and leaves a permanent mark on you. The Keeper will tell you what happens next.">and you take on a colossal form as your prophecy comes to bear and leaves a permanent mark on you. The Keeper will tell you what happens next.</span> 
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="section"><a name="jumpmove_borrowed_power"></a>
+                <input class="view" type="hidden" name="attr_view_borrowed_power" value="0"/>
+                <div class="viewable"><a name="headerborrowed_power"></a>
+                  <div class="subheader">
+                    <input class="toggle" type="hidden" name="attr_check_borrowed_power" value="0"/>
+                    <button class="checked hfade" type="action" name="act_uncheck" value="borrowed_power"></button>
+                    <button class="unchecked hfade" type="action" name="act_check" value="borrowed_power"></button><span class="title" data-i18n="Borrowed Power">Borrowed Power</span> 
+                    <button class="dismiss hfade" type="action" name="act_unview" value="borrowed_power"></button>&nbsp;
+                    <input class="toggle" type="hidden" name="attr_expand_borrowed_power" value="1"/>
+                    <button class="contract hfade" type="action" name="act_contract" value="borrowed_power"></button>
+                    <button class="expand hfade" type="action" name="act_expand" value="borrowed_power"></button>
+                  </div>
+                  <div class="section">
+                    <input class="rollup" type="hidden" name="attr_expand_borrowed_power" value="1"/>
+                    <div class="section roller">
+                      <p><span data-i18n="Along the walls of the world beings of twisted power await your bidding.">Along the walls of the world beings of twisted power await your bidding.</span> 
+                      </p>
+                      <p><span class="trigger" data-i18n="When you summon a creature from another world to help you,">When you summon a creature from another world to help you,</span> <span data-i18n="spend Darkness Tokens and roll.">spend Darkness Tokens and roll.</span> 
+                        <div class="rollspend">
+                          <div class="titlebar">
+                            <input class="toggle" type="hidden" name="attr_expand_rolldark3" value="0"/>
+                            <button class="contract" type="action" name="act_contract" value="rolldark3">&nbsp;&nbsp;&nbsp;&nbsp;<span class="bold" data-i18n="Spend and Roll">Spend and Roll</span> 
+                            </button>
+                            <button class="expand" type="action" name="act_expand" value="rolldark3">&nbsp;&nbsp;&nbsp;&nbsp;<span class="bold" data-i18n="Spend and Roll">Spend and Roll</span> 
+                            </button>
+                          </div>
+                          <input class="rollup" type="hidden" name="attr_expand_rolldark3" value="0"/>
+                          <div class="roller">
+                            <div>
+                              <button class="dice" type="action" name="act_rolldicedark" value="Borrowed Power"></button>
+                              +
+                              <input class="narrower" name="attr_darkness_spend" value="0" min="0" max="3" type="number"/><span class="footnote"><span data-i18n="(max 3)">(max 3)</span> </span>
+                              <button class="dice" type="action" name="act_rolldicedark" value="Borrowed Power"></button>
+                            </div>
+                            <input class="toggle" type="hidden" name="attr_view_recent_roll" value="0"/>
+                            <div class="viewable">
+                              <button class="dismiss" type="action" name="act_unview" value="recent_roll"></button>
+                              <input type="hidden" name="attr_recent_roll" value=""/>
+                              <input type="hidden" name="attr_recent_roll_result" value=""/><span data-i18n="Last roll">Last roll</span> (<span name="attr_recent_roll"></span>) = 
+                               <span name="attr_recent_roll_result"></span>
+                              <div>
+                                <input class="spacetoggle" type="hidden" name="attr_expand_roll_bonds" value="1"/>
+                                <div class="titlebar subtitle">
+                                  <input class="toggle" type="hidden" name="attr_expand_roll_bonds" value="1"/>
+                                  <button class="contract" type="action" name="act_contract" value="roll_bonds">&nbsp;&nbsp;<span class="bold" data-i18n="Spend bonds?">Spend bonds?</span> 
+                                  </button>
+                                  <button class="expand" type="action" name="act_expand" value="roll_bonds">&nbsp;&nbsp;<span class="bold" data-i18n="Spend bonds?">Spend bonds?</span> 
+                                  </button>
+                                </div>
+                                <div>
+                                  <input class="rollup" type="hidden" name="attr_expand_roll_bonds" value="1"/>
+                                  <div class="roller">
+                                    <div class="bondspend footnote">
+                                      <fieldset class="repeating_bonds">
+                                        <div class="spendline">( + or – )
+                                          <input type="hidden" name="attr_points"/>
+                                          <input type="hidden" name="attr_bondname"/>
+                                          <input class="narrower footnote" type="number" name="attr_spend" value="0"/>(<span name="attr_points"></span>)  <span name="attr_bondname"></span>
+                                        </div>
+                                      </fieldset>
+                                    </div>
+                                    <input type="hidden" name="attr_bond_mod_summary"/>
+                                    <input class="nullview" type="hidden" name="attr_bond_mod"/>
+                                    <div class="viewable">
+                                      <button class="dice bold topspace" type="action" name="act_spendbonds" value="Borrowed Power"><span data-i18n="Spend:">Spend:</span> <span name="attr_bond_mod_summary"></span>
+                                      </button>
+                                      <div><span class="footnote" data-i18n="Once you commit to the adjustment, bonds will be reduced and the adjusted roll displayed in chat.">Once you commit to the adjustment, bonds will be reduced and the adjusted roll displayed in chat.</span> 
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="footnote">
+                              <input name="attr_darkness_tokens" type="hidden"/><span name="attr_darkness_tokens"></span> <span data-i18n="Darkness Tokens currently available.">Darkness Tokens currently available.</span> <br/><span data-i18n="Enter the amount to spend and click the dice.">Enter the amount to spend and click the dice.</span> 
+                            </div>
+                          </div>
+                        </div>
+                      </p>
+                      <p><span class="result" data-i18n="On an 8-10">On an 8-10</span> <span class="bold" data-i18n="the summoning wards hold and you have the upper hand for now.">the summoning wards hold and you have the upper hand for now.</span> <span data-i18n="Choose one:">Choose one:</span> 
+                        <ul>
+                          <li><span data-i18n="The summoned creature is fire and rage, violence and storm. They will destroy a vulnerable target before the summoning unravels.">The summoned creature is fire and rage, violence and storm. They will destroy a vulnerable target before the summoning unravels.</span> 
+                          </li>
+                          <li><span data-i18n="The summoned creature will answer any one question truthfully, take">The summoned creature will answer any one question truthfully, take</span> <a class="bold term" href="#headerbonds"><span data-i18n="1 Bond">1 Bond</span> </a><span data-i18n="with What the Darkness Demands of You.">with What the Darkness Demands of You.</span> 
+                          </li>
+                          <li><span data-i18n="The summoned creature will uncover">The summoned creature will uncover</span> <span class="bold term" data-i18n="a Key">a Key</span> <span data-i18n="for you, at great cost to you. It shares an ominous warning before it fades away.">for you, at great cost to you. It shares an ominous warning before it fades away.</span> 
+                          </li>
+                        </ul>
+                      </p>
+                      <p><span class="result" data-i18n="On an 11+">On an 11+</span> <span class="bold" data-i18n="you barely have this creature under control, it will do as you command but the wards will shatter soon after.">you barely have this creature under control, it will do as you command but the wards will shatter soon after.</span> <span data-i18n="Choose:">Choose:</span> 
+                        <ul>
+                          <li><span data-i18n="Choose one from above, but you have to exert your will and banish the creature before it can wreak havoc. Mark">Choose one from above, but you have to exert your will and banish the creature before it can wreak havoc. Mark</span> <a class="bold term" href="#headerconditions"><span data-i18n="1 Condition">1 Condition</span> </a><span data-i18n="or">or</span> 
+                            <button class="enact colorized" type="action" name="act_addruin" value="1"><span class="bold">1&nbsp;</span><span class="bold" data-i18n="Ruin">Ruin</span> 
+                            </button> 
+                          </li>
+                          <li><span data-i18n="Choose one from above, but the creature will escape into the world and be forever free of your control. Gain">Choose one from above, but the creature will escape into the world and be forever free of your control. Gain</span> <a class="bold term" href="#headerbonds"><span data-i18n="1 Bond">1 Bond</span> </a><span data-i18n="with What the Darkness Demands of You.">with What the Darkness Demands of You.</span> 
+                          </li>
+                        </ul>
+                      </p>
+                      <p><span class="result" data-i18n="On a 7-">On a 7-</span> <span class="bold" data-i18n="something powerful and sinister hijacks the summoning and comes through,">something powerful and sinister hijacks the summoning and comes through,</span> <span data-i18n="with no summoning wards to control it. The forbidden comes through. The Keeper will tell you what happens next.">with no summoning wards to control it. The forbidden comes through. The Keeper will tell you what happens next.</span> 
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="section"><a name="jumpmove_we_re_family_now"></a>
+                <input class="view" type="hidden" name="attr_view_we_re_family_now" value="0"/>
+                <div class="viewable"><a name="headerwe_re_family_now"></a>
+                  <div class="subheader">
+                    <input class="toggle" type="hidden" name="attr_check_we_re_family_now" value="0"/>
+                    <button class="checked hfade" type="action" name="act_uncheck" value="we_re_family_now"></button>
+                    <button class="unchecked hfade" type="action" name="act_check" value="we_re_family_now"></button><span class="title" data-i18n="We’re Family Now">We’re Family Now</span> 
+                    <button class="dismiss hfade" type="action" name="act_unview" value="we_re_family_now"></button>&nbsp;
+                    <input class="toggle" type="hidden" name="attr_expand_we_re_family_now" value="1"/>
+                    <button class="contract hfade" type="action" name="act_contract" value="we_re_family_now"></button>
+                    <button class="expand hfade" type="action" name="act_expand" value="we_re_family_now"></button>
+                  </div>
+                  <div class="section">
+                    <input class="rollup" type="hidden" name="attr_expand_we_re_family_now" value="1"/>
+                    <div class="section roller">
+                      <p><span class="trigger" data-i18n="When someone spends">When someone spends</span> <span class="bold term" data-i18n="a Bond">a Bond</span> <span class="trigger" data-i18n="with you to modify a roll by +1 or -1,">with you to modify a roll by +1 or -1,</span> <span data-i18n="they choose:">they choose:</span> 
+                        <ul>
+                          <li><span data-i18n="The Bond instead grants +3 or a -3 bonus">The Bond instead grants +3 or a -3 bonus</span> 
+                          </li>
+                          <li><span data-i18n="You gain">You gain</span> <a class="bold term" href="#headerbonds"><span data-i18n="a new Bond">a new Bond</span> </a><span data-i18n="with them afterwards">with them afterwards</span> 
+                          </li>
+                        </ul>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="section"><a name="jumpmove_everything_for_you__my_love"></a>
+                <input class="view" type="hidden" name="attr_view_everything_for_you__my_love" value="0"/>
+                <div class="viewable"><a name="headereverything_for_you__my_love"></a>
+                  <div class="subheader">
+                    <input class="toggle" type="hidden" name="attr_check_everything_for_you__my_love" value="0"/>
+                    <button class="checked hfade" type="action" name="act_uncheck" value="everything_for_you__my_love"></button>
+                    <button class="unchecked hfade" type="action" name="act_check" value="everything_for_you__my_love"></button><span class="title" data-i18n="Everything For You, My Love">Everything For You, My Love</span> 
+                    <button class="dismiss hfade" type="action" name="act_unview" value="everything_for_you__my_love"></button>&nbsp;
+                    <input class="toggle" type="hidden" name="attr_expand_everything_for_you__my_love" value="1"/>
+                    <button class="contract hfade" type="action" name="act_contract" value="everything_for_you__my_love"></button>
+                    <button class="expand hfade" type="action" name="act_expand" value="everything_for_you__my_love"></button>
+                  </div>
+                  <div class="section">
+                    <input class="rollup" type="hidden" name="attr_expand_everything_for_you__my_love" value="1"/>
+                    <div class="section roller">
+                      <p><span class="trigger" data-i18n="When you are about to mark your fifth box of Ruin,">When you are about to mark your fifth box of Ruin,</span> <span class="bold" data-i18n="you may choose to declare your love for the first time, or describe how love has changed you.">you may choose to declare your love for the first time, or describe how love has changed you.</span> <span data-i18n="Tell everyone how you bare your heart for all to see, spend Darkness Tokens and roll.">Tell everyone how you bare your heart for all to see, spend Darkness Tokens and roll.</span> 
+                        <div class="rollspend">
+                          <div class="titlebar">
+                            <input class="toggle" type="hidden" name="attr_expand_rolldark4" value="0"/>
+                            <button class="contract" type="action" name="act_contract" value="rolldark4">&nbsp;&nbsp;&nbsp;&nbsp;<span class="bold" data-i18n="Spend and Roll">Spend and Roll</span> 
+                            </button>
+                            <button class="expand" type="action" name="act_expand" value="rolldark4">&nbsp;&nbsp;&nbsp;&nbsp;<span class="bold" data-i18n="Spend and Roll">Spend and Roll</span> 
+                            </button>
+                          </div>
+                          <input class="rollup" type="hidden" name="attr_expand_rolldark4" value="0"/>
+                          <div class="roller">
+                            <div>
+                              <button class="dice" type="action" name="act_rolldicedark" value="Everything For You, My Love"></button>
+                              +
+                              <input class="narrower" name="attr_darkness_spend" value="0" min="0" max="3" type="number"/><span class="footnote"><span data-i18n="(max 3)">(max 3)</span> </span>
+                              <button class="dice" type="action" name="act_rolldicedark" value="Everything For You, My Love"></button>
+                            </div>
+                            <input class="toggle" type="hidden" name="attr_view_recent_roll" value="0"/>
+                            <div class="viewable">
+                              <button class="dismiss" type="action" name="act_unview" value="recent_roll"></button>
+                              <input type="hidden" name="attr_recent_roll" value=""/>
+                              <input type="hidden" name="attr_recent_roll_result" value=""/><span data-i18n="Last roll">Last roll</span> (<span name="attr_recent_roll"></span>) = 
+                               <span name="attr_recent_roll_result"></span>
+                              <div>
+                                <input class="spacetoggle" type="hidden" name="attr_expand_roll_bonds" value="1"/>
+                                <div class="titlebar subtitle">
+                                  <input class="toggle" type="hidden" name="attr_expand_roll_bonds" value="1"/>
+                                  <button class="contract" type="action" name="act_contract" value="roll_bonds">&nbsp;&nbsp;<span class="bold" data-i18n="Spend bonds?">Spend bonds?</span> 
+                                  </button>
+                                  <button class="expand" type="action" name="act_expand" value="roll_bonds">&nbsp;&nbsp;<span class="bold" data-i18n="Spend bonds?">Spend bonds?</span> 
+                                  </button>
+                                </div>
+                                <div>
+                                  <input class="rollup" type="hidden" name="attr_expand_roll_bonds" value="1"/>
+                                  <div class="roller">
+                                    <div class="bondspend footnote">
+                                      <fieldset class="repeating_bonds">
+                                        <div class="spendline">( + or – )
+                                          <input type="hidden" name="attr_points"/>
+                                          <input type="hidden" name="attr_bondname"/>
+                                          <input class="narrower footnote" type="number" name="attr_spend" value="0"/>(<span name="attr_points"></span>)  <span name="attr_bondname"></span>
+                                        </div>
+                                      </fieldset>
+                                    </div>
+                                    <input type="hidden" name="attr_bond_mod_summary"/>
+                                    <input class="nullview" type="hidden" name="attr_bond_mod"/>
+                                    <div class="viewable">
+                                      <button class="dice bold topspace" type="action" name="act_spendbonds" value="Everything For You, My Love"><span data-i18n="Spend:">Spend:</span> <span name="attr_bond_mod_summary"></span>
+                                      </button>
+                                      <div><span class="footnote" data-i18n="Once you commit to the adjustment, bonds will be reduced and the adjusted roll displayed in chat.">Once you commit to the adjustment, bonds will be reduced and the adjusted roll displayed in chat.</span> 
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="footnote">
+                              <input name="attr_darkness_tokens" type="hidden"/><span name="attr_darkness_tokens"></span> <span data-i18n="Darkness Tokens currently available.">Darkness Tokens currently available.</span> <br/><span data-i18n="Enter the amount to spend and click the dice.">Enter the amount to spend and click the dice.</span> 
+                            </div>
+                          </div>
+                        </div>
+                      </p>
+                      <p><span class="result" data-i18n="On an 8-10">On an 8-10</span> <span class="bold" data-i18n="you hold back the Harbinger within you and your heart shines through.">you hold back the Harbinger within you and your heart shines through.</span> 
+                        <button class="enact colorized" type="action" name="act_spendruin" value="99"><span data-i18n="Erase your Ruin track">Erase your Ruin track</span> 
+                        </button> <span data-i18n="and your love gains">and your love gains</span> <span class="bold term" data-i18n="1 Bond">1 Bond</span> <span data-i18n="with you.">with you.</span> 
+                      </p>
+                      <p><span class="result" data-i18n="On an 11+">On an 11+</span> <span class="bold" data-i18n="you further entangle your beloved in your prophecy.">you further entangle your beloved in your prophecy.</span> <span data-i18n="If your beloved accepts your love and the burden of your prophecy,">If your beloved accepts your love and the burden of your prophecy,</span> 
+                        <button class="enact colorized" type="action" name="act_spendruin" value="99"><span data-i18n="erase your Ruin track.">erase your Ruin track.</span> 
+                        </button> <span data-i18n="If they respond otherwise, or not at all, take that as a sign of rejection. Erase">If they respond otherwise, or not at all, take that as a sign of rejection. Erase</span> 
+                        <button class="enact colorized" type="action" name="act_spendruin" value="1"><span class="bold">1&nbsp;</span><span class="bold" data-i18n="Ruin">Ruin</span> 
+                        </button> <span data-i18n="and gain">and gain</span> <a class="bold term" href="#headerbonds"><span data-i18n="1 Bond">1 Bond</span> </a><span data-i18n="with What the Darkness Demands of You.">with What the Darkness Demands of You.</span> 
+                      </p>
+                      <p><span class="result" data-i18n="On a 7-">On a 7-</span> <span class="bold" data-i18n="the Harbinger is unleashed and turns on the one you love,">the Harbinger is unleashed and turns on the one you love,</span> <span data-i18n="the Keeper will tell you what happens next.">the Keeper will tell you what happens next.</span> 
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="section"><a name="jumpmove_together_we_are_destiny"></a>
+                <input class="view" type="hidden" name="attr_view_together_we_are_destiny" value="0"/>
+                <div class="viewable"><a name="headertogether_we_are_destiny"></a>
+                  <div class="subheader">
+                    <input class="toggle" type="hidden" name="attr_check_together_we_are_destiny" value="0"/>
+                    <button class="checked hfade" type="action" name="act_uncheck" value="together_we_are_destiny"></button>
+                    <button class="unchecked hfade" type="action" name="act_check" value="together_we_are_destiny"></button><span class="title" data-i18n="Together We Are Destiny">Together We Are Destiny</span> 
+                    <button class="dismiss hfade" type="action" name="act_unview" value="together_we_are_destiny"></button>&nbsp;
+                    <input class="toggle" type="hidden" name="attr_expand_together_we_are_destiny" value="1"/>
+                    <button class="contract hfade" type="action" name="act_contract" value="together_we_are_destiny"></button>
+                    <button class="expand hfade" type="action" name="act_expand" value="together_we_are_destiny"></button>
+                  </div>
+                  <div class="section">
+                    <input class="rollup" type="hidden" name="attr_expand_together_we_are_destiny" value="1"/>
+                    <div class="section roller">
+                      <p><span class="trigger" data-i18n="When you seek to defy your prophecy,">When you seek to defy your prophecy,</span> <span class="bold" data-i18n="declare a new destiny.">declare a new destiny.</span> <span data-i18n="Ask each other player if they will defy prophecy with you. Roll, adding +1 for each player who says yes, to a maximum of +3. You cannot spend Darkness Tokens on this roll.">Ask each other player if they will defy prophecy with you. Roll, adding +1 for each player who says yes, to a maximum of +3. You cannot spend Darkness Tokens on this roll.</span> 
+                        <div class="rollspend">
+                          <div class="titlebar">
+                            <input class="toggle" type="hidden" name="attr_expand_rollcustom1" value="0"/>
+                            <button class="contract" type="action" name="act_contract" value="rollcustom1">&nbsp;&nbsp;<span class="bold" data-i18n="Custom Roll">Custom Roll</span> 
+                            </button>
+                            <button class="expand" type="action" name="act_expand" value="rollcustom1">&nbsp;&nbsp;<span class="bold" data-i18n="Custom Roll">Custom Roll</span> 
+                            </button>
+                          </div>
+                          <input class="rollup" type="hidden" name="attr_expand_rollcustom1" value="0"/>
+                          <div class="roller">
+                            <div>
+                              <button class="dice" type="action" name="act_rolldicecustom" value="Together We Are Destiny"></button>
+                              +
+                              <input class="narrower" name="attr_custom_bonus" value="0" min="0" max="3" type="number"/><span class="footnote"><span data-i18n="(max 3)">(max 3)</span> </span>
+                            </div>
+                            <input class="view" type="hidden" name="attr_view_recent_roll" value="0"/>
+                            <div class="viewable">
+                              <button class="dismiss" type="action" name="act_unview" value="recent_roll"></button>
+                              <input type="hidden" name="attr_recent_roll" value=""/>
+                              <input type="hidden" name="attr_recent_roll_result" value=""/><span data-i18n="Last roll">Last roll</span> (<span name="attr_recent_roll"></span>) = 
+                               <span name="attr_recent_roll_result"></span>
+                              <div>
+                                <input class="spacetoggle" type="hidden" name="attr_expand_roll_bonds" value="1"/>
+                                <div class="titlebar subtitle">
+                                  <input class="toggle" type="hidden" name="attr_expand_roll_bonds" value="1"/>
+                                  <button class="contract" type="action" name="act_contract" value="roll_bonds">&nbsp;&nbsp;<span class="bold" data-i18n="Spend bonds?">Spend bonds?</span> 
+                                  </button>
+                                  <button class="expand" type="action" name="act_expand" value="roll_bonds">&nbsp;&nbsp;<span class="bold" data-i18n="Spend bonds?">Spend bonds?</span> 
+                                  </button>
+                                </div>
+                                <div>
+                                  <input class="rollup" type="hidden" name="attr_expand_roll_bonds" value="1"/>
+                                  <div class="roller">
+                                    <div class="bondspend footnote">
+                                      <fieldset class="repeating_bonds">
+                                        <div class="spendline">( + or – )
+                                          <input type="hidden" name="attr_points"/>
+                                          <input type="hidden" name="attr_bondname"/>
+                                          <input class="narrower footnote" type="number" name="attr_spend" value="0"/>(<span name="attr_points"></span>)  <span name="attr_bondname"></span>
+                                        </div>
+                                      </fieldset>
+                                    </div>
+                                    <input type="hidden" name="attr_bond_mod_summary"/>
+                                    <input class="nullview" type="hidden" name="attr_bond_mod"/>
+                                    <div class="viewable">
+                                      <button class="dice bold topspace" type="action" name="act_spendbonds" value="Together We Are Destiny"><span data-i18n="Spend:">Spend:</span> <span name="attr_bond_mod_summary"></span>
+                                      </button>
+                                      <div><span class="footnote" data-i18n="Once you commit to the adjustment, bonds will be reduced and the adjusted roll displayed in chat.">Once you commit to the adjustment, bonds will be reduced and the adjusted roll displayed in chat.</span> 
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </p>
+                      <p><span class="result" data-i18n="On an 8-10">On an 8-10</span> <span class="bold" data-i18n="the prophecy weakens its hold on you for now,">the prophecy weakens its hold on you for now,</span> <span data-i18n="choose two:">choose two:</span> 
+                        <ul>
+                          <li><span data-i18n="Declare a new truth about your prophecy">Declare a new truth about your prophecy</span> 
+                          </li>
+                          <li><span data-i18n="Reveal a crucial event that is going on outside of view">Reveal a crucial event that is going on outside of view</span> 
+                          </li>
+                          <li><span data-i18n="Gain">Gain</span> <a class="bold term" href="#headerbonds"><span data-i18n="1 Bond">1 Bond</span> </a><span data-i18n="with a PC or NPC that is central to the destiny you desire">with a PC or NPC that is central to the destiny you desire</span> 
+                          </li>
+                        </ul>
+                      </p>
+                      <p><span class="result" data-i18n="On an 11+">On an 11+</span> <span class="bold" data-i18n="destiny and prophecy intertwine.">destiny and prophecy intertwine.</span> <span data-i18n="Choose one from above and one from below.">Choose one from above and one from below.</span> 
+                        <ul>
+                          <li><span data-i18n="Declare a dark secret about who you love most, they gain">Declare a dark secret about who you love most, they gain</span> <span class="bold term" data-i18n="1 Bond">1 Bond</span> <span data-i18n="with What the Darkness Demands of You">with What the Darkness Demands of You</span> 
+                          </li>
+                          <li><span data-i18n="Reveal a sinister scheme that comes to fruition">Reveal a sinister scheme that comes to fruition</span> 
+                          </li>
+                          <li><span data-i18n="A part of your heart whispers that you can only delay the inevitable, mark">A part of your heart whispers that you can only delay the inevitable, mark</span> 
+                            <button class="enact colorized" type="action" name="act_addruin" value="1"><span class="bold">1&nbsp;</span><span class="bold" data-i18n="Ruin">Ruin</span> 
+                            </button> 
+                          </li>
+                        </ul>
+                      </p>
+                      <p><span class="result" data-i18n="On a 7-">On a 7-</span> <span class="bold" data-i18n="your prophecy reasserts itself and grows crueller,">your prophecy reasserts itself and grows crueller,</span> <span data-i18n="the Keeper will tell you what happens next.">the Keeper will tell you what happens next.</span> 
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div><a name="headernotes"></a>
+      <div class="header"><span class="title" data-i18n="Notes">Notes</span> 
+        <input class="toggle" type="hidden" name="attr_expand_notes" value="1"/>
+        <button class="contract hfade" type="action" name="act_contract" value="notes"></button>
+        <button class="expand hfade" type="action" name="act_expand" value="notes"></button>
+      </div>
+      <div class="section">
+        <input class="rollup" type="hidden" name="attr_expand_notes" value="1"/>
+        <div class="section roller">
+          <textarea class="notes" name="attr_notes"></textarea>
+        </div>
+      </div>
+      <div class="columns">
+        <div class="middling"><a name="headerremember_to___"></a>
+          <div class="header fixed"><span class="title" data-i18n="Remember to...">Remember to...</span> 
+          </div>
+          <div class="section">
+            <input class="pbselector" type="hidden" name="attr_playbook" value=""/>
+            <div class="pbsummoned">
+              <ul>
+                <li><span data-i18n="Define violence on your own terms">Define violence on your own terms</span> 
+                </li>
+                <li><span data-i18n="Seek out love in all its forms">Seek out love in all its forms</span> 
+                </li>
+                <li><span data-i18n="Defy your Destiny">Defy your Destiny</span> 
+                </li>
+              </ul>
+            </div>
+            <div class="pbsurge"></div>
+            <div class="pbfound"></div>
+            <div class="pbshade"></div>
+            <div class="pblast"></div>
+            <div class="pbfallen"></div>
+            <div class="pbhungry"></div>
+          </div>
+        </div>
+        <div class="wide"><a name="headerbio"></a>
+          <div class="header"><span class="title" data-i18n="Bio">Bio</span> 
+            <input class="toggle" type="hidden" name="attr_expand_bio" value="1"/>
+            <button class="contract hfade" type="action" name="act_contract" value="bio"></button>
+            <button class="expand hfade" type="action" name="act_expand" value="bio"></button>
+          </div>
+          <div class="section">
+            <input class="rollup" type="hidden" name="attr_expand_bio" value="1"/>
+            <div class="section roller">
+              <div class="minihead"><span data-i18n="Your Look">Your Look</span> 
+              </div>
+              <div>
+                <textarea class="bio" name="attr_look"></textarea>
+              </div>
+              <div class="minihead"><span data-i18n="Your Origin">Your Origin</span> 
+              </div>
+              <div>
+                <textarea class="bio" name="attr_origin"></textarea>
+              </div>
+              <div>
+                <input class="pbselector" type="hidden" name="attr_playbook" value=""/>
+                <div class="pbsummoned">
+                  <div class="minihead"><span data-i18n="What is the prophecy that haunts you?">What is the prophecy that haunts you?</span> 
+                  </div>
+                  <div>
+                    <textarea class="bio" name="attr_summoned_prophecy"></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

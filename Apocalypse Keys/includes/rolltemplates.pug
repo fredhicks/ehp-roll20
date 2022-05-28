@@ -1,0 +1,47 @@
+rolltemplate.sheet-rolltemplate-2d6-roll
+	div.rollspend
+		div.titlebar {{#title}}{{title}}{{/title}}
+		div.rollcontainer
+			| {{#rollGreater() roll 10}}
+			span.disastrous
+				| {{expression}} = {{roll}}
+			| {{/rollGreater() roll 10}}
+			| {{#rollBetween() roll 8 10}}
+			span.perfect
+				| {{expression}} = {{roll}}
+			| {{/rollBetween() roll 8 10}}
+			| {{#rollLess() roll 8}}
+			span.miss
+				| {{expression}} = {{roll}}
+			| {{/rollLess() roll 8}}
+		div.rollresult
+			| {{#rollGreater() roll 10}}
+			+translate("Disastrous Success")
+			| {{/rollGreater() roll 10}}
+			| {{#rollBetween() roll 8 10}}
+			+translate("Perfect Hit")
+			| {{/rollBetween() roll 8 10}}
+			| {{#rollLess() roll 8}}
+			+translate("Miss")
+			| {{/rollLess() roll 8}}
+		div.footnote {{#character}}{{character}}{{/character}}
+
+rolltemplate.sheet-rolltemplate-bondspend
+	div.rollspend
+		div.titlebar 
+			| {{#title}}{{title}}{{/title}}
+			br
+			+translate("Bond Spend Adjustment")
+		div.rollcontainer
+			| {{#summary}}{{summary}}{{/summary}}
+		div.rollresult
+			| {{#rollGreater() roll 10}}
+			+translate("Disastrous Success")
+			| {{/rollGreater() roll 10}}
+			| {{#rollBetween() roll 8 10}}
+			+translate("Perfect Hit")
+			| {{/rollBetween() roll 8 10}}
+			| {{#rollLess() roll 8}}
+			+translate("Miss")
+			| {{/rollLess() roll 8}}
+		div.footnote {{#character}}{{character}}{{/character}}
