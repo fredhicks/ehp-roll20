@@ -8,6 +8,9 @@
 
 /* Darkmode broad recoloring up top */
 
+.sheet-rolltemplate-fateroll.sheet-rolltemplate-darkmode,
+.sheet-rolltemplate-fateroll.sheet-rolltemplate-darkmode .sheet-roll,
+.sheet-rolltemplate-share.sheet-rolltemplate-darkmode,
 .sheet-darkmode .tab-content .charsheet .btn,
 .sheet-darkmode .tab-content .charsheet .btn:hover,
 .sheet-darkmode .tab-content .charsheet button,
@@ -267,7 +270,7 @@ input.icon[value="blank"] + span.icon::before {
 	padding-left: 10px;
 }
 
-.rolltemplate-share .space-above,
+.sheet-rolltemplate-share .space-above,
 .space-above {
 	padding-top: 12px;
 }
@@ -1343,7 +1346,7 @@ input.hideAllBut[value="1"] + .iblock {
 	min-height: 50px;
 }
 
-.sheet-rolltemplate-fateroll .sheet-roll .sheet-inlinerollresult {
+.sheet-rolltemplate-fateroll .sheet-roll .inlinerollresult {
 	display: inline-block;
 	color: white;
 	font-weight: bold;
