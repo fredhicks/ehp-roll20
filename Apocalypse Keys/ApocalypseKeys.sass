@@ -5,7 +5,7 @@ $font: 'Nunito', sans-serif
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0')
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,700;1,400;1,700&display=swap')
 
-:root, .sheet-rolltemplate-2d6-roll
+:root, .sheet-rolltemplate-2d6-roll, .sheet-rolltemplate-bondspend
 	--ak-fg: black
 	--ak-bg: white
 	--ak-pink: #82174a
@@ -20,7 +20,10 @@ $font: 'Nunito', sans-serif
 	--ak-lightpink: #e5668e
 	--ak-pink: #bd66e5 
 	--ak-alert: #08c1c4
-	
+	.ui-dialog .charsheet .doomclock
+		background-image: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/art/alldoom-darkmode.svg)
+
+
 p,
 .ui-dialog .charsheet
 	font-family: #{$font}
@@ -62,6 +65,9 @@ p,
 .sheet-darkmode .ui-dialog .charsheet
 	.wrapper
 		margin-top: 0px
+
+.rightwards
+	text-align: right
 
 .ui-dialog .charsheet
 	ul
@@ -142,9 +148,15 @@ p,
 		&.downarrow:before
 			content: '}'
 		&.locked:before
-			content: '('
+			font-family: 'Material Symbols Outlined'
+			content: 'lock'
+			font-size: 110%
+			vertical-align: -4px
 		&.unlocked:before
-			content: ')'
+			font-family: 'Material Symbols Outlined'
+			content: 'no_encryption'
+			font-size: 110%
+			vertical-align: -4px
 		&.dice:before
 			content: 'FA'
 			font-family: 'dicefontd6'
@@ -184,9 +196,15 @@ p,
 			font-family: 'Material Symbols Outlined'
 			content: 'density_small'
 			vertical-align: -3px
-		&.add:before
+		&.clockwise:before
 			font-family: 'Material Symbols Outlined'
-			content: 'add'
+			content: 'add_circle'
+			vertical-align: -2px
+		/* &.counterclockwise
+			transform: scale(-1,1) */
+		&.counterclockwise:before
+			font-family: 'Material Symbols Outlined'
+			content: 'do_not_disturb_on'
 			vertical-align: -2px
 		&.enact:before
 			font-family: 'Material Symbols Outlined'
@@ -215,6 +233,8 @@ p,
 		font-size: 18px
 		&:hover
 			border-bottom: 1px solid var(--ak-fg)
+	input.fillme
+		border-bottom: 1px solid var(--ak-pink)
 	input.bigname
 			font-family: 'Amatic SC', cursive
 			font-weight: 700
@@ -231,6 +251,11 @@ p,
 			display: none
 		&~ .viewable
 			display: initial
+	input.antiview 
+		&[value="0"] ~ .viewable
+			display: initial
+		&~ .viewable
+			display: none
 	.columns, .topline
 		display: flex
 		flex-direction: row
@@ -401,6 +426,8 @@ p,
 				display: initial
 	.trigger, .term, .bold
 		font-weight: bold
+	.italic
+		font-style: italic
 	.trigger, .term
 		color: var(--ak-pink)
 	.movename
@@ -439,6 +466,11 @@ p,
 					height: 18px
 					border-bottom: 1px solid var(--ak-pink)
 					width: 100%
+	.conditions .checklist1box
+		.buttons .unlocked
+			display: none
+		&:hover .buttons input.toggle[value="0"] ~ .unlocked
+			display: initial
 	.conditiontext
 		text-transform: capitalize
 	input.hidecheckboxesnotnull[value=""] ~ div input.masker 
@@ -456,6 +488,50 @@ p,
 		color: var(--ak-pink)
 	button.topspace
 		margin-top: 6px
+	.doomclock
+		display: inline-block
+		min-height: 160px
+		min-width: 160px
+		height: 160px
+		width: 160px
+		margin-bottom: 0px
+		background-image: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/art/alldoom.svg)
+		background-repeat: no-repeat
+		background-size: 2080px 960px
+		background-clip: padding-box
+	@for $i from 1 through 6
+		@for $j from 0 through $i*2	
+			input.clocksize[value="#{$i*2}"] + input.clocksegment[value="#{$j}"] + .doomclock
+				// background-position: top 0px left 0px
+				background-position: top #{$i*-160+160}px left #{$j*-160}px
+	.doomclock .clockcontrol
+		display: flex
+		justify-content: center
+		align-items: center
+		opacity: 0
+		margin-top: 30px
+		margin-left: 29px
+		min-height: 100px
+		height: 100px
+		width: 100px
+		border-radius: 50px
+		background-color: var(--ak-bg)
+		.clockwise, .counterclockwise
+			font-size: 40px
+			background: none
+			padding: 0px
+			margin: 0px
+			line-height: 1
+	.doomclock:hover .clockcontrol
+		opacity: .8
+		&+ *
+			opacity: 1
+	.clocktitle
+		text-align: center
+		font-size: 80%
+		font-weight: bold
+	.centered
+		text-align: center
 
 .sheet-rolltemplate-2d6-roll,
 .sheet-rolltemplate-bondspend
@@ -540,18 +616,3 @@ input.spacetoggle[value="1"] + .titlebar.subtitle
 .spaceupmini
 	margin-top: 3px
 
-.doomclock
-	background-image: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/art/alldoom.png)
-	background-repeat: no-repeat
-	background-position: top 0px left 0px
-	background-size: 2080px 960px
-	background-clip: padding-box
-	text-align: center
-	vertical-align: middle
-	min-height: 160px
-	height: 160px
-	width: 160px
-	display: flex
-	flex-flow: row
-	align-items: center
-	justify-content: center

@@ -7,8 +7,6 @@ script(type='text/worker')
 
 include includes/rolltemplates.pug
 
-.doomclock
-
 .wrapper
 	include includes/headlinks.pug
 	.topline
@@ -70,19 +68,30 @@ include includes/rolltemplates.pug
 					+translate("I gain 2-4 Darkness Tokens when I...")
 					input(type='hidden' name='attr_playbook' class='pbselector' value='')
 					div(class='pbsummoned')
-						include includes/summonedgains.pug
+						ul
+							include includes/summonedgains.pug
+							input.view(type="hidden" name="attr_check_checkablexpadvance_newtokens_1" value="0")
+							li.viewable
+								input(type="hidden" name="attr_newdarknesstokensmethod")
+								span(name="attr_newdarknesstokensmethod")
 					div(class='pbsurge')
-						include includes/surgegains.pug
+						ul
+							include includes/surgegains.pug
 					div(class='pbfound')
-						include includes/foundgains.pug
+						ul
+							include includes/foundgains.pug
 					div(class='pbshade')
-						include includes/shadegains.pug
+						ul
+							include includes/shadegains.pug
 					div(class='pblast')
-						include includes/lastgains.pug
+						ul
+							include includes/lastgains.pug
 					div(class='pbfallen')
-						include includes/fallengains.pug
+						ul
+							include includes/fallengains.pug
 					div(class='pbhungry')
-						include includes/hungrygains.pug
+						ul
+							include includes/hungrygains.pug
 					+translate("Click to gain")(class="bold")
 					br
 					+dark(2)
@@ -99,7 +108,7 @@ include includes/rolltemplates.pug
 					fieldset(class="repeating_bonds")
 						div.bond
 							input(type="number" value="0" min="0" name="attr_points")
-							input(type="text" value="" name="attr_bondname")
+							input(type="text" value='' name="attr_bondname")
 					+expandablesub("Starting Bonds Prompts")
 						input(type='hidden' name='attr_playbook' class='pbselector' value='')
 						div(class='pbsummoned')
@@ -133,8 +142,11 @@ include includes/rolltemplates.pug
 						include includes/fallenconditions.pug
 					div(class='pbhungry')
 						include includes/hungryconditions.pug
-					+condition("",true,true)
-					+condition("",true,true)
+					each instance in [1,2]
+						div
+							input.view(type="hidden" name="attr_check_checkableruinadvance_newruincon_"+instance value="0")
+							div.viewable
+								+condition('',"ruincon",true)
 				+expandablesub("Breaking Point")
 					+translate("(when you mark your last named condition)")(class="instruction")
 					input(type='hidden' name='attr_playbook' class='pbselector' value='')
@@ -172,7 +184,7 @@ include includes/rolltemplates.pug
 							+translate("At the start of every session,")(class="trigger")
 							+translate("choose one to explore during play.")
 					input(type='hidden' name='attr_playbook' class='pbselector' value='')
-					input(type='hidden' name='attr_chosenimpulse' class='hidecheckboxesnotnull' value="")
+					input(type='hidden' name='attr_chosenimpulse' class='hidecheckboxesnotnull' value='')
 					div(class='pbsummoned')
 						include includes/summonedimpulse.pug
 					div(class='pbsurge')
@@ -237,30 +249,67 @@ include includes/rolltemplates.pug
 				+expandablesub("XP Advances")
 					input(type='hidden' name='attr_playbook' class='pbselector' value='')
 					div(class='pbsummoned')
-						+multicheckable("Take a new Summoned move",2,"","summoned_xpadvance",2)
+						+multicheckable("Take a new Summoned move",2,'',"summoned_xpadvance",2)
 					div(class='pbsurge')
-						+multicheckable("Take a new Surge move",2,"","surge_xpadvance",2)
+						+multicheckable("Take a new Surge move",2,'',"surge_xpadvance",2)
 					div(class='pbfound')
-						+multicheckable("Take a new Found move",2,"","found_xpadvance",2)
+						+multicheckable("Take a new Found move",2,'',"found_xpadvance",2)
 					div(class='pbshade')
-						+multicheckable("Take a new Shade move",2,"","shade_xpadvance",2)
+						+multicheckable("Take a new Shade move",2,'',"shade_xpadvance",2)
 					div(class='pblast')
-						+multicheckable("Take a new Last move",2,"","last_xpadvance",2)
+						+multicheckable("Take a new Last move",2,'',"last_xpadvance",2)
 					div(class='pbfallen')
-						+multicheckable("Take a new Fallen move",2,"","fallen_xpadvance",2)
+						+multicheckable("Take a new Fallen move",2,'',"fallen_xpadvance",2)
 					div(class='pbhungry')
-						+multicheckable("Take a new Hungry move",2,"","hungry_xpadvance",2)
-					+multicheckable("Take a new DIVISION move",2,"","xpadvance",2)
-					+multicheckable("Take a move from another playbook",2,"","xpadvance",2)
-					+multicheckable("Describe a new way to gain Darkness Tokens",1,"","xpadvance",2)
-					+multicheckable("Take a new Power of Darkness from your playbook",1,"","xpadvance",2)
-					+multicheckable("Change your playbook",1,"","xpadvance",2)
+						+multicheckable("Take a new Hungry move",2,'',"hungry_xpadvance",2)
+					+multicheckable("Take a new DIVISION move",2,'',"xpadvance",2)
+					+multicheckable("Take a move from another playbook",2,'',"xpadvance",2)
+					+multicheckable("Describe a new way to gain Darkness Tokens",1,'',"xpadvance_newtokens",2)
+					div
+						input.view(type="hidden" name="attr_check_checkablexpadvance_newtokens_1" value="0")
+						div.viewable
+							div.checklist2box
+								div.buttons
+								div.text
+									input.fillme(type="text" name="attr_newdarknesstokensmethod" value="" style="width: 100%")
+						+multicheckable("Take a new Power of Darkness from your playbook",1,'',"xpadvance_newpod",2)
+						+multicheckable("Change your playbook",1,'',"xpadvance",2)
+					div
+						+translate("Unused")(class="bold")
+						+translate("Advances")(class="bold")
+						input(type="number" min=0 value=0 name="attr_unused_xp_advances" class="fillme narrower")
+						br
+						+translate("Not ready to make a decision? Note an earned advance here, and come back to spend it later when you're ready to decide.")(class="italic footnote" style="line-height: 8px;")
+
 				+expandablesub("Ruin Advances")
-					+multicheckable("Take a new Ruin Move",2,"","ruinadvance",2)
-					+multicheckable("Take Ruin Move from another playbook",2,"","ruinadvance",2)
-					+multicheckable("Permanently mark a Condition",2,"","ruinadvance",2)
-					+multicheckable("Gain a new Ruin Condition",2,"","ruinadvance",2)
-					+multicheckable("Retire your character. You become a Harbinger of the apocalypse.",1,"","ruinadvance",2)
+					+multicheckable("Take a new Ruin Move",2,'',"ruinadvance",2)
+					+multicheckable("Take Ruin Move from another playbook",2,'',"ruinadvance",2)
+					+multicheckable("Permanently mark a Condition",2,'',"ruinadvance_permmark",2)
+					+multicheckable("Gain a new Ruin Condition",2,'',"ruinadvance_newruincon",2)
+					each instance in [1,2]
+						div
+							input.view(type="hidden" name="attr_check_checkableruinadvance_newruincon_"+instance value="0")
+							div.viewable
+								div.checklist2box
+									div.buttons
+									div.text
+										select(name="attr_ruincon"+instance)
+											option(value="" data-i18n="Gain a new Ruin Condition")
+											option(value="Cruel" data-i18n="Cruel") Cruel
+											option(value="Fragile" data-i18n="Fragile") Fragile
+											option(value="Guilty" data-i18n="Guilty") Guilty
+											option(value="Haunted" data-i18n="Haunted") Haunted
+											option(value="Paranoid" data-i18n="Paranoid") Paranoid
+											option(value="Possessive" data-i18n="Possessive") Possessive
+											option(value="Ruthless" data-i18n="Ruthless") Ruthless
+											option(value="Reckless" data-i18n="Reckless") Reckless
+					+multicheckable("Retire your character. You become a Harbinger of the apocalypse.",1,'',"ruinadvance",2)
+					div
+						+translate("Unused")(class="bold")
+						+translate("Advances")(class="bold")
+						input(type="number" min=0 value=0 name="attr_unused_ruin_advances" class="fillme narrower")
+						br
+						+translate("Not ready to make a decision? Note an earned advance here, and come back to spend it later when you're ready to decide.")(class="italic footnote" style="line-height: 8px;")
 		.wide
 			+expandable("Moves")
 				.columns
@@ -292,7 +341,7 @@ include includes/rolltemplates.pug
 							div(class='pblast')
 							div(class='pbfallen')
 							div(class='pbhungry')
-						+expandablesub("Playbook Moves","","pbchecked")
+						+expandablesub("Playbook Moves",'',"pbchecked")
 							input(type="hidden" name="attr_check_pbchecked" class="checksonly" value="1")
 							div(class='pbsummoned')
 								+briefmove("Come On, Tough Guy","summoned")

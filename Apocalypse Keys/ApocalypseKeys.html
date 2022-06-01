@@ -1,4 +1,9 @@
 
+<!-- movekey: text of the move name, which is converted to a key for fields-->
+<!-- context: the (prior-to-translation) text indicating context, such as playbook name-->
+<!-- selectable: it can have a checkbox to be selected or not-->
+<!-- dismissable: it can be dismissed from view-->
+<!-- checkerbox is specific to hiding-all-moves-that-have-been-not-checked, see ApocalypseKeys.pug for the +expandablesub for Playbook Moves-->
 <script type="text/worker">var gTBK = function(t) {
 	if ( typeof t === "undefined" ) {
 		return "";
@@ -162,7 +167,7 @@ on("clicked:unchecklist", function(event) {
 });
 
 
-on("change:condition_blank1_text change:condition_blank2_text change:condition_blank3_text change:condition_blank4_text change:condition_blank5_text change:condition_blank6_text", function(event) {
+on("change:condition_blankruincon1_text change:condition_blankruincon2_text change:condition_hungry1_text change:condition_hungry2_text change:condition_hungry3_text", function(event) {
 		log(event);
 		var field = event.sourceAttribute; // condition_blank?_text
 		var cfield = "check_" + field.replace("_text",""); // check_condition_blank?
@@ -197,6 +202,25 @@ on("change:condition_blank1_text change:condition_blank2_text change:condition_b
 		});
 });
 
+on("clicked:lock", function(event) {
+	var what = event.htmlAttributes.value;
+	var atname = "lock_" + what;
+	var ats = {};
+	ats[atname] = 1;
+	setAttrs(ats);
+	log(ats);
+	log(what + " lock");
+});
+
+on("clicked:unlock", function(event) {
+	var what = event.htmlAttributes.value;
+	var atname = "lock_" + what;
+	var ats = {};
+	ats[atname] = 0;
+	setAttrs(ats);
+	log(ats);
+	log(what + " unlock");
+});
 
 on("clicked:view", function(event) {
 	var what = event.htmlAttributes.value;
@@ -514,6 +538,46 @@ on("clicked:spenddark", function(event) {
 	});
 });
 
+on("clicked:addclock", function(event) {
+	var fpre = event.htmlAttributes.value;
+	var fsize = fpre + "_clocksize";
+	var fseg = fpre + "_clocksegment";
+	var ats = {};
+	getAttrs([fsize,fseg], function(v) {
+		var size = parseInt(v[fsize])||2;
+		var seg = parseInt(v[fseg])||0;
+		seg++;
+		if ( seg > size ) { seg = size; }
+		ats[fseg] = seg; ats[fsize] = size;
+		setAttrs(ats);
+	});
+});
+
+on("clicked:reduceclock", function(event) {
+	var fpre = event.htmlAttributes.value;
+	var fsize = fpre + "_clocksize";
+	var fseg = fpre + "_clocksegment";
+	var ats = {};
+	getAttrs([fsize,fseg], function(v) {
+		var size = parseInt(v[fsize])||2;
+		var seg = parseInt(v[fseg])||0;
+		seg--;
+		if ( seg > size ) { seg = size-1; } // always reduce off the max
+		if ( seg < 0 ) { seg = 0; }
+		ats[fseg] = seg; ats[fsize] = size;
+		setAttrs(ats);
+	});
+});
+
+// attr_ruincon1 vs attr_condition_blankruincon1_text
+on("change:ruincon1 change:ruincon2", function(event) {
+	var nv = "";
+	if ( typeof(event.newValue) != "undefined" ) { nv = event.newValue; }
+	var na = "condition_blank"+event.sourceAttribute+"_text";
+	var ats = {};
+	ats[na] = nv; 
+	setAttrs(ats);
+});
 
 
 </script>
@@ -544,7 +608,6 @@ on("clicked:spenddark", function(event) {
     <div class="footnote">{{#character}}{{character}}{{/character}}</div>
   </div>
 </rolltemplate>
-<div class="doomclock"></div>
 <div class="wrapper">
   <div class="menu">
     <div>
@@ -582,6 +645,8 @@ on("clicked:spenddark", function(event) {
   <div class="columns">
     <div class="narrow"><a name="headerplaybook"></a>
       <div class="header"><span class="title" data-i18n="Playbook">Playbook</span> 
+        <!-- if dismiss is true and selectable is false, we're good to go-->
+        <!-- if dismiss is true and selectable is true, we want to expose the dismiss option only if the item is not *currently* selected-->
         <input class="toggle" type="hidden" name="attr_expand_playbook" value="1"/>
         <button class="contract hfade" type="action" name="act_contract" value="playbook"></button>
         <button class="expand hfade" type="action" name="act_expand" value="playbook"></button>
@@ -626,6 +691,8 @@ on("clicked:spenddark", function(event) {
           <div class="pbfallen"></div>
           <div class="pbhungry"></div><a name="headercharacter_creation_options"></a>
           <div class="subheader"><span class="title" data-i18n="Character Creation Options">Character Creation Options</span> 
+            <!-- if dismiss is true and selectable is false, we're good to go-->
+            <!-- if dismiss is true and selectable is true, we want to expose the dismiss option only if the item is not *currently* selected-->
             <input class="toggle" type="hidden" name="attr_expand_character_creation_options" value="1"/>
             <button class="contract hfade" type="action" name="act_contract" value="character_creation_options"></button>
             <button class="expand hfade" type="action" name="act_expand" value="character_creation_options"></button>
@@ -1011,6 +1078,8 @@ on("clicked:spenddark", function(event) {
         </div>
       </div><a name="headerdarkness"></a>
       <div class="header"><span class="title" data-i18n="Darkness">Darkness</span> 
+        <!-- if dismiss is true and selectable is false, we're good to go-->
+        <!-- if dismiss is true and selectable is true, we want to expose the dismiss option only if the item is not *currently* selected-->
         <input class="toggle" type="hidden" name="attr_expand_darkness" value="1"/>
         <button class="contract hfade" type="action" name="act_contract" value="darkness"></button>
         <button class="expand hfade" type="action" name="act_expand" value="darkness"></button>
@@ -1089,6 +1158,8 @@ on("clicked:spenddark", function(event) {
             </div>
           </div><a name="headergaining"></a>
           <div class="subheader"><span class="title" data-i18n="Gaining">Gaining</span> 
+            <!-- if dismiss is true and selectable is false, we're good to go-->
+            <!-- if dismiss is true and selectable is true, we want to expose the dismiss option only if the item is not *currently* selected-->
             <input class="toggle" type="hidden" name="attr_expand_gaining" value="1"/>
             <button class="contract hfade" type="action" name="act_contract" value="gaining"></button>
             <button class="expand hfade" type="action" name="act_expand" value="gaining"></button>
@@ -1109,14 +1180,30 @@ on("clicked:spenddark", function(event) {
                   </li>
                   <li><span data-i18n="Embody a Condition that affects me">Embody a Condition that affects me</span> 
                   </li>
+                  <input class="view" type="hidden" name="attr_check_checkablexpadvance_newtokens_1" value="0"/>
+                  <li class="viewable">
+                    <input type="hidden" name="attr_newdarknesstokensmethod"/><span name="attr_newdarknesstokensmethod"></span>
+                  </li>
                 </ul>
               </div>
-              <div class="pbsurge"></div>
-              <div class="pbfound"></div>
-              <div class="pbshade"></div>
-              <div class="pblast"></div>
-              <div class="pbfallen"></div>
-              <div class="pbhungry"></div><span class="bold" data-i18n="Click to gain">Click to gain</span> <br/>
+              <div class="pbsurge">
+                <ul></ul>
+              </div>
+              <div class="pbfound">
+                <ul></ul>
+              </div>
+              <div class="pbshade">
+                <ul></ul>
+              </div>
+              <div class="pblast">
+                <ul></ul>
+              </div>
+              <div class="pbfallen">
+                <ul></ul>
+              </div>
+              <div class="pbhungry">
+                <ul></ul>
+              </div><span class="bold" data-i18n="Click to gain">Click to gain</span> <br/>
               <button class="enact colorized" type="action" name="act_adddark" value="2"><span class="bold">2&nbsp;</span><span class="bold" data-i18n="Darkness Tokens">Darkness Tokens</span> 
               </button> <br/>
               <button class="enact colorized" type="action" name="act_adddark" value="3"><span class="bold">3&nbsp;</span><span class="bold" data-i18n="Darkness Tokens">Darkness Tokens</span> 
@@ -1126,6 +1213,8 @@ on("clicked:spenddark", function(event) {
             </div>
           </div><a name="headerpowers"></a>
           <div class="subheader"><span class="title" data-i18n="Powers">Powers</span> 
+            <!-- if dismiss is true and selectable is false, we're good to go-->
+            <!-- if dismiss is true and selectable is true, we want to expose the dismiss option only if the item is not *currently* selected-->
             <input class="toggle" type="hidden" name="attr_expand_powers" value="1"/>
             <button class="contract hfade" type="action" name="act_contract" value="powers"></button>
             <button class="expand hfade" type="action" name="act_expand" value="powers"></button>
@@ -1137,6 +1226,8 @@ on("clicked:spenddark", function(event) {
             </div>
           </div><a name="headerdemands"></a>
           <div class="subheader"><span class="title" data-i18n="Demands">Demands</span> 
+            <!-- if dismiss is true and selectable is false, we're good to go-->
+            <!-- if dismiss is true and selectable is true, we want to expose the dismiss option only if the item is not *currently* selected-->
             <input class="toggle" type="hidden" name="attr_expand_demands" value="1"/>
             <button class="contract hfade" type="action" name="act_contract" value="demands"></button>
             <button class="expand hfade" type="action" name="act_expand" value="demands"></button>
@@ -1150,6 +1241,8 @@ on("clicked:spenddark", function(event) {
         </div>
       </div><a name="headerbonds"></a>
       <div class="header"><span class="title" data-i18n="Bonds">Bonds</span> 
+        <!-- if dismiss is true and selectable is false, we're good to go-->
+        <!-- if dismiss is true and selectable is true, we want to expose the dismiss option only if the item is not *currently* selected-->
         <input class="toggle" type="hidden" name="attr_expand_bonds" value="1"/>
         <button class="contract hfade" type="action" name="act_contract" value="bonds"></button>
         <button class="expand hfade" type="action" name="act_expand" value="bonds"></button>
@@ -1165,6 +1258,8 @@ on("clicked:spenddark", function(event) {
               </div>
             </fieldset><a name="headerstarting_bonds_prompts"></a>
             <div class="subheader"><span class="title" data-i18n="Starting Bonds Prompts">Starting Bonds Prompts</span> 
+              <!-- if dismiss is true and selectable is false, we're good to go-->
+              <!-- if dismiss is true and selectable is true, we want to expose the dismiss option only if the item is not *currently* selected-->
               <input class="toggle" type="hidden" name="attr_expand_starting_bonds_prompts" value="1"/>
               <button class="contract hfade" type="action" name="act_contract" value="starting_bonds_prompts"></button>
               <button class="expand hfade" type="action" name="act_expand" value="starting_bonds_prompts"></button>
@@ -1195,6 +1290,8 @@ on("clicked:spenddark", function(event) {
         </div>
       </div><a name="headerconditions"></a>
       <div class="header"><span class="title" data-i18n="Conditions">Conditions</span> 
+        <!-- if dismiss is true and selectable is false, we're good to go-->
+        <!-- if dismiss is true and selectable is true, we want to expose the dismiss option only if the item is not *currently* selected-->
         <input class="toggle" type="hidden" name="attr_expand_conditions" value="1"/>
         <button class="contract hfade" type="action" name="act_contract" value="conditions"></button>
         <button class="expand hfade" type="action" name="act_expand" value="conditions"></button>
@@ -1207,38 +1304,86 @@ on("clicked:spenddark", function(event) {
             <div class="pbsummoned">
               <div class="checklist1box">
                 <div class="buttons">
-                  <input class="toggle" type="hidden" name="attr_check_condition_raging" value="0"/>
-                  <button class="checked" type="action" name="act_unchecklist" value="condition_raging|current_conditions=raging"></button>
-                  <button class="unchecked" type="action" name="act_checklist" value="condition_raging|current_conditions=raging"></button>
+                  <input class="toggle" type="hidden" name="attr_lock_condition_raging" value="0"/>
+                  <div><span class="icon checked"></span></div>
+                  <div>
+                    <input class="toggle" type="hidden" name="attr_check_condition_raging" value="0"/>
+                    <button class="checked" type="action" name="act_unchecklist" value="condition_raging|current_conditions=raging"></button>
+                    <button class="unchecked" type="action" name="act_checklist" value="condition_raging|current_conditions=raging"></button>
+                  </div>
                 </div>
                 <div class="conditiontext"><span data-i18n="raging">raging</span> 
                 </div>
+                <div class="buttons">
+                  <input class="view" type="hidden" name="attr_check_condition_raging" value="0"/>
+                  <div class="viewable">
+                    <input class="toggle" type="hidden" name="attr_lock_condition_raging" value="0"/>
+                    <button class="locked" type="action" name="act_unlock" value="condition_raging"></button>
+                    <button class="unlocked" type="action" name="act_lock" value="condition_raging"></button>
+                  </div>
+                </div>
               </div>
               <div class="checklist1box">
                 <div class="buttons">
-                  <input class="toggle" type="hidden" name="attr_check_condition_lovelorn" value="0"/>
-                  <button class="checked" type="action" name="act_unchecklist" value="condition_lovelorn|current_conditions=lovelorn"></button>
-                  <button class="unchecked" type="action" name="act_checklist" value="condition_lovelorn|current_conditions=lovelorn"></button>
+                  <input class="toggle" type="hidden" name="attr_lock_condition_lovelorn" value="0"/>
+                  <div><span class="icon checked"></span></div>
+                  <div>
+                    <input class="toggle" type="hidden" name="attr_check_condition_lovelorn" value="0"/>
+                    <button class="checked" type="action" name="act_unchecklist" value="condition_lovelorn|current_conditions=lovelorn"></button>
+                    <button class="unchecked" type="action" name="act_checklist" value="condition_lovelorn|current_conditions=lovelorn"></button>
+                  </div>
                 </div>
                 <div class="conditiontext"><span data-i18n="lovelorn">lovelorn</span> 
                 </div>
+                <div class="buttons">
+                  <input class="view" type="hidden" name="attr_check_condition_lovelorn" value="0"/>
+                  <div class="viewable">
+                    <input class="toggle" type="hidden" name="attr_lock_condition_lovelorn" value="0"/>
+                    <button class="locked" type="action" name="act_unlock" value="condition_lovelorn"></button>
+                    <button class="unlocked" type="action" name="act_lock" value="condition_lovelorn"></button>
+                  </div>
+                </div>
               </div>
               <div class="checklist1box">
                 <div class="buttons">
-                  <input class="toggle" type="hidden" name="attr_check_condition_obsessed" value="0"/>
-                  <button class="checked" type="action" name="act_unchecklist" value="condition_obsessed|current_conditions=obsessed"></button>
-                  <button class="unchecked" type="action" name="act_checklist" value="condition_obsessed|current_conditions=obsessed"></button>
+                  <input class="toggle" type="hidden" name="attr_lock_condition_obsessed" value="0"/>
+                  <div><span class="icon checked"></span></div>
+                  <div>
+                    <input class="toggle" type="hidden" name="attr_check_condition_obsessed" value="0"/>
+                    <button class="checked" type="action" name="act_unchecklist" value="condition_obsessed|current_conditions=obsessed"></button>
+                    <button class="unchecked" type="action" name="act_checklist" value="condition_obsessed|current_conditions=obsessed"></button>
+                  </div>
                 </div>
                 <div class="conditiontext"><span data-i18n="obsessed">obsessed</span> 
                 </div>
+                <div class="buttons">
+                  <input class="view" type="hidden" name="attr_check_condition_obsessed" value="0"/>
+                  <div class="viewable">
+                    <input class="toggle" type="hidden" name="attr_lock_condition_obsessed" value="0"/>
+                    <button class="locked" type="action" name="act_unlock" value="condition_obsessed"></button>
+                    <button class="unlocked" type="action" name="act_lock" value="condition_obsessed"></button>
+                  </div>
+                </div>
               </div>
               <div class="checklist1box">
                 <div class="buttons">
-                  <input class="toggle" type="hidden" name="attr_check_condition_despairing" value="0"/>
-                  <button class="checked" type="action" name="act_unchecklist" value="condition_despairing|current_conditions=despairing"></button>
-                  <button class="unchecked" type="action" name="act_checklist" value="condition_despairing|current_conditions=despairing"></button>
+                  <input class="toggle" type="hidden" name="attr_lock_condition_despairing" value="0"/>
+                  <div><span class="icon checked"></span></div>
+                  <div>
+                    <input class="toggle" type="hidden" name="attr_check_condition_despairing" value="0"/>
+                    <button class="checked" type="action" name="act_unchecklist" value="condition_despairing|current_conditions=despairing"></button>
+                    <button class="unchecked" type="action" name="act_checklist" value="condition_despairing|current_conditions=despairing"></button>
+                  </div>
                 </div>
                 <div class="conditiontext"><span data-i18n="despairing">despairing</span> 
+                </div>
+                <div class="buttons">
+                  <input class="view" type="hidden" name="attr_check_condition_despairing" value="0"/>
+                  <div class="viewable">
+                    <input class="toggle" type="hidden" name="attr_lock_condition_despairing" value="0"/>
+                    <button class="locked" type="action" name="act_unlock" value="condition_despairing"></button>
+                    <button class="unlocked" type="action" name="act_lock" value="condition_despairing"></button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1250,82 +1395,172 @@ on("clicked:spenddark", function(event) {
             <div class="pbhungry">
               <div class="checklist1box">
                 <div class="buttons">
-                  <input class="toggle" type="hidden" name="attr_check_condition_raging" value="0"/>
-                  <button class="checked" type="action" name="act_unchecklist" value="condition_raging|current_conditions=raging"></button>
-                  <button class="unchecked" type="action" name="act_checklist" value="condition_raging|current_conditions=raging"></button>
+                  <input class="toggle" type="hidden" name="attr_lock_condition_raging" value="0"/>
+                  <div><span class="icon checked"></span></div>
+                  <div>
+                    <input class="toggle" type="hidden" name="attr_check_condition_raging" value="0"/>
+                    <button class="checked" type="action" name="act_unchecklist" value="condition_raging|current_conditions=raging"></button>
+                    <button class="unchecked" type="action" name="act_checklist" value="condition_raging|current_conditions=raging"></button>
+                  </div>
                 </div>
                 <div class="conditiontext"><span data-i18n="raging">raging</span> 
                 </div>
+                <div class="buttons">
+                  <input class="view" type="hidden" name="attr_check_condition_raging" value="0"/>
+                  <div class="viewable">
+                    <input class="toggle" type="hidden" name="attr_lock_condition_raging" value="0"/>
+                    <button class="locked" type="action" name="act_unlock" value="condition_raging"></button>
+                    <button class="unlocked" type="action" name="act_lock" value="condition_raging"></button>
+                  </div>
+                </div>
               </div>
               <div class="checklist1box">
                 <div class="buttons">
-                  <input class="toggle" type="hidden" name="attr_check_condition_lonely" value="0"/>
-                  <button class="checked" type="action" name="act_unchecklist" value="condition_lonely|current_conditions=lonely"></button>
-                  <button class="unchecked" type="action" name="act_checklist" value="condition_lonely|current_conditions=lonely"></button>
+                  <input class="toggle" type="hidden" name="attr_lock_condition_lonely" value="0"/>
+                  <div><span class="icon checked"></span></div>
+                  <div>
+                    <input class="toggle" type="hidden" name="attr_check_condition_lonely" value="0"/>
+                    <button class="checked" type="action" name="act_unchecklist" value="condition_lonely|current_conditions=lonely"></button>
+                    <button class="unchecked" type="action" name="act_checklist" value="condition_lonely|current_conditions=lonely"></button>
+                  </div>
                 </div>
                 <div class="conditiontext"><span data-i18n="lonely">lonely</span> 
                 </div>
+                <div class="buttons">
+                  <input class="view" type="hidden" name="attr_check_condition_lonely" value="0"/>
+                  <div class="viewable">
+                    <input class="toggle" type="hidden" name="attr_lock_condition_lonely" value="0"/>
+                    <button class="locked" type="action" name="act_unlock" value="condition_lonely"></button>
+                    <button class="unlocked" type="action" name="act_lock" value="condition_lonely"></button>
+                  </div>
+                </div>
               </div>
               <div class="checklist1box">
                 <div class="buttons">
-                  <input class="toggle" type="hidden" name="attr_check_condition_lustful" value="0"/>
-                  <button class="checked" type="action" name="act_unchecklist" value="condition_lustful|current_conditions=lustful"></button>
-                  <button class="unchecked" type="action" name="act_checklist" value="condition_lustful|current_conditions=lustful"></button>
+                  <input class="toggle" type="hidden" name="attr_lock_condition_lustful" value="0"/>
+                  <div><span class="icon checked"></span></div>
+                  <div>
+                    <input class="toggle" type="hidden" name="attr_check_condition_lustful" value="0"/>
+                    <button class="checked" type="action" name="act_unchecklist" value="condition_lustful|current_conditions=lustful"></button>
+                    <button class="unchecked" type="action" name="act_checklist" value="condition_lustful|current_conditions=lustful"></button>
+                  </div>
                 </div>
                 <div class="conditiontext"><span data-i18n="lustful">lustful</span> 
                 </div>
-              </div>
-              <div class="checklist1box">
                 <div class="buttons">
-                  <input class="toggle" type="hidden" name="attr_check_condition_blank1" value="0"/>
-                  <button class="checked" type="action" name="act_unchecklist" value="condition_blank1|current_conditions=&gt;condition_blank1_text"></button>
-                  <button class="unchecked" type="action" name="act_checklist" value="condition_blank1|current_conditions=&gt;condition_blank1_text"></button>
-                </div>
-                <div class="conditiontext">
-                  <input type="text" name="attr_condition_blank1_text"/>
-                </div>
-              </div>
-              <div class="checklist1box">
-                <div class="buttons">
-                  <input class="toggle" type="hidden" name="attr_check_condition_blank2" value="0"/>
-                  <button class="checked" type="action" name="act_unchecklist" value="condition_blank2|current_conditions=&gt;condition_blank2_text"></button>
-                  <button class="unchecked" type="action" name="act_checklist" value="condition_blank2|current_conditions=&gt;condition_blank2_text"></button>
-                </div>
-                <div class="conditiontext">
-                  <input type="text" name="attr_condition_blank2_text"/>
+                  <input class="view" type="hidden" name="attr_check_condition_lustful" value="0"/>
+                  <div class="viewable">
+                    <input class="toggle" type="hidden" name="attr_lock_condition_lustful" value="0"/>
+                    <button class="locked" type="action" name="act_unlock" value="condition_lustful"></button>
+                    <button class="unlocked" type="action" name="act_lock" value="condition_lustful"></button>
+                  </div>
                 </div>
               </div>
               <div class="checklist1box">
                 <div class="buttons">
-                  <input class="toggle" type="hidden" name="attr_check_condition_blank3" value="0"/>
-                  <button class="checked" type="action" name="act_unchecklist" value="condition_blank3|current_conditions=&gt;condition_blank3_text"></button>
-                  <button class="unchecked" type="action" name="act_checklist" value="condition_blank3|current_conditions=&gt;condition_blank3_text"></button>
+                  <input class="toggle" type="hidden" name="attr_lock_condition_blankhungry1" value="0"/>
+                  <div><span class="icon checked"></span></div>
+                  <div>
+                    <input class="toggle" type="hidden" name="attr_check_condition_blankhungry1" value="0"/>
+                    <button class="checked" type="action" name="act_unchecklist" value="condition_blankhungry1|current_conditions=&gt;condition_blankhungry1_text"></button>
+                    <button class="unchecked" type="action" name="act_checklist" value="condition_blankhungry1|current_conditions=&gt;condition_blankhungry1_text"></button>
+                  </div>
                 </div>
                 <div class="conditiontext">
-                  <input type="text" name="attr_condition_blank3_text"/>
+                  <input type="text" name="attr_condition_blankhungry1_text"/>
+                </div>
+                <div class="buttons">
+                  <input class="view" type="hidden" name="attr_check_condition_blankhungry1" value="0"/>
+                  <div class="viewable">
+                    <input class="toggle" type="hidden" name="attr_lock_condition_blankhungry1" value="0"/>
+                    <button class="locked" type="action" name="act_unlock" value="condition_blankhungry1"></button>
+                    <button class="unlocked" type="action" name="act_lock" value="condition_blankhungry1"></button>
+                  </div>
+                </div>
+              </div>
+              <div class="checklist1box">
+                <div class="buttons">
+                  <input class="toggle" type="hidden" name="attr_lock_condition_blankhungry2" value="0"/>
+                  <div><span class="icon checked"></span></div>
+                  <div>
+                    <input class="toggle" type="hidden" name="attr_check_condition_blankhungry2" value="0"/>
+                    <button class="checked" type="action" name="act_unchecklist" value="condition_blankhungry2|current_conditions=&gt;condition_blankhungry2_text"></button>
+                    <button class="unchecked" type="action" name="act_checklist" value="condition_blankhungry2|current_conditions=&gt;condition_blankhungry2_text"></button>
+                  </div>
+                </div>
+                <div class="conditiontext">
+                  <input type="text" name="attr_condition_blankhungry2_text"/>
+                </div>
+                <div class="buttons">
+                  <input class="view" type="hidden" name="attr_check_condition_blankhungry2" value="0"/>
+                  <div class="viewable">
+                    <input class="toggle" type="hidden" name="attr_lock_condition_blankhungry2" value="0"/>
+                    <button class="locked" type="action" name="act_unlock" value="condition_blankhungry2"></button>
+                    <button class="unlocked" type="action" name="act_lock" value="condition_blankhungry2"></button>
+                  </div>
+                </div>
+              </div>
+              <div class="checklist1box">
+                <div class="buttons">
+                  <input class="toggle" type="hidden" name="attr_lock_condition_blankhungry3" value="0"/>
+                  <div><span class="icon checked"></span></div>
+                  <div>
+                    <input class="toggle" type="hidden" name="attr_check_condition_blankhungry3" value="0"/>
+                    <button class="checked" type="action" name="act_unchecklist" value="condition_blankhungry3|current_conditions=&gt;condition_blankhungry3_text"></button>
+                    <button class="unchecked" type="action" name="act_checklist" value="condition_blankhungry3|current_conditions=&gt;condition_blankhungry3_text"></button>
+                  </div>
+                </div>
+                <div class="conditiontext">
+                  <input type="text" name="attr_condition_blankhungry3_text"/>
+                </div>
+                <div class="buttons">
+                  <input class="view" type="hidden" name="attr_check_condition_blankhungry3" value="0"/>
+                  <div class="viewable">
+                    <input class="toggle" type="hidden" name="attr_lock_condition_blankhungry3" value="0"/>
+                    <button class="locked" type="action" name="act_unlock" value="condition_blankhungry3"></button>
+                    <button class="unlocked" type="action" name="act_lock" value="condition_blankhungry3"></button>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="checklist1box">
-              <div class="buttons">
-                <!-- Simply establish that this field is always checked, but don't provide buttons to make it toggle-able.-->
-                <input type="hidden" name="attr_check_condition_blank4" value="1"/><span class="icon checked"></span>
-              </div>
-              <div class="conditiontext">
-                <input type="text" name="attr_condition_blank4_text"/>
+            <div>
+              <input class="view" type="hidden" name="attr_check_checkableruinadvance_newruincon_1" value="0"/>
+              <div class="viewable">
+                <div class="checklist1box">
+                  <div class="buttons">
+                    <!-- Simply establish that this field is always checked, but don't provide buttons to make it toggle-able.-->
+                    <input type="hidden" name="attr_check_condition_blankruincon1" value="1"/><span class="icon checked"></span>
+                  </div>
+                  <div class="conditiontext">
+                    <input type="hidden" name="attr_condition_blankruincon1_text"/><span name="attr_condition_blankruincon1_text"></span>
+                  </div>
+                  <div class="buttons">
+                    <!-- Simply establish that this field is always checked, but don't provide buttons to make it toggle-able.--><span class="icon locked"></span>
+                  </div>
+                </div>
               </div>
             </div>
-            <div class="checklist1box">
-              <div class="buttons">
-                <!-- Simply establish that this field is always checked, but don't provide buttons to make it toggle-able.-->
-                <input type="hidden" name="attr_check_condition_blank5" value="1"/><span class="icon checked"></span>
-              </div>
-              <div class="conditiontext">
-                <input type="text" name="attr_condition_blank5_text"/>
+            <div>
+              <input class="view" type="hidden" name="attr_check_checkableruinadvance_newruincon_2" value="0"/>
+              <div class="viewable">
+                <div class="checklist1box">
+                  <div class="buttons">
+                    <!-- Simply establish that this field is always checked, but don't provide buttons to make it toggle-able.-->
+                    <input type="hidden" name="attr_check_condition_blankruincon2" value="1"/><span class="icon checked"></span>
+                  </div>
+                  <div class="conditiontext">
+                    <input type="hidden" name="attr_condition_blankruincon2_text"/><span name="attr_condition_blankruincon2_text"></span>
+                  </div>
+                  <div class="buttons">
+                    <!-- Simply establish that this field is always checked, but don't provide buttons to make it toggle-able.--><span class="icon locked"></span>
+                  </div>
+                </div>
               </div>
             </div>
           </div><a name="headerbreaking_point"></a>
           <div class="subheader"><span class="title" data-i18n="Breaking Point">Breaking Point</span> 
+            <!-- if dismiss is true and selectable is false, we're good to go-->
+            <!-- if dismiss is true and selectable is true, we want to expose the dismiss option only if the item is not *currently* selected-->
             <input class="toggle" type="hidden" name="attr_expand_breaking_point" value="1"/>
             <button class="contract hfade" type="action" name="act_contract" value="breaking_point"></button>
             <button class="expand hfade" type="action" name="act_expand" value="breaking_point"></button>
@@ -1351,6 +1586,8 @@ on("clicked:spenddark", function(event) {
         </div>
       </div><a name="headerexperience_and_ruin"></a>
       <div class="header"><span class="title" data-i18n="Experience and Ruin">Experience and Ruin</span> 
+        <!-- if dismiss is true and selectable is false, we're good to go-->
+        <!-- if dismiss is true and selectable is true, we want to expose the dismiss option only if the item is not *currently* selected-->
         <input class="toggle" type="hidden" name="attr_expand_experience_and_ruin" value="1"/>
         <button class="contract hfade" type="action" name="act_contract" value="experience_and_ruin"></button>
         <button class="expand hfade" type="action" name="act_expand" value="experience_and_ruin"></button>
@@ -1381,6 +1618,8 @@ on("clicked:spenddark", function(event) {
             </div>
           </div><a name="headeryour_impulse"></a>
           <div class="subheader"><span class="title" data-i18n="Your Impulse">Your Impulse</span> 
+            <!-- if dismiss is true and selectable is false, we're good to go-->
+            <!-- if dismiss is true and selectable is true, we want to expose the dismiss option only if the item is not *currently* selected-->
             <input class="toggle" type="hidden" name="attr_expand_your_impulse" value="1"/>
             <button class="contract hfade" type="action" name="act_contract" value="your_impulse"></button>
             <button class="expand hfade" type="action" name="act_expand" value="your_impulse"></button>
@@ -1463,6 +1702,8 @@ on("clicked:spenddark", function(event) {
             </div>
           </div><a name="headerend_of_session"></a>
           <div class="subheader"><span class="title" data-i18n="End of Session">End of Session</span> 
+            <!-- if dismiss is true and selectable is false, we're good to go-->
+            <!-- if dismiss is true and selectable is true, we want to expose the dismiss option only if the item is not *currently* selected-->
             <input class="toggle" type="hidden" name="attr_expand_end_of_session" value="1"/>
             <button class="contract hfade" type="action" name="act_contract" value="end_of_session"></button>
             <button class="expand hfade" type="action" name="act_expand" value="end_of_session"></button>
@@ -1497,6 +1738,8 @@ on("clicked:spenddark", function(event) {
         </div>
       </div><a name="headeradvances"></a>
       <div class="header"><span class="title" data-i18n="Advances">Advances</span> 
+        <!-- if dismiss is true and selectable is false, we're good to go-->
+        <!-- if dismiss is true and selectable is true, we want to expose the dismiss option only if the item is not *currently* selected-->
         <input class="toggle" type="hidden" name="attr_expand_advances" value="1"/>
         <button class="contract hfade" type="action" name="act_contract" value="advances"></button>
         <button class="expand hfade" type="action" name="act_expand" value="advances"></button>
@@ -1523,6 +1766,8 @@ on("clicked:spenddark", function(event) {
             </div>
           </div><a name="headerxp_advances"></a>
           <div class="subheader"><span class="title" data-i18n="XP Advances">XP Advances</span> 
+            <!-- if dismiss is true and selectable is false, we're good to go-->
+            <!-- if dismiss is true and selectable is true, we want to expose the dismiss option only if the item is not *currently* selected-->
             <input class="toggle" type="hidden" name="attr_expand_xp_advances" value="1"/>
             <button class="contract hfade" type="action" name="act_contract" value="xp_advances"></button>
             <button class="expand hfade" type="action" name="act_expand" value="xp_advances"></button>
@@ -1671,39 +1916,55 @@ on("clicked:spenddark", function(event) {
                 <div class="text"><span data-i18n="Take a move from another playbook">Take a move from another playbook</span> 
                 </div>
               </div>
-              <input class="masker" type="hidden" name="attr_check_checkablexpadvance_5" value="0"/>
+              <input class="masker" type="hidden" name="attr_check_checkablexpadvance_newtokens_1" value="0"/>
               <div class="checklist2box">
                 <div class="buttons">
-                  <input class="toggle" type="hidden" name="attr_check_checkablexpadvance_5" value="0"/>
-                  <button class="checked" type="action" name="act_unchecklist" value="checkablexpadvance_5"></button>
-                  <button class="unchecked" type="action" name="act_checklist" value="checkablexpadvance_5"></button>
+                  <input class="toggle" type="hidden" name="attr_check_checkablexpadvance_newtokens_1" value="0"/>
+                  <button class="checked" type="action" name="act_unchecklist" value="checkablexpadvance_newtokens_1"></button>
+                  <button class="unchecked" type="action" name="act_checklist" value="checkablexpadvance_newtokens_1"></button>
                 </div>
                 <div class="text"><span data-i18n="Describe a new way to gain Darkness Tokens">Describe a new way to gain Darkness Tokens</span> 
                 </div>
               </div>
-              <input class="masker" type="hidden" name="attr_check_checkablexpadvance_6" value="0"/>
-              <div class="checklist2box">
-                <div class="buttons">
-                  <input class="toggle" type="hidden" name="attr_check_checkablexpadvance_6" value="0"/>
-                  <button class="checked" type="action" name="act_unchecklist" value="checkablexpadvance_6"></button>
-                  <button class="unchecked" type="action" name="act_checklist" value="checkablexpadvance_6"></button>
+              <div>
+                <input class="view" type="hidden" name="attr_check_checkablexpadvance_newtokens_1" value="0"/>
+                <div class="viewable">
+                  <div class="checklist2box">
+                    <div class="buttons"></div>
+                    <div class="text">
+                      <input class="fillme" type="text" name="attr_newdarknesstokensmethod" value="" style="width: 100%"/>
+                    </div>
+                  </div>
                 </div>
-                <div class="text"><span data-i18n="Take a new Power of Darkness from your playbook">Take a new Power of Darkness from your playbook</span> 
+                <input class="masker" type="hidden" name="attr_check_checkablexpadvance_newpod_1" value="0"/>
+                <div class="checklist2box">
+                  <div class="buttons">
+                    <input class="toggle" type="hidden" name="attr_check_checkablexpadvance_newpod_1" value="0"/>
+                    <button class="checked" type="action" name="act_unchecklist" value="checkablexpadvance_newpod_1"></button>
+                    <button class="unchecked" type="action" name="act_checklist" value="checkablexpadvance_newpod_1"></button>
+                  </div>
+                  <div class="text"><span data-i18n="Take a new Power of Darkness from your playbook">Take a new Power of Darkness from your playbook</span> 
+                  </div>
+                </div>
+                <input class="masker" type="hidden" name="attr_check_checkablexpadvance_5" value="0"/>
+                <div class="checklist2box">
+                  <div class="buttons">
+                    <input class="toggle" type="hidden" name="attr_check_checkablexpadvance_5" value="0"/>
+                    <button class="checked" type="action" name="act_unchecklist" value="checkablexpadvance_5"></button>
+                    <button class="unchecked" type="action" name="act_checklist" value="checkablexpadvance_5"></button>
+                  </div>
+                  <div class="text"><span data-i18n="Change your playbook">Change your playbook</span> 
+                  </div>
                 </div>
               </div>
-              <input class="masker" type="hidden" name="attr_check_checkablexpadvance_7" value="0"/>
-              <div class="checklist2box">
-                <div class="buttons">
-                  <input class="toggle" type="hidden" name="attr_check_checkablexpadvance_7" value="0"/>
-                  <button class="checked" type="action" name="act_unchecklist" value="checkablexpadvance_7"></button>
-                  <button class="unchecked" type="action" name="act_checklist" value="checkablexpadvance_7"></button>
-                </div>
-                <div class="text"><span data-i18n="Change your playbook">Change your playbook</span> 
-                </div>
+              <div><span class="bold" data-i18n="Unused">Unused</span> <span class="bold" data-i18n="Advances">Advances</span> 
+                <input class="fillme narrower" type="number" min="0" value="0" name="attr_unused_xp_advances"/><br/><span class="italic footnote" data-i18n="Not ready to make a decision? Note an earned advance here, and come back to spend it later when you're ready to decide." style="line-height: 8px;">Not ready to make a decision? Note an earned advance here, and come back to spend it later when you're ready to decide.</span> 
               </div>
             </div>
           </div><a name="headerruin_advances"></a>
           <div class="subheader"><span class="title" data-i18n="Ruin Advances">Ruin Advances</span> 
+            <!-- if dismiss is true and selectable is false, we're good to go-->
+            <!-- if dismiss is true and selectable is true, we want to expose the dismiss option only if the item is not *currently* selected-->
             <input class="toggle" type="hidden" name="attr_expand_ruin_advances" value="1"/>
             <button class="contract hfade" type="action" name="act_contract" value="ruin_advances"></button>
             <button class="expand hfade" type="action" name="act_expand" value="ruin_advances"></button>
@@ -1739,43 +2000,88 @@ on("clicked:spenddark", function(event) {
                 <div class="text"><span data-i18n="Take Ruin Move from another playbook">Take Ruin Move from another playbook</span> 
                 </div>
               </div>
-              <input class="masker" type="hidden" name="attr_check_checkableruinadvance_5" value="0"/>
-              <input class="masker" type="hidden" name="attr_check_checkableruinadvance_6" value="0"/>
+              <input class="masker" type="hidden" name="attr_check_checkableruinadvance_permmark_1" value="0"/>
+              <input class="masker" type="hidden" name="attr_check_checkableruinadvance_permmark_2" value="0"/>
               <div class="checklist2box">
                 <div class="buttons">
-                  <input class="toggle" type="hidden" name="attr_check_checkableruinadvance_5" value="0"/>
-                  <button class="checked tightright" type="action" name="act_unchecklist" value="checkableruinadvance_5"></button>
-                  <button class="unchecked tightright" type="action" name="act_checklist" value="checkableruinadvance_5"></button>
-                  <input class="toggle" type="hidden" name="attr_check_checkableruinadvance_6" value="0"/>
-                  <button class="checked" type="action" name="act_unchecklist" value="checkableruinadvance_6"></button>
-                  <button class="unchecked" type="action" name="act_checklist" value="checkableruinadvance_6"></button>
+                  <input class="toggle" type="hidden" name="attr_check_checkableruinadvance_permmark_1" value="0"/>
+                  <button class="checked tightright" type="action" name="act_unchecklist" value="checkableruinadvance_permmark_1"></button>
+                  <button class="unchecked tightright" type="action" name="act_checklist" value="checkableruinadvance_permmark_1"></button>
+                  <input class="toggle" type="hidden" name="attr_check_checkableruinadvance_permmark_2" value="0"/>
+                  <button class="checked" type="action" name="act_unchecklist" value="checkableruinadvance_permmark_2"></button>
+                  <button class="unchecked" type="action" name="act_checklist" value="checkableruinadvance_permmark_2"></button>
                 </div>
                 <div class="text"><span data-i18n="Permanently mark a Condition">Permanently mark a Condition</span> 
                 </div>
               </div>
-              <input class="masker" type="hidden" name="attr_check_checkableruinadvance_7" value="0"/>
-              <input class="masker" type="hidden" name="attr_check_checkableruinadvance_8" value="0"/>
+              <input class="masker" type="hidden" name="attr_check_checkableruinadvance_newruincon_1" value="0"/>
+              <input class="masker" type="hidden" name="attr_check_checkableruinadvance_newruincon_2" value="0"/>
               <div class="checklist2box">
                 <div class="buttons">
-                  <input class="toggle" type="hidden" name="attr_check_checkableruinadvance_7" value="0"/>
-                  <button class="checked tightright" type="action" name="act_unchecklist" value="checkableruinadvance_7"></button>
-                  <button class="unchecked tightright" type="action" name="act_checklist" value="checkableruinadvance_7"></button>
-                  <input class="toggle" type="hidden" name="attr_check_checkableruinadvance_8" value="0"/>
-                  <button class="checked" type="action" name="act_unchecklist" value="checkableruinadvance_8"></button>
-                  <button class="unchecked" type="action" name="act_checklist" value="checkableruinadvance_8"></button>
+                  <input class="toggle" type="hidden" name="attr_check_checkableruinadvance_newruincon_1" value="0"/>
+                  <button class="checked tightright" type="action" name="act_unchecklist" value="checkableruinadvance_newruincon_1"></button>
+                  <button class="unchecked tightright" type="action" name="act_checklist" value="checkableruinadvance_newruincon_1"></button>
+                  <input class="toggle" type="hidden" name="attr_check_checkableruinadvance_newruincon_2" value="0"/>
+                  <button class="checked" type="action" name="act_unchecklist" value="checkableruinadvance_newruincon_2"></button>
+                  <button class="unchecked" type="action" name="act_checklist" value="checkableruinadvance_newruincon_2"></button>
                 </div>
                 <div class="text"><span data-i18n="Gain a new Ruin Condition">Gain a new Ruin Condition</span> 
                 </div>
               </div>
-              <input class="masker" type="hidden" name="attr_check_checkableruinadvance_9" value="0"/>
+              <div>
+                <input class="view" type="hidden" name="attr_check_checkableruinadvance_newruincon_1" value="0"/>
+                <div class="viewable">
+                  <div class="checklist2box">
+                    <div class="buttons"></div>
+                    <div class="text">
+                      <select name="attr_ruincon1">
+                        <option value="" data-i18n="Gain a new Ruin Condition"></option>
+                        <option value="Cruel" data-i18n="Cruel">Cruel</option>
+                        <option value="Fragile" data-i18n="Fragile">Fragile</option>
+                        <option value="Guilty" data-i18n="Guilty">Guilty</option>
+                        <option value="Haunted" data-i18n="Haunted">Haunted</option>
+                        <option value="Paranoid" data-i18n="Paranoid">Paranoid</option>
+                        <option value="Possessive" data-i18n="Possessive">Possessive</option>
+                        <option value="Ruthless" data-i18n="Ruthless">Ruthless</option>
+                        <option value="Reckless" data-i18n="Reckless">Reckless</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <input class="view" type="hidden" name="attr_check_checkableruinadvance_newruincon_2" value="0"/>
+                <div class="viewable">
+                  <div class="checklist2box">
+                    <div class="buttons"></div>
+                    <div class="text">
+                      <select name="attr_ruincon2">
+                        <option value="" data-i18n="Gain a new Ruin Condition"></option>
+                        <option value="Cruel" data-i18n="Cruel">Cruel</option>
+                        <option value="Fragile" data-i18n="Fragile">Fragile</option>
+                        <option value="Guilty" data-i18n="Guilty">Guilty</option>
+                        <option value="Haunted" data-i18n="Haunted">Haunted</option>
+                        <option value="Paranoid" data-i18n="Paranoid">Paranoid</option>
+                        <option value="Possessive" data-i18n="Possessive">Possessive</option>
+                        <option value="Ruthless" data-i18n="Ruthless">Ruthless</option>
+                        <option value="Reckless" data-i18n="Reckless">Reckless</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <input class="masker" type="hidden" name="attr_check_checkableruinadvance_5" value="0"/>
               <div class="checklist2box">
                 <div class="buttons">
-                  <input class="toggle" type="hidden" name="attr_check_checkableruinadvance_9" value="0"/>
-                  <button class="checked" type="action" name="act_unchecklist" value="checkableruinadvance_9"></button>
-                  <button class="unchecked" type="action" name="act_checklist" value="checkableruinadvance_9"></button>
+                  <input class="toggle" type="hidden" name="attr_check_checkableruinadvance_5" value="0"/>
+                  <button class="checked" type="action" name="act_unchecklist" value="checkableruinadvance_5"></button>
+                  <button class="unchecked" type="action" name="act_checklist" value="checkableruinadvance_5"></button>
                 </div>
                 <div class="text"><span data-i18n="Retire your character. You become a Harbinger of the apocalypse.">Retire your character. You become a Harbinger of the apocalypse.</span> 
                 </div>
+              </div>
+              <div><span class="bold" data-i18n="Unused">Unused</span> <span class="bold" data-i18n="Advances">Advances</span> 
+                <input class="fillme narrower" type="number" min="0" value="0" name="attr_unused_ruin_advances"/><br/><span class="italic footnote" data-i18n="Not ready to make a decision? Note an earned advance here, and come back to spend it later when you're ready to decide." style="line-height: 8px;">Not ready to make a decision? Note an earned advance here, and come back to spend it later when you're ready to decide.</span> 
               </div>
             </div>
           </div>
@@ -1784,6 +2090,8 @@ on("clicked:spenddark", function(event) {
     </div>
     <div class="wide"><a name="headermoves"></a>
       <div class="header"><span class="title" data-i18n="Moves">Moves</span> 
+        <!-- if dismiss is true and selectable is false, we're good to go-->
+        <!-- if dismiss is true and selectable is true, we want to expose the dismiss option only if the item is not *currently* selected-->
         <input class="toggle" type="hidden" name="attr_expand_moves" value="1"/>
         <button class="contract hfade" type="action" name="act_contract" value="moves"></button>
         <button class="expand hfade" type="action" name="act_expand" value="moves"></button>
@@ -1844,6 +2152,8 @@ on("clicked:spenddark", function(event) {
                 <input class="toggle" type="hidden" name="attr_check_pbchecked" value="0"/>
                 <button class="checked hfade" type="action" name="act_uncheck" value="pbchecked"></button>
                 <button class="unchecked hfade" type="action" name="act_check" value="pbchecked"></button>
+                <!-- if dismiss is true and selectable is false, we're good to go-->
+                <!-- if dismiss is true and selectable is true, we want to expose the dismiss option only if the item is not *currently* selected-->
                 <input class="toggle" type="hidden" name="attr_expand_playbook_moves" value="1"/>
                 <button class="contract hfade" type="action" name="act_contract" value="playbook_moves"></button>
                 <button class="expand hfade" type="action" name="act_expand" value="playbook_moves"></button>
@@ -1953,6 +2263,8 @@ on("clicked:spenddark", function(event) {
                 </div>
               </div><a name="headerruin_moves"></a>
               <div class="subheader"><span class="title" data-i18n="Ruin Moves">Ruin Moves</span> 
+                <!-- if dismiss is true and selectable is false, we're good to go-->
+                <!-- if dismiss is true and selectable is true, we want to expose the dismiss option only if the item is not *currently* selected-->
                 <input class="toggle" type="hidden" name="attr_expand_ruin_moves" value="1"/>
                 <button class="contract hfade" type="action" name="act_contract" value="ruin_moves"></button>
                 <button class="expand hfade" type="action" name="act_expand" value="ruin_moves"></button>
@@ -1971,6 +2283,8 @@ on("clicked:spenddark", function(event) {
                 </div>
               </div><a name="headerdivision_moves"></a>
               <div class="subheader"><span class="title" data-i18n="DIVISION Moves">DIVISION Moves</span> 
+                <!-- if dismiss is true and selectable is false, we're good to go-->
+                <!-- if dismiss is true and selectable is true, we want to expose the dismiss option only if the item is not *currently* selected-->
                 <input class="toggle" type="hidden" name="attr_expand_division_moves" value="1"/>
                 <button class="contract hfade" type="action" name="act_contract" value="division_moves"></button>
                 <button class="expand hfade" type="action" name="act_expand" value="division_moves"></button>
@@ -1981,6 +2295,8 @@ on("clicked:spenddark", function(event) {
                 </div>
               </div><a name="headerbasic_moves"></a>
               <div class="subheader"><span class="title" data-i18n="Basic Moves">Basic Moves</span> 
+                <!-- if dismiss is true and selectable is false, we're good to go-->
+                <!-- if dismiss is true and selectable is true, we want to expose the dismiss option only if the item is not *currently* selected-->
                 <input class="toggle" type="hidden" name="attr_expand_basic_moves" value="1"/>
                 <button class="contract hfade" type="action" name="act_contract" value="basic_moves"></button>
                 <button class="expand hfade" type="action" name="act_expand" value="basic_moves"></button>
@@ -1997,7 +2313,8 @@ on("clicked:spenddark", function(event) {
                 <input class="view" type="hidden" name="attr_view_sometimes__i_get_angry" value="0"/>
                 <div class="viewable"><a name="headersometimes__i_get_angry"></a>
                   <div class="subheader"><span class="title" data-i18n="Sometimes, I Get Angry">Sometimes, I Get Angry</span> 
-                    <button class="dismiss hfade" type="action" name="act_unview" value="sometimes__i_get_angry"></button>&nbsp;
+                    <!-- if dismiss is true and selectable is false, we're good to go-->
+                    <!-- if dismiss is true and selectable is true, we want to expose the dismiss option only if the item is not *currently* selected-->
                     <input class="toggle" type="hidden" name="attr_expand_sometimes__i_get_angry" value="1"/>
                     <button class="contract hfade" type="action" name="act_contract" value="sometimes__i_get_angry"></button>
                     <button class="expand hfade" type="action" name="act_expand" value="sometimes__i_get_angry"></button>
@@ -2005,6 +2322,8 @@ on("clicked:spenddark", function(event) {
                   <div class="section">
                     <input class="rollup" type="hidden" name="attr_expand_sometimes__i_get_angry" value="1"/>
                     <div class="section roller">
+                      <div class="footnote italic rightwards"><span data-i18n="summoned">summoned</span> 
+                      </div>
                       <p><span class="trigger"><span data-i18n="When you">When you</span> <span>
                             <input class="toggle" type="hidden" name="attr_view_unleash_the_dark" value="0"/><a class="icon document" href="#headerunleash_the_dark"><span class="movename bold" data-i18n="Unleash the Dark">Unleash the Dark</span> </a><span class="movename bold term" data-i18n="Unleash the Dark">Unleash the Dark</span> </span><span data-i18n="through anger and violence,">through anger and violence,</span> </span><span data-i18n="take">take</span> 
                         <button class="enact colorized" type="action" name="act_adddark" value="3"><span class="bold">3&nbsp;</span><span class="bold" data-i18n="Darkness Tokens">Darkness Tokens</span> 
@@ -2021,7 +2340,10 @@ on("clicked:spenddark", function(event) {
                     <input class="toggle" type="hidden" name="attr_check_come_on__tough_guy" value="0"/>
                     <button class="checked hfade" type="action" name="act_uncheck" value="come_on__tough_guy"></button>
                     <button class="unchecked hfade" type="action" name="act_check" value="come_on__tough_guy"></button><span class="title" data-i18n="Come On, Tough Guy">Come On, Tough Guy</span> 
-                    <button class="dismiss hfade" type="action" name="act_unview" value="come_on__tough_guy"></button>&nbsp;
+                    <!-- if dismiss is true and selectable is false, we're good to go-->
+                    <!-- if dismiss is true and selectable is true, we want to expose the dismiss option only if the item is not *currently* selected--><span>
+                      <input class="antiview" type="hidden" name="attr_check_come_on__tough_guy" value="0"/><span class="viewable">
+                        <button class="dismiss hfade" type="action" name="act_unview" value="come_on__tough_guy"></button>&nbsp;</span></span>
                     <input class="toggle" type="hidden" name="attr_expand_come_on__tough_guy" value="1"/>
                     <button class="contract hfade" type="action" name="act_contract" value="come_on__tough_guy"></button>
                     <button class="expand hfade" type="action" name="act_expand" value="come_on__tough_guy"></button>
@@ -2029,6 +2351,8 @@ on("clicked:spenddark", function(event) {
                   <div class="section">
                     <input class="rollup" type="hidden" name="attr_expand_come_on__tough_guy" value="1"/>
                     <div class="section roller">
+                      <div class="footnote italic rightwards"><span data-i18n="summoned">summoned</span> 
+                      </div>
                       <p><span class="trigger" data-i18n="When you go up against a colossal and otherworldly opponent,">When you go up against a colossal and otherworldly opponent,</span> <span data-i18n="tell everyone how you taunt them and keep their attention. Spend Darkness Tokens and roll.">tell everyone how you taunt them and keep their attention. Spend Darkness Tokens and roll.</span> 
                         <div class="rollspend">
                           <div class="titlebar">
@@ -2116,7 +2440,10 @@ on("clicked:spenddark", function(event) {
                     <input class="toggle" type="hidden" name="attr_check_borrowed_power" value="0"/>
                     <button class="checked hfade" type="action" name="act_uncheck" value="borrowed_power"></button>
                     <button class="unchecked hfade" type="action" name="act_check" value="borrowed_power"></button><span class="title" data-i18n="Borrowed Power">Borrowed Power</span> 
-                    <button class="dismiss hfade" type="action" name="act_unview" value="borrowed_power"></button>&nbsp;
+                    <!-- if dismiss is true and selectable is false, we're good to go-->
+                    <!-- if dismiss is true and selectable is true, we want to expose the dismiss option only if the item is not *currently* selected--><span>
+                      <input class="antiview" type="hidden" name="attr_check_borrowed_power" value="0"/><span class="viewable">
+                        <button class="dismiss hfade" type="action" name="act_unview" value="borrowed_power"></button>&nbsp;</span></span>
                     <input class="toggle" type="hidden" name="attr_expand_borrowed_power" value="1"/>
                     <button class="contract hfade" type="action" name="act_contract" value="borrowed_power"></button>
                     <button class="expand hfade" type="action" name="act_expand" value="borrowed_power"></button>
@@ -2124,6 +2451,8 @@ on("clicked:spenddark", function(event) {
                   <div class="section">
                     <input class="rollup" type="hidden" name="attr_expand_borrowed_power" value="1"/>
                     <div class="section roller">
+                      <div class="footnote italic rightwards"><span data-i18n="summoned">summoned</span> 
+                      </div>
                       <p><span data-i18n="Along the walls of the world beings of twisted power await your bidding.">Along the walls of the world beings of twisted power await your bidding.</span> 
                       </p>
                       <p><span class="trigger" data-i18n="When you summon a creature from another world to help you,">When you summon a creature from another world to help you,</span> <span data-i18n="spend Darkness Tokens and roll.">spend Darkness Tokens and roll.</span> 
@@ -2221,7 +2550,10 @@ on("clicked:spenddark", function(event) {
                     <input class="toggle" type="hidden" name="attr_check_we_re_family_now" value="0"/>
                     <button class="checked hfade" type="action" name="act_uncheck" value="we_re_family_now"></button>
                     <button class="unchecked hfade" type="action" name="act_check" value="we_re_family_now"></button><span class="title" data-i18n="We’re Family Now">We’re Family Now</span> 
-                    <button class="dismiss hfade" type="action" name="act_unview" value="we_re_family_now"></button>&nbsp;
+                    <!-- if dismiss is true and selectable is false, we're good to go-->
+                    <!-- if dismiss is true and selectable is true, we want to expose the dismiss option only if the item is not *currently* selected--><span>
+                      <input class="antiview" type="hidden" name="attr_check_we_re_family_now" value="0"/><span class="viewable">
+                        <button class="dismiss hfade" type="action" name="act_unview" value="we_re_family_now"></button>&nbsp;</span></span>
                     <input class="toggle" type="hidden" name="attr_expand_we_re_family_now" value="1"/>
                     <button class="contract hfade" type="action" name="act_contract" value="we_re_family_now"></button>
                     <button class="expand hfade" type="action" name="act_expand" value="we_re_family_now"></button>
@@ -2229,6 +2561,8 @@ on("clicked:spenddark", function(event) {
                   <div class="section">
                     <input class="rollup" type="hidden" name="attr_expand_we_re_family_now" value="1"/>
                     <div class="section roller">
+                      <div class="footnote italic rightwards"><span data-i18n="summoned">summoned</span> 
+                      </div>
                       <p><span class="trigger" data-i18n="When someone spends">When someone spends</span> <span class="bold term" data-i18n="a Bond">a Bond</span> <span class="trigger" data-i18n="with you to modify a roll by +1 or -1,">with you to modify a roll by +1 or -1,</span> <span data-i18n="they choose:">they choose:</span> 
                         <ul>
                           <li><span data-i18n="The Bond instead grants +3 or a -3 bonus">The Bond instead grants +3 or a -3 bonus</span> 
@@ -2248,7 +2582,10 @@ on("clicked:spenddark", function(event) {
                     <input class="toggle" type="hidden" name="attr_check_everything_for_you__my_love" value="0"/>
                     <button class="checked hfade" type="action" name="act_uncheck" value="everything_for_you__my_love"></button>
                     <button class="unchecked hfade" type="action" name="act_check" value="everything_for_you__my_love"></button><span class="title" data-i18n="Everything For You, My Love">Everything For You, My Love</span> 
-                    <button class="dismiss hfade" type="action" name="act_unview" value="everything_for_you__my_love"></button>&nbsp;
+                    <!-- if dismiss is true and selectable is false, we're good to go-->
+                    <!-- if dismiss is true and selectable is true, we want to expose the dismiss option only if the item is not *currently* selected--><span>
+                      <input class="antiview" type="hidden" name="attr_check_everything_for_you__my_love" value="0"/><span class="viewable">
+                        <button class="dismiss hfade" type="action" name="act_unview" value="everything_for_you__my_love"></button>&nbsp;</span></span>
                     <input class="toggle" type="hidden" name="attr_expand_everything_for_you__my_love" value="1"/>
                     <button class="contract hfade" type="action" name="act_contract" value="everything_for_you__my_love"></button>
                     <button class="expand hfade" type="action" name="act_expand" value="everything_for_you__my_love"></button>
@@ -2256,6 +2593,8 @@ on("clicked:spenddark", function(event) {
                   <div class="section">
                     <input class="rollup" type="hidden" name="attr_expand_everything_for_you__my_love" value="1"/>
                     <div class="section roller">
+                      <div class="footnote italic rightwards"><span data-i18n="summoned">summoned</span> 
+                      </div>
                       <p><span class="trigger" data-i18n="When you are about to mark your fifth box of Ruin,">When you are about to mark your fifth box of Ruin,</span> <span class="bold" data-i18n="you may choose to declare your love for the first time, or describe how love has changed you.">you may choose to declare your love for the first time, or describe how love has changed you.</span> <span data-i18n="Tell everyone how you bare your heart for all to see, spend Darkness Tokens and roll.">Tell everyone how you bare your heart for all to see, spend Darkness Tokens and roll.</span> 
                         <div class="rollspend">
                           <div class="titlebar">
@@ -2341,7 +2680,10 @@ on("clicked:spenddark", function(event) {
                     <input class="toggle" type="hidden" name="attr_check_together_we_are_destiny" value="0"/>
                     <button class="checked hfade" type="action" name="act_uncheck" value="together_we_are_destiny"></button>
                     <button class="unchecked hfade" type="action" name="act_check" value="together_we_are_destiny"></button><span class="title" data-i18n="Together We Are Destiny">Together We Are Destiny</span> 
-                    <button class="dismiss hfade" type="action" name="act_unview" value="together_we_are_destiny"></button>&nbsp;
+                    <!-- if dismiss is true and selectable is false, we're good to go-->
+                    <!-- if dismiss is true and selectable is true, we want to expose the dismiss option only if the item is not *currently* selected--><span>
+                      <input class="antiview" type="hidden" name="attr_check_together_we_are_destiny" value="0"/><span class="viewable">
+                        <button class="dismiss hfade" type="action" name="act_unview" value="together_we_are_destiny"></button>&nbsp;</span></span>
                     <input class="toggle" type="hidden" name="attr_expand_together_we_are_destiny" value="1"/>
                     <button class="contract hfade" type="action" name="act_contract" value="together_we_are_destiny"></button>
                     <button class="expand hfade" type="action" name="act_expand" value="together_we_are_destiny"></button>
@@ -2349,6 +2691,8 @@ on("clicked:spenddark", function(event) {
                   <div class="section">
                     <input class="rollup" type="hidden" name="attr_expand_together_we_are_destiny" value="1"/>
                     <div class="section roller">
+                      <div class="footnote italic rightwards"><span data-i18n="summoned">summoned</span> 
+                      </div>
                       <p><span class="trigger" data-i18n="When you seek to defy your prophecy,">When you seek to defy your prophecy,</span> <span class="bold" data-i18n="declare a new destiny.">declare a new destiny.</span> <span data-i18n="Ask each other player if they will defy prophecy with you. Roll, adding +1 for each player who says yes, to a maximum of +3. You cannot spend Darkness Tokens on this roll.">Ask each other player if they will defy prophecy with you. Roll, adding +1 for each player who says yes, to a maximum of +3. You cannot spend Darkness Tokens on this roll.</span> 
                         <div class="rollspend">
                           <div class="titlebar">
@@ -2435,11 +2779,29 @@ on("clicked:spenddark", function(event) {
                   </div>
                 </div>
               </div>
+              <div class="centered">
+                <input class="clocksize" name="attr__y__ower__ade__lesh_clocksize" type="hidden" value="12"/>
+                <input class="clocksegment" name="attr__y__ower__ade__lesh_clocksegment" type="hidden" value="0"/>
+                <div class="doomclock">
+                  <div class="clockcontrol">
+                    <div>
+                      <div style="text-align: center;">
+                        <button class="counterclockwise" type="action" name="act_reduceclock" value="_y__ower__ade__lesh"></button>
+                        <button class="clockwise" type="action" name="act_addclock" value="_y__ower__ade__lesh"></button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="clocktitle">My Power Made Flesh&nbsp;(<span name="attr__y__ower__ade__lesh_clocksegment"></span>/<span name="attr__y__ower__ade__lesh_clocksize"></span>)&nbsp;
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div><a name="headernotes"></a>
       <div class="header"><span class="title" data-i18n="Notes">Notes</span> 
+        <!-- if dismiss is true and selectable is false, we're good to go-->
+        <!-- if dismiss is true and selectable is true, we want to expose the dismiss option only if the item is not *currently* selected-->
         <input class="toggle" type="hidden" name="attr_expand_notes" value="1"/>
         <button class="contract hfade" type="action" name="act_contract" value="notes"></button>
         <button class="expand hfade" type="action" name="act_expand" value="notes"></button>
@@ -2476,6 +2838,8 @@ on("clicked:spenddark", function(event) {
         </div>
         <div class="wide"><a name="headerbio"></a>
           <div class="header"><span class="title" data-i18n="Bio">Bio</span> 
+            <!-- if dismiss is true and selectable is false, we're good to go-->
+            <!-- if dismiss is true and selectable is true, we want to expose the dismiss option only if the item is not *currently* selected-->
             <input class="toggle" type="hidden" name="attr_expand_bio" value="1"/>
             <button class="contract hfade" type="action" name="act_contract" value="bio"></button>
             <button class="expand hfade" type="action" name="act_expand" value="bio"></button>

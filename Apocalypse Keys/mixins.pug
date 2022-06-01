@@ -36,16 +36,26 @@ mixin briefmove(movekey,pb,check)
 					+translate(pb)
 					| )
 
-mixin move(movekey,selectable)
+// movekey: text of the move name, which is converted to a key for fields
+// context: the (prior-to-translation) text indicating context, such as playbook name
+// selectable: it can have a checkbox to be selected or not
+// dismissable: it can be dismissed from view
+
+mixin move(movekey,context,selectable,dismissable)
 	- var movetext = movekey
 	- movekey = movekey.toLowerCase();
 	- movekey = movekey.replace(/[^a-z0-9]/g,"_");
 	- if ( typeof(selectable) == "undefined" || selectable == "" ) { selectable = false; } else { selectable = true; }
+	- if ( typeof(dismissable) == "undefined" || dismissable == "" ) { dismissable = false; } else { dismissable = true; }
+	- if ( typeof(context) == "undefined" ) { context = ""; }
 	.section
 		a(name="jumpmove_"+movekey)
 		input(type='hidden' name='attr_view_'+movekey value='0' class='view')
 		.viewable
-			+expandablesub(movetext,'dismiss','',selectable)
+			+expandablesub(movetext,dismissable,'',selectable)
+				if ( context !== "" )
+					.footnote.italic.rightwards
+						+translate(context)
 				block
 
 mixin headlink(t,k)
@@ -55,6 +65,8 @@ mixin headlink(t,k)
 	- key = key.replace(/[^a-z0-9]/g,"_");
 	a(href="#header"+key)&attributes(attributes)
 		+translate(t)
+
+// checkerbox is specific to hiding-all-moves-that-have-been-not-checked, see ApocalypseKeys.pug for the +expandablesub for Playbook Moves
 
 mixin expandable(t,s,dismiss,checkerbox,selectable)
 	- var key = t;
@@ -75,9 +87,17 @@ mixin expandable(t,s,dismiss,checkerbox,selectable)
 			input(type='hidden' name="attr_check_"+checkerbox value="0" class="toggle")
 			button.checked.hfade(type='action' name='act_uncheck' value=checkerbox)
 			button.unchecked.hfade(type='action' name='act_check' value=checkerbox)
-		if ( dismiss )
+		// if dismiss is true and selectable is false, we're good to go
+		if ( dismiss && ! selectable )
 			button.dismiss.hfade(type='action' name='act_unview' value=key)
 			| &nbsp;
+		// if dismiss is true and selectable is true, we want to expose the dismiss option only if the item is not *currently* selected
+		if ( dismiss && selectable )
+			span
+				input(type='hidden' name="attr_check_"+key value="0" class="antiview")
+				span.viewable
+					button.dismiss.hfade(type='action' name='act_unview' value=key)
+					| &nbsp;
 		input(type='hidden' name="attr_expand_"+key value="1" class="toggle")
 		button.contract.hfade(type='action' name='act_contract' value=key)
 		button.expand.hfade(type='action' name='act_expand' value=key)
@@ -223,10 +243,10 @@ mixin minihead(title)
 	div
 		block
 
-- var checkables = { "": 0 };
 mixin checkable(item,updatefield,checkgroup)
 	+multicheckable(item,1,updatefield,checkgroup)
 
+- var checkables = { "": 0 };
 mixin multicheckable(item,qty,updatefield,checkgroup,maxq)
 	- if ( typeof(checkgroup) == "undefined" ) { checkgroup = ""; }
 	- if ( typeof(checkables[checkgroup]) == "undefined" ) { checkables[checkgroup] = 0; }
@@ -256,10 +276,10 @@ mixin multicheckable(item,qty,updatefield,checkgroup,maxq)
 		div.text
 			+translate(item)
 
-- var blankcons = 0;
+- var blankcons = { "": 0 }; 
 mixin condition(con,blank,locked)
 	- var key = con;
-	- if ( typeof(blank) == "undefined" || blank == "" ) { blank = false; } else { var bpre = ""; if ( blank != true ) { bpre = blank; blank = true; } blankcons = blankcons + 1; key = "blank"+bpre+blankcons; }
+	- if ( typeof(blank) == "undefined" || blank == "" ) { blank = false; } else { var bpre = ""; if ( blank != true ) { bpre = blank; blank = true; if ( typeof(blankcons[bpre]) == "undefined") { blankcons[bpre] = 0; } } blankcons[bpre] = blankcons[bpre] + 1; key = "blank"+bpre+blankcons[bpre]; }
 	- if ( typeof(locked) == "undefined" || locked == "" ) { locked = false; } else { locked == true; }
 	- key = key.toLowerCase();
 	- key = key.replace(/[^a-z0-9]/g,"_");
@@ -272,18 +292,36 @@ mixin condition(con,blank,locked)
 				input(type='hidden' name="attr_check_"+ckey value="1")
 				span.icon.checked
 			- else
-				input(type='hidden' name="attr_check_"+ckey value="0" class="toggle")
-				- if ( blank )
-					button.checked(type='action' name='act_unchecklist' value=ckey+"|current_conditions=>"+bkey)
-					button.unchecked(type='action' name='act_checklist' value=ckey+"|current_conditions=>"+bkey)
-				- else
-					button.checked(type='action' name='act_unchecklist' value=ckey+"|current_conditions="+con)
-					button.unchecked(type='action' name='act_checklist' value=ckey+"|current_conditions="+con)
+				input(type='hidden' name='attr_lock_'+ckey value="0" class='toggle')
+				div
+					span.icon.checked
+				div
+					input(type='hidden' name="attr_check_"+ckey value="0" class="toggle")
+					- if ( blank )
+						button.checked(type='action' name='act_unchecklist' value=ckey+"|current_conditions=>"+bkey)
+						button.unchecked(type='action' name='act_checklist' value=ckey+"|current_conditions=>"+bkey)
+					- else
+						button.checked(type='action' name='act_unchecklist' value=ckey+"|current_conditions="+con)
+						button.unchecked(type='action' name='act_checklist' value=ckey+"|current_conditions="+con)
 		div.conditiontext
 			- if ( blank ) 
-				input(type='text' name="attr_"+bkey)
+				- if ( locked )
+					input(type='hidden' name="attr_"+bkey)
+					span(name='attr_'+bkey)
+				- else
+					input(type='text' name="attr_"+bkey)
 			- else
 				+translate(con)
+		div.buttons
+			- if ( locked )
+				// Simply establish that this field is always checked, but don't provide buttons to make it toggle-able.
+				span.icon.locked
+			- else 
+				input(type='hidden' name="attr_check_"+ckey value="0" class="view")
+				div.viewable
+					input(type='hidden' name='attr_lock_'+ckey value="0" class="toggle")
+					button.locked(type='action' name='act_unlock' value=ckey)
+					button.unlocked(type='action' name='act_lock' value=ckey)
 
 mixin xp(n)
 	button.enact.colorized(type='action' name='act_addxp' value=n)
@@ -350,3 +388,38 @@ mixin movelink(t)
 		a(href="#header"+key)(class="icon document")
 			+translate(t)(class="movename bold")
 		+translate(t)(class="movename bold term")
+
+- var clockcount = 0;
+mixin doomclock(size,marked,name,translate)
+	- if ( typeof(translate) == "undefined" || translate == "" ) { translate = false; } else { translate = true; }
+	- var ckey;
+	- if ( typeof(name) == "undefined" || name == "" ) { clockcount++; ckey = "clock"+clockcount; name = ""; } 
+	- else { ckey = name.toLowerCase(); ckey = name.replace(/[^a-z0-9]/g,"_"); }
+	- var cs = false;
+	- if ( size == "select" ) { cs = true; size = 2; }
+	div.centered
+		input.clocksize(name="attr_"+ckey+"_clocksize" type="hidden" value=size)
+		input.clocksegment(name="attr_"+ckey+"_clocksegment" type="hidden" value=marked)
+		.doomclock
+			.clockcontrol
+				div
+					div(style="text-align: center;")
+						button.counterclockwise(type="action" name="act_reduceclock" value=ckey)
+						button.clockwise(type="action" name="act_addclock" value=ckey)
+						if cs
+							br
+							select(name="attr_"+ckey+"_clocksize" style="width: 3em")
+								- var clocks = 0;
+								while clocks < 12
+									- clocks = clocks + 2;
+									option(value=clocks) #{clocks}
+		.clocktitle
+			if translate
+				+translate(name)
+			else
+				|#{name}
+			|&nbsp;(
+			span(name="attr_"+ckey+"_clocksegment")
+			|/
+			span(name="attr_"+ckey+"_clocksize")
+			|)&nbsp;

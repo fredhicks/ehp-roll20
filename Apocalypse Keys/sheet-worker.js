@@ -161,7 +161,7 @@ on("clicked:unchecklist", function(event) {
 });
 
 
-on("change:condition_blank1_text change:condition_blank2_text change:condition_blank3_text change:condition_blank4_text change:condition_blank5_text change:condition_blank6_text", function(event) {
+on("change:condition_blankruincon1_text change:condition_blankruincon2_text change:condition_hungry1_text change:condition_hungry2_text change:condition_hungry3_text", function(event) {
 		log(event);
 		var field = event.sourceAttribute; // condition_blank?_text
 		var cfield = "check_" + field.replace("_text",""); // check_condition_blank?
@@ -196,6 +196,25 @@ on("change:condition_blank1_text change:condition_blank2_text change:condition_b
 		});
 });
 
+on("clicked:lock", function(event) {
+	var what = event.htmlAttributes.value;
+	var atname = "lock_" + what;
+	var ats = {};
+	ats[atname] = 1;
+	setAttrs(ats);
+	log(ats);
+	log(what + " lock");
+});
+
+on("clicked:unlock", function(event) {
+	var what = event.htmlAttributes.value;
+	var atname = "lock_" + what;
+	var ats = {};
+	ats[atname] = 0;
+	setAttrs(ats);
+	log(ats);
+	log(what + " unlock");
+});
 
 on("clicked:view", function(event) {
 	var what = event.htmlAttributes.value;
@@ -513,4 +532,44 @@ on("clicked:spenddark", function(event) {
 	});
 });
 
+on("clicked:addclock", function(event) {
+	var fpre = event.htmlAttributes.value;
+	var fsize = fpre + "_clocksize";
+	var fseg = fpre + "_clocksegment";
+	var ats = {};
+	getAttrs([fsize,fseg], function(v) {
+		var size = parseInt(v[fsize])||2;
+		var seg = parseInt(v[fseg])||0;
+		seg++;
+		if ( seg > size ) { seg = size; }
+		ats[fseg] = seg; ats[fsize] = size;
+		setAttrs(ats);
+	});
+});
+
+on("clicked:reduceclock", function(event) {
+	var fpre = event.htmlAttributes.value;
+	var fsize = fpre + "_clocksize";
+	var fseg = fpre + "_clocksegment";
+	var ats = {};
+	getAttrs([fsize,fseg], function(v) {
+		var size = parseInt(v[fsize])||2;
+		var seg = parseInt(v[fseg])||0;
+		seg--;
+		if ( seg > size ) { seg = size-1; } // always reduce off the max
+		if ( seg < 0 ) { seg = 0; }
+		ats[fseg] = seg; ats[fsize] = size;
+		setAttrs(ats);
+	});
+});
+
+// attr_ruincon1 vs attr_condition_blankruincon1_text
+on("change:ruincon1 change:ruincon2", function(event) {
+	var nv = "";
+	if ( typeof(event.newValue) != "undefined" ) { nv = event.newValue; }
+	var na = "condition_blank"+event.sourceAttribute+"_text";
+	var ats = {};
+	ats[na] = nv; 
+	setAttrs(ats);
+});
 

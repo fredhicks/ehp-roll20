@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0");
 @import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,700;1,400;1,700&display=swap");
-:root, .sheet-rolltemplate-2d6-roll {
+:root, .sheet-rolltemplate-2d6-roll, .sheet-rolltemplate-bondspend {
 	--ak-fg: black;
 	--ak-bg: white;
 	--ak-pink: #82174a;
@@ -17,6 +17,9 @@
 	--ak-lightpink: #e5668e;
 	--ak-pink: #bd66e5;
 	--ak-alert: #08c1c4;
+}
+.sheet-darkmode .ui-dialog .charsheet .doomclock, .sheet-rolltemplate-darkmode .ui-dialog .charsheet .doomclock {
+	background-image: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/art/alldoom-darkmode.svg);
 }
 
 p,
@@ -65,6 +68,10 @@ p,
 
 .sheet-darkmode .ui-dialog .charsheet .wrapper {
 	margin-top: 0px;
+}
+
+.rightwards {
+	text-align: right;
 }
 
 .ui-dialog .charsheet ul {
@@ -119,6 +126,8 @@ p,
 	-webkit-box-shadow: unset;
 	        box-shadow: unset;
 	vertical-align: unset;
+	/* &.counterclockwise
+	* transform: scale(-1,1) */
 }
 .ui-dialog .charsheet button[type=roll]:before, .ui-dialog .charsheet button[type=action]:before, .ui-dialog .charsheet .icon:before {
 	content: "";
@@ -167,10 +176,16 @@ p,
 	content: "}";
 }
 .ui-dialog .charsheet button[type=roll].locked:before, .ui-dialog .charsheet button[type=action].locked:before, .ui-dialog .charsheet .icon.locked:before {
-	content: "(";
+	font-family: "Material Symbols Outlined";
+	content: "lock";
+	font-size: 110%;
+	vertical-align: -4px;
 }
 .ui-dialog .charsheet button[type=roll].unlocked:before, .ui-dialog .charsheet button[type=action].unlocked:before, .ui-dialog .charsheet .icon.unlocked:before {
-	content: ")";
+	font-family: "Material Symbols Outlined";
+	content: "no_encryption";
+	font-size: 110%;
+	vertical-align: -4px;
 }
 .ui-dialog .charsheet button[type=roll].dice:before, .ui-dialog .charsheet button[type=action].dice:before, .ui-dialog .charsheet .icon.dice:before {
 	content: "FA";
@@ -221,9 +236,14 @@ p,
 	content: "density_small";
 	vertical-align: -3px;
 }
-.ui-dialog .charsheet button[type=roll].add:before, .ui-dialog .charsheet button[type=action].add:before, .ui-dialog .charsheet .icon.add:before {
+.ui-dialog .charsheet button[type=roll].clockwise:before, .ui-dialog .charsheet button[type=action].clockwise:before, .ui-dialog .charsheet .icon.clockwise:before {
 	font-family: "Material Symbols Outlined";
-	content: "add";
+	content: "add_circle";
+	vertical-align: -2px;
+}
+.ui-dialog .charsheet button[type=roll].counterclockwise:before, .ui-dialog .charsheet button[type=action].counterclockwise:before, .ui-dialog .charsheet .icon.counterclockwise:before {
+	font-family: "Material Symbols Outlined";
+	content: "do_not_disturb_on";
 	vertical-align: -2px;
 }
 .ui-dialog .charsheet button[type=roll].enact:before, .ui-dialog .charsheet button[type=action].enact:before, .ui-dialog .charsheet .icon.enact:before {
@@ -261,6 +281,9 @@ p,
 .ui-dialog .charsheet input[type=text]:hover, .ui-dialog .charsheet input[type=number]:hover, .ui-dialog .charsheet select:hover {
 	border-bottom: 1px solid var(--ak-fg);
 }
+.ui-dialog .charsheet input.fillme {
+	border-bottom: 1px solid var(--ak-pink);
+}
 .ui-dialog .charsheet input.bigname {
 	font-family: "Amatic SC", cursive;
 	font-weight: 700;
@@ -279,6 +302,12 @@ p,
 }
 .ui-dialog .charsheet input.nullview ~ .viewable {
 	display: initial;
+}
+.ui-dialog .charsheet input.antiview[value="0"] ~ .viewable {
+	display: initial;
+}
+.ui-dialog .charsheet input.antiview ~ .viewable {
+	display: none;
 }
 .ui-dialog .charsheet .columns, .ui-dialog .charsheet .topline {
 	display: -webkit-box;
@@ -627,6 +656,9 @@ p,
 .ui-dialog .charsheet .trigger, .ui-dialog .charsheet .term, .ui-dialog .charsheet .bold {
 	font-weight: bold;
 }
+.ui-dialog .charsheet .italic {
+	font-style: italic;
+}
 .ui-dialog .charsheet .trigger, .ui-dialog .charsheet .term {
 	color: var(--ak-pink);
 }
@@ -670,6 +702,12 @@ p,
 	border-bottom: 1px solid var(--ak-pink);
 	width: 100%;
 }
+.ui-dialog .charsheet .conditions .checklist1box .buttons .unlocked {
+	display: none;
+}
+.ui-dialog .charsheet .conditions .checklist1box:hover .buttons input.toggle[value="0"] ~ .unlocked {
+	display: initial;
+}
 .ui-dialog .charsheet .conditiontext {
 	text-transform: capitalize;
 }
@@ -692,6 +730,202 @@ p,
 }
 .ui-dialog .charsheet button.topspace {
 	margin-top: 6px;
+}
+.ui-dialog .charsheet .doomclock {
+	display: inline-block;
+	min-height: 160px;
+	min-width: 160px;
+	height: 160px;
+	width: 160px;
+	margin-bottom: 0px;
+	background-image: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/art/alldoom.svg);
+	background-repeat: no-repeat;
+	background-size: 2080px 960px;
+	background-clip: padding-box;
+}
+.ui-dialog .charsheet input.clocksize[value="2"] + input.clocksegment[value="0"] + .doomclock {
+	background-position: top 0px left 0px;
+}
+.ui-dialog .charsheet input.clocksize[value="2"] + input.clocksegment[value="1"] + .doomclock {
+	background-position: top 0px left -160px;
+}
+.ui-dialog .charsheet input.clocksize[value="2"] + input.clocksegment[value="2"] + .doomclock {
+	background-position: top 0px left -320px;
+}
+.ui-dialog .charsheet input.clocksize[value="4"] + input.clocksegment[value="0"] + .doomclock {
+	background-position: top -160px left 0px;
+}
+.ui-dialog .charsheet input.clocksize[value="4"] + input.clocksegment[value="1"] + .doomclock {
+	background-position: top -160px left -160px;
+}
+.ui-dialog .charsheet input.clocksize[value="4"] + input.clocksegment[value="2"] + .doomclock {
+	background-position: top -160px left -320px;
+}
+.ui-dialog .charsheet input.clocksize[value="4"] + input.clocksegment[value="3"] + .doomclock {
+	background-position: top -160px left -480px;
+}
+.ui-dialog .charsheet input.clocksize[value="4"] + input.clocksegment[value="4"] + .doomclock {
+	background-position: top -160px left -640px;
+}
+.ui-dialog .charsheet input.clocksize[value="6"] + input.clocksegment[value="0"] + .doomclock {
+	background-position: top -320px left 0px;
+}
+.ui-dialog .charsheet input.clocksize[value="6"] + input.clocksegment[value="1"] + .doomclock {
+	background-position: top -320px left -160px;
+}
+.ui-dialog .charsheet input.clocksize[value="6"] + input.clocksegment[value="2"] + .doomclock {
+	background-position: top -320px left -320px;
+}
+.ui-dialog .charsheet input.clocksize[value="6"] + input.clocksegment[value="3"] + .doomclock {
+	background-position: top -320px left -480px;
+}
+.ui-dialog .charsheet input.clocksize[value="6"] + input.clocksegment[value="4"] + .doomclock {
+	background-position: top -320px left -640px;
+}
+.ui-dialog .charsheet input.clocksize[value="6"] + input.clocksegment[value="5"] + .doomclock {
+	background-position: top -320px left -800px;
+}
+.ui-dialog .charsheet input.clocksize[value="6"] + input.clocksegment[value="6"] + .doomclock {
+	background-position: top -320px left -960px;
+}
+.ui-dialog .charsheet input.clocksize[value="8"] + input.clocksegment[value="0"] + .doomclock {
+	background-position: top -480px left 0px;
+}
+.ui-dialog .charsheet input.clocksize[value="8"] + input.clocksegment[value="1"] + .doomclock {
+	background-position: top -480px left -160px;
+}
+.ui-dialog .charsheet input.clocksize[value="8"] + input.clocksegment[value="2"] + .doomclock {
+	background-position: top -480px left -320px;
+}
+.ui-dialog .charsheet input.clocksize[value="8"] + input.clocksegment[value="3"] + .doomclock {
+	background-position: top -480px left -480px;
+}
+.ui-dialog .charsheet input.clocksize[value="8"] + input.clocksegment[value="4"] + .doomclock {
+	background-position: top -480px left -640px;
+}
+.ui-dialog .charsheet input.clocksize[value="8"] + input.clocksegment[value="5"] + .doomclock {
+	background-position: top -480px left -800px;
+}
+.ui-dialog .charsheet input.clocksize[value="8"] + input.clocksegment[value="6"] + .doomclock {
+	background-position: top -480px left -960px;
+}
+.ui-dialog .charsheet input.clocksize[value="8"] + input.clocksegment[value="7"] + .doomclock {
+	background-position: top -480px left -1120px;
+}
+.ui-dialog .charsheet input.clocksize[value="8"] + input.clocksegment[value="8"] + .doomclock {
+	background-position: top -480px left -1280px;
+}
+.ui-dialog .charsheet input.clocksize[value="10"] + input.clocksegment[value="0"] + .doomclock {
+	background-position: top -640px left 0px;
+}
+.ui-dialog .charsheet input.clocksize[value="10"] + input.clocksegment[value="1"] + .doomclock {
+	background-position: top -640px left -160px;
+}
+.ui-dialog .charsheet input.clocksize[value="10"] + input.clocksegment[value="2"] + .doomclock {
+	background-position: top -640px left -320px;
+}
+.ui-dialog .charsheet input.clocksize[value="10"] + input.clocksegment[value="3"] + .doomclock {
+	background-position: top -640px left -480px;
+}
+.ui-dialog .charsheet input.clocksize[value="10"] + input.clocksegment[value="4"] + .doomclock {
+	background-position: top -640px left -640px;
+}
+.ui-dialog .charsheet input.clocksize[value="10"] + input.clocksegment[value="5"] + .doomclock {
+	background-position: top -640px left -800px;
+}
+.ui-dialog .charsheet input.clocksize[value="10"] + input.clocksegment[value="6"] + .doomclock {
+	background-position: top -640px left -960px;
+}
+.ui-dialog .charsheet input.clocksize[value="10"] + input.clocksegment[value="7"] + .doomclock {
+	background-position: top -640px left -1120px;
+}
+.ui-dialog .charsheet input.clocksize[value="10"] + input.clocksegment[value="8"] + .doomclock {
+	background-position: top -640px left -1280px;
+}
+.ui-dialog .charsheet input.clocksize[value="10"] + input.clocksegment[value="9"] + .doomclock {
+	background-position: top -640px left -1440px;
+}
+.ui-dialog .charsheet input.clocksize[value="10"] + input.clocksegment[value="10"] + .doomclock {
+	background-position: top -640px left -1600px;
+}
+.ui-dialog .charsheet input.clocksize[value="12"] + input.clocksegment[value="0"] + .doomclock {
+	background-position: top -800px left 0px;
+}
+.ui-dialog .charsheet input.clocksize[value="12"] + input.clocksegment[value="1"] + .doomclock {
+	background-position: top -800px left -160px;
+}
+.ui-dialog .charsheet input.clocksize[value="12"] + input.clocksegment[value="2"] + .doomclock {
+	background-position: top -800px left -320px;
+}
+.ui-dialog .charsheet input.clocksize[value="12"] + input.clocksegment[value="3"] + .doomclock {
+	background-position: top -800px left -480px;
+}
+.ui-dialog .charsheet input.clocksize[value="12"] + input.clocksegment[value="4"] + .doomclock {
+	background-position: top -800px left -640px;
+}
+.ui-dialog .charsheet input.clocksize[value="12"] + input.clocksegment[value="5"] + .doomclock {
+	background-position: top -800px left -800px;
+}
+.ui-dialog .charsheet input.clocksize[value="12"] + input.clocksegment[value="6"] + .doomclock {
+	background-position: top -800px left -960px;
+}
+.ui-dialog .charsheet input.clocksize[value="12"] + input.clocksegment[value="7"] + .doomclock {
+	background-position: top -800px left -1120px;
+}
+.ui-dialog .charsheet input.clocksize[value="12"] + input.clocksegment[value="8"] + .doomclock {
+	background-position: top -800px left -1280px;
+}
+.ui-dialog .charsheet input.clocksize[value="12"] + input.clocksegment[value="9"] + .doomclock {
+	background-position: top -800px left -1440px;
+}
+.ui-dialog .charsheet input.clocksize[value="12"] + input.clocksegment[value="10"] + .doomclock {
+	background-position: top -800px left -1600px;
+}
+.ui-dialog .charsheet input.clocksize[value="12"] + input.clocksegment[value="11"] + .doomclock {
+	background-position: top -800px left -1760px;
+}
+.ui-dialog .charsheet input.clocksize[value="12"] + input.clocksegment[value="12"] + .doomclock {
+	background-position: top -800px left -1920px;
+}
+.ui-dialog .charsheet .doomclock .clockcontrol {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-pack: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
+	-webkit-box-align: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+	opacity: 0;
+	margin-top: 30px;
+	margin-left: 29px;
+	min-height: 100px;
+	height: 100px;
+	width: 100px;
+	border-radius: 50px;
+	background-color: var(--ak-bg);
+}
+.ui-dialog .charsheet .doomclock .clockcontrol .clockwise, .ui-dialog .charsheet .doomclock .clockcontrol .counterclockwise {
+	font-size: 40px;
+	background: none;
+	padding: 0px;
+	margin: 0px;
+	line-height: 1;
+}
+.ui-dialog .charsheet .doomclock:hover .clockcontrol {
+	opacity: 0.8;
+}
+.ui-dialog .charsheet .doomclock:hover .clockcontrol + * {
+	opacity: 1;
+}
+.ui-dialog .charsheet .clocktitle {
+	text-align: center;
+	font-size: 80%;
+	font-weight: bold;
+}
+.ui-dialog .charsheet .centered {
+	text-align: center;
 }
 
 .sheet-rolltemplate-2d6-roll,
@@ -799,30 +1033,4 @@ input.spacetoggle[value="1"] + .titlebar.subtitle {
 
 .spaceupmini {
 	margin-top: 3px;
-}
-
-.doomclock {
-	background-image: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/art/alldoom.png);
-	background-repeat: no-repeat;
-	background-position: top 0px left 0px;
-	background-size: 2080px 960px;
-	background-clip: padding-box;
-	text-align: center;
-	vertical-align: middle;
-	min-height: 160px;
-	height: 160px;
-	width: 160px;
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: flex;
-	-webkit-box-orient: horizontal;
-	-webkit-box-direction: normal;
-	    -ms-flex-flow: row;
-	        flex-flow: row;
-	-webkit-box-align: center;
-	    -ms-flex-align: center;
-	        align-items: center;
-	-webkit-box-pack: center;
-	    -ms-flex-pack: center;
-	        justify-content: center;
 }
