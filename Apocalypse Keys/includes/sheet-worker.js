@@ -15,13 +15,13 @@ var gTBK = function(t) {
 };
 
 const exclusives = {
-	"summoned": [ "Sometimes, I Get Angry" ],
-	"surge": [ "My Hands Around Your Heart", "The Heart’s Eclipse" ],
-	"found": [ "You Can’t Hide Your Heart From Me" ],
-	"shade": [ "Death Walked Here" ],
-	"last": [ "Ashes to Ashes" ],
-	"fallen": [ "Call Me Master" ],
-	"hungry": [ "The Gnawing Edge of Hunger" ]
+	"summoned": [ "Sometimes, I Get Angry", "The Crown of Prophecy" ],
+	"surge": [ "My Hands Around Your Heart", "The Heart’s Eclipse", "Follow Me into the Dark" ],
+	"found": [ "You Can’t Hide Your Heart From Me", "Waking Up from the Dream" ],
+	"shade": [ "Death Walked Here", "In Death There Is Only Love" ],
+	"last": [ "Ashes to Ashes", "Stolen Time" ],
+	"fallen": [ "Call Me Master", "Glory Be My Name" ],
+	"hungry": [ "The Gnawing Edge of Hunger", "The Gift" ]
 };
 
 on("change:playbook", function(event) {

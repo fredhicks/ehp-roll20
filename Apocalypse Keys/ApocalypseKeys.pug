@@ -520,10 +520,22 @@ input(type='hidden' name='attr_scrollstyle' value='compact' class="scrollstyle")
 						div
 							input(type='hidden' name="attr_final_mystery_toggle" class="rollup")
 							.roller
-								+expandablesub("Final Mystery Moves")
-									+translate("The following is a playbook move that the Keeper may offer you during (or before!) the Final Mystery. The move is crafted to specifically address the core emotional theme and unique question of your playbook.")(class="instruction")
-									p
-										| PENDING DEVELOPMENT!
+								+expandablesub("Final Mystery Move")
+									input(type='hidden' name='attr_playbook' class='pbselector' value='')
+									div(class='pbsummoned')
+										+briefmove('The Crown of Prophecy','summoned','no')
+									div(class='pbsurge')
+										+briefmove('Follow Me into the Dark','surge','no')
+									div(class='pbfound')
+										+briefmove('Waking Up from the Dream','found','no')
+									div(class='pbshade')
+										+briefmove('In Death There Is Only Love','shade','no')
+									div(class='pblast')
+										+briefmove('Stolen Time','last','no')
+									div(class='pbfallen')
+										+briefmove('Glory Be My Name','fallen','no')
+									div(class='pbhungry')
+										+briefmove('The Gift','hungry','no')
 						+expandablesub("Basic Moves")
 							+briefmove("Unleash the Dark",'',"no")
 							+briefmove("Power Through Darkness",'',"no")
@@ -551,7 +563,6 @@ input(type='hidden' name='attr_scrollstyle' value='compact' class="scrollstyle")
 						include includes/fallenruinmoves.pug
 						include includes/hungryruinmoves.pug
 						include includes/divisionmoves.pug
-						include includes/finalmysterymoves.pug
 						include includes/basicmoves.pug
 
 +translations

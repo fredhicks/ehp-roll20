@@ -1,8 +1,257 @@
-input(type='hidden' name='attr_playbook' class='pbselector' value='')
-div(class='pbsummoned')
-div(class='pbsurge')
-div(class='pbfound')
-div(class='pbshade')
-div(class='pblast')
-div(class='pbfallen')
-div(class='pbhungry')
+// Here we begin the Final Mystery Moves that are playbook-exclusive
+div
+	input(type='hidden' name="attr_final_mystery_toggle" class="rollup")
+	.roller
+		+move("The Crown of Prophecy","summoned","","")
+			p
+				+translate("The following is a playbook move that the Keeper may offer you during (or before!) the Final Mystery. The move is crafted to specifically address the core emotional theme and unique question of your playbook.")(class="instruction")
+			p
+				+translate("When you place the crown of prophecy on your brow,")(class="trigger")
+				+translate("declare a harrowing aspect of your prophecy and how it comes to pass. Spend Darkness Tokens and roll.")
+				+rolldark("The Crown of Prophecy")
+			p
+				+translate("On an 8-10")(class="result") 
+				+translate("the prophecy bends to your will.")(class="bold") 
+				+translate("Choose two:")
+				ul
+					li
+						+translate("Declare the fate of another and tie them to your prophecy. They will act in accordance with your prophecy and seek to fulfill it. In addition, gain")
+						+headlink("1 Bond","bonds")(class="bold term") 
+						+translate("with them.")
+					li
+						+translate("Declare the demise of another and doom them. Describe what power or truth they lose access to. In addition, gain")
+						+headlink("1 Bond","bonds")(class="bold term") 
+						+headlink("with What the Darkness Demands.","demands","darkness")
+					li
+						+translate("Take on your true and final form, leaving behind the shell you once were. Gain every")
+						+headlink("power of darkness","powers","darkness")
+						+translate("from your playbook until the end of the Final Mystery.")
+			p
+				+translate("On an 11+")(class="result") 
+				+translate("the prophecy shatters and reality breaks around you.")(class="bold") 
+				+translate("Choose one from below:")
+				ul
+					li
+						+translate("The crown of prophecy reforms itself, each player (including you and the Keeper) will each declare one sentence to create a new prophecy for you. By the end of the Final Mystery, the prophecy will be fulfilled in one way or another.")
+					li
+						+translate("The crown of prophecy creates a mirror image of itself—choose another to share the burden of the prophecy with you. By the end of the Final Mystery, one of you must fulfill the prophecy—one way or another.")
+			p
+				+translate("On a 7-")(class="result") 
+				+translate("the prophecy comes to bear and will be fulfilled now, in one way or another.")(class="bold") 
+				+translate("The world you were summoned from bleeds violently into this world, the Keeper will tell you what happens next.")
+		+move("Follow Me into the Dark","surge","","")
+			p
+				+translate("The following is a playbook move that the Keeper may offer you during (or before!) the Final Mystery. The move is crafted to specifically address the core emotional theme and unique question of your playbook.")(class="instruction")
+			p
+				+translate("When you share an aspect of your terrible powers with another,")(class="trigger")
+				+translate("ask the Keeper what catastrophic destruction you cause and how it hastens the apocalypse.")(class="bold")
+			p
+				+translate("Choose one:")
+				ul
+					li
+						+translate("Your power purifies those around you, all PCs clear")
+						+headlink("all their Conditions","conditions")(class="bold term")
+						+translate("and gain")
+						+headlink("1 Bond","bonds")(class="bold term") 
+						+translate("with you.")
+					li
+						+translate("Your power surges and leaves scars on those around you—all PCs mark")
+						+headlink("two Conditions","conditions")(class="bold term")
+						+translate("and gain")
+						+headlink("1 Bond","bonds")(class="bold term") 
+						+headlink("with What the Darkness Demands of them.","demands","darkness")
+						+translate("All PCs have access to every")
+						+headlink("power of darkness","powers","darkness")
+						+translate("in their playbook until the end of the Final Mystery.")
+					li
+						+translate("You destroy an aspect of your humanity for all to see and take on a form beyond mortal comprehension. Gain every")
+						+headlink("power of darkness","powers","darkness")
+						+translate("from your playbook until the end of the Final Mystery.")
+		+move("Waking Up from the Dream","found","","")
+			p
+				+translate("The following is a playbook move that the Keeper may offer you during (or before!) the Final Mystery. The move is crafted to specifically address the core emotional theme and unique question of your playbook.")(class="instruction")
+			p
+				+translate("When you sacrifice a recent memory to reclaim an aspect of your past self,")(class="trigger")
+				+translate("declare what the memory is. Spend Darkness Tokens and roll.")
+				+rolldark("Waking Up from the Dream")
+			p
+				+translate("On an 8-10")(class="result") 
+				+translate("your former and current selves sing in harmony.")(class="bold") 
+				+translate("Choose one:")
+				ul
+					li
+						+translate("Some of your memories return for a fleeting moment before fading away. The Keeper offers you two Keys related to your past.")
+					li
+						+translate("Draw a line between two Keys and a single Facet of the Final Mystery. Declare two irrevocable truths about the Final Mystery, and explain how it is related to your present self.")
+					li
+						+translate("Regain all of your memories, at great cost to yourself or another.")
+			p
+				+translate("On an 11+")(class="result") 
+				+translate("your lost memories come flooding in and overwhelm you.")(class="bold") 
+				+translate("Choose one:")
+				ul
+					li
+						+translate("Your psychic abilities cause catastrophic and permanent damage. Gain every")
+						+headlink("power of darkness","powers","darkness")
+						+translate("from your playbook until the end of the Final Mystery.")
+					li
+						+translate("Your past self feeds on your powers and violently separates from you, becoming their own person. They will whisper a terrible truth to you before they escape into the world of dreams. Uncover two Keys.")
+			p
+				+translate("On a 7-")(class="result") 
+				+translate("your present self and the life you built are buckling under the truth of your past.")(class="bold") 
+				+translate("Decide for yourself if your past self asserts itself, destroying your present self, or if you lose access to the past forever. No matter what choice you make, the Keeper will tell you what happens next.")
+		+move("In Death There Is Only Love","shade","","")
+			p
+				+translate("The following is a playbook move that the Keeper may offer you during (or before!) the Final Mystery. The move is crafted to specifically address the core emotional theme and unique question of your playbook.")(class="instruction")
+			p
+				+translate("When you allow Death to take hold of you,")(class="trigger")
+				+translate("weaken the veil between death and the living.")(class="bold") 
+				+translate("Spend Darkness Tokens and roll.")
+				+rolldark("In Death There Is Only Love")
+			p
+				+translate("On an 8-10")(class="result") 
+				+translate("both death and life hold and keep you.")(class="bold") 
+				+translate("Choose one:")
+				ul
+					li
+						+translate("All that you touch with your hands will wither and die, for now. In addition, every PC gains")
+						+headlink("1 Bond","bonds")(class="bold term") 
+						+headlink("with What the Darkness Demands.","demands","darkness")
+					li
+						+translate("All that you touch with your hands will flourish and heal, for now. In addition, every PC clears")
+						+headlink("one Condition.","conditions")(class="bold term")
+					li
+						+translate("Death and life reveal great truths to you. Uncover")
+						+translate("a Key")(class="bold term") 
+						+translate("and draw a line from it to a Facet of the Final Mystery. Declare an irrevocable truth about the Final Mystery.")
+			p
+				+translate("On an 11+")(class="result") 
+				+translate("Death claims what should not belong to them.")(class="bold") 
+				+translate("Choose one:")
+				ul
+					li
+						+translate("Death will reveal their chosen avatar and claim this place. A roiling sea of spectral entities floods the area and beyond, forever steeping it in loss and despair. You now have a new way of gaining Darkness Tokens:")
+						+translate("Allow Death to speak and act through me.")(class= "bold italic")
+					li
+						+translate("You and every PC mark two Conditions, but for a time you regain your soul and body from before death corrupted you. Gain every")
+						+headlink("power of darkness","powers","darkness")
+						+translate("from your playbook until the end of the Final Mystery.")
+			p
+				+translate("On a 7-")(class="result") 
+				+translate("Death takes hold of you and will not let go,")(class="bold")
+				+translate("and the veil between death and the living is sundered. The Keeper will tell you what happens next.")
+		+move("Stolen Time","last","","")
+			p
+				+translate("The following is a playbook move that the Keeper may offer you during (or before!) the Final Mystery. The move is crafted to specifically address the core emotional theme and unique question of your playbook.")(class="instruction")
+			p
+				+translate("You’ve carried the history of your people long enough to feel the weight and weakness of time itself.")
+				+translate("When you shatter the laws of time,")(class="trigger")
+				+translate("declare how you take on a new form to reflect the future that was stolen from you and your people. Spend Darkness Tokens and roll.")
+				+rolldark("Stolen Time")
+			p
+				+translate("On an 8-10")(class="result") 
+				+translate("time starts again, the threads of your grief rebuilding the future.")(class="bold") 
+				+translate("Choose one:")
+				ul
+					li
+						+translate("An aspect of your people is reborn, and hope blooms. You become the paragon of your people. Gain every")
+						+headlink("power of darkness","powers","darkness")
+						+translate("from your playbook until the end of the Final Mystery.")
+					li
+						+translate("The spirit of your people infuses your chosen comrades. Every PC unmarks")
+						+headlink("one Condition","conditions")(class="bold term")
+						+translate("and gains one Bond with you.")
+					li
+						+translate("You are no longer the Last. You reach through time and pull from the past another survivor of your tragedy. Gain")
+						+headlink("1 Bond","bonds")(class="bold term") 
+						+translate("with them—until the end of the Final Mystery they will assist you in fighting back the apocalypse.")
+			p
+				+translate("On an 11+")(class="result") 
+				+translate("what you have lost overwhelms you,")(class="bold")
+				+translate("and grief demands your all. Choose one:")
+				ul
+					li
+						+translate("Your grief offers revelation, you uncover two Keys. At the end of the Final Mystery, a corrupted version of your people will be reborn, seeking retribution.")
+					li
+						+translate("You burn brighter than any star. You no longer mark Conditions. At the end of the Final Mystery, you will leave DIVISION and meet the end of your days in solitude. When you are gone, there will never be another like you in all the universe.")
+			p
+				+translate("On a 7-")(class="result") 
+				+translate("time shatters again and again and again.")(class="bold") 
+				+translate("You and all who are vulnerable are pulled into a time loop, the Keeper will tell you what happens next.")
+		+move("Glory Be My Name","fallen","","")
+			p
+				+translate("The following is a playbook move that the Keeper may offer you during (or before!) the Final Mystery. The move is crafted to specifically address the core emotional theme and unique question of your playbook.")(class="instruction")
+			p
+				+translate("When you gamble all that remains of your divinity,")(class="trigger")
+				+translate("describe how you become a wretched and mortal thing.")(class="bold") 
+				+translate("Spend Darkness Tokens and roll.")
+				+rolldark("Glory Be My Name")
+			p
+				+translate("On an 8-10")(class="result") 
+				+translate("your mortal skin falls away to reveal stolen divinity that is yours, until the end of the Final Mystery.")(class="bold") 
+				+translate("Choose one:")
+				ul
+					li
+						+translate("Take on a divine form that none may look at directly without burning away. When you")
+						+movelink("Unleash the Dark")
+						+translate("you completely overwhelm the senses of your target, even on a miss.")
+					li
+						+translate("Take on a divine form that bends reality around it in unpredictable ways. When you,")
+						+movelink("Power Through Darkness")
+						+translate("you dramatically change your surroundings permanently, even on a miss.")
+					li
+						+translate("Take on a divine form that offers both horror and beauty beyond comparison. When you,")
+						+movelink("Reveal Your Heart")
+						+translate("you and the one you open up to gain")
+						+headlink("1 Bond","bonds")(class="bold term") 
+						+headlink("with What the Darkness Demands,","demands","darkness")
+						+translate("even on a miss.")
+			p
+				+translate("On an 11+")(class="result") 
+				+translate("the heavens part and glory be your name, but your imperfect vessel can only hold this form for so long.")(class="bold") 
+				+translate("Choose one:")
+				ul
+					li
+						+translate("Share your glory with others. You and all PCs")
+						+headlink("clear their Conditions,","conditions")(class="bold term")
+						+translate("and all those susceptible to your glory gain a new")
+						+headlink("power of darkness","powers","darkness")
+						+translate("that reflects your glory. At the end of the Final Mystery, a violent and dangerous cult dedicated to your glory will be formed.")
+					li
+						+translate("Drain the divine from your fellow monsters. You and all PCs")
+						+headlink("mark one Condition,","conditions")(class="bold term")
+						+translate("and you gain every")
+						+headlink("power of darkness","powers","darkness")
+						+translate("from your playbook until the end of the Final Mystery.")
+			p
+				+translate("On a 7-")(class="result") 
+				+translate("your divinity goes dormant and you are trapped in this mortal shell, for now.")(class="bold") 
+				+translate("The Keeper will tell you what happens next.")
+		+move("The Gift","hungry","","")
+			p
+				+translate("The following is a playbook move that the Keeper may offer you during (or before!) the Final Mystery. The move is crafted to specifically address the core emotional theme and unique question of your playbook.")(class="instruction")
+			p
+				+translate("The hunger within you grows and seeks new hosts, offering you power in exchange.")
+				+translate("When you choose to permanently infect another with your hunger,")(class="trigger")
+				+translate("mark")
+				+translate("a Condition")(class="bold term") 
+				+translate("and choose one:")
+				ul
+					li
+						+translate("Infect an Omen with the hunger:")(class="bold term") 
+						+translate("The Omen can now use")
+						+movelink("The Gnawing Edge of Hunger") 
+						+translate("until the end of the Final Mystery, and you permanently gain one of their")
+						+headlink("powers of darkness","powers","darkness")
+						+translate("from their playbook. The Omen gains the permanently marked Condition:")
+						+translate("Ravenous.")(class="italic")
+					li
+						+translate("Infect a Harbinger with the hunger:")(class="bold term") 
+						+translate("Describe how you open your hearts to each other in a moment of cruel intimacy. The Keeper will tell you what new")
+						+headlink("powers of darkness","powers","darkness")
+						+translate("you permanently gain that reflect your connection to the Harbinger. At the end of the Final Mystery, the Harbinger will return, changed and twisted by your hunger.")
+					li
+						+translate("Infect an innocent with the hunger:")(class="bold term") 
+						+translate("The Keeper will describe how they become stronger than you will ever be. Gain")
+						+headlink("1 Bond","bonds")(class="bold term") 
+						+translate("with them, until the end of the Final Mystery they will assist you in fighting back the apocalypse. At the end of the Final Mystery they’ll disappear, taking an aspect of the hunger with them.")
