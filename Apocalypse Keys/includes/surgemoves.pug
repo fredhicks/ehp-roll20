@@ -1,0 +1,73 @@
++move("My Darkness is Never Leashed","surge","selectable","dismissable")
+	p
+		+translate("When you")(class="trigger")
+		+movelink("Unleash the Dark")
+		+translate("you can also choose one from below, even on a miss:")
+		ul
+			li
+				+translate("Weaken them, for now")
+			li
+				+translate("Force them to retreat, for now")
+			li
+				+translate("Corrupt an aspect of their power, for now")
+			li
+				+translate("They will tell you more than they wanted to")
++move("I Am Your Destruction","surge","selectable","dismissable")
+	p
+		+translate("You hold on to your power with an intensity that would break most souls— you are always a single breath from shattering under the pressure.")
+	p
+		+translate("When you allow your power to surge and cause great collateral damage,")(class="trigger")
+		+translate("ask the Keeper what catastrophic destruction you cause.")(class="bold") 
+		+translate("Choose two:")
+		ul
+			li
+				+translate("You permanently gain an aspect of the Harbinger’s powers of darkness, the Keeper will tell you what it is. Mark")
+				+ruin(1)(class="bold term")
+			li
+				+translate("The power within you surges to give you visions of the past, present, or future. Uncover")
+				+translate("a Key")(class="bold term") 
+				+translate("and draw a line between that Key and a Facet on the Mystery Map. Declare an irrevocable truth about the Mystery.")
+			li
+				+translate("You protect the one person who matters most, gain")
+				+headlink("1 Bond","Bonds")(class="bold term") 
+				+translate("with them.")
+			li
+				+translate("You use the destruction to reshape your environment, creating a golden opportunity or a fleeting moment for an ally. Gain")
+				+headlink("1 Bond","Bonds")(class="bold term") 
+				+translate("with them.")
++move("Like a Moth to the Flame","surge","selectable","dismissable")
+	p
+		+translate("When you Reveal Your Heart to someone,")(class="trigger")
+		+translate("you may first tell them how you could destroy them. If you do, you choose one from below, even on a miss:")
+		ul
+			li
+				+translate("You leave a permanent mark on their body or soul, marking them as yours. Gain")
+				+headlink("1 Bond","Bonds")(class="bold term") 
+				+translate("with them.")
+			li
+				+translate("Ask them what part of them they wish you would destroy. They gain")
+				+translate("1 Bond")(class="bold term") 
+				+translate("with you.")
+			li
+				+translate("Ask the Keeper what your darkness whispers about them. Gain")
+				+headlink("1 Bond","Bonds")(class="bold term") 
+				+translate("with")
+				+headlink("What the Darkness Demands of You.","demands","darkness")
++move("My Little Monster","surge","selectable","dismissable")
+	p
+		+translate("Your little monster is a constant reminder of what happens when you allow someone to get too close to you.")
+	p
+		+translate("When you take this move,")(class="trigger")
+		+translate("describe the person your little monster used to be and how they became twisted by your power. The Keeper will describe why they still love you.")
+		textarea(name="attr_movetaken_question-my_little_monster" class="bio")
+	p
+		+translate("Choose three basic moves and tell the Keeper how your little monster helps you with those moves.")
+	p
+		+translate("Whenever your companion can help you,")(class="trigger")
+		+translate("you add +1.")(class="bold") 
+		+translate("If your companion ever gets hurt or is betrayed by you,")
+		+ruin(1,"mark Ruin.")
+	p
+		+translate("If you release your little monster from their love of you,")(class="bold term")
+		+ruin(1,"mark Ruin.")(class="bold term")
+		+translate("Describe how you destroy them. They may return in one form or another, but for now they have found peace. Discard this move and choose a new one from your playbook.")

@@ -1,0 +1,149 @@
++move("Unleash the Dark","Basic Moves","","dismissable")
+	p
+		+translate("When you unleash the dark within you to enforce your will on someone (physically, socially, or emotionally),")(class="trigger") 
+		+translate("spend Darkness Tokens and roll.")
+		+rolldark("Unleash the Dark")
+	p
+		+translate("On an 8-10")(class="result") 
+		+translate("you wield the darkness with control and ease, choose two:")(class="bold")
+		ul
+			li
+				+translate("Get past their defenses and inflict")
+				+translate("a Condition")(class="bold term")
+			li
+				+translate("Get what you want from them")
+			li
+				+translate("Avoid reprisals, harm, or cost")
+			li
+				+translate("Gain the upper hand, for now")
+			li
+				+translate("Expose a weakness or flaw")
+			li
+				+translate("Confuse them for some time")
+	p
+		+translate("On an 11+")(class="result") 
+		+translate("your control falters and you go too far.")(class="bold") 
+		+translate("Choose one, but the Keeper describes an unintended consequence.")
+	p
+		+translate("On a 7-")(class="result") 
+		+translate("you have greatly underestimated them,")(class="bold") 
+		+translate("the Keeper will describe the desperate position you find yourself in.")
++move("Power Through Darkness","Basic Moves","","dismissable")
+	p
+		+translate("When you push the limits of your supernatural powers,")(class="trigger")
+		+translate("straining to do the extraordinary or avert imminent danger,")(class="bold")
+		+translate("spend Darkness Tokens and roll.")
+		+rolldark("Power Through Darkness")
+	p
+		+translate("On an 8-10")(class="result") 
+		+translate("you use your powers with great precision and effect, changing the situation before you.")(class="bold") 
+		+translate("Additionally, the Keeper may offer you reprieve, a golden opportunity, or")
+		+headlink("a Bond","bonds")(class="bold term") 
+		+translate("with someone.")
+	p
+		+translate("On an 11+")(class="result") 
+		+translate("you are on the edge of disaster.")(class="bold") 
+		+translate("Choose one: mark")
+		+headlink("a Condition","conditions")(class="bold term") 
+		+translate("to exert better control of your powers, or let the Keeper tell you how the situation is not under your control.")
+	p
+		+translate("On a 7-")(class="result") 
+		+translate("the Keeper will offer you something connected to What the Darkness Demands of You.")(class="bold") 
+		+translate("Whether or not you take it, prepare for the worst.")
++move("Reveal Your Heart","Basic Moves","","dismissable")
+	p
+		+translate("When you reveal your heart and try to sincerely connect to someone,")(class="trigger")
+		+translate("spend Darkness Tokens and roll.")
+		+rolldark("Reveal Your Heart")
+	p
+		+translate("On an 8-10")(class="result") 
+		+translate("your heart reaches theirs,")(class="bold")
+		+translate("choose one. If they are a PC and they choose to deepen the connection further, they choose one too.")
+		ul
+			li
+				+translate("You grow closer, gain")
+				+headlink("1 Bond","bonds")(class="bold term") 
+				+translate("on them")
+			li
+				+translate("They soothe your heart, clear")
+				+headlink("1 Condition","conditions")(class="bold term")
+			li
+				+translate("They taught you something important, mark")
+				+xp(1)
+			li
+				+translate("They gave you hope, clear")
+				+spendruin(1)
+	p
+		+translate("On an 11+")(class="result") 
+		+translate("you have a moment of closeness but also weakness.")(class="bold") 
+		+translate("Ask each other, “How do I scare you at this moment?” After you both answer, you each choose one:")
+		ul
+			li
+				+translate("Tell them how fearful you have become of them, on a scale from 0 to 4. That becomes the number of Darkness Tokens that they now have.")
+			li
+				+translate("Gain")
+				+headlink("a Bond","bonds")(class="bold term") 
+				+translate("with What the Darkness Demands of You.")
+	p
+		+translate("On a 7-")(class="result") 
+		+translate("something interrupts or undermines the moment")(class="bold")
+		+translate("—a dire warning, consequence, or an aspect of the Mystery itself. The Keeper will tell you what happens next.")
++move("Torn Between","Basic Moves","","dismissable")
+	p
+		+translate("When you are torn between your monstrous nature and your human heart,")(class="trigger")
+		+translate("or")
+		+translate("when you are tempted by What the Darkness Demands of You,")(class="trigger")
+		+translate("make a choice:")
+		ul
+			li
+				+translate("Let your monstrous nature show and describe the damage your outburst causes, mark")
+				+ruin(1)
+			li
+				+translate("Describe how you diminish your power and conform to the pressures of humanity and")
+				+spenddark(99,"lose all Darkness Tokens.")
+			li
+				+translate("Spend")
+				+headlink("a Bond","bonds")(class="bold term") 
+				+translate("with someone. Describe how they, directly or inadvertently, help you regain control.")
++move("Grasp Keys","Basic Moves","","dismissable")
+	p
+		+translate("When you search for a clue,")(class="trigger")
+		+translate("investigate the signs of the apocalypse, or use your powers of darkness to gather information,")(class="bold")
+		+translate("describe how you are doing so. Spend Darkness Tokens and roll.")
+		+rolldark("Grasp Keys")
+	p
+		+translate("On an 8-10")(class="result") 
+		+translate("you uncover")(class="bold")
+		+translate("a Key,")(class="bold term")
+		+translate("the Keeper will tell you what it is.")
+	p
+		+translate("On an 11+")(class="result") 
+		+translate("you uncover")(class="bold")
+		+translate("a Key,")(class="bold term")
+		+translate("but there’s a significant complication, cost, or fall out, the Keeper will tell you what it is.")
+	p
+		+translate("On a 7-")(class="result") 
+		+translate("you find more than you were ready for.")(class="bold") 
+		+translate("You may choose to mark Ruin to uncover")
+		+translate("a Key,")(class="bold term")
+		+translate("but in doing so, the Keeper will reveal how you come closer to becoming a Harbinger.")
++move("Unlock Doom’s Door","Basic Moves","","dismissable")
+	p
+		+translate("When you are ready to declare what the door is and how to unlock it,")(class="trigger")
+		+translate("say what you believe it to be.")(class="bold") 
+		+translate("Connect the Keys to the Facets of the Mystery, revealing the Harbinger. Roll, and add the number of connected Keys minus the Mystery’s complexity. This roll is not affected by Darkness Tokens, Bonds, or any other move.")
+		+rollcustom("Unlock Doom's Door",false,"connected Keys minus complexity")
+	p
+		+translate("On an 8-10")(class="result") 
+		+translate("you have tracked down Doom’s Door.")(class="bold") 
+		+translate("You know exactly where it is and how to unlock it. In addition, the Keeper will present an opportunity to protect what matters most, take down the Harbinger, or otherwise drive back the apocalypse.")
+	p
+		+translate("On an 11+")(class="result") 
+		+translate("you reach the door moments after the Harbinger has unlocked it.")(class="bold")
+		+translate("They’ve begun to harness the power on the other side of the door, but there is still time to stop them. The Keeper will tell you what sacrifice or risk you will need to endure to interrupt their ascension.")
+	p
+		+translate("On a 7-")(class="result") 
+		+translate("the door remains hidden, the theory was the wrong one.")(class="bold") 
+		+translate("Every PC marks")
+		+ruin(1,"1 Ruin.")(class="bold term")
+		+translate("In addition, precious time is lost, and the Doomsday Clock ticks forward. If this fills the Doomsday Clock, the Harbinger has claimed the power of the door, and the PCs will face the worst possible circumstances.")

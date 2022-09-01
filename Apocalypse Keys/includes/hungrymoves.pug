@@ -1,0 +1,166 @@
++move("The Better to Eat You With, My Dear","hungry","selectable","dismissable")
+	p
+		+translate("When you reflect on the Keys uncovered thus far,")(class="trigger")
+		+translate("you may feed on an aspect of")
+		+translate("a Key.")(class="bold term")
+		+translate("The Keeper describes how your body violently changes in response. Mark")
+		+headlink("1 Condition","Conditions")(class="bold term") 
+		+translate("to reflect how the transformation makes you feel.")
+	p
+		+translate("Choose two questions to ask the Keeper, they will answer honestly and in great detail:")
+		ul
+			li
+				+translate("What do my eyes feast on that others have missed?")
+			li
+				+translate("What do my teeth tear away to reveal someone else’s hunger?")
+			li
+				+translate("How do my claws break the Key to change it into a truer shape?")
+			li
+				+translate("How does my blood purify the Key and lead me to another?")
++move("Do Harbingers Dream of Monsters Like Me","hungry","selectable","dismissable")
+	p
+		+translate("You have acquired a taste of power that only a Harbinger can wield. Under your skin, carved into your bone, burrowing in your flesh, is what remains of the Harbingers you have consumed.")
+	p
+		+translate("When you tear away at your skin to reveal what remains of a slumbering Harbinger,")(class="trigger")
+		+translate("spend Darkness Tokens and roll.")
+		+rolldark("Do Harbingers Dream of Monsters Like kMe")
+	p
+		+translate("On an 8-10")(class="result") 
+		+translate("your body ripples in perfect sync with what remains of the Harbinger’s power.")(class="bold") 
+		+translate("Choose what your body changes into, for now:")
+		ul
+			li
+				+translate("A Harbinger of elemental strength and fury, immediately inflict")
+				+translate("2 Conditions")(class="bold term") 
+				+translate("on a target but")
+				+headlink("take one in return","conditions")
+			li
+				+translate("A Harbinger of jagged shadows and haunting whispers, uncover")
+				+translate("a Key")(class="bold term") 
+				+translate("at great cost")
+			li
+				+translate("A Harbinger of ethereal and fleeting beauty, ask who is most captivated by you and gain")
+				+headlink("1 Bond","Bonds")(class="bold term") 
+				+translate("with them")
+			li
+				+translate("A Harbinger that mirrors your hidden desire and power. Create or replace a")
+				+headlink("Hunger Condition","Conditions")(class="bold term") 
+	p
+		+translate("On an 11+")(class="result") 
+		+translate("another Harbinger within you seeks to re-form itself,")(class="bold")
+		+translate("tearing at your flesh and remaking it in their glory. Choose one from above and one from below:")
+		ul
+			li
+				+translate("A Harbinger breaks free from the prison of your flesh, and escapes into the world carrying an infectious aspect of your hunger.")
+			li
+				+translate("Mark")
+				+headlink("1 Condition","Conditions")(class="bold term") 
+				+translate("or")
+				+ruin(1,"1 Ruin")(class="bold") 
+				+translate("to allow the Harbinger to feed on you and force it to slumber again, and describe how your body twists into a horrifying new shape to reflect this.")
+	p
+		+translate("On a 7-")(class="result") 
+		+translate("a terrifying Harbinger within you awakens, one that you did not mean to call upon.")(class="bold") 
+		+translate("They break you open, feed on your heart and mind, and toss you aside. The Keeper will tell you what happens next, prepare for the worst.")
++move("Gaze Into My Heart’s Abyss","hungry","selectable","dismissable")
+	p
+		+translate("When you")(class="trigger")
+		+movelink("Reveal Your Heart")
+		+translate("to someone,")(class="trigger")
+		+translate("you may show them how your hunger ravages and breaks you.")(class="bold") 
+		+translate("If you do, you choose one from below, even on a miss:")
+		ul
+			li
+				+translate("Whisper of how you wish to feed on them and leave nothing behind, gain")
+				+headlink("1 Bond","Bonds")(class="bold term") 
+				+translate("with them")
+			li
+				+translate("Ask them to reveal a vulnerability with you that they will share with no one else, if they do, they clear")
+				+translate("1 Condition")(class="bold term")
+			li
+				+translate("Ask them why they hunger for you, create or replace a")
+				+headlink("Hunger Condition","Conditions")(class="bold term") 
+				+translate("that reflects their desire for you")
++move("Enthralled by You","hungry","selectable","dismissable")
+	p
+		+translate("The hunger inside of you yearns for the innocent, to transform mortal flesh into an endless void filled with teeth.")
+	p
+		+translate("When you share an intimate moment with an NPC willing to become your thrall,")(class="trigger")
+		+translate("ask them if they desire you.")(class="bold") 
+		+translate("If they say yes, describe the feeding. Spend Darkness Tokens and roll.")
+		+rolldark("Enthralled by You")
+	p
+		+translate("On an 8-10")(class="result") 
+		+translate("they feed on you in turn, and the hunger within you infects them slowly leaving you euphoric.")(class="bold") 
+		+translate("Choose one:")
+		ul
+			li
+				+translate("They are beautiful and perfect, unlike you. They will not survive the hunger for long. Gain")
+				+headlink("1 Bond","Bonds")(class="bold term") 
+				+translate("with them and give them a single command. After they fulfill the command, they will soon perish.")
+			li
+				+translate("They are haunted and terrifying, like you. They will outlive you and can never be harmed by you. Gain")
+				+headlink("1 Bond","Bonds")(class="bold term") 
+				+translate("with")
+				+headlink("What the Darkness Demands of You,","demands","darkness")
+				+translate("they will spend the rest of their immortality working towards fulfilling What the Darkness Demands of You.")
+	p
+		+translate("On an 11+")(class="result") 
+		+translate("the hunger corrupts them and breaks them, reforming their shape into the seed of a Harbinger.")(class="bold") 
+		+translate("Choose one:")
+		ul
+			li
+				+translate("You hide the true nature of who they are and protect them. Before they vanish, they give you")
+				+translate("a Key")(class="bold term") 
+				+translate("at great cost. When they return, they will be a Harbinger seeking an ancient Door of Power.")
+			li
+				+translate("You turn them over to DIVISION, where the rest of your failed thralls are imprisoned. Gain")
+				+headlink("1 Bond","Bonds")(class="bold term") 
+				+translate("with DIVISION and mark")
+				+headlink("1 Condition","Conditions")(class="bold term") 
+				+translate("that reflects how this makes you feel.")
+	p
+		+translate("On a 7-")(class="result") 
+		+translate("something within your would-be thrall seduces the hunger, and they gain more power than you were ready to give.")(class="bold") 
+		+translate("The Keeper describes what happens next. Prepare for the worst.")
++move("I Remember the Taste of You","hungry","selectable","dismissable")
+	p
+		+translate("You’ve fed upon countless victims, and their remnants merged inside you to become a unique consciousness. This alien horror living under your skin will one day consume you in turn.")
+	p
+		+translate("When you first encounter a named NPC or Faction,")(class="trigger")
+		+translate("you may declare that the remnants within you recognize them.")(class="bold") 
+		+translate("When you do so, spend Darkness Tokens and roll.")
+		+rolldark("I Remember the Taste of You")
+	p
+		+translate("The Keeper will tell you something significant and valuable, even on a miss.")
+	p
+		+translate("On an 8-10,")(class="result") 
+		+translate("the remnants whisper many secrets,")(class="bold")
+		+translate("choose one:")
+		ul
+			li
+				+translate("You once fed on them, gain")
+				+headlink("1 Bond","Bonds")(class="bold term") 
+				+translate("with them")
+			li
+				+translate("The sight of them calms the hunger within you, clear")
+				+headlink("1 Condition","Conditions")(class="bold term")
+			li
+				+translate("They may one day consume you, erase")
+				+spendruin(1,"1 Ruin")(class="bold") 
+	p
+		+translate("On an 11+")(class="result") 
+		+translate("the sight of them drives the remnants within you into a frenzy,")(class="bold")
+		+translate("choose one:")
+		ul
+			li
+				+translate("You offer them a part of you to feed on, gain")
+				+headlink("1 Bond","Bonds")(class="bold term") 
+				+translate("with them")
+			li
+				+translate("They will one day kill the hunger within you, mark")
+				+ruin(1,"1 Ruin")(class="bold")
+	p
+		+translate("On a 7-")(class="result") 
+		+translate("they know about the remnants within you and the power of your hunger.")(class="bold") 
+		+translate("They will immediately place you in a vulnerable position, the Keeper will tell you what happens next.")

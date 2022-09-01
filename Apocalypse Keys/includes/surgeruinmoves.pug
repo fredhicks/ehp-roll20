@@ -1,1 +1,98 @@
-+doomclock(12,0,"My Power Made Flesh")
++move("Alpha and Omega","surge ruin move","selectable","dismissable")
+	p
+		+translate("The burden of power can be carried between two, should fate choose to be so kind.")
+	p
+		+translate("When you take this move,")(class="trigger")
+		+translate("declare a PC or NPC you are bound to by fate. If they agree, they declare what shared fate awaits you both. The two of you are connected always, sharing emotions, thoughts, and unable to stay away from each other for very long.")
+		textarea(name="attr_movetaken_question-alpha_and_omega" class="bio")
+	p
+		+translate("When you wish to deepen the connection between you two,")(class="trigger")
+		+translate("choose:")
+		ul
+			li
+				+translate("Mark")
+				+ruin(1)(class="bold") 
+				+translate("to have them appear by your side, defying logic or plausibility–though they may have suffered to do so.")
+			li
+				+translate("Mark")
+				+ruin(1)(class="bold") 
+				+translate("to change a small but significant aspect of your shared fate, to bring it closer to ruin. If you do, immediately gain")
+				+headlink("1 Bond","Bonds")(class="bold term") 
+				+translate("with them and")
+				+headlink("1 Bond","Bonds")(class="bold term") 
+				+translate("with")
+				+headlink("What the Darkness Demands of You.","demands","darkness")
++move("My Dark Patron","surge ruin move","selectable","dismissable")
+	p
+		+translate("A Harbinger claims that they will help you, assuring you that they are working against the other Harbingers for their own agenda.")
+	p
+		+translate("When you call upon your patron and tell them what you need,")(class="trigger")
+		+translate("the Keeper will describe what you must do for them in return. Choose:")
+		ul
+			li
+				+translate("Mark")
+				+ruin(1)(class="bold term") 
+				+translate("to agree to their terms, and describe how your dark patron becomes stronger.")
+			li
+				+translate("Mark")
+				+ruin(2)(class="bold term") 
+				+translate("to display your power to horrifying effect, instilling fear and respect in them. They give what you need without advancing their agenda, but you suspect this was part of their plans all along.")
++move("This Is the Blood of My Covenant","surge ruin move","selectable","dismissable")
+	p
+		+translate("You have created an unbreakable covenant with another Omen, in fervent and twisted hope that you can resist the abyss long enough to save each other.")
+	p
+		+translate("When you take this move,")(class="trigger")
+		+translate("declare which PC you create this covenant with. If they agree, both mark Ruin and bind your power together. They are now your Chosen.")
+	textarea(name="attr_movetaken_question-this_is_the_blood_of_my_covenant" class="bio")
+	p
+		+translate("When you create a sacred moment of communion with your Chosen,")(class="trigger")
+		+translate("choose:")
+		ul
+			li
+				+translate("Tell them how they matter more than any other. Destroy any number of")
+				+headlink("Bonds")
+				+translate("you have to clear any number of Conditions your Chosen suffers from, destroying one for one.")
+			li
+				+translate("Whisper to the Harbinger within them and promise that you will fall to ruin first. Erase any number of Ruin marks your Chosen has, transferring their")
+				+headlink("Ruin","Ruin","Experience and Ruin")
+				+translate("marks to your own track.")
+			li
+				+translate("Empower your Chosen beyond their reckoning. Mark")
+				+ruin(1)(class="bold term") 
+				+translate("to permanently grant them a new power of darkness that reflects an aspect of you—describe what it is.")
++move("My Anointed One","surge ruin move","selectable","dismissable")
+	p
+		+translate("You have found someone innocent—a perfect vessel. They are willing to embody your raw power and take your place for a time. Describe who they are and why they love you.")
+	textarea(name="attr_movetaken_question-my_anointed_one" class="bio")
+	p
+		+translate("When you take this move,")(class="trigger")
+		+translate("create your own personal Doomsday Clock with 12 ticks and name it")
+		+translate("My Power Made Flesh.")(class="bold italic")
+	+doomclock(12,0,"My Power Made Flesh")
+	p
+		+translate("When you seek relief or comfort through your Anointed One,")(class="trigger")
+		+translate("choose:")
+		ul
+			li
+				+translate("Mark")
+				+translate("1 Ruin,")(class="bold term")
+				+translate("and tick")
+				+translate("My Power Made Flesh")(class="bold italic") 
+				+translate("once. Your Anointed One will bear a new scar. You become mundane, and can pass for a mortal. Clear your Conditions. But your powers will violently return to you at the worst possible time.")
+			li
+				+translate("Mark")
+				+translate("2 Ruin,")(class="bold term")
+				+translate("and tick")
+				+translate("My Power Made Flesh")(class="bold italic") 
+				+translate("twice. You and your Anointed One share a moment of intimacy, they will become more beautiful. Clear")
+				+headlink("your Conditions","conditions")
+				+translate("and gain")
+				+headlink("1 Bond","Bonds")(class="bold term") 
+				+translate("with your Anointed One.")
+	p
+		+translate("When the My Power Made Flesh clock fills,")(class="trigger")
+		+translate("your Anointed One is fully corrupted and consumed by your power and surges into a horrifying new form. The current Mystery is set aside. In this moment, your Anointed One has become the next Harbinger of the apocalypse, emerging from an ancient Door of Power. They wear your power with a strength of will and purity of soul beyond what you were ever capable of. Give them a new name and title befitting the destroyer of worlds they have become.")
+	p
+		+translate("You and the other PCs must deal with your Anointed One, one way or another. Once this apocalyptic threat is dealt with, decide if you will leave DIVISION or stay. If you leave, retire this character and create a new one. If you stay, clear the Doomsday Clock")
+		+translate("My Power Made Flesh")(class="bold italic") 
+		+translate("and choose a new Anointed One.")

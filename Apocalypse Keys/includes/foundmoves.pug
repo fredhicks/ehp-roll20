@@ -1,0 +1,107 @@
++move("Walk with Me in Dreams","found","selectable","dismissable")
+	p
+		+translate("You have learned how to travel through the portals that connect all dreamers. Even locations, objects, and Harbingers dream.")
+	p
+		+translate("When you seek out insight or wisdom in dreams,")(class="trigger")
+		+translate("spend Darkness Tokens and roll.")
+		+rolldark("Walk with Me in Dreams")
+	p
+		+translate("On an 8-10")(class="result") 
+		+translate("you find exactly what you are looking for.")(class="bold") 
+		+translate("Choose two:")
+		ul
+			li
+				+translate("You unearth a secret.")
+			li
+				+translate("You implant a suggestion that shifts reality.")
+			li
+				+translate("You hide something in the dream.")
+			li
+				+translate("You bring back something from the dream.")
+			li
+				+translate("Declare an irrevocable truth about the Mystery that you learn from the Dream. Rewrite or add a Facet of the Mystery that reflects this truth.")
+	p
+		+translate("On an 11+")(class="result") 
+		+translate("you come across something disturbing,")(class="bold")
+		+translate("choose one from above and one from below.")
+		ul
+			li
+				+translate("You lose control of your powers in a terrible way, mark")
+				+headlink("1 Condition","Conditions")(class="bold term")
+			li
+				+translate("You are in the grasp of something horrifying, mark")
+				+ruin(1,"1 Ruin")(class="bold")
+			li
+				+translate("You endanger someone, destroy")
+				+headlink("1 Bond","Bonds")(class="bold term") 
+				+translate("with them")
+	p
+		+translate("On a 7-")(class="result") 
+		+translate("the dream comes alive and leaks violently out into the world.")(class="bold") 
+		+translate("The Keeper will tell you what happens next.")
++move("A Man of a Thousand Faces","found","selectable","dismissable")
+	p
+		+translate("You have learned how to reflect the thoughts of memories of others, to help them see who they wish to see.")
+	p
+		+translate("When you allow your form to fluctuate and take on the face of another,")(class="trigger")
+		+translate("spend Darkness Tokens and roll.")
+		+rolldark("A Man of a Thousand Faces")
+	p
+		+translate("On an 8-10")(class="result") 
+		+translate("the thoughts and memories come together in song and your form harmonizes with it,")(class="bold")
+		+translate("choose two:")
+		ul
+			li
+				+translate("You look like one person who causes fear and easily intimidates others")
+			li
+				+translate("You look like a different person to different people, someone inconspicuous and easily underestimated")
+			li
+				+translate("The shape and form is stable and will last for as long as you can concentrate on maintaining it")
+			li
+				+translate("You gain the memories and thoughts of whoever you look like")
+	p
+		+translate("On an 11+")(class="result") 
+		+translate("your own thoughts and memories are discordant and the song falters for a moment,")(class="bold")
+		+translate("choose one above and one below:")
+		ul
+			li
+				+translate("One of your own memories must be sacrificed, destroy")
+				+headlink("1 Bond","Bonds")(class="bold term")
+			li
+				+translate("You learn something disturbing through the thoughts and memory of another, mark")
+				+headlink("1 Condition","Conditions")(class="bold term")
+			li
+				+translate("An aspect of your subconscious escapes into the mind of another, mark")
+				+ruin(1,"1 Ruin")(class="bold")
+	p
+		+translate("On a 7-")(class="result") 
+		+translate("a thought or memory bears the mark of a Harbinger,")(class="bold")
+		+translate("causing you to lose control of your form entirely. The Keeper will tell you what happens next.")
++move("You Are Not Alone","found","selectable","dismissable")
+	p
+		+translate("When a PC is")(class="trigger")
+		+movelink("Torn Between")
+		+translate("and must make a choice,")(class="trigger")
+		+translate("you may reach out to them psychically and tell them why they shouldn’t be afraid.")
+	p
+		+translate("Mark")
+		+headlink("1 Condition","Conditions")(class="bold term") 
+		+translate("and ask them, “How do I help you believe in yourself?” They no longer have to make a choice and find a moment of clarity and calm. In addition, both of you gain")
+		+headlink("1 Bond","Bonds")(class="bold term") 
+		+translate("with each other.")
++move("The Truth Above All Else","found","selectable","dismissable")
+	p
+		+translate("When you")(class="trigger")
+		+movelink("Grasp Keys")
+		+translate("alone while inviting danger,")(class="trigger")
+		+translate("take 3 Darkness Tokens before doing so.")
++move("It Was Just Me for A Long Time","found","selectable","dismissable")
+	p
+		+translate("You spent many years alone before you were found by DIVISION. You have learned the wisdom of solitude, the strength in loneliness. Unlike other PCs you may create")
+		+headlink("a Bond","Bonds")(class="bold term") 
+		+translate("with yourself.")
+	p
+		+translate("When you choose the wisdom of solitude,")(class="trigger")
+		+translate("tell everyone how you spend time alone. What do you do? How is it calming, fruitful, or insightful? Gain")
+		+headlink("1 Bond","Bonds")(class="bold term") 
+		+translate("with yourself. You may spend these Bonds with yourself as normal.")

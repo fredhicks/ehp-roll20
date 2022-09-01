@@ -3,7 +3,7 @@ div.menu
 		input(type='hidden' name='attr_playbook' class='pbselector' value='')
 		each book in playbooks
 			div(class="pb"+book)
-				+headlink(book,"Playbook")(class="bold fglink")
+				+headlink(book,"Playbook",'','')(class="bold fglink")
 		| • 
 		input(type="hidden" name="attr_xp")
 		input(type="hidden" name="attr_ruin")
@@ -13,7 +13,7 @@ div.menu
 				span.icon.star.alert
 		span(name="attr_darkness_tokens")
 		|&nbsp;
-		+headlink("Darkness Tokens","Darkness")(class="bold fglink")
+		+headlink("Darkness Tokens","Darkness",'','')(class="bold fglink")
 		| • 
 		span
 			input(type="hidden" name="attr_xp_advance_active" value="0" class="view")
@@ -21,7 +21,7 @@ div.menu
 				span.icon.star.alert
 		span(name="attr_xp")
 		|&nbsp;
-		+headlink("XP","Experience and Ruin")(class="bold fglink")
+		+headlink("XP","Experience and Ruin",'','')(class="bold fglink")
 		| • 
 		span
 			input(type="hidden" name="attr_ruin_advance_active" value="0" class="view")
@@ -29,39 +29,41 @@ div.menu
 				span.icon.star.alert
 		span(name="attr_ruin")
 		|&nbsp;
-		+headlink("Ruin","Experience and Ruin")(class="bold fglink")
+		+headlink("Ruin","Experience and Ruin",'','')(class="bold fglink")
 		input(type="hidden" name="attr_current_conditions" value="" class="hideempty")
 		span
 			| • 
-			+headlink("Conditions")(class="bold fglink")
+			+headlink("Conditions",'conditions','','')(class="bold fglink")
 			|: 
 			span(name="attr_current_conditions" class="conditiontext")
 	div.spaceupmini
-		+headlink("Playbook")
+		+headlink("Playbook",'playbook','','')
 		| • 
-		+headlink("Moves")
+		+headlink("Moves",'moves','','')
 		| • 
 		span
 			input(type="hidden" name="attr_torn_between_active" value="0" class="view")
 			span.viewable
 				span.icon.star.alert
-		+headlink("Darkness")
+		+headlink("Darkness",'darkness','','')
 		| • 
-		+headlink("Bonds")
+		+headlink("Bonds",'bonds','','')
 		| • 
-		+headlink("Conditions")
+		+headlink("Conditions",'conditions','','')
 		| • 
-		+headlink("Experience and Ruin")
+		+headlink("Experience and Ruin",'Experience and Ruin','','')
 		| • 
 		span
 			input(type="hidden" name="attr_xp_advance_active" value="0" class="view")
 			input(type="hidden" name="attr_ruin_advance_active" value="0" class="view")
 			span.viewable
 				span.icon.star.alert
-		+headlink("Advances")
+		+headlink("Advances",'advances','','')
 		| • 
-		+headlink("Notes")
+		+headlink("Remember to...",'Remember to...','','')
 		| • 
-		+headlink("Remember to...")
+		+headlink("Bio",'Bio','','')
 		| • 
-		+headlink("Bio")
+		+headlink("Notes",'notes','','')
+		| • 
+		+headlink("Preferences",'Preferences','','')

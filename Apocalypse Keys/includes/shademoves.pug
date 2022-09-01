@@ -1,0 +1,150 @@
++move("Soul Like a Steel Trap","shade","selectable","dismissable")
+	p
+		+translate("Your cold analytical skills help you devise the perfect plan.")
+	p
+		+translate("When you study a tense situation,")(class="trigger")
+		+translate("spend Darkness Tokens and roll.")
+		+rolldark("Soul Like a Steel Trap")
+	p
+		+translate("On an 8-10")(class="result") 
+		+translate("the plan starts to form,")(class="bold")
+		+translate("ask two:")
+		ul
+			li
+				+translate("What do DIVISION files tell me about this?")
+			li
+				+translate("Which of our powers of darkness will be most effective?")
+			li
+				+translate("What weakness do I perceive?")
+			li
+				+translate("Who or what can help me?")
+			li
+				+translate("How could we best end this quickly?")
+	p
+		+translate("On an 11+")(class="result") 
+		+translate("ask one from above, but you come to a harrowing realization about the situation.")(class="bold") 
+		+translate("The Keeper will ask you a difficult question that you must answer.")
+	p
+		+translate("On a 7-")(class="result") 
+		+translate("the Harbinger has prepared for this moment and a trap is sprung.")(class="bold") 
+		+translate("Prepare for the worst.")
++move("I’m the Expert Here!","shade","selectable","dismissable")
+	p
+		+translate("When someone spends")(class="trigger")
+		+translate("a Bond")(class="bold term") 
+		+translate("with you to receive the +1 or -1 bonus,")(class="trigger")
+		+translate("they may ask for your expert advice. If they follow it, they may also choose one:")
+		ul
+			li
+				+translate("They clear")
+				+translate("1 Condition")(class="bold term")
+			li
+				+translate("You gain")
+				+headlink("1 Bond","Bonds")(class="bold term") 
+				+translate("on them")
+			li
+				+translate("They may change a detail or context about")
+				+translate("a Key")(class="bold term")
++move("Your Reputation Precedes You","shade","selectable","dismissable")
+	p
+		+translate("When you first encounter a named NPC or Faction,")(class="trigger")
+		+translate("you may declare that they have intimate ties with DIVISION.")(class="bold") 
+		+translate("When you do so, spend Darkness Tokens and roll.")
+		+rolldark("Your Reputation Precedes You")
+	p
+		+translate("The Keeper will tell you something significant and valuable, even on a miss.")
+	p
+		+translate("On an 8-10")(class="result") 
+		+translate("you know much about them,")(class="bold")
+		+translate("choose one:")
+		ul
+			li
+				+translate("You have a significant connection, gain")
+				+headlink("1 Bond","Bonds")(class="bold term") 
+				+translate("with them")
+			li
+				+translate("They trust you and/or DIVISION, clear")
+				+headlink("1 Condition","Conditions")(class="bold term")
+			li
+				+translate("Declare how they can help escape your doom, erase")
+				+spendruin(1,"1 Ruin")(class="bold")
+	p
+		+translate("On an 11+")(class="result") 
+		+translate("they are dangerous to you or DIVISION,")(class="bold")
+		+translate("the Keeper will say which. Choose one:")
+		ul
+			li
+				+translate("You’re drawn to them regardless of the danger, gain")
+				+headlink("1 Bond","Bonds")(class="bold term") 
+				+translate("with them")
+			li
+				+translate("They stir the Harbinger within you, mark")
+				+ruin(1,"1 Ruin")(class="bold")
+	p
+		+translate("On a 7-")(class="result") 
+		+translate("they have something on you.")(class="bold") 
+		+translate("What terrible secret do they know about you?")
++move("The Devil’s Advocate","shade","selectable","dismissable")
+	p
+		+translate("You have a mentor, someone ancient and terrifying who wears human skin. They tell you what you need to know, as long as you prove you are worth their care and interest.")
+	p
+		+translate("At the start of each session,")(class="trigger")
+		+translate("reflect on a moment with your mentor.")(class="bold") 
+		+translate("Spend Darkness Tokens and roll.")
+		+rolldark("The Devil’s Advocate")
+	p
+		+translate("On an 8-10")(class="result") 
+		+translate("you flashback to a moment when your mentor was pleased with you.")(class="bold") 
+		+translate("Their sinister riddles make sense of what is going on in the present. Choose two:")
+		ul
+			li
+				+translate("They taught you that emotions only get in the way, clear")
+				+headlink("1 Condition.","Conditions")(class="bold term")
+			li
+				+translate("They taught you to recognize undercover DIVISION agents, name an NPC who is such an agent and gain")
+				+headlink("1 Bond","Bonds")(class="bold term") 
+				+translate("with them.")
+			li
+				+translate("They taught you the cruel patterns of the apocalypse, declare an irrevocable truth about the Mystery—rewrite or add a Facet of the Mystery that reflects this truth.")
+			li
+				+translate("They revealed your destiny as a Harbinger, gain")
+				+headlink("1 Bond","Bonds")(class="bold term") 
+				+translate("with")
+				+headlink("What the Darkness Demands of You.","demands","darkness")
+			li
+				+translate("They tested you ruthlessly, and without mercy. Mark")
+				+xp(1)(class="bold")
+	p
+		+translate("On an 11+")(class="result") 
+		+translate("you flashback to a moment when your mentor expressed their disappointment.")(class="bold") 
+		+translate("Choose one from above, but you must prove your worth. Choose one:")
+		ul
+			li
+				+translate("Report back information on your fellow monsters, to sate the appetite of your mentor. Destroy")
+				+headlink("1 Bond","Bonds")(class="bold term") 
+				+translate("with a PC.")
+			li
+				+translate("You bargain with the Harbinger within you to gain power, mark")
+				+ruin(1,"1 Ruin.")(class="bold")
+	p
+		+translate("On a 7-")(class="result") 
+		+translate("you receive a dire warning or difficult orders from your mentor,")(class="bold")
+		+translate("the Keeper will tell you what happens next.")
++move("Allow Me to Offer a Theory","shade","selectable","dismissable")
+	p
+		+translate("When another PC is")(class="trigger") 
+		+movelink("Grasp Keys","Grasping Keys,")
+		+translate("ask if they desire your expertise.")(class="bold") 
+		+translate("If they do, work together to describe how you correct their method or line of reasoning. They roll as normal but in addition:")
+	p
+		+translate("On an 8-10")(class="result") 
+		+translate("any PC may add or change a detail of the Key the Keeper offers.")
+	p
+		+translate("On an 11+")(class="result") 
+		+translate("the Keeper will provide a golden opportunity to avoid the worst of the consequences.")
+	p
+		+translate("However, on a 7-")(class="result") 
+		+translate("all the consequences of the roll affect you rather than the player who rolled, including the option to mark")
+		+ruin(1,"1 Ruin")(class="bold") 
+		+translate("in order to uncover")
+		+translate("a Key.")(class="bold term")

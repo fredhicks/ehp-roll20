@@ -9,3 +9,266 @@
 		+translate('take')
 		+dark(3)
 		+translate('before doing so.')
++move("My Hands Around Your Heart","surge","","")
+	p
+		+translate("Yours is a power that was never meant for you alone to bear.")
+	p
+		+translate("At the start of each session,")(class="trigger")
+		+translate("choose another PC to be your Heart and share the burden of your power with.")(class="bold") 
+		+translate("Say why you hope they will save you from")
+		+headlink("What the Darkness Demands.","demands","darkness")
+		textarea(name="attr_question-my_hands_around_your_heart" class="bio")
+	p
+		+translate("When you share an intimate moment together,")(class="trigger")
+		+translate("either of you can mark")(class="bold")
+		+headlink("1 Condition","conditions")(class="bold term") 
+		+translate("to reflect the nature of your relationship.")(class="bold") 
+		+translate("Choose one:")
+		ul
+			li
+				+translate("You each gain")
+				+headlink("1 Bond","bonds")(class="bold term") 
+				+translate("with the other")
+			li
+				+translate("One of you gains")
+				+translate("a Key")(class="bold term") 
+				+translate("at great cost")
+	p
+		+translate("In addition,")
+		+translate("when you hit your")(class="trigger")
+		+headlink("Breaking Point,","breaking point","conditions")(class="trigger")
+		+translate("your Heart chooses:")
+		ul
+			li
+				+translate("They do nothing, allowing you to hit your Breaking Point. They clear all their Conditions.")
+			li
+				+translate("They intervene, and describe how they hurt themselves to protect you. You clear")
+				+headlink("all your Conditions,","conditions")
+				+translate("but they mark")
+				+translate("1 Condition")(class="bold term") 
+				+translate("or")
+				+translate("1 Ruin.")(class="bold term")
+	p
+		+translate("When your Heart hits their Breaking Point,")(class="trigger")
+		+translate("you have the last option to intervene, but if you do nothing, your Conditions don’t clear.")
++move("The Heart’s Eclipse","surge","","")
+	p
+		+translate("Your heart is a wild thing that surges along with your power, one day your heart will break and your power will consume you. But that day is not today.")
+	p
+		+translate("Whenever you roll a miss,")(class="trigger")
+		+translate("you can choose to have your power surge beyond your control, causing great collateral damage around you. Choose:")
+		ul
+			li
+				+translate("Mark")
+				+headlink("2 Conditions,","conditions")(class="bold term")
+				+translate("describe how your emotions get the better of you and gain")
+				+headlink("1 Bond","bonds")(class="bold term") 
+				+translate("with")
+				+headlink("What the Darkness Demands of You.","demands","darkness")
+				+translate("Treat the roll as if you had rolled an 11+ instead.")
+			li
+				+translate("A PC marks")
+				+translate("2 Conditions")(class="bold term") 
+				+translate("and gains")
+				+translate("1 Bond")(class="bold term") 
+				+translate("with you—they describe how they hurt themselves to help you. Treat the roll as if you had rolled an 8-10 instead.")
++move("You Can’t Hide Your Heart from Me","found","","")
+	p
+		+translate("You are sensitive to the surface thoughts and strongest feelings of those around you.")
+	p
+		+translate("When you deepen your senses,")(class="trigger")
+		+translate("spend Darkness Tokens and roll.")
+		+rolldark("You Can’t Hide Your Heart from Me")
+	p
+		+translate("On an 8-10")(class="result") 
+		+translate("you sense more under the surface,")(class="bold")
+		+translate("ask two:")
+		ul
+			li
+				+translate("What do you wish would happen?")
+			li
+				+translate("What are you hiding?")
+			li
+				+translate("What are you truly afraid of?")
+			li
+				+translate("Who or what do you love above all else?")
+			li
+				+translate("How can I make you trust me?")
+			li
+				+translate("What don’t you realize you know? Draw a line between")
+				+translate("a Key")(class="bold term") 
+				+translate("and a Facet of the Mystery. Declare an irrevocable truth about the Mystery.")
+	p
+		+translate("On an 11+")(class="result") 
+		+translate("their mind bleeds into yours,")(class="bold")
+		+translate("choose one above and they will choose one to ask you as well. The Keeper tells you how their heart is corrupted by your power, gain")
+		+headlink("1 Bond","Bonds")(class="bold term") 
+		+translate("with them.")
+	p
+		+translate("On a 7-")(class="result") 
+		+translate("the darkness within you takes hold and will break the mind and heart of who you were connecting to.")(class="bold") 
+		+translate("The Keeper tells you what price you must pay to save them from the worst of your power.")
++move("Death Walked Here","shade","","")
+	p
+		+translate("Death reaches all places, and into the heart of all things.")
+	p
+		+translate("When you seek to reconstruct events or learn something valuable in an area,")(class="trigger")
+		+translate("spend Darkness Tokens and roll.")
+		+rolldark("Death Walked Here")
+	p
+		+translate("On an 8-10")(class="result") 
+		+translate("Death shows you exactly what happened here.")(class="bold") 
+		+translate("In addition, you draw Death close to you, ask two that Death will answer:")
+		ul
+			li
+				+translate("What glimpse beyond these events can you show me?")
+			li
+				+translate("What important item or knowledge was taken from here?")
+			li
+				+translate("What evidence here will help my investigation?")
+			li
+				+translate("How can I use any of this as leverage?")
+			li
+				+translate("What draws Death close? Draw a line between")
+				+translate("a Key")(class="bold term") 
+				+translate("and a Facet of the Mystery. Declare an irrevocable truth about the Mystery.")
+	p
+		+translate("On an 11+")(class="result") 
+		+translate("the whispers of Death overwhelm you,")(class="bold")
+		+translate("choose one from above and one from below.")
+		ul
+			li
+				+translate("Death lingers and holds you, mark")
+				+headlink("1 Condition","Conditions")(class="bold term")
+			li
+				+translate("Death shows you what you do not wish to see, mark")
+				+ruin(1)
+			li
+				+translate("You bring someone else closer to Death, destroy")
+				+headlink("1 Bond","Bonds")(class="bold term") 
+				+translate("to no effect")
+	p
+		+translate("On a 7-")(class="result") 
+		+translate("the laws of the dead and dying are compromised somehow.")(class="bold") 
+		+translate("The Keeper will tell you what happens next.")
++move("Ashes to Ashes","last","","")
+	p
+		+translate("You are the last of your kind, there will never be another.")
+	p
+		+translate("When you declare how the wisdom of your people may help in a situation,")(class="trigger")
+		+translate("spend Darkness Tokens and roll.")
+		+rolldark("Ashes to Ashes")
+	p
+		+translate("On an 8-10")(class="result") 
+		+translate("your wisdom shines brightly in the dark,")(class="bold")
+		+translate("choose two.")
+		ul
+			li
+				+translate("Recall ancient knowledge.")(class="bold") 
+				+translate("Ask the Keeper any question, they will answer it honestly and with great detail.")
+			li
+				+translate("Awaken latent abilities within.")(class="bold") 
+				+translate("Choose another Power of Darkness from another playbook, you have access to it, for now.")
+			li
+				+translate("Recognize the signs of portent hanging over your fellow monsters.")(class="bold") 
+				+translate("Each PC gains")
+				+dark(1)
+			li
+				+translate("See a fractured memory in the face of another monster.")(class="bold") 
+				+translate("Declare what that memory is and gain")
+				+headlink("1 Bond","Bonds")(class="bold term") 
+				+translate("with that PC or NPC.")
+	p
+		+translate("On an 11+")(class="result") 
+		+translate("the dark of your despair threatens to consume you,")(class="bold")
+		+translate("choose one from above. The Keeper will describe how an aspect of your people’s tragedy will be repeated, in spite of or because of your actions.")
+	p
+		+translate("On a 7-")(class="result") 
+		+translate("the ashes of your people demand fire and retribution.")(class="bold") 
+		+translate("The Keeper will tell you what happens next.")
++move("Call Me Master","fallen","","")
+	p
+		+translate("No one can resist the call of your dark heart, not for long anyway.")
+	p
+		+translate("When you declare how you mesmerize onlooking NPCs with your faded power,")(class="trigger")
+		+translate("spend Darkness Tokens and roll.")
+		+rolldark("Call Me Master")
+	p
+		+translate("On an 8-10")(class="result") 
+		+translate("you have claimed new worshipers.")(class="bold") 
+		+translate("Choose two:")
+		ul
+			li
+				+translate("They will fulfill a single command exactly as you wish")
+			li
+				+translate("They will grant you new powers temporarily, describe them")
+			li
+				+translate("They will create a place of worship and power in your name")
+	p
+		+translate("On an 11+")(class="result") 
+		+translate("you wonder if this is truly what you desire. Choose one from above and one from below:")(class="bold")
+		ul
+			li
+				+translate("An old enemy takes notice and makes a move against you, mark")
+				+headlink("1 Condition","Conditions")(class="bold term")
+			li
+				+translate("Your true self emerges for a moment, destroy")
+				+headlink("1 Bond","Bonds")(class="bold term")
+			li
+				+translate("Receive a terrible vision of your future, mark")
+				+ruin(1)(class="bold term")
+	p
+		+translate("On a 7-")(class="result") 
+		+translate("the song of your dark heart awakens a slumbering horror,")(class="bold")
+		+translate("the Keeper will tell you what dark and terrifying entity answers you call.")
++move("The Gnawing Edge of Hunger","hungry","","")
+	p
+		+translate("When you surrender to the Hunger within you,")(class="trigger")
+		+translate("describe how your body transforms and what you feed on. Spend Darkness Tokens and roll.")
+		+rolldark("The Gnawing Edge of Hunger")
+	p
+		+translate("On an 8-10")(class="result") 
+		+translate("you blunt the worst edges of your Hunger and feed on only as much as you need. Choose one:")
+		ul
+			li
+				+translate("Describe how your form becomes more human, clear")
+				+headlink("1 Condition.","Conditions")(class="bold term")
+			li
+				+translate("Describe who you wish you could feed on instead, gain")
+				+headlink("1 Bond","Bonds")(class="bold term") 
+				+translate("with them.")
+			li
+				+translate("Give into the euphoria of the feeding, describe how you feel and create or replace a")
+				+headlink("Hunger Condition","conditions")(class="bold term") 
+				+translate("to reflect this.")
+	p
+		+translate("On an 11+")(class="result") 
+		+translate("your Hunger grows deeper, edged with endless teeth as your humanity slips further away. Choose one:")
+		ul
+			li
+				+translate("Ask the Keeper what the Harbinger within you screams for, gain")
+				+headlink("1 Bond","Bonds")(class="bold term") 
+				+translate("with")
+				+headlink("What the Darkness Demands of You.","demands","darkness")
+				+translate("If you give into the Harbinger, clear")
+				+headlink("1 Condition.","Conditions")(class="bold term")
+			li
+				+translate("Give into the worst of your Hunger and go too far, inviting chaos and terror. Name a new fear you have and create or replace a")
+				+headlink("Hunger Condition","conditions")(class="bold term") 
+				+translate("to reflect this.")
+	p
+		+translate("On a 7-")(class="result") 
+		+translate("you lose control of the Hunger completely, the Keeper describes how your form twists into obscene and heartbreaking new shapes. Prepare for the worst.")
+
+
+
+
+
+
+
+
+
+
+
+
+

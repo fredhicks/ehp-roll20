@@ -1,0 +1,86 @@
++move("The Story of You Carved into My Flesh","hungry ruin move","selectable","dismissable")
+	p
+		+translate("When you share an intimate moment with a PC,")(class="trigger")
+		+translate("ask them if you may feed on the Harbinger within them. If they say yes, describe the feeding and choose:")
+		ul
+			li
+				+translate("Mark")
+				+ruin(1,"1 Ruin,")(class="bold")
+				+translate("unleash the hunger for a single moment and leave behind loving scars on them. You clear")
+				+headlink("1 Condition","Conditions")(class="bold term") 
+				+translate("and they gain")
+				+translate("1 Bond")(class="bold term") 
+				+translate("with")
+				+headlink("What the Darkness Demands of You.","demands","darkness")
+			li
+				+translate("Mark")
+				+ruin(2,"2 Ruin,")(class="bold")
+				+translate("and tear away at your skin and bone until you reveal a new aspect of your monstrosity to them. Ask the PC if the beast under your skin entices, horrifies, or both. Create a new")
+				+headlink("Hunger Condition","conditions")(class="bold term") 
+				+translate("that reflects how you make them feel. They clear all their Conditions.")
++move("Your Ruin on My Lips","hungry ruin move","selectable","dismissable")
+	p
+		+translate("When you share an intimate moment with a PC,")(class="trigger")
+		+translate("ask them if they will shed their skin for a moment to show you the Harbinger they may one day become.")
+	p
+		+translate("If they do, you feast upon their Ruin. Erase any number of Ruin marks they have, transferring their Ruin marks to")
+		+headlink("your own track.","ruin","experience and ruin")
+	p
+		+translate("If you share")
+		+headlink("What the Darkness Demands of You","demands","darkness")
+		+translate("and how it tempts you, they may choose to feed off")
+		+headlink("your Ruin","ruin","experience and ruin")
+		+translate("instead.")
++move("The Purity of My Reflection","hungry ruin move","selectable","dismissable")
+	p
+		+translate("Imprisoned within DIVISION is your reflection, purified by your hunger. They were once a person, long ago. But now they only mirror the worst aspects of you, showing on their skin what horror lies beneath the surface of you.")
+	p
+		+translate("When you share an intimate moment with your reflection,")(class="trigger")
+		+translate("describe how their body has changed to show what you hide from all others. The Keeper will describe why they still love you. Choose:")
+		ul
+			li
+				+translate("Mark")
+				+ruin(1,"1 Ruin,")(class="bold")
+				+translate("allow your reflection to feed on you. They will lovingly sift through your memories and fears. Ask the Keeper a question and they will answer it honestly and with great detail. In addition, gain")
+				+headlink("1 Bond","Bonds")(class="bold term") 
+				+translate("with your reflection.")
+			li
+				+translate("Mark")
+				+ruin(2,"2 Ruin")(class="bold") 
+				+translate("and feed on your reflection with reckless abandon. Describe how they become more grotesque as you become more beautiful. Gain a new")
+				+headlink("Power of Darkness","powers","darkness")
+				+translate("permanently. In addition, gain")
+				+headlink("1 Bond","Bonds")(class="bold term") 
+				+translate("with")
+				+headlink("What the Darkness Demands of You.","demands","darkness")
++move("Until Only Hunger Remains","hungry ruin move","selectable","dismissable")
+	p
+		+translate("You and the hunger know each other intimately—it has broken and remade you again and again over the years, leaving behind your insides changed and yearning. You know that the hunger is reshaping you to fulfill its greatest desire.")
+	p
+		+translate("When you take this move,")(class="trigger")
+		+translate("create your own personal Doomsday Clock with 4 ticks and name it")
+		+translate("Only Hunger Remains.")(class="bold italic")
+	+doomclock(4,0,"Only Hunger Remains")
+	p
+		+translate("When you are about to hit your")(class="trigger")
+		+headlink("Breaking Point,","breaking point","conditions")(class="trigger")
+		+translate("you can choose to give into desperation and feed on yourself instead, allowing the hunger within to grow stronger.")(class="bold") 
+		+translate("Mark")
+		+ruin(1,"1 Ruin")(class="bold") 
+		+translate("and tick")
+		+translate("Only Hunger Remains")(class="bold italic") 
+		+translate("once. Clear all your Conditions and choose three new unmarked")
+		+translate("Hunger Conditions:")(class="bold term") 
+		each instance in [1,2,3]
+			select(name="attr_condition_blankhungry"+instance+"_text")
+				+option("Hunger Condition #"+instance,"")
+				+option("Ravenous")
+				+option("Twisted")
+				+option("Brutal")
+				+option("Despairing")
+				+option("Volatile")
+	p
+		+translate("When the Only Hunger Remains clock fills,")(class="trigger")
+		+translate("you are finally consumed by your hunger. Whatever the current Mystery is, it is set aside. In this moment, you become the next Harbinger of the apocalypse, emerging from an ancient Door of Power. Your bones and flesh have been reshaped to reflect the truth of who you are, displaying the exquisite pain and torture you subjected your victims to. Give yourself a new name and title befitting the grotesque horror you are.")
+	p
+		+translate("You are no longer part of DIVISION. The other PCs must deal with you, one way or another. Once your apocalyptic threat is dealt with, retire this character and create a new one.")

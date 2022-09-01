@@ -1,0 +1,103 @@
++move("You Can’t Escape the Truth","shade ruin move","selectable","dismissable")
+	p
+		+translate("Your hard earned knowledge can be used as a weapon, and you have learned how to sharpen the truth to its finest edge.")
+	p
+		+translate("You may at any time reveal a dark and terrible secret of an NPC (or a PC, if invited) in a scene.")(class="bold") 
+		+translate("Choose:")
+		ul
+			li
+				+translate("Mark")
+				+ruin(1,"1 Ruin,")(class="bold")
+				+translate("you speak softly and the truth hurts. They decide: give up something valuable in order to stay and fight, or preserve their own safety by fleeing or surrendering.")
+			li
+				+translate("Mark")
+				+ruin(2,"2 Ruin,")(class="bold")
+				+translate("you speak in edges and cut mercilessly. They decide: they accept your words and do as you wish for now, or they offer you another truth at great cost to themselves.")
++move("Death Broke Me First","shade ruin move","selectable","dismissable")
+	p
+		+translate("When a PC is about to mark their final Condition and hit their Breaking Point,")(class="trigger")
+		+translate("ask if they wish for you to intervene.")(class="bold") 
+		+translate("If they agree, you summon Death to their side. You do not have to physically be present in the scene to be able to do so.")
+	p
+		+translate("When Death comes,")(class="trigger")
+		+translate("they ask you for something in return for their assistance. Choose:")
+		ul
+			li
+				+translate("Mark")
+				+ruin(1,"1 Ruin,")(class="bold")
+				+translate("and describe how Death will bridle their torment. The PC erases")
+				+translate("2 Conditions.")(class="bold term")
+				+translate("Describe how you appease and honor Death as they requested.")
+			li
+				+translate("Mark")
+				+ruin(2,"2 Ruin,")(class="bold")
+				+translate("the Harbinger within you awakens and you force Death to serve you without honoring their request. The PC erases")
+				+translate("2 Conditions.")(class="bold term")
+				+translate("In addition, describe how Death noticeably marks you as a Harbinger.")
++move("Death Always Leads to Life","shade ruin move","selectable","dismissable")
+	p
+		+translate("You intimately understand that Death and Life are connected to all things.")
+	p
+		+translate("When a person,")(class="trigger")
+		+translate("object, or location is on the verge of death or decay,")(class="bold term")
+		+translate("you may choose to hold Death hostage and demand Life bargain with you.")
+	p
+		+translate("When you hold Death hostage,")(class="trigger")
+		+translate("choose:")
+		ul
+			li
+				+translate("Mark")
+				+ruin(1,"1 Ruin,")(class="bold")
+				+translate("and the ebb and flow of Life will reveal itself to you. You hold back Death for a time, the Keeper will tell you what Life demands in return.")
+			li
+				+translate("Mark")
+				+ruin(2,"2 Ruin")(class="bold") 
+				+translate("and shatter a part of your undying soul, the shard will imbue the person, object, or location instead. Death cannot touch them without your express permission.")
++move("The Corridor of Doors","shade ruin move","selectable","dismissable")
+	p
+		+translate("You have been with DIVISION long enough that they trusted you with a secret. Over the years, DIVISION has managed to collect ancient doors of power, and placed them within a metaphysical space of highly volatile energy. Each door exists within a fluctuating state of")
+		+translate("open")(class="italic") 
+		+translate("and")
+		+translate("not open,")(class="italic")
+		+translate("locked")(class="italic") 
+		+translate("and")
+		+translate("unlocked.")(class="italic")
+	p
+		+translate("Only the most powerful in DIVISION know that the Harbinger within you can access these doors. They watch you with great interest.")
+	p
+		+translate("When you allow the Harbinger within you to access the Corridor of Doors,")(class="trigger")
+		+translate("unlock a door:")(class="bold term")
+		.strikelist
+			+strikebox("spider lord",true)
+				+translate("The Door of the Spider Lord,")(class="bold")
+				+translate("of webs and cunning, of patience and guile")
+			+strikebox("veiled one",true)
+				+translate("The Door of the Veiled One,")(class="bold")
+				+translate("of spite and rage, of whisper and blade")
+			+strikebox("scaled princess",true)
+				+translate("The Door of the Scaled Princess,")(class="bold")
+				+translate("of serpent and monsoon, of thunder and flood")
+			+strikebox("black prince",true)
+				+translate("The Door of the Black Prince,")(class="bold")
+				+translate("of plague and despair, of swarm and ichor")
+			+strikebox("twin moves",true)
+				+translate("The Door of the Twin Moons,")(class="bold")
+				+translate("of gravity and stars, of darkness and void")
+			+strikebox("broken mother",true)
+				+translate("The Door of the Broken Mother,")(class="bold")
+				+translate("of oaths and strength, of war and conquest")
+			+strikebox("blood queen",true)
+				+translate("The Door of the Blood Queen,")(class="bold")
+				+translate("of pain and torture, of love and hate")
+	p
+		+translate("When you have unlocked a door,")(class="trigger")
+		+translate("choose:")
+		ul
+			li
+				+translate("Mark")
+				+ruin(1,"1 Ruin,")(class="bold")
+				+translate("whatever is behind the door is unleashed. You cannot completely control what happens next, but you are given a fleeting opportunity to bargain with whatever comes through. The door will disappear from the corridor, and reappear somewhere in the world. Cross it out from the list. When the corridor of doors is empty, lose access to this move and choose another.")
+			li
+				+translate("Mark")
+				+ruin(2,"2 Ruin,")(class="bold")
+				+translate("whatever is behind the door acknowledges your power and control, and sees you for the fearsome Harbinger you will become. They will obey your commands for a time, before returning to the corridor of doors.")

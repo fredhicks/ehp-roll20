@@ -1,0 +1,129 @@
++move("Mother of Monsters","fallen","selectable","dismissable")
+	p
+		+translate("You have the ability to bring into the world terrifying monsters of beauty.")(class="bold") 
+		+translate("Describe the process and what you wish to bring into the world. Spend Darkness Tokens and roll.")
+		+rolldark("Mother of Monsters")
+	p
+		+translate("On an 8-10")(class="result") 
+		+translate("the child is perfect and obedient.")(class="bold") 
+		+translate("It helps as you wish and sees you as a parent. Describe what dark powers it has.")
+	p
+		+translate("On an 11+")(class="result") 
+		+translate("the child is perfect and rebellious.")(class="bold") 
+		+translate("It does as you ask for now, but it sees you as its lesser. The Keeper describes what powers it has. Choose one:")
+		ul
+			li
+				+translate("Mark")
+				+headlink("1 Condition","Conditions")(class="bold term") 
+				+translate("and describe how you convince them to worship you, for now")
+			li
+				+translate("Mark")
+				+ruin(1)(class="bold term") 
+				+translate("and birth another exactly like it")
+			li
+				+translate("Do nothing, but know that it will become an enemy")
+	p
+		+translate("On a 7-")(class="result") 
+		+translate("something has gone terribly wrong")(class="bold")
+		+translate("—the Keeper will tell you what happens next.")
++move("Fleeting Divinity","fallen","selectable","dismissable")
+	p
+		+translate("You have a collection of beautiful relics that were created in worship of you, and small fragments of your lingering divinity are contained within them.")
+	p
+		+translate("After any roll you make,")(class="trigger")
+		+translate("you can expend one of these relics to modify the result by +1 or -1.")(class="bold") +
+		translate("Describe the relic that you hold, and what happens as the divinity is within cracks and fades. Does it leave behind ash and blood? Glass and tears?")
+	p
+		+translate("Whatever happens, it has been used up forever. Mark")
+		+headlink("1 Condition.","Conditions")(class="bold term")
+		+translate("You have at your disposal a vast supply of these beautiful relics, which may all be sacrificed at the cost of chipping away at your divinity.")
++move("Honeyed Tongue and Clouded Minds","fallen","selectable","dismissable")
+	p
+		+translate("You have only survived in this wretched state because of your ability to lie and charm.")
+	p
+		+translate("When you")(class="trigger")
+		+movelink("Unleash the Dark")(class="trigger")
+		+translate("through lies,")(class="trigger")
+		+translate("you can also choose one from below, even on a miss:")
+		ul
+			li
+				+translate("A part of my lie becomes truth")
+			li
+				+translate("I learn a valuable secret")
+			li
+				+translate("They are tempted to worship me")
+			li
+				+translate("They will give me temporary shelter or protection")
++move("You Loved Me Once","fallen","selectable","dismissable")
+	p
+		+translate("When you first encounter a named NPC or Faction,")(class="trigger")
+		+translate("you may declare how they loved or worshiped you before your fall.")(class="bold") 
+		+translate("Spend Darkness Tokens and roll.")
+		+rolldark("You Loved Me Once")
+	p
+		+translate("The Keeper will tell you something significant and valuable, even on a miss.")
+	p
+		+translate("On an 8-10")(class="result") 
+		+translate("you feel their heart open to you,")(class="bold")
+		+translate("choose one:")
+		ul
+			li
+				+translate("They worship you still, gain")
+				+headlink("1 Bond","Bonds")(class="bold term") 
+				+translate("with them")
+			li
+				+translate("They have what you need, clear")
+				+headlink("1 Condition","Conditions")(class="bold term")
+			li
+				+translate("The sight of them soothes your heart, erase")
+				+spendruin(1,"1 Ruin")(class="bold")
+	p
+		+translate("On an 11+")(class="result") 
+		+translate("they intoxicate you,")(class="bold")
+		+translate("choose one:")
+		ul
+			li
+				+translate("Your fates are now linked in strange ways, gain")
+				+headlink("1 Bond","Bonds")(class="bold term") 
+				+translate("with them")
+			li
+				+translate("They can help you seek vengeance on who wronged you, mark")
+				+ruin(1,"1 Ruin")(class="bold")
+	p
+		+translate("On a 7-")(class="result") 
+		+translate("they serve those who forced your fall,")(class="bold")
+		+translate("their master makes a move against you immediately. The Keeper will tell you what happens next.")
++move("The Lies That Serve Me","fallen","selectable","dismissable")
+	p
+		+translate("You learned through pain that secrets are a key aspect of survival. You may attempt to tap into your latent divinity to cloak reality with your lies for a time.")
+	p
+		+translate("When you have a secret or truth you wish to conceal,")(class="trigger")
+		+translate("describe what lie or distraction will replace it.")(class="bold") 
+		+translate("Spend Darkness Tokens and roll.")
+		+rolldark("The Lies That Serve Me")
+	p
+		+translate("On an 8-10")(class="result") 
+		+translate("you encase the lie in what remains of your divinity.")(class="bold") 
+		+translate("Choose one:")
+		ul
+			li
+				+translate("The lie will last for as long as you wish it will")
+			li
+				+translate("The lie will hold up against any type of scrutiny")
+			li
+				+translate("The lie will not give birth to new lies beyond your control")
+	p
+		+translate("On an 11+")(class="result") 
+		+translate("the lie grows more powerful than you intended and your divinity cracks further.")(class="bold") 
+		+translate("Choose two from above, but choose one below:")
+		ul
+			li
+				+translate("Your divinity corrupts further and the Harbinger within you stirs, mark")
+				+ruin(1,"1 Ruin")(class="bold")
+			li
+				+translate("Your heart buckles under the weight of the lie, mark")
+				+headlink("1 Condition","Conditions")(class="bold term")
+	p
+		+translate("On a 7-")(class="result") 
+		+translate("you lose control of the lie and the spark of your divinity you used to create it.")(class="bold") 
+		+translate("The Keeper will tell you what happens next, prepare for the worst.")

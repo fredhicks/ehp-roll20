@@ -15,7 +15,13 @@ var gTBK = function(t) {
 };
 
 const exclusives = {
-	"summoned": [ "Sometimes, I Get Angry" ]
+	"summoned": [ "Sometimes, I Get Angry" ],
+	"surge": [ "My Hands Around Your Heart", "The Heart’s Eclipse" ],
+	"found": [ "You Can’t Hide Your Heart From Me" ],
+	"shade": [ "Death Walked Here" ],
+	"last": [ "Ashes to Ashes" ],
+	"fallen": [ "Call Me Master" ],
+	"hungry": [ "The Gnawing Edge of Hunger" ]
 };
 
 on("change:playbook", function(event) {
@@ -24,7 +30,7 @@ on("change:playbook", function(event) {
 	if ( typeof(event.newValue) == "undefined" ) { nv = ""; } else { nv = event.newValue; }
 	log("changed playbook to " + nv );
 	var pbs = Object.keys(exclusives);
-	var a = {};
+	var a = { "expand_movelist": 1 };
 	for(var i = 0; i < pbs.length; i++ ) {
 		if ( typeof(exclusives[pbs[i]]) !== "undefined" ) {
 			for(var j = 0; j < exclusives[pbs[i]].length; j++) {
@@ -283,17 +289,20 @@ on("sheet:opened change:ruin", function(event) {
 
 on("clicked:rolldicedark", function(event) {
 	var title = event.htmlAttributes.value;
-	getAttrs(["darkness_spend","darkness_tokens"], function(v) {
+	getAttrs(["darkness_spend","darkness_tokens","dark_added_bonus"], function(v) {
 		var current = parseInt(v.darkness_tokens)||0;
 		var spend = parseInt(v.darkness_spend)||0;
+		var bonus = parseInt(v.dark_added_bonus)||0;
 		if ( spend > 3 ) { spend = 3; }
 		if ( spend > current ) { spend = current; }
 		var exp = "2d6 + " + spend;
-		startRoll("&{template:2d6-roll} {{character=@{character_name}}} {{title="+title+"}} {{expression="+exp+"}} {{roll=[[2d6+"+spend+"]]}}", function(results) {
+		if ( bonus > 0 ) { exp = exp + " + " + bonus; }
+		startRoll("&{template:2d6-roll} {{character=@{character_name}}} {{title="+title+"}} {{expression="+exp+"}} {{roll=[[2d6+"+spend+"+"+bonus+"]]}}", function(results) {
 			log(results);
 			var a = {};
 			a.darkness_tokens = current - spend;
 			a.darkness_spend = 0;
+			a.dark_added_bonus = 0;
 			a.view_recent_roll = 1;
 			a.expand_roll_bonds = 0; // we don't need to see the bonds unless we want to
 			a.bond_mod_summary = "";
@@ -317,14 +326,17 @@ on("clicked:rolldicedark", function(event) {
 
 on("clicked:rolldicecustom", function(event) {
 	var title = event.htmlAttributes.value;
-	getAttrs(["custom_bonus"], function(v) {
+	getAttrs(["custom_bonus","custom_added_bonus"], function(v) {
 		var bonus = parseInt(v.custom_bonus)||0;
+		var xbonus = parseInt(v.custom_added_bonus)||0;
 		if ( bonus > 3 ) { bonus = 3; }
 		var exp = "2d6 + " + bonus;
-		startRoll("&{template:2d6-roll} {{character=@{character_name}}} {{title="+title+"}} {{expression="+exp+"}} {{roll=[[2d6+"+bonus+"]]}}", function(results) {
+		if ( xbonus > 0 ) { exp = exp + " + " + xbonus; }
+		startRoll("&{template:2d6-roll} {{character=@{character_name}}} {{title="+title+"}} {{expression="+exp+"}} {{roll=[[2d6+"+bonus+"+"+xbonus+"]]}}", function(results) {
 			log(results);
 			var a = {};
 			a.custom_bonus = 0;
+			a.custom_added_bonus = 0;
 			a.view_recent_roll = 1;
 			a.expand_roll_bonds = 0; // we don't need to see the bonds unless we want to
 			a.bond_mod_summary = "";
@@ -376,6 +388,7 @@ on("change:repeating_bonds:spend", function(e) {
 				getAttrs(fields, function(f) {
 					log(f);
 					var result = parseInt(f.recent_roll_result)||0;
+					var newresult = result;
 					var summary = "";
 					var mod = 0;
 					for(var i=0; i < s.length; i++) {
@@ -392,7 +405,7 @@ on("change:repeating_bonds:spend", function(e) {
 					}
 					if ( summary != "" ) { // then there is a nonzero spend
 						summary = result + " " + summary;
-						var newresult = result + mod;
+						newresult = result + mod;
 						summary = summary + " = " + newresult;
 					}
 					log(summary);

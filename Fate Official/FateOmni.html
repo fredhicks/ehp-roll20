@@ -164,6 +164,7 @@
 		<hr>
 		Click this button to export the entire sheet as a JSON object that can be imported to another sheet using the import area below.
 		<div><button type="action" name="act_exportsheet">Export</button></div>
+		<div><button type="action" name="act_exportsheetextrasonly">Export (Extras Only)</button></div>
 		<div><textarea name="attr_exportsheetdata" style="width: 90%"></textarea></div>
 		<hr>
 		Clicking this button will empty out all the dynamic elements of the sheet. It will leave some attributes untouched, but should blank out aspects, skills, stunts, stress, consequences, conditions, tempaspects, modes, roles, swaps, packages, powers, extras, and notes. 
@@ -4833,8 +4834,14 @@ on("change:importsheetdata sheet:opened", function() {
 		if ( values.importsheetdata !== "" ) { // Then it's gonna get processed.
 			log("importsheetdata: non null importablesheetdata detected");
 			var impsheet = JSON.parse(values.importsheetdata); // Hope this works!
-			var attrs = impsheet.attr; // this should get us the "flat attributes" that are just gonna get overwritten, as our starter object
-			var fsets = impsheet.fieldset; // An array of objects each representing a row in one of the many fieldsets this sheet uses
+			var attrs = {};
+			var fsets = [];
+			if ( typeof(impsheet.attr) !== "undefined" ) {
+				attrs = impsheet.attr; // this should get us the "flat attributes" that are just gonna get overwritten, as our starter object
+			}
+			if ( typeof(impsheet.fieldset) !== "undefined" ) {
+				fsets = impsheet.fieldset; // An array of objects each representing a row in one of the many fieldsets this sheet uses
+			}
 			attrs["importsheetdata"] = ""; // Initialize the import field now that we've read it in.
 			for(var i=0; i < fsets.length; i++) {
 				var row = fsets[i]; // This is an object
@@ -4858,6 +4865,32 @@ on("change:importsheetdata sheet:opened", function() {
 // all the fieldsets so far: 
 // aspects, skills, stunts, stress, consequences, conditions, tempaspects, modes, roles, swaps, packages, powers, extras, notes
 // ZOD
+
+on("clicked:exportsheetextrasonly", function(e) {
+	var exsheet = { "attr": {}, "fieldset": [] };
+	var fields = [];
+	getSectionIDs("extras", function(extrasList) {
+		var flist = fieldsets["extras"];
+		var fnames = [];
+		for(var i=0; i < extrasList.length; i++) {
+			for(var j=0; j < flist.length; j++) {
+				fnames[i*flist.length+j] = "repeating_extras_" + extrasList[i] + "_" + flist[j];
+			}
+		}
+		fields = fields.concat(fnames);
+		getAttrs(fields, function(v) {
+			log(v);
+			for(var i=0; i < extrasList.length; i++) {
+				var thisrow = { "_fieldset": "extras" };
+				for(var j=0; j < fieldsets["extras"].length; j++) {
+					thisrow[fieldsets["extras"][j]] = v["repeating_extras_" + extrasList[i] + "_" + fieldsets["extras"][j]];
+				}
+				exsheet["fieldset"].push(thisrow);
+			}
+			setAttrs({ "exportsheetdata": JSON.stringify(exsheet,null,"\t") });
+		});
+	});
+});
 
 on("clicked:exportsheet", function(e) {
 	var exsheet = { "attr": {}, "fieldset": [] };
@@ -5111,7 +5144,7 @@ on("clicked:exportsheet", function(e) {
 																}
 																
 																// And finally, we stringify the object and set the export field value
-																setAttrs({ "exportsheetdata": JSON.stringify(exsheet) });
+																setAttrs({ "exportsheetdata": JSON.stringify(exsheet,null,"\t") });
 															});
 
 														}); // notes

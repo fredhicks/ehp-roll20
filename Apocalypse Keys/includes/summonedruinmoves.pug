@@ -1,0 +1,82 @@
++move("None Stand Before Me","summoned ruin move","selectable","dismissable")
+	p
+		+translate("You may at any time choose to kill an NPC who is vulnerable to you.")(class="bold") 
+		+translate("Choose:")
+		ul
+			li
+				+translate("Mark")
+				+ruin(1,"1 Ruin,")(class="bold")
+				+translate("kill the NPC and describe how you visibly change to become more like the loathsome Harbinger you will become. An aspect of them will come back in some shape or form to haunt you.")
+			li
+				+translate("Mark")
+				+ruin(2,"2 Ruin,")(class="bold")
+				+translate("kill the NPC and destroy their soul—they will never return. Describe the comforting lie you tell yourself.")
++move("The Prodigal Child Will Return","summoned ruin move","selectable","dismissable")
+	p
+		+translate("Your true parent or creator has reconnected with you, and they bear great power.")
+	p
+		+translate("When you ask your true parent or creator for help,")(class="trigger")
+		+translate("they will do as you ask if you give them the love they crave from you.")
+	p
+		+translate("Tell them what you need, the Keeper will describe what form of loyalty or affection they require in return. Choose:")
+		ul
+			li
+				+translate("Mark")
+				+ruin(1,"1 Ruin,")(class="bold")
+				+translate("they will do as you ask in exchange for your act of love. Describe how you please them.")
+			li
+				+translate("Mark")
+				+ruin(2,"2 Ruin,")(class="bold")
+				+translate("the Harbinger within you awakens and you force your parent to do what you want while hardening your heart. Describe how they are proud of the Harbinger you are becoming.")
++move("Heavy Is the Crown","summoned ruin move","selectable","dismissable")
+	p
+		+translate("You may always declare a Harbinger knows you and the terrible prophecy that awaits you.")(class="bold")
+		+translate("Describe what part they will play in your prophecy.")
+	p
+		+translate("When you declare this,")(class="trigger")
+		+translate("choose:")
+		ul
+			li
+				+translate("Mark")
+				+ruin(1,"1 Ruin,")(class="bold")
+				+translate("they will immediately offer you something of great value, but will demand you show through action that you are ready to fulfill your prophecy.")
+			li
+				+translate("Mark")
+				+ruin(2,"2 Ruin,")(class="bold")
+				+translate("you force them to acknowledge your power and give way to you, for now. They will offer something of great value as a means of appeasing you.")
++move("Humanity Was a Dream","summoned ruin move","selectable","dismissable")
+	p
+		+translate("When you would")(class="trigger")
+		+movelink("Reveal Your Heart") 
+		+translate("to a PC or an NPC who may")(class="trigger")
+		+translate("become a Harbinger,")(class="trigger")
+		+translate("you may instead choose to describe why you are destined to become a Harbinger and how this makes you afraid.")
+	p
+		+translate("If you do, mark")
+		+ruin(1)
+		+translate("and the Harbinger within you stirs and reaches out to the other person, bringing your hearts far closer than any confession ever could. Choose two:")
+		ul
+			li
+				+translate("Reveal a beautiful shared memory, you both gain")
+				+headlink("2 Bonds","bonds")(class="bold term")
+				+translate("with each other.")
+			li
+				+translate("Reveal a painful shared memory, you both")
+				+xp(1,"mark XP.")
+			li
+				+translate("Promise that you will always protect the other, even if they become a Harbinger. You both clear")
+				+headlink("1 Condition.","conditions")(class="bold term")
+	p
+		+translate("Then the Harbinger within you resonates with the Harbinger within them.")(class="bold") 
+		+translate("If they mark")
+		+translate("1 Ruin,")(class="bold term")
+		+translate("they choose one:")
+		ul
+			li
+				+translate("Reveal a hope they have for you, you clear")
+				+headlink("1 Condition.","conditions")(class="bold term")
+			li
+				+translate("Talk about the good old times, to help you believe in the dream of your humanity. You both")
+				+xp(1,"mark XP.")
+			li
+				+translate("They promise to never abandon you. They erase any number of Ruin marks you have, transferring those Ruin marks to their own track.")

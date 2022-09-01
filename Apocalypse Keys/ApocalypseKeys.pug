@@ -1,348 +1,429 @@
-include mixins.pug 
+include includes/mixins.pug 
 
 - var playbooks = ['summoned','surge','found','shade','last','fallen','hungry']
 
 script(type='text/worker')
-	include sheet-worker.js 
+	include includes/sheet-worker.js 
 
 include includes/rolltemplates.pug
 
+
+input(type='hidden' name='attr_tooltips_show' value='1' class="tipsuppressor")
+
+input(type='hidden' name='attr_scrollstyle' value='compact' class="scrollstyle")
+
 .wrapper
 	include includes/headlinks.pug
-	.topline
-		input.bigname(type='text' name='attr_character_name')
 	.columns
 		.narrow
-			+expandable("Playbook")
-				select(name='attr_playbook')
-					option(value='' data-i18n="choose a playbook")
-					each book in playbooks
-						option(value=book data-i18n=book)
-							= 'The ' + book
-				input(type='hidden' name='attr_playbook' class='pbselector' value='')
-				div(class='pbsummoned')
-					include includes/summonedcolor.pug
-				div(class='pbsurge')
-					include includes/surgecolor.pug
-				div(class='pbfound')
-					include includes/foundcolor.pug
-				div(class='pbshade')
-					include includes/shadecolor.pug
-				div(class='pblast')
-					include includes/lastcolor.pug
-				div(class='pbfallen')
-					include includes/fallencolor.pug
-				div(class='pbhungry')
-					include includes/hungrycolor.pug
-
-				+expandablesub("Character Creation Options")
+			.topline
+				input.bigname(type='text' name='attr_character_name')
+			.scrollable
+				+expandable("Playbook")
+					select(name='attr_playbook')
+						+option("choose a playbook",'')
+						each book in playbooks
+							option(value=book data-i18n=book)
+								= 'The ' + book
 					input(type='hidden' name='attr_playbook' class='pbselector' value='')
 					div(class='pbsummoned')
-						include includes/summonedcco.pug
+						include includes/summonedcolor.pug
 					div(class='pbsurge')
-						include includes/surgecco.pug
+						include includes/surgecolor.pug
 					div(class='pbfound')
-						include includes/foundcco.pug
+						include includes/foundcolor.pug
 					div(class='pbshade')
-						include includes/shadecco.pug
+						include includes/shadecolor.pug
 					div(class='pblast')
-						include includes/lastcco.pug
+						include includes/lastcolor.pug
 					div(class='pbfallen')
-						include includes/fallencco.pug
+						include includes/fallencolor.pug
 					div(class='pbhungry')
-						include includes/hungrycco.pug
-			+expandable("Darkness")
-				+translate("Current Darkness Tokens")(class="bold")
-				div
-					input(type="hidden" name="attr_torn_between_active" value="0" class="colorizewhenactive")
-					input.tokens(type="number" value="0" min="0" name="attr_darkness_tokens")
-				input(type="hidden" name="attr_torn_between_active" value="0" class="view")
-				div.viewable
-					+translate("You are")(class="term")
-					+movelink("Torn Between")
-					| &mdash;
-					+translate("Choose between What the Darkness Demands of You and your mission.")
-				div
-					+rolldark("Darkness Roll")
-				+expandablesub("Gaining")
-					+translate("I gain 2-4 Darkness Tokens when I...")
-					input(type='hidden' name='attr_playbook' class='pbselector' value='')
-					div(class='pbsummoned')
-						ul
-							include includes/summonedgains.pug
-							input.view(type="hidden" name="attr_check_checkablexpadvance_newtokens_1" value="0")
-							li.viewable
-								input(type="hidden" name="attr_newdarknesstokensmethod")
-								span(name="attr_newdarknesstokensmethod")
-					div(class='pbsurge')
-						ul
-							include includes/surgegains.pug
-					div(class='pbfound')
-						ul
-							include includes/foundgains.pug
-					div(class='pbshade')
-						ul
-							include includes/shadegains.pug
-					div(class='pblast')
-						ul
-							include includes/lastgains.pug
-					div(class='pbfallen')
-						ul
-							include includes/fallengains.pug
-					div(class='pbhungry')
-						ul
-							include includes/hungrygains.pug
-					+translate("Click to gain")(class="bold")
-					br
-					+dark(2)
-					br
-					+dark(3)
-					br
-					+dark(4)
-				+expandablesub("Powers")
-					textarea.bio(name="attr_powers")
-				+expandablesub("Demands")
-					textarea.bio(name="attr_demands")
-			+expandable("Bonds")
-				.bondzone
-					fieldset(class="repeating_bonds")
-						div.bond
-							input(type="number" value="0" min="0" name="attr_points")
-							input(type="text" value='' name="attr_bondname")
-					+expandablesub("Starting Bonds Prompts")
+						include includes/hungrycolor.pug
+					+expandablesub("Character Creation Options")
 						input(type='hidden' name='attr_playbook' class='pbselector' value='')
 						div(class='pbsummoned')
-							include includes/summonedbondprompts.pug
+							include includes/summonedcco.pug
 						div(class='pbsurge')
-							include includes/surgebondprompts.pug
+							include includes/surgecco.pug
 						div(class='pbfound')
-							include includes/foundbondprompts.pug
+							include includes/foundcco.pug
 						div(class='pbshade')
-							include includes/shadebondprompts.pug
+							include includes/shadecco.pug
 						div(class='pblast')
-							include includes/lastbondprompts.pug
+							include includes/lastcco.pug
 						div(class='pbfallen')
-							include includes/fallenbondprompts.pug
+							include includes/fallencco.pug
 						div(class='pbhungry')
-							include includes/hungrybondprompts.pug
-			+expandable("Conditions")
-				.conditions
-					input(type='hidden' name='attr_playbook' class='pbselector' value='')
-					div(class='pbsummoned')
-						include includes/summonedconditions.pug
-					div(class='pbsurge')
-						include includes/surgeconditions.pug
-					div(class='pbfound')
-						include includes/foundconditions.pug
-					div(class='pbshade')
-						include includes/shadeconditions.pug
-					div(class='pblast')
-						include includes/lastconditions.pug
-					div(class='pbfallen')
-						include includes/fallenconditions.pug
-					div(class='pbhungry')
-						include includes/hungryconditions.pug
-					each instance in [1,2]
-						div
-							input.view(type="hidden" name="attr_check_checkableruinadvance_newruincon_"+instance value="0")
-							div.viewable
-								+condition('',"ruincon",true)
-				+expandablesub("Breaking Point")
-					+translate("(when you mark your last named condition)")(class="instruction")
-					input(type='hidden' name='attr_playbook' class='pbselector' value='')
-					div(class='pbsummoned')
-						include includes/summonedbreaking.pug
-					div(class='pbsurge')
-						include includes/surgebreaking.pug
-					div(class='pbfound')
-						include includes/foundbreaking.pug
-					div(class='pbshade')
-						include includes/shadebreaking.pug
-					div(class='pblast')
-						include includes/lastbreaking.pug
-					div(class='pbfallen')
-						include includes/fallenbreaking.pug
-					div(class='pbhungry')
-						include includes/hungrybreaking.pug
-			+expandable("Experience and Ruin")
-				.columns
-					.wide
-						+fixedsub("Experience")
-							+translate("Current XP")(class="bold")
-							div
-								input(type="hidden" name="attr_xp_advance_active" value="0" class="colorizewhenactive")
-								input.tokens(type="number" value="0" min="0" name="attr_xp")
-					.wide
-						+fixedsub("Ruin")
-							+translate("Current Ruin")(class="bold")
-							div
-								input(type="hidden" name="attr_ruin_advance_active" value="0" class="colorizewhenactive")
-								input.tokens(type="number" value="0" min="0" name="attr_ruin")
-				+expandablesub("Your Impulse")
-					div.instruction
-						p
-							+translate("At the start of every session,")(class="trigger")
-							+translate("choose one to explore during play.")
-					input(type='hidden' name='attr_playbook' class='pbselector' value='')
-					input(type='hidden' name='attr_chosenimpulse' class='hidecheckboxesnotnull' value='')
-					div(class='pbsummoned')
-						include includes/summonedimpulse.pug
-					div(class='pbsurge')
-						include includes/surgeimpulse.pug
-					div(class='pbfound')
-						include includes/foundimpulse.pug
-					div(class='pbshade')
-						include includes/shadeimpulse.pug
-					div(class='pblast')
-						include includes/lastimpulse.pug
-					div(class='pbfallen')
-						include includes/fallenimpulse.pug
-					div(class='pbhungry')
-						include includes/hungryimpulse.pug
-					div.instruction
-						p
-							+translate("At the end of the session,")(class="trigger")
-							+translate("answer the question—if yes, mark")
-							+xp(1)
-							| &nbsp;
-							+translate("or")
-							+ruin(1)
-				+expandablesub("End of Session")
-					div.instruction
-						p
-							+translate("At the end of the session,")(class="trigger")
-							+translate("answer all of these questions.")
-					ul
-						li
-							+translate("Did you express your monstrous nature and/or express your humanity?")(class="bold")
-							+translate("If yes, mark")
-							+xp("1")
-						li
-							+translate("Did you learn something significant about yourself and/or your impending ruin?")(class="bold")
-							+translate("If yes, mark")
-							+xp("1")
-						li
-							+translate("Did you learn something significant about a fellow monster?")(class="bold")
-							+translate("If yes, mark")
-							+xp("1")
-						li
-							+translate("Did you uncover at least a Key of the Apocalypse or attempt to Unlock Doom’s Door?")(class="bold")
-							+translate("If no, mark")
-							+ruin("1")
-			+expandable("Advances")
-				div
-					input(type="hidden" name="attr_xp_advance_active" value="0" class="view")
-					.viewable
-						p
-							+translate("You may spend")
-							+spendxp(8)
-							| 
-							+translate("for an XP advance.")
-				div
-					input(type="hidden" name="attr_ruin_advance_active" value="0" class="view")
-					.viewable
-						p
-							+translate("You may spend")
-							+spendruin(5)
-							| 
-							+translate("for a Ruin advance.")
-				+expandablesub("XP Advances")
-					input(type='hidden' name='attr_playbook' class='pbselector' value='')
-					div(class='pbsummoned')
-						+multicheckable("Take a new Summoned move",2,'',"summoned_xpadvance",2)
-					div(class='pbsurge')
-						+multicheckable("Take a new Surge move",2,'',"surge_xpadvance",2)
-					div(class='pbfound')
-						+multicheckable("Take a new Found move",2,'',"found_xpadvance",2)
-					div(class='pbshade')
-						+multicheckable("Take a new Shade move",2,'',"shade_xpadvance",2)
-					div(class='pblast')
-						+multicheckable("Take a new Last move",2,'',"last_xpadvance",2)
-					div(class='pbfallen')
-						+multicheckable("Take a new Fallen move",2,'',"fallen_xpadvance",2)
-					div(class='pbhungry')
-						+multicheckable("Take a new Hungry move",2,'',"hungry_xpadvance",2)
-					+multicheckable("Take a new DIVISION move",2,'',"xpadvance",2)
-					+multicheckable("Take a move from another playbook",2,'',"xpadvance",2)
-					+multicheckable("Describe a new way to gain Darkness Tokens",1,'',"xpadvance_newtokens",2)
+							include includes/hungrycco.pug
+				+expandable("Darkness")
+					+translate("Current Darkness Tokens")(class="bold")
 					div
-						input.view(type="hidden" name="attr_check_checkablexpadvance_newtokens_1" value="0")
-						div.viewable
-							div.checklist2box
-								div.buttons
-								div.text
-									input.fillme(type="text" name="attr_newdarknesstokensmethod" value="" style="width: 100%")
-						+multicheckable("Take a new Power of Darkness from your playbook",1,'',"xpadvance_newpod",2)
-						+multicheckable("Change your playbook",1,'',"xpadvance",2)
+						input(type="hidden" name="attr_torn_between_active" value="0" class="colorizewhenactive")
+						input.tokens(type="number" value="0" min="0" name="attr_darkness_tokens")
+					input(type="hidden" name="attr_torn_between_active" value="0" class="view")
+					div.viewable
+						+translate("You are")(class="term")
+						+movelink("Torn Between")
+						| &mdash;
+						+translate("Choose between What the Darkness Demands of You and your mission.")
 					div
-						+translate("Unused")(class="bold")
-						+translate("Advances")(class="bold")
-						input(type="number" min=0 value=0 name="attr_unused_xp_advances" class="fillme narrower")
+						+rolldark("Darkness Roll")
+					+expandablesub("Gaining")
+						+translate("I gain 2-4 Darkness Tokens when I...")
+						input(type='hidden' name='attr_playbook' class='pbselector' value='')
+						div(class='pbsummoned')
+							ul
+								include includes/summonedgains.pug
+								input.view(type="hidden" name="attr_check_checkablexpadvance_newtokens_1" value="0")
+								li.viewable
+									input(type="hidden" name="attr_newdarknesstokensmethod")
+									span(name="attr_newdarknesstokensmethod")
+						div(class='pbsurge')
+							ul
+								include includes/surgegains.pug
+						div(class='pbfound')
+							ul
+								include includes/foundgains.pug
+						div(class='pbshade')
+							ul
+								include includes/shadegains.pug
+						div(class='pblast')
+							ul
+								include includes/lastgains.pug
+						div(class='pbfallen')
+							ul
+								include includes/fallengains.pug
+						div(class='pbhungry')
+							ul
+								include includes/hungrygains.pug
+						+translate("Click to gain")(class="bold")
 						br
-						+translate("Not ready to make a decision? Note an earned advance here, and come back to spend it later when you're ready to decide.")(class="italic footnote" style="line-height: 8px;")
-
-				+expandablesub("Ruin Advances")
-					+multicheckable("Take a new Ruin Move",2,'',"ruinadvance",2)
-					+multicheckable("Take Ruin Move from another playbook",2,'',"ruinadvance",2)
-					+multicheckable("Permanently mark a Condition",2,'',"ruinadvance_permmark",2)
-					+multicheckable("Gain a new Ruin Condition",2,'',"ruinadvance_newruincon",2)
-					each instance in [1,2]
+						+dark(2)
+						br
+						+dark(3)
+						br
+						+dark(4)
+					+expandablesub("Powers")
+						+headlink("See options for more.","character creation options","playbook")(class="instruction")
+						textarea.bio(name="attr_powers")
+					+expandablesub("Demands")
+						+headlink("See options for more.","character creation options","playbook")(class="instruction")
+						textarea.bio(name="attr_demands")
+				+expandable("Bonds")
+					.bondzone
+						fieldset(class="repeating_bonds")
+							div.bond
+								input(type="number" value="0" min="0" name="attr_points")
+								input(type="text" value='' name="attr_bondname")
+						+expandablesub("Starting Bonds Prompts")
+							input(type='hidden' name='attr_playbook' class='pbselector' value='')
+							div(class='pbsummoned')
+								include includes/summonedbondprompts.pug
+							div(class='pbsurge')
+								include includes/surgebondprompts.pug
+							div(class='pbfound')
+								include includes/foundbondprompts.pug
+							div(class='pbshade')
+								include includes/shadebondprompts.pug
+							div(class='pblast')
+								include includes/lastbondprompts.pug
+							div(class='pbfallen')
+								include includes/fallenbondprompts.pug
+							div(class='pbhungry')
+								include includes/hungrybondprompts.pug
+				+expandable("Conditions")
+					.conditions
+						input(type='hidden' name='attr_playbook' class='pbselector' value='')
+						div(class='pbsummoned')
+							include includes/summonedconditions.pug
+						div(class='pbsurge')
+							include includes/surgeconditions.pug
+						div(class='pbfound')
+							include includes/foundconditions.pug
+						div(class='pbshade')
+							include includes/shadeconditions.pug
+						div(class='pblast')
+							include includes/lastconditions.pug
+						div(class='pbfallen')
+							include includes/fallenconditions.pug
+						div(class='pbhungry')
+							include includes/hungryconditions.pug
+						each instance in [1,2]
+							div
+								input.view(type="hidden" name="attr_check_checkableruinadvance_newruincon_"+instance value="0")
+								div.viewable
+									+condition('',"ruincon",true)
+					+expandablesub("Breaking Point")
+						+translate("(when you mark your last named condition)")(class="instruction")
+						input(type='hidden' name='attr_playbook' class='pbselector' value='')
+						div(class='pbsummoned')
+							include includes/summonedbreaking.pug
+						div(class='pbsurge')
+							include includes/surgebreaking.pug
+						div(class='pbfound')
+							include includes/foundbreaking.pug
+						div(class='pbshade')
+							include includes/shadebreaking.pug
+						div(class='pblast')
+							include includes/lastbreaking.pug
+						div(class='pbfallen')
+							include includes/fallenbreaking.pug
+						div(class='pbhungry')
+							include includes/hungrybreaking.pug
+				+expandable("Experience and Ruin")
+					.columns
+						.wide.centered(style="margin-right: 18px;")
+							+fixedsub("Experience")
+								//- +translate("Current XP")(class="bold")
+								div
+									input(type="hidden" name="attr_xp_advance_active" value="0" class="colorizewhenactive")
+									input.tokens(type="number" value="0" min="0" name="attr_xp")
+						.wide.centered
+							+fixedsub("Ruin")
+								//- +translate("Current Ruin")(class="bold")
+								div
+									input(type="hidden" name="attr_ruin_advance_active" value="0" class="colorizewhenactive")
+									input.tokens(type="number" value="0" min="0" name="attr_ruin")
+					+expandablesub("Your Impulse")
+						div.instruction
+							p
+								+translate("At the start of every session,")(class="trigger")
+								+translate("choose one to explore during play.")
+						input(type='hidden' name='attr_playbook' class='pbselector' value='')
+						input(type='hidden' name='attr_chosenimpulse' class='hidecheckboxesnotnull' value='')
+						div(class='pbsummoned')
+							include includes/summonedimpulse.pug
+						div(class='pbsurge')
+							include includes/surgeimpulse.pug
+						div(class='pbfound')
+							include includes/foundimpulse.pug
+						div(class='pbshade')
+							include includes/shadeimpulse.pug
+						div(class='pblast')
+							include includes/lastimpulse.pug
+						div(class='pbfallen')
+							include includes/fallenimpulse.pug
+						div(class='pbhungry')
+							include includes/hungryimpulse.pug
+						div.instruction
+							p
+								+translate("At the end of the session,")(class="trigger")
+								+translate("answer the question—if yes, mark")
+								+xp(1)
+								| &nbsp;
+								+translate("or")
+								+ruin(1)
+					+expandablesub("End of Session")
+						div.instruction
+							p
+								+translate("At the end of the session,")(class="trigger")
+								+translate("answer all of these questions.")
+						ul
+							li
+								+translate("Did you express your monstrous nature and/or express your humanity?")(class="bold")
+								+translate("If yes, mark")
+								+xp("1")
+							li
+								+translate("Did you learn something significant about yourself and/or your impending ruin?")(class="bold")
+								+translate("If yes, mark")
+								+xp("1")
+							li
+								+translate("Did you learn something significant about a fellow monster?")(class="bold")
+								+translate("If yes, mark")
+								+xp("1")
+							li
+								+translate("Did you uncover at least a Key of the Apocalypse or attempt to Unlock Doom’s Door?")(class="bold")
+								+translate("If no, mark")
+								+ruin("1")
+				+expandable("Advances")
+					div
+						input(type="hidden" name="attr_xp_advance_active" value="0" class="view")
+						.viewable
+							+headlink("You're ready for an XP advance.","XP Advances","Advances")
+					div
+						input(type="hidden" name="attr_ruin_advance_active" value="0" class="view")
+						.viewable
+							+headlink("You're ready for a Ruin advance.","Ruin Advances","Advances")
+					+expandablesub("XP Advances")
 						div
-							input.view(type="hidden" name="attr_check_checkableruinadvance_newruincon_"+instance value="0")
+							input(type="hidden" name="attr_xp_advance_active" value="0" class="view")
+							.viewable
+								p
+									+translate("You may spend")
+									+spendxp(8)
+									| 
+									+translate("for an XP advance.")
+									+translate("(You will still need to select the advance you want from the list below. If you're not ready to decide, add one to your Unused Advances tally.)")(class="italic")
+						input(type='hidden' name='attr_playbook' class='pbselector' value='')
+						div(class='pbsummoned')
+							+multicheckable("Take a new Summoned move",2,'',"summoned_xpadvance",2)
+						div(class='pbsurge')
+							+multicheckable("Take a new Surge move",2,'',"surge_xpadvance",2)
+						div(class='pbfound')
+							+multicheckable("Take a new Found move",2,'',"found_xpadvance",2)
+						div(class='pbshade')
+							+multicheckable("Take a new Shade move",2,'',"shade_xpadvance",2)
+						div(class='pblast')
+							+multicheckable("Take a new Last move",2,'',"last_xpadvance",2)
+						div(class='pbfallen')
+							+multicheckable("Take a new Fallen move",2,'',"fallen_xpadvance",2)
+						div(class='pbhungry')
+							+multicheckable("Take a new Hungry move",2,'',"hungry_xpadvance",2)
+						+multicheckable("Take a new DIVISION move",2,'',"xpadvance",2)
+						+multicheckable("Take a move from another playbook",2,'',"xpadvance",2)
+						+multicheckable("Describe a new way to gain Darkness Tokens",1,'',"xpadvance_newtokens",2)
+						div
+							input.view(type="hidden" name="attr_check_checkablexpadvance_newtokens_1" value="0")
 							div.viewable
 								div.checklist2box
 									div.buttons
 									div.text
-										select(name="attr_ruincon"+instance)
-											option(value="" data-i18n="Gain a new Ruin Condition")
-											option(value="Cruel" data-i18n="Cruel") Cruel
-											option(value="Fragile" data-i18n="Fragile") Fragile
-											option(value="Guilty" data-i18n="Guilty") Guilty
-											option(value="Haunted" data-i18n="Haunted") Haunted
-											option(value="Paranoid" data-i18n="Paranoid") Paranoid
-											option(value="Possessive" data-i18n="Possessive") Possessive
-											option(value="Ruthless" data-i18n="Ruthless") Ruthless
-											option(value="Reckless" data-i18n="Reckless") Reckless
-					+multicheckable("Retire your character. You become a Harbinger of the apocalypse.",1,'',"ruinadvance",2)
+										input.fillme(type="text" name="attr_newdarknesstokensmethod" value="" style="width: 100%")
+							+multicheckable("Take a new Power of Darkness from your playbook",1,'',"xpadvance_newpod",2)
+							+multicheckable("Change your playbook",1,'',"xpadvance",2)
+						div
+							+translate("Unused")(class="bold")
+							+translate("Advances")(class="bold")
+							input(type="number" min=0 value=0 name="attr_unused_xp_advances" class="fillme narrower")
+							br
+							+translate("Not ready to make a decision? Note an earned advance here, and come back to spend it later when you're ready to decide.")(class="italic footnote" style="line-height: 8px;")
+
+					+expandablesub("Ruin Advances")
+						div
+							input(type="hidden" name="attr_ruin_advance_active" value="0" class="view")
+							.viewable
+								p
+									+translate("You may spend")
+									+spendruin(5)
+									| 
+									+translate("for a Ruin advance.")
+									+translate("(You will still need to select the advance you want from the list below. If you're not ready to decide, add one to your Unused Advances tally.)")(class="italic")
+						+multicheckable("Take a new Ruin Move",2,'',"ruinadvance",2)
+						+multicheckable("Take Ruin Move from another playbook",2,'',"ruinadvance",2)
+						+multicheckable("Permanently mark a Condition",2,'',"ruinadvance_permmark",2)
+						+multicheckable("Gain a new Ruin Condition",2,'',"ruinadvance_newruincon",2)
+						each instance in [1,2]
+							div
+								input.view(type="hidden" name="attr_check_checkableruinadvance_newruincon_"+instance value="0")
+								div.viewable
+									div.checklist2box
+										div.buttons
+										div.text
+											select(name="attr_ruincon"+instance)
+												+option("Gain a new Ruin Condition","")
+												+option("Cruel")
+												+option("Fragile")
+												+option("Guilty")
+												+option("Haunted")
+												+option("Paranoid")
+												+option("Possessive")
+												+option("Ruthless")
+												+option("Reckless")
+						+multicheckable("Retire your character. You become a Harbinger of the apocalypse.",1,'',"ruinadvance",2)
+						div
+							+translate("Unused")(class="bold")
+							+translate("Advances")(class="bold")
+							input(type="number" min=0 value=0 name="attr_unused_ruin_advances" class="fillme narrower")
+							br
+							+translate("Not ready to make a decision? Note an earned advance here, and come back to spend it later when you're ready to decide.")(class="italic footnote" style="line-height: 8px;")
+				div
+					+expandable("Remember to...")
+						input(type='hidden' name='attr_playbook' class='pbselector' value='')
+						div(class='pbsummoned')
+							include includes/summonedremember.pug
+						div(class='pbsurge')
+							include includes/surgeremember.pug
+						div(class='pbfound')
+							include includes/foundremember.pug
+						div(class='pbshade')
+							include includes/shaderemember.pug
+						div(class='pblast')
+							include includes/lastremember.pug
+						div(class='pbfallen')
+							include includes/fallenremember.pug
+						div(class='pbhungry')
+							include includes/hungryremember.pug
+				+expandable("Bio")
+					+minihead("Your Look")
+						textarea.bio(name="attr_look")
+					+minihead("Your Origin")
+						textarea.bio(name="attr_origin")
 					div
-						+translate("Unused")(class="bold")
-						+translate("Advances")(class="bold")
-						input(type="number" min=0 value=0 name="attr_unused_ruin_advances" class="fillme narrower")
-						br
-						+translate("Not ready to make a decision? Note an earned advance here, and come back to spend it later when you're ready to decide.")(class="italic footnote" style="line-height: 8px;")
-		.wide
-			+expandable("Moves")
-				.columns
-					.sidetab
-						input(type='hidden' name="attr_expand_movelist" value="1" class="toggle")
-						button.vcontract.hfade(type='action' name='act_contract' value="movelist")
-						button.vexpand.hfade(type='action' name='act_expand' value="movelist")
-					input(type='hidden' name="attr_expand_movelist" value="1" class="rollup")
-					.middling.roller
+						input(type='hidden' name='attr_playbook' class='pbselector' value='')
+						div(class='pbsummoned')
+							+minihead("What is the prophecy that haunts you?")
+								textarea.bio(name="attr_summoned_prophecy")
+						div(class='pblast')
+							+minihead("What Tragedy Destroyed Your People?")
+								textarea.bio(name="attr_last_tragedy")
+						div(class='pbfallen')
+							+minihead("Who are the gods who taunt you?")
+								textarea.bio(name="attr_fallen_gods")
+						div(class='pbfound')
+							+minihead("What Has Replaced Most Of Your Memories From Before DIVISION?")
+								textarea.bio(name="attr_found_memories")
+						div(class='pbhungry')
+							+minihead("What do you feed on and what remnants do you leave behind?")
+								textarea.bio(name="attr_hungry_feed")
+						div(class='pbshade')
+							+minihead("What form does Death take to speak to you?")
+								textarea.bio(name="attr_shade_voice")
+						div(class='pbsurge')
+							+minihead("What Collateral Damage Do You Leave in Your Wake?")
+								textarea.bio(name="attr_surge_damage")
+				+expandable("Notes")
+					textarea.notes(name="attr_notes")
+				+expandable("Preferences")
+					select(name='attr_scrollstyle')
+						+option("Independent scrollbars (compact)",'compact')
+						+option("Independent scrollbars (comfy)",'comfy')
+						+option("Independent scrollbars (tall)",'tall')
+						+option("Single scrollbar",'')
+					select(name='attr_tooltips_show')
+						+option("Show tooltips","1")
+						+option("Hide tooltips",'0')
+					select(name='attr_final_mystery_toggle')
+						+option("Hide final mystery move","0")
+						+option("Show final mystery move",'1')
+
+		input(type='hidden' name="attr_expand_movelist" value="1" class="toggle")
+		div 
+			// intentionally empty
+		.sidetab
+			+button("Show Moves List","left")(type='action' name='act_expand' value="movelist" class="vexpand hfade")
+		input(type='hidden' name="attr_expand_movelist" value="1" class="rollup")
+		.narrow.roller
+			a(name="headermove_index")
+			.header.fixed
+				+translate("Move Index")(class="title")
+				+button("Hide Moves List","right")(type='action' name='act_contract' value="movelist" class="vcontract hfade")
+			.section
+				.columns.movecols
+					.scrollable
 						p
 						div
-							input(type='hidden' name='attr_playbook' class='pbselector' value='')
-							div(class='pbsummoned')
-								+pbinstruct()
-									+translate("Choose one more Playbook Move, then choose either one of your Ruin Moves, or instead take a DIVISION move (make sure everyone knows which one).")
-							div(class='pbsurge')
-							div(class='pbfound')
-							div(class='pbshade')
-							div(class='pblast')
-							div(class='pbfallen')
-							div(class='pbhungry')
+							+pbinstruct()
+								+translate("Choose one more Playbook Move, then choose either one of your Ruin Moves, or instead take a DIVISION move (make sure everyone knows which one).")
 						+fixedsub("Starting Playbook Moves")
 							input(type='hidden' name='attr_playbook' class='pbselector' value='')
 							div(class='pbsummoned')
 								+briefmove('Sometimes, I Get Angry','summoned','no')
 							div(class='pbsurge')
+								+briefmove("My Hands Around Your Heart","surge",'no')
+								+briefmove("The Heart’s Eclipse","surge",'no')
 							div(class='pbfound')
+								+briefmove("You Can’t Hide Your Heart from Me","found",'no')
 							div(class='pbshade')
+								+briefmove("Death Walked Here","shade",'no')
 							div(class='pblast')
+								+briefmove("Ashes to Ashes","last",'no')
 							div(class='pbfallen')
+								+briefmove("Call Me Master","fallen",'no')
 							div(class='pbhungry')
+								+briefmove("The Gnawing Edge of Hunger","hungry",'no')
 						+expandablesub("Playbook Moves",'',"pbchecked")
-							input(type="hidden" name="attr_check_pbchecked" class="checksonly" value="1")
+							input(type="hidden" name="attr_check_pbchecked" class="checksonly" value="0")
 							div(class='pbsummoned')
 								+briefmove("Come On, Tough Guy","summoned")
 								+briefmove("Borrowed Power","summoned")
@@ -350,23 +431,110 @@ include includes/rolltemplates.pug
 								+briefmove("Everything For You, My Love","summoned")
 								+briefmove("Together We Are Destiny","summoned")
 							div(class='pbsurge')
+								+briefmove("My Darkness is Never Leashed","surge")
+								+briefmove("I Am Your Destruction","surge")
+								+briefmove("Like a Moth to the Flame","surge")
+								+briefmove("My Little Monster","surge")
 							div(class='pbfound')
+								+briefmove("Walk with Me in Dreams","found")
+								+briefmove("A Man of a Thousand Faces","found")
+								+briefmove("You Are Not Alone","found")
+								+briefmove("The Truth Above All Else","found")
+								+briefmove("It Was Just Me for A Long Time","found")
 							div(class='pbshade')
+								+briefmove("Soul Like a Steel Trap","shade")
+								+briefmove("I’m the Expert Here!","shade")
+								+briefmove("Your Reputation Precedes You","shade")
+								+briefmove("The Devil’s Advocate","shade")
+								+briefmove("Allow Me to Offer a Theory","shade")
 							div(class='pblast')
+								+briefmove("Harrowing Beauty","last")
+								+briefmove("Tragedy’s Long Shadow","last")
+								+briefmove("Reshaped by Despair","last")
+								+briefmove("A Flickering Hope","last")
+								+briefmove("You Are All I Have Left","last")
 							div(class='pbfallen')
+								+briefmove("Mother of Monsters","fallen")
+								+briefmove("Fleeting Divinity","fallen")
+								+briefmove("Honeyed Tongue and Clouded Minds","fallen")
+								+briefmove("You Loved Me Once","fallen")
+								+briefmove("The Lies That Serve Me","fallen")
 							div(class='pbhungry')
-						+expandablesub("Ruin Moves")
-							input(type="hidden" name="attr_check_pbchecked" class="checksonly" value="1")
+								+briefmove("The Better to Eat You With, My Dear","hungry")
+								+briefmove("Do Harbingers Dream of Monsters Like Me","hungry")
+								+briefmove("Gaze Into My Heart’s Abyss","hungry")
+								+briefmove("Enthralled by You","hungry")
+								+briefmove("I Remember the Taste of You","hungry")
+						+expandablesub("Ruin Moves",'',"pbchecked")
+							input(type="hidden" name="attr_check_pbchecked" class="checksonly" value="0")
 							div(class='pbsummoned')
+								+briefmove("None Stand Before Me","summoned")
+								+briefmove("The Prodigal Child Will Return","summoned")
+								+briefmove("Heavy Is the Crown","summoned")
+								+briefmove("Humanity Was a Dream","summoned")
 							div(class='pbsurge')
+								+briefmove("Alpha and Omega","surge")
+								+briefmove("My Dark Patron","surge")
+								+briefmove("This Is the Blood of My Covenant","surge")
+								+briefmove("My Anointed One","surge")
 							div(class='pbfound')
+								+briefmove("Dark Puppet Strings","found")
+								+briefmove("Where Do You End, Where Do I Begin?","found")
+								+briefmove("Let Sleeping Gods Lie","found")
+								+briefmove("Crowned by Dream, Exalted by Nightmare","found")
 							div(class='pbshade')
+								+briefmove("You Can’t Escape the Truth","shade")
+								+briefmove("Death Broke Me First","shade")
+								+briefmove("Death Always Leads to Life","shade")
+								+briefmove("The Corridor of Doors","shade")
 							div(class='pblast')
+								+briefmove("Tragedy Will Not Claim Another","last")
+								+briefmove("I Carry the Hope of my People","last")
+								+briefmove("Reaching Beyond Time and Space","last")
+								+briefmove("Tower of Isolation","last")
 							div(class='pbfallen')
+								+briefmove("Tremble Before Me","fallen")
+								+briefmove("My Beloved Nemesis","fallen")
+								+briefmove("Desire Dressed as Faith","fallen")
+								+briefmove("I Will Rise Again","fallen")
 							div(class='pbhungry')
-						+expandablesub("DIVISION Moves")
+								+briefmove("The Story of You Carved into My Flesh","hungry")
+								+briefmove("Your Ruin on My Lips","hungry")
+								+briefmove("The Purity of My Reflection","hungry")
+								+briefmove("Until Only Hunger Remains","hungry")
+						+expandablesub("DIVISION Moves",'',"pbchecked")
+							input(type="hidden" name="attr_check_pbchecked" class="checksonly" value="0")
+							div
+								+briefmove("Dream Future Review Protocols")
+								+briefmove("Fae Liaison")
+								+briefmove("The Forbidden Archives")
+								+briefmove("Ghostly Agent")
+								+briefmove("Hero’s Weapon")
+								+briefmove("Holy Symbol Arsenal")
+								+briefmove("Monster Celebrity")
+								+briefmove("Orphanage Visit")
+								+briefmove("Partly Cursed Weapon")
+								+briefmove("The Peacemaker")
+								+briefmove("Psychic Invokers")
+								+briefmove("Subcontractor")
+						div
+							input(type='hidden' name="attr_final_mystery_toggle" class="rollup")
+							.roller
+								+expandablesub("Final Mystery Moves")
+									+translate("The following is a playbook move that the Keeper may offer you during (or before!) the Final Mystery. The move is crafted to specifically address the core emotional theme and unique question of your playbook.")(class="instruction")
+									p
+										| PENDING DEVELOPMENT!
 						+expandablesub("Basic Moves")
-					.wide
+							+briefmove("Unleash the Dark",'',"no")
+							+briefmove("Power Through Darkness",'',"no")
+							+briefmove("Reveal Your Heart",'',"no")
+							+briefmove("Torn Between",'',"no")
+							+briefmove("Grasp Keys",'',"no")
+							+briefmove("Unlock Doom’s Door",'',"no")
+		.wide
+			+fixed("Moves")
+				.columns.movecols
+					.wide.scrollable
 						include includes/exclusivemoves.pug
 						include includes/summonedmoves.pug
 						include includes/surgemoves.pug
@@ -383,35 +551,7 @@ include includes/rolltemplates.pug
 						include includes/fallenruinmoves.pug
 						include includes/hungryruinmoves.pug
 						include includes/divisionmoves.pug
+						include includes/finalmysterymoves.pug
 						include includes/basicmoves.pug
-			+expandable("Notes")
-				textarea.notes(name="attr_notes")
-			.columns
-				.middling
-					+fixed("Remember to...")
-						input(type='hidden' name='attr_playbook' class='pbselector' value='')
-						div(class='pbsummoned')
-							include includes/summonedremember.pug
-						div(class='pbsurge')
-							include includes/surgeremember.pug
-						div(class='pbfound')
-							include includes/foundremember.pug
-						div(class='pbshade')
-							include includes/shaderemember.pug
-						div(class='pblast')
-							include includes/lastremember.pug
-						div(class='pbfallen')
-							include includes/fallenremember.pug
-						div(class='pbhungry')
-							include includes/hungryremember.pug
-				.wide
-					+expandable("Bio")
-						+minihead("Your Look")
-							textarea.bio(name="attr_look")
-						+minihead("Your Origin")
-							textarea.bio(name="attr_origin")
-						div
-							input(type='hidden' name='attr_playbook' class='pbselector' value='')
-							div(class='pbsummoned')
-								+minihead("What is the prophecy that haunts you?")
-									textarea.bio(name="attr_summoned_prophecy")
+
++translations

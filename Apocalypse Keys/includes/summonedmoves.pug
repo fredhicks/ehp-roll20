@@ -49,7 +49,8 @@
 			li
 				+translate("The summoned creature will answer any one question truthfully, take")
 				+headlink("1 Bond","bonds")(class="bold term")
-				+translate("with What the Darkness Demands of You.")
+				+translate("with")
+				+headlink("What the Darkness Demands of You.","demands","darkness")
 			li
 				+translate("The summoned creature will uncover")
 				+translate("a Key")(class="bold term")
@@ -67,11 +68,12 @@
 			li
 				+translate("Choose one from above, but the creature will escape into the world and be forever free of your control. Gain")
 				+headlink("1 Bond","bonds")(class="bold term")
-				+translate("with What the Darkness Demands of You.")
+				+translate("with")
+				+headlink("What the Darkness Demands of You.","demands","darkness")
 	p
 		+translate("On a 7-")(class="result")
-		+translate("something powerful and sinister hijacks the summoning and comes through,")(class="bold")
-		+translate("with no summoning wards to control it. The forbidden comes through. The Keeper will tell you what happens next.")
+		+translate("something powerful and sinister hijacks the summoning,")(class="bold")
+		+translate("with no wards to control it. The forbidden comes through. The Keeper will tell you what happens next.")
 +move("We’re Family Now",'summoned',"selectable","dismissable")
 	p
 		+translate("When someone spends")(class="trigger")
@@ -107,7 +109,8 @@
 		+spendruin(1)
 		+translate("and gain")
 		+headlink("1 Bond","bonds")(class="bold term")
-		+translate("with What the Darkness Demands of You.")
+		+translate("with")
+		+headlink("What the Darkness Demands of You.","demands","darkness")
 	p
 		+translate("On a 7-")(class="result")
 		+translate("the Harbinger is unleashed and turns on the one you love,")(class="bold")
@@ -116,8 +119,8 @@
 	p
 		+translate("When you seek to defy your prophecy,")(class="trigger")
 		+translate("declare a new destiny.")(class="bold")
-		+translate("Ask each other player if they will defy prophecy with you. Roll, adding +1 for each player who says yes, to a maximum of +3. You cannot spend Darkness Tokens on this roll.")
-		+rollcustom("Together We Are Destiny")
+		+translate("Ask each player if they will defy prophecy with you. Roll, adding +1 for each player who says yes, to a maximum of +3. You cannot spend Darkness Tokens on this roll.")
+		+rollcustom("Together We Are Destiny",true,"each player who says yes (max 3)")
 	p
 		+translate("On an 8-10")(class="result")
 		+translate("the prophecy weakens its hold on you for now,")(class="bold")
@@ -139,7 +142,8 @@
 			li
 				+translate("Declare a dark secret about who you love most, they gain")
 				+translate("1 Bond")(class="bold term")
-				+translate("with What the Darkness Demands of You")
+				+translate("with")
+				+headlink("What the Darkness Demands of You","demands","darkness")
 			li
 				+translate("Reveal a sinister scheme that comes to fruition")
 			li

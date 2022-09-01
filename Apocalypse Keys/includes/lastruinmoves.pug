@@ -1,0 +1,100 @@
++move("Tragedy Will Not Claim Another","last ruin move","selectable","dismissable")
+	p
+		+translate("You have grown attached to your fellow monsters and care deeply about their fates.")(class="bold") 
+	p
+		+translate("When a PC or NPC is in peril,")(class="trigger")
+		+ruin(1,"mark Ruin")
+		+translate("to suddenly appear at the scene, ignoring usual limits of time, distance, or plausibility. In addition, gain")
+		+headlink("1 Bond","Bonds")(class="bold term") 
+		+translate("with them.")
+	p
+		+translate("If you wish to appear in a superior position or bearing a golden opportunity,")
+		+ruin(1,"mark Ruin")
+		+translate("a second time.")
++move("I Carry the Hope of my People","last ruin move","selectable","dismissable")
+	p
+		+translate("You are determined to embody the beauty and terror of your people, no matter the cost.")(class="bold") 
+		+translate("You will be beautiful, and all will look upon you with despair.")
+	p
+		+translate("When you reach deep into your ancestral memory and embody the paragon of your people,")(class="trigger")
+		+translate("choose:")
+		ul
+			li
+				+translate("Mark")
+				+ruin(1,"1 Ruin,")(class="bold")
+				+translate("describe how your form changes for a time, and temporarily gain another power of darkness from any playbook. In addition, gain")
+				+headlink("1 Bond","Bonds")(class="bold term") 
+				+translate("with")
+				+headlink("What the Darkness Demands of You.","demands","darkness")
+			li
+				+translate("Mark")
+				+ruin(2,"2 Ruin,")(class="bold")
+				+translate("describe how your form changes forever, revealing more of the Harbinger you may become. Permanently gain another")
+				+headlink("power of darkness","powers","darkness")
+				+translate("from any playbook.")
++move("Reaching Beyond Time and Space","last ruin move","selectable","dismissable")
+	p
+		+translate("You once had friends who stood and fought with you, long ago, in the light of better days. They were powerful, brave, and full of hope. They loved you enough to promise that oblivion could not hold them forever. But calling them comes at great cost to you.")
+	p
+		+translate("When you break the sacred laws of time and space to reach one of these friends,")(class="trigger")
+		+translate("mark")
+		+ruin(1,"1 Ruin")(class="bold") 
+		+translate("and choose one from below. Describe how your friend and their power come through for a time, they are even more powerful than you remember them being. Their time is short on this plane of existence.")
+		ul
+			li
+				+translate("a space-witch who died sacrificing themselves for you")(class="italic")
+			li
+				+translate("a shadowy creature of fear who hid their heart of gold")(class="italic")
+			li
+				+translate("an invincible warrior who died of heartbreak")(class="italic")
+			li
+				+translate("a being of pure elemental magic who gave you the last of their power")(class="italic")
+			li
+				+translate("a heroic leader with a dark past")(class="italic")
+			li
+				+translate("or someone who was seen as a hero to you and your people")(class="italic")
+	p
+		+translate("When your friend leaves,")(class="trigger")
+		+translate("cross them from the list. The oblivion will claim them again, corrupting their soul forever and turning them into a Harbinger.")
+	p
+		+translate("You may mark")
+		+ruin(1,"1 Ruin")(class="bold") 
+		+translate("again to offer oblivion a part of your soul instead, allowing your friend to finally find peace in the next world.")
++move("Tower of Isolation","last ruin move","selectable","dismissable")
+	p
+		+translate("Hidden away on Earth is a fortress that was meant for your people. Now, there is no one else but you.")
+	p
+		+translate("When you take this move,")(class="trigger")
+		+translate("choose two features of this place:")
+		ul
+			li
+				+translate("An aide or assistant")(class="italic")
+			li
+				+translate("interdimensional portals")(class="italic")
+			li
+				+translate("a containment system")(class="italic")
+			li
+				+translate("an oracle of knowledge and secrets")(class="italic")
+			li
+				+translate("the weapons of a great enemy")(class="italic")
+			li
+				+translate("mementos and artifacts of your people")(class="italic")
+			li
+				+translate("catacombs and all that remains of your people")(class="italic")
+			li
+				+translate("a sleeping god who should never awaken")(class="italic")
+			li
+				+translate("something else that hints at the long history lost forever to time and its treasures I must now guard with honor")(class="italic")
+		textarea(name="attr_movetaken_question-tower_of_isolation" class="bio")
+	p
+		+translate("When you call upon the resources of your fortress to immediately solve a problem or address a challenge,")(class="trigger")
+		+translate("say what you want to happen. The Keeper will tell you how your people expect you to use these resources lawfully through honor and duty. Choose:")
+		ul
+			li
+				+translate("Mark")
+				+ruin(1,"1 Ruin,")(class="bold")
+				+translate("call upon your limited resources and honor your people as tradition demands. The Keeper will describe how your fortress weakens, as more of your people’s legacy fades.")
+			li
+				+translate("Mark")
+				+ruin(2,"2 Ruin,")(class="bold")
+				+translate("ignore the traditions of your people and use your resources as you wish, feeding the Harbinger within you. In addition, gain one more feature for the tower as you learn about the secrets your people kept from you.")

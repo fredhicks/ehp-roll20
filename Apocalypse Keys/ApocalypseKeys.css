@@ -22,7 +22,7 @@
 	background-image: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/art/alldoom-darkmode.svg);
 }
 
-p,
+.wrapper p,
 .ui-dialog .charsheet {
 	font-family: Nunito, sans-serif;
 	font-size: 16px;
@@ -53,12 +53,15 @@ p,
 	padding-bottom: 0px;
 }
 
+.largedialog textarea {
+	width: calc(100% - 12px);
+}
 .largedialog .charsheet textarea.bio {
 	height: 80px;
 }
 .largedialog .charsheet textarea.notes {
 	font-size: 16px;
-	height: 400px;
+	height: 200px;
 }
 
 .ui-dialog .charsheet .wrapper {
@@ -103,6 +106,13 @@ p,
 }
 .ui-dialog .charsheet a:hover, .ui-dialog .charsheet a.icon:hover {
 	color: var(--ak-fg);
+}
+.ui-dialog .charsheet .colorized {
+	color: var(--ak-pink);
+}
+.ui-dialog .charsheet .dicespace {
+	width: 28px;
+	display: inline-block;
 }
 .ui-dialog .charsheet button[type=roll]:hover, .ui-dialog .charsheet button[type=roll].hfade:hover:before, .ui-dialog .charsheet button[type=roll].colorized:hover:before, .ui-dialog .charsheet button[type=roll].colorized:hover, .ui-dialog .charsheet button[type=action]:hover, .ui-dialog .charsheet button[type=action].hfade:hover:before, .ui-dialog .charsheet button[type=action].colorized:hover:before, .ui-dialog .charsheet button[type=action].colorized:hover, .ui-dialog .charsheet a:hover, .ui-dialog .charsheet a.hfade:hover:before, .ui-dialog .charsheet a.colorized:hover:before, .ui-dialog .charsheet a.colorized:hover, .ui-dialog .charsheet a.icon:hover, .ui-dialog .charsheet a.icon.hfade:hover:before, .ui-dialog .charsheet a.icon.colorized:hover:before, .ui-dialog .charsheet a.icon.colorized:hover {
 	color: var(--ak-fg);
@@ -213,7 +223,17 @@ p,
 	font-size: 80%;
 	vertical-align: -2px;
 }
-.ui-dialog .charsheet button[type=roll].checked.tightright:before, .ui-dialog .charsheet button[type=roll].unchecked.tightright:before, .ui-dialog .charsheet button[type=action].checked.tightright:before, .ui-dialog .charsheet button[type=action].unchecked.tightright:before, .ui-dialog .charsheet .icon.checked.tightright:before, .ui-dialog .charsheet .icon.unchecked.tightright:before {
+.ui-dialog .charsheet button[type=roll].bothchecks:before, .ui-dialog .charsheet button[type=action].bothchecks:before, .ui-dialog .charsheet .icon.bothchecks:before {
+	font-family: "Material Symbols Outlined";
+	content: "check_box_outline_blankcheck_box";
+	font-size: 110%;
+	vertical-align: -4px;
+}
+.ui-dialog .charsheet button[type=roll].bothchecks.hfade:before, .ui-dialog .charsheet button[type=action].bothchecks.hfade:before, .ui-dialog .charsheet .icon.bothchecks.hfade:before {
+	font-size: 80%;
+	vertical-align: -2px;
+}
+.ui-dialog .charsheet button[type=roll].checked.tightright:before, .ui-dialog .charsheet button[type=roll].unchecked.tightright:before, .ui-dialog .charsheet button[type=roll].bothchecks.tightright:before, .ui-dialog .charsheet button[type=action].checked.tightright:before, .ui-dialog .charsheet button[type=action].unchecked.tightright:before, .ui-dialog .charsheet button[type=action].bothchecks.tightright:before, .ui-dialog .charsheet .icon.checked.tightright:before, .ui-dialog .charsheet .icon.unchecked.tightright:before, .ui-dialog .charsheet .icon.bothchecks.tightright:before {
 	margin-right: -4px;
 }
 .ui-dialog .charsheet button[type=roll].vexpand:before, .ui-dialog .charsheet button[type=action].vexpand:before, .ui-dialog .charsheet .icon.vexpand:before {
@@ -234,6 +254,7 @@ p,
 .ui-dialog .charsheet button[type=roll].document:before, .ui-dialog .charsheet button[type=action].document:before, .ui-dialog .charsheet .icon.document:before {
 	font-family: "Material Symbols Outlined";
 	content: "density_small";
+	font-style: normal;
 	vertical-align: -3px;
 }
 .ui-dialog .charsheet button[type=roll].clockwise:before, .ui-dialog .charsheet button[type=action].clockwise:before, .ui-dialog .charsheet .icon.clockwise:before {
@@ -285,11 +306,12 @@ p,
 	border-bottom: 1px solid var(--ak-pink);
 }
 .ui-dialog .charsheet input.bigname {
-	font-family: "Amatic SC", cursive;
+	font-family: "Amatic SC", sans-serif;
+	font-size: 36px;
+	line-height: 36px;
 	font-weight: 700;
-	font-size: 48px;
 	padding-left: 0px;
-	color: var(--ak-fg);
+	color: var(--ak-pink);
 }
 .ui-dialog .charsheet input.view[value="1"] ~ .viewable {
 	display: initial;
@@ -322,6 +344,13 @@ p,
 	-webkit-box-flex: 1;
 	    -ms-flex-positive: 1;
 	        flex-grow: 1;
+}
+.ui-dialog .charsheet .divlinetop {
+	margin-top: 6px;
+	margin-left: -6px;
+	margin-right: -6px;
+	padding-top: 3px;
+	border-top: 1px solid var(--ak-pink);
 }
 .ui-dialog .charsheet .columns .wide {
 	-webkit-box-flex: 1;
@@ -356,7 +385,7 @@ p,
 }
 .ui-dialog .charsheet .header, .ui-dialog .charsheet .subheader {
 	margin-top: 12px;
-	font-family: "Amatic SC", cursive;
+	font-family: "Amatic SC", sans-serif;
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
@@ -389,7 +418,7 @@ p,
 	font-weight: 400;
 	color: var(--ak-fg);
 }
-.ui-dialog .charsheet .move, .ui-dialog .charsheet .bond, .ui-dialog .charsheet .checklist1box, .ui-dialog .charsheet .checklist2box {
+.ui-dialog .charsheet .move, .ui-dialog .charsheet .bond, .ui-dialog .charsheet .checklist1box, .ui-dialog .charsheet .checklist2box, .ui-dialog .charsheet .striker {
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
@@ -397,6 +426,17 @@ p,
 	-webkit-box-direction: normal;
 	    -ms-flex-direction: row;
 	        flex-direction: row;
+}
+.ui-dialog .charsheet .striker .text {
+	-webkit-box-flex: 1;
+	    -ms-flex-positive: 1;
+	        flex-grow: 1;
+}
+.ui-dialog .charsheet .striker .text .stricken + span {
+	text-decoration: none;
+}
+.ui-dialog .charsheet .striker .text .stricken[value="1"] + span {
+	text-decoration: line-through;
 }
 .ui-dialog .charsheet .bond {
 	margin-top: 10px;
@@ -463,7 +503,7 @@ p,
 .ui-dialog .charsheet .bondspend .btn {
 	display: none;
 }
-.ui-dialog .charsheet .checklist1box .buttons, .ui-dialog .charsheet .checklist2box .buttons {
+.ui-dialog .charsheet .checklist1box .buttons, .ui-dialog .charsheet .checklist2box .buttons, .ui-dialog .charsheet .striker .buttons {
 	white-space: nowrap;
 	padding-right: 6px;
 	height: 24px;
@@ -474,7 +514,7 @@ p,
 	    -ms-flex-positive: 0;
 	        flex-grow: 0;
 }
-.ui-dialog .charsheet .checklist1box .buttons {
+.ui-dialog .charsheet .checklist1box .buttons, .ui-dialog .charsheet .striker .buttons {
 	width: 18px;
 }
 .ui-dialog .charsheet .checklist2box .buttons {
@@ -665,6 +705,9 @@ p,
 .ui-dialog .charsheet .movename {
 	font-weight: bold;
 	font-variant: small-caps;
+}
+.ui-dialog .charsheet .spaceunder {
+	margin-bottom: 3px;
 }
 .ui-dialog .charsheet .result {
 	font-weight: bold;
@@ -928,6 +971,142 @@ p,
 	text-align: center;
 }
 
+.ui-dialog .charsheet input.scrollstyle ~ .wrapper .scrollable::-webkit-scrollbar {
+	width: 8px;
+}
+.ui-dialog .charsheet input.scrollstyle ~ .wrapper .scrollable::-webkit-scrollbar-track {
+	background: var(--ak-bg);
+}
+.ui-dialog .charsheet input.scrollstyle ~ .wrapper .scrollable::-webkit-scrollbar-thumb {
+	background-color: var(--ak-bg);
+	border-radius: 4px;
+	border: 1px solid var(--ak-pink);
+}
+.ui-dialog .charsheet input.scrollstyle ~ .wrapper .scrollable::-webkit-scrollbar-thumb:hover {
+	background-color: var(--ak-pink);
+}
+.ui-dialog .charsheet input.scrollstyle[value=""] ~ .wrapper .scrollable {
+	overflow-y: initial;
+	overflow-x: initial;
+}
+.ui-dialog .charsheet input.scrollstyle[value=compact] ~ .wrapper .scrollable,
+.ui-dialog .charsheet input.scrollstyle[value=comfy] ~ .wrapper .scrollable,
+.ui-dialog .charsheet input.scrollstyle[value=tall] ~ .wrapper .scrollable,
+.ui-dialog .charsheet input.scrollstyle[value=mixed] ~ .wrapper .scrollable {
+	border-bottom: 1px dotted rgba(122, 122, 122, 0.75);
+	padding: 2px;
+	padding-left: 6px;
+	padding-right: 6px;
+	margin-right: 0px;
+}
+.ui-dialog .charsheet input.scrollstyle[value=compact] ~ .wrapper .scrollable {
+	overflow-y: auto;
+	overflow-x: hidden;
+	height: 496px;
+}
+.ui-dialog .charsheet input.scrollstyle[value=comfy] ~ .wrapper .scrollable {
+	overflow-y: auto;
+	overflow-x: hidden;
+	height: 696px;
+}
+.ui-dialog .charsheet input.scrollstyle[value=tall] ~ .wrapper .scrollable {
+	overflow-y: auto;
+	overflow-x: hidden;
+	height: 896px;
+}
+.ui-dialog .charsheet .tipper {
+	position: relative;
+}
+.ui-dialog .charsheet .tipper .tipped {
+	visibility: hidden;
+	opacity: 0;
+	position: absolute;
+	background: var(--ak-bg);
+	color: var(--ak-alert);
+	padding: 6px 6px 6px 6px;
+	border: 1px solid var(--ak-alert);
+	text-shadow: none;
+	font-family: Nunito, sans-serif;
+	font-size: 12px;
+	line-height: 16px;
+	white-space: normal;
+	margin: 0px;
+	width: 100px;
+	border-radius: 6px;
+	-webkit-box-shadow: 0 0 2px var(--ak-alert);
+	        box-shadow: 0 0 2px var(--ak-alert);
+	text-align: center;
+}
+.ui-dialog .charsheet .tipper .tipped:after {
+	border: 6px solid var(--ak-alert);
+	position: absolute;
+	content: "";
+	top: calc( 50% - 6px );
+}
+.ui-dialog .charsheet .tipper .tipped.smalltip {
+	width: 50px;
+}
+.ui-dialog .charsheet .tipper .tipped.midtip {
+	width: 75px;
+}
+.ui-dialog .charsheet input.tipsuppressor[value="1"] ~ .wrapper .tipper:hover .tipped {
+	visibility: visible;
+	opacity: 1;
+	z-index: 10;
+	-webkit-transition: opacity 0.25s;
+	transition: opacity 0.25s;
+}
+.ui-dialog .charsheet .tipper .tipped.tipleft {
+	margin-left: 6px;
+	left: 50%;
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+	        transform: translateY(-50%);
+}
+.ui-dialog .charsheet .tipper .tipped.tipleft:after {
+	left: -12px;
+	border-color: transparent var(--ak-alert) transparent transparent;
+}
+.ui-dialog .charsheet .tipper .tipped.tipright {
+	margin-right: 18px;
+	right: 40%;
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+	        transform: translateY(-50%);
+}
+.ui-dialog .charsheet .tipper .tipped.tipright:after {
+	right: -12px;
+	border-color: transparent transparent transparent var(--ak-alert);
+}
+.ui-dialog .charsheet .tipper .tipped.tipunder {
+	margin-top: 24px;
+	left: 0%;
+	top: 100%;
+	-webkit-transform: translateY(-50%);
+	        transform: translateY(-50%);
+}
+.ui-dialog .charsheet .tipper .tipped.tipunder:after {
+	left: 50%;
+	-webkit-transform: translateX(-50%);
+	        transform: translateX(-50%);
+	top: -12px;
+	border-color: transparent transparent var(--ak-alert) transparent;
+}
+.ui-dialog .charsheet .tipper .tipped.tipover {
+	margin-bottom: 6px;
+	left: 50%;
+	bottom: 100%;
+	-webkit-transform: translateX(-50%);
+	        transform: translateX(-50%);
+}
+.ui-dialog .charsheet .tipper .tipped.tipover:after {
+	left: 50%;
+	-webkit-transform: translateX(-50%);
+	        transform: translateX(-50%);
+	top: 100%;
+	border-color: var(--ak-alert) transparent transparent transparent;
+}
+
 .sheet-rolltemplate-2d6-roll,
 .sheet-rolltemplate-bondspend {
 	font-family: Nunito, sans-serif;
@@ -962,6 +1141,14 @@ p,
 	margin-right: -6px;
 	margin-bottom: 3px;
 	background-color: var(--ak-pink);
+}
+
+.titlebar .tipper .tipped span {
+	text-transform: none;
+	color: var(--ak-alert);
+	background-color: var(--ak-bg);
+	font-size: 12px;
+	font-weight: normal;
 }
 
 .titlebar.subtitle {

@@ -1,0 +1,102 @@
++move("Harrowing Beauty","last","selectable","dismissable")
+	p
+		+translate("Sometimes, your mask of humanity slips.")
+	p
+		+translate("When you peel away at the mask of humanity,")(class="trigger")
+		+translate("you may mark")
+		+headlink("1 Condition","Conditions")(class="bold term") 
+		+translate("to tear away your mask and reveal the true alien horror you are.")
+	p
+		+translate("This will end an attack or interaction as your opponent is momentarily stunned by the revelation. Doing so will provide a fleeting opportunity before they come to their senses.")
++move("Tragedy’s Long Shadow","last","selectable","dismissable")
+	p
+		+translate("You will do whatever it takes to avoid the tragedy that befell your people.")
+	p
+		+translate("When you’re in a tense situation and see the echoes of that tragedy,")(class="trigger")
+		+translate("tell the Keeper what you fear will happen,")(class="bold")
+		+translate("spend Darkness Tokens and roll.")
+		+rolldark("Tragedy’s Long Shadow")
+	p
+		+translate("On an 8-10")(class="result") 
+		+translate("you know exactly how your friends can avoid the worst of what is to happen.")(class="bold") 
+		+translate("Each PC around you gains")
+		+translate("1 Bond")(class="bold term") 
+		+translate("with you.")
+	p
+		+translate("On an 11+")(class="result") 
+		+translate("you realize you must carry this burden alone.")(class="bold") 
+		+translate("Add +1 to every move to avoid impending disaster as long as you are acting alone.")
+	p
+		+translate("On a 7-")(class="result") 
+		+translate("it is worse than you feared,")(class="bold")
+		+translate("the Keeper will tell you what happens next.")
++move("Reshaped by Despair","last","selectable","dismissable")
+	p
+		+translate("When you choose to")(class="trigger")
+		+movelink("Unleash the Dark")
+		+translate("describe how your form changes through violence and beauty, causing those around you to despair.")(class="bold") 
+		+translate("When you do, you may choose one from the following options, even on a miss:")
+		ul
+			li
+				+translate("I uncover")
+				+translate("a Key")(class="bold term") 
+				+translate("at great cost")
+			li
+				+translate("I gain their affection and admiration")
+			li
+				+translate("I gain their fear and loathing")
+			li
+				+translate("I see into their soul and declare what I find there")
++move("A Flickering Hope","last","selectable","dismissable")
+	p
+		+translate("At the start of each session,")(class="trigger")
+		+translate("describe a memory you have of your people.")(class="bold") 
+		+translate("Choose to speak with love, sorrow, or both. Say what you hope for, spend Darkness Tokens and roll.")
+		+rolldark("A Flickering Hope")
+	p
+		+translate("On an 8-10,")(class="result") 
+		+translate("your memory grants you an epiphany.")(class="bold") 
+		+translate("Choose two:")
+		ul
+			li
+				+translate("Describe how a fellow monster reminds you of someone from your past, gain")
+				+headlink("1 Bond","Bonds")(class="bold term") 
+				+translate("with them.")
+			li
+				+translate("Describe how the tragedy of your people haunts you, gain")
+				+headlink("1 Bond","Bonds")(class="bold term") 
+				+translate("with")
+				+headlink("What the Darkness Demands of You.","demands","darkness")
+			li
+				+translate("Describe the long overture of the apocalypse and how it claimed your people, uncover")
+				+translate("a Key.")(class="bold term")
+	p
+		+translate("On an 11+")(class="result") 
+		+translate("your memory turns dark,")(class="bold")
+		+translate("choose one from above and the Keeper will describe a sign of terrible things to come or a significant complication.")
+	p
+		+translate("On a 7-")(class="result") 
+		+translate("your hold on the memory falters.")(class="bold") 
+		+translate("The Keeper tells you what price you will have to pay to save your memories from the Harbingers’ grasp.")
++move("You Are All I Have Left","last","selectable","dismissable")
+	p
+		+translate("You are the last, but there is an echo of the past that will never leave your side. Choose one:")
+		ul
+			li
+				+translate("a small machine that holds the soul of a loved one")(class="italic")
+			li
+				+translate("a specter who can only be seen by you")(class="italic")
+			li
+				+translate("a homunculus who looks exactly like someone you betrayed")(class="italic")
+			li
+				+translate("something that reminds you of what you lost and will never have again.")(class="italic")
+		textarea(name="attr_movetaken_question-you_are_all_i_have_left" class="bio")
+	p
+		+translate("Gain")
+		+headlink("1 Bond","Bonds")(class="bold term") 
+		+translate("with the echo.")
+	p
+		+translate("When you spend time alone with the echo,")(class="trigger")
+		+translate("gain")
+		+headlink("1 Bond","Bonds")(class="bold term") 
+		+translate("with it. Tell everyone else at the table how your time together is spent. How is it lonely, sad, or moving?")

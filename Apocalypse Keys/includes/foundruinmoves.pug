@@ -1,0 +1,104 @@
++move("Dark Puppet Strings","found ruin move","selectable","dismissable")
+	p
+		+translate("The darkness wants to be molded by you, and yearns for your control.")
+	p
+		+translate("When you take this move,")(class="trigger")
+		+translate("create a puppet made from the dark and twisted thoughts you have collected from others over the years. Describe two emotions it can feel and understand.")
+		textarea(name="attr_movetaken_question-dark_puppet_strings" class="bio")
+	p
+		+translate("When you seek to command your puppet mark")(class="trigger")
+		+ruin(1,"1 Ruin")(class="bold") 
+		+translate("and choose one:")(class="trigger")
+		ul
+			li
+				+translate("It protects you or someone else important to you")
+			li
+				+translate("It creates a cunning diversion")
+			li
+				+translate("It passes itself off as someone or something else for a time")
+			li
+				+translate("It mirrors one power of darkness from another PC, immediately using it to great effect")
+	p
+		+translate("Once the task is completed,")(class="trigger")
+		+translate("the puppet wishes to escape into the land of dreams. Choose:")
+		ul
+			li
+				+translate("Allow it to escape, knowing that it will create others like itself and infect more dreams.")
+			li
+				+translate("Mark")
+				+ruin(1,"1 Ruin")(class="bold") 
+				+translate("to leash it to you, for now. It will await your next command. The first time you do this, name it. It will see you as its parent.")
++move("Where Do You End, Where Do I Begin?","found ruin move","selectable","dismissable")
+	p
+		+translate("You know that the heart is such a strong, but fragile thing.")
+	p
+		+translate("When you know the desire or emotional state of an NPC (or a PC, if invited),")(class="trigger") 
+		+translate("you may touch them and alter it. Mark")
+		+ruin(1,"1 Ruin")(class="bold") 
+		+translate("and choose two:")
+		ul
+			li
+				+translate("Deepen it")
+			li
+				+translate("Lessen it")
+			li
+				+translate("Bring it to the center")
+			li
+				+translate("Shift its nature")
+			li
+				+translate("Shift its target")
+			li
+				+translate("Remove it for a time")
+	p
+		+translate("As long as you remain in control of their desire or emotion, you feel what they are feeling. You may release your hold on their heart at any time.")
++move("Let Sleeping Gods Lie","found ruin move","selectable","dismissable")
+	p
+		+translate("Somewhere in your memories lies the truth—you were once a terrible and vengeful cosmic being, destroyer of souls and worlds, before heroes forced you into slumber. What you are now is just a dream come to life, while the real you continues to sleep, yearning for a new age of destruction.")
+	p
+		+translate("When you take this move,")(class="trigger")
+		+translate("create your own personal Doomsday Clock with 12 ticks and name it")
+		+translate("The Dream Ends.")(class="bold italic")
+	+doomclock(12,0,"The Dream Ends")
+	p
+		+translate("When you reach out to your true self and take back some of your destructive cosmic power,")(class="trigger")
+		+translate("choose:")
+		ul
+			li
+				+translate("Mark")
+				+ruin(1,"1 Ruin")(class="bold") 
+				+translate("and tick")
+				+translate("The Dream Ends")(class="bold italic") 
+				+translate("once. Cosmic dreams of terror bleed from you. The dreams cause horrifying hallucinations around you and the vulnerable are infected by corrupting nightmares. You cannot control who is harmed or the nature of their corruption.")
+			li
+				+translate("Mark")
+				+ruin(2,"2 Ruin,")(class="bold")
+				+translate("and tick")
+				+translate("The Dream Ends")(class="bold italic") 
+				+translate("twice. You wield cosmic dreams of terror like the sharpest weapon—infect a specific vulnerable target with horrifying hallucinations and bring one of their nightmares to life. In addition, gain")
+				+headlink("1 Bond","Bonds")(class="bold term") 
+				+translate("with My True and Cosmic Form.")
+	p
+		+translate("When The Dream Ends clock fills,")(class="trigger")
+		+translate("you wake up and regain your True and Cosmic Form. Whatever the current Mystery is, it is set aside. In this moment, you become the next Harbinger of the apocalypse, emerging from an ancient Door of Power. You are whole, complete, but terrifying and beyond mortal comprehension. Give yourself a new name and title befitting the cosmic horror you are.")
+	p
+		+translate("You are no longer part of DIVISION. The other PCs must deal with you, one way or another. Once your apocalyptic threat is dealt with, retire this character and create a new one.")
++move("Crowned by Dream, Exalted by Nightmare","found ruin move","selectable","dismissable")
+	p
+		+translate("You have learned how to harness dreams and create great and terrible weapons from them.")
+	p
+		+translate("When you turn dreams into a dangerous weapon,")(class="trigger")
+		+ruin(1,"mark Ruin")(class="bold")
+		+translate("and choose one:")
+		ul
+			li
+				+translate("It is a physical weapon.")(class="bold") 
+				+translate("Others can interact with it and pick it up. It can be physically destroyed.")
+			li
+				+translate("It is an emotional weapon.")(class="bold") 
+				+translate("Only you or someone you give it to can wield it. It can be emotionally disrupted.")
+			li
+				+translate("It is a weapon of darkness.")(class="bold") 
+				+translate("Any monster or creature of darkness can use it and see it, but the mundane and mortals cannot.")
+			li
+				+translate("It is a weapon of pure nightmare.")(class="bold") 
+				+translate("It has a will and mind of its own. It creates itself. It is powerful, unstoppable. It is exactly what you need. It only honors your commands for a time.")

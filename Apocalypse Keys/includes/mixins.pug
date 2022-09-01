@@ -1,40 +1,90 @@
+- 
+	var translations = { 
+		"choose a playbook": "Choose a Playbook",
+		"fallen": "The Fallen",
+		"found": "The Found",
+		"hungry": "The Hungry",
+		"last": "The Last",
+		"shade": "The Shade",
+		"summoned": "The Summoned",
+		"surge": "The Surge",
+		"summoned ruin move": "Summoned Ruin Move",
+		"shade ruin move": "Shade Ruin Move",
+		"surge ruin move": "Surge Ruin Move",
+		"found ruin move": "Found Ruin Move",
+		"last ruin move": "Last Ruin Move",
+		"fallen ruin move": "Fallen Ruin Move",
+		"hungry ruin move": "Hungry Ruin Move",
+		"Experience and Ruin": "XP and Ruin",
+		"Character Creation Options": "Character Options",
+		"Move Index": "Moves List",
+		"Starting Playbook Moves": "Starting",
+		"Playbook Moves": "Playbook",
+		"Ruin Moves": "Ruin",
+		"DIVISION Moves": "DIVISION",
+		"Basic Moves": "Basic",
+	};
+
 mixin translate(text)
+	- if ( typeof(translations[text]) == "undefined" ) { translations[text] = text; }
 	span(data-i18n=text)&attributes(attributes) #{text}
 	| 
 
+mixin option(t,v)
+	- if ( typeof(translations[t]) == "undefined" ) { translations[t] = t; }
+	if ( typeof(v) == "undefined" )
+		option(data-i18n=t)
+	else
+		option(value=v data-i18n=t)
+
+mixin translations
+	- var contents = JSON.stringify(translations,null,"\t");
+	//
+		translation.json:
+		!{contents}
+
 mixin briefmove(movekey,pb,check)
 	- if ( typeof(check) == "undefined" ) { check = "yes"; }
+	- var pbmode = true;
+	- if ( typeof(pb) == "undefined" || pb == "" ) { pbmode = false; }
 	- var movetext = movekey
 	- movekey = movekey.toLowerCase();
 	- movekey = movekey.replace(/[^a-z0-9]/g,"_");
 	- if ( check == "yes" )
-		input(type='hidden' name='attr_playbook' class='moveselector' value='')
+		- if ( pbmode )
+			input(type='hidden' name='attr_playbook' class='moveselector' value='')
 		input(type='hidden' name='attr_check_'+movekey class='movemark' value='0')
-	div(class='pb'+pb)
+	- var pbkey = ''; if ( pbmode ) { pbkey = 'pb'+pb; }
+	div(class=pbkey)
 		if ( check == "yes" )
 			input(type='hidden' name='attr_check_'+movekey class='checker' value="0")
 		div.move
 			div.buttons
 				- if ( check == "yes" )
 					input(type='hidden' name="attr_check_"+movekey value="0" class="toggle")
-					button.checked.colorized(type='action' name='act_uncheck' value=movekey)
-					button.unchecked.colorized(type='action' name='act_check' value=movekey)
+					+button()(type='action' name='act_uncheck' value=movekey class="checked colorized")
+					+button()(type='action' name='act_check' value=movekey class="unchecked colorized")
 				input(type='hidden' name="attr_view_"+movekey value="0" class="toggle")
-				a.viewable(href="#jumpmove_"+movekey)
-					span.icon.document
-				button.view.colorized(type='action' name='act_view' value=movekey)
+				a.viewable.tipper(href="#jumpmove_"+movekey)
+					span.icon.document 
+					span(class="tipped tipleft")
+						+translate("Jump to this move")
+				+button("show this move","left")(type='action' name='act_view' value=movekey class="view colorized")
 			div.text
 				span
 					input(class="toggle" type="hidden" name="attr_view_"+movekey value="0")
-					a(href="#header"+movekey)(class="fglink")
+					a(href="#header"+movekey)(class="fglink tipper")
 						+translate(movetext)
+						div(class="tipped tipunder")
+							+translate("Jump to this move")
 					+translate(movetext)
-				input(type='hidden' name='attr_playbook' class='pbunselector' value='')
-				br
-				span(class='pb'+pb+' pbid')
-					| (
-					+translate(pb)
-					| )
+				if ( pbmode )
+					input(type='hidden' name='attr_playbook' class='pbunselector' value='')
+					br
+					span(class='pb'+pb+' pbid')
+						| (
+						+translate(pb)
+						| )
 
 // movekey: text of the move name, which is converted to a key for fields
 // context: the (prior-to-translation) text indicating context, such as playbook name
@@ -54,17 +104,9 @@ mixin move(movekey,context,selectable,dismissable)
 		.viewable
 			+expandablesub(movetext,dismissable,'',selectable)
 				if ( context !== "" )
-					.footnote.italic.rightwards
+					.footnote.italic.colorized.spaceunder
 						+translate(context)
 				block
-
-mixin headlink(t,k)
-	- if ( typeof(k) == "undefined" || k == "" ) { k = t; }
-	- var key = k;
-	- key = key.toLowerCase();
-	- key = key.replace(/[^a-z0-9]/g,"_");
-	a(href="#header"+key)&attributes(attributes)
-		+translate(t)
 
 // checkerbox is specific to hiding-all-moves-that-have-been-not-checked, see ApocalypseKeys.pug for the +expandablesub for Playbook Moves
 
@@ -80,27 +122,27 @@ mixin expandable(t,s,dismiss,checkerbox,selectable)
 	div(class=s+"header")
 		if ( selectable )
 			input(type='hidden' name="attr_check_"+key value="0" class="toggle")
-			button.checked.hfade(type='action' name='act_uncheck' value=key)
-			button.unchecked.hfade(type='action' name='act_check' value=key)
+			+button("unmark this","left")(type='action' name='act_uncheck' value=key class="checked hfade")
+			+button("mark this","left")(type='action' name='act_check' value=key class="unchecked hfade")
 		+translate(t)(class="title")
 		if ( checkerbox !== "" )
 			input(type='hidden' name="attr_check_"+checkerbox value="0" class="toggle")
-			button.checked.hfade(type='action' name='act_uncheck' value=checkerbox)
-			button.unchecked.hfade(type='action' name='act_check' value=checkerbox)
+			+button("Showing checked only","right")(type='action' name='act_uncheck' value=checkerbox class="checked hfade")
+			+button("Showing checked and unchecked","right")(type='action' name='act_check' value=checkerbox class="bothchecks hfade")
 		// if dismiss is true and selectable is false, we're good to go
 		if ( dismiss && ! selectable )
-			button.dismiss.hfade(type='action' name='act_unview' value=key)
+			+button("hide this")(type='action' name='act_unview' value=key class="dismiss hfade")
 			| &nbsp;
 		// if dismiss is true and selectable is true, we want to expose the dismiss option only if the item is not *currently* selected
 		if ( dismiss && selectable )
 			span
 				input(type='hidden' name="attr_check_"+key value="0" class="antiview")
 				span.viewable
-					button.dismiss.hfade(type='action' name='act_unview' value=key)
+					+button("hide this","right")(type='action' name='act_unview' value=key class="dismiss hfade")
 					| &nbsp;
 		input(type='hidden' name="attr_expand_"+key value="1" class="toggle")
-		button.contract.hfade(type='action' name='act_contract' value=key)
-		button.expand.hfade(type='action' name='act_expand' value=key)
+		+button("collapse this section","right")(type='action' name='act_contract' value=key class="contract hfade")
+		+button("expand this section","right")(type='action' name='act_expand' value=key class="expand hfade")
 	.section
 		input(type='hidden' name="attr_expand_"+key value="1" class="rollup")
 		.section.roller
@@ -132,33 +174,42 @@ mixin rolldark(t)
 	div.rollspend
 		div.titlebar
 			input(type='hidden' name="attr_expand_rolldark"+rolldarks value="0" class="toggle")
-			button.contract(type='action' name='act_contract' value="rolldark"+rolldarks)
+			+button("hide the roll widget","left")(type='action' name='act_contract' value="rolldark"+rolldarks class="contract ")
 				| &nbsp;&nbsp;&nbsp;&nbsp;
 				+translate("Spend and Roll")(class="bold")
-			button.expand(type='action' name='act_expand' value="rolldark"+rolldarks)
+			+button("show the roll widget","left")(type='action' name='act_expand' value="rolldark"+rolldarks class="expand ")
 				| &nbsp;&nbsp;&nbsp;&nbsp;
 				+translate("Spend and Roll")(class="bold")
 		input(type='hidden' name="attr_expand_rolldark"+rolldarks value="0" class="rollup")
 		.roller
 			div
-				button.dice(type='action' name='act_rolldicedark' value=t)
+				+button("click to roll","left")(type='action' name='act_rolldicedark' value=t class="dice ")
 				|
 				| +
 				input(name="attr_darkness_spend" value="0" min="0" max="3" type="number" class="narrower")
 				span.footnote
+					+translate("Darkness Tokens")
 					+translate("(max 3)")
-				button.dice(type='action' name='act_rolldicedark' value=t)
+			div
+				span.dicespace
+				|
+				| +
+				input(name="attr_dark_added_bonus" value="0" type="number" class="narrower")
+				span.footnote
+					+translate("any other bonuses or penalties")
+				+button("click to roll","right")(type='action' name='act_rolldicedark' value=t class="dice ")
 			input(type="hidden" name="attr_view_recent_roll" value="0" class="toggle")
 			div.viewable
-				button.dismiss(type='action' name='act_unview' value="recent_roll")
-				input(type="hidden" name="attr_recent_roll" value="")
-				input(type="hidden" name="attr_recent_roll_result" value="")
-				+translate("Last roll")
-				| (
-				span(name="attr_recent_roll")
-				| ) = 
-				| 
-				span(name="attr_recent_roll_result")
+				div.divlinetop
+					+button("once you're finished with the roll, click this to hide it","left")(type='action' name='act_unview' value="recent_roll" class="dismiss dicespace")
+					input(type="hidden" name="attr_recent_roll" value="")
+					input(type="hidden" name="attr_recent_roll_result" value="")
+					+translate("Last roll")
+					| (
+					span(name="attr_recent_roll")
+					| ) = 
+					| 
+					span(name="attr_recent_roll_result")
 				+spendbondsbox(t)
 			div.footnote
 				input(name="attr_darkness_tokens" type="hidden")
@@ -170,48 +221,61 @@ mixin rolldark(t)
 
 - var rollcustoms = 0;
 
-mixin rollcustom(t)
+mixin rollcustom(t,bonds,btext)
 	- rollcustoms = rollcustoms + 1;
+	- if ( typeof(bonds) == "undefined" || bonds ) { bonds = true; } else { bonds = false; }
+	- if ( typeof(btext) == "undefined" ) { btext = ""; }
 	div.rollspend
 		div.titlebar
 			input(type='hidden' name="attr_expand_rollcustom"+rollcustoms value="0" class="toggle")
-			button.contract(type='action' name='act_contract' value="rollcustom"+rollcustoms)
+			+button("collapse the roll widget","left")(type='action' name='act_contract' value="rollcustom"+rollcustoms class="contract ")
 				| &nbsp;&nbsp;
 				+translate("Custom Roll")(class="bold")
-			button.expand(type='action' name='act_expand' value="rollcustom"+rollcustoms)
+			+button("show the roll widget","left")(type='action' name='act_expand' value="rollcustom"+rollcustoms class="expand ")
 				| &nbsp;&nbsp;
 				+translate("Custom Roll")(class="bold")
 		input(type='hidden' name="attr_expand_rollcustom"+rollcustoms value="0" class="rollup")
 		.roller
 			div
-				button.dice(type='action' name='act_rolldicecustom' value=t)
+				+button("click to roll","left")(type='action' name='act_rolldicecustom' value=t class="dice ")
 				|
 				| +
-				input(name="attr_custom_bonus" value="0" min="0" max="3" type="number" class="narrower")
+				input(name="attr_custom_bonus" value="0" type="number" class="narrower")
 				span.footnote
-					+translate("(max 3)")
+					if btext !== ""
+						+translate(btext)
+			div
+				span.dicespace
+				|
+				| +
+				input(name="attr_custom_added_bonus" value="0" type="number" class="narrower")
+				span.footnote
+					+translate("any other bonuses or penalties")
+				+button("click to roll","right")(type='action' name='act_rolldicecustom' value=t class="dice ")
 			input(type="hidden" name="attr_view_recent_roll" value="0" class="view")
 			div.viewable
-				button.dismiss(type='action' name='act_unview' value="recent_roll")
-				input(type="hidden" name="attr_recent_roll" value="")
-				input(type="hidden" name="attr_recent_roll_result" value="")
-				+translate("Last roll")
-				| (
-				span(name="attr_recent_roll")
-				| ) = 
-				| 
-				span(name="attr_recent_roll_result")
-				+spendbondsbox(t)
+				div.divlinetop
+					+button("once you're finished with the roll, click this to hide it","left")(type='action' name='act_unview' value="recent_roll" class="dismiss dicespace")
+					input(type="hidden" name="attr_recent_roll" value="")
+					input(type="hidden" name="attr_recent_roll_result" value="")
+					+translate("Last roll")
+					| (
+					span(name="attr_recent_roll")
+					| ) = 
+					| 
+					span(name="attr_recent_roll_result")
+				if bonds
+					+spendbondsbox(t)
 
 mixin spendbondsbox(t)
 	div
 		input(type='hidden' name="attr_expand_roll_bonds" value="1" class="spacetoggle")
 		.titlebar.subtitle
 			input(type='hidden' name="attr_expand_roll_bonds" value="1" class="toggle")
-			button.contract(type='action' name='act_contract' value="roll_bonds")
+			+button("collapse bonds","left")(type='action' name='act_contract' value="roll_bonds" class="contract ")
 				| &nbsp;&nbsp;
 				+translate("Spend bonds?")(class="bold")
-			button.expand(type='action' name='act_expand' value="roll_bonds")
+			+button("expand (if you wish to modify the roll results with bonds)","left")(type='action' name='act_expand' value="roll_bonds" class="expand ")
 				| &nbsp;&nbsp;
 				+translate("Spend bonds?")(class="bold")
 		div
@@ -231,12 +295,13 @@ mixin spendbondsbox(t)
 				input(type="hidden" name="attr_bond_mod_summary")
 				input(type="hidden" name="attr_bond_mod" class="nullview")
 				.viewable
-					button.dice.bold.topspace(type='action' name='act_spendbonds' value=t)
+					+button()(type='action' name='act_spendbonds' value=t class="enact bold topspace")
+						| 
 						+translate("Spend:")
 						span(name="attr_bond_mod_summary")
-					div(style="")
+					div(style="padding-left: 21px;")
 						+translate("Once you commit to the adjustment, bonds will be reduced and the adjusted roll displayed in chat.")(class="footnote")
-						
+
 mixin minihead(title)
 	div.minihead
 		+translate(title)
@@ -290,19 +355,24 @@ mixin condition(con,blank,locked)
 			- if ( locked )
 				// Simply establish that this field is always checked, but don't provide buttons to make it toggle-able.
 				input(type='hidden' name="attr_check_"+ckey value="1")
-				span.icon.checked
+				div.tipper
+					span.icon.checked
+					div.tipped.tipleft.smalltip
+						+translate("locked")
 			- else
 				input(type='hidden' name='attr_lock_'+ckey value="0" class='toggle')
-				div
+				div.tipper
 					span.icon.checked
+					div.tipped.tipleft.smalltip
+						+translate("locked")
 				div
 					input(type='hidden' name="attr_check_"+ckey value="0" class="toggle")
 					- if ( blank )
-						button.checked(type='action' name='act_unchecklist' value=ckey+"|current_conditions=>"+bkey)
-						button.unchecked(type='action' name='act_checklist' value=ckey+"|current_conditions=>"+bkey)
+						+button()(type='action' name='act_unchecklist' value=ckey+"|current_conditions=>"+bkey class="checked ")
+						+button()(type='action' name='act_checklist' value=ckey+"|current_conditions=>"+bkey class="unchecked ")
 					- else
-						button.checked(type='action' name='act_unchecklist' value=ckey+"|current_conditions="+con)
-						button.unchecked(type='action' name='act_checklist' value=ckey+"|current_conditions="+con)
+						+button()(type='action' name='act_unchecklist' value=ckey+"|current_conditions="+con class="checked ")
+						+button()(type='action' name='act_checklist' value=ckey+"|current_conditions="+con class="unchecked ")
 		div.conditiontext
 			- if ( blank ) 
 				- if ( locked )
@@ -315,37 +385,46 @@ mixin condition(con,blank,locked)
 		div.buttons
 			- if ( locked )
 				// Simply establish that this field is always checked, but don't provide buttons to make it toggle-able.
-				span.icon.locked
+				div.tipper
+					span.icon.locked
+					div.tipped.tipleft.midtip
+						+translate("locked (permanent)")
 			- else 
 				input(type='hidden' name="attr_check_"+ckey value="0" class="view")
 				div.viewable
 					input(type='hidden' name='attr_lock_'+ckey value="0" class="toggle")
-					button.locked(type='action' name='act_unlock' value=ckey)
-					button.unlocked(type='action' name='act_lock' value=ckey)
+					+button("locked (click to unlock)","left smalltip")(type='action' name='act_unlock' value=ckey class="locked ")
+					+button("unlocked","left smalltip")(type='action' name='act_lock' value=ckey class="unlocked ")
 
-mixin xp(n)
-	button.enact.colorized(type='action' name='act_addxp' value=n)
-		span.bold
-			| #{n}&nbsp;
-		+translate("XP")(class="bold")
+mixin xp(n,t)
+	+button("click to gain","over smalltip")(type='action' name='act_addxp' value=n class="enact colorized")
+		if typeof(t) == "undefined"
+			span.bold
+				| #{n}&nbsp;
+			+translate("XP")(class="bold")
+		else
+			+translate(t)&attributes(attributes)
 	| 
 		
 mixin spendxp(n)
-	button.enact.colorized(type='action' name='act_spendxp' value=n)
+	+button("click to spend","over smalltip")(type='action' name='act_spendxp' value=n class="enact colorized")
 		span.bold
 			| #{n}&nbsp;
 		+translate("XP")(class="bold")
 	| 
 
-mixin ruin(n)
-	button.enact.colorized(type='action' name='act_addruin' value=n)
-		span.bold
-			| #{n}&nbsp;
-		+translate("Ruin")(class="bold")
+mixin ruin(n,t)
+	+button("click to gain","over smalltip")(type='action' name='act_addruin' value=n class="enact colorized")
+		if typeof(t) == "undefined"
+			span.bold
+				| #{n}&nbsp;
+			+translate("Ruin")(class="bold")
+		else
+			+translate(t)&attributes(attributes)
 	| 
 
 mixin spendruin(n,t)
-	button.enact.colorized(type='action' name='act_spendruin' value=n)
+	+button("click to spend","over smalltip")(type='action' name='act_spendruin' value=n class="enact colorized")
 		if typeof(t) == "undefined"
 			span.bold
 				| #{n}&nbsp;
@@ -355,7 +434,7 @@ mixin spendruin(n,t)
 	| 
 
 mixin dark(n)
-	button.enact.colorized(type='action' name='act_adddark' value=n)
+	+button("click to gain","over smalltip")(type='action' name='act_adddark' value=n class="enact colorized")
 		span.bold
 			| #{n}&nbsp;
 		- var tokens = "Tokens"
@@ -363,26 +442,51 @@ mixin dark(n)
 		+translate("Darkness "+tokens)(class="bold")
 	| 
 		
-mixin spenddark(n)
-	button.enact.colorized(type='action' name='act_spenddark' value=n)
-		span.bold
-			| #{n}&nbsp;
-		- var tokens = "Tokens"
-		- if ( (parseInt(n)||0) == 1 ) { tokens = "Token"; }
-		+translate("Darkness "+tokens)(class="bold")
+mixin spenddark(n,t)
+	+button("click to spend","over smalltip")(type='action' name='act_spenddark' value=n class="enact colorized")
+		if typeof(t) == "undefined"
+			span.bold
+				| #{n}&nbsp;
+			- var tokens = "Tokens"
+			- if ( (parseInt(n)||0) == 1 ) { tokens = "Token"; }
+			+translate("Darkness "+tokens)(class="bold")
+		else
+			+translate(t)&attributes(attributes)
 	| 
 
 mixin pbinstruct()
 	- var key = 'pbinstructions'
 	input(type='hidden' name='attr_view_'+key value='1' class='view')
 	.viewable
+		+button("click to get rid of these instructions","left")(type='action' name='act_unview' value=key class="dismiss colorized")
+		| 
 		block
-		button.dismiss.colorized(type='action' name='act_unview' value=key)
 
-mixin movelink(t)
+mixin headlink(t,k,x,icons)
+	- if ( typeof(k) == "undefined" || k == "" ) { k = t; }
+	- var key = k;
+	- key = key.toLowerCase();
+	- key = key.replace(/[^a-z0-9]/g,"_");
+	- var xkey = "";
+	- if ( typeof(x) == "undefined" ) { x = ""; }
+	- if ( x != "" ) { xkey = x.toLowerCase().replace(/[^a-z0-9]/g,"_"); }
+	- if ( typeof(icons) == "undefined" ) { icons = "icon document"; }
+	if x == ""
+		a(href="#header"+key class=icons)&attributes(attributes)
+			+translate(t)
+	else
+		span
+			input(class="toggle" type="hidden" name="attr_expand_"+xkey value="0")
+			a(href="#header"+key)(class=icons)&attributes(attributes)
+				+translate(t)
+			a(href="#header"+xkey)&attributes(attributes)
+				+translate(t)
+
+mixin movelink(t,ot)
 	- var key = t;
 	- key = key.toLowerCase();
 	- key = key.replace(/[^a-z0-9]/g,"_");
+	- if ( typeof(ot) !== "undefined" && ot !== "" ) { t = ot; }
 	span
 		input(class="toggle" type="hidden" name="attr_view_"+key value="0")
 		a(href="#header"+key)(class="icon document")
@@ -404,8 +508,8 @@ mixin doomclock(size,marked,name,translate)
 			.clockcontrol
 				div
 					div(style="text-align: center;")
-						button.counterclockwise(type="action" name="act_reduceclock" value=ckey)
-						button.clockwise(type="action" name="act_addclock" value=ckey)
+						+button("erase one","under smalltip")(type="action" name="act_reduceclock" value=ckey class="counterclockwise ")
+						+button("mark one","under smalltip")(type="action" name="act_addclock" value=ckey class="clockwise ")
 						if cs
 							br
 							select(name="attr_"+ckey+"_clocksize" style="width: 3em")
@@ -423,3 +527,43 @@ mixin doomclock(size,marked,name,translate)
 			|/
 			span(name="attr_"+ckey+"_clocksize")
 			|)&nbsp;
+
+mixin gainDT
+	br
+	+translate("Click to gain")(class="bold italic")
+	br
+	+dark(2)
+	br
+	+dark(3)
+	br
+	+dark(4)
+
+mixin strikebox(t,blk)
+	- var	key = t.toLowerCase().replace(/[^a-z0-9]/g,"_");
+	- if ( typeof(blk) == "undefined" ) { blk = false; } else { blk = true; }
+	.striker
+		div.buttons
+			input(type='hidden' name='attr_check_strikebox-'+key class='toggle' value="0")
+			+button()(type='action' name='act_uncheck' value='strikebox-'+key class="checked colorized")
+			+button()(type='action' name='act_check' value='strikebox-'+key class="unchecked colorized")
+		div.text
+			input(type='hidden' name='attr_check_strikebox-'+key class='stricken' value="0")
+			if blk
+				span
+					block
+			else
+				+translate(t)
+
+mixin button(tooltip,align)
+	- var tipper = false;
+	- if ( typeof(tooltip) !== "undefined" && tooltip !== "" ) { tipper = true; }
+	- if ( typeof(align) == "undefined" || align == '' ) { align = ""; } else { align = "tip"+align; }
+	if tipper
+		span
+			button.tipper&attributes(attributes)
+				block
+				div(class="tipped "+align)
+					+translate(tooltip)
+	else
+		button&attributes(attributes)
+			block

@@ -24,7 +24,7 @@ $font: 'Nunito', sans-serif
 		background-image: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/art/alldoom-darkmode.svg)
 
 
-p,
+.wrapper p,
 .ui-dialog .charsheet
 	font-family: #{$font}
 	font-size: 16px
@@ -51,11 +51,13 @@ p,
 	padding-bottom: 0px
 
 .largedialog 
+	textarea
+		width: calc(100% - 12px)
 	.charsheet textarea.bio
 		height: 80px
 	.charsheet textarea.notes
 		font-size: 16px
-		height: 400px
+		height: 200px
 
 .ui-dialog .charsheet
 	.wrapper
@@ -93,6 +95,11 @@ p,
 		color: var(--ak-fg)
 	a:hover, a.icon:hover
 		color: var(--ak-fg)
+	.colorized
+		color: var(--ak-pink)
+	.dicespace
+		width: 28px
+		display: inline-block
 	button[type="roll"], button[type="action"], a, a.icon
 		&:hover, &.hfade:hover:before, &.colorized:hover:before, &.colorized:hover
 			color: var(--ak-fg)
@@ -178,7 +185,15 @@ p,
 		&.unchecked.hfade:before
 			font-size: 80%
 			vertical-align: -2px
-		&.checked.tightright:before, &.unchecked.tightright:before
+		&.bothchecks:before
+			font-family: 'Material Symbols Outlined'
+			content: 'check_box_outline_blankcheck_box'
+			font-size: 110%
+			vertical-align: -4px
+		&.bothchecks.hfade:before
+			font-size: 80%
+			vertical-align: -2px
+		&.checked.tightright:before, &.unchecked.tightright:before, &.bothchecks.tightright:before
 			margin-right: -4px
 		&.vexpand:before
 			font-family: 'Material Symbols Outlined'
@@ -195,6 +210,7 @@ p,
 		&.document:before
 			font-family: 'Material Symbols Outlined'
 			content: 'density_small'
+			font-style: normal
 			vertical-align: -3px
 		&.clockwise:before
 			font-family: 'Material Symbols Outlined'
@@ -236,11 +252,12 @@ p,
 	input.fillme
 		border-bottom: 1px solid var(--ak-pink)
 	input.bigname
-			font-family: 'Amatic SC', cursive
+			font-family: 'Amatic SC', sans-serif
+			font-size: 36px
+			line-height: 36px
 			font-weight: 700
-			font-size: 48px
 			padding-left: 0px
-			color: var(--ak-fg)
+			color: var(--ak-pink)
 	input.view 
 		&[value="1"] ~ .viewable
 			display: initial
@@ -261,6 +278,12 @@ p,
 		flex-direction: row
 	.topline input[type="text"]
 		flex-grow: 1
+	.divlinetop
+		margin-top: 6px
+		margin-left: -6px
+		margin-right: -6px
+		padding-top: 3px
+		border-top: 1px solid var(--ak-pink)
 	.columns
 		.wide
 			flex-grow: 1
@@ -283,7 +306,7 @@ p,
 			flex-shrink: 0
 	.header, .subheader
 		margin-top: 12px
-		font-family: 'Amatic SC', cursive
+		font-family: 'Amatic SC', sans-serif
 		display: flex
 		flex-direction: row
 		align-items: flex-start
@@ -302,9 +325,16 @@ p,
 		line-height: 30px
 		font-weight: 400
 		color: var(--ak-fg)
-	.move, .bond, .checklist1box, .checklist2box
+	.move, .bond, .checklist1box, .checklist2box, .striker
 		display: flex
 		flex-direction: row
+	.striker
+		.text
+			flex-grow: 1
+			.stricken + span
+				text-decoration: none
+			.stricken[value="1"] + span
+				text-decoration: line-through
 	.bond
 		margin-top: 10px
 		input[type="number"]
@@ -355,7 +385,7 @@ p,
 				text-align: right
 		.btn
 			display: none
-	.checklist1box, .checklist2box
+	.checklist1box, .checklist2box, .striker
 		.buttons
 			white-space: nowrap
 			padding-right: 6px
@@ -363,8 +393,9 @@ p,
 			text-align: right
 			flex-shrink: 0
 			flex-grow: 0
-	.checklist1box .buttons
-		width: 18px
+	.checklist1box, .striker
+		.buttons
+			width: 18px
 	.checklist2box .buttons
 		width: 36px
 	.move .buttons
@@ -433,6 +464,8 @@ p,
 	.movename
 		font-weight: bold
 		font-variant: small-caps
+	.spaceunder
+		margin-bottom: 3px
 	.result
 		font-weight: bold
 		text-transform: uppercase
@@ -533,6 +566,129 @@ p,
 	.centered
 		text-align: center
 
+.ui-dialog .charsheet
+	input.scrollstyle ~ .wrapper
+		.scrollable
+			&::-webkit-scrollbar
+				width: 8px
+			&::-webkit-scrollbar-track
+				background: var(--ak-bg)
+			&::-webkit-scrollbar-thumb
+				background-color: var(--ak-bg)
+				border-radius: 4px
+				border: 1px solid var(--ak-pink)
+				&:hover
+					background-color: var(--ak-pink)
+	input.scrollstyle[value=""] ~ .wrapper
+		.scrollable
+			overflow-y: initial
+			overflow-x: initial
+	input.scrollstyle[value="compact"],
+	input.scrollstyle[value="comfy"],
+	input.scrollstyle[value="tall"],
+	input.scrollstyle[value="mixed"]
+		~ .wrapper .scrollable
+			border-bottom: 1px dotted rgba(122,122,122,0.75)
+			padding: 2px
+			padding-left: 6px
+			padding-right: 6px
+			margin-right: 0px
+	input.scrollstyle[value="compact"] ~ .wrapper
+		.scrollable
+			overflow-y: auto
+			overflow-x: hidden
+			height: 496px
+		// .movecols .scrollable
+			// height: 430px
+	input.scrollstyle[value="comfy"] ~ .wrapper
+		.scrollable
+			overflow-y: auto
+			overflow-x: hidden
+			height: 696px
+		// .movecols .scrollable
+			// height: 630px
+	input.scrollstyle[value="tall"] ~ .wrapper
+		.scrollable
+			overflow-y: auto
+			overflow-x: hidden
+			height: 896px
+		// .movecols .scrollable
+			// height: 830px
+	.tipper
+		position: relative
+	.tipper .tipped
+		visibility: hidden
+		opacity: 0
+		position: absolute
+		background: var(--ak-bg)
+		color: var(--ak-alert)
+		padding: 6px 6px 6px 6px
+		border: 1px solid var(--ak-alert)
+		text-shadow: none
+		font-family: #{$font}
+		font-size: 12px
+		line-height: 16px
+		white-space: normal
+		margin: 0px
+		width: 100px
+		border-radius: 6px
+		box-shadow: 0 0 2px var(--ak-alert)
+		text-align: center
+		&:after
+			border: 6px solid var(--ak-alert)
+			position: absolute
+			content: ""
+			top: calc( 50% - 6px )
+	.tipper .tipped.smalltip
+		width: 50px
+	.tipper .tipped.midtip
+		width: 75px
+	input.tipsuppressor[value="1"] ~ .wrapper .tipper:hover .tipped
+		visibility: visible
+		opacity: 1
+		z-index: 10
+		transition: opacity 0.25s
+	.tipper .tipped.tipleft
+		margin-left: 6px
+		left: 50%
+		top: 50%
+		transform: translateY(-50%)
+		// text-align: left
+		&:after
+			left: -12px
+			border-color: transparent var(--ak-alert) transparent transparent
+	.tipper .tipped.tipright
+		margin-right: 18px
+		right: 40%
+		top: 50%
+		// text-align: right
+		transform: translateY(-50%)
+		&:after
+			right: -12px
+			border-color: transparent transparent transparent var(--ak-alert)
+	.tipper .tipped.tipunder
+		margin-top: 24px
+		left: 0%
+		top: 100%
+		// text-align: right
+		transform: translateY(-50%) 
+		&:after
+			left: 50%
+			transform: translateX(-50%)
+			top: -12px
+			border-color: transparent transparent var(--ak-alert) transparent 
+	.tipper .tipped.tipover
+		margin-bottom: 6px
+		left: 50%
+		bottom: 100%
+		// text-align: right
+		transform: translateX(-50%)
+		&:after
+			left: 50%
+			transform: translateX(-50%)
+			top: 100%
+			border-color: var(--ak-alert) transparent transparent transparent
+
 .sheet-rolltemplate-2d6-roll,
 .sheet-rolltemplate-bondspend
 	font-family: #{$font}
@@ -565,7 +721,14 @@ p,
 	margin-right: -6px
 	margin-bottom: 3px
 	background-color: var(--ak-pink)
-	
+
+.titlebar .tipper .tipped span
+	text-transform: none
+	color: var(--ak-alert)
+	background-color: var(--ak-bg)
+	font-size: 12px
+	font-weight: normal
+
 .titlebar.subtitle
 	margin-top: 0px
 	margin-bottom: -6px

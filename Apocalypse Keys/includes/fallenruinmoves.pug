@@ -1,0 +1,99 @@
++move("Tremble Before Me","fallen ruin move","selectable","dismissable")
+	p
+		+translate("Your words once swayed gods and broke the gates of heaven. When you speak in your true and ancient voice, all living mortals are driven to despair.")
+	p
+		+translate("When you")(class="trigger")
+		+movelink("Unleash the Dark")(class="trigger")
+		+translate("and enforce your will socially or emotionally,")(class="trigger")
+		+translate("you may choose to mark")
+		+ruin(1,"1 Ruin.")(class="bold")
+		+translate("If you do, treat the move as if you rolled an 8-10 and choose four options instead of two.")
++move("My Beloved Nemesis","fallen ruin move","selectable","dismissable")
+	p
+		+translate("The one who orchestrated your fall is out in the world, they thrive as they plot and scheme.")
+	p
+		+translate("When you take this move,")(class="trigger")
+		+translate("tell the Keeper what grand plans they have and what power they stole from you. Explain why you still care for them. Gain")
+		+headlink("1 Bond","Bonds")(class="bold term") 
+		+translate("with them.")
+		textarea(name="attr_movetaken_question-my_beloved_nemesis" class="bio")
+	p
+		+translate("When you wish to connect to your nemesis,")(class="trigger")
+		+translate("choose one:")
+		ul
+			li
+				+translate("Mark")
+				+ruin(1,"1 Ruin:")(class="bold")
+				+translate("Describe a flashback that features an intimate moment between you two. How does it fuel your desire for revenge? Or do you wish for something else? Clear")
+				+headlink("1 Condition","Conditions")(class="bold term") 
+				+translate("and gain")
+				+headlink("1 Bond","Bonds")(class="bold term") 
+				+translate("with your nemesis.")
+			li
+				+translate("Mark")
+				+ruin(2,"2 Ruin:")(class="bold")
+				+translate("They will appear on the scene, defying logic or plausibility. They will mysteriously offer to help you, for now. Gain")
+				+headlink("1 Bond","Bonds")(class="bold term") 
+				+translate("with them and")
+				+headlink("1 Bond","Bonds")(class="bold term") 
+				+translate("with")
+				+headlink("What the Darkness Demands of You.","demands","darkness")
++move("Desire Dressed as Faith","fallen ruin move","selectable","dismissable")
+	p
+		+translate("You know well that worship comes from desire, selfish and cruel.")
+	p
+		+translate("When you touch a being,")(class="trigger")
+		+translate("you may imbue them with an uncontrollable desire for someone or something.")(class="bold") 
+		+translate("Choose:")
+		ul
+			li
+				+translate("Mark")
+				+ruin(1,"1 Ruin:")(class="bold")
+				+translate("They do nothing else but work towards making that desire real, though they are aware that it is false, and that you did this to them. The same desire will burn within you. When the desire fades, their heart is left with a permanent void. They will attempt to fill that void by worshiping you in strange ways.")
+			li
+				+translate("Mark")
+				+ruin(2,"2 Ruin:")(class="bold")
+				+translate("The desire becomes permanent for both of you, and they will spread that desire in others. In addition, gain")
+				+headlink("1 Bond","Bonds")(class="bold term") 
+				+translate("with")
+				+headlink("What the Darkness Demands of You.","demands","darkness")
++move("I Will Rise Again","fallen ruin move","selectable","dismissable")
+	p
+		+translate("This is not the first time you have fallen. You will claw your way back up to glory and power, no matter the cost. You will do whatever it takes to rebuild what is lost, and you have a plan.")
+	p
+		+translate("When you secretly work towards reclaiming your glory and power,")(class="trigger")
+		+translate("mark")
+		+ruin(1,"1 Ruin")(class="bold") 
+		+translate("and choose one step of the plan below and strike it out. When you do, the Keeper will choose a consequence from the next list.")
+		.strikelist
+			+strikebox("Hide my presence and conceal my actions completely")
+			+strikebox("Create a place of power for myself")
+			+strikebox("Create a circle of loyal and powerful acolytes")
+			+strikebox("Gather an army that will serve me")
+			+strikebox("Bless my army with sacred weapons and armor")
+			+strikebox("Destroy the one weapon that can kill me")
+			+strikebox("Kill the one being who can stop me")
+			+strikebox("Prepare a new body or vessel to house me")
+			+strikebox("Remove my soul and hide it away")
+			+strikebox("Destroy my heart, that I may never be betrayed again")
+	p
+		+translate("The Keeper describes the consequence you face for your growing power,")(class="bold")
+		+translate("they choose one.")
+		ul
+			li
+				+translate("I know my memories of a PC or NPC will weaken my resolve, I must destroy all Bonds with them to no effect.")
+			li
+				+translate("A seed of doubt grows within me. I give a PC or NPC the means to weaken me.")
+			li
+				+translate("DIVISION learns of my plans and gains something similar to what I just achieved.")
+			li
+				+translate("A new Faction rises or grows more powerful, determined to destroy me. They will hound my every step and push back against my plan.")
+	p
+		+translate("When all steps of the plan have been struck out,")(class="trigger")
+		+translate("you have been reborn to your true glory and immeasurable power. In this moment, you become a Harbinger of the apocalypse, emerging from an ancient Door of Power. You inspire awe and fear as your divinity threatens to tear apart the world. A new Faction serves you to carry out your divine will. Give yourself and your Faction a new name and title befitting the god you are now.")
+	p
+		+translate("You are no longer part of DIVISION. Describe how you disappear, and what you leave behind in DIVISION. Each PC gains")
+		+translate("1 Bond")(class="bold term") 
+		+translate("with you and")
+		+translate("1 Bond")(class="bold term") 
+		+translate("with your Faction. Retire this character and create a new one.")

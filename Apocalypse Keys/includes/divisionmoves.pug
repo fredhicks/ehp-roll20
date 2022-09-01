@@ -1,0 +1,529 @@
++move("Dream Future Review Protocols","DIVISION Moves","selectable","dismissable")
+	p
+		+translate("For as long as you remember, you’ve had strange and prophetic dreams. DIVISION suspects that you were once a time traveller in an alternate reality, but you have lost the ability to move through time. DIVISION has the equipment and personnel available to help record and analyze useful information from the dreams, often leading to breakthroughs during an investigation.")
+	p
+		+translate("When you take this move,")(class="trigger")
+		+translate("answer at least one of the following questions:")
+		ul
+			li
+				+translate("What recurring elements are present in every dream you have?")(class="italic")
+			li
+				+translate("Who or what only exists in your dreams? What do they want from you?")(class="italic")
+			li
+				+translate("Why are you worried about the dreams stopping one day?")(class="italic")
+		textarea(name="attr_movetaken_question-dream_future_review_protocols" class="bio")
+	p
+		+translate("At the start of each session,")(class="trigger")
+		+translate("tell the Keeper what kind of dreams you have.")(class="bold") 
+		+translate("Spend Darkness Tokens and roll.")
+		+rolldark("Dream Future Review Protocols")
+	p
+		+translate("On an 8-10")(class="result") 
+		+translate("the experts are able to parse your dreams effectively,")(class="bold")
+		+translate("and you uncover")
+		+translate("a Key.")(class="bold term")
+		+translate("In addition, the Keeper describes someone who features prominently in the dream, gain")
+		+headlink("1 Bond","bonds")(class="bold term") 
+		+translate("with them.")
+	p
+		+translate("On an 11+")(class="result") 
+		+translate("the experts reveal a living nightmare hiding within your subconscious,")(class="bold")
+		+translate("but you uncover")
+		+translate("a Key.")(class="bold term")
+		+translate("The Keeper describes the nightmare you catch a glimpse of before it escapes into the real world. Declare an irrevocable truth about the Mystery that you learn from the nightmare. Rewrite or add a Facet of the Mystery that reflects this.")
+	p
+		+translate("On a 7-")(class="result") 
+		+translate("you dream of a broken future that was erased from the timeline by a future you that no longer exists.")(class="bold") 
+		+translate("The Keeper describes the dream and the harrowing future. A part of that future will become real and infect this reality.")
++move("Fae Liaison","DIVISION Moves","selectable","dismissable")
+	p
+		+translate("DIVISION formed an uneasy alliance with one of the royal courts of the fae, and you were assigned to work with a liaison. They are now invested in your fate, for better or for worse.")
+	p
+		+translate("When you take this move,")(class="trigger")
+		+translate("answer at least one of the following questions:")
+		ul
+			li
+				+translate("Who is this fae, and why do they love you?")(class="italic")
+			li
+				+translate("How did they permanently complicate your life in a misguided attempt to help you?")(class="italic")
+			li
+				+translate("How did they help you understand")(class="italic")
+				+headlink("What the Darkness Demands of You?","demands","darkness")(class="italic")
+		textarea(name="attr_movetaken_question-fae_liaison" class="bio")
+	p
+		+translate("When you call upon the Fae Liaison for help,")(class="trigger")
+		+translate("tell the Keeper how large a favor you’re offering the fae in exchange, on a scale of 1-3. The Keeper will describe a fae creature and its power with an intensity equal to the scale of the favor. Roll, and add the level of favor you promised.")
+		+rollcustom("Fae Liaison",true,"scale of favor offered (max 3)")
+	p
+		+translate("On an 8-10")(class="result") 
+		+translate("the fae recognizes you as one beloved and chosen by fae magic.")(class="bold") 
+		+translate("Choose a number of actions equal to the scale of the favor you promised. In addition, gain")
+		+headlink("1 Bond","bonds")(class="bold term") 
+		+translate("with your fae liaison.")
+		ul
+			li
+				+translate("The fae reaches out and uses their magic to recolor your memories. Clear")
+				+headlink("1 Condition.","conditions")(class="bold term")
+			li
+				+translate("The fae creates a temporary magical disguise for you and one other, describe what it is.")
+			li
+				+translate("The fae offers a glimpse into the dreams of someone you care for, gain")
+				+headlink("1 Bond","bonds")(class="bold term") 
+				+translate("with them.")
+			li
+				+translate("The fae will give you one weapon, item, or secret that will help you face your next challenge.")
+	p
+		+translate("On an 11+")(class="result") 
+		+translate("the Harbinger within you responds to the fae’s magic, and awakens for a moment.")(class="bold") 
+		+translate("Choose a number of actions equal to the scale of the favor you promised. In addition, gain")
+		+headlink("1 Bond","bonds")(class="bold term") 
+		+translate("with")
+		+headlink("What the Darkness Demands of You.","demands","darkness")
+		ul
+			li
+				+translate("Force the fae to absorb all nearby magic and give it to you. Clear")
+				+headlink("1 Condition.","conditions")(class="bold term")
+			li
+				+translate("Force the fae to swear their loyalty to you, for now. Gain")
+				+headlink("1 Bond","bonds")(class="bold term") 
+				+translate("with them.")
+			li
+				+translate("Compel the fae to help you work towards")
+				+headlink("What the Darkness Demands of You.","demands","darkness")
+				+translate("Mark")
+				+xp(1)
+				|.
+			li
+				+translate("Demand that the fae peer into the future and describe how you may gain more power for yourself. Mark")
+				+ruin(1)
+				|.
+	p
+		+translate("On a 7-")(class="result") 
+		+translate("something terrifying and sinister takes notice of the fae and their magic, and they come to claim their prize.")(class="bold") 
+		+translate("The Keeper will tell you what happens next.")
++move("The Forbidden Archives","DIVISION Moves","selectable","dismissable")
+	p
+		+translate("DIVISION has within its facilities a maze of libraries and tomes bursting with knowledge. You found a section of the library that very few know about. Some books are so dangerous, they are bound by chains and spell-tech.")
+	p
+		+translate("When you take this move,")(class="trigger")
+		+translate("answer at least one of the following questions:")
+		ul
+			li
+				+translate("Who is the Head Librarian and what esoteric rule do they demand everyone follows?")(class="italic")
+			li
+				+translate("What creature lies waiting in the restricted and forbidden archives?")(class="italic")
+			li
+				+translate("Which book have you read, against DIVISION’s strict orders?")(class="italic")
+		textarea(name="attr_movetaken_question-forbidden_archives" class="bio")
+	p
+		+translate("When you reveal that you brought one of the forbidden books with you,")(class="trigger")
+		+translate("spend Darkness Tokens and roll.")
+		+rolldark("The Forbidden Archives")
+	p
+		+translate("On an 8-10")(class="result") 
+		+translate("the chains bend and the spell-tech weakens, the book recognizes you as its master.")(class="bold") 
+		+translate("Choose two:")
+		ul
+			li
+				+translate("The book opens to a page and reveals a welcome truth. Choose any PC (including yourself), they clear")
+				+translate("1 Condition.")(class="bold term")
+			li
+				+translate("Name a target. The book will consume them and hold them within its pages, for now.")
+			li
+				+translate("The book eerily describes current events in exacting detail and offers a revelation. Uncover")
+				+translate("a Key")(class="bold term") 
+				+translate("at great cost.")
+			li
+				+translate("The author of the book exists in a wretched form between death and life. Ask for their advice—they’re always happy to hear from you. Gain")
+				+headlink("1 Bond","bonds")(class="bold term") 
+				+translate("with them.")
+	p
+		+translate("On an 11+")(class="result") 
+		+translate("the chains break and the spell-tech unravels, the book is free to do as it likes.")(class="bold") 
+		+translate("Choose one from above, and one from below:")
+		ul
+			li
+				+translate("Allow the book to change its form and escape into the world, wreaking havoc as it likes.")
+			li
+				+translate("Mark")
+				+headlink("1 Condition","conditions")(class="bold term") 
+				+translate("or")
+				+ruin(1)
+				+translate("to strengthen the chains and spell-tech, binding the book to you once again.")
+	p
+		+translate("On a 7-")(class="result") 
+		+translate("something or someone has tampered with the book, it opens and something terrible and harrowing uses it as a portal to come through.")(class="bold") 
+		+translate("The Keeper will tell you what happens next.")
++move("Ghostly Agent","DIVISION Moves","selectable","dismissable")
+	p
+		+translate("DIVISION has a high mortality rate—the average agent survives only a few months on the job. Some of them love the work so much, they continue to work for DIVISION, even in death.")
+	p
+		+translate("When you take this move,")(class="trigger")
+		+translate("answer at least one of the following questions:")
+		ul
+			li
+				+translate("Why do you mean so much to the Ghostly Agent?")(class="italic")
+			li
+				+translate("What strange or mysterious death befell them?")(class="italic")
+			li
+				+translate("What unfinished business do you try to attend to for them?")(class="italic")
+		textarea(name="attr_movetaken_question-ghostly_agent" class="bio")
+	p
+		+translate("When you call upon the Ghostly Agent for help,")(class="trigger")
+		+translate("draw them to your darkness and open your heart to them.")(class="bold") 
+		+translate("Spend Darkness Tokens and roll.")
+		+rolldark("Ghostly Agent")
+	p
+		+translate("On an 8-10")(class="result") 
+		+translate("they walk through the veil between the living and the dead, offering their aid.")(class="bold") 
+		+translate("Choose two:")
+		ul
+			li
+				+translate("Take their hand and travel through the veil, physically appearing anywhere that the veil of death can touch. To take another with you, mark")
+				+headlink("1 Condition.","conditions")(class="bold term")
+			li
+				+translate("Ask them what they have seen through the veil as they have watched your investigation. Uncover")
+				+translate("a Key")(class="bold term") 
+				+translate("at great cost.")
+			li
+				+translate("Whisper into their ear and reveal a secret that has burdened your heart. Gain")
+				+headlink("1 Bond","bonds")(class="bold term") 
+				+translate("with the Ghostly Agent.")
+			li
+				+translate("Tell them how you have worked towards attending to their unfinished business, mark")
+				+translate("1 XP.")(class="bold term")
+	p
+		+translate("On an 11+")(class="result") 
+		+translate("the Ghostly Agent has witnessed a terrible portent and they have come through the veil to warn you.")(class="bold") 
+		+translate("Choose one from above, but prepare to heed the dire warning the Ghostly Agent gives you.")
+	p
+		+translate("On a 7-")(class="result") 
+		+translate("the Ghostly Agent tries to come through the veil but they are ensnared by something dangerous and otherworldly,")(class="bold")
+		+translate("the Keeper will tell you what happens next.")
++move("Hero’s Weapon","DIVISION Moves","selectable","dismissable")
+	p
+		+translate("You impressed a hero who worked with DIVISION for a short time. They entrusted you with this weapon and its legacy.")
+	p
+		+translate("When you take this move,")(class="trigger")
+		+translate("answer at least one of the following questions:")
+		ul
+			li
+				+translate("Who was this hero, and how did you impress them?")(class="italic")
+			li
+				+translate("What tragedy befell this hero, and how do you uphold their legacy?")(class="italic")
+			li
+				+translate("How did this hero become a Harbinger, and why do you still hold out hope for them?")(class="italic")
+		textarea(name="attr_movetaken_question-hero_s_weapon" class="bio")
+	p
+		+translate("When you take this move,")(class="trigger")
+		+translate("create")
+		+headlink("1 Bond","bonds")(class="bold term") 
+		+translate("with the hero.")
+		+translate("When you use this weapon to protect someone,")(class="bold")
+		+translate("choose:")
+		ul
+			li
+				+translate("Describe a flashback between you and the hero, gain")
+				+headlink("1 Bond","bonds")(class="bold term") 
+				+translate("with them")
+			li
+				+translate("Describe how you embody or contradict their legacy, clear")
+				+headlink("1 Condition","conditions")(class="bold term")
+			li
+				+translate("Describe how the weapon is corrupted by")
+				+headlink("What the Darkness Demands of You,","demands","darkness")
+				+translate("gain 2-4 Darkness Tokens")
+				+gainDT
+	p
+		+translate("You can describe using the weapon in the field, just as you would a power of darkness. There’s always a risk that the weapon will become damaged or unusable until you return to DIVISION to have someone look at it.")
++move("Holy Symbol Arsenal","DIVISION Moves","selectable","dismissable")
+	p
+		+translate("DIVISION curates a collection of certified holy symbols and assigns them to agents as needed. You have shown a divine resonance with a number of holy symbols, but the priest-technicians warn you that using the arsenal may be dangerous to a monster like you.")
+	p
+		+translate("When you take this move,")(class="trigger")
+		+translate("answer at least one of the following questions:")
+		ul
+			li
+				+translate("What’s the story behind the holy symbol you procured for this collection?")(class="italic")
+			li
+				+translate("What holy symbol affects you negatively, and which agent is it assigned to?")(class="italic")
+			li
+				+translate("Which of the holy symbols must you never use, no matter the circumstances?")(class="italic")
+		textarea(name="attr_movetaken_question-holy_symbol_arsenal" class="bio")
+	p
+		+translate("When you dampen your powers of darkness in order to use the holy symbol arsenal,")(class="trigger")
+		+translate("tell the Keeper how much you open yourself to the divine energies of the arsenal, on a scale of 1-3. The Keeper describes a divine vision and its effects with an intensity equal to your divine vulnerability. Roll, and add your level of divine vulnerability.")
+		+rollcustom("Holy Symbol Arsenal",true,"divine energy exposure (max 3)")
+	p
+		+translate("On an 8-10")(class="result") 
+		+translate("the darkness and divine energies synchronize to activate the Hymn of the Righteous.")(class="bold") 
+		+translate("Choose a number of actions equal to your divine vulnerability. In addition, gain")
+		+headlink("1 Bond","bonds")(class="bold term") 
+		+translate("with the divine entity that aids you.")
+		ul
+			li
+				+translate("Bind a target and render them helpless, for now.")
+			li
+				+translate("Protect a mind, heart, or soul from possession or attack.")
+			li
+				+translate("Create an area of divine protection—it will hold for now.")
+			li
+				+translate("Create a temporary divine weapon, and gift it to the worthy. Gain")
+				+headlink("1 Bond","bonds")(class="bold term") 
+				+translate("with them.")
+	p
+		+translate("On an 11+")(class="result") 
+		+translate("the divine energies turn dangerous and the Harbinger within you takes control.")(class="bold") 
+		+translate("Choose a number of actions equal to your divine vulnerability. In addition, gain")
+		+headlink("1 Bond","bonds")(class="bold term") 
+		+translate("with")
+		+headlink("What the Darkness Demands of You.","demands","darkness")
+		ul
+			li
+				+translate("Mutilate a target and render them weak, for now.")
+			li
+				+translate("Call upon dark entities to take up residence in a mind, heart, or soul of your choosing.")
+			li
+				+translate("Create an area of wild and destructive energies—it will expand in time.")
+			li
+				+translate("Create a weapon of darkness, use it to immediately destroy your enemies. Mark")
+				+ruin(1)
+	p
+		+translate("On a 7-")(class="result") 
+		+translate("something or someone has corrupted the holy symbol arsenal,")(class="bold")
+		+translate("the Keeper will tell you what happens next.")
++move("Monster Celebrity","DIVISION Moves","selectable","dismissable")
+	p
+		+translate("While most Omens operate in secret and must hide who they are, you are a celebrity and have become famous enough to earn honorary human status. Being “one of the good ones” is a novelty to humanity, though, and they hold you to impossible expectations.")
+	p
+		+translate("When you take this move,")(class="trigger")
+		+translate("answer at least one of the following questions:")
+		ul
+			li
+				+translate("How is your public persona drastically different from who you are?")(class="italic")
+			li
+				+translate("What does the public expect and demand from you at all times?")(class="italic")
+			li
+				+translate("What must you hide about yourself from the public at all cost?")(class="italic")
+		textarea(name="attr_movetaken_question-monster_celebrity" class="bio")
+	p
+		+translate("When you take this move,")(class="trigger")
+		+translate("create")
+		+headlink("1 Bond","bonds")(class="bold term") 
+		+translate("with the public.")
+		+translate("When you hide who you are to be what the public wants you to be,")(class="bold")
+		+translate("choose:")
+		ul
+			li
+				+translate("Describe how you compromise yourself in a significant way to please the public, gain")
+				+headlink("1 Bond","bonds")(class="bold term") 
+				+translate("with them")
+			li
+				+translate("Describe how a fan reaches out to you to remind you why your work at DIVISION is important, clear")
+				+headlink("1 Condition","conditions")(class="bold term")
+			li
+				+translate("Describe how your fear and spite towards the public grows, gain 2-4 Darkness Tokens")
+				+gainDT
+	p
+		+translate("It is easy for your actions to tarnish your celebrity status and fragile reputation. The Keeper will tell you what the public demands to regain their trust and support.")
++move("Orphanage Visit","DIVISION Moves","selectable","dismissable")
+	p
+		+translate("DIVISION has an orphanage and a professional set of caretakers dedicated to raising young monsters that have the potential to become Omens. You yourself grew up in this way here and/or spent time as a caretaker.")
+	p
+		+translate("When you take this move,")(class="trigger")
+		+translate("answer at least one of the following questions:")
+		ul
+			li
+				+translate("Who is the lead caretaker of the Orphanage? What strong history do you share together?")(class="italic")
+			li
+				+translate("Which young monster are you most attached to? What high hopes do you have for them?")(class="italic")
+			li
+				+translate("Why are you worried about the continued operations of the orphanage?")(class="italic")
+		textarea(name="attr_movetaken_question-orphanage_visit" class="bio")
+	p
+		+translate("When you have enough time between or during investigations,")(class="trigger")
+		+translate("you may visit the orphanage with at least one other PC or NPC. If you do, each of you describes how you care for the young monsters.")
+	p
+		+translate("If they’re a PC, you each erase")
+		+spendruin(1,"1 Ruin.")
+		+translate("If they’re an NPC, you gain")
+		+headlink("2 Bonds","bonds")(class="bold term") 
+		+translate("with them.")
+	p
+		+translate("When visiting the orphanage,")(class="trigger")
+		+translate("you may discover something that hints at the plans of a Harbinger or witness a terrible portent of what may come to pass. Describe what you find, and the Keeper will tell you its significance and hint at the Harbinger’s plans.")
++move("Partly Cursed Weapon","DIVISION Moves","selectable","dismissable")
+	p
+		+translate("DIVISION has a collection of cursed artifacts. On a previous mission, your soul bonded with a partly cursed weapon. Partly isn’t all that bad, right?")
+	p
+		+translate("When you take this move,")(class="trigger")
+		+translate("answer at least one of the following questions:")
+		ul
+			li
+				+translate("What kind of weapon is this, and what memories does it hold?")(class="italic")
+			li
+				+translate("How does the partial curse manifest?")(class="italic")
+			li
+				+translate("What does the weapon long for?")(class="italic")
+		textarea(name="attr_movetaken_question-partly_cursed_weapon" class="bio")
+	p
+		+translate("When you take this move,")(class="trigger")
+		+translate("create")
+		+headlink("1 Bond","bonds")(class="bold term") 
+		+translate("with the weapon.")
+	p
+		+translate("When you open your heart to the weapon and let it speak directly to you,")(class="trigger")
+		+translate("choose:")
+		ul
+			li
+				+translate("Describe how the weapon communicates what it desires from you, gain")
+				+headlink("1 Bond","bonds")(class="bold term")
+			li
+				+translate("Describe how you fulfilled a desire of the weapon, clear")
+				+headlink("1 Condition","conditions")(class="bold term")
+			li
+				+translate("Describe how the curse grows stronger, gain 2-4 Darkness Tokens")
+				+gainDT
+	p
+		+translate("You can describe using the weapon in the field, just as you would a power of darkness. There’s always a risk that the weapon will become damaged or unusable until you return to DIVISION to have someone look at it.")
++move("The Peacemaker","DIVISION Moves","selectable","dismissable")
+	p
+		+translate("There are many")
+		+translate("Factions")(class="bold term") 
+		+translate("that watch every move DIVISION makes. A tense web exists between numerous Factions, all vying for power, information, and access to the doors of ancient power. You have been chosen to represent DIVISION’s interests and work closely with one Faction in particular, but will the relationship compromise you one day?")
+	p
+		+translate("When you take this move,")(class="trigger")
+		+translate("ask your Keeper which Factions are in play and choose which one you have a relationship with. Answer at least one of the following questions:")
+		ul
+			li
+				+translate("Who is the Faction’s representative that you work most closely with? Why is your relationship complex?")(class="italic")
+			li
+				+translate("Why did you leave the Faction and start working for DIVISION instead?")(class="italic")
+			li
+				+translate("What secrets of the Faction will you never reveal to DIVISION?")(class="italic")
+	p
+		+translate("When you reach out to a Faction’s representative for help,")(class="trigger")
+		+translate("tell the Keeper how large a favor you’re willing to offer the Faction in exchange, on a scale of 1-3. The Keeper describes how much the Faction can help you, equal to the scale of the favor. Roll, and add the level of favor you promised.")
+		+rollcustom("The Peacemaker",true,"size of favor promised (max 3)")
+	p
+		+translate("On an 8-10")(class="result") 
+		+translate("the Faction will help as you ask,")(class="bold")
+		+translate("choose a number of actions based on the scale of the favor you promised. In addition, gain")
+		+headlink("1 Bond","bonds")(class="bold term") 
+		+translate("with the Faction.")
+		ul
+			li
+				+translate("The Faction sends additional resources to assist you, describe what it is.")
+			li
+				+translate("The Faction offers valuable information, uncover")
+				+translate("a Key")(class="bold term") 
+				+translate("at great cost.")
+			li
+				+translate("The Faction will follow your orders for a time. Gain access to one Faction move, for now.")
+	p
+		+translate("On an 11+")(class="result") 
+		+translate("the Faction agrees to help, but they actively seek to compromise DIVISION and awaken the Harbinger within you.")(class="bold") 
+		+translate("Choose a number of actions based on the scale of the favor you promised. In addition, gain")
+		+headlink("1 Bond","bonds")(class="bold term") 
+		+translate("with")
+		+headlink("What the Darkness Demands of You.","demands","darkness")
+		ul
+			li
+				+translate("Give the Faction an irreplaceable DIVISION resource. Clear")
+				+headlink("1 Condition.","conditions")(class="bold term")
+			li
+				+translate("Give the Faction invaluable information about DIVISION that will one day be used against them. Uncover")
+				+translate("a Key")(class="bold term") 
+				+translate("and draw a line between that Key and a Facet on the Mystery Map. Declare an irrevocable truth about the Mystery.")
+			li
+				+translate("Allow the Faction to work towards")
+				+headlink("What the Darkness Demands of You.","demands","darkness")
+				+translate("Mark")
+				+xp(1)
+	p
+		+translate("On a 7-")(class="result") 
+		+translate("the Faction is caught up in something truly dangerous that will compromise your investigation.")(class="bold") 
+		+translate("The Keeper will tell you what happens next.")
++move("Psychic Invokers","DIVISION Moves","selectable","dismissable")
+	p
+		+translate("DIVISION has a number of psychics attuned to an agent, sending visions directly into the mind of that agent across vast distances. This connection operates within marginally safe parameters, at a high level of risk DIVISION finds acceptable.")
+	p
+		+translate("When you take this move,")(class="trigger")
+		+translate("answer at least one of the following questions:")
+		ul
+			li
+				+translate("Who is the psychic invoker you have a good working relationship with? What is their specialty?")(class="italic")
+			li
+				+translate("Who is a psychic invoker you don’t always get along with? Why do you put up with them anyway?")(class="italic")
+			li
+				+translate("Who was the former psychic invoker whose telepathic powers burnt out while connected to you? How do you care for them?")(class="italic")
+		textarea(name="attr_movetaken_question-psychic_invokers" class="bio")
+	p
+		+translate("When you increase your psychic vulnerability to receive information,")(class="trigger")
+		+translate("tell the Keeper how much you open your mind to the psychic invocation, on a scale of 1-3. The Keeper describes a vision and its effects with an intensity equal to your psychic vulnerability. Roll, and add your level of psychic vulnerability.")
+		+rollcustom("Psychic Invokers",true,"psychic vulnerability (max 3)")
+	p
+		+translate("On an 8-10")(class="result") 
+		+translate("the connection between you and the psychic invoker registers within safe parameters.")(class="bold") 
+		+translate("Choose a number of questions from the list below equal to your psychic vulnerability, and the psychic invoker will show you the answers in great detail. In addition, gain")
+		+headlink("1 Bond","bonds")(class="bold term") 
+		+translate("with the psychic invoker.")
+		ul
+			li
+				+translate("What past event is directly affecting this investigation?")
+			li
+				+translate("What lie was born recently?")
+			li
+				+translate("What will most likely happen in the future based on current probabilities?")
+			li
+				+translate("What truth has been hidden? Declare an irrevocable truth based on this one. Rewrite or add a Facet of the Mystery that reflects this truth.")
+	p
+		+translate("On an 11+")(class="result") 
+		+translate("you and the psychic invoker fail to sync safely and the Harbinger within you forces the psychic invoker to become a temporary channel.")(class="bold") 
+		+translate("Choose a number of questions equal to your scale of vulnerability— the Keeper reveals what the Harbinger you may become shows you. In addition, gain")
+		+headlink("1 Bond","bonds")(class="bold term") 
+		+translate("with")
+		+headlink("What the Darkness Demands of You.","demands","darkness")
+		ul
+			li
+				+translate("Who can’t I trust?")
+			li
+				+translate("What will happen if the Harbinger unlocks the door and claims ascension?")
+			li
+				+translate("How can the psychic invoker help me become a Harbinger?")
+			li
+				+translate("What will happen if I take the door of ancient power for myself? Uncover")
+				+translate("a Key")(class="bold term") 
+				+translate("and draw a line between that Key and a Facet on the Mystery Map. Declare an irrevocable truth about the Mystery.")
+	p
+		+translate("On a 7-")(class="result") 
+		+translate("something or someone has hijacked the connection between you and the psychic invoker,")(class="bold")
+		+translate("the Keeper will tell you what happens next.")
++move("Subcontractor","DIVISION Moves","selectable","dismissable")
+	p
+		+translate("DIVISION works with various experts in the field and has a number of regular subcontractors. During an investigation, you may call DIVISION to request an expert subcontractor. It’s hard to get good and reliable help in a pinch.")
+	p
+		+translate("When you take this move,")(class="trigger")
+		+translate("answer at least one of the following questions:")
+		ul
+			li
+				+translate("Who is the subcontractor that none of you have met, but all of you fear?")(class="italic")
+			li
+				+translate("What terrible fate befell the last subcontractor who was sent into the field?")(class="italic")
+			li
+				+translate("Who is the head of operational security at DIVISION who is called in when a subcontractor compromises DIVISION?")(class="italic")
+		textarea(name="attr_movetaken_question-subcontractor" class="bio")
+	p
+		+translate("When you call DIVISION and ask them to send someone over,")(class="trigger")
+		+translate("tell them who you need.")(class="bold") 
+		+translate("Ask another player to choose from the list below and describe the subcontractor:")
+		ul
+			li
+				+translate("MONSTROUS:")(class="bold term") 
+				+translate("The expert subcontractor shows up immediately, but they are also an Omen. Just like you, their Harbinger can tempt them from within, and they may fall victim to apocalyptic ruin.")
+			li
+				+translate("REMOTE:")(class="bold term") 
+				+translate("The expert subcontractor can’t make it in time. Without being directly at the scene, they can only give you partial information, or a possible lead to go on.")
+			li
+				+translate("SHADY:")(class="bold term") 
+				+translate("The subcontractor is not exactly an expert, and they may not always provide reliable information or have the best scruples. But they show up immediately and offer a good lead to start with.")
