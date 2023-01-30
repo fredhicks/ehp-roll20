@@ -1,0 +1,11 @@
+.sheet-MysteryClub
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Allies-Unused', value='1', checked='')
+	+move('MysteryClub-Allies','Leon/Lyn, an authority figure (parent, teacher, etc.). Helpful dealing with officials.')
+	+move('MysteryClub-Allies','Romain, a librarian. Good at finding out details.')
+	+move('MysteryClub-Allies','A very smart pet. Pick their species and give them a name:')
+		input(type='text' name='attr_MysteryClub-Allies-Pet-Name')
+	+move('MysteryClub-Allies','Your friend group, an ally team. Great for distractions.')
+	+move('MysteryClub-Allies','Internet mystery circle, an ally team. Good for finding out weird facts and rumours.')
+	+move('MysteryClub-Allies','Someone else:')
+		div
+			textarea(rows='2' name='attr_MysteryClub-Allies-Custom')

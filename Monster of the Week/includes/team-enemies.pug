@@ -1,0 +1,22 @@
+.sheet-Agents.sheet-Road.sheet-Entourage.sheet-Guardians.sheet-IMPS.sheet-Crisis.sheet-Survivors.sheet-League.sheet-Mercenaries.sheet-MysteryClub.sheet-NightShift.sheet-SuburbanWatch.sheet-Band
+	.sheet-Subsection
+		+translate('Enemies')
+	+expanderInstructions('Enemies')
+		p
+			+translate('Pick an enemy for your team:') 
+	+expanderMoveSection('Enemies')
+		input.sheet-TeamCheck(type='hidden', name='attr_TeamCheck', value='0')
+		include team-enemies-agents.pug
+		include team-enemies-agents.pug
+		include team-enemies-road.pug
+		include team-enemies-entourage.pug
+		include team-enemies-guardians.pug
+		include team-enemies-imps.pug
+		include team-enemies-crisis.pug
+		include team-enemies-survivors.pug
+		include team-enemies-league.pug
+		include team-enemies-mercenaries.pug
+		include team-enemies-mysteryclub.pug
+		include team-enemies-nightshift.pug
+		include team-enemies-suburbanwatch.pug
+		include team-enemies-band.pug

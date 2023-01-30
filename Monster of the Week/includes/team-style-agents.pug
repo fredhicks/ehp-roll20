@@ -1,0 +1,12 @@
+.sheet-Agents
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Style-Unused', value='1', checked='')
+	+move('Agents-Style','<b>Hush:</b> At the end of each session, ask: “Did we suppress knowledge of monsters and the supernatural?”')
+	+move('Agents-Style','<b>The Greater Good:</b> At the end of each session, ask: “Did we protect civilian lives?”')
+	+move('Agents-Style','<b>By Any Means Necessary:</b> At the end of each session, ask: “Did we stop the problem, regardless of the cost?”')
+	+move('Agents-Style','<b>Custom:</b> What’s your story?')
+		div
+			textarea(rows='2' name='attr_Agents-Style-Custom-Story')
+		div
+			+translate('At the end of each session, ask:')
+		div
+			textarea(rows='2' name='attr_Agents-Style-Custom-Question')

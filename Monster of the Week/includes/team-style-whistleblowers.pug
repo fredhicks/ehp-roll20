@@ -1,0 +1,13 @@
+.sheet-Whistleblowers
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Style-Unused', value='1', checked='')
+	+move('Whistleblowers-Style','<b>Inquisition:</b> You believe your organisation isn’t rotten to the core, it just has a few rotten apples. At the end of each session, ask: “Is the organisation better now?”')
+	+move('Whistleblowers-Style','<b>Redemption:</b> You were once part of the organisation’s shady dealings but are disgusted by them now. At the end of each session, ask: “Did we repay part of the harm we caused as organisation members?”')
+	+move('Whistleblowers-Style','<b>Revolt:</b> You’ve recently understood the organisation is rotten to the core and should be terminated. At the end of each session, ask: “Are we closer to destroying the organisation?”')
+	+move('Whistleblowers-Style','<b>Custom:</b> What’s your story?')
+		div
+			textarea(rows='2' name='attr_Whistleblowers-Style-Custom-Story')
+		div
+			+translate('At the end of each session, ask:')
+		div
+			textarea(rows='2' name='attr_Whistleblowers-Style-Custom-Question')
+

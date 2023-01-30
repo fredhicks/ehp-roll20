@@ -1,0 +1,13 @@
+.sheet-MysteryClub
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Style-Unused', value='1', checked='')
+	+move('MysteryClub-Style','<b>Wholesome:</b> At the end of each session, ask: “Did we succeed by believing in each other and using our individual strengths?”')
+	+move('MysteryClub-Style','<b>Comical:</b> At the end of each session, ask: “Did we do something really funny?”')
+	+move('MysteryClub-Style','<b>Cool:</b> At the end of each session, ask: “Did we save the day, with style?”')
+	+move('MysteryClub-Style','<b>Custom:</b> What’s your story?')
+		div
+			textarea(rows='2' name='attr_MysteryClub-Style-Custom-Story')
+		div
+			+translate('At the end of each session, ask:')
+		div
+			textarea(rows='2' name='attr_MysteryClub-Style-Custom-Question')
+

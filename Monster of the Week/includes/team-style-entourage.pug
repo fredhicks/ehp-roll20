@@ -1,0 +1,14 @@
+.sheet-Entourage
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Style-Unused', value='1', checked='')
+	+move('Entourage-Style','<b>First among Equals:</b> Sure, one of us is chosen by destiny, but we all play our part. At the end of each session, ask: “Did we all contribute in our own way to solve the mystery?”')
+	+move('Entourage-Style','<b>Sworn Guardians:</b> The rest of us made a solemn oath to help the Chosen One. At the end of each session, ask: “Did we save the Chosen One from serious harm?”')
+	+move('Entourage-Style','<b>Fate’s Rebels:</b> Screw destiny! At the end of each session, ask: “Did we fight against fate and prophecies, no matter the cost?”')
+	+move('Entourage-Style','<b>Custom:</b> What’s your story?')
+		div
+			textarea(rows='2' name='attr_Entourage-Style-Custom-Story')
+		div
+			+translate('At the end of each session, ask:')
+		div
+			textarea(rows='2' name='attr_Entourage-Style-Custom-Question')
+
+

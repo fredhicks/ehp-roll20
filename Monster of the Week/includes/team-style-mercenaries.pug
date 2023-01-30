@@ -1,0 +1,15 @@
+.sheet-Mercenaries
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Style-Unused', value='1', checked='')
+	+move('Mercenaries-Style','<b>Secret Mission:</b> You are all devoted to a particular goal, using “mercenary monster hunter team” as your cover. What’s your objective? At the end of each session, ask: “Did we get closer to our goal?” If you achieve the objective, choose a new one or change to a new style. Your objective:')
+		div
+			textarea(rows='2' name='attr_Mercenaries-Style-Secret-Mission-Objective')
+	+move('Mercenaries-Style','<b>Goal-Oriented:</b> At the end of each session, ask: “Did we fulfil the exact mission requested, without extra work?”')
+	+move('Mercenaries-Style','<b>Hearts of Gold:</b> At the end of each session, ask: “Did we refuse to accept money from someone we saved?”')
+	+move('Mercenaries-Style','<b>Custom:</b> What’s your story?')
+		div
+			textarea(rows='2' name='attr_Mercenaries-Style-Custom-Story')
+		div
+			+translate('At the end of each session, ask:')
+		div
+			textarea(rows='2' name='attr_Mercenaries-Style-Custom-Question')
+

@@ -1,0 +1,36 @@
+.sheet-XP
+	.sheet-Subsection
+		+translate('Improvement')
+	p(align='center')
+		input.sheet-checkbox(type='checkbox', name='attr_Improvement1')
+		span.sheet-altbox
+		input.sheet-checkbox(type='checkbox', name='attr_Improvement2')
+		span.sheet-altbox
+		input.sheet-checkbox(type='checkbox', name='attr_Improvement3')
+		span.sheet-altbox
+		input.sheet-checkbox(type='checkbox', name='attr_Improvement4')
+		span.sheet-altbox
+		input.sheet-checkbox(type='checkbox', name='attr_Improvement5')
+		span.sheet-altbox
+	+expanderInstructions('Improvement')
+		p
+			+translate('At the end of each session, answer your Style question (below). If yes, gain one improvement mark. If yes and it came up a lot, gain two improvement marks.')
+		p
+			+translate('When you fill in the improvement box, clear the improvement track and choose one of these:')
+		ul
+			li
+				+translate('Gain a new team move.')
+			li
+				+translate('Gain a new team ally.')
+			li
+				+translate('Gain two new asset selections.')
+			input.sheet-TeamCheck(type='hidden', name='attr_TeamCheck', value='0')
+			.sheet-Agents.sheet-Road.sheet-Entourage.sheet-Guardians.sheet-IMPS.sheet-Crisis.sheet-Survivors.sheet-League.sheet-Mercenaries.sheet-MysteryClub.sheet-NightShift.sheet-SuburbanWatch.sheet-Band
+				li
+					+translate('Make the next mystery about your team enemy, giving you a chance to interfere in their plans.')
+			.sheet-Whistleblowers
+				li
+					+translate('Make the next mystery about the organisation or its bad apples, giving you a chance to interfere in their plans.')
+			.sheet-Fugitives
+				li
+					+translate('Make the next mystery about the Wild Hunt, giving you a chance to weaken or confuse them.')

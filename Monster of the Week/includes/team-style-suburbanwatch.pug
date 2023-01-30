@@ -1,0 +1,13 @@
+.sheet-SuburbanWatch
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Style-Unused', value='1', checked='')
+	+move('SuburbanWatch-Style','<b>Thrown in the Deep End:</b> You started out knowing nothing about the supernatural, and you’re still catching up. At the end of each session, ask: “Did we learn something new about the supernatural world?”')
+	+move('SuburbanWatch-Style','<b>Protectors:</b> It’s all about looking after people. At the end of each session, ask: “Did we prevent harm in our community?”')
+	+move('SuburbanWatch-Style','<b>Cosy Coven:</b> You were never strangers to the supernatural, but nobody else suspects it. At the end of each session, ask: “Did we help with our supernatural powers, undetected?”')
+	+move('SuburbanWatch-Style','<b>Custom:</b> What’s your story?')
+		div
+			textarea(rows='2' name='attr_SuburbanWatch-Style-Custom-Story')
+		div
+			+translate('At the end of each session, ask:')
+		div
+			textarea(rows='2' name='attr_SuburbanWatch-Style-Custom-Question') 
+

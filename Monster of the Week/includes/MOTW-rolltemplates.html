@@ -1,0 +1,107 @@
+<rolltemplate class="sheet-rolltemplate-motw-dieroll">
+	<div class="sheet-template-container">
+		<div class="sheet-dieroll-title">
+			{{#stat}} <span data-i18n="{{stat}}">{{stat}}</span> Roll {{/stat}}
+			{{#title}} {{title}} {{/title}}
+			{{#CharName}} ({{CharName}}) {{/CharName}}
+		</div>
+			{{#rollGreater() Roll 11}}
+		<div class="sheet-dieroll-content-advsuccess">
+				<div class="sheet-dieroll-roll">{{Roll}}</div>
+		</div>
+		<div class="sheet-dieroll-title" align="right">
+			<span data-i18n="hit">Hit</span>: <span data-i18n="advsuccess">Advanced Success</span>!
+		</div>
+		<div>
+			<i><span data-i18n="treat-regular">Treat as a regular success if you do not have the advanced improvement for this move.</span></i>
+		</div>
+			{{/rollGreater() Roll 11}}
+			{{#rollBetween() Roll 10 11}}
+		<div class="sheet-dieroll-content-success">
+				<div class="sheet-dieroll-roll">{{Roll}}</div>
+		</div>
+		<div class="sheet-dieroll-title" align="right">
+			<span data-i18n="hit">Hit</span>: <span data-i18n="success">Success</span>!
+		</div>
+			{{/rollBetween() Roll 10 11}}
+			{{#rollBetween() Roll 7 9}}
+		<div class="sheet-dieroll-content-mixed">
+				<div class="sheet-dieroll-roll">{{Roll}}</div>
+		</div>
+		<div class="sheet-dieroll-title" align="right">
+			<span data-i18n="hit">Hit</span>: <span data-i18n="mixed">Mixed Success</span>.
+		</div>
+			{{/rollBetween() Roll 7 9}}
+			{{#rollLess() Roll 7}}
+		<div class="sheet-dieroll-content-failure">
+				<div class="sheet-dieroll-roll">{{Roll}}</div>
+		</div>
+		<div class="sheet-dieroll-title" align="right">
+			<span data-i18n="failure">Failure</span>.
+		</div>
+		<div>
+			<i><span data-i18n="mark-xp-remind">Make sure to mark experience!</span></i>
+		</div>
+			{{/rollLess() Roll 7}}
+	</div>
+</rolltemplate>
+
+<rolltemplate class="sheet-rolltemplate-motw-moveshare">
+	<div class="sheet-template-container">
+			<div class="sheet-moveshare-title"><span data-i18n="move"></span> ({{CharName}})</div>
+		{{#movekey}}
+			<div class="sheet-moveshare-content" data-i18n="{{movekey}}"></div>
+		{{/movekey}}
+		{{#movetext}}
+			<div class="sheet-moveshare-content">{{movetext}}</div>
+		{{/movetext}}
+		{{#extra}}
+			<div class="sheet-moveshare-content sheet-move">&bull; {{extra}}</div>
+		{{/extra}}
+		{{#rollTotal() c1v 1}}
+			<div class="sheet-moveshare-content sheet-move">&bull; <span data-i18n="{{c1}}"></span></div>
+		{{/rollTotal() c1v 1}}
+		{{#rollTotal() c2v 1}}
+			<div class="sheet-moveshare-content sheet-move">&bull; <span data-i18n="{{c2}}"></span></div>
+		{{/rollTotal() c2v 1}}
+		{{#rollTotal() c3v 1}}
+			<div class="sheet-moveshare-content sheet-move">&bull; <span data-i18n="{{c3}}"></span></div>
+		{{/rollTotal() c3v 1}}
+		{{#rollTotal() c4v 1}}
+			<div class="sheet-moveshare-content sheet-move">&bull; <span data-i18n="{{c4}}"></span></div>
+		{{/rollTotal() c4v 1}}
+		{{#rollTotal() c5v 1}}
+			<div class="sheet-moveshare-content sheet-move">&bull; <span data-i18n="{{c5}}"></span></div>
+		{{/rollTotal() c5v 1}}
+		{{#rollTotal() c6v 1}}
+			<div class="sheet-moveshare-content sheet-move">&bull; <span data-i18n="{{c6}}"></span></div>
+		{{/rollTotal() c6v 1}}
+		{{#rollTotal() c7v 1}}
+			<div class="sheet-moveshare-content sheet-move">&bull; <span data-i18n="{{c7}}"></span></div>
+		{{/rollTotal() c7v 1}}
+		{{#rollTotal() c8v 1}}
+			<div class="sheet-moveshare-content sheet-move">&bull; <span data-i18n="{{c8}}"></span></div>
+		{{/rollTotal() c8v 1}}
+		{{#rollTotal() c9v 1}}
+			<div class="sheet-moveshare-content sheet-move">&bull; <span data-i18n="{{c9}}"></span></div>
+		{{/rollTotal() c9v 1}}
+		{{#rollTotal() c10v 1}}
+			<div class="sheet-moveshare-content sheet-move">&bull; <span data-i18n="{{c10}}"></span></div>
+		{{/rollTotal() c10v 1}}
+		{{#rollTotal() c11v 1}}
+			<div class="sheet-moveshare-content sheet-move">&bull; <span data-i18n="{{c11}}"></span></div>
+		{{/rollTotal() c11v 1}}
+		{{#rollTotal() c12v 1}}
+			<div class="sheet-moveshare-content sheet-move">&bull; <span data-i18n="{{c12}}"></span></div>
+		{{/rollTotal() c12v 1}}
+		{{#allprops() CharName movekey movetext extra coda codakey c1 c1v c2 c2v c3 c3v c4 c4v c5 c5v c6 c6v c7 c7v c8 c8v c9 c9v c10 c10v c11 c11v c12 c12v}}
+			<div class="sheet-moveshare-content sheet-move">&bull; <span data-i18n="{{value}}"></span></div>
+		{{/allprops() CharName movekey movetext extra coda codakey c1 c1v c2 c2v c3 c3v c4 c4v c5 c5v c6 c6v c7 c7v c8 c8v c9 c9v c10 c10v c11 c11v c12 c12v}}
+		{{#codakey}}
+			<div class="sheet-moveshare-content" data-i18n="{{codakey}}"></div>
+		{{/codakey}}
+		{{#coda}}
+			<div class="sheet-moveshare-content">{{coda}}</div>
+		{{/coda}}
+	</div>
+</rolltemplate>

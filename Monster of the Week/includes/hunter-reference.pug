@@ -1,0 +1,921 @@
+input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_RefToggle', value='1')
+span.sheet-anglebox
+span.sheet-MinorHead(data-i18n='hunter-reference') Hunter Moves Reference
+.sheet-Reference
+	.sheet-isolator
+		// Isolation divs necessary to keep one pivot-toggle from controlling others outside of this container
+		input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-AUP', value='1')
+		span.sheet-anglebox
+		|  
+		span.sheet-MinorHead(data-i18n='aup') Act Under Pressure
+		button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Act Under Pressure}} {{Roll=[[2d6+?{Act Under Pressure with|Cool (Default),@{Cool}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_AUP')
+		|  
+		.sheet-Reference
+			div(data-i18n='aup-move')
+				| When you act under pressure, roll +Cool.
+				| On a 10+ you do what you set out to.
+				| On a 7-9 the Keeper is going to give you a worse outcome, hard choice, or price to pay.
+			.sheet-isolator
+				input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-AUP-Advanced', value='1')
+				span.sheet-anglebox
+				|  
+				span.sheet-MinorHead
+					span(data-i18n='advanced') Advanced
+					|  
+					span(data-i18n='aup') Act Under Pressure
+					|  
+					input.sheet-triggerbox(type='checkbox', name='attr_advanced-aup')
+					span.sheet-triggertext.sheet-redtext(data-i18n='enabled') (Enabled)
+				.sheet-Reference(data-i18n='aup-advanced')
+					b Advanced:
+					|  On a 12+ you may choose to either do what you wanted and something extra, or to do what you wanted to absolute perfection.
+	.sheet-isolator
+		input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-HO', value='1')
+		span.sheet-anglebox
+		|  
+		span.sheet-MinorHead(data-i18n='helpout') Help Out
+		button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Help Out}} {{Roll=[[2d6+?{Help Out with|Cool (Default),@{Cool}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_HO')
+		|  
+		.sheet-Reference
+			div(data-i18n='helpout-move')
+				| When you help another hunter, roll +Cool.
+				| On a 10+ your help grants them +1 to their roll.
+				| On a 7-9 your help grants them +1 to their roll, but you also expose yourself to trouble or danger.
+			.sheet-isolator
+				input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-HO-Advanced', value='1')
+				span.sheet-anglebox
+				|  
+				span.sheet-MinorHead
+					span(data-i18n='advanced') Advanced
+					|  
+					span(data-i18n='helpout') Help Out
+					|  
+					input.sheet-triggerbox(type='checkbox', name='attr_advanced-helpout')
+					span.sheet-triggertext.sheet-redtext(data-i18n='enabled') (Enabled)
+				.sheet-Reference(data-i18n='helpout-advanced')
+					b Advanced:
+					|  On a 12+ your help lets them act as if they just rolled a 12, regardless of what they actually got.
+	.sheet-isolator
+		input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-IAM', value='1')
+		span.sheet-anglebox
+		|  
+		span.sheet-MinorHead(data-i18n='iam') Investigate a Mystery
+		button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Investigate a Mystery}} {{Roll=[[2d6+?{Investigate a Mystery with|Sharp (Default),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_IAM')
+		|  
+		.sheet-Reference
+			div(data-i18n='iam-move1')
+				| When you investigate a mystery, roll +Sharp. On a 10+ hold 2, and on a 7-9 hold 1.
+			b
+				span(data-i18n='current-hold') Current Hold
+				| :
+			|  
+			input(type='number', name='attr_IAM-Hold', min='0', value='0')
+			div(data-i18n='iam-move2')
+				| One hold can be spent to ask the Keeper one of the following questions:
+				ul
+					li What happened here?
+					li What sort of creature is it?
+					li What can it do?
+					li What can hurt it?
+					li Where did it go?
+					li What was it going to do?
+					li What is being concealed here?
+			.sheet-isolator
+				input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-IAM-Advanced', value='1')
+				span.sheet-anglebox
+				|  
+				span.sheet-MinorHead
+					span(data-i18n='advanced') Advanced
+					|  
+					span(data-i18n='iam') Investigate a Mystery
+					|  
+					input.sheet-triggerbox(type='checkbox', name='attr_advanced-iam')
+					span.sheet-triggertext.sheet-redtext(data-i18n='enabled') (Enabled)
+				.sheet-Reference(data-i18n='iam-advanced')
+					b Advanced:
+					|  On a 12+, you may ask the Keeper any question you want about the mystery, not just the listed ones.
+			.sheet-isolator
+				input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-IAP', value='1')
+				span.sheet-anglebox
+				|  
+				span.sheet-MinorHead(data-i18n='iap') Investigating Phenomena
+				.sheet-Reference(data-i18n='iap-move')
+					| Hunters dealing with phenomena may ask the following as part of the standard investigate a mystery list of questions:
+					ul
+						li How is this phenomenon doing this?
+						li What could fix it, cure it, or slow it down?
+						li How far does the effect reach?
+						li What will be affected next?
+	// IAM
+	.sheet-isolator
+		input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-IAM-Alt', value='1')
+		span.sheet-anglebox
+		|  
+		span.sheet-MinorHead
+			span(data-i18n='iam') Investigate a Mystery
+			|  (
+			span(data-i18n='flex-alt') Flexible Alternative
+			| )
+		button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Investigate a Mystery}} {{Roll=[[2d6+?{Investigate a Mystery with|Sharp (Default),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_IAM')
+		|  
+		.sheet-Reference
+			div(data-i18n='iam-alt')
+				| (
+				i This is from 
+				| Tome of Mysteries,
+				i  page 29. See that book for a more full discussion.
+				| )
+				br
+				| When you investigate a mystery with your particular techniques and skills, roll +Sharp:
+				ul
+					li
+						| On a 10 or higher, ask the Keeper two general questions or one specific question. Based on how you are investigating, they will tell you honestly and with good detail what you discover.
+					li
+						| On a 7 to 9, ask the Keeper one general question. Based on how you are investigating, they will tell you honestly and with reasonable detail what you discover.
+					li
+						| On a miss, ask the Keeper one general question. They may answer it as they wish. Regardless of the question and answer, something bad happens.
+				b Moves That Grant Different Questions:
+				|  Many hunters have moves that grant special questions to ask instead of the usual list. To ensure these moves are still valuable, they now grant one of those special questions in addition to the questions granted by your investigate a mystery move result.
+			.sheet-isolator
+				input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-IAM-Alt-Advanced', value='1')
+				span.sheet-anglebox
+				|  
+				span.sheet-MinorHead
+					span(data-i18n='advanced') Advanced
+					|  
+					span(data-i18n='iam') Investigate a Mystery
+					|  
+					input.sheet-triggerbox(type='checkbox', name='attr_advanced-iam-alt')
+					span.sheet-triggertext.sheet-redtext(data-i18n='enabled') (Enabled)
+				.sheet-Reference(data-i18n='iam-alt-advanced')
+					b Advanced:
+					|  On a 12 or higher, as 10 or higher but you may ask one additional question&mdash;specific or general, your choice.
+	// IAM Alt
+	.sheet-isolator
+		input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-KSA', value='1')
+		span.sheet-anglebox
+		|  
+		span.sheet-MinorHead(data-i18n='kickass') Kick Some Ass
+		button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Kick Some Ass}} {{Roll=[[2d6+?{Kick Some Ass with|Tough (Default),@{Tough}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_KSA')
+		|  
+		.sheet-Reference
+			div(data-i18n='kickass-move')
+				| When you get into a fight and kick some ass, roll +Tough.  
+				| On a 7+, you and whatever you&apos;re fighting inflict harm on each other. 
+				| The amount of harm is based on the established dangers in the game. 
+				| That usually means you inflict the harm rating of your weapon and your enemy inflicts their attack&apos;s harm rating on you.  
+				| On a 10+, choose one extra effect:
+				ul
+					li
+						| You gain the advantage: take +1 forward, or give +1 forward to another hunter.
+					li
+						| You inflict terrible harm (+1 harm).
+					li
+						| You suffer less harm (-1 harm).
+					li
+						| You force them where you want them.
+			input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-KSA-Advanced', value='1')
+			span.sheet-anglebox
+			|  
+			span.sheet-MinorHead
+				span(data-i18n='advanced') Advanced
+				|  
+				span(data-i18n='kickass') Kick Some Ass
+				|  
+				input.sheet-triggerbox(type='checkbox', name='attr_advanced-kickass')
+				span.sheet-triggertext.sheet-redtext(data-i18n='enabled') (Enabled)
+			.sheet-Reference(data-i18n='kickass-advanced')
+				b Advanced:
+				|  On a 12+ instead pick an enhanced effect: 
+				ul
+					li
+						| You completely hold the advantage. All hunters involved in the fight get +1 forward.
+					li
+						| You suffer no harm at all.
+					li
+						| Your attack inflicts double the normal harm.
+					li
+						| Your attack drives the enemy away in a rout.
+	.sheet-isolator
+		input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-MS', value='1')
+		span.sheet-anglebox
+		|  
+		span.sheet-MinorHead(data-i18n='manipulate') Manipulate Someone
+		button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Manipulate Someone}} {{Roll=[[2d6+?{Manipulate Someone with|Charm (Default),@{Charm}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_MS')
+		|  
+		.sheet-Reference
+			div(data-i18n='manipulate-move')
+				| Once you have given them a reason, tell them what you want them to do and roll +Charm.
+			.sheet-isolator
+				input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-MS-Normal', value='1')
+				span.sheet-anglebox
+				|  
+				span.sheet-MinorHead(data-i18n='for-normal') For a Normal Person...
+				.sheet-Reference
+					div(data-i18n='normal-person-move')
+						ul
+							li
+								| On a 10+, then they&apos;ll do it for the reason you gave them. If you asked too much, they&apos;ll tell you the minimum it would take for them to do it (or if there&apos;s no way they&apos;d do it).
+							li
+								| On a 7-9, they&apos;ll do it, but only if you do something for them right now to show that you mean it. If you asked too much, they&apos;ll tell you what, if anything, it would take for them to do it.
+					.sheet-isolator
+						input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-MS-Normal-Advanced', value='1')
+						span.sheet-anglebox
+						|  
+						span.sheet-MinorHead
+							span(data-i18n='advanced') Advanced
+							|  
+							span(data-i18n='manipulate') Manipulate Someone
+							|  
+							input.sheet-triggerbox(type='checkbox', name='attr_advanced-manipulate')
+							span.sheet-triggertext.sheet-redtext(data-i18n='enabled') (Enabled)
+						.sheet-Reference(data-i18n='normal-person-advanced')
+							b Advanced:
+							|  On a 12+ not only do they do what you want right now, they also become your ally for the rest of the mystery (or, if you do enough for them, permanently).
+			.sheet-isolator
+				input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-MS-Hunter', value='1')
+				span.sheet-anglebox
+				|  
+				span.sheet-MinorHead(data-i18n='another-hunter') For Another Hunter...
+				.sheet-Reference
+					div(data-i18n='another-hunter-move')
+						ul
+							li
+								| On a 10+, if they do what you ask they mark experience and get +1 forward.
+							li
+								| On a 7-9, they mark experience if they do what you ask.
+							li
+								| On a miss, it&apos;s up to that hunter to decide how badly you offend or annoy them. They mark experience if they decide not to do what you asked. Monsters and minions cannot normally be manipulated.
+					.sheet-isolator
+						input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-MS-Hunter-Advanced', value='1')
+						span.sheet-anglebox
+						|  
+						span.sheet-MinorHead
+							span(data-i18n='advanced') Advanced
+							|  
+							span(data-i18n='manipulate') Manipulate Someone
+							|  
+							input.sheet-triggerbox(type='checkbox', name='attr_advanced-manipulate')
+							span.sheet-triggertext.sheet-redtext(data-i18n='enabled') (Enabled)
+						.sheet-Reference(data-i18n='another-hunter-advanced')
+							b Advanced:
+							|  On a 12+ they must act under pressure to resist your request. If they do what you ask, they mark one experience and take +1 ongoing while doing what you asked.
+	.sheet-isolator
+		input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-PS', value='1')
+		span.sheet-anglebox
+		|  
+		span.sheet-MinorHead(data-i18n='protect-someone') Protect Someone
+		button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Protect Someone}} {{Roll=[[2d6+?{Protect Someone with|Tough (Default),@{Tough}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_PS')
+		|  
+		.sheet-Reference
+			div(data-i18n='protect-someone-move')
+				| When you prevent harm to another character, roll +Tough. 
+				| On a 7+, you protect them okay, but you&apos;ll suffer some or all of the harm they were going to get. 
+				| On a 10+ choose an extra:
+				ul
+					li
+						| You suffer little harm (-1 harm).
+					li
+						| All impending danger is now focused on you.
+					li
+						| You inflict harm on the enemy.
+					li
+						| You hold the enemy back.
+			input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-PS-Advanced', value='1')
+			span.sheet-anglebox
+			|  
+			span.sheet-MinorHead
+				span(data-i18n='advanced') Advanced
+				|  
+				span(data-i18n='protect-someone') Protect Someone
+				|  
+				input.sheet-triggerbox(type='checkbox', name='attr_advanced-protect-someone')
+				span.sheet-triggertext.sheet-redtext(data-i18n='enabled') (Enabled)
+			.sheet-Reference(data-i18n='protect-someone-advanced')
+				b Advanced:
+				|  on a 12+ both you and the character you are protecting are unharmed and out of danger. If you were protecting a bystander, they also become your ally.
+	.sheet-isolator
+		input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-RABS', value='1')
+		span.sheet-anglebox
+		|  
+		span.sheet-MinorHead(data-i18n='rabs') Read a Bad Situation
+		button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Read a Bad Situation}} {{Roll=[[2d6+?{Read a Bad Situation with|Sharp (Default),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_RABS')
+		|  
+		.sheet-Reference
+			div(data-i18n='rabs-move1')
+				| When you look around and read a bad situation, roll +Sharp.  On a 10+ hold 3, and on a 7-9, hold 1.
+			b
+				span(data-i18n='current-hold') Current Hold
+				| :
+			|  
+			input(type='number', name='attr_RABS-Hold', min='0', value='0')
+			div(data-i18n='rabs-move2')
+				| One hold can be spent to ask the Keeper one of the following questions:
+				ul
+					li
+						| What&apos;s my best way in?
+					li
+						| What&apos;s my best way out?
+					li
+						| Are there any dangers we haven&apos;t noticed?
+					li
+						| What&apos;s the biggest threat?
+					li
+						| What&apos;s most vulnerable to me?
+					li
+						| What&apos;s the best way to protect the victims?
+				| If you act on the answers, you get +1 ongoing while the information is relevant.
+			.sheet-isolator
+				input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-RABS-Advanced', value='1')
+				span.sheet-anglebox
+				|  
+				span.sheet-MinorHead
+					span(data-i18n='advanced') Advanced
+					|  
+					span(data-i18n='rabs') Read a Bad Situation
+					|  
+					input.sheet-triggerbox(type='checkbox', name='attr_advanced-rabs')
+					span.sheet-triggertext.sheet-redtext(data-i18n='enabled') (Enabled)
+				.sheet-Reference(data-i18n='rabs-advanced')
+					b Advanced:
+					|  On a 12+ you may ask the Keeper any question you want about the situation, not just the listed ones.
+	.sheet-isolator
+		input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-UM', value='1')
+		span.sheet-anglebox
+		|  
+		span.sheet-MinorHead(data-i18n='usemagic') Use Magic
+		button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Use Magic}} {{Roll=[[2d6+?{Use Magic with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_UM')
+		|  
+		.sheet-Reference
+			div(data-i18n='usemagic-move')
+				| When you use magic, say what you&apos;re trying to achieve and how you do the spell, then roll +Weird.
+				| On a 10+, the magic works without issues: choose your effect.
+				| On a 7-9, it works imperfectly: choose your effect and a glitch. The Keeper will decide what effect the glitch has.
+			.sheet-isolator
+				input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-UM-Advanced', value='1')
+				span.sheet-anglebox
+				|  
+				span.sheet-MinorHead
+					span(data-i18n='advanced') Advanced
+					|  
+					span(data-i18n='usemagic') Use Magic
+					|  
+					input.sheet-triggerbox(type='checkbox', name='attr_advanced-usemagic')
+					span.sheet-triggertext.sheet-redtext(data-i18n='enabled') (Enabled)
+				.sheet-Reference(data-i18n='usemagic-advanced')
+					b Advanced:
+					|  On a 12+ the Keeper will offer you some added benefit.
+			.sheet-isolator
+				input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-UME', value='1')
+				span.sheet-anglebox
+				|  
+				span.sheet-MinorHead(data-i18n='rote-effect') Effects
+				.sheet-Reference(data-i18n='usemagic-effects')
+					ul
+						li
+							| Inflict harm (1-harm ignore-armour magic obvious).
+						li
+							| Enchant a weapon. It gets +1 harm and +magic.
+						li
+							| Do one thing that is beyond human limitations.
+						li
+							| Bar a place or portal to a specific person or a type of creature.
+						li
+							| Trap a specific person, minion, or monster.
+						li
+							| Banish a spirit or curse from the person, object, or place it inhabits.
+						li
+							| Summon a monster into the world.
+						li
+							| Communicate with something that you do not share a language with.
+						li
+							| Observe another place or time.
+						li
+							| Heal 1-harm from an injury, or cure a disease, or neutralize a poison.
+			.sheet-isolator
+				input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-Glitches', value='1')
+				span.sheet-anglebox
+				|  
+				span.sheet-MinorHead(data-i18n='glitches') Glitches
+				.sheet-Reference(data-i18n='usemagic-glitches')
+					ul
+						li
+							| The effect is weakened.
+						li
+							| The effect is of short duration.
+						li
+							| You take 1-harm ignore-armour.
+						li
+							| The magic draws immediate, unwelcome attention.
+						li
+							| It has a problematic side effect.
+			.sheet-isolator
+				input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-KMS', value='1')
+				span.sheet-anglebox
+				|  
+				span.sheet-MinorHead(data-i18n='keeper-may-say') The Keeper May Say That...
+				.sheet-Reference(data-i18n='usemagic-keeper')
+					ul
+						li
+							| The spell requires weird materials.
+						li
+							| The spell will take 10 seconds, 30 seconds, or 1 minute to cast.
+						li
+							| The spell requires ritual chanting and gestures.
+						li
+							| The spell requires you to draw arcane symbols.
+						li
+							| You need one or two people to help cast the spell.
+						li
+							| You need to refer to a tome of magic for the details.
+	.sheet-isolator
+		input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-BM', value='1')
+		span.sheet-anglebox
+		|  
+		span.sheet-MinorHead(data-i18n='bigmagic') Big Magic
+		.sheet-Reference(data-i18n='bigmagic-move')
+			| Use this when you want more than the Use Magic effects. Tell the Keeper what you want to do.
+			| The Keeper may require:
+			ul
+				li
+					| You need to spend a lot of time (days or weeks) researching the magic ritual.
+				li
+					| You need to experiment with the spell &ndash; there will be lots of failures before you get it right.
+				li
+					| You need some rare and weird ingredients and supplies.
+				li
+					| The spell will take a long time (hours or days) to cast.
+				li
+					| You need a lot of people (2, 3, 7, 13, or more) to help.
+				li
+					| The spell needs to be cast at a particular place and/or time.
+				li
+					| You need to use magic as part of the ritual, perhaps to summon a monster, communicate with something, or bar the portal you opened.
+				li
+					| It will have a specific side-effect or danger.
+			| If you meet the requirements, then the magic takes effect.
+	.sheet-isolator
+		input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-AltWeird', value='1')
+		span.sheet-anglebox
+		|  
+		span.sheet-MinorHead(data-i18n='altwm') Alternative Weird Moves
+		.sheet-Reference
+			div(data-i18n='alt-move-desc')
+				| If you&apos;re using the alternative weird moves options from 
+				i Tome of Mysteries
+				| , here they are. To keep track, tick the checkbox next to the move you&apos;re using.
+			.sheet-isolator
+				input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-Empath', value='1')
+				span.sheet-anglebox
+				|  
+				input.sheet-checkbox(type='checkbox', name='attr_Alt-Move-Empath', value='1')
+				span.sheet-altbox
+				span.sheet-MinorHead(data-i18n='empath') Empath
+				button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Empath}} {{Roll=[[2d6+?{Empath with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_Empath')
+				|  
+				.sheet-Reference
+					div(data-i18n='empath-move')
+						ul
+							li
+								| When you open up your brain to feel the emotions of something right there in front of you, roll +Weird:
+							li
+								| On a 10 or more, you gain a clear impression of their current emotional state and intentions. Take +1 forward when acting on this knowledge.
+							li
+								| On a 7-9, you gain a hazy impression of their current emotional state and intentions.
+							li
+								| On a miss, your brain is overwhelmed with emotion.
+						| You can use empath on anything with emotions, but the less human they are, the less it&apos;s safe for you. If the emotions are especially strong or alien, you might need to act under pressure.
+					.sheet-isolator
+						input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-Empath-Advanced', value='1')
+						span.sheet-anglebox
+						|  
+						span.sheet-MinorHead
+							span(data-i18n='advanced') Advanced
+							|  
+							span(data-i18n='empath') Empath
+							|  
+							input.sheet-triggerbox(type='checkbox', name='attr_advanced-empath')
+							span.sheet-triggertext.sheet-redtext(data-i18n='enabled') (Enabled)
+						.sheet-Reference(data-i18n='empath-advanced')
+							b Advanced:
+							|  When you advance your empath move, add this:
+							ul
+								li
+									| On a 12 or more, you get an impression (as for 10 or more), and you may ask one follow-up question that the Keeper will answer honestly.
+			.sheet-isolator
+				input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-Illuminated', value='1')
+				span.sheet-anglebox
+				input.sheet-checkbox(type='checkbox', name='attr_Alt-Move-Illuminated', value='1')
+				span.sheet-altbox
+				span.sheet-MinorHead(data-i18n='illuminated') Illuminated
+				button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Illuminated}} {{Roll=[[2d6+?{Illuminated with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_Illuminated')
+				|  
+				.sheet-Reference
+					div(data-i18n='illuminated-move')
+						| When you telepathically ask the Secret Masters for aid, roll +Weird:
+						ul
+							li
+								| On a 10 or more, the Secret Masters reveal a key fact, clue, or technique that will help you.
+							li
+								| On a 7-9, the Secret Masters need you to complete a task for them. Once it is done, they reveal a key fact, clue, or technique that will help you.
+							li
+								| On a miss, the Secret Masters&apos; reply is terrible, garbled, or somehow dangerously wrong.
+					.sheet-isolator
+						input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-Illuminated-Advanced', value='1')
+						span.sheet-anglebox
+						|  
+						span.sheet-MinorHead
+							span(data-i18n='advanced') Advanced
+							|  
+							span(data-i18n='illuminated') Illuminated
+							|  
+							input.sheet-triggerbox(type='checkbox', name='attr_advanced-illuminated')
+							span.sheet-triggertext.sheet-redtext(data-i18n='enabled') (Enabled)
+						.sheet-Reference(data-i18n='illuminated-advanced')
+							b Advanced:
+							|  When you advance your illuminated move, add this:
+							ul
+								li
+									| On a 12 or more, the Secret Masters reveal a key fact, clue, or technique that will help you. You may ask one follow-up question that the Keeper will answer honestly.
+			.sheet-isolator
+				input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-NoLimits', value='1')
+				span.sheet-anglebox
+				input.sheet-checkbox(type='checkbox', name='attr_Alt-Move-NoLimits', value='1')
+				span.sheet-altbox
+				span.sheet-MinorHead(data-i18n='nolimits') No Limits
+				button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=No Limits}} {{Roll=[[2d6+?{No Limits with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_NoLimits')
+				|  
+				.sheet-Reference
+					span(data-i18n='nolimits-move')
+						| When you push your physical body past its limits, roll +Weird:
+						ul
+							li
+								| On a 10 or more, your body obeys your will, to the limits of physical possibility (see below), for a moment.
+							li
+								| On a 7-9, you do it but choose one consequence: suffer 1-harm, take &ndash;1 forward, or you need to rest right now.
+							li
+								| On a miss, something goes horribly wrong.
+					.sheet-isolator
+						input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-NoLimits-Advanced', value='1')
+						span.sheet-anglebox
+						|  
+						span.sheet-MinorHead
+							span(data-i18n='advanced') Advanced
+							|  
+							span(data-i18n='nolimits') No Limits
+							|  
+							input.sheet-triggerbox(type='checkbox', name='attr_advanced-nolimits')
+							span.sheet-triggertext.sheet-redtext(data-i18n='enabled') (Enabled)
+						.sheet-Reference(data-i18n='nolimits-advanced')
+							b Advanced:
+							|  If you advance your no limits move, add this:
+							ul
+								li
+									| On a 12 or more, you can continue acting at your body&apos;s limits for 30 seconds
+			.sheet-isolator
+				input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-PastLives', value='1')
+				span.sheet-anglebox
+				input.sheet-checkbox(type='checkbox', name='attr_Alt-Move-PastLives', value='1')
+				span.sheet-altbox
+				span.sheet-MinorHead(data-i18n='pastlives') Past Lives
+				button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Past Lives}} {{Roll=[[2d6+?{Past Lives with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_PastLives')
+				|  
+				.sheet-Reference
+					div(data-i18n='pastlives-move')
+						| When you channel your previous incarnations to discover something, pose your question and roll +Weird:
+						ul
+							li
+								| On a 10 or more, a past life has something useful to offer. Ask the Keeper two of the questions below.
+							li
+								| On a 7-9, a past life has a little experience with this. Ask the Keeper one of the questions below.
+							li
+								| On a miss, a past life takes over for a while.
+					.sheet-isolator
+						input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-PastLives-Advanced', value='1')
+						span.sheet-anglebox
+						|  
+						span.sheet-MinorHead
+							span(data-i18n='advanced') Advanced
+							|  
+							span(data-i18n='pastlives') Past Lives
+							|  
+							input.sheet-triggerbox(type='checkbox', name='attr_advanced-pastlives')
+							span.sheet-triggertext.sheet-redtext(data-i18n='enabled') (Enabled)
+						.sheet-Reference(data-i18n='pastlives-advanced')
+							| Advanced Past Lives. If you advance your past lives move, add this:
+							ul
+								li
+									| On a 12 or more, a past life knows exactly what you were after. Ask the Keeper one of the questions below, and one free-form question. Gain +1 ongoing while acting on the answers.
+					.sheet-isolator
+						input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-PLQ', value='1')
+						span.sheet-anglebox
+						|  
+						span.sheet-MinorHead
+							span(data-i18n='pastlives') Past Lives
+							|  
+							span(data-i18n='questions') Questions
+						.sheet-Reference(data-i18n='pastlives-questions')
+							ul
+								li
+									| What did a past life discover about [topic] ?
+								li
+									| How did a past life deal with [topic]?
+								li
+									| What important hidden secret can a past life show me the way to?
+								li
+									| What did a past life learn too late to help them?
+								li
+									| What does a past life advise me to do now?
+			.sheet-isolator
+				input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-Sensitive', value='1')
+				span.sheet-anglebox
+				input.sheet-checkbox(type='checkbox', name='attr_Alt-Move-Sensitive', value='1')
+				span.sheet-altbox
+				span.sheet-MinorHead(data-i18n='sensitive') Sensitive
+				button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Sensitive}} {{Roll=[[2d6+?{Sensitive with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_Sensitive')
+				|  
+				.sheet-Reference
+					div(data-i18n='sensitive-move')
+						| When you open up your brain to the psychic environment, roll +Weird:
+						ul
+							li
+								| On a 10 or more, you gain a definite impression (a vision, tangible aura, overheard thought, etc) about something important.
+							li
+								| On a 7-9, you gain a hazy impression about something important.
+							li
+								| On a miss, your brain makes contact with something dangerous.
+					.sheet-isolator
+						input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-Sensitive-Advanced', value='1')
+						span.sheet-anglebox
+						|  
+						span.sheet-MinorHead
+							span(data-i18n='advanced') Advanced
+							|  
+							span(data-i18n='sensitive') Sensitive
+							|  
+							input.sheet-triggerbox(type='checkbox', name='attr_advanced-sensitive')
+							span.sheet-triggertext.sheet-redtext(data-i18n='enabled') (Enabled)
+						.sheet-Reference(data-i18n='sensitive-advanced')
+							b Advanced:
+							|  When you advance your sensitive move, add this:
+							ul
+								li
+									| On a 12 or more, you get an impression as for 10 or more, plus you may ask one follow-up question that the Keeper will answer honestly.
+			.sheet-isolator
+				input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-TYG', value='1')
+				span.sheet-anglebox
+				input.sheet-checkbox(type='checkbox', name='attr_Alt-Move-TYG', value='1')
+				span.sheet-altbox
+				span.sheet-MinorHead(data-i18n='tyg') Trust Your Gut
+				button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Trust Your Gut}} {{Roll=[[2d6+?{Trust Your Gut with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_TYG')
+				|  
+				.sheet-Reference
+					div(data-i18n='tyg-move')
+						| When you consult your instincts about what to do next, roll +Weird:
+						ul
+							li
+								| On a 10 or more, the Keeper will tell where you should go. Wherever that is, it will be important. You get +1 ongoing on the way to this place.
+							li
+								| On a 7-9, the Keeper will tell you a general direction to go. Take +1 forward as you explore that.
+							li
+								| On a miss, your instincts lead you into danger.
+					.sheet-isolator
+						input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-TYG-Advanced', value='1')
+						span.sheet-anglebox
+						|  
+						span.sheet-MinorHead
+							span(data-i18n='advanced') Advanced
+							|  
+							span(data-i18n='tyg') Trust Your Gut
+							|  
+							input.sheet-triggerbox(type='checkbox', name='attr_advanced-tyg')
+							span.sheet-triggertext.sheet-redtext(data-i18n='enabled') (Enabled)
+						.sheet-Reference(data-i18n='tyg-advanced')
+							b Advanced:
+							|  If you advance your trust your gut move, add this:
+							ul
+								li
+									| On a 12 or more, in addition to the usual 10+ result, the Keeper will tell you about one important thing you should investigate further.
+			.sheet-isolator
+				input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-Telekinesis', value='1')
+				span.sheet-anglebox
+				input.sheet-checkbox(type='checkbox', name='attr_Alt-Move-Telekinesis', value='1')
+				span.sheet-altbox
+				span.sheet-MinorHead(data-i18n='tk') Telekinesis
+				button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Telekinesis}} {{Roll=[[2d6+?{Telekinesis with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_Telekinesis')
+				|  
+				.sheet-Reference
+					div(data-i18n='tk-move')
+						| When you fling something with your mind, roll +Weird:
+						ul
+							li
+								| On a 10 or more, you move it. Choose two options and mark 1-harm.
+							li
+								| On a 7-9, you move it but it hurts. Choose one option and mark 2-harm.
+							li
+								| On a miss, something goes horribly wrong.
+						| By default you can move something smaller than a person. You don&apos;t have much control, and you can&apos;t move it strongly enough to hurt anything.
+					.sheet-isolator
+						input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-TKO', value='1')
+						span.sheet-anglebox
+						|  
+						span.sheet-MinorHead
+							span(data-i18n='tk') Telekinesis
+							|  
+							span(data-i18n='options') Options
+						.sheet-Reference(data-i18n='tk-options')
+							| Anything not picked is not true:
+							ul
+								li
+									| Something is held fast.
+								li
+									| Something is hurt (2-harm smash).
+								li
+									| Something catches fire.
+								li
+									| You can fling something bigger than a person.
+								li
+									| You keep it basically under your control.
+								li
+									| You suffer 1 less harm.
+					.sheet-isolator
+						input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-Telekinesis-Advanced', value='1')
+						span.sheet-anglebox
+						|  
+						span.sheet-MinorHead
+							span(data-i18n='advanced') Advanced
+							|  
+							span(data-i18n='tk') Telekinesis
+							|  
+							input.sheet-triggerbox(type='checkbox', name='attr_advanced-tk')
+							span.sheet-triggertext.sheet-redtext(data-i18n='enabled') (Enabled)
+						.sheet-Reference(data-i18n='tk-advanced')
+							b Advanced:
+							|  When you advance your telekinesis move, add this:
+							ul
+								li
+									| On a 12 or more, choose three options. You may also choose from these advanced options:
+									ul
+										li
+											| Something explodes (3-harm close fire area messy)
+										li
+											| Something implodes (3-harm close crush)
+										li
+											| Lots of stuff is flying under your control.
+										li
+											| You have perfect and precise control over exactly what happens.
+			.sheet-isolator
+				input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-WS', value='1')
+				span.sheet-anglebox
+				input.sheet-checkbox(type='checkbox', name='attr_Alt-Move-WS', value='1')
+				span.sheet-altbox
+				span.sheet-MinorHead(data-i18n='weirdsci') Weird Science
+				button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Weird Science}} {{Roll=[[2d6+?{Weird Science with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_WS')
+				|  
+				.sheet-Reference
+					div(data-i18n='weirdsci-move')
+						| When you create or adapt a device to analyse or deal with strangeness, say what it will do and roll +Weird:
+						ul
+							li
+								| On a 10 or more, you pick two requirements.
+							li
+								| On a 7-9, you pick one requirement and the Keeper picks a second one.
+							li
+								| On a miss, something goes horribly wrong. You are still able to create your device, but the Keeper picks three requirements.
+					.sheet-isolator
+						input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-WSR', value='1')
+						span.sheet-anglebox
+						|  
+						span.sheet-MinorHead
+							span(data-i18n='weirdsci') Weird Science
+							|  
+							span(data-i18n='requirements') Requirements
+						.sheet-Reference(data-i18n='weirdsci-reqs')
+							ul
+								li
+									| It needs a rare and/or weird material.
+								li
+									| It won&apos;t be very reliable.
+								li
+									| It requires huge amounts of power or fuel.
+								li
+									| It will take a long time to get it working.
+								li
+									| It won&apos;t work exactly as you intended.
+								li
+									| You&apos;ll need help (beyond the hunters on your team) to finish it.
+					.sheet-isolator
+						input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-WS-Advanced', value='1')
+						span.sheet-anglebox
+						|  
+						span.sheet-MinorHead
+							span(data-i18n='advanced') Advanced
+							|  
+							span(data-i18n='weirdsci') Weird Science
+							|  
+							input.sheet-triggerbox(type='checkbox', name='attr_advanced-weirdsci')
+							span.sheet-triggertext.sheet-redtext(data-i18n='enabled') (Enabled)
+						.sheet-Reference(data-i18n='weirdsci-advanced')
+							b Advanced:
+							|  When you advance your weird science move, add this: 
+							ul
+								li  On a 12 or more, you gain +1 ongoing when operating the device. 
+	.sheet-isolator
+		input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-OTopics', value='1')
+		span.sheet-anglebox
+		|  
+		span.sheet-MinorHead(data-i18n='other-topics') Other Topics
+		.sheet-Reference
+			.sheet-isolator
+				input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-Agenda', value='1')
+				span.sheet-anglebox
+				|  
+				span.sheet-MinorHead(data-i18n='hunter-agenda') Hunter Agenda
+				.sheet-Reference(data-i18n='hunter-agenda-list')
+					ul
+						li
+							| Act like you&apos;re the hero in this story (because you are).
+						li
+							| Make your own destiny.
+						li
+							| Find the damn monsters and stop them.
+						li
+							| Play your hunter like they&apos;re a real person.
+			.sheet-isolator
+				input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-Harm', value='1')
+				span.sheet-anglebox
+				|  
+				span.sheet-MinorHead(data-i18n='harm') Harm
+				.sheet-Reference
+					div(data-i18n='harm-list')
+						| Whenever you suffer harm, the Keeper will tell you what effect it has.
+						| Injury severity depends on how much harm you have suffered:
+						ul
+							li
+								| 0-harm wounds have only minor, short term effects.
+							li
+								| 4-7 harm wounds are serious and unstable. They will get worse unless treated. Mark the &quot;Unstable&quot; box.
+							li
+								| 8-harm or more will kill a normal human, including a hunter.
+						| Armour reduces the harm suffered by the number of points it is rated for.
+						| Monsters may not be defeated until you use their weakness against them, and this applies to some minions as well.
+					.sheet-isolator
+						input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-Recovery', value='1')
+						span.sheet-anglebox
+						|  
+						span.sheet-MinorHead(data-i18n='recovery') Recovery
+						.sheet-Reference(data-i18n='harm-recovery')
+							ul
+								li
+									| 0 harm wounds are considered healed right away.
+								li
+									| 1-3 harm wounds improve when you receive first aid, and later when you rest. Heal 1 when you do.
+								li
+									| Unstable wounds require first aid to become stable. While unstable, they may get worse.
+								li
+									| 4+ harm wounds require a healing move, time in an infirmary or hospital, or magical healing.
+							| At the end of the mystery, you also have a chance to heal.
+							ul
+								li
+									| If there is no chance to rest, heal 1 harm.
+								li
+									| If there is plenty of time, heal all harm.
+			.sheet-isolator
+				input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-Luck', value='1')
+				span.sheet-anglebox
+				|  
+				span.sheet-MinorHead(data-i18n='luck') Luck
+				.sheet-Reference(data-i18n='luck-list')
+					| When you spend a point of Luck, pick one:
+					ul
+						li
+							| Decrease a wound you have suffered to 0 harm.
+						li
+							| After you roll, retroactively change the result to a 12.
+					| When you have no luck left, bad things will happen to you.
+			.sheet-isolator
+				input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-Leveling', value='1')
+				span.sheet-anglebox
+				|  
+				span.sheet-MinorHead(data-i18n='leveling-up') Leveling Up
+				.sheet-Reference(data-i18n='leveling-up-ref')
+					| Mark an experience point whenever your roll totals six or less, or when a move tells you to.
+					| Whenever you mark the fifth experience box, level up. Erase all five marks and choose an improvement from your list.
+					| After you have levelled up five times, you may choose from the advanced improvement list as well.
+			.sheet-isolator
+				input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-EOS', value='1')
+				span.sheet-anglebox
+				|  
+				span.sheet-MinorHead(data-i18n='eos') End of Session
+				.sheet-Reference(data-i18n='eos-ref')
+					| At the end of each session, the Keeper will ask the following questions:
+					ul
+						li
+							| Did we conclude the current mystery?
+						li
+							| Did we save someone from certain death (or worse)?
+						li
+							| Did we learn something new and important about the world?
+						li
+							| Did we learn something new and important about one of the hunters?
+					| If you get one or two &quot;Yes&quot; answers, mark one experience. If you get three or four, mark two.

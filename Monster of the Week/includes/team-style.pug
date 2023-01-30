@@ -1,0 +1,23 @@
+div
+	.sheet-Subsection
+		+translate('Style')
+	+expanderInstructions('Style')
+		p
+			+translate('Pick one of these styles (and the associated improvement question):')
+	+expanderMoveSection('Style')
+		input.sheet-TeamCheck(type='hidden', name='attr_TeamCheck', value='0')
+		include team-style-agents.pug
+		include team-style-road.pug
+		include team-style-entourage.pug
+		include team-style-guardians.pug
+		include team-style-imps.pug
+		include team-style-crisis.pug
+		include team-style-survivors.pug
+		include team-style-league.pug
+		include team-style-mercenaries.pug
+		include team-style-mysteryclub.pug
+		include team-style-nightshift.pug
+		include team-style-suburbanwatch.pug
+		include team-style-band.pug
+		include team-style-whistleblowers.pug
+		include team-style-fugitives.pug

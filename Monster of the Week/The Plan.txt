@@ -1,0 +1,64 @@
+Working on organizing my thoughts for some intense coding weeks. MOTW/Codex comes first. Overall, these are the things that need to be considered in terms of the sheet:
+
+PENDING
+
+Major: In-Playbooks support for how the various Worlds change the defaults. See second list below.
+Minor: Non-Lethal Play chapter is mainly guidelines for how to change your tempo on healing; page 23 does have a “Gear” section which is a list of stuff that the GM can “allow the players to swap for any of their existing gear picks”, so maybe a toggle for “provide non-lethal gear options” that makes those appear in any playbook’s pickable gear list.
+Very minor: Adding support to the mystery/monster builder sheet for the new Atonement Mystery type — but that’s mainly “replace Monster Weakness with Sin or Wrongdoing [to be resolved]”
+
+Codex features several worlds; where necessary, these would probably manifest as setting toggles (“show Gothic Century version”, etc):
+
+- This Strange Old House is the smallest World in the Codex, and does not actually require any changes to how character playbooks work, so that’s potentially fruitful. The only particularly unusual asset with House is the exploration map, but that would best be handled as an in-module/on-VTT-table thing rather than any sheet integration being necessary.
+
+- Gothic Century has a number of modifiers to gear lists for all the playbooks (p167 onward), as well as a few where the moves’ text gets a little altered to fit the setting. Gothic Century also features Dark Pasts (p176) that each hunter chooses and fills in, so the Gothic Century toggle would also present the player with a new section and options to pick from. May need some minor support for the Gothic Haunt subtype of phenomena (p190) but it’s possible that’s merely cosmetic.
+
+- Dreaming with the Gods similarly has some new gear (p223) that gets feathered into the gear lists for the playbooks plus some altered moves (p224+). It also adds a “Dive Into Dreams” setting-specific basic move. 
+
+- Monster Marches gives us some gear alterations plus the (coder’s heartburn inducing) idea that hunters can apply some special materials modifiers to any of their weapons (page 290). So there’s altered gear lists, some configurability to the gear lists, and of course some altered moves (page 291+). The Look block could probably be expanded to include the hunter’s mark that makes it clear they’re Spirit-Touched (page 299). There’s also a new Threat type, Villain (p 302) that would need to be added to the mystery building sheet.
+
+- Bone Spear has some stuff involving tracking community support (page 336+) which may be its own new thing as far as sheet types go. For the PC playbooks there’s gear list modifications and move modifications (starts page 345; wide-purpose Everyday Gear list on page 374), and some other cosmetic alterations (there’s an overview list on page 334). In some cases a given playbook is so thoroughly reworked it is its own new thing (e.g., the Loner is a reworked Crooked that changes a ton, pp 348-351). It also brings in some different basic moves (p.365-370), and the idea that your gear can break down over time (playing to the stone age theme, p372-373). And there are some new monster types and such (page 379+).
+
+@sophielagace What are your minima in terms of things that need to be supported in order to do a Codex quickstart module (I’m going off of Sean’s moniker for whatever-it-is here)? Team playbooks?  I suspect a focus on Team Playbook support, and getting that version of the sheet out, is the vector for the quickest win w/ a quickstart goal. So: as far as team playbook stuff goes, each comes with a “First Mystery Seed”; a Codex quickstart could potentially be as small as one specific team playbook pre-statted, pregenerated hunters, and the “first mystery seed” mystery itself. Or that could be done for a small set of team playbooks. 
+
+
+
+Agents in Black
+Always on the Road
+The Chosen One and Entourage
+Guardians of the Borderland
+IMPS (International Monster and Paranormal Service)
+Interdimensional Crisis Team
+The Last Survivors
+League of Double Lives
+Mercenaries
+Mystery Club
+The Night Shift
+Suburban Watch Group
+Touring Band
+Whistleblowers
+Wild Hunt Fugitives
+
+
+
+.sheet-Agents
+.sheet-Road
+.sheet-Entourage
+.sheet-Guardians
+.sheet-IMPS
+.sheet-Crisis
+.sheet-Survivors
+.sheet-League
+.sheet-Mercenaries
+.sheet-MysteryClub
+.sheet-NightShift
+.sheet-SuburbanWatch
+.sheet-Band
+.sheet-Whistleblowers
+.sheet-Fugitives
+
+
+
+
+DONE 
+
+Major: Adding in support for using a character sheet for all of the Team Playbooks (you/the GM would make this visible and alterable by the playgroup, rather than one individual player; has enough complexity and persistence-need that it doesn’t make sense as a map object, so def squarely in the character sheet space) 

@@ -1,0 +1,12 @@
+.sheet-Crisis
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Style-Unused', value='1', checked='')
+	+move('Crisis-Style','<b>Well-prepared:</b> You keep track of worlds that might need monster hunting help and have procedures for reaching and helping them. At the end of each session, ask: “Did things go according to our plans?”')
+	+move('Crisis-Style','<b>Led by Fate:</b> The universe wants you to help where you’re needed most. At the end of each session, ask: “Do we understand our place in the multiverse better now?”')
+	+move('Crisis-Style','<b>Accidental Heroes:</b> You always end up where you’re needed because of magical mishaps and weird coincidences. At the end of each session, ask: “Did we make use of a coincidence or unexpected resource?”')
+	+move('Crisis-Style','<b>Custom:</b> What’s your story?')
+		div
+			textarea(rows='2' name='attr_Crisis-Style-Custom-Story')
+		div
+			+translate('At the end of each session, ask:')
+		div
+			textarea(rows='2' name='attr_Crisis-Style-Custom-Question')

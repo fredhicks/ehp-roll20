@@ -1,0 +1,14 @@
+.sheet-Road
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Style-Unused', value='1', checked='')
+	+move('Road-Style','<b>Family:</b> You’re all family, or as good as. At the end of each session, ask: “Did we talk about—or pointedly not talk about—something that was troubling a team member?”')
+	+move('Road-Style','<b>Vocation:</b> Someone has to do it, and you happened to be able. At the end of each session, ask: “Did we save the people we went there to protect?”')
+	+move('Road-Style','<b>Excitement:</b> Monster hunting sure is a new thrill every time. At the end of each session, ask: “Did we take extremely dangerous risks?”')
+	+move('Road-Style','<b>Custom:</b> What’s your story?')
+		div
+			textarea(rows='2' name='attr_Road-Style-Custom-Story')
+		div
+			+translate('At the end of each session, ask:')
+		div
+			textarea(rows='2' name='attr_Road-Style-Custom-Question')
+
+

@@ -1,0 +1,24 @@
+div
+	.sheet-Subsection
+		+translate('Allies')
+	+expanderInstructions('Team-Allies')
+		p
+			+translate('Choose your team allies from this list:') 
+	+expanderMoveSection('Allies')
+		input.sheet-TeamCheck(type='hidden', name='attr_TeamCheck', value='0')
+		include team-allies-agents.pug
+		include team-allies-agents.pug
+		include team-allies-road.pug
+		include team-allies-entourage.pug
+		include team-allies-guardians.pug
+		include team-allies-imps.pug
+		include team-allies-crisis.pug
+		include team-allies-survivors.pug
+		include team-allies-league.pug
+		include team-allies-mercenaries.pug
+		include team-allies-mysteryclub.pug
+		include team-allies-nightshift.pug
+		include team-allies-suburbanwatch.pug
+		include team-allies-band.pug
+		include team-allies-whistleblowers.pug
+		include team-allies-fugitives.pug

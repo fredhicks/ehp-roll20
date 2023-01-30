@@ -1,0 +1,28 @@
+div
+	.sheet-Subsection
+		+translate('Team Moves')
+	+expanderInstructions('Team-Moves')
+		p
+			+translate('Choose your team moves from this list. The first one is a good default choice:')
+	+expanderMoveSection('Team-Moves')
+		br
+		input.sheet-checkbox.sheet-OPBToggle(type='checkbox', name='attr_Toggle-Other-Team-Playbooks', value='1')
+		span.sheet-anglebox
+		span.sheet-ExpHeader
+			span(data-i18n='other-playbook-moves') Other Playbook Moves
+		input.sheet-TeamCheck(type='hidden', name='attr_TeamCheck', value='0')
+		include team-moves-agents.pug
+		include team-moves-road.pug
+		include team-moves-entourage.pug
+		include team-moves-guardians.pug
+		include team-moves-imps.pug
+		include team-moves-crisis.pug
+		include team-moves-survivors.pug
+		include team-moves-league.pug
+		include team-moves-mercenaries.pug
+		include team-moves-mysteryclub.pug
+		include team-moves-nightshift.pug
+		include team-moves-suburbanwatch.pug
+		include team-moves-band.pug
+		include team-moves-whistleblowers.pug
+		include team-moves-fugitives.pug

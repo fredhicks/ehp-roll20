@@ -1,0 +1,24 @@
+div
+	.sheet-Subsection
+		+translate('Assets')
+	+expanderInstructions('Assets')
+		p
+			+translate('Choose from these available assets. If there are two boxes, you need to mark both to earn that asset. (If you are making partial progress towards taking a two-box asset, mark the leftmost box first.)')
+	+expanderMoveSection('Assets')
+		input.sheet-TeamCheck(type='hidden', name='attr_TeamCheck', value='0')
+		include team-assets-agents.pug
+		include team-assets-agents.pug
+		include team-assets-road.pug
+		include team-assets-entourage.pug
+		include team-assets-guardians.pug
+		include team-assets-imps.pug
+		include team-assets-crisis.pug
+		include team-assets-survivors.pug
+		include team-assets-league.pug
+		include team-assets-mercenaries.pug
+		include team-assets-mysteryclub.pug
+		include team-assets-nightshift.pug
+		include team-assets-suburbanwatch.pug
+		include team-assets-band.pug
+		include team-assets-whistleblowers.pug
+		include team-assets-fugitives.pug

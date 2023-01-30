@@ -1,0 +1,313 @@
+.sheet-Agents
+	.sheet-Subsection
+		+translate('The Bureau')
+	input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Agents-Bureau', value='1', checked='')
+	span.sheet-anglebox
+	span.sheet-ExpHeader
+		+translate('Prompts')
+	.sheet-Expander
+		p
+			+translate('The Bureau setup is determined by the group. Record your answers to these prompts in the Notes section below.')
+		p
+			+translate('If you have a hunter who belongs to an organisation already—like a Professional or an Initiate—you may combine their setup with the Bureau setup. Figure out how the two perspectives work for your Bureau. If you don’t like that idea, you can also keep them separate (which will lead to its own drama with split loyalties and rivalries).')
+		p
+			+translate('Now determine the nature of the Bureau:')
+		ul
+			li
+				+translate('Is the Bureau an open, covert, or secret organisation? An open Bureau exists openly but has a cover responsibility to distract from their real mission. A covert Bureau doesn’t explicitly hide themselves, but they try not to draw attention. A secret Bureau has no official records and operates completely in the shadows.')
+			li
+				+translate('Who is your team’s handler or commanding officer and what are they like? Create your own or pick one of these:')
+				ul
+					li
+						+translate('Special Agent “Coop” is a genial, avuncular middle-aged man. He’s disorganised and often loses track of details, but he always has the team’s back.')
+					li
+						+translate('Special Agent “Star” is a harsh boss. She doesn’t really seem to like you, and you never seem to measure up to her standards of “perfection plus.” She runs everything by the book (this can be good or bad for you).')
+					li
+						+translate('Provisional Special Agent “Fireball” is young and excitable. They prefer you deal with problems in a scorched earth style, without regard for consequences. That is also their management style.')
+			li
+				+translate('Who do you think is really running the Bureau? The government? A secret global government? Some other government? A billionaire? A secret conspiracy dating back to Uruk’s priesthood? Something else?')
+.sheet-Road
+	// Nothing for Road
+.sheet-Entourage
+	// Nothing for Entourage
+.sheet-Guardians
+	// Nothing for Guardians
+.sheet-IMPS
+	// Nothing for IMPS
+.sheet-Crisis
+	// Nothing for Crisis
+.sheet-Survivors
+	.sheet-Subsection
+		+translate('The Event')
+	+expanderMoveSection('Survivors-Event')
+		p
+			+translate('What is the terrible situation you all survived together?') 
+		+move('Survivors-Event-Situation','A concerted assault by monsters, as you took shelter in an isolated cabin.')
+		+move('Survivors-Event-Situation','A single terrifying monster invaded your homes.')
+		+move('Survivors-Event-Situation','It was the only chance to avert an apocalypse.')
+		+move('Survivors-Event-Situation','An invasion from another dimension.')
+		+move('Survivors-Event-Situation','People around you were transformed into monsters.')
+		+move('Survivors-Event-Situation','You were strangers in a small town filled with murderous monsters, on festival day.')
+		+move('Survivors-Event-Situation','Something else:')
+			div
+				textarea(rows='2' name='attr_Survivors-Event-Situation-Custom')
+		p
+			+translate('Decide who the allies were who fought alongside you and died in battle. Each hunter picks one.')
+		+move('Survivors-Event-Deceased','A monster hunting teammate.')
+		+move('Survivors-Event-Deceased','Your spouse or lover.')
+		+move('Survivors-Event-Deceased','Your sibling.')
+		+move('Survivors-Event-Deceased','A parent.')
+		+move('Survivors-Event-Deceased','A child.')
+		+move('Survivors-Event-Deceased','Your mentor.')
+		+move('Survivors-Event-Deceased','Your protégée.')
+		+move('Survivors-Event-Deceased','Your dog (or other pet).')
+		+move('Survivors-Event-Deceased','Someone else:')
+			div
+				textarea(rows='2' name='attr_Survivors-Event-Deceased-Custom')
+		p
+			+translate('Then decide how you saved the day in the end. Whatever it was, it came at great personal cost (beyond the loss you just chose).')
+			div
+				textarea(rows='2' name='attr_Survivors-Event-Saved-Cost')
+
+.sheet-League
+	// The City
+	.sheet-Subsection
+		+translate('The City')
+	+expanderInstructions('League-City')
+		p
+			+translate('The city you all protect will be an important aspect of the story, more of a collective character of your mysteries than just a background element. Each player should choose one key aspect of the city from one of the following lists. Balance between good and bad things as fits the mood of your campaign.')
+	+expanderMoveSection('League-City-Lists')
+		div
+			+translate('Good things')(class='sheet-Label')
+		+move('League-City-Good','Cozy')
+		+move('League-City-Good','Affluent')
+		+move('League-City-Good','Good social care')
+		+move('League-City-Good','Proud of its past')
+		+move('League-City-Good','Lots of monuments')
+		+move('League-City-Good','Highly ecological')
+		+move('League-City-Good','Transparent politics')
+		+move('League-City-Good','Technological hub')
+		+move('League-City-Good','The nation’s main transport hub')
+		+move('League-City-Good','Protected by benevolent magic')
+		+move('League-City-Good','Beloved by travel vloggers')
+		+move('League-City-Good','An extremely famous mayor')
+		+move('League-City-Good','A university with unique departments')
+		+move('League-City-Good','Other:')
+			input(type=text name='attr_League-City-Good-Other')
+		div
+			+translate('Bad things')(class='sheet-Label')
+		+move('League-City-Bad','Alienating')
+		+move('League-City-Bad','Poor')
+		+move('League-City-Bad','Big social inequality')
+		+move('League-City-Bad','Shameful past')
+		+move('League-City-Bad','Nothing worth sightseeing')
+		+move('League-City-Bad','Highly polluted')
+		+move('League-City-Bad','Shady politics')
+		+move('League-City-Bad','No prospects for the future')
+		+move('League-City-Bad','Shady military bases')
+		+move('League-City-Bad','Gangs that terrorize the entire region')
+		+move('League-City-Bad','Believed to bring bad luck')
+		+move('League-City-Bad','Struck by a powerful curse')
+		+move('League-City-Bad','Other:')
+			input(type=text name='attr_League-City-Bad-Other')
+
+	// Obligations
+	.sheet-Subsection
+		+translate('Obligations')
+	+expanderInstructions('League-Obligations')
+		p
+			+translate('Your social status carries some obligations with it. At the beginning of a mystery, the Keeper holds 3. They can spend 1 hold to introduce one of the obligations. When it’s introduced, at least half of you must attend, otherwise you can lose allies or tempt mundane people to investigate your lives.')
+		p
+			+translate('Choose or create two obligations you have:')
+	+expanderMoveSection('League-Obligations')
+		+move('League-Obligation','Attending parties and balls.')
+		+move('League-Obligation','Attending important conferences.')
+		+move('League-Obligation','Ceremonially opening new buildings.')
+		+move('League-Obligation','Meeting children at schools.')
+		+move('League-Obligation','Tutoring promising students one on one.')
+		+move('League-Obligation','Appearing on TV.')
+		+move('League-Obligation','')
+			input(type=text name='attr_League-Obligation-Other-1')
+		+move('League-Obligation','')
+			input(type=text name='attr_League-Obligation-Other-2')
+
+.sheet-Mercenaries
+	// Nothing for Mercenaries
+.sheet-MysteryClub
+	// Nothing for Mystery Club
+.sheet-NightShift
+	// Nothing for Night Shift
+.sheet-SuburbanWatch
+	// Nothing for Suburban Watch
+.sheet-Band
+	// Nothing for Touring Band
+.sheet-Whistleblowers
+	// The Organisation
+	.sheet-Subsection
+		+translate('The Organisation')
+	+expanderInstructions('Whistleblowers-Org')
+		p
+			+translate('You create the details about your organisation, choosing options from the following lists. Things you suspect can pertain either to the organisation as a whole or to an influential group within it. At least two of the things you suspect are true, the Keeper decides which ones.')
+	+expanderMoveSection('Whistleblowers-Org-Aspects')
+		div
+			+translate('Official goals')(class='sheet-Label')
+			i
+				+translate('(choose one or two)')
+		+move('Whistleblowers-Org-Official-Goals','Slay monsters')
+		+move('Whistleblowers-Org-Official-Goals','Contain monsters')
+		+move('Whistleblowers-Org-Official-Goals','Govern safe use of magic')
+		+move('Whistleblowers-Org-Official-Goals','Research monsters')
+		+move('Whistleblowers-Org-Official-Goals','Research paranatural phenomena')
+		+move('Whistleblowers-Org-Official-Goals','Keep monsters and magic secret')
+		div
+			+translate('Goal you suspect')(class='sheet-Label')
+			i
+				+translate('(choose one)')
+		+move('Whistleblowers-Org-Suspected-Goals','Training an army of monsters')
+		+move('Whistleblowers-Org-Suspected-Goals','Creating new monsters')
+		+move('Whistleblowers-Org-Suspected-Goals','Stealing the monsters’ powers')
+		+move('Whistleblowers-Org-Suspected-Goals','Keeping all magic to themselves')
+		+move('Whistleblowers-Org-Suspected-Goals','Taking over the world')
+		+move('Whistleblowers-Org-Suspected-Goals','Destroying the world')
+		div
+			+translate('Official resources')(class='sheet-Label')
+			i
+				+translate('(choose two)')
+		+move('Whistleblowers-Org-Official-Resource','Ancient lore')
+		+move('Whistleblowers-Org-Official-Resource','Modernised')
+		+move('Whistleblowers-Org-Official-Resource','Chapters everywhere')
+		+move('Whistleblowers-Org-Official-Resource','Secular power')
+		+move('Whistleblowers-Org-Official-Resource','Rich')
+		+move('Whistleblowers-Org-Official-Resource','Rigorous training')
+		+move('Whistleblowers-Org-Official-Resource','Offices all over the place')
+		+move('Whistleblowers-Org-Official-Resource','Good intel')
+		+move('Whistleblowers-Org-Official-Resource','Support teams')
+		div
+			+translate('Suspected resources')(class='sheet-Label')
+		div
+			i
+				+translate('(choose one or two)')
+		+move('Whistleblowers-Org-Suspected-Resource','Demonology')
+		+move('Whistleblowers-Org-Suspected-Resource','Necromancy')
+		+move('Whistleblowers-Org-Suspected-Resource','Deals with monsters')
+		+move('Whistleblowers-Org-Suspected-Resource','Manipulated minions')
+		+move('Whistleblowers-Org-Suspected-Resource','Manipulated cultists')
+		+move('Whistleblowers-Org-Suspected-Resource','Bribed officials')
+		+move('Whistleblowers-Org-Suspected-Resource','Sacrificing members')
+		div
+			+translate('Obvious flaws')(class='sheet-Label')
+			i
+				+translate('(choose one)')
+		+move('Whistleblowers-Org-Obvious-Flaw','Tradition-bound')
+		+move('Whistleblowers-Org-Obvious-Flaw','Paranoid and secretive')
+		+move('Whistleblowers-Org-Obvious-Flaw','Closed hierarchy')
+		+move('Whistleblowers-Org-Obvious-Flaw','Strict laws')
+		+move('Whistleblowers-Org-Obvious-Flaw','Mystical oaths')
+		+move('Whistleblowers-Org-Obvious-Flaw','Poor')
+		+move('Whistleblowers-Org-Obvious-Flaw','Bureaucratic')
+		+move('Whistleblowers-Org-Obvious-Flaw','Hostile superiors')
+		+move('Whistleblowers-Org-Obvious-Flaw','Take-no-prisoners policy')
+		+move('Whistleblowers-Org-Obvious-Flaw','Live capture policy')
+		div
+			+translate('Suspected flaws')(class='sheet-Label')
+			i
+				+translate('(choose one or two)')
+		+move('Whistleblowers-Org-Suspected-Flaw','Tradition-bound')
+		+move('Whistleblowers-Org-Suspected-Flaw','Paranoid and secretive')
+		+move('Whistleblowers-Org-Suspected-Flaw','Closed hierarchy')
+		+move('Whistleblowers-Org-Suspected-Flaw','Mystical oaths')
+		+move('Whistleblowers-Org-Suspected-Flaw','Total obedience')
+		+move('Whistleblowers-Org-Suspected-Flaw','Tyrannical leaders')
+		+move('Whistleblowers-Org-Suspected-Flaw','Hostile superiors')
+		+move('Whistleblowers-Org-Suspected-Flaw','Protects member criminals')
+
+.sheet-Fugitives
+	// The Wild Hunt
+	.sheet-Subsection
+		+translate('The Wild Hunt')
+	+expanderInstructions('Fugitives-Wild-Hunt')
+		p
+			+translate('You were part of the Wild Hunt, a group of violent fey and spirits riding the world and striking fear into the hearts of people. Detail the Wild Hunt here.')
+	+expanderMoveSection('Fugitives-Wild-Hunt')
+		div
+			+translate('Who Rides With The Hunt?')(class='sheet-Label')
+		+move('Fugitives-Wild-Hunt-Riders','Elves')
+		+move('Fugitives-Wild-Hunt-Riders','Trolls')
+		+move('Fugitives-Wild-Hunt-Riders','Demons')
+		+move('Fugitives-Wild-Hunt-Riders','Wraiths')
+		+move('Fugitives-Wild-Hunt-Riders','Banshees')
+		+move('Fugitives-Wild-Hunt-Riders','Werewolves')
+		+move('Fugitives-Wild-Hunt-Riders','Something Else')
+			input(type='text' name='attr_Fugitives-Wild-Hunt-Riders-Custom')
+		div
+			+translate('The Wild Hunt has a leader, probably a king or a queen. Give them a name or a title:')
+			input(type='text' name='attr_Fugitives-Wild-Hunt-Leader')
+		div
+			+translate('Choose or invent their impressive powers, at least two:')
+		+move('Fugitives-Wild-Hunt-Powers','Grant immortality')
+		+move('Fugitives-Wild-Hunt-Powers','Grant lycanthropy')
+		+move('Fugitives-Wild-Hunt-Powers','Steal emotion')
+		+move('Fugitives-Wild-Hunt-Powers','See destinies')
+		+move('Fugitives-Wild-Hunt-Powers','Set destinies')
+		+move('Fugitives-Wild-Hunt-Powers','Control weather')
+		+move('Fugitives-Wild-Hunt-Powers','Grant sentience to animals')
+		+move('Fugitives-Wild-Hunt-Powers','Grant sentience to weapons')
+		+move('Fugitives-Wild-Hunt-Powers','Something Else')
+			textarea(rows='2' name='attr_Fugitives-Wild-Hunt-Powers-Custom')
+		div
+			+translate('Why were you a part of the Wild Hunt?')(class='sheet-Label')
+		div
+			+translate('Each player can choose a different answer:')
+			ul
+				li
+					+translate('I was kidnapped by the Hunt')
+				li
+					+translate('I sold my soul to the Hunt')
+				li
+					+translate('I wanted to ride with the Hunt')
+				li
+					+translate('I’m a supernatural creature who’s a part of the Hunt')
+				li
+					+translate('Something else')
+			div
+				textarea(rows='2' name='attr_Fugitives-Wild-Hunt-Why-Part')
+		div
+			+translate('Then all of you escaped, sick with the Hunt’s atrocities or their treatment of you.')
+
+	// How Did You Escape
+	.sheet-Subsection
+		+translate('How Did You Escape?')
+	+expanderInstructions('Fugitives-Escape')
+		p
+			+translate('You were part of the Wild Hunt, a group of violent fey and spirits riding the world and striking fear into the hearts of people. Detail the Wild Hunt here.')
+	+expanderMoveSection('Fugitives-Escape')
+		div
+			+translate('How did you escape?')(class='sheet-Label')
+		+move('Fugitives-Escape-How','With a clever plan')
+		+move('Fugitives-Escape-How','By sheer luck')
+		+move('Fugitives-Escape-How','With outside help')
+		+move('Fugitives-Escape-How','Thanks to a loophole in your fae contract')
+		+move('Fugitives-Escape-How','Something else:')
+			input(type='text' name='attr_Fugitives-Escape-How-Custom')
+		div
+			+translate('The Wild Hunt keeps looking for you. How do they do it?')(class='sheet-Label')
+		div
+			+translate('Choose two ways:')
+		+move('Fugitives-Escape-Looking','They give other monsters this in exchange for information.')
+			input(type='text' name='attr_Fugitives-Escape-Looking-Monsters')
+		+move('Fugitives-Escape-Looking','They track the internet, but they can’t monitor one part of it:')
+			input(type='text' name='attr_Fugitives-Escape-Looking-Internet')
+		+move('Fugitives-Escape-Looking','They can see you when you’re outside in one type of weather, namely:')
+			input(type='text' name='attr_Fugitives-Escape-Looking-Weather')
+		+move('Fugitives-Escape-Looking','They sense you when you use magic unless you take a precaution, namely:')
+			input(type='text' name='attr_Fugitives-Escape-Looking-Magic-Precaution')
+		+move('Fugitives-Escape-Looking','Something else:')
+			input(type='text' name='attr_Fugitives-Escape-Looking-Other')
+		div
+			+translate('What will the Wild Hunt do if they find you?')(class='sheet-Label')
+		+move('Fugitives-Escape-Find','Kill you.')
+		+move('Fugitives-Escape-Find','Torment you.')
+		+move('Fugitives-Escape-Find','Make you join the Hunt again.')
+		+move('Fugitives-Escape-Find','Make you slaves.')
+		+move('Fugitives-Escape-Find','Something else:')
+			input(type='text' name='attr_Fugitives-Escape-Find-Other')

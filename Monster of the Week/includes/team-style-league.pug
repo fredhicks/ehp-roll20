@@ -1,0 +1,13 @@
+.sheet-League
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Style-Unused', value='1', checked='')
+	+move('League-Style','<b>Greater Good:</b> You find your secret monster hunting lives more important than your mundane social roles. At the end of each session, ask: “Did we choose the more important obligation?”')
+	+move('League-Style','<b>The Only Ones:</b> You’re the only ones capable enough to protect those around you from supernatural threats. At the end of each session, ask: “Did we do something nobody else in our society could do?”')
+	+move('League-Style','<b>An Ancient Tradition:</b> You’ve inherited your double role from family or mentors. At the end of each session, ask: “Have we done something that would make our predecessors proud?”')
+	+move('League-Style','<b>Custom:</b> What’s your story?')
+		div
+			textarea(rows='2' name='attr_League-Style-Custom-Story')
+		div
+			+translate('At the end of each session, ask:')
+		div
+			textarea(rows='2' name='attr_League-Style-Custom-Question') 
+

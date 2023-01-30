@@ -1,0 +1,13 @@
+.sheet-Survivors
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Style-Unused', value='1', checked='')
+	+move('Survivors-Style','<b>We’re Prepared for Next Time:</b> At the end of each session, ask: “Did our planning ahead save the day?”')
+	+move('Survivors-Style','<b>Fatalists:</b> One day our times will come. Until then we fight. At the end of each session, ask: “Did we throw ourselves into danger to save the day?”')
+	+move('Survivors-Style','<b>Wardens:</b> We won’t let what happened to us happen to anyone else. At the end of each session, ask: “Did we save people, no matter the cost?”')
+	+move('Survivors-Style','<b>Custom:</b> What’s your story?')
+		div
+			textarea(rows='2' name='attr_Survivors-Style-Custom-Story')
+		div
+			+translate('At the end of each session, ask:')
+		div
+			textarea(rows='2' name='attr_Survivors-Style-Custom-Question')
+

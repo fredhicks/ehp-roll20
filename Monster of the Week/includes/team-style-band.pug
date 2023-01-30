@@ -1,0 +1,17 @@
+.sheet-Band
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Style-Unused', value='1', checked='')
+	+move('Band-Style','<b>Rock:</b> At the end of each session, ask: “Did we lay the smackdown on some evildoers?”')
+	+move('Band-Style','<b>Punk:</b> At the end of each session, ask: “Did we fight for the downtrodden?”')
+	+move('Band-Style','<b>Pop:</b> At the end of each session, ask: “Did we look awesome?”')
+	+move('Band-Style','<b>Metal:</b> At the end of each session, ask: “Did we battle gloriously?”')
+	+move('Band-Style','<b>Hip-hop:</b> At the end of each session, ask: “Did we improve things for the local community?”')
+	+move('Band-Style','<b>Folk:</b> At the end of each session, ask: “Did we learn about local history and folklore?”')
+	+move('Band-Style','<b>Country:</b> At the end of each session, ask: “Will that make a great story, later?”') 
+	+move('Band-Style','<b>Custom:</b> What’s your story?')
+		div
+			textarea(rows='2' name='attr_Band-Style-Custom-Story')
+		div
+			+translate('At the end of each session, ask:')
+		div
+			textarea(rows='2' name='attr_Band-Style-Custom-Question')
+

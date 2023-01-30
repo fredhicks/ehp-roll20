@@ -1,0 +1,21 @@
+.sheet-Teams
+	input.sheet-TeamCheck(type='hidden', name='attr_TeamCheck', value='0')
+	include team-selection-long.pug
+	.sheet-NoNull
+		include team-identifier.pug
+		.sheet-3colrow
+			.sheet-col
+				input.sheet-TeamCheck(type='hidden', name='attr_TeamCheck', value='0')
+				include team-getting-started.pug
+				include team-unique-setup.pug
+				include team-notes.pug
+			.sheet-col
+				input.sheet-TeamCheck(type='hidden', name='attr_TeamCheck', value='0')
+				include team-moves.pug
+				include team-assets.pug
+			.sheet-col
+				input.sheet-TeamCheck(type='hidden', name='attr_TeamCheck', value='0')
+				include team-improvement.pug
+				include team-style.pug
+				include team-enemies.pug
+				include team-allies.pug
