@@ -22,7 +22,7 @@
 	color: #eee;
 }
 
-
+.sheet-Atonement,
 .sheet-KItem-Type-New,
 .sheet-KItem-Type-Countdown,
 .sheet-KItem-Type-Monster,
@@ -94,6 +94,8 @@ span.sheet-Custom, div.sheet-Custom
 	display: none;
 }
 
+.sheet-Atonement-Hider[value="1"] ~ .sheet-kflex span.sheet-Atonement,
+.sheet-Atonement-Hider[value="1"] ~ span.sheet-Atonement,
 .sheet-KTyper[value="0"] ~ span.sheet-KItem-Type-New,
 .sheet-KTyper[value="7"] ~ span.sheet-KItem-Type-Text,
 .sheet-KTyper[value="1"] ~ span.sheet-KItem-Type-Countdown,
@@ -106,6 +108,8 @@ span.sheet-Custom, div.sheet-Custom
 	display: inline;
 }
 
+.sheet-Atonement-Hider[value="1"] ~ .sheet-kflex div.sheet-Atonement,
+.sheet-Atonement-Hider[value="1"] ~ div.sheet-Atonement,
 .sheet-KTyper[value="0"] ~ div.sheet-KItem-Type-New,
 .sheet-KTyper[value="7"] ~ div.sheet-KItem-Type-Text,
 .sheet-KTyper[value="1"] ~ div.sheet-KItem-Type-Countdown,

@@ -1,0 +1,73 @@
+.sheet-Keeper
+	input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Concept-Hider', value='1', checked='')
+	span.sheet-anglebox
+	|  
+	span.sheet-ExpHeader
+		span(data-i18n='edit') Edit
+	.sheet-Expander
+		input.sheet-SkinCheck(type='hidden', name='attr_SkinCheck', value='0')
+		.sheet-Keeper
+			+translate('Mystery Type')(class="sheet-Label")
+			select.sheet-KItem-input(name='attr_Mystery-Type')
+				option(value='0', selected="", data-i18n='Standard Mystery')
+				option(value='1', data-i18n='Atonement Mystery')
+			input.sheet-null-hider(type='hidden', name='attr_Mystery-Type', value='')
+			p
+				+translate('A “transgression” field will be added to Monsters and Phenomena. Enter the sin or wrongdoing for the mystery there. In case you want to use a Weaknesses as well, that field is left intact but may be ignored.')
+		.sheet-Keeper
+			span.sheet-Label(data-i18n='mystery-concept') Mystery&apos;s Concept
+			textarea(name='attr_Concept', style='width: 98%; margin-bottom: 0px;')
+		input.sheet-SkinCheck(type='hidden', name='attr_SkinCheck', value='0')
+		.sheet-Keeper
+			span.sheet-Label(data-i18n='mystery-hook') Mystery&apos;s Hook
+			textarea(name='attr_Hook', style='width: 98%; margin-bottom: 0px;')
+			input.sheet-null-hider(type='hidden', name='attr_Hook', value='')
+			ul
+				li
+					input(type='text', name='attr_Hook-List1', value='', style='width: 90%')
+				input.sheet-null-hider(type='hidden', name='attr_Hook-List1', value='')
+				li
+					input(type='text', name='attr_Hook-List2', value='', style='width: 90%')
+				input.sheet-null-hider(type='hidden', name='attr_Hook-List2', value='')
+				li
+					input(type='text', name='attr_Hook-List3', value='', style='width: 90%')
+				input.sheet-null-hider(type='hidden', name='attr_Hook-List3', value='')
+				li
+					input(type='text', name='attr_Hook-List4', value='', style='width: 90%')
+				input.sheet-null-hider(type='hidden', name='attr_Hook-List4', value='')
+				li
+					input(type='text', name='attr_Hook-List5', value='', style='width: 90%')
+				input.sheet-null-hider(type='hidden', name='attr_Hook-List5', value='')
+				li
+					input(type='text', name='attr_Hook-List6', value='', style='width: 90%')
+	input.sheet-null-hider(type='hidden', name='attr_Concept', value='')
+	.sheet-space-above
+		div
+			span.sheet-Label(data-i18n='mystery-concept') Mystery&apos;s Concept
+		span(name='attr_Concept')
+	input.sheet-null-hider(type='hidden', name='attr_Hook', value='')
+	.sheet-space-above
+		span.sheet-Label(data-i18n='mystery-hook') The Hook
+	input.sheet-null-hider(type='hidden', name='attr_Hook', value='')
+	div
+		span(name='attr_Hook')
+		input.sheet-null-hider(type='hidden', name='attr_Hook-List1', value='')
+		ul
+			input.sheet-null-hider(type='hidden', name='attr_Hook-List1', value='')
+			li
+				span(name='attr_Hook-List1')
+			input.sheet-null-hider(type='hidden', name='attr_Hook-List2', value='')
+			li
+				span(name='attr_Hook-List2')
+			input.sheet-null-hider(type='hidden', name='attr_Hook-List3', value='')
+			li
+				span(name='attr_Hook-List3')
+			input.sheet-null-hider(type='hidden', name='attr_Hook-List4', value='')
+			li
+				span(name='attr_Hook-List4')
+			input.sheet-null-hider(type='hidden', name='attr_Hook-List5', value='')
+			li
+				span(name='attr_Hook-List5')
+			input.sheet-null-hider(type='hidden', name='attr_Hook-List6', value='')
+			li
+				span(name='attr_Hook-List6')

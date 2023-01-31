@@ -277,6 +277,15 @@ on("sheet:opened change:harm1 change:harm2 change:harm3 change:harm4 change:harm
       <input class="sheet-checkbox sheet-ExpToggle" type="checkbox" name="attr_Toggle-Concept-Hider" value="1" checked=""/><span class="sheet-anglebox"></span> <span class="sheet-ExpHeader"><span data-i18n="edit">Edit</span></span>
       <div class="sheet-Expander">
         <input class="sheet-SkinCheck" type="hidden" name="attr_SkinCheck" value="0"/>
+        <div class="sheet-Keeper"><span class="sheet-Label" data-i18n="Mystery Type"></span> 
+          <select class="sheet-KItem-input" name="attr_Mystery-Type">
+            <option value="0" selected="" data-i18n="Standard Mystery"></option>
+            <option value="1" data-i18n="Atonement Mystery"></option>
+          </select>
+          <input class="sheet-null-hider" type="hidden" name="attr_Mystery-Type" value=""/>
+          <p><span data-i18n="A “transgression” field will be added to Monsters and Phenomena. Enter the sin or wrongdoing for the mystery there. In case you want to use a Weaknesses as well, that field is left intact but may be ignored."></span> 
+          </p>
+        </div>
         <div class="sheet-Keeper"><span class="sheet-Label" data-i18n="mystery-concept">Mystery&apos;s Concept</span>
           <textarea name="attr_Concept" style="width: 98%; margin-bottom: 0px;"></textarea>
         </div>
@@ -1433,6 +1442,7 @@ on("sheet:opened change:harm1 change:harm2 change:harm3 change:harm4 change:harm
       <!-- End Custom Moves-->
     </div>
     <!-- Outer Reference-->
+    <input class="sheet-Atonement-Hider" type="hidden" name="attr_Mystery-Type" value=""/>
     <div class="sheet-kflex">
       <fieldset class="repeating_kitems">
         <div>
@@ -1641,6 +1651,14 @@ on("sheet:opened change:harm1 change:harm2 change:harm3 change:harm4 change:harm
               <div class="sheet-KItem-Type-Monster sheet-KItem-Type-Minion">
                 <div class="sheet-MinorHead" data-i18n="armour">Armour</div>
                 <textarea class="sheet-KItem-input" rows="1" name="attr_KItem-Armour"></textarea>
+              </div>
+              <div class="sheet-Atonement">
+                <input class="sheet-KTyper" type="hidden" name="attr_KItem-Type" value="0"/>
+                <div class="sheet-KItem-Type-Monster sheet-KItem-Type-Phenomenon">
+                  <div class="sheet-MinorHead"><span data-i18n="Transgression"></span> 
+                  </div><i><span data-i18n="For an atonement mystery, resolving a transgression may take the place of a weakness."></span> </i>
+                  <textarea class="sheet-KItem-input" rows="1" name="attr_KItem-Transgression"></textarea>
+                </div>
               </div>
               <div class="sheet-KItem-Type-Monster sheet-KItem-Type-Minion sheet-KItem-Type-Phenomenon">
                 <div class="sheet-MinorHead"><span data-i18n="weaknesses">Weaknesses</span> (<span data-i18n="up-to-6">Up to 6</span>)</div><i><span data-i18n="slot-on-finish">An additional slot will appear each time you finish filling out an existing one</span>.</i>
@@ -1928,6 +1946,13 @@ on("sheet:opened change:harm1 change:harm2 change:harm3 change:harm4 change:harm
               <input class="sheet-null-hider" type="hidden" name="attr_KItem-Armour" value=""/>
               <div><span class="sheet-MinorHead" data-i18n="armour">Armour</span></div> 
               <div class="sheet-KIndented"><span name="attr_KItem-Armour"></span></div>
+            </div>
+            <div class="sheet-Atonement">
+              <input class="sheet-null-hider" type="hidden" name="attr_KItem-Transgression" value=""/>
+              <div>
+                <div class="sheet-MinorHead"><span data-i18n="Transgression"></span> 
+                </div><span name="attr_KItem-Transgression"></span>
+              </div>
             </div>
             <div>
               <input class="sheet-null-hider" type="hidden" name="attr_KItem-Weakness1" value=""/><span class="sheet-MinorHead"><span data-i18n="weaknesses">Weaknesses</span></span>
@@ -12105,6 +12130,12 @@ translation.json:
 	"This team is a band, eternally on tour. Everywhere you have a gig booked, it seems like something bad is going down. Between sound check and putting on the show, you gotta deal with whatever is eating people in this town.": "This team is a band, eternally on tour. Everywhere you have a gig booked, it seems like something bad is going down. Between sound check and putting on the show, you gotta deal with whatever is eating people in this town.",
 	"All the hunters in your team are members of a monster hunting organisation, and you start suspecting there’s something fishy about this group. This team playbook shares many elements of the Initiate and Professional playbooks because it essentially represents playing an entire team of Initiates and/or Professionals. You shouldn’t choose those playbooks when playing as the Whistleblowers—unless the Keeper agrees some characters belong to a different organisation as well, which might make the situation even more messy.": "All the hunters in your team are members of a monster hunting organisation, and you start suspecting there’s something fishy about this group. This team playbook shares many elements of the Initiate and Professional playbooks because it essentially represents playing an entire team of Initiates and/or Professionals. You shouldn’t choose those playbooks when playing as the Whistleblowers—unless the Keeper agrees some characters belong to a different organisation as well, which might make the situation even more messy.",
 	"You joined or were abducted by the Wild Hunt. You gained some supernatural skills while riding with it, but then escaped it. Now you use your experience to hunt monsters, evade the Hunt and, maybe, destroy it one day.": "You joined or were abducted by the Wild Hunt. You gained some supernatural skills while riding with it, but then escaped it. Now you use your experience to hunt monsters, evade the Hunt and, maybe, destroy it one day.",
+	"Standard Mystery": "Standard Mystery",
+	"Atonement Mystery": "Atonement Mystery",
+	"Mystery Type": "Mystery Type",
+	"A “transgression” field will be added to Monsters and Phenomena. Enter the sin or wrongdoing for the mystery there. In case you want to use a Weaknesses as well, that field is left intact but may be ignored.": "A “transgression” field will be added to Monsters and Phenomena. Enter the sin or wrongdoing for the mystery there. In case you want to use a Weaknesses as well, that field is left intact but may be ignored.",
+	"Transgression": "Transgression",
+	"For an atonement mystery, resolving a transgression may take the place of a weakness.": "For an atonement mystery, resolving a transgression may take the place of a weakness.",
 	"Getting Started": "Getting Started",
 	"Determine the nature of the Event.": "Determine the nature of the Event.",
 	"Decide the history between you and the Wild Hunt.": "Decide the history between you and the Wild Hunt.",

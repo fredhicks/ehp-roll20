@@ -1,0 +1,46 @@
+.sheet-Subsection
+	span(name='attr_KItem-Name')
+	input.sheet-KTyper(type='hidden', name='attr_KItem-Type', value='0')
+	span.sheet-KItem-Type-New.sheet-redtext(data-i18n='select-type')
+		| Select Type
+	span.sheet-KItem-Type-Countdown
+		span(data-i18n='countdown') Countdown
+	span.sheet-KItem-Type-Monster
+		| (
+		span(data-i18n='monster') Monster
+		| )
+	span.sheet-KItem-Type-Minion
+		| (
+		span(data-i18n='minion') Minion
+		| )
+	span.sheet-KItem-Type-Bystander
+		| (
+		span(data-i18n='bystander') Bystander
+		| )
+	span.sheet-KItem-Type-Location
+		| (
+		span(data-i18n='location') Location
+		| )
+	span.sheet-KItem-Type-Phenomenon
+		| (
+		span(data-i18n='phenomenon') Phenomenon
+		| )
+.sheet-KItem-Subtype
+	input.sheet-null-hider(type='hidden', name='attr_KItem-Monster-Type', value='')
+	div
+		span(name='attr_KItem-Monster-Type')
+	input.sheet-null-hider(type='hidden', name='attr_KItem-Minion-Type', value='')
+	div
+		span(name='attr_KItem-Minion-Type')
+	input.sheet-null-hider(type='hidden', name='attr_KItem-Bystander-Type', value='')
+	div
+		span(name='attr_KItem-Bystander-Type')
+	input.sheet-null-hider(type='hidden', name='attr_KItem-Location-Type', value='')
+	div
+		span(name='attr_KItem-Location-Type')
+	input.sheet-null-hider(type='hidden', name='attr_KItem-Phenomenon-Type', value='')
+	div
+		span(name='attr_KItem-Phenomenon-Type')
+	input.sheet-null-hider(type='hidden', name='attr_KItem-CountdownLevel', value='')
+	div
+		span(name='attr_KItem-CountdownLevel')
