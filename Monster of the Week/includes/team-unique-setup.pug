@@ -147,7 +147,7 @@
 		+translate('The Organisation')
 	+expanderInstructions('Whistleblowers-Org')
 		p
-			+translate('You create the details about your organisation, choosing options from the following lists. Things you suspect can pertain either to the organisation as a whole or to an influential group within it. At least two of the things you suspect are true, the Keeper decides which ones.')
+			+translate('You create the details about your organisation, choosing options from the following lists. Things you suspect can pertain either to the organisation as a whole or to an influential group within it. At least two of the things you suspect are true; the Keeper decides which ones.')
 	+expanderMoveSection('Whistleblowers-Org-Aspects')
 		div
 			+translate('Official goals')(class='sheet-Label')
@@ -260,15 +260,15 @@
 			+translate('Each player can choose a different answer:')
 			ul
 				li
-					+translate('I was kidnapped by the Hunt')
+					+translate('I was kidnapped by the Hunt.')
 				li
-					+translate('I sold my soul to the Hunt')
+					+translate('I sold my soul to the Hunt.')
 				li
-					+translate('I wanted to ride with the Hunt')
+					+translate('I wanted to ride with the Hunt.')
 				li
-					+translate('I’m a supernatural creature who’s a part of the Hunt')
+					+translate('I’m a supernatural creature who’s a part of the Hunt.')
 				li
-					+translate('Something else')
+					+translate('Something else:')
 			div
 				textarea(rows='2' name='attr_Fugitives-Wild-Hunt-Why-Part')
 		div
@@ -283,10 +283,10 @@
 	+expanderMoveSection('Fugitives-Escape')
 		div
 			+translate('How did you escape?')(class='sheet-Label')
-		+move('Fugitives-Escape-How','With a clever plan')
-		+move('Fugitives-Escape-How','By sheer luck')
-		+move('Fugitives-Escape-How','With outside help')
-		+move('Fugitives-Escape-How','Thanks to a loophole in your fae contract')
+		+move('Fugitives-Escape-How','With a clever plan.')
+		+move('Fugitives-Escape-How','By sheer luck.')
+		+move('Fugitives-Escape-How','With outside help.')
+		+move('Fugitives-Escape-How','Thanks to a loophole in your fae contract.')
 		+move('Fugitives-Escape-How','Something else:')
 			input(type='text' name='attr_Fugitives-Escape-How-Custom')
 		div
@@ -299,7 +299,7 @@
 			input(type='text' name='attr_Fugitives-Escape-Looking-Internet')
 		+move('Fugitives-Escape-Looking','They can see you when you’re outside in one type of weather, namely:')
 			input(type='text' name='attr_Fugitives-Escape-Looking-Weather')
-		+move('Fugitives-Escape-Looking','They sense you when you use magic unless you take a precaution, namely:')
+		+move('Fugitives-Escape-Looking','They sense you when you <b>use magic</b> unless you take a precaution, namely:')
 			input(type='text' name='attr_Fugitives-Escape-Looking-Magic-Precaution')
 		+move('Fugitives-Escape-Looking','Something else:')
 			input(type='text' name='attr_Fugitives-Escape-Looking-Other')
