@@ -2,11 +2,7 @@ Working on organizing my thoughts for some intense coding weeks. MOTW/Codex come
 
 PENDING
 
-Very minor: Adding support to the mystery/monster builder sheet for the new Atonement Mystery type — but that’s mainly “replace Monster Weakness with Sin or Wrongdoing [to be resolved]”
-
 Major: In-Playbooks support for how the various Worlds change the defaults. See second list below.
-
-Minor: Non-Lethal Play chapter is mainly guidelines for how to change your tempo on healing; page 23 does have a “Gear” section which is a list of stuff that the GM can “allow the players to swap for any of their existing gear picks”, so maybe a toggle for “provide non-lethal gear options” that makes those appear in any playbook’s pickable gear list.
 
 Codex features several worlds; where necessary, these would probably manifest as setting toggles (“show Gothic Century version”, etc):
 
@@ -25,3 +21,7 @@ DONE
 Major: Adding in support for using a character sheet for all of the Team Playbooks (you/the GM would make this visible and alterable by the playgroup, rather than one individual player; has enough complexity and persistence-need that it doesn’t make sense as a map object, so def squarely in the character sheet space) 
 
 GITHUB UPDATE for phase one (Team Playbooks)
+
+Very minor: Adding support to the mystery/monster builder sheet for the new Atonement Mystery type — but that’s mainly “replace Monster Weakness with Sin or Wrongdoing [to be resolved]”
+
+Minor: Non-Lethal Play chapter is mainly guidelines for how to change your tempo on healing; page 23 does have a “Gear” section which is a list of stuff that the GM can “allow the players to swap for any of their existing gear picks”, so maybe a toggle for “provide non-lethal gear options” that makes those appear in any playbook’s pickable gear list.
