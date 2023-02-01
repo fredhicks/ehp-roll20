@@ -103,6 +103,17 @@ mixin expanderInstructions(tag)
 		.sheet-Expander
 			if block
 				block
+				
+mixin expander(tag,name)
+	div
+		input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-'+tag, value='1', checked='')
+		span.sheet-anglebox
+		span.sheet-ExpHeader
+			if name
+				+translate(name)
+		.sheet-Expander
+			if block
+				block
 
 mixin otherTeamPlaybooksHeader(tag)
 	input.sheet-triggerbox.sheet-UnusedToggle(type='checkbox', name='attr_Toggle-Team-Moves-Unused', value='1', checked='')

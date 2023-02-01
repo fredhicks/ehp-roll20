@@ -33,6 +33,7 @@
 .sheet-KItem-Type-Text,
 div.sheet-Keeper,
 div.sheet-Teams,
+.sheet-SkinCheck[value="-2"] ~ div.sheet-NoTeams,
 .sheet-SkinCheck[value="-2"] ~ div.sheet-NoKeep,
 .sheet-SkinCheck[value="-1"] ~ div.sheet-NoKeep,
 .sheet-SkinCheck[value="0"] ~ div div.sheet-NoNull,
@@ -108,6 +109,7 @@ span.sheet-Custom, div.sheet-Custom
 	display: inline;
 }
 
+div.sheet-NoTeams,
 .sheet-Atonement-Hider[value="1"] ~ .sheet-kflex div.sheet-Atonement,
 .sheet-Atonement-Hider[value="1"] ~ div.sheet-Atonement,
 .sheet-KTyper[value="0"] ~ div.sheet-KItem-Type-New,

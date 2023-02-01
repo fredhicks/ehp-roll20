@@ -1,0 +1,30 @@
+input.sheet-SkinCheck(type='hidden', name='attr_SkinCheck', value='0')
+.sheet-NoTeams
+	+expander('Game-Options','Options')
+		div
+			+translate("Game Options")(class="sheet-Label")
+			// Game Options that affect both Keeper Mysteries and Player Playbooks
+			p
+				b
+					+translate("World Settings")
+				select(name='attr_Game-World')
+					option(value='0', selected='', data-i18n='Default')
+					option(value='bone', data-i18n='Bone Spear (Codex of Worlds)')
+					option(value='dreaming', data-i18n='Dreaming With the Gods (Codex of Worlds)')
+					option(value='gothic', data-i18n='Gothic Century (Codex of Worlds)')
+					option(value='marches', data-i18n='Monster Marches (Codex of Worlds)')
+				br
+				i
+					+translate("(Use this to change the moves and gear available to match the selected published setting.)")
+			input.sheet-SkinCheck(type='hidden', name='attr_SkinCheck', value='0')
+			.sheet-NoKeep
+				// Game Options that are exclusively for Player Playbooks
+				p
+					b
+						+translate("Non-Lethal Gear Options")
+					select(name='attr_Non-Lethal-Gear')
+						option(value='0', selected='', data-i18n='Off')
+						option(value='1', selected='', data-i18n='On')
+					br
+					i
+						+translate("(Turn on to add the non-lethal gear options from Codex of Worlds to your playbook’s Gear section.)")
