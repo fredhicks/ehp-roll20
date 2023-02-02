@@ -1,0 +1,88 @@
+// Hard Case 2020 Moves
+.sheet-OPBHead.sheet-MinorHead.sheet-space-above(data-i18n='the-hardcase2020') The Hard Case (2020)
+.sheet-Hardcase2020
+	i
+		span(data-i18n='1-fixed-move') You get this
+	| :
+.sheet-Hardcase2020.sheet-OPB
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-MovesUnused', value='1', checked='')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_hardcase2020-move1', value='1')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='hardcase2020-move1')
+				b Furnace
+				| : You have a Fire track with 10 boxes. Mark 1 Fire per harm you suffer, every time someone openly defies you, and every time a friend is hurt. You may spend 1 Fire to add +1-harm whenever you inflict harm, or take +1 to a 
+				i kick some ass
+				|  or 
+				i protect someone
+				|  move. Fire is cleared between mysteries.
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=hardcase2020-move1}}', data-i18n-title='send_details_to_chat')
+// .sheet-Hardcase2020 .sheet-OPB
+.sheet-Hardcase2020
+	i
+		span(data-i18n='2-moves-then') Then pick two of these
+	| :
+.sheet-Hardcase2020.sheet-OPB
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-MovesUnused', value='1', checked='')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_hardcase2020-move2')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='hardcase2020-move2')
+				b Unstoppable
+				| : You may spend 3 Fire to avoid or heal 2-harm. This also stabilizes you, if appropriate.
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=hardcase2020-move2}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_hardcase2020-move3')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='hardcase2020-move3')
+				b Ascetic
+				| : Spend 1 Fire to ignore all pain and discomfort in your current situation, even beyond normal human tolerances.
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=hardcase2020-move3}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_hardcase2020-move4')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='hardcase2020-move4')
+				b Always Angry
+				| : Start mysteries with 2 Fire marked.
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=hardcase2020-move4}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_hardcase2020-move5')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='hardcase2020-move5')
+				b FINISH HIM!
+				| : When you have Fire remaining and strike a foe for 3-harm or more, tell the Keeper how much Fire you have and ask if that&rsquo;s enough. If the foe has that much or less harm capacity left, the Keeper will tell you. You may spend all your Fire immediately to make a follow up attack, defeating your foe.
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=hardcase2020-move5}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_hardcase2020-move6')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='hardcase2020-move6')
+				b Inspired Guesswork
+				| : When you 
+				i investigate a mystery
+				| , you may spend 1 Fire to add 1 extra hold. The extra question must be about powers, motivations, or weaknesses.
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=hardcase2020-move6}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_hardcase2020-move7')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='hardcase2020-move7')
+				b Stone Cold
+				| : You never really get ruffled by danger. Gain +1 whenever pain or fear requires you 
+				i act under pressure
+				| . Your nearby allies also gain this bonus against pain and fear, as long as you keep it together.
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=hardcase2020-move7}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_hardcase2020-move8')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='hardcase2020-move8')
+				b Weapon Master
+				| : When you take possession of a new weapon you may add, remove, or change one tag. This change only applies for you. When you get this move, apply it to all your current weapons.
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=hardcase2020-move8}}', data-i18n-title='send_details_to_chat')
+// .sheet-Hardcase2020 .sheet-OPB

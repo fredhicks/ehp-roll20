@@ -1,0 +1,29 @@
+// Gear for The Spell-Slinger
+.sheet-Spellslinger
+	input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-GearUnused-Hider', value='1', checked='')
+	div
+		b
+			span(data-i18n='spellslinger-weapon') Backup Weapon
+		|  
+		i
+			| &nbsp;(
+			span(data-i18n='pick-one') pick one
+			| )
+		| :
+	.sheet-move.sheet-Setting-Gothic.sheet-Setting-Default
+		input.sheet-checkbox(type='checkbox', name='attr_Spellslinger_gearchoice1')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='spellslinger-gear1') Old revolver (2 harm, close, reload, loud)
+	.sheet-move.sheet-Setting-Gothic.sheet-Setting-Default
+		input.sheet-checkbox(type='checkbox', name='attr_Spellslinger_gearchoice2')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='spellslinger-gear2') Ritual knife (1 harm, hand)
+	.sheet-move.sheet-Setting-Gothic.sheet-Setting-Default
+		input.sheet-checkbox(type='checkbox', name='attr_Spellslinger_gearchoice3')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='spellslinger-gear3') Heirloom sword (2 harm, hand, messy)
+	+move('Gothic-Spellslinger-Gear','Sword cane (2-harm hand concealable)').sheet-Setting-Gothic

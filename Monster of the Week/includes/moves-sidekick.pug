@@ -1,0 +1,91 @@
+// The Sidekick Moves
+.sheet-OPBHead.sheet-MinorHead.sheet-space-above(data-i18n='the-sidekick') The Sidekick
+.sheet-Sidekick
+	i
+		span(data-i18n='1-fixed-move') You get this
+	| :
+.sheet-Sidekick.sheet-OPB
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-MovesUnused', value='1', checked='')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_FixedMoves-Sidekick1')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='sidekick-fixed-move1')
+				b There&apos;s no &apos;I&apos; in &apos;Team&apos;
+				| : You get +1 ongoing to 
+				i help out
+				| ; +2 ongoing, if you are helping out your hero.
+			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=There’s no I in Team}} {{Roll=[[2d6+?{There’s no I in Team with|Cool (Default),@{Cool}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|1}]]}}', name='roll_iteam')
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=sidekick-fixed-move1}}', data-i18n-title='send_details_to_chat')
+// .sheet-Sidekick .sheet-OPB
+.sheet-Sidekick
+	i
+		span(data-i18n='2-moves-then') Then pick two of these
+	| :
+.sheet-Sidekick.sheet-OPB
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-MovesUnused', value='1', checked='')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Sidekick1')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='sidekick-move1')
+				b Caddy
+				| : You carry all your hero&apos;s stuff around. That means you can use anything from their gear list, unless they are currently holding it. Plus, if the item is not unique, you carry spares. For anything like that, you can use one of the spares even if your hero is currently using it.
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=sidekick-move1}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Sidekick2')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='sidekick-move2')
+				b As You Wish
+				| : Mark experience whenever your hero orders or requests that you do something you don&apos;t want to do, and you go ahead and do it.
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=sidekick-move2}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Sidekick3')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='sidekick-move3')
+				b Bodyguard
+				| : If something bad is going to happen to your hero, your comrades, or a bystander, and you are right there, you may throw yourself in harm&apos;s way. Whatever was going to happen to them happens to you instead.
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=sidekick-move3}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Sidekick4')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='sidekick-move4')
+				b Me Too!
+				| : If your hero makes a roll for a move, and you copy what they did (i.e. the same move), you may choose not to roll. Instead, use the outcome of your hero&apos;s roll.
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=sidekick-move4}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Sidekick7')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='sidekick-move7')
+			ul
+				li
+					span(data-i18n='sidekick-move7.1')
+				li
+					span(data-i18n='sidekick-move7.2')
+				li
+					span(data-i18n='sidekick-move7.3')
+					button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Eek!}} {{Roll=[[2d6+?{Eek! with|Sharp (Default),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_eek')
+					button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=sidekick-move7}} {{key1=sidekick-move7.1}} {{key1=sidekick-move7.2}} {{key3=sidekick-move7.3}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Sidekick5')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='sidekick-move5')
+				b I Can Make You Look Good
+				| : If you 
+				i help out
+				|  your hero, you may choose to change the outcome of your dice roll with the outcome of their original dice roll.
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=sidekick-move5}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Sidekick6')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='sidekick-move6')
+				b Journeyman (or Journeywoman)
+				| : Take a move that your hero has. Add it to your &quot;Other Moves&quot; section, below.
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=sidekick-move6}}', data-i18n-title='send_details_to_chat')
+// .sheet-Sidekick .sheet-OPB

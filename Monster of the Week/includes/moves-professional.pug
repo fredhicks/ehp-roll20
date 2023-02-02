@@ -1,0 +1,94 @@
+// The Professional Moves
+.sheet-OPBHead.sheet-MinorHead.sheet-space-above(data-i18n='the-professional') The Professional
+.sheet-Professional
+	i
+		span(data-i18n='1-fixed-move') You get this
+		| :
+.sheet-Professional.sheet-OPB
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-MovesUnused', value='1', checked='')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_FixedMoves-Professional1')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='professional-fixed-move1')
+				| When you 
+				i deal with the agency
+				| , requesting help or gear, or making excuses for a failure, roll +Sharp. On a 10+, you&apos;re good - your request for gear or personell is okayed, or your slip-up goes unnoticed. On a 7-9, things aren&apos;t so great. You might get chewed out by your superiors, and there&apos;ll be fallout, but you get what you need for the job. On a miss, you screwed up; you might be suspended, or under investigation, or just in the doghouse. You certainly aren&apos;t going to get any help until you sort it all out.
+			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Deal With the Agency}} {{Roll=[[2d6+?{Deal With the Agency with|Sharp (Default),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_dwta')
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=professional-fixed-move1}}', data-i18n-title='send_details_to_chat')
+// .sheet-Professional .sheet-OPB
+.sheet-Professional
+	i
+		span(data-i18n='3-moves-then') Then pick three of these
+		| :
+.sheet-Professional.sheet-OPB
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-MovesUnused', value='1', checked='')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Professional1')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='professional-move1')
+			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Act Under Pressure}} {{Roll=[[2d6+?{Act Under Pressure with|Cool (Default),@{Cool}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_aup')
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=professional-move1}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Professional2')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='professional-move2')
+			|  
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=professional-move2}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Professional3')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='professional-move3')
+			|  
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=professional-move3}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Professional4')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='professional-move4')
+			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Leave No One Behind}} {{Roll=[[2d6+?{Leave No One Behind with|Sharp (Default),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_lnob')
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=professional-move4}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Professional5')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='professional-move5')
+			|  
+			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Read a Bad Situation}} {{Roll=[[2d6+?{Read a Bad Situation with|Cool (Default),@{Cool}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_rabs-cool')
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=professional-move5}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Professional6')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='professional-move6')
+			|  
+			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Medic}} {{Roll=[[2d6+?{Medic with|Cool (Default),@{Cool}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_medic')
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=professional-move6}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Professional7')
+		span.sheet-mainbox
+		span.sheet-grayable
+			input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+			span.sheet-Setting-Default
+				span(data-i18n='professional-move7')
+			span.sheet-Setting-Gothic
+				+translate('<b>Mobility</b>: You have a carriage or train compartment built for monster hunting. Choose two good things and one bad thing about it.')
+			ul
+				li
+					span(data-i18n='professional-move7.1')
+						i Good things
+						| : roomy; surveillance gear; fast; stealthy; intimidating; classic; medical kit; sleeping space; toolkit; concealed weapons; anonymous; armoured (+1 armour inside); tough; monster cage.
+				li
+					span(data-i18n='professional-move7.2')
+						i Bad things
+						| : loud; obvious; temperamental; beaten-up; gas-guzzler; uncomfortable; slow; old.
+					input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+					span.sheet-Setting-Default
+						button.sheet-broadcast-button.sheet-Setting-Default(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=professional-move7}} {{key1=professional-move7.1}} {{key2=professional-move7.2}} {{coda=@{Mobility-Professional}}}', data-i18n-title='send_details_to_chat')
+					span.sheet-Setting-Gothic
+						+shareButton('<b>Mobility</b>: You have a carriage or train compartment built for monster hunting. Choose two good things and one bad thing about it.','{{key1=professional-move7.1}} {{key2=professional-move7.2}} {{coda=@{Mobility-Professional}}}')
+			textarea(name='attr_Mobility-Professional', rows='2', cols='40')
+// .sheet-Professional .sheet-OPB

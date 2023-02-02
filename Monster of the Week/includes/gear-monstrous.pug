@@ -1,0 +1,56 @@
+// Gear for The Monstrous
+.sheet-Monstrous
+	input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-GearUnused-Hider', value='1', checked='')
+	div
+		b
+			span(data-i18n='monstrous-weapon') (Optional) Handy Weapon
+		|  
+		i
+			| &nbsp;(
+			span(data-i18n='pick-one') pick one
+			| )
+		| :
+	.sheet-move.sheet-Setting-Default
+		input.sheet-checkbox(type='checkbox', name='attr_Monstrous_gearchoice1')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='monstrous-gear1') .38 revolver (2 harm, close, reload, loud)
+	.sheet-move.sheet-Setting-Default
+		input.sheet-checkbox(type='checkbox', name='attr_Monstrous_gearchoice2')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='monstrous-gear2') 9mm (2 harm, close, loud)
+	.sheet-move.sheet-Setting-Default
+		input.sheet-checkbox(type='checkbox', name='attr_Monstrous_gearchoice3')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='monstrous-gear3') Magnum (3 harm, close, reload, loud)
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Monstrous_gearchoice4')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='monstrous-gear4') Shotgun (3 harm, close, messy)
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Monstrous_gearchoice5')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='monstrous-gear5') Big knife (1 harm, hand)
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Monstrous_gearchoice6')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='monstrous-gear6') Brass knuckles (1 harm, hand, quiet, small)
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Monstrous_gearchoice7')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='monstrous-gear7') Sword (2 harm, hand, messy)
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Monstrous_gearchoice8')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='monstrous-gear8') Huge sword (3 harm, hand, heavy)
+	+move('Gothic-Gear-Monstrous','Revolver (2-harm hand/close reload)')(class="sheet-Setting-Gothic")
+	+move('Gothic-Gear-Monstrous','Steam pressure rifle (3-harm close reload)')(class="sheet-Setting-Gothic")
+	+move('Gothic-Gear-Monstrous','Whipblade (2-harm hand/close messy)')(class="sheet-Setting-Gothic")

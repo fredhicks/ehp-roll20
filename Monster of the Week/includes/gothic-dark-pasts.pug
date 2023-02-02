@@ -1,0 +1,185 @@
+input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+.sheet-Setting-Gothic
+	.sheet-Subsection
+		+translate('Dark Past')
+	input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-DarkPastAll', value='1', checked='')
+	span.sheet-anglebox
+	span.sheet-ExpHeader
+		span(data-i18n='all') All
+	// big expander
+	.sheet-Expander
+		input.sheet-checkbox.sheet-ExpToggle.sheet-UnusedToggle(type='checkbox', name='attr_Toggle-DarkPastUnused', value='1', checked='')
+		span.sheet-anglebox
+		span.sheet-ExpHeader
+			span(data-i18n='unused') Unused
+		br
+		+translate('Choose your <b>dark past</b>:')
+		select(name="attr_DarkPast")
+			+option('Choose a Dark Past','0')
+			+option('Back From the Dead','dead')
+			+option('Outcast','outcast')
+			+option('Touched by Tragedy','tragedy')
+			+option('Bearing a Curse','curse')
+		input.sheet-DarkPastCheck(type='hidden', name='attr_DarkPast', value='0')
+		div.sheet-DarkPast-Dead
+			input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-DarkPastUnused', value='1', checked='')
+			+translate('You’re alive, but you have been dead.')
+			.sheet-space-above
+				+translate('<b>I died…</b>')
+			+move('DarkPast-Dead-Cause','Killed by an enemy')
+			+move('DarkPast-Dead-Cause','Killed by a friend or lover')
+			+move('DarkPast-Dead-Cause','In an industrial accident')
+			+move('DarkPast-Dead-Cause','Sacrificing myself for a greater good')
+			+move('DarkPast-Dead-Cause','Killed by a haunt, monster, or phenomenon')
+			+move('DarkPast-Dead-Cause','As a result of a terrible crime I committed')
+			+move('DarkPast-Dead-Cause','By my own hand, to end my misery')
+			+move('DarkPast-Dead-Cause','Something else:')
+				input(type='text' name="attr_DarkPast-Dead-Cause-Custom")
+			.sheet-space-above
+				+translate('<b>I returned…</b>')
+			+move('DarkPast-Dead-Returned','Thanks to a magical ritual')
+			+move('DarkPast-Dead-Returned','Thanks to a religious ceremony')
+			+move('DarkPast-Dead-Returned','Thanks to a scientific experiment')
+			+move('DarkPast-Dead-Returned','Due to the whim of a god or force of nature')
+			+move('DarkPast-Dead-Returned','Because my or others’ emotions keep me anchored to this world')
+			+move('DarkPast-Dead-Returned','Because the thing that killed me works this way')
+			+move('DarkPast-Dead-Returned','But have no idea how and why')
+			+move('DarkPast-Dead-Returned','Something else:')
+				input(type='text' name="attr_DarkPast-Dead-Returned-Custom")
+			.sheet-space-above
+				+translate('Think about how death changed you. Choose one of the following options:')
+			+move('DarkPast-Dead-Change','<b>I cling to life desperately.</b> I gain one extra harm box. If I’m unstable, I become fearful and get -1 ongoing to <b>act under pressure</b>.')
+				+shareButton('<b>I cling to life desperately.</b> I gain one extra harm box. If I’m unstable, I become fearful and get -1 ongoing to <b>act under pressure</b>.')
+			+move('DarkPast-Dead-Change','<b>I’m indifferent to death.</b> I can treat misses when <b>acting under pressure</b> as rolling 7-9 if only my life is at stake. If harm is going to kill me, I can’t use Luck to negate it.')
+				+shareButton('<b>I’m indifferent to death.</b> I can treat misses when <b>acting under pressure</b> as rolling 7-9 if only my life is at stake. If harm is going to kill me, I can’t use Luck to negate it.')
+			+move('DarkPast-Dead-Change','<b>I sense death.</b> When someone dear to me dies, or a stranger dies nearby, I feel it. If it’s nearby, I sense the exact location of this death. In any case, I get -1 forward because sensing death is a shaking experience.')
+				+shareButton('<b>I sense death.</b> When someone dear to me dies, or a stranger dies nearby, I feel it. If it’s nearby, I sense the exact location of this death. In any case, I get -1 forward because sensing death is a shaking experience.')
+			+move('DarkPast-Dead-Change','<b>I feed on death.</b> When I kill somebody, I get +1 forward or heal 1-harm. It looks unsettling, people seeing it happen will think I’m a monster.')
+				+shareButton('<b>I feed on death.</b> When I kill somebody, I get +1 forward or heal 1-harm. It looks unsettling, people seeing it happen will think I’m a monster.')
+			+move('DarkPast-Dead-Change','<b>I see the dead.</b> I am aware of ghosts, and they notice me too. I can talk to and <b>manipulate</b> spirits of the dead as if they were normal bystanders. I have a somewhat ghostly look myself.')
+				+shareButton('<b>I see the dead.</b> I am aware of ghosts, and they notice me too. I can talk to and <b>manipulate</b> spirits of the dead as if they were normal bystanders. I have a somewhat ghostly look myself.')
+		div.sheet-DarkPast-Outcast
+			input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-DarkPastUnused', value='1', checked='')
+			+translate('You became an outcast of the judgmental and close-minded nineteenth-century society.')
+			.sheet-space-above
+				+translate('<b>I became an outcast…</b>')
+			+move('DarkPast-Outcast-Became','Because of a mésalliance')
+			+move('DarkPast-Outcast-Became','Because I lost all my fortune')
+			+move('DarkPast-Outcast-Became','Because I moved to a different society')
+			+move('DarkPast-Outcast-Became','Because I challenged the values of my society')
+			+move('DarkPast-Outcast-Became','Because my family member did something unacceptable')
+			+move('DarkPast-Outcast-Became','Because I perform work unsuited to my social standing')
+			+move('DarkPast-Outcast-Became','Because I committed a crime (either legal or moral)')
+			+move('DarkPast-Outcast-Became','Something else:')
+				input(type='text' name="attr_DarkPast-Outcast-Became-Custom")
+
+			.sheet-space-above
+				+translate('<b>The main change it caused in my life was…</b>')
+			+move('DarkPast-Outcast-Change','Being shunned by my family')
+			+move('DarkPast-Outcast-Change','Being shunned by my friends')
+			+move('DarkPast-Outcast-Change','Having problems with the law')
+			+move('DarkPast-Outcast-Change','Being able to live however I please')
+			+move('DarkPast-Outcast-Change','Finding new friends, my fellow outcasts')
+			+move('DarkPast-Outcast-Change','Being praised for my bravery and defiance')
+			+move('DarkPast-Outcast-Change','Having to move to a new neighbourhood or city')
+			+move('DarkPast-Outcast-Change','Something else:')
+				input(type='text' name="attr_DarkPast-Outcast-Change-Custom")
+
+			.sheet-space-above
+				+translate('Think about your outcast status and hunting monsters. Choose one of the following options:')
+			+move('DarkPast-Outcast-Status','<b>You thirst for belonging.</b> At the beginning of each mystery, hold 2. Spend your hold to get +1 to any roll when you’re working with the other hunters. When you’re on your own, you get -1 ongoing to <b>act under pressure</b>.')
+				input(type="number" value="2" max="2" min="0" name="attr_DarkPast-Outcast-Status-Hold-Belonging")
+				+shareButton('<b>You thirst for belonging.</b> At the beginning of each mystery, hold 2. Spend your hold to get +1 to any roll when you’re working with the other hunters. When you’re on your own, you get -1 ongoing to <b>act under pressure</b>.')
+			+move('DarkPast-Outcast-Status','<b>You feel confident on your own.</b> You get +1 ongoing to <b>act under pressure</b> when you’re on your own, but other hunters get -1 ongoing to <b>help you out</b> and <b>protect</b> you.')
+				+shareButton('<b>You feel confident on your own.</b> You get +1 ongoing to <b>act under pressure</b> when you’re on your own, but other hunters get -1 ongoing to <b>help you out</b> and <b>protect</b> you.')
+			+move('DarkPast-Outcast-Status','<b>You understand the importance of social conventions.</b> You get +1 to <b>manipulate someone</b> when you use social conventions, but -1 if you ask for something that defies them.')
+				+shareButton('<b>You understand the importance of social conventions.</b> You get +1 to <b>manipulate someone</b> when you use social conventions, but -1 if you ask for something that defies them.')
+			+move('DarkPast-Outcast-Status','<b>You lead by example in defying social norms.</b> If the fact that an action breaks social norms would work as a reason to do it when <b>manipulating someone</b>, you sense it. If you fail the roll, however, you get -1 ongoing to manipulating that person.')
+				+shareButton('<b>You lead by example in defying social norms.</b> If the fact that an action breaks social norms would work as a reason to do it when <b>manipulating someone</b>, you sense it. If you fail the roll, however, you get -1 ongoing to manipulating that person.')
+
+		div.sheet-DarkPast-Tragedy
+			input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-DarkPastUnused', value='1', checked='')
+			+translate('Your life was deeply affected by a tragic event. People with tragic biographies often have it hard in nineteenth-century society, as people feel compassion for them but also expect them to live in mourning and not complain too much.')
+
+			.sheet-space-above
+				+translate('<b>Type of tragedy:</b>')
+			+move('DarkPast-Tragedy-Type','Death of a parent.')
+			+move('DarkPast-Tragedy-Type','Death of a partner or spouse.')
+			+move('DarkPast-Tragedy-Type','Destruction of your house or residence.')
+			+move('DarkPast-Tragedy-Type','Being a victim of a crime or assault.')
+			+move('DarkPast-Tragedy-Type','Having your life turned upside down by a war.')
+			+move('DarkPast-Tragedy-Type','Loss of family fortune.')
+			+move('DarkPast-Tragedy-Type','Something else:')
+				input(type='text' name="attr_DarkPast-Tragedy-Change-Custom")
+
+			.sheet-space-above
+				+translate('<b>Main change in your life:</b>')
+			+move('DarkPast-Tragedy-Change','Long and painful mourning.')
+			+move('DarkPast-Tragedy-Change','Having to be officially in mourning without feeling like it.')
+			+move('DarkPast-Tragedy-Change','Loss of affluence or financial stability.')
+			+move('DarkPast-Tragedy-Change','Gaining affluence or stability via inheritance.')
+			+move('DarkPast-Tragedy-Change','Gaining new troubles or enemies via inheritance.')
+			+move('DarkPast-Tragedy-Change','Becoming somebody’s caretaker.')
+			+move('DarkPast-Tragedy-Change','Having a loving and supporting caretaker.')
+			+move('DarkPast-Tragedy-Change','Having a troublesome, maybe unwilling caretaker.')
+			+move('DarkPast-Tragedy-Change','Becoming emotionally distant or frigid.')
+			+move('DarkPast-Tragedy-Change','Becoming extremely understanding and compassionate.')
+			+move('DarkPast-Tragedy-Change','Becoming ready for anything else you might face in life.')
+
+			.sheet-space-above
+				+translate('Think about how the tragedy you’ve experienced influences the way you hunt monsters. Choose one of the following:')
+			+move('DarkPast-Tragedy-Influence','<b>You’re indifferent to tragedies.</b> You treat misses on <b>act under pressure</b> as 7-9 when the circumstances are really dire, but you get -1 ongoing to <b>protect someone</b> and <b>help out</b> in such circumstances.')
+				+shareButton('<b>You’re indifferent to tragedies.</b> You treat misses on <b>act under pressure</b> as 7-9 when the circumstances are really dire, but you get -1 ongoing to <b>protect someone</b> and <b>help out</b> in such circumstances.')
+			+move('DarkPast-Tragedy-Influence','<b>You want no further tragedies.</b> You treat misses on <b>protecting someone</b> as 7-9 when the protected person would become unstable or die, but you get -1 ongoing to <b>act under pressure</b> in such circumstances.')
+				+shareButton('<b>You want no further tragedies.</b> You treat misses on <b>protecting someone</b> as 7-9 when the protected person would become unstable or die, but you get -1 ongoing to <b>act under pressure</b> in such circumstances.')
+			+move('DarkPast-Tragedy-Influence','<b>You want no further risks in your life.</b> At the beginning of each mystery, hold 2. Spend a hold when making a move that requires a roll. The roll’s results change: 2-5 is a miss, 6-11 is a partial success, and 12+ is a complete success.')
+				+shareButton('<b>You want no further risks in your life.</b> At the beginning of each mystery, hold 2. Spend a hold when making a move that requires a roll. The roll’s results change: 2-5 is a miss, 6-11 is a partial success, and 12+ is a complete success.')
+				input(type="number" value="2" max="2" min="0" name="attr_DarkPast-Tragedy-Influence-Hold-NoRisks")
+			+move('DarkPast-Tragedy-Influence','<b>You’re able to risk a lot.</b> At the beginning of each mystery, hold 2. Spend a hold when making a move that requires a roll. The roll’s results change: 2-8 is a miss, 9-11 is a complete success, and 12+ is an advanced success even if it’s not an advanced move for you. If it is, 9+ is an advanced success.')
+				+shareButton('<b>You’re able to risk a lot.</b> At the beginning of each mystery, hold 2. Spend a hold when making a move that requires a roll. The roll’s results change: 2-8 is a miss, 9-11 is a complete success, and 12+ is an advanced success even if it’s not an advanced move for you. If it is, 9+ is an advanced success.')
+				input(type="number" value="2" max="2" min="0" name="attr_DarkPast-Tragedy-Influence-Hold-Risks")
+
+		div.sheet-DarkPast-Curse
+			input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-DarkPastUnused', value='1', checked='')
+			+translate('You bear a supernatural curse that has affected your life. Choose one of the following curses, or invent your own:')
+			+move('DarkPast-Curse-Nature','<b>You’re weaker in daylight.</b> At the beginning of each mystery, the Keeper holds 3. They can spend those holds to give you -1 forward to a move made in broad daylight.')
+				+shareButton('<b>You’re weaker in daylight.</b> At the beginning of each mystery, the Keeper holds 3. They can spend those holds to give you -1 forward to a move made in broad daylight.')
+			+move('DarkPast-Curse-Nature','<b>You’ve got bad luck</b> that complicates your triumphs. At the beginning of each mystery, the Keeper holds 2. They can spend this hold to change your 10+ result to a 7-9 result.')
+				+shareButton('<b>You’ve got bad luck</b> that complicates your triumphs. At the beginning of each mystery, the Keeper holds 2. They can spend this hold to change your 10+ result to a 7-9 result.')
+			+move('DarkPast-Curse-Nature','Your luck is another’s misfortune. When you spend a Luck point, the Keeper holds 1 and can spend this hold to give another hunter -2 forward and make them mark experience. Consult the other players if introducing this effect is okay for them before choosing it.')
+				+shareButton('Your luck is another’s misfortune. When you spend a Luck point, the Keeper holds 1 and can spend this hold to give another hunter -2 forward and make them mark experience. Consult the other players if introducing this effect is okay for them before choosing it.')
+			+move('DarkPast-Curse-Nature','<b>Your magic is capricious.</b> At the beginning of each mystery, the Keeper holds 3. They can spend those holds to make you choose an extra glitch on a <b>use magic</b> roll, no matter the roll result.')
+				+shareButton('<b>Your magic is capricious.</b> At the beginning of each mystery, the Keeper holds 3. They can spend those holds to make you choose an extra glitch on a <b>use magic</b> roll, no matter the roll result.')
+			+move('DarkPast-Curse-Nature','<b>Your reflection in the mirror does its best to unnerve you.</b> When in the presence of mirrors, you get -1 ongoing to <b>investigate a mystery</b> and <b>act under pressure</b>.')
+				+shareButton('<b>Your reflection in the mirror does its best to unnerve you.</b> When in the presence of mirrors, you get -1 ongoing to <b>investigate a mystery</b> and <b>act under pressure</b>.')
+			+move('DarkPast-Curse-Nature','<b>You are haunted by a hostile spirit:</b> either an ancestor who hates what your family has become, or an ancient family foe. It will berate you for your failings, and it can cause small accidents to vex you.')
+				+shareButton('<b>You are haunted by a hostile spirit:</b> either an ancestor who hates what your family has become, or an ancient family foe. It will berate you for your failings, and it can cause small accidents to vex you.')
+			+move('DarkPast-Curse-Nature','<b>Your shadow is possessed.</b> Sometimes it will leave you and run off to cause trouble (fortunately limited to shadow-play and obscuring things). It is not good when people notice your shadow has left.')
+				+shareButton('<b>Your shadow is possessed.</b> Sometimes it will leave you and run off to cause trouble (fortunately limited to shadow-play and obscuring things). It is not good when people notice your shadow has left.')
+			+move('DarkPast-Curse-Nature','<b>Something else</b>, giving you a penalty to your stats and/or a narrative problem:')
+				+shareButton('<b>Something else</b>, giving you a penalty to your stats and/or a narrative problem:',' {{coda=@{DarkPast-Curse-Nature-Custom}}}')
+				textarea(name="attr_DarkPast-Curse-Nature-Custom")
+
+			.sheet-space-above
+				+translate('<b>Choose the reason of your curse:</b>')
+			+move('DarkPast-Curse-Reason','You were cursed by a powerful occultist.')
+			+move('DarkPast-Curse-Reason','Your entire family, organisation, or place of living is cursed.')
+			+move('DarkPast-Curse-Reason','You broke a vow or an arcane law.')
+			+move('DarkPast-Curse-Reason','You awoke so much hate in an ordinary person that their thoughts brought you a curse.')
+			+move('DarkPast-Curse-Reason','You almost changed into a supernatural creature, and now you retain some of its traits.')
+			+move('DarkPast-Curse-Reason','Something else:')
+				input(type='text' name="attr_DarkPast-Curse-Reason-Custom")
+
+			.sheet-space-above
+				+translate('<b>Your curse gave you some knowledge or resilience.</b> Choose one effect:')
+			+move('DarkPast-Curse-Effect','<b>You have researched the arcane arts extensively.</b> When you roll a 7+ on <b>investigate a mystery</b>, you can ask “What kind of magic was active here?” in addition to your normal pool of questions.')
+				+shareButton('<b>You have researched the arcane arts extensively.</b> When you roll a 7+ on <b>investigate a mystery</b>, you can ask “What kind of magic was active here?” in addition to your normal pool of questions.')
+			+move('DarkPast-Curse-Effect','<b>You’ve built a bond with another person bearing the same curse.</b> You gain an ally.')
+				+shareButton('<b>You’ve built a bond with another person bearing the same curse.</b> You gain an ally.')
+			+move('DarkPast-Curse-Effect','<b>Other forms of magic can’t harm you easily.</b> You take 1 less harm from magical attacks.')
+				+shareButton('<b>Other forms of magic can’t harm you easily.</b> You take 1 less harm from magical attacks.')
+			+move('DarkPast-Curse-Effect','<b>You’re used to hardships and misfortunes.</b> At the beginning of each mystery, hold 2. Spend this hold to get an automatic 10+ result to <b>act under pressure</b>.')
+				+shareButton('<b>You’re used to hardships and misfortunes.</b> At the beginning of each mystery, hold 2. Spend this hold to get an automatic 10+ result to <b>act under pressure</b>.')
+				input(type="number" value="2" max="2" min="0" name="attr_DarkPast-Curse-Effect-Hold-Hardships")
+
+			// Finally, add “I find a clear, but maybe difficult, way to break my curse” to your improvement options and “I break my curse” to your advanced improvement options.

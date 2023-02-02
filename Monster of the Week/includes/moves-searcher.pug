@@ -1,0 +1,170 @@
+// The Searcher Moves
+.sheet-OPBHead.sheet-MinorHead.sheet-space-above(data-i18n='the-searcher') The Searcher
+.sheet-Searcher
+	i
+		span(data-i18n='extra-fixed-move') You get this
+	| :
+.sheet-Searcher.sheet-OPB
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-MovesUnused', value='1', checked='')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_FixedMoves-Searcher1')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='searcher-fixed-move1')
+				b First Encounter
+				| : One strange event started you down this path, sparking your need to discover the truth behind the unexplained. Decide what that event was, pick a category below and take the associated move. Then tell everyone what happened to you (or someone close to you).
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=searcher-fixed-move1}} {{coda=@{Encounter-Searcher}}} {{c1v=[[0+@{Moves-Searcher1A}]]}} {{c1=searcher-fixed-move1.1}} {{c2v=[[0+@{Moves-Searcher1B}]]}} {{c2=searcher-fixed-move1.2}} {{c3v=[[0+@{Moves-Searcher1C}]]}} {{c3=searcher-fixed-move1.3}} {{c4v=[[0+@{Moves-Searcher1D}]]}} {{c4=searcher-fixed-move1.4}} {{c5v=[[0+@{Moves-Searcher1E}]]}} {{c5=searcher-fixed-move1.5}} {{c6v=[[0+@{Moves-Searcher1F}]]}} {{c6=searcher-fixed-move1.6}} {{c7v=[[0+@{Moves-Searcher1G}]]}} {{c7=searcher-fixed-move1.7}}', data-i18n-title='send_details_to_chat')
+			.sheet-isolator
+				input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Searcher-Move1Unused-Hider', value='1', checked='')
+				span.sheet-anglebox
+				span.sheet-ExpHeader
+					span(data-i18n='unused') Unused
+				.sheet-move
+					input.sheet-checkbox(type='checkbox', name='attr_Moves-Searcher1A', value='1')
+					span.sheet-mainbox
+					|  
+					span.sheet-grayable
+						span(data-i18n='searcher-fixed-move1.1')
+							i Cryptid Sighting
+							| : You take note of any reports of strange creatures. Whenever you first see a new type of creature, you may immediately ask one of the 
+							i investigate a mystery
+							|  questions.
+				.sheet-move
+					input.sheet-checkbox(type='checkbox', name='attr_Moves-Searcher1B', value='1')
+					span.sheet-mainbox
+					|  
+					span.sheet-grayable
+						span(data-i18n='searcher-fixed-move1.2')
+							i Zone of Strangeness
+							| : Things are not fixed. You never need to 
+							i act under pressure
+							|  when supernatural forces alter the environment around you, and you get protection (2 armour) against harm from sudden changes to the laws of physics.
+				.sheet-move
+					input.sheet-checkbox(type='checkbox', name='attr_Moves-Searcher1C', value='1')
+					span.sheet-mainbox
+					|  
+					span.sheet-grayable
+						span(data-i18n='searcher-fixed-move1.3')
+							i Psychic Event
+							| : Your mind is awakened. You may 
+							i act under pressure
+							|  to use the 
+							i sensitive
+							|  weird move, or (if you already have 
+							i sensitive
+							| ) the 
+							i empath
+							|  weird move.
+						button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Psychic Event}} {{Roll=[[2d6+?{Roll with|Cool (Act Under Pressure),@{Cool}|Weird (Sensitive/Empath),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_psyevent')
+				.sheet-move
+					input.sheet-checkbox(type='checkbox', name='attr_Moves-Searcher1D', value='1')
+					span.sheet-mainbox
+					|  
+					span.sheet-grayable
+						span(data-i18n='searcher-fixed-move1.4')
+							i Higher Power
+							| : Something looks out for you. You start with an extra 
+							i Luck
+							|  point.
+				.sheet-move
+					input.sheet-checkbox(type='checkbox', name='attr_Moves-Searcher1E', value='1')
+					span.sheet-mainbox
+					|  
+					span.sheet-grayable
+						span(data-i18n='searcher-fixed-move1.5')
+							i Strange Dangers
+							| : You are always watching for hazards. When you have no armour, you still count as having protection (1 armour).
+				.sheet-move
+					input.sheet-checkbox(type='checkbox', name='attr_Moves-Searcher1F', value='1')
+					span.sheet-mainbox
+					|  
+					span.sheet-grayable
+						span(data-i18n='searcher-fixed-move1.6')
+							i Abduction
+							| : They taught you hidden knowledge. Gain +1 to any move when you research strange or ancient secrets to do it.
+				.sheet-move
+					input.sheet-checkbox(type='checkbox', name='attr_Moves-Searcher1G', value='1')
+					span.sheet-mainbox
+					|  
+					span.sheet-grayable
+						span(data-i18n='searcher-fixed-move1.7')
+							i Cosmic Insight
+							| : You have encompassed the soul of the universe. You never need to 
+							i act under pressure
+							|  due to feelings of fear, despair, or isolation.
+			textarea(name='attr_Encounter-Searcher', rows='4', cols='40', placeholder='Describe your First Encounter')
+// .sheet-Searcher .sheet-OPB
+.sheet-Searcher
+	i
+		span(data-i18n='2-moves-then') Then pick two of these
+	| :
+.sheet-Searcher.sheet-OPB
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-MovesUnused', value='1', checked='')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Searcher1')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='searcher-move1')
+				b Prepared to Defend
+				| : Even truth-seekers need to fight sometimes. Whenever you suffer harm when you 
+				i kick some ass
+				|  or 
+				i protect someone
+				| , you suffer 1 harm less.
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=searcher-move1}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Searcher2')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='searcher-move2')
+				b Fellow Believer
+				| : People understand you&apos;ve also known strangeness. Bystanders will talk to you about weird things they would not trust another hunter (or a mundane official) to believe.
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=searcher-move2}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Searcher3')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='searcher-move3')
+				b Guardian
+				| : You have a mystical ally (perhaps a spirit, alien, or cryptid) who helps and defends you. Define them, and their powers, with the Keeper&apos;s agreement. Their look is one of: invisible, an intangible spirit thing, a weird creature, disguised as an animal, or disguised as a person.
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=searcher-move3}} {{coda=@{Guardian-Searcher}}}', data-i18n-title='send_details_to_chat')
+			textarea(name='attr_Guardian-Searcher', rows='4', cols='40')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Searcher4')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='searcher-move4')
+				b Just Another Day
+				| : When you have to 
+				i act under pressure
+				|  due to a monster, phenomenon, or mystical effect, you may roll +Weird instead of +Cool.
+			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Act Under Pressure}} {{Roll=[[2d6+?{Act Under Pressure with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_aup-weird')
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=searcher-move4}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Searcher5')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='searcher-move5')
+				b Network
+				| : You may gain an ally group of others who had experiences similar to your 
+				i First Encounter 
+				|  - perhaps they&apos;re a support group or a hobbyist club. Detail up to five members with useful skills related to what happened to them (none are up for fighting monsters).
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=searcher-move5}} {{coda=@{Network-Searcher}}}', data-i18n-title='send_details_to_chat')
+			textarea(name='attr_Network-Searcher', rows='4', cols='40')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_MovesCont-Searcher6')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='searcher-move6')
+				b Ockham&apos;s Broadsword
+				| : When you first encounter something strange, you may ask the Keeper what sort of thing it is. They will tell you if it (or the cause) is: natural, an unnatural creature, a weird phenomenon, or a person. You gain +1 forward dealing with it.
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=searcher-move6}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_MovesCont-Searcher7')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='searcher-move7')
+				b The Things I&apos;ve Seen
+				| : When you encounter a creature or phenomenon, you may declare that you have seen it before. The Keeper may ask you some questions about that encounter, and will then tell you one useful fact you learned and one danger you need to watch out for (maybe right now).
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=searcher-move7}}', data-i18n-title='send_details_to_chat')
+// .sheet-Searcher .sheet-OPB

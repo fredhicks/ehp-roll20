@@ -18,6 +18,18 @@ mixin translate(text)
 		span(data-i18n=text)&attributes(attributes)
 		| 
 
+mixin shareButton(text,extracode)
+	if text !== ''
+		- 
+			var rtext = text.replace(/<[^>]*>/g,'');
+			if ( rtext !== text ) {
+				translations[rtext] = text;
+				text = rtext;
+			}
+			if ( typeof(translations[text]) == "undefined" ) { translations[text] = text; }
+			if ( typeof(extracode) == "undefined" ) { extracode = ""; }
+		button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey='+text+'}} '+extracode, data-i18n-title='send_details_to_chat')
+
 mixin option(t,v)
 	- if ( typeof(translations[t]) == "undefined" ) { translations[t] = t; }
 	if ( typeof(v) == "undefined" )
@@ -40,7 +52,7 @@ mixin move(toggle,text,share)
 		toggle = toggle + toggles[toggle];
 		if ( typeof(text) == "undefined" ) { text = 'NO TEXT'; }
 		if ( typeof(share) == "undefined" ) { share = false; } else { share = true; }
-	.sheet-move
+	.sheet-move&attributes(attributes)
 		input.sheet-checkbox(type='checkbox', name=toggle)
 		span.sheet-mainbox
 		span.sheet-grayable

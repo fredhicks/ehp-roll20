@@ -1,0 +1,87 @@
+// The Exile Moves
+.sheet-OPBHead.sheet-MinorHead.sheet-space-above(data-i18n='the-exile') The Exile
+.sheet-Exile
+	i
+		span(data-i18n='2-moves') Pick two of these
+	| :
+.sheet-Exile.sheet-OPB
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-MovesUnused', value='1', checked='')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Exile1')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='exile-move1')
+				b Adept Sorcerer
+				| : You have a familiar spirit (usually in the guise of a pet) that counts as an ally: subordinate (motivation: to follow your exact instructions).
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=exile-move1}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Exile2')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='exile-move2')
+				b Warrior
+				| : If you are fighting with (and against) old-fashioned hand weapons and suffer harm, you suffer 1 harm less. Monster attacks almost always count as old-fashioned for this move.
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=exile-move2}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Exile3')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='exile-move3')
+				b Traditional Remedies
+				| : You can treat injuries without any need for modern medical supplies (although you might need someone to hold the patient down). Dealing with a poison, infection, or disease might need you to track down some specific ingredients (eg. healing herbs).
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=exile-move3}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Exile4')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='exile-move4')
+				b Immortal Name
+				| : Your monster-hunting exploits are legendary, so much that your name still scares monsters and minions. You may use threats to use the move 
+				i manipulate someone
+				|  on monsters if they understand enough to have heard stories about you.
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=exile-move4}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Exile5')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='exile-move5')
+				b Hearty Constitution
+				| : You never suffer from normal illnesses, and get +1 ongoing against magical illnesses and poisons. You&apos;ve been through worse.
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=exile-move5}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Exile6')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='exile-move6')
+				b Confused
+				| : Mark experience whenever your bafflement with the modern world gets in the way of monster-hunting.
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=exile-move6}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Exile7')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='exile-move7')
+				b Ancient Magics
+				| : You learned magic when less lore had been lost. When you use magic, on a 7-9, don&apos;t choose a glitch. Instead, take -1 forward.
+			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Use Magic}} {{Roll=[[2d6+?{Use Magic with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_um')
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=exile-move7}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Exile8')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='exile-move8')
+				b Learned
+				| : You researched all the legends and tales of monsters in your home time. When you 
+				i investigate a mystery
+				| , you can ask the Keeper questions from the following list as well as from the usual list
+			| :
+			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Investigate a Mystery}} {{Roll=[[2d6+?{Investigate a Mystery with|Sharp (Default),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_iam')
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=exile-move8}} {{key1=exile-move8.1}} {{key2=exile-move8.2}} {{key3=exile-move8.3}}', data-i18n-title='send_details_to_chat')
+			ul
+				li
+					span(data-i18n='exile-move8.1') Did this creature (or this type of creature) exist in my home time?
+				li
+					span(data-i18n='exile-move8.2') What defenses are effective against this creature?
+				li
+					span(data-i18n='exile-move8.3') What do I know about this creature that has been forgotten?
+// .sheet-Exile .sheet-OPB

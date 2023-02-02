@@ -1,0 +1,19 @@
+.sheet-Custom
+	fieldset.repeating_Gear-Custom
+		div
+			input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Edit-Hider', value='1', checked='')
+			span.sheet-anglebox
+			|  
+			span.sheet-ExpHeader
+				span(data-i18n='edit') Edit
+			.sheet-EditControls.sheet-Expander
+				div
+					b
+						span(data-i18n='description') Description
+					| :
+				textarea(name='attr_Gear-CustomDescrip', rows='2', cols='40')
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_Gear-CustomCheck', checked='')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(name='attr_Gear-CustomDescrip')

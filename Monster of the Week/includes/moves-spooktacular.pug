@@ -1,0 +1,47 @@
+// Spooktacular Moves
+.sheet-OPBHead.sheet-MinorHead.sheet-space-above(data-i18n='the-spooktacular') The Spooktacular
+.sheet-Spooktacular
+	i
+		span(data-i18n='2-moves') Pick two of these
+	| :
+.sheet-Spooktacular.sheet-OPB
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-MovesUnused', value='1', checked='')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Spooktacular1')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='spooktacular-move1')
+			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Put On a Show}} {{Roll=[[2d6+?{Put On a Show with|Charm (Default),@{Charm}|Weird (Pinch of Magic),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_putonashow')
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=spooktacular-move1}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Spooktacular2')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='spooktacular-move2')
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=spooktacular-move2}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Spooktacular3')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='spooktacular-move3')
+			button.sheet-2d6-button(type='roll', value="&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Easygoin'}} {{Roll=[[2d6+?{Easygoin' with|Charm (Default),@{Charm}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}", name='roll_easygoing')
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=spooktacular-move3}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Spooktacular4')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='spooktacular-move4')
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=spooktacular-move4}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Spooktacular5')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='spooktacular-move5')
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=spooktacular-move5}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Spooktacular6')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='spooktacular-move6')
+			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Use Magic}} {{Roll=[[2d6+?{Use Magic with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_usemagic')
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=spooktacular-move6}}', data-i18n-title='send_details_to_chat')

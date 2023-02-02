@@ -1,0 +1,63 @@
+.sheet-Crooked
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-GearUnused-Hider', value='1', checked='')
+	div
+		b
+			span(data-i18n='crooked-weapon') Effective Weapons
+		|  
+		i
+			| &nbsp;(
+			span(data-i18n='pick-three') pick three
+			| )
+		| :
+	.sheet-move.sheet-Setting-Default
+		input.sheet-checkbox(type='checkbox', name='attr_Crooked_gearchoice1')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='crooked-gear1') .22 revolver (1 harm, close, reload, small)
+	.sheet-move.sheet-Setting-Default
+		input.sheet-checkbox(type='checkbox', name='attr_Crooked_gearchoice2')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='crooked-gear2') .38 revolver (2 harm, close, reload, loud)
+	.sheet-move.sheet-Setting-Default
+		input.sheet-checkbox(type='checkbox', name='attr_Crooked_gearchoice3')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='crooked-gear3') 9mm (2 harm, close, loud)
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Crooked_gearchoice4')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='crooked-gear4') Shotgun (3 harm, close, messy)
+	.sheet-move.sheet-Setting-Default
+		input.sheet-checkbox(type='checkbox', name='attr_Crooked_gearchoice5')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='crooked-gear5') Hunting rifle (2 harm, far, loud)
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Crooked_gearchoice6')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='crooked-gear6') Big knife (1 harm, hand)
+	.sheet-move.sheet-Setting-Default
+		input.sheet-checkbox(type='checkbox', name='attr_Crooked_gearchoice7')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='crooked-gear7') Baseball bat (1 harm, hand)
+	.sheet-move.sheet-Setting-Default
+		input.sheet-checkbox(type='checkbox', name='attr_Crooked_gearchoice8')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='crooked-gear8') Submachinegun (2 harm, close, reload, area)
+	.sheet-move.sheet-Setting-Default
+		input.sheet-checkbox(type='checkbox', name='attr_Crooked_gearchoice9')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='crooked-gear9') Assault rifle (3 harm, close/far, area)
+	input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+	+move('Gothic-Gear-Crooked','Lever rifle (3-harm close/far reload)')(class="sheet-Setting-Gothic")
+	+move('Gothic-Gear-Crooked','Revolver (2-harm hand/close reload)')(class="sheet-Setting-Gothic")
+	+move('Gothic-Gear-Crooked','Small revolver (1-harm hand/close reload concealable)')(class="sheet-Setting-Gothic")
+	+move('Gothic-Gear-Crooked','Steam pressure rifle (3-harm close reload)')(class="sheet-Setting-Gothic")
+	+move('Gothic-Gear-Crooked','Sword cane (2-harm hand concealable)')(class="sheet-Setting-Gothic")
+	+move('Gothic-Gear-Crooked','Wrench (2-harm hand inconspicuous)')(class="sheet-Setting-Gothic")

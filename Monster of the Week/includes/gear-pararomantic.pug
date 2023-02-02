@@ -1,0 +1,91 @@
+// Gear for The Pararomantic
+.sheet-Pararomantic
+	input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-GearUnused-Hider', value='1', checked='')
+	div
+		b
+			span(data-i18n='pararomantic-equip') Normal Equipment
+		|  
+		i
+			| &nbsp;(
+			span(data-i18n='pick-two') pick two
+			| )
+		| :
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Pararomantic_gearchoice1')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='pararomantic-gear1')
+				| Golf club, baseball bat, cricket bat, or hockey stick (2 harm, hand, innocuous, messy)
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Pararomantic_gearchoice2')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='pararomantic-gear2') Pocket knife or multitool (1 harm, hand, useful, small)
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Pararomantic_gearchoice3')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='pararomantic-gear3') Small handgun (2 harm, close, loud, reload)
+	.sheet-move.sheet-Setting-Default
+		input.sheet-checkbox(type='checkbox', name='attr_Pararomantic_gearchoice4')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='pararomantic-gear4') Bicycle
+	.sheet-move.sheet-Setting-Default
+		input.sheet-checkbox(type='checkbox', name='attr_Pararomantic_gearchoice5')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='pararomantic-gear5') Fairly new car in decent condition
+	.sheet-move.sheet-Setting-Default
+		input.sheet-checkbox(type='checkbox', name='attr_Pararomantic_gearchoice6')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='pararomantic-gear6') Motorcycle
+	+move('Gothic-Gear-Pararomantic','Sword cane (2-harm hand concealable)')(class="sheet-Setting-Gothic")
+	+move('Gothic-Gear-Pararomantic','A horse')(class="sheet-Setting-Gothic")
+	+move('Gothic-Gear-Pararomantic','A mule-drawn carriage')(class="sheet-Setting-Gothic")
+	+move('Gothic-Gear-Pararomantic','A boat')(class="sheet-Setting-Gothic")
+	.sheet-space-above
+		span(data-i18n='pararomantic-gift')
+			| Gift from your 
+			i Guide
+			| , which must be periodically recharged by interactions with them
+		|  
+		i
+			| &nbsp;(
+			span(data-i18n='pick-one') pick one
+			| )
+		| :
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Pararomantic_gearchoice7')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='pararomantic-gift1')
+				| Part of their body, eg. a vial of blood, lock of hair, tears in a phial, fairy dust, etc. It either helps you heal, or counts as a weakness against a specific kind of monster.
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Pararomantic_gearchoice8')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='pararomantic-gift2')
+				| Piece of jewelry, eg. a golden ring, tribal pendant, silver locket, etc. It either provides armour (1 armour, magic) or protects you from the powers of a specific kind of monster.
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Pararomantic_gearchoice9')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='pararomantic-gift3')
+				| A memento of the time when they were human, eg. a portrait/photo from life, diary, favourite hat, doll, lighter, etc. It provides +1 to 
+				i Bond Abuse
+				|  rolls.
+			|  
+			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Bond Abuse}} {{Roll=[[2d6+?{Bond Abuse with|Charm (Default),@{Charm}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|1}]]}}', name='roll_bondabuse')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Pararomantic_gearchoice10')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='pararomantic-gift4')
+				| A strange or antique weapon, eg. a family sword, ancient staff, holy mace (2 harm, hand, messy), etc. Additionally, add &apos;+magic&apos;, &apos;+silver&apos;, &apos;+holy&apos;, or &apos;+iron&apos; tag to the weapon.
+	+move('Gothic-Gear-Pararomantic','Family heirloom sword (2-harm hand precious)')(class="sheet-Setting-Gothic")
+	+move('Gothic-Gear-Pararomantic','Whipblade (2-harm hand/close messy)')(class="sheet-Setting-Gothic")
+	div
+		textarea(name='attr_Gift-Pararomantic', rows='3', cols='40', placeholder='Describe the Gift')

@@ -1,0 +1,123 @@
+// The Traveler Moves
+.sheet-OPBHead.sheet-MinorHead.sheet-space-above(data-i18n='the-traveler') The Traveler
+.sheet-Traveler
+	i
+		span(data-i18n='1-fixed-move') You get this
+		| :
+.sheet-Traveler.sheet-OPB
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-MovesUnused', value='1', checked='')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_FixedMoves-Traveler1')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='traveler-fixed-move1')
+				b Servant of Technology
+				| : You are extremely dependent on technology, having difficulties in relating to the supernatural. You get -1 ongoing to 
+				i use magic
+				|  or any other moves related to the supernatural or magic.
+			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Use Magic}} {{Roll=[[2d6+?{Use Magic with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|-1}]]}}', name='roll_techserve')
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=traveler-fixed-move1}}', data-i18n-title='send_details_to_chat')
+// .sheet-Traveler .sheet-OPB
+.sheet-Traveler
+	i
+		span(data-i18n='3-moves-then') Then pick three of these
+		| :
+.sheet-Traveler.sheet-OPB
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-MovesUnused', value='1', checked='')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Traveler1')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='traveler-move1')
+				b Butterfly Effect
+				| : 
+				i At the beginning of each mystery
+				| , choose one rating to receive +1 (max +3) and another to receive -1 (min -2) during this mystery. These actions disturb the spacetime and the oscillations of their characteristics is a reflection of that.
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=traveler-move1}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Traveler2')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='traveler-move2')
+				b Historian
+				| : When you 
+				i investigate a mystery
+				|  or 
+				i read a bad situation
+				| , you can choose to ask \&quot;Why does this seem familiar?\&quot; as one of the questions. If possible, the Keeper will describe how a similar situation has happened in the past or future history of the world.
+			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Historian}} {{Roll=[[2d6+?{Historian with|Sharp (Investigate a Mystery),@{Sharp}|Sharp (Read a Bad Situation),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_historian')
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=traveler-move2}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Traveler3')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='traveler-move3')
+				b Inventor
+				| : If you want to 
+				i build, repair, or study a device
+				| , the Keeper will tell you how long it will take and what equipment will be needed.
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=traveler-move3}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Traveler4')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='traveler-move4')
+				b Prescience
+				| : Attacks that can cause your death pop up in your memory. When you 
+				i take harm and become unstable
+				| , you may roll +Weird. On a 10+, you remembered the attack and were able to avoid it completely. On a 7-9, the memory took time to emerge, take 1 harm less or don&apos;t become unstable. On a miss, the memory was incorrect and your avoidance made you unbalanced; in addition to the harm, you take -1 forward.
+			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Prescience}} {{Roll=[[2d6+?{Prescience with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_presci')
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=traveler-move4}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Traveler5')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='traveler-move5')
+				b Neural Implants
+				| : When you 
+				i need to do something that requires specific training
+				| , such as defusing a bomb or flying a helicopter, you already have the information implanted in your brain. You still need to 
+				i act under pressure
+				| , but you know what to do.
+			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Act Under Pressure}} {{Roll=[[2d6+?{Act Under Pressure with|Cool (Default),@{Cool}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_aup')
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=traveler-move5}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Traveler6')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='traveler-move6')
+				b Sufficiently Advanced Technology
+				| : You can reproduce the effects of the move 
+				i use magic
+				|  with technological tools. You do not roll dice for this, but you must choose an effect and a glitch. This is not magic, so the effect will not have the magic tag and will not work on things affected only by magic. The Keeper may ask for one or more requirements to achieve the effect.
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=traveler-move6}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Traveler7')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='traveler-move7')
+				b No Paradoxes
+				| : When you say why something should happen to guarantee the future, you can help another hunter and give +1 to their roll, as if you had rolled a 10+ on 
+				i help out
+				| . You still need to describe how you are helping.
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=traveler-move7}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Traveler8')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='traveler-move8')
+				b Android/Cyborg
+				| : You have cybernetic implants or maybe you&apos;re half a machine. In addition to superhuman strength, your punches and kicks are attacks with (3 harm, contact).
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=traveler-move8}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Traveler9')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='traveler-move9')
+				b Psychic Paper
+				| : You get +1 ongoing in rolls to avoid being detected or remaining unnoticed. You also get +1 ongoing when you 
+				i manipulate someone
+				|  by pretending to be someone else.
+			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Manipulate Someone}} {{Roll=[[2d6+?{Manipulate Someone with|Charm (Default),@{Charm}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|1}]]}}', name='roll_psypaper')
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=traveler-move9}}', data-i18n-title='send_details_to_chat')
+// .sheet-Traveler .sheet-OPB

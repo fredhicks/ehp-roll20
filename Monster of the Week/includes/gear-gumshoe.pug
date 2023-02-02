@@ -1,0 +1,125 @@
+// Gear for The Gumshoe
+.sheet-Gumshoe
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-GearUnused-Hider', value='1', checked='')
+	div
+		input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+		span(data-i18n='Gumshoe-gear-base').sheet-Setting-Default
+		+translate('You get a flask of wine, brandy, ale, or vodka; a notebook; two espionage tools; and one handy weapon.').sheet-Setting-Gothic
+	input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+	div.sheet-Setting-Default
+		input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-GearUnused-Hider', value='1', checked='')
+		.sheet-space-above
+			b
+				span(data-i18n='Gumshoe-recording') Recording Devices
+			|  
+			i
+				| &nbsp;(
+				span(data-i18n='pick-two') pick two
+				| )
+			| :
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_Gumshoe_gearchoice1')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='Gumshoe-gear1') Night vision camera
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_Gumshoe_gearchoice2')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='Gumshoe-gear2') Tiny digital video camera
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_Gumshoe_gearchoice3')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='Gumshoe-gear3') Film camera (8mm or 16mm)
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_Gumshoe_gearchoice4')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='Gumshoe-gear4') Digital sound recorder
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_Gumshoe_gearchoice5')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='Gumshoe-gear5') Cassette tape recorder
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_Gumshoe_gearchoice6')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='Gumshoe-gear6') Remote-controlled camera drone
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_Gumshoe_gearchoice7')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='Gumshoe-gear7') Laser microphone
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_Gumshoe_gearchoice8')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='Gumshoe-gear8') SLR camera
+	div.sheet-Setting-Gothic
+		input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-GearUnused-Hider', value='1', checked='')
+		.sheet-space-above
+			b
+				+translate('Espionage Tools')
+			|  
+			i
+				| &nbsp;(
+				span(data-i18n='pick-two') pick two
+				| )
+			| :
+		+move('Gothic-Gumshoe-Gear','climbing claws')
+		+move('Gothic-Gumshoe-Gear','dictionary of thieves’ codes')
+		+move('Gothic-Gumshoe-Gear','access to local fingerprint recordings')
+		+move('Gothic-Gumshoe-Gear','durable rope')
+		+move('Gothic-Gumshoe-Gear','false police seal')
+		+move('Gothic-Gumshoe-Gear','false royal seal')
+		+move('Gothic-Gumshoe-Gear','false travel documents')
+		+move('Gothic-Gumshoe-Gear','invisible ink')
+		+move('Gothic-Gumshoe-Gear','well-crafted disguise (can be chosen multiple times if you want multiple disguises)')
+			input(type='text', name="attr_Gothic-Gumshoe-Disguises")
+	.sheet-space-above
+		b
+			input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+			span(data-i18n='Gumshoe-weapon').sheet-Setting-Default
+			+translate('Handy Weapons').sheet-Setting-Gothic
+		|  
+		i
+			| &nbsp;(
+			span(data-i18n='pick-one') pick one
+			| )
+		| :
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Gumshoe_gearchoice9')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='Gumshoe-gear9') Brass knuckles (1 harm, hand, small)
+	.sheet-move.sheet-Setting-Default
+		input.sheet-checkbox(type='checkbox', name='attr_Gumshoe_gearchoice10')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='Gumshoe-gear10') .38 revolver (2 harm, close, reload, loud)
+	.sheet-move.sheet-Setting-Default
+		input.sheet-checkbox(type='checkbox', name='attr_Gumshoe_gearchoice11')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='Gumshoe-gear11') 9mm (2 harm, close, loud)
+	.sheet-move.sheet-Setting-Default
+		input.sheet-checkbox(type='checkbox', name='attr_Gumshoe_gearchoice12')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='Gumshoe-gear12') Magnum (3 harm, close, reload, loud)
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Gumshoe_gearchoice13')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='Gumshoe-gear13') Shotgun (3 harm, close, messy, loud)
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Gumshoe_gearchoice14')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='Gumshoe-gear14') Switchblade (1-harm, hand, small)
+	+move('Gothic-Gear-Gumshoe','Revolver (2-harm hand/close reload)')(class="sheet-Setting-Gothic")
+	+move('Gothic-Gear-Gumshoe','Small revolver (1-harm hand/close reload concealable)')(class="sheet-Setting-Gothic")
+	+move('Gothic-Gear-Gumshoe','Sword cane (2-harm hand concealable)')(class="sheet-Setting-Gothic")
+	+move('Gothic-Gear-Gumshoe','Whipblade (2-harm hand/close messy)')(class="sheet-Setting-Gothic")

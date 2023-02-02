@@ -1,0 +1,162 @@
+// The Gumshoe Moves
+.sheet-OPBHead.sheet-MinorHead.sheet-space-above(data-i18n='the-gumshoe') The Gumshoe
+.sheet-Gumshoe
+	i
+		span(data-i18n='2-fixed-moves') You get these 2
+	| :
+.sheet-Gumshoe.sheet-OPB
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-MovesUnused', value='1', checked='')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_FixedMoves-Gumshoe1')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='Gumshoe-fixed-move1')
+				b Occult Confidential
+				| : The first time in each mystery that you observe a monster, minion, or phenomenon in action, you may ask one question from the 
+				i investigate a mystery
+				|  list.
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=Gumshoe-fixed-move1}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_FixedMoves-Gumshoe2')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='Gumshoe-fixed-move2')
+				b The Naked City
+				| : You have lots of personal contacts wherever you go. Pick four contact types from the following areas (or from other areas agreed to between you and the Keeper)
+			| :
+			.sheet-isolator
+				input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-GSPCon', value='1')
+				span.sheet-anglebox
+				|  
+				span.sheet-ExpHeader(data-i18n='possible-contacts') Possible Contacts
+				.sheet-Expander
+					input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+					span(data-i18n='Gumshoe-fixed-move2-examples').sheet-Setting-Default
+						| Academics, Accountants, Artists, Bartenders, Clergy, Conspiracy Theorists, Construction, Courts, Criminals (organised), Criminals (street), Cultists, Engineers, Espionage, Film and TV, Forensic Scientists, Fringe Scientists, Hackers, Journalists, Lawyers, Mechanics, Media, Medical Practioners, Military, Morgue, Occult, Police (local), Police (national), Politicians, Prisons, Private Security, Property Developers, Stage Magicians, Technologists, Transportation
+					+translate('Academics, Accountants, Artists, Bartenders, Clergy, Conspiracy Theorists, Construction, Courts, Criminals (organised), Criminals (street), Cultists, Espionage, Forensic Scientists, Fringe Scientists, Hackers, Journalists, Lawyers, Mechanics, Media, Medical Practioners, Military, Morgue, Occult, Police (local), Police (national), Politicians, Prisons, Private Security, Property Developers, Stage Magicians, Technologists, Theater, Tinkers, Transportation').sheet-Setting-Gothic
+			textarea(name='attr_Gumshoe-fixed-move2-choices', rows='2', cols='40')
+			span(data-i18n='Gumshoe-fixed-move2-continued')
+				| You can hit them up for info (+1 to one 
+				i investigate a mystery
+				|  roll) or small favours - but there may be a small cost involved. Personal contacts can provide more significant help but the Keeper decides their price on a case-by-case basis.
+			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Investigate a Mystery}} {{Roll=[[2d6+?{Investigate a Mystery with|Sharp (Default),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|1}]]}}', name='roll_iam-plusone')
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=Gumshoe-fixed-move2}} {{extra=@{Gumshoe-fixed-move2-choices}}} {{codakey=Gumshoe-fixed-move2-continued}}', data-i18n-title='send_details_to_chat')
+// .sheet-Gumshoe .sheet-OPB
+.sheet-Gumshoe
+	i
+		span(data-i18n='1-move') Then pick one of these
+	| :
+.sheet-Gumshoe.sheet-OPB
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-MovesUnused', value='1', checked='')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Gumshoe1')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='Gumshoe-move1')
+				b The Postman Always Rings Twice
+				| : Twice per mystery - as long as you follow your Code - you may reroll a roll.
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=Gumshoe-move1}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Gumshoe2')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='Gumshoe-move2')
+				b The Long Goodbye
+				| : You can&apos;t die with an open case. Specifically, you suffer all harm as normal but your death is postponed until you have either completed or abandoned the case, or you break your Code (then all bets are off).
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=Gumshoe-move2}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Gumshoe3')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='Gumshoe-move3')
+				b Jessica Jones Entry
+				| : When you double-talk your way into a secure location, roll +Charm. On a 10+ pick three, on a 7-9 pick two, on a fail pick one
+			| :
+			ul
+				li
+					span(data-i18n='Gumshoe-move3.1') You don&apos;t leave any trace of what you searched.
+				li
+					span(data-i18n='Gumshoe-move3.2') You find what you wanted.
+				li
+					span(data-i18n='Gumshoe-move3.3') You find something else that&apos;s important.
+				li
+					span(data-i18n='Gumshoe-move3.4') You don&apos;t piss anyone off.
+				li
+					span(data-i18n='Gumshoe-move3.5') You aren&apos;t recognised.
+					button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Jessica Jones Entry}} {{Roll=[[2d6+?{Jessica Jones Entry with|Charm (Default),@{Charm}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_jje')
+					button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=Gumshoe-move3}} {{key1=Gumshoe-move3.1}} {{key2=Gumshoe-move3.2}} {{key3=Gumshoe-move3.3}} {{key4=Gumshoe-move3.4}} {{key5=Gumshoe-move3.5}}', data-i18n-title='send_details_to_chat')
+	|  
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Gumshoe4')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='Gumshoe-move4')
+				b Out of the Past
+				| : You have a police buddy who will do you big favours. Get in touch with them when you need to redirect law enforcement attention, get a heads-up on what operations are planned, or access police files. You now owe them; expect them to collect on it soon.
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=Gumshoe-move4}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Gumshoe5')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='Gumshoe-move5')
+				b Asphalt Jungle
+				| : You heal faster than normal people. Any time your harm gets healed, heal 1 harm extra. You are immune to all the harm move effects under &apos;0 harm&apos; and &apos;1 harm&apos; (when the Keeper would apply these, you ignore them).
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=Gumshoe-move5}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Gumshoe6')
+		span.sheet-mainbox
+		span.sheet-grayable
+			input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+			span.sheet-Setting-Default
+				span(data-i18n='Gumshoe-move6')
+					b Hacker with a Dragon Tattoo
+					| : When you hack into a computer system, roll +Sharp. On 10+ pick two, on a 7-9 pick one. You
+				| :
+			span.sheet-Setting-Gothic
+				+translate('<b>Archive Rat</b>: When you gain access to a library or archive, roll +Sharp. On 10+ pick two, on a 7-9 pick one. You')
+			ul
+				li
+					span(data-i18n='Gumshoe-move6.1') ...leave no traces.
+				li
+					span(data-i18n='Gumshoe-move6.2') ...learn something important.
+				li
+					span(data-i18n='Gumshoe-move6.3') ...can leave misinformation in place.
+				li
+					span(data-i18n='Gumshoe-move6.4') ...gain access to somewhere you want to get in to.
+			span.sheet-Setting-Default
+				button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Hacker with a Dragon Tattoo}} {{Roll=[[2d6+?{Hacker with a Dragon Tattoo with|Sharp (Default),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_hacker')
+				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=Gumshoe-move6}} {{key1=Gumshoe-move6.1}} {{key2=Gumshoe-move6.2}} {{key3=Gumshoe-move6.3}} {{key4=Gumshoe-move6.4}}', data-i18n-title='send_details_to_chat')
+			span.sheet-Setting-Gothic
+				button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Archive Rat}} {{Roll=[[2d6+?{Archive Rat with|Sharp (Default),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_hacker')
+				+shareButton('<b>Archive Rat</b>: When you gain access to a library or archive, roll +Sharp. On 10+ pick two, on a 7-9 pick one. You',' {{key1=Gumshoe-move6.1}} {{key2=Gumshoe-move6.2}} {{key3=Gumshoe-move6.3}} {{key4=Gumshoe-move6.4}}')
+	|  
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Gumshoe7')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='Gumshoe-move7')
+				b \&quot;Just one more thing\&quot;
+				| : When you ask a suspect leading questions, roll +Charm. On a 10+ hold 2, on a 7-9 hold 1, on a miss hold 1 but something bad is going to happen too. Spend your hold 1-for-1 to ask questions from this list
+			| :
+			ul
+				li
+					span(data-i18n='Gumshoe-move7.1')
+						| One question from the 
+						i investigate a mystery
+						|  list.
+				li
+					span(data-i18n='Gumshoe-move7.2') Was that a lie?
+				li
+					span(data-i18n='Gumshoe-move7.3') What is something you left out that you didn&apos;t want me to notice?
+				li
+					span(data-i18n='Gumshoe-move7.4') Are you complicit with any ongoing criminal activity?
+				li
+					span(data-i18n='Gumshoe-move7.5') Did you commit this specific crime?
+					button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Just One More Thing}} {{Roll=[[2d6+?{Just One More Thing with|Charm (Default),@{Charm}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_jomt')
+					button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=Gumshoe-move7}} {{key1=Gumshoe-move7.1}} {{key2=Gumshoe-move7.2}} {{key3=Gumshoe-move7.3}} {{key4=Gumshoe-move7.4}} {{key5=Gumshoe-move7.5}}', data-i18n-title='send_details_to_chat')
+			b
+				span(data-i18n='current-hold') Current Hold
+				| :
+			|  
+			input(type='number', name='attr_gumshoe-move7-Hold', min='0', value='0')
+// .sheet-Gumshoe .sheet-OPB

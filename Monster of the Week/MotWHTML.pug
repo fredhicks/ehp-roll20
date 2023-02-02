@@ -394,6 +394,12 @@ include includes/MOTW-rolltemplates.html
 							input.sheet-triggerbox(type='checkbox', name='attr_Moves-Constructed1')
 							input.sheet-checkbox(type='checkbox', name='attr_Constructed-Harm3')
 							span.sheet-altbox
+							// With the Back from the Dead Dark Past, you can potentially get an extra box of harm
+							input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+							span.sheet-Setting-Gothic
+								input.sheet-triggerbox(type='checkbox', name='attr_DarkPast-Dead-Change1')
+								input.sheet-checkbox(type='checkbox', name='attr_DarkPast-Dead-Harm')
+								span.sheet-altbox
 							// Pop in up to 2 additional boxes if the right improvements are taken
 							input.sheet-triggerbox(type='checkbox', name='attr_Imp-Dying')
 							input.sheet-checkbox(type='checkbox', name='attr_Extra-Harm1')
@@ -555,6 +561,10 @@ include includes/MOTW-rolltemplates.html
 								.sheet-Luchador.sheet-Traveler.sheet-Custom
 									textarea(name='attr_Luck-Special', rows='4', cols='40', placeholder='(Optional) Write your own Luck Special Move')
 						// .sheet-Luck-Specials
+
+						// Gothic Century's Dark Pasts
+						include includes/gothic-dark-pasts.pug
+
 						// Playbook Specific Oddities
 						.sheet-Chosen.sheet-Fate-Chosen
 							.sheet-Subsection
@@ -726,123 +736,7 @@ include includes/MOTW-rolltemplates.html
 									span.sheet-mainbox
 									span.sheet-grayable
 										span(data-i18n='fate-doom14') The source of Evil
-						.sheet-Crooked.sheet-Background-Crooked
-							.sheet-Subsection
-								span(data-i18n='background') Background
-							input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-CrookedBackgroundAll', value='1', checked='')
-							span.sheet-anglebox
-							span.sheet-ExpHeader
-								span(data-i18n='all') All
-							.sheet-Expander
-								input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-CrookedBackgroundUnused', value='1', checked='')
-								span.sheet-anglebox
-								span.sheet-ExpHeader
-									span(data-i18n='unused') Unused
-								div
-									span(data-i18n='background-description') Before you became a hunter, what less-than-legal job did you do?
-									|  
-									i
-										| &nbsp;(
-										span(data-i18n='pick-one')
-										| )
-								.sheet-move
-									input.sheet-checkbox(type='checkbox', name='attr_Background-Crooked-Hoodlum')
-									span.sheet-mainbox
-									span.sheet-grayable
-										span(data-i18n='background1')
-											b Hoodlum
-											| : You can use Tough instead of Charm to 
-											i manipulate someone
-											|  with threats of violence.
-										button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=background1}}', data-i18n-title='send_details_to_chat')
-								.sheet-move
-									input.sheet-checkbox(type='checkbox', name='attr_Background-Crooked-Burglar')
-									span.sheet-mainbox
-									span.sheet-grayable
-										span(data-i18n='background2')
-											b Burglar
-											| : When you 
-											i break into a secure location
-											| , roll +Sharp. On a 10+ pick three, on a 7-9 pick two
-										| :
-										ul
-											li
-												span(data-i18n='background2.1') You get in undetected
-											li
-												span(data-i18n='background2.2') You get out undetected
-											li
-												span(data-i18n='background2.3') You don&apos;t leave a mess
-											li
-												span(data-i18n='background2.4') You find what you were after
-												button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Burglar}} {{Roll=[[2d6+?{Burglar with|Sharp (Default),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_Burglar')
-												button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=background2}} {{key1=background2.1}} {{key2=background2.2}} {{key3=background2.3}} {{key4=background2.4}}', data-i18n-title='send_details_to_chat')
-								.sheet-move
-									input.sheet-checkbox(type='checkbox', name='attr_Background-Crooked-Grifter')
-									span.sheet-mainbox
-									span.sheet-grayable
-										span(data-i18n='background3')
-											b Grifter
-											| : When you are about to 
-											i manipulate someone
-											| , you can ask the Keeper &quot;what will convince this person to do what I want?&quot; The Keeper must answer honestly, but not necessarily completely.
-										button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=background3}}', data-i18n-title='send_details_to_chat')
-								.sheet-move
-									input.sheet-checkbox(type='checkbox', name='attr_Background-Crooked-Fixer')
-									span.sheet-mainbox
-									span.sheet-grayable
-										span(data-i18n='background4')
-											b Fixer
-											| : If you 
-											i need to buy something, sell something, or hire someone
-											| , roll +Charm. On a 10+, you know just the person that will be interested. On a 7-9, you know the only person who can do it, but there&apos;s a complication. Pick one
-										| :
-										ul
-											li
-												span(data-i18n='background4.1') You owe them
-											li
-												span(data-i18n='background4.2') They screwed you over
-											li
-												span(data-i18n='background4.3') You screwed them over
-										span(data-i18n='background4.4') On a miss, the only person who can help you is someone who absolutely hates you.
-										button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Fixer}} {{Roll=[[2d6+?{Fixer with|Charm (Default),@{Charm}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_Fixer')
-										button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=background4}} {{key1=background4.1}} {{key2=background4.2}} {{key3=background4.3}} {{codakey=background4.4}}', data-i18n-title='send_details_to_chat')
-								.sheet-move
-									input.sheet-checkbox(type='checkbox', name='attr_Background-Crooked-Assassin')
-									span.sheet-mainbox
-									span.sheet-grayable
-										span(data-i18n='background5')
-											b Assassin
-											| : When you take your first shot at an unsuspecting target, do +2 harm.
-										button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=background5}}', data-i18n-title='send_details_to_chat')
-								.sheet-move
-									input.sheet-checkbox(type='checkbox', name='attr_Background-Crooked-Charlatan')
-									span.sheet-mainbox
-									span.sheet-grayable
-										span(data-i18n='background6')
-											b Charlatan
-											| : When you 
-											i want people to think you are using magic,
-											|  roll +Cool. On a 10+ your audience is amazed and fooled by your illusion. On a 7-9, you tripped up a few times, someone will notice.
-										button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Charlatan}} {{Roll=[[2d6+?{Charlatan with|Cool (Default),@{Cool}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_Charlatan')
-										br
-										| &nbsp; &nbsp;
-										span(data-i18n='background6.1')
-											| You may also 
-											i manipulate someone
-											|  with fortune telling. When you do that, ask &quot;What are they hoping for right now?&quot; as a free question (even on a miss).
-										button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=background6}} {{codakey=background6.1}}', data-i18n-title='send_details_to_chat')
-								.sheet-move
-									input.sheet-checkbox(type='checkbox', name='attr_Background-Crooked-Pickpocket')
-									span.sheet-mainbox
-									span.sheet-grayable
-										span(data-i18n='background7')
-											b Pickpocket
-											| : When you 
-											i steal something small
-											| . roll +Charm. On a 10+, you get it and they didn&apos;t notice you taking it. On a 7-9, either you don&apos;t grab it, you grab the wrong thing, or they remember you later; your choice.
-										button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Pickpocket}} {{Roll=[[2d6+?{Pickpocket with|Charm (Default),@{Charm}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_Pickpocket')
-										button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=background7}}', data-i18n-title='send_details_to_chat')
-							// End Expander
+						include includes/crooked-backgrounds.pug
 						.sheet-Crooked.sheet-Heat-Crooked
 							.sheet-Subsection
 								span(data-i18n='heat') Heat
@@ -1086,140 +980,7 @@ include includes/MOTW-rolltemplates.html
 											b Dark Master
 											| : You have an evil lord who doesn&apos;t know you changed sides. They still give you orders, and they do not tolerate refusal, or failure.
 								input(type='text', name='attr_Curse-Monstrous')
-						.sheet-Professional.sheet-Agency-Professional
-							.sheet-Subsection
-								span(data-i18n='agency') Agency
-							input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Agency-Professional-All', value='1', checked='')
-							span.sheet-anglebox
-							span.sheet-ExpHeader
-								span(data-i18n='all') All
-							.sheet-Expander
-								span(data-i18n='agency-description')
-									| Who do you work for? Are they a black-budget government department, a secret military unit, a clandestine police team, a private individual&apos;s crusade, a corporation, a scientific team, or what?
-								br
-								textarea(name='attr_AgencyName-Professional', rows='3', cols='40')
-								br
-								span(data-i18n='agency-goal')
-									| Is the Agency&apos;s goal to: destroy monsters, study the supernatural, protect people, gain power, or something else?
-								input(type='text', name='attr_AgencyGoal-Professional')
-								br
-								div
-									b
-										span(data-i18n='resources') Resources
-									|  
-									i
-										| &nbsp;(
-										span(data-i18n='pick-two') pick two
-										| )
-									| :
-								input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Agency-Professional-Unused', value='1', checked='')
-								span.sheet-anglebox
-								span.sheet-ExpHeader
-									span(data-i18n='unused') Unused
-								.sheet-move
-									input.sheet-checkbox(type='checkbox', name='attr_Agency-Professiona1')
-									span.sheet-mainbox
-									span.sheet-grayable
-										span(data-i18n='agency1') Well-armed
-								.sheet-move
-									input.sheet-checkbox(type='checkbox', name='attr_Agency-Professiona2')
-									span.sheet-mainbox
-									span.sheet-grayable
-										span(data-i18n='agency2') Well-financed
-								.sheet-move
-									input.sheet-checkbox(type='checkbox', name='attr_Agency-Professiona3')
-									span.sheet-mainbox
-									span.sheet-grayable
-										span(data-i18n='agency3') Rigorous training
-								.sheet-move
-									input.sheet-checkbox(type='checkbox', name='attr_Agency-Professiona4')
-									span.sheet-mainbox
-									span.sheet-grayable
-										span(data-i18n='agency4') Official pull
-								.sheet-move
-									input.sheet-checkbox(type='checkbox', name='attr_Agency-Professiona5')
-									span.sheet-mainbox
-									span.sheet-grayable
-										span(data-i18n='agency5') Cover identities
-								.sheet-move
-									input.sheet-checkbox(type='checkbox', name='attr_Agency-Professiona6')
-									span.sheet-mainbox
-									span.sheet-grayable
-										span(data-i18n='agency6') Offices all over the place
-								.sheet-move
-									input.sheet-checkbox(type='checkbox', name='attr_Agency-Professiona7')
-									span.sheet-mainbox
-									span.sheet-grayable
-										span(data-i18n='agency7') Good intel
-								.sheet-move
-									input.sheet-checkbox(type='checkbox', name='attr_Agency-Professiona8')
-									span.sheet-mainbox
-									span.sheet-grayable
-										span(data-i18n='agency8') Recognised authority
-								.sheet-move
-									input.sheet-checkbox(type='checkbox', name='attr_Agency-Professiona9')
-									span.sheet-mainbox
-									span.sheet-grayable
-										span(data-i18n='agency9') Weird tech gadgets
-								.sheet-move
-									input.sheet-checkbox(type='checkbox', name='attr_Agency-Professiona10')
-									span.sheet-mainbox
-									span.sheet-grayable
-										span(data-i18n='agency10') Support teams
-								b
-									span(data-i18n='red-tape') Red Tape
-								|  
-								i
-									| &nbsp;(
-									span(data-i18n='pick-two') pick two
-									| )
-								| :
-								br
-								.sheet-move
-									input.sheet-checkbox(type='checkbox', name='attr_Agency-Professiona11')
-									span.sheet-mainbox
-									span.sheet-grayable
-										span(data-i18n='agency11') Dubious motives
-								.sheet-move
-									input.sheet-checkbox(type='checkbox', name='attr_Agency-Professiona12')
-									span.sheet-mainbox
-									span.sheet-grayable
-										span(data-i18n='agency12') Bureaucratic
-								.sheet-move
-									input.sheet-checkbox(type='checkbox', name='attr_Agency-Professiona13')
-									span.sheet-mainbox
-									span.sheet-grayable
-										span(data-i18n='agency13') Secretive hierarchy
-								.sheet-move
-									input.sheet-checkbox(type='checkbox', name='attr_Agency-Professiona14')
-									span.sheet-mainbox
-									span.sheet-grayable
-										span(data-i18n='agency14') Cryptic missions
-								.sheet-move
-									input.sheet-checkbox(type='checkbox', name='attr_Agency-Professiona15')
-									span.sheet-mainbox
-									span.sheet-grayable
-										span(data-i18n='agency15') Hostile superiors
-								.sheet-move
-									input.sheet-checkbox(type='checkbox', name='attr_Agency-Professiona16')
-									span.sheet-mainbox
-									span.sheet-grayable
-										span(data-i18n='agency16') Inter-departmental rivalry
-								.sheet-move
-									input.sheet-checkbox(type='checkbox', name='attr_Agency-Professiona17')
-									span.sheet-mainbox
-									span.sheet-grayable
-										span(data-i18n='agency17') Budget cuts
-								.sheet-move
-									input.sheet-checkbox(type='checkbox', name='attr_Agency-Professiona18')
-									span.sheet-mainbox
-									span.sheet-grayable
-										span(data-i18n='agency18') Take no prisoners policy
-								.sheet-move
-									input.sheet-checkbox(type='checkbox', name='attr_Agency-Professiona19')
-									span.sheet-mainbox
-									span.sheet-grayable
-										span(data-i18n='agency19') Live capture policy
+						include includes/professional-agency.pug
 						.sheet-Spellslinger
 							.sheet-Subsection
 								span(data-i18n='combat-magic') Combat Magic
@@ -2530,167 +2291,7 @@ include includes/MOTW-rolltemplates.html
 											| , and any other magical moves).
 										button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=haven9}}', data-i18n-title='send_details_to_chat')
 						|  
-						input.sheet-triggerbox.sheet-SectRevealer(type='checkbox', name='attr_Imp-Sect')
-						.sheet-Initiate.sheet-Sect
-							.sheet-Subsection
-								span(data-i18n='your-sect') Sect
-							input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Initiate-Sect-All', value='1', checked='')
-							span.sheet-anglebox
-							span.sheet-ExpHeader
-								span(data-i18n='all') All
-							.sheet-Expander
-								span(data-i18n='sect-description')
-									| You are part of a secret order that deals with the paranormal. Where are they from? How old are they? Are they religious? Why do they stay secret? How do they recruit?
-								textarea(name='attr_SectChoice-Initiate', rows='8', cols='40')
-								br
-								input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Initiate-Sect-Unused', value='1', checked='')
-								span.sheet-anglebox
-								span.sheet-ExpHeader
-									span(data-i18n='unused') Unused
-								.sheet-MinorHead(data-i18n='sect-traditions') Sect&apos;s Traditions
-								b
-									span(data-i18n='good-traditions') Good Traditions
-								|  
-								i
-									| &nbsp;(
-									span(data-i18n='pick-two') pick two
-									| )
-								| :
-								.sheet-move
-									input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate1')
-									span.sheet-mainbox
-									span.sheet-grayable
-										span(data-i18n='good-tradition1') Knowledgeable
-								.sheet-move
-									input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate2')
-									span.sheet-mainbox
-									span.sheet-grayable
-										span(data-i18n='good-tradition2') Ancient lore
-								.sheet-move
-									input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate3')
-									span.sheet-mainbox
-									span.sheet-grayable
-										span(data-i18n='good-tradition3') Magical lore
-								.sheet-move
-									input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate4')
-									span.sheet-mainbox
-									span.sheet-grayable
-										span(data-i18n='good-tradition4') Fighting arts
-								.sheet-move
-									input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate5')
-									span.sheet-mainbox
-									span.sheet-grayable
-										span(data-i18n='good-tradition5') Modernised
-								.sheet-move
-									input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate6')
-									span.sheet-mainbox
-									span.sheet-grayable
-										span(data-i18n='good-tradition6') Chapters everywhere
-								.sheet-move
-									input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate7')
-									span.sheet-mainbox
-									span.sheet-grayable
-										span(data-i18n='good-tradition7') Secular power
-								.sheet-move
-									input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate8')
-									span.sheet-mainbox
-									span.sheet-grayable
-										span(data-i18n='good-tradition8') Flexible tactics
-								.sheet-move
-									input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate9')
-									span.sheet-mainbox
-									span.sheet-grayable
-										span(data-i18n='good-tradition9') Open hierarchy
-								.sheet-move
-									input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate10')
-									span.sheet-mainbox
-									span.sheet-grayable
-										span(data-i18n='good-tradition10') Integrated in society
-								.sheet-move
-									input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate11')
-									span.sheet-mainbox
-									span.sheet-grayable
-										span(data-i18n='good-tradition11') Rich
-								.sheet-move
-									input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate12')
-									span.sheet-mainbox
-									span.sheet-grayable
-										span(data-i18n='good-tradition12') Nifty gadgets
-								.sheet-move
-									input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate13')
-									span.sheet-mainbox
-									span.sheet-grayable
-										span(data-i18n='good-tradition13') Magical items
-								b
-									span(data-i18n='bad-traditions') Bad Traditions
-								|  
-								i
-									| &nbsp;(
-									span(data-i18n='pick-one') pick one
-									| )
-								| :
-								.sheet-move
-									input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate14')
-									span.sheet-mainbox
-									span.sheet-grayable
-										span(data-i18n='bad-tradition1') Dubious motives
-								.sheet-move
-									input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate15')
-									span.sheet-mainbox
-									span.sheet-grayable
-										span(data-i18n='bad-tradition2') Tradition-bound
-								.sheet-move
-									input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate16')
-									span.sheet-mainbox
-									span.sheet-grayable
-										span(data-i18n='bad-tradition3') Short-sighted
-								.sheet-move
-									input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate17')
-									span.sheet-mainbox
-									span.sheet-grayable
-										span(data-i18n='bad-tradition4') Paranoid and secretive
-								.sheet-move
-									input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate18')
-									span.sheet-mainbox
-									span.sheet-grayable
-										span(data-i18n='bad-tradition5') Closed hierarchy
-								.sheet-move
-									input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate19')
-									span.sheet-mainbox
-									span.sheet-grayable
-										span(data-i18n='bad-tradition6') Factionalised
-								.sheet-move
-									input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate20')
-									span.sheet-mainbox
-									span.sheet-grayable
-										span(data-i18n='bad-tradition7') Strict laws
-								.sheet-move
-									input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate21')
-									span.sheet-mainbox
-									span.sheet-grayable
-										span(data-i18n='bad-tradition8') Mystical oaths
-								.sheet-move
-									input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate22')
-									span.sheet-mainbox
-									span.sheet-grayable
-										span(data-i18n='bad-tradition9') Total obedience
-								.sheet-move
-									input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate23')
-									span.sheet-mainbox
-									span.sheet-grayable
-										span(data-i18n='bad-tradition10') Tyrannical leaders
-								.sheet-move
-									input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate24')
-									span.sheet-mainbox
-									span.sheet-grayable
-										span(data-i18n='bad-tradition11') Obsolete gear
-								.sheet-move
-									input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate25')
-									span.sheet-mainbox
-									span.sheet-grayable
-										span(data-i18n='bad-tradition12') Poor
-										|  
-										br
+						include includes/initiate-sect.pug
 						// For tracking Ally improvements
 						// input type="checkbox" class="sheet-triggerbox sheet-AllyRevealer" name="attr_Imp-Ally"
 						.sheet-Ally
@@ -2995,6 +2596,7 @@ include includes/MOTW-rolltemplates.html
 												span(name='attr_RoteEffect-Hex')
 												button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Cast a Rote: @{RoteName-Hex}}} {{Roll=[[2d6+?{Cast @{RoteName-Hex} with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_rote')
 												button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movetext=**@{RoteName-Hex} (Rote)**}} {{coda=*Requirements:* @{RoteReq-Hex} *Effects:* @{RoteEffect-Hex}}}', data-i18n-title='send_details_to_chat')
+
 						// Advanced Basic Moves
 						input.sheet-triggerbox(type='checkbox', name='attr_AdvImp-AdvBasic')
 						.sheet-triggerframe
@@ -3291,6 +2893,12 @@ include includes/MOTW-rolltemplates.html
 								|  
 								span.sheet-ExpHeader
 									span(data-i18n='unused') Unused
+								input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+								.sheet-Setting-Gothic
+									input.sheet-DarkPastCheck(type='hidden', name='attr_DarkPast', value='0')
+									.sheet-DarkPast-Curse
+										input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Improvements-Hider', value='1', checked='')
+										+move('Gothic-Curse-Improve','I find a clear, but maybe difficult, way to break my curse')
 								// CHARM
 								.sheet-move.sheet-Spooktacular.sheet-Actionscientist.sheet-Spooky.sheet-Professional.sheet-Mundane.sheet-Monstrous.sheet-Flake.sheet-Chosen.sheet-Crooked.sheet-Divine.sheet-Expert.sheet-Gumshoe.sheet-Hex.sheet-Pararomantic.sheet-Searcher.sheet-Luchador.sheet-Meddlingkid.sheet-Sidekick.sheet-Snoop.sheet-Summoned.sheet-Traveler.sheet-Custom
 									input.sheet-checkbox(type='checkbox', name='attr_Imp-Charm-1')
@@ -3718,6 +3326,12 @@ include includes/MOTW-rolltemplates.html
 								|  
 								span.sheet-ExpHeader
 									span(data-i18n='unused') Unused
+								input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+								.sheet-Setting-Gothic
+									input.sheet-DarkPastCheck(type='hidden', name='attr_DarkPast', value='0')
+									.sheet-DarkPast-Curse
+										input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Improvements-Hider', value='1', checked='')
+										+move('Gothic-Curse-Advanced-Improve','I break my curse')
 								.sheet-move.sheet-Hardcase2020.sheet-Constructed.sheet-Spooktacular.sheet-Actionscientist.sheet-Chosen.sheet-Crooked.sheet-Divine.sheet-Expert.sheet-Flake.sheet-Initiate.sheet-Monstrous.sheet-Mundane.sheet-Professional.sheet-Spellslinger.sheet-Spooky.sheet-Wronged.sheet-Gumshoe.sheet-Hex.sheet-Pararomantic.sheet-Searcher.sheet-Exile.sheet-Hardcase.sheet-Luchador.sheet-Meddlingkid.sheet-Sidekick.sheet-Snoop.sheet-Summoned.sheet-Traveler.sheet-Custom
 									input.sheet-checkbox(type='checkbox', name='attr_AdvImp-Any-1')
 									span.sheet-mainbox

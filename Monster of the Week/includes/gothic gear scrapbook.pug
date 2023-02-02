@@ -1,0 +1,34 @@
+	input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+	+move('Gothic-Gear-Wronged','Musket (3-harm close reload slow inaccurate)')(class="sheet-Setting-Gothic")
+	+move('Gothic-Gear-Wronged','Rifle (3-harm close/far reload slow)')(class="sheet-Setting-Gothic")
+	+move('Gothic-Gear-Wronged','Lever rifle (3-harm close/far reload)')(class="sheet-Setting-Gothic")
+	+move('Gothic-Gear-Wronged','Revolver (2-harm hand/close reload)')(class="sheet-Setting-Gothic")
+	+move('Gothic-Gear-Wronged','Small revolver (1-harm hand/close reload concealable)')(class="sheet-Setting-Gothic")
+	+move('Gothic-Gear-Wronged','Sword cane (2-harm hand concealable)')(class="sheet-Setting-Gothic")
+	+move('Gothic-Gear-Wronged','Family heirloom sword (2-harm hand precious)')(class="sheet-Setting-Gothic")
+	+move('Gothic-Gear-Wronged','Wrench (2-harm hand inconspicuous)')(class="sheet-Setting-Gothic")
+
+	+move('Gothic-Gear-Wronged','Portable steamcannon (3-harm close/far reload loud messy)')(class="sheet-Setting-Gothic")
+	+move('Gothic-Gear-Wronged','Prototype Flamethrower (3-harm close area volatile)')(class="sheet-Setting-Gothic")
+	+move('Gothic-Gear-Wronged','Steam pressure rifle (3-harm close reload)')(class="sheet-Setting-Gothic")
+	+move('Gothic-Gear-Wronged','Whipblade (2-harm hand/close messy)')(class="sheet-Setting-Gothic")
+	+move('Gothic-Gear-Wronged','Vampire hunting kit (4-harm hand or 2-harm close restraining against vampires, 1-harm hand against everybody else)')(class="sheet-Setting-Gothic")
+
+			input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+			+translate('<i>In Gothic Century:</i> This applies to riding beasts and driving carriages as well.').sheet-Setting-Gothic
+
+	input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+
+.sheet-Setting-Default only
+
+retained
+
+			input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+			span.sheet-Setting-Default
+				span(data-i18n='Wronged-move7')
+				button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Net Friends}} {{Roll=[[2d6+?{Net Friends with|Charm (Default),@{Charm}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_netfriends') 
+				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=Wronged-move7}}', data-i18n-title='send_details_to_chat') 
+			span.sheet-Setting-Gothic
+				+translate('<b>Correspondence Society</b>: You have a network of spies, informants, and eccentrics that constantly correspond with each other, all over the world, via mail and coded messages in newspapers. When you <i>contact a society member to help you</i>, roll +Charm. On a 10+, they’re available and helpful—they can fix something, break a code, or get you some special information. On a 7-9, they’re prepared to help, but it’s either going to take some time, or you’ll have to do part of it yourself. On a miss, you burn some bridges.') 
+				button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Correspondence Society}} {{Roll=[[2d6+?{Correspondence Society with|Charm (Default),@{Charm}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_netfriends') 
+				+shareButton('<b>Correspondence Society</b>: You have a network of spies, informants, and eccentrics that constantly correspond with each other, all over the world, via mail and coded messages in newspapers. When you <i>contact a society member to help you</i>, roll +Charm. On a 10+, they’re available and helpful—they can fix something, break a code, or get you some special information. On a 7-9, they’re prepared to help, but it’s either going to take some time, or you’ll have to do part of it yourself. On a miss, you burn some bridges.')

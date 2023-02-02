@@ -1,0 +1,130 @@
+// The Meddling Kid Moves
+.sheet-OPBHead.sheet-MinorHead.sheet-space-above(data-i18n='the-meddlingkid') The Meddling Kid
+.sheet-Meddlingkid
+	i
+		span(data-i18n='3-moves') Pick three of these
+	| :
+.sheet-Meddlingkid.sheet-OPB
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-MovesUnused', value='1', checked='')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Meddlingkid1')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='meddlingkid-move1')
+				b Unmasked!
+				| : When you have a monster captured or at bay, you may explain it is not a monster after all but a specific person in a mask. You must explain the real reason for all the seemingly supernatural events you have seen, and how the villain was behind them. When you reveal the culprit, roll +Sharp. On a 10+, your deduction is correct and it really is that person in a mask! On a 7-9, the Keeper must choose one of
+			| :
+			ul
+				li
+					span(data-i18n='meddlingkid-move1.1')
+						| This really is a monster, but the named bystander was secretly their ally all along.
+				li
+					span(data-i18n='meddlingkid-move1.2') You are correct, but while you talked, they found a way to attempt an escape.
+				li
+					span(data-i18n='meddlingkid-move1.3')
+						| The explanation for all the events is correct but you picked the wrong person; when you unmask them, the villain is someone unexpected.
+			span(data-i18n='meddlingkid-move1.4')
+				| On a miss, the monster gets an opportunity to create chaos while you explain your (incorrect) deductions.
+			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Unmasked!}} {{Roll=[[2d6+?{Unmasked! with|Sharp (Default),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_unmasked')
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=meddlingkid-move1}} {{codakey=meddlingkid-move1.4}} {{key1=meddlingkid-move1.1}} {{key2=meddlingkid-move1.2}} {{key3=meddlingkid-move1.3}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Meddlingkid2')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='meddlingkid-move2')
+				b Power Snack
+				| : When you take the time to eat your chosen snacks and really enjoy them, take +1 forward. My power snack is:
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=meddlingkid-move2}} {{extra=@{Snack-Meddlingkid}}}', data-i18n-title='send_details_to_chat')
+			input(type='text', name='attr_Snack-Meddlingkid')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Meddlingkid3')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='meddlingkid-move3')
+				b Wallop!
+				| : When you use an improvised weapon to attack something, you may choose one of these extra effects
+			| :
+			ul
+				li
+					span(data-i18n='meddlingkid-move3.2') Momentarily stun them with a blow to the head.
+				li
+					span(data-i18n='meddlingkid-move3.3') Trip or entangle them.
+				li
+					span(data-i18n='meddlingkid-move3.1') Inflict +1 harm but the improvised weapon breaks.
+					button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Wallop!}} {{Roll=[[2d6+?{Wallop! with|Tough (Default),@{Tough}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_ksb')
+					button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=meddlingkid-move3}} {{key1=meddlingkid-move3.1}} {{key2=meddlingkid-move3.2}} {{key3=meddlingkid-move3.3}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Meddlingkid4')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='meddlingkid-move4')
+				b It&apos;s A Trap!
+				| : When you make a trap to capture a monster or minion, roll +Sharp. On a hit, you capture something! On a 10+, you can choose one of these extra effects
+			| :
+			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=It’s a Trap!}} {{Roll=[[2d6+?{It’s a Trap! with|Sharp (Default),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_iatrap')
+			ul
+				li
+					span(data-i18n='meddlingkid-move4.1') It will take some time for the victim to get free.
+				li
+					span(data-i18n='meddlingkid-move4.2') The trap inflicts harm (as an improvised weapon).
+				li
+					span(data-i18n='meddlingkid-move4.3')
+						| The trap may be reset and reused later. Roll the move again when you do so, with +1 forward.
+					button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Reset and reuse It’s a Trap!}} {{Roll=[[2d6+?{Reset and reuse It’s a Trap! with|Sharp (Default),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|1}]]}}', name='roll_iatrap-reset')
+					button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=meddlingkid-move4}} {{key1=meddlingkid-move4.1}} {{key2=meddlingkid-move4.2}} {{key3=meddlingkid-move4.3}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Meddlingkid5')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='meddlingkid-move5')
+				b Tell Me The Truth!
+				| : When you are questioning somebody to 
+				i investigate a mystery
+				| , you may ask questions from the following list as well as from the usual list
+			| :
+			ul
+				li
+					span(data-i18n='meddlingkid-move5.1') Who has something to gain from this situation?
+				li
+					span(data-i18n='meddlingkid-move5.2') What are you plotting?
+				li
+					span(data-i18n='meddlingkid-move5.3') Are you lying to me?
+				li
+					span(data-i18n='meddlingkid-move5.4') Who knows about _____?
+					button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Investigate a Mystery}} {{Roll=[[2d6+?{Investigate a Mystery with|Sharp (Default),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_iam')
+					button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=meddlingkid-move5}} {{key1=meddlingkid-move5.1}} {{key2=meddlingkid-move5.2}} {{key3=meddlingkid-move5.3}} {{key4=meddlingkid-move5.4}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Meddlingkid6')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='meddlingkid-move6')
+				b Run Away!
+				| : When you decide to get out of a bad situation, you can get away just fine. Unfortunately you will end up somewhere just as bad, that is important to the current mystery.
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=meddlingkid-move6}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Meddlingkid7')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='meddlingkid-move7')
+				b A Pleasant and Friendly Manner
+				| : When you politely 
+				i manipulate someone
+				| , your impeccable manners always count as a reason for the person to do what you say.
+			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Manipulate Someone}} {{Roll=[[2d6+?{Manipulate Someone with|Charm (Default),@{Charm}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_ms')
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=meddlingkid-move7}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Meddlingkid8')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='meddlingkid-move8')
+				b Best Bud!
+				| : You have an animal ally to help you solve mysteries. They can talk, but with a heavy accent (most people don&rsquo;t understand).
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=meddlingkid-move8}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Meddlingkid9')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='meddlingkid-move9')
+				| b&gt;Hard Head!: Any time you suffer harm from an attack, you may choose to take 0-harm. You instead are knocked out for a few minutes.
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=meddlingkid-move9}}', data-i18n-title='send_details_to_chat')
+// .sheet-Meddlingkid .sheet-OPB

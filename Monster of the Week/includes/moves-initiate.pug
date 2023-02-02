@@ -1,0 +1,99 @@
+// The Initiate Moves
+.sheet-OPBHead.sheet-MinorHead.sheet-space-above(data-i18n='the-initiate') The Initiate
+.sheet-Initiate
+	i
+		span(data-i18n='1-fixed-move') You get this one
+	| :
+input.sheet-triggerbox.sheet-SectRevealer(type='checkbox', name='attr_Imp-Sect')
+.sheet-Initiate.sheet-OPB.sheet-Sect
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-MovesUnused', value='1', checked='')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_FixedMoves-Initiate1')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='initiate-fixed-move1')
+			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Beginning of Mystery Sect Move}} {{Roll=[[2d6+?{Beginning of Mystery Sect Move with|Charm (Default),@{Charm}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_bom-sect')
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=initiate-fixed-move1}}', data-i18n-title='send_details_to_chat')
+// .sheet-Initiate .sheet-OPB
+.sheet-Initiate
+	i
+		span(data-i18n='3-moves-then') Then pick three of these
+	| :
+.sheet-Initiate.sheet-OPB
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-MovesUnused', value='1', checked='')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Initiate1')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='initiate-move1')
+			|  
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=initiate-move1}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Initiate2')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='initiate-move2')
+			|  
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=initiate-move2}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Initiate3')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='initiate-move3')
+			ul
+				li
+					span(data-i18n='initiate-move3.1') Have a useful object ready.
+				li
+					span(data-i18n='initiate-move3.2') Be somewhere you are needed, just in time.
+				li
+					span(data-i18n='initiate-move3.3') Take +1 forward, or give +1 forward to another hunter.
+				li
+					span(data-i18n='initiate-move3.4') Preemptively warn someone about an attack, so that it doesn&apos;t happen.
+					|  
+					button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Fortunes}} {{Roll=[[2d6+?{Fortunes with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_fortunes')
+					button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=initiate-move3}} {{key1=initiate-move3.1}} {{key2=initiate-move3.2}} {{key3=initiate-move3.3}} {{key4=initiate-move3.4}}', data-i18n-title='send_details_to_chat')
+			b
+				span(data-i18n='current-hold') Current Hold
+				| :
+			|  
+			input(type='number', name='attr_Initiate3-Hold', min='0', value='0')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Initiate4')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='initiate-move4')
+			|  
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=initiate-move4}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Initiate5')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='initiate-move5')
+			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Mentor}} {{Roll=[[2d6+?{Mentor with|Sharp (Default),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_Mentor')
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=initiate-move5}} {{extra=@{Mentor-Initiate}}}', data-i18n-title='send_details_to_chat')
+			|  
+			input(type='text', name='attr_Mentor-Initiate')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Initiate6')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='initiate-move6')
+			|  
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=initiate-move6}} {{extra=@{Mentor-Apprentice}}}', data-i18n-title='send_details_to_chat')
+			|  
+			input(type='text', name='attr_Mentor-Apprentice')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Initiate7')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='initiate-move7')
+			|  
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=initiate-move7}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Initiate8')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='initiate-move8')
+			|  
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=initiate-move8}}', data-i18n-title='send_details_to_chat')
+// .sheet-Initiate .sheet-OPB

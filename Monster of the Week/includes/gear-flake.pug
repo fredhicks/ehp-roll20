@@ -1,0 +1,87 @@
+// Gear for The Flake
+.sheet-Flake
+	input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-GearUnused-Hider', value='1', checked='')
+	div
+		b
+			span(data-i18n='flake-normal') Normal Weapon
+		|  
+		i
+			| &nbsp;(
+			span(data-i18n='pick-one') pick one
+			| )
+		| :
+	.sheet-move.sheet-Setting-Default
+		input.sheet-checkbox(type='checkbox', name='attr_Flake_gear1')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='flake-gear1')
+	.sheet-move.sheet-Setting-Default
+		input.sheet-checkbox(type='checkbox', name='attr_Flake_gear2')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='flake-gear2')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Flake_gear3')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='flake-gear3')
+	.sheet-move.sheet-Setting-Default
+		input.sheet-checkbox(type='checkbox', name='attr_Flake_gear4')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='flake-gear4')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Flake_gear5')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='flake-gear5')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Flake_gear6')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='flake-gear6')
+	+move('Gothic-Gear-Flake','Revolver (2-harm hand/close reload)')(class="sheet-Setting-Gothic")
+	+move('Gothic-Gear-Flake','Rifle (3-harm close/far reload slow)')(class="sheet-Setting-Gothic")
+	+move('Gothic-Gear-Flake','Wrench (2-harm hand inconspicuous)')(class="sheet-Setting-Gothic")
+	+move('Gothic-Gear-Flake','Steam pressure rifle (3-harm close reload)')(class="sheet-Setting-Gothic")
+	.sheet-space-above
+		b
+			span(data-i18n='flake-hidden') Hidden Weapons
+		|  
+		i
+			| &nbsp;(
+			span(data-i18n='pick-two') pick two
+			| )
+		| :
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Flake_gear7', value='gear7')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='flake-gear7')
+	.sheet-move.sheet-Setting-Default
+		input.sheet-checkbox(type='checkbox', name='attr_Flake_gear8', value='gear8')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='flake-gear8')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Flake_gear9', value='gear9')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='flake-gear9')
+	.sheet-move.sheet-Setting-Default
+		input.sheet-checkbox(type='checkbox', name='attr_Flake_gear10', value='gear10')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='flake-gear10')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Flake_gear11', value='gear11')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='flake-gear11')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Flake_gear12', value='gear12')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='flake-gear12')
+	+move('Gothic-Gear-Flake','Sword cane (2-harm hand concealable)')(class="sheet-Setting-Gothic")

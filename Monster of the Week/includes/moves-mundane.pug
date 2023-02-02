@@ -1,0 +1,91 @@
+// The Mundane Moves
+.sheet-OPBHead.sheet-MinorHead.sheet-space-above(data-i18n='the-mundane') The Mundane
+.sheet-Mundane
+	i
+		span(data-i18n='3-moves') Pick three of these
+	| :
+.sheet-Mundane.sheet-OPB
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-MovesUnused', value='1', checked='')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Mundane1')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='mundane-move1')
+			|  
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=mundane-move1}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Mundane2')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='mundane-move2')
+			|  
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=mundane-move2}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Mundane3')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='mundane-move3')
+			|  
+			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Protect Someone}} {{Roll=[[2d6+?{Protect Someone with|Charm (Default),@{Charm}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_ps-charm')
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=mundane-move3}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Mundane4')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='mundane-move4')
+			|  
+			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Panic Button}} {{Roll=[[2d6+?{Panic Button with|Sharp (Default),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_pbutton')
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=mundane-move4}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Mundane5')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='mundane-move5')
+			|  
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=mundane-move5}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Mundane6')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='mundane-move6')
+			| :
+			ul
+				li
+					span(data-i18n='mundane-move6.1') They ask you a hard question first.
+				li
+					span(data-i18n='mundane-move6.2') They stall and dither a while.
+				li
+					span(data-i18n='mundane-move6.3') They have a &apos;better&apos; idea.
+			span(data-i18n='mundane-move6.4') On a Miss, they think you&apos;re crazy, and maybe dangerous too.
+			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Trust Me}} {{Roll=[[2d6+?{Trust Me with|Charm (Default),@{Charm}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_trustme')
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=mundane-move6}} {{key1=mundane-move6.1}} {{key2=mundane-move6.2}} {{key3=mundane-move6.3}} {{codakey=mundane-move6.4}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Mundane7')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='mundane-move7')
+			ul
+				li
+					span(data-i18n='mundane-move7.1') Inflict 1 harm.
+				li
+					span(data-i18n='mundane-move7.2') Reduce someone&apos;s harm suffered by 1.
+				li
+					span(data-i18n='mundane-move7.3')
+						| Take +2 forward on an 
+						i act under pressure
+						|  roll.
+					button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Act Under Pressure}} {{Roll=[[2d6+?{Act Under Pressure with|Cool (Default),@{Cool}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|2}]]}}', name='roll_aup-plustwo')
+					button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=mundane-move7}} {{key1=mundane-move7.1}} {{key2=mundane-move7.2}} {{key3=mundane-move7.3}}', data-i18n-title='send_details_to_chat')
+			b
+				span(data-i18n='current-hold') Current Hold
+				| :
+			|  
+			input(type='number', name='attr_Mundane7-Hold', min='0', value='0')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Mundane8')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='mundane-move8')
+			|  
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=mundane-move8}}', data-i18n-title='send_details_to_chat')
+// .sheet-Mundane .sheet-OPB

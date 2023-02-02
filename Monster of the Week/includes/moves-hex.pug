@@ -1,0 +1,118 @@
+// The Hex Moves
+.sheet-OPBHead.sheet-MinorHead.sheet-space-above(data-i18n='the-hex') The Hex
+.sheet-Hex
+	i
+		span(data-i18n='1-fixed-move') You get this
+	| :
+.sheet-Hex.sheet-OPB
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-MovesUnused', value='1', checked='')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_FixedMoves-Hex1')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='hex-fixed-move1')
+				b Bad Luck Charm
+				| : Whenever you 
+				i use magic
+				|  and miss, the backlash never affects you directly if there&apos;s someone else around to hit. It&apos;ll go for allies, other hunters, and innocent bystanders. Sometimes, every so often, it might even hit an enemy.
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=hex-fixed-move1}}', data-i18n-title='send_details_to_chat')
+// .sheet-Hex .sheet-OPB
+.sheet-Hex
+	i
+		span(data-i18n='2-moves-then') Then pick two of these
+	| :
+.sheet-Hex.sheet-OPB
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-MovesUnused', value='1', checked='')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Hex1')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='hex-move1')
+				b Burn Everything
+				| : When you 
+				i use magic
+				|  to inflict harm, you can choose to inflict (3 harm, area, magic, obvious) or (3 harm, ignore-armour, magic, obvious).
+			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Use Magic}} {{Roll=[[2d6+?{Use Magic with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_um')
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=hex-move1}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Hex2')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='hex-move2')
+				b Cast the Bones
+				| : Once per mystery, you may perform some kind of divination (tarot, casting the runes, reading entrails, or something like that) to glean information about the future. When you do, roll +Sharp. On a 10+ hold 2, on a 7-9 hold 1. On a miss, you get some information, but it&apos;s not what you want to hear. Spend the hold 1-for-1 to ask any question from the 
+				i investigate a mystery
+				|  list, or from the following list
+			| :
+			ul
+				li
+					span(data-i18n='hex-move2.1') What can I gain from this person/place/thing/creature?
+				li
+					span(data-i18n='hex-move2.2') Who has touched this person/place/thing/creature before me?
+			span(data-i18n='hex-move2.3')
+				| The Keeper will answer truthfully, with either a direct answer or how to find out more.
+			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Cast the Bones}} {{Roll=[[2d6+?{Cast the Bones with|Sharp (Default),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_bones')
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=hex-move2}} {{key1=hex-move2.1}} {{key2=hex-move2.2}} {{codakey=hex-move2.3}}', data-i18n-title='send_details_to_chat')
+			br
+			b
+				span(data-i18n='current-hold') Current Hold
+				| :
+			|  
+			input(type='number', name='attr_hex-move2-Hold', min='0', value='0')
+	|  
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Hex3')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='hex-move3')
+				b Force of Will
+				| : When you apply your will to dispelling a magical effect, blocking a spell, or suspending a Phenomenon, roll +Weird. On a hit, momentary magics are cancelled completely, and long-lasting spells and effects are suspended temporarily. On a 10+, you can also spend 
+				i Luck
+				|  to instantly snuff out a powerful spell or strange effect. On a 7-9, you take 1 harm as the strain of dismissing magic unravels you.
+			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Force of Will}} {{Roll=[[2d6+?{Force of Will with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_fow')
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=hex-move3}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Hex4')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='hex-move4')
+				b Luck of the Damned
+				| : After you 
+				i use magic
+				|  or cast a rote, take +1 forward.
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=hex-move4}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Hex5')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='hex-move5')
+				b Sympathetic Token
+				| : As long as you carry a personal object belonging to someone, such as a lock of hair, a full set of toenails, or a treasured family heirloom, you get +1 ongoing to 
+				i use magic
+				|  against them. You can also 
+				i use magic
+				|  against them at a distance. If you miss, the token is lost, destroyed, or loses its power.
+			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Use Magic}} {{Roll=[[2d6+?{Use Magic with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|1}]]}}', name='roll_um-plusone')
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=hex-move5}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Hex6')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='hex-move6')
+				b This Might Sting
+				| : You can 
+				i use magic
+				|  to heal 3 harm, but the process is exceptionally painful. On a 7-9, it also leaves a gnarly scar.
+			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Use Magic}} {{Roll=[[2d6+?{Use Magic with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_um')
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=hex-move6}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Hex7')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='hex-move7')
+				b Wise Soul
+				| : Whenever you 
+				i use magic
+				| , right before you roll, you can ask the Keeper what exactly would happen on a miss. If you dislike the risk, you can stop at the last second, and let the spell fizzle harmlessly. All of the effort is wasted.
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=hex-move7}}', data-i18n-title='send_details_to_chat')
+// .sheet-Hex .sheet-OPB

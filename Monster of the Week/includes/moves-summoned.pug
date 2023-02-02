@@ -1,0 +1,135 @@
+// The Summoned Moves
+.sheet-OPBHead.sheet-MinorHead.sheet-space-above(data-i18n='the-summoned') The Summoned
+.sheet-Summoned
+	i
+		span(data-i18n='1-fixed-move') You get this
+	| :
+.sheet-Summoned.sheet-OPB
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-MovesUnused', value='1', checked='')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_FixedMoves-Summoned1')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='summoned-fixed-move1')
+				b Freakish
+				| : You&apos;re weird, and people react badly. You cannot use 
+				i manipulate someone
+				|  on a person until you prove yourself to them first (this includes the other hunters, and it&apos;s up to them to decide when you have proved yourself). Until then, people will just try to get away from you. You can spend 
+				i Luck
+				|  to have a person take to you. Don&apos;t roll 
+				i manipulate someone
+				| ; they act as though you&apos;d rolled a 12. On the other hand, you can use 
+				i manipulate someone
+				|  on monsters that can reason and talk (but they always want something really bad).
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=summoned-fixed-move1}}', data-i18n-title='send_details_to_chat')
+// .sheet-Summoned .sheet-OPB
+.sheet-Summoned
+	i
+		span(data-i18n='2-moves-then') Then pick two of these
+	| :
+.sheet-Summoned.sheet-OPB
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-MovesUnused', value='1', checked='')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Summoned1')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='summoned-move1')
+				b What Are You Looking At?
+				| : When you talk to a monster (capable of reason and speech), they will recognize you and your potential. If you ask them what they know, pick one for the Keeper to reveal
+			| :
+			ul
+				li
+					span(data-i18n='summoned-move1.1') Tell me something about where I&apos;m from.
+				li
+					span(data-i18n='summoned-move1.2') Tell me something about my destiny.
+				li
+					span(data-i18n='summoned-move1.3') Tell me something about who I really am.
+				li
+					span(data-i18n='summoned-move1.4')
+						| Tell me something about the 
+						i Apocalypse
+						| .
+					button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=summoned-move1}}  {{key1=summoned-move1.1}} {{key2=summoned-move1.2}} {{key3=summoned-move1.3}} {{key4=summoned-move1.4}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Summoned2')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='summoned-move2')
+				b Should I Feel That?
+				| : Your body has 2 armour. This does not stack with any other armour.
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=summoned-move2}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Summoned3')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='summoned-move3')
+				b Mayhem!
+				| : When you grab a nearby large object and use it as an improvised weapon, first determine how much damage it will do.
+			span(data-i18n='summoned-move3-guide') Guidelines
+			| :
+			ul
+				li
+					span(data-i18n='summoned-move3.1') Fire extinguisher, fence post, furniture, etc: 2 harm
+				li
+					span(data-i18n='summoned-move3.2') Motorcycle, lamppost, masonry chunk, etc: 3 harm
+				li
+					span(data-i18n='summoned-move3.3') Car, dumpster, boulder, etc: 4 harm
+				li
+					span(data-i18n='summoned-move3.4') Bus, truck, wall, etc: 5 harm
+					button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=summoned-move3}} {{key1=summoned-move3.1}} {{key2=summoned-move3.2}} {{key3=summoned-move3.3}} {{key4=summoned-move3.4}}', data-i18n-title='send_details_to_chat')
+			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Kick Some Ass}} {{Roll=[[2d6+?{Kick Some Ass with|Tough (Default),@{Tough}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_kickass')
+			span(data-i18n='summoned-move3-desc')
+				| After you inflict harm with it (with a 
+				i kick some ass
+				|  roll or otherwise), roll +harm your weapon actually caused. On a miss, you use it without trouble. On a 7-9 pick one side effect, on a 10+ pick two
+			| :
+			ul
+				li
+					span(data-i18n='summoned-move3.5') You hurt someone nearby as well as your target.
+				li
+					span(data-i18n='summoned-move3.6') You make something about the situation worse.
+				li
+					span(data-i18n='summoned-move3.7') You lose control of your improvised weapon.
+				li
+					span(data-i18n='summoned-move3.8') You cause massive property damage.
+				li
+					span(data-i18n='summoned-move3.9') Your improvised weapon breaks.
+					button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Mayhem Consequence}} {{Roll=[[2d6+?{Harm inflicted|Small (2 harm),2|Medium (3 harm),3|Large (4 harm),4|Huge (5 harm),5}+?{+/- forward?|0}]]}}', name='roll_mayhem')
+					button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=summoned-move3-desc}} {{key1=summoned-move3.5}} {{key2=summoned-move3.6}} {{key3=summoned-move3.7}} {{key4=summoned-move3.8}} {{key5=summoned-move3.9}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Summoned4')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='summoned-move4')
+				b Absolute Badass
+				| : Take +1 Tough (max +3).
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=summoned-move4}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Summoned5')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='summoned-move5')
+				b Screw You
+				| : Spend 
+				i Luck
+				|  to get +1 ongoing vs. one particular monster. This lasts until that monster is dead.
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=summoned-move5}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Summoned6')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='summoned-move6')
+				b Whatever
+				| : Spend 
+				i Luck
+				|  to get +1 Tough for the remainder of the current mystery (max +4).
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=summoned-move6}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Summoned7')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='summoned-move7')
+				b Why So Serious?
+				| : If you cap off a move with an appropriate one-liner, the team gets +1 forward (so the next hunter who makes a roll gets +1).
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=summoned-move7}}', data-i18n-title='send_details_to_chat')
+// .sheet-Summoned .sheet-OPB

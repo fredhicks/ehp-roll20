@@ -6,8 +6,6 @@ Major: In-Playbooks support for how the various Worlds change the defaults. See 
 
 Codex features several worlds; where necessary, these would probably manifest as setting toggles (“show Gothic Century version”, etc):
 
-- This Strange Old House is the smallest World in the Codex, and does not actually require any changes to how character playbooks work, so that’s potentially fruitful. The only particularly unusual asset with House is the exploration map, but that would best be handled as an in-module/on-VTT-table thing rather than any sheet integration being necessary.
-
 - Gothic Century has a number of modifiers to gear lists for all the playbooks (p167 onward), as well as a few where the moves’ text gets a little altered to fit the setting. Gothic Century also features Dark Pasts (p176) that each hunter chooses and fills in, so the Gothic Century toggle would also present the player with a new section and options to pick from. May need some minor support for the Gothic Haunt subtype of phenomena (p190) but it’s possible that’s merely cosmetic.
 
 - Dreaming with the Gods similarly has some new gear (p223) that gets feathered into the gear lists for the playbooks plus some altered moves (p224+). It also adds a “Dive Into Dreams” setting-specific basic move. 
@@ -25,3 +23,5 @@ GITHUB UPDATE for phase one (Team Playbooks)
 Very minor: Adding support to the mystery/monster builder sheet for the new Atonement Mystery type — but that’s mainly “replace Monster Weakness with Sin or Wrongdoing [to be resolved]”
 
 Minor: Non-Lethal Play chapter is mainly guidelines for how to change your tempo on healing; page 23 does have a “Gear” section which is a list of stuff that the GM can “allow the players to swap for any of their existing gear picks”, so maybe a toggle for “provide non-lethal gear options” that makes those appear in any playbook’s pickable gear list.
+
+- NULL OPERATION: This Strange Old House is the smallest World in the Codex, and does not actually require any changes to how character playbooks work, so that’s potentially fruitful. The only particularly unusual asset with House is the exploration map, but that would best be handled as an in-module/on-VTT-table thing rather than any sheet integration being necessary.

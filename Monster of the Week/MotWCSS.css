@@ -22,6 +22,15 @@
 	color: #eee;
 }
 
+.sheet-DarkPast-Dead,
+.sheet-DarkPast-Outcast,
+.sheet-DarkPast-Tragedy,
+.sheet-DarkPast-Curse,
+.sheet-Setting-Default,
+.sheet-Setting-Gothic,
+.sheet-Setting-Dreaming,
+.sheet-Setting-Marches,
+.sheet-Setting-Bone,
 .sheet-Atonement,
 .sheet-KItem-Type-New,
 .sheet-KItem-Type-Countdown,
@@ -124,7 +133,33 @@ div.sheet-NoTeams,
 	display: block;
 }
 
-/* SkinCheck value 28 is unallocated; keep in mind for future playbooks */
+.sheet-DarkPastCheck[value="dead"] ~ div.sheet-DarkPast-Dead,
+.sheet-DarkPastCheck[value="outcast"] ~ div.sheet-DarkPast-Outcast,
+.sheet-DarkPastCheck[value="tragedy"] ~ div.sheet-DarkPast-Tragedy,
+.sheet-DarkPastCheck[value="curse"] ~ div.sheet-DarkPast-Curse,
+.sheet-SettingCheck[value="gothic"] ~ div.sheet-Setting-Gothic,
+.sheet-SettingCheck[value="bone"] ~ div.sheet-Setting-Bone,
+.sheet-SettingCheck[value="marches"] ~ div.sheet-Setting-Marches,
+.sheet-SettingCheck[value="dreaming"] ~ div.sheet-Setting-Dreaming,
+.sheet-SettingCheck[value="0"] ~ div.sheet-Setting-Default,
+.sheet-SettingCheck[value=""] ~ div.sheet-Setting-Default
+{
+	display: block;
+}
+
+.sheet-DarkPastCheck[value="dead"] ~ span.sheet-DarkPast-Dead,
+.sheet-DarkPastCheck[value="outcast"] ~ span.sheet-DarkPast-Outcast,
+.sheet-DarkPastCheck[value="tragedy"] ~ span.sheet-DarkPast-Tragedy,
+.sheet-DarkPastCheck[value="curse"] ~ span.sheet-DarkPast-Curse,
+.sheet-SettingCheck[value="gothic"] ~ span.sheet-Setting-Gothic,
+.sheet-SettingCheck[value="bone"] ~ span.sheet-Setting-Bone,
+.sheet-SettingCheck[value="marches"] ~ span.sheet-Setting-Marches,
+.sheet-SettingCheck[value="dreaming"] ~ span.sheet-Setting-Dreaming,
+.sheet-SettingCheck[value="0"] ~ span.sheet-Setting-Default,
+.sheet-SettingCheck[value=""] ~ span.sheet-Setting-Default
+{
+	display: inline;
+}
 
 .sheet-TeamCheck[value="0"] ~ div.sheet-TeamPick,
 .sheet-TeamCheck[value="1"] ~ div.sheet-Agents,
@@ -145,6 +180,8 @@ div.sheet-NoTeams,
 {
 	display: block;
 }
+
+/* SkinCheck value 28 is unallocated; keep in mind for future playbooks */
 
 .sheet-SkinCheck[value="-2"] ~ div.sheet-Teams,
 .sheet-SkinCheck[value="-1"] ~ div.sheet-Keeper,

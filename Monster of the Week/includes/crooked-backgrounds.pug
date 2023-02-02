@@ -1,0 +1,124 @@
+.sheet-Crooked.sheet-Background-Crooked
+	.sheet-Subsection
+		span(data-i18n='background') Background
+	input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-CrookedBackgroundAll', value='1', checked='')
+	span.sheet-anglebox
+	span.sheet-ExpHeader
+		span(data-i18n='all') All
+	.sheet-Expander
+		input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-CrookedBackgroundUnused', value='1', checked='')
+		span.sheet-anglebox
+		span.sheet-ExpHeader
+			span(data-i18n='unused') Unused
+		div
+			span(data-i18n='background-description') Before you became a hunter, what less-than-legal job did you do?
+			|  
+			i
+				| &nbsp;(
+				span(data-i18n='pick-one')
+				| )
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_Background-Crooked-Hoodlum')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='background1')
+					b Hoodlum
+					| : You can use Tough instead of Charm to 
+					i manipulate someone
+					|  with threats of violence.
+				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=background1}}', data-i18n-title='send_details_to_chat')
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_Background-Crooked-Burglar')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='background2')
+					b Burglar
+					| : When you 
+					i break into a secure location
+					| , roll +Sharp. On a 10+ pick three, on a 7-9 pick two
+				| :
+				ul
+					li
+						span(data-i18n='background2.1') You get in undetected
+					li
+						span(data-i18n='background2.2') You get out undetected
+					li
+						span(data-i18n='background2.3') You don&apos;t leave a mess
+					li
+						span(data-i18n='background2.4') You find what you were after
+						button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Burglar}} {{Roll=[[2d6+?{Burglar with|Sharp (Default),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_Burglar')
+						button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=background2}} {{key1=background2.1}} {{key2=background2.2}} {{key3=background2.3}} {{key4=background2.4}}', data-i18n-title='send_details_to_chat')
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_Background-Crooked-Grifter')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='background3')
+					b Grifter
+					| : When you are about to 
+					i manipulate someone
+					| , you can ask the Keeper &quot;what will convince this person to do what I want?&quot; The Keeper must answer honestly, but not necessarily completely.
+				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=background3}}', data-i18n-title='send_details_to_chat')
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_Background-Crooked-Fixer')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='background4')
+					b Fixer
+					| : If you 
+					i need to buy something, sell something, or hire someone
+					| , roll +Charm. On a 10+, you know just the person that will be interested. On a 7-9, you know the only person who can do it, but there&apos;s a complication. Pick one
+				| :
+				ul
+					li
+						span(data-i18n='background4.1') You owe them
+					li
+						span(data-i18n='background4.2') They screwed you over
+					li
+						span(data-i18n='background4.3') You screwed them over
+				span(data-i18n='background4.4') On a miss, the only person who can help you is someone who absolutely hates you.
+				button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Fixer}} {{Roll=[[2d6+?{Fixer with|Charm (Default),@{Charm}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_Fixer')
+				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=background4}} {{key1=background4.1}} {{key2=background4.2}} {{key3=background4.3}} {{codakey=background4.4}}', data-i18n-title='send_details_to_chat')
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_Background-Crooked-Assassin')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='background5')
+					b Assassin
+					| : When you take your first shot at an unsuspecting target, do +2 harm.
+				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=background5}}', data-i18n-title='send_details_to_chat')
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_Background-Crooked-Charlatan')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='background6')
+					b Charlatan
+					| : When you 
+					i want people to think you are using magic,
+					|  roll +Cool. On a 10+ your audience is amazed and fooled by your illusion. On a 7-9, you tripped up a few times, someone will notice.
+				button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Charlatan}} {{Roll=[[2d6+?{Charlatan with|Cool (Default),@{Cool}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_Charlatan')
+				br
+				| &nbsp; &nbsp;
+				span(data-i18n='background6.1')
+					| You may also 
+					i manipulate someone
+					|  with fortune telling. When you do that, ask &quot;What are they hoping for right now?&quot; as a free question (even on a miss).
+				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=background6}} {{codakey=background6.1}}', data-i18n-title='send_details_to_chat')
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_Background-Crooked-Pickpocket')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='background7')
+					b Pickpocket
+					| : When you 
+					i steal something small
+					| . roll +Charm. On a 10+, you get it and they didn&apos;t notice you taking it. On a 7-9, either you don&apos;t grab it, you grab the wrong thing, or they remember you later; your choice.
+				button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Pickpocket}} {{Roll=[[2d6+?{Pickpocket with|Charm (Default),@{Charm}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_Pickpocket')
+				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=background7}}', data-i18n-title='send_details_to_chat')
+		input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+		.sheet-move.sheet-Setting-Gothic
+			input.sheet-checkbox(type='checkbox', name='attr_Background-Crooked-Revolutionary')
+			span.sheet-mainbox
+			span.sheet-grayable
+				+translate('<b>Revolutionary</b>: Constantly seeking to improve the world by radical means, you can <b>read a bad situation</b> in any social situation.')
+				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=Revolutionary: Constantly seeking to improve the world by radical means, you can read a bad situation in any social situation.}}', data-i18n-title='send_details_to_chat')
+	// End Expander

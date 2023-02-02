@@ -1,0 +1,100 @@
+// Gear for The Professional
+.sheet-Professional
+	input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-GearUnused-Hider', value='1', checked='')
+	div
+		b
+			span(data-i18n='professional-armour') Armour
+		|  
+		i
+			| &nbsp;(
+			span(data-i18n='pick-one') pick one
+			| )
+		| :
+	.sheet-move.sheet-Setting-Default
+		input.sheet-checkbox(type='checkbox', name='attr_Gear-Professional', value='1')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='professional-gear1') Flak vest (1 armour, hidden)
+	.sheet-move.sheet-Setting-Default
+		input.sheet-checkbox(type='checkbox', name='attr_Gear-Professional', value='2')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='professional-gear2') Combat armour (2 armour, heavy)
+	+move('Gothic-Professional-Gear','Heavy Cloak (1 armour, hidden)').sheet-Setting-Gothic
+	+move('Gothic-Professional-Gear','Medieval Armour (2 armour, heavy)').sheet-Setting-Gothic
+	.sheet-space-above
+		b
+			span(data-i18n='professional-serious-weapon') Serious Weapons
+		|  
+		i
+			| &nbsp;(
+			span(data-i18n='pick-one') pick one
+			| )
+		| :
+	.sheet-move.sheet-Setting-Default
+		input.sheet-checkbox(type='checkbox', name='attr_Professional_seriousgearchoice1')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='professional-gear3') Assault rifle (3 harm, far, area, loud, reload)
+	.sheet-move.sheet-Setting-Default
+		input.sheet-checkbox(type='checkbox', name='attr_Professional_seriousgearchoice2')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='professional-gear4') Grenade launcher (4 harm, far, area, messy, loud, reload)
+	.sheet-move.sheet-Setting-Default
+		input.sheet-checkbox(type='checkbox', name='attr_Professional_seriousgearchoice3')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='professional-gear5') Sniper rifle (4 harm, far)
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Professional_seriousgearchoice4')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='professional-gear6') Grenades (4 harm, close, area, messy, loud)
+	.sheet-move.sheet-Setting-Default
+		input.sheet-checkbox(type='checkbox', name='attr_Professional_seriousgearchoice5')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='professional-gear7') Submachine gun (3 harm, close, area, loud, reload)
+	+move('Gothic-Gear-Professional','Portable steamcannon (3-harm close/far reload loud messy)')(class="sheet-Setting-Gothic")
+	+move('Gothic-Gear-Professional','Prototype Flamethrower (3-harm close area volatile)')(class="sheet-Setting-Gothic")
+	+move('Gothic-Gear-Professional','Rifle (3-harm close/far reload slow)')(class="sheet-Setting-Gothic")
+	+move('Gothic-Gear-Professional','Lever rifle (3-harm close/far reload)')(class="sheet-Setting-Gothic")
+
+	b
+		span(data-i18n='professional-normal-weapon') Normal Weapons
+	|  
+	i
+		| &nbsp;(
+		span(data-i18n='pick-two') pick two
+		| )
+	| :
+	.sheet-move.sheet-Setting-Default
+		input.sheet-checkbox(type='checkbox', name='attr_Professional_normalgearchoice1')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='professional-gear8') .38 revolver (2 harm, close, reload, loud)
+	.sheet-move.sheet-Setting-Default
+		input.sheet-checkbox(type='checkbox', name='attr_Professional_normalgearchoice2')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='professional-gear9') 9mm (2 harm, close, loud)
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Professional_normalgearchoice3')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='professional-gear10') Hunting rifle (2 harm, far, loud)
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Professional_normalgearchoice4')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='professional-gear11') Shotgun (3 harm, close, messy)
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Professional_normalgearchoice5')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='professional-gear12') Big knife (1 harm, hand)
+	+move('Gothic-Gear-Professional','Revolver (2-harm hand/close reload)')(class="sheet-Setting-Gothic")
+	+move('Gothic-Gear-Professional','Steam pressure rifle (3-harm close reload)')(class="sheet-Setting-Gothic")
+	+move('Gothic-Gear-Professional','Whipblade (2-harm hand/close messy)')(class="sheet-Setting-Gothic")

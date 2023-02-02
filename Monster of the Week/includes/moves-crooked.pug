@@ -1,0 +1,140 @@
+// Crooked Moves
+.sheet-OPBHead.sheet-MinorHead.sheet-space-above(data-i18n='the-crooked') The Crooked
+.sheet-Crooked
+	i
+		span(data-i18n='2-moves') Pick two of these
+	| :
+.sheet-Crooked.sheet-OPB
+	input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-MovesUnused', value='1', checked='')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Crooked1')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='crooked-move1')
+				b Artifact
+				| : You &apos;found&apos; a magical artifact with handy powers and kept it. Pick 1:
+			.sheet-isolator
+				input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-CrookedMoves1Unused', value='1', checked='')
+				span.sheet-anglebox
+				span.sheet-ExpHeader
+					span(data-i18n='unused') Unused
+				.sheet-move
+					input.sheet-checkbox(type='checkbox', name='attr_Moves-Crooked1.1', value='1')
+					span.sheet-mainbox
+					span.sheet-grayable
+						span(data-i18n='crooked-move1.1') Protective amulet (1 amour, magic, recharge)
+				.sheet-move
+					input.sheet-checkbox(type='checkbox', name='attr_Moves-Crooked1.2', value='1')
+					span.sheet-mainbox
+					span.sheet-grayable
+						span(data-i18n='crooked-move1.2')
+							| Lucky charm (may be used as a 
+							i Luck
+							|  point just once)
+				.sheet-move
+					input.sheet-checkbox(type='checkbox', name='attr_Moves-Crooked1.3', value='1')
+					span.sheet-mainbox
+					span.sheet-grayable
+						span(data-i18n='crooked-move1.3')
+							| Grimoire (studying the book gives +1 forward to 
+							i use magic
+							| )
+						button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Use Magic}} {{Roll=[[2d6+?{Use Magic with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|1}]]}}', name='roll_Grimoire')
+				.sheet-move
+					input.sheet-checkbox(type='checkbox', name='attr_Moves-Crooked1.4', value='1')
+					span.sheet-mainbox
+					span.sheet-grayable
+						span(data-i18n='crooked-move1.4') Skeleton key (opens any magically sealed lock)
+				.sheet-move
+					input.sheet-checkbox(type='checkbox', name='attr_Moves-Crooked1.5', value='1')
+					span.sheet-mainbox
+					span.sheet-grayable
+						span(data-i18n='crooked-move1.5')
+							| Imp stone (a weak demon is bound to serve the holder; the imp must be summoned with 
+							i Use Magic
+							| )
+						button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Use Magic}} {{Roll=[[2d6+?{Use Magic with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_ImpStone')
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=crooked-move1}} {{c1v=[[0+@{Moves-Crooked1.1}]]}} {{c1=crooked-move1.1}} {{c2v=[[0+@{Moves-Crooked1.2}]]}} {{c2=crooked-move1.2}} {{c3v=[[0+@{Moves-Crooked1.3}]]}} {{c3=crooked-move1.3}} {{c4v=[[0+@{Moves-Crooked1.4}]]}} {{c4=crooked-move1.4}} {{c5v=[[0+@{Moves-Crooked1.5}]]}} {{c5=crooked-move1.5}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Crooked2')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='crooked-move2')
+				b Crew
+				| : You have a regular crew, a team of 3 or 4 people who will help you out with pretty much anything. This counts as a 
+				i team
+				| .
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=crooked-move2}} {{coda=@{Moves-Crooked2-Crew}}}', data-i18n-title='send_details_to_chat')
+			|  
+			textarea(rows='2', name='attr_Moves-Crooked2-Crew')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Crooked3')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='crooked-move3')
+				b Deal with the Devil
+				| : You sold your soul to the Devil (or someone equivalent). Pick 1 or 2 things you got out of the deal: wealth, fame, youth, sensual gratification, skill (add +1 to two ratings). Payment is due either when you die, or in a year (6 months if you chose 2 things).
+			|  
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=crooked-move3}} {{extra=@{DealDesc-Crooked}}}', data-i18n-title='send_details_to_chat')
+			|  
+			input(type='text', name='attr_DealDesc-Crooked')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Crooked4')
+		span.sheet-mainbox
+		span.sheet-grayable
+			input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+			span.sheet-Setting-Default
+				+translate('<b>Friends on the Force</b>: You know a few cops who can be persuaded to look the other way, or do you a favour, for certain considerations. You can <i>act under pressure</i> to get in touch with them when you need to divert any law enforcement attention. There will be a cost, although maybe not right now.')
+				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=crooked-move4}}', data-i18n-title='send_details_to_chat')
+			span.sheet-Setting-Gothic
+				+translate('<b>Friends on the Force</b>: You know a few cops who can be persuaded to look the other way, or do you a favour, for certain considerations. You can <i>act under pressure</i> to get in touch with them when you need to divert any law enforcement attention. There will be a cost, although maybe not right now. Police were less coordinated and professionalised in the nineteenth century than they are now, so your friends are local—but they’re high-ranking and can pull some strings if you contact them in time.')
+				+shareButton('<b>Friends on the Force</b>: You know a few cops who can be persuaded to look the other way, or do you a favour, for certain considerations. You can <i>act under pressure</i> to get in touch with them when you need to divert any law enforcement attention. There will be a cost, although maybe not right now. Police were less coordinated and professionalised in the nineteenth century than they are now, so your friends are local—but they’re high-ranking and can pull some strings if you contact them in time.')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Crooked5')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='crooked-move5')
+				b Made
+				| : You&apos;re &apos;made&apos; in a gang. Name the gang and say how their operations tie into your background. You can call on gang members to help you out, but they&apos;ll expect to be paid. Your bosses will have requests for you now and again, but you&apos;ll be paid. Minor trouble will be overlooked, but you better not screw over any other &apos;made&apos; members.
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=crooked-move5}} {{extra=@{MadeDesc-Crooked}}}', data-i18n-title='send_details_to_chat')
+			|  
+			input(type='text', name='attr_MadeDesc-Crooked')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Crooked6')
+		span.sheet-mainbox
+		span.sheet-grayable
+			input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+			span.sheet-Setting-Default
+				span(data-i18n='crooked-move6')
+					b Driver
+					| : You gain +1 ongoing while driving, plus you can hotwire anything (the older it is, the fewer tools you need). You also own 2 handy, widely-available vehicles.
+				input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=crooked-move6}} {{coda=@{Moves-Crooked6-Rides}}}', data-i18n-title='send_details_to_chat')
+			span.sheet-Setting-Gothic
+				+translate('<b>Driver</b>: You gain +1 ongoing while driving a vehicle, such as a carriage, or riding an animal. You also own 2 handy, widely-available means of transport.')
+				+shareButton('<b>Driver</b>: You gain +1 ongoing while driving a vehicle, such as a carriage, or riding an animal. You also own 2 handy, widely-available means of transport.','{{coda=@{Moves-Crooked6-Rides}}}')
+			textarea(rows='2', name='attr_Moves-Crooked6-Rides')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Crooked7')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='crooked-move7')
+				b Home Ground
+				| : Your crew made a point of keeping the locals happy - keeping them safe, ensuring things always went down okay. When you&apos;re back in your old neighbourhood, you can always find people who will hide you or help you with a minor favour, no questions asked.
+			|  
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=crooked-move7}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Crooked8')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='crooked-move8')
+				b Notorious
+				| : You have a reputation from your criminal past. When you 
+				i reveal who you are
+				| , your terrifying reputation counts as a reason for people to do what you ask, when you 
+				i manipulate someone
+				| . Revealing your identity to someone can bring other problems later, of course.
+			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Manipulate Someone}} {{Roll=[[2d6+?{Manipulate Someone with|Charm (Default),@{Charm}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_ms-plus1')
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=crooked-move8}}', data-i18n-title='send_details_to_chat')
+// .sheet-Crooked .sheet-OPB

@@ -1,0 +1,89 @@
+// Divine Moves
+.sheet-OPBHead.sheet-MinorHead.sheet-space-above(data-i18n='the-divine') The Divine
+.sheet-Divine
+	i
+		span(data-i18n='3-moves') Pick three of these
+	| :
+.sheet-Divine.sheet-OPB
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-MovesUnused', value='1', checked='')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Divine1')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='divine-move1')
+				b Boss from Beyond
+				| : 
+				i At the beginning of each mystery
+				| , roll +Weird. On a 10+, your superiors ask you to do something small. On a 7-9, they ask you to do something complicated or difficult. In either case, you get to ask them one question from the 
+				i investigate a mystery
+				|  move right now. On a miss, you are required to do something terrible. If you do not accomplish what they&apos;ve ordered, you cannot use this move again until you have made up for your failure.
+			|  
+			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Boss From Beyond}} {{Roll=[[2d6+?{Boss From Beyond with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_BossFB')
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=divine-move1}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Divine2')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='divine-move2')
+				b Angel Wings
+				| : You can go instantly to anywhere you&apos;ve visited before, or to a person you know well. 
+				i When you carry one or two people with you
+				| , roll +Weird. On a 10+, you all go where you wanted. On a 7-9, you don&apos;t quite manage it; either you are all separated, or you all appear in the wrong place.
+			|  
+			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Angel Wings}} {{Roll=[[2d6+?{Angel Wings with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_AWings')
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=divine-move2}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Divine3')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='divine-move3')
+				b What I Need, When I Need It
+				| : You may store any small object you own, putting it into a magical space nobody can get to. You may retrieve anything you stored at any time; it appears in your hand.
+			|  
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=divine-move3}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Divine4')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='divine-move4')
+				b Smite
+				| : Your body and divine weapon always count as a weakness against the monsters you fight. Your unarmed attacks are 2 harm, intimate/hand, messy.
+			|  
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=divine-move4}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Divine5')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='divine-move5')
+				b Soothe
+				| : 
+				i When you talk to someone for a few seconds in a quiet voice
+				| , you can calm them down, blocking any panic, anger, or other negitive emotions they have. This works even if the thing that freaked them out is still present, as long as your voice can be heard.
+			|  
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=divine-move5}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Divine6')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='divine-move6')
+				b Lay On Hands
+				| : Your touch can heal any injury or disease. When you 
+				i lay your hands on someone hurt
+				| , roll +Cool. On a 10+, heal 2 harm or an illness, plus they&apos;re stabilised. On a 7-9, you can heal the harm or illness, but you take it into yourself. On a miss, your aura causes them extra harm.
+			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Lay On Hands}} {{Roll=[[2d6+?{Lay On Hands with|Cool (Default),@{Cool}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_LOH')
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=divine-move6}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Divine7')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='divine-move7')
+				b Cast Out Evil
+				| : You may 
+				i banish an unnatural creature from your presence
+				| . Roll +Tough. On a 10+, it is banished. On a 7-9, it takes a little while for the banishing to take effect - the creature has time to make one or two actions. Either way, the banished creature is unharmed, and you have no control over where it goes. This move may be used on 
+				i unnatural hunters
+				|  (eg the Monstrous). On a miss, something is keeping it here. That&apos;s bad.
+			|  
+			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Cast Out Evil}} {{Roll=[[2d6+?{Cast Out Evil with|Tough (Default),@{Tough}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_COE')
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=divine-move7}}', data-i18n-title='send_details_to_chat')
+// .sheet-Divine .sheet-OPB

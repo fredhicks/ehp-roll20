@@ -1,0 +1,102 @@
+// The Spell-Slinger Moves
+.sheet-OPBHead.sheet-MinorHead.sheet-space-above(data-i18n='the-spellslinger') The Spell-Slinger
+.sheet-Spellslinger
+	i
+		span(data-i18n='3-moves') Pick three of these
+	| :
+.sheet-Spellslinger.sheet-OPB
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-MovesUnused', value='1', checked='')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Spellslinger1')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='spellslinger-move1')
+			|  
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=spellslinger-move1}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Spellslinger2')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='spellslinger-move2')
+			|  
+			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Manipulate Someone}} {{Roll=[[2d6+?{Manipulate Someone with|Charm (Default),@{Charm}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|1}]]}}', name='roll_ms-plusone')
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=spellslinger-move2}} {{extra=@{ArcaneRep-Spellslinger}}}', data-i18n-title='send_details_to_chat')
+			|  
+			textarea(name='attr_ArcaneRep-Spellslinger', rows='2', cols='40')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Spellslinger3')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='spellslinger-move3')
+			|  
+			ul
+				li
+					span(data-i18n='spellslinger-move3.1')
+						i Fizzle
+						| : The preparations and materials for the spell are ruined. You&apos;ll have to start over from scratch with the prep time doubled.
+				li
+					span(data-i18n='spellslinger-move3.2')
+						i This Is Gonna Suck
+						| : The effect happens, but you trigger all of the listed glitches but one. You pick the one you avoid.
+					button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=spellslinger-move3}} {{key1=spellslinger-move3.1}} {{key2=spellslinger-move3.2}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Spellslinger4')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='spellslinger-move4')
+			|  
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=spellslinger-move4}} {{extra=@{EnchCloth-Spellslinger}}}', data-i18n-title='send_details_to_chat')
+			|  
+			input(type='text', name='attr_EnchCloth-Spellslinger')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Spellslinger5')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='spellslinger-move5')
+			|  
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=spellslinger-move5}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Spellslinger6')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='spellslinger-move6')
+			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Use Magic}} {{Roll=[[2d6+?{Use Magic with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|1}]]}}', name='roll_um-plusone')
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=spellslinger-move6}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Spellslinger7')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='spellslinger-move7')
+			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Act Under Pressure}} {{Roll=[[2d6+?{Act Under Pressure with|Cool (Default),@{Cool}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|1}]]}}', name='roll_aup-plusone')
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=spellslinger-move7}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Spellslinger8')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='spellslinger-move8')
+			|  
+			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Use Magic}} {{Roll=[[2d6+?{Use Magic with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|1}]]}}', name='roll_um-plusone')
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=spellslinger-move8}} {{extra=@{Practitioner-Spellslinger}}}', data-i18n-title='send_details_to_chat')
+			|  
+			textarea(name='attr_Practitioner-Spellslinger', rows='1', cols='40')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Spellslinger9')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='spellslinger-move9')
+			|  
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=spellslinger-move9}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Spellslinger10')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='spellslinger-move10')
+			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Read a Bad Situation}} {{Roll=[[2d6+?{Read a Bad Situation with|Sharp (Default),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_rabs')
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=spellslinger-move10}}', data-i18n-title='send_details_to_chat')
+			br
+			b
+				span(data-i18n='current-hold') Current Hold
+				| :
+			|  
+			input(type='number', name='attr_Spellslinger10-Hold', min='0', value='0')
+// .sheet-Spellslinger .sheet-OPB

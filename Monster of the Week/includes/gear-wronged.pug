@@ -1,0 +1,155 @@
+// Gear for The Wronged
+.sheet-Wronged
+	input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-GearUnused-Hider', value='1', checked='')
+	.sheet-move
+		span(data-i18n='wronged-armour') Protective wear suited to your look (1 armour)
+	.sheet-space-above
+		b
+			span(data-i18n='wronged-signature') Signature Weapon
+		|  
+		i
+			| &nbsp;(
+			span(data-i18n='pick-one') pick one
+			| )
+		| :
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic
+		input.sheet-checkbox(type='checkbox', name='attr_Wronged_gearchoice1')
+		span.sheet-mainbox
+		|  
+		span.sheet-grayable
+			span(data-i18n='wronged-gear1') Sawn-off shotgun (3 harm, hand/close, messy, loud, reload)
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic
+		input.sheet-checkbox(type='checkbox', name='attr_Wronged_gearchoice2')
+		span.sheet-mainbox
+		|  
+		span.sheet-grayable
+			span(data-i18n='wronged-gear2') Hand cannon (3 harm, close, loud)
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic
+		input.sheet-checkbox(type='checkbox', name='attr_Wronged_gearchoice3')
+		span.sheet-mainbox
+		|  
+		span.sheet-grayable
+			span(data-i18n='wronged-gear3') Fighting knife (2 harm, hand, quiet)
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic
+		input.sheet-checkbox(type='checkbox', name='attr_Wronged_gearchoice4')
+		span.sheet-mainbox
+		|  
+		span.sheet-grayable
+			span(data-i18n='wronged-gear4') Huge sword or huge axe (3 harm, hand, messy, heavy)
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic
+		input.sheet-checkbox(type='checkbox', name='attr_Wronged_gearchoice5')
+		span.sheet-mainbox
+		|  
+		span.sheet-grayable
+			span(data-i18n='wronged-gear5')
+				| Specialist weapons for destroying your foes (eg. wooden stakes and mallet for vampires, silver dagger for warewolves, etc), 4 harm against the specific creatures it targets, 1 harm otherwise, and other tags by agreement with the Keeper
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic
+		input.sheet-checkbox(type='checkbox', name='attr_Wronged_gearchoice6')
+		span.sheet-mainbox
+		|  
+		span.sheet-grayable
+			span(data-i18n='wronged-gear6') Enchanted dagger (2 harm, hand, magic)
+	.sheet-move.sheet-Setting-Default
+		input.sheet-checkbox(type='checkbox', name='attr_Wronged_gearchoice7')
+		span.sheet-mainbox
+		|  
+		span.sheet-grayable
+			span(data-i18n='wronged-gear7') Chainsaw (3 harm, hand, messy, unreliable, loud, heavy)
+	+move('Gothic-Gear-Wronged','Lever rifle (3-harm close/far reload)')(class="sheet-Setting-Gothic")
+	+move('Gothic-Gear-Wronged','Whipblade (2-harm hand/close messy)')(class="sheet-Setting-Gothic")
+	+move('Gothic-Gear-Wronged','Portable steamcannon (3-harm close/far reload loud messy)')(class="sheet-Setting-Gothic")
+	+move('Gothic-Gear-Wronged','Prototype Flamethrower (3-harm close area volatile)')(class="sheet-Setting-Gothic")
+
+	.sheet-space-above
+		b
+			span(data-i18n='wronged-weapon') Practical Weapons
+		|  
+		i
+			| &nbsp;(
+			span(data-i18n='pick-two') pick two
+			| )
+		| :
+	.sheet-move.sheet-Setting-Default
+		input.sheet-checkbox(type='checkbox', name='attr_Wronged_gearchoice8')
+		span.sheet-mainbox
+		|  
+		span.sheet-grayable
+			span(data-i18n='wronged-gear8') .38 revolver (2 harm, close, reload, loud)
+	.sheet-move.sheet-Setting-Default
+		input.sheet-checkbox(type='checkbox', name='attr_Wronged_gearchoice9')
+		span.sheet-mainbox
+		|  
+		span.sheet-grayable
+			span(data-i18n='wronged-gear9') 9mm (2 harm, close, loud)
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic
+		input.sheet-checkbox(type='checkbox', name='attr_Wronged_gearchoice10')
+		span.sheet-mainbox
+		|  
+		span.sheet-grayable
+			span(data-i18n='wronged-gear10') Hunting rifle (2 harm, far, loud)
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic
+		input.sheet-checkbox(type='checkbox', name='attr_Wronged_gearchoice11')
+		span.sheet-mainbox
+		|  
+		span.sheet-grayable
+			span(data-i18n='wronged-gear11') Shotgun (3 harm, close, messy, loud)
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic
+		input.sheet-checkbox(type='checkbox', name='attr_Wronged_gearchoice12')
+		span.sheet-mainbox
+		|  
+		span.sheet-grayable
+			span(data-i18n='wronged-gear12') Big knife (1 harm, hand)
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic
+		input.sheet-checkbox(type='checkbox', name='attr_Wronged_gearchoice13')
+		span.sheet-mainbox
+		|  
+		span.sheet-grayable
+			span(data-i18n='wronged-gear13') Brass knuckles (1 harm, hand, stealthy)
+	.sheet-move.sheet-Setting-Default
+		input.sheet-checkbox(type='checkbox', name='attr_Wronged_gearchoice14')
+		span.sheet-mainbox
+		|  
+		span.sheet-grayable
+			span(data-i18n='wronged-gear14') Assault rifle (3 harm, close, area, loud, reload)
+	+move('Gothic-Gear-Wronged','Steam pressure rifle (3-harm close reload)')(class="sheet-Setting-Gothic")
+	+move('Gothic-Gear-Wronged','Revolver (2-harm hand/close reload)')(class="sheet-Setting-Gothic")
+	+move('Gothic-Gear-Wronged','Wrench (2-harm hand inconspicuous)')(class="sheet-Setting-Gothic")
+
+	.sheet-space-above
+		b
+			span(data-i18n='wronged-vehicle') (Optional) Vehicle
+		|  
+		i
+			| &nbsp;(
+			span(data-i18n='pick-one') pick one
+			| )
+		| :
+	.sheet-move.sheet-Setting-Default
+		input.sheet-checkbox(type='checkbox', name='attr_Wronged_gearchoice15')
+		span.sheet-mainbox
+		|  
+		span.sheet-grayable
+			span(data-i18n='wronged-gear15') Classic car
+	.sheet-move.sheet-Setting-Default
+		input.sheet-checkbox(type='checkbox', name='attr_Wronged_gearchoice16')
+		span.sheet-mainbox
+		|  
+		span.sheet-grayable
+			span(data-i18n='wronged-gear16') Classic motorcycle
+	.sheet-move.sheet-Setting-Default
+		input.sheet-checkbox(type='checkbox', name='attr_Wronged_gearchoice17')
+		span.sheet-mainbox
+		|  
+		span.sheet-grayable
+			span(data-i18n='wronged-gear17') Plain pickup
+	.sheet-move.sheet-Setting-Default
+		input.sheet-checkbox(type='checkbox', name='attr_Wronged_gearchoice18')
+		span.sheet-mainbox
+		|  
+		span.sheet-grayable
+			span(data-i18n='wronged-gear18') Plain van
+	+move('Gothic-Gear-Wronged','A trusted horse').sheet-Setting-Gothic
+	+move('Gothic-Gear-Wronged','A horse- or mule-drawn carriage').sheet-Setting-Gothic
+	+move('Gothic-Gear-Wronged','A fast boat').sheet-Setting-Gothic
+	+move('Gothic-Gear-Wronged','A small ship').sheet-Setting-Gothic

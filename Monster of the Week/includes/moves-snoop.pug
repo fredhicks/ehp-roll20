@@ -1,0 +1,92 @@
+// The Snoop Moves
+.sheet-OPBHead.sheet-MinorHead.sheet-space-above(data-i18n='the-snoop') The Snoop
+.sheet-Snoop
+	i
+		span(data-i18n='3-moves') Pick three of these
+	| :
+.sheet-Snoop.sheet-OPB
+	input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-MovesUnused', value='1', checked='')
+	.sheet-move.sheet-Setting-Default
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Snoop1')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='snoop-move1')
+				b \&quot;What Does That Feel Like?\&quot;
+				| : When you put your camera/microphone right in a person&apos;s face, they automatically break off whatever they are doing. They might go right back to it after they deal with you, but you&apos;ll create enough time for everyone else to act in the meantime.
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=snoop-move1}}', data-i18n-title='send_details_to_chat')
+	.sheet-move.sheet-Setting-Gothic
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Snoop1')
+		span.sheet-mainbox
+		span.sheet-grayable
+			+translate('<b>“What Does That Feel Like?”</b>: When you frantically write in a notebook in front of someone, they automatically break off whatever they are doing. They might go right back to it after they deal with you, but you’ll create enough time for everyone else to act in the meantime.')
+			+shareButton('<b>“What Does That Feel Like?”</b>: When you frantically write in a notebook in front of someone, they automatically break off whatever they are doing. They might go right back to it after they deal with you, but you’ll create enough time for everyone else to act in the meantime.')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Snoop2')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='snoop-move2')
+				b Minor Celebrity
+				| : 
+				i At the beginning of each mystery
+				| , roll +Weird. On a 10+ hold 2, on a 7-9 hold 1. Spend your hold 1-for-1 during the mystery to have someone you meet know of you in a positive light (maybe they read your blog, listen to your podcast, or watch your Internet/TV show, etc). You may end up getting asked for autographs or given &apos;hot&apos; leads, too.
+			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Minor Celebrity}} {{Roll=[[2d6+?{Minor Celebrity with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_celeb')
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=snoop-move2}}', data-i18n-title='send_details_to_chat')
+			br
+			b
+				span(data-i18n='current-hold') Current Hold
+				| :
+			|  
+			input(type='number', name='attr_Moves-Snoop2-Hold', min='0', value='0')
+	.sheet-move.sheet-Setting-Default
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Snoop3')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='snoop-move3')
+				b We&apos;ll Fix It In Post
+				| : You can use anything you could conceivably have recorded as evidence for 
+				i investigate a mystery
+				| , allowing you to check previous interviews, attack sites, and so on, from the comfort of your laptop.
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=snoop-move3}}', data-i18n-title='send_details_to_chat')
+	.sheet-move.sheet-Setting-Gothic
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Snoop3')
+		span.sheet-mainbox
+		span.sheet-grayable
+			+translate('<b>Everything’s Documented</b>: You can use anything you could conceivably have recorded as evidence for <i>investigate a mystery</i>, allowing you to check previous interviews, attack sites, and so on, by consulting your notes and photographs.')
+			+shareButton('<b>Everything’s Documented</b>: You can use anything you could conceivably have recorded as evidence for <i>investigate a mystery</i>, allowing you to check previous interviews, attack sites, and so on, by consulting your notes and photographs.')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Snoop4')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='snoop-move4')
+				b I&apos;m A Reporter!
+				| : When you 
+				i investigate a mystery
+				|  by talking to witnesses, interviewing locals, or anything else requiring interpersonal skills, roll +Charm instead of +Sharp.
+			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Investigate a Mystery}} {{Roll=[[2d6+?{Investigate a Mystery with|Charm (Default),@{Charm}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_iam-charm')
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=snoop-move4}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Snoop5')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='snoop-move5')
+				b Truthiness
+				| : Whatever you tell a normal person, they&apos;ll accept that you think it&apos;s true. If it&apos;s far out, they might think you&apos;re crazy, but they won&apos;t think you&apos;re lying.
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=snoop-move5}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Snoop6')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='snoop-move6')
+				b The Mojo Wire
+				| : When you read all the current news feeds looking for the weird and crazy stuff, take +1 forward.
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=snoop-move6}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Snoop7')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='snoop-move7')
+				b Relaxed Producer
+				| : You&apos;re employed, with a regular paycheck and little or no oversight. As long as you send in a story every few days, no matter how bizarre, you&apos;re set. Every now and again, they&apos;ll send you somewhere in particular, and when that happens it usually involves supernatural activity; unless they need human interest, in which case it will be a kitten show or agricultural fair or something.
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=snoop-move7}}', data-i18n-title='send_details_to_chat')
+// .sheet-Snoop .sheet-OPB

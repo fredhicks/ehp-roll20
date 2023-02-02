@@ -1,0 +1,80 @@
+// The Hard Case Moves
+.sheet-OPBHead.sheet-MinorHead.sheet-space-above(data-i18n='the-hardcase') The Hard Case
+.sheet-Hardcase
+	i
+		span(data-i18n='1-fixed-move') You get this
+	| :
+.sheet-Hardcase.sheet-OPB
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-MovesUnused', value='1', checked='')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_FixedMoves-Hardcase1')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='hardcase-fixed-move1')
+				b Unstoppable
+				| : When you spend 
+				i Luck
+				|  to avoid harm you are about to suffer, additionally remove all harm you had already suffered. Once per mystery, when you are about to take major damage (2 harm or more), change it to just 1 harm.
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=hardcase-fixed-move1}}', data-i18n-title='send_details_to_chat')
+// .sheet-Hardcase .sheet-OPB
+.sheet-Hardcase
+	i
+		span(data-i18n='2-moves-then') Then pick two of these
+	| :
+.sheet-Hardcase.sheet-OPB
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-MovesUnused', value='1', checked='')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Hardcase1')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='hardcase-move1')
+				b FINISH HIM!
+				| : Whenever you inflict a massive injury (3 harm or more), you may immediately follow up with another attack. Roll +Tough. On a 10+, double the harm you cause. On a 7-9, you inflict 1 harm extra. On a miss, you leave yourself open and vulnerable.
+			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=FINISH HIM!}} {{Roll=[[2d6+?{FINISH HIM with|Tough (Default),@{Tough}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_finish')
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=hardcase-move1}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Hardcase2')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='hardcase-move2')
+				b Weapon Master
+				| : When you take possession of a new weapon, you may change or remove one tag when you are using it (eg. &apos;heavy&apos; becomes &apos;ignore-armour&apos;, or &apos;unreliable&apos; is removed). The changed tag only applies for you. When you get this move, apply it to all your current weapons.
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=hardcase-move2}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Hardcase3')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='hardcase-move3')
+				b Aim For The Weak Spot
+				| : Your unarmed and hand weapon attacks all get the &apos;ignore-armour&apos; tag.
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=hardcase-move3}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Hardcase4')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='hardcase-move4')
+				b Inspired Guesswork
+				| : Once per mystery, when you observe a monster in action, you may 
+				i investigate a mystery
+				|  to discover its powers, motivations, or weaknesses. It works even if what you asked about wasn&apos;t displayed; you work it out by deduction (or guessing).
+			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Investigate a Mystery}} {{Roll=[[2d6+?{Investigate a Mystery with|Sharp (Default),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_iam')
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=hardcase-move4}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Hardcase5')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='hardcase-move5')
+				b Come Get Some
+				| : You can challenge your foes to fight you alone, maybe in words or maybe just by being the biggest and baddest in the team. Roll +Tough. On a 10+, they all go for you. On a 7-9, they go for you, mainly, but maybe one or two of your comrades are getting marked too. On a miss, they come for you harder than you expected.
+			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Come Get Some}} {{Roll=[[2d6+?{Come Get Some with|Tough (Default),@{Tough}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_comeget')
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=hardcase-move5}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Hardcase6')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='hardcase-move6')
+				b Property Damage
+				| : You can smash your way through almost anything. If it is at all possible to destroy an inanimate object with the tools at your disposal, you can roll +Sharp to work out how. On a 10+, you can pulverize it, no trouble. On a 7-9, it will either take a long time, or you can&apos;t break it all down - your choice. On a miss, you hurt yourself getting it done, or get trapped in a bad spot.
+			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Property Damage}} {{Roll=[[2d6+?{Property Damage with|Sharp (Default),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_propertydamage')
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=hardcase-move6}}', data-i18n-title='send_details_to_chat')
+// .sheet-Hardcase .sheet-OPB

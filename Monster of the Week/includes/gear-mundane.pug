@@ -1,0 +1,90 @@
+// Gear for The Mundane
+.sheet-Mundane
+	input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-GearUnused-Hider', value='1', checked='')
+	div
+		b
+			span(data-i18n='mundane-weapon') Mundane Weapons
+		|  
+		i
+			| &nbsp;(
+			span(data-i18n='pick-two') pick two
+			| )
+		| :
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Mundane_gearchoice1')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='mundane-gear1')
+				| Golf club, baseball bat, cricket bat, or hockey stick (2 harm, hand, innocuous, messy)
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Mundane_gearchoice2')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='mundane-gear2') Pocket knife or multitool (1 harm, hand, useful, small)
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Mundane_gearchoice3')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='mundane-gear3') Small handgun (2 harm, close, loud, reload)
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Mundane_gearchoice4')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='mundane-gear4') Hunting rifle (3 harm, far, loud, reload)
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Mundane_gearchoice5')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='mundane-gear5') Sledge-hammer or fire axe (3 harm, hand, messy)
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Mundane_gearchoice6')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='mundane-gear6') Nunchuks (2 harm, hand, area)
+	+move('Gothic-Gear-Mundane','Wrench (2-harm hand inconspicuous)')(class="sheet-Setting-Gothic")
+
+	.sheet-space-above
+		b
+			span(data-i18n='mundane-transport') Means of Transport
+		|  
+		i
+			| &nbsp;(
+			span(data-i18n='pick-one') pick one
+			| )
+		| :
+	.sheet-move.sheet-Setting-Default
+		input.sheet-checkbox(type='checkbox', name='attr_Mundane_gearchoice7')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='mundane-gear7') Skateboard
+	.sheet-move.sheet-Setting-Default
+		input.sheet-checkbox(type='checkbox', name='attr_Mundane_gearchoice8')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='mundane-gear8') Bicycle
+	.sheet-move.sheet-Setting-Default
+		input.sheet-checkbox(type='checkbox', name='attr_Mundane_gearchoice9')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='mundane-gear9') Fairly new car in decent condition
+	.sheet-move.sheet-Setting-Default
+		input.sheet-checkbox(type='checkbox', name='attr_Mundane_gearchoice10')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='mundane-gear10') Classic car in terrible condition
+	.sheet-move.sheet-Setting-Default
+		input.sheet-checkbox(type='checkbox', name='attr_Mundane_gearchoice11')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='mundane-gear11') Motorcycle
+	.sheet-move.sheet-Setting-Default
+		input.sheet-checkbox(type='checkbox', name='attr_Mundane_gearchoice12')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='mundane-gear12') Van
+	+move('Gothic-Mundane-Vehicle','a fast horse')
+	+move('Gothic-Mundane-Vehicle','an average horse and carriage')
+	+move('Gothic-Mundane-Vehicle','a boat')
+	+move('Gothic-Mundane-Vehicle','friends who can procure railway tickets')
+	+move('Gothic-Mundane-Vehicle','friends who can procure ship tickets')

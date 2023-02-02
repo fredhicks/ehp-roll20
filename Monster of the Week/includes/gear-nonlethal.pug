@@ -1,0 +1,17 @@
+input.sheet-null-hider(name='attr_Non-Lethal-Gear' type='hidden' value='0')
+.sheet-NonLethal
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-GearUnused-Hider', value='1', checked='')
+	br
+	.sheet-MinorHead
+		+translate('Non-Lethal Gear Options')
+	div
+		i
+			+translate('You may swap these for any of your existing gear picks.')
+	+move('Nonlethal-Gear','Furious struggle (0-harm hand 1-armour)')
+	+move('Nonlethal-Gear','Martial arts (1-harm intimate/hand)')
+	+move('Nonlethal-Gear','Martial arts master (2-harm intimate/hand 1-armour)')
+	+move('Nonlethal-Gear','Traps (1-harm hand/close/far slow capture). More elaborate traps might do 2- or 3-harm.')
+	+move('Nonlethal-Gear','Stun-gun (1-harm hand stun recharge)')
+	+move('Nonlethal-Gear','Hockey stick/bat/etc. (2-harm hand)')
+	+move('Nonlethal-Gear','Slingshot (2-harm close reload)')
+	+move('Nonlethal-Gear','Net or blanket (0-harm hand/close bulky capture)')

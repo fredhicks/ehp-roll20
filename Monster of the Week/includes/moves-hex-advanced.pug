@@ -1,0 +1,81 @@
+// Hex's advanced hex move
+.sheet-Hex
+	input.sheet-triggerbox(type='checkbox', name='attr_AdvImp-AdvHex')
+	.sheet-AdvMoves-Hex.sheet-triggerframe
+		.sheet-Subsection
+			span(data-i18n='hex-advmove') Advanced Hex Moves
+		input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Hex-AdvMove-All', value='1', checked='')
+		span.sheet-anglebox
+		span.sheet-ExpHeader
+			span(data-i18n='all') All
+		.sheet-Expander
+			input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Hex-AdvMove-Unused', value='1', checked='')
+			span.sheet-anglebox
+			span.sheet-ExpHeader
+				span(data-i18n='unused') Unused
+			div
+				span(data-i18n='hex-advmove-desc')
+					| When you take the corresponding 
+					i Improvement
+					| , choose one of these
+				| :
+			.sheet-move
+				input.sheet-checkbox(type='checkbox', name='attr_AdvMoves-Hex1')
+				span.sheet-mainbox
+				span.sheet-grayable
+					span(data-i18n='hex-advmove1')
+						b Apotheosis
+						| : You become a terrifying fount of mystical power. Once per mystery, after you suffer loss or harm, you may enter a state where you have both immense power and zero interest in the well-being of others. While in this state, all of the following are true
+					| :
+					ul
+						li
+							span(data-i18n='hex-advmove1.1') You can fly.
+						li
+							span(data-i18n='hex-advmove1.2')
+								| Use +Weird to 
+								i kick some ass
+								|  instead of +Tough. For this, you use innate magic as a weapon with (3 harm and any properties you choose).
+						li
+							span(data-i18n='hex-advmove1.3') Ignore the component costs of your rotes.
+						li
+							span(data-i18n='hex-advmove1.4')
+								| Ignore one requirement of every spell you cast with 
+								i use magic
+								| .
+						li
+							span(data-i18n='hex-advmove1.5') You have +1 ongoing to do everything.
+						li
+							span(data-i18n='hex-advmove1.6')
+								| You cannot use the 
+								i protect someone
+								|  move.
+						li
+							span(data-i18n='hex-advmove1.7')
+								| You have all the 
+								i Temptations
+								| , and you have to indulge them whenever a good opportunity presents itself.
+						li
+							span(data-i18n='hex-advmove1.8')
+								| When you try to resist a 
+								i Temnptation
+								| , roll +Cool. On a 10+, 
+								i Apotheosis
+								|  ends. On a 7-9, it ends with you doing something dangerous or cruel. On a miss, it ends only after you harm someone (or something) you love.
+							button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Resist a Temptation}} {{Roll=[[2d6+?{Resist a Temptation with|Cool (Default),@{Cool}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_rat')
+							button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=hex-advmove1}} {{key1=hex-advmove1.1}} {{key2=hex-advmove1.2}} {{key3=hex-advmove1.3}} {{key4=hex-advmove1.4}} {{key5=hex-advmove1.5}} {{key6=hex-advmove1.6}} {{key7=hex-advmove1.7}} {{key8=hex-advmove1.8}}', data-i18n-title='send_details_to_chat')
+			.sheet-move
+				input.sheet-checkbox(type='checkbox', name='attr_AdvMoves-Hex2')
+				span.sheet-mainbox
+				span.sheet-grayable
+					span(data-i18n='hex-advmove2')
+						b Synthesis
+						| : You manage to conciliate your dark power with your moral impulses. You lose your 
+						i Temptation
+						| . Whenever you 
+						i use magic
+						|  to 
+						i help out
+						|  or 
+						i protect someone
+						| , you mark experience. Mark a second experience if you do it at the expense of your own safety.
+					button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=hex-advmove2}}', data-i18n-title='send_details_to_chat')

@@ -1,0 +1,88 @@
+// The Flake Moves
+.sheet-OPBHead.sheet-MinorHead.sheet-space-above(data-i18n='the-flake') The Flake
+.sheet-Flake
+	i
+		span(data-i18n='3-moves') Pick three of these
+	| :
+.sheet-Flake.sheet-OPB
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-MovesUnused', value='1', checked='')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Flake1')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='flake-move1')
+			|  
+			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Connect the Dots}} {{Roll=[[2d6+?{Connect the Dots with|Sharp (Default),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_ctdots')
+			ul
+				li
+					span(data-i18n='flake-move1.1') Is this person connected to current events more than they are saying?
+				li
+					span(data-i18n='flake-move1.2') When and where will the next critical event occur?
+				li
+					span(data-i18n='flake-move1.3') What does the monster want from this person?
+				li
+					span(data-i18n='flake-move1.4') Is this connected to previous mysteries we have investigated?
+				li
+					span(data-i18n='flake-move1.5') How does this mystery connect to the bigger picture?
+					button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=flake-move1}} {{key1=flake-move1.1}} {{key2=flake-move1.2}} {{key3=flake-move1.3}} {{key4=flake-move1.4}} {{key5=flake-move1.5}}', data-i18n-title='send_details_to_chat')
+			b
+				span(data-i18n='current-hold') Current Hold
+				| :
+			|  
+			input(type='number', name='attr_Flake1-Hold', min='0', value='0')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Flake2')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='flake-move2')
+			|  
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=flake-move2}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Flake3')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='flake-move3')
+			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Manipulate Someone}} {{Roll=[[2d6+?{Manipulate Someone with|Sharp (Default),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_manipulate-sharp')
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=flake-move3}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Flake4')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='flake-move4')
+			|  
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=flake-move4}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Flake5')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='flake-move5')
+			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Often Overlooked}} {{Roll=[[2d6+?{Often Overlooked with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_overlooked')
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=flake-move5}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Flake6')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='flake-move6')
+			|  
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=flake-move6}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Flake7')
+		span.sheet-mainbox
+		span.sheet-grayable
+			input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+			span.sheet-Setting-Default
+				span(data-i18n='flake-move7')
+				button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Net Friends}} {{Roll=[[2d6+?{Net Friends with|Charm (Default),@{Charm}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_netfriends')
+				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=flake-move7}}', data-i18n-title='send_details_to_chat')
+			span.sheet-Setting-Gothic
+				+translate('<b>Correspondence Society</b>: You have a network of spies, informants, and eccentrics that constantly correspond with each other, all over the world, via mail and coded messages in newspapers. When you <i>contact a society member to help you</i>, roll +Charm. On a 10+, they’re available and helpful—they can fix something, break a code, or get you some special information. On a 7-9, they’re prepared to help, but it’s either going to take some time, or you’ll have to do part of it yourself. On a miss, you burn some bridges.')
+				button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Correspondence Society}} {{Roll=[[2d6+?{Correspondence Society with|Charm (Default),@{Charm}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_netfriends')
+				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=Correspondence Society: You have a network of spies, informants, and eccentrics that constantly correspond with each other, all over the world, via mail and coded messages in newspapers. When you contact a society member to help you, roll +Charm. On a 10+, they’re available and helpful—they can fix something, break a code, or get you some special information. On a 7-9, they’re prepared to help, but it’s either going to take some time, or you’ll have to do part of it yourself. On a miss, you burn some bridges.}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Flake8')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='flake-move8')
+			|  
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=flake-move8}}', data-i18n-title='send_details_to_chat')
+// .sheet-Flake .sheet-OPB

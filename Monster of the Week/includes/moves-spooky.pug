@@ -1,0 +1,120 @@
+// The Spooky Moves
+.sheet-OPBHead.sheet-MinorHead.sheet-space-above(data-i18n='the-spooky') The Spooky
+.sheet-Spooky
+	i
+		span(data-i18n='3-moves') Pick three of these
+	| :
+input.sheet-triggerbox(type='checkbox', name='attr_Imp-MysticLibrary')
+.sheet-move.sheet-triggerframe
+	input.sheet-checkbox(type='checkbox', name='attr_Haven-Spooky', checked='')
+	span.sheet-mainbox
+	span.sheet-grayable
+		span(data-i18n='haven2')
+			b Mystical Library
+			| : If you use your library&apos;s occult tomes and grimoires to prepare yourself, take +1 forward to 
+			i use magic
+			| .
+		button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Use Magic}} {{Roll=[[2d6+?{Use Magic with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|1}]]}}', name='roll_um-plusone')
+		button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=haven2}}', data-i18n-title='send_details_to_chat')
+.sheet-Spooky.sheet-OPB
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-MovesUnused', value='1', checked='')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Spooky1')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='spooky-move1')
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=spooky-move1}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Spooky2')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='spooky-move2')
+			|  
+			ul
+				li
+					span(data-i18n='spooky-move2.1') The target contracts a disease.
+				li
+					span(data-i18n='spooky-move2.2') The target immediately suffers harm (2 harm, magic, ignore-armour).
+				li
+					span(data-i18n='spooky-move2.3') The target breaks something precious or important.
+					button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Use Magic}} {{Roll=[[2d6+?{Use Magic with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_um')
+					button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=spooky-move2}} {{key1=spooky-move2.1}} {{key2=spooky-move2.2}} {{key3=spooky-move2.3}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Spooky3')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='spooky-move3')
+			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Investigate a Mystery}} {{Roll=[[2d6+?{Investigate a Mystery with|Sharp (Default),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_iam')
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=spooky-move3}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Spooky4')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='spooky-move4')
+			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Premonitions}} {{Roll=[[2d6+?{Premonitions with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_premo')
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=spooky-move4}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Spooky5')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='spooky-move5')
+			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Hunches}} {{Roll=[[2d6+?{Hunches with|Sharp (Default),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_hunch')
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=spooky-move5}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Spooky6')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='spooky-move6')
+			|  
+			ul
+				li
+					span(data-i18n='spooky-move6.1') Where is the creature right now?
+				li
+					span(data-i18n='spooky-move6.2') What is it planning to do right now?
+				li
+					span(data-i18n='spooky-move6.3') Who is it going to attack next?
+				li
+					span(data-i18n='spooky-move6.4') Who does it regard as the biggest threat?
+				li
+					span(data-i18n='spooky-move6.5') How can I attract its attention?
+					button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Tune In}} {{Roll=[[2d6+?{Tune In with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_tunein')
+					button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=spooky-move6}} {{key1=spooky-move6.1}} {{key2=spooky-move6.2}} {{key3=spooky-move6.3}} {{key4=spooky-move6.4}} {{key5=spooky-move6.5}}', data-i18n-title='send_details_to_chat')
+			b
+				span(data-i18n='current-hold') Current Hold
+				| :
+			|  
+			input(type='number', name='attr_Spooky6-Hold', min='0', value='0')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Spooky7')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='spooky-move7')
+			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Kick Some Ass}} {{Roll=[[2d6+?{Kick Some Ass with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_kickass-weird')
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=spooky-move7}}', data-i18n-title='send_details_to_chat')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Moves-Spooky8')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='spooky-move8')
+			|  
+			ul
+				li
+					span(data-i18n='spooky-move8.1') Interfere with a hunter, giving them -1 forward.
+				li
+					span(data-i18n='spooky-move8.2') Help a hunter, giving them +1 forward, by interfering with their enemy.
+				li
+					span(data-i18n='spooky-move8.3') Interfere with what a monster, minion, or bystander is trying to do.
+				li
+					span(data-i18n='spooky-move8.4') Inflict 1 harm on the target due to an accident.
+				li
+					span(data-i18n='spooky-move8.5') The target finds something you left for them.
+				li
+					span(data-i18n='spooky-move8.6') The target loses something that you will soon find.
+					button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Jinx}} {{Roll=[[2d6+?{Jinx with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_jinx')
+					button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=spooky-move8}}', data-i18n-title='send_details_to_chat')
+			b
+				span(data-i18n='current-hold') Current Hold
+				| :
+			|  
+			input(type='number', name='attr_Spooky8-Hold', min='0', value='0')
+// .sheet-Spooky .sheet-OPB

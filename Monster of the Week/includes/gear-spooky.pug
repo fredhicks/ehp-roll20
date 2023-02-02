@@ -1,0 +1,45 @@
+// Gear for The Spooky
+.sheet-Spooky
+	input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-GearUnused-Hider', value='1', checked='')
+	.sheet-move
+		span(data-i18n='spooky-items') Any magical items or amulets that you use to invoke your powers
+		br
+		input(type='text', name='attr_Item-Spooky')
+	.sheet-space-above
+		b
+			span(data-i18n='spooky-weapons') Normal Weapons
+		|  
+		i
+			| &nbsp;(
+			span(data-i18n='pick-two') pick two
+			| )
+		| :
+	.sheet-move.sheet-Setting-Default
+		input.sheet-checkbox(type='checkbox', name='attr_Spooky_gearchoice1')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='spooky-gear1') .38 revolver (2 harm, close, reload, loud)
+	.sheet-move.sheet-Setting-Default
+		input.sheet-checkbox(type='checkbox', name='attr_Spooky_gearchoice2')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='spooky-gear2') 9mm (2 harm, close, loud)
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic
+		input.sheet-checkbox(type='checkbox', name='attr_Spooky_gearchoice3')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='spooky-gear3') Hunting rifle (2 harm, far, loud)
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic
+		input.sheet-checkbox(type='checkbox', name='attr_Spooky_gearchoice4')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='spooky-gear4') Shotgun (3 harm, close, messy)
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic
+		input.sheet-checkbox(type='checkbox', name='attr_Spooky_gearchoice5')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='spooky-gear5') Big knife (1 harm, hand)
+	+move('Gothic-Gear-Spooky','Revolver (2-harm hand/close reload)')(class="sheet-Setting-Gothic")
+	+move('Gothic-Gear-Spooky','Steam pressure rifle (3-harm close reload)')(class="sheet-Setting-Gothic")
+	+move('Gothic-Gear-Spooky','Whipblade (2-harm hand/close messy)')(class="sheet-Setting-Gothic")

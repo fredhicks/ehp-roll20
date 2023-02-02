@@ -1,0 +1,117 @@
+// Gear for The Searcher
+.sheet-Searcher
+	input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-GearUnused-Hider', value='1', checked='')
+	div.sheet-Setting-Default
+		span(data-i18n='searcher-gear-base') A laptop, a camera, and binoculars, plus:
+	div.sheet-Setting-Gothic
+		+translate('A notebook and a looking-glass, plus:')
+	.sheet-move.sheet-Setting-Default
+		input.sheet-checkbox(type='checkbox', name='attr_Searcher_gearbase1')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='searcher-gear-base1') A car
+	.sheet-move.sheet-Setting-Default
+		input.sheet-checkbox(type='checkbox', name='attr_Searcher_gearbase2')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='searcher-gear-base2') A motorcycle
+	+move('Gothic-Gear-Searcher','A horse and a carriage').sheet-Setting-Gothic
+	+move('Gothic-Gear-Searcher','A small ship').sheet-Setting-Gothic
+	.sheet-space-above.sheet-Setting-Default
+		b
+			span(data-i18n='searcher-tools') Investigation Tools
+		|  
+		i
+			| &nbsp;(
+			span(data-i18n='pick-two') pick two
+			| )
+		| :
+	.sheet-space-above.sheet-Setting-Gothic
+		+translate('<b>Investigator Tools</b> <i>(pick three)</i>:')
+	.sheet-move.sheet-Setting-Default
+		input.sheet-checkbox(type='checkbox', name='attr_Searcher_gearchoice1')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='searcher-gear1') A bag of cameras and microphones
+	.sheet-move.sheet-Setting-Default
+		input.sheet-checkbox(type='checkbox', name='attr_Searcher_gearchoice2')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='searcher-gear2') Forensic tools
+	.sheet-move.sheet-Setting-Default
+		input.sheet-checkbox(type='checkbox', name='attr_Searcher_gearchoice3')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='searcher-gear3') Ghost hunting tools
+	.sheet-move.sheet-Setting-Default
+		input.sheet-checkbox(type='checkbox', name='attr_Searcher_gearchoice4')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='searcher-gear4') Scientific measuring tools
+	.sheet-move.sheet-Setting-Default
+		input.sheet-checkbox(type='checkbox', name='attr_Searcher_gearchoice5')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='searcher-gear5') Cryptid hunting gear
+	.sheet-move.sheet-Setting-Default
+		input.sheet-checkbox(type='checkbox', name='attr_Searcher_gearchoice6')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='searcher-gear6') Historical documents and witness reports of strange events
+	.sheet-move.sheet-Setting-Default
+		input.sheet-checkbox(type='checkbox', name='attr_Searcher_gearchoice7')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='searcher-gear7') Maps, blueprints, and building reports for significant places
+	+move('Gothic-Gear-Searcher','Chemical analysis set').sheet-Setting-Gothic
+	+move('Gothic-Gear-Searcher','Prototype forensic tools').sheet-Setting-Gothic
+	+move('Gothic-Gear-Searcher','Ghost hunting tools').sheet-Setting-Gothic
+	+move('Gothic-Gear-Searcher','Scientific measuring tools').sheet-Setting-Gothic
+	+move('Gothic-Gear-Searcher','Cryptid hunting gear').sheet-Setting-Gothic
+	+move('Gothic-Gear-Searcher','Historical documents and witness reports of strange events').sheet-Setting-Gothic
+	+move('Gothic-Gear-Searcher','Disguise set').sheet-Setting-Gothic
+	+move('Gothic-Gear-Searcher','Garlic').sheet-Setting-Gothic
+	+move('Gothic-Gear-Searcher','A small mirror').sheet-Setting-Gothic
+	+move('Gothic-Gear-Searcher','Holy symbols of various religions').sheet-Setting-Gothic
+	.sheet-space-above
+		b
+			span(data-i18n='searcher-weapon') Self-defence Weapons
+		|  
+		i
+			| &nbsp;(
+			span(data-i18n='pick-one') pick one
+			| )
+		| :
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Searcher_gearchoice8')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='searcher-gear8') Walking stick (1 harm, hand, innocuous)
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Searcher_gearchoice9')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='searcher-gear9') Small handgun (2 harm, close, reload, loud)
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Searcher_gearchoice10')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='searcher-gear10') Small knife (1 harm, hand, messy)
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Searcher_gearchoice11')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='searcher-gear11') Martial arts training (1 harm, hand, innocuous)
+	.sheet-move.sheet-Setting-Default
+		input.sheet-checkbox(type='checkbox', name='attr_Searcher_gearchoice12')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='searcher-gear12') Incapacitating spray (0 harm, hand, irritating)
+	.sheet-move.sheet-Setting-Default
+		input.sheet-checkbox(type='checkbox', name='attr_Searcher_gearchoice13')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='searcher-gear13') Heavy flashlight (1 harm, hand, innocuous)
+	+move('Gothic-Gear-Searcher','Small revolver (1-harm hand/close reload concealable)')(class="sheet-Setting-Gothic")
+	+move('Gothic-Gear-Searcher','Sword cane (2-harm hand concealable)')(class="sheet-Setting-Gothic")

@@ -1,0 +1,50 @@
+// Gear for The Hex
+.sheet-Hex
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-GearUnused-Hider', value='1', checked='')
+	div
+		span(data-i18n='hex-items') Any magical items or amulets that you use to perform magic
+	div
+		input(type='text', name='attr_Item-Hex')
+	.sheet-space-above
+		b
+			span(data-i18n='hex-weapons') Wizardly Weapons
+		|  
+		i
+			| &nbsp;(
+			span(data-i18n='pick-two') pick two
+			| )
+		| :
+	input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+	.sheet-move.sheet-Setting-Default
+		input.sheet-checkbox(type='checkbox', name='attr_Hex_gearchoice1')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='hex-gear1') .38 revolver (2 harm, close, reload, loud)
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Hex_gearchoice2')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='hex-gear2') Shotgun (3 harm, close, messy, loud)
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Hex_gearchoice3')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='hex-gear3') Athame (2 harm, hand, magic, silver)
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Hex_gearchoice4')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='hex-gear4') Shillelagh (1 harm, hand, balanced)
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Hex_gearchoice5')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='hex-gear5') Crossbow (2 harm, close, slow)
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_Hex_gearchoice6')
+		span.sheet-mainbox
+		span.sheet-grayable
+			span(data-i18n='hex-gear6') Staff (1 harm, hand, balanced, large)
+	+move('Gothic-Gear-Hex','Revolver (2-harm hand/close reload)')(class="sheet-Setting-Gothic")
+	+move('Gothic-Gear-Hex','Sword cane (2-harm hand concealable)')(class="sheet-Setting-Gothic")
+	+move('Gothic-Gear-Hex','Family heirloom sword (2-harm hand precious)')(class="sheet-Setting-Gothic")
