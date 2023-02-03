@@ -1,0 +1,41 @@
+.sheet-Custom.sheet-Special-Custom
+	.sheet-Subsection
+		span(data-i18n='custom-special') Playbook Special
+	i
+		| &nbsp;(
+		span(data-i18n='custom-special-example') Like the Expert&apos;s haven or the Spellslinger&apos;s combat magic
+		| )
+	.sheet-Special-Custom
+		input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Custom-PlaybookSpecial-Hider', value='1', checked='')
+		span.sheet-anglebox
+		|  
+		span.sheet-ExpHeader
+		.sheet-Expander
+			fieldset.repeating_Special
+				div
+					input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Edit-Hider', value='1', checked='')
+					span.sheet-anglebox
+					|  
+					span.sheet-ExpHeader
+						span(data-i18n='edit') Edit
+					.sheet-EditControls.sheet-Expander
+						div
+							b
+								span(data-i18n='custom-special-name') Name
+							| :
+						input(type='text', name='attr_SpecialName')
+						div
+							b
+								span(data-i18n='custom-special-description') Description
+							| :
+						textarea(name='attr_SpecialDescrip', rows='4', cols='40')
+				.sheet-move
+					input.sheet-checkbox(type='checkbox', name='attr_SpecialCheck', checked='')
+					span.sheet-mainbox
+					span.sheet-grayable
+						b
+							span(name='attr_SpecialName')
+							| :
+						|  
+						span(name='attr_SpecialDescrip')
+					button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movetext=**@{SpecialName}:** @{SpecialDescrip}}}', data-i18n-title='send_details_to_chat')

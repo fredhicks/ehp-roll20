@@ -1,0 +1,84 @@
+.sheet-Monstrous.sheet-Breed-Monstrous
+	.sheet-Subsection
+		span(data-i18n='monster-breed') Monster Breed
+	input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Monstrous-Breed-All', value='1', checked='')
+	span.sheet-anglebox
+	span.sheet-ExpHeader
+		span(data-i18n='all') All
+	.sheet-Expander
+		div
+			span(data-i18n='breed-description')
+				| You&apos;re half-human, half-monster. Were you always this way, or were you originally human and were transformed somehow? Were you always fighting for good, or were you once evil and then changed sides?
+		textarea(name='attr_Breed-Monstrous', rows='3', cols='40')
+		.sheet-isolator
+			input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-monstrous-breedsuggests', value='1')
+			span.sheet-anglebox
+			span.sheet-ExpHeader
+				span(data-i18n='breed-suggestions')
+			.sheet-Expander(data-i18n='breed-suggestions-list')
+				ul
+					li
+						| Vampire: Curse: feed (blood or life-force). Natural attacks: Base: life-drain or Base: teeth; add +1 harm to base attack. Moves: immortal or unquenchable vitality; mental domination.
+					li
+						| Werewolf: Curse: vulnerability (silver). Natural attacks: Base: claws; Base: teeth. Moves: shapeshifter (wolf and/or wolfman); claws of the beast or unholy strength.
+					li
+						| Ghost: Curse: vulnerability (rock salt). Natural attacks: Base: magical force; add hand range to magical force. Moves: incorporeal; immortal.
+					li
+						| Faerie: Curse: pure drive (joy). Natural attacks: Base: magical force; add ignore-armour to magical force. Moves: flight; preternatural speed.
+					li
+						| Demon: Curse: pure drive (cruelty). Natural attacks: Base: claws; +1 harm to claws. Moves: dark negotiator; unquenchable vitality.
+					li
+						| Orc: Curse: dark master (the orc overlord). Natural attacks: Base: teeth; add ignore-armour to teeth. Moves: Unholy strength; dark negotiator.
+					li
+						| Zombie: Curse: pure drive (hunger), feed (flesh or brains). Natural attacks: Base: teeth; +1 harm to teeth. Moves: immortal; unquenchable vitality.
+		div
+			b
+				span(data-i18n='curses') Curses
+			|  
+			i
+				| &nbsp;(
+				span(data-i18n='pick-one') pick one
+				| )
+			| :
+		input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Monstrous-Breed-Unused', value='1', checked='')
+		span.sheet-anglebox
+		span.sheet-ExpHeader
+			span(data-i18n='unused') Unused
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_Curse-Monstrous-Category', value='B1')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='curse1')
+					b Feed
+					| : You must subsist on living humans - it could be from blood, brains, or spiritual essence but it must be from people. You need to 
+					i act under pressure
+					|  to resist feeding whenever a perfect opportunity presents itself.
+				button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Act Under Pressure (Resist Feeding)}} {{Roll=[[2d6+?{Act Under Pressure with|Cool (Default),@{Cool}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_aup')
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_Curse-Monstrous-Category', value='B2')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='curse2')
+					b Vulnerability
+					| : Pick a substance. You&apos;ll take +1 harm when you suffer harm from it. If you are bound or surrounded by it, you must 
+					i act under pressure
+					|  to use your powers.
+				button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Act Under Pressure (When Bound)}} {{Roll=[[2d6+?{Act Under Pressure with|Cool (Default),@{Cool}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_aup')
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_Curse-Monstrous-Category', value='B3')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='curse3')
+					b Pure Drive
+					| : One emotion rules you. Pick from: hunger, hate, anger, fear, jealousy, greed, joy, pride, envy, lust, or cruelty. Whenever you have a chance to indulge that emotion, you must do so immediately, or 
+					i act under pressure
+					|  to resist.
+				button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Act Under Pressure (Resist Drive)}} {{Roll=[[2d6+?{Act Under Pressure with|Cool (Default),@{Cool}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_aup')
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_Curse-Monstrous-Category', value='B4')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='curse4')
+					b Dark Master
+					| : You have an evil lord who doesn&apos;t know you changed sides. They still give you orders, and they do not tolerate refusal, or failure.
+		input(type='text', name='attr_Curse-Monstrous')

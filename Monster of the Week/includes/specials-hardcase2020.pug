@@ -1,0 +1,68 @@
+.sheet-Hardcase2020
+	.sheet-Subsection
+		span(data-i18n='hardknocks') Hard Knocks
+	input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Hardknocks-All', value='1', checked='')
+	span.sheet-anglebox
+	span.sheet-ExpHeader
+		span(data-i18n='all') All
+	.sheet-Expander
+		input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Hardknocks-Unused', value='1', checked='')
+		span.sheet-anglebox
+		span.sheet-ExpHeader
+			span(data-i18n='unused') Unused
+		div(data-i18n='hardknocks-desc')
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_hardknocks1', value='1')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='hardknocks1')
+					b Bodyguard
+					| : When you spend 1 Fire to 
+					i protect someone
+					| , as well as +1 forward, you may protect them even if they are out of reach or the harm they are about to suffer would be unstoppable. Get an ally group of old colleagues: good at protecting people. Get the &ldquo;concealed armour&rdquo; gear pick.
+				button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Protect Someone}} {{Roll=[[2d6+?{Protect Someone with|Tough (Default),@{Tough}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|1}]]}}', name='roll_hk1')
+				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=hardknocks1}}', data-i18n-title='send_details_to_chat')
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_hardknocks2', value='1')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='hardknocks2')
+					b Enforcer
+					| : Spend 1 Fire to look so scary that it counts as a reason for 
+					i manipulating someone
+					| . After you roll, if you terrify them, spend Fire 1-for-1 to increase your result. Gain an ally who can help with money, disguises, back you up, or get underworld gossip. Get the &ldquo;bag of cash&rdquo; gear pick.
+				button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Manipulate Someone}} {{Roll=[[2d6+?{Manipulate Someone with|Charm (Default),@{Charm}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_hk2')
+				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=hardknocks2}}', data-i18n-title='send_details_to_chat')
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_hardknocks3', value='1')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='hardknocks3')
+					b Secret Martial Art
+					| : Spend Fire 1-for-1 to increase harm inflicted by your unarmed attacks. Your unarmed attacks gain &grave;ignore-armour&grave;. Get an ally, a mentor or student: good in a fight or philosophical discussion. Get the &ldquo;ancient sword&rdquo; gear pick.
+				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=hardknocks3}}', data-i18n-title='send_details_to_chat')
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_hardknocks4', value='1')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='hardknocks4')
+					b Military
+					| : When you&rsquo;re using military gear on a move, you may spend 2 Fire to boost the result level (a miss becomes a 7-9, 7-9 becomes 10+, or 10+ becomes 12+). You have an ally group, your old comrades: good in a fight or when you need help making preparations. Get the &ldquo;battered assault rifle&rdquo; gear pick.
+				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=hardknocks4}}', data-i18n-title='send_details_to_chat')
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_hardknocks5', value='1')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='hardknocks5')
+					b Resistance
+					| : What was your cause? You have contacts amongst sympathetic activists. If you need help and it fits the cause, call on them. Roll +Charm. On a 10+ they will help. On a 7-9 they&rsquo;ll help you but then you have to help them. On a miss, they help but you get drawn into their trouble. You may spend 2-Fire instead of rolling; you rouse them and they&rsquo;ll help as if you rolled 10+. Gain an ally, an old comrade from the movement. Get the &ldquo;spell formula&rdquo; gear pick.
+				button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Resistance}} {{Roll=[[2d6+?{Resistance with|Charm (Default),@{Charm}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_hk5')
+				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=hardknocks5}}', data-i18n-title='send_details_to_chat')
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_hardknocks6', value='1')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='hardknocks6')
+					b Street Fighter
+					| : When you have an ally standing by your side, spend 1-Fire to add +2 harm when you inflict harm. If there are multiple allies at your side, you may spend Fire for each. Gain an ally, an old friend you can count on for anything. Get the &ldquo;firewater&rdquo; gear pick.
+				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=hardknocks6}}', data-i18n-title='send_details_to_chat')

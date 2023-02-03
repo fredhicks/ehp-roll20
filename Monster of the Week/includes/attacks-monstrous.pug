@@ -1,0 +1,54 @@
+.sheet-Monstrous.sheet-Attacks-Monstrous
+	.sheet-Subsection
+		span(data-i18n='natural-attacks') Natural Attacks
+	input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Monstrous-NatWeap-All', value='1', checked='')
+	span.sheet-anglebox
+	span.sheet-ExpHeader
+		span(data-i18n='all') All
+	.sheet-Expander
+		input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Monstrous-NatWeap-Unused', value='1', checked='')
+		span.sheet-anglebox
+		span.sheet-ExpHeader
+			span(data-i18n='unused') Unused
+		div
+			i
+				| &nbsp;(
+				span(data-i18n='monstrous-attacks-pick') pick one base and one extra, or pick two bases
+				| )
+			| :
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_Attacks-Monstrous1')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='monstrous-attacks1') Base: teeth (3 harm, intimate)
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_Attacks-Monstrous2')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='monstrous-attacks2') Base: claws (2 harm, hand)
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_Attacks-Monstrous3')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='monstrous-attacks3') Base: magical force (1 harm, magical, close)
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_Attacks-Monstrous4')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='monstrous-attacks4') Base: life-drain (1 harm, intimate, life-drain)
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_Attacks-Monstrous5')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='monstrous-attacks5') Extra: add +1 harm to a base
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_Attacks-Monstrous6')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='monstrous-attacks6') Extra: add ignore-armour to a base
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_Attacks-Monstrous7')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='monstrous-attacks7') Extra: Add an extra range to a base (intimate, hand, or close)
+				input(type='text', name='attr_Attacks-Monstrous7-ExtraRange', placeholder='intimate, hand, or close')

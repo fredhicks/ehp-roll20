@@ -1,0 +1,58 @@
+// For tracking Ally improvements
+// input type="checkbox" class="sheet-triggerbox sheet-AllyRevealer" name="attr_Imp-Ally"
+.sheet-Ally
+	.sheet-Subsection
+		span(data-i18n='allies') Allies
+	input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Ally-All', value='1', checked='')
+	span.sheet-anglebox
+	span.sheet-ExpHeader
+		span(data-i18n='all')
+	.sheet-Expander
+		fieldset.repeating_Allies
+			div
+				input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Edit-Hider', value='1', checked='')
+				span.sheet-anglebox
+				|  
+				span.sheet-ExpHeader
+					span(data-i18n='edit') Edit
+				.sheet-EditControls.sheet-Expander
+					div
+						b
+							span(data-i18n='name') Name
+						| :
+					input(type='text', name='attr_Ally-Name')
+					div
+						b
+							span(data-i18n='motivation') Motivation
+						| :
+					select.sheet-FateSelect-Chosen(name='attr_Ally-Motive', style='width: 80%')
+						option(checked='checked', data-i18n='choose-one') Choose one
+						option(data-i18n='ally-motive1') Subordinate: to follow your exact instructions
+						option(data-i18n='ally-motive2') Lieutenant: to execute the spirit of your instructions
+						option(data-i18n='ally-motive3') Friend: to provide emotional support
+						option(data-i18n='ally-motive4') Bodyguard: to intercept danger
+						option(data-i18n='ally-motive5') Confidante: to give you advice and perspective
+						option(data-i18n='ally-motive6') Backup: to stand with you
+					div
+						b
+							span(data-i18n='description') Description
+						| :
+					textarea(name='attr_Ally-Descrip', rows='2', cols='40')
+			.sheet-move
+				b
+					span(name='attr_Ally-Name')
+				| :
+				span(name='attr_Ally-Descrip')
+				| &nbsp;(
+				i
+					span(name='attr_Ally-Motive')
+				| )
+		input.sheet-SkinCheck(type='hidden', name='attr_SkinCheck', value='0')
+		|  
+		.sheet-Meddlingkid
+			.sheet-MinorHead.sheet-space-above
+				span(data-i18n='meddlingkid-animal') Animal Allies
+			span(data-i18n='meddlingkid-animal-desc')
+				| Animal allies follow the normal rules for allies, except for communication. Animal allies can understand commands about as well as a very clever dog (regardless of what sort of animal they are).
+	// ally expander
+// Ally

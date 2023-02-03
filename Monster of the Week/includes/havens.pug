@@ -1,0 +1,134 @@
+input.sheet-triggerbox.sheet-HavenRevealer(type='checkbox', name='attr_Imp-Haven')
+.sheet-Expert.sheet-Haven
+	.sheet-Subsection
+		span(data-i18n='your-haven') Haven
+	input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Expert-Haven-All', value='1', checked='')
+	span.sheet-anglebox
+	span.sheet-ExpHeader
+		span(data-i18n='all') All
+	.sheet-Expander
+		input.sheet-SkinCheck(type='hidden', name='attr_SkinCheck', value='0')
+		|  
+		input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Expert-Haven-Unused', value='1', checked='')
+		span.sheet-anglebox
+		span.sheet-ExpHeader
+			span(data-i18n='unused') Unused
+		div
+			span(data-i18n='haven-description') You have set up a haven, a safe place to work
+			span.sheet-Snoop.sheet-Actionscientist . 
+			span.sheet-Expert
+				i
+					| &nbsp;(
+					span(data-i18n='pick-three') pick three
+					| )
+				| :
+			span.sheet-Gumshoe.sheet-Hex.sheet-Flake.sheet-Monstrous.sheet-Wronged.sheet-Luchador
+				i
+					| &nbsp;(
+					span(data-i18n='pick-two') pick two
+					| )
+				| :
+			span.sheet-Snoop
+				i
+					span(data-i18n='1-fixed-move') You get this
+					| :
+			span.sheet-Actionscientist
+				i
+					span(data-i18n='as-haven-instruct') Pick one in addition to a Workshop
+					| :
+		.sheet-move.sheet-Snoop
+			input.sheet-checkbox(type='checkbox', name='attr_Haven-Snoop', checked='')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='snoop-haven')
+					b Film Lab
+					| : All the stuff you need to develop film, store negatives, and process digital images.
+				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=haven1}}', data-i18n-title='send_details_to_chat')
+		.sheet-Snoop
+			i
+				| &nbsp;(
+				span(data-i18n='1-move') Then pick one of these
+				| )
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_Haven-Expert1')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='haven1')
+					b Lore Library
+					| : When you hit the books, take +1 forward to 
+					i investigate a mystery
+					|  (as long as historical or reference works are appropriate).
+				button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Investigate a Mystery}} {{Roll=[[2d6+?{Investigate a Mystery with|Sharp (Default),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|1}]]}}', name='roll_iam-plusone')
+				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=haven1}}', data-i18n-title='send_details_to_chat')
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_Haven-Expert2')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='haven2')
+					b Mystical Library
+					| : If you use your library&apos;s occult tomes and grimoires to prepare yourself, take +1 forward to 
+					i use magic
+					| .
+				button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Use Magic}} {{Roll=[[2d6+?{Use Magic with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|1}]]}}', name='roll_um-plusone')
+				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=haven2}}', data-i18n-title='send_details_to_chat')
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_Haven-Expert3')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='haven3')
+					b Protection Spells
+					| : Your haven is safe from monsters - they cannot enter. Monsters might be able to do something special to evade the wards, but not easily.
+				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=haven3}}', data-i18n-title='send_details_to_chat')
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_Haven-Expert4')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='haven4')
+					b Armoury
+					| : You have a stockpile of mystical and rare monster-killing weapons and items. If you 
+					i need a special weapon
+					| , roll +Weird. On a 10+, you have it (and plenty, if that matters). On a 7-9, you have it, but only the minimum. On a miss, you&apos;ve got the wrong thing.
+				button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Armoury}} {{Roll=[[2d6+?{Armoury with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_armoury')
+				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=haven4}}', data-i18n-title='send_details_to_chat')
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_Haven-Expert5')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='haven5')
+					b Infirmary
+					| : You can heal people, and have the space for one or two to recuperate. The Keeper will tell you how long any patient&apos;s recovery is likely to take, and if you need any extra supplies or help.
+				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=haven5}}', data-i18n-title='send_details_to_chat')
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_Haven-Expert6')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='haven6')
+					b Workshop
+					| : You have a space for building and repairing guns, cars, and other gadgets. Work out with the Keeper how long any repair or construction will take, and if you need extra supplies or help.
+				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=haven6}}', data-i18n-title='send_details_to_chat')
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_Haven-Expert7')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='haven7')
+					b Oubliette
+					| : This room is isolated from every kind of monster, spirit or magic that you know about. Anything you stash in there can&apos;t be found, can&apos;t do any magic, and can&apos;t get out.
+				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=haven7}}', data-i18n-title='send_details_to_chat')
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_Haven-Expert8')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='haven8')
+					b Panic Room
+					| : This has essential supplies and is protected by normal and mystical means. You can hide out there for a few days, safe from pretty much anything.
+				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=haven8}}', data-i18n-title='send_details_to_chat')
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_Haven-Expert9')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='haven9')
+					b Magical Laboratory
+					| : You have a mystical lab with all kinds of weird ingredients and tools useful for casting spells (like 
+					i use magic, big magic
+					| , and any other magical moves).
+				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=haven9}}', data-i18n-title='send_details_to_chat')

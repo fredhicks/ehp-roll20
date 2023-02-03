@@ -1,0 +1,91 @@
+.sheet-Wronged
+	.sheet-Lost-Wronged
+		.sheet-Subsection
+			span(data-i18n='who-you-lost') Who You Lost
+		input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Wronged-Lost-All', value='1', checked='')
+		span.sheet-anglebox
+		span.sheet-ExpHeader
+			span(data-i18n='all') All
+		.sheet-Expander
+			div
+				b
+					span(data-i18n='who') Who did you lose?
+				|  
+				i
+					span(data-i18n='pick-some') Pick one or more
+					| : 
+					span(data-i18n='lost-pick') Your parent(s), sibling(s), spouse/partner, child(ren), best friend(s) etc
+			textarea(name='attr_Lost-Wronged', rows='2', cols='40')
+			div
+				b
+					span(data-i18n='lost-save-them') Why couldn&apos;t you save them? You were
+				| : 
+				i
+					| &nbsp;(
+					span(data-i18n='pick-some') pick one or more
+					| )
+			input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Wronged-Lost-Unused', value='1', checked='')
+			span.sheet-anglebox
+			span.sheet-ExpHeader
+				span(data-i18n='unused') Unused
+			.sheet-move
+				input.sheet-checkbox(type='checkbox', name='attr_Lost-Wronged1')
+				span.sheet-mainbox
+				|  
+				span.sheet-grayable
+					span(data-i18n='lost1') At fault
+			.sheet-move
+				input.sheet-checkbox(type='checkbox', name='attr_Lost-Wronged2')
+				span.sheet-mainbox
+				|  
+				span.sheet-grayable
+					span(data-i18n='lost2') Selfish
+			.sheet-move
+				input.sheet-checkbox(type='checkbox', name='attr_Lost-Wronged3')
+				span.sheet-mainbox
+				|  
+				span.sheet-grayable
+					span(data-i18n='lost3') Injured
+			.sheet-move
+				input.sheet-checkbox(type='checkbox', name='attr_Lost-Wronged4')
+				span.sheet-mainbox
+				|  
+				span.sheet-grayable
+					span(data-i18n='lost4') Weak
+			.sheet-move
+				input.sheet-checkbox(type='checkbox', name='attr_Lost-Wronged5')
+				span.sheet-mainbox
+				|  
+				span.sheet-grayable
+					span(data-i18n='lost5') Slow
+			.sheet-move
+				input.sheet-checkbox(type='checkbox', name='attr_Lost-Wronged6')
+				span.sheet-mainbox
+				|  
+				span.sheet-grayable
+					span(data-i18n='lost6') Scared
+			.sheet-move
+				input.sheet-checkbox(type='checkbox', name='attr_Lost-Wronged7')
+				span.sheet-mainbox
+				|  
+				span.sheet-grayable
+					span(data-i18n='lost7') In denial
+			.sheet-move
+				input.sheet-checkbox(type='checkbox', name='attr_Lost-Wronged8')
+				span.sheet-mainbox
+				|  
+				span.sheet-grayable
+					span(data-i18n='lost8') Complicit
+		// relocate to other side of expansion wrapper
+	.sheet-Prey-Wronged
+		.sheet-Subsection
+			span(data-i18n='what-prey') What Did It?
+		input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Wronged-Prey', value='1', checked='')
+		span.sheet-anglebox
+		span.sheet-ExpHeader
+		.sheet-Expander
+			span(data-i18n='prey-breed') With the Keeper&apos;s agreement, pick the monster breed.
+			br
+			span(data-i18n='prey') My Prey
+			| : 
+			input(type='text', name='attr_PreyChoice-Wronged')

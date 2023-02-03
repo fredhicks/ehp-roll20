@@ -122,3 +122,110 @@
 				+translate('<b>Revolutionary</b>: Constantly seeking to improve the world by radical means, you can <b>read a bad situation</b> in any social situation.')
 				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=Revolutionary: Constantly seeking to improve the world by radical means, you can read a bad situation in any social situation.}}', data-i18n-title='send_details_to_chat')
 	// End Expander
+.sheet-Crooked.sheet-Heat-Crooked
+	.sheet-Subsection
+		span(data-i18n='heat') Heat
+	input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-CrookedHeatAll', value='1', checked='')
+	span.sheet-anglebox
+	span.sheet-ExpHeader
+		span(data-i18n='all') All
+	.sheet-Expander
+		input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-CrookedHeatUnused', value='1', checked='')
+		span.sheet-anglebox
+		span.sheet-ExpHeader
+			span(data-i18n='unused') Unused
+		div
+			span(data-i18n='heat-description') You didn&apos;t get here without making enemies.
+			i
+				span(data-i18n='pick-heat') Pick at least 2 of these and name the people involved
+			| :
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_Heat-Crooked1')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='heat1')
+					| A 
+					i police detective
+					|  has made it a personal goal to put you away.
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_Heat-Crooked2')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='heat2')
+					| You have a 
+					i rival
+					|  from your background, who never misses a chance to screw you over.
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_Heat-Crooked3')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='heat3')
+					| You pissed off a well connected 
+					i criminal,
+					| , and they&apos;ll do whatever they can to destroy you.
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_Heat-Crooked4')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='heat4')
+					| You took advantage of 
+					i someone
+					|  with special powers (a person or monster).
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_Heat-Crooked5')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='heat5')
+					| You betrayed 
+					i an old partner
+					|  in the middle of a job.
+		.sheet-MinorHead
+			span(data-i18n='your-enemies') Your enemies
+			| :
+		textarea(name='attr_HeatDescrip', rows='2', cols='40')
+.sheet-Crooked.sheet-Underworld-Crooked
+	.sheet-Subsection
+		span(data-i18n='underworld') Underworld
+	input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-CrookedUnderworldAll', value='1', checked='')
+	span.sheet-anglebox
+	span.sheet-ExpHeader
+		span(data-i18n='all') All
+	.sheet-Expander
+		input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-CrookedUnderworldUnused', value='1', checked='')
+		span.sheet-anglebox
+		span.sheet-ExpHeader
+			span(data-i18n='unused') Unused
+		div
+			span(data-i18n='underworld-description')
+				| Pick how you discovered the 
+				i real
+				|  underworld
+			| :
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_Underworld-Crooked-underworld1')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='underworld1')
+					| The target of a job was a dangerous creature (pick one: vampire, werewolf, troll, reptiloid, etc).
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_Underworld-Crooked-underworld2')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='underworld2')
+					| You worked with someone who was more than they seemed (pick one: sorceror, demon, faerie, psychic, etc).
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_Underworld-Crooked-underworld3')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='underworld3')
+					| You were hired by something weird (pick one: immortal, god, outsider, witch, etc).
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_Underworld-Crooked-underworld4')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='underworld4')
+					| Things went south on a job - including, but not limited to, running into (choose one: a horde of goblins, a hunger of ghouls, a dream-eater, etc).
+		.sheet-MinorHead
+			span(data-i18n='your-choice') Your choice
+			| :
+		input(type='text', name='attr_UnderworldDesc-Crooked')

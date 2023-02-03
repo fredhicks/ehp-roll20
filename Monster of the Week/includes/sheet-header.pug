@@ -1,0 +1,20 @@
+input.sheet-SkinCheck(type='hidden', name='attr_SkinCheck', value='0')
+input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Basics', value='1', checked='')
+span.sheet-anglebox
+span.sheet-ExpHeader
+.sheet-Expander
+	input.sheet-SkinCheck(type='hidden', name='attr_SkinCheck', value='0')
+	.sheet-3colrow
+		input.sheet-SkinCheck(type='hidden', name='attr_SkinCheck', value='0')
+		include sheet-header-name.pug
+		include sheet-header-pronouns.pug
+		include sheet-header-selection.pug
+	input.sheet-SkinCheck(type='hidden', name='attr_SkinCheck', value='0')
+	.sheet-NoKeep
+		span.sheet-Label(data-i18n='character-look') Look
+		|  
+		br
+		input(type='text', name='attr_Look', style='width: 98%')
+	include game-options-config.pug
+	// Here goes the top of the keeper's mystery sheet; more to follow
+	include keeper-mystery-head.pug

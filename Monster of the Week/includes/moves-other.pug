@@ -1,0 +1,37 @@
+.sheet-OtherMoves
+	.sheet-Subsection
+		span(data-i18n='other-moves') Other Moves
+	input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-ChosenOtherMoves', value='1', checked='')
+	span.sheet-anglebox
+	span.sheet-ExpHeader
+	.sheet-Expander
+		fieldset.repeating_OtherMoves
+			div
+				input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Edit-Hider', value='1', checked='')
+				span.sheet-anglebox
+				|  
+				span.sheet-ExpHeader
+					span(data-i18n='edit') Edit
+				.sheet-EditControls.sheet-Expander
+					div
+						b
+							span(data-i18n='name') Name
+						| :
+					input(type='text', name='attr_OtherMoveName')
+					div
+						b
+							span(data-i18n='description') Description
+						| :
+					textarea(name='attr_OtherMoveDescrip', rows='4', cols='40')
+			.sheet-move.sheet-othermove
+				input.sheet-checkbox(type='checkbox', name='attr_OtherMoveCheck', checked='')
+				span.sheet-mainbox
+				span.sheet-grayable
+					b
+						span(name='attr_OtherMoveName')
+						| :
+					|  
+					span(name='attr_OtherMoveDescrip')
+					button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movetext=**@{OtherMoveName}:** @{OtherMoveDescrip}}}', data-i18n-title='send_details_to_chat')
+	// Expander
+// End Other Moves

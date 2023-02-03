@@ -1,0 +1,77 @@
+.sheet-Exile.sheet-Origin-Exile
+	.sheet-Subsection
+		span(data-i18n='exile-origin') Origin
+	input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Exile-Origin-All', value='1', checked='')
+	span.sheet-anglebox
+	span.sheet-ExpHeader
+		span(data-i18n='all') All
+	.sheet-Expander
+		div
+			span(data-i18n='exile-origin-desc1')
+				| You were taken from your home in the past, and dropped into the modern world with only what you were carrying.
+		div
+			textarea(name='attr_Origin-Exile-Descrip', rows='2', cols='40', placeholder='Describe where and when you are from')
+		div
+			span(data-i18n='exile-origin-desc2')
+				| Your nemesis came to the modern world and is aware you followed it. It will kill you if you don&rsquo;t kill it first. Decide what it is with the Keeper. Name it, if you know.
+		div
+			textarea(name='attr_Origin-Exile-Nemesis', rows='2', cols='40', placeholder='Describe your Nemesis')
+		div
+			b
+				span(data-i18n='exile-origin-desc3') How did you get transported to the modern day?
+			|  
+			i
+				| &nbsp;(
+				span(data-i18n='pick-one') pick one
+				| )
+			| :
+		input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Exile-Origin-Unused', value='1', checked='')
+		span.sheet-anglebox
+		span.sheet-ExpHeader
+			span(data-i18n='unused') Unused
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_Origin-Exile1')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='exile-origin1') You were pursuing your nemesis.
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_Origin-Exile2')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='exile-origin2')
+					| Your nemesis had already travelled to the future, so you (or your comrades) cast a spell to send you after it.
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_Origin-Exile3')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='exile-origin3') Magical accident or side-effect.
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_Origin-Exile4')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='exile-origin4') You angered a sorcerer.
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_Origin-Exile5')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='exile-origin5') Divine intervention.
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_Origin-Exile6')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='exile-origin6') One moment you were there, the next you were here.
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_Origin-Exile7')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='exile-origin7') A strange place or artifact brought you.
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_Origin-Exile8')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='exile-origin8') You were frozen, and recently unearthed and revived.
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_Origin-Exile9')
+			span.sheet-mainbox
+			span.sheet-grayable
+				input(type='text', name='attr_Origininfo-Exile', placeholder='Something else!', style='width: 80%')

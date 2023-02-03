@@ -1,0 +1,147 @@
+.sheet-Spellslinger
+	.sheet-Subsection
+		span(data-i18n='combat-magic') Combat Magic
+	.sheet-MinorHead(data-i18n='restrictions') Restrictions
+	.sheet-FixedMoves-Spellslinger
+		input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Spellslinger-Restrictions-All', value='1', checked='')
+		span.sheet-anglebox
+		span.sheet-ExpHeader
+			span(data-i18n='all') All
+		.sheet-Expander
+			div
+				i
+					span(data-i18n='extra-fixed-move') You get this
+				| :
+			.sheet-move
+				input.sheet-checkbox(type='checkbox', name='attr_FixedMoves-Spellslinger1', checked='true')
+				span.sheet-mainbox
+				span(data-i18n='spellslinger-fixed-move1')
+					b Tools and Techniques
+					| : To use your combat magic effectively, you rely on a collection of tools and techniques. Uncheck one; you&apos;ll need the rest.
+				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=spellslinger-fixed-move1}} {{c1v=[[0+@{Moves-Spellslinger1A}]]}} {{c1=spellslinger-fixed-move1.1}} {{c2v=[[0+@{Moves-Spellslinger1B}]]}} {{c2=spellslinger-fixed-move1.2}} {{c3v=[[0+@{Moves-Spellslinger1C}]]}} {{c3=spellslinger-fixed-move1.3}} {{c4v=[[0+@{Moves-Spellslinger1D}]]}} {{c4=spellslinger-fixed-move1.4}}', data-i18n-title='send_details_to_chat')
+				|  
+				.sheet-isolator
+					input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Spellslinger-Restrictions-Unused', value='1', checked='')
+					span.sheet-anglebox
+					span.sheet-ExpHeader
+						span(data-i18n='unused') Unused
+					.sheet-move
+						input.sheet-checkbox(type='checkbox', name='attr_Moves-Spellslinger1A', value='1', checked='')
+						span.sheet-mainbox
+						span.sheet-grayable
+							span(data-i18n='spellslinger-fixed-move1.1')
+								i Consumables
+								| : You need certain supplies - powders, oils, etc - on hand, some will be used up each cast. If you don&apos;t have them, when you cast, take 1 harm, ignore-armour.
+					.sheet-move
+						input.sheet-checkbox(type='checkbox', name='attr_Moves-Spellslinger1B', value='1', checked='')
+						span.sheet-mainbox
+						span.sheet-grayable
+							span(data-i18n='spellslinger-fixed-move1.2')
+								i Foci
+								| : You need wands, staves, and other obvious props to focus. If you don&apos;t have what you need, your combat magic does 1 harm less.
+					.sheet-move
+						input.sheet-checkbox(type='checkbox', name='attr_Moves-Spellslinger1C', value='1', checked='')
+						span.sheet-mainbox
+						span.sheet-grayable
+							span(data-i18n='spellslinger-fixed-move1.3')
+								i Gestures
+								| : You need to wave your hands around to use combat magic. If you&apos;re restrained, take -1 ongoing for combat magic.
+					.sheet-move
+						input.sheet-checkbox(type='checkbox', name='attr_Moves-Spellslinger1D', value='1', checked='')
+						span.sheet-mainbox
+						span.sheet-grayable
+							span(data-i18n='spellslinger-fixed-move1.4')
+								i Incantations
+								| : You must speak in an arcane language to control your magic. If you use combat magic without speaking, 
+								i act under pressure
+								|  to avoid scrambling your thoughts.
+	.sheet-MinorHead(data-i18n='attack-spells') Attack Spells
+	.sheet-Magic-Spellslinger
+		input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Spellslinger-AttackSpells-All', value='1', checked='')
+		span.sheet-anglebox
+		span.sheet-ExpHeader
+			span(data-i18n='all') All
+		.sheet-Expander
+			div
+				div
+					span(data-i18n='combat-magic-description1')
+						| You have a few attack spells you can use as weapons. When you use these spells to 
+						i kick some ass
+						| , roll +Weird instead of +Tough.
+					button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Kick Some Ass with Combat Magic}} {{Roll=[[2d6+?{Kick Some Ass with Combat Magic with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_kickass-cm')
+				div
+					i
+						| &nbsp;(
+						span(data-i18n='combat-magic-pick') pick three, with at least one base
+						| )
+				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=combat-magic-description1}} {{codakey=combat-magic-description2}} {{c1v=[[0+@{Magic-Spellslinger1}]]}} {{c1=base1}} {{c2v=[[0+@{Magic-Spellslinger2}]]}} {{c2=base2}} {{c3v=[[0+@{Magic-Spellslinger3}]]}} {{c3=base3}} {{c4v=[[0+@{Magic-Spellslinger4}]]}} {{c4=base4}} {{c5v=[[0+@{Magic-Spellslinger5}]]}} {{c5=effect1}} {{c6v=[[0+@{Magic-Spellslinger6}]]}} {{c6=effect2}} {{c7v=[[0+@{Magic-Spellslinger7}]]}} {{c7=effect3}} {{c8v=[[0+@{Magic-Spellslinger8}]]}} {{c8=effect4}} {{c9v=[[0+@{Magic-Spellslinger9}]]}} {{c9=effect5}} {{c10v=[[0+@{Magic-Spellslinger10}]]}} {{c10=effect6}}', data-i18n-title='send_details_to_chat')
+			input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Spellslinger-AttackSpells-Unused', value='1', checked='')
+			span.sheet-anglebox
+			span.sheet-ExpHeader
+				span(data-i18n='unused') Unused
+			div
+				b
+					span(data-i18n='bases') Bases
+					| :
+			.sheet-move
+				input.sheet-checkbox(type='checkbox', name='attr_Magic-Spellslinger1', value='1')
+				span.sheet-mainbox
+				span.sheet-grayable
+					span(data-i18n='base1') Blast (2 harm, magic, close, obvious, loud)
+			.sheet-move
+				input.sheet-checkbox(type='checkbox', name='attr_Magic-Spellslinger2', value='1')
+				span.sheet-mainbox
+				span.sheet-grayable
+					span(data-i18n='base2') Ball (1 harm, magic, area, close, obvious, loud)
+			.sheet-move
+				input.sheet-checkbox(type='checkbox', name='attr_Magic-Spellslinger3', value='1')
+				span.sheet-mainbox
+				span.sheet-grayable
+					span(data-i18n='base3') Missile (1 harm, magic, far, obvious, loud)
+			.sheet-move
+				input.sheet-checkbox(type='checkbox', name='attr_Magic-Spellslinger4', value='1')
+				span.sheet-mainbox
+				span.sheet-grayable
+					span(data-i18n='base4') Wall (1 harm, magic, barrier, close, 1 armour, obvious, loud)
+			div
+				b
+					span(data-i18n='effects') Effects
+					| :
+			.sheet-move
+				input.sheet-checkbox(type='checkbox', name='attr_Magic-Spellslinger5', value='1')
+				span.sheet-mainbox
+				span.sheet-grayable
+					span(data-i18n='effect1')
+						| Fire (add &apos;+2 harm, fire&apos; to a base; if you get a 10+ on a combat magic roll, the fire won&apos;t spread)
+			.sheet-move
+				input.sheet-checkbox(type='checkbox', name='attr_Magic-Spellslinger6', value='1')
+				span.sheet-mainbox
+				span.sheet-grayable
+					span(data-i18n='effect2') Force or Wind (add &apos;+1 harm, forceful&apos; to a base; or &apos;+1 armour&apos; to a wall)
+			.sheet-move
+				input.sheet-checkbox(type='checkbox', name='attr_Magic-Spellslinger7', value='1')
+				span.sheet-mainbox
+				span.sheet-grayable
+					span(data-i18n='effect3') Lightning or Entropy (add &apos;+1 harm, messy&apos; to a base)
+			.sheet-move
+				input.sheet-checkbox(type='checkbox', name='attr_Magic-Spellslinger8', value='1')
+				span.sheet-mainbox
+				span.sheet-grayable
+					span(data-i18n='effect4')
+						| Frost or Ice (add &apos;-1 harm, +2 armour&apos; to a wall, or &apos;+1 harm, restraining&apos; to other bases)
+			.sheet-move
+				input.sheet-checkbox(type='checkbox', name='attr_Magic-Spellslinger9', value='1')
+				span.sheet-mainbox
+				span.sheet-grayable
+					span(data-i18n='effect5') Earth (add &apos;forceful, restraining&apos; to a base)
+			.sheet-move
+				input.sheet-checkbox(type='checkbox', name='attr_Magic-Spellslinger10', value='1')
+				span.sheet-mainbox
+				span.sheet-grayable
+					span(data-i18n='effect6') Necromantic (add &apos;life-drain&apos; to a base)
+			div
+				span(data-i18n='combat-magic-description2')
+					| Sometimes you may need to 
+					i act under pressure
+					|  to cast your spells without problems.
+				button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Act Under Pressure}} {{Roll=[[2d6+?{Act Under Pressure with|Cool (Default),@{Cool}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_aup')

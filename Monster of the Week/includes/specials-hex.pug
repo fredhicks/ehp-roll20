@@ -1,0 +1,85 @@
+.sheet-Hex.sheet-Temptation-Hex
+	.sheet-Subsection
+		span(data-i18n='temptation') Temptation
+	input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Hex-Temptation-All', value='1', checked='')
+	span.sheet-anglebox
+	span.sheet-ExpHeader
+		span(data-i18n='all') All
+	.sheet-Expander
+		div
+			span.sheet-highlights(data-i18n='temptation-desc1')
+				| You have a dangerous drive that you pursue, sometimes to the exclusion of your own safety. Decide if your 
+				i Temptation
+				|  drove you to learn magic, or if learning magic drove you to it
+			| :
+		textarea(name='attr_Temptation-reason', rows='1', cols='40')
+		span.sheet-highlights(data-i18n='temptation-desc2')
+			| Whenever you give in to your 
+			i Temptation
+			|  and act accordingly, you mark experience. If a perfect opportunity presents itself, you need to 
+			i act under pressure
+			|  to resist giving in to your 
+			i Temptation
+			| . If you fail this roll, you 
+			b don&apos;t mark experience
+			|  like you would have if you&apos;d willingly acted out your desires.
+		button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Act Under Pressure (Resist Temptation)}} {{Roll=[[2d6+?{Act Under Pressure with|Cool (Default),@{Cool}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_aup')
+		div
+			br
+			span(data-i18n='temptation-choose')
+				| Choose one 
+				i Temptation
+			| :
+		input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Hex-Temptation-Unused', value='1', checked='')
+		span.sheet-anglebox
+		span.sheet-ExpHeader
+			span(data-i18n='unused') Unused
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_Temptation-Hex1')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='temptation1')
+					b Vengeance
+					| : Utilize magic to inflict disproportionate retribution on someone who wronged you.
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_Temptation-Hex2')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='temptation2')
+					b Power
+					| : Utilize magic to exert your dominance over another.
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_Temptation-Hex3')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='temptation3')
+					b Addiction
+					| : Utilize magic to do what you could do without it.
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_Temptation-Hex4')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='temptation4')
+					b Callousness
+					| : Utilize magic without regard for the safety of others.
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_Temptation-Hex5')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='temptation5')
+					b Carnage
+					| : Utilize magic to inflict gruesome violence.
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_Temptation-Hex6')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='temptation6')
+					b Secrets
+					| : Utilize magic to discover forbidden, dangerous knowledge.
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_Temptation-Hex7')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='temptation7')
+					b Glory
+					| : Utilize magic to steal someone&apos;s thunder.

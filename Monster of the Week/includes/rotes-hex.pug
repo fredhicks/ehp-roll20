@@ -1,0 +1,111 @@
+// Hex's Rotes
+.sheet-Hex.sheet-Rote-Hex
+	.sheet-Subsection
+		span(data-i18n='rotes') Rotes
+	.sheet-isolator
+		input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Rotes', value='1')
+		span.sheet-anglebox
+		|  
+		span.sheet-ExpHeader(data-i18n='rotes') Rotes
+		.sheet-Expander
+			input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-RotesInstruct', value='1')
+			span.sheet-anglebox
+			|  
+			span.sheet-ExpHeader(data-i18n='instructions') Instructions
+			.sheet-Expander
+				span.sheet-highlights(data-i18n='rote-desc1')
+					| Whenever you 
+					i use magic
+					| , you can decide afterwards that a particular spell is a 
+					i Rote
+					|  that you know. You know how to cast it off the top of your head. Write down in detail the name of the 
+					i Rote
+					| , what it requires, and what it does on a 10+, a 7-9, and a miss. A 
+					i Rote
+					|  is a bit more powerful than a basic 
+					i use magic
+					|  spell; its glitches are less onerous and its effect may be a little bigger. Unlike regular 
+					i use magic
+					| , the cost and consequences for failing a 
+					i Rote
+					|  are known to you in advance.
+				span(data-i18n='rote-desc2')
+					| Choose two fixed requirements for each 
+					i Rote
+					|  from this list
+				| :
+				ul
+					li
+						span(data-i18n='rote-req1') Magic words and ritual gestures.
+					li
+						span(data-i18n='rote-req2') An object of power (wand, talisman, orb, staff, etc) which must be wielded.
+					li
+						span(data-i18n='rote-req3')
+							| An expendable component such as sulfur, sage, or incense, which must be burned, blown, destroyed or scattered during the casting.
+					li
+						span(data-i18n='rote-req4') Runes or symbols written or engraved on a surface (which must be prepared).
+					li
+						span(data-i18n='rote-req5') A spilling of blood (1 harm to you or a willing participant).
+				|  
+				span(data-i18n='rote-desc3')
+					| After you cast it for the first time, treat each 
+					i Rote
+					|  as a custom move - a specialised version of 
+					i use magic
+					| , which is built with the Keeper.
+			.sheet-Subsection
+				span(data-i18n='rote-list') List of Rotes
+			input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-RotesInstruct', value='1')
+			span.sheet-anglebox
+			|  
+			span.sheet-ExpHeader(data-i18n='instructions') Instructions
+			.sheet-Expander
+				span(data-i18n='rote-desc4')
+					| You start out knowing up to one 
+					i Rote
+					| , which you can choose when creating your character or during play. You can learn more by taking corresponding 
+					i Improvements
+					| . When you do, you can choose the new 
+					i Rote
+					|  right away or in play.
+				span(data-i18n='rote-desc5')
+					| You roll +Weird to cast a 
+					i Rote
+					| , which requires you to have the needed items at hand and the ability to physically use them.
+			fieldset.repeating_Rote-Hex
+				input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Edit-Hider', value='1', checked='')
+				span.sheet-anglebox
+				|  
+				span.sheet-ExpHeader
+					span(data-i18n='edit') Edit
+				.sheet-EditControls.sheet-Expander
+					b
+						span(data-i18n='rote-name') Rote Name
+					|  
+					input(type='text', name='attr_RoteName-Hex')
+					b
+						span(data-i18n='rote-reqs') Requirements
+					|  
+					textarea(name='attr_RoteReq-Hex', rows='2', cols='30', placeholder='Pick two from the list')
+					b
+						span(data-i18n='rote-effect') Effects
+					|  
+					textarea(name='attr_RoteEffect-Hex', rows='3', cols='30', placeholder='Write what the Rote does on a 10+, on a 7-9 and on a miss')
+				.sheet-move.sheet-othermove
+					input.sheet-checkbox(type='checkbox', name='attr_RoteCheck', checked='')
+					span.sheet-mainbox
+					span.sheet-grayable
+						b
+							span(name='attr_RoteName-Hex')
+							| :
+						|  
+						i
+							span(data-i18n='rote-reqs')
+							| :
+						span(name='attr_RoteReq-Hex')
+						i
+							span(data-i18n='rote-effect')
+							| :
+						span(name='attr_RoteEffect-Hex')
+						button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Cast a Rote: @{RoteName-Hex}}} {{Roll=[[2d6+?{Cast @{RoteName-Hex} with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_rote')
+						button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movetext=**@{RoteName-Hex} (Rote)**}} {{coda=*Requirements:* @{RoteReq-Hex} *Effects:* @{RoteEffect-Hex}}}', data-i18n-title='send_details_to_chat')

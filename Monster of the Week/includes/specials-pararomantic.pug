@@ -1,0 +1,130 @@
+.sheet-Pararomantic
+	.sheet-Relation-Pararomantic
+		.sheet-Subsection
+			span(data-i18n='relation') Relationship Status
+		input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-PNRelStat', value='1', checked='')
+		span.sheet-anglebox
+		|  
+		span.sheet-ExpHeader
+		.sheet-Expander
+			.sheet-MinorHead
+				span(data-i18n='guide-name') Guide Name
+			input(type='text', name='attr_Guide-Pararomantic')
+			br
+			p.sheet-space-above(align='center')
+				b
+					span(data-i18n='loving') Loving
+				input.sheet-checkbox(type='checkbox', name='attr_Relation-Pararomantic1')
+				span.sheet-altbox
+				input.sheet-checkbox(type='checkbox', name='attr_Relation-Pararomantic2')
+				span.sheet-altbox
+				input.sheet-checkbox(type='checkbox', name='attr_Relation-Pararomantic3')
+				span.sheet-altbox
+				input.sheet-checkbox(type='checkbox', name='attr_Relation-Pararomantic4')
+				span.sheet-altbox
+				input.sheet-checkbox(type='checkbox', name='attr_Relation-Pararomantic5')
+				span.sheet-altbox
+				input.sheet-checkbox(type='checkbox', name='attr_Relation-Pararomantic6')
+				span.sheet-altbox
+				input.sheet-checkbox(type='checkbox', name='attr_Relation-Pararomantic7')
+				span.sheet-altbox
+				|  
+				b
+					span(data-i18n='broken') Broken
+			input.sheet-triggerbox(type='checkbox', name='attr_Pararomantic-AdvImp9')
+			.sheet-triggerframe
+				.sheet-MinorHead
+					span(data-i18n='guide-name-second') Second Guide Name
+				input(type='text', name='attr_Guide-second-Pararomantic')
+				br
+				p.sheet-space-above(align='center')
+					b
+						span(data-i18n='loving') Loving
+					input.sheet-checkbox(type='checkbox', name='attr_Relation2-Pararomantic1')
+					span.sheet-altbox
+					input.sheet-checkbox(type='checkbox', name='attr_Relation2-Pararomantic2')
+					span.sheet-altbox
+					input.sheet-checkbox(type='checkbox', name='attr_Relation2-Pararomantic3')
+					span.sheet-altbox
+					input.sheet-checkbox(type='checkbox', name='attr_Relation2-Pararomantic4')
+					span.sheet-altbox
+					input.sheet-checkbox(type='checkbox', name='attr_Relation2-Pararomantic5')
+					span.sheet-altbox
+					input.sheet-checkbox(type='checkbox', name='attr_Relation2-Pararomantic6')
+					span.sheet-altbox
+					input.sheet-checkbox(type='checkbox', name='attr_Relation2-Pararomantic7')
+					span.sheet-altbox
+					|  
+					b
+						span(data-i18n='broken') Broken
+	.sheet-Bond-Pararomantic
+		.sheet-Subsection
+			span(data-i18n='bond') Bond Abuse
+		input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-PNBondAbuse', value='1', checked='')
+		span.sheet-anglebox
+		|  
+		span.sheet-ExpHeader
+		.sheet-Expander
+			span(data-i18n='bond1')
+				| Whenever you do something to abuse the bond with your 
+				i Guide
+				| , like acting against them, or not giving them enough attention, roll +Charm
+			| :
+			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Bond Abuse}} {{Roll=[[2d6+?{Bond Abuse with|Charm (Default),@{Charm}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_bondabuse')
+			ul
+				li
+					span(data-i18n='bond1.1') On a 10+, your action has no effect beyond the exchange of some angry words.
+				li
+					span(data-i18n='bond1.2')
+						| On a 7-9, choose one of the 
+						i Bond Abuse
+						|  options below.
+				li
+					span(data-i18n='bond1.3')
+						| On a miss, the Keeper may choose two of the 
+						i Bond Abuse
+						|  options below, or something worse.
+					button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=bond1}} {{key1=bond1.1}}  {{key2=bond1.2}} {{key3=bond1.3}}', data-i18n-title='send_details_to_chat')
+			span(data-i18n='bond2')
+				b Bond Abuse options
+			| :
+			ul
+				li
+					span(data-i18n='bond2.1')
+						| Mark one 
+						i Relationship Status
+						|  box.
+				li
+					span(data-i18n='bond2.2')
+						| You may not channel the power of your 
+						i Bond
+						|  for the rest of the mystery.
+				li
+					span(data-i18n='bond2.3') You gain the unwelcome attention of others of your Guide&apos;s kind.
+				li
+					span(data-i18n='bond2.4')
+						| Someone who shouldn&apos;t know finds a clue about your relationship with your 
+						i Guide
+						| .
+					button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=bond2}} {{key1=bond2.1}}  {{key2=bond2.2}} {{key3=bond2.3}} {{key4=bond2.4}}', data-i18n-title='send_details_to_chat')
+	div
+		.sheet-Subsection
+			span(data-i18n='bond-fate') Fate of your Love
+		input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-PNFOYL', value='1', checked='')
+		span.sheet-anglebox
+		|  
+		span.sheet-ExpHeader
+		.sheet-Expander
+			span(data-i18n='bond-fate-desc1')
+				| There is a reason why your love with your 
+				i Guide
+				|  is forbidden or doomed. Invent this reason or leave it to the Keeper.
+			textarea(name='attr_BondDescrip', rows='2', cols='40')
+			span(data-i18n='bond-fate-desc2')
+				| Whenever you spend Luck, the truth of your love&apos;s Fate slowly unfolds. When you mark your last 
+				i Luck
+				|  point, it becomes clear that you cannot be together. Your Guide might even end up as an enemy, depending on how things go.
+			span(data-i18n='bond-fate-desc3')
+				| Whenever you put yourself or somebody else in serious danger in order to conceal the truth about you and your 
+				i Guide
+				| , mark experience.
