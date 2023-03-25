@@ -33,7 +33,9 @@
 					input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
 					span(data-i18n='Gumshoe-fixed-move2-examples').sheet-Setting-Default
 						| Academics, Accountants, Artists, Bartenders, Clergy, Conspiracy Theorists, Construction, Courts, Criminals (organised), Criminals (street), Cultists, Engineers, Espionage, Film and TV, Forensic Scientists, Fringe Scientists, Hackers, Journalists, Lawyers, Mechanics, Media, Medical Practioners, Military, Morgue, Occult, Police (local), Police (national), Politicians, Prisons, Private Security, Property Developers, Stage Magicians, Technologists, Transportation
-					+translate('Academics, Accountants, Artists, Bartenders, Clergy, Conspiracy Theorists, Construction, Courts, Criminals (organised), Criminals (street), Cultists, Espionage, Forensic Scientists, Fringe Scientists, Hackers, Journalists, Lawyers, Mechanics, Media, Medical Practioners, Military, Morgue, Occult, Police (local), Police (national), Politicians, Prisons, Private Security, Property Developers, Stage Magicians, Technologists, Theater, Tinkers, Transportation').sheet-Setting-Gothic
+					+translate('Academics, Accountants, Artists, Bartenders, Clergy, Conspiracy Theorists, Construction, Courts, Criminals (organised), Criminals (street), Cultists, Espionage, Forensic Scientists, Fringe Scientists, Journalists, Lawyers, Mechanics, Media, Medical Practioners, Military, Morgue, Occult, Police (local), Police (national), Politicians, Prisons, Private Security, Property Developers, Stage Magicians, Theater, Tinkers, Transportation').sheet-Setting-Gothic
+					+translate('Academics, Accountants, Artists, Bartenders, Clergy, Conspiracy Theorists, Construction, Courts, Courtiers, Criminals (organised), Criminals (street), Cultists, Dream Alchemists, Engineers, Espionage, Forensic Scientists, Fringe Scientists, Hackers, Journalists, Lawyers, Mechanics, Media, Medical Practioners, Merchants, Military, Morgue, Musketeers, Occult, Politicians, Prisons, Private Security, Property Developers, Stage Magicians, Technologists, Theatre, Town Guards, Transportation').sheet-Setting-Dreaming
+					+translate('Scholars, Scribes, Artists, Bartenders, Builders, Healers, Magistrates, Wild cultists, Secret agents, Criminals, Engineers, Lawyers, Marches Guard, Carters').sheet-Setting-Marches
 			textarea(name='attr_Gumshoe-fixed-move2-choices', rows='2', cols='40')
 			span(data-i18n='Gumshoe-fixed-move2-continued')
 				| You can hit them up for info (+1 to one 
@@ -90,10 +92,17 @@
 		input.sheet-checkbox(type='checkbox', name='attr_Moves-Gumshoe4')
 		span.sheet-mainbox
 		span.sheet-grayable
-			span(data-i18n='Gumshoe-move4')
+			input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+			span(data-i18n='Gumshoe-move4').sheet-Setting-Default.sheet-Setting-Gothic
 				b Out of the Past
 				| : You have a police buddy who will do you big favours. Get in touch with them when you need to redirect law enforcement attention, get a heads-up on what operations are planned, or access police files. You now owe them; expect them to collect on it soon.
-			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=Gumshoe-move4}}', data-i18n-title='send_details_to_chat')
+				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=Gumshoe-move4}}', data-i18n-title='send_details_to_chat')
+			span.sheet-Setting-Dreaming
+				+translate('<b>Out of the Past</b>: You have a Musketeer or town guard buddy who will do you big favors. Get in touch with them when you need to redirect law enforcement attention, get a heads-up on what operations are planned, or access police files. You now owe them: expect them to collect on it soon.')
+				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=<b>Out of the Past</b>: You have a Musketeer or town guard buddy who will do you big favors. Get in touch with them when you need to redirect law enforcement attention, get a heads-up on what operations are planned, or access police files. You now owe them: expect them to collect on it soon.}}', data-i18n-title='send_details_to_chat')
+			span.sheet-Setting-Marches
+				+translate('<b>Out of the Past</b>: You have a Marches Guard member or royal administrator buddy who will do you big favors. Get in touch with them when you need to redirect law enforcement attention, get a heads-up on what operations are planned, or access police files. You now owe them: expect them to collect on it soon.')
+				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=<b>Out of the Past</b>: You have a Marches Guard member or royal administrator buddy who will do you big favors. Get in touch with them when you need to redirect law enforcement attention, get a heads-up on what operations are planned, or access police files. You now owe them: expect them to collect on it soon.}}', data-i18n-title='send_details_to_chat')
 	.sheet-move
 		input.sheet-checkbox(type='checkbox', name='attr_Moves-Gumshoe5')
 		span.sheet-mainbox
@@ -112,8 +121,10 @@
 					b Hacker with a Dragon Tattoo
 					| : When you hack into a computer system, roll +Sharp. On 10+ pick two, on a 7-9 pick one. You
 				| :
-			span.sheet-Setting-Gothic
+			span.sheet-Setting-Gothic.sheet-Setting-Dreaming
 				+translate('<b>Archive Rat</b>: When you gain access to a library or archive, roll +Sharp. On 10+ pick two, on a 7-9 pick one. You')
+			span.sheet-Setting-Marches
+				+translate('<b>Tune in to Gossip</b>: When you chat folks up at a tavern, inn, or other public gathering, roll +Sharp. On 10+ pick two, on a 7-9 pick one. You')
 			ul
 				li
 					span(data-i18n='Gumshoe-move6.1') ...leave no traces.
@@ -126,9 +137,12 @@
 			span.sheet-Setting-Default
 				button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Hacker with a Dragon Tattoo}} {{Roll=[[2d6+?{Hacker with a Dragon Tattoo with|Sharp (Default),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_hacker')
 				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=Gumshoe-move6}} {{key1=Gumshoe-move6.1}} {{key2=Gumshoe-move6.2}} {{key3=Gumshoe-move6.3}} {{key4=Gumshoe-move6.4}}', data-i18n-title='send_details_to_chat')
-			span.sheet-Setting-Gothic
+			span.sheet-Setting-Gothic.sheet-Setting-Dreaming
 				button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Archive Rat}} {{Roll=[[2d6+?{Archive Rat with|Sharp (Default),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_hacker')
 				+shareButton('<b>Archive Rat</b>: When you gain access to a library or archive, roll +Sharp. On 10+ pick two, on a 7-9 pick one. You',' {{key1=Gumshoe-move6.1}} {{key2=Gumshoe-move6.2}} {{key3=Gumshoe-move6.3}} {{key4=Gumshoe-move6.4}}')
+			span.sheet-Setting-Gothic.sheet-Setting-Marches
+				button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Tune in to Gossip}} {{Roll=[[2d6+?{Archive Rat with|Sharp (Default),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_hacker')
+				+shareButton('<b>Tune in to Gossip</b>: When you chat folks up at a tavern, inn, or other public gathering, roll +Sharp. On 10+ pick two, on a 7-9 pick one. You',' {{key1=Gumshoe-move6.1}} {{key2=Gumshoe-move6.2}} {{key3=Gumshoe-move6.3}} {{key4=Gumshoe-move6.4}}')
 	|  
 	.sheet-move
 		input.sheet-checkbox(type='checkbox', name='attr_Moves-Gumshoe7')

@@ -25,9 +25,15 @@ input.sheet-triggerbox.sheet-SectRevealer(type='checkbox', name='attr_Imp-Sect')
 		input.sheet-checkbox(type='checkbox', name='attr_Moves-Initiate1')
 		span.sheet-mainbox
 		span.sheet-grayable
-			span(data-i18n='initiate-move1')
-			|  
-			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=initiate-move1}}', data-i18n-title='send_details_to_chat')
+			input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+			span.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
+				span(data-i18n='initiate-move1')
+				|  
+				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=initiate-move1}}', data-i18n-title='send_details_to_chat')
+			span.sheet-Setting-Bone
+				+translate('<b>Ancient Fighting Arts</b>: When you fight without weapons, you inflict +1 harm and get +1 ongoing to <i>protect someone</i>.')
+				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=<b>Ancient Fighting Arts</b>: When you fight without weapons, you inflict +1 harm and get +1 ongoing to <i>protect someone</i>.}}', data-i18n-title='send_details_to_chat')
+
 	.sheet-move
 		input.sheet-checkbox(type='checkbox', name='attr_Moves-Initiate2')
 		span.sheet-mainbox

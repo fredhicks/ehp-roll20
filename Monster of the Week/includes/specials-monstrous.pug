@@ -15,22 +15,30 @@
 			span.sheet-anglebox
 			span.sheet-ExpHeader
 				span(data-i18n='breed-suggestions')
-			.sheet-Expander(data-i18n='breed-suggestions-list')
-				ul
-					li
-						| Vampire: Curse: feed (blood or life-force). Natural attacks: Base: life-drain or Base: teeth; add +1 harm to base attack. Moves: immortal or unquenchable vitality; mental domination.
-					li
-						| Werewolf: Curse: vulnerability (silver). Natural attacks: Base: claws; Base: teeth. Moves: shapeshifter (wolf and/or wolfman); claws of the beast or unholy strength.
-					li
-						| Ghost: Curse: vulnerability (rock salt). Natural attacks: Base: magical force; add hand range to magical force. Moves: incorporeal; immortal.
-					li
-						| Faerie: Curse: pure drive (joy). Natural attacks: Base: magical force; add ignore-armour to magical force. Moves: flight; preternatural speed.
-					li
-						| Demon: Curse: pure drive (cruelty). Natural attacks: Base: claws; +1 harm to claws. Moves: dark negotiator; unquenchable vitality.
-					li
-						| Orc: Curse: dark master (the orc overlord). Natural attacks: Base: teeth; add ignore-armour to teeth. Moves: Unholy strength; dark negotiator.
-					li
-						| Zombie: Curse: pure drive (hunger), feed (flesh or brains). Natural attacks: Base: teeth; +1 harm to teeth. Moves: immortal; unquenchable vitality.
+			.sheet-Expander
+				input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+				.sheet-Setting-Default.sheet-Setting-Gothic(data-i18n='breed-suggestions-list')
+					ul
+						li
+							| Vampire: Curse: feed (blood or life-force). Natural attacks: Base: life-drain or Base: teeth; add +1 harm to base attack. Moves: immortal or unquenchable vitality; mental domination.
+						li
+							| Werewolf: Curse: vulnerability (silver). Natural attacks: Base: claws; Base: teeth. Moves: shapeshifter (wolf and/or wolfman); claws of the beast or unholy strength.
+						li
+							| Ghost: Curse: vulnerability (rock salt). Natural attacks: Base: magical force; add hand range to magical force. Moves: incorporeal; immortal.
+						li
+							| Faerie: Curse: pure drive (joy). Natural attacks: Base: magical force; add ignore-armour to magical force. Moves: flight; preternatural speed.
+						li
+							| Demon: Curse: pure drive (cruelty). Natural attacks: Base: claws; +1 harm to claws. Moves: dark negotiator; unquenchable vitality.
+						li
+							| Orc: Curse: dark master (the orc overlord). Natural attacks: Base: teeth; add ignore-armour to teeth. Moves: Unholy strength; dark negotiator.
+						li
+							| Zombie: Curse: pure drive (hunger), feed (flesh or brains). Natural attacks: Base: teeth; +1 harm to teeth. Moves: immortal; unquenchable vitality.
+				.sheet-Setting-Dreaming
+					+translate('<ul><li><b>Minotaur</b>: Curse: pure drive (anger). Natural attacks: Base: teeth (or horns), add ignore-armour to base. Moves: Unholy Strength, Claws of the Beast, or Unquenchable Vitality.<li><b>Siren</b>: Curse: Feed (breath), Natural attacks: Base: life-drain; add +1 harm to base. Moves: Mental Dominion, Unnatural Appeal, or Dark Negotiator.<li><b>Harpy</b>: Curse: Dark Master (Entropy speaks to you in dreams). Natural attacks: Base: claws; add close range to base. Moves: Flight, Preternatural Speed.</ul>')
+				.sheet-Setting-Marches
+					+translate('<ul><li><b>Changed</b>: Curse: pure drive (anger). Natural attacks: Base: fists (works like claws), add +1 harm to base. Moves: Something Borrowed, Dark Negotiator.<li><b>Permanently Possessed</b>: Curse: dark master (other spirits). Natural attacks: Base: claws, add ignore-armour to base. Moves: Unnatural Appeal, Shapeshifter.<li><b>Corporeal Spirit</b>: Curse: pure drive (hate). Natural attacks: Base: claws, add +1 harm to base. Moves: Immortal, Mental Dominion.<li><b>Fed with Mutagens</b>: Curse: vulnerability (cold iron). Natural attacks: Base: magical force, add far to the base. Moves: Unholy Strength, Unquenchable Vitality.<li><b>Wyvern</b>: Curse: Dark Master (incorporeal spirits). Natural attacks: Base: teeth, add ignore-armour to base. Moves: Flight, Preternatural Speed. The wyvern can’t take human form, but will be accepted or even revered in some Marches settlements.</ul>')
+				.sheet-Setting-Bone
+					+translate('<ul><li><b>Animal-kin</b>: Curse: vulnerability (a specific plant). Natural attacks: Teeth, claws. Moves: Shapeshifter.<li><b>Big Folk</b>: Curse: pure drive or feed. Natural attacks: claws, +1 harm. Moves: Claws of the Beast, Unholy Strength.<li><b>Ghost</b>: Curse: Duty (protect your family). Natural attacks: Magic, add hand range. Moves: Incorporeal.<li><b>Predator</b>: Curse: feed. Natural attacks: life-drain or teeth, +1 harm. Moves: Unquenchable Vitality.<li><b>Small Folk</b>: Curse: pure drive (playing tricks). Natural attacks: teeth, ignore armour. Moves: Unnatural Appeal or Preternatural Speed.<li><b>Walking Dead</b>: Curse: duty (protect your family). Natural attacks: Teeth, add harm. Moves: Immortal.<li><b>Wilderness Spirit</b>: Curse: duty (guard your home). Natural attacks: Magic attack, add far range. Moves: Wild Language.<li><b>Night Folk</b>: Curse: duty (walk under the sky every night). Natural attacks: Claws, +1 harm. Moves: Shadowsight.</ul>')
 		div
 			b
 				span(data-i18n='curses') Curses
@@ -44,6 +52,12 @@
 		span.sheet-anglebox
 		span.sheet-ExpHeader
 			span(data-i18n='unused') Unused
+		input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+		.sheet-move.sheet-Setting-Bone
+			input.sheet-checkbox(type='checkbox', name='attr_Curse-Monstrous-Category', value='Duty')
+			span.sheet-mainbox
+			span.sheet-grayable
+				+translate('<b>Duty</b>: You have an onerous ongoing responsibility, such as: protect something, craft certain things, patrol an area, or preserve specific knowledge. You must do this for a few hours each day.')
 		.sheet-move
 			input.sheet-checkbox(type='checkbox', name='attr_Curse-Monstrous-Category', value='B1')
 			span.sheet-mainbox

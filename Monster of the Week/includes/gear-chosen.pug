@@ -1,6 +1,7 @@
 .sheet-Chosen
+	input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
 	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-GearUnused-Hider', value='1', checked='')
-	.sheet-move
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 		input.sheet-checkbox(type='checkbox', name='attr_Chosen_gearchoice0')
 		span.sheet-mainbox
 		span.sheet-grayable
@@ -8,11 +9,15 @@
 			|  (
 			span(data-i18n='optional') optional
 			| )
-	br
+		br
+		| &nbsp;
 	.sheet-MinorHead
 		span(data-i18n='chosen-gear2') Special Weapon
 	span(data-i18n='chosen-special-descrip')
 		| Design your weapon by choosing a Form, three Business-end options (which are added to the base tags), and a material that the business-end is made from.
+	input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+	span.sheet-Setting-Bone
+		+translate('Your special weapon has unlimited wear.')
 	br
 	b
 		span(data-i18n='form') Form
@@ -23,11 +28,19 @@
 		| )
 	| :
 	br
-	select.sheet-Gear-Chosen(name='attr_Chosen_gearchoice')
-		option.sheet-Gear-Chosen(name='attr_Chosen_gearchoice', value='staff', checked='', data-i18n='chosen-gear3') Staff (1 harm, hand/close)
-		option.sheet-Gear-Chosen(name='attr_Chosen_gearchoice', value='haft', data-i18n='chosen-gear4') Haft (2 harm, hand, heavy)
-		option.sheet-Gear-Chosen(name='attr_Chosen_gearchoice', value='handle', data-i18n='chosen-gear5') Handle (1 harm, hand, balanced)
-		option.sheet-Gear-Chosen(name='attr_Chosen_gearchoice', value='chain', data-i18n='chosen-gear6') Chain (1 harm, hand, area)
+	input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+	span.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
+		select.sheet-Gear-Chosen(name='attr_Chosen_gearchoice')
+			option.sheet-Gear-Chosen(name='attr_Chosen_gearchoice', value='staff', checked='', data-i18n='chosen-gear3') Staff (1 harm, hand/close)
+			option.sheet-Gear-Chosen(name='attr_Chosen_gearchoice', value='haft', data-i18n='chosen-gear4') Haft (2 harm, hand, heavy)
+			option.sheet-Gear-Chosen(name='attr_Chosen_gearchoice', value='handle', data-i18n='chosen-gear5') Handle (1 harm, hand, balanced)
+			option.sheet-Gear-Chosen(name='attr_Chosen_gearchoice', value='chain', data-i18n='chosen-gear6') Chain (1 harm, hand, area)
+	span.sheet-Setting-Bone
+		select.sheet-Gear-Chosen(name='attr_Chosen_gearchoice')
+			option.sheet-Gear-Chosen(name='attr_Chosen_gearchoice', value='staff', checked='', data-i18n='chosen-gear3') Staff (1 harm, hand/close)
+			option.sheet-Gear-Chosen(name='attr_Chosen_gearchoice', value='haft', data-i18n='chosen-gear4') Haft (2 harm, hand, heavy)
+			option.sheet-Gear-Chosen(name='attr_Chosen_gearchoice', value='handle', data-i18n='chosen-gear5') Handle (1 harm, hand, balanced)
+			+option('Cord (1 harm, hand, area)','chain')
 	br
 	|  
 	b
@@ -52,7 +65,11 @@
 		input.sheet-checkbox(type='checkbox', name='attr_Chosen_gearchoice3')
 		span.sheet-mainbox
 		span.sheet-grayable
-			span(data-i18n='chosen-gear9') Blade (+1 harm)
+			input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+			span.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
+				span(data-i18n='chosen-gear9') Blade (+1 harm)
+			span.sheet-Setting-Bone
+				+translate('Edge (+1 harm)')
 	.sheet-move
 		input.sheet-checkbox(type='checkbox', name='attr_Chosen_gearchoice4')
 		span.sheet-mainbox
@@ -72,7 +89,11 @@
 		input.sheet-checkbox(type='checkbox', name='attr_Chosen_gearchoice7')
 		span.sheet-mainbox
 		span.sheet-grayable
-			span(data-i18n='chosen-gear13') Chain (+area)
+			input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+			span.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
+				span(data-i18n='chosen-gear13') Chain (+area)
+			span.sheet-Setting-Bone
+				+translate('Cord (+area)')
 	.sheet-move
 		b
 			span(data-i18n='material') Material
@@ -83,7 +104,11 @@
 			| )
 		| :
 		br
-		span(data-i18n='material-desc')
-			| &nbsp;(+steel, +cold iron, +silver, +wood, +stone, +bone, +teeth, +obsidian, or anything else you want)
+		input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+		span.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
+			span(data-i18n='material-desc')
+				| &nbsp;(+steel, +cold iron, +silver, +wood, +stone, +bone, +teeth, +obsidian, or anything else you want)
+		span.sheet-Setting-Bone
+			+translate('antler, fangs, flint, ivory, jade, talon, beak, ebony, oak, thorn, holly, ash, whalebone, ironwood, or anything else you want. Metal is allowed, but only as a specifically unusual and unique option—most likely copper or meteoric iron.')
 		br
 		input(type='text', name='attr_gear-chosen')

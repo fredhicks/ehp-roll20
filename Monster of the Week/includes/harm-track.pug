@@ -1,0 +1,74 @@
+.sheet-Harm
+	.sheet-Subsection
+		span(data-i18n='harm') Harm
+		| &nbsp;(
+		span(name='attr_Harm-Remaining')
+		| /
+		span(name='attr_Harm-TotalCapacity')
+		| )
+	.sheet-nowrap(align='center')
+		b.sheet-statelabel
+			span(data-i18n='okay') Okay
+		input.sheet-checkbox(type='checkbox', name='attr_Harm1')
+		span.sheet-altbox
+		input.sheet-checkbox(type='checkbox', name='attr_Harm2')
+		span.sheet-altbox
+		input.sheet-checkbox(type='checkbox', name='attr_Harm3')
+		span.sheet-altbox
+		input.sheet-inverted-triggerbox(type='checkbox', name='attr_Moves-Constructed1')
+		span.sheet-triggertext
+			b |
+		input.sheet-checkbox(type='checkbox', name='attr_Harm4')
+		span.sheet-altbox
+		input.sheet-checkbox(type='checkbox', name='attr_Harm5')
+		span.sheet-altbox
+		input.sheet-checkbox(type='checkbox', name='attr_Harm6')
+		span.sheet-altbox
+		// The Constructed gets a whopping 3 extra Harm boxes
+		input.sheet-triggerbox(type='checkbox', name='attr_Moves-Constructed1')
+		input.sheet-checkbox(type='checkbox', name='attr_Constructed-Harm1')
+		span.sheet-altbox
+		input.sheet-triggerbox(type='checkbox', name='attr_Moves-Constructed1')
+		input.sheet-checkbox(type='checkbox', name='attr_Constructed-Harm2')
+		span.sheet-altbox
+		input.sheet-triggerbox(type='checkbox', name='attr_Moves-Constructed1')
+		input.sheet-checkbox(type='checkbox', name='attr_Constructed-Harm3')
+		span.sheet-altbox
+		// With the Back from the Dead Dark Past, you can potentially get an extra box of harm
+		input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+		span.sheet-Setting-Gothic
+			input.sheet-triggerbox(type='checkbox', name='attr_DarkPast-Dead-Change1')
+			input.sheet-checkbox(type='checkbox', name='attr_DarkPast-Dead-Harm')
+			span.sheet-altbox
+		// Pop in up to 2 additional boxes if the right improvements are taken
+		input.sheet-triggerbox(type='checkbox', name='attr_Imp-Dying')
+		input.sheet-checkbox(type='checkbox', name='attr_Extra-Harm1')
+		span.sheet-altbox
+		input.sheet-triggerbox(type='checkbox', name='attr_AdvImp-Dying')
+		input.sheet-checkbox(type='checkbox', name='attr_Extra-Harm2')
+		span.sheet-altbox
+		// Final box is always the Harm7 box in case we want to tie behavior to that
+		input.sheet-checkbox(type='checkbox', name='attr_Harm7')
+		span.sheet-altbox
+		b.sheet-statelabel
+			span(data-i18n='dying') Dying
+		input.sheet-inverted-triggerbox(type='checkbox', name='attr_Moves-Constructed1')
+		span.sheet-triggertext
+			br
+			input.sheet-checkbox(type='checkbox', name='attr_Unstable')
+			span.sheet-altbox
+			b.sheet-statelabel
+				span(data-i18n='unstable') Unstable
+	input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Unstable-Instructions', value='1', checked='')
+	span.sheet-anglebox
+	|  
+	span.sheet-ExpHeader
+		span(data-i18n='instructions') Instructions
+	.sheet-Expander
+		input.sheet-inverted-triggerbox(type='checkbox', name='attr_Moves-Constructed1')
+		span.sheet-triggertext
+			span(data-i18n='harm-instructions')
+				| When you reach 4 or more, mark unstable. Unstable injuries worsen as time passes.
+		input.sheet-triggerbox(type='checkbox', name='attr_Moves-Constructed1')
+		span.sheet-triggertext
+			span(data-i18n='constructed-unstable')

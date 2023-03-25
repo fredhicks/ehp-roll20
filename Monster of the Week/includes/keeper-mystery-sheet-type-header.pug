@@ -6,8 +6,13 @@
 	span.sheet-KItem-Type-Countdown
 		span(data-i18n='countdown') Countdown
 	span.sheet-KItem-Type-Monster
-		| (
+		| ( 
 		span(data-i18n='monster') Monster
+		input.sheet-null-hider(type='hidden', name='attr_KItem-Monster-Form', value='')
+		span
+			| / 
+			span(name='attr_KItem-Monster-Form')
+			|  
 		| )
 	span.sheet-KItem-Type-Minion
 		| (
@@ -25,6 +30,10 @@
 		| (
 		span(data-i18n='phenomenon') Phenomenon
 		| )
+	span.sheet-KItem-Type-Villain
+		| (
+		+translate('Villain')
+		| )
 .sheet-KItem-Subtype
 	input.sheet-null-hider(type='hidden', name='attr_KItem-Monster-Type', value='')
 	div
@@ -41,6 +50,9 @@
 	input.sheet-null-hider(type='hidden', name='attr_KItem-Phenomenon-Type', value='')
 	div
 		span(name='attr_KItem-Phenomenon-Type')
+	input.sheet-null-hider(type='hidden', name='attr_KItem-Villain-Type', value='')
+	div
+		span(name='attr_KItem-Villain-Type')
 	input.sheet-null-hider(type='hidden', name='attr_KItem-CountdownLevel', value='')
 	div
 		span(name='attr_KItem-CountdownLevel')

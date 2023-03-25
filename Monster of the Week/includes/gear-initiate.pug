@@ -1,110 +1,153 @@
 // Gear for The Initiate
 .sheet-Initiate
 	input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
-	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-GearUnused-Hider', value='1', checked='')
-	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic
-		span(data-i18n='inititate-armour') Old-fashioned Armour (1 armour, heavy)
-	.sheet-MinorHead.sheet-space-above(data-i18n='inititate-old') Old-fashioned Weapons
-	div
+	.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
+		input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+		input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-GearUnused-Hider', value='1', checked='')
+		.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming
+			span(data-i18n='inititate-armour') Old-fashioned Armour (1 armour, heavy)
+		.sheet-MinorHead.sheet-space-above(data-i18n='inititate-old') Old-fashioned Weapons
+		div
+			i
+				| &nbsp;(
+				span(data-i18n='inititate-oldgear-pick')
+					| If the Sect has 
+					b Fighting arts
+					|  or 
+					b Obsolete gear
+					| , pick three; otherwise pick two
+				| )
+			| :
+		.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic
+			input.sheet-checkbox(type='checkbox', name='attr_Initiate_gearchoice1')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='inititate-gear1') Sword (2 harm, hand, messy)
+		.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming
+			input.sheet-checkbox(type='checkbox', name='attr_Initiate_gearchoice2')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='inititate-gear2') Axe (2 harm, hand, messy)
+		.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming
+			input.sheet-checkbox(type='checkbox', name='attr_Initiate_gearchoice3')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='inititate-gear3') Big sword (3 harm, hand, messy, heavy)
+		.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
+			input.sheet-checkbox(type='checkbox', name='attr_Initiate_gearchoice4')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='inititate-gear4') Big axe (3 harm, hand, messy, slow, heavy)
+		.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
+			input.sheet-checkbox(type='checkbox', name='attr_Initiate_gearchoice5')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='inititate-gear5') Silver knife (1 harm, hand, silver)
+		.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
+			input.sheet-checkbox(type='checkbox', name='attr_Initiate_gearchoice6')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='inititate-gear6') Fighting sticks (1 harm, hand, quick)
+		.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming
+			input.sheet-checkbox(type='checkbox', name='attr_Initiate_gearchoice7')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='inititate-gear7') Spear (2 harm, hand/close)
+		.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
+			input.sheet-checkbox(type='checkbox', name='attr_Initiate_gearchoice8')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='inititate-gear8') Mace (2 harm, hand, messy)
+		.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming
+			input.sheet-checkbox(type='checkbox', name='attr_Initiate_gearchoice9')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='inititate-gear9') Crossbow (2 harm, close, slow)
+		+move('Gothic-Gear-Initiate','Family heirloom sword (2-harm hand precious)')(class="sheet-Setting-Gothic")
+		+move('Gothic-Gear-Initiate','Vampire hunting kit (4-harm hand or 2-harm close restraining against vampires, 1-harm hand against everybody else)')(class="sheet-Setting-Gothic")
+		+move('Dreaming-Gear-Initiate','Ancient gladius (2-harm hand valuable)')(class="sheet-Setting-Dreaming")
+		+move('Dreaming-Gear-Initiate','Ancient stiletto (1-harm intimate/hand small valuable)')(class="sheet-Setting-Dreaming")
+		+move('Marches-Gear-Initiate',"Axe (2-harm hand messy)").sheet-Setting-Marches
+		+move('Marches-Gear-Initiate',"Big sword (3-harm hand messy)").sheet-Setting-Marches
+		+move('Marches-Gear-Initiate',"Crossbow (2-harm close quick reload)").sheet-Setting-Marches
+		+move('Marches-Gear-Initiate',"Halberd (3-harm hand/close messy slow)").sheet-Setting-Marches
+		+move('Marches-Gear-Initiate',"Spear (2-harm hand/close)").sheet-Setting-Marches
+		.sheet-MinorHead.sheet-space-above(data-i18n='initiate-modern') Modern Weapons
+		div.sheet-Setting-Default
+			i
+				| &nbsp;(
+				span(data-i18n='initiate-moderngear-pick')
+					| If Sect has 
+					b Modernised
+					|  or 
+					b Nifty gadgets
+					| , pick two; otherwise pick one
+				| )
+			| :
+		div.sheet-Setting-Gothic
+			i
+				+translate('(If Sect has <b>Modernised</b> or <b>Scientifical Gadgets</b>, pick two; otherwise pick one)')
+		div.sheet-Setting-Dreaming
+			i
+				+translate('(If Sect has <b>Modernised</b> or <b>State-of-the-art Alchemy</b>, pick two; otherwise pick one)')
+		div.sheet-Setting-Marches
+			i
+				+translate('(If Sect has <b>Modernised</b> or <b>Industrial Marvels</b>, pick two; otherwise pick one)')
+		.sheet-move.sheet-Setting-Default
+			input.sheet-checkbox(type='checkbox', name='attr_Initiate_gearchoice10')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='inititate-gear10') .38 revolver (2 harm, hand, close, reload, loud)
+		.sheet-move.sheet-Setting-Default
+			input.sheet-checkbox(type='checkbox', name='attr_Initiate_gearchoice11')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='inititate-gear11') 9mm (2 harm, close, loud)
+		.sheet-move.sheet-Setting-Default
+			input.sheet-checkbox(type='checkbox', name='attr_Initiate_gearchoice12')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='inititate-gear12') Sniper rifle (3 harm, far)
+		.sheet-move.sheet-Setting-Default
+			input.sheet-checkbox(type='checkbox', name='attr_Initiate_gearchoice13')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='inititate-gear13') Magnum (3 harm, close, reload, loud)
+		.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic
+			input.sheet-checkbox(type='checkbox', name='attr_Initiate_gearchoice14')
+			span.sheet-mainbox
+			span.sheet-grayable
+				span(data-i18n='inititate-gear14') Shotgun (3 harm, close, messy)
+		+move('Gothic-Gear-Initiate','Revolver (2-harm hand/close reload)')(class="sheet-Setting-Gothic")
+		+move('Gothic-Gear-Initiate','Prototype Flamethrower (3-harm close area volatile)')(class="sheet-Setting-Gothic")
+		+move('Gothic-Gear-Initiate','Steam pressure rifle (3-harm close reload)')(class="sheet-Setting-Gothic")
+		+move('Gothic-Gear-Initiate','Sword cane (2-harm hand concealable)')(class="sheet-Setting-Gothic")
+		+move('Gothic-Gear-Initiate','Wrench (2-harm hand inconspicuous)')(class="sheet-Setting-Gothic")
+		+move('Dreaming-Gear-Initiate','Alchemical vials (2-harm close magic many volatile)')(class="sheet-Setting-Dreaming")
+		+move('Dreaming-Gear-Initiate','Clockwork rifle (3-harm close reload)')(class="sheet-Setting-Dreaming")
+		+move('Dreaming-Gear-Initiate','Dreamsteel rapier (2-harm hand balanced)')(class="sheet-Setting-Dreaming")
+		+move('Dreaming-Gear-Initiate','Flintlock pistol (2-harm close reload loud)')(class="sheet-Setting-Dreaming")
+		+move('Dreaming-Gear-Initiate','Hunting clockhawk (2-harm close ignore-armour)')(class="sheet-Setting-Dreaming")
+		+move('Dreaming-Gear-Initiate','Repeating crossbow (2-harm close quick)')(class="sheet-Setting-Dreaming")
+		+move('Marches-Gear-Initiate',"Prototype pistol (3-harm close reload ignore-armour volatile loud)").sheet-Setting-Marches
+		+move('Marches-Gear-Initiate',"Prototype rifle (3-harm far reload ignore-armour volatile loud)").sheet-Setting-Marches
+		+move('Marches-Gear-Initiate',"Repeating crossbow (2-harm close quick reload unreliable)").sheet-Setting-Marches
+	.sheet-Bone
+		input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-GearUnused-Hider', value='1', checked='')
+		.sheet-MinorHead
+			+translate('Sect weapons')
 		i
-			| &nbsp;(
-			span(data-i18n='inititate-oldgear-pick')
-				| If the Sect has 
-				b Fighting arts
-				|  or 
-				b Obsolete gear
-				| , pick three; otherwise pick two
-			| )
-		| :
-	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic
-		input.sheet-checkbox(type='checkbox', name='attr_Initiate_gearchoice1')
-		span.sheet-mainbox
-		span.sheet-grayable
-			span(data-i18n='inititate-gear1') Sword (2 harm, hand, messy)
-	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic
-		input.sheet-checkbox(type='checkbox', name='attr_Initiate_gearchoice2')
-		span.sheet-mainbox
-		span.sheet-grayable
-			span(data-i18n='inititate-gear2') Axe (2 harm, hand, messy)
-	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic
-		input.sheet-checkbox(type='checkbox', name='attr_Initiate_gearchoice3')
-		span.sheet-mainbox
-		span.sheet-grayable
-			span(data-i18n='inititate-gear3') Big sword (3 harm, hand, messy, heavy)
-	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic
-		input.sheet-checkbox(type='checkbox', name='attr_Initiate_gearchoice4')
-		span.sheet-mainbox
-		span.sheet-grayable
-			span(data-i18n='inititate-gear4') Big axe (3 harm, hand, messy, slow, heavy)
-	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic
-		input.sheet-checkbox(type='checkbox', name='attr_Initiate_gearchoice5')
-		span.sheet-mainbox
-		span.sheet-grayable
-			span(data-i18n='inititate-gear5') Silver knife (1 harm, hand, silver)
-	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic
-		input.sheet-checkbox(type='checkbox', name='attr_Initiate_gearchoice6')
-		span.sheet-mainbox
-		span.sheet-grayable
-			span(data-i18n='inititate-gear6') Fighting sticks (1 harm, hand, quick)
-	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic
-		input.sheet-checkbox(type='checkbox', name='attr_Initiate_gearchoice7')
-		span.sheet-mainbox
-		span.sheet-grayable
-			span(data-i18n='inititate-gear7') Spear (2 harm, hand/close)
-	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic
-		input.sheet-checkbox(type='checkbox', name='attr_Initiate_gearchoice8')
-		span.sheet-mainbox
-		span.sheet-grayable
-			span(data-i18n='inititate-gear8') Mace (2 harm, hand, messy)
-	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic
-		input.sheet-checkbox(type='checkbox', name='attr_Initiate_gearchoice9')
-		span.sheet-mainbox
-		span.sheet-grayable
-			span(data-i18n='inititate-gear9') Crossbow (2 harm, close, slow)
-	+move('Gothic-Gear-Initiate','Family heirloom sword (2-harm hand precious)')(class="sheet-Setting-Gothic")
-	+move('Gothic-Gear-Initiate','Vampire hunting kit (4-harm hand or 2-harm close restraining against vampires, 1-harm hand against everybody else)')(class="sheet-Setting-Gothic")
-	.sheet-MinorHead.sheet-space-above(data-i18n='initiate-modern') Modern Weapons
-	div.sheet-Setting-Default
+			+translate('(Pick one)')
+		+bonegear('Bone-Gear-Special','Sword studded with flints or teeth (4-wear 2-harm hand messy)',4)
+		+bonegear('Bone-Gear-Special','Stone machete (4-wear 2-harm hand useful)',4)
+		+bonegear('Bone-Gear-Special','Jade knife (6-wear 1-harm hand)',6)
+		+bonegear('Bone-Gear-Special','Bone-headed spear (3-wear 2-harm hand/close)',3)
+		+bonegear('Bone-Gear-Special','Bow (3-wear 2-harm close/far) and several arrows',3)
+		.sheet-MinorHead
+			+translate('Sect ritual item')
 		i
-			| &nbsp;(
-			span(data-i18n='initiate-moderngear-pick')
-				| If Sect has 
-				b Modernised
-				|  or 
-				b Nifty gadgets
-				| , pick two; otherwise pick one
-			| )
-		| :
-	div.sheet-Setting-Gothic
-		i
-			+translate('(If Sect has <b>Modernised</b> or <b>Scientifical Gadgets</b>, pick two; otherwise pick one)')
-	.sheet-move.sheet-Setting-Default
-		input.sheet-checkbox(type='checkbox', name='attr_Initiate_gearchoice10')
-		span.sheet-mainbox
-		span.sheet-grayable
-			span(data-i18n='inititate-gear10') .38 revolver (2 harm, hand, close, reload, loud)
-	.sheet-move.sheet-Setting-Default
-		input.sheet-checkbox(type='checkbox', name='attr_Initiate_gearchoice11')
-		span.sheet-mainbox
-		span.sheet-grayable
-			span(data-i18n='inititate-gear11') 9mm (2 harm, close, loud)
-	.sheet-move.sheet-Setting-Default
-		input.sheet-checkbox(type='checkbox', name='attr_Initiate_gearchoice12')
-		span.sheet-mainbox
-		span.sheet-grayable
-			span(data-i18n='inititate-gear12') Sniper rifle (3 harm, far)
-	.sheet-move.sheet-Setting-Default
-		input.sheet-checkbox(type='checkbox', name='attr_Initiate_gearchoice13')
-		span.sheet-mainbox
-		span.sheet-grayable
-			span(data-i18n='inititate-gear13') Magnum (3 harm, close, reload, loud)
-	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic
-		input.sheet-checkbox(type='checkbox', name='attr_Initiate_gearchoice14')
-		span.sheet-mainbox
-		span.sheet-grayable
-			span(data-i18n='inititate-gear14') Shotgun (3 harm, close, messy)
-	+move('Gothic-Gear-Initiate','Revolver (2-harm hand/close reload)')(class="sheet-Setting-Gothic")
-	+move('Gothic-Gear-Initiate','Prototype Flamethrower (3-harm close area volatile)')(class="sheet-Setting-Gothic")
-	+move('Gothic-Gear-Initiate','Steam pressure rifle (3-harm close reload)')(class="sheet-Setting-Gothic")
-	+move('Gothic-Gear-Initiate','Sword cane (2-harm hand concealable)')(class="sheet-Setting-Gothic")
-	+move('Gothic-Gear-Initiate','Wrench (2-harm hand inconspicuous)')(class="sheet-Setting-Gothic")
+			+translate('(Pick one)')
+		+bonegear('Bone-Gear-Special','Stone bead jewellery (3-wear)',3)
+		+bonegear('Bone-Gear-Special','Bone vest (4-wear 1-armour)',4)
+		+bonegear('Bone-Gear-Special','Ritual finery (2-wear)',2)
+		+bonegear('Bone-Gear-Special','Drum (3-wear)',3)

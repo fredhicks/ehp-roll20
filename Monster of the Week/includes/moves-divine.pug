@@ -1,26 +1,35 @@
 // Divine Moves
 .sheet-OPBHead.sheet-MinorHead.sheet-space-above(data-i18n='the-divine') The Divine
 .sheet-Divine
-	i
-		span(data-i18n='3-moves') Pick three of these
-	| :
+	input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+	.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
+		i
+			span(data-i18n='3-moves') Pick three of these
+		| :
 .sheet-Divine.sheet-OPB
+	input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
 	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-MovesUnused', value='1', checked='')
-	.sheet-move
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 		input.sheet-checkbox(type='checkbox', name='attr_Moves-Divine1')
 		span.sheet-mainbox
 		span.sheet-grayable
-			span(data-i18n='divine-move1')
+			input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+			span(data-i18n='divine-move1').sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Marches
 				b Boss from Beyond
 				| : 
 				i At the beginning of each mystery
 				| , roll +Weird. On a 10+, your superiors ask you to do something small. On a 7-9, they ask you to do something complicated or difficult. In either case, you get to ask them one question from the 
 				i investigate a mystery
 				|  move right now. On a miss, you are required to do something terrible. If you do not accomplish what they&apos;ve ordered, you cannot use this move again until you have made up for your failure.
+			span.sheet-Setting-Dreaming
+				+translate('<b>Boss From Beyond</b>: <i>At the beginning of each mystery</i>, roll +Weird. On a 10+, your dreams ask you to do something small. On a 7-9, they ask you to do something complicated or difficult. In either case, you get to ask them one question from the <i>investigate a mystery</i> move right now. On a miss, you are required to do something terrible. If you do not accomplish what they’ve ordered, you cannot use this move again until you have made up for your failure.')
 			|  
 			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Boss From Beyond}} {{Roll=[[2d6+?{Boss From Beyond with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_BossFB')
-			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=divine-move1}}', data-i18n-title='send_details_to_chat')
-	.sheet-move
+			span.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Marches
+				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=divine-move1}}', data-i18n-title='send_details_to_chat')
+			span.sheet-Setting-Dreaming
+				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=<b>Boss From Beyond</b>: <i>At the beginning of each mystery</i>, roll +Weird. On a 10+, your dreams ask you to do something small. On a 7-9, they ask you to do something complicated or difficult. In either case, you get to ask them one question from the <i>investigate a mystery</i> move right now. On a miss, you are required to do something terrible. If you do not accomplish what they’ve ordered, you cannot use this move again until you have made up for your failure.}}', data-i18n-title='send_details_to_chat')
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 		input.sheet-checkbox(type='checkbox', name='attr_Moves-Divine2')
 		span.sheet-mainbox
 		span.sheet-grayable
@@ -32,7 +41,7 @@
 			|  
 			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Angel Wings}} {{Roll=[[2d6+?{Angel Wings with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_AWings')
 			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=divine-move2}}', data-i18n-title='send_details_to_chat')
-	.sheet-move
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 		input.sheet-checkbox(type='checkbox', name='attr_Moves-Divine3')
 		span.sheet-mainbox
 		span.sheet-grayable
@@ -41,7 +50,7 @@
 				| : You may store any small object you own, putting it into a magical space nobody can get to. You may retrieve anything you stored at any time; it appears in your hand.
 			|  
 			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=divine-move3}}', data-i18n-title='send_details_to_chat')
-	.sheet-move
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 		input.sheet-checkbox(type='checkbox', name='attr_Moves-Divine4')
 		span.sheet-mainbox
 		span.sheet-grayable
@@ -50,7 +59,7 @@
 				| : Your body and divine weapon always count as a weakness against the monsters you fight. Your unarmed attacks are 2 harm, intimate/hand, messy.
 			|  
 			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=divine-move4}}', data-i18n-title='send_details_to_chat')
-	.sheet-move
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 		input.sheet-checkbox(type='checkbox', name='attr_Moves-Divine5')
 		span.sheet-mainbox
 		span.sheet-grayable
@@ -61,7 +70,7 @@
 				| , you can calm them down, blocking any panic, anger, or other negitive emotions they have. This works even if the thing that freaked them out is still present, as long as your voice can be heard.
 			|  
 			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=divine-move5}}', data-i18n-title='send_details_to_chat')
-	.sheet-move
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 		input.sheet-checkbox(type='checkbox', name='attr_Moves-Divine6')
 		span.sheet-mainbox
 		span.sheet-grayable
@@ -72,11 +81,12 @@
 				| , roll +Cool. On a 10+, heal 2 harm or an illness, plus they&apos;re stabilised. On a 7-9, you can heal the harm or illness, but you take it into yourself. On a miss, your aura causes them extra harm.
 			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Lay On Hands}} {{Roll=[[2d6+?{Lay On Hands with|Cool (Default),@{Cool}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_LOH')
 			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=divine-move6}}', data-i18n-title='send_details_to_chat')
-	.sheet-move
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 		input.sheet-checkbox(type='checkbox', name='attr_Moves-Divine7')
 		span.sheet-mainbox
 		span.sheet-grayable
-			span(data-i18n='divine-move7')
+			input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+			span(data-i18n='divine-move7').sheet-Setting-Default.sheet-Setting-Gothic
 				b Cast Out Evil
 				| : You may 
 				i banish an unnatural creature from your presence
@@ -84,6 +94,35 @@
 				i unnatural hunters
 				|  (eg the Monstrous). On a miss, something is keeping it here. That&apos;s bad.
 			|  
-			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Cast Out Evil}} {{Roll=[[2d6+?{Cast Out Evil with|Tough (Default),@{Tough}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_COE')
-			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=divine-move7}}', data-i18n-title='send_details_to_chat')
+			span.sheet-Setting-Dreaming
+				+translate('<b>Cast Out Evil</b>: You may banish a creature corrupted by dreams—including yourself! Roll +Tough. On a 10+ it is banished. On a 7-9 it takes a little while for the banishing to take effect—the creature has time to make one or two actions. Either way, the banished creature is unharmed, and you have no control over where it goes. This move may be used on unnatural hunters (e.g. the Monstrous). On a miss, you banish yourself instead. That’s bad.')
+				button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Cast Out Evil}} {{Roll=[[2d6+?{Cast Out Evil with|Tough (Default),@{Tough}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_COE')
+			span.sheet-Setting-Marches
+				+translate('<b>Cast Out Spirits</b>: You may <i>banish a corporeal spirit</i> or <i>contain an incorporeal spirit</i> in your presence. On a 10+, you force corporeal spirits to flee and makes the incorporeal ones unable to use any powers as long as you’re near them and don’t hurt them directly. On a 7-9, it takes a while before this effect starts. On a miss, it doesn’t work, and they’re really furious at you for using the Wild’s magic against them. You take –1 ongoing to moves against the spirits you tried to banish.')
+				button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Cast Out Spirits}} {{Roll=[[2d6+?{Cast Out Evil with|Tough (Default),@{Tough}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_COE')
+			span.sheet-Setting-Default.sheet-Setting-Gothic
+				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=divine-move7}}', data-i18n-title='send_details_to_chat')
+			span.sheet-Setting-Dreaming
+				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=<b>Cast Out Evil</b>: You may banish a creature corrupted by dreams—including yourself! Roll +Tough. On a 10+ it is banished. On a 7-9 it takes a little while for the banishing to take effect—the creature has time to make one or two actions. Either way, the banished creature is unharmed, and you have no control over where it goes. This move may be used on unnatural hunters (e.g. the Monstrous). On a miss, you banish yourself instead. That’s bad.}}', data-i18n-title='send_details_to_chat')
+			span.sheet-Setting-Marches
+				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=<b>Cast Out Spirits</b>: You may <i>banish a corporeal spirit</i> or <i>contain an incorporeal spirit</i> in your presence. On a 10+, you force corporeal spirits to flee and makes the incorporeal ones unable to use any powers as long as you’re near them and don’t hurt them directly. On a 7-9, it takes a while before this effect starts. On a miss, it doesn’t work, and they’re really furious at you for using the Wild’s magic against them. You take –1 ongoing to moves against the spirits you tried to banish.}}', data-i18n-title='send_details_to_chat')
+	.sheet-Setting-Bone
+		i
+			+translate('You get these two:')
+	+move('Bone-Divine-Move','<b>Unbreakable Bargain</b>: You made a deal with the spirit to gain your powers. At the beginning of each mystery, the spirit will let you know what it wants you to do. Ask the Keeper for a task (which may be more or less at odds with the mystery). When you make significant progress, take +1 forward. At the end of the mystery, if the task is complete, mark experience.',true).sheet-Setting-Bone
+	+move('Bone-Divine-Move','<b>Marks of Corruption</b>: The spirit’s magic can corrupt you. When you roll 6 or less on an action using a spirit power, the Keeper may require you become corrupted. This may take the form of a physical change to your body, a personality quirk or flaw, or a change in behaviour. When you must take a mark, you decide what it  is.',true).sheet-Setting-Bone
+	.sheet-Setting-Bone
+		i
+			+translate('Then pick two of these:')
+	+move('Bone-Divine-Move','<b>Spirit Paths</b>: You can visit the spirit world. You may bring others with you. Roll +Cool. On a 10+, you travel there safely. On a 7-9, you pick: you take longer than you intended, or you pass through a dangerous area. On a miss, you are lost in the spirit world. In the spirit world, you may commune with spirits to gain insights not available in the waking world.',true).sheet-Setting-Bone
+		button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Spirit Paths}} {{Roll=[[2d6+?{Spirit Paths with|Cool (Default),@{Cool}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_SP')
+	+move('Bone-Divine-Move','<b>Passage Transformation</b>: You may travel in an animal form to get to another place quickly, or move where a human could not. Pick the form you take and your destination, then roll +Weird. On a 10+, you get there safely. On a 7-9, pick one: you get pursued by a predator, you get lost, or you retain an aspect of that animal a little while. On any result, when you finish your journey, you return to your normal shape.',true).sheet-Setting-Bone
+		button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Passage Transformation}} {{Roll=[[2d6+?{Passage Transformation with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_PT')
+	+move('Bone-Divine-Move','<b>What I Need, When I Need It</b>: You may transform objects you own, so that they are small and innocuous (pebbles, beads, sticks, etc.). Whenever you wish, you may return them to their normal form.',true).sheet-Setting-Bone
+	+move('Bone-Divine-Move','<b>Soothe</b>: When you talk to someone for a few seconds in a quiet voice, you can calm them down, blocking any panic, anger, or other negative emotions they have. This works even if the thing that freaked them out is still present, as long as your voice can be heard.',true).sheet-Setting-Bone 
+	+move('Bone-Divine-Move','<b>Lay on Hands</b>: Your touch can heal injury and disease. When you lay your hands on someone hurt, roll +Cool. On a 10+, heal 2-harm or an illness, plus they’re stabilised. On a 7-9, you can heal the harm or illness as on a 10+, but you take it into yourself. On a miss, your aura causes them extra harm. You can’t use this on yourself.',true).sheet-Setting-Bone
+		button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Lay on Hands}} {{Roll=[[2d6+?{Lay on Hands with|Cool (Default),@{Cool}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_LOH')
+	+move('Bone-Divine-Move','<b>Sacred Warding</b>: If you take some time, you may prepare a place against evil influences. Specify what you’re guarding against (a specific sort of monster or magical spell). It can’t cross the warding or influence those on the other side. The Keeper will inform you how long it takes, based on the size of the place. The warding lasts until the next sunrise. You can’t use this on people or objects, just locations.',true).sheet-Setting-Bone
+	+move('Bone-Divine-Move','<b>Smite</b>: Your unarmed attacks do 2-harm intimate/hand imbued messy. If you attack with a weapon, you inflict +1 harm.',true).sheet-Setting-Bone
+	+move('Bone-Divine-Move','<b>A Little Friend</b>: You have a minor spirit or animal ally. They are an associate of your patron spirit. Give them a name, pick an ally type, and describe their form.',true).sheet-Setting-Bone
 // .sheet-Divine .sheet-OPB

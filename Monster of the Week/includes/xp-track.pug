@@ -1,0 +1,30 @@
+.sheet-XP
+	.sheet-Subsection
+		span(data-i18n='experience') Experience
+	p(align='center')
+		input.sheet-checkbox(type='checkbox', name='attr_XP1')
+		span.sheet-altbox
+		input.sheet-checkbox(type='checkbox', name='attr_XP2')
+		span.sheet-altbox
+		input.sheet-checkbox(type='checkbox', name='attr_XP3')
+		span.sheet-altbox
+		input.sheet-checkbox(type='checkbox', name='attr_XP4')
+		span.sheet-altbox
+		input.sheet-checkbox(type='checkbox', name='attr_XP5')
+		span.sheet-altbox
+	input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-XP-Instructions', value='1', checked='')
+	span.sheet-anglebox
+	|  
+	span.sheet-ExpHeader
+		span(data-i18n='instructions') Instructions
+	.sheet-Expander
+		span(data-i18n='experience-description')
+			| Mark 
+			i Experience
+			|  when a roll totals 6 or less; or when a move tells you to do so
+		| .
+		span(data-i18n='xp-description')
+			| Once you have filled all 5 boxes, uncheck them and choose an 
+			i Improvement
+			|  option
+		| .

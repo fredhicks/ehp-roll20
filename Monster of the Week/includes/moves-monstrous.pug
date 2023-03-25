@@ -5,6 +5,7 @@
 		span(data-i18n='2-moves') Pick two of these
 		| :
 .sheet-Monstrous.sheet-OPB
+	input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
 	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-MovesUnused', value='1', checked='')
 	.sheet-move
 		input.sheet-checkbox(type='checkbox', name='attr_Moves-Monstrous1')
@@ -17,9 +18,16 @@
 		input.sheet-checkbox(type='checkbox', name='attr_Moves-Monstrous2')
 		span.sheet-mainbox
 		span.sheet-grayable
-			span(data-i18n='monstrous-move2')
-			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Manipulate Someone}} {{Roll=[[2d6+?{Manipulate Someone with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_ms-charm')
-			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=monstrous-move2}}', data-i18n-title='send_details_to_chat')
+			input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+			span.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
+				span(data-i18n='monstrous-move2') 
+				// "<b>Unnatural Appeal</b>: Roll +Weird instead of +Charm when you <i>manipulate someone</i>.
+				button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Manipulate Someone}} {{Roll=[[2d6+?{Manipulate Someone with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_ms-charm')
+				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=monstrous-move2}}', data-i18n-title='send_details_to_chat')
+			span.sheet-Setting-Bone
+				+translate('<b>Unnatural Appeal</b>: Roll +Weird instead of +Charm when you <i>persuade</i> someone.')
+				button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Persuade}} {{Roll=[[2d6+?{Persuade with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_ms-charm')
+				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=<b>Unnatural Appeal</b>: Roll +Weird instead of +Charm when you <i>persuade</i> someone.}}', data-i18n-title='send_details_to_chat')
 	.sheet-move
 		input.sheet-checkbox(type='checkbox', name='attr_Moves-Monstrous3')
 		span.sheet-mainbox
@@ -39,9 +47,17 @@
 		input.sheet-checkbox(type='checkbox', name='attr_Moves-Monstrous5')
 		span.sheet-mainbox
 		span.sheet-grayable
-			span(data-i18n='monstrous-move5')
-			|  
-			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=monstrous-move5}}', data-i18n-title='send_details_to_chat')
+			input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+			span.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
+				span(data-i18n='monstrous-move5')
+				// <b>Preternatural Speed</b>: You go much faster than normal people. When you <i>chase, flee, or run</i>, take +1 ongoing.
+				|  
+				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=monstrous-move5}}', data-i18n-title='send_details_to_chat')
+			span.sheet-Setting-Bone
+				+translate('<b>Preternatural Speed</b>: You go much faster than normal people. When you <i>chase, flee, or run</i>—including with the <i>pursuit</i> move—take +1 ongoing.')
+				|  
+				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=<b>Preternatural Speed</b>: You go much faster than normal people. When you <i>chase, flee, or run</i>—including with the <i>pursuit</i> move—take +1 ongoing.}}', data-i18n-title='send_details_to_chat')
+
 	.sheet-move
 		input.sheet-checkbox(type='checkbox', name='attr_Moves-Monstrous6')
 		span.sheet-mainbox
@@ -71,7 +87,7 @@
 			span(data-i18n='monstrous-move8')
 			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Unquenchable Vitality}} {{Roll=[[2d6+?{Unquenchable Vitality with|Cool (Default),@{Cool}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_uvital')
 			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=monstrous-move8}}', data-i18n-title='send_details_to_chat')
-	.sheet-move
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 		input.sheet-checkbox(type='checkbox', name='attr_Moves-Monstrous9')
 		span.sheet-mainbox
 		span.sheet-grayable
@@ -89,9 +105,16 @@
 		input.sheet-checkbox(type='checkbox', name='attr_Moves-Monstrous11')
 		span.sheet-mainbox
 		span.sheet-grayable
-			span(data-i18n='monstrous-move11')
+			input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+			span.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
+				span(data-i18n='monstrous-move11')
+			span.sheet-Setting-Bone
+				+translate('<b>Shapeshifter</b>: You may change your form (usually into an animal). This often requires an object to transform, usually a hide of the creature whose form you assume. Decide if you have just one alternate form or several, and detail them. You gain +1 to <i>investigate a mystery</i> when using an alternate form’s superior senses.')
 			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Investigate a Mystery}} {{Roll=[[2d6+?{Investigate a Mystery with|Sharp (Default),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|1}]]}}', name='roll_iam-plusone')
-			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=monstrous-move11}} {{extra=@{Shapeshifter-Monstrous}}}', data-i18n-title='send_details_to_chat')
+			span.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
+				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=monstrous-move11}} {{extra=@{Shapeshifter-Monstrous}}}', data-i18n-title='send_details_to_chat')
+			span.sheet-Setting-Bone
+				+shareButton('<b>Shapeshifter</b>: You may change your form (usually into an animal). This often requires an object to transform, usually a hide of the creature whose form you assume. Decide if you have just one alternate form or several, and detail them. You gain +1 to <i>investigate a mystery</i> when using an alternate form’s superior senses.')
 			|  
 			input(type='text', name='attr_Shapeshifter-Monstrous')
 	.sheet-move
@@ -103,4 +126,6 @@
 			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=monstrous-move12}} {{extra=@{Borrowed-Monstrous}}}', data-i18n-title='send_details_to_chat')
 			|  
 			textarea(name='attr_Borrowed-Monstrous', rows='3', cols='40')
+	+move('Bone-Monstrous-Move','<b>Wild Language</b>: You may speak to the animating spirits within all beings, objects, and places (people, animals, plants, rocks, the air, fires, etc.) without needing to awaken them first with <i>use magic</i>.',true).sheet-Setting-Bone
+	+move('Bone-Monstrous-Move','<b>Shadowsight</b>: You can see in darkness as if it were daylight.',true).sheet-Setting-Bone
 // .sheet-Monstrous .sheet-OPB

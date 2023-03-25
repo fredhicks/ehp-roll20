@@ -2,9 +2,9 @@
 .sheet-Divine
 	input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
 	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-GearUnused-Hider', value='1', checked='')
-	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 		span(data-i18n='divine-armour') Divine Armour (1 armour, holy) with a look suited to your divine origin
-	.sheet-space-above
+	.sheet-space-above.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 		b
 			span(data-i18n='divine-weapon') Divine Weapon
 		|  
@@ -13,29 +13,37 @@
 			span(data-i18n='pick-one') pick one
 			| )
 		| :
-	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
+
 		input.sheet-checkbox(type='checkbox', name='attr_Divine_gearchoice1', value='1')
 		span.sheet-mainbox
 		span.sheet-grayable
 			span(data-i18n='divine-gear1') Flaming sword (3 harm, hand, fire, holy)
-	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
+
 		input.sheet-checkbox(type='checkbox', name='attr_Divine_gearchoice2', value='1')
 		span.sheet-mainbox
 		span.sheet-grayable
 			span(data-i18n='divine-gear2') Thunder hammer (3 harm, hand, stun, holy)
-	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
+
 		input.sheet-checkbox(type='checkbox', name='attr_Divine_gearchoice3', value='1')
 		span.sheet-mainbox
 		span.sheet-grayable
 			span(data-i18n='divine-gear3') Razor whip (3 harm, hand, area, messy, holy)
-	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
+
 		input.sheet-checkbox(type='checkbox', name='attr_Divine_gearchoice4', value='1')
 		span.sheet-mainbox
 		span.sheet-grayable
 			span(data-i18n='divine-gear4') Five demon bag (3 harm, close, magic, holy)
-	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
+
 		input.sheet-checkbox(type='checkbox', name='attr_Divine_gearchoice5', value='1')
 		span.sheet-mainbox
 		span.sheet-grayable
 			span(data-i18n='divine-gear5') Silver trident (3 harm, hand, silver, holy)
 	+move('Gothic-Gear-Divine','Whipblade (3-harm hand/close messy)')(class="sheet-Setting-Gothic")
+	+move('Dreaming-Gear-Divine','Alchemical vials (2-harm close magic many volatile)')(class="sheet-Setting-Dreaming")
+	+move('Marches-Gear-Divine',"Halberd (3-harm hand/close messy slow)").sheet-Setting-Marches
+

@@ -1,5 +1,12 @@
 input.sheet-KTyper(type='hidden', name='attr_KItem-Type', value='0')
 div
+	input.sheet-null-hider(type='hidden', name='attr_KItem-Transgression', value='')
+	div
+		span.sheet-MinorHead
+			+translate('Transgression')
+		.sheet-KIndented
+			span(name='attr_KItem-Transgression')
+div
 	input.sheet-null-hider(type='hidden', name='attr_KItem-Desc', value='')
 	div
 		span.sheet-MinorHead(data-i18n='description') Description
@@ -121,6 +128,14 @@ div
 	input(type='number', name='attr_KItem-HarmCurrent', min='0', value='')
 	| /
 	span(name='attr_KItem-Harm')
+input.sheet-null-hider(type='hidden', name='attr_KItem-Tenacity', value='')
+div
+	span.sheet-MinorHead
+		+translate('Tenacity')
+	|  
+	input(type='number', name='attr_KItem-TenacityCurrent', min='0', value='')
+	| /
+	span(name='attr_KItem-Tenacity')
 div
 	input.sheet-null-hider(type='hidden', name='attr_KItem-Armour', value='')
 	div
@@ -128,12 +143,6 @@ div
 	|  
 	.sheet-KIndented
 		span(name='attr_KItem-Armour')
-.sheet-Atonement
-	input.sheet-null-hider(type='hidden', name='attr_KItem-Transgression', value='')
-	div
-		.sheet-MinorHead
-			+translate('Transgression')
-		span(name='attr_KItem-Transgression')
 div
 	input.sheet-null-hider(type='hidden', name='attr_KItem-Weakness1', value='')
 	span.sheet-MinorHead

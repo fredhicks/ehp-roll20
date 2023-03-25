@@ -5,29 +5,30 @@
 		span(data-i18n='2-moves') Pick two of these
 	| :
 .sheet-Expert.sheet-OPB
+	input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
 	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-MovesUnused', value='1', checked='')
-	.sheet-move
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 		input.sheet-checkbox(type='checkbox', name='attr_Moves-Expert1')
 		span.sheet-mainbox
 		span.sheet-grayable
 			span(data-i18n='expert-move1')
 			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Act Under Pressure}} {{Roll=[[2d6+?{Act Under Pressure with|Sharp (Default),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_AUP-Read')
 			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=expert-move1}}', data-i18n-title='send_details_to_chat')
-	.sheet-move
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 		input.sheet-checkbox(type='checkbox', name='attr_Moves-Expert2')
 		span.sheet-mainbox
 		span.sheet-grayable
 			span(data-i18n='expert-move2')
 			|  
 			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=expert-move2}}', data-i18n-title='send_details_to_chat')
-	.sheet-move
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 		input.sheet-checkbox(type='checkbox', name='attr_Moves-Expert3')
 		span.sheet-mainbox
 		span.sheet-grayable
 			span(data-i18n='expert-move3')
 			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Preparedness}} {{Roll=[[2d6+?{Preparedness with|Sharp (Default),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_prep')
 			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=expert-move3}}', data-i18n-title='send_details_to_chat')
-	.sheet-move
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 		input.sheet-checkbox(type='checkbox', name='attr_Moves-Expert4')
 		span.sheet-mainbox
 		span.sheet-grayable
@@ -35,14 +36,14 @@
 			|  
 			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=It Wasn’t As Bad As It Looked}} {{Roll=[[2d6+?{It Wasn’t As Bad As It Looked with|Cool (Default),@{Cool}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_iwabail')
 			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=expert-move4}}', data-i18n-title='send_details_to_chat')
-	.sheet-move
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 		input.sheet-checkbox(type='checkbox', name='attr_Moves-Expert5')
 		span.sheet-mainbox
 		span.sheet-grayable
 			span(data-i18n='expert-move5')
 			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Precise Strike}} {{Roll=[[2d6+?{Precise Strike with|Tough (Default),@{Tough}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_pstrike')
 			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=expert-move5}}', data-i18n-title='send_details_to_chat')
-	.sheet-move
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 		input.sheet-checkbox(type='checkbox', name='attr_Moves-Expert6')
 		span.sheet-mainbox
 		span.sheet-grayable
@@ -57,7 +58,7 @@
 				| :
 			|  
 			input(type='number', name='attr_Expert6-Hold', min='0', max='2', value='0')
-	.sheet-move
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 		input.sheet-checkbox(type='checkbox', name='attr_Moves-Expert7')
 		span.sheet-mainbox
 		span.sheet-grayable
@@ -74,4 +75,17 @@
 				li
 					span(data-i18n='expert-move7.4')
 					button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=expert-move7}} {{key1=expert-move7.1}} {{key2=expert-move7.2}} {{key3=expert-move7.3}} {{key4=expert-move7.4}}', data-i18n-title='send_details_to_chat')
+	+move('Bone-Moves-Expert','<b>I’ve Heard about This Sort of Thing</b>: Roll +Sharp instead of +Cool when you <i>act under pressure</i>.',true).sheet-Setting-Bone
+		button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Act Under Pressure}} {{Roll=[[2d6+?{Act Under Pressure with|Sharp (Default),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_AUP-Read')
+	+move('Bone-Moves-Expert','<b>Often Right</b>: When a hunter comes to you for advice about a problem, give them your honest opinion and advice. If they take your advice, they get +1 ongoing while following it, and you mark experience.',true).sheet-Setting-Bone
+	+move('Bone-Moves-Expert','<b>Preparedness</b>: When you need something unusual or rare, roll +Sharp. On a 10+, you have it, ready to use. On a 7-9, you have it, but not here: it will take some time to get it. On a miss, you know where it is, but it’s somewhere real bad. The item will have 1 wear left (although if made of tough materials, you can still repair it back to its maximum wear).',true).sheet-Setting-Bone
+		button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Preparedness}} {{Roll=[[2d6+?{Preparedness with|Sharp (Default),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_Prep')
+	+move('Bone-Moves-Expert','<b>It Wasn’t as Bad as It Looked</b>: Once per mystery, you may attempt to keep going despite your injuries. Roll +Cool. On a 10+, heal 2-harm and stabilize your wounds. On a 7-9, you may either stabilize or heal 1-harm. On a miss, it was worse than it looked: the Keeper may inflict a harm move on you or make your wounds unstable.',true).sheet-Setting-Bone
+		button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=It Wasn’t as Bad as It Looked}} {{Roll=[[2d6+?{It Wasn’t as Bad as It Looked with|Cool (Default),@{Cool}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_IWABAIL')
+	+move('Bone-Moves-Expert','<b>The Exact Thing</b>: When you use an item you have specifically prepared for the current situation, gain +1 ongoing.',true).sheet-Setting-Bone
+	+move('Bone-Moves-Expert','<b>The Woman (or Man) With the Plan</b>: At the beginning of each mystery, roll +Sharp. On a 10+, hold 2. On a 7-9, hold 1. Spend the hold to be where you need to be, prepared and ready, if it’s at all possible you could make it. On a miss, the Keeper holds 1 they can spend to have you be in the worst place, unprepared and unready.',true).sheet-Setting-Bone
+		button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=The Woman (or Man) With the Plan}} {{Roll=[[2d6+?{The Woman (or Man) With the Plan with|Sharp (Default),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_Plan')
+	+move('Bone-Moves-Expert','<b>Dark Past</b>: You dabbled in the worst sort of mystical arts before you returned to the community. If you trawl through your memories for something relevant to the mystery at hand, roll +Weird. On a 10+, ask the Keeper two questions from the following list. On a 7-9, ask one. On a miss, you can ask a question anyway but that will mean you were personally complicit in creating the situation you’re now dealing with.<ul><li>When I dealt with this creature (or one of its kind), what did I learn?<li>What evil magic do I know that could help here?<li>Do I know anyone who might be behind this?<li>Who do I know who can help us right now?</ul>',true).sheet-Setting-Bone
+		button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Dark Past}} {{Roll=[[2d6+?{Dark Past with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_DPast')
+
 // .sheet-Expert .sheet-OPB

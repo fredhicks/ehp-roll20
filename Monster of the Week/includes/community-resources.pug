@@ -1,0 +1,50 @@
+input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-CommunityMaterials-Hider', value='1', checked='')
+span.sheet-anglebox
+span.sheet-ExpHeader
+	+translate('Resources')
+.sheet-Expander
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-CommunityMaterialsUnused-Hider', value='1', checked='')
+	.sheet-isolator
+		input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-CommunityMaterialsUnused-Hider', value='1', checked='')
+		span.sheet-anglebox
+		|  
+		span.sheet-ExpHeader
+			span(data-i18n='unused') Unused
+	.sheet-Label
+		+translate('Common Materials')
+	div
+		+translate('The community gets these:')
+	+move('Community-Materials-Common','Clay',false,true)
+	+move('Community-Materials-Common','Wood',false,true)
+	+move('Community-Materials-Common','Bone',false,true)
+	+move('Community-Materials-Common','Stone',false,true)
+	+move('Community-Materials-Common','Leather',false,true)
+	+move('Community-Materials-Common','Plant fiber',false,true)
+	.sheet-Label.sheet-space-above
+		+translate('Uncommon Materials')
+	div
+		+translate('Then pick two:')
+	+move('Community-Materials-Uncommon','Antler')
+	+move('Community-Materials-Uncommon','Copper')
+	+move('Community-Materials-Uncommon','Flint')
+	+move('Community-Materials-Uncommon','Ivory')
+	+move('Community-Materials-Uncommon','Crystals')
+	+move('Community-Materials-Uncommon','Gems')
+	+move('Community-Materials-Uncommon','Bamboo')
+	+move('Community-Materials-Uncommon','Hardwood')
+	+move('Community-Materials-Uncommon','Obsidian')
+	+move('Community-Materials-Uncommon','Flax')
+	+move('Community-Materials-Uncommon','Cotton')
+	+move('Community-Materials-Uncommon','Coloured stone (lapis lazuli, jade, opal, etc)')
+	+move('Community-Materials-Uncommon','Something else:')
+		input(type='text', name='attr_uncommon_other_1')
+	+move('Community-Materials-Uncommon','Something else:')
+		input(type='text', name='attr_uncommon_other_2')
+	+move('Community-Materials-Uncommon','Something else:')
+		input(type='text', name='attr_uncommon_other_3')
+	+move('Community-Materials-Uncommon','Something else:')
+		input(type='text', name='attr_uncommon_other_4')
+	+move('Community-Materials-Uncommon','Something else:')
+		input(type='text', name='attr_uncommon_other_5')
+	div
+		+translate('If desired, you may take an extra rare material, but this comes at the cost of a common one. Remove one of the starting materials.')

@@ -25,22 +25,22 @@
 		span.sheet-mainbox
 		span.sheet-grayable
 			span(data-i18n='hex-gear2') Shotgun (3 harm, close, messy, loud)
-	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 		input.sheet-checkbox(type='checkbox', name='attr_Hex_gearchoice3')
 		span.sheet-mainbox
 		span.sheet-grayable
 			span(data-i18n='hex-gear3') Athame (2 harm, hand, magic, silver)
-	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 		input.sheet-checkbox(type='checkbox', name='attr_Hex_gearchoice4')
 		span.sheet-mainbox
 		span.sheet-grayable
 			span(data-i18n='hex-gear4') Shillelagh (1 harm, hand, balanced)
-	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming
 		input.sheet-checkbox(type='checkbox', name='attr_Hex_gearchoice5')
 		span.sheet-mainbox
 		span.sheet-grayable
 			span(data-i18n='hex-gear5') Crossbow (2 harm, close, slow)
-	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 		input.sheet-checkbox(type='checkbox', name='attr_Hex_gearchoice6')
 		span.sheet-mainbox
 		span.sheet-grayable
@@ -48,3 +48,9 @@
 	+move('Gothic-Gear-Hex','Revolver (2-harm hand/close reload)')(class="sheet-Setting-Gothic")
 	+move('Gothic-Gear-Hex','Sword cane (2-harm hand concealable)')(class="sheet-Setting-Gothic")
 	+move('Gothic-Gear-Hex','Family heirloom sword (2-harm hand precious)')(class="sheet-Setting-Gothic")
+	+move('Dreaming-Gear-Hex','Alchemical vials (2-harm close magic many volatile)')(class="sheet-Setting-Dreaming")
+	+move('Dreaming-Gear-Hex','Ancient stiletto (1-harm intimate/hand small valuable)')(class="sheet-Setting-Dreaming")
+	+move('Dreaming-Gear-Hex','Hunting clockhawk (2-harm close ignore-armour)')(class="sheet-Setting-Dreaming")
+	+move('Marches-Gear-Hex',"Crossbow (2-harm close quick reload)").sheet-Setting-Marches
+	+move('Marches-Gear-Hex',"Dagger (1-harm hand/close hidden)").sheet-Setting-Marches
+	+move('Marches-Gear-Hex',"Spear (2-harm hand/close)").sheet-Setting-Marches

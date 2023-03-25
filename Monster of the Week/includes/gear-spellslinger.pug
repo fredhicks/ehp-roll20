@@ -16,14 +16,20 @@
 		span.sheet-mainbox
 		span.sheet-grayable
 			span(data-i18n='spellslinger-gear1') Old revolver (2 harm, close, reload, loud)
-	.sheet-move.sheet-Setting-Gothic.sheet-Setting-Default
+	.sheet-move.sheet-Setting-Gothic.sheet-Setting-Default.sheet-Setting-Dreaming.sheet-Setting-Marches
 		input.sheet-checkbox(type='checkbox', name='attr_Spellslinger_gearchoice2')
 		span.sheet-mainbox
 		span.sheet-grayable
 			span(data-i18n='spellslinger-gear2') Ritual knife (1 harm, hand)
-	.sheet-move.sheet-Setting-Gothic.sheet-Setting-Default
+	.sheet-move.sheet-Setting-Gothic.sheet-Setting-Default.sheet-Setting-Dreaming.sheet-Setting-Marches
 		input.sheet-checkbox(type='checkbox', name='attr_Spellslinger_gearchoice3')
 		span.sheet-mainbox
 		span.sheet-grayable
 			span(data-i18n='spellslinger-gear3') Heirloom sword (2 harm, hand, messy)
 	+move('Gothic-Spellslinger-Gear','Sword cane (2-harm hand concealable)').sheet-Setting-Gothic
+	+move('Dreaming-Gear-Spellslinger','Ancient stiletto (1-harm intimate/hand small valuable)')(class="sheet-Setting-Dreaming")
+	+move('Dreaming-Gear-Spellslinger','Dreamsteel rapier (2-harm hand balanced)')(class="sheet-Setting-Dreaming")
+	+move('Dreaming-Gear-Spellslinger','Flintlock pistol (2-harm close reload loud)')(class="sheet-Setting-Dreaming")
+	+move('Marches-Gear-Spellslinger',"Crossbow (2-harm close quick reload)").sheet-Setting-Marches
+	+move('Marches-Gear-Spellslinger',"Shortbow (2-harm close concealable)").sheet-Setting-Marches
+	+move('Marches-Gear-Spellslinger',"Spear (2-harm hand/close)").sheet-Setting-Marches

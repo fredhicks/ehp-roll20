@@ -84,7 +84,11 @@
 		span.sheet-anglebox
 		span.sheet-ExpHeader
 		.sheet-Expander
-			span(data-i18n='prey-breed') With the Keeper&apos;s agreement, pick the monster breed.
+			input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+			span.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
+				span(data-i18n='prey-breed') With the Keeper&apos;s agreement, pick the monster breed.
+			span.sheet-Setting-Bone
+				+translate('With the Keeper’s agreement, pick the monster breed, or you may select a single individual nemesis. If you do, you will mostly encounter its minions rather than the nemesis itself: any move advantages for your prey also apply to the minions and plots of the nemesis.')
 			br
 			span(data-i18n='prey') My Prey
 			| : 

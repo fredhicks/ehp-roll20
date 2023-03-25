@@ -88,4 +88,6 @@
 			span(data-i18n='mundane-move8')
 			|  
 			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=mundane-move8}}', data-i18n-title='send_details_to_chat')
+	input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+	+move('Bone-Mundane-Move','<b>Handy</b>: When you <i>craft</i>, your <i>repairs</i> restore +1 wear and your <i>new items</i> start with +1 maximum wear. This is in addition to any extras from your roll.',true)
 // .sheet-Mundane .sheet-OPB

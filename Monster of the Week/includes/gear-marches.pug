@@ -1,0 +1,49 @@
+.sheet-isolator
+	input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+	.sheet-Setting-Marches
+		br
+		.sheet-MinorHead.sheet-space-above
+			+translate('Special Materials Gear Tags')
+		div
+			input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-marches-instructions', value='1', checked='')
+			span.sheet-anglebox
+			span.sheet-ExpHeader
+				+translate('Instructions')
+			.sheet-Expander
+				div 
+					+translate('Because of their connection to the Marches, every hunter can pick up to two of their weapons to be made from a special material from the following list. Each material adds new tags or other special rules to the weapon’s attack.')
+			.sheet-Isolator
+				input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-GearUnused-Hider', value='1', checked='')
+				+move('Marches-Gear-Special','<b>Nimbleoak:</b> Removes “slow” and “reload” tags from a weapon.')
+					+translate('Affected weapon(s):')
+					input(type='text', name='attr_Weapons-Nimbleoak')
+				+move('Marches-Gear-Special','<b>Princely steel:</b> Adds “ignore-armour” to a hand weapon.')
+					+translate('Affected weapon(s):')
+					input(type='text', name='attr_Weapons-Princely-steel')
+				+move('Marches-Gear-Special','<b>Cold iron:</b> Adds “+1 harm to spirits” to an iron weapon.')
+					+translate('Affected weapon(s):')
+					input(type='text', name='attr_Weapons-Cold-iron')
+				+move('Marches-Gear-Special','<b>Riverstone:</b> Adds “magic” to a weapon.')
+					+translate('Affected weapon(s):')
+					input(type='text', name='attr_Weapons-Riverstone')
+				+move('Marches-Gear-Special','<b>Earthbone*:</b> Adds +1 harm to a hand or intimate weapon.')
+					+translate('Affected weapon(s):')
+					input(type='text', name='attr_Weapons-Earthbone')
+				+move('Marches-Gear-Special','<b>Bilewood*:</b> Adds “first attack against a creature deals +2 harm” to a wooden weapon.')
+					+translate('Affected weapon(s):')
+					input(type='text', name='attr_Weapons-Bilewood')
+				+move('Marches-Gear-Special','<b>Snakewood*:</b> Adds “close” to a hand weapon or “far” to a close weapon.')
+					+translate('Affected weapon(s):')
+					input(type='text', name='attr_Weapons-Snakewood')
+				+move('Marches-Gear-Special','<b>Blood rock*:</b> Adds “life-drain” to a weapon dealing 2 or less harm.')
+					+translate('Affected weapon(s):')
+					input(type='text', name='attr_Weapons-Blood-rock')
+				+move('Marches-Gear-Special','<b>Lifeshield*:</b> Adds “+1 ongoing to <i>protect someone</i> when you wield the weapon” to a hand or intimate weapon.')
+					+translate('Affected weapon(s):')
+					input(type='text', name='attr_Weapons-Lifeshield')
+				+move('Marches-Gear-Special','<b>Valorheart*:</b> Adds “+1 forward to <i>act under pressure</i> when you draw the weapon” to a weapon.')
+					+translate('Affected weapon(s):')
+					input(type='text', name='attr_Weapons-Valorheart')
+			.sheet-Expander
+				div
+					+translate('Materials marked with an asterisk* are considered relics or precious gifts by people and spirits of the Marches, and using them against the spirits causes their great wrath. Creating prototype firearms using <i>any</i> of those materials will earn the spirits’ great wrath as well.')

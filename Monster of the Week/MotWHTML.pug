@@ -1,4 +1,5 @@
 include includes/mixins.pug
++translate('Patron Spirit')
 
 script(type='text/worker')
 	include includes/MOTW-sheet-worker.js
@@ -9,165 +10,26 @@ include includes/MOTW-rolltemplates.html
 	include includes/sheet-header.pug
 	// Screen that shows when the value is null because no playbook has been selected
 	include includes/sheet-selection-long.pug
-	.space-above
+	.space-above.sheet-NoCommunity.sheet-NoTeams
 		// Hunter reference
 		include includes/hunter-reference.pug
 	// Keeper Mystery Sheet
 	include includes/keeper-mystery-sheet.pug
+	// Community Sheet
+	include includes/community-sheet.pug
 	// Teams Sheet
 	include includes/teams-sheet.pug
-	.sheet-SheetGrid.sheet-NoKeep
+	.sheet-SheetGrid.sheet-NoKeep.sheet-NoCommunity.sheet-NoTeams
 		include includes/stats.pug
 		.sheet-Specifics
 			.sheet-3colrow.sheet-NoNull
 				// Contains common elements found in all playbooks
 				.sheet-col
-					.sheet-Luck
-						.sheet-Subsection
-							span(data-i18n='luck') Luck
-						p(align='center')
-							b.sheet-statelabel
-								span(data-i18n='okay') Okay
-							input.sheet-checkbox(type='checkbox', name='attr_Luck1')
-							span.sheet-altbox
-							input.sheet-checkbox(type='checkbox', name='attr_Luck2')
-							span.sheet-altbox
-							input.sheet-checkbox(type='checkbox', name='attr_Luck3')
-							span.sheet-altbox
-							input.sheet-checkbox(type='checkbox', name='attr_Luck4')
-							span.sheet-altbox
-							input.sheet-checkbox(type='checkbox', name='attr_Luck5')
-							span.sheet-altbox
-							input.sheet-checkbox(type='checkbox', name='attr_Luck6')
-							span.sheet-altbox
-							// Pop in an extra box when the Searcher has the appropriate move
-							input.sheet-triggerbox(type='checkbox', name='attr_Moves-Searcher1D', value='1')
-							input.sheet-checkbox(type='checkbox', name='attr_Extra-Luck-Searcher')
-							span.sheet-altbox
-							// Final box is always Luck7 box in case we want to tie behavior to it
-							input.sheet-checkbox(type='checkbox', name='attr_Luck7')
-							span.sheet-altbox
-							b.sheet-statelabel
-								span(data-i18n='doomed') Doomed
-						input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Luck-Instructions', value='1', checked='')
-						span.sheet-anglebox
-						|  
-						span.sheet-ExpHeader
-							span(data-i18n='instructions') Instructions
-						.sheet-Expander
-							p
-								span(data-i18n='luck-description')
-									| Mark 
-									i Luck
-									|  to change a roll to a 12 or to avoid all harm from an injury
-								| .
-								span(data-i18n='trigger-luck-special') When you mark Luck, you trigger your playbook&apos;s Luck Special.
+					include includes/luck-track.pug
 				.sheet-col
-					.sheet-Harm
-						.sheet-Subsection
-							span(data-i18n='harm') Harm
-							| &nbsp;(
-							span(name='attr_Harm-Remaining')
-							| /
-							span(name='attr_Harm-TotalCapacity')
-							| )
-						.sheet-nowrap(align='center')
-							b.sheet-statelabel
-								span(data-i18n='okay') Okay
-							input.sheet-checkbox(type='checkbox', name='attr_Harm1')
-							span.sheet-altbox
-							input.sheet-checkbox(type='checkbox', name='attr_Harm2')
-							span.sheet-altbox
-							input.sheet-checkbox(type='checkbox', name='attr_Harm3')
-							span.sheet-altbox
-							input.sheet-inverted-triggerbox(type='checkbox', name='attr_Moves-Constructed1')
-							span.sheet-triggertext
-								b |
-							input.sheet-checkbox(type='checkbox', name='attr_Harm4')
-							span.sheet-altbox
-							input.sheet-checkbox(type='checkbox', name='attr_Harm5')
-							span.sheet-altbox
-							input.sheet-checkbox(type='checkbox', name='attr_Harm6')
-							span.sheet-altbox
-							// The Constructed gets a whopping 3 extra Harm boxes
-							input.sheet-triggerbox(type='checkbox', name='attr_Moves-Constructed1')
-							input.sheet-checkbox(type='checkbox', name='attr_Constructed-Harm1')
-							span.sheet-altbox
-							input.sheet-triggerbox(type='checkbox', name='attr_Moves-Constructed1')
-							input.sheet-checkbox(type='checkbox', name='attr_Constructed-Harm2')
-							span.sheet-altbox
-							input.sheet-triggerbox(type='checkbox', name='attr_Moves-Constructed1')
-							input.sheet-checkbox(type='checkbox', name='attr_Constructed-Harm3')
-							span.sheet-altbox
-							// With the Back from the Dead Dark Past, you can potentially get an extra box of harm
-							input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
-							span.sheet-Setting-Gothic
-								input.sheet-triggerbox(type='checkbox', name='attr_DarkPast-Dead-Change1')
-								input.sheet-checkbox(type='checkbox', name='attr_DarkPast-Dead-Harm')
-								span.sheet-altbox
-							// Pop in up to 2 additional boxes if the right improvements are taken
-							input.sheet-triggerbox(type='checkbox', name='attr_Imp-Dying')
-							input.sheet-checkbox(type='checkbox', name='attr_Extra-Harm1')
-							span.sheet-altbox
-							input.sheet-triggerbox(type='checkbox', name='attr_AdvImp-Dying')
-							input.sheet-checkbox(type='checkbox', name='attr_Extra-Harm2')
-							span.sheet-altbox
-							// Final box is always the Harm7 box in case we want to tie behavior to that
-							input.sheet-checkbox(type='checkbox', name='attr_Harm7')
-							span.sheet-altbox
-							b.sheet-statelabel
-								span(data-i18n='dying') Dying
-							input.sheet-inverted-triggerbox(type='checkbox', name='attr_Moves-Constructed1')
-							span.sheet-triggertext
-								br
-								input.sheet-checkbox(type='checkbox', name='attr_Unstable')
-								span.sheet-altbox
-								b.sheet-statelabel
-									span(data-i18n='unstable') Unstable
-						input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Unstable-Instructions', value='1', checked='')
-						span.sheet-anglebox
-						|  
-						span.sheet-ExpHeader
-							span(data-i18n='instructions') Instructions
-						.sheet-Expander
-							input.sheet-inverted-triggerbox(type='checkbox', name='attr_Moves-Constructed1')
-							span.sheet-triggertext
-								span(data-i18n='harm-instructions')
-									| When you reach 4 or more, mark unstable. Unstable injuries worsen as time passes.
-							input.sheet-triggerbox(type='checkbox', name='attr_Moves-Constructed1')
-							span.sheet-triggertext
-								span(data-i18n='constructed-unstable')
+					include includes/harm-track.pug
 				.sheet-col
-					.sheet-XP
-						.sheet-Subsection
-							span(data-i18n='experience') Experience
-						p(align='center')
-							input.sheet-checkbox(type='checkbox', name='attr_XP1')
-							span.sheet-altbox
-							input.sheet-checkbox(type='checkbox', name='attr_XP2')
-							span.sheet-altbox
-							input.sheet-checkbox(type='checkbox', name='attr_XP3')
-							span.sheet-altbox
-							input.sheet-checkbox(type='checkbox', name='attr_XP4')
-							span.sheet-altbox
-							input.sheet-checkbox(type='checkbox', name='attr_XP5')
-							span.sheet-altbox
-						input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-XP-Instructions', value='1', checked='')
-						span.sheet-anglebox
-						|  
-						span.sheet-ExpHeader
-							span(data-i18n='instructions') Instructions
-						.sheet-Expander
-							span(data-i18n='experience-description')
-								| Mark 
-								i Experience
-								|  when a roll totals 6 or less; or when a move tells you to do so
-							| .
-							span(data-i18n='xp-description')
-								| Once you have filled all 5 boxes, uncheck them and choose an 
-								i Improvement
-								|  option
-							| .
+					include includes/xp-track.pug
 			// This needs to be located just prior to the hidden sheets so it'll switch between them correctly!
 			input.sheet-SkinCheck(type='hidden', name='attr_SkinCheck', value='0')
 			// Begin significantly rearchitected playbooks
@@ -194,6 +56,9 @@ include includes/MOTW-rolltemplates.html
 
 						// Crooked Playbook Specials
 						include includes/specials-crooked.pug
+
+						// Divine Playbook Specials
+						include includes/specials-divine.pug
 
 						// Monstrous Playbook Specials
 						include includes/specials-monstrous.pug

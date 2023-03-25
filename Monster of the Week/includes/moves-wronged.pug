@@ -47,16 +47,30 @@
 		input.sheet-checkbox(type='checkbox', name='attr_Moves-Wronged4')
 		span.sheet-mainbox
 		span.sheet-grayable
-			span(data-i18n='wronged-move4')
-			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Manipulate Someone}} {{Roll=[[2d6+?{Manipulate Someone with|Tough (Default),@{Tough}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_ms-tough')
-			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=wronged-move4}}', data-i18n-title='send_details_to_chat')
+			input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+			span.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
+				// "<b>Fervor</b>: When you <i>manipulate someone</i>, roll +Tough instead of +Charm."
+				span(data-i18n='wronged-move4')
+				button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Manipulate Someone}} {{Roll=[[2d6+?{Manipulate Someone with|Tough (Default),@{Tough}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_ms-tough')
+				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=wronged-move4}}', data-i18n-title='send_details_to_chat')
+			span.sheet-Setting-Bone
+				+translate("<b>Fervor</b>: When you <i>persuade</i>, roll +Tough instead of +Charm.")
+				button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Persuade}} {{Roll=[[2d6+?{Persuade with|Tough (Default),@{Tough}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_Persuade-tough')
+				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=<b>Fervor</b>: When you <i>persuade</i>, roll +Tough instead of +Charm.}}', data-i18n-title='send_details_to_chat')
+
 	.sheet-move
 		input.sheet-checkbox(type='checkbox', name='attr_Moves-Wronged5')
 		span.sheet-mainbox
 		span.sheet-grayable
-			span(data-i18n='wronged-move5')
-			|  
-			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=wronged-move5}}', data-i18n-title='send_details_to_chat')
+			input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+			span.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
+				span(data-i18n='wronged-move5')
+				|  
+				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=wronged-move5}}', data-i18n-title='send_details_to_chat')
+			span.sheet-Setting-Bone
+				+translate('<b>Safety First</b>: Add +1 armour to any one piece of gear.')
+				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=<b>Safety First</b>: Add +1 armour to any one piece of gear.}}', data-i18n-title='send_details_to_chat')
+
 	.sheet-move
 		input.sheet-checkbox(type='checkbox', name='attr_Moves-Wronged6')
 		span.sheet-mainbox
@@ -82,6 +96,8 @@
 		span.sheet-grayable
 			span(data-i18n='wronged-move7')
 			|  
-			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=wronged-move7}}', data-i18n-title='send_details_to_chat')
 			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Kick Some Ass}} {{Roll=[[2d6+?{Kick Some Ass with|Tough (Default),@{Tough}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|1}]]}}', name='roll_ksa-plusone')
+			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=wronged-move7}}', data-i18n-title='send_details_to_chat')
+	input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+	+move('Bone-Wronged-Move',"<b>Make Do</b>: When you use the <i>crafting</i> basic move, you may substitute one inferior material for a requirement of the item.").sheet-Setting-Bone
 // .sheet-Wronged .sheet-OPB

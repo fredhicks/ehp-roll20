@@ -1,6 +1,7 @@
 .sheet-Crooked
+	input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
 	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-GearUnused-Hider', value='1', checked='')
-	div
+	.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 		b
 			span(data-i18n='crooked-weapon') Effective Weapons
 		|  
@@ -9,6 +10,20 @@
 			span(data-i18n='pick-three') pick three
 			| )
 		| :
+	.sheet-Setting-Bone
+		+translate('Pick three:')
+	+bonegear('Bone-Gear-Crooked','Fancy clothing (2-wear fancy)',2).sheet-Setting-Bone
+	+bonegear('Bone-Gear-Crooked','Gemstone bead jewellery (5-wear)',5).sheet-Setting-Bone
+	+bonegear('Bone-Gear-Crooked','Heavy leather vest (3-wear 1-armour)',3).sheet-Setting-Bone
+	+bonegear('Bone-Gear-Crooked','Jade knife (6-wear 1-harm hand)',6).sheet-Setting-Bone
+	+bonegear('Bone-Gear-Crooked','Obsidian axe (4-wear 2-harm hand messy)',4).sheet-Setting-Bone
+	+bonegear('Bone-Gear-Crooked','Rain cloak (3-wear rainproof)',3).sheet-Setting-Bone
+	+bonegear('Bone-Gear-Crooked','Snares and traps (2-wear 0-harm entangle)',2).sheet-Setting-Bone
+	+bonegear('Bone-Gear-Crooked','Snowshoes (3-wear useful)',3).sheet-Setting-Bone
+	+bonegear('Bone-Gear-Crooked','Stone bead jewellery (3-wear)',3).sheet-Setting-Bone
+	+bonegear('Bone-Gear-Crooked','Fancy hat (3-wear fancy)',3).sheet-Setting-Bone
+	+bonegear('Bone-Gear-Crooked','Sword studded with flint or teeth (4-wear 2-harm hand messy)',4).sheet-Setting-Bone
+	+bonegear('Bone-Gear-Crooked','Warm clothes (3-wear warm)',3).sheet-Setting-Bone
 	.sheet-move.sheet-Setting-Default
 		input.sheet-checkbox(type='checkbox', name='attr_Crooked_gearchoice1')
 		span.sheet-mainbox
@@ -34,7 +49,7 @@
 		span.sheet-mainbox
 		span.sheet-grayable
 			span(data-i18n='crooked-gear5') Hunting rifle (2 harm, far, loud)
-	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 		input.sheet-checkbox(type='checkbox', name='attr_Crooked_gearchoice6')
 		span.sheet-mainbox
 		span.sheet-grayable
@@ -54,10 +69,19 @@
 		span.sheet-mainbox
 		span.sheet-grayable
 			span(data-i18n='crooked-gear9') Assault rifle (3 harm, close/far, area)
-	input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
 	+move('Gothic-Gear-Crooked','Lever rifle (3-harm close/far reload)')(class="sheet-Setting-Gothic")
 	+move('Gothic-Gear-Crooked','Revolver (2-harm hand/close reload)')(class="sheet-Setting-Gothic")
 	+move('Gothic-Gear-Crooked','Small revolver (1-harm hand/close reload concealable)')(class="sheet-Setting-Gothic")
 	+move('Gothic-Gear-Crooked','Steam pressure rifle (3-harm close reload)')(class="sheet-Setting-Gothic")
 	+move('Gothic-Gear-Crooked','Sword cane (2-harm hand concealable)')(class="sheet-Setting-Gothic")
 	+move('Gothic-Gear-Crooked','Wrench (2-harm hand inconspicuous)')(class="sheet-Setting-Gothic")
+	+move('Dreaming-Gear-Crooked','Alchemical vials (2-harm close magic many volatile)')(class="sheet-Setting-Dreaming")
+	+move('Dreaming-Gear-Crooked','Ancient stiletto (1-harm intimate/hand small valuable)')(class="sheet-Setting-Dreaming")
+	+move('Dreaming-Gear-Crooked','Clockwork rifle (3-harm close reload)')(class="sheet-Setting-Dreaming")
+	+move('Dreaming-Gear-Crooked','Flintlock pistol (2-harm close reload loud)')(class="sheet-Setting-Dreaming")
+	+move('Dreaming-Gear-Crooked','Repeating crossbow (2-harm close quick)')(class="sheet-Setting-Dreaming")
+	+move('Marches-Gear-Crooked',"Prototype pistol (3-harm close reload ignore-armour volatile loud)").sheet-Setting-Marches
+	+move('Marches-Gear-Crooked',"Repeating crossbow (2-harm close quick reload unreliable)").sheet-Setting-Marches 
+	+move('Marches-Gear-Crooked',"Sword (2-harm hand)").sheet-Setting-Marches
+	+move('Marches-Gear-Crooked',"Spear (2-harm hand/close)").sheet-Setting-Marches
+	+move('Marches-Gear-Crooked',"Shortbow (2-harm close concealable)").sheet-Setting-Marches

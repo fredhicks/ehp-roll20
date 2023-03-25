@@ -10,11 +10,19 @@ span.sheet-ExpHeader
 		include sheet-header-pronouns.pug
 		include sheet-header-selection.pug
 	input.sheet-SkinCheck(type='hidden', name='attr_SkinCheck', value='0')
-	.sheet-NoKeep
+	.sheet-NoKeep.sheet-NoTeams.sheet-NoCommunity
 		span.sheet-Label(data-i18n='character-look') Look
 		|  
 		br
 		input(type='text', name='attr_Look', style='width: 98%')
+		input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+		.sheet-Setting-Marches
+			span.sheet-Label
+				+translate('Mark of the Spirit-Touched')
+			|  
+			br
+			input(type='text', name='attr_Marches-Spirit-Touched-Mark', style='width: 98%')
 	include game-options-config.pug
 	// Here goes the top of the keeper's mystery sheet; more to follow
 	include keeper-mystery-head.pug
+	include community-head.pug

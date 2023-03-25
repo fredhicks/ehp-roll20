@@ -1,0 +1,162 @@
+.sheet-isolator
+	input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+	.sheet-Setting-Bone
+		br
+		.sheet-MinorHead.sheet-space-above
+			+translate('Everyday Gear')
+		div
+			input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Bone-Gear-Instructions', value='1', checked='')
+			span.sheet-anglebox
+			span.sheet-ExpHeader
+				+translate('Instructions')
+			.sheet-Expander
+				.sheet-isolator
+					input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-GearUnused-Hider', value='1', checked='')
+					span.sheet-anglebox
+					|  
+					span.sheet-ExpHeader
+						span(data-i18n='unused') Unused
+				div 
+					+translate('Here are some basics that anyone might use and have access to.')
+					input.sheet-SkinCheck(type='hidden', name='attr_SkinCheck', value='0')
+					.sheet-Chosen.sheet-Initiate.sheet-Crooked.sheet-Expert.sheet-Divine.sheet-Spooky.sheet-Wronged.sheet-Pararomantic
+						+translate('Pick up to four things from the everyday gear list, plus your clothes.')
+					.sheet-Monstrous
+						+translate('Pick up to three things from the everyday gear list, plus your clothes.')
+					.sheet-Mundane
+						+translate('Pick up to five things from the everyday gear list, plus your clothes.')
+			.sheet-Isolator
+				input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-GearUnused-Hider', value='1', checked='')
+				+move('Bone-Gear-Everyday','Arrows are made in a variety of styles for different purposes. Hunters with bows pick a few types of arrows they normally carry, such as: small game, large game, war, barbed, stabilised, blunt. Decide what material they’re made from.')
+					textarea(style='height: 40px;', name="attr_bonespear_arrows_text")
+				+bonegear('Bone-Gear-Everyday','Bone flute (3-wear)',3)
+				+bonegear('Bone-Gear-Everyday','Bone spear (3-wear 2-harm hand/close)',3)
+				+bonegear('Bone-Gear-Everyday','Bow (3-wear 2-harm close/far) and a selection of arrows (see above)',3)
+				+bonegear('Bone-Gear-Everyday','Everyday clothing (2-wear)',2)
+				+bonegear('Bone-Gear-Everyday','Firestarting kit (2-wear)',2)
+				+bonegear('Bone-Gear-Everyday','Flint knife (4-wear 1-harm hand)',4)
+				+bonegear('Bone-Gear-Everyday','Heavy leather vest (2-wear 1-armour)',2)
+				+bonegear('Bone-Gear-Everyday','Horn knife (3-wear 1-harm hand)',3)
+				+bonegear('Bone-Gear-Everyday','Huge wooden mace or club (3-wear 3-harm hand heavy)',3)
+				+bonegear('Bone-Gear-Everyday','Leather bag (3-wear)',3)
+				+bonegear('Bone-Gear-Everyday','Leather sling (3-wear 2-harm close)',3)
+				+bonegear('Bone-Gear-Everyday','Linen bag (2-wear)',2)
+				+bonegear('Bone-Gear-Everyday','Paints (2-wear)',2)
+				+bonegear('Bone-Gear-Everyday','Rain cloak (3-wear rainproof)',3)
+				+bonegear('Bone-Gear-Everyday','Spear-thrower (3-wear thrown spear gains +1-harm, adds far range)',3)
+				+bonegear('Bone-Gear-Everyday','Stone axe (4-wear 2-harm hand useful)',4)
+				+bonegear('Bone-Gear-Everyday','Stone dagger (4-wear 2-harm hand useful)',4)
+				+bonegear('Bone-Gear-Everyday','Stone oil lamp (4-wear fire refill)',4)
+				+bonegear('Bone-Gear-Everyday','Tough clothing (4-wear)',4)
+				+bonegear('Bone-Gear-Everyday','Winter clothing (3-wear warm)',3)
+				+bonegear('Bone-Gear-Everyday','Wooden bead jewellery (2-wear)',2)
+				+bonegear('Bone-Gear-Everyday','Wooden drum (2-wear)',2)
+				+bonegear('Bone-Gear-Everyday','Wooden flute (2-wear)',2)
+				+bonegear('Bone-Gear-Everyday','Wooden knife (2-wear 1-harm hand)',2)
+				+bonegear('Bone-Gear-Everyday','Wooden mace or club (3-wear 2-harm hand)',3)
+				+bonegear('Bone-Gear-Everyday','Wooden oil lamp (2-wear fire refill)',2)
+				+bonegear('Bone-Gear-Everyday','Wooden spear (2-wear 2-harm hand/close)',2)
+				+bonegear('Bone-Gear-Everyday','Wooden throwing club (2-wear 2-harm hand/1-harm close)',2)
+		br
+		.sheet-MinorHead.sheet-space-above
+			+translate('Special Gear')
+		div
+			input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Bone-Gear-Special-Instructions', value='1', checked='')
+			span.sheet-anglebox
+			span.sheet-ExpHeader
+				+translate('Instructions')
+			.sheet-Expander
+				.sheet-isolator
+					input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-GearUnused-Hider', value='1', checked='')
+					span.sheet-anglebox
+					|  
+					span.sheet-ExpHeader
+						span(data-i18n='unused') Unused
+				div 
+					+translate('These are some items that are a bit more unusual or harder to find or craft. Some hunters may get gear picks from this list.')
+			.sheet-Isolator
+				input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-GearUnused-Hider', value='1', checked='')
+				+bonegear('Bone-Gear-Special','Bamboo blowpipe (3-wear 0-harm close poison)',3)
+				+bonegear('Bone-Gear-Special','Bone vest (4-wear 1-armour)',4)
+				+bonegear('Bone-Gear-Special','Fancy clothing (2-wear fancy)',2)
+				+bonegear('Bone-Gear-Special','Gemstone bead jewellery (5-wear)',5)
+				+bonegear('Bone-Gear-Special','Heavy hide and bone armour (3-wear 2-armour heavy)',3)
+				+bonegear('Bone-Gear-Special','Ivory flute (4-wear)',4)
+				+bonegear('Bone-Gear-Special','Jade knife (6-wear 1-harm hand)',6)
+				+bonegear('Bone-Gear-Special','Jade axe (5-wear 2-harm hand)',5)
+				+bonegear('Bone-Gear-Special','Ritual mask (2-wear fancy holy)',2)
+				+bonegear('Bone-Gear-Special','Stone bead jewellery (3-wear)',3)
+				+bonegear('Bone-Gear-Special','Sword studded with flints or teeth (4-wear 2-harm hand messy)',4)
+		br
+		.sheet-MinorHead.sheet-space-above
+			+translate('Wear Ratings and Materials')
+		div
+			input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Bone-Gear-Ratings-Instructions', value='1', checked='')
+			span.sheet-anglebox
+			span.sheet-ExpHeader
+				+translate('Instructions')
+			.sheet-Expander
+				div 
+					+translate('<p>The basic wear rating of any piece of gear is determined by two things. First, the main material it’s made from gives it a starting rating. That’s a combination of how strong and long-lasting the material is.<p>Then assess if there is a significant part that is stronger or weaker than the main material. This might be due to construction technique or the inclusion of another material. Add +1 wear for major use of a stronger element, or –1 wear for a weaker one. There’s no need to ensure you get this correct as long as the group agrees that a wear rating is fair. It’s not important to be fully realistic, just to provide a baseline for how quickly objects will wear out.<p>Because the wear rating relates to how much work it is to make an object, this is also a good guideline for how much people value things.')
+			.sheet-Isolator
+				input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Bone-Gear-Materials', value='1', checked='')
+				span.sheet-anglebox
+				span.sheet-ExpHeader
+					+translate('Materials')
+				.sheet-Expander
+					table.sheet-Bone-Materials
+						tr
+							th
+								+translate('Base Wear')
+							th
+								+translate('Description')
+							th
+								+translate('Examples')
+						tr
+							td
+								| 1
+							td
+								b
+									+translate('Weak')
+							td
+								+translate('Grass, twigs, hair')
+						tr
+							td
+								| 2
+							td
+								b
+									+translate('Decent')
+							td
+								+translate('Flax, thin leather, feathers, mud brick, branches')
+						tr
+							td
+								| 3
+							td
+								b
+									+translate('Strong')
+							td
+								+translate('Timber, horn, sandstone, thick leather')
+						tr
+							td
+								| 4
+							td
+								b
+									+translate('Hard wearing')
+							td
+								+translate('Bone, limestone')
+						tr
+							td
+								| 5
+							td
+								b
+									+translate('Very hard wearing')
+							td
+								+translate('Flint, antler, ivory')
+						tr
+							td
+								| 6
+							td
+								b
+									+translate('Extremely hard and tough')
+							td
+								+translate('Jade, gemstones, meteoric iron')

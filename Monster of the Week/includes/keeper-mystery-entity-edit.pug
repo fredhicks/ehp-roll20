@@ -3,10 +3,11 @@ select.sheet-KItem-input(name='attr_KItem-Type')
 	option(value='0', selected='', data-i18n='select-type') Select Type
 	option(value='1', data-i18n='countdown') Countdown
 	option(value='2', data-i18n='monster') Monster
+	option(value='6', data-i18n='phenomenon') Phenomenon
+	option(value='8', data-i18n='villain') Villain
 	option(value='3', data-i18n='minion') Minion
 	option(value='4', data-i18n='bystander') Bystander
 	option(value='5', data-i18n='location') Location
-	option(value='6', data-i18n='phenomenon') Phenomenon
 	option(value='7', data-i18n='text-block') Text Block
 input.sheet-KTyper(type='hidden', name='attr_KItem-Type', value='0')
 .sheet-KItem-Type-Countdown
@@ -28,85 +29,193 @@ input.sheet-KTyper(type='hidden', name='attr_KItem-Type', value='0')
 	.sheet-MinorHead
 		span(data-i18n='midnight') Midnight
 	textarea.sheet-KItem-input(rows='1', name='attr_KItem-Midnight')
-.sheet-KItem-Type-Text.sheet-KItem-Type-Monster.sheet-KItem-Type-Minion.sheet-KItem-Type-Bystander.sheet-KItem-Type-Location.sheet-KItem-Type-Phenomenon
+.sheet-KItem-Type-Text.sheet-KItem-Type-Monster.sheet-KItem-Type-Minion.sheet-KItem-Type-Bystander.sheet-KItem-Type-Location.sheet-KItem-Type-Phenomenon.sheet-KItem-Type-Villain
 	.sheet-MinorHead(data-i18n='name') Name
 	input.sheet-KItem-input(type='text', name='attr_KItem-Name', value='')
-	.sheet-MinorHead(data-i18n='description') Description
-	textarea.sheet-KItem-input(name='attr_KItem-Desc')
 .sheet-KItem-Type-Monster
 	.sheet-MinorHead(data-i18n='type-and-motivation') Type and Motivation
-	select.sheet-KItem-input(name='attr_KItem-Monster-Type')
-		option(value='', data-i18n='choose-type') Choose Type and Motivation
-		option(data-i18n='m-beast') Beast (to run wild, destroying and killing)
-		option(data-i18n='m-breeder') Breeder (to give birth to, bring forth, or create evil)
-		option(data-i18n='m-collector') Collector (to steal specific sorts of things)
-		option(data-i18n='m-destroyer') Destroyer (to bring about the end of the world)
-		option(data-i18n='m-devourer') Devourer (to consume people)
-		option(data-i18n='m-executioner') Executioner (to punish the guilty)
-		option(data-i18n='m-parasite') Parasite (to infest, control and devour)
-		option(data-i18n='m-queen') Queen (to possess and control)
-		option(data-i18n='m-sorcerer') Sorcerer (to usurp unnatural power)
-		option(data-i18n='m-tempter') Tempter (to tempt people into evil deeds)
-		option(data-i18n='m-torturer') Torturer (to hurt and terrify)
-		option(data-i18n='m-trickster') Trickster (to create chaos)
+	.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
+		select.sheet-KItem-input(name='attr_KItem-Monster-Type')
+			option(value='', data-i18n='choose-type') Choose Type and Motivation
+			option(data-i18n='m-beast') Beast (to run wild, destroying and killing)
+			option(data-i18n='m-breeder') Breeder (to give birth to, bring forth, or create evil)
+			option(data-i18n='m-collector') Collector (to steal specific sorts of things)
+			option(data-i18n='m-destroyer') Destroyer (to bring about the end of the world)
+			option(data-i18n='m-devourer') Devourer (to consume people)
+			option(data-i18n='m-executioner') Executioner (to punish the guilty)
+			option(data-i18n='m-parasite') Parasite (to infest, control and devour)
+			option(data-i18n='m-queen') Queen (to possess and control)
+			option(data-i18n='m-sorcerer') Sorcerer (to usurp unnatural power)
+			option(data-i18n='m-tempter') Tempter (to tempt people into evil deeds)
+			option(data-i18n='m-torturer') Torturer (to hurt and terrify)
+			option(data-i18n='m-trickster') Trickster (to create chaos)
+	.sheet-Setting-Bone
+		select.sheet-KItem-input(name='attr_KItem-Monster-Type')
+			option(value='', data-i18n='choose-type') Choose Type and Motivation
+			+option("Breeder (motivation: to give birth to, bring forth, or create evil)")
+			+option("Cleanser (motivation: to eradicate humans)")
+			+option("Collector (motivation: to steal things and keep them for itself)")
+			+option("Corrupter (motivation: to transform people into monsters)")
+			+option("Devourer (motivation: to consume people)")
+			+option("Inciter (motivation: to create division)")
+			+option("Plague-bearer (motivation: to spread rot and disease)")
+			+option("Imperator (motivation: to possess, control, and dominate)")
+			+option("Revenger (motivation: to punish and give payback)")
+			+option("Sorcerer (motivation: to steal unnatural power)")
+			+option("Trickster (motivation: to create chaos)")
+			+option("Wrecker (motivation: to run wild, destroy, and kill)")
+.sheet-KItem-Type-Monster
+	.sheet-Setting-Bone
+		.sheet-MinorHead
+			+translate('Form')
+		select.sheet-KItem-input(name='attr_KItem-Monster-Form')
+			+option("Choose Monster Form",'')
+			+option("Beast")
+			+option("Ghost")
+			+option("Nature Spirit")
+			+option("Un-human")
+			+option("Corrupted")
 .sheet-KItem-Type-Minion
 	.sheet-MinorHead(data-i18n='type-and-motivation') Type and Motivation
-	select.sheet-KItem-input(name='attr_KItem-Minion-Type')
-		option(value='', data-i18n='choose-type') Choose Type and Motivation
-		option(data-i18n='m-assassin') Assassin (to kill the hunters)
-		option(data-i18n='m-brute') Brute (to intimidate and attack)
-		option(data-i18n='m-cultist') Cultist (to save their own skin at any cost)
-		option(data-i18n='m-guardian') Guardian (to bar a way or protect something)
-		option(data-i18n='m-righthand') Right hand (to back up the monster)
-		option(data-i18n='m-plague') Plague (to swarm and destroy)
-		option(data-i18n='m-renfield') Renfield (to push victims towards the monster)
-		option(data-i18n='m-scout') Scout (to stalk, watch, and report)
-		option(data-i18n='m-thief') Thief (to steal and deliver to the monster)
-		option(data-i18n='m-traitor') Traitor (to betray people)
+	.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
+		select.sheet-KItem-input(name='attr_KItem-Minion-Type')
+			option(value='', data-i18n='choose-type') Choose Type and Motivation
+			option(data-i18n='m-assassin') Assassin (to kill the hunters)
+			option(data-i18n='m-brute') Brute (to intimidate and attack)
+			option(data-i18n='m-cultist') Cultist (to save their own skin at any cost)
+			option(data-i18n='m-guardian') Guardian (to bar a way or protect something)
+			option(data-i18n='m-righthand') Right hand (to back up the monster)
+			option(data-i18n='m-plague') Plague (to swarm and destroy)
+			option(data-i18n='m-renfield') Renfield (to push victims towards the monster)
+			option(data-i18n='m-scout') Scout (to stalk, watch, and report)
+			option(data-i18n='m-thief') Thief (to steal and deliver to the monster)
+			option(data-i18n='m-traitor') Traitor (to betray people)
+	.sheet-Setting-Bone
+		select.sheet-KItem-input(name='attr_KItem-Minion-Type')
+			option(value='', data-i18n='choose-type') Choose Type and Motivation
+			+option("Killer (motivation: to destroy the hunters)")
+			+option("Brute (motivation: to intimidate and attack)")
+			+option("Cultist (motivation: to aid a monster or phenomenon for their own benefit)")
+			+option("Guardian (motivation: to bar a way or protect something)")
+			+option("Right hand (motivation: to back up the monster)")
+			+option("Swarm (motivation: to overwhelm and destroy)")
+			+option("Servant (motivation: to lure victims towards the monster)")
+			+option("Scout (motivation: to stalk, watch, and report)")
+			+option("Thief (motivation: to steal and deliver to the monster)")
+			+option("Traitor (motivation: to betray people)")
 .sheet-KItem-Type-Bystander
 	.sheet-MinorHead(data-i18n='type-and-motivation') Type and Motivation
-	select.sheet-KItem-input(name='attr_KItem-Bystander-Type')
-		option(value='', data-i18n='choose-type') Choose Type and Motivation
-		option(data-i18n='m-busybody') Busybody (to interfere in other people&rsquo;s plans)
-		option(data-i18n='m-detective') Detective (to rule out explanations)
-		option(data-i18n='m-gossip') Gossip (to pass on rumours)
-		option(data-i18n='m-helper') Helper (to join the hunt)
-		option(data-i18n='m-innocent') Innocent (to do the right thing)
-		option(data-i18n='m-official') Official (to be suspicious)
-		option(data-i18n='m-skeptic') Skeptic (to deny supernatural explanations)
-		option(data-i18n='m-victim') Victim (to put themselves in danger)
-		option(data-i18n='m-witness') Witness (to reveal information)
+	.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
+		select.sheet-KItem-input(name='attr_KItem-Bystander-Type')
+			option(value='', data-i18n='choose-type') Choose Type and Motivation
+			option(data-i18n='m-busybody') Busybody (to interfere in other people&rsquo;s plans)
+			option(data-i18n='m-detective') Detective (to rule out explanations)
+			option(data-i18n='m-gossip') Gossip (to pass on rumours)
+			option(data-i18n='m-helper') Helper (to join the hunt)
+			option(data-i18n='m-innocent') Innocent (to do the right thing)
+			option(data-i18n='m-official') Official (to be suspicious)
+			option(data-i18n='m-skeptic') Skeptic (to deny supernatural explanations)
+			option(data-i18n='m-victim') Victim (to put themselves in danger)
+			option(data-i18n='m-witness') Witness (to reveal information)
+	.sheet-Setting-Bone
+		select.sheet-KItem-input(name='attr_KItem-Bystander-Type')
+			option(value='', data-i18n='choose-type') Choose Type and Motivation
+			+option("Busybody (motivation: to interfere in other people’s plans)")
+			+option("Gossip (motivation: to pass on rumours)")
+			+option("Helper (motivation: to join the hunt)")
+			+option("Innocent (motivation: to do the right thing)")
+			+option("Mystic (motivation: to foretell potential consequences)")
+			+option("Nuisance (motivation: to get in the hunters’ way)")
+			+option("Skeptic (motivation: to deny explanations)")
+			+option("Victim (motivation: to put themself in danger)")
+			+option("Witness (motivation: to reveal information)")
 .sheet-KItem-Type-Location
 	.sheet-MinorHead(data-i18n='type-and-motivation') Type and Motivation
-	select.sheet-KItem-input(name='attr_KItem-Location-Type')
-		option(value='', data-i18n='choose-type') Choose Type and Motivation
-		option(data-i18n='m-crossroads') Crossroads (to bring people, and things, together)
-		option(data-i18n='m-deathtrap') Deathtrap (to harm intruders)
-		option(data-i18n='m-den') Den (to harbour monsters)
-		option(data-i18n='m-fortress') Fortress (to deny entry)
-		option(data-i18n='m-hellgate') Hellgate (to create evil)
-		option(data-i18n='m-hub') Hub (to reveal information)
-		option(data-i18n='m-lab') Lab (to create weirdness)
-		option(data-i18n='m-maze') Maze (to confuse and separate)
-		option(data-i18n='m-prison') Prison (to constrain and prevent exit)
-		option(data-i18n='m-wilds') Wilds (to contain hidden things)
+	.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
+		select.sheet-KItem-input(name='attr_KItem-Location-Type')
+			option(value='', data-i18n='choose-type') Choose Type and Motivation
+			option(data-i18n='m-crossroads') Crossroads (to bring people, and things, together)
+			option(data-i18n='m-deathtrap') Deathtrap (to harm intruders)
+			option(data-i18n='m-den') Den (to harbour monsters)
+			option(data-i18n='m-fortress') Fortress (to deny entry)
+			option(data-i18n='m-hellgate') Hellgate (to create evil)
+			option(data-i18n='m-hub') Hub (to reveal information)
+			option(data-i18n='m-lab') Lab (to create weirdness)
+			option(data-i18n='m-maze') Maze (to confuse and separate)
+			option(data-i18n='m-prison') Prison (to constrain and prevent exit)
+			option(data-i18n='m-wilds') Wilds (to contain hidden things)
+	.sheet-Setting-Bone
+		select.sheet-KItem-input(name='attr_KItem-Location-Type')
+			option(value='', data-i18n='choose-type') Choose Type and Motivation
+			+option("Badlands (motivation: to harm intruders)")
+			+option("Borderland (motivation: to allow weirdness in)")
+			+option("Den (motivation: to harbour dangerous creatures)")
+			+option("Barrier (motivation: to deny entry)")
+			+option("Liminal Space (motivation: to allow access to other worlds)")
+			+option("Hellgate (motivation: to bring evil and corrupt what is good)")
+			+option("Maze (motivation: to confuse and separate)")
+			+option("Meeting-place (motivation: to bring people together)")
+			+option("Prison (motivation: to constrain and prevent exit)")
+			+option("Sacred Ground (motivation: to protect)")
+			+option("Wilds (motivation: to contain and reveal hidden things)")
 .sheet-KItem-Type-Phenomenon
 	.sheet-MinorHead(data-i18n='type-and-motivation') Type and Motivation
-	select.sheet-KItem-input(name='attr_KItem-Phenomenon-Type')
+	.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
+		select.sheet-KItem-input(name='attr_KItem-Phenomenon-Type')
+			option(value='', data-i18n='choose-type') Choose Type and Motivation
+			option(data-i18n='m-alien') Alien (to be unfathomable)
+			option(data-i18n='m-artifact') Artifact (to grant someone more power than they can handle)
+			option(data-i18n='m-biohazard') Biohazard (to infect, harm, and spread)
+			option(data-i18n='m-bubble') Bubble (to keep inside things inside, and outside things outside)
+			option(data-i18n='m-conspiracy') Conspiracy (to gather power, keep secrets, and create confusion)
+			option(data-i18n='m-corruption') Corruption (to change the laws of the universe)
+			option(data-i18n='m-experiment') Experiment (to unleash dangers)
+			option(data-i18n='m-mutagen') Mutagen (to transform creatures and people)
+			option(data-i18n='m-panic') Panic (to make people act irrationally)
+			option(data-i18n='m-portal') Portal (to draw things from one world to another)
+			option(data-i18n='m-teratogen') Teratogen (to turn creatures and people into monsters)
+			option(data-i18n='m-zone') Zone (to harm all that venture within)
+	.sheet-Setting-Bone
+		select.sheet-KItem-input(name='attr_KItem-Phenomenon-Type')
+			option(value='', data-i18n='choose-type') Choose Type and Motivation
+			+option("Alien (motivation: to be unfathomable)")
+			+option("Power (motivation: to grant someone more power than they can handle)")
+			+option("Plague (motivation: to infect, harm, and spread)")
+			+option("Bubble (motivation: to keep inside things inside, and outside things outside)")
+			+option("Conspiracy (motivation: to gather power, keep secrets, and create confusion)")
+			+option("Corruption (motivation: to erode the laws of nature)")
+			+option("Changing Curse (motivation: to transform creatures and people)")
+			+option("Panic (motivation: to make people act irrationally)")
+			+option("Portal (motivation: to draw things from one world to another)")
+			+option("Zone (motivation: to harm all that venture within)")
+.sheet-KItem-Type-Villain
+	.sheet-MinorHead(data-i18n='type-and-motivation') Type and Motivation
+	select.sheet-KItem-input(name='attr_KItem-Villain-Type')
 		option(value='', data-i18n='choose-type') Choose Type and Motivation
-		option(data-i18n='m-alien') Alien (to be unfathomable)
-		option(data-i18n='m-artifact') Artifact (to grant someone more power than they can handle)
-		option(data-i18n='m-biohazard') Biohazard (to infect, harm, and spread)
-		option(data-i18n='m-bubble') Bubble (to keep inside things inside, and outside things outside)
-		option(data-i18n='m-conspiracy') Conspiracy (to gather power, keep secrets, and create confusion)
-		option(data-i18n='m-corruption') Corruption (to change the laws of the universe)
-		option(data-i18n='m-experiment') Experiment (to unleash dangers)
-		option(data-i18n='m-mutagen') Mutagen (to transform creatures and people)
-		option(data-i18n='m-panic') Panic (to make people act irrationally)
-		option(data-i18n='m-portal') Portal (to draw things from one world to another)
-		option(data-i18n='m-teratogen') Teratogen (to turn creatures and people into monsters)
-		option(data-i18n='m-zone') Zone (to harm all that venture within)
-.sheet-KItem-Type-Monster.sheet-KItem-Type-Minion
+		+option('Schemer (motivation: to increase their influence)')
+		+option('Sadist (motivation: to make others suffer)')
+		+option('Narcissist (motivation: to prove their superiority)')
+		+option('Fanatic (motivation: to do wrong things for right purposes)')
+		+option('Tyrant (motivation: to have subordinates and boss them around)')
+		+option('Taker (motivation: to take what’s not theirs)')
+.sheet-Atonement
+	.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
+		input.sheet-KTyper(type='hidden', name='attr_KItem-Type', value='0')
+		.sheet-KItem-Type-Monster.sheet-KItem-Type-Phenomenon
+			.sheet-MinorHead
+				+translate('Transgression')
+			i
+				+translate('For an atonement mystery, resolving a transgression may take the place of a weakness.')
+			textarea.sheet-KItem-input(rows='1', name='attr_KItem-Transgression')
+.sheet-KItem-Type-Monster.sheet-KItem-Type-Phenomenon
+	.sheet-Setting-Bone
+		.sheet-MinorHead
+			+translate('Transgression')
+		textarea.sheet-KItem-input(name='attr_KItem-Transgression')
+.sheet-KItem-Type-Text.sheet-KItem-Type-Monster.sheet-KItem-Type-Minion.sheet-KItem-Type-Bystander.sheet-KItem-Type-Location.sheet-KItem-Type-Phenomenon.sheet-KItem-Type-Villain
+	.sheet-MinorHead(data-i18n='description') Description
+	textarea.sheet-KItem-input(name='attr_KItem-Desc')
+.sheet-KItem-Type-Monster.sheet-KItem-Type-Minion.sheet-KItem-Type-Villain
 	.sheet-MinorHead
 		span(data-i18n='powers') Powers
 		|  (
@@ -170,7 +279,7 @@ input.sheet-KTyper(type='hidden', name='attr_KItem-Type', value='0')
 	textarea.sheet-KItem-input(rows='1', name='attr_KItem-Effect11')
 	input.sheet-null-hider(type='hidden', name='attr_KItem-Effect11', value='')
 	textarea.sheet-KItem-input(rows='1', name='attr_KItem-Effect12')
-.sheet-KItem-Type-Monster.sheet-KItem-Type-Minion
+.sheet-KItem-Type-Monster.sheet-KItem-Type-Minion.sheet-KItem-Type-Villain
 	.sheet-MinorHead
 		span(data-i18n='attacks') Attacks
 		|  (
@@ -190,42 +299,42 @@ input.sheet-KTyper(type='hidden', name='attr_KItem-Type', value='0')
 	textarea.sheet-KItem-input(rows='1', name='attr_KItem-Attack5')
 	input.sheet-null-hider(type='hidden', name='attr_KItem-Attack5', value='')
 	textarea.sheet-KItem-input(rows='1', name='attr_KItem-Attack6')
-.sheet-KItem-Type-Monster.sheet-KItem-Type-Minion
+.sheet-KItem-Type-Monster.sheet-KItem-Type-Minion.sheet-KItem-Type-Villain
 	.sheet-MinorHead(data-i18n='armour') Armour
 	textarea.sheet-KItem-input(rows='1', name='attr_KItem-Armour')
-.sheet-Atonement
-	input.sheet-KTyper(type='hidden', name='attr_KItem-Type', value='0')
-	.sheet-KItem-Type-Monster.sheet-KItem-Type-Phenomenon
-		.sheet-MinorHead
-			+translate('Transgression')
-		i
-			+translate('For an atonement mystery, resolving a transgression may take the place of a weakness.')
-		textarea.sheet-KItem-input(rows='1', name='attr_KItem-Transgression')
 .sheet-KItem-Type-Monster.sheet-KItem-Type-Minion.sheet-KItem-Type-Phenomenon
-	.sheet-MinorHead
-		span(data-i18n='weaknesses') Weaknesses
-		|  (
-		span(data-i18n='up-to-6') Up to 6
-		| )
-	i
-		span(data-i18n='slot-on-finish') An additional slot will appear each time you finish filling out an existing one
-		| .
-	textarea.sheet-KItem-input(rows='1', name='attr_KItem-Weakness1')
-	input.sheet-null-hider(type='hidden', name='attr_KItem-Weakness1', value='')
-	textarea.sheet-KItem-input(rows='1', name='attr_KItem-Weakness2')
-	input.sheet-null-hider(type='hidden', name='attr_KItem-Weakness2', value='')
-	textarea.sheet-KItem-input(rows='1', name='attr_KItem-Weakness3')
-	input.sheet-null-hider(type='hidden', name='attr_KItem-Weakness3', value='')
-	textarea.sheet-KItem-input(rows='1', name='attr_KItem-Weakness4')
-	input.sheet-null-hider(type='hidden', name='attr_KItem-Weakness4', value='')
-	textarea.sheet-KItem-input(rows='1', name='attr_KItem-Weakness5')
-	input.sheet-null-hider(type='hidden', name='attr_KItem-Weakness5', value='')
-	textarea.sheet-KItem-input(rows='1', name='attr_KItem-Weakness1')
-.sheet-KItem-Type-Monster.sheet-KItem-Type-Minion.sheet-KItem-Type-Bystander
+	.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
+		.sheet-MinorHead
+			span(data-i18n='weaknesses') Weaknesses
+			|  (
+			span(data-i18n='up-to-6') Up to 6
+			| )
+		i
+			span(data-i18n='slot-on-finish') An additional slot will appear each time you finish filling out an existing one
+			| .
+		textarea.sheet-KItem-input(rows='1', name='attr_KItem-Weakness1')
+		input.sheet-null-hider(type='hidden', name='attr_KItem-Weakness1', value='')
+		textarea.sheet-KItem-input(rows='1', name='attr_KItem-Weakness2')
+		input.sheet-null-hider(type='hidden', name='attr_KItem-Weakness2', value='')
+		textarea.sheet-KItem-input(rows='1', name='attr_KItem-Weakness3')
+		input.sheet-null-hider(type='hidden', name='attr_KItem-Weakness3', value='')
+		textarea.sheet-KItem-input(rows='1', name='attr_KItem-Weakness4')
+		input.sheet-null-hider(type='hidden', name='attr_KItem-Weakness4', value='')
+		textarea.sheet-KItem-input(rows='1', name='attr_KItem-Weakness5')
+		input.sheet-null-hider(type='hidden', name='attr_KItem-Weakness5', value='')
+		textarea.sheet-KItem-input(rows='1', name='attr_KItem-Weakness1')
+.sheet-KItem-Type-Monster.sheet-KItem-Type-Minion.sheet-KItem-Type-Bystander.sheet-KItem-Type-Villain
 	.sheet-MinorHead
 		span(data-i18n='harm-capacity') Harm Capacity
 	input.sheet-KItem-input(type='number', name='attr_KItem-Harm', min='0', value='0')
-.sheet-KItem-Type-Monster.sheet-KItem-Type-Minion.sheet-KItem-Type-Bystander.sheet-KItem-Type-Location.sheet-KItem-Type-Phenomenon
+.sheet-KItem-Type-Phenomenon
+	.sheet-MinorHead
+		+translate('Tenacity')
+	i
+		+translate('How strongly the phenomenon is ingrained in the world. You can only use a weakness to end the phenomenon for good when all tenacity has been used up. See Codex of Mysteries (Gothic Haunts) for details.')
+	br
+	input.sheet-KItem-input(type='number', name='attr_KItem-Tenacity', min='0', value='0')
+.sheet-KItem-Type-Monster.sheet-KItem-Type-Minion.sheet-KItem-Type-Bystander.sheet-KItem-Type-Location.sheet-KItem-Type-Phenomenon.sheet-KItem-Type-Villain
 	.sheet-MinorHead
 		span(data-i18n='custom-moves-header') Custom Moves
 		|  (
@@ -359,7 +468,7 @@ input.sheet-KTyper(type='hidden', name='attr_KItem-Type', value='0')
 		input.sheet-null-hider(type='hidden', name='attr_KItem-Move6-List5', value='')
 		li
 			input(type='text', name='attr_KItem-Move6-List6', value='')
-.sheet-KItem-Type-Text.sheet-KItem-Type-Monster.sheet-KItem-Type-Minion.sheet-KItem-Type-Bystander.sheet-KItem-Type-Location.sheet-KItem-Type-Phenomenon.sheet-KItem-Type-Countdown
+.sheet-KItem-Type-Text.sheet-KItem-Type-Monster.sheet-KItem-Type-Minion.sheet-KItem-Type-Bystander.sheet-KItem-Type-Location.sheet-KItem-Type-Phenomenon.sheet-KItem-Type-Countdown.sheet-KItem-Type-Villain
 	.sheet-MinorHead
 		span(data-i18n='notes') Notes
 	textarea.sheet-KItem-input(rows='1', name='attr_KItem-Notes')

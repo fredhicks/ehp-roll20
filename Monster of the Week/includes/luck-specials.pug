@@ -1,53 +1,84 @@
 .sheet-Luck-Specials
 	.sheet-Subsection
-		span(data-i18n='luck') Luck
+		input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+		span(data-i18n='luck').sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches Luck
+		span.sheet-Setting-Bone
+			+translate('Favour')
 		|  
 		span(data-i18n='special') Special
 	input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-LuckSpecial', value='1', checked='')
 	span.sheet-anglebox
 	span.sheet-ExpHeader
 	.sheet-Expander
+		input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
 		input.sheet-SkinCheck(type='hidden', name='attr_SkinCheck', value='0')
-		|  
-		.sheet-Chosen
-			span.sheet-highlights(data-i18n='luck-special-chosen')
-				| When you spend 
-				i Luck
-				| , the Keeper will bring your fate into play.
-		.sheet-Crooked
-			span.sheet-highlights(data-i18n='luck-special-Crooked')
-				| When you spend 
-				i Luck
-				| , someone from your past will re-appear in your life. Soon.
-		.sheet-Divine
-			span.sheet-highlights(data-i18n='luck-special-divine')
-				| When you spend 
-				i Luck
-				| , you get word that your Mission requires something difficult that must be done. By you. Urgently.
-		.sheet-Expert
-			span.sheet-highlights(data-i18n='luck-special-expert')
+		.sheet-Setting-Bone
+			input.sheet-SkinCheck(type='hidden', name='attr_SkinCheck', value='0')
+			.sheet-Chosen
+				+translate('When you spend a point of <i>Favour</i>, the Keeper will bring your fate into play.')
+			.sheet-Initiate
+				+translate('When you spend a point of <i>Favour</i>, something goes wrong for your Sect: an ill-advised project or a disastrous operation.')
+			.sheet-Crooked
+				// Loner
+				+translate('Whenever you spend a <i>Favour</i> point, one of your enemies appears to get in your way or a favour you owe comes due.')
+			.sheet-Expert
+				// Lore-Holder
+				+translate('When you spend a point of <i>Favour</i>, you discover something happening now is related to something you were involved in years ago.')
+			.sheet-Mundane
+				+translate('When you spend a point of <i>Favour</i>, you’ll find something weird—maybe even useful!')
+			.sheet-Monstrous
+				// Other-Folk
+				+translate('When you spend a point of <i>Favour</i>, your monster side gains power: your Curse may become stronger, or another Breed disadvantage may manifest.')
+			.sheet-Pararomantic
+				+translate('When you spend a point of <i>Favour</i>, also mark off one of your relationship status boxes. The Keeper will bring <i>fate of your love</i> into play.')
+			.sheet-Divine
+				// Spirit-Touched
+				+translate('When you spend a point of <i>Favour</i>, either your patron spirit has an urgent and dangerous job for you, or one of its enemies comes after you.')
+			.sheet-Spooky
+				+translate('As you mark off <i>Favour</i> boxes, your dark side’s needs will get nastier.')
+			.sheet-Wronged
+				+translate('When you spend a point of <i>Favour</i>, you find a dangerous lead on your prey.')
+		.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
+			input.sheet-SkinCheck(type='hidden', name='attr_SkinCheck', value='0')
+			.sheet-Chosen
+				span.sheet-highlights(data-i18n='luck-special-chosen')
+					| When you spend 
+					i Luck
+					| , the Keeper will bring your fate into play.
+			.sheet-Crooked
+				span.sheet-highlights(data-i18n='luck-special-Crooked')
+					| When you spend 
+					i Luck
+					| , someone from your past will re-appear in your life. Soon.
+			.sheet-Divine
+				span.sheet-highlights(data-i18n='luck-special-divine')
+					| When you spend 
+					i Luck
+					| , you get word that your Mission requires something difficult that must be done. By you. Urgently.
+			.sheet-Expert
+				span.sheet-highlights(data-i18n='luck-special-expert')
+			.sheet-Initiate
+				span.sheet-highlights(data-i18n='luck-special-initiate')
+			.sheet-Monstrous
+				span.sheet-highlights(data-i18n='luck-special-monstrous')
+			.sheet-Mundane
+				span.sheet-highlights(data-i18n='luck-special-mundane')
+			.sheet-Spooky
+				span.sheet-highlights(data-i18n='luck-special-spooky')
+			.sheet-Wronged
+				span.sheet-highlights(data-i18n='luck-special-wronged')
+			.sheet-Pararomantic
+				span.sheet-highlights(data-i18n='luck-special-pararomantic')
 		.sheet-Flake
 			span.sheet-highlights(data-i18n='luck-special-flake')
-		.sheet-Initiate
-			span.sheet-highlights(data-i18n='luck-special-initiate')
-		.sheet-Monstrous
-			span.sheet-highlights(data-i18n='luck-special-monstrous')
-		.sheet-Mundane
-			span.sheet-highlights(data-i18n='luck-special-mundane')
 		.sheet-Professional
 			span.sheet-highlights(data-i18n='luck-special-professional')
 		.sheet-Spellslinger
 			span.sheet-highlights(data-i18n='luck-special-spellslinger')
-		.sheet-Spooky
-			span.sheet-highlights(data-i18n='luck-special-spooky')
-		.sheet-Wronged
-			span.sheet-highlights(data-i18n='luck-special-wronged')
 		.sheet-Gumshoe
 			span.sheet-highlights(data-i18n='luck-special-gumshoe')
 		.sheet-Hex
 			span.sheet-highlights(data-i18n='luck-special-hex')
-		.sheet-Pararomantic
-			span.sheet-highlights(data-i18n='luck-special-pararomantic')
 		.sheet-Searcher
 			span.sheet-highlights(data-i18n='luck-special-searcher')
 		.sheet-Exile

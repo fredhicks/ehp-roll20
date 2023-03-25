@@ -75,3 +75,34 @@ on("sheet:opened change:harm1 change:harm2 change:harm3 change:harm4 change:harm
 
 	});
 });
+
+on("change:repeating_comfolk:preload", function(e) {
+	log(e);
+	var example = {
+    "sourceAttribute": "repeating_comfolk_-nr4clqsrzvspkemmtq6_preload",
+    "sourceType": "player",
+    "triggerName": "repeating_comfolk_-nr4clqsrzvspkemmtq6_preload",
+    "previousValue": "---------------------------",
+    "newValue": "Resource Collector|Provides a common material for a single hunter’s crafting needs between mysteries.|Provides a common or uncommon material. Enough for two hunters’ crafting needs between mysteries.|Additionally provides one rare or special material (ivory, jade, obsidian, ebony, etc.). Pick the material when you gain this benefit."
+	}
+	var test = new RegExp('[|]');
+	// log(test.test(e.newValue));
+	if ( test.test(e.newValue) ) {
+		var atts = {};
+		var preload = e.sourceAttribute;
+		atts[e.sourceAttribute] = '';
+		var rowid = (e.sourceAttribute).slice(0,-7); // strips off 'preload';\
+		var loadtext = String(e.newValue);
+		var loadparts = loadtext.split("|");
+		atts[rowid+'specialty'] = loadparts[0];
+		atts[rowid+'benefit-standard'] = loadparts[1];
+		atts[rowid+'benefit-improved'] = loadparts[2];
+		atts[rowid+'benefit-special'] = loadparts[3];
+		log(loadparts);
+		setAttrs(atts);
+	} else if ( e.newValue !== "" ) {
+		var atts = {};
+		atts[e.sourceAttribute] = '';
+		setAttrs(atts);
+	}
+});

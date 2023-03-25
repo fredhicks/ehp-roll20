@@ -1,0 +1,97 @@
+- var maxrels = 10;
++expander('Community-Members','Members')
+	+expander('Community-Members-Edit','Edit')
+		fieldset.repeating_comfolk
+			.sheet-SubSubsection.sheet-space-above
+				input(type='hidden',name='attr_name')
+				span(name='attr_name')
+			.sheet-Label.sheet-space-above
+				+translate('Name')
+			input(type='text',name='attr_name')
+			.sheet-Label.sheet-space-above
+				+translate('Relationships')
+			.sheet-isolator
+				- var rels = 1;
+				while rels < maxrels+1
+					input(type='text',name='attr_rel-'+rels,value="")
+					input(type='hidden',name='attr_rel-'+rels,value="").sheet-null-hider
+					- rels++;
+			.sheet-Label.sheet-space-above
+				+translate('Specialty')
+			input(type='text',name='attr_specialty')
+			select(name="attr_preload")
+				+option('Quick load a specialty...','')
+				+option('---------------------------','skip')
+				+option('Ancient Spirit','Ancient Spirit|Once per mystery, a hunter may treat any roll as a 12 without rolling, as if they spent Ancestral Favour. When you do this, erase one support mark from an ancestral spirit’s support track (not necessarily this one).|Once per mystery, an additional hunter may treat any roll as a 12 without rolling, as if they spent Ancestral Favour. When you do this, erase one support mark from an ancestral spirit’s support track (not necessarily this one).|Two hunters each erase one used Ancestral Favour. Clear this spirit’s support track. You must refill the track to access this benefit again.')
+				+option('Animal','Animal|Twice per mystery, a hunter may take +1 forward on any move roll if the animal provides help.|Twice per mystery, a hunter may take +2 forward on any move roll if the animal provides help.|Additionally, pick a special move for the animal. It may use this as appropriate. For example, a bird might gain the move Scout from Above: The hunters may get an idea of the situation as seen from the air.')
+				+option('Crafter','Crafter|Once per mystery, provide a new item, or repair an item to its maximum wear.|Twice per mystery, provide an item, or repair an item to its maximum wear.|One per mystery for each hunter, provide an item, or repair an item to its maximum wear.')
+				+option('Food Gatherer/Hunter','Food Gatherer/Hunter|One hunter starts each mystery with a temporary harm box. This acts like an extra harm box in the first section until the end of the mystery.|An additional hunter starts each mystery with a temporary harm box. This acts like an extra harm box in the first section until the end of the mystery.|Additionally, once per mystery, one hunter may avoid a single instance of harm.')
+				+option('Healer or Herbalist','Healer or herbalist|Once per mystery, treat a hunter: stabilise their injury, or else recover 1-harm.|Twice per mystery, treat a hunter: stabilise their injury, or else recover 1-harm.|Additionally provides nursing for one harmed hunter: their endure harm rolls count as one result level better.')
+				+option('Lore-Keeper','Lore-Keeper|Once per mystery, a hunter may use investigate a mystery without rolling, as if they got 10+.|Once per mystery, an additional hunter may use investigate a mystery without rolling, as if they got 10+.|Additionally, once per mystery, the hunters may ask one specific question of the Keeper. Define it when you gain this benefit. For example: “Did any of our ancestors encounter this?”')
+				+option('Resource Collector','Resource Collector|Provides a common material for a single hunter’s crafting needs between mysteries.|Provides a common or uncommon material. Enough for two hunters’ crafting needs between mysteries.|Additionally provides one rare or special material (ivory, jade, obsidian, ebony, etc.). Pick the material when you gain this benefit.')
+				+option('Wild Spirit','Wild Spirit|Pick a use magic effect or a unique effect of the same power appropriate to the spirit. Once per mystery, a hunter may use that effect.|Use the effect twice per mystery instead.|When you gain this benefit, pick a specific magic effect appropriate to the spirit. The hunters may use this once, but then clear the spirit’s support track. You must refill the track to access this power again.')
+			div
+				b
+					+translate('Benefit')
+			textarea(name='attr_benefit-standard').sheet-compact
+			div
+				b
+					+translate('Improved Benefit')
+			textarea(name='attr_benefit-improved').sheet-compact
+			div
+				b
+					+translate('Special Benefit')
+			textarea(name='attr_benefit-special').sheet-compact
+	.sheet-fset-display-only
+		fieldset.repeating_comfolk
+			.sheet-SubSubsection.sheet-space-above
+				input(type='hidden',name='attr_name')
+				input(type='hidden',name='attr_specialty')
+				span(name='attr_name')
+				| &nbsp;(
+				span(name='attr_specialty')
+				| )
+			.sheet-Label
+				+translate('Relationships')
+			- var rels = 1;
+			while rels < maxrels+1
+				input(type='hidden',name='attr_rel-'+rels,value="").sheet-null-hider
+				.sheet-hanging-indent
+					| &#x2022&nbsp;
+					span(name='attr_rel-'+rels)
+				- rels++;
+			input(name='attr_benefit-standard',type='hidden')
+			input(name='attr_benefit-improved',type='hidden')
+			input(name='attr_benefit-specialty',type='hidden')
+			.sheet-Label.sheet-space-above
+				+translate('Hunter Support')
+			.sheet-Label.sheet-space-above
+				span.sheet-supportboxes
+					input(type='checkbox',name='attr_support-1').sheet-checkbox
+					span.sheet-altbox
+				| &nbsp;
+				+translate('Benefit')
+			div
+				span(name='attr_benefit-standard')
+			.sheet-Label.sheet-space-above
+				span.sheet-supportboxes
+					input(type='checkbox',name='attr_support-2').sheet-checkbox
+					span.sheet-altbox
+					input(type='checkbox',name='attr_support-3').sheet-checkbox
+					span.sheet-altbox
+				| &nbsp;
+				+translate('Improved Benefit')
+			div
+				span(name='attr_benefit-improved')
+			.sheet-Label.sheet-space-above
+				span.sheet-supportboxes
+					input(type='checkbox',name='attr_support-4').sheet-checkbox
+					span.sheet-altbox
+					input(type='checkbox',name='attr_support-5').sheet-checkbox
+					span.sheet-altbox
+					input(type='checkbox',name='attr_support-6').sheet-checkbox
+					span.sheet-altbox
+				| &nbsp;
+				+translate('Special Benefit')
+			div
+				span(name='attr_benefit-special')

@@ -2,7 +2,7 @@
 .sheet-Pararomantic
 	input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
 	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-GearUnused-Hider', value='1', checked='')
-	div
+	div.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 		b
 			span(data-i18n='pararomantic-equip') Normal Equipment
 		|  
@@ -17,7 +17,7 @@
 		span.sheet-grayable
 			span(data-i18n='pararomantic-gear1')
 				| Golf club, baseball bat, cricket bat, or hockey stick (2 harm, hand, innocuous, messy)
-	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 		input.sheet-checkbox(type='checkbox', name='attr_Pararomantic_gearchoice2')
 		span.sheet-mainbox
 		span.sheet-grayable
@@ -43,9 +43,14 @@
 		span.sheet-grayable
 			span(data-i18n='pararomantic-gear6') Motorcycle
 	+move('Gothic-Gear-Pararomantic','Sword cane (2-harm hand concealable)')(class="sheet-Setting-Gothic")
-	+move('Gothic-Gear-Pararomantic','A horse')(class="sheet-Setting-Gothic")
-	+move('Gothic-Gear-Pararomantic','A mule-drawn carriage')(class="sheet-Setting-Gothic")
-	+move('Gothic-Gear-Pararomantic','A boat')(class="sheet-Setting-Gothic")
+	+move('Gothic-Gear-Pararomantic','A horse')(class="sheet-Setting-Gothic sheet-Setting-Dreaming sheet-Setting-Marches")
+	+move('Gothic-Gear-Pararomantic','A mule-drawn carriage')(class="sheet-Setting-Gothic sheet-Setting-Dreaming sheet-Setting-Marches")
+	+move('Gothic-Gear-Pararomantic','A boat')(class="sheet-Setting-Gothic sheet-Setting-Dreaming sheet-Setting-Marches")
+	+move('Dreaming-Gear-Pararomantic','Ancient stiletto (1-harm intimate/hand small valuable)')(class="sheet-Setting-Dreaming")
+	+move('Dreaming-Gear-Pararomantic','Flintlock pistol (2-harm close reload loud)')(class="sheet-Setting-Dreaming")
+	+move('Marches-Gear-Pararomantic',"Shortbow (2-harm close concealable)").sheet-Setting-Marches
+	+move('Marches-Gear-Pararomantic',"Spear (2-harm hand/close)").sheet-Setting-Marches
+
 	.sheet-space-above
 		span(data-i18n='pararomantic-gift')
 			| Gift from your 
@@ -57,19 +62,19 @@
 			span(data-i18n='pick-one') pick one
 			| )
 		| :
-	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 		input.sheet-checkbox(type='checkbox', name='attr_Pararomantic_gearchoice7')
 		span.sheet-mainbox
 		span.sheet-grayable
 			span(data-i18n='pararomantic-gift1')
 				| Part of their body, eg. a vial of blood, lock of hair, tears in a phial, fairy dust, etc. It either helps you heal, or counts as a weakness against a specific kind of monster.
-	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 		input.sheet-checkbox(type='checkbox', name='attr_Pararomantic_gearchoice8')
 		span.sheet-mainbox
 		span.sheet-grayable
 			span(data-i18n='pararomantic-gift2')
 				| Piece of jewelry, eg. a golden ring, tribal pendant, silver locket, etc. It either provides armour (1 armour, magic) or protects you from the powers of a specific kind of monster.
-	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 		input.sheet-checkbox(type='checkbox', name='attr_Pararomantic_gearchoice9')
 		span.sheet-mainbox
 		span.sheet-grayable
@@ -79,13 +84,24 @@
 				|  rolls.
 			|  
 			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Bond Abuse}} {{Roll=[[2d6+?{Bond Abuse with|Charm (Default),@{Charm}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|1}]]}}', name='roll_bondabuse')
-	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 		input.sheet-checkbox(type='checkbox', name='attr_Pararomantic_gearchoice10')
 		span.sheet-mainbox
 		span.sheet-grayable
+			input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
 			span(data-i18n='pararomantic-gift4')
 				| A strange or antique weapon, eg. a family sword, ancient staff, holy mace (2 harm, hand, messy), etc. Additionally, add &apos;+magic&apos;, &apos;+silver&apos;, &apos;+holy&apos;, or &apos;+iron&apos; tag to the weapon.
-	+move('Gothic-Gear-Pararomantic','Family heirloom sword (2-harm hand precious)')(class="sheet-Setting-Gothic")
-	+move('Gothic-Gear-Pararomantic','Whipblade (2-harm hand/close messy)')(class="sheet-Setting-Gothic")
+			span.sheet-Setting-Gothic
+				|  
+				+translate('For <i>Gothic Century</i>, you may instead pick a family heirloom sword (2-harm hand precious) or whipblade (2-harm hand/close messy).')
+			span.sheet-Setting-Dreaming
+				|  
+				+translate('For <i>Dreaming With the Gods</i>, you may instead pick an ancient gladius (2-harm hand), ancient stiletto (1-harm intimate/hand small), dreamsteel rapier (2-harm hand balanced), or hunting clockhawk (2-harm close ignore-armour).')
+	// Bone spear stuff here
+	+move("Bone-Pararomantic-Gift","Part of their body, such as a vial of blood, lock of hair, tears in a phial, fairy dust. It either helps you heal or counts as a weakness against a specific sort of monster.").sheet-Setting-Bone
+	+move("Bone-Pararomantic-Gift","An amulet, from the rare gear list. It provides 1-armour magic.").sheet-Setting-Bone
+	+move("Bone-Pararomantic-Gift","An amulet, from the rare gear list. It protects you from the powers of a specific sort of monster.").sheet-Setting-Bone
+	+move("Bone-Pararomantic-Gift","A memento of the time when they were human, such as a portrait, favourite hat, doll, or tool. Provides +1 on bond abuse rolls.").sheet-Setting-Bone
+	+move("Bone-Pararomantic-Gift","A rare weapon, from the rare gear list. Add either a “magic” or “imbued” tag to the weapon.").sheet-Setting-Bone
 	div
 		textarea(name='attr_Gift-Pararomantic', rows='3', cols='40', placeholder='Describe the Gift')

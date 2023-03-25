@@ -1,0 +1,60 @@
+PENDING
+
+Make sure that the Game Options are available in outside-of-launched-game config options (sheet.json)
+
+Bone Spear:
+x Community support sheet (page 336+)
+x It also brings in some different basic moves (p.365-370),
+x Luck is now Ancestral Favour (p. 371) -- addressed in reference, but will need to be done for the sheet-itself
+	x Luck Specials
+	x Improvements
+	x Chosen: I'm Here For A Reason; Your Fate (special)
+	x Pararomantic: I Am Theirs And They Are Mine; Fate of your love (special)
+	x Spooky: The Dark Side (special)
+x And there are some new/different monster types and such (page 379+)
+x And new phenomenon types (page 382)
+x And new minion types (page 383)
+x Locations
+x Bystanders
+x This also means that atonement *mysteries* are redundant for bone spear — will need to remove the Standard-or-Atonement thing from the mystery edit at the top. 
+- Wear tracking for ALL gear — The idea that your gear can break down over time (playing to the stone age theme, p372-373). 
+	- This will include all playbook gear (see below)
+	x Wide-Purpose Everyday Gear list available to all playbooks (page 374)
+- For the PC playbooks there’s gear list modifications and move modifications (starts page 345)
+- and some other cosmetic alterations (there’s an overview list on page 334). 
+- In some cases a given playbook is so thoroughly reworked it is its own new thing (e.g., the Loner is a reworked Crooked that changes a ton, pp 348-351). 
+x Consider making the playbook names that changed (Crooked → Loner, Expert → Lore-Holder, Monstrous → Other-Folk, Divine → Spirit-Touched) show up as their new names in the drop-down and longform playbook selection screen. Might also want to asterisk or similar any playbook that is actually supported by Bone Spear. 
+	- Will also need to look for places the original name is mentioned, such as improvements. 
+
+
+DONE 
+
+Added Codex of Worlds world-setting selection to the game options.
+
+Support for Gothic Century, Monster Marches, and Dreaming With the Gods modifications to playbooks moves and gear as indicated by Codex of Worlds.
+
+Support for Gothic Century's Dark Pasts from Codex of Worlds, when Gothic Century is selected in game options on a sheet.
+
+Added list of special materials available for weapons to all character gear listings for games set in the Monster Marches.
+
+Changed the Mystery Sheet behavior for phenomena to provide a Tenacity tracker if desired (for Gothic Haunts as found in the Codex of Worlds, etc)
+
+Added support for the Villain threat type from Monster Marches to the Mystery Sheet.
+
+Added Dive into Dreams basic move support for Dreaming With the Gods setting from Codex of Worlds. Will show up in the hunter's reference when the Dreaming With the Gods setting is selected in game options.
+
+Added a "Mark of the Spirit-Touched" field to the character Look block which is activated only for Monster Marches.
+
+Fixed CSS for dark mode display of some annotations that appear on some rolltemplate outputs.
+
+
+
+GITHUB UPDATE for phase one (Team Playbooks)
+
+Major: Adding in support for using a character sheet for all of the Team Playbooks (you/the GM would make this visible and alterable by the playgroup, rather than one individual player; has enough complexity and persistence-need that it doesn’t make sense as a map object, so def squarely in the character sheet space) 
+
+Very minor: Adding support to the mystery/monster builder sheet for the new Atonement Mystery type — but that’s mainly “replace Monster Weakness with Sin or Wrongdoing [to be resolved]”
+
+Minor: Non-Lethal Play chapter is mainly guidelines for how to change your tempo on healing; page 23 does have a “Gear” section which is a list of stuff that the GM can “allow the players to swap for any of their existing gear picks”, so maybe a toggle for “provide non-lethal gear options” that makes those appear in any playbook’s pickable gear list.
+
+- NULL OPERATION: This Strange Old House is the smallest World in the Codex, and does not actually require any changes to how character playbooks work, so that’s potentially fruitful. The only particularly unusual asset with House is the exploration map, but that would best be handled as an in-module/on-VTT-table thing rather than any sheet integration being necessary.

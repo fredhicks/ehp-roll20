@@ -7,6 +7,7 @@ input.sheet-triggerbox.sheet-HavenRevealer(type='checkbox', name='attr_Imp-Haven
 	span.sheet-ExpHeader
 		span(data-i18n='all') All
 	.sheet-Expander
+		input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
 		input.sheet-SkinCheck(type='hidden', name='attr_SkinCheck', value='0')
 		|  
 		input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Expert-Haven-Unused', value='1', checked='')
@@ -49,7 +50,7 @@ input.sheet-triggerbox.sheet-HavenRevealer(type='checkbox', name='attr_Imp-Haven
 				| &nbsp;(
 				span(data-i18n='1-move') Then pick one of these
 				| )
-		.sheet-move
+		.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 			input.sheet-checkbox(type='checkbox', name='attr_Haven-Expert1')
 			span.sheet-mainbox
 			span.sheet-grayable
@@ -60,7 +61,7 @@ input.sheet-triggerbox.sheet-HavenRevealer(type='checkbox', name='attr_Imp-Haven
 					|  (as long as historical or reference works are appropriate).
 				button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Investigate a Mystery}} {{Roll=[[2d6+?{Investigate a Mystery with|Sharp (Default),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|1}]]}}', name='roll_iam-plusone')
 				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=haven1}}', data-i18n-title='send_details_to_chat')
-		.sheet-move
+		.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 			input.sheet-checkbox(type='checkbox', name='attr_Haven-Expert2')
 			span.sheet-mainbox
 			span.sheet-grayable
@@ -71,7 +72,7 @@ input.sheet-triggerbox.sheet-HavenRevealer(type='checkbox', name='attr_Imp-Haven
 					| .
 				button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Use Magic}} {{Roll=[[2d6+?{Use Magic with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|1}]]}}', name='roll_um-plusone')
 				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=haven2}}', data-i18n-title='send_details_to_chat')
-		.sheet-move
+		.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 			input.sheet-checkbox(type='checkbox', name='attr_Haven-Expert3')
 			span.sheet-mainbox
 			span.sheet-grayable
@@ -79,7 +80,7 @@ input.sheet-triggerbox.sheet-HavenRevealer(type='checkbox', name='attr_Imp-Haven
 					b Protection Spells
 					| : Your haven is safe from monsters - they cannot enter. Monsters might be able to do something special to evade the wards, but not easily.
 				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=haven3}}', data-i18n-title='send_details_to_chat')
-		.sheet-move
+		.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 			input.sheet-checkbox(type='checkbox', name='attr_Haven-Expert4')
 			span.sheet-mainbox
 			span.sheet-grayable
@@ -90,7 +91,7 @@ input.sheet-triggerbox.sheet-HavenRevealer(type='checkbox', name='attr_Imp-Haven
 					| , roll +Weird. On a 10+, you have it (and plenty, if that matters). On a 7-9, you have it, but only the minimum. On a miss, you&apos;ve got the wrong thing.
 				button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Armoury}} {{Roll=[[2d6+?{Armoury with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_armoury')
 				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=haven4}}', data-i18n-title='send_details_to_chat')
-		.sheet-move
+		.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 			input.sheet-checkbox(type='checkbox', name='attr_Haven-Expert5')
 			span.sheet-mainbox
 			span.sheet-grayable
@@ -98,15 +99,20 @@ input.sheet-triggerbox.sheet-HavenRevealer(type='checkbox', name='attr_Imp-Haven
 					b Infirmary
 					| : You can heal people, and have the space for one or two to recuperate. The Keeper will tell you how long any patient&apos;s recovery is likely to take, and if you need any extra supplies or help.
 				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=haven5}}', data-i18n-title='send_details_to_chat')
-		.sheet-move
+		.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 			input.sheet-checkbox(type='checkbox', name='attr_Haven-Expert6')
 			span.sheet-mainbox
 			span.sheet-grayable
-				span(data-i18n='haven6')
-					b Workshop
-					| : You have a space for building and repairing guns, cars, and other gadgets. Work out with the Keeper how long any repair or construction will take, and if you need extra supplies or help.
-				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=haven6}}', data-i18n-title='send_details_to_chat')
-		.sheet-move
+				input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+				span.sheet-Setting-Default.sheet-Setting-Gothic
+					span(data-i18n='haven6').sheet-Setting-Default.sheet-Setting-Gothic
+						b Workshop
+						| : You have a space for building and repairing guns, cars, and other gadgets. Work out with the Keeper how long any repair or construction will take, and if you need extra supplies or help.
+					button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=haven6}}', data-i18n-title='send_details_to_chat')
+				span.sheet-Setting-Dreaming
+					+translate('<b>Alchemical Workshop</b>: You have a space for working on alchemical contrivances. Work out with the Keeper how long any repair or construction will take, and if you need extra supplies or help.')
+					button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=<b>Alchemical Workshop</b>: You have a space for working on alchemical contrivances. Work out with the Keeper how long any repair or construction will take, and if you need extra supplies or help.}}', data-i18n-title='send_details_to_chat')
+		.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 			input.sheet-checkbox(type='checkbox', name='attr_Haven-Expert7')
 			span.sheet-mainbox
 			span.sheet-grayable
@@ -114,7 +120,7 @@ input.sheet-triggerbox.sheet-HavenRevealer(type='checkbox', name='attr_Imp-Haven
 					b Oubliette
 					| : This room is isolated from every kind of monster, spirit or magic that you know about. Anything you stash in there can&apos;t be found, can&apos;t do any magic, and can&apos;t get out.
 				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=haven7}}', data-i18n-title='send_details_to_chat')
-		.sheet-move
+		.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 			input.sheet-checkbox(type='checkbox', name='attr_Haven-Expert8')
 			span.sheet-mainbox
 			span.sheet-grayable
@@ -122,7 +128,7 @@ input.sheet-triggerbox.sheet-HavenRevealer(type='checkbox', name='attr_Imp-Haven
 					b Panic Room
 					| : This has essential supplies and is protected by normal and mystical means. You can hide out there for a few days, safe from pretty much anything.
 				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=haven8}}', data-i18n-title='send_details_to_chat')
-		.sheet-move
+		.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 			input.sheet-checkbox(type='checkbox', name='attr_Haven-Expert9')
 			span.sheet-mainbox
 			span.sheet-grayable
@@ -132,3 +138,15 @@ input.sheet-triggerbox.sheet-HavenRevealer(type='checkbox', name='attr_Imp-Haven
 					i use magic, big magic
 					| , and any other magical moves).
 				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=haven9}}', data-i18n-title='send_details_to_chat')
+		+move('Bone-Haven','<b>Armoury</b>: You have a stockpile of mystical and rare monster-killing weapons and items. If you need a special weapon, roll +Weird. On a 10+, you have it (and plenty if that matters). On a 7-9, you have it, but only the minimum. On a miss, you’ve got the wrong thing.',true).sheet-Setting-Bone 
+			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Armoury}} {{Roll=[[2d6+?{Armoury with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_armoury')
+		+move('Bone-Haven','<b>Selection of Amulets</b>: A collection of useful ritual items. If you use them in mystical preparation, take +1 forward to <i>use magic</i>.',true).sheet-Setting-Bone
+			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Use Magic}} {{Roll=[[2d6+?{Use Magic with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|1}]]}}', name='roll_um-plusone')
+		+move('Bone-Haven','<b>Herb Garden</b>: You have a garden that contains plenty of medicinal and mystically useful herbs. These may be used for magic requirements, healing moves, or crafting.',true).sheet-Setting-Bone
+		+move('Bone-Haven','<b>Hideout</b>: You have a place prepared with essential supplies and a variety of mundane and mystical protections. You can hide out there for a few days, safe from pretty much anything.',true).sheet-Setting-Bone
+		+move('Bone-Haven','<b>Infirmary</b>: You can heal people, and have the space for one or two to recuperate. The Keeper will tell you how long any patient’s recovery is likely to take, and if you need extra supplies or help.',true).sheet-Setting-Bone
+		+move('Bone-Haven','<b>Ritual Space</b>: You have an area of mystical power, with all kinds of weird ingredients and tools useful for casting spells (like the <i>use magic</i> move, <i>big magic</i>, and any other magical moves). You also have contacts with the shamans and lore-keepers who can help with rituals. This can be used to meet certain magical requirements.',true).sheet-Setting-Bone
+			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Use Magic}} {{Roll=[[2d6+?{Use Magic with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_um')
+		+move('Bone-Haven','<b>Oubliette</b>: You have a place prepared, isolated from every kind of monster, spirit, or magic that you know about. Anything you stash in there can’t be found, can’t do any magic, and can’t get out.',true).sheet-Setting-Bone
+		+move('Bone-Haven','<b>Protection Spells</b>: Your haven is safe from monsters—they can’t enter. Monsters might be able to do something special to evade the wards, but not easily.',true).sheet-Setting-Bone
+		+move('Bone-Haven','<b>Workshop</b>: You have a space for building and repairing gear. When you <i>craft</i> in your workshop, your creation has +1 maximum wear. If you want to do something more elaborate, work out with the Keeper how long it will take and if you need extra supplies or help.',true).sheet-Setting-Bone

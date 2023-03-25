@@ -76,6 +76,10 @@
 				span(data-i18n='professional-move7')
 			span.sheet-Setting-Gothic
 				+translate('<b>Mobility</b>: You have a carriage or train compartment built for monster hunting. Choose two good things and one bad thing about it.')
+			span.sheet-Setting-Dreaming
+				+translate('<b>Mobility</b>: You have a carriage or a ship built for monster hunting. Choose two good things and one bad thing about it.')
+			span.sheet-Setting-Marches
+				+translate('<b>Mobility</b>: You have a carriage built for monster hunting. Choose two good things and one bad thing about it.')
 			ul
 				li
 					span(data-i18n='professional-move7.1')
@@ -90,5 +94,9 @@
 						button.sheet-broadcast-button.sheet-Setting-Default(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=professional-move7}} {{key1=professional-move7.1}} {{key2=professional-move7.2}} {{coda=@{Mobility-Professional}}}', data-i18n-title='send_details_to_chat')
 					span.sheet-Setting-Gothic
 						+shareButton('<b>Mobility</b>: You have a carriage or train compartment built for monster hunting. Choose two good things and one bad thing about it.','{{key1=professional-move7.1}} {{key2=professional-move7.2}} {{coda=@{Mobility-Professional}}}')
+					span.sheet-Setting-Dreaming
+						+shareButton('<b>Mobility</b>: You have a carriage or a ship built for monster hunting. Choose two good things and one bad thing about it.','{{key1=professional-move7.1}} {{key2=professional-move7.2}} {{coda=@{Mobility-Professional}}}')
+					span.sheet-Setting-Marches
+						+shareButton('<b>Mobility</b>: You have a carriage built for monster hunting. Choose two good things and one bad thing about it.','{{key1=professional-move7.1}} {{key2=professional-move7.2}} {{coda=@{Mobility-Professional}}}')
 			textarea(name='attr_Mobility-Professional', rows='2', cols='40')
 // .sheet-Professional .sheet-OPB

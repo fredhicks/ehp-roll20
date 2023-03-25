@@ -2,7 +2,7 @@
 .sheet-Expert
 	input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
 	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-GearUnused-Hider', value='1', checked='')
-	div
+	.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 		b
 			span(data-i18n='expert-weapons') Monster-slaying Weapons
 		|  
@@ -11,18 +11,19 @@
 			span(data-i18n='pick-three') pick three
 			| )
 		| :
-
+	.sheet-Setting-Bone
+		+translate('Pick four of these monster hunting items:')
 	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic
 		input.sheet-checkbox(type='checkbox', name='attr_Expert_gear1', value='gear1')
 		span.sheet-mainbox
 		span.sheet-grayable
 			span(data-i18n='expert-gear1')
-	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming
 		input.sheet-checkbox(type='checkbox', name='attr_Expert_gear2', value='gear2')
 		span.sheet-mainbox
 		span.sheet-grayable
 			span(data-i18n='expert-gear2')
-	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming
 		input.sheet-checkbox(type='checkbox', name='attr_Expert_gear3', value='gear3')
 		span.sheet-mainbox
 		span.sheet-grayable
@@ -32,17 +33,17 @@
 		span.sheet-mainbox
 		span.sheet-grayable
 			span(data-i18n='expert-gear4')
-	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 		input.sheet-checkbox(type='checkbox', name='attr_Expert_gear5', value='gear5')
 		span.sheet-mainbox
 		span.sheet-grayable
 			span(data-i18n='expert-gear5')
-	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Marches
 		input.sheet-checkbox(type='checkbox', name='attr_Expert_gear6', value='gear6')
 		span.sheet-mainbox
 		span.sheet-grayable
 			span(data-i18n='expert-gear6')
-	.sheet-move.sheet-Setting-Default
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Dreaming
 		input.sheet-checkbox(type='checkbox', name='attr_Expert_gear7', value='gear7')
 		span.sheet-mainbox
 		span.sheet-grayable
@@ -62,3 +63,23 @@
 	+move('Gothic-Gear-Expert','Musket (3-harm close reload slow inaccurate)')(class="sheet-Setting-Gothic")
 	+move('Gothic-Gear-Expert','Prototype Flamethrower (3-harm close area volatile)')(class="sheet-Setting-Gothic")
 	+move('Gothic-Gear-Expert','Revolver (2-harm hand/close reload)')(class="sheet-Setting-Gothic")
+	+move('Dreaming-Gear-Expert','Alchemical vials (2-harm close magic many volatile)')(class="sheet-Setting-Dreaming")
+	+move('Dreaming-Gear-Expert','Ancient stiletto (1-harm intimate/hand small valuable)')(class="sheet-Setting-Dreaming")
+	+move('Dreaming-Gear-Expert','Dreamsteel rapier (2-harm hand balanced)')(class="sheet-Setting-Dreaming")
+	+move('Dreaming-Gear-Expert','Flintlock pistol (2-harm close reload loud)')(class="sheet-Setting-Dreaming")
+	+move('Marches-Gear-Expert',"Crossbow (2-harm close quick reload)").sheet-Setting-Marches
+	+move('Marches-Gear-Expert',"Prototype pistol (3-harm close reload ignore-armour volatile loud)").sheet-Setting-Marches
+	+move('Marches-Gear-Expert',"Prototype rifle (3-harm far reload ignore-armour volatile loud)").sheet-Setting-Marches
+	+move('Marches-Gear-Expert',"Spear (2-harm hand/close)").sheet-Setting-Marches
+	+move('Marches-Gear-Expert',"Sword (2-harm hand)").sheet-Setting-Marches
+	+bonegear('Bone-Gear-Expert','Hammer & ash stakes (2-wear 3-harm intimate slow wooden)',2).sheet-Setting-Bone
+	+bonegear('Bone-Gear-Expert','Hammered sky-iron dagger (5-wear 1-harm hand messy iron)',5).sheet-Setting-Bone
+	+bonegear('Bone-Gear-Expert','Blessed flint knife (3-wear 1-harm hand sacred)',3).sheet-Setting-Bone
+	+bonegear('Bone-Gear-Expert','Magical obsidian dagger (3-wear 1-harm hand magic)',3).sheet-Setting-Bone
+	+bonegear('Bone-Gear-Expert','Curse bag (2-wear 1-harm far magic)',2).sheet-Setting-Bone
+	+bonegear('Bone-Gear-Expert','Demon mask (2-wear magic disguise)',2).sheet-Setting-Bone
+	+bonegear('Bone-Gear-Expert','Enchanted drum (4-wear 1-harm magic loud)',4).sheet-Setting-Bone
+	+bonegear('Bone-Gear-Expert','Bag of seeds (2-wear distracting)',2).sheet-Setting-Bone
+	div.sheet-Setting-Marches
+		i
+			+translate("For the Expert, all of these may be made of special materials from the Marches (see below).")

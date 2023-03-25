@@ -6,6 +6,8 @@
 		span(data-i18n='searcher-gear-base') A laptop, a camera, and binoculars, plus:
 	div.sheet-Setting-Gothic
 		+translate('A notebook and a looking-glass, plus:')
+	div.sheet-Setting-Dreaming
+		+translate('You get one of:')
 	.sheet-move.sheet-Setting-Default
 		input.sheet-checkbox(type='checkbox', name='attr_Searcher_gearbase1')
 		span.sheet-mainbox
@@ -18,6 +20,10 @@
 			span(data-i18n='searcher-gear-base2') A motorcycle
 	+move('Gothic-Gear-Searcher','A horse and a carriage').sheet-Setting-Gothic
 	+move('Gothic-Gear-Searcher','A small ship').sheet-Setting-Gothic
+	+move('Dreaming-Gear-Searcher','A horse').sheet-Setting-Dreaming
+	+move('Dreaming-Gear-Searcher','A small ship').sheet-Setting-Dreaming
+	+move('Marches-Gear-Searcher','A horse').sheet-Setting-Marches
+	+move('Marches-Gear-Searcher','A small ship').sheet-Setting-Marches
 	.sheet-space-above.sheet-Setting-Default
 		b
 			span(data-i18n='searcher-tools') Investigation Tools
@@ -27,8 +33,10 @@
 			span(data-i18n='pick-two') pick two
 			| )
 		| :
-	.sheet-space-above.sheet-Setting-Gothic
+	.sheet-space-above.sheet-Setting-Gothic.sheet-Setting-Dreaming
 		+translate('<b>Investigator Tools</b> <i>(pick three)</i>:')
+	.sheet-space-above.sheet-Setting-Marches
+		+translate('<b>Research Tools</b> <i>(pick three)</i>:')
 	.sheet-move.sheet-Setting-Default
 		input.sheet-checkbox(type='checkbox', name='attr_Searcher_gearchoice1')
 		span.sheet-mainbox
@@ -74,6 +82,22 @@
 	+move('Gothic-Gear-Searcher','Garlic').sheet-Setting-Gothic
 	+move('Gothic-Gear-Searcher','A small mirror').sheet-Setting-Gothic
 	+move('Gothic-Gear-Searcher','Holy symbols of various religions').sheet-Setting-Gothic
+	+move('Dreaming-Gear-Searcher','Alchemical analysis set').sheet-Setting-Dreaming
+	+move('Dreaming-Gear-Searcher','Ancient bestiary').sheet-Setting-Dreaming
+	+move('Dreaming-Gear-Searcher','Dream-catcher').sheet-Setting-Dreaming
+	+move('Dreaming-Gear-Searcher','Dream diary').sheet-Setting-Dreaming
+	+move('Dreaming-Gear-Searcher','Spyglass').sheet-Setting-Dreaming
+	+move('Dreaming-Gear-Searcher','Historical documents and witness reports of strange events').sheet-Setting-Dreaming
+	+move('Dreaming-Gear-Searcher','Maps, blueprints, and building reports for significant places').sheet-Setting-Dreaming
+	+move('Marches-Gear-Searcher','a book of spirits').sheet-Setting-Marches
+	+move('Marches-Gear-Searcher','spiritbane herbs').sheet-Setting-Marches
+	+move('Marches-Gear-Searcher','list of the Principality’s army symbols and banners').sheet-Setting-Marches
+	+move('Marches-Gear-Searcher','a forged recommendation from a Principality official').sheet-Setting-Marches
+	+move('Marches-Gear-Searcher','a trap for catching (1-harm hand restraining if sprung)').sheet-Setting-Marches
+	+move('Marches-Gear-Searcher','a trap for hurting (3-harm close messy if sprung)').sheet-Setting-Marches
+	+move('Marches-Gear-Searcher','a crude map of the entire Marches').sheet-Setting-Marches
+	+move('Marches-Gear-Searcher','a detailed map of key spirits’ domains').sheet-Setting-Marches
+	+move('Marches-Gear-Searcher','spyglass').sheet-Setting-Marches
 	.sheet-space-above
 		b
 			span(data-i18n='searcher-weapon') Self-defence Weapons
@@ -83,7 +107,7 @@
 			span(data-i18n='pick-one') pick one
 			| )
 		| :
-	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 		input.sheet-checkbox(type='checkbox', name='attr_Searcher_gearchoice8')
 		span.sheet-mainbox
 		span.sheet-grayable
@@ -93,12 +117,12 @@
 		span.sheet-mainbox
 		span.sheet-grayable
 			span(data-i18n='searcher-gear9') Small handgun (2 harm, close, reload, loud)
-	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 		input.sheet-checkbox(type='checkbox', name='attr_Searcher_gearchoice10')
 		span.sheet-mainbox
 		span.sheet-grayable
 			span(data-i18n='searcher-gear10') Small knife (1 harm, hand, messy)
-	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 		input.sheet-checkbox(type='checkbox', name='attr_Searcher_gearchoice11')
 		span.sheet-mainbox
 		span.sheet-grayable
@@ -115,3 +139,7 @@
 			span(data-i18n='searcher-gear13') Heavy flashlight (1 harm, hand, innocuous)
 	+move('Gothic-Gear-Searcher','Small revolver (1-harm hand/close reload concealable)')(class="sheet-Setting-Gothic")
 	+move('Gothic-Gear-Searcher','Sword cane (2-harm hand concealable)')(class="sheet-Setting-Gothic")
+	+move('Dreaming-Gear-Searcher','Ancient stiletto (1-harm intimate/hand small valuable)')(class="sheet-Setting-Dreaming")
+	+move('Dreaming-Gear-Searcher','Flintlock pistol (2-harm close reload loud)')(class="sheet-Setting-Dreaming")
+	+move('Marches-Gear-Searcher',"Crossbow (2-harm close quick reload)").sheet-Setting-Marches
+	+move('Marches-Gear-Searcher',"Spear (2-harm hand/close)").sheet-Setting-Marches

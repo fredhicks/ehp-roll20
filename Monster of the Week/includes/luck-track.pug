@@ -1,0 +1,47 @@
+.sheet-Luck
+	input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+	.sheet-Subsection.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
+		span(data-i18n='luck') Luck
+	.sheet-Subsection.sheet-Setting-Bone
+		+translate('Ancestral Favour')
+	p(align='center')
+		b.sheet-statelabel
+			span(data-i18n='okay') Okay
+		input.sheet-checkbox(type='checkbox', name='attr_Luck1')
+		span.sheet-altbox
+		input.sheet-checkbox(type='checkbox', name='attr_Luck2')
+		span.sheet-altbox
+		input.sheet-checkbox(type='checkbox', name='attr_Luck3')
+		span.sheet-altbox
+		input.sheet-checkbox(type='checkbox', name='attr_Luck4')
+		span.sheet-altbox
+		input.sheet-checkbox(type='checkbox', name='attr_Luck5')
+		span.sheet-altbox
+		input.sheet-checkbox(type='checkbox', name='attr_Luck6')
+		span.sheet-altbox
+		// Pop in an extra box when the Searcher has the appropriate move
+		input.sheet-triggerbox(type='checkbox', name='attr_Moves-Searcher1D', value='1')
+		input.sheet-checkbox(type='checkbox', name='attr_Extra-Luck-Searcher')
+		span.sheet-altbox
+		// Final box is always Luck7 box in case we want to tie behavior to it
+		input.sheet-checkbox(type='checkbox', name='attr_Luck7')
+		span.sheet-altbox
+		b.sheet-statelabel
+			span(data-i18n='doomed') Doomed
+	input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Luck-Instructions', value='1', checked='')
+	span.sheet-anglebox
+	|  
+	span.sheet-ExpHeader
+		span(data-i18n='instructions') Instructions
+	.sheet-Expander
+		input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+		.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
+			p
+				span(data-i18n='luck-description')
+					| Mark 
+					i Luck
+					|  to change a roll to a 12 or to avoid all harm from an injury
+				| .&nbsp;
+				span(data-i18n='trigger-luck-special') When you mark Luck, you trigger your playbook&apos;s Luck Special.
+		.sheet-Setting-Bone
+			+translate('<p>Mark <i>Ancestral Favour</i>  to change a roll to a 12 or to avoid all harm from an injury. When you mark Favour, you trigger your playbook&apos;s Favour Special.<p>Ancestral Favour replaces Luck in Bone Spear. Anything else that would normally apply to Luck (such as an improvement that erases a Luck mark or a move referring to Luck) applies the same to Ancestral Favour.')

@@ -43,7 +43,7 @@ mixin translations
 		translation.json:
 		!{contents}
 
-mixin move(toggle,text,share)
+mixin move(toggle,text,share,checked)
 	- 
 		if ( typeof(toggle) == "undefined" ) { toggle = 'ERROR'; }
 		toggle = 'attr_' + toggle;
@@ -51,9 +51,22 @@ mixin move(toggle,text,share)
 		toggles[toggle] = toggles[toggle] + 1;
 		toggle = toggle + toggles[toggle];
 		if ( typeof(text) == "undefined" ) { text = 'NO TEXT'; }
-		if ( typeof(share) == "undefined" ) { share = false; } else { share = true; }
+		if ( typeof(share) == "undefined" ) { 
+			share = false; } 
+		else {
+			if ( share !== false ) {
+				share = true; 
+			}
+		}
+		if ( typeof(checked) == "undefined" ) { 
+			checked = false; } 
+		else {
+			if ( checked !== false ) {
+				checked = true;  
+			}
+		}
 	.sheet-move&attributes(attributes)
-		input.sheet-checkbox(type='checkbox', name=toggle)
+		input.sheet-checkbox(type='checkbox', name=toggle, checked=checked)
 		span.sheet-mainbox
 		span.sheet-grayable
 			+translate(text)
@@ -61,6 +74,27 @@ mixin move(toggle,text,share)
 				block
 			if share
 				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey='+text.replace(/<[^>]*>/g,'')+'}}', data-i18n-title='send_details_to_chat')
+
+mixin bonegear(toggle,text,wear)
+	- 
+		if ( typeof(toggle) == "undefined" ) { toggle = 'ERROR'; }
+		toggle = 'attr_' + toggle;
+		if ( typeof(toggles[toggle]) == "undefined" ) { toggles[toggle] = 0; }
+		toggles[toggle] = toggles[toggle] + 1;
+		toggle = toggle + toggles[toggle];
+		var weartrack = toggle + '-Wear' + toggles[toggle];
+		if ( typeof(text) == "undefined" ) { text = 'NO TEXT'; }
+		if ( typeof(wear) == "undefined" ) { wear = 0; }
+	.sheet-move&attributes(attributes)
+		input.sheet-checkbox(type='checkbox', name=toggle)
+		span.sheet-mainbox
+		span.sheet-grayable
+			+translate(text)
+			br
+			+translate('<i>Current wear:</i>')
+			input(type='number', min=0, value=wear, name=weartrack)
+			if block
+				block
 
 mixin asset(toggle,text,boxes,share,checked)
 	- 
@@ -93,6 +127,17 @@ mixin asset(toggle,text,boxes,share,checked)
 			if share == true
 				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey='+text.replace(/<[^>]*>/g,'')+'}}', data-i18n-title='send_details_to_chat')
 
+mixin expander(tag,name)
+	div
+		input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-'+tag, value='1', checked='')
+		span.sheet-anglebox
+		span.sheet-ExpHeader
+			if name
+				+translate(name)
+		.sheet-Expander
+			if block
+				block
+
 mixin expanderMoveSection(tag)
 	input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-'+tag+'-All', value='1', checked='')
 	span.sheet-anglebox
@@ -116,17 +161,6 @@ mixin expanderInstructions(tag)
 			if block
 				block
 				
-mixin expander(tag,name)
-	div
-		input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-'+tag, value='1', checked='')
-		span.sheet-anglebox
-		span.sheet-ExpHeader
-			if name
-				+translate(name)
-		.sheet-Expander
-			if block
-				block
-
 mixin otherTeamPlaybooksHeader(tag)
 	input.sheet-triggerbox.sheet-UnusedToggle(type='checkbox', name='attr_Toggle-Team-Moves-Unused', value='1', checked='')
 	input.sheet-triggerbox.sheet-OPBToggle(type='checkbox', name='attr_Toggle-Other-Team-Playbooks', value='1')

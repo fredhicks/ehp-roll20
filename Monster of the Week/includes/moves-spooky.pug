@@ -4,26 +4,21 @@
 	i
 		span(data-i18n='3-moves') Pick three of these
 	| :
-input.sheet-triggerbox(type='checkbox', name='attr_Imp-MysticLibrary')
-.sheet-move.sheet-triggerframe
-	input.sheet-checkbox(type='checkbox', name='attr_Haven-Spooky', checked='')
-	span.sheet-mainbox
-	span.sheet-grayable
-		span(data-i18n='haven2')
-			b Mystical Library
-			| : If you use your library&apos;s occult tomes and grimoires to prepare yourself, take +1 forward to 
-			i use magic
-			| .
-		button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Use Magic}} {{Roll=[[2d6+?{Use Magic with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|1}]]}}', name='roll_um-plusone')
-		button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=haven2}}', data-i18n-title='send_details_to_chat')
 .sheet-Spooky.sheet-OPB
 	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-MovesUnused', value='1', checked='')
 	.sheet-move
 		input.sheet-checkbox(type='checkbox', name='attr_Moves-Spooky1')
 		span.sheet-mainbox
 		span.sheet-grayable
-			span(data-i18n='spooky-move1')
-			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=spooky-move1}}', data-i18n-title='send_details_to_chat')
+			// "<b>Telepathy</b>: You can read people's thoughts and put words in their mind. This can allow you to <i>investigate a mystery</i> and <i>read a bad situation</i> without needing to actually talk. You can also <i>manipulate someone</i> without speaking. You roll moves as normal, except people will not expect the weirdness of your mental communication."
+			input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+			span.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
+				span(data-i18n='spooky-move1')
+				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=spooky-move1}}', data-i18n-title='send_details_to_chat')
+			span.sheet-Setting-Bone
+				+translate("<b>Telepathy</b>: You can read people’s thoughts and put words in their mind. This can allow you to <i>investigate a mystery</i> and <i>read a bad situation</i> without needing to actually talk. You can also <i>persuade</i> and <i>intimidate</i> without speaking. You roll moves as normal, except people will not expect the weirdness of your mental communication.")
+				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=<b>Telepathy</b>: You can read people’s thoughts and put words in their mind. This can allow you to <i>investigate a mystery</i> and <i>read a bad situation</i> without needing to actually talk. You can also <i>persuade</i> and <i>intimidate</i> without speaking. You roll moves as normal, except people will not expect the weirdness of your mental communication.}}', data-i18n-title='send_details_to_chat')
+
 	.sheet-move
 		input.sheet-checkbox(type='checkbox', name='attr_Moves-Spooky2')
 		span.sheet-mainbox
@@ -43,9 +38,17 @@ input.sheet-triggerbox(type='checkbox', name='attr_Imp-MysticLibrary')
 		input.sheet-checkbox(type='checkbox', name='attr_Moves-Spooky3')
 		span.sheet-mainbox
 		span.sheet-grayable
-			span(data-i18n='spooky-move3')
+			input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+			span.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
+				// "<b>The Sight</b>: You can see the invisible, especially spirits and magical influences. You may communicate with (and maybe even make deals with) the spirits you see; and they give you more opportunities to spot clues when you <i>investigate a mystery</i>."
+				span(data-i18n='spooky-move3')
+			span.sheet-Setting-Bone
+				+translate("<b>The Sight</b>: You can see the invisible, especially spirits and magical influences. You may communicate with (and maybe even make deals with) the spirits you see; and they give you more opportunities to spot clues when you <i>investigate a mystery</i>. Additionally—each session—you get +1 forward when interacting with spirits or the spirit world.")
 			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Investigate a Mystery}} {{Roll=[[2d6+?{Investigate a Mystery with|Sharp (Default),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_iam')
-			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=spooky-move3}}', data-i18n-title='send_details_to_chat')
+			span.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
+				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=spooky-move3}}', data-i18n-title='send_details_to_chat')
+			span.sheet-Setting-Bone
+				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=<b>The Sight</b>: You can see the invisible, especially spirits and magical influences. You may communicate with (and maybe even make deals with) the spirits you see; and they give you more opportunities to spot clues when you <i>investigate a mystery</i>. Additionally—each session—you get +1 forward when interacting with spirits or the spirit world.}}', data-i18n-title='send_details_to_chat')
 	.sheet-move
 		input.sheet-checkbox(type='checkbox', name='attr_Moves-Spooky4')
 		span.sheet-mainbox

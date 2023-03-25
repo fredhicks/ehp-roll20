@@ -1,167 +1,232 @@
 input.sheet-triggerbox.sheet-SectRevealer(type='checkbox', name='attr_Imp-Sect')
 .sheet-Initiate.sheet-Sect
+	input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
 	.sheet-Subsection
 		span(data-i18n='your-sect') Sect
-	input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Initiate-Sect-All', value='1', checked='')
-	span.sheet-anglebox
-	span.sheet-ExpHeader
-		span(data-i18n='all') All
-	.sheet-Expander
-		span(data-i18n='sect-description')
-			| You are part of a secret order that deals with the paranormal. Where are they from? How old are they? Are they religious? Why do they stay secret? How do they recruit?
-		textarea(name='attr_SectChoice-Initiate', rows='8', cols='40')
-		br
-		input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Initiate-Sect-Unused', value='1', checked='')
+	.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
+		input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Initiate-Sect-All', value='1', checked='')
 		span.sheet-anglebox
 		span.sheet-ExpHeader
-			span(data-i18n='unused') Unused
-		.sheet-MinorHead(data-i18n='sect-traditions') Sect&apos;s Traditions
-		b
-			span(data-i18n='good-traditions') Good Traditions
-		|  
-		i
-			| &nbsp;(
-			span(data-i18n='pick-two') pick two
-			| )
-		| :
-		.sheet-move
-			input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate1')
-			span.sheet-mainbox
-			span.sheet-grayable
-				span(data-i18n='good-tradition1') Knowledgeable
-		.sheet-move
-			input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate2')
-			span.sheet-mainbox
-			span.sheet-grayable
-				span(data-i18n='good-tradition2') Ancient lore
-		.sheet-move
-			input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate3')
-			span.sheet-mainbox
-			span.sheet-grayable
-				span(data-i18n='good-tradition3') Magical lore
-		.sheet-move
-			input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate4')
-			span.sheet-mainbox
-			span.sheet-grayable
-				span(data-i18n='good-tradition4') Fighting arts
-		.sheet-move
-			input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate5')
-			span.sheet-mainbox
-			span.sheet-grayable
-				span(data-i18n='good-tradition5') Modernised
-		.sheet-move
-			input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate6')
-			span.sheet-mainbox
-			span.sheet-grayable
-				span(data-i18n='good-tradition6') Chapters everywhere
-		.sheet-move
-			input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate7')
-			span.sheet-mainbox
-			span.sheet-grayable
-				span(data-i18n='good-tradition7') Secular power
-		.sheet-move
-			input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate8')
-			span.sheet-mainbox
-			span.sheet-grayable
-				span(data-i18n='good-tradition8') Flexible tactics
-		.sheet-move
-			input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate9')
-			span.sheet-mainbox
-			span.sheet-grayable
-				span(data-i18n='good-tradition9') Open hierarchy
-		.sheet-move
-			input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate10')
-			span.sheet-mainbox
-			span.sheet-grayable
-				span(data-i18n='good-tradition10') Integrated in society
-		.sheet-move
-			input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate11')
-			span.sheet-mainbox
-			span.sheet-grayable
-				span(data-i18n='good-tradition11') Rich
-		input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
-		.sheet-move.sheet-Setting-Default
-			input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate12')
-			span.sheet-mainbox
-			span.sheet-grayable
-				span(data-i18n='good-tradition12')
-		.sheet-move.sheet-Setting-Gothic
-			input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate12')
-			span.sheet-mainbox
-			span.sheet-grayable
-				+translate('Scientifical gadgets')
-		.sheet-move
-			input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate13')
-			span.sheet-mainbox
-			span.sheet-grayable
-				span(data-i18n='good-tradition13') Magical items
-		b
-			span(data-i18n='bad-traditions') Bad Traditions
-		|  
-		i
-			| &nbsp;(
-			span(data-i18n='pick-one') pick one
-			| )
-		| :
-		.sheet-move
-			input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate14')
-			span.sheet-mainbox
-			span.sheet-grayable
-				span(data-i18n='bad-tradition1') Dubious motives
-		.sheet-move
-			input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate15')
-			span.sheet-mainbox
-			span.sheet-grayable
-				span(data-i18n='bad-tradition2') Tradition-bound
-		.sheet-move
-			input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate16')
-			span.sheet-mainbox
-			span.sheet-grayable
-				span(data-i18n='bad-tradition3') Short-sighted
-		.sheet-move
-			input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate17')
-			span.sheet-mainbox
-			span.sheet-grayable
-				span(data-i18n='bad-tradition4') Paranoid and secretive
-		.sheet-move
-			input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate18')
-			span.sheet-mainbox
-			span.sheet-grayable
-				span(data-i18n='bad-tradition5') Closed hierarchy
-		.sheet-move
-			input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate19')
-			span.sheet-mainbox
-			span.sheet-grayable
-				span(data-i18n='bad-tradition6') Factionalised
-		.sheet-move
-			input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate20')
-			span.sheet-mainbox
-			span.sheet-grayable
-				span(data-i18n='bad-tradition7') Strict laws
-		.sheet-move
-			input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate21')
-			span.sheet-mainbox
-			span.sheet-grayable
-				span(data-i18n='bad-tradition8') Mystical oaths
-		.sheet-move
-			input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate22')
-			span.sheet-mainbox
-			span.sheet-grayable
-				span(data-i18n='bad-tradition9') Total obedience
-		.sheet-move
-			input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate23')
-			span.sheet-mainbox
-			span.sheet-grayable
-				span(data-i18n='bad-tradition10') Tyrannical leaders
-		.sheet-move
-			input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate24')
-			span.sheet-mainbox
-			span.sheet-grayable
-				span(data-i18n='bad-tradition11') Obsolete gear
-		.sheet-move
-			input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate25')
-			span.sheet-mainbox
-			span.sheet-grayable
-				span(data-i18n='bad-tradition12') Poor
-				|  
-				br
+			span(data-i18n='all') All
+		.sheet-Expander
+			span(data-i18n='sect-description')
+				| You are part of a secret order that deals with the paranormal. Where are they from? How old are they? Are they religious? Why do they stay secret? How do they recruit?
+			textarea(name='attr_SectChoice-Initiate', rows='8', cols='40')
+			br
+			input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Initiate-Sect-Unused', value='1', checked='')
+			span.sheet-anglebox
+			span.sheet-ExpHeader
+				span(data-i18n='unused') Unused
+			.sheet-MinorHead(data-i18n='sect-traditions') Sect&apos;s Traditions
+			b
+				span(data-i18n='good-traditions') Good Traditions
+			|  
+			i
+				| &nbsp;(
+				span(data-i18n='pick-two') pick two
+				| )
+			| :
+			.sheet-move
+				input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate1')
+				span.sheet-mainbox
+				span.sheet-grayable
+					span(data-i18n='good-tradition1') Knowledgeable
+			.sheet-move
+				input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate2')
+				span.sheet-mainbox
+				span.sheet-grayable
+					span(data-i18n='good-tradition2') Ancient lore
+			.sheet-move
+				input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate3')
+				span.sheet-mainbox
+				span.sheet-grayable
+					span(data-i18n='good-tradition3') Magical lore
+			.sheet-move
+				input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate4')
+				span.sheet-mainbox
+				span.sheet-grayable
+					span(data-i18n='good-tradition4') Fighting arts
+			.sheet-move
+				input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate5')
+				span.sheet-mainbox
+				span.sheet-grayable
+					span(data-i18n='good-tradition5') Modernised
+			.sheet-move
+				input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate6')
+				span.sheet-mainbox
+				span.sheet-grayable
+					span(data-i18n='good-tradition6') Chapters everywhere
+			.sheet-move
+				input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate7')
+				span.sheet-mainbox
+				span.sheet-grayable
+					span(data-i18n='good-tradition7') Secular power
+			.sheet-move
+				input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate8')
+				span.sheet-mainbox
+				span.sheet-grayable
+					span(data-i18n='good-tradition8') Flexible tactics
+			.sheet-move
+				input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate9')
+				span.sheet-mainbox
+				span.sheet-grayable
+					span(data-i18n='good-tradition9') Open hierarchy
+			.sheet-move
+				input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate10')
+				span.sheet-mainbox
+				span.sheet-grayable
+					span(data-i18n='good-tradition10') Integrated in society
+			.sheet-move
+				input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate11')
+				span.sheet-mainbox
+				span.sheet-grayable
+					span(data-i18n='good-tradition11') Rich
+			input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+			.sheet-move.sheet-Setting-Default
+				input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate12')
+				span.sheet-mainbox
+				span.sheet-grayable
+					span(data-i18n='good-tradition12')
+			.sheet-move.sheet-Setting-Gothic
+				input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate12')
+				span.sheet-mainbox
+				span.sheet-grayable
+					+translate('Scientifical gadgets')
+			.sheet-move.sheet-Setting-Dreaming
+				input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate12')
+				span.sheet-mainbox
+				span.sheet-grayable
+					+translate('State-of-the-art alchemy')
+			.sheet-move.sheet-Setting-Marches
+				input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate12')
+				span.sheet-mainbox
+				span.sheet-grayable
+					+translate('Industrial marvels')
+			.sheet-move
+				input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate13')
+				span.sheet-mainbox
+				span.sheet-grayable
+					span(data-i18n='good-tradition13') Magical items
+			b
+				span(data-i18n='bad-traditions') Bad Traditions
+			|  
+			i
+				| &nbsp;(
+				span(data-i18n='pick-one') pick one
+				| )
+			| :
+			.sheet-move
+				input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate14')
+				span.sheet-mainbox
+				span.sheet-grayable
+					span(data-i18n='bad-tradition1') Dubious motives
+			.sheet-move
+				input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate15')
+				span.sheet-mainbox
+				span.sheet-grayable
+					span(data-i18n='bad-tradition2') Tradition-bound
+			.sheet-move
+				input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate16')
+				span.sheet-mainbox
+				span.sheet-grayable
+					span(data-i18n='bad-tradition3') Short-sighted
+			.sheet-move
+				input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate17')
+				span.sheet-mainbox
+				span.sheet-grayable
+					span(data-i18n='bad-tradition4') Paranoid and secretive
+			.sheet-move
+				input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate18')
+				span.sheet-mainbox
+				span.sheet-grayable
+					span(data-i18n='bad-tradition5') Closed hierarchy
+			.sheet-move
+				input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate19')
+				span.sheet-mainbox
+				span.sheet-grayable
+					span(data-i18n='bad-tradition6') Factionalised
+			.sheet-move
+				input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate20')
+				span.sheet-mainbox
+				span.sheet-grayable
+					span(data-i18n='bad-tradition7') Strict laws
+			.sheet-move
+				input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate21')
+				span.sheet-mainbox
+				span.sheet-grayable
+					span(data-i18n='bad-tradition8') Mystical oaths
+			.sheet-move
+				input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate22')
+				span.sheet-mainbox
+				span.sheet-grayable
+					span(data-i18n='bad-tradition9') Total obedience
+			.sheet-move
+				input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate23')
+				span.sheet-mainbox
+				span.sheet-grayable
+					span(data-i18n='bad-tradition10') Tyrannical leaders
+			.sheet-move
+				input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate24')
+				span.sheet-mainbox
+				span.sheet-grayable
+					span(data-i18n='bad-tradition11') Obsolete gear
+			.sheet-move
+				input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate25')
+				span.sheet-mainbox
+				span.sheet-grayable
+					span(data-i18n='bad-tradition12') Poor
+					|  
+					br
+	.sheet-Setting-Bone
+		input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Initiate-Sect-All', value='1', checked='')
+		span.sheet-anglebox
+		span.sheet-ExpHeader
+			span(data-i18n='all') All
+		.sheet-Expander
+			+translate('You are part of an ancient order that slays monsters. Is it a community society, or a widespread order? How old are they? What are your ritual responsibilities? How do they recruit?')
+			textarea(name='attr_SectChoice-Initiate', rows='8', cols='40')
+			br
+			input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Initiate-Sect-Unused', value='1', checked='')
+			span.sheet-anglebox
+			span.sheet-ExpHeader
+				span(data-i18n='unused') Unused
+			.sheet-MinorHead(data-i18n='sect-traditions') Sect&apos;s Traditions
+			b
+				span(data-i18n='good-traditions') Good Traditions
+			|  
+			i
+				| &nbsp;(
+				span(data-i18n='pick-two') pick two
+				| )
+			| :
+			+move("Initiate-Bone-Tradition","Knowledgeable")
+			+move("Initiate-Bone-Tradition","Ancient lore")
+			+move("Initiate-Bone-Tradition","Magical lore")
+			+move("Initiate-Bone-Tradition","Fighting arts")
+			+move("Initiate-Bone-Tradition","Chapters everywhere")
+			+move("Initiate-Bone-Tradition","Respected")
+			+move("Initiate-Bone-Tradition","Flexible tactics")
+			+move("Initiate-Bone-Tradition","Open hierarchy")
+			+move("Initiate-Bone-Tradition","Integrated in society")
+			+move("Initiate-Bone-Tradition","Rich")
+			+move("Initiate-Bone-Tradition","Nifty gear")
+			+move("Initiate-Bone-Tradition","Magical items")
+			b
+				span(data-i18n='bad-traditions') Bad Traditions
+			|  
+			i
+				| &nbsp;(
+				span(data-i18n='pick-one') pick one
+				| )
+			| :
+			+move("Initiate-Bone-Tradition","Dubious motives")
+			+move("Initiate-Bone-Tradition","Tradition-bound")
+			+move("Initiate-Bone-Tradition","Short-sighted")
+			+move("Initiate-Bone-Tradition","Paranoid and secretive")
+			+move("Initiate-Bone-Tradition","Closed hierarchy")
+			+move("Initiate-Bone-Tradition","Factionalised")
+			+move("Initiate-Bone-Tradition","Strict laws")
+			+move("Initiate-Bone-Tradition","Mystical oaths")
+			+move("Initiate-Bone-Tradition","Total obedience")
+			+move("Initiate-Bone-Tradition","Tyrannical leaders")
+			+move("Initiate-Bone-Tradition","Poor")

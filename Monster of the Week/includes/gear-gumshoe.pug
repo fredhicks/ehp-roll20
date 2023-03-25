@@ -5,6 +5,7 @@
 		input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
 		span(data-i18n='Gumshoe-gear-base').sheet-Setting-Default
 		+translate('You get a flask of wine, brandy, ale, or vodka; a notebook; two espionage tools; and one handy weapon.').sheet-Setting-Gothic
+		+translate('You get a flask of wine or rum, three espionage tools, and one handy weapon.').sheet-Setting-Dreaming
 	input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
 	div.sheet-Setting-Default
 		input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-GearUnused-Hider', value='1', checked='')
@@ -78,18 +79,57 @@
 		+move('Gothic-Gumshoe-Gear','invisible ink')
 		+move('Gothic-Gumshoe-Gear','well-crafted disguise (can be chosen multiple times if you want multiple disguises)')
 			input(type='text', name="attr_Gothic-Gumshoe-Disguises")
+	div.sheet-Setting-Dreaming
+		input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-GearUnused-Hider', value='1', checked='')
+		.sheet-space-above
+			b
+				+translate('Espionage Tools')
+			|  
+			i
+				| &nbsp;(
+				+translate('pick three')
+				| )
+			| :
+		+move('Dreaming-Gumshoe-Gear','climbing claws')
+		+move('Dreaming-Gumshoe-Gear','dictionary of thieves’ codes')
+		+move('Dreaming-Gumshoe-Gear','durable rope')
+		+move('Dreaming-Gumshoe-Gear','false Dream Alchemists’ seal')
+		+move('Dreaming-Gumshoe-Gear','false Queen’s seal')
+		+move('Dreaming-Gumshoe-Gear','invisible ink')
+		+move('Dreaming-Gumshoe-Gear','perfect map of Hermessia')
+		+move('Dreaming-Gumshoe-Gear','well-crafted disguise (can be chosen multiple times if you want multiple disguises)')
+			input(type='text', name="attr_Dreaming-Gumshoe-Disguises")
+	div.sheet-Setting-Marches
+		input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-GearUnused-Hider', value='1', checked='')
+		.sheet-space-above
+			b
+				+translate('Espionage Tools')
+			|  
+			i
+				| &nbsp;
+				+translate('(pick three)')
+			| :
+		+move('Marches-Gumshoe-Gear','climbing claws')
+		+move('Marches-Gumshoe-Gear','a crude map of the entire Marches')
+		+move('Marches-Gumshoe-Gear','a detailed map of key spirits’ domains')
+		+move('Marches-Gumshoe-Gear','<i>big magic</i> ritual useful for gaining info')
+		+move('Marches-Gumshoe-Gear','Durable rope')
+		+move('Marches-Gumshoe-Gear','False Queen’s seal')
+		+move('Marches-Gumshoe-Gear','Invisible ink')
+		+move('Marches-Gumshoe-Gear','well-crafted disguise (can be chosen multiple times if you want multiple disguises)')
+			input(type='text', name="attr_Dreaming-Gumshoe-Disguises")
 	.sheet-space-above
 		b
 			input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
 			span(data-i18n='Gumshoe-weapon').sheet-Setting-Default
-			+translate('Handy Weapons').sheet-Setting-Gothic
+			+translate('Handy Weapons').sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 		|  
 		i
 			| &nbsp;(
 			span(data-i18n='pick-one') pick one
 			| )
 		| :
-	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 		input.sheet-checkbox(type='checkbox', name='attr_Gumshoe_gearchoice9')
 		span.sheet-mainbox
 		span.sheet-grayable
@@ -114,7 +154,7 @@
 		span.sheet-mainbox
 		span.sheet-grayable
 			span(data-i18n='Gumshoe-gear13') Shotgun (3 harm, close, messy, loud)
-	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 		input.sheet-checkbox(type='checkbox', name='attr_Gumshoe_gearchoice14')
 		span.sheet-mainbox
 		span.sheet-grayable
@@ -123,3 +163,11 @@
 	+move('Gothic-Gear-Gumshoe','Small revolver (1-harm hand/close reload concealable)')(class="sheet-Setting-Gothic")
 	+move('Gothic-Gear-Gumshoe','Sword cane (2-harm hand concealable)')(class="sheet-Setting-Gothic")
 	+move('Gothic-Gear-Gumshoe','Whipblade (2-harm hand/close messy)')(class="sheet-Setting-Gothic")
+	+move('Dreaming-Gear-Gumshoe','Dreamsteel rapier (2-harm hand balanced)')(class="sheet-Setting-Dreaming")
+	+move('Dreaming-Gear-Gumshoe','Flintlock pistol (2-harm close reload loud)')(class="sheet-Setting-Dreaming")
+	+move('Dreaming-Gear-Gumshoe','Repeating crossbow (2-harm close quick)')(class="sheet-Setting-Dreaming")
+	+move('Dreaming-Gear-Gumshoe','Whipblade (2-harm hand/close messy)')(class="sheet-Setting-Dreaming")
+	+move('Marches-Gear-Gumshoe',"Dagger (1-harm hand/close hidden)").sheet-Setting-Marches
+	+move('Marches-Gear-Gumshoe',"Prototype pistol (3-harm close reload ignore-armour volatile loud)").sheet-Setting-Marches
+	+move('Marches-Gear-Gumshoe',"Repeating crossbow (2-harm close quick reload unreliable)").sheet-Setting-Marches
+	+move('Marches-Gear-Gumshoe',"Shortbow (2-harm close concealable)").sheet-Setting-Marches

@@ -74,13 +74,19 @@
 		input.sheet-checkbox(type='checkbox', name='attr_Moves-Pararomantic2')
 		span.sheet-mainbox
 		span.sheet-grayable
-			span(data-i18n='pararomantic-move2')
-				b Dark Desires
-				| : You may use 
-				i manipulate someone
-				|  on monsters, as long as you are using emotional ties.
-			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Manipulate Someone}} {{Roll=[[2d6+?{Manipulate Someone with|Charm (Default),@{Charm}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_ms')
-			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=pararomantic-move2}}', data-i18n-title='send_details_to_chat')
+			input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+			span.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
+				span(data-i18n='pararomantic-move2')
+					b Dark Desires
+					| : You may use 
+					i manipulate someone
+					|  on monsters, as long as you are using emotional ties.
+				button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Manipulate Someone}} {{Roll=[[2d6+?{Manipulate Someone with|Charm (Default),@{Charm}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_ms')
+				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=pararomantic-move2}}', data-i18n-title='send_details_to_chat')
+			span.sheet-Setting-Bone
+				+translate('<b>Dark Desires</b>: When you <i>persuade</i> a non-human using emotional ties, take +1 forward.')
+				button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Persuade}} {{Roll=[[2d6+?{Persuade with|Charm (Default),@{Charm}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|1}]]}}', name='roll_Persuade-plus-one')
+				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=<b>Dark Desires</b>: When you <i>persuade</i> a non-human using emotional ties, take +1 forward.}}', data-i18n-title='send_details_to_chat')
 	.sheet-move
 		input.sheet-checkbox(type='checkbox', name='attr_Moves-Pararomantic3')
 		span.sheet-mainbox
@@ -110,22 +116,27 @@
 		input.sheet-checkbox(type='checkbox', name='attr_Moves-Pararomantic5')
 		span.sheet-mainbox
 		span.sheet-grayable
-			span(data-i18n='pararomantic-move5')
-				b I Am Theirs And They Are Mine
-				| : Whenever you are in danger, your 
-				i Guide
-				|  knows it. If your 
-				i Guide
-				|  is suffering harm (and it&apos;s feasible), you can spend 
-				i Luck
-				|  to redirect the attack onto yourself as if you have rolled 10+ with 
-				i protect someone
-				| . If you are suffering harm, you can decide that your 
-				i Guide
-				|  has protected you and is suffering this harm instead. If you choose this, roll for 
-				i Bond Abuse
-				| .
-			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=pararomantic-move5}}', data-i18n-title='send_details_to_chat')
+			input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+			span.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
+				span(data-i18n='pararomantic-move5')
+					b I Am Theirs And They Are Mine
+					| : Whenever you are in danger, your 
+					i Guide
+					|  knows it. If your 
+					i Guide
+					|  is suffering harm (and it&apos;s feasible), you can spend 
+					i Luck
+					|  to redirect the attack onto yourself as if you have rolled 10+ with 
+					i protect someone
+					| . If you are suffering harm, you can decide that your 
+					i Guide
+					|  has protected you and is suffering this harm instead. If you choose this, roll for 
+					i Bond Abuse
+					| .
+				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=pararomantic-move5}}', data-i18n-title='send_details_to_chat')
+			span.sheet-Setting-Bone
+				+translate('<b>I Am Theirs And They Are Mine</b>: Whenever you are in danger, your <i>Guide</i> knows it. If your <i>Guide</i> is suffering harm (and it’s feasible), you can spend a point of <i>Favour</i> to redirect the attack onto yourself as if you have rolled 10+ with <i>protect someone</i>. If you are suffering harm, you can decide that your <i>Guide</i> has protected you and is suffering this harm instead. If you choose this, roll for <i>bond abuse</i>.')
+				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=<b>I Am Theirs And They Are Mine</b>: Whenever you are in danger, your <i>Guide</i> knows it. If your <i>Guide</i> is suffering harm (and it’s feasible), you can spend a point of <i>Favour</i> to redirect the attack onto yourself as if you have rolled 10+ with <i>protect someone</i>. If you are suffering harm, you can decide that your <i>Guide</i> has protected you and is suffering this harm instead. If you choose this, roll for <i>bond abuse</i>.}}', data-i18n-title='send_details_to_chat')
 	.sheet-move
 		input.sheet-checkbox(type='checkbox', name='attr_Moves-Pararomantic6')
 		span.sheet-mainbox

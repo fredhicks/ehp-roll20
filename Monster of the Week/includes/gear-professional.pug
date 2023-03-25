@@ -23,6 +23,10 @@
 			span(data-i18n='professional-gear2') Combat armour (2 armour, heavy)
 	+move('Gothic-Professional-Gear','Heavy Cloak (1 armour, hidden)').sheet-Setting-Gothic
 	+move('Gothic-Professional-Gear','Medieval Armour (2 armour, heavy)').sheet-Setting-Gothic
+	+move('Dreaming-Professional-Gear','Reinforced Vest (1 armour, hidden)').sheet-Setting-Dreaming
+	+move('Dreaming-Professional-Gear','Alchemical Armour (2 armour, heavy)').sheet-Setting-Dreaming
+	+move('Marches-Professional-Gear','Thin Leather Armour (1 armour, hidden)').sheet-Setting-Marches
+	+move('Marches-Professional-Gear','Heavy Chainmail (2 armour, heavy)').sheet-Setting-Marches
 	.sheet-space-above
 		b
 			span(data-i18n='professional-serious-weapon') Serious Weapons
@@ -61,15 +65,24 @@
 	+move('Gothic-Gear-Professional','Prototype Flamethrower (3-harm close area volatile)')(class="sheet-Setting-Gothic")
 	+move('Gothic-Gear-Professional','Rifle (3-harm close/far reload slow)')(class="sheet-Setting-Gothic")
 	+move('Gothic-Gear-Professional','Lever rifle (3-harm close/far reload)')(class="sheet-Setting-Gothic")
+	+move('Dreaming-Gear-Professional','Alchemical vials (2-harm close magic many volatile)')(class="sheet-Setting-Dreaming")
+	+move('Dreaming-Gear-Professional','Clockwork rifle (3-harm close reload)')(class="sheet-Setting-Dreaming")
+	+move('Dreaming-Gear-Professional','Handcannon (3-harm close/far reload loud messy)')(class="sheet-Setting-Dreaming")
+	+move('Marches-Gear-Professional',"Big sword (3-harm hand messy)").sheet-Setting-Marches
+	+move('Marches-Gear-Professional',"Halberd (3-harm hand/close messy slow)").sheet-Setting-Marches
+	+move('Marches-Gear-Professional',"Longbow (2-harm far)").sheet-Setting-Marches
+	+move('Marches-Gear-Professional',"Prototype rifle (3-harm far reload ignore-armour volatile loud)").sheet-Setting-Marches
+	+move('Marches-Gear-Professional',"Repeating crossbow (2-harm close quick reload unreliable)").sheet-Setting-Marches
 
-	b
-		span(data-i18n='professional-normal-weapon') Normal Weapons
-	|  
-	i
-		| &nbsp;(
-		span(data-i18n='pick-two') pick two
-		| )
-	| :
+	.sheet-space-above
+		b
+			span(data-i18n='professional-normal-weapon') Normal Weapons
+		|  
+		i
+			| &nbsp;(
+			span(data-i18n='pick-two') pick two
+			| )
+		| :
 	.sheet-move.sheet-Setting-Default
 		input.sheet-checkbox(type='checkbox', name='attr_Professional_normalgearchoice1')
 		span.sheet-mainbox
@@ -90,7 +103,7 @@
 		span.sheet-mainbox
 		span.sheet-grayable
 			span(data-i18n='professional-gear11') Shotgun (3 harm, close, messy)
-	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 		input.sheet-checkbox(type='checkbox', name='attr_Professional_normalgearchoice5')
 		span.sheet-mainbox
 		span.sheet-grayable
@@ -98,3 +111,13 @@
 	+move('Gothic-Gear-Professional','Revolver (2-harm hand/close reload)')(class="sheet-Setting-Gothic")
 	+move('Gothic-Gear-Professional','Steam pressure rifle (3-harm close reload)')(class="sheet-Setting-Gothic")
 	+move('Gothic-Gear-Professional','Whipblade (2-harm hand/close messy)')(class="sheet-Setting-Gothic")
+	+move('Dreaming-Gear-Professional','Dreamsteel rapier (2-harm hand balanced)')(class="sheet-Setting-Dreaming")
+	+move('Dreaming-Gear-Professional','Flintlock pistol (2-harm close reload loud)')(class="sheet-Setting-Dreaming")
+	+move('Dreaming-Gear-Professional','Hunting clockhawk (2-harm close ignore-armour)')(class="sheet-Setting-Dreaming")
+	+move('Dreaming-Gear-Professional','Repeating crossbow (2-harm close quick)')(class="sheet-Setting-Dreaming")
+	+move('Dreaming-Gear-Professional','Whipblade (2-harm hand/close messy)')(class="sheet-Setting-Dreaming")
+	+move('Marches-Gear-Professional',"Axe (2-harm hand messy)").sheet-Setting-Marches
+	+move('Marches-Gear-Professional',"Shortbow (2-harm close concealable)").sheet-Setting-Marches
+	+move('Marches-Gear-Professional',"Spear (2-harm hand/close)").sheet-Setting-Marches
+	+move('Marches-Gear-Professional',"Sword (2-harm hand)").sheet-Setting-Marches
+	+move('Marches-Gear-Professional',"Prototype pistol (3-harm close reload ignore-armour volatile loud)").sheet-Setting-Marches

@@ -1,12 +1,87 @@
 .sheet-Null(name='sheet-Null')
+	input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
 	.sheet-Subsection(data-i18n='pick-book') Pick Your Playbook
 	div(data-i18n='pick-book-desc')
 		b Pick your playbook using the menu in the upper right corner
 		|  or the buttons in the lists below.
 		i
 			| Once you pick a playbook, starting stats options are found at the bottom of the first main column (not including the stats column).
+	.sheet-Setting-Bone
+		.sheet-Subsection
+			+translate('Bone Spear Playbooks')
+		.sheet-move
+			input(type='radio', name='attr_SkinName', value='1')
+			|  
+			b
+				span(data-i18n='the-chosen') The Chosen
+				| :
+			|  
+			span(data-i18n='chosen-desc')
+				| a once-ordinary person who discovered they have a special destiny, and who has been given the power to accomplish it. The Chosen is good in a fight, with some weird powers. E.g. Buffy from Buffy the Vampire Slayer.
+		.sheet-move
+			input(type='radio', name='attr_SkinName', value='6')
+			|  
+			b
+				span(data-i18n='the-initiate') The Initiate
+				| :
+			|  
+			span(data-i18n='initiate-desc')
+				| a member of an ancient monster-slaying Sect, trained to fight and use magic. The Initiate is good with magic, and their Sect provides help (and sometimes problems). E.g. The Wardens from The Dresden Files; Annelise from the Twenty Palaces series.
+		.sheet-move
+			input(type='radio', name='attr_SkinName', value='2')
+			|  
+			+translate('<b>The Loner:</b> This is a reworked version of the Crooked, someone no longer welcome in the community proper due to their background. The community hasn’t completely cast them out, but they’re viewed with suspicion.')
+		.sheet-move
+			input(type='radio', name='attr_SkinName', value='4')
+			|  
+			+translate('<b>The Lore-Holder:</b> The Lore-holder is the Stone Age version of the Expert.')
+		.sheet-move
+			input(type='radio', name='attr_SkinName', value='8')
+			|  
+			b
+				span(data-i18n='the-mundane') The Mundane
+				| :
+			|  
+			span(data-i18n='mundane-desc')
+				| just a normal regular person, especially good at dealing with regular people you meet and have to save, and at getting captured by monsters (which can be more useful than you might expect). E.g. Xander or Cordelia from Buffy the Vampire Slayer.
+		.sheet-move
+			input(type='radio', name='attr_SkinName', value='7')
+			|  
+			+translate('<b>The Other-Folk:</b> This replaces the Monstrous playbook and has a variety of options to add a Stone Age feel.')
+		.sheet-move
+			input(type='radio', name='attr_SkinName', value='3')
+			|  
+			+translate('<b>The Spirit-Touched:</b> This is a reworking of the Divine. In this setting, the Spirit-Touched is a person who has been imbued with great power by a spirit. You may have sought this out, or it may have been imposed on you. Either way, you have made a deal that you can’t get out of now.')
+		.sheet-move
+			input(type='radio', name='attr_SkinName', value='11')
+			|  
+			b
+				span(data-i18n='the-spooky') The Spooky
+				| :
+			|  
+			span(data-i18n='spooky-desc')
+				| has psychic or magical powers. These powers are strange and sinister ... and not completely under the Spooky&apos;s control. E.g. Sam Winchester from Supernatural; Willow from earlier seasons of Buffy the Vampire Slayer.
+		.sheet-move
+			input(type='radio', name='attr_SkinName', value='12')
+			|  
+			b
+				span(data-i18n='the-wronged') The Wronged
+				| :
+			|  
+			span(data-i18n='wronged-desc')
+				| revenge-driven, and really tough. The Wronged is all about killing a specific breed of monster and protecting others as you do it. E.g. Dean and John Winchester from Supernatural
+		.sheet-move
+			input(type='radio', name='attr_SkinName', value='15')
+			|  
+			b
+				span(data-i18n='the-pararomantic') The Pararomantic
+				| :
+			|  
+			span(data-i18n='pararomantic-desc')
+				| A hunter with a loving&mdash;but difficult&mdash;relationship with a supernatural being. Understands monsters&apos; intentions and can earn their trust, but puts their own heart, and even mortality, at risk. E.g. Elena Gilbert from The Vampire Diaries, Belle from Beauty and the Beast.
+
 	.sheet-Subsection(data-i18n='motw-books') Monster of the Week Hardcover Edition Playbooks
-	.sheet-move
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 		input(type='radio', name='attr_SkinName', value='1')
 		|  
 		b
@@ -15,7 +90,8 @@
 		|  
 		span(data-i18n='chosen-desc')
 			| a once-ordinary person who discovered they have a special destiny, and who has been given the power to accomplish it. The Chosen is good in a fight, with some weird powers. E.g. Buffy from Buffy the Vampire Slayer.
-	.sheet-move
+		input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 		input(type='radio', name='attr_SkinName', value='2')
 		|  
 		b
@@ -24,7 +100,8 @@
 		|  
 		span(data-i18n='crooked-desc')
 			| a criminal turned monster hunter, haunted by their past and enemies. The Crooked is good in social situations and has a lot of contacts. E.g. Anna Valmont from The Dresden Files, Peter Bishop from Fringe.
-	.sheet-move
+		input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 		input(type='radio', name='attr_SkinName', value='3')
 		|  
 		b
@@ -33,7 +110,8 @@
 		|  
 		span(data-i18n='divine-desc')
 			| an agent of a higher power, with a mission to fulfill. The Divine is very tough and has been granted holy powers. E.g. Castiel from Supernatural; Michael Carpenter from The Dresden Files.
-	.sheet-move
+		input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 		input(type='radio', name='attr_SkinName', value='4')
 		|  
 		b
@@ -42,6 +120,7 @@
 		|  
 		span(data-i18n='expert-desc')
 			| the hunter who knows all about monsters and magic. The Expert knows a lot of hidden secrets and how to find out more, and also has a well-supplied base to work from. E.g. Bobby Singer from Supernatural; Rupert Giles from Buffy the Vampire Slayer.
+		input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
 	.sheet-move
 		input(type='radio', name='attr_SkinName', value='5')
 		|  
@@ -51,7 +130,7 @@
 		|  
 		span(data-i18n='flake-desc')
 			| a conspiracy theorist. The Flake is great at finding things out and seeing how the events of separate mysteries are connected. E.g. Agent Mulder or the Lone Gunmen from The X-Files.
-	.sheet-move
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 		input(type='radio', name='attr_SkinName', value='6')
 		|  
 		b
@@ -60,7 +139,7 @@
 		|  
 		span(data-i18n='initiate-desc')
 			| a member of an ancient monster-slaying Sect, trained to fight and use magic. The Initiate is good with magic, and their Sect provides help (and sometimes problems). E.g. The Wardens from The Dresden Files; Annelise from the Twenty Palaces series.
-	.sheet-move
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 		input(type='radio', name='attr_SkinName', value='7')
 		|  
 		b
@@ -69,7 +148,7 @@
 		|  
 		span(data-i18n='monstrous-desc')
 			| a monster fighting for the good guys. The Monstrous is very weird, and can have a variety of different powers based on what monster breed they are. E.g. Angel from Buffy the Vampire Slayer and Angel; Bill Compton from True Blood.
-	.sheet-move
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 		input(type='radio', name='attr_SkinName', value='8')
 		|  
 		b
@@ -114,7 +193,7 @@
 		|  
 		span(data-i18n='spooktacular-desc')
 			| A carnival worker with a history of supernatural entertainments as part of a travelling show . E.g. Carnivale.
-	.sheet-move
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 		input(type='radio', name='attr_SkinName', value='11')
 		|  
 		b
@@ -123,7 +202,7 @@
 		|  
 		span(data-i18n='spooky-desc')
 			| has psychic or magical powers. These powers are strange and sinister ... and not completely under the Spooky&apos;s control. E.g. Sam Winchester from Supernatural; Willow from earlier seasons of Buffy the Vampire Slayer.
-	.sheet-move
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 		input(type='radio', name='attr_SkinName', value='12')
 		|  
 		b
@@ -151,7 +230,7 @@
 		|  
 		span(data-i18n='hex-desc')
 			| A witch motivated by the pursuit of forbidden power, using magic more readily&mdash;and more recklessly&mdash;than other hunters. E.g. Willow during season six of Buffy the Vampire Slayer.
-	.sheet-move
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 		input(type='radio', name='attr_SkinName', value='15')
 		|  
 		b
@@ -284,4 +363,10 @@
 		|  
 		b
 			span(data-i18n='keeper-sheet') Keeper&apos;s Mystery Sheet 
+	.sheet-Subsection(data-i18n='community-tracker') Community Tracker
+	.sheet-move
+		input(type='radio', name='attr_SkinName', value='-3')
+		|  
+		b
+			span(data-i18n='community-tracker') Community Tracker 
 // End Null

@@ -2,7 +2,7 @@
 .sheet-Monstrous
 	input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
 	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-GearUnused-Hider', value='1', checked='')
-	div
+	div.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 		b
 			span(data-i18n='monstrous-weapon') (Optional) Handy Weapon
 		|  
@@ -31,22 +31,22 @@
 		span.sheet-mainbox
 		span.sheet-grayable
 			span(data-i18n='monstrous-gear4') Shotgun (3 harm, close, messy)
-	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 		input.sheet-checkbox(type='checkbox', name='attr_Monstrous_gearchoice5')
 		span.sheet-mainbox
 		span.sheet-grayable
 			span(data-i18n='monstrous-gear5') Big knife (1 harm, hand)
-	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 		input.sheet-checkbox(type='checkbox', name='attr_Monstrous_gearchoice6')
 		span.sheet-mainbox
 		span.sheet-grayable
 			span(data-i18n='monstrous-gear6') Brass knuckles (1 harm, hand, quiet, small)
-	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming
 		input.sheet-checkbox(type='checkbox', name='attr_Monstrous_gearchoice7')
 		span.sheet-mainbox
 		span.sheet-grayable
 			span(data-i18n='monstrous-gear7') Sword (2 harm, hand, messy)
-	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 		input.sheet-checkbox(type='checkbox', name='attr_Monstrous_gearchoice8')
 		span.sheet-mainbox
 		span.sheet-grayable
@@ -54,3 +54,9 @@
 	+move('Gothic-Gear-Monstrous','Revolver (2-harm hand/close reload)')(class="sheet-Setting-Gothic")
 	+move('Gothic-Gear-Monstrous','Steam pressure rifle (3-harm close reload)')(class="sheet-Setting-Gothic")
 	+move('Gothic-Gear-Monstrous','Whipblade (2-harm hand/close messy)')(class="sheet-Setting-Gothic")
+	+move('Dreaming-Gear-Monstrous','Clockwork rifle (3-harm close reload)')(class="sheet-Setting-Dreaming")
+	+move('Dreaming-Gear-Monstrous','Flintlock pistol (2-harm close reload loud)')(class="sheet-Setting-Dreaming")
+	+move('Dreaming-Gear-Monstrous','Whipblade (2-harm hand/close messy)')(class="sheet-Setting-Dreaming")
+	+move('Marches-Gear-Monstrous',"Crossbow (2-harm close quick reload)").sheet-Setting-Marches
+	+move('Marches-Gear-Monstrous',"Halberd (3-harm hand/close messy slow)").sheet-Setting-Marches
+	+move('Marches-Gear-Monstrous',"Sword (2-harm hand)").sheet-Setting-Marches

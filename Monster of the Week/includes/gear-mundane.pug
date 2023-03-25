@@ -2,7 +2,7 @@
 .sheet-Mundane
 	input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
 	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-GearUnused-Hider', value='1', checked='')
-	div
+	div.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 		b
 			span(data-i18n='mundane-weapon') Mundane Weapons
 		|  
@@ -17,7 +17,7 @@
 		span.sheet-grayable
 			span(data-i18n='mundane-gear1')
 				| Golf club, baseball bat, cricket bat, or hockey stick (2 harm, hand, innocuous, messy)
-	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 		input.sheet-checkbox(type='checkbox', name='attr_Mundane_gearchoice2')
 		span.sheet-mainbox
 		span.sheet-grayable
@@ -32,7 +32,7 @@
 		span.sheet-mainbox
 		span.sheet-grayable
 			span(data-i18n='mundane-gear4') Hunting rifle (3 harm, far, loud, reload)
-	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 		input.sheet-checkbox(type='checkbox', name='attr_Mundane_gearchoice5')
 		span.sheet-mainbox
 		span.sheet-grayable
@@ -43,8 +43,17 @@
 		span.sheet-grayable
 			span(data-i18n='mundane-gear6') Nunchuks (2 harm, hand, area)
 	+move('Gothic-Gear-Mundane','Wrench (2-harm hand inconspicuous)')(class="sheet-Setting-Gothic")
+	+move('Dreaming-Gear-Mundane','Clockwork rifle (3-harm close reload)')(class="sheet-Setting-Dreaming")
+	+move('Dreaming-Gear-Mundane','Flintlock pistol (2-harm close reload loud)')(class="sheet-Setting-Dreaming")
+	+move('Dreaming-Gear-Mundane','Repeating crossbow (2-harm close quick)')(class="sheet-Setting-Dreaming")
+	+move('Marches-Gear-Mundane',"Axe (2-harm hand messy)").sheet-Setting-Marches
+	+move('Marches-Gear-Mundane',"Dagger (1-harm hand/close hidden)").sheet-Setting-Marches
+	+move('Marches-Gear-Mundane',"Crossbow (2-harm close quick reload)").sheet-Setting-Marches
+	+move('Marches-Gear-Mundane',"Spear (2-harm hand/close)").sheet-Setting-Marches
+	.sheet-Setting-Marches.sheet-space-above
+			+translate('<b>Normal Person:</b> If you wish, your Mundane doesn’t need to be a Spirit-Touched. However, if they’re not, they don’t choose special materials for their weapons.')
 
-	.sheet-space-above
+	.sheet-space-above.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 		b
 			span(data-i18n='mundane-transport') Means of Transport
 		|  
@@ -83,8 +92,22 @@
 		span.sheet-mainbox
 		span.sheet-grayable
 			span(data-i18n='mundane-gear12') Van
-	+move('Gothic-Mundane-Vehicle','a fast horse')
-	+move('Gothic-Mundane-Vehicle','an average horse and carriage')
-	+move('Gothic-Mundane-Vehicle','a boat')
-	+move('Gothic-Mundane-Vehicle','friends who can procure railway tickets')
-	+move('Gothic-Mundane-Vehicle','friends who can procure ship tickets')
+	+move('Gothic-Mundane-Vehicle','a fast horse')(class='sheet-Setting-Gothic sheet-Setting-Marches')
+	+move('Gothic-Mundane-Vehicle','an average horse and carriage')(class='sheet-Setting-Gothic sheet-Setting-Marches')
+	+move('Gothic-Mundane-Vehicle','a boat')(class='sheet-Setting-Gothic')
+	+move('Gothic-Mundane-Vehicle','friends who can procure railway tickets')(class='sheet-Setting-Gothic')
+	+move('Gothic-Mundane-Vehicle','friends who can procure ship tickets')(class='sheet-Setting-Gothic')
+	+move('Dreaming-Mundane-Vehicle','a fast horse')(class='sheet-Setting-Dreaming')
+	+move('Dreaming-Mundane-Vehicle','an average horse and carriage')(class='sheet-Setting-Dreaming')
+	+move('Dreaming-Mundane-Vehicle','a boat')(class='sheet-Setting-Dreaming')
+	+move('Dreaming-Mundane-Vehicle','a small ship in terrible condition')(class='sheet-Setting-Dreaming')
+	+move('Marches-Mundane-Vehicle','right to stay in inns for free').sheet-Setting-Marches
+	+move('Marches-Mundane-Vehicle','add “What useful shortcut do I know?” to <i>investigate a mystery</i> questions').sheet-Setting-Marches
+	.sheet-Setting-Bone
+		+translate('Pick one of these:')
+	+bonegear('Bone-Gear-Mundane','A mysterious amulet (4-wear fancy magic). You don’t know what it does.',4).sheet-Setting-Bone
+	+bonegear('Bone-Gear-Mundane','Gemstone bead jewellery (5-wear). It’s a family heirloom.',5).sheet-Setting-Bone
+	+bonegear('Bone-Gear-Mundane','Ritual mask (2-wear fancy holy)',2).sheet-Setting-Bone
+	+bonegear('Bone-Gear-Mundane','Bone whistle (3-wear)',3).sheet-Setting-Bone
+	+bonegear('Bone-Gear-Mundane','Shell trumpet (3-wear)',3).sheet-Setting-Bone
+	+bonegear('Bone-Gear-Mundane','Really nice flint knife (4-wear 1-harm hand fancy useful)',4).sheet-Setting-Bone

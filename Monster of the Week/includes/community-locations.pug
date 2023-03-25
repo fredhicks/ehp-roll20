@@ -1,0 +1,32 @@
++expander('Community-Locations','Locations')
+	+expander('Community-Locations-Edit','Edit')
+		fieldset.repeating_comloc
+			.sheet-space-above.sheet-space-below
+				.sheet-Label.sheet-space-above
+					+translate('Location')
+				div
+					input(type='text', name='attr_location', value='')
+				.sheet-Label
+					+translate('Short Description')
+				div
+					input(type='text', name='attr_desc', value='')
+				.sheet-Label
+					+translate('Type')
+				div
+					input(type='text', name='attr_type', value='')
+	.sheet-fset-display-only
+		fieldset.repeating_comloc
+			.sheet-hanging-indent
+				input(type='hidden', name='attr_location')
+				input(type='hidden', name='attr_desc')
+				input(type='hidden', name='attr_type')
+				| &#x2022&nbsp;
+				b
+					span(name='attr_location')
+					| .&nbsp;
+				span(name='attr_desc')
+				i
+					| &nbsp;(
+					+translate('Type:')
+					span(name='attr_type')
+					| )

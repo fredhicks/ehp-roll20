@@ -120,11 +120,17 @@
 				i Guide
 				|  is forbidden or doomed. Invent this reason or leave it to the Keeper.
 			textarea(name='attr_BondDescrip', rows='2', cols='40')
-			span(data-i18n='bond-fate-desc2')
-				| Whenever you spend Luck, the truth of your love&apos;s Fate slowly unfolds. When you mark your last 
-				i Luck
-				|  point, it becomes clear that you cannot be together. Your Guide might even end up as an enemy, depending on how things go.
-			span(data-i18n='bond-fate-desc3')
-				| Whenever you put yourself or somebody else in serious danger in order to conceal the truth about you and your 
-				i Guide
-				| , mark experience.
+			p
+				input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+				span.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
+					span(data-i18n='bond-fate-desc2')
+						| Whenever you spend Luck, the truth of your love&apos;s Fate slowly unfolds. When you mark your last 
+						i Luck
+						|  point, it becomes clear that you cannot be together. Your Guide might even end up as an enemy, depending on how things go.
+				span.sheet-Setting-Bone
+					+translate('Whenever you mark off a point of Favour, the truth of your love’s Fate slowly unfolds: mark off a box in your Relationship Status track. When your last point of <i>Favour</i> is used it becomes clear you cannot be together. Your Guide might even end up as an enemy, depending on how things go.')
+			p
+				span(data-i18n='bond-fate-desc3')
+					| Whenever you put yourself or somebody else in serious danger in order to conceal the truth about you and your 
+					i Guide
+					| , mark experience.

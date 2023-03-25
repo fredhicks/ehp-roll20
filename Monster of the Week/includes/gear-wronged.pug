@@ -2,7 +2,7 @@
 .sheet-Wronged
 	input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
 	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-GearUnused-Hider', value='1', checked='')
-	.sheet-move
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 		span(data-i18n='wronged-armour') Protective wear suited to your look (1 armour)
 	.sheet-space-above
 		b
@@ -19,32 +19,32 @@
 		|  
 		span.sheet-grayable
 			span(data-i18n='wronged-gear1') Sawn-off shotgun (3 harm, hand/close, messy, loud, reload)
-	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming
 		input.sheet-checkbox(type='checkbox', name='attr_Wronged_gearchoice2')
 		span.sheet-mainbox
 		|  
 		span.sheet-grayable
 			span(data-i18n='wronged-gear2') Hand cannon (3 harm, close, loud)
-	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Marches
 		input.sheet-checkbox(type='checkbox', name='attr_Wronged_gearchoice3')
 		span.sheet-mainbox
 		|  
 		span.sheet-grayable
 			span(data-i18n='wronged-gear3') Fighting knife (2 harm, hand, quiet)
-	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Marches
 		input.sheet-checkbox(type='checkbox', name='attr_Wronged_gearchoice4')
 		span.sheet-mainbox
 		|  
 		span.sheet-grayable
 			span(data-i18n='wronged-gear4') Huge sword or huge axe (3 harm, hand, messy, heavy)
-	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Marches
 		input.sheet-checkbox(type='checkbox', name='attr_Wronged_gearchoice5')
 		span.sheet-mainbox
 		|  
 		span.sheet-grayable
 			span(data-i18n='wronged-gear5')
 				| Specialist weapons for destroying your foes (eg. wooden stakes and mallet for vampires, silver dagger for warewolves, etc), 4 harm against the specific creatures it targets, 1 harm otherwise, and other tags by agreement with the Keeper
-	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 		input.sheet-checkbox(type='checkbox', name='attr_Wronged_gearchoice6')
 		span.sheet-mainbox
 		|  
@@ -60,8 +60,25 @@
 	+move('Gothic-Gear-Wronged','Whipblade (2-harm hand/close messy)')(class="sheet-Setting-Gothic")
 	+move('Gothic-Gear-Wronged','Portable steamcannon (3-harm close/far reload loud messy)')(class="sheet-Setting-Gothic")
 	+move('Gothic-Gear-Wronged','Prototype Flamethrower (3-harm close area volatile)')(class="sheet-Setting-Gothic")
-
-	.sheet-space-above
+	+move('Dreaming-Gear-Wronged','Alchemical vials (2-harm close magic many volatile)')(class="sheet-Setting-Dreaming")
+	+move('Dreaming-Gear-Wronged','Ancient gladius (2-harm hand valuable)')(class="sheet-Setting-Dreaming")
+	+move('Dreaming-Gear-Wronged','Hunting clockhawk (2-harm close ignore-armour)')(class="sheet-Setting-Dreaming")
+	+move('Dreaming-Gear-Wronged','Whipblade (2-harm hand/close messy)')(class="sheet-Setting-Dreaming")
+	+move('Marches-Gear-Wronged',"Halberd (3-harm hand/close messy slow)").sheet-Setting-Marches
+	+move('Marches-Gear-Wronged',"Longbow (2-harm far)").sheet-Setting-Marches
+	+move('Marches-Gear-Wronged',"Prototype rifle (3-harm far reload ignore-armour volatile loud)").sheet-Setting-Marches
+	+move('Marches-Gear-Wronged',"Repeating crossbow (2-harm close quick reload unreliable)").sheet-Setting-Marches
+	+move('Marches-Gear-Wronged',"Sword (2-harm hand) made from two special materials at once").sheet-Setting-Marches
+	+bonegear('Bone-Gear-Wronged','Massive sword studded with monster teeth (6-wear 4-harm hand messy heavy)',6).sheet-Setting-Bone
+	+bonegear('Bone-Gear-Wronged','Jade dagger (8-wear 2-harm intimate/hand messy ignore-armour)',8).sheet-Setting-Bone
+	+bonegear('Bone-Gear-Wronged','Obsidian axe (7-wear 3-harm hand messy)',7).sheet-Setting-Bone
+	+bonegear('Bone-Gear-Wronged','Mighty bow (5-wear 3-harm close/far fast) and a selection of arrows',5).sheet-Setting-Bone
+	+bonegear('Bone-Gear-Wronged','Ivory spear and thrower (5-wear 4-harm hand/close/far)',5).sheet-Setting-Bone
+	+bonegear('Bone-Gear-Wronged','Ancient ebony club (6-wear 3-harm hand stun)',6).sheet-Setting-Bone
+	+bonegear('Bone-Gear-Wronged','Spirit rope (8-wear 2-harm hand/close magic entangle)',8).sheet-Setting-Bone
+	+bonegear('Bone-Gear-Wronged','Flint pick (7-wear 4-harm hand messy heavy slow)',7).sheet-Setting-Bone
+	+bonegear('Bone-Gear-Wronged','Enchanted antler dagger (6-wear 2-harm intimate/hand magic)',6).sheet-Setting-Bone
+	.sheet-space-above.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 		b
 			span(data-i18n='wronged-weapon') Practical Weapons
 		|  
@@ -94,13 +111,13 @@
 		|  
 		span.sheet-grayable
 			span(data-i18n='wronged-gear11') Shotgun (3 harm, close, messy, loud)
-	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 		input.sheet-checkbox(type='checkbox', name='attr_Wronged_gearchoice12')
 		span.sheet-mainbox
 		|  
 		span.sheet-grayable
 			span(data-i18n='wronged-gear12') Big knife (1 harm, hand)
-	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic
+	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 		input.sheet-checkbox(type='checkbox', name='attr_Wronged_gearchoice13')
 		span.sheet-mainbox
 		|  
@@ -115,8 +132,18 @@
 	+move('Gothic-Gear-Wronged','Steam pressure rifle (3-harm close reload)')(class="sheet-Setting-Gothic")
 	+move('Gothic-Gear-Wronged','Revolver (2-harm hand/close reload)')(class="sheet-Setting-Gothic")
 	+move('Gothic-Gear-Wronged','Wrench (2-harm hand inconspicuous)')(class="sheet-Setting-Gothic")
+	+move('Dreaming-Gear-Wronged','Ancient stiletto (1-harm intimate/hand small valuable)')(class="sheet-Setting-Dreaming")
+	+move('Dreaming-Gear-Wronged','Clockwork rifle (3-harm close reload)')(class="sheet-Setting-Dreaming")
+	+move('Dreaming-Gear-Wronged','Flintlock pistol (2-harm close reload loud)')(class="sheet-Setting-Dreaming")
+	+move('Dreaming-Gear-Wronged','Repeating crossbow (2-harm close quick)')(class="sheet-Setting-Dreaming")
+	+move('Marches-Gear-Wronged',"Axe (2-harm hand messy)").sheet-Setting-Marches
+	+move('Marches-Gear-Wronged',"Crossbow (2-harm close quick reload)").sheet-Setting-Marches
+	+move('Marches-Gear-Wronged',"Prototype pistol (3-harm close reload ignore-armour volatile loud)").sheet-Setting-Marches
+	+move('Marches-Gear-Wronged',"Shortbow (2-harm close concealable)").sheet-Setting-Marches
+	+move('Marches-Gear-Wronged',"Spear (2-harm hand/close)").sheet-Setting-Marches
+	+move('Marches-Gear-Wronged',"Sword (2-harm hand)").sheet-Setting-Marches
 
-	.sheet-space-above
+	.sheet-space-above.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 		b
 			span(data-i18n='wronged-vehicle') (Optional) Vehicle
 		|  
@@ -149,7 +176,7 @@
 		|  
 		span.sheet-grayable
 			span(data-i18n='wronged-gear18') Plain van
-	+move('Gothic-Gear-Wronged','A trusted horse').sheet-Setting-Gothic
-	+move('Gothic-Gear-Wronged','A horse- or mule-drawn carriage').sheet-Setting-Gothic
-	+move('Gothic-Gear-Wronged','A fast boat').sheet-Setting-Gothic
-	+move('Gothic-Gear-Wronged','A small ship').sheet-Setting-Gothic
+	+move('Gothic-Gear-Wronged','A trusted horse').sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
+	+move('Gothic-Gear-Wronged','A horse- or mule-drawn carriage').sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
+	+move('Gothic-Gear-Wronged','A fast boat').sheet-Setting-Gothic.sheet-Setting-Dreaming
+	+move('Gothic-Gear-Wronged','A small ship').sheet-Setting-Gothic.sheet-Setting-Dreaming

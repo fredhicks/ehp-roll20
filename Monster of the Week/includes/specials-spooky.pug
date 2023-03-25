@@ -115,7 +115,12 @@
 			|  
 			span.sheet-grayable
 				span(data-i18n='dark-side16') Paranoia
-		span(data-i18n='dark-side-effects')
-			| The Keeper can ask you to do nasty things (in accordance with your tags) when your powers need you to. If you do whatever is asked, mark experience. If you don&apos;t, then your powers are unavilable until the end of the mystery (or until you cave). As you spend 
-			i Luck
-			| , these requests will get bigger and nastier.
+		input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+		span.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
+			span(data-i18n='dark-side-effects')
+				| The Keeper can ask you to do nasty things (in accordance with your tags) when your powers need you to. If you do whatever is asked, mark experience. If you don&apos;t, then your powers are unavilable until the end of the mystery (or until you cave). As you spend 
+				i Luck
+				| , these requests will get bigger and nastier.
+		span.sheet-Setting-Bone
+			+translate('The Keeper can ask you to do nasty things (in accordance with the tags), when your powers need you to. If you do whatever is asked, mark experience. If you don’t do it, then your powers are unavailable until the end of the mystery (or until you cave). As you mark off <i>Favour</i> boxes, these requests will get bigger and nastier.')
+

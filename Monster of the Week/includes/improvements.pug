@@ -109,12 +109,24 @@
 				span.sheet-Constructed(data-i18n='constructed') Constructed
 				span.sheet-Actionscientist(data-i18n='actionscientist') Action Scientist
 				span.sheet-Chosen(data-i18n='chosen') Chosen
-				span.sheet-Crooked(data-i18n='Crooked') Crooked
-				span.sheet-Divine(data-i18n='Divine') Divine
-				span.sheet-Expert(data-i18n='Expert') Expert
+				span.sheet-Crooked
+					input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+					+translate('Crooked').sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
+					+translate('Loner').sheet-Setting-Bone
+				span.sheet-Divine
+					input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+					+translate('Divine').sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
+					+translate('Spirit-Touched').sheet-Setting-Bone
+				span.sheet-Expert
+					input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+					+translate('Expert').sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
+					+translate('Lore-Holder').sheet-Setting-Bone
 				span.sheet-Flake(data-i18n='Flake') Flake
 				span.sheet-Initiate(data-i18n='Initiate') Initiate
-				span.sheet-Monstrous(data-i18n='Monstrous') Monstrous
+				span.sheet-Monstrous
+					input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+					+translate('Monstrous').sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
+					+translate('Other-Folk').sheet-Setting-Bone
 				span.sheet-Mundane(data-i18n='Mundane') Mundane
 				span.sheet-Professional(data-i18n='Professional') Professional
 				span.sheet-Spellslinger(data-i18n='Spellslinger') Spell-Slinger
@@ -154,12 +166,24 @@
 				span.sheet-Spooktacular(data-i18n='spooktacular') Spooktacular
 				span.sheet-Actionscientist(data-i18n='actionscientist') Action Scientist
 				span.sheet-Chosen(data-i18n='chosen') Chosen
-				span.sheet-Crooked(data-i18n='Crooked') Crooked
-				span.sheet-Divine(data-i18n='Divine') Divine
-				span.sheet-Expert(data-i18n='Expert') Expert
+				span.sheet-Crooked
+					input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+					+translate('Crooked').sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
+					+translate('Loner').sheet-Setting-Bone
+				span.sheet-Divine
+					input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+					+translate('Divine').sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
+					+translate('Spirit-Touched').sheet-Setting-Bone
+				span.sheet-Expert
+					input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+					+translate('Expert').sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
+					+translate('Lore-Holder').sheet-Setting-Bone
 				span.sheet-Flake(data-i18n='Flake') Flake
 				span.sheet-Initiate(data-i18n='Initiate') Initiate
-				span.sheet-Monstrous(data-i18n='Monstrous') Monstrous
+				span.sheet-Monstrous
+					input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+					+translate('Monstrous').sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
+					+translate('Other-Folk').sheet-Setting-Bone
 				span.sheet-Mundane(data-i18n='Mundane') Mundane
 				span.sheet-Professional(data-i18n='Professional') Professional
 				span.sheet-Spellslinger(data-i18n='Spellslinger') Spell-Slinger
@@ -219,7 +243,9 @@
 				span.sheet-Divine
 					span(data-i18n='ally') Gain an ally
 					| : 
-					span(data-i18n='Divine-ally') a lesser divine being, sent to help you with your mission
+					input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+					+translate('Divine-ally').sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
+					+translate('a lesser spirit being').sheet-Setting-Bone
 				span.sheet-Exile
 					span(data-i18n='ally') Gain an ally
 					| : 
@@ -244,14 +270,20 @@
 				span.sheet-Summoned(data-i18n='summoned-advance1') Gain an ally team of monster-hunters (or monstrous hunters) under your command
 				span.sheet-Constructed(data-i18n='constructed-imp1') Gain an ally: you make a friend (literally)
 				span.sheet-Spooktacular.sheet-Chosen.sheet-Searcher.sheet-Traveler.sheet-Pararomantic(data-i18n='ally') Gain an ally
-		.sheet-move.sheet-Actionscientist.sheet-Flake.sheet-Monstrous.sheet-Wronged.sheet-Gumshoe.sheet-Hex.sheet-Luchador.sheet-Snoop
+		.sheet-move.sheet-Actionscientist.sheet-Flake.sheet-Monstrous.sheet-Wronged.sheet-Gumshoe.sheet-Hex.sheet-Luchador.sheet-Snoop.sheet-Spooky
 			input.sheet-checkbox(type='checkbox', name='attr_Imp-Haven')
 			span.sheet-mainbox
 			span.sheet-grayable
-				span.sheet-Wronged.sheet-Flake.sheet-Monstrous.sheet-Hex.sheet-Luchador(data-i18n='luchador-advance1')
-					| Gain a Haven, like the 
-					i Expert
-					| , with two options
+				span.sheet-Wronged.sheet-Flake.sheet-Monstrous.sheet-Hex.sheet-Luchador
+					input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+					span.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches(data-i18n='luchador-advance1')
+							| Gain a Haven, like the 
+							i Expert
+							| , with two options
+				span.sheet-Wronged
+					input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+					span.sheet-Setting-Bone
+						+translate('Gain a Haven, like the <i>Lore-Holder</i>, with two options.')
 				span.sheet-Gumshoe(data-i18n='Gumshoe-advance2')
 					| Gain a Haven (your office, perhaps), like the 
 					i Expert
@@ -261,6 +293,14 @@
 					i Expert
 					| , with one option plus a film lab
 				span.sheet-Actionscientist(data-i18n='as-haven') Gain a haven, like the Expert has, with a Workshop and one other option.
+				span.sheet-Spooky
+					input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+					span.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
+						span(data-i18n='Spooky-advance2')
+							| Gain a Mystical Library, like the Haven option of the 
+							i Expert
+					span.sheet-Setting-Bone
+						+translate('Gain a ritual space, like the Haven option of the <i>Lore-Holder</i>.')
 			input.sheet-triggerbox(type='checkbox', name='attr_Imp-Haven')
 			span.sheet-triggertext
 				input(type='text', name='attr_Imp-Haven-Choice')
@@ -297,8 +337,10 @@
 			input.sheet-checkbox(type='checkbox', name='attr_Imp-Stash')
 			span.sheet-mainbox
 			span.sheet-grayable
-				span(data-i18n='crooked-advance1')
-					| Recover a stash of money from the old days, enough to live without care for a year or two
+				input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+				// Recover a stash of money from the old days, enough to live without care for a year or two
+				+translate('crooked-advance1').sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
+				+translate('Recover a stash of valuables. Take 15-wear worth of fancy items (mostly jewellery).').sheet-Setting-Bone
 		.sheet-move.sheet-Gumshoe
 			input.sheet-checkbox(type='checkbox', name='attr_Imp-4Contacts')
 			span.sheet-mainbox
@@ -347,13 +389,6 @@
 			span.sheet-mainbox
 			span.sheet-grayable
 				span(data-i18n='Spooky-advance1') Change some, or all, of your Dark Side tags
-		.sheet-move.sheet-Spooky
-			input.sheet-checkbox(type='checkbox', name='attr_Imp-MysticLibrary')
-			span.sheet-mainbox
-			span.sheet-grayable
-				span(data-i18n='Spooky-advance2')
-					| Gain a Mystical Library, like the Haven option of the 
-					i Expert
 		.sheet-move.sheet-Hex
 			input.sheet-checkbox(type='checkbox', name='attr_Imp-HexRote1')
 			span.sheet-mainbox
@@ -393,18 +428,24 @@
 			input.sheet-checkbox(type='checkbox', name='attr_Imp-Luck1')
 			span.sheet-mainbox
 			span.sheet-grayable
-				span(data-i18n='erase-luck')
+				input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+				span(data-i18n='erase-luck').sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 					| Erase one used 
 					i Luck
 					|  point
+				span.sheet-Setting-Bone
+					+translate('Erase one used <i>Favour</i> point')
 		.sheet-move.sheet-Mundane
 			input.sheet-checkbox(type='checkbox', name='attr_Imp-Luck2')
 			span.sheet-mainbox
 			span.sheet-grayable
-				span(data-i18n='erase-luck')
+				input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+				span(data-i18n='erase-luck').sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 					| Erase one used 
 					i Luck
 					|  point
+				span.sheet-Setting-Bone
+					+translate('Erase one used <i>Favour</i> point')
 		.sheet-move.sheet-Summoned
 			input.sheet-checkbox(type='checkbox', name='attr_Imp-Sect')
 			span.sheet-mainbox
@@ -493,6 +534,7 @@
 		input.sheet-triggerbox(type='checkbox', name='attr_AdvImp-AdvBasic')
 		.sheet-triggerframe
 			.sheet-advmoves
+				input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
 				input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-AdvanceBasicMovesList', value='1', checked='')
 				span.sheet-anglebox
 				span.sheet-ExpHeader
@@ -502,6 +544,11 @@
 					span.sheet-mainbox
 					span.sheet-grayable
 						span(data-i18n='aup')
+				.sheet-move.sheet-Setting-Bone
+					input.sheet-checkbox(type='checkbox', name='attr_advanced-crafting')
+					span.sheet-mainbox
+					span.sheet-grayable
+						+translate('Crafting')
 				.sheet-move
 					input.sheet-checkbox(type='checkbox', name='attr_advanced-helpout')
 					span.sheet-mainbox
@@ -520,21 +567,36 @@
 						|  (
 						span(data-i18n='flex-alt')
 						| )
+				.sheet-move.sheet-Setting-Bone
+					input.sheet-checkbox(type='checkbox', name='attr_advanced-intimidate')
+					span.sheet-mainbox
+					span.sheet-grayable
+						+translate('Intimidate')
 				.sheet-move
 					input.sheet-checkbox(type='checkbox', name='attr_advanced-kickass')
 					span.sheet-mainbox
 					span.sheet-grayable
 						span(data-i18n='kickass')
-				.sheet-move
+				.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 					input.sheet-checkbox(type='checkbox', name='attr_advanced-manipulate')
 					span.sheet-mainbox
 					span.sheet-grayable
 						span(data-i18n='manipulate')
+				.sheet-move.sheet-Setting-Bone
+					input.sheet-checkbox(type='checkbox', name='attr_advanced-persuade')
+					span.sheet-mainbox
+					span.sheet-grayable
+						+translate('Persuade')
 				.sheet-move
 					input.sheet-checkbox(type='checkbox', name='attr_advanced-protect-someone')
 					span.sheet-mainbox
 					span.sheet-grayable
 						span(data-i18n='protect-someone')
+				.sheet-move.sheet-Setting-Bone
+					input.sheet-checkbox(type='checkbox', name='attr_advanced-pursuit')
+					span.sheet-mainbox
+					span.sheet-grayable
+						+translate('Pursuit')
 				.sheet-move
 					input.sheet-checkbox(type='checkbox', name='attr_advanced-rabs')
 					span.sheet-mainbox
@@ -605,18 +667,24 @@
 			input.sheet-checkbox(type='checkbox', name='attr_AdvImp-Luck1')
 			span.sheet-mainbox
 			span.sheet-grayable
-				span(data-i18n='erase-luck')
+				input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+				span(data-i18n='erase-luck').sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 					| Erase one used 
 					i Luck
 					|  point
+				span.sheet-Setting-Bone
+					+translate('Erase one used <i>Favour</i> point')
 		.sheet-move.sheet-Mundane.sheet-Searcher
 			input.sheet-checkbox(type='checkbox', name='attr_AdvImp-Luck2')
 			span.sheet-mainbox
 			span.sheet-grayable
-				span(data-i18n='erase-luck')
+				input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+				span(data-i18n='erase-luck').sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 					| Erase one used 
 					i Luck
 					|  point
+				span.sheet-Setting-Bone
+					+translate('Erase one used <i>Favour</i> point')
 		.sheet-move.sheet-Snoop
 			input.sheet-checkbox(type='checkbox', name='attr_AdvImp-MakeItBig')
 			span.sheet-mainbox
@@ -647,10 +715,12 @@
 			input.sheet-checkbox(type='checkbox', name='attr_AdvImp-MissionChange')
 			span.sheet-mainbox
 			span.sheet-grayable
-				span(data-i18n='Divine-advance1')
+				input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+				+translate('Divine-advance1').sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 					| Change your 
 					i Mission
 					| . Select a different option from the Mission list, or (with the Keeper&apos;s agreement) create a new mission
+				+translate('Change the nature of your obligation. Select a new obligation from the normal options or (with the Keeper’s agreement) a new obligation of your own creation.').sheet-Setting-Bone
 		.sheet-move.sheet-Initiate
 			input.sheet-checkbox(type='checkbox', name='attr_AdvImp-LeadSect')
 			span.sheet-mainbox
