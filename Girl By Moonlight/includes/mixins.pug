@@ -64,3 +64,9 @@ mixin toggle(a)
 	button(type="action",name="act_"+a).sheet-button-header-expand
 	+hidden(a)(value=0).sheet-hide-on-one
 	button(type="action",name="act_"+a).sheet-button-header-collapse
+
+mixin abilityMark(a)
+	+hidden(a)(value=0).sheet-hide-on-zero
+	button(type="action",name="act_"+a).sheet-button-mark-on
+	+hidden(a)(value=0).sheet-hide-on-one
+	button(type="action",name="act_"+a).sheet-button-mark-off

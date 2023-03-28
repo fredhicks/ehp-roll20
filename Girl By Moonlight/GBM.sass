@@ -10,6 +10,8 @@ $abyssicon: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Gi
 $skyicon: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/playset-sky.svg)
 $starsicon: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/playset-stars.svg)
 $dreamsicon: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/playset-dreams.svg)
+$markonicon: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/mark-on.svg)
+$markonicon: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/mark-off.svg)
 
 @import url('https://fonts.googleapis.com/css2?family=Kufam:ital,wght@0,400;0,700;1,400;1,700&family=Montserrat:ital,wght@0,400;0,700;1,400;1,700&display=swap')
 
@@ -183,6 +185,14 @@ input.sheet-Mode-Playbook
 			height: 50px
 			margin-bottom: 0px
 
+.sheet-Abilities-Block
+	display: grid
+	grid-template-columns: 16px 1fr
+	column-gap: 4px
+	row-gap: 8px
+	.sheet-Ability
+		grid-column-start: 2
+
 .sheet-Blocks-Playbooks
 	display: grid
 	grid-template-columns: 40% 40% 20%
@@ -262,6 +272,16 @@ button.sheet-button-header-close:before
 	font-family: 'Pictos'
 	font-size: #{$headsize}
 	content: 'D'
+
+button.sheet-button-mark-on:before
+	content: #{$markonicon}
+	height: #{$bodysize}
+	width: #{$bodysize}
+
+button.sheet-button-mark-off:before
+	content: #{$markofficon}
+	height: #{$bodysize}
+	width: #{$bodysize}
 
 .sheet-button-header-expand, .sheet-button-header-collapse, .sheet-button-header-edit, .sheet-button-header-close
 	border: none

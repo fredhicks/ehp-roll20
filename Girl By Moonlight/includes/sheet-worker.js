@@ -1,5 +1,6 @@
 var toggles = [
-	"Toggle-Bio-Expand"
+	"Toggle-Bio-Expand",
+	"Toggle-Abilities-Expand",
 ];
 var toggleclicks = "";
 var clicks = 0;

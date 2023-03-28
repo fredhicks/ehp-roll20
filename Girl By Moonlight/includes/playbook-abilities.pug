@@ -1,0 +1,91 @@
+-
+	var abilities = {
+		"Enigma": [
+			{
+				"name": "Behind the mask",
+				"effect": "Your transcendent and mundane selves lead separate lives, and no one knows that they are the same person. Your transcendent self wears a mask: describe it.",
+				"selectable": false
+			},
+			{
+				"name": "Working from the shadows",
+				"effect": "When you secretly set up another character’s action, roll +1d. If they succeed, mark xp.",
+				"selectable": true
+			},
+			{
+				"name": "Phantom",
+				"effect": "You may expend your special armour to resist any consequence that would cause you to be detected or overlooked, or to immediately seize the attention of everyone present.",
+				"selectable": true
+			},
+			{
+				"name": "Shrouded in secrets",
+				"effect": "No one can unmask you without your permission. Gain +1d when your mundane identity conceals your true purpose, or helps you escape notice.",
+				"selectable": true
+			},
+			{
+				"name": "Cover story",
+				"effect": "You may choose to take -1d to your obligation roll to fill any remaining segments of your recovery clock. What’s your cover story for your injuries?",
+				"selectable": true
+			},
+			{
+				"name": "Two steps ahead",
+				"effect": "Two times per mission, you can assist a team mate without spending stress. Tell us how you prepared for this situation.",
+				"selectable": true
+			},
+			{
+				"name": "The big reveal",
+				"effect": "The moment you transcend, you may choose to immediately disappear, and may reappear at any time in the place of your choosing.",
+				"selectable": true,
+				"transcendent": true
+			},
+			{
+				"name": "Watch this!",
+				"effect": "When you push yourself choose one of the following additional benefits: Perform a superhuman feat of athletics - deliver a monologue without anyone interrupting you",
+				"selectable": true,
+				"transcendent": true
+			},
+			{
+				"name": "Powerful friends",
+				"effect": "Once per mission you may flash back to a special downtime action, taken as your transcendent self. Shift the results of the roll up one step.",
+				"selectable": true,
+				"transcendent": true
+			},
+		],
+	};
+
+.sheet-Box
+	.sheet-Box-Header
+		.sheet-Box-Header-Text
+			+translate('Abilities')
+		.sheet-Box-Header-Icons
+			+toggle('Toggle-Abilities-Expand')
+	+hidden('Toggle-Abilities-Expand').sheet-hide-on-one
+	.sheet-Abilities-Block
+		each pbabs, pb in abilities
+			- var abc = 0;
+			each ability in pbabs
+				-
+					abc += 1;
+					var abid = 'Ability-' + pb + '-' + abc;
+					if ( typeof(ability["name"]) == "undefined" ) { 
+						ability["name"] = "UNDEFINED";
+					}
+					if ( typeof(ability["effect"]) == "undefined" ) { 
+						ability["effect"] = "UNDEFINED";
+					}
+					if ( typeof(ability["selectable"]) == "undefined" ) { 
+						ability["selectable"] = false;
+					}
+					if ( typeof(ability["transcendent"]) == "undefined" ) { 
+						ability["transcendent"] = false;
+					}
+				if ( ! ability['transcendent'] )
+					div(class="sheet-Ability-Selector sheet-Playbook-"+pb)
+						if ( ability['selectable'] )
+							+abilityMark(abid)
+						else
+							+hidden(abid,1)
+					div(class="sheet-Ability sheet-Playbook-"+pb)
+						b 
+							+translate(ability['name'])
+						|: 
+						+translate(ability['effect'])

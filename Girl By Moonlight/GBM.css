@@ -247,6 +247,21 @@ input.sheet-Mode-Playbook[value=UnlikelyHero] ~ div.sheet-Playbook-UnlikelyHero,
 	margin-bottom: 0px;
 }
 
+.sheet-Abilities-Block {
+	display: -ms-grid;
+	display: grid;
+	-ms-grid-columns: 16px 4px 1fr;
+	grid-template-columns: 16px 1fr;
+	-webkit-column-gap: 4px;
+	   -moz-column-gap: 4px;
+	        column-gap: 4px;
+	row-gap: 8px;
+}
+.sheet-Abilities-Block .sheet-Ability {
+	-ms-grid-column: 2;
+	    grid-column-start: 2;
+}
+
 .sheet-Blocks-Playbooks {
 	display: -ms-grid;
 	display: grid;
