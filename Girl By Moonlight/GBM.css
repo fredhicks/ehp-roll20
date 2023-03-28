@@ -75,10 +75,69 @@ select {
 
 .sheet-bigname {
 	font-size: 28px;
+	margin-bottom: 8px;
+}
+.sheet-bigname span.sheet-Icon-Abyss, .sheet-bigname span.sheet-Icon-Dreams, .sheet-bigname span.sheet-Icon-Sky, .sheet-bigname span.sheet-Icon-Stars {
+	height: 36px;
+	width: 36px;
 }
 
 input.sheet-HideNull[value=""] + *, input.sheet-HideNull[value="0"] + * {
 	display: none;
+}
+
+input.sheet-Mode-Playset ~ .sheet-Playset-Abyss, input.sheet-Mode-Playset ~ .sheet-Playset-Sky, input.sheet-Mode-Playset ~ .sheet-Playset-Stars, input.sheet-Mode-Playset ~ .sheet-Playset-Dreams, input.sheet-Mode-Playset ~ * .sheet-Playset-Abyss, input.sheet-Mode-Playset ~ * .sheet-Playset-Sky, input.sheet-Mode-Playset ~ * .sheet-Playset-Stars, input.sheet-Mode-Playset ~ * .sheet-Playset-Dreams {
+	display: none;
+}
+input.sheet-Mode-Playset[value=abyss] ~ span.sheet-Playset-Abyss, input.sheet-Mode-Playset[value=abyss] ~ * span.sheet-Playset-Abyss {
+	display: inline;
+}
+input.sheet-Mode-Playset[value=abyss] ~ div.sheet-Playset-Abyss, input.sheet-Mode-Playset[value=abyss] ~ * div.sheet-Playset-Abyss {
+	display: block;
+}
+input.sheet-Mode-Playset[value=sky] ~ span.sheet-Playset-Sky, input.sheet-Mode-Playset[value=sky] ~ * span.sheet-Playset-Sky {
+	display: inline;
+}
+input.sheet-Mode-Playset[value=sky] ~ div.sheet-Playset-Sky, input.sheet-Mode-Playset[value=sky] ~ * div.sheet-Playset-Sky {
+	display: block;
+}
+input.sheet-Mode-Playset[value=stars] ~ span.sheet-Playset-Stars, input.sheet-Mode-Playset[value=stars] ~ * span.sheet-Playset-Stars {
+	display: inline;
+}
+input.sheet-Mode-Playset[value=stars] ~ div.sheet-Playset-Stars, input.sheet-Mode-Playset[value=stars] ~ * div.sheet-Playset-Stars {
+	display: block;
+}
+input.sheet-Mode-Playset[value=dreams] ~ span.sheet-Playset-Dreams, input.sheet-Mode-Playset[value=dreams] ~ * span.sheet-Playset-Dreams {
+	display: inline;
+}
+input.sheet-Mode-Playset[value=dreams] ~ div.sheet-Playset-Dreams, input.sheet-Mode-Playset[value=dreams] ~ * div.sheet-Playset-Dreams {
+	display: block;
+}
+
+span.sheet-Icon-Abyss, span.sheet-Icon-Dreams, span.sheet-Icon-Sky, span.sheet-Icon-Stars {
+	height: 14px;
+	width: 14px;
+	vertical-align: middle;
+}
+
+span.sheet-Icon-Abyss {
+	display: inline-block;
+	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/playset-abyss.svg);
+}
+
+span.sheet-Icon-Dreams {
+	display: inline-block;
+	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/playset-dreams.svg);
+}
+
+span.sheet-Icon-Sky {
+	display: inline-block;
+	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/playset-sky.svg);
+}
+
+span.sheet-Icon-Stars {
+	display: inline-block;
+	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/playset-stars.svg);
 }
 
 input.sheet-Mode-Playbook ~ .sheet-Playbook-Enigma, input.sheet-Mode-Playbook ~ * .sheet-Playbook-Enigma {
@@ -232,6 +291,24 @@ input.sheet-Mode-Playbook[value=UnlikelyHero] ~ div.sheet-Playbook-UnlikelyHero,
 	font-size: 21px;
 	color: white;
 	background-color: var(--gbm-blue);
+	display: -ms-grid;
+	display: grid;
+	-ms-grid-columns: 1fr 50px;
+	grid-template-columns: 1fr 50px;
+}
+.sheet-Box .sheet-Box-Header .sheet-Box-Header-Icons {
+	text-align: right;
+	-ms-grid-column: 2;
+	    grid-column-start: 2;
+}
+
+.sheet-buttonless {
+	border: none;
+	background: none;
+	font-weight: normal;
+	text-align: left;
+	padding: 0px;
+	vertical-align: top;
 }
 
 /* Not currently in use but it looks cool, so keep this defintion around */
@@ -245,4 +322,48 @@ input.sheet-Mode-Playbook[value=UnlikelyHero] ~ div.sheet-Playbook-UnlikelyHero,
 	border-right: 12px solid var(--gbm-blue-dark);
 	width: 120px;
 	font-size: 10px;
+}
+
+button.sheet-button-header-collapse:before {
+	font-family: "Pictos";
+	font-size: 21px;
+	content: "J";
+}
+
+button.sheet-button-header-expand:before {
+	font-family: "Pictos";
+	font-size: 21px;
+	content: "`";
+}
+
+button.sheet-button-header-edit:before {
+	font-family: "Pictos";
+	font-size: 21px;
+	content: "p";
+}
+
+button.sheet-button-header-close:before {
+	font-family: "Pictos";
+	font-size: 21px;
+	content: "D";
+}
+
+.sheet-button-header-expand, .sheet-button-header-collapse, .sheet-button-header-edit, .sheet-button-header-close {
+	border: none;
+	background: none;
+	font-weight: normal;
+	text-align: left;
+	padding-top: 7px;
+	padding-bottom: 7px;
+	vertical-align: top;
+}
+.sheet-button-header-expand:hover, .sheet-button-header-collapse:hover, .sheet-button-header-edit:hover, .sheet-button-header-close:hover {
+	text-shadow: 0 0 8px white;
+}
+.sheet-button-header-expand:focus, .sheet-button-header-collapse:focus, .sheet-button-header-edit:focus, .sheet-button-header-close:focus {
+	text-shadow: 0 0 8px black;
+}
+
+.sheet-hide-on-one[value="1"] + *, .sheet-hide-on-zero[value="0"] + * {
+	display: none;
 }

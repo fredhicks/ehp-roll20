@@ -1,14 +1,24 @@
 .sheet-Box
 	.sheet-Box-Header
 		+translate('Bio')
+		.sheet-Box-Header-Icons
+			+toggle('Toggle-Bio-Expand')
+	+hidden('Toggle-Bio-Expand').sheet-hide-on-one
 	.sheet-Bio-Block
+		.sheet-Label
+			+translate('Playset')
+		.sheet-Field
+			+select("playset")
+				+option("Choose a Playset","0")
+				each ps, key in playsets
+					+option(ps,key)
 		.sheet-Label
 			+translate('Playbook')
 		.sheet-Field
-				+select("Playbook")
-					+option("Select a Playbook","")
-					each pb, key in playbooks
-						+option(pb,key)
+			+select("Playbook")
+				+option("Select a Playbook","")
+				each pb, key in playbooks
+					+option(pb,key)
 		.sheet-Label
 			+translate('Mundane Name')
 		.sheet-Field

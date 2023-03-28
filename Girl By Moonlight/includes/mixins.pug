@@ -3,6 +3,7 @@
 	var translations = { 
 		"Series Playset": "Series Playset",
 		"Choose a Series Playset": "(Choose a Series Playset)",
+		"Choose a Playset": "(Choose a Playset)",
 		"At the Brink of the Abyss": "At the Brink of the Abyss", 
 		"Beneath a Rotting Sky": "Beneath a Rotting Sky", 
 		"On a Sea of Stars": "On a Sea of Stars", 
@@ -57,3 +58,9 @@ mixin option(t,v)
 		option(data-i18n=t)
 	else
 		option(value=v data-i18n=t)
+
+mixin toggle(a)
+	+hidden(a)(value=0).sheet-hide-on-zero
+	button(type="action",name="act_"+a).sheet-button-header-expand
+	+hidden(a)(value=0).sheet-hide-on-one
+	button(type="action",name="act_"+a).sheet-button-header-collapse

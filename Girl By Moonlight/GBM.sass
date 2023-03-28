@@ -4,7 +4,12 @@ $labelsize: 10px
 $smallsize: 10px
 $headsize: 21px
 $bigsize: 28px
+$bigicon: 36px
 $headfont: 'Kufam', sans-serif
+$abyssicon: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/playset-abyss.svg)
+$skyicon: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/playset-sky.svg)
+$starsicon: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/playset-stars.svg)
+$dreamsicon: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/playset-dreams.svg)
 
 @import url('https://fonts.googleapis.com/css2?family=Kufam:ital,wght@0,400;0,700;1,400;1,700&family=Montserrat:ital,wght@0,400;0,700;1,400;1,700&display=swap')
 
@@ -78,11 +83,62 @@ select
 
 .sheet-bigname
 	font-size: #{$bigsize}
+	margin-bottom: 8px
+	span.sheet-Icon-Abyss, span.sheet-Icon-Dreams, span.sheet-Icon-Sky, span.sheet-Icon-Stars
+		height: #{$bigicon}
+		width: #{$bigicon}
 
 input.sheet-HideNull
 	&[value=""], &[value="0"]
 		+ *
 			display: none
+
+input.sheet-Mode-Playset
+	~, ~ *
+		.sheet-Playset-Abyss, .sheet-Playset-Sky, .sheet-Playset-Stars, .sheet-Playset-Dreams
+			display: none
+	&[value='abyss']
+		~, ~ *
+			span.sheet-Playset-Abyss
+				display: inline
+			div.sheet-Playset-Abyss
+				display: block
+	&[value='sky']
+		~, ~ *
+			span.sheet-Playset-Sky
+				display: inline
+			div.sheet-Playset-Sky
+				display: block
+	&[value='stars']
+		~, ~ *
+			span.sheet-Playset-Stars
+				display: inline
+			div.sheet-Playset-Stars
+				display: block
+	&[value='dreams']
+		~, ~ *
+			span.sheet-Playset-Dreams
+				display: inline
+			div.sheet-Playset-Dreams
+				display: block
+
+span.sheet-Icon-Abyss, span.sheet-Icon-Dreams, span.sheet-Icon-Sky, span.sheet-Icon-Stars
+	height: #{$bodysize}
+	width: #{$bodysize}
+	vertical-align: middle
+
+span.sheet-Icon-Abyss
+	display: inline-block
+	content: #{$abyssicon}
+span.sheet-Icon-Dreams
+	display: inline-block
+	content: #{$dreamsicon}
+span.sheet-Icon-Sky
+	display: inline-block
+	content: #{$skyicon}
+span.sheet-Icon-Stars
+	display: inline-block
+	content: #{$starsicon}
 
 $playbooks: Enigma, Stranger, TimeTraveller, Harmony, Guardian, Outsider, UnlikelyHero
 
@@ -159,6 +215,19 @@ input.sheet-Mode-Playbook
 		font-size: #{$headsize}
 		color: white
 		background-color: var(--gbm-blue)
+		display: grid
+		grid-template-columns: 1fr 50px
+		.sheet-Box-Header-Icons
+			text-align: right
+			grid-column-start: 2
+
+.sheet-buttonless
+	border: none
+	background: none
+	font-weight: normal
+	text-align: left
+	padding: 0px
+	vertical-align: top
 
 /* Not currently in use but it looks cool, so keep this defintion around */
 
@@ -173,7 +242,43 @@ input.sheet-Mode-Playbook
 	width: 120px
 	font-size: #{$labelsize}
 
+// .ui-dialog .charsheet 
+button.sheet-button-header-collapse:before
+	font-family: 'Pictos'
+	font-size: #{$headsize}
+	content: 'J'
 
+button.sheet-button-header-expand:before
+	font-family: 'Pictos'
+	font-size: #{$headsize}
+	content: '`'
+
+button.sheet-button-header-edit:before
+	font-family: 'Pictos'
+	font-size: #{$headsize}
+	content: 'p'
+
+button.sheet-button-header-close:before
+	font-family: 'Pictos'
+	font-size: #{$headsize}
+	content: 'D'
+
+.sheet-button-header-expand, .sheet-button-header-collapse, .sheet-button-header-edit, .sheet-button-header-close
+	border: none
+	background: none
+	font-weight: normal
+	text-align: left
+	padding-top: 7px
+	padding-bottom: 7px
+	vertical-align: top
+	&:hover
+		text-shadow: 0 0 8px white
+	&:focus
+		text-shadow: 0 0 8px black
+
+.sheet-hide-on-one[value="1"], .sheet-hide-on-zero[value="0"] 
+	+ * 
+		display: none
 
 
 
