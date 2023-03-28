@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 27.3.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
+	<!ENTITY ns_extend "http://ns.adobe.com/Extensibility/1.0/">
+	<!ENTITY ns_ai "http://ns.adobe.com/AdobeIllustrator/10.0/">
+	<!ENTITY ns_graphs "http://ns.adobe.com/Graphs/1.0/">
+	<!ENTITY ns_vars "http://ns.adobe.com/Variables/1.0/">
+	<!ENTITY ns_imrep "http://ns.adobe.com/ImageReplacement/1.0/">
+	<!ENTITY ns_sfw "http://ns.adobe.com/SaveForWeb/1.0/">
+	<!ENTITY ns_custom "http://ns.adobe.com/GenericCustomNamespace/1.0/">
+	<!ENTITY ns_adobe_xpath "http://ns.adobe.com/XPath/1.0/">
+]>
+<svg version="1.1" id="Layer_1" xmlns:x="&ns_extend;" xmlns:i="&ns_ai;" xmlns:graph="&ns_graphs;"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="60px" height="60px"
+	 viewBox="0 0 60 60" style="enable-background:new 0 0 60 60;" xml:space="preserve">
+<style type="text/css">
+	.st0{clip-path:url(#SVGID_00000049223033524962039180000001862749928360719774_);fill:#FFFFFF;}
+	.st1{clip-path:url(#SVGID_00000049223033524962039180000001862749928360719774_);fill:#CBA5CE;}
+	.st2{fill:#40014B;}
+	.st3{clip-path:url(#SVGID_00000129171975924691638280000010145903857121068959_);fill:none;stroke:#CBA5CE;stroke-width:2.091;}
+	.st4{clip-path:url(#SVGID_00000129171975924691638280000010145903857121068959_);fill:none;stroke:#A464AB;stroke-width:2.091;}
+	.st5{clip-path:url(#SVGID_00000129171975924691638280000010145903857121068959_);fill:none;stroke:#FFFFFF;stroke-width:2.091;}
+	.st6{fill:none;stroke:#40014B;stroke-width:3.1365;stroke-miterlimit:3;}
+	.st7{fill:none;stroke:#40014B;stroke-width:3.1365;}
+</style>
+<metadata>
+	<sfw  xmlns="&ns_sfw;">
+		<slices></slices>
+		<sliceSourceBounds  bottomLeftOrigin="true" height="60" width="59.8" x="0.1" y="-60"></sliceSourceBounds>
+	</sfw>
+</metadata>
+<g>
+	<defs>
+		<rect id="SVGID_1_" x="0.1" y="0" width="59.8" height="60"/>
+	</defs>
+	<clipPath id="SVGID_00000148652140892049721340000001173367065985127838_">
+		<use xlink:href="#SVGID_1_"  style="overflow:visible;"/>
+	</clipPath>
+	<path style="clip-path:url(#SVGID_00000148652140892049721340000001173367065985127838_);fill:#FFFFFF;" d="M29.8,59.4
+		c16.4,0,29.7-13.3,29.7-29.7C59.5,13.3,46.2,0,29.8,0S0.1,13.3,0.1,29.7C0.1,46.1,13.4,59.4,29.8,59.4"/>
+	<path style="clip-path:url(#SVGID_00000148652140892049721340000001173367065985127838_);fill:#CBA5CE;" d="M29.8,55.7
+		c14.4,0,26.1-11.7,26.1-26.1c0-14.4-11.7-26.1-26.1-26.1S3.7,15.1,3.7,29.6C3.7,44,15.4,55.7,29.8,55.7"/>
+</g>
+<polygon class="st2" points="0.1,8.2 30,60 59.9,8.2 "/>
+<g>
+	<defs>
+		<rect id="SVGID_00000106865174054713912530000002268571621775463612_" x="0.1" y="0" width="59.8" height="60"/>
+	</defs>
+	<clipPath id="SVGID_00000061472513275451299700000007071702845064321666_">
+		<use xlink:href="#SVGID_00000106865174054713912530000002268571621775463612_"  style="overflow:visible;"/>
+	</clipPath>
+	
+		<path style="clip-path:url(#SVGID_00000061472513275451299700000007071702845064321666_);fill:none;stroke:#CBA5CE;stroke-width:2.091;" d="
+		M30.1,43.1c9.5,0,17.2-7.7,17.2-17.2c0-9.5-7.7-17.2-17.2-17.2s-17.2,7.7-17.2,17.2C12.9,35.4,20.6,43.1,30.1,43.1z"/>
+	
+		<circle style="clip-path:url(#SVGID_00000061472513275451299700000007071702845064321666_);fill:none;stroke:#A464AB;stroke-width:2.091;" cx="30.1" cy="25.9" r="11.2"/>
+	
+		<circle style="clip-path:url(#SVGID_00000061472513275451299700000007071702845064321666_);fill:none;stroke:#FFFFFF;stroke-width:2.091;" cx="30.1" cy="25.9" r="5.1"/>
+</g>
+<line class="st6" x1="22.4" y1="21.7" x2="17.7" y2="19.1"/>
+<line class="st6" x1="30.1" y1="28.4" x2="30.1" y2="33.5"/>
+<line class="st7" x1="42" y1="18.4" x2="51.9" y2="12.5"/>
+</svg>

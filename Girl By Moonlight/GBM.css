@@ -1,0 +1,248 @@
+@import url("https://fonts.googleapis.com/css2?family=Kufam:ital,wght@0,400;0,700;1,400;1,700&family=Montserrat:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+:root {
+	--gbm-blue: #006784;
+	--gbm-blue-pale: #dee9ed;
+	--gbm-blue-shade: #8fb1b5;
+	--gbm-blue-dark: #00394c;
+	--gbm-pink: #a52868;
+	--gbm-pink-pale: #d6b8c2;
+	--gbm-pink-dark: #68083f;
+	--gbm-teal: #358a8d;
+	--gbm-teal-pale: #a2bfc2;
+	--gbm-teal-dark: #005f5f;
+	--gbm-purple: #564a6f;
+	--gbm-purple-pale: #d6d1d9;
+	--gbm-purple-dark: #261841;
+	--gbm-fg: var(--gbm-blue);
+	--gbm-bg: white;
+	--gbm-bg-shaded: var(--gbm-blue-pale);
+	--gbm-font-size: 16px;
+	font-family: Montserrat, sans-serif;
+	color: var(--gbm-fg);
+	background: var(--gbm-bg);
+}
+
+.sheet-darkmode, .sheet-rolltemplate-darkmode {
+	--gbm-fg: var(--gbm-blue-pale);
+	--gbm-bg: #1f1f1f;
+	--gbm-bg-shaded: var(--gbm-blue-dark);
+}
+
+.ui-dialog .charsheet {
+	font-family: Montserrat, sans-serif;
+	font-size: 14px;
+	color: var(--gbm-fg) !important;
+	background-color: var(--gbm-bg);
+	line-height: unset;
+}
+
+input[type=text] {
+	background: none;
+	border: none;
+	color: var(--gbm-fg);
+	padding: 2px;
+	padding-top: 0px;
+	font-size: 14px;
+	border-bottom: 1px dotted var(--gbm-fg);
+	margin-bottom: 3px;
+}
+input[type=text]:hover, input[type=text]:active, input[type=text]:focus {
+	background-color: var(--gbm-bg);
+	border: none;
+	border-bottom: 1px dotted var(--gbm-fg);
+}
+
+textarea, select {
+	background: none;
+	border: none;
+	color: var(--gbm-fg);
+	font-size: 14px;
+	border-bottom: 1px dotted var(--gbm-fg);
+	padding: 2px;
+	padding-top: 0px;
+	padding-left: 0px;
+	margin-bottom: 3px;
+}
+textarea:hover, textarea:active, textarea:focus, select:hover, select:active, select:focus {
+	background-color: var(--gbm-bg);
+	border: none;
+	border-bottom: 1px dotted var(--gbm-fg);
+}
+
+select {
+	height: auto;
+}
+
+.sheet-bigname {
+	font-size: 28px;
+}
+
+input.sheet-HideNull[value=""] + *, input.sheet-HideNull[value="0"] + * {
+	display: none;
+}
+
+input.sheet-Mode-Playbook ~ .sheet-Playbook-Enigma, input.sheet-Mode-Playbook ~ * .sheet-Playbook-Enigma {
+	display: none;
+}
+input.sheet-Mode-Playbook ~ .sheet-Playbook-Stranger, input.sheet-Mode-Playbook ~ * .sheet-Playbook-Stranger {
+	display: none;
+}
+input.sheet-Mode-Playbook ~ .sheet-Playbook-TimeTraveller, input.sheet-Mode-Playbook ~ * .sheet-Playbook-TimeTraveller {
+	display: none;
+}
+input.sheet-Mode-Playbook ~ .sheet-Playbook-Harmony, input.sheet-Mode-Playbook ~ * .sheet-Playbook-Harmony {
+	display: none;
+}
+input.sheet-Mode-Playbook ~ .sheet-Playbook-Guardian, input.sheet-Mode-Playbook ~ * .sheet-Playbook-Guardian {
+	display: none;
+}
+input.sheet-Mode-Playbook ~ .sheet-Playbook-Outsider, input.sheet-Mode-Playbook ~ * .sheet-Playbook-Outsider {
+	display: none;
+}
+input.sheet-Mode-Playbook ~ .sheet-Playbook-UnlikelyHero, input.sheet-Mode-Playbook ~ * .sheet-Playbook-UnlikelyHero {
+	display: none;
+}
+input.sheet-Mode-Playbook[value=Enigma] ~ span.sheet-Playbook-Enigma, input.sheet-Mode-Playbook[value=Enigma] ~ * span.sheet-Playbook-Enigma {
+	display: inline;
+}
+input.sheet-Mode-Playbook[value=Enigma] ~ div.sheet-Playbook-Enigma, input.sheet-Mode-Playbook[value=Enigma] ~ * div.sheet-Playbook-Enigma {
+	display: block;
+}
+input.sheet-Mode-Playbook[value=Stranger] ~ span.sheet-Playbook-Stranger, input.sheet-Mode-Playbook[value=Stranger] ~ * span.sheet-Playbook-Stranger {
+	display: inline;
+}
+input.sheet-Mode-Playbook[value=Stranger] ~ div.sheet-Playbook-Stranger, input.sheet-Mode-Playbook[value=Stranger] ~ * div.sheet-Playbook-Stranger {
+	display: block;
+}
+input.sheet-Mode-Playbook[value=TimeTraveller] ~ span.sheet-Playbook-TimeTraveller, input.sheet-Mode-Playbook[value=TimeTraveller] ~ * span.sheet-Playbook-TimeTraveller {
+	display: inline;
+}
+input.sheet-Mode-Playbook[value=TimeTraveller] ~ div.sheet-Playbook-TimeTraveller, input.sheet-Mode-Playbook[value=TimeTraveller] ~ * div.sheet-Playbook-TimeTraveller {
+	display: block;
+}
+input.sheet-Mode-Playbook[value=Harmony] ~ span.sheet-Playbook-Harmony, input.sheet-Mode-Playbook[value=Harmony] ~ * span.sheet-Playbook-Harmony {
+	display: inline;
+}
+input.sheet-Mode-Playbook[value=Harmony] ~ div.sheet-Playbook-Harmony, input.sheet-Mode-Playbook[value=Harmony] ~ * div.sheet-Playbook-Harmony {
+	display: block;
+}
+input.sheet-Mode-Playbook[value=Guardian] ~ span.sheet-Playbook-Guardian, input.sheet-Mode-Playbook[value=Guardian] ~ * span.sheet-Playbook-Guardian {
+	display: inline;
+}
+input.sheet-Mode-Playbook[value=Guardian] ~ div.sheet-Playbook-Guardian, input.sheet-Mode-Playbook[value=Guardian] ~ * div.sheet-Playbook-Guardian {
+	display: block;
+}
+input.sheet-Mode-Playbook[value=Outsider] ~ span.sheet-Playbook-Outsider, input.sheet-Mode-Playbook[value=Outsider] ~ * span.sheet-Playbook-Outsider {
+	display: inline;
+}
+input.sheet-Mode-Playbook[value=Outsider] ~ div.sheet-Playbook-Outsider, input.sheet-Mode-Playbook[value=Outsider] ~ * div.sheet-Playbook-Outsider {
+	display: block;
+}
+input.sheet-Mode-Playbook[value=UnlikelyHero] ~ span.sheet-Playbook-UnlikelyHero, input.sheet-Mode-Playbook[value=UnlikelyHero] ~ * span.sheet-Playbook-UnlikelyHero {
+	display: inline;
+}
+input.sheet-Mode-Playbook[value=UnlikelyHero] ~ div.sheet-Playbook-UnlikelyHero, input.sheet-Mode-Playbook[value=UnlikelyHero] ~ * div.sheet-Playbook-UnlikelyHero {
+	display: block;
+}
+
+.sheet-Bio-Block {
+	display: -ms-grid;
+	display: grid;
+	-ms-grid-columns: 100px 8px 1fr;
+	grid-template-columns: 100px 1fr;
+	-webkit-column-gap: 8px;
+	   -moz-column-gap: 8px;
+	        column-gap: 8px;
+	row-gap: 8px;
+}
+.sheet-Bio-Block .sheet-Label, .sheet-Bio-Block .sheet-Field, .sheet-Bio-Block .sheet-Field-Wide {
+	vertical-align: top;
+}
+.sheet-Bio-Block .sheet-Label {
+	-ms-grid-column: 1;
+	    grid-column-start: 1;
+	font-weight: bold;
+	font-size: 10px;
+	text-align: right;
+	text-transform: uppercase;
+}
+.sheet-Bio-Block .sheet-Field {
+	-ms-grid-column: 2;
+	    grid-column-start: 2;
+}
+.sheet-Bio-Block .sheet-Field-Wide {
+	-ms-grid-column: 1;
+	-ms-grid-column-span: 2;
+	grid-column: 1/span 2;
+}
+.sheet-Bio-Block .sheet-Field .sheet-Prompt, .sheet-Bio-Block .sheet-Field-Wide .sheet-Prompt {
+	font-size: 10px;
+	font-style: italic;
+	text-align: right;
+}
+.sheet-Bio-Block .sheet-Field input[type=text], .sheet-Bio-Block .sheet-Field select, .sheet-Bio-Block .sheet-Field textarea, .sheet-Bio-Block .sheet-Field-Wide input[type=text], .sheet-Bio-Block .sheet-Field-Wide select, .sheet-Bio-Block .sheet-Field-Wide textarea {
+	width: 100%;
+}
+.sheet-Bio-Block .sheet-Field textarea, .sheet-Bio-Block .sheet-Field-Wide textarea {
+	height: 50px;
+	margin-bottom: 0px;
+}
+
+.sheet-Blocks-Playbooks {
+	display: -ms-grid;
+	display: grid;
+	-ms-grid-columns: 40% 12px 40% 12px 20%;
+	grid-template-columns: 40% 40% 20%;
+	-webkit-column-gap: 12px;
+	   -moz-column-gap: 12px;
+	        column-gap: 12px;
+}
+.sheet-Blocks-Playbooks .sheet-Left, .sheet-Blocks-Playbooks .sheet-Mid, .sheet-Blocks-Playbooks .sheet-Right {
+	vertical-align: top;
+}
+.sheet-Blocks-Playbooks .sheet-Left {
+	-ms-grid-column: 1;
+	    grid-column-start: 1;
+}
+.sheet-Blocks-Playbooks .sheet-Mid {
+	-ms-grid-column: 2;
+	    grid-column-start: 2;
+}
+.sheet-Blocks-Playbooks .sheet-Right {
+	-ms-grid-column: 3;
+	    grid-column-start: 3;
+}
+
+.sheet-Box {
+	background-color: var(--gbm-bg-shaded);
+	padding-right: 8px;
+	padding-bottom: 4px;
+	padding-top: 4px;
+	padding-left: 4px;
+	border-radius: 0px 12px 12px 12px;
+}
+.sheet-Box .sheet-Box-Header {
+	border: 0.5px solid var(--gbm-blue);
+	border-radius: 0px 12px 0px 0px;
+	margin-right: -8px;
+	margin-top: -4px;
+	margin-left: -4px;
+	margin-bottom: 4px;
+	padding-left: 4px;
+	font-size: 21px;
+	color: white;
+	background-color: var(--gbm-blue);
+}
+
+/* Not currently in use but it looks cool, so keep this defintion around */
+.sheet-Lozenge-Label {
+	display: inline-block;
+	font-weight: bold;
+	color: var(--gbm-blue-pale);
+	background-color: var(--gbm-blue);
+	padding-left: 6px;
+	border-radius: 12px 0px 0px 12px;
+	border-right: 12px solid var(--gbm-blue-dark);
+	width: 120px;
+	font-size: 10px;
+}

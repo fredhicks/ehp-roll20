@@ -1,0 +1,184 @@
+$bodyfont: 'Montserrat', sans-serif
+$bodysize: 14px
+$labelsize: 10px
+$smallsize: 10px
+$headsize: 21px
+$bigsize: 28px
+$headfont: 'Kufam', sans-serif
+
+@import url('https://fonts.googleapis.com/css2?family=Kufam:ital,wght@0,400;0,700;1,400;1,700&family=Montserrat:ital,wght@0,400;0,700;1,400;1,700&display=swap')
+
+// Comment valid?
+
+:root
+	--gbm-blue: #006784
+	--gbm-blue-pale: #dee9ed
+	--gbm-blue-shade: #8fb1b5
+	--gbm-blue-dark: #00394c
+	--gbm-pink: #a52868
+	--gbm-pink-pale: #d6b8c2
+	--gbm-pink-dark: #68083f
+	--gbm-teal: #358a8d
+	--gbm-teal-pale: #a2bfc2
+	--gbm-teal-dark: #005f5f
+	--gbm-purple: #564a6f
+	--gbm-purple-pale: #d6d1d9
+	--gbm-purple-dark: #261841
+	--gbm-fg: var(--gbm-blue)
+	--gbm-bg: white
+	--gbm-bg-shaded: var(--gbm-blue-pale)
+	--gbm-font-size: 16px
+	font-family: #{$bodyfont}
+	color: var(--gbm-fg)
+	background: var(--gbm-bg)
+
+.sheet-darkmode, .sheet-rolltemplate-darkmode
+	--gbm-fg: var(--gbm-blue-pale)
+	--gbm-bg: #1f1f1f
+	--gbm-bg-shaded: var(--gbm-blue-dark)
+
+.ui-dialog .charsheet
+	font-family: #{$bodyfont}
+	font-size: #{$bodysize} 
+	color: var(--gbm-fg) !important
+	background-color: var(--gbm-bg)
+	line-height: unset
+
+input[type="text"]
+	background: none
+	border: none
+	color: var(--gbm-fg)
+	padding: 2px
+	padding-top: 0px
+	font-size: #{$bodysize}
+	border-bottom: 1px dotted var(--gbm-fg)
+	margin-bottom: 3px
+	&:hover, &:active, &:focus
+		background-color: var(--gbm-bg)
+		border: none
+		border-bottom: 1px dotted var(--gbm-fg)
+
+textarea, select
+	background: none
+	border: none
+	color: var(--gbm-fg)
+	font-size: #{$bodysize}
+	border-bottom: 1px dotted var(--gbm-fg)
+	padding: 2px
+	padding-top: 0px
+	padding-left: 0px
+	margin-bottom: 3px
+	&:hover, &:active, &:focus
+		background-color: var(--gbm-bg)
+		border: none
+		border-bottom: 1px dotted var(--gbm-fg)
+
+select
+	height: auto
+
+.sheet-bigname
+	font-size: #{$bigsize}
+
+input.sheet-HideNull
+	&[value=""], &[value="0"]
+		+ *
+			display: none
+
+$playbooks: Enigma, Stranger, TimeTraveller, Harmony, Guardian, Outsider, UnlikelyHero
+
+input.sheet-Mode-Playbook
+	~, ~ *
+		@each $pb in $playbooks
+			.sheet-Playbook-#{$pb}
+				display: none
+	@each $pb in $playbooks
+		&[value=#{$pb}]
+			~, ~ *
+				span.sheet-Playbook-#{$pb} 
+					display: inline
+				div.sheet-Playbook-#{$pb}
+					display: block
+
+.sheet-Bio-Block
+	display: grid
+	grid-template-columns: 100px 1fr
+	column-gap: 8px
+	row-gap: 8px
+	.sheet-Label, .sheet-Field, .sheet-Field-Wide
+		vertical-align: top
+	.sheet-Label
+		grid-column-start: 1
+		font-weight: bold
+		font-size: #{$labelsize}
+		text-align: right
+		text-transform: uppercase
+	.sheet-Field
+		grid-column-start: 2
+	.sheet-Field-Wide
+		grid-column: 1 / span 2
+	.sheet-Field, .sheet-Field-Wide
+		.sheet-Prompt
+			font-size: #{$smallsize}
+			font-style: italic
+			text-align: right
+		input[type='text'], select, textarea
+			width: 100%
+		textarea
+			height: 50px
+			margin-bottom: 0px
+
+.sheet-Blocks-Playbooks
+	display: grid
+	grid-template-columns: 40% 40% 20%
+	column-gap: 12px
+	.sheet-Left, .sheet-Mid, .sheet-Right
+		vertical-align: top
+	.sheet-Left
+		grid-column-start: 1
+	.sheet-Mid
+		grid-column-start: 2
+	.sheet-Right
+		grid-column-start: 3
+
+.sheet-Box
+	background-color: var(--gbm-bg-shaded)
+	padding-right: 8px
+	padding-bottom: 4px
+	padding-top: 4px
+	padding-left: 4px
+	// border: 0.5px solid var(--gbm-blue)
+	border-radius: 0px 12px 12px 12px
+	.sheet-Box-Header
+		border: 0.5px solid var(--gbm-blue)
+		border-radius: 0px 12px 0px 0px
+		margin-right: -8px
+		margin-top: -4px
+		margin-left: -4px
+		margin-bottom: 4px
+		padding-left: 4px
+		font-size: #{$headsize}
+		color: white
+		background-color: var(--gbm-blue)
+
+/* Not currently in use but it looks cool, so keep this defintion around */
+
+.sheet-Lozenge-Label
+	display: inline-block
+	font-weight: bold
+	color: var(--gbm-blue-pale)
+	background-color: var(--gbm-blue)
+	padding-left: 6px
+	border-radius: 12px 0px 0px 12px
+	border-right: 12px solid var(--gbm-blue-dark)
+	width: 120px
+	font-size: #{$labelsize}
+
+
+
+
+
+
+
+
+
+

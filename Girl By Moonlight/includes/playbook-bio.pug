@@ -1,0 +1,103 @@
+.sheet-Box
+	.sheet-Box-Header
+		+translate('Bio')
+	.sheet-Bio-Block
+		.sheet-Label
+			+translate('Playbook')
+		.sheet-Field
+				+select("Playbook")
+					+option("Select a Playbook","")
+					each pb, key in playbooks
+						+option(pb,key)
+		.sheet-Label
+			+translate('Mundane Name')
+		.sheet-Field
+			+text('character_name')
+			.sheet-Prompt
+				.sheet-Playbook-Enigma
+					+translate('a forgettable name — a puzzling name')
+				.sheet-Playbook-Stranger
+					+translate('a confusing name — a model name')
+				.sheet-Playbook-TimeTraveller
+					+translate('an anachronistic name — a clever name')
+				.sheet-Playbook-Harmony
+					+translate('a lofty name — a romantic name')
+				.sheet-Playbook-Guardian
+					+translate('a traditional name — a resolute name')
+				.sheet-Playbook-Outsider
+					+translate('a fierce name — an arrogant name')
+				.sheet-Playbook-UnlikelyHero
+					+translate('an innocent name — a pretty name')
+		.sheet-Label
+			+translate('True Name')
+		.sheet-Field
+			+text('TrueName')
+			.sheet-Prompt
+				.sheet-Playbook-Enigma
+					+translate('a dashing name — an imperious name')
+				.sheet-Playbook-Stranger
+					+translate('an alien name — an unnerving name')
+				.sheet-Playbook-TimeTraveller
+					+translate('an historic name — an ominous name')
+				.sheet-Playbook-Harmony
+					+translate('a musical name — a beautiful name')
+				.sheet-Playbook-Guardian
+					+translate('a warrior name — an iconic name')
+				.sheet-Playbook-Outsider
+					+translate('a rebellious name — a villainous name')
+				.sheet-Playbook-UnlikelyHero
+					+translate('a sacred name — a renowned name')
+		.sheet-Label
+			+translate('Role')
+		.sheet-Field
+			+text('Role')
+		.sheet-Label
+			+translate('Background')
+		.sheet-Field
+			+text('Background')
+		.sheet-Label
+			+translate('Obligation')
+		.sheet-Field
+			+text('Obligation')
+		.sheet-Label
+			+translate('Promises')
+		.sheet-Field
+			+textarea('Promise-1')
+			.sheet-Prompt
+				.sheet-Playbook-Enigma
+					+translate('a secretive promise')
+				.sheet-Playbook-Stranger
+					+translate('a promise of growth')
+				.sheet-Playbook-TimeTraveller
+					+translate('a forgotten promise')
+				.sheet-Playbook-Harmony
+					+translate('a shared promise')
+				.sheet-Playbook-Guardian
+					+translate('a promise of martyrdom')
+				.sheet-Playbook-Outsider
+					+translate('a promise to your rival')
+				.sheet-Playbook-UnlikelyHero
+					+translate('a naive promise')
+		.sheet-Field
+			+textarea('Promise-2')
+			.sheet-Prompt
+				.sheet-Playbook-Enigma
+					+translate('an intimate promise')
+				.sheet-Playbook-Stranger
+					+translate('a misguided promise')
+				.sheet-Playbook-TimeTraveller
+					+translate('a paradoxical promise')
+					br
+					+translate('One promise must involve your fated person and their fate.')
+				.sheet-Playbook-Harmony
+					+translate('two conflicting promises')
+				.sheet-Playbook-Guardian
+					+translate('a protective promise')
+				.sheet-Playbook-Outsider
+					+translate('a competitive promise')
+				.sheet-Playbook-UnlikelyHero
+					+translate('an impossible promise')
+		.sheet-Label
+			+translate('Look')
+		.sheet-Field
+			+textarea('Look')

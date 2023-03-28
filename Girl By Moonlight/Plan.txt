@@ -1,0 +1,39 @@
+sheet.json
+	- offer config option to select which of the game settings to use
+
+GBM.sass
+	- @import url('https://fonts.googleapis.com/css2?family=Kufam:ital,wght@0,400;0,700;1,400;1,700&family=Montserrat:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+	- font-family: 'Kufam', sans-serif; /* headers maybe */
+	- font-family: 'Montserrat', sans-serif; /* body */
+	- Define some colors
+		- blue: #006784
+			- pale: #dee9ed
+			- shade: #8fb1b5 — darker than pale, paler than standard
+			- dark: #00394c — used for text in blue contexts
+		- magenta: #a52868
+			- pale: #d6b8c2
+			- dark: #68083f - used for text in magenta contexts
+		- teal: #358a8d
+			- pale: #a2bfc2
+			- dark: #005f5f - used for text in teal contexts
+		- purple: #564a6f (it's kinda greyed out but it's purple)
+			- pale: #d6d1d9
+			- dark: #261841
+		- boxes with sharp upper left corner and other three corners rounded is great, but not critical
+	- Will need some SVG elements if not available via font:
+		- Empty star, filled in star (different colors)
+		- Empty circle, filled in circle (different colors)
+
+GBM.pug
+	- playbook
+		- common: player agenda, bonus die, teamwork, stats (actions) layout, bio details, stress track, transcendence track, harm and recovery, links, xp track, veteran ability area (tho will need to have list of abilities, excluding the currently-selected playbook)
+		- individualized: abilities list, transcendent abilities list, experience triggers, gather information questions, eclipse effect, eclipse escape, promises? 
+	- series
+		- main sheet: bio list, series abilities, transcendent abilities, missions progression, XP track, series-specific track(s) often including investigation, series rules, names block
+		- series map page: highly individualized
+		- director's sheet: agenda, judgment calls, principles, series specific track, fallout, names, notes
+		- series creation sheet: questions, answers, notes
+	- rules reference
+		- embed in playbook & other contexts
+		- consider 'tooltip' style popups to explain what each action (or attribute) represents.
+		

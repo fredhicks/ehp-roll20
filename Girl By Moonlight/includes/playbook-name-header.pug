@@ -1,0 +1,12 @@
+.sheet-bigname
+	+display('character_name')
+	+hidden('TrueName').sheet-HideNull
+	span
+		| • 
+		+display('TrueName')
+	+hidden('Playbook').sheet-HideNull
+	span
+		| • 
+		+display('Playbook')
+div
+	+display('playset')

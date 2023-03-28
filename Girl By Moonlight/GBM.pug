@@ -1,0 +1,25 @@
+include includes/mixins.pug 
++hidden("Playbook").sheet-Mode-Playbook
++hidden("playset").sheet-Mode-Playset // need to support this
+-
+	var playbooks = { 
+		"Enigma": "Enigma", 
+		"Stranger": "Stranger", 
+		"TimeTraveller": "Time Traveller", 
+		"Harmony": "Harmony", 
+		"Guardian": "Guardian", 
+		"Outsider": "Outsider", 
+		"UnlikelyHero": "Unlikely Hero"
+	};
+
+.sheet-Playbooks
+	div
+		include includes/playbook-name-header.pug
+	.sheet-Blocks-Playbooks
+		.sheet-Left
+			include includes/playbook-bio.pug
+		.sheet-Mid
+		.sheet-Right
+// Translations for extraction
+
++translations
