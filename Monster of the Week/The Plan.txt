@@ -1,51 +1,20 @@
-PENDING
-
-Make sure that the Game Options are available in outside-of-launched-game config options (sheet.json)
-
-Bone Spear:
-x Community support sheet (page 336+)
-x It also brings in some different basic moves (p.365-370),
-x Luck is now Ancestral Favour (p. 371) -- addressed in reference, but will need to be done for the sheet-itself
-	x Luck Specials
-	x Improvements
-	x Chosen: I'm Here For A Reason; Your Fate (special)
-	x Pararomantic: I Am Theirs And They Are Mine; Fate of your love (special)
-	x Spooky: The Dark Side (special)
-x And there are some new/different motivations & types and such (page 379+)
-	x Monsters
-	x Phenomena
-	x Minions
-	x Locations
-	x Bystanders
-x This also means that atonement *mysteries* are redundant for bone spear — will need to remove the Standard-or-Atonement thing from the mystery edit at the top. 
-- For the PC playbooks there’s gear list modifications and move modifications (starts page 345)
-- In some cases a given playbook is so thoroughly reworked it is its own new thing (e.g., the Loner is a reworked Crooked that changes a ton, pp 348-351). 
-- Wear tracking for ALL gear — The idea that your gear can break down over time (playing to the stone age theme, p372-373). 
-	- This will include all playbook gear (see below)
-	x Wide-Purpose Everyday Gear list available to all playbooks (page 374)
-x Make the playbook names that changed (Crooked → Loner, Expert → Lore-Holder, Monstrous → Other-Folk, Divine → Spirit-Touched) show up as their new names in the drop-down and longform playbook selection screen.
-	x Change mentions of original name in Improvements. 
-
-
 DONE 
 
-Added Codex of Worlds world-setting selection to the game options.
-
-Support for Gothic Century, Monster Marches, and Dreaming With the Gods modifications to playbooks moves and gear as indicated by Codex of Worlds.
-
-Support for Gothic Century's Dark Pasts from Codex of Worlds, when Gothic Century is selected in game options on a sheet.
-
-Added list of special materials available for weapons to all character gear listings for games set in the Monster Marches.
-
-Changed the Mystery Sheet behavior for phenomena to provide a Tenacity tracker if desired (for Gothic Haunts as found in the Codex of Worlds, etc)
-
-Added support for the Villain threat type from Monster Marches to the Mystery Sheet.
-
-Added Dive into Dreams basic move support for Dreaming With the Gods setting from Codex of Worlds. Will show up in the hunter's reference when the Dreaming With the Gods setting is selected in game options.
-
-Added a "Mark of the Spirit-Touched" field to the character Look block which is activated only for Monster Marches.
-
-Fixed CSS for dark mode display of some annotations that appear on some rolltemplate outputs.
+- Added Codex of Worlds world-setting selection and non-lethal weapons on/off to the pre-launch game options.
+- Support for Gothic Century, Monster Marches, Dreaming With the Gods, and Bone Spear modifications to the moves, gear, and other playbook features as indicated by Codex of Worlds. Includes the Bone Spear specific reskinning of several playbooks.
+- Support for Gothic Century's Dark Pasts from Codex of Worlds, when Gothic Century is selected in game options on a sheet.
+- Added list of special materials available for weapons to all character gear listings for games set in the Monster Marches.
+- Changed the Mystery Sheet behavior for phenomena to provide a Tenacity tracker if desired (for Gothic Haunts as found in the Codex of Worlds, etc)
+- Added support for the Villain threat type from Monster Marches to the Mystery Sheet.
+- Added Dive into Dreams basic move support for Dreaming With the Gods setting from Codex of Worlds. Will show up in the hunter's reference when the Dreaming With the Gods setting is selected in game options.
+- Added a "Mark of the Spirit-Touched" field to the character Look block which is activated only for Monster Marches.
+- Added a Community tracking sheet to support the Bone Spear setting from Codex of Worlds.
+- Added support for the changed and additional basic moves from Bone Spear to the on-sheet Hunter's Reference.
+- Added support for changing Luck to Ancestral Favour in Bone Spear.
+- Added support for the different features of mysteries, monsters, phenomena, bystanders, locations, and minions for Bone Spear to the Keeper's mystery sheet.
+- Atonement mysteries are redundant for Bone Spear; made sure that's handled gracefully.
+- Added support for tracking wear, everyday gear, and special gear as required for Bone Spear.
+- Fixed CSS for dark mode display of some annotations that appear on some rolltemplate outputs.
 
 
 
