@@ -57,6 +57,7 @@
 		.sheet-Box-Header-Text
 			+translate('Abilities')
 		.sheet-Box-Header-Icons
+			+hideUnmarked('Toggle-Abilities-Marked')
 			+toggle('Toggle-Abilities-Expand')
 	+hidden('Toggle-Abilities-Expand').sheet-hide-on-one
 	.sheet-Abilities-Block
@@ -89,3 +90,14 @@
 							+translate(ability['name'])
 						|: 
 						+translate(ability['effect'])
+
+
+
+
+
+
+
+
+
+
+

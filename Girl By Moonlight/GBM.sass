@@ -11,7 +11,7 @@ $skyicon: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl
 $starsicon: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/playset-stars.svg)
 $dreamsicon: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/playset-dreams.svg)
 $markonicon: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/mark-on.svg)
-$markonicon: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/mark-off.svg)
+$markofficon: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/mark-off.svg)
 
 @import url('https://fonts.googleapis.com/css2?family=Kufam:ital,wght@0,400;0,700;1,400;1,700&family=Montserrat:ital,wght@0,400;0,700;1,400;1,700&display=swap')
 
@@ -187,7 +187,7 @@ input.sheet-Mode-Playbook
 
 .sheet-Abilities-Block
 	display: grid
-	grid-template-columns: 16px 1fr
+	grid-template-columns: 24px 1fr
 	column-gap: 4px
 	row-gap: 8px
 	.sheet-Ability
@@ -212,7 +212,6 @@ input.sheet-Mode-Playbook
 	padding-bottom: 4px
 	padding-top: 4px
 	padding-left: 4px
-	// border: 0.5px solid var(--gbm-blue)
 	border-radius: 0px 12px 12px 12px
 	.sheet-Box-Header
 		border: 0.5px solid var(--gbm-blue)
@@ -226,18 +225,10 @@ input.sheet-Mode-Playbook
 		color: white
 		background-color: var(--gbm-blue)
 		display: grid
-		grid-template-columns: 1fr 50px
+		grid-template-columns: 1fr 75px
 		.sheet-Box-Header-Icons
 			text-align: right
 			grid-column-start: 2
-
-.sheet-buttonless
-	border: none
-	background: none
-	font-weight: normal
-	text-align: left
-	padding: 0px
-	vertical-align: top
 
 /* Not currently in use but it looks cool, so keep this defintion around */
 
@@ -252,7 +243,14 @@ input.sheet-Mode-Playbook
 	width: 120px
 	font-size: #{$labelsize}
 
-// .ui-dialog .charsheet 
+.sheet-buttonless
+	border: none
+	background: none
+	font-weight: normal
+	text-align: left
+	padding: 0px
+	vertical-align: top
+
 button.sheet-button-header-collapse:before
 	font-family: 'Pictos'
 	font-size: #{$headsize}
@@ -283,7 +281,17 @@ button.sheet-button-mark-off:before
 	height: #{$bodysize}
 	width: #{$bodysize}
 
-.sheet-button-header-expand, .sheet-button-header-collapse, .sheet-button-header-edit, .sheet-button-header-close
+button.sheet-button-header-mark-on:before
+	content: #{$markonicon}
+	height: #{$headsize}
+	width: #{$headsize}
+
+button.sheet-button-header-mark-off:before
+	content: #{$markofficon}
+	height: #{$headsize}
+	width: #{$headsize}
+
+.sheet-button-header-expand, .sheet-button-header-collapse, .sheet-button-header-edit, .sheet-button-header-close, .sheet-button-header-mark-off, .sheet-button-header-mark-on
 	border: none
 	background: none
 	font-weight: normal
@@ -295,6 +303,13 @@ button.sheet-button-mark-off:before
 		text-shadow: 0 0 8px white
 	&:focus
 		text-shadow: 0 0 8px black
+
+.sheet-button-mark-on, .sheet-button-mark-off
+	border: none
+	background: none
+	font-weight: normal
+	text-align: left
+	vertical-align: top
 
 .sheet-hide-on-one[value="1"], .sheet-hide-on-zero[value="0"] 
 	+ * 

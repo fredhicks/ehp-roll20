@@ -1,11 +1,28 @@
 
 <!-- mixins-->
-<script type="text/worker">var toggles = [
+<script type="text/worker">var playbooks = [
+	"Enigma", 
+	"Stranger", 
+	"TimeTraveller", 
+	"Harmony", 
+	"Guardian", 
+	"Outsider", 
+	"UnlikelyHero"
+];
+var toggles = [
 	"Toggle-Bio-Expand",
 	"Toggle-Abilities-Expand",
+	"Toggle-Abilities-Marked",
 ];
 var toggleclicks = "";
 var clicks = 0;
+
+for(var i; i < 20; i++) {
+	for(var pb of playbooks) {
+		var field = 'Ability-' + pb + '-' + i;
+		toggles.push(field);
+	}
+}
 
 for(var i of toggles) {
 	clicks++;
@@ -195,6 +212,10 @@ on(toggleclicks, function(e) {
           <div class="sheet-Box-Header-Text"><span data-i18n="Abilities">Abilities</span>
           </div>
           <div class="sheet-Box-Header-Icons">
+            <input class="sheet-hide-on-zero" name="attr_Toggle-Abilities-Marked" type="hidden" value="0"/>
+            <button class="sheet-button-header-mark-on" type="action" name="act_Toggle-Abilities-Marked"></button>
+            <input class="sheet-hide-on-one" name="attr_Toggle-Abilities-Marked" type="hidden" value="0"/>
+            <button class="sheet-button-header-mark-off" type="action" name="act_Toggle-Abilities-Marked"></button>
             <input class="sheet-hide-on-zero" name="attr_Toggle-Abilities-Expand" type="hidden" value="0"/>
             <button class="sheet-button-header-expand" type="action" name="act_Toggle-Abilities-Expand"></button>
             <input class="sheet-hide-on-one" name="attr_Toggle-Abilities-Expand" type="hidden" value="0"/>

@@ -14,13 +14,13 @@
 	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16px" height="16px"
 	 viewBox="0 0 16 16" style="enable-background:new 0 0 16 16;" xml:space="preserve">
 <style type="text/css">
-	.st0{fill:#47857E;}
+	.st0{fill:#FFFFFF;}
 	.st1{fill:#146464;}
 </style>
 <metadata>
 	<sfw  xmlns="&ns_sfw;">
 		<slices></slices>
-		<sliceSourceBounds  bottomLeftOrigin="true" height="16" width="15.6" x="0.2" y="-16"></sliceSourceBounds>
+		<sliceSourceBounds  bottomLeftOrigin="true" height="16" width="15.6" x="0.2" y="0"></sliceSourceBounds>
 	</sfw>
 </metadata>
 <g>
@@ -29,4 +29,5 @@
 <path class="st1" d="M8,16l-0.7-1.7c-1.1-2.7-2.9-4.5-5.5-5.6L0.2,8l1.6-0.7c2.6-1.1,4.4-2.9,5.5-5.6L8,0l0.7,1.7
 	c1.1,2.7,2.9,4.5,5.5,5.6L15.8,8l-1.6,0.7c-2.6,1.1-4.4,2.9-5.5,5.6L8,16z M3.8,8C5.6,9,7,10.5,8,12.3C9,10.5,10.4,9,12.2,8
 	C10.4,7,9,5.5,8,3.7C7,5.5,5.6,7,3.8,8z"/>
+<path class="st1" d="M8,4.4C7.2,5.9,6,7.2,4.5,8C6,8.8,7.2,10.1,8,11.6c0.8-1.5,2-2.7,3.5-3.6C10,7.2,8.8,5.9,8,4.4z"/>
 </svg>

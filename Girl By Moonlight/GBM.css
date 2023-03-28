@@ -250,8 +250,8 @@ input.sheet-Mode-Playbook[value=UnlikelyHero] ~ div.sheet-Playbook-UnlikelyHero,
 .sheet-Abilities-Block {
 	display: -ms-grid;
 	display: grid;
-	-ms-grid-columns: 16px 4px 1fr;
-	grid-template-columns: 16px 1fr;
+	-ms-grid-columns: 24px 4px 1fr;
+	grid-template-columns: 24px 1fr;
 	-webkit-column-gap: 4px;
 	   -moz-column-gap: 4px;
 	        column-gap: 4px;
@@ -308,22 +308,13 @@ input.sheet-Mode-Playbook[value=UnlikelyHero] ~ div.sheet-Playbook-UnlikelyHero,
 	background-color: var(--gbm-blue);
 	display: -ms-grid;
 	display: grid;
-	-ms-grid-columns: 1fr 50px;
-	grid-template-columns: 1fr 50px;
+	-ms-grid-columns: 1fr 75px;
+	grid-template-columns: 1fr 75px;
 }
 .sheet-Box .sheet-Box-Header .sheet-Box-Header-Icons {
 	text-align: right;
 	-ms-grid-column: 2;
 	    grid-column-start: 2;
-}
-
-.sheet-buttonless {
-	border: none;
-	background: none;
-	font-weight: normal;
-	text-align: left;
-	padding: 0px;
-	vertical-align: top;
 }
 
 /* Not currently in use but it looks cool, so keep this defintion around */
@@ -337,6 +328,15 @@ input.sheet-Mode-Playbook[value=UnlikelyHero] ~ div.sheet-Playbook-UnlikelyHero,
 	border-right: 12px solid var(--gbm-blue-dark);
 	width: 120px;
 	font-size: 10px;
+}
+
+.sheet-buttonless {
+	border: none;
+	background: none;
+	font-weight: normal;
+	text-align: left;
+	padding: 0px;
+	vertical-align: top;
 }
 
 button.sheet-button-header-collapse:before {
@@ -363,7 +363,31 @@ button.sheet-button-header-close:before {
 	content: "D";
 }
 
-.sheet-button-header-expand, .sheet-button-header-collapse, .sheet-button-header-edit, .sheet-button-header-close {
+button.sheet-button-mark-on:before {
+	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/mark-on.svg);
+	height: 14px;
+	width: 14px;
+}
+
+button.sheet-button-mark-off:before {
+	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/mark-off.svg);
+	height: 14px;
+	width: 14px;
+}
+
+button.sheet-button-header-mark-on:before {
+	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/mark-on.svg);
+	height: 21px;
+	width: 21px;
+}
+
+button.sheet-button-header-mark-off:before {
+	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/mark-off.svg);
+	height: 21px;
+	width: 21px;
+}
+
+.sheet-button-header-expand, .sheet-button-header-collapse, .sheet-button-header-edit, .sheet-button-header-close, .sheet-button-header-mark-off, .sheet-button-header-mark-on {
 	border: none;
 	background: none;
 	font-weight: normal;
@@ -372,11 +396,19 @@ button.sheet-button-header-close:before {
 	padding-bottom: 7px;
 	vertical-align: top;
 }
-.sheet-button-header-expand:hover, .sheet-button-header-collapse:hover, .sheet-button-header-edit:hover, .sheet-button-header-close:hover {
+.sheet-button-header-expand:hover, .sheet-button-header-collapse:hover, .sheet-button-header-edit:hover, .sheet-button-header-close:hover, .sheet-button-header-mark-off:hover, .sheet-button-header-mark-on:hover {
 	text-shadow: 0 0 8px white;
 }
-.sheet-button-header-expand:focus, .sheet-button-header-collapse:focus, .sheet-button-header-edit:focus, .sheet-button-header-close:focus {
+.sheet-button-header-expand:focus, .sheet-button-header-collapse:focus, .sheet-button-header-edit:focus, .sheet-button-header-close:focus, .sheet-button-header-mark-off:focus, .sheet-button-header-mark-on:focus {
 	text-shadow: 0 0 8px black;
+}
+
+.sheet-button-mark-on, .sheet-button-mark-off {
+	border: none;
+	background: none;
+	font-weight: normal;
+	text-align: left;
+	vertical-align: top;
 }
 
 .sheet-hide-on-one[value="1"] + *, .sheet-hide-on-zero[value="0"] + * {

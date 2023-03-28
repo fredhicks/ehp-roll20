@@ -1,9 +1,26 @@
+var playbooks = [
+	"Enigma", 
+	"Stranger", 
+	"TimeTraveller", 
+	"Harmony", 
+	"Guardian", 
+	"Outsider", 
+	"UnlikelyHero"
+];
 var toggles = [
 	"Toggle-Bio-Expand",
 	"Toggle-Abilities-Expand",
+	"Toggle-Abilities-Marked",
 ];
 var toggleclicks = "";
 var clicks = 0;
+
+for(var i; i < 20; i++) {
+	for(var pb of playbooks) {
+		var field = 'Ability-' + pb + '-' + i;
+		toggles.push(field);
+	}
+}
 
 for(var i of toggles) {
 	clicks++;
