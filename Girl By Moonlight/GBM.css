@@ -552,4 +552,36 @@ input.sheet-unused-toggle[value="1"] ~ * input.sheet-hide-if-unused[value="0"] +
 
 .sheet-Stress-Track {
 	text-align: center;
+	height: 40px;
+	padding-top: 22px;
+	background: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/eclipse-0.svg) no-repeat center center;
+	background-size: 60px;
+}
+
+input.sheet-Stress-Total[value="0"] ~ .sheet-Stress-Track {
+	background: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/eclipse-0.svg) no-repeat center center;
+}
+input.sheet-Stress-Total[value="1"] ~ .sheet-Stress-Track {
+	background: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/eclipse-1.svg) no-repeat center center;
+}
+input.sheet-Stress-Total[value="2"] ~ .sheet-Stress-Track {
+	background: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/eclipse-2.svg) no-repeat center center;
+}
+input.sheet-Stress-Total[value="3"] ~ .sheet-Stress-Track {
+	background: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/eclipse-3.svg) no-repeat center center;
+}
+input.sheet-Stress-Total[value="4"] ~ .sheet-Stress-Track {
+	background: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/eclipse-4.svg) no-repeat center center;
+}
+input.sheet-Stress-Total[value="5"] ~ .sheet-Stress-Track {
+	background: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/eclipse-5.svg) no-repeat center center;
+}
+input.sheet-Stress-Total[value="6"] ~ .sheet-Stress-Track {
+	background: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/eclipse-6.svg) no-repeat center center;
+}
+input.sheet-Stress-Total[value="7"] ~ .sheet-Stress-Track {
+	background: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/eclipse-7.svg) no-repeat center center;
+}
+input.sheet-Stress-Total[value="8"] ~ .sheet-Stress-Track {
+	background: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/eclipse-8.svg) no-repeat center center;
 }

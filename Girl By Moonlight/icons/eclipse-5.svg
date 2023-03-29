@@ -11,29 +11,31 @@
 	<!ENTITY ns_adobe_xpath "http://ns.adobe.com/XPath/1.0/">
 ]>
 <svg version="1.1" id="Layer_1" xmlns:x="&ns_extend;" xmlns:i="&ns_ai;" xmlns:graph="&ns_graphs;"
-	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px" height="40px"
-	 viewBox="0 0 40 40" style="enable-background:new 0 0 40 40;" xml:space="preserve">
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="60px" height="60px"
+	 viewBox="0 0 60 60" style="enable-background:new 0 0 60 60;" xml:space="preserve">
 <style type="text/css">
-	.st0{fill:#FFFFFF;}
-	.st1{clip-path:url(#SVGID_00000024696308641114834520000004778382439060001194_);fill:#6A0D3F;}
+	.st0{opacity:0.5;fill:#FFFFFF;}
+	.st1{fill:#FFFFFF;}
+	.st2{clip-path:url(#SVGID_00000089541813024317893320000008364085293313604236_);fill:#6A0D3F;}
 </style>
 <metadata>
 	<sfw  xmlns="&ns_sfw;">
 		<slices></slices>
-		<sliceSourceBounds  bottomLeftOrigin="true" height="32" width="44" x="4" y="-36"></sliceSourceBounds>
+		<sliceSourceBounds  bottomLeftOrigin="true" height="56" width="70" x="2" y="2"></sliceSourceBounds>
 	</sfw>
 </metadata>
-<circle class="st0" cx="20" cy="20" r="16"/>
+<circle class="st0" cx="30" cy="30" r="28"/>
+<circle class="st1" cx="30" cy="30" r="24"/>
 <g>
-</g>
-<g>
-	<defs>
-		<circle id="SVGID_1_" cx="20" cy="20" r="16"/>
-	</defs>
-	<clipPath id="SVGID_00000142896476977416712380000012667430214609756321_">
-		<use xlink:href="#SVGID_1_"  style="overflow:visible;"/>
-	</clipPath>
-	
-		<circle style="clip-path:url(#SVGID_00000142896476977416712380000012667430214609756321_);fill:#6A0D3F;" cx="32" cy="20" r="16"/>
+	<g>
+		<defs>
+			<circle id="SVGID_1_" cx="30" cy="30" r="24"/>
+		</defs>
+		<clipPath id="SVGID_00000147181633406126282790000015301693976143168390_">
+			<use xlink:href="#SVGID_1_"  style="overflow:visible;"/>
+		</clipPath>
+		
+			<circle style="clip-path:url(#SVGID_00000147181633406126282790000015301693976143168390_);fill:#6A0D3F;" cx="48" cy="30" r="24"/>
+	</g>
 </g>
 </svg>

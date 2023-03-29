@@ -80,8 +80,6 @@
   				log('Setting Stress-'+i+"=0")
   				a['Stress-'+i] = 0;
   			}
-  			log(a);
-  			setAttrs(a);
   		} else {
   			log(id+"=0");
   			a[id] = "1";
@@ -91,9 +89,14 @@
   				log('Setting Stress-'+i+"=1")
   				a['Stress-'+i] = 1;
   			}
-  			log(a);
-  			setAttrs(a);
   		}
+  		var st = 0;
+  		for(i = 1; i <= 8; i++) {
+  			st = st + Number(a['Stress-'+i]);
+  		}
+  		a['Stress-Total'] = st;
+  		log(a);
+  		setAttrs(a);
   	});
   });
 </script>
@@ -119,6 +122,7 @@
             <button class="sheet-button-header-collapse" type="action" name="act_Toggle-Stress-Expand"></button>
           </div>
         </div>
+        <input class="sheet-Stress-Total" name="attr_Stress-Total" type="hidden" value="0"/>
         <input class="sheet-hide-on-one" name="attr_Toggle-Stress-Expand" type="hidden" value=""/>
         <div class="sheet-Stress-Track">
           <input class="sheet-hide-on-zero" name="attr_Stress-1" type="hidden" value="0"/>

@@ -18,6 +18,15 @@ $stressonicon: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master
 $stressofficon: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/stress-off.svg)
 $tmarkonicon: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/transcendent-on.svg)
 $tmarkofficon: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/transcendent-off.svg)
+$e0: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/eclipse-0.svg)
+$e1: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/eclipse-1.svg)
+$e2: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/eclipse-2.svg)
+$e3: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/eclipse-3.svg)
+$e4: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/eclipse-4.svg)
+$e5: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/eclipse-5.svg)
+$e6: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/eclipse-6.svg)
+$e7: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/eclipse-7.svg)
+$e8: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/eclipse-8.svg)
 
 @import url('https://fonts.googleapis.com/css2?family=Kufam:ital,wght@0,400;0,700;1,400;1,700&family=Montserrat:ital,wght@0,400;0,700;1,400;1,700&display=swap')
 
@@ -448,7 +457,28 @@ input.sheet-unused-toggle[value="1"]
 
 .sheet-Stress-Track
 	text-align: center
-
-
+	height: 40px
+	padding-top: 22px
+	background: #{$e0} no-repeat center center
+	background-size: 60px
+input.sheet-Stress-Total
+	&[value="0"] ~ .sheet-Stress-Track
+		background: #{$e0} no-repeat center center
+	&[value="1"] ~ .sheet-Stress-Track
+		background: #{$e1} no-repeat center center
+	&[value="2"] ~ .sheet-Stress-Track
+		background: #{$e2} no-repeat center center
+	&[value="3"] ~ .sheet-Stress-Track
+		background: #{$e3} no-repeat center center
+	&[value="4"] ~ .sheet-Stress-Track
+		background: #{$e4} no-repeat center center
+	&[value="5"] ~ .sheet-Stress-Track
+		background: #{$e5} no-repeat center center
+	&[value="6"] ~ .sheet-Stress-Track
+		background: #{$e6} no-repeat center center
+	&[value="7"] ~ .sheet-Stress-Track
+		background: #{$e7} no-repeat center center
+	&[value="8"] ~ .sheet-Stress-Track
+		background: #{$e8} no-repeat center center
 
 
