@@ -537,7 +537,8 @@ button.sheet-button-header-transcendent-off, button.sheet-button-header-transcen
 	font-weight: normal;
 	text-align: left;
 	vertical-align: top;
-	padding: 0;
+	padding-left: 0;
+	padding-right: 0;
 }
 
 .sheet-hide-on-one[value="1"] + *, .sheet-hide-on-zero[value="0"] + * {
@@ -547,4 +548,8 @@ button.sheet-button-header-transcendent-off, button.sheet-button-header-transcen
 input.sheet-unused-toggle[value="1"] ~ input.sheet-hide-if-unused[value="0"] + *,
 input.sheet-unused-toggle[value="1"] ~ * input.sheet-hide-if-unused[value="0"] + * {
 	display: none;
+}
+
+.sheet-Stress-Track {
+	text-align: center;
 }

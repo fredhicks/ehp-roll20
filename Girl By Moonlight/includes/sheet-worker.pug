@@ -30,28 +30,6 @@ script(type="text/worker")
 			});
 		});
 
-		on("#{stressclicks}", function(e) {
-			log(e);
-			var id = "";
-			if ( typeof e.sourceAttribute !== "undefined" && e.sourceAttribute !== "" ) {
-				id = e.sourceAttribute;
-			} else {
-				id = (e.htmlAttributes.name).substring(4); // Strips off the 'act_'
-			}
-			log("Stress Toggle Handler: " + id);
-			getAttrs(!{stressfields}, function(a) {
-				log(a);
-				if ( a[id] === "1" ) {
-					a[id] = "0";
-				} else {
-					a[id] = "1";
-				}
-				log(a);
-				setAttrs(a);
-			});
-		});
-
-
 		on("change:Choose-Veteran-Ability", function(e) {
 			log(e);
 			// e.previousValue
@@ -96,4 +74,34 @@ script(type="text/worker")
 			setAttrs(atts);
 		});
 
-// Choose-Transcendent-Ability-UnlikelyHero-1
+		on("#{stressclicks}", function(e) {
+			log(e);
+			var id = "";
+			id = (e.htmlAttributes.name).substring(4); // Strips off the 'act_'
+			log("Stress Toggle Handler: " + id);
+			getAttrs(!{stressfields}, function(a) {
+				if ( Number(a[id]) === 1 ) {
+					log(id+"=1");
+					a[id] = "0";
+					// We want to empty others past the one turned on
+					var endnum = Number(id.substring('7')); // Strips off the 'Stress-'
+					for(i = endnum; i <= 8; i++) {
+						log('Setting Stress-'+i+"=0")
+						a['Stress-'+i] = 0;
+					}
+					log(a);
+					setAttrs(a);
+				} else {
+					log(id+"=0");
+					a[id] = "1";
+					// We want to fill others up to the one turned on
+					var endnum = Number(id.substring('7')); // Strips off the 'Stress-'
+					for(i = 1; i < endnum; i++) {
+						log('Setting Stress-'+i+"=1")
+						a['Stress-'+i] = 1;
+					}
+					log(a);
+					setAttrs(a);
+				}
+			});
+		});
