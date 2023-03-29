@@ -309,18 +309,32 @@ input.sheet-Mode-Playbook
 		.sheet-Box-Header-Icons
 			text-align: right
 			grid-column-start: 2
+		&.sheet-Box-Subsection
+			margin-top: 8px
+			font-size: #{$bodysize}
+			border-radius: 0px 6px 0px 0px
+			.sheet-button-header-expand, .sheet-button-header-collapse, .sheet-button-header-edit, .sheet-button-header-close, .sheet-button-header-mark-off, .sheet-button-header-mark-on, .sheet-button-header-transcendent-off, .sheet-button-header-transcendent-on
+				padding-top: 0px
+				padding-bottom: 0px
+				&:before
+					font-size: #{$bodysize}
 	&.sheet-Teal
 		color: var(--gbm-teal-text)
 		background-color: var(--gbm-teal-shaded)
 		.sheet-Box-Header
+			border: 0.5px solid var(--gbm-teal)
 			background-color: var(--gbm-teal)
 	&.sheet-Pink
+		color: var(--gbm-pink-text)
 		background-color: var(--gbm-pink-shaded)
 		.sheet-Box-Header
+			border: 0.5px solid var(--gbm-pink)
 			background-color: var(--gbm-pink)
 	&.sheet-Purple
+		color: var(--gbm-purple-text)
 		background-color: var(--gbm-purple-shaded)
 		.sheet-Box-Header
+			border: 0.5px solid var(--gbm-purple)
 			background-color: var(--gbm-purple)
 
 /* Not currently in use but it looks cool, so keep this defintion around */
@@ -457,8 +471,8 @@ input.sheet-unused-toggle[value="1"]
 
 .sheet-Stress-Track
 	text-align: center
-	height: 40px
-	padding-top: 22px
+	height: 50px
+	padding-top: 30px
 	background: #{$e0} no-repeat center center
 	background-size: 60px
 input.sheet-Stress-Total
@@ -480,5 +494,15 @@ input.sheet-Stress-Total
 		background: #{$e7} no-repeat center center
 	&[value="8"] ~ .sheet-Stress-Track
 		background: #{$e8} no-repeat center center
+.sheet-Stress-Warning
+	text-align: center
+	font-weight: bold
+	font-style: italic
 
+.sheet-preload
+	opacity: 0
+	position: absolute
 
+.sheet-preload img
+	width: 1px
+	height: 1px

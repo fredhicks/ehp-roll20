@@ -374,23 +374,40 @@ input.sheet-Mode-Playbook[value=UnlikelyHero] ~ div.sheet-Playbook-UnlikelyHero,
 	-ms-grid-column: 2;
 	    grid-column-start: 2;
 }
+.sheet-Box .sheet-Box-Header.sheet-Box-Subsection {
+	margin-top: 8px;
+	font-size: 14px;
+	border-radius: 0px 6px 0px 0px;
+}
+.sheet-Box .sheet-Box-Header.sheet-Box-Subsection .sheet-button-header-expand, .sheet-Box .sheet-Box-Header.sheet-Box-Subsection .sheet-button-header-collapse, .sheet-Box .sheet-Box-Header.sheet-Box-Subsection .sheet-button-header-edit, .sheet-Box .sheet-Box-Header.sheet-Box-Subsection .sheet-button-header-close, .sheet-Box .sheet-Box-Header.sheet-Box-Subsection .sheet-button-header-mark-off, .sheet-Box .sheet-Box-Header.sheet-Box-Subsection .sheet-button-header-mark-on, .sheet-Box .sheet-Box-Header.sheet-Box-Subsection .sheet-button-header-transcendent-off, .sheet-Box .sheet-Box-Header.sheet-Box-Subsection .sheet-button-header-transcendent-on {
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+.sheet-Box .sheet-Box-Header.sheet-Box-Subsection .sheet-button-header-expand:before, .sheet-Box .sheet-Box-Header.sheet-Box-Subsection .sheet-button-header-collapse:before, .sheet-Box .sheet-Box-Header.sheet-Box-Subsection .sheet-button-header-edit:before, .sheet-Box .sheet-Box-Header.sheet-Box-Subsection .sheet-button-header-close:before, .sheet-Box .sheet-Box-Header.sheet-Box-Subsection .sheet-button-header-mark-off:before, .sheet-Box .sheet-Box-Header.sheet-Box-Subsection .sheet-button-header-mark-on:before, .sheet-Box .sheet-Box-Header.sheet-Box-Subsection .sheet-button-header-transcendent-off:before, .sheet-Box .sheet-Box-Header.sheet-Box-Subsection .sheet-button-header-transcendent-on:before {
+	font-size: 14px;
+}
 .sheet-Box.sheet-Teal {
 	color: var(--gbm-teal-text);
 	background-color: var(--gbm-teal-shaded);
 }
 .sheet-Box.sheet-Teal .sheet-Box-Header {
+	border: 0.5px solid var(--gbm-teal);
 	background-color: var(--gbm-teal);
 }
 .sheet-Box.sheet-Pink {
+	color: var(--gbm-pink-text);
 	background-color: var(--gbm-pink-shaded);
 }
 .sheet-Box.sheet-Pink .sheet-Box-Header {
+	border: 0.5px solid var(--gbm-pink);
 	background-color: var(--gbm-pink);
 }
 .sheet-Box.sheet-Purple {
+	color: var(--gbm-purple-text);
 	background-color: var(--gbm-purple-shaded);
 }
 .sheet-Box.sheet-Purple .sheet-Box-Header {
+	border: 0.5px solid var(--gbm-purple);
 	background-color: var(--gbm-purple);
 }
 
@@ -552,8 +569,8 @@ input.sheet-unused-toggle[value="1"] ~ * input.sheet-hide-if-unused[value="0"] +
 
 .sheet-Stress-Track {
 	text-align: center;
-	height: 40px;
-	padding-top: 22px;
+	height: 50px;
+	padding-top: 30px;
 	background: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/eclipse-0.svg) no-repeat center center;
 	background-size: 60px;
 }
@@ -584,4 +601,20 @@ input.sheet-Stress-Total[value="7"] ~ .sheet-Stress-Track {
 }
 input.sheet-Stress-Total[value="8"] ~ .sheet-Stress-Track {
 	background: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/eclipse-8.svg) no-repeat center center;
+}
+
+.sheet-Stress-Warning {
+	text-align: center;
+	font-weight: bold;
+	font-style: italic;
+}
+
+.sheet-preload {
+	opacity: 0;
+	position: absolute;
+}
+
+.sheet-preload img {
+	width: 1px;
+	height: 1px;
 }

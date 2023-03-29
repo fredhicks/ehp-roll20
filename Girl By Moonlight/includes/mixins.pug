@@ -65,10 +65,11 @@ mixin select(a)
 mixin textarea(a)
 	textarea(name="attr_"+a)&attributes(attributes)
 
-mixin toggle(a)
-	+hidden(a)(value=0).sheet-hide-on-zero
+mixin toggle(a,v)
+	- if ( typeof(v) == "undefined" ) { v = 0; }
+	+hidden(a)(value=v).sheet-hide-on-zero
 	button(type="action",name="act_"+a).sheet-button-header-expand
-	+hidden(a)(value=0).sheet-hide-on-one
+	+hidden(a)(value=v).sheet-hide-on-one
 	button(type="action",name="act_"+a).sheet-button-header-collapse
 
 mixin hideUnmarked(a)
