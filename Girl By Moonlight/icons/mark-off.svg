@@ -11,28 +11,50 @@
 	<!ENTITY ns_adobe_xpath "http://ns.adobe.com/XPath/1.0/">
 ]>
 <svg version="1.1" id="Layer_1" xmlns:x="&ns_extend;" xmlns:i="&ns_ai;" xmlns:graph="&ns_graphs;"
-	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16px" height="16px"
-	 viewBox="0 0 16 16" style="enable-background:new 0 0 16 16;" xml:space="preserve">
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="32px" height="32px"
+	 viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve">
 <style type="text/css">
-	.st0{clip-path:url(#SVGID_00000097468693379093132020000012201572023457450932_);fill:#FFFFFF;}
-	.st1{clip-path:url(#SVGID_00000097468693379093132020000012201572023457450932_);fill:none;stroke:#032231;stroke-width:1.9175;}
+	.st0{clip-path:url(#SVGID_00000008831845389499343000000018000412383018047656_);fill:#FFFFFF;}
+	.st1{clip-path:url(#SVGID_00000015356423358113777360000011104393201718763177_);fill:none;stroke:#032231;stroke-width:3.835;}
 </style>
 <metadata>
 	<sfw  xmlns="&ns_sfw;">
 		<slices></slices>
-		<sliceSourceBounds  bottomLeftOrigin="true" height="16" width="16" x="0" y="-16"></sliceSourceBounds>
+		<sliceSourceBounds  bottomLeftOrigin="true" height="32" width="32" x="0" y="0"></sliceSourceBounds>
 	</sfw>
 </metadata>
 <g>
-	<defs>
-		<rect id="SVGID_1_" width="16" height="16"/>
-	</defs>
-	<clipPath id="SVGID_00000182492343029553035130000014251610453697776540_">
-		<use xlink:href="#SVGID_1_"  style="overflow:visible;"/>
-	</clipPath>
-	<path style="clip-path:url(#SVGID_00000182492343029553035130000014251610453697776540_);fill:#FFFFFF;" d="M8,15c3.9,0,7-3.2,7-7
-		s-3.2-7-7-7S1,4.1,1,8S4.1,15,8,15"/>
-	
-		<circle style="clip-path:url(#SVGID_00000182492343029553035130000014251610453697776540_);fill:none;stroke:#032231;stroke-width:1.9175;" cx="8" cy="8" r="7"/>
+	<g>
+		<g>
+			<defs>
+				<rect id="SVGID_1_" width="32" height="32"/>
+			</defs>
+			<clipPath id="SVGID_00000034076057588430721130000017138233330038396605_">
+				<use xlink:href="#SVGID_1_"  style="overflow:visible;"/>
+			</clipPath>
+			<path style="clip-path:url(#SVGID_00000034076057588430721130000017138233330038396605_);fill:#FFFFFF;" d="M16,29
+				c7.2,0,13-6,13-13S23,3,16,3S3,8.8,3,16S8.8,29,16,29"/>
+		</g>
+		<g>
+			<defs>
+				<rect id="SVGID_00000034072230007475298480000000032857453322076566_" width="32" height="32"/>
+			</defs>
+			<clipPath id="SVGID_00000086675873995778831570000004641556064978211763_">
+				<use xlink:href="#SVGID_00000034072230007475298480000000032857453322076566_"  style="overflow:visible;"/>
+			</clipPath>
+		</g>
+	</g>
+	<g>
+		<g>
+			<defs>
+				<rect id="SVGID_00000127011826083678386120000009987038002392169392_" width="32" height="32"/>
+			</defs>
+			<clipPath id="SVGID_00000088830214651968446840000010258619963013740683_">
+				<use xlink:href="#SVGID_00000127011826083678386120000009987038002392169392_"  style="overflow:visible;"/>
+			</clipPath>
+			
+				<circle style="clip-path:url(#SVGID_00000088830214651968446840000010258619963013740683_);fill:none;stroke:#032231;stroke-width:3.835;" cx="16" cy="16" r="14"/>
+		</g>
+	</g>
 </g>
 </svg>
