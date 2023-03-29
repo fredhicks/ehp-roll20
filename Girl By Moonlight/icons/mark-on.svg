@@ -11,53 +11,41 @@
 	<!ENTITY ns_adobe_xpath "http://ns.adobe.com/XPath/1.0/">
 ]>
 <svg version="1.1" id="Layer_1" xmlns:x="&ns_extend;" xmlns:i="&ns_ai;" xmlns:graph="&ns_graphs;"
-	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="32px" height="32px"
-	 viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve">
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16px" height="16px"
+	 viewBox="0 0 16 16" style="enable-background:new 0 0 16 16;" xml:space="preserve">
 <style type="text/css">
-	.st0{clip-path:url(#SVGID_00000129922796154982321160000013576685411552946597_);fill:#FFFFFF;}
-	.st1{clip-path:url(#SVGID_00000034783806163566573760000000897205671798012605_);fill:#176885;}
-	.st2{clip-path:url(#SVGID_00000104698002007078264540000003964644421753673142_);fill:none;stroke:#032231;stroke-width:3.835;}
+	.st0{clip-path:url(#SVGID_00000103959373197562775050000015796173508406296714_);fill:#FFFFFF;}
+	.st1{clip-path:url(#SVGID_00000103959373197562775050000015796173508406296714_);fill:#176885;}
+	.st2{clip-path:url(#SVGID_00000111884075333178329280000004772899393400116144_);fill:none;stroke:#032231;stroke-width:1.9175;}
 </style>
 <metadata>
 	<sfw  xmlns="&ns_sfw;">
 		<slices></slices>
-		<sliceSourceBounds  bottomLeftOrigin="true" height="32" width="32" x="0" y="0"></sliceSourceBounds>
+		<sliceSourceBounds  bottomLeftOrigin="true" height="16" width="16" x="0" y="0"></sliceSourceBounds>
 	</sfw>
 </metadata>
 <g>
 	<g>
-		<g>
-			<defs>
-				<rect id="SVGID_1_" width="32" height="32"/>
-			</defs>
-			<clipPath id="SVGID_00000096753446919591140540000013249283488605416325_">
-				<use xlink:href="#SVGID_1_"  style="overflow:visible;"/>
-			</clipPath>
-			<path style="clip-path:url(#SVGID_00000096753446919591140540000013249283488605416325_);fill:#FFFFFF;" d="M16,29
-				c7.2,0,13-6,13-13S23,3,16,3S3,8.8,3,16S8.8,29,16,29"/>
-		</g>
-		<g>
-			<defs>
-				<rect id="SVGID_00000010291361528842294950000016302992090620257178_" width="32" height="32"/>
-			</defs>
-			<clipPath id="SVGID_00000170975982674639968180000001374757138288393371_">
-				<use xlink:href="#SVGID_00000010291361528842294950000016302992090620257178_"  style="overflow:visible;"/>
-			</clipPath>
-			<path style="clip-path:url(#SVGID_00000170975982674639968180000001374757138288393371_);fill:#176885;" d="M16,26
-				c5.6,0,10-4.6,10-10S21.4,6,16,6S6,10.4,6,16S10.4,26,16,26"/>
-		</g>
+		<defs>
+			<rect id="SVGID_1_" width="16" height="16"/>
+		</defs>
+		<clipPath id="SVGID_00000038383553239639254710000000029420240304463525_">
+			<use xlink:href="#SVGID_1_"  style="overflow:visible;"/>
+		</clipPath>
+		<path style="clip-path:url(#SVGID_00000038383553239639254710000000029420240304463525_);fill:#FFFFFF;" d="M8,14.5
+			c3.6,0,6.5-3,6.5-6.5s-3-6.5-6.5-6.5S1.5,4.4,1.5,8S4.4,14.5,8,14.5"/>
+		<path style="clip-path:url(#SVGID_00000038383553239639254710000000029420240304463525_);fill:#176885;" d="M8,13c2.8,0,5-2.3,5-5
+			s-2.3-5-5-5S3,5.2,3,8S5.2,13,8,13"/>
 	</g>
 	<g>
-		<g>
-			<defs>
-				<rect id="SVGID_00000148622605686458322730000015222128718136311187_" width="32" height="32"/>
-			</defs>
-			<clipPath id="SVGID_00000057140415558027214490000009439719491623482533_">
-				<use xlink:href="#SVGID_00000148622605686458322730000015222128718136311187_"  style="overflow:visible;"/>
-			</clipPath>
-			
-				<circle style="clip-path:url(#SVGID_00000057140415558027214490000009439719491623482533_);fill:none;stroke:#032231;stroke-width:3.835;" cx="16" cy="16" r="14"/>
-		</g>
+		<defs>
+			<rect id="SVGID_00000014616073862066166430000013648851801110429367_" width="16" height="16"/>
+		</defs>
+		<clipPath id="SVGID_00000097459825756611342870000009853845478818409369_">
+			<use xlink:href="#SVGID_00000014616073862066166430000013648851801110429367_"  style="overflow:visible;"/>
+		</clipPath>
+		
+			<circle style="clip-path:url(#SVGID_00000097459825756611342870000009853845478818409369_);fill:none;stroke:#032231;stroke-width:1.9175;" cx="8" cy="8" r="7"/>
 	</g>
 </g>
 </svg>

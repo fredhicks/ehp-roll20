@@ -469,14 +469,24 @@ button.sheet-button-transcendent-off:before {
 
 button.sheet-button-header-transcendent-on:before {
 	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/transcendent-on.svg);
+}
+
+button.sheet-button-header-transcendent-on, button.sheet-button-header-transcendent-on:before {
 	height: 23px;
 	width: 23px;
+	max-height: 23px;
+	max-width: 23px;
 }
 
 button.sheet-button-header-transcendent-off:before {
 	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/transcendent-off.svg);
+}
+
+button.sheet-button-header-transcendent-off, button.sheet-button-header-transcendent-off:before {
 	height: 23px;
 	width: 23px;
+	max-height: 23px;
+	max-width: 23px;
 }
 
 .sheet-button-header-expand, .sheet-button-header-collapse, .sheet-button-header-edit, .sheet-button-header-close, .sheet-button-header-mark-off, .sheet-button-header-mark-on, .sheet-button-header-transcendent-off, .sheet-button-header-transcendent-on {
