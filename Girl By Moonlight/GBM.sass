@@ -18,6 +18,8 @@ $stressonicon: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master
 $stressofficon: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/stress-off.svg)
 $tmarkonicon: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/transcendent-on.svg)
 $tmarkofficon: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/transcendent-off.svg)
+$tmarkondarkicon: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/transcendent-on-dark.svg)
+$tmarkoffdarkicon: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/transcendent-off-dark.svg)
 $e0: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/eclipse-0.svg)
 $e1: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/eclipse-1.svg)
 $e2: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/eclipse-2.svg)
@@ -402,11 +404,15 @@ button.sheet-button-transcendent-on:before
 	content: #{$tmarkonicon}
 	height: #{$bodystarsize}
 	width: #{$bodystarsize}
+.sheet-darkmode button.sheet-button-transcendent-on:before
+	content: #{$tmarkdarkonicon}
 
 button.sheet-button-transcendent-off:before
 	content: #{$tmarkofficon}
 	height: #{$bodystarsize}
 	width: #{$bodystarsize}
+.sheet-darkmode button.sheet-button-transcendent-off:before
+	content: #{$tmarkdarkofficon}
 	
 button.sheet-button-stress-on:before
 	content: #{$stressonicon}
@@ -420,6 +426,8 @@ button.sheet-button-stress-off:before
 
 button.sheet-button-header-transcendent-on:before
 	content: #{$tmarkonicon}
+.sheet-darkmode button.sheet-button-transcendent-off:before
+	content: #{$tmarkdarkonicon}
 button.sheet-button-header-transcendent-on, button.sheet-button-header-transcendent-on:before
 	height: #{$headstarsize}
 	width: #{$headstarsize}
@@ -428,6 +436,8 @@ button.sheet-button-header-transcendent-on, button.sheet-button-header-transcend
 
 button.sheet-button-header-transcendent-off:before
 	content: #{$tmarkofficon}
+.sheet-darkmode button.sheet-button-transcendent-off:before
+	content: #{$tmarkdarkofficon}
 button.sheet-button-header-transcendent-off, button.sheet-button-header-transcendent-off:before
 	height: #{$headstarsize}
 	width: #{$headstarsize}
