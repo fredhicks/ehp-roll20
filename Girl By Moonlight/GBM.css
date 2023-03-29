@@ -487,10 +487,18 @@ button.sheet-button-transcendent-on:before {
 	width: 16px;
 }
 
+.sheet-darkmode button.sheet-button-transcendent-on:before {
+	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/transcendent-on-dark.svg);
+}
+
 button.sheet-button-transcendent-off:before {
 	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/transcendent-off.svg);
 	height: 16px;
 	width: 16px;
+}
+
+.sheet-darkmode button.sheet-button-transcendent-off:before {
+	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/transcendent-off-dark.svg);
 }
 
 button.sheet-button-stress-on:before {
@@ -509,6 +517,10 @@ button.sheet-button-header-transcendent-on:before {
 	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/transcendent-on.svg);
 }
 
+.sheet-darkmode button.sheet-button-header-transcendent-on:before {
+	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/transcendent-on-dark.svg);
+}
+
 button.sheet-button-header-transcendent-on, button.sheet-button-header-transcendent-on:before {
 	height: 23px;
 	width: 23px;
@@ -518,6 +530,10 @@ button.sheet-button-header-transcendent-on, button.sheet-button-header-transcend
 
 button.sheet-button-header-transcendent-off:before {
 	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/transcendent-off.svg);
+}
+
+.sheet-darkmode button.sheet-button-header-transcendent-off:before {
+	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/transcendent-off-dark.svg);
 }
 
 button.sheet-button-header-transcendent-off, button.sheet-button-header-transcendent-off:before {
