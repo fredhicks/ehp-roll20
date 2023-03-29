@@ -12,12 +12,25 @@
 	};
 
 mixin translate(text)
-	- if ( typeof(translations[text]) == "undefined" ) { translations[text] = text; }
-	span(data-i18n=text)&attributes(attributes) #{text}
+	if text !== ''
+		- 
+			var rtext = text.replace(/<[^>]*>/g,'');
+			if ( rtext !== text ) {
+				translations[rtext] = text;
+				text = rtext;
+			}
+			if ( typeof(translations[text]) == "undefined" ) { translations[text] = text; }
+		span(data-i18n=text)&attributes(attributes)
 	//- | 
 
 mixin option(t,v)
-	- if ( typeof(translations[t]) == "undefined" ) { translations[t] = t; }
+	- 
+		var rtext = t.replace(/<[^>]*>/g,'');
+		if ( rtext !== t ) {
+			translations[rtext] = t;
+			t = rtext;
+		}
+		if ( typeof(translations[t]) == "undefined" ) { translations[t] = t; }
 	if ( typeof(v) == "undefined" )
 		option(value=t data-i18n=t)
 	else
@@ -52,13 +65,6 @@ mixin select(a)
 mixin textarea(a)
 	textarea(name="attr_"+a)&attributes(attributes)
 
-mixin option(t,v)
-	- if ( typeof(translations[t]) == "undefined" ) { translations[t] = t; }
-	if ( typeof(v) == "undefined" )
-		option(data-i18n=t)
-	else
-		option(value=v data-i18n=t)
-
 mixin toggle(a)
 	+hidden(a)(value=0).sheet-hide-on-zero
 	button(type="action",name="act_"+a).sheet-button-header-expand
@@ -76,3 +82,16 @@ mixin abilityMark(a)
 	button(type="action",name="act_"+a).sheet-button-mark-on
 	+hidden(a)(value=0).sheet-hide-on-one
 	button(type="action",name="act_"+a).sheet-button-mark-off
+
+
+mixin hideUnmarkedTranscendent(a)
+	+hidden(a)(value=0).sheet-hide-on-zero
+	button(type="action",name="act_"+a).sheet-button-header-transcendent-on
+	+hidden(a)(value=0).sheet-hide-on-one
+	button(type="action",name="act_"+a).sheet-button-header-transcendent-off
+
+mixin abilityMarkTranscendent(a)
+	+hidden(a)(value=0).sheet-hide-on-zero
+	button(type="action",name="act_"+a).sheet-button-transcendent-on
+	+hidden(a)(value=0).sheet-hide-on-one
+	button(type="action",name="act_"+a).sheet-button-transcendent-off

@@ -1,0 +1,398 @@
+-
+	var abilities = {
+		"Enigma": [
+			{
+				"name": "Behind the mask",
+				"effect": "Your transcendent and mundane selves lead separate lives, and no one knows that they are the same person. Your transcendent self wears a mask: describe it.",
+				"selectable": false,
+				"textfield": true
+			},
+			{
+				"name": "Working from the shadows",
+				"effect": "When you secretly set up another character’s action, roll +1d. If they succeed, mark xp.",
+				"selectable": true
+			},
+			{
+				"name": "Phantom",
+				"effect": "You may expend your special armour to resist any consequence that would cause you to be detected or overlooked, or to immediately seize the attention of everyone present.",
+				"selectable": true
+			},
+			{
+				"name": "Shrouded in secrets",
+				"effect": "No one can unmask you without your permission. Gain +1d when your mundane identity conceals your true purpose, or helps you escape notice.",
+				"selectable": true
+			},
+			{
+				"name": "Cover story",
+				"effect": "You may choose to take -1d to your obligation roll to fill any remaining segments of your recovery clock. What’s your cover story for your injuries?",
+				"selectable": true
+			},
+			{
+				"name": "Two steps ahead",
+				"effect": "Two times per mission, you can assist a team mate without spending stress. Tell us how you prepared for this situation.",
+				"selectable": true
+			},
+			{
+				"name": "The big reveal",
+				"effect": "The moment you transcend, you may choose to immediately disappear, and may reappear at any time in the place of your choosing.",
+				"selectable": true,
+				"transcendent": true
+			},
+			{
+				"name": "Watch this!",
+				"effect": "When you push yourself choose one of the following additional benefits: Perform a superhuman feat of athletics - deliver a monologue without anyone interrupting you",
+				"selectable": true,
+				"transcendent": true
+			},
+			{
+				"name": "Powerful friends",
+				"effect": "Once per mission you may flash back to a special downtime action, taken as your transcendent self. Shift the results of the roll up one step.",
+				"selectable": true,
+				"transcendent": true
+			},
+		],
+		"Stranger": [
+			{
+				"name": "Stranger to kindness",
+				"effect": "You cannot make a connection, or help a friend recover in downtime. When you roll obligation, always roll stars. When you investigate, take +1d.",
+				"selectable": false,
+				"transcendent": false
+			},
+			{
+				"name": "Oblivious",
+				"effect": "You may expend your special armour to resist consequences of emotional trauma, or to be completely overlooked until you take a direct action.",
+				"selectable": true,
+				"transcendent": false
+			},
+			{
+				"name": "Safe distance",
+				"effect": "You can make a connection and help a friend recover by leaving anonymous gifts. When you do so, take +1d. If you watch them receive the gift, you can ask their player one question from their gather info list.",
+				"selectable": true,
+				"transcendent": false
+			},
+			{
+				"name": "No sleep",
+				"effect": "During each downtime phase, you get two ticks to distribute among any long term project clocks. Whenever you complete a project, mark xp.",
+				"selectable": true,
+				"transcendent": false
+			},
+			{
+				"name": "Things feel",
+				"effect": "You can empathize with non-human things as if they were people. If you use this to gather info, you may ask questions from any playbook currently in play.",
+				"selectable": true,
+				"transcendent": false
+			},
+			{
+				"name": "Know it all",
+				"effect": "You have encyclopaedic knowledge on a topic. Take +1d when you gather info relating to the chosen topic. Take this ability again to choose an additional option. Available topics: plants and animals - magic rituals - engineering - ancient lore - pop culture",
+				"selectable": true,
+				"transcendent": false,
+				"textfield": true
+			},
+			{
+				"name": "Ex machina",
+				"effect": "When you push yourself, choose one of the following additional benefits: you compel non-human things around you to hinder or distract your foes - you compel the environment to change itself to suit your needs",
+				"selectable": true,
+				"transcendent": true
+			},
+			{
+				"name": "Deeper understanding",
+				"effect": "When you gather info, gain +1 effect. When a transcended ally acts on information you provide, they gain 1 link with you.",
+				"selectable": true,
+				"transcendent": true
+			},
+			{
+				"name": "Here’s one I prepared earlier",
+				"effect": "Once per transcendence you may activate a flashback without spending stress to create a device that does one of the following: Allow for an escape - reveal unexpected information - create an opportunity for an ally",
+				"selectable": true,
+				"transcendent": true
+			},
+		],
+		"TimeTraveller": [
+			{
+				"name": "Fated",
+				"effect": "You travelled through time to change another protagonist’s fate. What perilous fate are you here to prevent? Whose fate is it?",
+				"selectable": false,
+				"transcendent": false,
+				"textfield": true
+			},
+			{
+				"name": "Dark omen",
+				"effect": "When you use your impossible knowledge to persuade someone, gain +1 effect level. If a fate you warned of comes to pass, mark xp.",
+				"selectable": true,
+				"transcendent": false
+			},
+			{
+				"name": "Saw it coming",
+				"effect": "You can expend your special armour to resist any consequence relating to surprise or misfortune, to be in two places at once, or perform some similar feat of time manipulation.",
+				"selectable": true,
+				"transcendent": false
+			},
+			{
+				"name": "Oracle",
+				"effect": "You can perceive the myriad timelines leading from past to future. When you gather info, gain +1 effect level. If it relates to your fated person, take +1d as well.",
+				"selectable": true,
+				"transcendent": false
+			},
+			{
+				"name": "My very best friend",
+				"effect": "When you connect with your fated person, gain +1d. When they connect with you, mark +1 link.",
+				"selectable": true,
+				"transcendent": false
+			},
+			{
+				"name": "Out of time",
+				"effect": "You are outside the regular flow of time, and injuries fade from you quickly. Permanently fill one segment of your recovery clock. Other players roll +1d to help you recover.",
+				"selectable": true,
+				"transcendent": false
+			},
+			{
+				"name": "Rewind, return",
+				"effect": "You have been through this timeline at least once before. Flashbacks cost 1 less stress than normal. How did this go wrong the first time?",
+				"selectable": true,
+				"transcendent": false
+			},
+			{
+				"name": "Clock stopper",
+				"effect": "If ever there is a question of who acts first, it’s you. Once per mission, when the director advances a clock, you may say “no” and the clock does not advance.",
+				"selectable": true,
+				"transcendent": true
+			},
+			{
+				"name": "On the other side of time",
+				"effect": "When you push yourself choose one of the following additional benefits: You trade places with your fated person - you briefly remove an ally or foe from the flow of time",
+				"selectable": true,
+				"transcendent": true
+			},
+			{
+				"name": "Lost cause",
+				"effect": "Once per transcendence, when an ally suffers severe consequences, you may choose to abandon this timeline for a better one. Consequences they would have suffered are replaced by your suffering level 3 harm: Traveller’s despair. Your relationship to the person you save is different in this timeline, they will tell you how.",
+				"selectable": true,
+				"transcendent": true
+			},
+		], 
+		"Harmony": [
+			{
+				"name": "In harmony",
+				"effect": "You are a relationship, two people whose love has bound them into a single form and identity. Should you ever be separated, all actions you make are desperate until you are reunited. You roll +1d to gather info about relationships.",
+				"selectable": false,
+				"transcendent": false
+			},
+			{
+				"name": "Split attention",
+				"effect": "You may take an additional action in each downtime phase.",
+				"selectable": true,
+				"transcendent": false
+			},
+			{
+				"name": "Inseparable",
+				"effect": "You may expend your special armour to resist any consequence that would impact your relationships with others, or within yourself, or to magically appear from within your allies.",
+				"selectable": true,
+				"transcendent": false
+			},
+			{
+				"name": "Synchronized",
+				"effect": "When you are involved in a group action you may count multiple 6s from different rolls as a critical success. When leading, you take at most 1 stress regardless of the number of failed rolls during a group action.",
+				"selectable": true,
+				"transcendent": false
+			},
+			{
+				"name": "Bonds of love",
+				"effect": "You start each downtime with 2 links with yourself.",
+				"selectable": true,
+				"transcendent": false
+			},
+			{
+				"name": "Perfect pitch",
+				"effect": "Your voice is polyphonic, and eerily beautiful. Your allies can always hear you speak, regardless of distance or other interference. When you sing to inspire your allies, or soothe the troubled hearts of foes, roll +1d.",
+				"selectable": true,
+				"transcendent": false
+			},
+			{
+				"name": "Powerful presence",
+				"effect": "When you transcend, your scale increases, and your effect level changes accordingly where size is a factor.",
+				"selectable": true,
+				"transcendent": true
+			},
+			{
+				"name": "As one",
+				"effect": "When you lead a group action or receive an assist while transcended, you briefly incorporate others into your harmony. You may roll the highest action rating among all participants instead of your own action rating.",
+				"selectable": true,
+				"transcendent": true
+			},
+			{
+				"name": "Beacon",
+				"effect": "Once per transcendence, you may uplift your allies with a speech, or song. When you do, it counts as spending a link on each ally that can hear you. They choose which link effect to use.",
+				"selectable": true,
+				"transcendent": true
+			},
+		], 
+		"Guardian": [
+			{
+				"name": "Honour bound",
+				"effect": "You live by a code. Your code forbids all but one of the following: violence, lying, admitting fault, asking for help. At the end of a mission, if you did not violate your code, mark xp. If none of the protagonists broke your code, also mark series xp.",
+				"selectable": false,
+				"transcendent": false,
+				"textfield": true
+			},
+			{
+				"name": "Watchful",
+				"effect": "When you protect an ally, take +1d to your resistance roll. When you gather info to anticipate possible threats in the current situation, you gain +1 effect level.",
+				"selectable": true,
+				"transcendent": false
+			},
+			{
+				"name": "You don’t have to feel it",
+				"effect": "You reduce all penalties from harm by one level. Level 4 harm is still fatal.",
+				"selectable": true,
+				"transcendent": false
+			},
+			{
+				"name": "Constant care",
+				"effect": "When you help a friend recover, you also recover based on your roll. When you gather info, you can always ask “Who here is hurting?” for free.",
+				"selectable": true,
+				"transcendent": false
+			},
+			{
+				"name": "Here for you",
+				"effect": "You may expend your special armour to resist consequences suffered when you protect an ally, or to give +1d to someone else’s action.",
+				"selectable": true,
+				"transcendent": false
+			},
+			{
+				"name": "Righteous",
+				"effect": "When you confront a deadly foe, they are humbled by your bravery. When you forgive a humbled foe, take +1d on your roll.",
+				"selectable": true,
+				"transcendent": false
+			},
+			{
+				"name": "Indomitable",
+				"effect": "You suffer at most 2 stress when resisting consequences, and get +1d when rolling eclipse.",
+				"selectable": true,
+				"transcendent": true
+			},
+			{
+				"name": "How Dare You",
+				"effect": "When you strike back against someone who has harmed one of your friends, gain +1 effect. If your action succeeds, you recover 1 stress.",
+				"selectable": true,
+				"transcendent": true
+			},
+			{
+				"name": "Bolstering presence",
+				"effect": "When you assist or set up a teammate, they mark 1 segment on their recovery clock.",
+				"selectable": true,
+				"transcendent": true
+			},
+		], 
+		"Outsider": [
+			{
+				"name": "Something to prove",
+				"effect": "Choose another protagonist to be your rival. You always have exactly one rival. Put their name here:",
+				"selectable": false,
+				"transcendent": false,
+				"textfield": true
+			},
+			{
+				"name": "Reckless",
+				"effect": "When you make a desperate roll, you may choose to get +1d for the roll if you also take -1d to any resistance rolls against consequences from your actions.",
+				"selectable": true,
+				"transcendent": false
+			},
+			{
+				"name": "Jaded",
+				"effect": "You may expend your special armour to resist any consequence of your rival’s actions, or to act before your rival does.",
+				"selectable": true,
+				"transcendent": false
+			},
+			{
+				"name": "Pathetic!",
+				"effect": "When you gather info, you can always ask “Where’s my rival, what are they doing?” for free. If your rival is about to suffer fatal harm, or fall into eclipse, you can choose to be there and protect them, regardless of circumstances.",
+				"selectable": true,
+				"transcendent": false
+			},
+			{
+				"name": "Old loyalties",
+				"effect": "The group’s adversaries are not immediately hostile towards you, and you can interact with them as peers. What role did you once serve among them?",
+				"selectable": true,
+				"transcendent": false
+			},
+			{
+				"name": "Anything you do, I do better",
+				"effect": "When you assist your rival, you grant them +2d and take 2 stress. If you refuse your rival’s help, or they refuse yours, mark xp.",
+				"selectable": true,
+				"transcendent": false
+			},
+			{
+				"name": "Brutish",
+				"effect": "When you push yourself, choose one of the following additional benefits: perform a superhuman feat of physical force - destroy an obstacle between you and your rival.",
+				"selectable": true,
+				"transcendent": true
+			},
+			{
+				"name": "This one’s mine!",
+				"effect": "Once you engage a foe, neither of you may back down until one of you is defeated. While you are engaged with your foe, only your rival can assist you, and other foes will not interfere. Your rival may take your place at any time, but must finish what you started.",
+				"selectable": true,
+				"transcendent": true
+			},
+			{
+				"name": "Relentless",
+				"effect": "While transcended, each other protagonist counts as your rival.",
+				"selectable": true,
+				"transcendent": true
+			},
+		], 
+		"UnlikelyHero": [
+			{
+				"name": "Only mortal",
+				"effect": "You cannot transcend, and you cannot have special armour. You get an additional action during downtime. You get +1d when rolling to make a connection. When only you can save one of your friends from fatal harm or severe consequence, and you do it, you can discard this ability and gain Hero’s destiny instead.",
+				"selectable": false,
+				"transcendent": false
+			},
+			{
+				"name": "Hero’s destiny",
+				"effect": "You have embraced your heroic destiny. You gain increased effect when fighting your most powerful foes. Gain +1d when rolling eclipse. You may only transcend when an ally suffers consequences from an action. Immediately mark one transcendent ability on your playbook when you gain this ability.",
+				"selectable": true,
+				"transcendent": false,
+				"veteran": false
+			},
+			{
+				"name": "Call out",
+				"effect": "When you confront someone about their bad behaviour roll +1d. If they are unrepentant, mark xp.",
+				"selectable": true,
+				"transcendent": false
+			},
+			{
+				"name": "Worth saving",
+				"effect": "When you run foolishly into danger, and no one comes to help you, mark xp. Your allies roll +1d when they protect you from consequences.",
+				"selectable": true,
+				"transcendent": false
+			},
+			{
+				"name": "Heartfelt",
+				"effect": "When gathering information about someone’s emotions, roll +1d, and you can always ask a player “what is your character really feeling?” for free.",
+				"selectable": true,
+				"transcendent": false
+			},
+			{
+				"name": "Believe in me",
+				"effect": "Links on your sheet, and links with you on other player’s sheets, may be spent to affect any character.",
+				"selectable": true,
+				"transcendent": false
+			},
+			{
+				"transcendent": true,
+				"selectable": true,
+				"picklist": true
+			},
+			{
+				"transcendent": true,
+				"selectable": true,
+				"picklist": true
+			},
+			{
+				"transcendent": true,
+				"selectable": true,
+				"picklist": true
+			},
+		]
+	};

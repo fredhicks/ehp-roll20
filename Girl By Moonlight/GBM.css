@@ -8,15 +8,22 @@
 	--gbm-pink-pale: #d6b8c2;
 	--gbm-pink-dark: #68083f;
 	--gbm-teal: #358a8d;
-	--gbm-teal-pale: #a2bfc2;
+	--gbm-teal-pale: #d6e7e8;
 	--gbm-teal-dark: #005f5f;
 	--gbm-purple: #564a6f;
 	--gbm-purple-pale: #d6d1d9;
 	--gbm-purple-dark: #261841;
-	--gbm-fg: var(--gbm-blue);
-	--gbm-bg: white;
-	--gbm-bg-shaded: var(--gbm-blue-pale);
+	--gbm-blue-shaded: var(--gbm-blue-pale);
+	--gbm-teal-shaded: var(--gbm-teal-pale);
+	--gbm-pink-shaded: var(--gbm-pink-pale);
+	--gbm-purple-shaded: var(--gbm-purple-pale);
+	--gbm-blue-text: var(--gbm-blue);
+	--gbm-teal-text: var(--gbm-teal);
+	--gbm-pink-text: var(--gbm-pink);
+	--gbm-purple-text: var(--gbm-purple);
 	--gbm-font-size: 16px;
+	--gbm-fg: var(--gbm-blue-text);
+	--gbm-bg: white;
 	font-family: Montserrat, sans-serif;
 	color: var(--gbm-fg);
 	background: var(--gbm-bg);
@@ -25,14 +32,26 @@
 .sheet-darkmode, .sheet-rolltemplate-darkmode {
 	--gbm-fg: var(--gbm-blue-pale);
 	--gbm-bg: #1f1f1f;
-	--gbm-bg-shaded: var(--gbm-blue-dark);
+	--gbm-blue-shaded: var(--gbm-blue-dark);
+	--gbm-teal-shaded: var(--gbm-teal-dark);
+	--gbm-pink-shaded: var(--gbm-pink-dark);
+	--gbm-purple-shaded: var(--gbm-purple-dark);
+	--gbm-blue-text: var(--gbm-blue-pale);
+	--gbm-teal-text: var(--gbm-teal-pale);
+	--gbm-pink-text: var(--gbm-pink-pale);
+	--gbm-purple-text: var(--gbm-purple-pale);
 }
 
 .ui-dialog .charsheet {
 	font-family: Montserrat, sans-serif;
 	font-size: 14px;
-	color: var(--gbm-fg) !important;
+	color: var(--gbm-fg);
 	background-color: var(--gbm-bg);
+	line-height: unset;
+}
+.ui-dialog .charsheet p {
+	font-family: Montserrat, sans-serif;
+	font-size: 14px;
 	line-height: unset;
 }
 
@@ -48,8 +67,6 @@ input[type=text] {
 }
 input[type=text]:hover, input[type=text]:active, input[type=text]:focus {
 	background-color: var(--gbm-bg);
-	border: none;
-	border-bottom: 1px dotted var(--gbm-fg);
 }
 
 textarea, select {
@@ -65,8 +82,11 @@ textarea, select {
 }
 textarea:hover, textarea:active, textarea:focus, select:hover, select:active, select:focus {
 	background-color: var(--gbm-bg);
-	border: none;
-	border-bottom: 1px dotted var(--gbm-fg);
+}
+
+.sheet-Teal input[type=text], .sheet-Teal textarea, .sheet-Teal select {
+	color: var(--gbm-teal-text);
+	border-bottom: 1px dotted var(--gbm-teal-text);
 }
 
 select {
@@ -204,35 +224,44 @@ input.sheet-Mode-Playbook[value=UnlikelyHero] ~ div.sheet-Playbook-UnlikelyHero,
 	display: block;
 }
 
-.sheet-Bio-Block {
-	display: -ms-grid;
-	display: grid;
-	-ms-grid-columns: 100px 8px 1fr;
-	grid-template-columns: 100px 1fr;
-	-webkit-column-gap: 8px;
-	   -moz-column-gap: 8px;
-	        column-gap: 8px;
-	row-gap: 8px;
-}
+/* .sheet-Bio-Block
+ * display: grid
+ * grid-template-columns: 100px 1fr
+ * column-gap: 8px
+ * row-gap: 8px
+ * .sheet-Label, .sheet-Field, .sheet-Field-Wide
+ * vertical-align: top
+ * .sheet-Label
+ * grid-column-start: 1
+ * font-weight: bold
+ * font-size: 10px
+ * text-align: right
+ * text-transform: uppercase
+ * .sheet-Field
+ * grid-column-start: 2
+ * .sheet-Field-Wide
+ * grid-column: 1 / span 2
+ * .sheet-Field, .sheet-Field-Wide
+ * .sheet-Prompt
+ * font-size: 10px
+ * font-style: italic
+ * text-align: right
+ * input[type='text'], select, textarea
+ * width: 100%
+ * textarea
+ * height: 50px
+ * margin-bottom: 0px */
 .sheet-Bio-Block .sheet-Label, .sheet-Bio-Block .sheet-Field, .sheet-Bio-Block .sheet-Field-Wide {
 	vertical-align: top;
 }
 .sheet-Bio-Block .sheet-Label {
-	-ms-grid-column: 1;
-	    grid-column-start: 1;
 	font-weight: bold;
 	font-size: 10px;
-	text-align: right;
+	text-align: left;
 	text-transform: uppercase;
 }
-.sheet-Bio-Block .sheet-Field {
-	-ms-grid-column: 2;
-	    grid-column-start: 2;
-}
-.sheet-Bio-Block .sheet-Field-Wide {
-	-ms-grid-column: 1;
-	-ms-grid-column-span: 2;
-	grid-column: 1/span 2;
+.sheet-Bio-Block .sheet-Field, .sheet-Bio-Block .sheet-Field-Wide {
+	margin-bottom: 8px;
 }
 .sheet-Bio-Block .sheet-Field .sheet-Prompt, .sheet-Bio-Block .sheet-Field-Wide .sheet-Prompt {
 	font-size: 10px;
@@ -247,26 +276,45 @@ input.sheet-Mode-Playbook[value=UnlikelyHero] ~ div.sheet-Playbook-UnlikelyHero,
 	margin-bottom: 0px;
 }
 
-.sheet-Abilities-Block {
+.sheet-Abilities-Block .sheet-Ability {
+	-ms-grid-column: 1;
+	    grid-column-start: 1;
 	display: -ms-grid;
 	display: grid;
-	-ms-grid-columns: 24px 4px 1fr;
-	grid-template-columns: 24px 1fr;
 	-webkit-column-gap: 4px;
 	   -moz-column-gap: 4px;
 	        column-gap: 4px;
-	row-gap: 8px;
+	-ms-grid-columns: 24px 4px 1fr;
+	grid-template-columns: 24px 1fr;
 }
-.sheet-Abilities-Block .sheet-Ability {
+.sheet-Abilities-Block .sheet-Ability .sheet-Ability-Text {
 	-ms-grid-column: 2;
 	    grid-column-start: 2;
+	margin-bottom: 6px;
+}
+.sheet-Abilities-Block .sheet-Ability .sheet-Ability-Text p {
+	margin-top: 6px;
+}
+.sheet-Abilities-Block .sheet-Ability .sheet-Ability-Text input[type=text], .sheet-Abilities-Block .sheet-Ability .sheet-Ability-Text select {
+	width: 100%;
+}
+.sheet-Abilities-Block .sheet-Ability .sheet-Ability-Selector {
+	-ms-grid-column: 1;
+	    grid-column-start: 1;
+}
+.sheet-Abilities-Block .sheet-Ability-Veteran-Header .sheet-Label {
+	text-transform: uppercase;
+	font-weight: bold;
+}
+.sheet-Abilities-Block .sheet-Ability-Veteran-Header .sheet-Instruction select {
+	width: 100%;
 }
 
 .sheet-Blocks-Playbooks {
 	display: -ms-grid;
 	display: grid;
-	-ms-grid-columns: 40% 12px 40% 12px 20%;
-	grid-template-columns: 40% 40% 20%;
+	-ms-grid-columns: 30% 12px 40% 12px 30%;
+	grid-template-columns: 30% 40% 30%;
 	-webkit-column-gap: 12px;
 	   -moz-column-gap: 12px;
 	        column-gap: 12px;
@@ -288,12 +336,13 @@ input.sheet-Mode-Playbook[value=UnlikelyHero] ~ div.sheet-Playbook-UnlikelyHero,
 }
 
 .sheet-Box {
-	background-color: var(--gbm-bg-shaded);
+	background-color: var(--gbm-blue-shaded);
 	padding-right: 8px;
 	padding-bottom: 4px;
 	padding-top: 4px;
 	padding-left: 4px;
 	border-radius: 0px 12px 12px 12px;
+	margin-bottom: 8px;
 }
 .sheet-Box .sheet-Box-Header {
 	border: 0.5px solid var(--gbm-blue);
@@ -315,6 +364,25 @@ input.sheet-Mode-Playbook[value=UnlikelyHero] ~ div.sheet-Playbook-UnlikelyHero,
 	text-align: right;
 	-ms-grid-column: 2;
 	    grid-column-start: 2;
+}
+.sheet-Box.sheet-Teal {
+	color: var(--gbm-teal-text);
+	background-color: var(--gbm-teal-shaded);
+}
+.sheet-Box.sheet-Teal .sheet-Box-Header {
+	background-color: var(--gbm-teal);
+}
+.sheet-Box.sheet-Pink {
+	background-color: var(--gbm-pink-shaded);
+}
+.sheet-Box.sheet-Pink .sheet-Box-Header {
+	background-color: var(--gbm-pink);
+}
+.sheet-Box.sheet-Purple {
+	background-color: var(--gbm-purple-shaded);
+}
+.sheet-Box.sheet-Purple .sheet-Box-Header {
+	background-color: var(--gbm-purple);
 }
 
 /* Not currently in use but it looks cool, so keep this defintion around */
@@ -387,7 +455,31 @@ button.sheet-button-header-mark-off:before {
 	width: 21px;
 }
 
-.sheet-button-header-expand, .sheet-button-header-collapse, .sheet-button-header-edit, .sheet-button-header-close, .sheet-button-header-mark-off, .sheet-button-header-mark-on {
+button.sheet-button-transcendent-on:before {
+	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/transcendent-on.svg);
+	height: 16px;
+	width: 16px;
+}
+
+button.sheet-button-transcendent-off:before {
+	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/transcendent-off.svg);
+	height: 16px;
+	width: 16px;
+}
+
+button.sheet-button-header-transcendent-on:before {
+	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/transcendent-on.svg);
+	height: 23px;
+	width: 23px;
+}
+
+button.sheet-button-header-transcendent-off:before {
+	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/transcendent-off.svg);
+	height: 23px;
+	width: 23px;
+}
+
+.sheet-button-header-expand, .sheet-button-header-collapse, .sheet-button-header-edit, .sheet-button-header-close, .sheet-button-header-mark-off, .sheet-button-header-mark-on, .sheet-button-header-transcendent-off, .sheet-button-header-transcendent-on {
 	border: none;
 	background: none;
 	font-weight: normal;
@@ -396,14 +488,14 @@ button.sheet-button-header-mark-off:before {
 	padding-bottom: 7px;
 	vertical-align: top;
 }
-.sheet-button-header-expand:hover, .sheet-button-header-collapse:hover, .sheet-button-header-edit:hover, .sheet-button-header-close:hover, .sheet-button-header-mark-off:hover, .sheet-button-header-mark-on:hover {
+.sheet-button-header-expand:hover, .sheet-button-header-collapse:hover, .sheet-button-header-edit:hover, .sheet-button-header-close:hover, .sheet-button-header-mark-off:hover, .sheet-button-header-mark-on:hover, .sheet-button-header-transcendent-off:hover, .sheet-button-header-transcendent-on:hover {
 	text-shadow: 0 0 8px white;
 }
-.sheet-button-header-expand:focus, .sheet-button-header-collapse:focus, .sheet-button-header-edit:focus, .sheet-button-header-close:focus, .sheet-button-header-mark-off:focus, .sheet-button-header-mark-on:focus {
+.sheet-button-header-expand:focus, .sheet-button-header-collapse:focus, .sheet-button-header-edit:focus, .sheet-button-header-close:focus, .sheet-button-header-mark-off:focus, .sheet-button-header-mark-on:focus, .sheet-button-header-transcendent-off:focus, .sheet-button-header-transcendent-on:focus {
 	text-shadow: 0 0 8px black;
 }
 
-.sheet-button-mark-on, .sheet-button-mark-off {
+.sheet-button-mark-on, .sheet-button-mark-off, .sheet-button-transcendent-on, .sheet-button-transcendent-off {
 	border: none;
 	background: none;
 	font-weight: normal;
@@ -412,5 +504,10 @@ button.sheet-button-header-mark-off:before {
 }
 
 .sheet-hide-on-one[value="1"] + *, .sheet-hide-on-zero[value="0"] + * {
+	display: none;
+}
+
+input.sheet-unused-toggle[value="1"] ~ input.sheet-hide-if-unused[value="0"] + *,
+input.sheet-unused-toggle[value="1"] ~ * input.sheet-hide-if-unused[value="0"] + * {
 	display: none;
 }

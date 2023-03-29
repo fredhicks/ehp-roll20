@@ -1,8 +1,10 @@
 $bodyfont: 'Montserrat', sans-serif
 $bodysize: 14px
+$bodystarsize: 16px
 $labelsize: 10px
 $smallsize: 10px
 $headsize: 21px
+$headstarsize: 23px
 $bigsize: 28px
 $bigicon: 36px
 $headfont: 'Kufam', sans-serif
@@ -12,6 +14,8 @@ $starsicon: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Gi
 $dreamsicon: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/playset-dreams.svg)
 $markonicon: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/mark-on.svg)
 $markofficon: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/mark-off.svg)
+$tmarkonicon: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/transcendent-on.svg)
+$tmarkofficon: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/transcendent-off.svg)
 
 @import url('https://fonts.googleapis.com/css2?family=Kufam:ital,wght@0,400;0,700;1,400;1,700&family=Montserrat:ital,wght@0,400;0,700;1,400;1,700&display=swap')
 
@@ -26,15 +30,22 @@ $markofficon: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/
 	--gbm-pink-pale: #d6b8c2
 	--gbm-pink-dark: #68083f
 	--gbm-teal: #358a8d
-	--gbm-teal-pale: #a2bfc2
+	--gbm-teal-pale: #d6e7e8
 	--gbm-teal-dark: #005f5f
 	--gbm-purple: #564a6f
 	--gbm-purple-pale: #d6d1d9
 	--gbm-purple-dark: #261841
-	--gbm-fg: var(--gbm-blue)
-	--gbm-bg: white
-	--gbm-bg-shaded: var(--gbm-blue-pale)
+	--gbm-blue-shaded: var(--gbm-blue-pale)
+	--gbm-teal-shaded: var(--gbm-teal-pale)
+	--gbm-pink-shaded: var(--gbm-pink-pale)
+	--gbm-purple-shaded: var(--gbm-purple-pale)
+	--gbm-blue-text: var(--gbm-blue)
+	--gbm-teal-text: var(--gbm-teal)
+	--gbm-pink-text: var(--gbm-pink)
+	--gbm-purple-text: var(--gbm-purple)
 	--gbm-font-size: 16px
+	--gbm-fg: var(--gbm-blue-text)
+	--gbm-bg: white
 	font-family: #{$bodyfont}
 	color: var(--gbm-fg)
 	background: var(--gbm-bg)
@@ -42,14 +53,25 @@ $markofficon: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/
 .sheet-darkmode, .sheet-rolltemplate-darkmode
 	--gbm-fg: var(--gbm-blue-pale)
 	--gbm-bg: #1f1f1f
-	--gbm-bg-shaded: var(--gbm-blue-dark)
+	--gbm-blue-shaded: var(--gbm-blue-dark)
+	--gbm-teal-shaded: var(--gbm-teal-dark)
+	--gbm-pink-shaded: var(--gbm-pink-dark)
+	--gbm-purple-shaded: var(--gbm-purple-dark)
+	--gbm-blue-text: var(--gbm-blue-pale)
+	--gbm-teal-text: var(--gbm-teal-pale)
+	--gbm-pink-text: var(--gbm-pink-pale)
+	--gbm-purple-text: var(--gbm-purple-pale)
 
 .ui-dialog .charsheet
 	font-family: #{$bodyfont}
 	font-size: #{$bodysize} 
-	color: var(--gbm-fg) !important
+	color: var(--gbm-fg)
 	background-color: var(--gbm-bg)
 	line-height: unset
+	p
+		font-family: #{$bodyfont}
+		font-size: #{$bodysize} 
+		line-height: unset
 
 input[type="text"]
 	background: none
@@ -62,8 +84,6 @@ input[type="text"]
 	margin-bottom: 3px
 	&:hover, &:active, &:focus
 		background-color: var(--gbm-bg)
-		border: none
-		border-bottom: 1px dotted var(--gbm-fg)
 
 textarea, select
 	background: none
@@ -77,8 +97,11 @@ textarea, select
 	margin-bottom: 3px
 	&:hover, &:active, &:focus
 		background-color: var(--gbm-bg)
-		border: none
-		border-bottom: 1px dotted var(--gbm-fg)
+
+.sheet-Teal
+	input[type="text"], textarea, select
+		color: var(--gbm-teal-text)
+		border-bottom: 1px dotted var(--gbm-teal-text)
 
 select
 	height: auto
@@ -157,7 +180,7 @@ input.sheet-Mode-Playbook
 				div.sheet-Playbook-#{$pb}
 					display: block
 
-.sheet-Bio-Block
+/* .sheet-Bio-Block
 	display: grid
 	grid-template-columns: 100px 1fr
 	column-gap: 8px
@@ -183,19 +206,56 @@ input.sheet-Mode-Playbook
 			width: 100%
 		textarea
 			height: 50px
+			margin-bottom: 0px */
+
+
+.sheet-Bio-Block
+	.sheet-Label, .sheet-Field, .sheet-Field-Wide
+		vertical-align: top
+	.sheet-Label
+		font-weight: bold
+		font-size: #{$labelsize}
+		text-align: left
+		text-transform: uppercase
+	.sheet-Field, .sheet-Field-Wide
+		margin-bottom: 8px
+		.sheet-Prompt
+			font-size: #{$smallsize}
+			font-style: italic
+			text-align: right
+		input[type='text'], select, textarea
+			width: 100%
+		textarea
+			height: 50px
 			margin-bottom: 0px
 
+
 .sheet-Abilities-Block
-	display: grid
-	grid-template-columns: 24px 1fr
-	column-gap: 4px
-	row-gap: 8px
 	.sheet-Ability
-		grid-column-start: 2
+		grid-column-start: 1
+		display: grid
+		column-gap: 4px
+		grid-template-columns: 24px 1fr
+		.sheet-Ability-Text
+			grid-column-start: 2
+			margin-bottom: 6px
+			p
+				margin-top: 6px
+			input[type=text], select
+				width: 100%
+		.sheet-Ability-Selector
+			grid-column-start: 1
+	.sheet-Ability-Veteran-Header
+		.sheet-Label
+			text-transform: uppercase
+			font-weight: bold
+		.sheet-Instruction
+			select
+				width: 100%
 
 .sheet-Blocks-Playbooks
 	display: grid
-	grid-template-columns: 40% 40% 20%
+	grid-template-columns: 30% 40% 30%
 	column-gap: 12px
 	.sheet-Left, .sheet-Mid, .sheet-Right
 		vertical-align: top
@@ -207,12 +267,13 @@ input.sheet-Mode-Playbook
 		grid-column-start: 3
 
 .sheet-Box
-	background-color: var(--gbm-bg-shaded)
+	background-color: var(--gbm-blue-shaded)
 	padding-right: 8px
 	padding-bottom: 4px
 	padding-top: 4px
 	padding-left: 4px
 	border-radius: 0px 12px 12px 12px
+	margin-bottom: 8px
 	.sheet-Box-Header
 		border: 0.5px solid var(--gbm-blue)
 		border-radius: 0px 12px 0px 0px
@@ -229,6 +290,19 @@ input.sheet-Mode-Playbook
 		.sheet-Box-Header-Icons
 			text-align: right
 			grid-column-start: 2
+	&.sheet-Teal
+		color: var(--gbm-teal-text)
+		background-color: var(--gbm-teal-shaded)
+		.sheet-Box-Header
+			background-color: var(--gbm-teal)
+	&.sheet-Pink
+		background-color: var(--gbm-pink-shaded)
+		.sheet-Box-Header
+			background-color: var(--gbm-pink)
+	&.sheet-Purple
+		background-color: var(--gbm-purple-shaded)
+		.sheet-Box-Header
+			background-color: var(--gbm-purple)
 
 /* Not currently in use but it looks cool, so keep this defintion around */
 
@@ -291,7 +365,27 @@ button.sheet-button-header-mark-off:before
 	height: #{$headsize}
 	width: #{$headsize}
 
-.sheet-button-header-expand, .sheet-button-header-collapse, .sheet-button-header-edit, .sheet-button-header-close, .sheet-button-header-mark-off, .sheet-button-header-mark-on
+button.sheet-button-transcendent-on:before
+	content: #{$tmarkonicon}
+	height: #{$bodystarsize}
+	width: #{$bodystarsize}
+
+button.sheet-button-transcendent-off:before
+	content: #{$tmarkofficon}
+	height: #{$bodystarsize}
+	width: #{$bodystarsize}
+
+button.sheet-button-header-transcendent-on:before
+	content: #{$tmarkonicon}
+	height: #{$headstarsize}
+	width: #{$headstarsize}
+
+button.sheet-button-header-transcendent-off:before
+	content: #{$tmarkofficon}
+	height: #{$headstarsize}
+	width: #{$headstarsize}
+
+.sheet-button-header-expand, .sheet-button-header-collapse, .sheet-button-header-edit, .sheet-button-header-close, .sheet-button-header-mark-off, .sheet-button-header-mark-on, .sheet-button-header-transcendent-off, .sheet-button-header-transcendent-on
 	border: none
 	background: none
 	font-weight: normal
@@ -304,7 +398,7 @@ button.sheet-button-header-mark-off:before
 	&:focus
 		text-shadow: 0 0 8px black
 
-.sheet-button-mark-on, .sheet-button-mark-off
+.sheet-button-mark-on, .sheet-button-mark-off, .sheet-button-transcendent-on, .sheet-button-transcendent-off
 	border: none
 	background: none
 	font-weight: normal
@@ -315,7 +409,10 @@ button.sheet-button-header-mark-off:before
 	+ * 
 		display: none
 
-
+input.sheet-unused-toggle[value="1"]
+	~ input.sheet-hide-if-unused[value="0"] + *, 
+	~ * input.sheet-hide-if-unused[value="0"] + *
+		display: none
 
 
 

@@ -1,0 +1,22 @@
+
+<script type="text/worker">// This part is run in the sheetworker javascript
+  on(toggleclicks, function(e) {
+  	log(e);
+  	var id = "";
+  	if ( typeof e.sourceAttribute !== "undefined" && e.sourceAttribute !== "" ) {
+  		id = e.sourceAttribute;
+  	} else {
+  		id = (e.htmlAttributes.name).substring(4); // Strips off the 'act_'
+  	}
+  	log("Toggle Handler: " + id);
+  	getAttrs([id], function(a) {
+  		if ( a[id] === "1" ) {
+  			a[id] = "0";
+  		} else {
+  			a[id] = "1";
+  		}
+  		log(a);
+  		setAttrs(a);
+  	});
+  });
+</script>

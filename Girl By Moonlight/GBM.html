@@ -1,56 +1,72 @@
 
 <!-- mixins-->
-<script type="text/worker">var playbooks = [
-	"Enigma", 
-	"Stranger", 
-	"TimeTraveller", 
-	"Harmony", 
-	"Guardian", 
-	"Outsider", 
-	"UnlikelyHero"
-];
-var toggles = [
-	"Toggle-Bio-Expand",
-	"Toggle-Abilities-Expand",
-	"Toggle-Abilities-Marked",
-];
-var toggleclicks = "";
-var clicks = 0;
-
-for(var i; i < 20; i++) {
-	for(var pb of playbooks) {
-		var field = 'Ability-' + pb + '-' + i;
-		toggles.push(field);
-	}
-}
-
-for(var i of toggles) {
-	clicks++;
-	if ( clicks > 1 )
-		toggleclicks = toggleclicks + " ";
-	toggleclicks = toggleclicks + "clicked:" + i;
-}
-
-on(toggleclicks, function(e) {
-	log(e);
-	var id = "";
-	if ( typeof e.sourceAttribute !== "undefined" && e.sourceAttribute !== "" ) {
-		id = e.sourceAttribute;
-	} else {
-		id = (e.htmlAttributes.name).substring(4); // Strips off the 'act_'
-	}
-	log("Toggle Handler: " + id);
-	getAttrs([id], function(a) {
-		if ( a[id] === "1" ) {
-			a[id] = "0";
-		} else {
-			a[id] = "1";
-		}
-		log(a);
-		setAttrs(a);
-	});
-});
+<script type="text/worker">// This part is run in the sheetworker javascript
+  on("clicked:Toggle-Bio-Expand clicked:Toggle-Abilities-Expand clicked:Toggle-Abilities-Marked clicked:Ability-Veteran clicked:Toggle-Transcendent-Expand clicked:Toggle-Transcendent-Marked clicked:Ability-Enigma-1 clicked:Ability-Transcendent-Enigma-1 clicked:Ability-Stranger-1 clicked:Ability-Transcendent-Stranger-1 clicked:Ability-TimeTraveller-1 clicked:Ability-Transcendent-TimeTraveller-1 clicked:Ability-Harmony-1 clicked:Ability-Transcendent-Harmony-1 clicked:Ability-Guardian-1 clicked:Ability-Transcendent-Guardian-1 clicked:Ability-Outsider-1 clicked:Ability-Transcendent-Outsider-1 clicked:Ability-UnlikelyHero-1 clicked:Ability-Transcendent-UnlikelyHero-1 clicked:Ability-Enigma-2 clicked:Ability-Transcendent-Enigma-2 clicked:Ability-Stranger-2 clicked:Ability-Transcendent-Stranger-2 clicked:Ability-TimeTraveller-2 clicked:Ability-Transcendent-TimeTraveller-2 clicked:Ability-Harmony-2 clicked:Ability-Transcendent-Harmony-2 clicked:Ability-Guardian-2 clicked:Ability-Transcendent-Guardian-2 clicked:Ability-Outsider-2 clicked:Ability-Transcendent-Outsider-2 clicked:Ability-UnlikelyHero-2 clicked:Ability-Transcendent-UnlikelyHero-2 clicked:Ability-Enigma-3 clicked:Ability-Transcendent-Enigma-3 clicked:Ability-Stranger-3 clicked:Ability-Transcendent-Stranger-3 clicked:Ability-TimeTraveller-3 clicked:Ability-Transcendent-TimeTraveller-3 clicked:Ability-Harmony-3 clicked:Ability-Transcendent-Harmony-3 clicked:Ability-Guardian-3 clicked:Ability-Transcendent-Guardian-3 clicked:Ability-Outsider-3 clicked:Ability-Transcendent-Outsider-3 clicked:Ability-UnlikelyHero-3 clicked:Ability-Transcendent-UnlikelyHero-3 clicked:Ability-Enigma-4 clicked:Ability-Transcendent-Enigma-4 clicked:Ability-Stranger-4 clicked:Ability-Transcendent-Stranger-4 clicked:Ability-TimeTraveller-4 clicked:Ability-Transcendent-TimeTraveller-4 clicked:Ability-Harmony-4 clicked:Ability-Transcendent-Harmony-4 clicked:Ability-Guardian-4 clicked:Ability-Transcendent-Guardian-4 clicked:Ability-Outsider-4 clicked:Ability-Transcendent-Outsider-4 clicked:Ability-UnlikelyHero-4 clicked:Ability-Transcendent-UnlikelyHero-4 clicked:Ability-Enigma-5 clicked:Ability-Transcendent-Enigma-5 clicked:Ability-Stranger-5 clicked:Ability-Transcendent-Stranger-5 clicked:Ability-TimeTraveller-5 clicked:Ability-Transcendent-TimeTraveller-5 clicked:Ability-Harmony-5 clicked:Ability-Transcendent-Harmony-5 clicked:Ability-Guardian-5 clicked:Ability-Transcendent-Guardian-5 clicked:Ability-Outsider-5 clicked:Ability-Transcendent-Outsider-5 clicked:Ability-UnlikelyHero-5 clicked:Ability-Transcendent-UnlikelyHero-5 clicked:Ability-Enigma-6 clicked:Ability-Transcendent-Enigma-6 clicked:Ability-Stranger-6 clicked:Ability-Transcendent-Stranger-6 clicked:Ability-TimeTraveller-6 clicked:Ability-Transcendent-TimeTraveller-6 clicked:Ability-Harmony-6 clicked:Ability-Transcendent-Harmony-6 clicked:Ability-Guardian-6 clicked:Ability-Transcendent-Guardian-6 clicked:Ability-Outsider-6 clicked:Ability-Transcendent-Outsider-6 clicked:Ability-UnlikelyHero-6 clicked:Ability-Transcendent-UnlikelyHero-6 clicked:Ability-Enigma-7 clicked:Ability-Transcendent-Enigma-7 clicked:Ability-Stranger-7 clicked:Ability-Transcendent-Stranger-7 clicked:Ability-TimeTraveller-7 clicked:Ability-Transcendent-TimeTraveller-7 clicked:Ability-Harmony-7 clicked:Ability-Transcendent-Harmony-7 clicked:Ability-Guardian-7 clicked:Ability-Transcendent-Guardian-7 clicked:Ability-Outsider-7 clicked:Ability-Transcendent-Outsider-7 clicked:Ability-UnlikelyHero-7 clicked:Ability-Transcendent-UnlikelyHero-7 clicked:Ability-Enigma-8 clicked:Ability-Transcendent-Enigma-8 clicked:Ability-Stranger-8 clicked:Ability-Transcendent-Stranger-8 clicked:Ability-TimeTraveller-8 clicked:Ability-Transcendent-TimeTraveller-8 clicked:Ability-Harmony-8 clicked:Ability-Transcendent-Harmony-8 clicked:Ability-Guardian-8 clicked:Ability-Transcendent-Guardian-8 clicked:Ability-Outsider-8 clicked:Ability-Transcendent-Outsider-8 clicked:Ability-UnlikelyHero-8 clicked:Ability-Transcendent-UnlikelyHero-8 clicked:Ability-Enigma-9 clicked:Ability-Transcendent-Enigma-9 clicked:Ability-Stranger-9 clicked:Ability-Transcendent-Stranger-9 clicked:Ability-TimeTraveller-9 clicked:Ability-Transcendent-TimeTraveller-9 clicked:Ability-Harmony-9 clicked:Ability-Transcendent-Harmony-9 clicked:Ability-Guardian-9 clicked:Ability-Transcendent-Guardian-9 clicked:Ability-Outsider-9 clicked:Ability-Transcendent-Outsider-9 clicked:Ability-UnlikelyHero-9 clicked:Ability-Transcendent-UnlikelyHero-9", function(e) {
+  	log(e);
+  	var id = "";
+  	if ( typeof e.sourceAttribute !== "undefined" && e.sourceAttribute !== "" ) {
+  		id = e.sourceAttribute;
+  	} else {
+  		id = (e.htmlAttributes.name).substring(4); // Strips off the 'act_'
+  	}
+  	log("Toggle Handler: " + id);
+  	getAttrs([id], function(a) {
+  		if ( a[id] === "1" ) {
+  			a[id] = "0";
+  		} else {
+  			a[id] = "1";
+  		}
+  		log(a);
+  		setAttrs(a);
+  	});
+  });
+  
+  on("change:Choose-Veteran-Ability", function(e) {
+  	log(e);
+  	// e.previousValue
+  	// e.newValue
+  	var atts = {};
+  	if ( typeof(e.newValue) == "undefined" || e.newValue == "" || e.newValue == "0") {
+  		atts["Choose-Veteran-Ability"] = "";
+  		atts["Ability-Veteran-Name"] = "";
+  		atts["Ability-Veteran-Effect"] = "";
+  	} else {
+  		var parts = String(e.newValue).split("|");
+  		var name = parts[0];
+  		var effect = parts[1];
+  		var tf = parts[2];
+  		atts["Ability-Veteran-Name"] = getTranslationByKey(name);
+  		atts["Ability-Veteran-Effect"] = getTranslationByKey(effect);
+  		atts["Ability-Veteran-Has-Text"] = tf;
+  	}
+  	setAttrs(atts);
+  });
+  
+  on("change:Choose-Ability-Transcendent-UnlikelyHero-1 change:Choose-Ability-Transcendent-UnlikelyHero-2 change:Choose-Ability-Transcendent-UnlikelyHero-3", function(e) {
+  	log(e);
+  	// e.sourceAttribute
+  	var abroot = String(e.sourceAttribute).slice(7); // Should remove 'Choose-' from the front of it
+  	// e.previousValue
+  	// e.newValue
+  	var atts = {};
+  	if ( typeof(e.newValue) == "undefined" || e.newValue == "" || e.newValue == "0") {
+  		atts[e.sourceAttribute] = "";
+  		atts[abroot+"-Name"] = "";
+  		atts[abroot+"-Effect"] = "";
+  	} else {
+  		var parts = String(e.newValue).split("|");
+  		var name = parts[0];
+  		var effect = parts[1];
+  		var tf = parts[2];
+  		atts[abroot+"-Name"] = getTranslationByKey(name);
+  		atts[abroot+"-Effect"] = getTranslationByKey(effect);
+  		atts[abroot+"-Has-Text"] = tf;
+  	}
+  	setAttrs(atts);
+  });
+  
 </script>
+<!-- Choose-Transcendent-Ability-UnlikelyHero-1-->
 <input class="sheet-Mode-Playbook" name="attr_Playbook" type="hidden" value=""/>
 <input class="sheet-Mode-Playset" name="attr_playset" type="hidden" value=""/>
 <div class="sheet-Playbooks">
@@ -59,14 +75,13 @@ on(toggleclicks, function(e) {
       <input name="attr_character_name" type="hidden" value=""/><span name="attr_character_name"></span>
       <input class="sheet-HideNull" name="attr_TrueName" type="hidden" value=""/><span>• 
         <input name="attr_TrueName" type="hidden" value=""/><span name="attr_TrueName"></span></span>
-      <input class="sheet-HideNull" name="attr_Playbook" type="hidden" value=""/><span>• 
-        <input name="attr_Playbook" type="hidden" value=""/><span name="attr_Playbook"></span></span>
+      <input class="sheet-HideNull" name="attr_Playbook" type="hidden" value=""/><span>• <span class="sheet-Playbook-Enigma"><span data-i18n="Enigma"></span></span><span class="sheet-Playbook-Stranger"><span data-i18n="Stranger"></span></span><span class="sheet-Playbook-TimeTraveller"><span data-i18n="Time Traveller"></span></span><span class="sheet-Playbook-Harmony"><span data-i18n="Harmony"></span></span><span class="sheet-Playbook-Guardian"><span data-i18n="Guardian"></span></span><span class="sheet-Playbook-Outsider"><span data-i18n="Outsider"></span></span><span class="sheet-Playbook-UnlikelyHero"><span data-i18n="Unlikely Hero"></span></span></span>
     </div>
   </div>
   <div class="sheet-Blocks-Playbooks">
     <div class="sheet-Left">
       <div class="sheet-Box">
-        <div class="sheet-Box-Header"><span data-i18n="Bio">Bio</span>
+        <div class="sheet-Box-Header"><span data-i18n="Bio"></span>
           <div class="sheet-Box-Header-Icons">
             <input class="sheet-hide-on-zero" name="attr_Toggle-Bio-Expand" type="hidden" value="0"/>
             <button class="sheet-button-header-expand" type="action" name="act_Toggle-Bio-Expand"></button>
@@ -76,7 +91,7 @@ on(toggleclicks, function(e) {
         </div>
         <input class="sheet-hide-on-one" name="attr_Toggle-Bio-Expand" type="hidden" value=""/>
         <div class="sheet-Bio-Block">
-          <div class="sheet-Label"><span data-i18n="Playset">Playset</span>
+          <div class="sheet-Label"><span data-i18n="Playset"></span>
           </div>
           <div class="sheet-Field">
             <select name="attr_playset">
@@ -87,7 +102,7 @@ on(toggleclicks, function(e) {
               <option value="dreams" data-i18n="In a Maze of Dreams"></option>
             </select>
           </div>
-          <div class="sheet-Label"><span data-i18n="Playbook">Playbook</span>
+          <div class="sheet-Label"><span data-i18n="Playbook"></span>
           </div>
           <div class="sheet-Field">
             <select name="attr_Playbook">
@@ -101,104 +116,104 @@ on(toggleclicks, function(e) {
               <option value="UnlikelyHero" data-i18n="Unlikely Hero"></option>
             </select>
           </div>
-          <div class="sheet-Label"><span data-i18n="Mundane Name">Mundane Name</span>
+          <div class="sheet-Label"><span data-i18n="Mundane Name"></span>
           </div>
           <div class="sheet-Field">
             <input name="attr_character_name" type="text" value=""/>
             <div class="sheet-Prompt">
-              <div class="sheet-Playbook-Enigma"><span data-i18n="a forgettable name — a puzzling name">a forgettable name — a puzzling name</span>
+              <div class="sheet-Playbook-Enigma"><span data-i18n="a forgettable name — a puzzling name"></span>
               </div>
-              <div class="sheet-Playbook-Stranger"><span data-i18n="a confusing name — a model name">a confusing name — a model name</span>
+              <div class="sheet-Playbook-Stranger"><span data-i18n="a confusing name — a model name"></span>
               </div>
-              <div class="sheet-Playbook-TimeTraveller"><span data-i18n="an anachronistic name — a clever name">an anachronistic name — a clever name</span>
+              <div class="sheet-Playbook-TimeTraveller"><span data-i18n="an anachronistic name — a clever name"></span>
               </div>
-              <div class="sheet-Playbook-Harmony"><span data-i18n="a lofty name — a romantic name">a lofty name — a romantic name</span>
+              <div class="sheet-Playbook-Harmony"><span data-i18n="a lofty name — a romantic name"></span>
               </div>
-              <div class="sheet-Playbook-Guardian"><span data-i18n="a traditional name — a resolute name">a traditional name — a resolute name</span>
+              <div class="sheet-Playbook-Guardian"><span data-i18n="a traditional name — a resolute name"></span>
               </div>
-              <div class="sheet-Playbook-Outsider"><span data-i18n="a fierce name — an arrogant name">a fierce name — an arrogant name</span>
+              <div class="sheet-Playbook-Outsider"><span data-i18n="a fierce name — an arrogant name"></span>
               </div>
-              <div class="sheet-Playbook-UnlikelyHero"><span data-i18n="an innocent name — a pretty name">an innocent name — a pretty name</span>
+              <div class="sheet-Playbook-UnlikelyHero"><span data-i18n="an innocent name — a pretty name"></span>
               </div>
             </div>
           </div>
-          <div class="sheet-Label"><span data-i18n="True Name">True Name</span>
+          <div class="sheet-Label"><span data-i18n="True Name"></span>
           </div>
           <div class="sheet-Field">
             <input name="attr_TrueName" type="text" value=""/>
             <div class="sheet-Prompt">
-              <div class="sheet-Playbook-Enigma"><span data-i18n="a dashing name — an imperious name">a dashing name — an imperious name</span>
+              <div class="sheet-Playbook-Enigma"><span data-i18n="a dashing name — an imperious name"></span>
               </div>
-              <div class="sheet-Playbook-Stranger"><span data-i18n="an alien name — an unnerving name">an alien name — an unnerving name</span>
+              <div class="sheet-Playbook-Stranger"><span data-i18n="an alien name — an unnerving name"></span>
               </div>
-              <div class="sheet-Playbook-TimeTraveller"><span data-i18n="an historic name — an ominous name">an historic name — an ominous name</span>
+              <div class="sheet-Playbook-TimeTraveller"><span data-i18n="an historic name — an ominous name"></span>
               </div>
-              <div class="sheet-Playbook-Harmony"><span data-i18n="a musical name — a beautiful name">a musical name — a beautiful name</span>
+              <div class="sheet-Playbook-Harmony"><span data-i18n="a musical name — a beautiful name"></span>
               </div>
-              <div class="sheet-Playbook-Guardian"><span data-i18n="a warrior name — an iconic name">a warrior name — an iconic name</span>
+              <div class="sheet-Playbook-Guardian"><span data-i18n="a warrior name — an iconic name"></span>
               </div>
-              <div class="sheet-Playbook-Outsider"><span data-i18n="a rebellious name — a villainous name">a rebellious name — a villainous name</span>
+              <div class="sheet-Playbook-Outsider"><span data-i18n="a rebellious name — a villainous name"></span>
               </div>
-              <div class="sheet-Playbook-UnlikelyHero"><span data-i18n="a sacred name — a renowned name">a sacred name — a renowned name</span>
+              <div class="sheet-Playbook-UnlikelyHero"><span data-i18n="a sacred name — a renowned name"></span>
               </div>
             </div>
           </div>
-          <div class="sheet-Label"><span data-i18n="Role">Role</span>
+          <div class="sheet-Label"><span data-i18n="Role"></span>
           </div>
           <div class="sheet-Field">
             <input name="attr_Role" type="text" value=""/>
           </div>
-          <div class="sheet-Label"><span data-i18n="Background">Background</span>
+          <div class="sheet-Label"><span data-i18n="Background"></span>
           </div>
           <div class="sheet-Field">
             <input name="attr_Background" type="text" value=""/>
           </div>
-          <div class="sheet-Label"><span data-i18n="Obligation">Obligation</span>
+          <div class="sheet-Label"><span data-i18n="Obligation"></span>
           </div>
           <div class="sheet-Field">
             <input name="attr_Obligation" type="text" value=""/>
           </div>
-          <div class="sheet-Label"><span data-i18n="Promises">Promises</span>
+          <div class="sheet-Label"><span data-i18n="Promises"></span>
           </div>
           <div class="sheet-Field">
             <textarea name="attr_Promise-1"></textarea>
             <div class="sheet-Prompt">
-              <div class="sheet-Playbook-Enigma"><span data-i18n="a secretive promise">a secretive promise</span>
+              <div class="sheet-Playbook-Enigma"><span data-i18n="a secretive promise"></span>
               </div>
-              <div class="sheet-Playbook-Stranger"><span data-i18n="a promise of growth">a promise of growth</span>
+              <div class="sheet-Playbook-Stranger"><span data-i18n="a promise of growth"></span>
               </div>
-              <div class="sheet-Playbook-TimeTraveller"><span data-i18n="a forgotten promise">a forgotten promise</span>
+              <div class="sheet-Playbook-TimeTraveller"><span data-i18n="a forgotten promise"></span>
               </div>
-              <div class="sheet-Playbook-Harmony"><span data-i18n="a shared promise">a shared promise</span>
+              <div class="sheet-Playbook-Harmony"><span data-i18n="a shared promise"></span>
               </div>
-              <div class="sheet-Playbook-Guardian"><span data-i18n="a promise of martyrdom">a promise of martyrdom</span>
+              <div class="sheet-Playbook-Guardian"><span data-i18n="a promise of martyrdom"></span>
               </div>
-              <div class="sheet-Playbook-Outsider"><span data-i18n="a promise to your rival">a promise to your rival</span>
+              <div class="sheet-Playbook-Outsider"><span data-i18n="a promise to your rival"></span>
               </div>
-              <div class="sheet-Playbook-UnlikelyHero"><span data-i18n="a naive promise">a naive promise</span>
+              <div class="sheet-Playbook-UnlikelyHero"><span data-i18n="a naive promise"></span>
               </div>
             </div>
           </div>
           <div class="sheet-Field">
             <textarea name="attr_Promise-2"></textarea>
             <div class="sheet-Prompt">
-              <div class="sheet-Playbook-Enigma"><span data-i18n="an intimate promise">an intimate promise</span>
+              <div class="sheet-Playbook-Enigma"><span data-i18n="an intimate promise"></span>
               </div>
-              <div class="sheet-Playbook-Stranger"><span data-i18n="a misguided promise">a misguided promise</span>
+              <div class="sheet-Playbook-Stranger"><span data-i18n="a misguided promise"></span>
               </div>
-              <div class="sheet-Playbook-TimeTraveller"><span data-i18n="a paradoxical promise">a paradoxical promise</span><br/><span data-i18n="One promise must involve your fated person and their fate.">One promise must involve your fated person and their fate.</span>
+              <div class="sheet-Playbook-TimeTraveller"><span data-i18n="a paradoxical promise"></span><br/><span data-i18n="One promise must involve your fated person and their fate."></span>
               </div>
-              <div class="sheet-Playbook-Harmony"><span data-i18n="two conflicting promises">two conflicting promises</span>
+              <div class="sheet-Playbook-Harmony"><span data-i18n="two conflicting promises"></span>
               </div>
-              <div class="sheet-Playbook-Guardian"><span data-i18n="a protective promise">a protective promise</span>
+              <div class="sheet-Playbook-Guardian"><span data-i18n="a protective promise"></span>
               </div>
-              <div class="sheet-Playbook-Outsider"><span data-i18n="a competitive promise">a competitive promise</span>
+              <div class="sheet-Playbook-Outsider"><span data-i18n="a competitive promise"></span>
               </div>
-              <div class="sheet-Playbook-UnlikelyHero"><span data-i18n="an impossible promise">an impossible promise</span>
+              <div class="sheet-Playbook-UnlikelyHero"><span data-i18n="an impossible promise"></span>
               </div>
             </div>
           </div>
-          <div class="sheet-Label"><span data-i18n="Look">Look</span>
+          <div class="sheet-Label"><span data-i18n="Look"></span>
           </div>
           <div class="sheet-Field">
             <textarea name="attr_Look"></textarea>
@@ -207,9 +222,10 @@ on(toggleclicks, function(e) {
       </div>
     </div>
     <div class="sheet-Mid">
+      <!-- Transcendent Abilities-->
       <div class="sheet-Box">
         <div class="sheet-Box-Header">
-          <div class="sheet-Box-Header-Text"><span data-i18n="Abilities">Abilities</span>
+          <div class="sheet-Box-Header-Text"><span data-i18n="Special Abilities"></span>
           </div>
           <div class="sheet-Box-Header-Icons">
             <input class="sheet-hide-on-zero" name="attr_Toggle-Abilities-Marked" type="hidden" value="0"/>
@@ -224,50 +240,897 @@ on(toggleclicks, function(e) {
         </div>
         <input class="sheet-hide-on-one" name="attr_Toggle-Abilities-Expand" type="hidden" value=""/>
         <div class="sheet-Abilities-Block">
-          <div class="sheet-Ability-Selector sheet-Playbook-Enigma">
-            <input name="attr_Ability-Enigma-1" type="hidden" value="1"/>
+          <input class="sheet-unused-toggle" name="attr_Toggle-Abilities-Marked" type="hidden" value=""/>
+          <input class="sheet-hide-if-unused" name="attr_Ability-Enigma-1" type="hidden" value="1"/>
+          <div class="sheet-Ability">
+            <div class="sheet-Ability-Selector sheet-Playbook-Enigma">
+            </div>
+            <div class="sheet-Ability-Text sheet-Playbook-Enigma"><b> <span data-i18n="Behind the mask"></span></b>: <span data-i18n="Your transcendent and mundane selves lead separate lives, and no one knows that they are the same person. Your transcendent self wears a mask: describe it."></span>
+              <input name="attr_Ability-Enigma-1-Text" type="text" value=""/>
+            </div>
           </div>
-          <div class="sheet-Ability sheet-Playbook-Enigma"><b> <span data-i18n="Behind the mask">Behind the mask</span></b>: <span data-i18n="Your transcendent and mundane selves lead separate lives, and no one knows that they are the same person. Your transcendent self wears a mask: describe it.">Your transcendent and mundane selves lead separate lives, and no one knows that they are the same person. Your transcendent self wears a mask: describe it.</span>
+          <input class="sheet-hide-if-unused" name="attr_Ability-Enigma-2" type="hidden" value="0"/>
+          <div class="sheet-Ability">
+            <div class="sheet-Ability-Selector sheet-Playbook-Enigma">
+              <input class="sheet-hide-on-zero" name="attr_Ability-Enigma-2" type="hidden" value="0"/>
+              <button class="sheet-button-mark-on" type="action" name="act_Ability-Enigma-2"></button>
+              <input class="sheet-hide-on-one" name="attr_Ability-Enigma-2" type="hidden" value="0"/>
+              <button class="sheet-button-mark-off" type="action" name="act_Ability-Enigma-2"></button>
+            </div>
+            <div class="sheet-Ability-Text sheet-Playbook-Enigma"><b> <span data-i18n="Working from the shadows"></span></b>: <span data-i18n="When you secretly set up another character’s action, roll +1d. If they succeed, mark xp."></span>
+            </div>
           </div>
-          <div class="sheet-Ability-Selector sheet-Playbook-Enigma">
-            <input class="sheet-hide-on-zero" name="attr_Ability-Enigma-2" type="hidden" value="0"/>
-            <button class="sheet-button-mark-on" type="action" name="act_Ability-Enigma-2"></button>
-            <input class="sheet-hide-on-one" name="attr_Ability-Enigma-2" type="hidden" value="0"/>
-            <button class="sheet-button-mark-off" type="action" name="act_Ability-Enigma-2"></button>
+          <input class="sheet-hide-if-unused" name="attr_Ability-Enigma-3" type="hidden" value="0"/>
+          <div class="sheet-Ability">
+            <div class="sheet-Ability-Selector sheet-Playbook-Enigma">
+              <input class="sheet-hide-on-zero" name="attr_Ability-Enigma-3" type="hidden" value="0"/>
+              <button class="sheet-button-mark-on" type="action" name="act_Ability-Enigma-3"></button>
+              <input class="sheet-hide-on-one" name="attr_Ability-Enigma-3" type="hidden" value="0"/>
+              <button class="sheet-button-mark-off" type="action" name="act_Ability-Enigma-3"></button>
+            </div>
+            <div class="sheet-Ability-Text sheet-Playbook-Enigma"><b> <span data-i18n="Phantom"></span></b>: <span data-i18n="You may expend your special armour to resist any consequence that would cause you to be detected or overlooked, or to immediately seize the attention of everyone present."></span>
+            </div>
           </div>
-          <div class="sheet-Ability sheet-Playbook-Enigma"><b> <span data-i18n="Working from the shadows">Working from the shadows</span></b>: <span data-i18n="When you secretly set up another character’s action, roll +1d. If they succeed, mark xp.">When you secretly set up another character’s action, roll +1d. If they succeed, mark xp.</span>
+          <input class="sheet-hide-if-unused" name="attr_Ability-Enigma-4" type="hidden" value="0"/>
+          <div class="sheet-Ability">
+            <div class="sheet-Ability-Selector sheet-Playbook-Enigma">
+              <input class="sheet-hide-on-zero" name="attr_Ability-Enigma-4" type="hidden" value="0"/>
+              <button class="sheet-button-mark-on" type="action" name="act_Ability-Enigma-4"></button>
+              <input class="sheet-hide-on-one" name="attr_Ability-Enigma-4" type="hidden" value="0"/>
+              <button class="sheet-button-mark-off" type="action" name="act_Ability-Enigma-4"></button>
+            </div>
+            <div class="sheet-Ability-Text sheet-Playbook-Enigma"><b> <span data-i18n="Shrouded in secrets"></span></b>: <span data-i18n="No one can unmask you without your permission. Gain +1d when your mundane identity conceals your true purpose, or helps you escape notice."></span>
+            </div>
           </div>
-          <div class="sheet-Ability-Selector sheet-Playbook-Enigma">
-            <input class="sheet-hide-on-zero" name="attr_Ability-Enigma-3" type="hidden" value="0"/>
-            <button class="sheet-button-mark-on" type="action" name="act_Ability-Enigma-3"></button>
-            <input class="sheet-hide-on-one" name="attr_Ability-Enigma-3" type="hidden" value="0"/>
-            <button class="sheet-button-mark-off" type="action" name="act_Ability-Enigma-3"></button>
+          <input class="sheet-hide-if-unused" name="attr_Ability-Enigma-5" type="hidden" value="0"/>
+          <div class="sheet-Ability">
+            <div class="sheet-Ability-Selector sheet-Playbook-Enigma">
+              <input class="sheet-hide-on-zero" name="attr_Ability-Enigma-5" type="hidden" value="0"/>
+              <button class="sheet-button-mark-on" type="action" name="act_Ability-Enigma-5"></button>
+              <input class="sheet-hide-on-one" name="attr_Ability-Enigma-5" type="hidden" value="0"/>
+              <button class="sheet-button-mark-off" type="action" name="act_Ability-Enigma-5"></button>
+            </div>
+            <div class="sheet-Ability-Text sheet-Playbook-Enigma"><b> <span data-i18n="Cover story"></span></b>: <span data-i18n="You may choose to take -1d to your obligation roll to fill any remaining segments of your recovery clock. What’s your cover story for your injuries?"></span>
+            </div>
           </div>
-          <div class="sheet-Ability sheet-Playbook-Enigma"><b> <span data-i18n="Phantom">Phantom</span></b>: <span data-i18n="You may expend your special armour to resist any consequence that would cause you to be detected or overlooked, or to immediately seize the attention of everyone present.">You may expend your special armour to resist any consequence that would cause you to be detected or overlooked, or to immediately seize the attention of everyone present.</span>
+          <input class="sheet-hide-if-unused" name="attr_Ability-Enigma-6" type="hidden" value="0"/>
+          <div class="sheet-Ability">
+            <div class="sheet-Ability-Selector sheet-Playbook-Enigma">
+              <input class="sheet-hide-on-zero" name="attr_Ability-Enigma-6" type="hidden" value="0"/>
+              <button class="sheet-button-mark-on" type="action" name="act_Ability-Enigma-6"></button>
+              <input class="sheet-hide-on-one" name="attr_Ability-Enigma-6" type="hidden" value="0"/>
+              <button class="sheet-button-mark-off" type="action" name="act_Ability-Enigma-6"></button>
+            </div>
+            <div class="sheet-Ability-Text sheet-Playbook-Enigma"><b> <span data-i18n="Two steps ahead"></span></b>: <span data-i18n="Two times per mission, you can assist a team mate without spending stress. Tell us how you prepared for this situation."></span>
+            </div>
           </div>
-          <div class="sheet-Ability-Selector sheet-Playbook-Enigma">
-            <input class="sheet-hide-on-zero" name="attr_Ability-Enigma-4" type="hidden" value="0"/>
-            <button class="sheet-button-mark-on" type="action" name="act_Ability-Enigma-4"></button>
-            <input class="sheet-hide-on-one" name="attr_Ability-Enigma-4" type="hidden" value="0"/>
-            <button class="sheet-button-mark-off" type="action" name="act_Ability-Enigma-4"></button>
+          <input class="sheet-hide-if-unused" name="attr_Ability-Stranger-1" type="hidden" value="1"/>
+          <div class="sheet-Ability">
+            <div class="sheet-Ability-Selector sheet-Playbook-Stranger">
+            </div>
+            <div class="sheet-Ability-Text sheet-Playbook-Stranger"><b> <span data-i18n="Stranger to kindness"></span></b>: <span data-i18n="You cannot make a connection, or help a friend recover in downtime. When you roll obligation, always roll stars. When you investigate, take +1d."></span>
+            </div>
           </div>
-          <div class="sheet-Ability sheet-Playbook-Enigma"><b> <span data-i18n="Shrouded in secrets">Shrouded in secrets</span></b>: <span data-i18n="No one can unmask you without your permission. Gain +1d when your mundane identity conceals your true purpose, or helps you escape notice.">No one can unmask you without your permission. Gain +1d when your mundane identity conceals your true purpose, or helps you escape notice.</span>
+          <input class="sheet-hide-if-unused" name="attr_Ability-Stranger-2" type="hidden" value="0"/>
+          <div class="sheet-Ability">
+            <div class="sheet-Ability-Selector sheet-Playbook-Stranger">
+              <input class="sheet-hide-on-zero" name="attr_Ability-Stranger-2" type="hidden" value="0"/>
+              <button class="sheet-button-mark-on" type="action" name="act_Ability-Stranger-2"></button>
+              <input class="sheet-hide-on-one" name="attr_Ability-Stranger-2" type="hidden" value="0"/>
+              <button class="sheet-button-mark-off" type="action" name="act_Ability-Stranger-2"></button>
+            </div>
+            <div class="sheet-Ability-Text sheet-Playbook-Stranger"><b> <span data-i18n="Oblivious"></span></b>: <span data-i18n="You may expend your special armour to resist consequences of emotional trauma, or to be completely overlooked until you take a direct action."></span>
+            </div>
           </div>
-          <div class="sheet-Ability-Selector sheet-Playbook-Enigma">
-            <input class="sheet-hide-on-zero" name="attr_Ability-Enigma-5" type="hidden" value="0"/>
-            <button class="sheet-button-mark-on" type="action" name="act_Ability-Enigma-5"></button>
-            <input class="sheet-hide-on-one" name="attr_Ability-Enigma-5" type="hidden" value="0"/>
-            <button class="sheet-button-mark-off" type="action" name="act_Ability-Enigma-5"></button>
+          <input class="sheet-hide-if-unused" name="attr_Ability-Stranger-3" type="hidden" value="0"/>
+          <div class="sheet-Ability">
+            <div class="sheet-Ability-Selector sheet-Playbook-Stranger">
+              <input class="sheet-hide-on-zero" name="attr_Ability-Stranger-3" type="hidden" value="0"/>
+              <button class="sheet-button-mark-on" type="action" name="act_Ability-Stranger-3"></button>
+              <input class="sheet-hide-on-one" name="attr_Ability-Stranger-3" type="hidden" value="0"/>
+              <button class="sheet-button-mark-off" type="action" name="act_Ability-Stranger-3"></button>
+            </div>
+            <div class="sheet-Ability-Text sheet-Playbook-Stranger"><b> <span data-i18n="Safe distance"></span></b>: <span data-i18n="You can make a connection and help a friend recover by leaving anonymous gifts. When you do so, take +1d. If you watch them receive the gift, you can ask their player one question from their gather info list."></span>
+            </div>
           </div>
-          <div class="sheet-Ability sheet-Playbook-Enigma"><b> <span data-i18n="Cover story">Cover story</span></b>: <span data-i18n="You may choose to take -1d to your obligation roll to fill any remaining segments of your recovery clock. What’s your cover story for your injuries?">You may choose to take -1d to your obligation roll to fill any remaining segments of your recovery clock. What’s your cover story for your injuries?</span>
+          <input class="sheet-hide-if-unused" name="attr_Ability-Stranger-4" type="hidden" value="0"/>
+          <div class="sheet-Ability">
+            <div class="sheet-Ability-Selector sheet-Playbook-Stranger">
+              <input class="sheet-hide-on-zero" name="attr_Ability-Stranger-4" type="hidden" value="0"/>
+              <button class="sheet-button-mark-on" type="action" name="act_Ability-Stranger-4"></button>
+              <input class="sheet-hide-on-one" name="attr_Ability-Stranger-4" type="hidden" value="0"/>
+              <button class="sheet-button-mark-off" type="action" name="act_Ability-Stranger-4"></button>
+            </div>
+            <div class="sheet-Ability-Text sheet-Playbook-Stranger"><b> <span data-i18n="No sleep"></span></b>: <span data-i18n="During each downtime phase, you get two ticks to distribute among any long term project clocks. Whenever you complete a project, mark xp."></span>
+            </div>
           </div>
-          <div class="sheet-Ability-Selector sheet-Playbook-Enigma">
-            <input class="sheet-hide-on-zero" name="attr_Ability-Enigma-6" type="hidden" value="0"/>
-            <button class="sheet-button-mark-on" type="action" name="act_Ability-Enigma-6"></button>
-            <input class="sheet-hide-on-one" name="attr_Ability-Enigma-6" type="hidden" value="0"/>
-            <button class="sheet-button-mark-off" type="action" name="act_Ability-Enigma-6"></button>
+          <input class="sheet-hide-if-unused" name="attr_Ability-Stranger-5" type="hidden" value="0"/>
+          <div class="sheet-Ability">
+            <div class="sheet-Ability-Selector sheet-Playbook-Stranger">
+              <input class="sheet-hide-on-zero" name="attr_Ability-Stranger-5" type="hidden" value="0"/>
+              <button class="sheet-button-mark-on" type="action" name="act_Ability-Stranger-5"></button>
+              <input class="sheet-hide-on-one" name="attr_Ability-Stranger-5" type="hidden" value="0"/>
+              <button class="sheet-button-mark-off" type="action" name="act_Ability-Stranger-5"></button>
+            </div>
+            <div class="sheet-Ability-Text sheet-Playbook-Stranger"><b> <span data-i18n="Things feel"></span></b>: <span data-i18n="You can empathize with non-human things as if they were people. If you use this to gather info, you may ask questions from any playbook currently in play."></span>
+            </div>
           </div>
-          <div class="sheet-Ability sheet-Playbook-Enigma"><b> <span data-i18n="Two steps ahead">Two steps ahead</span></b>: <span data-i18n="Two times per mission, you can assist a team mate without spending stress. Tell us how you prepared for this situation.">Two times per mission, you can assist a team mate without spending stress. Tell us how you prepared for this situation.</span>
+          <input class="sheet-hide-if-unused" name="attr_Ability-Stranger-6" type="hidden" value="0"/>
+          <div class="sheet-Ability">
+            <div class="sheet-Ability-Selector sheet-Playbook-Stranger">
+              <input class="sheet-hide-on-zero" name="attr_Ability-Stranger-6" type="hidden" value="0"/>
+              <button class="sheet-button-mark-on" type="action" name="act_Ability-Stranger-6"></button>
+              <input class="sheet-hide-on-one" name="attr_Ability-Stranger-6" type="hidden" value="0"/>
+              <button class="sheet-button-mark-off" type="action" name="act_Ability-Stranger-6"></button>
+            </div>
+            <div class="sheet-Ability-Text sheet-Playbook-Stranger"><b> <span data-i18n="Know it all"></span></b>: <span data-i18n="You have encyclopaedic knowledge on a topic. Take +1d when you gather info relating to the chosen topic. Take this ability again to choose an additional option. Available topics: plants and animals - magic rituals - engineering - ancient lore - pop culture"></span>
+              <input name="attr_Ability-Stranger-6-Text" type="text" value=""/>
+            </div>
+          </div>
+          <input class="sheet-hide-if-unused" name="attr_Ability-TimeTraveller-1" type="hidden" value="1"/>
+          <div class="sheet-Ability">
+            <div class="sheet-Ability-Selector sheet-Playbook-TimeTraveller">
+            </div>
+            <div class="sheet-Ability-Text sheet-Playbook-TimeTraveller"><b> <span data-i18n="Fated"></span></b>: <span data-i18n="You travelled through time to change another protagonist’s fate. What perilous fate are you here to prevent? Whose fate is it?"></span>
+              <input name="attr_Ability-TimeTraveller-1-Text" type="text" value=""/>
+            </div>
+          </div>
+          <input class="sheet-hide-if-unused" name="attr_Ability-TimeTraveller-2" type="hidden" value="0"/>
+          <div class="sheet-Ability">
+            <div class="sheet-Ability-Selector sheet-Playbook-TimeTraveller">
+              <input class="sheet-hide-on-zero" name="attr_Ability-TimeTraveller-2" type="hidden" value="0"/>
+              <button class="sheet-button-mark-on" type="action" name="act_Ability-TimeTraveller-2"></button>
+              <input class="sheet-hide-on-one" name="attr_Ability-TimeTraveller-2" type="hidden" value="0"/>
+              <button class="sheet-button-mark-off" type="action" name="act_Ability-TimeTraveller-2"></button>
+            </div>
+            <div class="sheet-Ability-Text sheet-Playbook-TimeTraveller"><b> <span data-i18n="Dark omen"></span></b>: <span data-i18n="When you use your impossible knowledge to persuade someone, gain +1 effect level. If a fate you warned of comes to pass, mark xp."></span>
+            </div>
+          </div>
+          <input class="sheet-hide-if-unused" name="attr_Ability-TimeTraveller-3" type="hidden" value="0"/>
+          <div class="sheet-Ability">
+            <div class="sheet-Ability-Selector sheet-Playbook-TimeTraveller">
+              <input class="sheet-hide-on-zero" name="attr_Ability-TimeTraveller-3" type="hidden" value="0"/>
+              <button class="sheet-button-mark-on" type="action" name="act_Ability-TimeTraveller-3"></button>
+              <input class="sheet-hide-on-one" name="attr_Ability-TimeTraveller-3" type="hidden" value="0"/>
+              <button class="sheet-button-mark-off" type="action" name="act_Ability-TimeTraveller-3"></button>
+            </div>
+            <div class="sheet-Ability-Text sheet-Playbook-TimeTraveller"><b> <span data-i18n="Saw it coming"></span></b>: <span data-i18n="You can expend your special armour to resist any consequence relating to surprise or misfortune, to be in two places at once, or perform some similar feat of time manipulation."></span>
+            </div>
+          </div>
+          <input class="sheet-hide-if-unused" name="attr_Ability-TimeTraveller-4" type="hidden" value="0"/>
+          <div class="sheet-Ability">
+            <div class="sheet-Ability-Selector sheet-Playbook-TimeTraveller">
+              <input class="sheet-hide-on-zero" name="attr_Ability-TimeTraveller-4" type="hidden" value="0"/>
+              <button class="sheet-button-mark-on" type="action" name="act_Ability-TimeTraveller-4"></button>
+              <input class="sheet-hide-on-one" name="attr_Ability-TimeTraveller-4" type="hidden" value="0"/>
+              <button class="sheet-button-mark-off" type="action" name="act_Ability-TimeTraveller-4"></button>
+            </div>
+            <div class="sheet-Ability-Text sheet-Playbook-TimeTraveller"><b> <span data-i18n="Oracle"></span></b>: <span data-i18n="You can perceive the myriad timelines leading from past to future. When you gather info, gain +1 effect level. If it relates to your fated person, take +1d as well."></span>
+            </div>
+          </div>
+          <input class="sheet-hide-if-unused" name="attr_Ability-TimeTraveller-5" type="hidden" value="0"/>
+          <div class="sheet-Ability">
+            <div class="sheet-Ability-Selector sheet-Playbook-TimeTraveller">
+              <input class="sheet-hide-on-zero" name="attr_Ability-TimeTraveller-5" type="hidden" value="0"/>
+              <button class="sheet-button-mark-on" type="action" name="act_Ability-TimeTraveller-5"></button>
+              <input class="sheet-hide-on-one" name="attr_Ability-TimeTraveller-5" type="hidden" value="0"/>
+              <button class="sheet-button-mark-off" type="action" name="act_Ability-TimeTraveller-5"></button>
+            </div>
+            <div class="sheet-Ability-Text sheet-Playbook-TimeTraveller"><b> <span data-i18n="My very best friend"></span></b>: <span data-i18n="When you connect with your fated person, gain +1d. When they connect with you, mark +1 link."></span>
+            </div>
+          </div>
+          <input class="sheet-hide-if-unused" name="attr_Ability-TimeTraveller-6" type="hidden" value="0"/>
+          <div class="sheet-Ability">
+            <div class="sheet-Ability-Selector sheet-Playbook-TimeTraveller">
+              <input class="sheet-hide-on-zero" name="attr_Ability-TimeTraveller-6" type="hidden" value="0"/>
+              <button class="sheet-button-mark-on" type="action" name="act_Ability-TimeTraveller-6"></button>
+              <input class="sheet-hide-on-one" name="attr_Ability-TimeTraveller-6" type="hidden" value="0"/>
+              <button class="sheet-button-mark-off" type="action" name="act_Ability-TimeTraveller-6"></button>
+            </div>
+            <div class="sheet-Ability-Text sheet-Playbook-TimeTraveller"><b> <span data-i18n="Out of time"></span></b>: <span data-i18n="You are outside the regular flow of time, and injuries fade from you quickly. Permanently fill one segment of your recovery clock. Other players roll +1d to help you recover."></span>
+            </div>
+          </div>
+          <input class="sheet-hide-if-unused" name="attr_Ability-TimeTraveller-7" type="hidden" value="0"/>
+          <div class="sheet-Ability">
+            <div class="sheet-Ability-Selector sheet-Playbook-TimeTraveller">
+              <input class="sheet-hide-on-zero" name="attr_Ability-TimeTraveller-7" type="hidden" value="0"/>
+              <button class="sheet-button-mark-on" type="action" name="act_Ability-TimeTraveller-7"></button>
+              <input class="sheet-hide-on-one" name="attr_Ability-TimeTraveller-7" type="hidden" value="0"/>
+              <button class="sheet-button-mark-off" type="action" name="act_Ability-TimeTraveller-7"></button>
+            </div>
+            <div class="sheet-Ability-Text sheet-Playbook-TimeTraveller"><b> <span data-i18n="Rewind, return"></span></b>: <span data-i18n="You have been through this timeline at least once before. Flashbacks cost 1 less stress than normal. How did this go wrong the first time?"></span>
+            </div>
+          </div>
+          <input class="sheet-hide-if-unused" name="attr_Ability-Harmony-1" type="hidden" value="1"/>
+          <div class="sheet-Ability">
+            <div class="sheet-Ability-Selector sheet-Playbook-Harmony">
+            </div>
+            <div class="sheet-Ability-Text sheet-Playbook-Harmony"><b> <span data-i18n="In harmony"></span></b>: <span data-i18n="You are a relationship, two people whose love has bound them into a single form and identity. Should you ever be separated, all actions you make are desperate until you are reunited. You roll +1d to gather info about relationships."></span>
+            </div>
+          </div>
+          <input class="sheet-hide-if-unused" name="attr_Ability-Harmony-2" type="hidden" value="0"/>
+          <div class="sheet-Ability">
+            <div class="sheet-Ability-Selector sheet-Playbook-Harmony">
+              <input class="sheet-hide-on-zero" name="attr_Ability-Harmony-2" type="hidden" value="0"/>
+              <button class="sheet-button-mark-on" type="action" name="act_Ability-Harmony-2"></button>
+              <input class="sheet-hide-on-one" name="attr_Ability-Harmony-2" type="hidden" value="0"/>
+              <button class="sheet-button-mark-off" type="action" name="act_Ability-Harmony-2"></button>
+            </div>
+            <div class="sheet-Ability-Text sheet-Playbook-Harmony"><b> <span data-i18n="Split attention"></span></b>: <span data-i18n="You may take an additional action in each downtime phase."></span>
+            </div>
+          </div>
+          <input class="sheet-hide-if-unused" name="attr_Ability-Harmony-3" type="hidden" value="0"/>
+          <div class="sheet-Ability">
+            <div class="sheet-Ability-Selector sheet-Playbook-Harmony">
+              <input class="sheet-hide-on-zero" name="attr_Ability-Harmony-3" type="hidden" value="0"/>
+              <button class="sheet-button-mark-on" type="action" name="act_Ability-Harmony-3"></button>
+              <input class="sheet-hide-on-one" name="attr_Ability-Harmony-3" type="hidden" value="0"/>
+              <button class="sheet-button-mark-off" type="action" name="act_Ability-Harmony-3"></button>
+            </div>
+            <div class="sheet-Ability-Text sheet-Playbook-Harmony"><b> <span data-i18n="Inseparable"></span></b>: <span data-i18n="You may expend your special armour to resist any consequence that would impact your relationships with others, or within yourself, or to magically appear from within your allies."></span>
+            </div>
+          </div>
+          <input class="sheet-hide-if-unused" name="attr_Ability-Harmony-4" type="hidden" value="0"/>
+          <div class="sheet-Ability">
+            <div class="sheet-Ability-Selector sheet-Playbook-Harmony">
+              <input class="sheet-hide-on-zero" name="attr_Ability-Harmony-4" type="hidden" value="0"/>
+              <button class="sheet-button-mark-on" type="action" name="act_Ability-Harmony-4"></button>
+              <input class="sheet-hide-on-one" name="attr_Ability-Harmony-4" type="hidden" value="0"/>
+              <button class="sheet-button-mark-off" type="action" name="act_Ability-Harmony-4"></button>
+            </div>
+            <div class="sheet-Ability-Text sheet-Playbook-Harmony"><b> <span data-i18n="Synchronized"></span></b>: <span data-i18n="When you are involved in a group action you may count multiple 6s from different rolls as a critical success. When leading, you take at most 1 stress regardless of the number of failed rolls during a group action."></span>
+            </div>
+          </div>
+          <input class="sheet-hide-if-unused" name="attr_Ability-Harmony-5" type="hidden" value="0"/>
+          <div class="sheet-Ability">
+            <div class="sheet-Ability-Selector sheet-Playbook-Harmony">
+              <input class="sheet-hide-on-zero" name="attr_Ability-Harmony-5" type="hidden" value="0"/>
+              <button class="sheet-button-mark-on" type="action" name="act_Ability-Harmony-5"></button>
+              <input class="sheet-hide-on-one" name="attr_Ability-Harmony-5" type="hidden" value="0"/>
+              <button class="sheet-button-mark-off" type="action" name="act_Ability-Harmony-5"></button>
+            </div>
+            <div class="sheet-Ability-Text sheet-Playbook-Harmony"><b> <span data-i18n="Bonds of love"></span></b>: <span data-i18n="You start each downtime with 2 links with yourself."></span>
+            </div>
+          </div>
+          <input class="sheet-hide-if-unused" name="attr_Ability-Harmony-6" type="hidden" value="0"/>
+          <div class="sheet-Ability">
+            <div class="sheet-Ability-Selector sheet-Playbook-Harmony">
+              <input class="sheet-hide-on-zero" name="attr_Ability-Harmony-6" type="hidden" value="0"/>
+              <button class="sheet-button-mark-on" type="action" name="act_Ability-Harmony-6"></button>
+              <input class="sheet-hide-on-one" name="attr_Ability-Harmony-6" type="hidden" value="0"/>
+              <button class="sheet-button-mark-off" type="action" name="act_Ability-Harmony-6"></button>
+            </div>
+            <div class="sheet-Ability-Text sheet-Playbook-Harmony"><b> <span data-i18n="Perfect pitch"></span></b>: <span data-i18n="Your voice is polyphonic, and eerily beautiful. Your allies can always hear you speak, regardless of distance or other interference. When you sing to inspire your allies, or soothe the troubled hearts of foes, roll +1d."></span>
+            </div>
+          </div>
+          <input class="sheet-hide-if-unused" name="attr_Ability-Guardian-1" type="hidden" value="1"/>
+          <div class="sheet-Ability">
+            <div class="sheet-Ability-Selector sheet-Playbook-Guardian">
+            </div>
+            <div class="sheet-Ability-Text sheet-Playbook-Guardian"><b> <span data-i18n="Honour bound"></span></b>: <span data-i18n="You live by a code. Your code forbids all but one of the following: violence, lying, admitting fault, asking for help. At the end of a mission, if you did not violate your code, mark xp. If none of the protagonists broke your code, also mark series xp."></span>
+              <input name="attr_Ability-Guardian-1-Text" type="text" value=""/>
+            </div>
+          </div>
+          <input class="sheet-hide-if-unused" name="attr_Ability-Guardian-2" type="hidden" value="0"/>
+          <div class="sheet-Ability">
+            <div class="sheet-Ability-Selector sheet-Playbook-Guardian">
+              <input class="sheet-hide-on-zero" name="attr_Ability-Guardian-2" type="hidden" value="0"/>
+              <button class="sheet-button-mark-on" type="action" name="act_Ability-Guardian-2"></button>
+              <input class="sheet-hide-on-one" name="attr_Ability-Guardian-2" type="hidden" value="0"/>
+              <button class="sheet-button-mark-off" type="action" name="act_Ability-Guardian-2"></button>
+            </div>
+            <div class="sheet-Ability-Text sheet-Playbook-Guardian"><b> <span data-i18n="Watchful"></span></b>: <span data-i18n="When you protect an ally, take +1d to your resistance roll. When you gather info to anticipate possible threats in the current situation, you gain +1 effect level."></span>
+            </div>
+          </div>
+          <input class="sheet-hide-if-unused" name="attr_Ability-Guardian-3" type="hidden" value="0"/>
+          <div class="sheet-Ability">
+            <div class="sheet-Ability-Selector sheet-Playbook-Guardian">
+              <input class="sheet-hide-on-zero" name="attr_Ability-Guardian-3" type="hidden" value="0"/>
+              <button class="sheet-button-mark-on" type="action" name="act_Ability-Guardian-3"></button>
+              <input class="sheet-hide-on-one" name="attr_Ability-Guardian-3" type="hidden" value="0"/>
+              <button class="sheet-button-mark-off" type="action" name="act_Ability-Guardian-3"></button>
+            </div>
+            <div class="sheet-Ability-Text sheet-Playbook-Guardian"><b> <span data-i18n="You don’t have to feel it"></span></b>: <span data-i18n="You reduce all penalties from harm by one level. Level 4 harm is still fatal."></span>
+            </div>
+          </div>
+          <input class="sheet-hide-if-unused" name="attr_Ability-Guardian-4" type="hidden" value="0"/>
+          <div class="sheet-Ability">
+            <div class="sheet-Ability-Selector sheet-Playbook-Guardian">
+              <input class="sheet-hide-on-zero" name="attr_Ability-Guardian-4" type="hidden" value="0"/>
+              <button class="sheet-button-mark-on" type="action" name="act_Ability-Guardian-4"></button>
+              <input class="sheet-hide-on-one" name="attr_Ability-Guardian-4" type="hidden" value="0"/>
+              <button class="sheet-button-mark-off" type="action" name="act_Ability-Guardian-4"></button>
+            </div>
+            <div class="sheet-Ability-Text sheet-Playbook-Guardian"><b> <span data-i18n="Constant care"></span></b>: <span data-i18n="When you help a friend recover, you also recover based on your roll. When you gather info, you can always ask “Who here is hurting?” for free."></span>
+            </div>
+          </div>
+          <input class="sheet-hide-if-unused" name="attr_Ability-Guardian-5" type="hidden" value="0"/>
+          <div class="sheet-Ability">
+            <div class="sheet-Ability-Selector sheet-Playbook-Guardian">
+              <input class="sheet-hide-on-zero" name="attr_Ability-Guardian-5" type="hidden" value="0"/>
+              <button class="sheet-button-mark-on" type="action" name="act_Ability-Guardian-5"></button>
+              <input class="sheet-hide-on-one" name="attr_Ability-Guardian-5" type="hidden" value="0"/>
+              <button class="sheet-button-mark-off" type="action" name="act_Ability-Guardian-5"></button>
+            </div>
+            <div class="sheet-Ability-Text sheet-Playbook-Guardian"><b> <span data-i18n="Here for you"></span></b>: <span data-i18n="You may expend your special armour to resist consequences suffered when you protect an ally, or to give +1d to someone else’s action."></span>
+            </div>
+          </div>
+          <input class="sheet-hide-if-unused" name="attr_Ability-Guardian-6" type="hidden" value="0"/>
+          <div class="sheet-Ability">
+            <div class="sheet-Ability-Selector sheet-Playbook-Guardian">
+              <input class="sheet-hide-on-zero" name="attr_Ability-Guardian-6" type="hidden" value="0"/>
+              <button class="sheet-button-mark-on" type="action" name="act_Ability-Guardian-6"></button>
+              <input class="sheet-hide-on-one" name="attr_Ability-Guardian-6" type="hidden" value="0"/>
+              <button class="sheet-button-mark-off" type="action" name="act_Ability-Guardian-6"></button>
+            </div>
+            <div class="sheet-Ability-Text sheet-Playbook-Guardian"><b> <span data-i18n="Righteous"></span></b>: <span data-i18n="When you confront a deadly foe, they are humbled by your bravery. When you forgive a humbled foe, take +1d on your roll."></span>
+            </div>
+          </div>
+          <input class="sheet-hide-if-unused" name="attr_Ability-Outsider-1" type="hidden" value="1"/>
+          <div class="sheet-Ability">
+            <div class="sheet-Ability-Selector sheet-Playbook-Outsider">
+            </div>
+            <div class="sheet-Ability-Text sheet-Playbook-Outsider"><b> <span data-i18n="Something to prove"></span></b>: <span data-i18n="Choose another protagonist to be your rival. You always have exactly one rival. Put their name here:"></span>
+              <input name="attr_Ability-Outsider-1-Text" type="text" value=""/>
+            </div>
+          </div>
+          <input class="sheet-hide-if-unused" name="attr_Ability-Outsider-2" type="hidden" value="0"/>
+          <div class="sheet-Ability">
+            <div class="sheet-Ability-Selector sheet-Playbook-Outsider">
+              <input class="sheet-hide-on-zero" name="attr_Ability-Outsider-2" type="hidden" value="0"/>
+              <button class="sheet-button-mark-on" type="action" name="act_Ability-Outsider-2"></button>
+              <input class="sheet-hide-on-one" name="attr_Ability-Outsider-2" type="hidden" value="0"/>
+              <button class="sheet-button-mark-off" type="action" name="act_Ability-Outsider-2"></button>
+            </div>
+            <div class="sheet-Ability-Text sheet-Playbook-Outsider"><b> <span data-i18n="Reckless"></span></b>: <span data-i18n="When you make a desperate roll, you may choose to get +1d for the roll if you also take -1d to any resistance rolls against consequences from your actions."></span>
+            </div>
+          </div>
+          <input class="sheet-hide-if-unused" name="attr_Ability-Outsider-3" type="hidden" value="0"/>
+          <div class="sheet-Ability">
+            <div class="sheet-Ability-Selector sheet-Playbook-Outsider">
+              <input class="sheet-hide-on-zero" name="attr_Ability-Outsider-3" type="hidden" value="0"/>
+              <button class="sheet-button-mark-on" type="action" name="act_Ability-Outsider-3"></button>
+              <input class="sheet-hide-on-one" name="attr_Ability-Outsider-3" type="hidden" value="0"/>
+              <button class="sheet-button-mark-off" type="action" name="act_Ability-Outsider-3"></button>
+            </div>
+            <div class="sheet-Ability-Text sheet-Playbook-Outsider"><b> <span data-i18n="Jaded"></span></b>: <span data-i18n="You may expend your special armour to resist any consequence of your rival’s actions, or to act before your rival does."></span>
+            </div>
+          </div>
+          <input class="sheet-hide-if-unused" name="attr_Ability-Outsider-4" type="hidden" value="0"/>
+          <div class="sheet-Ability">
+            <div class="sheet-Ability-Selector sheet-Playbook-Outsider">
+              <input class="sheet-hide-on-zero" name="attr_Ability-Outsider-4" type="hidden" value="0"/>
+              <button class="sheet-button-mark-on" type="action" name="act_Ability-Outsider-4"></button>
+              <input class="sheet-hide-on-one" name="attr_Ability-Outsider-4" type="hidden" value="0"/>
+              <button class="sheet-button-mark-off" type="action" name="act_Ability-Outsider-4"></button>
+            </div>
+            <div class="sheet-Ability-Text sheet-Playbook-Outsider"><b> <span data-i18n="Pathetic!"></span></b>: <span data-i18n="When you gather info, you can always ask “Where’s my rival, what are they doing?” for free. If your rival is about to suffer fatal harm, or fall into eclipse, you can choose to be there and protect them, regardless of circumstances."></span>
+            </div>
+          </div>
+          <input class="sheet-hide-if-unused" name="attr_Ability-Outsider-5" type="hidden" value="0"/>
+          <div class="sheet-Ability">
+            <div class="sheet-Ability-Selector sheet-Playbook-Outsider">
+              <input class="sheet-hide-on-zero" name="attr_Ability-Outsider-5" type="hidden" value="0"/>
+              <button class="sheet-button-mark-on" type="action" name="act_Ability-Outsider-5"></button>
+              <input class="sheet-hide-on-one" name="attr_Ability-Outsider-5" type="hidden" value="0"/>
+              <button class="sheet-button-mark-off" type="action" name="act_Ability-Outsider-5"></button>
+            </div>
+            <div class="sheet-Ability-Text sheet-Playbook-Outsider"><b> <span data-i18n="Old loyalties"></span></b>: <span data-i18n="The group’s adversaries are not immediately hostile towards you, and you can interact with them as peers. What role did you once serve among them?"></span>
+            </div>
+          </div>
+          <input class="sheet-hide-if-unused" name="attr_Ability-Outsider-6" type="hidden" value="0"/>
+          <div class="sheet-Ability">
+            <div class="sheet-Ability-Selector sheet-Playbook-Outsider">
+              <input class="sheet-hide-on-zero" name="attr_Ability-Outsider-6" type="hidden" value="0"/>
+              <button class="sheet-button-mark-on" type="action" name="act_Ability-Outsider-6"></button>
+              <input class="sheet-hide-on-one" name="attr_Ability-Outsider-6" type="hidden" value="0"/>
+              <button class="sheet-button-mark-off" type="action" name="act_Ability-Outsider-6"></button>
+            </div>
+            <div class="sheet-Ability-Text sheet-Playbook-Outsider"><b> <span data-i18n="Anything you do, I do better"></span></b>: <span data-i18n="When you assist your rival, you grant them +2d and take 2 stress. If you refuse your rival’s help, or they refuse yours, mark xp."></span>
+            </div>
+          </div>
+          <input class="sheet-hide-if-unused" name="attr_Ability-UnlikelyHero-1" type="hidden" value="1"/>
+          <div class="sheet-Ability">
+            <div class="sheet-Ability-Selector sheet-Playbook-UnlikelyHero">
+            </div>
+            <div class="sheet-Ability-Text sheet-Playbook-UnlikelyHero"><b> <span data-i18n="Only mortal"></span></b>: <span data-i18n="You cannot transcend, and you cannot have special armour. You get an additional action during downtime. You get +1d when rolling to make a connection. When only you can save one of your friends from fatal harm or severe consequence, and you do it, you can discard this ability and gain Hero’s destiny instead."></span>
+            </div>
+          </div>
+          <input class="sheet-hide-if-unused" name="attr_Ability-UnlikelyHero-2" type="hidden" value="0"/>
+          <div class="sheet-Ability">
+            <div class="sheet-Ability-Selector sheet-Playbook-UnlikelyHero">
+              <input class="sheet-hide-on-zero" name="attr_Ability-UnlikelyHero-2" type="hidden" value="0"/>
+              <button class="sheet-button-mark-on" type="action" name="act_Ability-UnlikelyHero-2"></button>
+              <input class="sheet-hide-on-one" name="attr_Ability-UnlikelyHero-2" type="hidden" value="0"/>
+              <button class="sheet-button-mark-off" type="action" name="act_Ability-UnlikelyHero-2"></button>
+            </div>
+            <div class="sheet-Ability-Text sheet-Playbook-UnlikelyHero"><b> <span data-i18n="Hero’s destiny"></span></b>: <span data-i18n="You have embraced your heroic destiny. You gain increased effect when fighting your most powerful foes. Gain +1d when rolling eclipse. You may only transcend when an ally suffers consequences from an action. Immediately mark one transcendent ability on your playbook when you gain this ability."></span>
+            </div>
+          </div>
+          <input class="sheet-hide-if-unused" name="attr_Ability-UnlikelyHero-3" type="hidden" value="0"/>
+          <div class="sheet-Ability">
+            <div class="sheet-Ability-Selector sheet-Playbook-UnlikelyHero">
+              <input class="sheet-hide-on-zero" name="attr_Ability-UnlikelyHero-3" type="hidden" value="0"/>
+              <button class="sheet-button-mark-on" type="action" name="act_Ability-UnlikelyHero-3"></button>
+              <input class="sheet-hide-on-one" name="attr_Ability-UnlikelyHero-3" type="hidden" value="0"/>
+              <button class="sheet-button-mark-off" type="action" name="act_Ability-UnlikelyHero-3"></button>
+            </div>
+            <div class="sheet-Ability-Text sheet-Playbook-UnlikelyHero"><b> <span data-i18n="Call out"></span></b>: <span data-i18n="When you confront someone about their bad behaviour roll +1d. If they are unrepentant, mark xp."></span>
+            </div>
+          </div>
+          <input class="sheet-hide-if-unused" name="attr_Ability-UnlikelyHero-4" type="hidden" value="0"/>
+          <div class="sheet-Ability">
+            <div class="sheet-Ability-Selector sheet-Playbook-UnlikelyHero">
+              <input class="sheet-hide-on-zero" name="attr_Ability-UnlikelyHero-4" type="hidden" value="0"/>
+              <button class="sheet-button-mark-on" type="action" name="act_Ability-UnlikelyHero-4"></button>
+              <input class="sheet-hide-on-one" name="attr_Ability-UnlikelyHero-4" type="hidden" value="0"/>
+              <button class="sheet-button-mark-off" type="action" name="act_Ability-UnlikelyHero-4"></button>
+            </div>
+            <div class="sheet-Ability-Text sheet-Playbook-UnlikelyHero"><b> <span data-i18n="Worth saving"></span></b>: <span data-i18n="When you run foolishly into danger, and no one comes to help you, mark xp. Your allies roll +1d when they protect you from consequences."></span>
+            </div>
+          </div>
+          <input class="sheet-hide-if-unused" name="attr_Ability-UnlikelyHero-5" type="hidden" value="0"/>
+          <div class="sheet-Ability">
+            <div class="sheet-Ability-Selector sheet-Playbook-UnlikelyHero">
+              <input class="sheet-hide-on-zero" name="attr_Ability-UnlikelyHero-5" type="hidden" value="0"/>
+              <button class="sheet-button-mark-on" type="action" name="act_Ability-UnlikelyHero-5"></button>
+              <input class="sheet-hide-on-one" name="attr_Ability-UnlikelyHero-5" type="hidden" value="0"/>
+              <button class="sheet-button-mark-off" type="action" name="act_Ability-UnlikelyHero-5"></button>
+            </div>
+            <div class="sheet-Ability-Text sheet-Playbook-UnlikelyHero"><b> <span data-i18n="Heartfelt"></span></b>: <span data-i18n="When gathering information about someone’s emotions, roll +1d, and you can always ask a player “what is your character really feeling?” for free."></span>
+            </div>
+          </div>
+          <input class="sheet-hide-if-unused" name="attr_Ability-UnlikelyHero-6" type="hidden" value="0"/>
+          <div class="sheet-Ability">
+            <div class="sheet-Ability-Selector sheet-Playbook-UnlikelyHero">
+              <input class="sheet-hide-on-zero" name="attr_Ability-UnlikelyHero-6" type="hidden" value="0"/>
+              <button class="sheet-button-mark-on" type="action" name="act_Ability-UnlikelyHero-6"></button>
+              <input class="sheet-hide-on-one" name="attr_Ability-UnlikelyHero-6" type="hidden" value="0"/>
+              <button class="sheet-button-mark-off" type="action" name="act_Ability-UnlikelyHero-6"></button>
+            </div>
+            <div class="sheet-Ability-Text sheet-Playbook-UnlikelyHero"><b> <span data-i18n="Believe in me"></span></b>: <span data-i18n="Links on your sheet, and links with you on other player’s sheets, may be spent to affect any character."></span>
+            </div>
+          </div>
+          <input class="sheet-hide-if-unused" name="attr_Ability-Veteran" type="hidden" value="0"/>
+          <div class="sheet-Ability-Veteran-Header">
+            <div class="sheet-Label"><span data-i18n="Veteran ability"></span>
+            </div>
+          </div>
+          <input class="sheet-hide-if-unused" name="attr_Ability-Veteran" type="hidden" value="0"/>
+          <div class="sheet-Ability">
+            <div class="sheet-Ability-Selector">
+              <input class="sheet-hide-on-zero" name="attr_Ability-Veteran" type="hidden" value="0"/>
+              <button class="sheet-button-mark-on" type="action" name="act_Ability-Veteran"></button>
+              <input class="sheet-hide-on-one" name="attr_Ability-Veteran" type="hidden" value="0"/>
+              <button class="sheet-button-mark-off" type="action" name="act_Ability-Veteran"></button>
+            </div>
+            <div class="sheet-Ability-Text">
+              <select name="attr_Choose-Veteran-Ability">
+                <option value="" data-i18n="(choose from any playbook)"></option>
+                <option value="0">---------------------------</option>
+                <option value="Working from the shadows|When you secretly set up another character’s action, roll +1d. If they succeed, mark xp.|0" data-i18n="Working from the shadows (Enigma)"></option>
+                <option value="Phantom|You may expend your special armour to resist any consequence that would cause you to be detected or overlooked, or to immediately seize the attention of everyone present.|0" data-i18n="Phantom (Enigma)"></option>
+                <option value="Shrouded in secrets|No one can unmask you without your permission. Gain +1d when your mundane identity conceals your true purpose, or helps you escape notice.|0" data-i18n="Shrouded in secrets (Enigma)"></option>
+                <option value="Cover story|You may choose to take -1d to your obligation roll to fill any remaining segments of your recovery clock. What’s your cover story for your injuries?|0" data-i18n="Cover story (Enigma)"></option>
+                <option value="Two steps ahead|Two times per mission, you can assist a team mate without spending stress. Tell us how you prepared for this situation.|0" data-i18n="Two steps ahead (Enigma)"></option>
+                <option value="0">---------------------------</option>
+                <option value="Oblivious|You may expend your special armour to resist consequences of emotional trauma, or to be completely overlooked until you take a direct action.|0" data-i18n="Oblivious (Stranger)"></option>
+                <option value="Safe distance|You can make a connection and help a friend recover by leaving anonymous gifts. When you do so, take +1d. If you watch them receive the gift, you can ask their player one question from their gather info list.|0" data-i18n="Safe distance (Stranger)"></option>
+                <option value="No sleep|During each downtime phase, you get two ticks to distribute among any long term project clocks. Whenever you complete a project, mark xp.|0" data-i18n="No sleep (Stranger)"></option>
+                <option value="Things feel|You can empathize with non-human things as if they were people. If you use this to gather info, you may ask questions from any playbook currently in play.|0" data-i18n="Things feel (Stranger)"></option>
+                <option value="Know it all|You have encyclopaedic knowledge on a topic. Take +1d when you gather info relating to the chosen topic. Take this ability again to choose an additional option. Available topics: plants and animals - magic rituals - engineering - ancient lore - pop culture|1" data-i18n="Know it all (Stranger)"></option>
+                <option value="0">---------------------------</option>
+                <option value="Dark omen|When you use your impossible knowledge to persuade someone, gain +1 effect level. If a fate you warned of comes to pass, mark xp.|0" data-i18n="Dark omen (Time Traveller)"></option>
+                <option value="Saw it coming|You can expend your special armour to resist any consequence relating to surprise or misfortune, to be in two places at once, or perform some similar feat of time manipulation.|0" data-i18n="Saw it coming (Time Traveller)"></option>
+                <option value="Oracle|You can perceive the myriad timelines leading from past to future. When you gather info, gain +1 effect level. If it relates to your fated person, take +1d as well.|0" data-i18n="Oracle (Time Traveller)"></option>
+                <option value="My very best friend|When you connect with your fated person, gain +1d. When they connect with you, mark +1 link.|0" data-i18n="My very best friend (Time Traveller)"></option>
+                <option value="Out of time|You are outside the regular flow of time, and injuries fade from you quickly. Permanently fill one segment of your recovery clock. Other players roll +1d to help you recover.|0" data-i18n="Out of time (Time Traveller)"></option>
+                <option value="Rewind, return|You have been through this timeline at least once before. Flashbacks cost 1 less stress than normal. How did this go wrong the first time?|0" data-i18n="Rewind, return (Time Traveller)"></option>
+                <option value="0">---------------------------</option>
+                <option value="Split attention|You may take an additional action in each downtime phase.|0" data-i18n="Split attention (Harmony)"></option>
+                <option value="Inseparable|You may expend your special armour to resist any consequence that would impact your relationships with others, or within yourself, or to magically appear from within your allies.|0" data-i18n="Inseparable (Harmony)"></option>
+                <option value="Synchronized|When you are involved in a group action you may count multiple 6s from different rolls as a critical success. When leading, you take at most 1 stress regardless of the number of failed rolls during a group action.|0" data-i18n="Synchronized (Harmony)"></option>
+                <option value="Bonds of love|You start each downtime with 2 links with yourself.|0" data-i18n="Bonds of love (Harmony)"></option>
+                <option value="Perfect pitch|Your voice is polyphonic, and eerily beautiful. Your allies can always hear you speak, regardless of distance or other interference. When you sing to inspire your allies, or soothe the troubled hearts of foes, roll +1d.|0" data-i18n="Perfect pitch (Harmony)"></option>
+                <option value="0">---------------------------</option>
+                <option value="Watchful|When you protect an ally, take +1d to your resistance roll. When you gather info to anticipate possible threats in the current situation, you gain +1 effect level.|0" data-i18n="Watchful (Guardian)"></option>
+                <option value="You don’t have to feel it|You reduce all penalties from harm by one level. Level 4 harm is still fatal.|0" data-i18n="You don’t have to feel it (Guardian)"></option>
+                <option value="Constant care|When you help a friend recover, you also recover based on your roll. When you gather info, you can always ask “Who here is hurting?” for free.|0" data-i18n="Constant care (Guardian)"></option>
+                <option value="Here for you|You may expend your special armour to resist consequences suffered when you protect an ally, or to give +1d to someone else’s action.|0" data-i18n="Here for you (Guardian)"></option>
+                <option value="Righteous|When you confront a deadly foe, they are humbled by your bravery. When you forgive a humbled foe, take +1d on your roll.|0" data-i18n="Righteous (Guardian)"></option>
+                <option value="0">---------------------------</option>
+                <option value="Reckless|When you make a desperate roll, you may choose to get +1d for the roll if you also take -1d to any resistance rolls against consequences from your actions.|0" data-i18n="Reckless (Outsider)"></option>
+                <option value="Jaded|You may expend your special armour to resist any consequence of your rival’s actions, or to act before your rival does.|0" data-i18n="Jaded (Outsider)"></option>
+                <option value="Pathetic!|When you gather info, you can always ask “Where’s my rival, what are they doing?” for free. If your rival is about to suffer fatal harm, or fall into eclipse, you can choose to be there and protect them, regardless of circumstances.|0" data-i18n="Pathetic! (Outsider)"></option>
+                <option value="Old loyalties|The group’s adversaries are not immediately hostile towards you, and you can interact with them as peers. What role did you once serve among them?|0" data-i18n="Old loyalties (Outsider)"></option>
+                <option value="Anything you do, I do better|When you assist your rival, you grant them +2d and take 2 stress. If you refuse your rival’s help, or they refuse yours, mark xp.|0" data-i18n="Anything you do, I do better (Outsider)"></option>
+                <option value="0">---------------------------</option>
+                <option value="Call out|When you confront someone about their bad behaviour roll +1d. If they are unrepentant, mark xp.|0" data-i18n="Call out (Unlikely Hero)"></option>
+                <option value="Worth saving|When you run foolishly into danger, and no one comes to help you, mark xp. Your allies roll +1d when they protect you from consequences.|0" data-i18n="Worth saving (Unlikely Hero)"></option>
+                <option value="Heartfelt|When gathering information about someone’s emotions, roll +1d, and you can always ask a player “what is your character really feeling?” for free.|0" data-i18n="Heartfelt (Unlikely Hero)"></option>
+                <option value="Believe in me|Links on your sheet, and links with you on other player’s sheets, may be spent to affect any character.|0" data-i18n="Believe in me (Unlikely Hero)"></option>
+              </select>
+              <input class="sheet-HideNull" name="attr_Ability-Veteran-Name" type="hidden" value=""/><span><b>
+                  <input name="attr_Ability-Veteran-Name" type="hidden" value=""/><span name="attr_Ability-Veteran-Name"></span></b>: 
+                <input name="attr_Ability-Veteran-Effect" type="hidden" value=""/><span name="attr_Ability-Veteran-Effect"></span>
+                <input class="sheet-hide-on-zero" name="attr_Ability-Veteran-Has-Text" type="hidden" value=""/>
+                <input name="attr_Ability-Veteran-Text" type="text" value=""/></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Transcendent Abilities-->
+      <div class="sheet-Box sheet-Teal">
+        <div class="sheet-Box-Header">
+          <div class="sheet-Box-Header-Text"><span data-i18n="Transcendent Abilities"></span>
+          </div>
+          <div class="sheet-Box-Header-Icons">
+            <input class="sheet-hide-on-zero" name="attr_Toggle-Transcendent-Marked" type="hidden" value="0"/>
+            <button class="sheet-button-header-transcendent-on" type="action" name="act_Toggle-Transcendent-Marked"></button>
+            <input class="sheet-hide-on-one" name="attr_Toggle-Transcendent-Marked" type="hidden" value="0"/>
+            <button class="sheet-button-header-transcendent-off" type="action" name="act_Toggle-Transcendent-Marked"></button>
+            <input class="sheet-hide-on-zero" name="attr_Toggle-Transcendent-Expand" type="hidden" value="0"/>
+            <button class="sheet-button-header-expand" type="action" name="act_Toggle-Transcendent-Expand"></button>
+            <input class="sheet-hide-on-one" name="attr_Toggle-Transcendent-Expand" type="hidden" value="0"/>
+            <button class="sheet-button-header-collapse" type="action" name="act_Toggle-Transcendent-Expand"></button>
+          </div>
+        </div>
+        <input class="sheet-hide-on-one" name="attr_Toggle-Transcendent-Expand" type="hidden" value=""/>
+        <div class="sheet-Abilities-Block">
+          <input class="sheet-unused-toggle" name="attr_Toggle-Transcendent-Marked" type="hidden" value=""/>
+          <!-- All transcendent abilities are selectable-->
+          <input class="sheet-hide-if-unused" name="attr_Ability-Transcendent-Enigma-1" type="hidden" value="0"/>
+          <div class="sheet-Ability">
+            <div class="sheet-Ability-Selector sheet-Playbook-Enigma">
+              <input class="sheet-hide-on-zero" name="attr_Ability-Transcendent-Enigma-1" type="hidden" value="0"/>
+              <button class="sheet-button-transcendent-on" type="action" name="act_Ability-Transcendent-Enigma-1"></button>
+              <input class="sheet-hide-on-one" name="attr_Ability-Transcendent-Enigma-1" type="hidden" value="0"/>
+              <button class="sheet-button-transcendent-off" type="action" name="act_Ability-Transcendent-Enigma-1"></button>
+            </div>
+            <div class="sheet-Ability-Text sheet-Playbook-Enigma"><b> <span data-i18n="The big reveal"></span></b>: <span data-i18n="The moment you transcend, you may choose to immediately disappear, and may reappear at any time in the place of your choosing."></span>
+            </div>
+          </div>
+          <!-- All transcendent abilities are selectable-->
+          <input class="sheet-hide-if-unused" name="attr_Ability-Transcendent-Enigma-2" type="hidden" value="0"/>
+          <div class="sheet-Ability">
+            <div class="sheet-Ability-Selector sheet-Playbook-Enigma">
+              <input class="sheet-hide-on-zero" name="attr_Ability-Transcendent-Enigma-2" type="hidden" value="0"/>
+              <button class="sheet-button-transcendent-on" type="action" name="act_Ability-Transcendent-Enigma-2"></button>
+              <input class="sheet-hide-on-one" name="attr_Ability-Transcendent-Enigma-2" type="hidden" value="0"/>
+              <button class="sheet-button-transcendent-off" type="action" name="act_Ability-Transcendent-Enigma-2"></button>
+            </div>
+            <div class="sheet-Ability-Text sheet-Playbook-Enigma"><b> <span data-i18n="Watch this!"></span></b>: <span data-i18n="When you push yourself choose one of the following additional benefits: Perform a superhuman feat of athletics - deliver a monologue without anyone interrupting you"></span>
+            </div>
+          </div>
+          <!-- All transcendent abilities are selectable-->
+          <input class="sheet-hide-if-unused" name="attr_Ability-Transcendent-Enigma-3" type="hidden" value="0"/>
+          <div class="sheet-Ability">
+            <div class="sheet-Ability-Selector sheet-Playbook-Enigma">
+              <input class="sheet-hide-on-zero" name="attr_Ability-Transcendent-Enigma-3" type="hidden" value="0"/>
+              <button class="sheet-button-transcendent-on" type="action" name="act_Ability-Transcendent-Enigma-3"></button>
+              <input class="sheet-hide-on-one" name="attr_Ability-Transcendent-Enigma-3" type="hidden" value="0"/>
+              <button class="sheet-button-transcendent-off" type="action" name="act_Ability-Transcendent-Enigma-3"></button>
+            </div>
+            <div class="sheet-Ability-Text sheet-Playbook-Enigma"><b> <span data-i18n="Powerful friends"></span></b>: <span data-i18n="Once per mission you may flash back to a special downtime action, taken as your transcendent self. Shift the results of the roll up one step."></span>
+            </div>
+          </div>
+          <!-- All transcendent abilities are selectable-->
+          <input class="sheet-hide-if-unused" name="attr_Ability-Transcendent-Stranger-1" type="hidden" value="0"/>
+          <div class="sheet-Ability">
+            <div class="sheet-Ability-Selector sheet-Playbook-Stranger">
+              <input class="sheet-hide-on-zero" name="attr_Ability-Transcendent-Stranger-1" type="hidden" value="0"/>
+              <button class="sheet-button-transcendent-on" type="action" name="act_Ability-Transcendent-Stranger-1"></button>
+              <input class="sheet-hide-on-one" name="attr_Ability-Transcendent-Stranger-1" type="hidden" value="0"/>
+              <button class="sheet-button-transcendent-off" type="action" name="act_Ability-Transcendent-Stranger-1"></button>
+            </div>
+            <div class="sheet-Ability-Text sheet-Playbook-Stranger"><b> <span data-i18n="Ex machina"></span></b>: <span data-i18n="When you push yourself, choose one of the following additional benefits: you compel non-human things around you to hinder or distract your foes - you compel the environment to change itself to suit your needs"></span>
+            </div>
+          </div>
+          <!-- All transcendent abilities are selectable-->
+          <input class="sheet-hide-if-unused" name="attr_Ability-Transcendent-Stranger-2" type="hidden" value="0"/>
+          <div class="sheet-Ability">
+            <div class="sheet-Ability-Selector sheet-Playbook-Stranger">
+              <input class="sheet-hide-on-zero" name="attr_Ability-Transcendent-Stranger-2" type="hidden" value="0"/>
+              <button class="sheet-button-transcendent-on" type="action" name="act_Ability-Transcendent-Stranger-2"></button>
+              <input class="sheet-hide-on-one" name="attr_Ability-Transcendent-Stranger-2" type="hidden" value="0"/>
+              <button class="sheet-button-transcendent-off" type="action" name="act_Ability-Transcendent-Stranger-2"></button>
+            </div>
+            <div class="sheet-Ability-Text sheet-Playbook-Stranger"><b> <span data-i18n="Deeper understanding"></span></b>: <span data-i18n="When you gather info, gain +1 effect. When a transcended ally acts on information you provide, they gain 1 link with you."></span>
+            </div>
+          </div>
+          <!-- All transcendent abilities are selectable-->
+          <input class="sheet-hide-if-unused" name="attr_Ability-Transcendent-Stranger-3" type="hidden" value="0"/>
+          <div class="sheet-Ability">
+            <div class="sheet-Ability-Selector sheet-Playbook-Stranger">
+              <input class="sheet-hide-on-zero" name="attr_Ability-Transcendent-Stranger-3" type="hidden" value="0"/>
+              <button class="sheet-button-transcendent-on" type="action" name="act_Ability-Transcendent-Stranger-3"></button>
+              <input class="sheet-hide-on-one" name="attr_Ability-Transcendent-Stranger-3" type="hidden" value="0"/>
+              <button class="sheet-button-transcendent-off" type="action" name="act_Ability-Transcendent-Stranger-3"></button>
+            </div>
+            <div class="sheet-Ability-Text sheet-Playbook-Stranger"><b> <span data-i18n="Here’s one I prepared earlier"></span></b>: <span data-i18n="Once per transcendence you may activate a flashback without spending stress to create a device that does one of the following: Allow for an escape - reveal unexpected information - create an opportunity for an ally"></span>
+            </div>
+          </div>
+          <!-- All transcendent abilities are selectable-->
+          <input class="sheet-hide-if-unused" name="attr_Ability-Transcendent-TimeTraveller-1" type="hidden" value="0"/>
+          <div class="sheet-Ability">
+            <div class="sheet-Ability-Selector sheet-Playbook-TimeTraveller">
+              <input class="sheet-hide-on-zero" name="attr_Ability-Transcendent-TimeTraveller-1" type="hidden" value="0"/>
+              <button class="sheet-button-transcendent-on" type="action" name="act_Ability-Transcendent-TimeTraveller-1"></button>
+              <input class="sheet-hide-on-one" name="attr_Ability-Transcendent-TimeTraveller-1" type="hidden" value="0"/>
+              <button class="sheet-button-transcendent-off" type="action" name="act_Ability-Transcendent-TimeTraveller-1"></button>
+            </div>
+            <div class="sheet-Ability-Text sheet-Playbook-TimeTraveller"><b> <span data-i18n="Clock stopper"></span></b>: <span data-i18n="If ever there is a question of who acts first, it’s you. Once per mission, when the director advances a clock, you may say “no” and the clock does not advance."></span>
+            </div>
+          </div>
+          <!-- All transcendent abilities are selectable-->
+          <input class="sheet-hide-if-unused" name="attr_Ability-Transcendent-TimeTraveller-2" type="hidden" value="0"/>
+          <div class="sheet-Ability">
+            <div class="sheet-Ability-Selector sheet-Playbook-TimeTraveller">
+              <input class="sheet-hide-on-zero" name="attr_Ability-Transcendent-TimeTraveller-2" type="hidden" value="0"/>
+              <button class="sheet-button-transcendent-on" type="action" name="act_Ability-Transcendent-TimeTraveller-2"></button>
+              <input class="sheet-hide-on-one" name="attr_Ability-Transcendent-TimeTraveller-2" type="hidden" value="0"/>
+              <button class="sheet-button-transcendent-off" type="action" name="act_Ability-Transcendent-TimeTraveller-2"></button>
+            </div>
+            <div class="sheet-Ability-Text sheet-Playbook-TimeTraveller"><b> <span data-i18n="On the other side of time"></span></b>: <span data-i18n="When you push yourself choose one of the following additional benefits: You trade places with your fated person - you briefly remove an ally or foe from the flow of time"></span>
+            </div>
+          </div>
+          <!-- All transcendent abilities are selectable-->
+          <input class="sheet-hide-if-unused" name="attr_Ability-Transcendent-TimeTraveller-3" type="hidden" value="0"/>
+          <div class="sheet-Ability">
+            <div class="sheet-Ability-Selector sheet-Playbook-TimeTraveller">
+              <input class="sheet-hide-on-zero" name="attr_Ability-Transcendent-TimeTraveller-3" type="hidden" value="0"/>
+              <button class="sheet-button-transcendent-on" type="action" name="act_Ability-Transcendent-TimeTraveller-3"></button>
+              <input class="sheet-hide-on-one" name="attr_Ability-Transcendent-TimeTraveller-3" type="hidden" value="0"/>
+              <button class="sheet-button-transcendent-off" type="action" name="act_Ability-Transcendent-TimeTraveller-3"></button>
+            </div>
+            <div class="sheet-Ability-Text sheet-Playbook-TimeTraveller"><b> <span data-i18n="Lost cause"></span></b>: <span data-i18n="Once per transcendence, when an ally suffers severe consequences, you may choose to abandon this timeline for a better one. Consequences they would have suffered are replaced by your suffering level 3 harm: Traveller’s despair. Your relationship to the person you save is different in this timeline, they will tell you how."></span>
+            </div>
+          </div>
+          <!-- All transcendent abilities are selectable-->
+          <input class="sheet-hide-if-unused" name="attr_Ability-Transcendent-Harmony-1" type="hidden" value="0"/>
+          <div class="sheet-Ability">
+            <div class="sheet-Ability-Selector sheet-Playbook-Harmony">
+              <input class="sheet-hide-on-zero" name="attr_Ability-Transcendent-Harmony-1" type="hidden" value="0"/>
+              <button class="sheet-button-transcendent-on" type="action" name="act_Ability-Transcendent-Harmony-1"></button>
+              <input class="sheet-hide-on-one" name="attr_Ability-Transcendent-Harmony-1" type="hidden" value="0"/>
+              <button class="sheet-button-transcendent-off" type="action" name="act_Ability-Transcendent-Harmony-1"></button>
+            </div>
+            <div class="sheet-Ability-Text sheet-Playbook-Harmony"><b> <span data-i18n="Powerful presence"></span></b>: <span data-i18n="When you transcend, your scale increases, and your effect level changes accordingly where size is a factor."></span>
+            </div>
+          </div>
+          <!-- All transcendent abilities are selectable-->
+          <input class="sheet-hide-if-unused" name="attr_Ability-Transcendent-Harmony-2" type="hidden" value="0"/>
+          <div class="sheet-Ability">
+            <div class="sheet-Ability-Selector sheet-Playbook-Harmony">
+              <input class="sheet-hide-on-zero" name="attr_Ability-Transcendent-Harmony-2" type="hidden" value="0"/>
+              <button class="sheet-button-transcendent-on" type="action" name="act_Ability-Transcendent-Harmony-2"></button>
+              <input class="sheet-hide-on-one" name="attr_Ability-Transcendent-Harmony-2" type="hidden" value="0"/>
+              <button class="sheet-button-transcendent-off" type="action" name="act_Ability-Transcendent-Harmony-2"></button>
+            </div>
+            <div class="sheet-Ability-Text sheet-Playbook-Harmony"><b> <span data-i18n="As one"></span></b>: <span data-i18n="When you lead a group action or receive an assist while transcended, you briefly incorporate others into your harmony. You may roll the highest action rating among all participants instead of your own action rating."></span>
+            </div>
+          </div>
+          <!-- All transcendent abilities are selectable-->
+          <input class="sheet-hide-if-unused" name="attr_Ability-Transcendent-Harmony-3" type="hidden" value="0"/>
+          <div class="sheet-Ability">
+            <div class="sheet-Ability-Selector sheet-Playbook-Harmony">
+              <input class="sheet-hide-on-zero" name="attr_Ability-Transcendent-Harmony-3" type="hidden" value="0"/>
+              <button class="sheet-button-transcendent-on" type="action" name="act_Ability-Transcendent-Harmony-3"></button>
+              <input class="sheet-hide-on-one" name="attr_Ability-Transcendent-Harmony-3" type="hidden" value="0"/>
+              <button class="sheet-button-transcendent-off" type="action" name="act_Ability-Transcendent-Harmony-3"></button>
+            </div>
+            <div class="sheet-Ability-Text sheet-Playbook-Harmony"><b> <span data-i18n="Beacon"></span></b>: <span data-i18n="Once per transcendence, you may uplift your allies with a speech, or song. When you do, it counts as spending a link on each ally that can hear you. They choose which link effect to use."></span>
+            </div>
+          </div>
+          <!-- All transcendent abilities are selectable-->
+          <input class="sheet-hide-if-unused" name="attr_Ability-Transcendent-Guardian-1" type="hidden" value="0"/>
+          <div class="sheet-Ability">
+            <div class="sheet-Ability-Selector sheet-Playbook-Guardian">
+              <input class="sheet-hide-on-zero" name="attr_Ability-Transcendent-Guardian-1" type="hidden" value="0"/>
+              <button class="sheet-button-transcendent-on" type="action" name="act_Ability-Transcendent-Guardian-1"></button>
+              <input class="sheet-hide-on-one" name="attr_Ability-Transcendent-Guardian-1" type="hidden" value="0"/>
+              <button class="sheet-button-transcendent-off" type="action" name="act_Ability-Transcendent-Guardian-1"></button>
+            </div>
+            <div class="sheet-Ability-Text sheet-Playbook-Guardian"><b> <span data-i18n="Indomitable"></span></b>: <span data-i18n="You suffer at most 2 stress when resisting consequences, and get +1d when rolling eclipse."></span>
+            </div>
+          </div>
+          <!-- All transcendent abilities are selectable-->
+          <input class="sheet-hide-if-unused" name="attr_Ability-Transcendent-Guardian-2" type="hidden" value="0"/>
+          <div class="sheet-Ability">
+            <div class="sheet-Ability-Selector sheet-Playbook-Guardian">
+              <input class="sheet-hide-on-zero" name="attr_Ability-Transcendent-Guardian-2" type="hidden" value="0"/>
+              <button class="sheet-button-transcendent-on" type="action" name="act_Ability-Transcendent-Guardian-2"></button>
+              <input class="sheet-hide-on-one" name="attr_Ability-Transcendent-Guardian-2" type="hidden" value="0"/>
+              <button class="sheet-button-transcendent-off" type="action" name="act_Ability-Transcendent-Guardian-2"></button>
+            </div>
+            <div class="sheet-Ability-Text sheet-Playbook-Guardian"><b> <span data-i18n="How Dare You"></span></b>: <span data-i18n="When you strike back against someone who has harmed one of your friends, gain +1 effect. If your action succeeds, you recover 1 stress."></span>
+            </div>
+          </div>
+          <!-- All transcendent abilities are selectable-->
+          <input class="sheet-hide-if-unused" name="attr_Ability-Transcendent-Guardian-3" type="hidden" value="0"/>
+          <div class="sheet-Ability">
+            <div class="sheet-Ability-Selector sheet-Playbook-Guardian">
+              <input class="sheet-hide-on-zero" name="attr_Ability-Transcendent-Guardian-3" type="hidden" value="0"/>
+              <button class="sheet-button-transcendent-on" type="action" name="act_Ability-Transcendent-Guardian-3"></button>
+              <input class="sheet-hide-on-one" name="attr_Ability-Transcendent-Guardian-3" type="hidden" value="0"/>
+              <button class="sheet-button-transcendent-off" type="action" name="act_Ability-Transcendent-Guardian-3"></button>
+            </div>
+            <div class="sheet-Ability-Text sheet-Playbook-Guardian"><b> <span data-i18n="Bolstering presence"></span></b>: <span data-i18n="When you assist or set up a teammate, they mark 1 segment on their recovery clock."></span>
+            </div>
+          </div>
+          <!-- All transcendent abilities are selectable-->
+          <input class="sheet-hide-if-unused" name="attr_Ability-Transcendent-Outsider-1" type="hidden" value="0"/>
+          <div class="sheet-Ability">
+            <div class="sheet-Ability-Selector sheet-Playbook-Outsider">
+              <input class="sheet-hide-on-zero" name="attr_Ability-Transcendent-Outsider-1" type="hidden" value="0"/>
+              <button class="sheet-button-transcendent-on" type="action" name="act_Ability-Transcendent-Outsider-1"></button>
+              <input class="sheet-hide-on-one" name="attr_Ability-Transcendent-Outsider-1" type="hidden" value="0"/>
+              <button class="sheet-button-transcendent-off" type="action" name="act_Ability-Transcendent-Outsider-1"></button>
+            </div>
+            <div class="sheet-Ability-Text sheet-Playbook-Outsider"><b> <span data-i18n="Brutish"></span></b>: <span data-i18n="When you push yourself, choose one of the following additional benefits: perform a superhuman feat of physical force - destroy an obstacle between you and your rival."></span>
+            </div>
+          </div>
+          <!-- All transcendent abilities are selectable-->
+          <input class="sheet-hide-if-unused" name="attr_Ability-Transcendent-Outsider-2" type="hidden" value="0"/>
+          <div class="sheet-Ability">
+            <div class="sheet-Ability-Selector sheet-Playbook-Outsider">
+              <input class="sheet-hide-on-zero" name="attr_Ability-Transcendent-Outsider-2" type="hidden" value="0"/>
+              <button class="sheet-button-transcendent-on" type="action" name="act_Ability-Transcendent-Outsider-2"></button>
+              <input class="sheet-hide-on-one" name="attr_Ability-Transcendent-Outsider-2" type="hidden" value="0"/>
+              <button class="sheet-button-transcendent-off" type="action" name="act_Ability-Transcendent-Outsider-2"></button>
+            </div>
+            <div class="sheet-Ability-Text sheet-Playbook-Outsider"><b> <span data-i18n="This one’s mine!"></span></b>: <span data-i18n="Once you engage a foe, neither of you may back down until one of you is defeated. While you are engaged with your foe, only your rival can assist you, and other foes will not interfere. Your rival may take your place at any time, but must finish what you started."></span>
+            </div>
+          </div>
+          <!-- All transcendent abilities are selectable-->
+          <input class="sheet-hide-if-unused" name="attr_Ability-Transcendent-Outsider-3" type="hidden" value="0"/>
+          <div class="sheet-Ability">
+            <div class="sheet-Ability-Selector sheet-Playbook-Outsider">
+              <input class="sheet-hide-on-zero" name="attr_Ability-Transcendent-Outsider-3" type="hidden" value="0"/>
+              <button class="sheet-button-transcendent-on" type="action" name="act_Ability-Transcendent-Outsider-3"></button>
+              <input class="sheet-hide-on-one" name="attr_Ability-Transcendent-Outsider-3" type="hidden" value="0"/>
+              <button class="sheet-button-transcendent-off" type="action" name="act_Ability-Transcendent-Outsider-3"></button>
+            </div>
+            <div class="sheet-Ability-Text sheet-Playbook-Outsider"><b> <span data-i18n="Relentless"></span></b>: <span data-i18n="While transcended, each other protagonist counts as your rival."></span>
+            </div>
+          </div>
+          <!-- All transcendent abilities are selectable-->
+          <input class="sheet-hide-if-unused" name="attr_Ability-Transcendent-UnlikelyHero-1" type="hidden" value="0"/>
+          <div class="sheet-Ability">
+            <div class="sheet-Ability-Selector sheet-Playbook-UnlikelyHero">
+              <input class="sheet-hide-on-zero" name="attr_Ability-Transcendent-UnlikelyHero-1" type="hidden" value="0"/>
+              <button class="sheet-button-transcendent-on" type="action" name="act_Ability-Transcendent-UnlikelyHero-1"></button>
+              <input class="sheet-hide-on-one" name="attr_Ability-Transcendent-UnlikelyHero-1" type="hidden" value="0"/>
+              <button class="sheet-button-transcendent-off" type="action" name="act_Ability-Transcendent-UnlikelyHero-1"></button>
+            </div>
+            <div class="sheet-Ability-Text sheet-Playbook-UnlikelyHero">
+              <!-- Then we're doing a pick-list one, not a standard one-->
+              <select name="attr_Choose-Ability-Transcendent-UnlikelyHero-1">
+                <option value="" data-i18n="(choose from any playbook)"></option>
+                <option value="0">---------------------------</option>
+                <option value="The big reveal|The moment you transcend, you may choose to immediately disappear, and may reappear at any time in the place of your choosing.|0" data-i18n="The big reveal (Enigma)"></option>
+                <option value="Watch this!|When you push yourself choose one of the following additional benefits: Perform a superhuman feat of athletics - deliver a monologue without anyone interrupting you|0" data-i18n="Watch this! (Enigma)"></option>
+                <option value="Powerful friends|Once per mission you may flash back to a special downtime action, taken as your transcendent self. Shift the results of the roll up one step.|0" data-i18n="Powerful friends (Enigma)"></option>
+                <option value="0">---------------------------</option>
+                <option value="Ex machina|When you push yourself, choose one of the following additional benefits: you compel non-human things around you to hinder or distract your foes - you compel the environment to change itself to suit your needs|0" data-i18n="Ex machina (Stranger)"></option>
+                <option value="Deeper understanding|When you gather info, gain +1 effect. When a transcended ally acts on information you provide, they gain 1 link with you.|0" data-i18n="Deeper understanding (Stranger)"></option>
+                <option value="Here’s one I prepared earlier|Once per transcendence you may activate a flashback without spending stress to create a device that does one of the following: Allow for an escape - reveal unexpected information - create an opportunity for an ally|0" data-i18n="Here’s one I prepared earlier (Stranger)"></option>
+                <option value="0">---------------------------</option>
+                <option value="Clock stopper|If ever there is a question of who acts first, it’s you. Once per mission, when the director advances a clock, you may say “no” and the clock does not advance.|0" data-i18n="Clock stopper (Time Traveller)"></option>
+                <option value="On the other side of time|When you push yourself choose one of the following additional benefits: You trade places with your fated person - you briefly remove an ally or foe from the flow of time|0" data-i18n="On the other side of time (Time Traveller)"></option>
+                <option value="Lost cause|Once per transcendence, when an ally suffers severe consequences, you may choose to abandon this timeline for a better one. Consequences they would have suffered are replaced by your suffering level 3 harm: Traveller’s despair. Your relationship to the person you save is different in this timeline, they will tell you how.|0" data-i18n="Lost cause (Time Traveller)"></option>
+                <option value="0">---------------------------</option>
+                <option value="Powerful presence|When you transcend, your scale increases, and your effect level changes accordingly where size is a factor.|0" data-i18n="Powerful presence (Harmony)"></option>
+                <option value="As one|When you lead a group action or receive an assist while transcended, you briefly incorporate others into your harmony. You may roll the highest action rating among all participants instead of your own action rating.|0" data-i18n="As one (Harmony)"></option>
+                <option value="Beacon|Once per transcendence, you may uplift your allies with a speech, or song. When you do, it counts as spending a link on each ally that can hear you. They choose which link effect to use.|0" data-i18n="Beacon (Harmony)"></option>
+                <option value="0">---------------------------</option>
+                <option value="Indomitable|You suffer at most 2 stress when resisting consequences, and get +1d when rolling eclipse.|0" data-i18n="Indomitable (Guardian)"></option>
+                <option value="How Dare You|When you strike back against someone who has harmed one of your friends, gain +1 effect. If your action succeeds, you recover 1 stress.|0" data-i18n="How Dare You (Guardian)"></option>
+                <option value="Bolstering presence|When you assist or set up a teammate, they mark 1 segment on their recovery clock.|0" data-i18n="Bolstering presence (Guardian)"></option>
+                <option value="0">---------------------------</option>
+                <option value="Brutish|When you push yourself, choose one of the following additional benefits: perform a superhuman feat of physical force - destroy an obstacle between you and your rival.|0" data-i18n="Brutish (Outsider)"></option>
+                <option value="This one’s mine!|Once you engage a foe, neither of you may back down until one of you is defeated. While you are engaged with your foe, only your rival can assist you, and other foes will not interfere. Your rival may take your place at any time, but must finish what you started.|0" data-i18n="This one’s mine! (Outsider)"></option>
+                <option value="Relentless|While transcended, each other protagonist counts as your rival.|0" data-i18n="Relentless (Outsider)"></option>
+                <option value="0">---------------------------</option>
+              </select>
+              <input class="sheet-HideNull" name="attr_Ability-Transcendent-UnlikelyHero-1-Name" type="hidden" value=""/><span><b>
+                  <input name="attr_Ability-Transcendent-UnlikelyHero-1-Name" type="hidden" value=""/><span name="attr_Ability-Transcendent-UnlikelyHero-1-Name"></span></b>: 
+                <input name="attr_Ability-Transcendent-UnlikelyHero-1-Effect" type="hidden" value=""/><span name="attr_Ability-Transcendent-UnlikelyHero-1-Effect"></span>
+                <input class="sheet-hide-on-zero" name="attr_Ability-Transcendent-UnlikelyHero-1-Has-Text" type="hidden" value=""/>
+                <input name="attr_Ability-Transcendent-UnlikelyHero-1-Text" type="text" value=""/></span>
+            </div>
+          </div>
+          <!-- All transcendent abilities are selectable-->
+          <input class="sheet-hide-if-unused" name="attr_Ability-Transcendent-UnlikelyHero-2" type="hidden" value="0"/>
+          <div class="sheet-Ability">
+            <div class="sheet-Ability-Selector sheet-Playbook-UnlikelyHero">
+              <input class="sheet-hide-on-zero" name="attr_Ability-Transcendent-UnlikelyHero-2" type="hidden" value="0"/>
+              <button class="sheet-button-transcendent-on" type="action" name="act_Ability-Transcendent-UnlikelyHero-2"></button>
+              <input class="sheet-hide-on-one" name="attr_Ability-Transcendent-UnlikelyHero-2" type="hidden" value="0"/>
+              <button class="sheet-button-transcendent-off" type="action" name="act_Ability-Transcendent-UnlikelyHero-2"></button>
+            </div>
+            <div class="sheet-Ability-Text sheet-Playbook-UnlikelyHero">
+              <!-- Then we're doing a pick-list one, not a standard one-->
+              <select name="attr_Choose-Ability-Transcendent-UnlikelyHero-2">
+                <option value="" data-i18n="(choose from any playbook)"></option>
+                <option value="0">---------------------------</option>
+                <option value="The big reveal|The moment you transcend, you may choose to immediately disappear, and may reappear at any time in the place of your choosing.|0" data-i18n="The big reveal (Enigma)"></option>
+                <option value="Watch this!|When you push yourself choose one of the following additional benefits: Perform a superhuman feat of athletics - deliver a monologue without anyone interrupting you|0" data-i18n="Watch this! (Enigma)"></option>
+                <option value="Powerful friends|Once per mission you may flash back to a special downtime action, taken as your transcendent self. Shift the results of the roll up one step.|0" data-i18n="Powerful friends (Enigma)"></option>
+                <option value="0">---------------------------</option>
+                <option value="Ex machina|When you push yourself, choose one of the following additional benefits: you compel non-human things around you to hinder or distract your foes - you compel the environment to change itself to suit your needs|0" data-i18n="Ex machina (Stranger)"></option>
+                <option value="Deeper understanding|When you gather info, gain +1 effect. When a transcended ally acts on information you provide, they gain 1 link with you.|0" data-i18n="Deeper understanding (Stranger)"></option>
+                <option value="Here’s one I prepared earlier|Once per transcendence you may activate a flashback without spending stress to create a device that does one of the following: Allow for an escape - reveal unexpected information - create an opportunity for an ally|0" data-i18n="Here’s one I prepared earlier (Stranger)"></option>
+                <option value="0">---------------------------</option>
+                <option value="Clock stopper|If ever there is a question of who acts first, it’s you. Once per mission, when the director advances a clock, you may say “no” and the clock does not advance.|0" data-i18n="Clock stopper (Time Traveller)"></option>
+                <option value="On the other side of time|When you push yourself choose one of the following additional benefits: You trade places with your fated person - you briefly remove an ally or foe from the flow of time|0" data-i18n="On the other side of time (Time Traveller)"></option>
+                <option value="Lost cause|Once per transcendence, when an ally suffers severe consequences, you may choose to abandon this timeline for a better one. Consequences they would have suffered are replaced by your suffering level 3 harm: Traveller’s despair. Your relationship to the person you save is different in this timeline, they will tell you how.|0" data-i18n="Lost cause (Time Traveller)"></option>
+                <option value="0">---------------------------</option>
+                <option value="Powerful presence|When you transcend, your scale increases, and your effect level changes accordingly where size is a factor.|0" data-i18n="Powerful presence (Harmony)"></option>
+                <option value="As one|When you lead a group action or receive an assist while transcended, you briefly incorporate others into your harmony. You may roll the highest action rating among all participants instead of your own action rating.|0" data-i18n="As one (Harmony)"></option>
+                <option value="Beacon|Once per transcendence, you may uplift your allies with a speech, or song. When you do, it counts as spending a link on each ally that can hear you. They choose which link effect to use.|0" data-i18n="Beacon (Harmony)"></option>
+                <option value="0">---------------------------</option>
+                <option value="Indomitable|You suffer at most 2 stress when resisting consequences, and get +1d when rolling eclipse.|0" data-i18n="Indomitable (Guardian)"></option>
+                <option value="How Dare You|When you strike back against someone who has harmed one of your friends, gain +1 effect. If your action succeeds, you recover 1 stress.|0" data-i18n="How Dare You (Guardian)"></option>
+                <option value="Bolstering presence|When you assist or set up a teammate, they mark 1 segment on their recovery clock.|0" data-i18n="Bolstering presence (Guardian)"></option>
+                <option value="0">---------------------------</option>
+                <option value="Brutish|When you push yourself, choose one of the following additional benefits: perform a superhuman feat of physical force - destroy an obstacle between you and your rival.|0" data-i18n="Brutish (Outsider)"></option>
+                <option value="This one’s mine!|Once you engage a foe, neither of you may back down until one of you is defeated. While you are engaged with your foe, only your rival can assist you, and other foes will not interfere. Your rival may take your place at any time, but must finish what you started.|0" data-i18n="This one’s mine! (Outsider)"></option>
+                <option value="Relentless|While transcended, each other protagonist counts as your rival.|0" data-i18n="Relentless (Outsider)"></option>
+                <option value="0">---------------------------</option>
+              </select>
+              <input class="sheet-HideNull" name="attr_Ability-Transcendent-UnlikelyHero-2-Name" type="hidden" value=""/><span><b>
+                  <input name="attr_Ability-Transcendent-UnlikelyHero-2-Name" type="hidden" value=""/><span name="attr_Ability-Transcendent-UnlikelyHero-2-Name"></span></b>: 
+                <input name="attr_Ability-Transcendent-UnlikelyHero-2-Effect" type="hidden" value=""/><span name="attr_Ability-Transcendent-UnlikelyHero-2-Effect"></span>
+                <input class="sheet-hide-on-zero" name="attr_Ability-Transcendent-UnlikelyHero-2-Has-Text" type="hidden" value=""/>
+                <input name="attr_Ability-Transcendent-UnlikelyHero-2-Text" type="text" value=""/></span>
+            </div>
+          </div>
+          <!-- All transcendent abilities are selectable-->
+          <input class="sheet-hide-if-unused" name="attr_Ability-Transcendent-UnlikelyHero-3" type="hidden" value="0"/>
+          <div class="sheet-Ability">
+            <div class="sheet-Ability-Selector sheet-Playbook-UnlikelyHero">
+              <input class="sheet-hide-on-zero" name="attr_Ability-Transcendent-UnlikelyHero-3" type="hidden" value="0"/>
+              <button class="sheet-button-transcendent-on" type="action" name="act_Ability-Transcendent-UnlikelyHero-3"></button>
+              <input class="sheet-hide-on-one" name="attr_Ability-Transcendent-UnlikelyHero-3" type="hidden" value="0"/>
+              <button class="sheet-button-transcendent-off" type="action" name="act_Ability-Transcendent-UnlikelyHero-3"></button>
+            </div>
+            <div class="sheet-Ability-Text sheet-Playbook-UnlikelyHero">
+              <!-- Then we're doing a pick-list one, not a standard one-->
+              <select name="attr_Choose-Ability-Transcendent-UnlikelyHero-3">
+                <option value="" data-i18n="(choose from any playbook)"></option>
+                <option value="0">---------------------------</option>
+                <option value="The big reveal|The moment you transcend, you may choose to immediately disappear, and may reappear at any time in the place of your choosing.|0" data-i18n="The big reveal (Enigma)"></option>
+                <option value="Watch this!|When you push yourself choose one of the following additional benefits: Perform a superhuman feat of athletics - deliver a monologue without anyone interrupting you|0" data-i18n="Watch this! (Enigma)"></option>
+                <option value="Powerful friends|Once per mission you may flash back to a special downtime action, taken as your transcendent self. Shift the results of the roll up one step.|0" data-i18n="Powerful friends (Enigma)"></option>
+                <option value="0">---------------------------</option>
+                <option value="Ex machina|When you push yourself, choose one of the following additional benefits: you compel non-human things around you to hinder or distract your foes - you compel the environment to change itself to suit your needs|0" data-i18n="Ex machina (Stranger)"></option>
+                <option value="Deeper understanding|When you gather info, gain +1 effect. When a transcended ally acts on information you provide, they gain 1 link with you.|0" data-i18n="Deeper understanding (Stranger)"></option>
+                <option value="Here’s one I prepared earlier|Once per transcendence you may activate a flashback without spending stress to create a device that does one of the following: Allow for an escape - reveal unexpected information - create an opportunity for an ally|0" data-i18n="Here’s one I prepared earlier (Stranger)"></option>
+                <option value="0">---------------------------</option>
+                <option value="Clock stopper|If ever there is a question of who acts first, it’s you. Once per mission, when the director advances a clock, you may say “no” and the clock does not advance.|0" data-i18n="Clock stopper (Time Traveller)"></option>
+                <option value="On the other side of time|When you push yourself choose one of the following additional benefits: You trade places with your fated person - you briefly remove an ally or foe from the flow of time|0" data-i18n="On the other side of time (Time Traveller)"></option>
+                <option value="Lost cause|Once per transcendence, when an ally suffers severe consequences, you may choose to abandon this timeline for a better one. Consequences they would have suffered are replaced by your suffering level 3 harm: Traveller’s despair. Your relationship to the person you save is different in this timeline, they will tell you how.|0" data-i18n="Lost cause (Time Traveller)"></option>
+                <option value="0">---------------------------</option>
+                <option value="Powerful presence|When you transcend, your scale increases, and your effect level changes accordingly where size is a factor.|0" data-i18n="Powerful presence (Harmony)"></option>
+                <option value="As one|When you lead a group action or receive an assist while transcended, you briefly incorporate others into your harmony. You may roll the highest action rating among all participants instead of your own action rating.|0" data-i18n="As one (Harmony)"></option>
+                <option value="Beacon|Once per transcendence, you may uplift your allies with a speech, or song. When you do, it counts as spending a link on each ally that can hear you. They choose which link effect to use.|0" data-i18n="Beacon (Harmony)"></option>
+                <option value="0">---------------------------</option>
+                <option value="Indomitable|You suffer at most 2 stress when resisting consequences, and get +1d when rolling eclipse.|0" data-i18n="Indomitable (Guardian)"></option>
+                <option value="How Dare You|When you strike back against someone who has harmed one of your friends, gain +1 effect. If your action succeeds, you recover 1 stress.|0" data-i18n="How Dare You (Guardian)"></option>
+                <option value="Bolstering presence|When you assist or set up a teammate, they mark 1 segment on their recovery clock.|0" data-i18n="Bolstering presence (Guardian)"></option>
+                <option value="0">---------------------------</option>
+                <option value="Brutish|When you push yourself, choose one of the following additional benefits: perform a superhuman feat of physical force - destroy an obstacle between you and your rival.|0" data-i18n="Brutish (Outsider)"></option>
+                <option value="This one’s mine!|Once you engage a foe, neither of you may back down until one of you is defeated. While you are engaged with your foe, only your rival can assist you, and other foes will not interfere. Your rival may take your place at any time, but must finish what you started.|0" data-i18n="This one’s mine! (Outsider)"></option>
+                <option value="Relentless|While transcended, each other protagonist counts as your rival.|0" data-i18n="Relentless (Outsider)"></option>
+                <option value="0">---------------------------</option>
+              </select>
+              <input class="sheet-HideNull" name="attr_Ability-Transcendent-UnlikelyHero-3-Name" type="hidden" value=""/><span><b>
+                  <input name="attr_Ability-Transcendent-UnlikelyHero-3-Name" type="hidden" value=""/><span name="attr_Ability-Transcendent-UnlikelyHero-3-Name"></span></b>: 
+                <input name="attr_Ability-Transcendent-UnlikelyHero-3-Effect" type="hidden" value=""/><span name="attr_Ability-Transcendent-UnlikelyHero-3-Effect"></span>
+                <input class="sheet-hide-on-zero" name="attr_Ability-Transcendent-UnlikelyHero-3-Has-Text" type="hidden" value=""/>
+                <input name="attr_Ability-Transcendent-UnlikelyHero-3-Text" type="text" value=""/></span>
+            </div>
           </div>
         </div>
       </div>
@@ -287,9 +1150,6 @@ translation.json:
 	"On a Sea of Stars": "On a Sea of Stars",
 	"In a Maze of Dreams": "In a Maze of Dreams",
 	"Select a Playbook": "(Select a Playbook)",
-	"Bio": "Bio",
-	"Playset": "Playset",
-	"Playbook": "Playbook",
 	"Enigma": "Enigma",
 	"Stranger": "Stranger",
 	"Time Traveller": "Time Traveller",
@@ -297,6 +1157,9 @@ translation.json:
 	"Guardian": "Guardian",
 	"Outsider": "Outsider",
 	"Unlikely Hero": "Unlikely Hero",
+	"Bio": "Bio",
+	"Playset": "Playset",
+	"Playbook": "Playbook",
 	"Mundane Name": "Mundane Name",
 	"a forgettable name — a puzzling name": "a forgettable name — a puzzling name",
 	"a confusing name — a model name": "a confusing name — a model name",
@@ -333,7 +1196,7 @@ translation.json:
 	"a competitive promise": "a competitive promise",
 	"an impossible promise": "an impossible promise",
 	"Look": "Look",
-	"Abilities": "Abilities",
+	"Special Abilities": "Special Abilities",
 	"Behind the mask": "Behind the mask",
 	"Your transcendent and mundane selves lead separate lives, and no one knows that they are the same person. Your transcendent self wears a mask: describe it.": "Your transcendent and mundane selves lead separate lives, and no one knows that they are the same person. Your transcendent self wears a mask: describe it.",
 	"Working from the shadows": "Working from the shadows",
@@ -345,7 +1208,173 @@ translation.json:
 	"Cover story": "Cover story",
 	"You may choose to take -1d to your obligation roll to fill any remaining segments of your recovery clock. What’s your cover story for your injuries?": "You may choose to take -1d to your obligation roll to fill any remaining segments of your recovery clock. What’s your cover story for your injuries?",
 	"Two steps ahead": "Two steps ahead",
-	"Two times per mission, you can assist a team mate without spending stress. Tell us how you prepared for this situation.": "Two times per mission, you can assist a team mate without spending stress. Tell us how you prepared for this situation."
+	"Two times per mission, you can assist a team mate without spending stress. Tell us how you prepared for this situation.": "Two times per mission, you can assist a team mate without spending stress. Tell us how you prepared for this situation.",
+	"Stranger to kindness": "Stranger to kindness",
+	"You cannot make a connection, or help a friend recover in downtime. When you roll obligation, always roll stars. When you investigate, take +1d.": "You cannot make a connection, or help a friend recover in downtime. When you roll obligation, always roll stars. When you investigate, take +1d.",
+	"Oblivious": "Oblivious",
+	"You may expend your special armour to resist consequences of emotional trauma, or to be completely overlooked until you take a direct action.": "You may expend your special armour to resist consequences of emotional trauma, or to be completely overlooked until you take a direct action.",
+	"Safe distance": "Safe distance",
+	"You can make a connection and help a friend recover by leaving anonymous gifts. When you do so, take +1d. If you watch them receive the gift, you can ask their player one question from their gather info list.": "You can make a connection and help a friend recover by leaving anonymous gifts. When you do so, take +1d. If you watch them receive the gift, you can ask their player one question from their gather info list.",
+	"No sleep": "No sleep",
+	"During each downtime phase, you get two ticks to distribute among any long term project clocks. Whenever you complete a project, mark xp.": "During each downtime phase, you get two ticks to distribute among any long term project clocks. Whenever you complete a project, mark xp.",
+	"Things feel": "Things feel",
+	"You can empathize with non-human things as if they were people. If you use this to gather info, you may ask questions from any playbook currently in play.": "You can empathize with non-human things as if they were people. If you use this to gather info, you may ask questions from any playbook currently in play.",
+	"Know it all": "Know it all",
+	"You have encyclopaedic knowledge on a topic. Take +1d when you gather info relating to the chosen topic. Take this ability again to choose an additional option. Available topics: plants and animals - magic rituals - engineering - ancient lore - pop culture": "You have encyclopaedic knowledge on a topic. Take +1d when you gather info relating to the chosen topic. Take this ability again to choose an additional option. Available topics: plants and animals - magic rituals - engineering - ancient lore - pop culture",
+	"Fated": "Fated",
+	"You travelled through time to change another protagonist’s fate. What perilous fate are you here to prevent? Whose fate is it?": "You travelled through time to change another protagonist’s fate. What perilous fate are you here to prevent? Whose fate is it?",
+	"Dark omen": "Dark omen",
+	"When you use your impossible knowledge to persuade someone, gain +1 effect level. If a fate you warned of comes to pass, mark xp.": "When you use your impossible knowledge to persuade someone, gain +1 effect level. If a fate you warned of comes to pass, mark xp.",
+	"Saw it coming": "Saw it coming",
+	"You can expend your special armour to resist any consequence relating to surprise or misfortune, to be in two places at once, or perform some similar feat of time manipulation.": "You can expend your special armour to resist any consequence relating to surprise or misfortune, to be in two places at once, or perform some similar feat of time manipulation.",
+	"Oracle": "Oracle",
+	"You can perceive the myriad timelines leading from past to future. When you gather info, gain +1 effect level. If it relates to your fated person, take +1d as well.": "You can perceive the myriad timelines leading from past to future. When you gather info, gain +1 effect level. If it relates to your fated person, take +1d as well.",
+	"My very best friend": "My very best friend",
+	"When you connect with your fated person, gain +1d. When they connect with you, mark +1 link.": "When you connect with your fated person, gain +1d. When they connect with you, mark +1 link.",
+	"Out of time": "Out of time",
+	"You are outside the regular flow of time, and injuries fade from you quickly. Permanently fill one segment of your recovery clock. Other players roll +1d to help you recover.": "You are outside the regular flow of time, and injuries fade from you quickly. Permanently fill one segment of your recovery clock. Other players roll +1d to help you recover.",
+	"Rewind, return": "Rewind, return",
+	"You have been through this timeline at least once before. Flashbacks cost 1 less stress than normal. How did this go wrong the first time?": "You have been through this timeline at least once before. Flashbacks cost 1 less stress than normal. How did this go wrong the first time?",
+	"In harmony": "In harmony",
+	"You are a relationship, two people whose love has bound them into a single form and identity. Should you ever be separated, all actions you make are desperate until you are reunited. You roll +1d to gather info about relationships.": "You are a relationship, two people whose love has bound them into a single form and identity. Should you ever be separated, all actions you make are desperate until you are reunited. You roll +1d to gather info about relationships.",
+	"Split attention": "Split attention",
+	"You may take an additional action in each downtime phase.": "You may take an additional action in each downtime phase.",
+	"Inseparable": "Inseparable",
+	"You may expend your special armour to resist any consequence that would impact your relationships with others, or within yourself, or to magically appear from within your allies.": "You may expend your special armour to resist any consequence that would impact your relationships with others, or within yourself, or to magically appear from within your allies.",
+	"Synchronized": "Synchronized",
+	"When you are involved in a group action you may count multiple 6s from different rolls as a critical success. When leading, you take at most 1 stress regardless of the number of failed rolls during a group action.": "When you are involved in a group action you may count multiple 6s from different rolls as a critical success. When leading, you take at most 1 stress regardless of the number of failed rolls during a group action.",
+	"Bonds of love": "Bonds of love",
+	"You start each downtime with 2 links with yourself.": "You start each downtime with 2 links with yourself.",
+	"Perfect pitch": "Perfect pitch",
+	"Your voice is polyphonic, and eerily beautiful. Your allies can always hear you speak, regardless of distance or other interference. When you sing to inspire your allies, or soothe the troubled hearts of foes, roll +1d.": "Your voice is polyphonic, and eerily beautiful. Your allies can always hear you speak, regardless of distance or other interference. When you sing to inspire your allies, or soothe the troubled hearts of foes, roll +1d.",
+	"Honour bound": "Honour bound",
+	"You live by a code. Your code forbids all but one of the following: violence, lying, admitting fault, asking for help. At the end of a mission, if you did not violate your code, mark xp. If none of the protagonists broke your code, also mark series xp.": "You live by a code. Your code forbids all but one of the following: violence, lying, admitting fault, asking for help. At the end of a mission, if you did not violate your code, mark xp. If none of the protagonists broke your code, also mark series xp.",
+	"Watchful": "Watchful",
+	"When you protect an ally, take +1d to your resistance roll. When you gather info to anticipate possible threats in the current situation, you gain +1 effect level.": "When you protect an ally, take +1d to your resistance roll. When you gather info to anticipate possible threats in the current situation, you gain +1 effect level.",
+	"You don’t have to feel it": "You don’t have to feel it",
+	"You reduce all penalties from harm by one level. Level 4 harm is still fatal.": "You reduce all penalties from harm by one level. Level 4 harm is still fatal.",
+	"Constant care": "Constant care",
+	"When you help a friend recover, you also recover based on your roll. When you gather info, you can always ask “Who here is hurting?” for free.": "When you help a friend recover, you also recover based on your roll. When you gather info, you can always ask “Who here is hurting?” for free.",
+	"Here for you": "Here for you",
+	"You may expend your special armour to resist consequences suffered when you protect an ally, or to give +1d to someone else’s action.": "You may expend your special armour to resist consequences suffered when you protect an ally, or to give +1d to someone else’s action.",
+	"Righteous": "Righteous",
+	"When you confront a deadly foe, they are humbled by your bravery. When you forgive a humbled foe, take +1d on your roll.": "When you confront a deadly foe, they are humbled by your bravery. When you forgive a humbled foe, take +1d on your roll.",
+	"Something to prove": "Something to prove",
+	"Choose another protagonist to be your rival. You always have exactly one rival. Put their name here:": "Choose another protagonist to be your rival. You always have exactly one rival. Put their name here:",
+	"Reckless": "Reckless",
+	"When you make a desperate roll, you may choose to get +1d for the roll if you also take -1d to any resistance rolls against consequences from your actions.": "When you make a desperate roll, you may choose to get +1d for the roll if you also take -1d to any resistance rolls against consequences from your actions.",
+	"Jaded": "Jaded",
+	"You may expend your special armour to resist any consequence of your rival’s actions, or to act before your rival does.": "You may expend your special armour to resist any consequence of your rival’s actions, or to act before your rival does.",
+	"Pathetic!": "Pathetic!",
+	"When you gather info, you can always ask “Where’s my rival, what are they doing?” for free. If your rival is about to suffer fatal harm, or fall into eclipse, you can choose to be there and protect them, regardless of circumstances.": "When you gather info, you can always ask “Where’s my rival, what are they doing?” for free. If your rival is about to suffer fatal harm, or fall into eclipse, you can choose to be there and protect them, regardless of circumstances.",
+	"Old loyalties": "Old loyalties",
+	"The group’s adversaries are not immediately hostile towards you, and you can interact with them as peers. What role did you once serve among them?": "The group’s adversaries are not immediately hostile towards you, and you can interact with them as peers. What role did you once serve among them?",
+	"Anything you do, I do better": "Anything you do, I do better",
+	"When you assist your rival, you grant them +2d and take 2 stress. If you refuse your rival’s help, or they refuse yours, mark xp.": "When you assist your rival, you grant them +2d and take 2 stress. If you refuse your rival’s help, or they refuse yours, mark xp.",
+	"Only mortal": "Only mortal",
+	"You cannot transcend, and you cannot have special armour. You get an additional action during downtime. You get +1d when rolling to make a connection. When only you can save one of your friends from fatal harm or severe consequence, and you do it, you can discard this ability and gain Hero’s destiny instead.": "You cannot transcend, and you cannot have special armour. You get an additional action during downtime. You get +1d when rolling to make a connection. When only you can save one of your friends from fatal harm or severe consequence, and you do it, you can discard this ability and gain Hero’s destiny instead.",
+	"Hero’s destiny": "Hero’s destiny",
+	"You have embraced your heroic destiny. You gain increased effect when fighting your most powerful foes. Gain +1d when rolling eclipse. You may only transcend when an ally suffers consequences from an action. Immediately mark one transcendent ability on your playbook when you gain this ability.": "You have embraced your heroic destiny. You gain increased effect when fighting your most powerful foes. Gain +1d when rolling eclipse. You may only transcend when an ally suffers consequences from an action. Immediately mark one transcendent ability on your playbook when you gain this ability.",
+	"Call out": "Call out",
+	"When you confront someone about their bad behaviour roll +1d. If they are unrepentant, mark xp.": "When you confront someone about their bad behaviour roll +1d. If they are unrepentant, mark xp.",
+	"Worth saving": "Worth saving",
+	"When you run foolishly into danger, and no one comes to help you, mark xp. Your allies roll +1d when they protect you from consequences.": "When you run foolishly into danger, and no one comes to help you, mark xp. Your allies roll +1d when they protect you from consequences.",
+	"Heartfelt": "Heartfelt",
+	"When gathering information about someone’s emotions, roll +1d, and you can always ask a player “what is your character really feeling?” for free.": "When gathering information about someone’s emotions, roll +1d, and you can always ask a player “what is your character really feeling?” for free.",
+	"Believe in me": "Believe in me",
+	"Links on your sheet, and links with you on other player’s sheets, may be spent to affect any character.": "Links on your sheet, and links with you on other player’s sheets, may be spent to affect any character.",
+	"Veteran ability": "Veteran ability",
+	"(choose from any playbook)": "(choose from any playbook)",
+	"Working from the shadows (Enigma)": "Working from the shadows (Enigma)",
+	"Phantom (Enigma)": "Phantom (Enigma)",
+	"Shrouded in secrets (Enigma)": "Shrouded in secrets (Enigma)",
+	"Cover story (Enigma)": "Cover story (Enigma)",
+	"Two steps ahead (Enigma)": "Two steps ahead (Enigma)",
+	"Oblivious (Stranger)": "Oblivious (Stranger)",
+	"Safe distance (Stranger)": "Safe distance (Stranger)",
+	"No sleep (Stranger)": "No sleep (Stranger)",
+	"Things feel (Stranger)": "Things feel (Stranger)",
+	"Know it all (Stranger)": "Know it all (Stranger)",
+	"Dark omen (Time Traveller)": "Dark omen (Time Traveller)",
+	"Saw it coming (Time Traveller)": "Saw it coming (Time Traveller)",
+	"Oracle (Time Traveller)": "Oracle (Time Traveller)",
+	"My very best friend (Time Traveller)": "My very best friend (Time Traveller)",
+	"Out of time (Time Traveller)": "Out of time (Time Traveller)",
+	"Rewind, return (Time Traveller)": "Rewind, return (Time Traveller)",
+	"Split attention (Harmony)": "Split attention (Harmony)",
+	"Inseparable (Harmony)": "Inseparable (Harmony)",
+	"Synchronized (Harmony)": "Synchronized (Harmony)",
+	"Bonds of love (Harmony)": "Bonds of love (Harmony)",
+	"Perfect pitch (Harmony)": "Perfect pitch (Harmony)",
+	"Watchful (Guardian)": "Watchful (Guardian)",
+	"You don’t have to feel it (Guardian)": "You don’t have to feel it (Guardian)",
+	"Constant care (Guardian)": "Constant care (Guardian)",
+	"Here for you (Guardian)": "Here for you (Guardian)",
+	"Righteous (Guardian)": "Righteous (Guardian)",
+	"Reckless (Outsider)": "Reckless (Outsider)",
+	"Jaded (Outsider)": "Jaded (Outsider)",
+	"Pathetic! (Outsider)": "Pathetic! (Outsider)",
+	"Old loyalties (Outsider)": "Old loyalties (Outsider)",
+	"Anything you do, I do better (Outsider)": "Anything you do, I do better (Outsider)",
+	"Call out (Unlikely Hero)": "Call out (Unlikely Hero)",
+	"Worth saving (Unlikely Hero)": "Worth saving (Unlikely Hero)",
+	"Heartfelt (Unlikely Hero)": "Heartfelt (Unlikely Hero)",
+	"Believe in me (Unlikely Hero)": "Believe in me (Unlikely Hero)",
+	"Transcendent Abilities": "Transcendent Abilities",
+	"The big reveal": "The big reveal",
+	"The moment you transcend, you may choose to immediately disappear, and may reappear at any time in the place of your choosing.": "The moment you transcend, you may choose to immediately disappear, and may reappear at any time in the place of your choosing.",
+	"Watch this!": "Watch this!",
+	"When you push yourself choose one of the following additional benefits: Perform a superhuman feat of athletics - deliver a monologue without anyone interrupting you": "When you push yourself choose one of the following additional benefits: Perform a superhuman feat of athletics - deliver a monologue without anyone interrupting you",
+	"Powerful friends": "Powerful friends",
+	"Once per mission you may flash back to a special downtime action, taken as your transcendent self. Shift the results of the roll up one step.": "Once per mission you may flash back to a special downtime action, taken as your transcendent self. Shift the results of the roll up one step.",
+	"Ex machina": "Ex machina",
+	"When you push yourself, choose one of the following additional benefits: you compel non-human things around you to hinder or distract your foes - you compel the environment to change itself to suit your needs": "When you push yourself, choose one of the following additional benefits: you compel non-human things around you to hinder or distract your foes - you compel the environment to change itself to suit your needs",
+	"Deeper understanding": "Deeper understanding",
+	"When you gather info, gain +1 effect. When a transcended ally acts on information you provide, they gain 1 link with you.": "When you gather info, gain +1 effect. When a transcended ally acts on information you provide, they gain 1 link with you.",
+	"Here’s one I prepared earlier": "Here’s one I prepared earlier",
+	"Once per transcendence you may activate a flashback without spending stress to create a device that does one of the following: Allow for an escape - reveal unexpected information - create an opportunity for an ally": "Once per transcendence you may activate a flashback without spending stress to create a device that does one of the following: Allow for an escape - reveal unexpected information - create an opportunity for an ally",
+	"Clock stopper": "Clock stopper",
+	"If ever there is a question of who acts first, it’s you. Once per mission, when the director advances a clock, you may say “no” and the clock does not advance.": "If ever there is a question of who acts first, it’s you. Once per mission, when the director advances a clock, you may say “no” and the clock does not advance.",
+	"On the other side of time": "On the other side of time",
+	"When you push yourself choose one of the following additional benefits: You trade places with your fated person - you briefly remove an ally or foe from the flow of time": "When you push yourself choose one of the following additional benefits: You trade places with your fated person - you briefly remove an ally or foe from the flow of time",
+	"Lost cause": "Lost cause",
+	"Once per transcendence, when an ally suffers severe consequences, you may choose to abandon this timeline for a better one. Consequences they would have suffered are replaced by your suffering level 3 harm: Traveller’s despair. Your relationship to the person you save is different in this timeline, they will tell you how.": "Once per transcendence, when an ally suffers severe consequences, you may choose to abandon this timeline for a better one. Consequences they would have suffered are replaced by your suffering level 3 harm: Traveller’s despair. Your relationship to the person you save is different in this timeline, they will tell you how.",
+	"Powerful presence": "Powerful presence",
+	"When you transcend, your scale increases, and your effect level changes accordingly where size is a factor.": "When you transcend, your scale increases, and your effect level changes accordingly where size is a factor.",
+	"As one": "As one",
+	"When you lead a group action or receive an assist while transcended, you briefly incorporate others into your harmony. You may roll the highest action rating among all participants instead of your own action rating.": "When you lead a group action or receive an assist while transcended, you briefly incorporate others into your harmony. You may roll the highest action rating among all participants instead of your own action rating.",
+	"Beacon": "Beacon",
+	"Once per transcendence, you may uplift your allies with a speech, or song. When you do, it counts as spending a link on each ally that can hear you. They choose which link effect to use.": "Once per transcendence, you may uplift your allies with a speech, or song. When you do, it counts as spending a link on each ally that can hear you. They choose which link effect to use.",
+	"Indomitable": "Indomitable",
+	"You suffer at most 2 stress when resisting consequences, and get +1d when rolling eclipse.": "You suffer at most 2 stress when resisting consequences, and get +1d when rolling eclipse.",
+	"How Dare You": "How Dare You",
+	"When you strike back against someone who has harmed one of your friends, gain +1 effect. If your action succeeds, you recover 1 stress.": "When you strike back against someone who has harmed one of your friends, gain +1 effect. If your action succeeds, you recover 1 stress.",
+	"Bolstering presence": "Bolstering presence",
+	"When you assist or set up a teammate, they mark 1 segment on their recovery clock.": "When you assist or set up a teammate, they mark 1 segment on their recovery clock.",
+	"Brutish": "Brutish",
+	"When you push yourself, choose one of the following additional benefits: perform a superhuman feat of physical force - destroy an obstacle between you and your rival.": "When you push yourself, choose one of the following additional benefits: perform a superhuman feat of physical force - destroy an obstacle between you and your rival.",
+	"This one’s mine!": "This one’s mine!",
+	"Once you engage a foe, neither of you may back down until one of you is defeated. While you are engaged with your foe, only your rival can assist you, and other foes will not interfere. Your rival may take your place at any time, but must finish what you started.": "Once you engage a foe, neither of you may back down until one of you is defeated. While you are engaged with your foe, only your rival can assist you, and other foes will not interfere. Your rival may take your place at any time, but must finish what you started.",
+	"Relentless": "Relentless",
+	"While transcended, each other protagonist counts as your rival.": "While transcended, each other protagonist counts as your rival.",
+	"The big reveal (Enigma)": "The big reveal (Enigma)",
+	"Watch this! (Enigma)": "Watch this! (Enigma)",
+	"Powerful friends (Enigma)": "Powerful friends (Enigma)",
+	"Ex machina (Stranger)": "Ex machina (Stranger)",
+	"Deeper understanding (Stranger)": "Deeper understanding (Stranger)",
+	"Here’s one I prepared earlier (Stranger)": "Here’s one I prepared earlier (Stranger)",
+	"Clock stopper (Time Traveller)": "Clock stopper (Time Traveller)",
+	"On the other side of time (Time Traveller)": "On the other side of time (Time Traveller)",
+	"Lost cause (Time Traveller)": "Lost cause (Time Traveller)",
+	"Powerful presence (Harmony)": "Powerful presence (Harmony)",
+	"As one (Harmony)": "As one (Harmony)",
+	"Beacon (Harmony)": "Beacon (Harmony)",
+	"Indomitable (Guardian)": "Indomitable (Guardian)",
+	"How Dare You (Guardian)": "How Dare You (Guardian)",
+	"Bolstering presence (Guardian)": "Bolstering presence (Guardian)",
+	"Brutish (Outsider)": "Brutish (Outsider)",
+	"This one’s mine! (Outsider)": "This one’s mine! (Outsider)",
+	"Relentless (Outsider)": "Relentless (Outsider)"
 }
 END_TRANSLATIONS
 
