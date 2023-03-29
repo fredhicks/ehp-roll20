@@ -15,3 +15,56 @@
 		"stars": "On a Sea of Stars",
 		"dreams": "In a Maze of Dreams"
 	};
+	
+	// Used in sheet-worker.pug
+
+	var pbkeys = [
+		"Enigma", 
+		"Stranger", 
+		"TimeTraveller", 
+		"Harmony", 
+		"Guardian", 
+		"Outsider", 
+		"UnlikelyHero"
+	];
+	var toggles = [
+		"Toggle-Bio-Expand",
+		"Toggle-Abilities-Expand",
+		"Toggle-Abilities-Marked",
+		"Ability-Veteran",
+		"Toggle-Transcendent-Expand",
+		"Toggle-Transcendent-Marked",
+		"Toggle-Stress-Expand",
+	];
+	var toggleclicks = "";
+	var stressclicks = "";
+	var stressfields = "";
+	var clicks = 0;
+	// Bulk toggle creation (enumerated)
+	for(var i = 1; i < 10; i++) {
+		for(var pb of pbkeys) {
+			var field = 'Ability-' + pb + '-' + i;
+			toggles.push(field);
+			field = 'Ability-Transcendent-' + pb + '-' + i;
+			toggles.push(field);
+			// field = 'Stress-' + i;
+			// toggles.push(field);
+		}
+	}
+	for(var i of toggles) {
+		clicks++;
+		if ( clicks > 1 )
+			toggleclicks = toggleclicks + " ";
+		toggleclicks = toggleclicks + "clicked:" + i;
+	}
+	stressfields = "[";
+	for(var i = 1; i <= 8; i++) {
+		if ( i > 1 )
+			stressclicks = stressclicks + " "; 
+		// I don't know why pug requires this to be a separate thing, but it sure fucking did, so here we go
+		if ( i > 1 )
+		  stressfields = stressfields + ", ";
+		stressclicks = stressclicks + "clicked:Stress-" + i;
+		stressfields = stressfields + '"'+"Stress-"+i+'"';
+	}
+	stressfields = stressfields + "]";

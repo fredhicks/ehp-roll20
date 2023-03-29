@@ -181,6 +181,15 @@ input.sheet-Mode-Playbook ~ .sheet-Playbook-Outsider, input.sheet-Mode-Playbook 
 input.sheet-Mode-Playbook ~ .sheet-Playbook-UnlikelyHero, input.sheet-Mode-Playbook ~ * .sheet-Playbook-UnlikelyHero {
 	display: none;
 }
+input.sheet-Mode-Playbook ~ span.sheet-Playbook-Selected, input.sheet-Mode-Playbook ~ * span.sheet-Playbook-Selected {
+	display: inline;
+}
+input.sheet-Mode-Playbook ~ div.sheet-Playbook-Selected, input.sheet-Mode-Playbook ~ * div.sheet-Playbook-Selected {
+	display: block;
+}
+input.sheet-Mode-Playbook[value=""] ~ .sheet-Playbook-Selected, input.sheet-Mode-Playbook[value=""] ~ * .sheet-Playbook-Selected {
+	display: none;
+}
 input.sheet-Mode-Playbook[value=Enigma] ~ span.sheet-Playbook-Enigma, input.sheet-Mode-Playbook[value=Enigma] ~ * span.sheet-Playbook-Enigma {
 	display: inline;
 }
@@ -467,6 +476,18 @@ button.sheet-button-transcendent-off:before {
 	width: 16px;
 }
 
+button.sheet-button-stress-on:before {
+	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/stress-on.svg);
+	height: 14px;
+	width: 14px;
+}
+
+button.sheet-button-stress-off:before {
+	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/stress-off.svg);
+	height: 14px;
+	width: 14px;
+}
+
 button.sheet-button-header-transcendent-on:before {
 	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/transcendent-on.svg);
 }
@@ -496,6 +517,7 @@ button.sheet-button-header-transcendent-off, button.sheet-button-header-transcen
 	text-align: left;
 	padding-top: 7px;
 	padding-bottom: 7px;
+	padding-left: 0px;
 	vertical-align: top;
 }
 .sheet-button-header-expand:hover, .sheet-button-header-collapse:hover, .sheet-button-header-edit:hover, .sheet-button-header-close:hover, .sheet-button-header-mark-off:hover, .sheet-button-header-mark-on:hover, .sheet-button-header-transcendent-off:hover, .sheet-button-header-transcendent-on:hover {
@@ -505,12 +527,17 @@ button.sheet-button-header-transcendent-off, button.sheet-button-header-transcen
 	text-shadow: 0 0 8px black;
 }
 
-.sheet-button-mark-on, .sheet-button-mark-off, .sheet-button-transcendent-on, .sheet-button-transcendent-off {
+.sheet-button-header-mark-off, .sheet-button-header-mark-on, .sheet-button-header-transcendent-off, .sheet-button-header-transcendent-on {
+	padding-right: 0px;
+}
+
+.sheet-button-mark-on, .sheet-button-mark-off, .sheet-button-transcendent-on, .sheet-button-transcendent-off, .sheet-button-stress-on, .sheet-button-stress-off {
 	border: none;
 	background: none;
 	font-weight: normal;
 	text-align: left;
 	vertical-align: top;
+	padding: 0;
 }
 
 .sheet-hide-on-one[value="1"] + *, .sheet-hide-on-zero[value="0"] + * {

@@ -1,39 +1,12 @@
 script(type="text/worker")
 	-
 		// This part is run in pug
-		var pbkeys = [
-			"Enigma", 
-			"Stranger", 
-			"TimeTraveller", 
-			"Harmony", 
-			"Guardian", 
-			"Outsider", 
-			"UnlikelyHero"
-		];
-		var toggles = [
-			"Toggle-Bio-Expand",
-			"Toggle-Abilities-Expand",
-			"Toggle-Abilities-Marked",
-			"Ability-Veteran",
-			"Toggle-Transcendent-Expand",
-			"Toggle-Transcendent-Marked",
-		];
-		var toggleclicks = "";
-		var clicks = 0;
-		for(var i = 1; i < 10; i++) {
-			for(var pb of pbkeys) {
-				var field = 'Ability-' + pb + '-' + i;
-				toggles.push(field);
-				field = 'Ability-Transcendent-' + pb + '-' + i;
-				toggles.push(field);
-			}
-		}
-		for(var i of toggles) {
-			clicks++;
-			if ( clicks > 1 )
-				toggleclicks = toggleclicks + " ";
-			toggleclicks = toggleclicks + "clicked:" + i;
-		}
+		// found in variables.pug:
+			// pbkeys (array-within-pug)
+			// toggles (array-within-pug) 
+			// stressfields (string that contains an array once used in javascript below)
+			// toggleclicks (string)
+			// stressclicks (string)
 	.
 		
 		// This part is run in the sheetworker javascript
@@ -56,7 +29,29 @@ script(type="text/worker")
 				setAttrs(a);
 			});
 		});
-		
+
+		on("#{stressclicks}", function(e) {
+			log(e);
+			var id = "";
+			if ( typeof e.sourceAttribute !== "undefined" && e.sourceAttribute !== "" ) {
+				id = e.sourceAttribute;
+			} else {
+				id = (e.htmlAttributes.name).substring(4); // Strips off the 'act_'
+			}
+			log("Stress Toggle Handler: " + id);
+			getAttrs(!{stressfields}, function(a) {
+				log(a);
+				if ( a[id] === "1" ) {
+					a[id] = "0";
+				} else {
+					a[id] = "1";
+				}
+				log(a);
+				setAttrs(a);
+			});
+		});
+
+
 		on("change:Choose-Veteran-Ability", function(e) {
 			log(e);
 			// e.previousValue

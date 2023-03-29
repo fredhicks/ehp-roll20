@@ -1,0 +1,11 @@
+.sheet-Box.sheet-Pink.sheet-Playbook-Selected
+	.sheet-Box-Header
+		+translate('Stress')
+		.sheet-Box-Header-Icons
+			+toggle('Toggle-Stress-Expand')
+	+hidden('Toggle-Stress-Expand').sheet-hide-on-one
+	.sheet-Stress-Block
+		- var i = 1;
+		while i <= 8
+			+stressMark('Stress-'+i)
+			- i++;

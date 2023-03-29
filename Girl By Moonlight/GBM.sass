@@ -14,6 +14,8 @@ $starsicon: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Gi
 $dreamsicon: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/playset-dreams.svg)
 $markonicon: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/mark-on.svg)
 $markofficon: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/mark-off.svg)
+$stressonicon: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/stress-on.svg)
+$stressofficon: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/stress-off.svg)
 $tmarkonicon: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/transcendent-on.svg)
 $tmarkofficon: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/transcendent-off.svg)
 
@@ -171,6 +173,14 @@ input.sheet-Mode-Playbook
 	~, ~ *
 		@each $pb in $playbooks
 			.sheet-Playbook-#{$pb}
+				display: none
+		span.sheet-Playbook-Selected
+			display: inline
+		div.sheet-Playbook-Selected
+			display: block
+	&[value=""]
+		~, ~ *
+			.sheet-Playbook-Selected
 				display: none
 	@each $pb in $playbooks
 		&[value=#{$pb}]
@@ -374,6 +384,16 @@ button.sheet-button-transcendent-off:before
 	content: #{$tmarkofficon}
 	height: #{$bodystarsize}
 	width: #{$bodystarsize}
+	
+button.sheet-button-stress-on:before
+	content: #{$stressonicon}
+	height: #{$bodysize}
+	width: #{$bodysize}
+
+button.sheet-button-stress-off:before
+	content: #{$stressofficon}
+	height: #{$bodysize}
+	width: #{$bodysize}
 
 button.sheet-button-header-transcendent-on:before
 	content: #{$tmarkonicon}
@@ -398,18 +418,23 @@ button.sheet-button-header-transcendent-off, button.sheet-button-header-transcen
 	text-align: left
 	padding-top: 7px
 	padding-bottom: 7px
+	padding-left: 0px
 	vertical-align: top
 	&:hover
 		text-shadow: 0 0 8px white
 	&:focus
 		text-shadow: 0 0 8px black
 
-.sheet-button-mark-on, .sheet-button-mark-off, .sheet-button-transcendent-on, .sheet-button-transcendent-off
+.sheet-button-header-mark-off, .sheet-button-header-mark-on, .sheet-button-header-transcendent-off, .sheet-button-header-transcendent-on
+	padding-right: 0px
+
+.sheet-button-mark-on, .sheet-button-mark-off, .sheet-button-transcendent-on, .sheet-button-transcendent-off, .sheet-button-stress-on, .sheet-button-stress-off
 	border: none
 	background: none
 	font-weight: normal
 	text-align: left
 	vertical-align: top
+	padding: 0
 
 .sheet-hide-on-one[value="1"], .sheet-hide-on-zero[value="0"] 
 	+ * 

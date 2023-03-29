@@ -83,6 +83,11 @@ mixin abilityMark(a)
 	+hidden(a)(value=0).sheet-hide-on-one
 	button(type="action",name="act_"+a).sheet-button-mark-off
 
+mixin stressMark(a)
+	+hidden(a)(value=0).sheet-hide-on-zero
+	button(type="action",name="act_"+a).sheet-button-stress-on
+	+hidden(a)(value=0).sheet-hide-on-one
+	button(type="action",name="act_"+a).sheet-button-stress-off
 
 mixin hideUnmarkedTranscendent(a)
 	+hidden(a)(value=0).sheet-hide-on-zero
