@@ -96,6 +96,44 @@
   			st = st + Number(a['Stress-'+i]);
   		}
   		a['Stress-Total'] = st;
+  		if ( a['Stress-8'] == 1) {
+  			a['Toggle-Eclipse-Expand'] = 0;
+  		}
+  		log(a);
+  		setAttrs(a);
+  	});
+  });
+  
+  on("clicked:Transcendence-1 clicked:Transcendence-2 clicked:Transcendence-3 clicked:Transcendence-4", function(e) {
+  	log(e);
+  	var id = "";
+  	id = (e.htmlAttributes.name).substring(4); // Strips off the 'act_'
+  	log("Transcendence Toggle Handler: " + id);
+  	getAttrs(["Transcendence-1", "Transcendence-2", "Transcendence-3", "Transcendence-4"], function(a) {
+  		if ( Number(a[id]) === 1 ) {
+  			log(id+"=1");
+  			a[id] = "0";
+  			// We want to empty others past the one turned on
+  			var endnum = Number(id.substring('14')); // Strips off the 'Transcendence-'
+  			for(i = endnum; i <= 4; i++) {
+  				log('Setting Transcendence-'+i+"=0")
+  				a['Transcendence-'+i] = 0;
+  			}
+  		} else {
+  			log(id+"=0");
+  			a[id] = "1";
+  			// We want to fill others up to the one turned on
+  			var endnum = Number(id.substring('14')); // Strips off the 'Transcendence-'
+  			for(i = 1; i < endnum; i++) {
+  				log('Setting Transcendence-'+i+"=1")
+  				a['Transcendence-'+i] = 1;
+  			}
+  		}
+  		var st = 0;
+  		for(i = 1; i <= 4; i++) {
+  			st = st + Number(a['Transcendence-'+i]);
+  		}
+  		a['Transcendence-Total'] = st;
   		log(a);
   		setAttrs(a);
   	});
@@ -174,6 +212,36 @@
         <div class="sheet-Stress-Eclipse">
           <p><b><span data-i18n="When you eclipse—"></span></b><i><span class="sheet-Playbook-Enigma" data-i18n="Who you really are clearly isn’t enough; only the mask is worthy of their love. You reject all aspects of your everyday self, and embrace the most superficial aspects of your persona. Give them what you know they want—effortless beauty, and extravagant drama!"></span><span class="sheet-Playbook-Stranger" data-i18n="No more wasting time with ‘friends’ or ‘feelings’, they just get in the way. It’s time to focus on something real and tangible, something that makes sense. You find a concrete, rational, and entirely impossible task to pursue to the exclusion of all else."></span><span class="sheet-Playbook-TimeTraveller" data-i18n="You’ve known all along that changing fate was impossible, yet here you are. So much wasted effort, wasted time. If this fate was inevitable, why not embrace it? You set aside caution for instinct, and pursue a direct course of action, heedless of consequence."></span><span class="sheet-Playbook-Harmony" data-i18n="You are fractured. A sour note has shattered your harmony, and now there is uncertainty, and conflict. Your relationship, once a source of strength, is suddenly tenuous. You are divided, and a difference of opinions keeps you separated."></span><span class="sheet-Playbook-Guardian" data-i18n="Your shining example is not enough. This world is rotten to its core, corrupted by those too weak-willed to follow even the simplest rules. The slightest breach of your code must be met with uncompromising justice. Punish them until they repent."></span><span class="sheet-Playbook-Outsider" data-i18n="Your friends are leeches and sycophants who will never wield real power. The strong do not owe the weak an explanation. Pursue your goals in the most violent and cruel manner you can. Doubly so if it would put your rival in their place."></span><span class="sheet-Playbook-UnlikelyHero" data-i18n="You are not who they need you to be. You’re weak, useless, unworthy of their friendship. They have given so much to you, and in return you give them nothing. You throw yourself into danger, desperately seeking any way you might possibly be of use."></span></i></p>
           <p><b><span data-i18n="You escape eclipse"></span></b> <i> <span class="sheet-Playbook-Enigma" data-i18n="when someone shows you the truth of their heart, and you reveal your identity to them. They add a promise about keeping your secret."></span><span class="sheet-Playbook-Stranger" data-i18n="when someone works alongside you on your task, without judgement, and you let the task go incomplete and unresolved."></span><span class="sheet-Playbook-TimeTraveller" data-i18n="when your fated person defies your predictions and shows you they can alter the course of fate. Change either your fated person, their fate, or both."></span><span class="sheet-Playbook-Harmony" data-i18n="when someone else mediates your dispute, and your halves are able to reconcile their differences."></span><span class="sheet-Playbook-Guardian" data-i18n="when someone shows you something pure and beautiful, and you set aside your crusade."></span><span class="sheet-Playbook-Outsider" data-i18n="when you see that your rival isn’t intimidated by you, and the two of you accomplish something together. You may choose a new rival."></span><span class="sheet-Playbook-UnlikelyHero" data-i18n="only when someone engages you in a dialogue about your feelings, and shows you that they have felt the same."></span></i></p>
+        </div>
+      </div>
+      <div class="sheet-Box sheet-Teal sheet-Playbook-Selected">
+        <div class="sheet-Box-Header"><span data-i18n="Transcendence"></span>
+          <div class="sheet-Box-Header-Icons">
+            <input class="sheet-hide-on-zero" name="attr_Toggle-Stress-Expand" type="hidden" value="0"/>
+            <button class="sheet-button-header-expand" type="action" name="act_Toggle-Stress-Expand"></button>
+            <input class="sheet-hide-on-one" name="attr_Toggle-Stress-Expand" type="hidden" value="0"/>
+            <button class="sheet-button-header-collapse" type="action" name="act_Toggle-Stress-Expand"></button>
+          </div>
+        </div>
+        <input class="sheet-Stress-Total" name="attr_Transcendence-Total" type="hidden" value="0"/>
+        <input class="sheet-hide-on-one" name="attr_Toggle-Transcendence-Expand" type="hidden" value=""/>
+        <div class="sheet-Transcendence-Track">
+          <input class="sheet-hide-on-zero" name="attr_Transcendence-1" type="hidden" value="0"/>
+          <button class="sheet-button-transcendent-on" type="action" name="act_Transcendence-1"></button>
+          <input class="sheet-hide-on-one" name="attr_Transcendence-1" type="hidden" value="0"/>
+          <button class="sheet-button-transcendent-off" type="action" name="act_Transcendence-1"></button>
+          <input class="sheet-hide-on-zero" name="attr_Transcendence-2" type="hidden" value="0"/>
+          <button class="sheet-button-transcendent-on" type="action" name="act_Transcendence-2"></button>
+          <input class="sheet-hide-on-one" name="attr_Transcendence-2" type="hidden" value="0"/>
+          <button class="sheet-button-transcendent-off" type="action" name="act_Transcendence-2"></button>
+          <input class="sheet-hide-on-zero" name="attr_Transcendence-3" type="hidden" value="0"/>
+          <button class="sheet-button-transcendent-on" type="action" name="act_Transcendence-3"></button>
+          <input class="sheet-hide-on-one" name="attr_Transcendence-3" type="hidden" value="0"/>
+          <button class="sheet-button-transcendent-off" type="action" name="act_Transcendence-3"></button>
+          <input class="sheet-hide-on-zero" name="attr_Transcendence-4" type="hidden" value="0"/>
+          <button class="sheet-button-transcendent-on" type="action" name="act_Transcendence-4"></button>
+          <input class="sheet-hide-on-one" name="attr_Transcendence-4" type="hidden" value="0"/>
+          <button class="sheet-button-transcendent-off" type="action" name="act_Transcendence-4"></button>
         </div>
       </div>
       <div class="sheet-Box">

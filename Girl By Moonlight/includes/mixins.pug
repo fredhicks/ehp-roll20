@@ -90,6 +90,12 @@ mixin stressMark(a)
 	+hidden(a)(value=0).sheet-hide-on-one
 	button(type="action",name="act_"+a).sheet-button-stress-off
 
+mixin starMark(a)
+	+hidden(a)(value=0).sheet-hide-on-zero
+	button(type="action",name="act_"+a).sheet-button-transcendent-on
+	+hidden(a)(value=0).sheet-hide-on-one
+	button(type="action",name="act_"+a).sheet-button-transcendent-off
+
 mixin hideUnmarkedTranscendent(a)
 	+hidden(a)(value=0).sheet-hide-on-zero
 	button(type="action",name="act_"+a).sheet-button-header-transcendent-on
