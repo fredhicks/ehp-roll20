@@ -514,7 +514,7 @@ button.sheet-button-stress-off:before {
 }
 
 button.sheet-button-header-transcendent-on:before {
-	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/transcendent-on.svg);
+	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/transcendent-on-dark.svg);
 }
 
 .sheet-darkmode button.sheet-button-header-transcendent-on:before {
@@ -529,7 +529,7 @@ button.sheet-button-header-transcendent-on, button.sheet-button-header-transcend
 }
 
 button.sheet-button-header-transcendent-off:before {
-	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/transcendent-off.svg);
+	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/transcendent-off-dark.svg);
 }
 
 .sheet-darkmode button.sheet-button-header-transcendent-off:before {
@@ -620,6 +620,18 @@ input.sheet-Stress-Total[value="8"] ~ .sheet-Stress-Track {
 }
 
 .sheet-Stress-Warning {
+	text-align: center;
+	font-weight: bold;
+	font-style: italic;
+}
+
+.sheet-Transcendence-Track {
+	text-align: center;
+	height: 30px;
+	padding-top: 4px;
+}
+
+.sheet-Transcendence-Warning {
 	text-align: center;
 	font-weight: bold;
 	font-style: italic;

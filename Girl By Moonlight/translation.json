@@ -34,6 +34,7 @@
 	"when you see that your rival isn’t intimidated by you, and the two of you accomplish something together. You may choose a new rival.": "when you see that your rival isn’t intimidated by you, and the two of you accomplish something together. You may choose a new rival.",
 	"only when someone engages you in a dialogue about your feelings, and shows you that they have felt the same.": "only when someone engages you in a dialogue about your feelings, and shows you that they have felt the same.",
 	"Transcendence": "Transcendence",
+	"transcendence ends": "transcendence ends",
 	"Bio": "Bio",
 	"Playset": "Playset",
 	"Playbook": "Playbook",
@@ -251,5 +252,19 @@
 	"Bolstering presence (Guardian)": "Bolstering presence (Guardian)",
 	"Brutish (Outsider)": "Brutish (Outsider)",
 	"This one’s mine! (Outsider)": "This one’s mine! (Outsider)",
-	"Relentless (Outsider)": "Relentless (Outsider)"
+	"Relentless (Outsider)": "Relentless (Outsider)",
+	"Bonus Die": "Bonus Die",
+	"Push yourself (take 2 stress) or accept a Poisoned Promise": "<b>Push yourself</b> (take 2 stress) or accept a <b>Poisoned Promise</b>",
+	"Teamwork": "Teamwork",
+	"Assist a teammateLead a group actionSet up a teammateProtect a teammate": "<ul><li><b>Assist</b> a teammate<li><b>Lead</b> a group action<li><b>Set up</b> a teammate<li><b>Protect</b> a teammate</ul>",
+	"Gather Info": "Gather Info",
+	"What does [X] intend to do?Who here is keeping secrets?Where can I find [X]?Where’s the vulnerability here?Where can I stay hidden?What does [X] really want?": "<ul><li>What does [X] intend to do?<li>Who here is keeping secrets?<li>Where can I find [X]?<li>Where’s the vulnerability here?<li>Where can I stay hidden?<li>What does [X] really want?</ul>",
+	"What is hidden here?Where can I gain an edge?What is the purpose of [X]?Who/what doesn’t belong here?What might happen if I [X]?Who/what here is isolated or alone?": "<ul><li>What is hidden here?<li>Where can I gain an edge?<li>What is the purpose of [X]?<li>Who/what doesn’t belong here?<li>What might happen if I [X]?<li>Who/what here is isolated or alone?</ul>",
+	"What do I remember about [X]?What really happen(s/ed) here?What defies the flow of time?What is already in motion here?What might happen if I [X]?What is different about [X] this time?": "<ul><li>What do I remember about [X]?<li>What really happen(s/ed) here?<li>What defies the flow of time?<li>What is already in motion here?<li>What might happen if I [X]?<li>What is different about [X] this time?</ul>",
+	"Who here can best help me?What are you really feeling?Who here is at their limit?How are [X] and [Y] connected?Who here feels alone?What here is incomplete?": "<ul><li>Who here can best help me?<li>What are you really feeling?<li>Who here is at their limit?<li>How are [X] and [Y] connected?<li>Who here feels alone?<li>What here is incomplete?</ul>",
+	"What is most dangerous here?Who here is afraid?How can I help [X]?Who will my foes try to single out?Who here is willing to do violence?Who here is hurting?": "<ul><li>What is most dangerous here?<li>Who here is afraid?<li>How can I help [X]?<li>Who will my foes try to single out?<li>Who here is willing to do violence?<li>Who here is hurting?</ul>",
+	"Where’s my rival, what are they doing?What are your secret pains?How can I gain an edge here?What’s the danger no one else sees?What’s really going on here?What here can be broken?": "<ul><li>Where’s my rival, what are they doing?<li>What are your secret pains?<li>How can I gain an edge here?<li>What’s the danger no one else sees?<li>What’s really going on here?<li>What here can be broken?</ul>",
+	"What is most dangerous here?Who here is feeling [X]?What are you really feeling?Who here is strong or vulnerable?Where can I find beauty here?What are your unmet needs?": "<ul><li>What is most dangerous here?<li>Who here is feeling [X]?<li>What are you really feeling?<li>Who here is strong or vulnerable?<li>Where can I find beauty here?<li>What are your unmet needs?</ul>",
+	"Player Agenda": "Player Agenda",
+	"Play to find out what happensBe a fan of the other playersReveal your inner worldHold on, but lightlyKeep hope in your heartSee things through a queer lensExplore the darkness": "<ul><li>Play to find out what happens<li>Be a fan of the other players<li>Reveal your inner world<li>Hold on, but lightly<li>Keep hope in your heart<li>See things through a queer lens<li>Explore the darkness</ul>"
 }

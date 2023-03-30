@@ -14,28 +14,30 @@
 	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="60px" height="60px"
 	 viewBox="0 0 60 60" style="enable-background:new 0 0 60 60;" xml:space="preserve">
 <style type="text/css">
-	.st0{opacity:0.5;fill:#FFFFFF;}
+	.st0{opacity:0.5;fill:#FFFFFF;enable-background:new    ;}
 	.st1{fill:#FFFFFF;}
-	.st2{clip-path:url(#SVGID_00000034811538921359211380000012672069074819845567_);fill:#6A0D3F;}
+	.st2{clip-path:url(#SVGID_00000060731921824348234180000006036982418083307160_);fill:#6A0D3F;}
 </style>
 <metadata>
 	<sfw  xmlns="&ns_sfw;">
 		<slices></slices>
-		<sliceSourceBounds  bottomLeftOrigin="true" height="56" width="76" x="2" y="2"></sliceSourceBounds>
+		<sliceSourceBounds  bottomLeftOrigin="true" height="56" width="78" x="2" y="2"></sliceSourceBounds>
 	</sfw>
 </metadata>
 <circle class="st0" cx="30" cy="30" r="28"/>
 <circle class="st1" cx="30" cy="30" r="24"/>
 <g>
 	<g>
-		<defs>
-			<circle id="SVGID_1_" cx="30" cy="30" r="24"/>
-		</defs>
-		<clipPath id="SVGID_00000182497234108287582940000012416646207646107056_">
-			<use xlink:href="#SVGID_1_"  style="overflow:visible;"/>
-		</clipPath>
-		
-			<circle style="clip-path:url(#SVGID_00000182497234108287582940000012416646207646107056_);fill:#6A0D3F;" cx="54" cy="30" r="24"/>
+		<g>
+			<defs>
+				<circle id="SVGID_1_" cx="30" cy="30" r="24"/>
+			</defs>
+			<clipPath id="SVGID_00000131340603116329493170000002505559297024006536_">
+				<use xlink:href="#SVGID_1_"  style="overflow:visible;"/>
+			</clipPath>
+			
+				<circle style="clip-path:url(#SVGID_00000131340603116329493170000002505559297024006536_);fill:#6A0D3F;" cx="56" cy="30" r="24"/>
+		</g>
 	</g>
 </g>
 </svg>

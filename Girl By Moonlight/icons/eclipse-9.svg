@@ -16,27 +16,30 @@
 <style type="text/css">
 	.st0{opacity:0.5;fill:#FFFFFF;enable-background:new    ;}
 	.st1{fill:#FFFFFF;}
-	.st2{clip-path:url(#SVGID_00000139265620780046501880000012185887746596643249_);fill:#6A0D3F;}
+	.st2{clip-path:url(#SVGID_00000025443233215520703210000010889272468908558994_);fill:#6A0D3F;}
 </style>
 <metadata>
 	<sfw  xmlns="&ns_sfw;">
 		<slices></slices>
-		<sliceSourceBounds  bottomLeftOrigin="true" height="56" width="62" x="2" y="2"></sliceSourceBounds>
+		<sliceSourceBounds  bottomLeftOrigin="true" height="60" width="60" x="0" y="0"></sliceSourceBounds>
 	</sfw>
 </metadata>
 <circle class="st0" cx="30" cy="30" r="28"/>
-<circle class="st1" cx="30" cy="30" r="24"/>
+<path class="st1" d="M60,17.6c-5.9,2.5-15.3-2.3-11.6-5.9C44.7,15.3,40,5.9,42.4,0C40,5.9,30,9.2,30,4c0,5.1-10,1.9-12.4-4
+	c2.5,5.9-2.3,15.3-5.9,11.6C15.3,15.3,5.9,20,0,17.6C5.9,20,9.2,30,4,30c5.1,0,1.9,10-4,12.4c5.9-2.5,15.3,2.3,11.6,5.9
+	c3.6-3.6,8.4,5.7,5.9,11.6C20,54.1,30,50.8,30,56c0-5.1,10-1.9,12.4,4c-2.5-5.9,2.3-15.3,5.9-11.6c-3.6-3.6,5.7-8.4,11.6-5.9
+	C54.1,40,50.8,30,56,30C50.8,30,54.1,20,60,17.6z"/>
 <g>
 	<g>
 		<g>
 			<defs>
 				<circle id="SVGID_1_" cx="30" cy="30" r="24"/>
 			</defs>
-			<clipPath id="SVGID_00000088847085255501818680000010592024901133762221_">
+			<clipPath id="SVGID_00000125600287764377623430000006016710371755390351_">
 				<use xlink:href="#SVGID_1_"  style="overflow:visible;"/>
 			</clipPath>
 			
-				<circle style="clip-path:url(#SVGID_00000088847085255501818680000010592024901133762221_);fill:#6A0D3F;" cx="40" cy="30" r="24"/>
+				<circle style="clip-path:url(#SVGID_00000125600287764377623430000006016710371755390351_);fill:#6A0D3F;" cx="30" cy="30" r="24"/>
 		</g>
 	</g>
 </g>

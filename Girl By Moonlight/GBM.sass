@@ -425,7 +425,7 @@ button.sheet-button-stress-off:before
 	width: #{$bodysize}
 
 button.sheet-button-header-transcendent-on:before
-	content: #{$tmarkonicon}
+	content: #{$tmarkondarkicon}
 .sheet-darkmode button.sheet-button-header-transcendent-on:before
 	content: #{$tmarkondarkicon}
 button.sheet-button-header-transcendent-on, button.sheet-button-header-transcendent-on:before
@@ -435,7 +435,7 @@ button.sheet-button-header-transcendent-on, button.sheet-button-header-transcend
 	max-width: #{$headstarsize}
 
 button.sheet-button-header-transcendent-off:before
-	content: #{$tmarkofficon}
+	content: #{$tmarkoffdarkicon}
 .sheet-darkmode button.sheet-button-header-transcendent-off:before
 	content: #{$tmarkoffdarkicon}
 button.sheet-button-header-transcendent-off, button.sheet-button-header-transcendent-off:before
@@ -505,6 +505,15 @@ input.sheet-Stress-Total
 	&[value="8"] ~ .sheet-Stress-Track
 		background: #{$e8} no-repeat center center
 .sheet-Stress-Warning
+	text-align: center
+	font-weight: bold
+	font-style: italic
+
+.sheet-Transcendence-Track
+	text-align: center
+	height: 30px
+	padding-top: 4px
+.sheet-Transcendence-Warning
 	text-align: center
 	font-weight: bold
 	font-style: italic
