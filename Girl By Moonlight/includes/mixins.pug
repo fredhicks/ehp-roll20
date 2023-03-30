@@ -112,7 +112,17 @@ mixin xptrack(a,l)
 	- var i = 1;
 	while i <= l
 		+hidden(a+'-'+i)(value=0).sheet-hide-on-zero
-		button(type="action",name="act_"+a+'-'+i).sheet-button-xp-on
+		if ( i == 1 )
+			button(type="action",name="act_"+a+'-'+i).sheet-button-header-xp-on.sheet-xp-start
+		else if ( i == l )
+			button(type="action",name="act_"+a+'-'+i).sheet-button-header-xp-on.sheet-xp-end
+		else
+			button(type="action",name="act_"+a+'-'+i).sheet-button-header-xp-on
 		+hidden(a+'-'+i)(value=0).sheet-hide-on-one
-		button(type="action",name="act_"+a+'-'+i).sheet-button-xp-off
+		if ( i == 1 )
+			button(type="action",name="act_"+a+'-'+i).sheet-button-header-xp-off.sheet-xp-start
+		else if ( i == l )
+			button(type="action",name="act_"+a+'-'+i).sheet-button-header-xp-off.sheet-xp-end
+		else
+			button(type="action",name="act_"+a+'-'+i).sheet-button-header-xp-off
 		- i++;

@@ -16,22 +16,21 @@
 <style type="text/css">
 	.st0{fill:#FFFFFF;}
 	.st1{fill:#0D3A4C;}
-	.st2{fill:#006784;}
 </style>
 <metadata>
 	<sfw  xmlns="&ns_sfw;">
 		<slices></slices>
-		<sliceSourceBounds  bottomLeftOrigin="true" height="20" width="24" x="0" y="-22"></sliceSourceBounds>
+		<sliceSourceBounds  bottomLeftOrigin="true" height="20" width="24" x="0" y="2"></sliceSourceBounds>
 	</sfw>
 </metadata>
 <g>
-	<path class="st0" d="M0.6,21.4V2.6H14c5.2,0,9.4,4.2,9.4,9.4c0,5.2-4.2,9.4-9.4,9.4H0.6z"/>
-	<path class="st1" d="M14,3.1c4.9,0,8.9,4,8.9,8.9s-4,8.9-8.9,8.9H1.1V3.1H14 M14,2H0v20h14c5.5,0,10-4.5,10-10C24,6.5,19.5,2,14,2
-		L14,2z"/>
+	<path class="st0" d="M0.6,21.4V2.6H14c5.2,0,9.4,4.2,9.4,9.4s-4.2,9.4-9.4,9.4H0.6z"/>
+	<path class="st1" d="M14,3.1c4.9,0,8.9,4,8.9,8.9s-4,8.9-8.9,8.9H1.1V3.1H14 M14,2H0v20h14c5.5,0,10-4.5,10-10S19.5,2,14,2L14,2z"
+		/>
 </g>
 <g>
-	<path class="st0" d="M0.5,20.5v-17H14c4.7,0,8.5,3.8,8.5,8.5c0,4.7-3.8,8.5-8.5,8.5H0.5z"/>
-	<path class="st1" d="M14,4c4.4,0,8,3.6,8,8s-3.6,8-8,8H1V4H14 M14,3H0v18h14c5,0,9-4,9-9C23,7,19,3,14,3L14,3z"/>
+	<path class="st0" d="M0.5,20.5v-17H14c4.7,0,8.5,3.8,8.5,8.5s-3.8,8.5-8.5,8.5H0.5z"/>
+	<path class="st1" d="M14,4c4.4,0,8,3.6,8,8s-3.6,8-8,8H1V4H14 M14,3H0v18h14c5,0,9-4,9-9S19,3,14,3L14,3z"/>
 </g>
-<path class="st2" d="M14,5c3.9,0,7,3.1,7,7c0,3.9-3.1,7-7,7H2V5H14z"/>
+<path class="st0" d="M14,5c3.9,0,7,3.1,7,7s-3.1,7-7,7H2V5H14z"/>
 </svg>

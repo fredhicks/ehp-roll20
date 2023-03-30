@@ -328,6 +328,8 @@ input.sheet-Mode-Playbook
 		background-color: var(--gbm-blue)
 		display: grid
 		grid-template-columns: 1fr 75px
+		&.sheet-Box-XP
+			grid-template-columns: 1fr 4fr
 		.sheet-Box-Header-Icons
 			text-align: right
 			grid-column-start: 2
@@ -503,6 +505,19 @@ button.sheet-button-header-xp-off.sheet-xp-end:before
 
 .sheet-button-header-mark-off, .sheet-button-header-mark-on, .sheet-button-header-transcendent-off, .sheet-button-header-transcendent-on
 	padding-right: 0px
+
+.sheet-button-header-xp-on, .sheet-button-header-xp-off
+	padding-right: 0px
+	padding-left: 0px
+	padding-bottom: 0px
+	padding-top: 2px
+
+.sheet-XP-Track
+	display: grid
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr
+	column-gap: 0px
+
+
 
 .sheet-button-mark-on, .sheet-button-mark-off, .sheet-button-transcendent-on, .sheet-button-transcendent-off, .sheet-button-stress-on, .sheet-button-stress-off
 	border: none
