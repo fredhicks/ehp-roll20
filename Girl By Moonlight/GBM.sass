@@ -326,13 +326,13 @@ input.sheet-Mode-Playbook
 		font-size: #{$headsize}
 		color: white
 		background-color: var(--gbm-blue)
-		display: grid
-		grid-template-columns: 1fr 75px
-		&.sheet-Box-XP
-			grid-template-columns: 1fr 4fr
+		display: flex
+		flex-direction: row
+		flex-wrap: nowrap
+		justify-content: space-between
+		align-content: center
 		.sheet-Box-Header-Icons
 			text-align: right
-			grid-column-start: 2
 		&.sheet-Box-Subsection
 			margin-top: 8px
 			font-size: #{$bodysize}
@@ -513,11 +513,19 @@ button.sheet-button-header-xp-off.sheet-xp-end:before
 	padding-top: 2px
 
 .sheet-XP-Track
-	display: grid
-	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr
-	column-gap: 0px
-
-
+	display: flex
+	flex-direction: row
+	flex-wrap: nowrap
+	justify-content: flex-end
+	align-content: center
+	padding-right: 4px
+.sheet-XP-Track-Label
+	font-size: #{$labelsize}
+	text-align: center
+	padding: 0px
+	padding-bottom: 4px
+	margin-top: -4px
+	text-transform: uppercase
 
 .sheet-button-mark-on, .sheet-button-mark-off, .sheet-button-transcendent-on, .sheet-button-transcendent-off, .sheet-button-stress-on, .sheet-button-stress-off
 	border: none
@@ -527,7 +535,7 @@ button.sheet-button-header-xp-off.sheet-xp-end:before
 	vertical-align: top
 	padding-left: 0
 	padding-right: 0
-
+	
 .sheet-hide-on-one[value="1"], .sheet-hide-on-zero[value="0"] 
 	+ * 
 		display: none

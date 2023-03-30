@@ -381,19 +381,23 @@ input.sheet-Mode-Playbook[value=UnlikelyHero] ~ div.sheet-Playbook-UnlikelyHero,
 	font-size: 21px;
 	color: white;
 	background-color: var(--gbm-blue);
-	display: -ms-grid;
-	display: grid;
-	-ms-grid-columns: 1fr 75px;
-	grid-template-columns: 1fr 75px;
-}
-.sheet-Box .sheet-Box-Header.sheet-Box-XP {
-	-ms-grid-columns: 1fr 4fr;
-	grid-template-columns: 1fr 4fr;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	    -ms-flex-direction: row;
+	        flex-direction: row;
+	-ms-flex-wrap: nowrap;
+	    flex-wrap: nowrap;
+	-webkit-box-pack: justify;
+	    -ms-flex-pack: justify;
+	        justify-content: space-between;
+	-ms-flex-line-pack: center;
+	    align-content: center;
 }
 .sheet-Box .sheet-Box-Header .sheet-Box-Header-Icons {
 	text-align: right;
-	-ms-grid-column: 2;
-	    grid-column-start: 2;
 }
 .sheet-Box .sheet-Box-Header.sheet-Box-Subsection {
 	margin-top: 8px;
@@ -621,13 +625,30 @@ button.sheet-button-header-xp-off.sheet-xp-end:before {
 }
 
 .sheet-XP-Track {
-	display: -ms-grid;
-	display: grid;
-	-ms-grid-columns: 1fr 0px 1fr 0px 1fr 0px 1fr 0px 1fr 0px 1fr 0px 1fr 0px 1fr;
-	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-	-webkit-column-gap: 0px;
-	   -moz-column-gap: 0px;
-	        column-gap: 0px;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	    -ms-flex-direction: row;
+	        flex-direction: row;
+	-ms-flex-wrap: nowrap;
+	    flex-wrap: nowrap;
+	-webkit-box-pack: end;
+	    -ms-flex-pack: end;
+	        justify-content: flex-end;
+	-ms-flex-line-pack: center;
+	    align-content: center;
+	padding-right: 4px;
+}
+
+.sheet-XP-Track-Label {
+	font-size: 10px;
+	text-align: center;
+	padding: 0px;
+	padding-bottom: 4px;
+	margin-top: -4px;
+	text-transform: uppercase;
 }
 
 .sheet-button-mark-on, .sheet-button-mark-off, .sheet-button-transcendent-on, .sheet-button-transcendent-off, .sheet-button-stress-on, .sheet-button-stress-off {

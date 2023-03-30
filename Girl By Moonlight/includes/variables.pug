@@ -42,14 +42,10 @@
 		"Toggle-BonusDie-Expand",
 		"Toggle-Links-Expand",
 		"Toggle-Links-Spend-Expand",
+		"Toggle-Gaining-XP-Expand",
 	];
+
 	var toggleclicks = "";
-	var stressclicks = "";
-	var stressfields = "";
-	var transclicks = "";
-	var transfields = "";
-	var linkclicks = "";
-	var linkfields = "";
 	var clicks = 0;
 	// Bulk toggle creation (enumerated)
 	for(var i = 1; i < 10; i++) {
@@ -69,6 +65,8 @@
 		toggleclicks = toggleclicks + "clicked:" + i;
 	}
 
+	var stressclicks = "";
+	var stressfields = "";
 	stressfields = "[";
 	for(var i = 1; i <= 9; i++) {
 		if ( i > 1 )
@@ -81,6 +79,8 @@
 	}
 	stressfields = stressfields + "]";
 
+	var transclicks = "";
+	var transfields = "";
 	transfields = "[";
 	for(var i = 1; i <= 4; i++) {
 		if ( i > 1 )
@@ -93,6 +93,8 @@
 	}
 	transfields = transfields + "]";
 
+	var linkclicks = "";
+	var linkfields = "";
 	linkfields = "[";
 	for(var i = 1; i <= 6; i++) {
 		for(var j = 1; j <= 6; j++) {
@@ -106,3 +108,59 @@
 		}
 	}
 	linkfields = linkfields + "]";
+
+	var pbxpclicks = "";
+	var pbxpfields = "";
+	pbxpfields = "[";
+	for(var i = 1; i <= 8; i++) {
+		if ( i > 1 )
+			pbxpclicks = pbxpclicks + " "; 
+		// I don't know why pug requires this to be a separate thing, but it sure fucking did, so here we go
+		if ( i > 1 )
+		  pbxpfields = pbxpfields + ", ";
+		pbxpclicks = pbxpclicks + "clicked:Playbook-XP-" + i;
+		pbxpfields = pbxpfields + '"'+"Playbook-XP-"+i+'"';
+	}
+	pbxpfields = pbxpfields + "]";
+
+	var sunclicks = "";
+	var sunfields = "";
+	sunfields = "[";
+	for(var i = 1; i <= 8; i++) {
+		if ( i > 1 )
+			sunclicks = sunclicks + " "; 
+		// I don't know why pug requires this to be a separate thing, but it sure fucking did, so here we go
+		if ( i > 1 )
+		  sunfields = sunfields + ", ";
+		sunclicks = sunclicks + "clicked:Sun-XP-" + i;
+		sunfields = sunfields + '"'+"Sun-XP-"+i+'"';
+	}
+	sunfields = sunfields + "]";
+
+	var moonclicks = "";
+	var moonfields = "";
+	moonfields = "[";
+	for(var i = 1; i <= 8; i++) {
+		if ( i > 1 )
+			moonclicks = moonclicks + " "; 
+		// I don't know why pug requires this to be a separate thing, but it sure fucking did, so here we go
+		if ( i > 1 )
+		  moonfields = moonfields + ", ";
+		moonclicks = moonclicks + "clicked:Moon-XP-" + i;
+		moonfields = moonfields + '"'+"Moon-XP-"+i+'"';
+	}
+	moonfields = moonfields + "]";
+
+	var starsclicks = "";
+	var starsfields = "";
+	starsfields = "[";
+	for(var i = 1; i <= 8; i++) {
+		if ( i > 1 )
+			starsclicks = starsclicks + " "; 
+		// I don't know why pug requires this to be a separate thing, but it sure fucking did, so here we go
+		if ( i > 1 )
+		  starsfields = starsfields + ", ";
+		starsclicks = starsclicks + "clicked:Stars-XP-" + i;
+		starsfields = starsfields + '"'+"Stars-XP-"+i+'"';
+	}
+	starsfields = starsfields + "]";
