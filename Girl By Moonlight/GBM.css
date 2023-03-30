@@ -751,3 +751,42 @@ input.sheet-Stress-Total[value="9"] ~ .sheet-Stress-Track {
 	    grid-column-start: 2;
 	text-align: right;
 }
+
+.sheet-Stats-Block {
+	display: -ms-grid;
+	display: grid;
+	display-template-columns: 16px 16px 16px 16px 1fr;
+	-webkit-column-gap: 4px;
+	   -moz-column-gap: 4px;
+	        column-gap: 4px;
+	padding-bottom: 4px;
+}
+.sheet-Stats-Block > * {
+	-ms-grid-column: 1;
+	    grid-column-start: 1;
+}
+.sheet-Stats-Block > * + * {
+	-ms-grid-column: 2;
+	    grid-column-start: 2;
+}
+.sheet-Stats-Block > * + * + * {
+	-ms-grid-column: 3;
+	    grid-column-start: 3;
+}
+.sheet-Stats-Block > * + * + * + * {
+	-ms-grid-column: 4;
+	    grid-column-start: 4;
+}
+.sheet-Stats-Block > * + * + * + * + * {
+	-ms-grid-column: 5;
+	    grid-column-start: 5;
+}
+.sheet-Stats-Block .sheet-Dot, .sheet-Stats-Block .sheet-Star {
+	text-align: center;
+}
+.sheet-Stats-Block .sheet-Stat {
+	width: 100%;
+}
+.sheet-Stats-Block .sheet-Connected {
+	background: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/connector-stats-blue-vertical.svg) no-repeat center center;
+}

@@ -36,6 +36,7 @@ $xpmidoff: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Gir
 $xpmidon: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/xp-box-mid-on.svg)
 $xprightoff: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/xp-box-right-off.svg)
 $xprighton: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/xp-box-right-on.svg)
+$statscon: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/connector-stats-blue-vertical.svg)
 
 @import url('https://fonts.googleapis.com/css2?family=Kufam:ital,wght@0,400;0,700;1,400;1,700&family=Montserrat:ital,wght@0,400;0,700;1,400;1,700&display=swap')
 
@@ -601,3 +602,25 @@ input.sheet-Stress-Total
 			vertical-align: top
 			grid-column-start: 2
 			text-align: right
+
+.sheet-Stats-Block
+	display: grid
+	display-template-columns: 16px 16px 16px 16px 1fr
+	column-gap: 4px
+	padding-bottom: 4px
+	> *
+		grid-column-start: 1
+	> * + *
+		grid-column-start: 2
+	> * + * + *
+		grid-column-start: 3
+	> * + * + * + *
+		grid-column-start: 4
+	> * + * + * + * + *
+		grid-column-start: 5
+	.sheet-Dot, .sheet-Star
+		text-align: center
+	.sheet-Stat
+		width: 100%
+	.sheet-Connected
+		background: #{$statscon} no-repeat center center
