@@ -40,12 +40,16 @@
 		"Toggle-GatherInfo-Expand",
 		"Toggle-Teamwork-Expand",
 		"Toggle-BonusDie-Expand",
+		"Toggle-Links-Expand",
+		"Toggle-Links-Spend-Expand",
 	];
 	var toggleclicks = "";
 	var stressclicks = "";
 	var stressfields = "";
 	var transclicks = "";
 	var transfields = "";
+	var linkclicks = "";
+	var linkfields = "";
 	var clicks = 0;
 	// Bulk toggle creation (enumerated)
 	for(var i = 1; i < 10; i++) {
@@ -88,3 +92,17 @@
 		transfields = transfields + '"'+"Transcendence-"+i+'"';
 	}
 	transfields = transfields + "]";
+
+	linkfields = "[";
+	for(var i = 1; i <= 6; i++) {
+		for(var j = 1; j <= 6; j++) {
+			if ( i > 1 || j > 1 )
+				linkclicks = linkclicks + " "; 
+			// I don't know why pug requires this to be a separate thing, but it sure fucking did, so here we go
+			if ( i > 1 || j > 1 )
+				linkfields = linkfields + ", ";
+			linkclicks = linkclicks + "clicked:Link-" + i + '-Dot-' + j;
+			linkfields = linkfields + '"' + "Link-" + i + '-Dot-' + j + '"';
+		}
+	}
+	linkfields = linkfields + "]";

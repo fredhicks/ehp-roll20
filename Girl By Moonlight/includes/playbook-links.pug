@@ -1,0 +1,26 @@
+.sheet-Box
+	.sheet-Box-Header
+		+translate('Links')
+		.sheet-Box-Header-Icons
+			+toggle('Toggle-Links-Expand')
+	+hidden('Toggle-Links-Expand').sheet-hide-on-one
+	.sheet-Links-Block
+		- var i = 1;
+		while i <= 6
+			.sheet-Link
+				.sheet-Who
+					+text('Link-'+i+'-Who')
+				.sheet-Dots
+					- var j = 1;
+					while j <= 6
+						+abilityMark('Link-'+i+'-Dot-'+j)
+						- j++;
+			- i++;
+	.sheet-Box-Header.sheet-Box-Subsection
+		+translate('Spending Links')
+		.sheet-Box-Header-Icons
+			+toggle('Toggle-Links-Spend-Expand',1)
+	+hidden('Toggle-Links-Spend-Expand',1).sheet-hide-on-one
+	.sheet-Links-Spend-Block
+		+translate('<b>Spend links on allies:</b><ul><li>You or linked protag recover 2 stress<li>They ignore 1 harm tag<li>Grant +1d to ally’s action<li>Prevent their eclipse on a 4/5 result</ul>')
+

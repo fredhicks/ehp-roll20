@@ -84,9 +84,29 @@ textarea:hover, textarea:active, textarea:focus, select:hover, select:active, se
 	background-color: var(--gbm-bg);
 }
 
+.sheet-preload {
+	opacity: 0;
+	position: absolute;
+}
+
+.sheet-preload img {
+	width: 1px;
+	height: 1px;
+}
+
 .sheet-Teal input[type=text], .sheet-Teal textarea, .sheet-Teal select {
 	color: var(--gbm-teal-text);
 	border-bottom: 1px dotted var(--gbm-teal-text);
+}
+
+.sheet-Pink input[type=text], .sheet-Pink textarea, .sheet-Pink select {
+	color: var(--gbm-pink-text);
+	border-bottom: 1px dotted var(--gbm-pink-text);
+}
+
+.sheet-Purple input[type=text], .sheet-Purple textarea, .sheet-Purple select {
+	color: var(--gbm-purple-text);
+	border-bottom: 1px dotted var(--gbm-purple-text);
 }
 
 select {
@@ -346,17 +366,14 @@ input.sheet-Mode-Playbook[value=UnlikelyHero] ~ div.sheet-Playbook-UnlikelyHero,
 
 .sheet-Box {
 	background-color: var(--gbm-blue-shaded);
-	padding-right: 8px;
-	padding-bottom: 4px;
-	padding-top: 4px;
-	padding-left: 4px;
+	padding: 4px;
 	border-radius: 0px 12px 12px 12px;
 	margin-bottom: 8px;
 }
 .sheet-Box .sheet-Box-Header {
 	border: 0.5px solid var(--gbm-blue);
 	border-radius: 0px 12px 0px 0px;
-	margin-right: -8px;
+	margin-right: -4px;
 	margin-top: -4px;
 	margin-left: -4px;
 	margin-bottom: 4px;
@@ -543,7 +560,35 @@ button.sheet-button-header-transcendent-off, button.sheet-button-header-transcen
 	max-width: 23px;
 }
 
-.sheet-button-header-expand, .sheet-button-header-collapse, .sheet-button-header-edit, .sheet-button-header-close, .sheet-button-header-mark-off, .sheet-button-header-mark-on, .sheet-button-header-transcendent-off, .sheet-button-header-transcendent-on {
+button.sheet-button-header-xp-on:before {
+	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/xp-box-mid-on.svg);
+	height: 21px;
+	width: 21px;
+}
+
+button.sheet-button-header-xp-off:before {
+	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/xp-box-mid-off.svg);
+	height: 21px;
+	width: 21px;
+}
+
+button.sheet-button-header-xp-on.sheet-xp-start:before {
+	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/xp-box-left-on.svg);
+}
+
+button.sheet-button-header-xp-off.sheet-xp-start:before {
+	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/xp-box-left-off.svg);
+}
+
+button.sheet-button-header-xp-on.sheet-xp-end:before {
+	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/xp-box-right-on.svg);
+}
+
+button.sheet-button-header-xp-off.sheet-xp-end:before {
+	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/xp-box-right-off.svg);
+}
+
+.sheet-button-header-expand, .sheet-button-header-collapse, .sheet-button-header-edit, .sheet-button-header-close, .sheet-button-header-mark-off, .sheet-button-header-mark-on, .sheet-button-header-transcendent-off, .sheet-button-header-transcendent-on, .sheet-button-header-xp-on, .sheet-button-header-xp-off {
 	border: none;
 	background: none;
 	font-weight: normal;
@@ -553,10 +598,10 @@ button.sheet-button-header-transcendent-off, button.sheet-button-header-transcen
 	padding-left: 0px;
 	vertical-align: top;
 }
-.sheet-button-header-expand:hover, .sheet-button-header-collapse:hover, .sheet-button-header-edit:hover, .sheet-button-header-close:hover, .sheet-button-header-mark-off:hover, .sheet-button-header-mark-on:hover, .sheet-button-header-transcendent-off:hover, .sheet-button-header-transcendent-on:hover {
+.sheet-button-header-expand:hover, .sheet-button-header-collapse:hover, .sheet-button-header-edit:hover, .sheet-button-header-close:hover, .sheet-button-header-mark-off:hover, .sheet-button-header-mark-on:hover, .sheet-button-header-transcendent-off:hover, .sheet-button-header-transcendent-on:hover, .sheet-button-header-xp-on:hover, .sheet-button-header-xp-off:hover {
 	text-shadow: 0 0 8px white;
 }
-.sheet-button-header-expand:focus, .sheet-button-header-collapse:focus, .sheet-button-header-edit:focus, .sheet-button-header-close:focus, .sheet-button-header-mark-off:focus, .sheet-button-header-mark-on:focus, .sheet-button-header-transcendent-off:focus, .sheet-button-header-transcendent-on:focus {
+.sheet-button-header-expand:focus, .sheet-button-header-collapse:focus, .sheet-button-header-edit:focus, .sheet-button-header-close:focus, .sheet-button-header-mark-off:focus, .sheet-button-header-mark-on:focus, .sheet-button-header-transcendent-off:focus, .sheet-button-header-transcendent-on:focus, .sheet-button-header-xp-on:focus, .sheet-button-header-xp-off:focus {
 	text-shadow: 0 0 8px black;
 }
 
@@ -618,6 +663,9 @@ input.sheet-Stress-Total[value="7"] ~ .sheet-Stress-Track {
 input.sheet-Stress-Total[value="8"] ~ .sheet-Stress-Track {
 	background: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/eclipse-8.svg) no-repeat center center;
 }
+input.sheet-Stress-Total[value="9"] ~ .sheet-Stress-Track {
+	background: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/eclipse-9.svg) no-repeat center center;
+}
 
 .sheet-Stress-Warning {
 	text-align: center;
@@ -637,12 +685,27 @@ input.sheet-Stress-Total[value="8"] ~ .sheet-Stress-Track {
 	font-style: italic;
 }
 
-.sheet-preload {
-	opacity: 0;
-	position: absolute;
+.sheet-Links-Block .sheet-Link {
+	display: -ms-grid;
+	display: grid;
+	-ms-grid-columns: 1fr 4px 116px;
+	grid-template-columns: 1fr 116px;
+	-webkit-column-gap: 4px;
+	   -moz-column-gap: 4px;
+	        column-gap: 4px;
+	margin-bottom: 4px;
 }
-
-.sheet-preload img {
-	width: 1px;
-	height: 1px;
+.sheet-Links-Block .sheet-Link input[type=text], .sheet-Links-Block .sheet-Link select, .sheet-Links-Block .sheet-Link textarea {
+	width: 100%;
+}
+.sheet-Links-Block .sheet-Link .sheet-Who {
+	vertical-align: top;
+	-ms-grid-column: 1;
+	    grid-column-start: 1;
+}
+.sheet-Links-Block .sheet-Link .sheet-Dots {
+	vertical-align: top;
+	-ms-grid-column: 2;
+	    grid-column-start: 2;
+	text-align: right;
 }

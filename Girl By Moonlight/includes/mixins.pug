@@ -107,3 +107,12 @@ mixin abilityMarkTranscendent(a)
 	button(type="action",name="act_"+a).sheet-button-transcendent-on
 	+hidden(a)(value=0).sheet-hide-on-one
 	button(type="action",name="act_"+a).sheet-button-transcendent-off
+
+mixin xptrack(a,l)
+	- var i = 1;
+	while i <= l
+		+hidden(a+'-'+i)(value=0).sheet-hide-on-zero
+		button(type="action",name="act_"+a+'-'+i).sheet-button-xp-on
+		+hidden(a+'-'+i)(value=0).sheet-hide-on-one
+		button(type="action",name="act_"+a+'-'+i).sheet-button-xp-off
+		- i++;
