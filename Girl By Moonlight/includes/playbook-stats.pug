@@ -1,32 +1,43 @@
-.sheet-Box.sheet-Playbook-Selected
-	.sheet-Box-Header.sheet-Box-XP
-		+translate('Sun')
-		.sheet-Box-Header-Icons
-			.sheet-XP-Track
-				+xptrack('Sun-XP',6)
-	.sheet-Stats-Block
-		.sheet-Stats-Row
-			.sheet-Dot.sheet-Connected
-				| x
-			.sheet-Dot
-				| x
-			.sheet-Star
-				| x
-			.sheet-Star
-				| x
-			.sheet-Stat
-				+translate('Defy')
+// statsblock exists in variables.pug
 
-.sheet-Box.sheet-Playbook-Selected
-	.sheet-Box-Header.sheet-Box-XP
-		+translate('Moon')
-		.sheet-Box-Header-Icons
-			.sheet-XP-Track
-				+xptrack('Moon-XP',6)
+// Eventually transplant this back to mixins.pug
+mixin statsrow(v)
+	.sheet-Stats-Row
+		.sheet-Dot.sheet-Connected
+			+abilityMark(v+"-Dot-1")
+		.sheet-Dot
+			+abilityMark(v+"-Dot-2")
+		.sheet-Star
+			+starMark(v+"-Star-1")
+		.sheet-Star
+			+starMark(v+"-Star-2")
+		.sheet-Stat
+			// This needs to be complexified to handle rolling while transcendent, but for now, let's get that base 
+			button(name="roll_"+v, type="roll", value="&{template:default} {{charname=@{character_name}}} {{@{Position-Query}}} {{effect=@{Effect-Query}}} {{?{Transcendent?|No (@{"+v+"-Base-Total}),@{"+v+"-Base-Roll-Formula}|Yes (@{"+v+"-Transcend-Total}),@{"+v+"-Transcend-Roll-Formula}}}} {{title=^{"+v+"}}}").sheet-buttonless
+				+translate(v)
 
-.sheet-Box.sheet-Playbook-Selected
-	.sheet-Box-Header.sheet-Box-XP
-		+translate('Stars')
-		.sheet-Box-Header-Icons
-			.sheet-XP-Track
-				+xptrack('Stars-XP',6)
+// {{@{"+v+"-Base-Roll-Formula}}}
+// {{?{Transcendent?|No (TOTAL),@{"+v+"-Base-Roll-Formula}|Yes (TOTAL),@{"+v+"-Transcend-Roll-Formula}}}}
+
+
+each actions, attribute in statsblock 
+	.sheet-Box.sheet-Playbook-Selected
+		.sheet-Box-Header.sheet-Box-XP
+			span
+				+hidden(attribute+'-Resist-Total')
+				button(name="roll_"+attribute, type="roll", value="&{template:default} {{charname=@{character_name}}} {{@{Position-Query}}} {{effect=@{Effect-Query}}} {{@{"+attribute+"-Resist-Roll-Formula}}} {{title=^{"+attribute+"}}}").sheet-buttonless
+					+translate(attribute)
+			.sheet-Box-Header-Icons
+				.sheet-XP-Track
+					+xptrack(attribute+'-XP',6)
+		.sheet-Stats-Block
+			each action in actions
+				+hidden(action+'-Base-Total')
+				+hidden(action+'-Transcend-Total')
+				+statsrow(action)
+
+// Position: Risky, Controlled, Desperate, Fortune
+// Effect: Standard, Limited, Great, Extreme, Zero
+// Bonus Dice: 0 thru 6, -1 thru -3
+// <button class="sheet-rollbutton sheet-label btn ui-draggable" type="roll" name="roll_Skirmish" value="&amp;{template:blades} @{skirmish_formula} @{skirmish_roll_mods} {{charimage=@{chat_image}}} @{title_text}" 
+// Have a look at this shit: data-i18n-title="skirmish_description" title="Skirmish with an opponent in close combat; assault or hold a position; brawl and wrestle."><span class="sheet-default-label sheet-inherit" data-i18n="skirmish">Skirmish</span><span class="sheet-custom-label sheet-inherit" name="attr_skirmish_label">Skirmish</span></button>

@@ -1,9 +1,141 @@
 
 <!-- mixins-->
+<!-- translations variable found in variables.pug-->
 <div class="sheet-preload"><img src="https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/playset-abyss.svg"/><img src="https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/playset-sky.svg"/><img src="https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/playset-stars.svg"/><img src="https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/playset-dreams.svg"/><img src="https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/mark-on.svg"/><img src="https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/mark-off.svg"/><img src="https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/stress-on.svg"/><img src="https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/stress-off.svg"/><img src="https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/transcendent-on.svg"/><img src="https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/transcendent-off.svg"/><img src="https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/transcendent-on-dark.svg"/><img src="https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/transcendent-off-dark.svg"/><img src="https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/eclipse-0.svg"/><img src="https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/eclipse-1.svg"/><img src="https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/eclipse-2.svg"/><img src="https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/eclipse-3.svg"/><img src="https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/eclipse-4.svg"/><img src="https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/eclipse-5.svg"/><img src="https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/eclipse-6.svg"/><img src="https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/eclipse-7.svg"/><img src="https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/eclipse-8.svg"/><img src="https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/eclipse-9.svg"/><img src="https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/xp-box-left-off.svg"/><img src="https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/xp-box-left-on.svg"/><img src="https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/xp-box-mid-off.svg"/><img src="https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/xp-box-mid-on.svg"/><img src="https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/xp-box-right-off.svg"/><img src="https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/xp-box-right-on.svg"/></div>
 <script type="text/worker">// This part is run in the sheetworker javascript
-  on("clicked:Toggle-Bio-Expand clicked:Toggle-Abilities-Expand clicked:Toggle-Abilities-Marked clicked:Ability-Veteran clicked:Toggle-Transcendent-Expand clicked:Toggle-Transcendent-Marked clicked:Toggle-Stress-Expand clicked:Toggle-Eclipse-Expand clicked:Toggle-Agenda-Expand clicked:Toggle-GatherInfo-Expand clicked:Toggle-Teamwork-Expand clicked:Toggle-BonusDie-Expand clicked:Toggle-Links-Expand clicked:Toggle-Links-Spend-Expand clicked:Toggle-Gaining-XP-Expand clicked:Ability-Enigma-1 clicked:Ability-Transcendent-Enigma-1 clicked:Ability-Stranger-1 clicked:Ability-Transcendent-Stranger-1 clicked:Ability-TimeTraveller-1 clicked:Ability-Transcendent-TimeTraveller-1 clicked:Ability-Harmony-1 clicked:Ability-Transcendent-Harmony-1 clicked:Ability-Guardian-1 clicked:Ability-Transcendent-Guardian-1 clicked:Ability-Outsider-1 clicked:Ability-Transcendent-Outsider-1 clicked:Ability-UnlikelyHero-1 clicked:Ability-Transcendent-UnlikelyHero-1 clicked:Ability-Enigma-2 clicked:Ability-Transcendent-Enigma-2 clicked:Ability-Stranger-2 clicked:Ability-Transcendent-Stranger-2 clicked:Ability-TimeTraveller-2 clicked:Ability-Transcendent-TimeTraveller-2 clicked:Ability-Harmony-2 clicked:Ability-Transcendent-Harmony-2 clicked:Ability-Guardian-2 clicked:Ability-Transcendent-Guardian-2 clicked:Ability-Outsider-2 clicked:Ability-Transcendent-Outsider-2 clicked:Ability-UnlikelyHero-2 clicked:Ability-Transcendent-UnlikelyHero-2 clicked:Ability-Enigma-3 clicked:Ability-Transcendent-Enigma-3 clicked:Ability-Stranger-3 clicked:Ability-Transcendent-Stranger-3 clicked:Ability-TimeTraveller-3 clicked:Ability-Transcendent-TimeTraveller-3 clicked:Ability-Harmony-3 clicked:Ability-Transcendent-Harmony-3 clicked:Ability-Guardian-3 clicked:Ability-Transcendent-Guardian-3 clicked:Ability-Outsider-3 clicked:Ability-Transcendent-Outsider-3 clicked:Ability-UnlikelyHero-3 clicked:Ability-Transcendent-UnlikelyHero-3 clicked:Ability-Enigma-4 clicked:Ability-Transcendent-Enigma-4 clicked:Ability-Stranger-4 clicked:Ability-Transcendent-Stranger-4 clicked:Ability-TimeTraveller-4 clicked:Ability-Transcendent-TimeTraveller-4 clicked:Ability-Harmony-4 clicked:Ability-Transcendent-Harmony-4 clicked:Ability-Guardian-4 clicked:Ability-Transcendent-Guardian-4 clicked:Ability-Outsider-4 clicked:Ability-Transcendent-Outsider-4 clicked:Ability-UnlikelyHero-4 clicked:Ability-Transcendent-UnlikelyHero-4 clicked:Ability-Enigma-5 clicked:Ability-Transcendent-Enigma-5 clicked:Ability-Stranger-5 clicked:Ability-Transcendent-Stranger-5 clicked:Ability-TimeTraveller-5 clicked:Ability-Transcendent-TimeTraveller-5 clicked:Ability-Harmony-5 clicked:Ability-Transcendent-Harmony-5 clicked:Ability-Guardian-5 clicked:Ability-Transcendent-Guardian-5 clicked:Ability-Outsider-5 clicked:Ability-Transcendent-Outsider-5 clicked:Ability-UnlikelyHero-5 clicked:Ability-Transcendent-UnlikelyHero-5 clicked:Ability-Enigma-6 clicked:Ability-Transcendent-Enigma-6 clicked:Ability-Stranger-6 clicked:Ability-Transcendent-Stranger-6 clicked:Ability-TimeTraveller-6 clicked:Ability-Transcendent-TimeTraveller-6 clicked:Ability-Harmony-6 clicked:Ability-Transcendent-Harmony-6 clicked:Ability-Guardian-6 clicked:Ability-Transcendent-Guardian-6 clicked:Ability-Outsider-6 clicked:Ability-Transcendent-Outsider-6 clicked:Ability-UnlikelyHero-6 clicked:Ability-Transcendent-UnlikelyHero-6 clicked:Ability-Enigma-7 clicked:Ability-Transcendent-Enigma-7 clicked:Ability-Stranger-7 clicked:Ability-Transcendent-Stranger-7 clicked:Ability-TimeTraveller-7 clicked:Ability-Transcendent-TimeTraveller-7 clicked:Ability-Harmony-7 clicked:Ability-Transcendent-Harmony-7 clicked:Ability-Guardian-7 clicked:Ability-Transcendent-Guardian-7 clicked:Ability-Outsider-7 clicked:Ability-Transcendent-Outsider-7 clicked:Ability-UnlikelyHero-7 clicked:Ability-Transcendent-UnlikelyHero-7 clicked:Ability-Enigma-8 clicked:Ability-Transcendent-Enigma-8 clicked:Ability-Stranger-8 clicked:Ability-Transcendent-Stranger-8 clicked:Ability-TimeTraveller-8 clicked:Ability-Transcendent-TimeTraveller-8 clicked:Ability-Harmony-8 clicked:Ability-Transcendent-Harmony-8 clicked:Ability-Guardian-8 clicked:Ability-Transcendent-Guardian-8 clicked:Ability-Outsider-8 clicked:Ability-Transcendent-Outsider-8 clicked:Ability-UnlikelyHero-8 clicked:Ability-Transcendent-UnlikelyHero-8 clicked:Ability-Enigma-9 clicked:Ability-Transcendent-Enigma-9 clicked:Ability-Stranger-9 clicked:Ability-Transcendent-Stranger-9 clicked:Ability-TimeTraveller-9 clicked:Ability-Transcendent-TimeTraveller-9 clicked:Ability-Harmony-9 clicked:Ability-Transcendent-Harmony-9 clicked:Ability-Guardian-9 clicked:Ability-Transcendent-Guardian-9 clicked:Ability-Outsider-9 clicked:Ability-Transcendent-Outsider-9 clicked:Ability-UnlikelyHero-9 clicked:Ability-Transcendent-UnlikelyHero-9", function(e) {
-  	log(e);
+  
+  // To understand what's going on with these functions,
+  // refer to https://wiki.roll20.net/Macros#Drop-Down_Prompts_for_Roll_Queries
+  // and look for "nesting queries" section
+  
+  function diceMagic(num,nest) {
+  	if ( typeof(nest) == 'undefined' ) {
+  		nest = 1;
+  	} else {
+  		nest = parseInt(nest);
+  	}
+  	var amp = '&';
+  	if ( nest == 2 ) {
+  		// Within diceMagic, our list is actually one nesting level deeper than the surroundings
+  		// So at nest level 2, we're &amp; all the & for the commas in &#44; because those commas
+  		// actually exist at a third level
+  		amp = '&amp;';
+  	}
+  	if (num > 0) {
+  		return `dice=${
+  			[...Array(num).keys()].map(() => "[[d6]]").join(amp + "#44" + "; ")
+  		}`;
+  	} else {
+  		return "zerodice=[[d6]]" + amp + "#44" + "; [[d6]]";
+  	}
+  }
+  
+  function buildRollFormula(base,nest) {
+  	if ( typeof(nest) == 'undefined' ) {
+  		nest = 1;
+  	} else {
+  		nest = parseInt(nest);
+  	}
+  	var comma = ',';
+  	var pipe = '|';
+  	// Putting { here to keep the braces balanced in the editor
+  	var endbrace = '}';
+  	if ( nest == 2 ) {
+  		// If doing further nest levels, these remain static but the ampersand complexifies
+  		var amp = '&';
+  		comma = amp + '#44' + ';';
+  		pipe = amp + '#124' + ';';
+  		endbrace = amp + '#125' + ';';
+  	}
+  	return ` ?{${getTranslationByKey("Bonus Dice")}${pipe}${
+  		[0, 1, 2, 3, 4, 5, 6, -1, -2, -3]
+  			.map(n => `${n}${comma}${diceMagic(n + (parseInt(base) || 0),nest)}`).join(pipe)
+  	}${endbrace}`;
+  }
+  
+  // function buildRollFormulaORIGINAL(base) {
+  	// return ` {{?{${getTranslationByKey("Bonus Dice")}|${
+  		// [0, 1, 2, 3, 4, 5, 6, -1, -2, -3]
+  			// .map(n => `${n},${diceMagic(n + (parseInt(base) || 0))}`).join("|")
+  	// }}}}`;
+  // }
+  
+  // Builds out the list of additional dice I guess
+  function buildNumdiceFormula() {
+  	return ` {{?{${getTranslationByKey("Number of Dice")}|${
+  		[0, 1, 2, 3, 4, 5, 6].map(n => `${n},${diceMagic(n)}`).join("|")
+  	}}}}`;
+  }
+  
+  on("sheet:opened", function(e) {
+  	var a = {};
+  	// Building out core essentials for dice rolls, with translated prompts
+  	a["Position-Query"] = `?{${getTranslationByKey("Position")}|${getTranslationByKey("Risky")},position=${getTranslationByKey("Risky")}|${getTranslationByKey("Controlled")},position=${getTranslationByKey("Controlled")}|${getTranslationByKey("Desperate")},position=${getTranslationByKey("Desperate")}|${getTranslationByKey("Fortune")},short=short}`;
+  	a["Effect-Query"] = `?{${getTranslationByKey("Effect")}|${getTranslationByKey("Standard")}|${getTranslationByKey("Limited")}|${getTranslationByKey("Great")}|${getTranslationByKey("Extreme")}|${getTranslationByKey("Zero")}}`;
+  	a["Number-Of-Dice"] = buildNumdiceFormula();
+  	log(a);
+  	setAttrs(a);
+  });
+  
+  
+  on("clicked:Defy-Dot-1 clicked:Defy-Dot-2 clicked:Defy-Star-1 clicked:Defy-Star-2 clicked:Empathise-Dot-1 clicked:Empathise-Dot-2 clicked:Empathise-Star-1 clicked:Empathise-Star-2 clicked:Express-Dot-1 clicked:Express-Dot-2 clicked:Express-Star-1 clicked:Express-Star-2 clicked:Confess-Dot-1 clicked:Confess-Dot-2 clicked:Confess-Star-1 clicked:Confess-Star-2 clicked:Forgive-Dot-1 clicked:Forgive-Dot-2 clicked:Forgive-Star-1 clicked:Forgive-Star-2 clicked:Perceive-Dot-1 clicked:Perceive-Dot-2 clicked:Perceive-Star-1 clicked:Perceive-Star-2 clicked:Analyse-Dot-1 clicked:Analyse-Dot-2 clicked:Analyse-Star-1 clicked:Analyse-Star-2 clicked:Conceal-Dot-1 clicked:Conceal-Dot-2 clicked:Conceal-Star-1 clicked:Conceal-Star-2 clicked:Flow-Dot-1 clicked:Flow-Dot-2 clicked:Flow-Star-1 clicked:Flow-Star-2", function(e) {
+  	id = (e.htmlAttributes.name).substring(4); // Strips off the 'act_'
+  	getAttrs([id], function(a) {
+  		if ( Number(a[id]) === 1 ) {
+  			a[id] = "0";
+  		} else {
+  			a[id] = "1";
+  		}
+  		setAttrs(a);
+  	});
+  });
+  
+  on("change:Defy-Dot-1 change:Defy-Dot-2 change:Defy-Star-1 change:Defy-Star-2 change:Empathise-Dot-1 change:Empathise-Dot-2 change:Empathise-Star-1 change:Empathise-Star-2 change:Express-Dot-1 change:Express-Dot-2 change:Express-Star-1 change:Express-Star-2 change:Confess-Dot-1 change:Confess-Dot-2 change:Confess-Star-1 change:Confess-Star-2 change:Forgive-Dot-1 change:Forgive-Dot-2 change:Forgive-Star-1 change:Forgive-Star-2 change:Perceive-Dot-1 change:Perceive-Dot-2 change:Perceive-Star-1 change:Perceive-Star-2 change:Analyse-Dot-1 change:Analyse-Dot-2 change:Analyse-Star-1 change:Analyse-Star-2 change:Conceal-Dot-1 change:Conceal-Dot-2 change:Conceal-Star-1 change:Conceal-Star-2 change:Flow-Dot-1 change:Flow-Dot-2 change:Flow-Star-1 change:Flow-Star-2", function(e) {
+  	var actioncats = {"Defy":"Sun","Empathise":"Sun","Express":"Sun","Confess":"Moon","Forgive":"Moon","Perceive":"Moon","Analyse":"Stars","Conceal":"Stars","Flow":"Stars"};
+  	getAttrs(["Defy-Dot-1", "Defy-Dot-2", "Defy-Star-1", "Defy-Star-2", "Empathise-Dot-1", "Empathise-Dot-2", "Empathise-Star-1", "Empathise-Star-2", "Express-Dot-1", "Express-Dot-2", "Express-Star-1", "Express-Star-2", "Confess-Dot-1", "Confess-Dot-2", "Confess-Star-1", "Confess-Star-2", "Forgive-Dot-1", "Forgive-Dot-2", "Forgive-Star-1", "Forgive-Star-2", "Perceive-Dot-1", "Perceive-Dot-2", "Perceive-Star-1", "Perceive-Star-2", "Analyse-Dot-1", "Analyse-Dot-2", "Analyse-Star-1", "Analyse-Star-2", "Conceal-Dot-1", "Conceal-Dot-2", "Conceal-Star-1", "Conceal-Star-2", "Flow-Dot-1", "Flow-Dot-2", "Flow-Star-1", "Flow-Star-2"], function(a) {
+  		var list = Object.keys(a);
+  		for(i = 0; i < list.length; i++) {
+  			// Format: [Action]-[Dot|Star]-[1|2]
+  			var parts = list[i].split('-');
+  			var action =  parts[0];
+  			var cat = actioncats[action];
+  			var kind = parts[1];
+  			var num = parts[2];
+  			if ( typeof(a[action+'-Base-Total']) == "undefined" ) {
+  				a[action+'-Base-Total'] = 0;
+  			}
+  			if ( typeof(a[action+'-Transcend-Total']) == "undefined" ) {
+  				a[action+'-Transcend-Total'] = 0;
+  			}
+  			if ( typeof(a[cat+'-Resist-Total']) == "undefined" ) {
+  				a[cat+'-Resist-Total'] = 0;
+  			}
+  			if ( kind == "Dot" ) {
+  				a[action+'-Base-Total'] += Number(a[list[i]]);
+  				if ( num == "1" ) {
+  					a[cat+'-Resist-Total'] += Number(a[list[i]]);
+  				}
+  			}
+  			a[action+'-Transcend-Total'] += Number(a[list[i]]); 
+  		};
+  		var cats = ['Sun','Moon','Stars'];
+  		for(i = 0; i < cats.length; i++) {
+  			var cat = cats[i];
+  			a[cat+'-Resist-Roll-Formula'] = buildRollFormula(a[cat+'-Resist-Total']);
+  		}
+  		var acts = Object.keys(actioncats);
+  		for(i = 0; i < acts.length; i++) {
+  			var act = acts[i];
+  			a[act+'-Base-Roll-Formula'] = buildRollFormula(a[act+'-Base-Total'],2);
+  			a[act+'-Transcend-Roll-Formula'] = buildRollFormula(a[act+'-Transcend-Total'],2);
+  		}
+  		log(a);
+  		setAttrs(a);
+  	});
+  });
+  
+  
+  on("clicked:Ability-Veteran clicked:Toggle-Abilities-Expand clicked:Toggle-Abilities-Marked clicked:Toggle-Agenda-Expand clicked:Toggle-Bio-Expand clicked:Toggle-BonusDie-Expand clicked:Toggle-Eclipse-Expand clicked:Toggle-Gaining-XP-Expand clicked:Toggle-GatherInfo-Expand clicked:Toggle-Links-Expand clicked:Toggle-Links-Spend-Expand clicked:Toggle-Notes-Expand clicked:Toggle-Stress-Expand clicked:Toggle-Teamwork-Expand clicked:Toggle-Transcendence-Expand clicked:Toggle-Transcendent-Expand clicked:Toggle-Transcendent-Marked clicked:Ability-Enigma-1 clicked:Ability-Transcendent-Enigma-1 clicked:Ability-Stranger-1 clicked:Ability-Transcendent-Stranger-1 clicked:Ability-TimeTraveller-1 clicked:Ability-Transcendent-TimeTraveller-1 clicked:Ability-Harmony-1 clicked:Ability-Transcendent-Harmony-1 clicked:Ability-Guardian-1 clicked:Ability-Transcendent-Guardian-1 clicked:Ability-Outsider-1 clicked:Ability-Transcendent-Outsider-1 clicked:Ability-UnlikelyHero-1 clicked:Ability-Transcendent-UnlikelyHero-1 clicked:Ability-Enigma-2 clicked:Ability-Transcendent-Enigma-2 clicked:Ability-Stranger-2 clicked:Ability-Transcendent-Stranger-2 clicked:Ability-TimeTraveller-2 clicked:Ability-Transcendent-TimeTraveller-2 clicked:Ability-Harmony-2 clicked:Ability-Transcendent-Harmony-2 clicked:Ability-Guardian-2 clicked:Ability-Transcendent-Guardian-2 clicked:Ability-Outsider-2 clicked:Ability-Transcendent-Outsider-2 clicked:Ability-UnlikelyHero-2 clicked:Ability-Transcendent-UnlikelyHero-2 clicked:Ability-Enigma-3 clicked:Ability-Transcendent-Enigma-3 clicked:Ability-Stranger-3 clicked:Ability-Transcendent-Stranger-3 clicked:Ability-TimeTraveller-3 clicked:Ability-Transcendent-TimeTraveller-3 clicked:Ability-Harmony-3 clicked:Ability-Transcendent-Harmony-3 clicked:Ability-Guardian-3 clicked:Ability-Transcendent-Guardian-3 clicked:Ability-Outsider-3 clicked:Ability-Transcendent-Outsider-3 clicked:Ability-UnlikelyHero-3 clicked:Ability-Transcendent-UnlikelyHero-3 clicked:Ability-Enigma-4 clicked:Ability-Transcendent-Enigma-4 clicked:Ability-Stranger-4 clicked:Ability-Transcendent-Stranger-4 clicked:Ability-TimeTraveller-4 clicked:Ability-Transcendent-TimeTraveller-4 clicked:Ability-Harmony-4 clicked:Ability-Transcendent-Harmony-4 clicked:Ability-Guardian-4 clicked:Ability-Transcendent-Guardian-4 clicked:Ability-Outsider-4 clicked:Ability-Transcendent-Outsider-4 clicked:Ability-UnlikelyHero-4 clicked:Ability-Transcendent-UnlikelyHero-4 clicked:Ability-Enigma-5 clicked:Ability-Transcendent-Enigma-5 clicked:Ability-Stranger-5 clicked:Ability-Transcendent-Stranger-5 clicked:Ability-TimeTraveller-5 clicked:Ability-Transcendent-TimeTraveller-5 clicked:Ability-Harmony-5 clicked:Ability-Transcendent-Harmony-5 clicked:Ability-Guardian-5 clicked:Ability-Transcendent-Guardian-5 clicked:Ability-Outsider-5 clicked:Ability-Transcendent-Outsider-5 clicked:Ability-UnlikelyHero-5 clicked:Ability-Transcendent-UnlikelyHero-5 clicked:Ability-Enigma-6 clicked:Ability-Transcendent-Enigma-6 clicked:Ability-Stranger-6 clicked:Ability-Transcendent-Stranger-6 clicked:Ability-TimeTraveller-6 clicked:Ability-Transcendent-TimeTraveller-6 clicked:Ability-Harmony-6 clicked:Ability-Transcendent-Harmony-6 clicked:Ability-Guardian-6 clicked:Ability-Transcendent-Guardian-6 clicked:Ability-Outsider-6 clicked:Ability-Transcendent-Outsider-6 clicked:Ability-UnlikelyHero-6 clicked:Ability-Transcendent-UnlikelyHero-6 clicked:Ability-Enigma-7 clicked:Ability-Transcendent-Enigma-7 clicked:Ability-Stranger-7 clicked:Ability-Transcendent-Stranger-7 clicked:Ability-TimeTraveller-7 clicked:Ability-Transcendent-TimeTraveller-7 clicked:Ability-Harmony-7 clicked:Ability-Transcendent-Harmony-7 clicked:Ability-Guardian-7 clicked:Ability-Transcendent-Guardian-7 clicked:Ability-Outsider-7 clicked:Ability-Transcendent-Outsider-7 clicked:Ability-UnlikelyHero-7 clicked:Ability-Transcendent-UnlikelyHero-7 clicked:Ability-Enigma-8 clicked:Ability-Transcendent-Enigma-8 clicked:Ability-Stranger-8 clicked:Ability-Transcendent-Stranger-8 clicked:Ability-TimeTraveller-8 clicked:Ability-Transcendent-TimeTraveller-8 clicked:Ability-Harmony-8 clicked:Ability-Transcendent-Harmony-8 clicked:Ability-Guardian-8 clicked:Ability-Transcendent-Guardian-8 clicked:Ability-Outsider-8 clicked:Ability-Transcendent-Outsider-8 clicked:Ability-UnlikelyHero-8 clicked:Ability-Transcendent-UnlikelyHero-8 clicked:Ability-Enigma-9 clicked:Ability-Transcendent-Enigma-9 clicked:Ability-Stranger-9 clicked:Ability-Transcendent-Stranger-9 clicked:Ability-TimeTraveller-9 clicked:Ability-Transcendent-TimeTraveller-9 clicked:Ability-Harmony-9 clicked:Ability-Transcendent-Harmony-9 clicked:Ability-Guardian-9 clicked:Ability-Transcendent-Guardian-9 clicked:Ability-Outsider-9 clicked:Ability-Transcendent-Outsider-9 clicked:Ability-UnlikelyHero-9 clicked:Ability-Transcendent-UnlikelyHero-9", function(e) {
   	var id = "";
   	if ( typeof e.sourceAttribute !== "undefined" && e.sourceAttribute !== "" ) {
   		id = e.sourceAttribute;
@@ -17,13 +149,11 @@
   		} else {
   			a[id] = "1";
   		}
-  		log(a);
   		setAttrs(a);
   	});
   });
   
   on("change:Choose-Veteran-Ability", function(e) {
-  	log(e);
   	// e.previousValue
   	// e.newValue
   	var atts = {};
@@ -44,7 +174,6 @@
   });
   
   on("change:Choose-Ability-Transcendent-UnlikelyHero-1 change:Choose-Ability-Transcendent-UnlikelyHero-2 change:Choose-Ability-Transcendent-UnlikelyHero-3", function(e) {
-  	log(e);
   	// e.sourceAttribute
   	var abroot = String(e.sourceAttribute).slice(7); // Should remove 'Choose-' from the front of it
   	// e.previousValue
@@ -67,7 +196,6 @@
   });
   
   on("clicked:Stress-1 clicked:Stress-2 clicked:Stress-3 clicked:Stress-4 clicked:Stress-5 clicked:Stress-6 clicked:Stress-7 clicked:Stress-8 clicked:Stress-9", function(e) {
-  	log(e);
   	var id = "";
   	id = (e.htmlAttributes.name).substring(4); // Strips off the 'act_'
   	log("Stress Toggle Handler: " + id);
@@ -99,13 +227,11 @@
   		if ( a['Stress-9'] == 1) {
   			a['Toggle-Eclipse-Expand'] = 0;
   		}
-  		log(a);
   		setAttrs(a);
   	});
   });
   
   on("clicked:Transcendence-1 clicked:Transcendence-2 clicked:Transcendence-3 clicked:Transcendence-4", function(e) {
-  	log(e);
   	var id = "";
   	id = (e.htmlAttributes.name).substring(4); // Strips off the 'act_'
   	log("Transcendence Toggle Handler: " + id);
@@ -134,13 +260,11 @@
   			st = st + Number(a['Transcendence-'+i]);
   		}
   		a['Transcendence-Total'] = st;
-  		log(a);
   		setAttrs(a);
   	});
   });
   
   on("clicked:Link-1-Dot-1 clicked:Link-1-Dot-2 clicked:Link-1-Dot-3 clicked:Link-1-Dot-4 clicked:Link-1-Dot-5 clicked:Link-1-Dot-6 clicked:Link-2-Dot-1 clicked:Link-2-Dot-2 clicked:Link-2-Dot-3 clicked:Link-2-Dot-4 clicked:Link-2-Dot-5 clicked:Link-2-Dot-6 clicked:Link-3-Dot-1 clicked:Link-3-Dot-2 clicked:Link-3-Dot-3 clicked:Link-3-Dot-4 clicked:Link-3-Dot-5 clicked:Link-3-Dot-6 clicked:Link-4-Dot-1 clicked:Link-4-Dot-2 clicked:Link-4-Dot-3 clicked:Link-4-Dot-4 clicked:Link-4-Dot-5 clicked:Link-4-Dot-6 clicked:Link-5-Dot-1 clicked:Link-5-Dot-2 clicked:Link-5-Dot-3 clicked:Link-5-Dot-4 clicked:Link-5-Dot-5 clicked:Link-5-Dot-6 clicked:Link-6-Dot-1 clicked:Link-6-Dot-2 clicked:Link-6-Dot-3 clicked:Link-6-Dot-4 clicked:Link-6-Dot-5 clicked:Link-6-Dot-6", function(e) {
-  	log(e);
   	var id = "";
   	id = (e.htmlAttributes.name).substring(4); // Strips off the 'act_'
   	var prefix = id.substring(0,id.length-6); // Strips off the -Dot-X
@@ -171,13 +295,11 @@
   			st = st + Number(a[prefix+'-Dot-'+i]);
   		}
   		a[prefix+'-Total'] = st;
-  		log(a);
   		setAttrs(a);
   	});
   });
   
   on("clicked:Playbook-XP-1 clicked:Playbook-XP-2 clicked:Playbook-XP-3 clicked:Playbook-XP-4 clicked:Playbook-XP-5 clicked:Playbook-XP-6 clicked:Playbook-XP-7 clicked:Playbook-XP-8", function(e) {
-  	log(e);
   	var id = "";
   	id = (e.htmlAttributes.name).substring(4); // Strips off the 'act_'
   	log("Playbook-XP Toggle Handler: " + id);
@@ -206,13 +328,11 @@
   			st = st + Number(a['Playbook-XP-'+i]);
   		}
   		a['Playbook-XP-Total'] = st;
-  		log(a);
   		setAttrs(a);
   	});
   });
   
   on("clicked:Sun-XP-1 clicked:Sun-XP-2 clicked:Sun-XP-3 clicked:Sun-XP-4 clicked:Sun-XP-5 clicked:Sun-XP-6 clicked:Sun-XP-7 clicked:Sun-XP-8", function(e) {
-  	log(e);
   	var id = "";
   	id = (e.htmlAttributes.name).substring(4); // Strips off the 'act_'
   	log("Sun-XP Toggle Handler: " + id);
@@ -241,13 +361,11 @@
   			st = st + Number(a['Sun-XP-'+i]);
   		}
   		a['Sun-XP-Total'] = st;
-  		log(a);
   		setAttrs(a);
   	});
   });
   
   on("clicked:Moon-XP-1 clicked:Moon-XP-2 clicked:Moon-XP-3 clicked:Moon-XP-4 clicked:Moon-XP-5 clicked:Moon-XP-6 clicked:Moon-XP-7 clicked:Moon-XP-8", function(e) {
-  	log(e);
   	var id = "";
   	id = (e.htmlAttributes.name).substring(4); // Strips off the 'act_'
   	log("Moon-XP Toggle Handler: " + id);
@@ -276,13 +394,11 @@
   			st = st + Number(a['Moon-XP-'+i]);
   		}
   		a['Moon-XP-Total'] = st;
-  		log(a);
   		setAttrs(a);
   	});
   });
   
   on("clicked:Stars-XP-1 clicked:Stars-XP-2 clicked:Stars-XP-3 clicked:Stars-XP-4 clicked:Stars-XP-5 clicked:Stars-XP-6 clicked:Stars-XP-7 clicked:Stars-XP-8", function(e) {
-  	log(e);
   	var id = "";
   	id = (e.htmlAttributes.name).substring(4); // Strips off the 'act_'
   	log("Stars-XP Toggle Handler: " + id);
@@ -311,11 +427,65 @@
   			st = st + Number(a['Stars-XP-'+i]);
   		}
   		a['Stars-XP-Total'] = st;
-  		log(a);
   		setAttrs(a);
   	});
   });
+  
+  on("change:Playbook", function(e) {
+  	var prev = "";
+  	var newv = "";
+  	if ( typeof(e.previousValue) != "undefined" ) {
+  		prev = e.previousValue;
+  	}
+  	if ( typeof(e.newValue) != "undefined" ) {
+  		newv = e.newValue;
+  	}
+  	var sdots = {
+  		"Enigma": ["Express","Conceal"],
+  		"Stranger": ["Analyse","Conceal"],
+  		"TimeTraveller": ["Confess","Analyse"],
+  		"Harmony": ["Empathise","Forgive"],
+  		"Guardian": ["Defy","Perceive"],
+  		"Outsider": ["Defy","Express"],
+  		"UnlikelyHero": ["Confess","Forgive"]
+  	};
+  	var a = {};
+  	if ( prev != "" ) {
+  		var dots = sdots[prev];
+  		a[dots[0]+"-Dot-1"] = 0;
+  		a[dots[1]+"-Dot-1"] = 0;
+  	}
+  	if ( newv != "" ) {
+  		var dots = sdots[newv];
+  		a[dots[0]+"-Dot-1"] = 1;
+  		a[dots[1]+"-Dot-1"] = 1;
+  	}
+  	setAttrs(a);
+  });
 </script>
+<input name="attr_Position-Query" type="hidden" value=""/>
+<input name="attr_Effect-Query" type="hidden" value=""/>
+<input name="attr_Sun-Resist-Roll-Formula" type="hidden" value=""/>
+<input name="attr_Defy-Base-Roll-Formula" type="hidden" value=""/>
+<input name="attr_Defy-Transcend-Roll-Formula" type="hidden" value=""/>
+<input name="attr_Empathise-Base-Roll-Formula" type="hidden" value=""/>
+<input name="attr_Empathise-Transcend-Roll-Formula" type="hidden" value=""/>
+<input name="attr_Express-Base-Roll-Formula" type="hidden" value=""/>
+<input name="attr_Express-Transcend-Roll-Formula" type="hidden" value=""/>
+<input name="attr_Moon-Resist-Roll-Formula" type="hidden" value=""/>
+<input name="attr_Confess-Base-Roll-Formula" type="hidden" value=""/>
+<input name="attr_Confess-Transcend-Roll-Formula" type="hidden" value=""/>
+<input name="attr_Forgive-Base-Roll-Formula" type="hidden" value=""/>
+<input name="attr_Forgive-Transcend-Roll-Formula" type="hidden" value=""/>
+<input name="attr_Perceive-Base-Roll-Formula" type="hidden" value=""/>
+<input name="attr_Perceive-Transcend-Roll-Formula" type="hidden" value=""/>
+<input name="attr_Stars-Resist-Roll-Formula" type="hidden" value=""/>
+<input name="attr_Analyse-Base-Roll-Formula" type="hidden" value=""/>
+<input name="attr_Analyse-Transcend-Roll-Formula" type="hidden" value=""/>
+<input name="attr_Conceal-Base-Roll-Formula" type="hidden" value=""/>
+<input name="attr_Conceal-Transcend-Roll-Formula" type="hidden" value=""/>
+<input name="attr_Flow-Base-Roll-Formula" type="hidden" value=""/>
+<input name="attr_Flow-Transcend-Roll-Formula" type="hidden" value=""/>
 <input class="sheet-Mode-Playbook" name="attr_Playbook" type="hidden" value=""/>
 <input class="sheet-Mode-Playset" name="attr_playset" type="hidden" value=""/>
 <div class="sheet-Playbooks">
@@ -398,10 +568,10 @@
       <div class="sheet-Box sheet-Teal sheet-Playbook-Selected">
         <div class="sheet-Box-Header"><span data-i18n="Transcendence"></span>
           <div class="sheet-Box-Header-Icons">
-            <input class="sheet-hide-on-zero" name="attr_Toggle-Stress-Expand" type="hidden" value="0"/>
-            <button class="sheet-button-header-expand" type="action" name="act_Toggle-Stress-Expand"></button>
-            <input class="sheet-hide-on-one" name="attr_Toggle-Stress-Expand" type="hidden" value="0"/>
-            <button class="sheet-button-header-collapse" type="action" name="act_Toggle-Stress-Expand"></button>
+            <input class="sheet-hide-on-zero" name="attr_Toggle-Transcendence-Expand" type="hidden" value="0"/>
+            <button class="sheet-button-header-expand" type="action" name="act_Toggle-Transcendence-Expand"></button>
+            <input class="sheet-hide-on-one" name="attr_Toggle-Transcendence-Expand" type="hidden" value="0"/>
+            <button class="sheet-button-header-collapse" type="action" name="act_Toggle-Transcendence-Expand"></button>
           </div>
         </div>
         <input class="sheet-Stress-Total" name="attr_Transcendence-Total" type="hidden" value="0"/>
@@ -429,7 +599,7 @@
         </div>
       </div>
       <!-- include includes/playbook-harm.pug-->
-      <div class="sheet-Box">
+      <div class="sheet-Box sheet-Playbook-Selected">
         <div class="sheet-Box-Header"><span data-i18n="Links"></span>
           <div class="sheet-Box-Header-Icons">
             <input class="sheet-hide-on-zero" name="attr_Toggle-Links-Expand" type="hidden" value="0"/>
@@ -637,45 +807,6 @@
         </div>
         <input class="sheet-hide-on-one" name="attr_Toggle-Links-Spend-Expand" type="hidden" value="1"/>
         <div class="sheet-Links-Spend-Block"><span data-i18n="Spend links on allies:You or linked protag recover 2 stressThey ignore 1 harm tagGrant +1d to ally’s actionPrevent their eclipse on a 4/5 result"></span>
-        </div>
-      </div>
-      <div class="sheet-Box">
-        <div class="sheet-Box-Header"><span data-i18n="Bonus Die"></span>
-          <div class="sheet-Box-Header-Icons">
-            <input class="sheet-hide-on-zero" name="attr_Toggle-BonusDie-Expand" type="hidden" value="0"/>
-            <button class="sheet-button-header-expand" type="action" name="act_Toggle-BonusDie-Expand"></button>
-            <input class="sheet-hide-on-one" name="attr_Toggle-BonusDie-Expand" type="hidden" value="0"/>
-            <button class="sheet-button-header-collapse" type="action" name="act_Toggle-BonusDie-Expand"></button>
-          </div>
-        </div>
-        <input class="sheet-hide-on-one" name="attr_Toggle-BonusDie-Expand" type="hidden" value=""/>
-        <div class="sheet-BonusDie-Block"><span data-i18n="Push yourself (take 2 stress) or accept a Poisoned Promise"></span>
-        </div>
-      </div>
-      <div class="sheet-Box">
-        <div class="sheet-Box-Header"><span data-i18n="Teamwork"></span>
-          <div class="sheet-Box-Header-Icons">
-            <input class="sheet-hide-on-zero" name="attr_Toggle-Teamwork-Expand" type="hidden" value="0"/>
-            <button class="sheet-button-header-expand" type="action" name="act_Toggle-Teamwork-Expand"></button>
-            <input class="sheet-hide-on-one" name="attr_Toggle-Teamwork-Expand" type="hidden" value="0"/>
-            <button class="sheet-button-header-collapse" type="action" name="act_Toggle-Teamwork-Expand"></button>
-          </div>
-        </div>
-        <input class="sheet-hide-on-one" name="attr_Toggle-Teamwork-Expand" type="hidden" value=""/>
-        <div class="sheet-Teamwork-Block"><span data-i18n="Assist a teammateLead a group actionSet up a teammateProtect a teammate"></span>
-        </div>
-      </div>
-      <div class="sheet-Box sheet-Playbook-Selected">
-        <div class="sheet-Box-Header"><span data-i18n="Gather Info"></span>
-          <div class="sheet-Box-Header-Icons">
-            <input class="sheet-hide-on-zero" name="attr_Toggle-GatherInfo-Expand" type="hidden" value="0"/>
-            <button class="sheet-button-header-expand" type="action" name="act_Toggle-GatherInfo-Expand"></button>
-            <input class="sheet-hide-on-one" name="attr_Toggle-GatherInfo-Expand" type="hidden" value="0"/>
-            <button class="sheet-button-header-collapse" type="action" name="act_Toggle-GatherInfo-Expand"></button>
-          </div>
-        </div>
-        <input class="sheet-hide-on-one" name="attr_Toggle-GatherInfo-Expand" type="hidden" value=""/>
-        <div class="sheet-GatherInfo-Block"><span class="sheet-Playbook-Enigma" data-i18n="What does [X] intend to do?Who here is keeping secrets?Where can I find [X]?Where’s the vulnerability here?Where can I stay hidden?What does [X] really want?"></span><span class="sheet-Playbook-Stranger" data-i18n="What is hidden here?Where can I gain an edge?What is the purpose of [X]?Who/what doesn’t belong here?What might happen if I [X]?Who/what here is isolated or alone?"></span><span class="sheet-Playbook-TimeTraveller" data-i18n="What do I remember about [X]?What really happen(s/ed) here?What defies the flow of time?What is already in motion here?What might happen if I [X]?What is different about [X] this time?"></span><span class="sheet-Playbook-Harmony" data-i18n="Who here can best help me?What are you really feeling?Who here is at their limit?How are [X] and [Y] connected?Who here feels alone?What here is incomplete?"></span><span class="sheet-Playbook-Guardian" data-i18n="What is most dangerous here?Who here is afraid?How can I help [X]?Who will my foes try to single out?Who here is willing to do violence?Who here is hurting?"></span><span class="sheet-Playbook-Outsider" data-i18n="Where’s my rival, what are they doing?What are your secret pains?How can I gain an edge here?What’s the danger no one else sees?What’s really going on here?What here can be broken?"></span><span class="sheet-Playbook-UnlikelyHero" data-i18n="What is most dangerous here?Who here is feeling [X]?What are you really feeling?Who here is strong or vulnerable?Where can I find beauty here?What are your unmet needs?"></span>
         </div>
       </div>
       <div class="sheet-Box sheet-Teal">
@@ -1745,10 +1876,31 @@
           </div>
         </div>
       </div>
+      <div class="sheet-Box">
+        <div class="sheet-Box-Header"><span data-i18n="Notes"></span>
+          <div class="sheet-Box-Header-Icons">
+            <input class="sheet-hide-on-zero" name="attr_Toggle-Notes-Expand" type="hidden" value="0"/>
+            <button class="sheet-button-header-expand" type="action" name="act_Toggle-Notes-Expand"></button>
+            <input class="sheet-hide-on-one" name="attr_Toggle-Notes-Expand" type="hidden" value="0"/>
+            <button class="sheet-button-header-collapse" type="action" name="act_Toggle-Notes-Expand"></button>
+          </div>
+        </div>
+        <input class="sheet-hide-on-one" name="attr_Toggle-Notes-Expand" type="hidden" value=""/>
+        <div class="sheet-Notes-Block">
+          <textarea name="attr_Notes"></textarea>
+        </div>
+      </div>
     </div>
     <div class="sheet-Right">
+      <!-- statsblock exists in variables.pug-->
+      <!-- Eventually transplant this back to mixins.pug-->
+      <!-- {{@{"+v+"-Base-Roll-Formula}}}-->
+      <!-- {{?{Transcendent?|No (TOTAL),@{"+v+"-Base-Roll-Formula}|Yes (TOTAL),@{"+v+"-Transcend-Roll-Formula}}}}-->
       <div class="sheet-Box sheet-Playbook-Selected">
-        <div class="sheet-Box-Header sheet-Box-XP"><span data-i18n="Sun"></span>
+        <div class="sheet-Box-Header sheet-Box-XP"><span>
+            <input name="attr_Sun-Resist-Total" type="hidden" value=""/>
+            <button class="sheet-buttonless" name="roll_Sun" type="roll" value="&amp;{template:default} {{charname=@{character_name}}} {{@{Position-Query}}} {{effect=@{Effect-Query}}} {{@{Sun-Resist-Roll-Formula}}} {{title=^{Sun}}}"><span data-i18n="Sun"></span>
+            </button></span>
           <div class="sheet-Box-Header-Icons">
             <div class="sheet-XP-Track">
               <input class="sheet-hide-on-zero" name="attr_Sun-XP-1" type="hidden" value="0"/>
@@ -1779,18 +1931,112 @@
           </div>
         </div>
         <div class="sheet-Stats-Block">
-          <div class="sheet-Stats-Row">
-            <div class="sheet-Dot sheet-Connected">x</div>
-            <div class="sheet-Dot">x</div>
-            <div class="sheet-Star">x</div>
-            <div class="sheet-Star">x</div>
-            <div class="sheet-Stat"><span data-i18n="Defy"></span>
-            </div>
-          </div>
+          <input name="attr_Defy-Base-Total" type="hidden" value=""/>
+          <input name="attr_Defy-Transcend-Total" type="hidden" value=""/>
+                <div class="sheet-Stats-Row">
+                  <div class="sheet-Dot sheet-Connected">
+                    <input class="sheet-hide-on-zero" name="attr_Defy-Dot-1" type="hidden" value="0"/>
+                    <button class="sheet-button-mark-on" type="action" name="act_Defy-Dot-1"></button>
+                    <input class="sheet-hide-on-one" name="attr_Defy-Dot-1" type="hidden" value="0"/>
+                    <button class="sheet-button-mark-off" type="action" name="act_Defy-Dot-1"></button>
+                  </div>
+                  <div class="sheet-Dot">
+                    <input class="sheet-hide-on-zero" name="attr_Defy-Dot-2" type="hidden" value="0"/>
+                    <button class="sheet-button-mark-on" type="action" name="act_Defy-Dot-2"></button>
+                    <input class="sheet-hide-on-one" name="attr_Defy-Dot-2" type="hidden" value="0"/>
+                    <button class="sheet-button-mark-off" type="action" name="act_Defy-Dot-2"></button>
+                  </div>
+                  <div class="sheet-Star">
+                    <input class="sheet-hide-on-zero" name="attr_Defy-Star-1" type="hidden" value="0"/>
+                    <button class="sheet-button-transcendent-on" type="action" name="act_Defy-Star-1"></button>
+                    <input class="sheet-hide-on-one" name="attr_Defy-Star-1" type="hidden" value="0"/>
+                    <button class="sheet-button-transcendent-off" type="action" name="act_Defy-Star-1"></button>
+                  </div>
+                  <div class="sheet-Star">
+                    <input class="sheet-hide-on-zero" name="attr_Defy-Star-2" type="hidden" value="0"/>
+                    <button class="sheet-button-transcendent-on" type="action" name="act_Defy-Star-2"></button>
+                    <input class="sheet-hide-on-one" name="attr_Defy-Star-2" type="hidden" value="0"/>
+                    <button class="sheet-button-transcendent-off" type="action" name="act_Defy-Star-2"></button>
+                  </div>
+                  <div class="sheet-Stat">
+                    <!-- This needs to be complexified to handle rolling while transcendent, but for now, let's get that base -->
+                    <button class="sheet-buttonless" name="roll_Defy" type="roll" value="&amp;{template:default} {{charname=@{character_name}}} {{@{Position-Query}}} {{effect=@{Effect-Query}}} {{?{Transcendent?|No (@{Defy-Base-Total}),@{Defy-Base-Roll-Formula}|Yes (@{Defy-Transcend-Total}),@{Defy-Transcend-Roll-Formula}}}} {{title=^{Defy}}}"><span data-i18n="Defy"></span>
+                    </button>
+                  </div>
+                </div>
+          <input name="attr_Empathise-Base-Total" type="hidden" value=""/>
+          <input name="attr_Empathise-Transcend-Total" type="hidden" value=""/>
+                <div class="sheet-Stats-Row">
+                  <div class="sheet-Dot sheet-Connected">
+                    <input class="sheet-hide-on-zero" name="attr_Empathise-Dot-1" type="hidden" value="0"/>
+                    <button class="sheet-button-mark-on" type="action" name="act_Empathise-Dot-1"></button>
+                    <input class="sheet-hide-on-one" name="attr_Empathise-Dot-1" type="hidden" value="0"/>
+                    <button class="sheet-button-mark-off" type="action" name="act_Empathise-Dot-1"></button>
+                  </div>
+                  <div class="sheet-Dot">
+                    <input class="sheet-hide-on-zero" name="attr_Empathise-Dot-2" type="hidden" value="0"/>
+                    <button class="sheet-button-mark-on" type="action" name="act_Empathise-Dot-2"></button>
+                    <input class="sheet-hide-on-one" name="attr_Empathise-Dot-2" type="hidden" value="0"/>
+                    <button class="sheet-button-mark-off" type="action" name="act_Empathise-Dot-2"></button>
+                  </div>
+                  <div class="sheet-Star">
+                    <input class="sheet-hide-on-zero" name="attr_Empathise-Star-1" type="hidden" value="0"/>
+                    <button class="sheet-button-transcendent-on" type="action" name="act_Empathise-Star-1"></button>
+                    <input class="sheet-hide-on-one" name="attr_Empathise-Star-1" type="hidden" value="0"/>
+                    <button class="sheet-button-transcendent-off" type="action" name="act_Empathise-Star-1"></button>
+                  </div>
+                  <div class="sheet-Star">
+                    <input class="sheet-hide-on-zero" name="attr_Empathise-Star-2" type="hidden" value="0"/>
+                    <button class="sheet-button-transcendent-on" type="action" name="act_Empathise-Star-2"></button>
+                    <input class="sheet-hide-on-one" name="attr_Empathise-Star-2" type="hidden" value="0"/>
+                    <button class="sheet-button-transcendent-off" type="action" name="act_Empathise-Star-2"></button>
+                  </div>
+                  <div class="sheet-Stat">
+                    <!-- This needs to be complexified to handle rolling while transcendent, but for now, let's get that base -->
+                    <button class="sheet-buttonless" name="roll_Empathise" type="roll" value="&amp;{template:default} {{charname=@{character_name}}} {{@{Position-Query}}} {{effect=@{Effect-Query}}} {{?{Transcendent?|No (@{Empathise-Base-Total}),@{Empathise-Base-Roll-Formula}|Yes (@{Empathise-Transcend-Total}),@{Empathise-Transcend-Roll-Formula}}}} {{title=^{Empathise}}}"><span data-i18n="Empathise"></span>
+                    </button>
+                  </div>
+                </div>
+          <input name="attr_Express-Base-Total" type="hidden" value=""/>
+          <input name="attr_Express-Transcend-Total" type="hidden" value=""/>
+                <div class="sheet-Stats-Row">
+                  <div class="sheet-Dot sheet-Connected">
+                    <input class="sheet-hide-on-zero" name="attr_Express-Dot-1" type="hidden" value="0"/>
+                    <button class="sheet-button-mark-on" type="action" name="act_Express-Dot-1"></button>
+                    <input class="sheet-hide-on-one" name="attr_Express-Dot-1" type="hidden" value="0"/>
+                    <button class="sheet-button-mark-off" type="action" name="act_Express-Dot-1"></button>
+                  </div>
+                  <div class="sheet-Dot">
+                    <input class="sheet-hide-on-zero" name="attr_Express-Dot-2" type="hidden" value="0"/>
+                    <button class="sheet-button-mark-on" type="action" name="act_Express-Dot-2"></button>
+                    <input class="sheet-hide-on-one" name="attr_Express-Dot-2" type="hidden" value="0"/>
+                    <button class="sheet-button-mark-off" type="action" name="act_Express-Dot-2"></button>
+                  </div>
+                  <div class="sheet-Star">
+                    <input class="sheet-hide-on-zero" name="attr_Express-Star-1" type="hidden" value="0"/>
+                    <button class="sheet-button-transcendent-on" type="action" name="act_Express-Star-1"></button>
+                    <input class="sheet-hide-on-one" name="attr_Express-Star-1" type="hidden" value="0"/>
+                    <button class="sheet-button-transcendent-off" type="action" name="act_Express-Star-1"></button>
+                  </div>
+                  <div class="sheet-Star">
+                    <input class="sheet-hide-on-zero" name="attr_Express-Star-2" type="hidden" value="0"/>
+                    <button class="sheet-button-transcendent-on" type="action" name="act_Express-Star-2"></button>
+                    <input class="sheet-hide-on-one" name="attr_Express-Star-2" type="hidden" value="0"/>
+                    <button class="sheet-button-transcendent-off" type="action" name="act_Express-Star-2"></button>
+                  </div>
+                  <div class="sheet-Stat">
+                    <!-- This needs to be complexified to handle rolling while transcendent, but for now, let's get that base -->
+                    <button class="sheet-buttonless" name="roll_Express" type="roll" value="&amp;{template:default} {{charname=@{character_name}}} {{@{Position-Query}}} {{effect=@{Effect-Query}}} {{?{Transcendent?|No (@{Express-Base-Total}),@{Express-Base-Roll-Formula}|Yes (@{Express-Transcend-Total}),@{Express-Transcend-Roll-Formula}}}} {{title=^{Express}}}"><span data-i18n="Express"></span>
+                    </button>
+                  </div>
+                </div>
         </div>
       </div>
       <div class="sheet-Box sheet-Playbook-Selected">
-        <div class="sheet-Box-Header sheet-Box-XP"><span data-i18n="Moon"></span>
+        <div class="sheet-Box-Header sheet-Box-XP"><span>
+            <input name="attr_Moon-Resist-Total" type="hidden" value=""/>
+            <button class="sheet-buttonless" name="roll_Moon" type="roll" value="&amp;{template:default} {{charname=@{character_name}}} {{@{Position-Query}}} {{effect=@{Effect-Query}}} {{@{Moon-Resist-Roll-Formula}}} {{title=^{Moon}}}"><span data-i18n="Moon"></span>
+            </button></span>
           <div class="sheet-Box-Header-Icons">
             <div class="sheet-XP-Track">
               <input class="sheet-hide-on-zero" name="attr_Moon-XP-1" type="hidden" value="0"/>
@@ -1820,9 +2066,113 @@
             </div>
           </div>
         </div>
+        <div class="sheet-Stats-Block">
+          <input name="attr_Confess-Base-Total" type="hidden" value=""/>
+          <input name="attr_Confess-Transcend-Total" type="hidden" value=""/>
+                <div class="sheet-Stats-Row">
+                  <div class="sheet-Dot sheet-Connected">
+                    <input class="sheet-hide-on-zero" name="attr_Confess-Dot-1" type="hidden" value="0"/>
+                    <button class="sheet-button-mark-on" type="action" name="act_Confess-Dot-1"></button>
+                    <input class="sheet-hide-on-one" name="attr_Confess-Dot-1" type="hidden" value="0"/>
+                    <button class="sheet-button-mark-off" type="action" name="act_Confess-Dot-1"></button>
+                  </div>
+                  <div class="sheet-Dot">
+                    <input class="sheet-hide-on-zero" name="attr_Confess-Dot-2" type="hidden" value="0"/>
+                    <button class="sheet-button-mark-on" type="action" name="act_Confess-Dot-2"></button>
+                    <input class="sheet-hide-on-one" name="attr_Confess-Dot-2" type="hidden" value="0"/>
+                    <button class="sheet-button-mark-off" type="action" name="act_Confess-Dot-2"></button>
+                  </div>
+                  <div class="sheet-Star">
+                    <input class="sheet-hide-on-zero" name="attr_Confess-Star-1" type="hidden" value="0"/>
+                    <button class="sheet-button-transcendent-on" type="action" name="act_Confess-Star-1"></button>
+                    <input class="sheet-hide-on-one" name="attr_Confess-Star-1" type="hidden" value="0"/>
+                    <button class="sheet-button-transcendent-off" type="action" name="act_Confess-Star-1"></button>
+                  </div>
+                  <div class="sheet-Star">
+                    <input class="sheet-hide-on-zero" name="attr_Confess-Star-2" type="hidden" value="0"/>
+                    <button class="sheet-button-transcendent-on" type="action" name="act_Confess-Star-2"></button>
+                    <input class="sheet-hide-on-one" name="attr_Confess-Star-2" type="hidden" value="0"/>
+                    <button class="sheet-button-transcendent-off" type="action" name="act_Confess-Star-2"></button>
+                  </div>
+                  <div class="sheet-Stat">
+                    <!-- This needs to be complexified to handle rolling while transcendent, but for now, let's get that base -->
+                    <button class="sheet-buttonless" name="roll_Confess" type="roll" value="&amp;{template:default} {{charname=@{character_name}}} {{@{Position-Query}}} {{effect=@{Effect-Query}}} {{?{Transcendent?|No (@{Confess-Base-Total}),@{Confess-Base-Roll-Formula}|Yes (@{Confess-Transcend-Total}),@{Confess-Transcend-Roll-Formula}}}} {{title=^{Confess}}}"><span data-i18n="Confess"></span>
+                    </button>
+                  </div>
+                </div>
+          <input name="attr_Forgive-Base-Total" type="hidden" value=""/>
+          <input name="attr_Forgive-Transcend-Total" type="hidden" value=""/>
+                <div class="sheet-Stats-Row">
+                  <div class="sheet-Dot sheet-Connected">
+                    <input class="sheet-hide-on-zero" name="attr_Forgive-Dot-1" type="hidden" value="0"/>
+                    <button class="sheet-button-mark-on" type="action" name="act_Forgive-Dot-1"></button>
+                    <input class="sheet-hide-on-one" name="attr_Forgive-Dot-1" type="hidden" value="0"/>
+                    <button class="sheet-button-mark-off" type="action" name="act_Forgive-Dot-1"></button>
+                  </div>
+                  <div class="sheet-Dot">
+                    <input class="sheet-hide-on-zero" name="attr_Forgive-Dot-2" type="hidden" value="0"/>
+                    <button class="sheet-button-mark-on" type="action" name="act_Forgive-Dot-2"></button>
+                    <input class="sheet-hide-on-one" name="attr_Forgive-Dot-2" type="hidden" value="0"/>
+                    <button class="sheet-button-mark-off" type="action" name="act_Forgive-Dot-2"></button>
+                  </div>
+                  <div class="sheet-Star">
+                    <input class="sheet-hide-on-zero" name="attr_Forgive-Star-1" type="hidden" value="0"/>
+                    <button class="sheet-button-transcendent-on" type="action" name="act_Forgive-Star-1"></button>
+                    <input class="sheet-hide-on-one" name="attr_Forgive-Star-1" type="hidden" value="0"/>
+                    <button class="sheet-button-transcendent-off" type="action" name="act_Forgive-Star-1"></button>
+                  </div>
+                  <div class="sheet-Star">
+                    <input class="sheet-hide-on-zero" name="attr_Forgive-Star-2" type="hidden" value="0"/>
+                    <button class="sheet-button-transcendent-on" type="action" name="act_Forgive-Star-2"></button>
+                    <input class="sheet-hide-on-one" name="attr_Forgive-Star-2" type="hidden" value="0"/>
+                    <button class="sheet-button-transcendent-off" type="action" name="act_Forgive-Star-2"></button>
+                  </div>
+                  <div class="sheet-Stat">
+                    <!-- This needs to be complexified to handle rolling while transcendent, but for now, let's get that base -->
+                    <button class="sheet-buttonless" name="roll_Forgive" type="roll" value="&amp;{template:default} {{charname=@{character_name}}} {{@{Position-Query}}} {{effect=@{Effect-Query}}} {{?{Transcendent?|No (@{Forgive-Base-Total}),@{Forgive-Base-Roll-Formula}|Yes (@{Forgive-Transcend-Total}),@{Forgive-Transcend-Roll-Formula}}}} {{title=^{Forgive}}}"><span data-i18n="Forgive"></span>
+                    </button>
+                  </div>
+                </div>
+          <input name="attr_Perceive-Base-Total" type="hidden" value=""/>
+          <input name="attr_Perceive-Transcend-Total" type="hidden" value=""/>
+                <div class="sheet-Stats-Row">
+                  <div class="sheet-Dot sheet-Connected">
+                    <input class="sheet-hide-on-zero" name="attr_Perceive-Dot-1" type="hidden" value="0"/>
+                    <button class="sheet-button-mark-on" type="action" name="act_Perceive-Dot-1"></button>
+                    <input class="sheet-hide-on-one" name="attr_Perceive-Dot-1" type="hidden" value="0"/>
+                    <button class="sheet-button-mark-off" type="action" name="act_Perceive-Dot-1"></button>
+                  </div>
+                  <div class="sheet-Dot">
+                    <input class="sheet-hide-on-zero" name="attr_Perceive-Dot-2" type="hidden" value="0"/>
+                    <button class="sheet-button-mark-on" type="action" name="act_Perceive-Dot-2"></button>
+                    <input class="sheet-hide-on-one" name="attr_Perceive-Dot-2" type="hidden" value="0"/>
+                    <button class="sheet-button-mark-off" type="action" name="act_Perceive-Dot-2"></button>
+                  </div>
+                  <div class="sheet-Star">
+                    <input class="sheet-hide-on-zero" name="attr_Perceive-Star-1" type="hidden" value="0"/>
+                    <button class="sheet-button-transcendent-on" type="action" name="act_Perceive-Star-1"></button>
+                    <input class="sheet-hide-on-one" name="attr_Perceive-Star-1" type="hidden" value="0"/>
+                    <button class="sheet-button-transcendent-off" type="action" name="act_Perceive-Star-1"></button>
+                  </div>
+                  <div class="sheet-Star">
+                    <input class="sheet-hide-on-zero" name="attr_Perceive-Star-2" type="hidden" value="0"/>
+                    <button class="sheet-button-transcendent-on" type="action" name="act_Perceive-Star-2"></button>
+                    <input class="sheet-hide-on-one" name="attr_Perceive-Star-2" type="hidden" value="0"/>
+                    <button class="sheet-button-transcendent-off" type="action" name="act_Perceive-Star-2"></button>
+                  </div>
+                  <div class="sheet-Stat">
+                    <!-- This needs to be complexified to handle rolling while transcendent, but for now, let's get that base -->
+                    <button class="sheet-buttonless" name="roll_Perceive" type="roll" value="&amp;{template:default} {{charname=@{character_name}}} {{@{Position-Query}}} {{effect=@{Effect-Query}}} {{?{Transcendent?|No (@{Perceive-Base-Total}),@{Perceive-Base-Roll-Formula}|Yes (@{Perceive-Transcend-Total}),@{Perceive-Transcend-Roll-Formula}}}} {{title=^{Perceive}}}"><span data-i18n="Perceive"></span>
+                    </button>
+                  </div>
+                </div>
+        </div>
       </div>
       <div class="sheet-Box sheet-Playbook-Selected">
-        <div class="sheet-Box-Header sheet-Box-XP"><span data-i18n="Stars"></span>
+        <div class="sheet-Box-Header sheet-Box-XP"><span>
+            <input name="attr_Stars-Resist-Total" type="hidden" value=""/>
+            <button class="sheet-buttonless" name="roll_Stars" type="roll" value="&amp;{template:default} {{charname=@{character_name}}} {{@{Position-Query}}} {{effect=@{Effect-Query}}} {{@{Stars-Resist-Roll-Formula}}} {{title=^{Stars}}}"><span data-i18n="Stars"></span>
+            </button></span>
           <div class="sheet-Box-Header-Icons">
             <div class="sheet-XP-Track">
               <input class="sheet-hide-on-zero" name="attr_Stars-XP-1" type="hidden" value="0"/>
@@ -1852,7 +2202,113 @@
             </div>
           </div>
         </div>
+        <div class="sheet-Stats-Block">
+          <input name="attr_Analyse-Base-Total" type="hidden" value=""/>
+          <input name="attr_Analyse-Transcend-Total" type="hidden" value=""/>
+                <div class="sheet-Stats-Row">
+                  <div class="sheet-Dot sheet-Connected">
+                    <input class="sheet-hide-on-zero" name="attr_Analyse-Dot-1" type="hidden" value="0"/>
+                    <button class="sheet-button-mark-on" type="action" name="act_Analyse-Dot-1"></button>
+                    <input class="sheet-hide-on-one" name="attr_Analyse-Dot-1" type="hidden" value="0"/>
+                    <button class="sheet-button-mark-off" type="action" name="act_Analyse-Dot-1"></button>
+                  </div>
+                  <div class="sheet-Dot">
+                    <input class="sheet-hide-on-zero" name="attr_Analyse-Dot-2" type="hidden" value="0"/>
+                    <button class="sheet-button-mark-on" type="action" name="act_Analyse-Dot-2"></button>
+                    <input class="sheet-hide-on-one" name="attr_Analyse-Dot-2" type="hidden" value="0"/>
+                    <button class="sheet-button-mark-off" type="action" name="act_Analyse-Dot-2"></button>
+                  </div>
+                  <div class="sheet-Star">
+                    <input class="sheet-hide-on-zero" name="attr_Analyse-Star-1" type="hidden" value="0"/>
+                    <button class="sheet-button-transcendent-on" type="action" name="act_Analyse-Star-1"></button>
+                    <input class="sheet-hide-on-one" name="attr_Analyse-Star-1" type="hidden" value="0"/>
+                    <button class="sheet-button-transcendent-off" type="action" name="act_Analyse-Star-1"></button>
+                  </div>
+                  <div class="sheet-Star">
+                    <input class="sheet-hide-on-zero" name="attr_Analyse-Star-2" type="hidden" value="0"/>
+                    <button class="sheet-button-transcendent-on" type="action" name="act_Analyse-Star-2"></button>
+                    <input class="sheet-hide-on-one" name="attr_Analyse-Star-2" type="hidden" value="0"/>
+                    <button class="sheet-button-transcendent-off" type="action" name="act_Analyse-Star-2"></button>
+                  </div>
+                  <div class="sheet-Stat">
+                    <!-- This needs to be complexified to handle rolling while transcendent, but for now, let's get that base -->
+                    <button class="sheet-buttonless" name="roll_Analyse" type="roll" value="&amp;{template:default} {{charname=@{character_name}}} {{@{Position-Query}}} {{effect=@{Effect-Query}}} {{?{Transcendent?|No (@{Analyse-Base-Total}),@{Analyse-Base-Roll-Formula}|Yes (@{Analyse-Transcend-Total}),@{Analyse-Transcend-Roll-Formula}}}} {{title=^{Analyse}}}"><span data-i18n="Analyse"></span>
+                    </button>
+                  </div>
+                </div>
+          <input name="attr_Conceal-Base-Total" type="hidden" value=""/>
+          <input name="attr_Conceal-Transcend-Total" type="hidden" value=""/>
+                <div class="sheet-Stats-Row">
+                  <div class="sheet-Dot sheet-Connected">
+                    <input class="sheet-hide-on-zero" name="attr_Conceal-Dot-1" type="hidden" value="0"/>
+                    <button class="sheet-button-mark-on" type="action" name="act_Conceal-Dot-1"></button>
+                    <input class="sheet-hide-on-one" name="attr_Conceal-Dot-1" type="hidden" value="0"/>
+                    <button class="sheet-button-mark-off" type="action" name="act_Conceal-Dot-1"></button>
+                  </div>
+                  <div class="sheet-Dot">
+                    <input class="sheet-hide-on-zero" name="attr_Conceal-Dot-2" type="hidden" value="0"/>
+                    <button class="sheet-button-mark-on" type="action" name="act_Conceal-Dot-2"></button>
+                    <input class="sheet-hide-on-one" name="attr_Conceal-Dot-2" type="hidden" value="0"/>
+                    <button class="sheet-button-mark-off" type="action" name="act_Conceal-Dot-2"></button>
+                  </div>
+                  <div class="sheet-Star">
+                    <input class="sheet-hide-on-zero" name="attr_Conceal-Star-1" type="hidden" value="0"/>
+                    <button class="sheet-button-transcendent-on" type="action" name="act_Conceal-Star-1"></button>
+                    <input class="sheet-hide-on-one" name="attr_Conceal-Star-1" type="hidden" value="0"/>
+                    <button class="sheet-button-transcendent-off" type="action" name="act_Conceal-Star-1"></button>
+                  </div>
+                  <div class="sheet-Star">
+                    <input class="sheet-hide-on-zero" name="attr_Conceal-Star-2" type="hidden" value="0"/>
+                    <button class="sheet-button-transcendent-on" type="action" name="act_Conceal-Star-2"></button>
+                    <input class="sheet-hide-on-one" name="attr_Conceal-Star-2" type="hidden" value="0"/>
+                    <button class="sheet-button-transcendent-off" type="action" name="act_Conceal-Star-2"></button>
+                  </div>
+                  <div class="sheet-Stat">
+                    <!-- This needs to be complexified to handle rolling while transcendent, but for now, let's get that base -->
+                    <button class="sheet-buttonless" name="roll_Conceal" type="roll" value="&amp;{template:default} {{charname=@{character_name}}} {{@{Position-Query}}} {{effect=@{Effect-Query}}} {{?{Transcendent?|No (@{Conceal-Base-Total}),@{Conceal-Base-Roll-Formula}|Yes (@{Conceal-Transcend-Total}),@{Conceal-Transcend-Roll-Formula}}}} {{title=^{Conceal}}}"><span data-i18n="Conceal"></span>
+                    </button>
+                  </div>
+                </div>
+          <input name="attr_Flow-Base-Total" type="hidden" value=""/>
+          <input name="attr_Flow-Transcend-Total" type="hidden" value=""/>
+                <div class="sheet-Stats-Row">
+                  <div class="sheet-Dot sheet-Connected">
+                    <input class="sheet-hide-on-zero" name="attr_Flow-Dot-1" type="hidden" value="0"/>
+                    <button class="sheet-button-mark-on" type="action" name="act_Flow-Dot-1"></button>
+                    <input class="sheet-hide-on-one" name="attr_Flow-Dot-1" type="hidden" value="0"/>
+                    <button class="sheet-button-mark-off" type="action" name="act_Flow-Dot-1"></button>
+                  </div>
+                  <div class="sheet-Dot">
+                    <input class="sheet-hide-on-zero" name="attr_Flow-Dot-2" type="hidden" value="0"/>
+                    <button class="sheet-button-mark-on" type="action" name="act_Flow-Dot-2"></button>
+                    <input class="sheet-hide-on-one" name="attr_Flow-Dot-2" type="hidden" value="0"/>
+                    <button class="sheet-button-mark-off" type="action" name="act_Flow-Dot-2"></button>
+                  </div>
+                  <div class="sheet-Star">
+                    <input class="sheet-hide-on-zero" name="attr_Flow-Star-1" type="hidden" value="0"/>
+                    <button class="sheet-button-transcendent-on" type="action" name="act_Flow-Star-1"></button>
+                    <input class="sheet-hide-on-one" name="attr_Flow-Star-1" type="hidden" value="0"/>
+                    <button class="sheet-button-transcendent-off" type="action" name="act_Flow-Star-1"></button>
+                  </div>
+                  <div class="sheet-Star">
+                    <input class="sheet-hide-on-zero" name="attr_Flow-Star-2" type="hidden" value="0"/>
+                    <button class="sheet-button-transcendent-on" type="action" name="act_Flow-Star-2"></button>
+                    <input class="sheet-hide-on-one" name="attr_Flow-Star-2" type="hidden" value="0"/>
+                    <button class="sheet-button-transcendent-off" type="action" name="act_Flow-Star-2"></button>
+                  </div>
+                  <div class="sheet-Stat">
+                    <!-- This needs to be complexified to handle rolling while transcendent, but for now, let's get that base -->
+                    <button class="sheet-buttonless" name="roll_Flow" type="roll" value="&amp;{template:default} {{charname=@{character_name}}} {{@{Position-Query}}} {{effect=@{Effect-Query}}} {{?{Transcendent?|No (@{Flow-Base-Total}),@{Flow-Base-Roll-Formula}|Yes (@{Flow-Transcend-Total}),@{Flow-Transcend-Roll-Formula}}}} {{title=^{Flow}}}"><span data-i18n="Flow"></span>
+                    </button>
+                  </div>
+                </div>
+        </div>
       </div>
+      <!-- Position: Risky, Controlled, Desperate, Fortune-->
+      <!-- Effect: Standard, Limited, Great, Extreme, Zero-->
+      <!-- Bonus Dice: 0 thru 6, -1 thru -3-->
+      <!-- <button class="sheet-rollbutton sheet-label btn ui-draggable" type="roll" name="roll_Skirmish" value="&amp;{template:blades} @{skirmish_formula} @{skirmish_roll_mods} {{charimage=@{chat_image}}} @{title_text}" -->
+      <!-- Have a look at this shit: data-i18n-title="skirmish_description" title="Skirmish with an opponent in close combat; assault or hold a position; brawl and wrestle."><span class="sheet-default-label sheet-inherit" data-i18n="skirmish">Skirmish</span><span class="sheet-custom-label sheet-inherit" name="attr_skirmish_label">Skirmish</span></button>-->
       <div class="sheet-Box sheet-Playbook-Selected">
         <div class="sheet-Box-Header sheet-Box-XP"><span data-i18n="XP"></span>
           <div class="sheet-Box-Header-Icons">
@@ -1920,6 +2376,45 @@
           </ul>
         </div>
       </div>
+      <div class="sheet-Box sheet-Playbook-Selected">
+        <div class="sheet-Box-Header"><span data-i18n="Bonus Die"></span>
+          <div class="sheet-Box-Header-Icons">
+            <input class="sheet-hide-on-zero" name="attr_Toggle-BonusDie-Expand" type="hidden" value="0"/>
+            <button class="sheet-button-header-expand" type="action" name="act_Toggle-BonusDie-Expand"></button>
+            <input class="sheet-hide-on-one" name="attr_Toggle-BonusDie-Expand" type="hidden" value="0"/>
+            <button class="sheet-button-header-collapse" type="action" name="act_Toggle-BonusDie-Expand"></button>
+          </div>
+        </div>
+        <input class="sheet-hide-on-one" name="attr_Toggle-BonusDie-Expand" type="hidden" value=""/>
+        <div class="sheet-BonusDie-Block"><span data-i18n="Push yourself (take 2 stress) or accept a Poisoned Promise"></span>
+        </div>
+      </div>
+      <div class="sheet-Box sheet-Playbook-Selected">
+        <div class="sheet-Box-Header"><span data-i18n="Teamwork"></span>
+          <div class="sheet-Box-Header-Icons">
+            <input class="sheet-hide-on-zero" name="attr_Toggle-Teamwork-Expand" type="hidden" value="0"/>
+            <button class="sheet-button-header-expand" type="action" name="act_Toggle-Teamwork-Expand"></button>
+            <input class="sheet-hide-on-one" name="attr_Toggle-Teamwork-Expand" type="hidden" value="0"/>
+            <button class="sheet-button-header-collapse" type="action" name="act_Toggle-Teamwork-Expand"></button>
+          </div>
+        </div>
+        <input class="sheet-hide-on-one" name="attr_Toggle-Teamwork-Expand" type="hidden" value=""/>
+        <div class="sheet-Teamwork-Block"><span data-i18n="Assist a teammateLead a group actionSet up a teammateProtect a teammate"></span>
+        </div>
+      </div>
+      <div class="sheet-Box sheet-Playbook-Selected">
+        <div class="sheet-Box-Header"><span data-i18n="Gather Info"></span>
+          <div class="sheet-Box-Header-Icons">
+            <input class="sheet-hide-on-zero" name="attr_Toggle-GatherInfo-Expand" type="hidden" value="0"/>
+            <button class="sheet-button-header-expand" type="action" name="act_Toggle-GatherInfo-Expand"></button>
+            <input class="sheet-hide-on-one" name="attr_Toggle-GatherInfo-Expand" type="hidden" value="0"/>
+            <button class="sheet-button-header-collapse" type="action" name="act_Toggle-GatherInfo-Expand"></button>
+          </div>
+        </div>
+        <input class="sheet-hide-on-one" name="attr_Toggle-GatherInfo-Expand" type="hidden" value=""/>
+        <div class="sheet-GatherInfo-Block"><span class="sheet-Playbook-Enigma" data-i18n="What does [X] intend to do?Who here is keeping secrets?Where can I find [X]?Where’s the vulnerability here?Where can I stay hidden?What does [X] really want?"></span><span class="sheet-Playbook-Stranger" data-i18n="What is hidden here?Where can I gain an edge?What is the purpose of [X]?Who/what doesn’t belong here?What might happen if I [X]?Who/what here is isolated or alone?"></span><span class="sheet-Playbook-TimeTraveller" data-i18n="What do I remember about [X]?What really happen(s/ed) here?What defies the flow of time?What is already in motion here?What might happen if I [X]?What is different about [X] this time?"></span><span class="sheet-Playbook-Harmony" data-i18n="Who here can best help me?What are you really feeling?Who here is at their limit?How are [X] and [Y] connected?Who here feels alone?What here is incomplete?"></span><span class="sheet-Playbook-Guardian" data-i18n="What is most dangerous here?Who here is afraid?How can I help [X]?Who will my foes try to single out?Who here is willing to do violence?Who here is hurting?"></span><span class="sheet-Playbook-Outsider" data-i18n="Where’s my rival, what are they doing?What are your secret pains?How can I gain an edge here?What’s the danger no one else sees?What’s really going on here?What here can be broken?"></span><span class="sheet-Playbook-UnlikelyHero" data-i18n="What is most dangerous here?Who here is feeling [X]?What are you really feeling?Who here is strong or vulnerable?Where can I find beauty here?What are your unmet needs?"></span>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -1935,6 +2430,19 @@ translation.json:
 	"On a Sea of Stars": "On a Sea of Stars",
 	"In a Maze of Dreams": "In a Maze of Dreams",
 	"Select a Playbook": "(Select a Playbook)",
+	"Position": "Position",
+	"Risky": "Risky",
+	"Controlled": "Controlled",
+	"Desperate": "Desperate",
+	"Fortune": "Fortune",
+	"Effect": "Effect",
+	"Standard": "Standard",
+	"Limited": "Limited",
+	"Great": "Great",
+	"Extreme": "Extreme",
+	"Zero": "Zero",
+	"Number of Dice": "Number of Dice",
+	"Bonus Dice": "Bonus Dice",
 	"Enigma": "Enigma",
 	"Stranger": "Stranger",
 	"Time Traveller": "Time Traveller",
@@ -1966,18 +2474,6 @@ translation.json:
 	"Links": "Links",
 	"Spending Links": "Spending Links",
 	"Spend links on allies:You or linked protag recover 2 stressThey ignore 1 harm tagGrant +1d to ally’s actionPrevent their eclipse on a 4/5 result": "<b>Spend links on allies:</b><ul><li>You or linked protag recover 2 stress<li>They ignore 1 harm tag<li>Grant +1d to ally’s action<li>Prevent their eclipse on a 4/5 result</ul>",
-	"Bonus Die": "Bonus Die",
-	"Push yourself (take 2 stress) or accept a Poisoned Promise": "<b>Push yourself</b> (take 2 stress) or accept a <b>Poisoned Promise</b>",
-	"Teamwork": "Teamwork",
-	"Assist a teammateLead a group actionSet up a teammateProtect a teammate": "<ul><li><b>Assist</b> a teammate<li><b>Lead</b> a group action<li><b>Set up</b> a teammate<li><b>Protect</b> a teammate</ul>",
-	"Gather Info": "Gather Info",
-	"What does [X] intend to do?Who here is keeping secrets?Where can I find [X]?Where’s the vulnerability here?Where can I stay hidden?What does [X] really want?": "<ul><li>What does [X] intend to do?<li>Who here is keeping secrets?<li>Where can I find [X]?<li>Where’s the vulnerability here?<li>Where can I stay hidden?<li>What does [X] really want?</ul>",
-	"What is hidden here?Where can I gain an edge?What is the purpose of [X]?Who/what doesn’t belong here?What might happen if I [X]?Who/what here is isolated or alone?": "<ul><li>What is hidden here?<li>Where can I gain an edge?<li>What is the purpose of [X]?<li>Who/what doesn’t belong here?<li>What might happen if I [X]?<li>Who/what here is isolated or alone?</ul>",
-	"What do I remember about [X]?What really happen(s/ed) here?What defies the flow of time?What is already in motion here?What might happen if I [X]?What is different about [X] this time?": "<ul><li>What do I remember about [X]?<li>What really happen(s/ed) here?<li>What defies the flow of time?<li>What is already in motion here?<li>What might happen if I [X]?<li>What is different about [X] this time?</ul>",
-	"Who here can best help me?What are you really feeling?Who here is at their limit?How are [X] and [Y] connected?Who here feels alone?What here is incomplete?": "<ul><li>Who here can best help me?<li>What are you really feeling?<li>Who here is at their limit?<li>How are [X] and [Y] connected?<li>Who here feels alone?<li>What here is incomplete?</ul>",
-	"What is most dangerous here?Who here is afraid?How can I help [X]?Who will my foes try to single out?Who here is willing to do violence?Who here is hurting?": "<ul><li>What is most dangerous here?<li>Who here is afraid?<li>How can I help [X]?<li>Who will my foes try to single out?<li>Who here is willing to do violence?<li>Who here is hurting?</ul>",
-	"Where’s my rival, what are they doing?What are your secret pains?How can I gain an edge here?What’s the danger no one else sees?What’s really going on here?What here can be broken?": "<ul><li>Where’s my rival, what are they doing?<li>What are your secret pains?<li>How can I gain an edge here?<li>What’s the danger no one else sees?<li>What’s really going on here?<li>What here can be broken?</ul>",
-	"What is most dangerous here?Who here is feeling [X]?What are you really feeling?Who here is strong or vulnerable?Where can I find beauty here?What are your unmet needs?": "<ul><li>What is most dangerous here?<li>Who here is feeling [X]?<li>What are you really feeling?<li>Who here is strong or vulnerable?<li>Where can I find beauty here?<li>What are your unmet needs?</ul>",
 	"Player Agenda": "Player Agenda",
 	"Play to find out what happensBe a fan of the other playersReveal your inner worldHold on, but lightlyKeep hope in your heartSee things through a queer lensExplore the darkness": "<ul><li>Play to find out what happens<li>Be a fan of the other players<li>Reveal your inner world<li>Hold on, but lightly<li>Keep hope in your heart<li>See things through a queer lens<li>Explore the darkness</ul>",
 	"Special Abilities": "Special Abilities",
@@ -2198,10 +2694,19 @@ translation.json:
 	"a competitive promise": "a competitive promise",
 	"an impossible promise": "an impossible promise",
 	"Look": "Look",
+	"Notes": "Notes",
 	"Sun": "Sun",
 	"Defy": "Defy",
+	"Empathise": "Empathise",
+	"Express": "Express",
 	"Moon": "Moon",
+	"Confess": "Confess",
+	"Forgive": "Forgive",
+	"Perceive": "Perceive",
 	"Stars": "Stars",
+	"Analyse": "Analyse",
+	"Conceal": "Conceal",
+	"Flow": "Flow",
 	"XP": "XP",
 	"Gaining XP": "Gaining XP",
 	"Each time you make a desperate roll, mark 1xp in that action’s attribute.": "Each time you make a desperate roll, mark 1xp in that action’s attribute.",
@@ -2216,7 +2721,19 @@ translation.json:
 	"compassion or honesty": "compassion or honesty",
 	"You expressed your beliefs, drives, role, or background": "You expressed your beliefs, drives, role, or background",
 	"You struggled with issues from your promises or obligation": "You struggled with issues from your promises or obligation",
-	"You embodied your Eclipse, or displayed the contents of your heart": "You embodied your Eclipse, or displayed the contents of your heart"
+	"You embodied your Eclipse, or displayed the contents of your heart": "You embodied your Eclipse, or displayed the contents of your heart",
+	"Bonus Die": "Bonus Die",
+	"Push yourself (take 2 stress) or accept a Poisoned Promise": "<b>Push yourself</b> (take 2 stress) or accept a <b>Poisoned Promise</b>",
+	"Teamwork": "Teamwork",
+	"Assist a teammateLead a group actionSet up a teammateProtect a teammate": "<ul><li><b>Assist</b> a teammate<li><b>Lead</b> a group action<li><b>Set up</b> a teammate<li><b>Protect</b> a teammate</ul>",
+	"Gather Info": "Gather Info",
+	"What does [X] intend to do?Who here is keeping secrets?Where can I find [X]?Where’s the vulnerability here?Where can I stay hidden?What does [X] really want?": "<ul><li>What does [X] intend to do?<li>Who here is keeping secrets?<li>Where can I find [X]?<li>Where’s the vulnerability here?<li>Where can I stay hidden?<li>What does [X] really want?</ul>",
+	"What is hidden here?Where can I gain an edge?What is the purpose of [X]?Who/what doesn’t belong here?What might happen if I [X]?Who/what here is isolated or alone?": "<ul><li>What is hidden here?<li>Where can I gain an edge?<li>What is the purpose of [X]?<li>Who/what doesn’t belong here?<li>What might happen if I [X]?<li>Who/what here is isolated or alone?</ul>",
+	"What do I remember about [X]?What really happen(s/ed) here?What defies the flow of time?What is already in motion here?What might happen if I [X]?What is different about [X] this time?": "<ul><li>What do I remember about [X]?<li>What really happen(s/ed) here?<li>What defies the flow of time?<li>What is already in motion here?<li>What might happen if I [X]?<li>What is different about [X] this time?</ul>",
+	"Who here can best help me?What are you really feeling?Who here is at their limit?How are [X] and [Y] connected?Who here feels alone?What here is incomplete?": "<ul><li>Who here can best help me?<li>What are you really feeling?<li>Who here is at their limit?<li>How are [X] and [Y] connected?<li>Who here feels alone?<li>What here is incomplete?</ul>",
+	"What is most dangerous here?Who here is afraid?How can I help [X]?Who will my foes try to single out?Who here is willing to do violence?Who here is hurting?": "<ul><li>What is most dangerous here?<li>Who here is afraid?<li>How can I help [X]?<li>Who will my foes try to single out?<li>Who here is willing to do violence?<li>Who here is hurting?</ul>",
+	"Where’s my rival, what are they doing?What are your secret pains?How can I gain an edge here?What’s the danger no one else sees?What’s really going on here?What here can be broken?": "<ul><li>Where’s my rival, what are they doing?<li>What are your secret pains?<li>How can I gain an edge here?<li>What’s the danger no one else sees?<li>What’s really going on here?<li>What here can be broken?</ul>",
+	"What is most dangerous here?Who here is feeling [X]?What are you really feeling?Who here is strong or vulnerable?Where can I find beauty here?What are your unmet needs?": "<ul><li>What is most dangerous here?<li>Who here is feeling [X]?<li>What are you really feeling?<li>Who here is strong or vulnerable?<li>Where can I find beauty here?<li>What are your unmet needs?</ul>"
 }
 END_TRANSLATIONS
 

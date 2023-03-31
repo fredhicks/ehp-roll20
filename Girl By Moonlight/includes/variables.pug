@@ -1,4 +1,28 @@
 -
+	var translations = { 
+		"Series Playset": "Series Playset",
+		"Choose a Series Playset": "(Choose a Series Playset)",
+		"Choose a Playset": "(Choose a Playset)",
+		"At the Brink of the Abyss": "At the Brink of the Abyss", 
+		"Beneath a Rotting Sky": "Beneath a Rotting Sky", 
+		"On a Sea of Stars": "On a Sea of Stars", 
+		"In a Maze of Dreams": "In a Maze of Dreams",
+		"Select a Playbook": "(Select a Playbook)",
+		"Position": "Position",
+		"Risky": "Risky",
+		"Controlled": "Controlled",
+		"Desperate": "Desperate",
+		"Fortune": "Fortune",
+		"Effect": "Effect",
+		"Standard": "Standard",
+		"Limited": "Limited",
+		"Great": "Great",
+		"Extreme": "Extreme",
+		"Zero": "Zero",
+		"Number of Dice": "Number of Dice",
+		"Bonus Dice": "Bonus Dice",
+	};
+
 	var playbooks = { 
 		"Enigma": "Enigma", 
 		"Stranger": "Stranger", 
@@ -15,7 +39,7 @@
 		"stars": "On a Sea of Stars",
 		"dreams": "In a Maze of Dreams"
 	};
-	
+
 	// Used in sheet-worker.pug
 
 	var pbkeys = [
@@ -28,21 +52,23 @@
 		"UnlikelyHero"
 	];
 	var toggles = [
-		"Toggle-Bio-Expand",
+		"Ability-Veteran",
 		"Toggle-Abilities-Expand",
 		"Toggle-Abilities-Marked",
-		"Ability-Veteran",
-		"Toggle-Transcendent-Expand",
-		"Toggle-Transcendent-Marked",
-		"Toggle-Stress-Expand",
-		"Toggle-Eclipse-Expand",
 		"Toggle-Agenda-Expand",
-		"Toggle-GatherInfo-Expand",
-		"Toggle-Teamwork-Expand",
+		"Toggle-Bio-Expand",
 		"Toggle-BonusDie-Expand",
+		"Toggle-Eclipse-Expand",
+		"Toggle-Gaining-XP-Expand",
+		"Toggle-GatherInfo-Expand",
 		"Toggle-Links-Expand",
 		"Toggle-Links-Spend-Expand",
-		"Toggle-Gaining-XP-Expand",
+		"Toggle-Notes-Expand",
+		"Toggle-Stress-Expand",
+		"Toggle-Teamwork-Expand",
+		"Toggle-Transcendence-Expand",
+		"Toggle-Transcendent-Expand",
+		"Toggle-Transcendent-Marked",
 	];
 
 	var toggleclicks = "";
@@ -164,3 +190,63 @@
 		starsfields = starsfields + '"'+"Stars-XP-"+i+'"';
 	}
 	starsfields = starsfields + "]";
+
+	var statsblock = {
+		'Sun': [
+			'Defy',
+			'Empathise',
+			'Express'
+		],
+		'Moon': [
+			'Confess',
+			'Forgive',
+			'Perceive'
+		],
+		'Stars': [
+			'Analyse',
+			'Conceal',
+			'Flow'
+		]
+	};
+
+	var statsclicks = "";
+	var statschanges = "";
+	var statsfields = "";
+	var actioncat = {};
+	var stattributes = Object.keys(statsblock);
+	for(var i = 0; i < stattributes.length; i++) {
+		stattribute = stattributes[i];
+		for(var j = 0; j < (statsblock[stattribute]).length; j++) {
+			var st = statsblock[stattributes[i]][j];
+			actioncat[st] = stattribute;
+			if ( i > 0 || j > 0)
+				statsclicks = statsclicks + " "; 
+			if ( i > 0 || j > 0)
+				statschanges = statschanges + " "; 
+			// I don't know why pug requires this to be a separate thing, but it sure fucking did, so here we go
+			if ( i > 0 || j > 0 )
+				statsfields = statsfields + ", ";
+			statsclicks = statsclicks + "clicked:"+st+"-Dot-1";
+			statschanges = statschanges + "change:"+st+"-Dot-1";
+			statsfields = statsfields + '"'+st+'-Dot-1"';
+			statsclicks = statsclicks + " "; 
+			statschanges = statschanges + " "; 
+			statsfields = statsfields + ", ";
+			statsclicks = statsclicks + "clicked:"+st+"-Dot-2";
+			statschanges = statschanges + "change:"+st+"-Dot-2";
+			statsfields = statsfields + '"'+st+'-Dot-2"';
+			statsclicks = statsclicks + " "; 
+			statschanges = statschanges + " "; 
+			statsfields = statsfields + ", ";
+			statsclicks = statsclicks + "clicked:"+st+"-Star-1";
+			statschanges = statschanges + "change:"+st+"-Star-1";
+			statsfields = statsfields + '"'+st+'-Star-1"';
+			statsclicks = statsclicks + " "; 
+			statschanges = statschanges + " "; 
+			statsfields = statsfields + ", ";
+			statsclicks = statsclicks + "clicked:"+st+"-Star-2";
+			statschanges = statschanges + "change:"+st+"-Star-2";
+			statsfields = statsfields + '"'+st+'-Star-2"';
+		}
+	}
+	var actioncats = JSON.stringify(actioncat);

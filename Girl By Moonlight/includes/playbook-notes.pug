@@ -1,0 +1,8 @@
+.sheet-Box
+	.sheet-Box-Header
+		+translate('Notes')
+		.sheet-Box-Header-Icons
+			+toggle('Toggle-Notes-Expand')
+	+hidden('Toggle-Notes-Expand').sheet-hide-on-one
+	.sheet-Notes-Block
+		+textarea('Notes')

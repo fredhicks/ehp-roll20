@@ -8,10 +8,140 @@ script(type="text/worker")
 			// toggleclicks (string)
 			// stressclicks (string)
 	.
-		
 		// This part is run in the sheetworker javascript
+
+		// To understand what's going on with these functions,
+		// refer to https://wiki.roll20.net/Macros#Drop-Down_Prompts_for_Roll_Queries
+		// and look for "nesting queries" section
+
+		function diceMagic(num,nest) {
+			if ( typeof(nest) == 'undefined' ) {
+				nest = 1;
+			} else {
+				nest = parseInt(nest);
+			}
+			var amp = '&';
+			if ( nest == 2 ) {
+				// Within diceMagic, our list is actually one nesting level deeper than the surroundings
+				// So at nest level 2, we're &amp; all the & for the commas in &#44; because those commas
+				// actually exist at a third level
+				amp = '&amp;';
+			}
+			if (num > 0) {
+				return `dice=${
+					[...Array(num).keys()].map(() => "[[d6]]").join(amp + "#44" + "; ")
+				}`;
+			} else {
+				return "zerodice=[[d6]]" + amp + "#44" + "; [[d6]]";
+			}
+		}
+
+		function buildRollFormula(base,nest) {
+			if ( typeof(nest) == 'undefined' ) {
+				nest = 1;
+			} else {
+				nest = parseInt(nest);
+			}
+			var comma = ',';
+			var pipe = '|';
+			// Putting { here to keep the braces balanced in the editor
+			var endbrace = '}';
+			if ( nest == 2 ) {
+				// If doing further nest levels, these remain static but the ampersand complexifies
+				var amp = '&';
+				comma = amp + '#44' + ';';
+				pipe = amp + '#124' + ';';
+				endbrace = amp + '#125' + ';';
+			}
+			return ` ?{${getTranslationByKey("Bonus Dice")}${pipe}${
+				[0, 1, 2, 3, 4, 5, 6, -1, -2, -3]
+					.map(n => `${n}${comma}${diceMagic(n + (parseInt(base) || 0),nest)}`).join(pipe)
+			}${endbrace}`;
+		}
+
+		// function buildRollFormulaORIGINAL(base) {
+			// return ` {{?{${getTranslationByKey("Bonus Dice")}|${
+				// [0, 1, 2, 3, 4, 5, 6, -1, -2, -3]
+					// .map(n => `${n},${diceMagic(n + (parseInt(base) || 0))}`).join("|")
+			// }}}}`;
+		// }
+
+		// Builds out the list of additional dice I guess
+		function buildNumdiceFormula() {
+			return ` {{?{${getTranslationByKey("Number of Dice")}|${
+				[0, 1, 2, 3, 4, 5, 6].map(n => `${n},${diceMagic(n)}`).join("|")
+			}}}}`;
+		}
+
+		on("sheet:opened", function(e) {
+			var a = {};
+			// Building out core essentials for dice rolls, with translated prompts
+			a["Position-Query"] = `?{${getTranslationByKey("Position")}|${getTranslationByKey("Risky")},position=${getTranslationByKey("Risky")}|${getTranslationByKey("Controlled")},position=${getTranslationByKey("Controlled")}|${getTranslationByKey("Desperate")},position=${getTranslationByKey("Desperate")}|${getTranslationByKey("Fortune")},short=short}`;
+			a["Effect-Query"] = `?{${getTranslationByKey("Effect")}|${getTranslationByKey("Standard")}|${getTranslationByKey("Limited")}|${getTranslationByKey("Great")}|${getTranslationByKey("Extreme")}|${getTranslationByKey("Zero")}}`;
+			a["Number-Of-Dice"] = buildNumdiceFormula();
+			log(a);
+			setAttrs(a);
+		});
+
+
+		on("#{statsclicks}", function(e) {
+			id = (e.htmlAttributes.name).substring(4); // Strips off the 'act_'
+			getAttrs([id], function(a) {
+				if ( Number(a[id]) === 1 ) {
+					a[id] = "0";
+				} else {
+					a[id] = "1";
+				}
+				setAttrs(a);
+			});
+		});
+
+		on("#{statschanges}", function(e) {
+			var actioncats = !{actioncats};
+			getAttrs([!{statsfields}], function(a) {
+				var list = Object.keys(a);
+				for(i = 0; i < list.length; i++) {
+					// Format: [Action]-[Dot|Star]-[1|2]
+					var parts = list[i].split('-');
+					var action =  parts[0];
+					var cat = actioncats[action];
+					var kind = parts[1];
+					var num = parts[2];
+					if ( typeof(a[action+'-Base-Total']) == "undefined" ) {
+						a[action+'-Base-Total'] = 0;
+					}
+					if ( typeof(a[action+'-Transcend-Total']) == "undefined" ) {
+						a[action+'-Transcend-Total'] = 0;
+					}
+					if ( typeof(a[cat+'-Resist-Total']) == "undefined" ) {
+						a[cat+'-Resist-Total'] = 0;
+					}
+					if ( kind == "Dot" ) {
+						a[action+'-Base-Total'] += Number(a[list[i]]);
+						if ( num == "1" ) {
+							a[cat+'-Resist-Total'] += Number(a[list[i]]);
+						}
+					}
+					a[action+'-Transcend-Total'] += Number(a[list[i]]); 
+				};
+				var cats = ['Sun','Moon','Stars'];
+				for(i = 0; i < cats.length; i++) {
+					var cat = cats[i];
+					a[cat+'-Resist-Roll-Formula'] = buildRollFormula(a[cat+'-Resist-Total']);
+				}
+				var acts = Object.keys(actioncats);
+				for(i = 0; i < acts.length; i++) {
+					var act = acts[i];
+					a[act+'-Base-Roll-Formula'] = buildRollFormula(a[act+'-Base-Total'],2);
+					a[act+'-Transcend-Roll-Formula'] = buildRollFormula(a[act+'-Transcend-Total'],2);
+				}
+				log(a);
+				setAttrs(a);
+			});
+		});
+
+
 		on("#{toggleclicks}", function(e) {
-			log(e);
 			var id = "";
 			if ( typeof e.sourceAttribute !== "undefined" && e.sourceAttribute !== "" ) {
 				id = e.sourceAttribute;
@@ -25,13 +155,11 @@ script(type="text/worker")
 				} else {
 					a[id] = "1";
 				}
-				log(a);
 				setAttrs(a);
 			});
 		});
 
 		on("change:Choose-Veteran-Ability", function(e) {
-			log(e);
 			// e.previousValue
 			// e.newValue
 			var atts = {};
@@ -52,7 +180,6 @@ script(type="text/worker")
 		});
 
 		on("change:Choose-Ability-Transcendent-UnlikelyHero-1 change:Choose-Ability-Transcendent-UnlikelyHero-2 change:Choose-Ability-Transcendent-UnlikelyHero-3", function(e) {
-			log(e);
 			// e.sourceAttribute
 			var abroot = String(e.sourceAttribute).slice(7); // Should remove 'Choose-' from the front of it
 			// e.previousValue
@@ -75,7 +202,6 @@ script(type="text/worker")
 		});
 
 		on("#{stressclicks}", function(e) {
-			log(e);
 			var id = "";
 			id = (e.htmlAttributes.name).substring(4); // Strips off the 'act_'
 			log("Stress Toggle Handler: " + id);
@@ -107,13 +233,11 @@ script(type="text/worker")
 				if ( a['Stress-9'] == 1) {
 					a['Toggle-Eclipse-Expand'] = 0;
 				}
-				log(a);
 				setAttrs(a);
 			});
 		});
 
 		on("#{transclicks}", function(e) {
-			log(e);
 			var id = "";
 			id = (e.htmlAttributes.name).substring(4); // Strips off the 'act_'
 			log("Transcendence Toggle Handler: " + id);
@@ -142,13 +266,11 @@ script(type="text/worker")
 					st = st + Number(a['Transcendence-'+i]);
 				}
 				a['Transcendence-Total'] = st;
-				log(a);
 				setAttrs(a);
 			});
 		});
 
 		on("#{linkclicks}", function(e) {
-			log(e);
 			var id = "";
 			id = (e.htmlAttributes.name).substring(4); // Strips off the 'act_'
 			var prefix = id.substring(0,id.length-6); // Strips off the -Dot-X
@@ -179,13 +301,11 @@ script(type="text/worker")
 					st = st + Number(a[prefix+'-Dot-'+i]);
 				}
 				a[prefix+'-Total'] = st;
-				log(a);
 				setAttrs(a);
 			});
 		});
 
 		on("#{pbxpclicks}", function(e) {
-			log(e);
 			var id = "";
 			id = (e.htmlAttributes.name).substring(4); // Strips off the 'act_'
 			log("Playbook-XP Toggle Handler: " + id);
@@ -214,13 +334,11 @@ script(type="text/worker")
 					st = st + Number(a['Playbook-XP-'+i]);
 				}
 				a['Playbook-XP-Total'] = st;
-				log(a);
 				setAttrs(a);
 			});
 		});
 
 		on("#{sunclicks}", function(e) {
-			log(e);
 			var id = "";
 			id = (e.htmlAttributes.name).substring(4); // Strips off the 'act_'
 			log("Sun-XP Toggle Handler: " + id);
@@ -249,13 +367,11 @@ script(type="text/worker")
 					st = st + Number(a['Sun-XP-'+i]);
 				}
 				a['Sun-XP-Total'] = st;
-				log(a);
 				setAttrs(a);
 			});
 		});
 
 		on("#{moonclicks}", function(e) {
-			log(e);
 			var id = "";
 			id = (e.htmlAttributes.name).substring(4); // Strips off the 'act_'
 			log("Moon-XP Toggle Handler: " + id);
@@ -284,13 +400,11 @@ script(type="text/worker")
 					st = st + Number(a['Moon-XP-'+i]);
 				}
 				a['Moon-XP-Total'] = st;
-				log(a);
 				setAttrs(a);
 			});
 		});
 
 		on("#{starsclicks}", function(e) {
-			log(e);
 			var id = "";
 			id = (e.htmlAttributes.name).substring(4); // Strips off the 'act_'
 			log("Stars-XP Toggle Handler: " + id);
@@ -319,8 +433,38 @@ script(type="text/worker")
 					st = st + Number(a['Stars-XP-'+i]);
 				}
 				a['Stars-XP-Total'] = st;
-				log(a);
 				setAttrs(a);
 			});
 		});
 
+		on("change:Playbook", function(e) {
+			var prev = "";
+			var newv = "";
+			if ( typeof(e.previousValue) != "undefined" ) {
+				prev = e.previousValue;
+			}
+			if ( typeof(e.newValue) != "undefined" ) {
+				newv = e.newValue;
+			}
+			var sdots = {
+				"Enigma": ["Express","Conceal"],
+				"Stranger": ["Analyse","Conceal"],
+				"TimeTraveller": ["Confess","Analyse"],
+				"Harmony": ["Empathise","Forgive"],
+				"Guardian": ["Defy","Perceive"],
+				"Outsider": ["Defy","Express"],
+				"UnlikelyHero": ["Confess","Forgive"]
+			};
+			var a = {};
+			if ( prev != "" ) {
+				var dots = sdots[prev];
+				a[dots[0]+"-Dot-1"] = 0;
+				a[dots[1]+"-Dot-1"] = 0;
+			}
+			if ( newv != "" ) {
+				var dots = sdots[newv];
+				a[dots[0]+"-Dot-1"] = 1;
+				a[dots[1]+"-Dot-1"] = 1;
+			}
+			setAttrs(a);
+		});

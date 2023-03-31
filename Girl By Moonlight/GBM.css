@@ -449,13 +449,34 @@ input.sheet-Mode-Playbook[value=UnlikelyHero] ~ div.sheet-Playbook-UnlikelyHero,
 	font-size: 10px;
 }
 
-.sheet-buttonless {
+.ui-dialog .tab-content .charsheet button[type=roll].sheet-buttonless {
 	border: none;
 	background: none;
 	font-weight: normal;
 	text-align: left;
 	padding: 0px;
-	vertical-align: top;
+	margin: 0px;
+	margin-top: -1px;
+	margin-bottom: 4px;
+	vertical-align: baseline;
+	text-shadow: none;
+	color: inherit;
+	font-weight: inherit;
+	font-size: inherit;
+	border-radius: unset;
+	line-height: inherit;
+	-webkit-box-shadow: unset;
+	        box-shadow: unset;
+}
+.ui-dialog .tab-content .charsheet button[type=roll].sheet-buttonless:before {
+	content: "";
+}
+.ui-dialog .tab-content .charsheet button[type=roll].sheet-buttonless:hover {
+	text-shadow: 0 0 8px white;
+}
+.ui-dialog .tab-content .charsheet button[type=roll].sheet-buttonless:active {
+	color: white;
+	text-shadow: 0 0 8px black;
 }
 
 button.sheet-button-header-collapse:before {
@@ -617,6 +638,11 @@ button.sheet-button-header-xp-off.sheet-xp-end:before {
 	padding-right: 0px;
 }
 
+.sheet-button-header-transcendent-off, .sheet-button-header-transcendent-on {
+	padding-top: 5px;
+	margin-right: -6px;
+}
+
 .sheet-button-header-xp-on, .sheet-button-header-xp-off {
 	padding-right: 0px;
 	padding-left: 0px;
@@ -753,40 +779,55 @@ input.sheet-Stress-Total[value="9"] ~ .sheet-Stress-Track {
 }
 
 .sheet-Stats-Block {
-	display: -ms-grid;
-	display: grid;
-	display-template-columns: 16px 16px 16px 16px 1fr;
-	-webkit-column-gap: 4px;
-	   -moz-column-gap: 4px;
-	        column-gap: 4px;
-	padding-bottom: 4px;
+	margin-top: -4px;
+	margin-bottom: -4px;
+	padding-top: 0px;
 }
-.sheet-Stats-Block > * {
-	-ms-grid-column: 1;
-	    grid-column-start: 1;
+.sheet-Stats-Block .sheet-Stats-Row {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-wrap: nowrap;
+	    flex-wrap: nowrap;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	    -ms-flex-direction: row;
+	        flex-direction: row;
+	-ms-flex-flow: flex-start;
+	    flex-flow: flex-start;
+	-ms-flex-line-pack: center;
+	    align-content: center;
+	height: 30px;
 }
-.sheet-Stats-Block > * + * {
-	-ms-grid-column: 2;
-	    grid-column-start: 2;
+.sheet-Stats-Block .sheet-Stats-Row .sheet-Connected {
+	background: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/connector-stats-blue-vertical.svg) repeat-y center center;
 }
-.sheet-Stats-Block > * + * + * {
-	-ms-grid-column: 3;
-	    grid-column-start: 3;
-}
-.sheet-Stats-Block > * + * + * + * {
-	-ms-grid-column: 4;
-	    grid-column-start: 4;
-}
-.sheet-Stats-Block > * + * + * + * + * {
-	-ms-grid-column: 5;
-	    grid-column-start: 5;
-}
-.sheet-Stats-Block .sheet-Dot, .sheet-Stats-Block .sheet-Star {
+.sheet-Stats-Block .sheet-Stats-Row .sheet-Dot, .sheet-Stats-Block .sheet-Stats-Row .sheet-Star {
+	width: 26px;
+	padding: 0px;
+	margin: 0px;
 	text-align: center;
+	font-size: 21px;
+	vertical-align: middle;
 }
-.sheet-Stats-Block .sheet-Stat {
-	width: 100%;
+.sheet-Stats-Block .sheet-Stats-Row .sheet-Dot {
+	padding-top: 5px;
 }
-.sheet-Stats-Block .sheet-Connected {
-	background: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/connector-stats-blue-vertical.svg) no-repeat center center;
+.sheet-Stats-Block .sheet-Stats-Row .sheet-Star {
+	padding-top: 4px;
+	background-color: var(--gbm-teal);
+}
+.sheet-Stats-Block .sheet-Stats-Row .sheet-Star button.sheet-button-transcendent-on:before {
+	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/transcendent-on-dark.svg);
+}
+.sheet-Stats-Block .sheet-Stats-Row .sheet-Star button.sheet-button-transcendent-off:before {
+	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/transcendent-off-dark.svg);
+}
+.sheet-Stats-Block .sheet-Stats-Row .sheet-Stat {
+	padding-left: 4px;
+	-webkit-box-flex: 1;
+	    -ms-flex-positive: 1;
+	        flex-grow: 1;
+	font-size: 21px;
+	vertical-align: middle;
 }

@@ -2,6 +2,7 @@ include includes/variables.pug
 include includes/mixins.pug
 include includes/preload-images.pug
 include includes/sheet-worker.pug
+include includes/hiddens.pug
 
 +hidden("Playbook").sheet-Mode-Playbook
 +hidden("playset").sheet-Mode-Playset // need to support this
@@ -15,16 +16,17 @@ include includes/sheet-worker.pug
 			include includes/playbook-transcendence.pug
 			// include includes/playbook-harm.pug
 			include includes/playbook-links.pug
-			include includes/playbook-bonus-die.pug
-			include includes/playbook-teamwork.pug
-			include includes/playbook-gather-info.pug
 			include includes/playbook-agenda.pug
 		.sheet-Mid
 			include includes/playbook-abilities.pug
 			include includes/playbook-bio.pug
+			include includes/playbook-notes.pug
 		.sheet-Right
 			include includes/playbook-stats.pug
 			include includes/playbook-xp.pug
+			include includes/playbook-bonus-die.pug
+			include includes/playbook-teamwork.pug
+			include includes/playbook-gather-info.pug
 // Translations for extraction
 
 +translations
