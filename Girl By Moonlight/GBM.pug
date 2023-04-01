@@ -11,7 +11,7 @@ include includes/rolltemplates.pug
 // Action roll - playbook-stats.pug
 // Fortune roll - playbook-other-rolls.pug
 // Resistance roll - playbook-stats.pug
-// Downtime roll - page 84 - several kinds of activities, rolls an action, advances clocks - doesn't seem to need additional support - but added a reference bloc for how to handle the results 
+// Downtime roll - page 84 - added a reference bloc for how to handle the results 
 // Eclipse roll - playbook-stress.pug
 // Obligation roll - playbook-other-rolls.pug
 // Recovery roll - page 70 - default, a FRIEND helps you recover during downtime - mainly needs documentation
@@ -31,7 +31,7 @@ include includes/rolltemplates.pug
 		.sheet-Left
 			include includes/playbook-stress.pug
 			include includes/playbook-transcendence.pug
-			// include includes/playbook-harm.pug
+			include includes/playbook-harm.pug
 			include includes/playbook-links.pug
 			include includes/playbook-agenda.pug
 		.sheet-Mid
@@ -44,6 +44,7 @@ include includes/rolltemplates.pug
 			include includes/playbook-xp.pug
 			include includes/playbook-gather-info.pug
 			include includes/playbook-other-rolls.pug
+			// May want to consider providing reference for downtime actions, but may need to be sensitive to how things are different from playset to playset
 			include includes/playbook-downtime.pug
 			include includes/playbook-bonus-die.pug
 			include includes/playbook-teamwork.pug

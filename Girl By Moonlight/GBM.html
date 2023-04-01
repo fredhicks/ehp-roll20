@@ -615,7 +615,7 @@
 <!-- Action roll - playbook-stats.pug-->
 <!-- Fortune roll - playbook-other-rolls.pug-->
 <!-- Resistance roll - playbook-stats.pug-->
-<!-- Downtime roll - page 84 - several kinds of activities, rolls an action, advances clocks - doesn't seem to need additional support - but added a reference bloc for how to handle the results -->
+<!-- Downtime roll - page 84 - added a reference bloc for how to handle the results -->
 <!-- Eclipse roll - playbook-stress.pug-->
 <!-- Obligation roll - playbook-other-rolls.pug-->
 <!-- Recovery roll - page 70 - default, a FRIEND helps you recover during downtime - mainly needs documentation-->
@@ -769,7 +769,6 @@
         <div class="sheet-Transcendence-Warning"><span data-i18n="transcendence ends"></span>
         </div>
       </div>
-      <!-- include includes/playbook-harm.pug-->
       <div class="sheet-Box sheet-Playbook-Selected">
         <div class="sheet-Box-Header"><span data-i18n="Links"></span>
           <div class="sheet-Box-Header-Icons">
@@ -2574,7 +2573,7 @@
           </ul>
         </div>
       </div>
-      <div class="sheet-Box sheet-Playbook-Selected">
+      <div class="sheet-Box sheet-Playbook-Selected sheet-Teal">
         <div class="sheet-Box-Header"><span data-i18n="Gather Info"></span>
           <div class="sheet-Box-Header-Icons">
             <input class="sheet-hide-on-zero" name="attr_Toggle-GatherInfo-Expand" type="hidden" value="0"/>
@@ -2629,7 +2628,8 @@
           </p>
         </div>
       </div>
-      <div class="sheet-Box sheet-Playbook-Selected">
+      <!-- May want to consider providing reference for downtime actions, but may need to be sensitive to how things are different from playset to playset-->
+      <div class="sheet-Box sheet-Playbook-Selected sheet-Teal">
         <div class="sheet-Box-Header"><span data-i18n="Downtime"></span>
           <div class="sheet-Box-Header-Icons">
             <input class="sheet-hide-on-zero" name="attr_Toggle-Downtime-Expand" type="hidden" value="1"/>
@@ -2642,7 +2642,7 @@
         <div class="sheet-Downtime"><span data-i18n="Downtime action results that affect tracks, clocks, or links award them based on the following table:1-3: 2 segments marked or links given4/5: 3 segments marked or links given6: 4 segments marked or links givenA critical success will have different results depending on the specific action, but generally results in 5 segments being marked plus an additional benefit."></span>
         </div>
       </div>
-      <div class="sheet-Box sheet-Playbook-Selected">
+      <div class="sheet-Box sheet-Playbook-Selected sheet-Teal">
         <div class="sheet-Box-Header"><span data-i18n="Bonus Die"></span>
           <div class="sheet-Box-Header-Icons">
             <input class="sheet-hide-on-zero" name="attr_Toggle-BonusDie-Expand" type="hidden" value="0"/>
@@ -2655,7 +2655,7 @@
         <div class="sheet-BonusDie-Block"><span data-i18n="Push yourself (take 2 stress) or accept a Poisoned Promise"></span>
         </div>
       </div>
-      <div class="sheet-Box sheet-Playbook-Selected">
+      <div class="sheet-Box sheet-Playbook-Selected sheet-Teal">
         <div class="sheet-Box-Header"><span data-i18n="Teamwork"></span>
           <div class="sheet-Box-Header-Icons">
             <input class="sheet-hide-on-zero" name="attr_Toggle-Teamwork-Expand" type="hidden" value="0"/>
