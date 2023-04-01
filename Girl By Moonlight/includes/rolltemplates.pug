@@ -1,0 +1,63 @@
+// Maybe eventually transplant this back to mixins.pug
+
+mixin rtf(f)
+	| {{#{f}}} 
+
+rolltemplate.sheet-rolltemplate-GBM
+	.sheet-Roll-Result
+		.sheet-Roll-Title
+			+rtf('title')
+			.sheet-Roll-Subtitle
+				+rtf('charname')
+				| &bull; 
+				+rtf('#action')
+				+translate('Action Roll')
+				+rtf('/action')
+				+rtf('#resist')
+				+translate('Resistance Roll')
+				+rtf('/resist')
+				+rtf('#short')
+				+rtf('^eclipse')
+				+rtf('^obligation')
+				+translate('Fortune Roll')
+				+rtf('/obligation')
+				+rtf('/eclipse')
+				+rtf('#eclipse')
+				+translate('Eclipse Roll')
+				|  &bull; 
+				+rtf('eclipse')
+				+rtf('/eclipse')
+				+rtf('#obligation')
+				+translate('Obligation Roll')
+				|  &bull; 
+				+rtf('obligation')
+				+rtf('/obligation')
+				+rtf('/short')
+		+rtf('^short')
+		.sheet-Roll-PnE
+			+translate('Position').sheet-Label-Position
+			+translate('Effect').sheet-Label-Effect
+			span.sheet-Position
+				+rtf('position')
+			span.sheet-Effect
+				+rtf('effect')
+			span(class="sheet-Position-{{position}}")
+				+translate("Make sure to mark XP!")
+		+rtf('/short')
+		.sheet-Roll-Dice
+			// Roll20 code is so bad, it won't let me access the fields dice, zerodice, transcenddice, or transcendzerodice. Hellaciously bad!!! So I've got to do some really tragically stupid workarounds here.
+			+rtf('#allprops() title charname short position effect action resist eclipse obligation')
+			.sheet-Dicezone
+				div(class="sheet-Dicezone-{{key}}")
+					.sheet-Only-transcenddice.sheet-Only-transcendzerodice
+						.sheet-SmallHead
+							+translate("Transcending!")
+					+rtf('value')
+					.sheet-Only-dice
+						// Standard Die Roll
+					.sheet-Only-zerodice.sheet-Only-transcendzerodice
+						.sheet-SmallHead
+								+translate("Zero dice!")
+						.sheet-Instruct
+							+translate("Take the lower of the two.")
+				+rtf('/allprops() title charname short position effect action resist eclipse obligation')

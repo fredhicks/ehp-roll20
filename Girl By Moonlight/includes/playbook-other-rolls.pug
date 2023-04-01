@@ -1,0 +1,48 @@
+
+.sheet-Box.sheet-Playbook-Selected
+	.sheet-Box-Header
+		button(name="roll_"+attribute, type="roll", data-i18n-title='Roll-Describe-'+attribute, value="&{template:GBM} {{charname=@{character_name}}} @{Number-Of-Dice} {{title=^{Fortune Roll}}} {{short=yes}}").sheet-buttonless
+			+translate('Fortune Roll')
+
+.sheet-Box.sheet-Playbook-Selected
+	.sheet-Box-Header
+		+translate('Obligation Roll')
+		.sheet-Box-Header-Icons
+			+toggle('Toggle-Obligation-Roll-Expand',1)
+	+hidden('Toggle-Obligation-Roll-Expand',1).sheet-hide-on-one
+	.sheet-Obligation-Roll
+		.sheet-Obligation-Roll-Stripe
+			+hidden('Moon-Resist-Total')
+			+hidden('Sun-Resist-Total')
+			+hidden('Stars-Resist-Total')
+			+hidden('Sun-Eclipse-Eligible',0).sheet-hide-on-zero
+			span
+				button(name="roll_Obligation-Sun", type="roll", value="&{template:GBM} {{charname=@{character_name}}} @{Sun-Eclipse-Roll-Formula} {{title=^{Obligation Roll}}} {{short=yes}} {{obligation=^{Sun}}}").sheet-buttonless
+					+translate('Sun')
+					|:
+					+display('Sun-Resist-Total')
+					|d
+			+hidden('Moon-Eclipse-Eligible',0).sheet-hide-on-zero
+			span
+				+hidden('Sun-Eclipse-Eligible',0).sheet-hide-on-zero
+				span &bull; 
+				button(name="roll_Obligation-Moon", type="roll", value="&{template:GBM} {{charname=@{character_name}}} @{Moon-Eclipse-Roll-Formula} {{title=^{Obligation Roll}}} {{short=yes}} {{obligation=^{Moon}}}").sheet-buttonless
+					+translate('Moon')
+					|:
+					+display('Moon-Resist-Total')
+					|d
+			+hidden('Stars-Eclipse-Eligible',0).sheet-hide-on-zero
+			span
+				+hidden('Sun-Eclipse-Eligible',0).sheet-hide-on-zero
+				span &bull; 
+				+hidden('Moon-Eclipse-Eligible',0).sheet-hide-on-zero
+				span
+					+hidden('Sun-Eclipse-Eligible',0).sheet-hide-on-one
+					span &bull; 
+				button(name="roll_Obligation-Stars", type="roll", value="&{template:GBM} {{charname=@{character_name}}} @{Stars-Eclipse-Roll-Formula} {{title=^{Obligation Roll}}} {{short=yes}} {{obligation=^{Stars}}}").sheet-buttonless
+					+translate('Stars')
+					|:
+					+display('Stars-Resist-Total')
+					|d
+		p
+			+translate('When you roll obligation, roll your lowest attribute, taking stress equal to 6 minus the die result. On a critical success, you get an additional downtime action.<p>For any result, we narrate what this means for the characters. This might mean some dialogue, or moments of in-character play, or you might choose to narrate what happens to the characters. Use the attribute rolled as a guide for the ways in which the obligation affects your character:<ul><li>If <b>sun</b> is rolled, your obligation involves scary people or circumstances, or is physically taxing.<li>If <b>moon</b> is rolled, your obligation breaks your heart, and drives you to despair.<li>If <b>stars</b> is rolled, your obligation puts you under social pressure, or sets off your anxiety.')

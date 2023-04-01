@@ -3,6 +3,23 @@ include includes/mixins.pug
 include includes/preload-images.pug
 include includes/sheet-worker.pug
 include includes/hiddens.pug
+include includes/rolltemplates.pug
+
+// How are them rolls handled?
+//
+// Characters
+// Action roll - playbook-stats.pug
+// Fortune roll - playbook-other-rolls.pug
+// Resistance roll - playbook-stats.pug
+// Downtime roll - page 84 - several kinds of activities, rolls an action, advances clocks - doesn't seem to need additional support - but added a reference bloc for how to handle the results 
+// Eclipse roll - playbook-stress.pug
+// Obligation roll - playbook-other-rolls.pug
+// Recovery roll - page 70 - default, a FRIEND helps you recover during downtime - mainly needs documentation
+// 
+// Missions
+// Engagement roll - page 90 - Is its own thing but it's a kind of fortune roll
+// Fallout roll - page 98 - sounds like something only the Director (GM) rolls
+
 
 +hidden("Playbook").sheet-Mode-Playbook
 +hidden("playset").sheet-Mode-Playset // need to support this
@@ -20,13 +37,16 @@ include includes/hiddens.pug
 		.sheet-Mid
 			include includes/playbook-abilities.pug
 			include includes/playbook-bio.pug
+			// include includes/playbook-clocks.pug
 			include includes/playbook-notes.pug
 		.sheet-Right
 			include includes/playbook-stats.pug
 			include includes/playbook-xp.pug
+			include includes/playbook-gather-info.pug
+			include includes/playbook-other-rolls.pug
+			include includes/playbook-downtime.pug
 			include includes/playbook-bonus-die.pug
 			include includes/playbook-teamwork.pug
-			include includes/playbook-gather-info.pug
 // Translations for extraction
 
 +translations

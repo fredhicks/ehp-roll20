@@ -1,7 +1,12 @@
 +hidden('Position-Query')
 +hidden('Effect-Query')
++hidden('Q-Transcendent','Transcendent?')
++hidden('A-Yes','Yes')
++hidden('A-No','No')
+
 each actions, attribute in statsblock 
 	+hidden(attribute+'-Resist-Roll-Formula')
+	+hidden(attribute+'-Eclipse-Roll-Formula')
 	each action in actions
 		+hidden(action+'-Base-Roll-Formula')
 		+hidden(action+'-Transcend-Roll-Formula')

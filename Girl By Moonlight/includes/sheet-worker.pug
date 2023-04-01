@@ -14,7 +14,13 @@ script(type="text/worker")
 		// refer to https://wiki.roll20.net/Macros#Drop-Down_Prompts_for_Roll_Queries
 		// and look for "nesting queries" section
 
-		function diceMagic(num,nest) {
+		function diceMagic(num, nest, dicetag) {
+			if ( typeof(dicetag) == 'undefined' ) {
+				dicetag = "";
+			}
+			log("Dice tag: ["+dicetag+"]");
+			dicetag = String(dicetag);
+
 			if ( typeof(nest) == 'undefined' ) {
 				nest = 1;
 			} else {
@@ -27,16 +33,21 @@ script(type="text/worker")
 				// actually exist at a third level
 				amp = '&amp;';
 			}
+			var joint ='';
+			// joint = amp + "#44" + "; "
 			if (num > 0) {
-				return `dice=${
-					[...Array(num).keys()].map(() => "[[d6]]").join(amp + "#44" + "; ")
+				return `${dicetag}dice=${
+					[...Array(num).keys()].map(() => "[[d6cf<3cs>6]]").join(joint)
 				}`;
 			} else {
-				return "zerodice=[[d6]]" + amp + "#44" + "; [[d6]]";
+				return dicetag + "zerodice=[[d6cf<3cs>6]]" + joint + "[[d6cf<3cs>6]]";
 			}
 		}
 
-		function buildRollFormula(base,nest) {
+		function buildRollFormula(base,nest,dicetag) {
+			if ( typeof(dicetag) == 'undefined' ) {
+				dicetag = "";
+			}
 			if ( typeof(nest) == 'undefined' ) {
 				nest = 1;
 			} else {
@@ -55,8 +66,12 @@ script(type="text/worker")
 			}
 			return ` ?{${getTranslationByKey("Bonus Dice")}${pipe}${
 				[0, 1, 2, 3, 4, 5, 6, -1, -2, -3]
-					.map(n => `${n}${comma}${diceMagic(n + (parseInt(base) || 0),nest)}`).join(pipe)
+					.map(n => `${n}${comma}${diceMagic(n + (parseInt(base) || 0),nest,dicetag)}`).join(pipe)
 			}${endbrace}`;
+		}
+
+		function buildEclipseRollFormula(base,nest,dicetag) {
+			return '{{'+diceMagic(base,nest,dicetag)+'}}';
 		}
 
 		// function buildRollFormulaORIGINAL(base) {
@@ -69,7 +84,7 @@ script(type="text/worker")
 		// Builds out the list of additional dice I guess
 		function buildNumdiceFormula() {
 			return ` {{?{${getTranslationByKey("Number of Dice")}|${
-				[0, 1, 2, 3, 4, 5, 6].map(n => `${n},${diceMagic(n)}`).join("|")
+				[0, 1, 2, 3, 4, 5, 6].map(n => `${n},${diceMagic(n,1,'')}`).join("|")
 			}}}}`;
 		}
 
@@ -79,6 +94,9 @@ script(type="text/worker")
 			a["Position-Query"] = `?{${getTranslationByKey("Position")}|${getTranslationByKey("Risky")},position=${getTranslationByKey("Risky")}|${getTranslationByKey("Controlled")},position=${getTranslationByKey("Controlled")}|${getTranslationByKey("Desperate")},position=${getTranslationByKey("Desperate")}|${getTranslationByKey("Fortune")},short=short}`;
 			a["Effect-Query"] = `?{${getTranslationByKey("Effect")}|${getTranslationByKey("Standard")}|${getTranslationByKey("Limited")}|${getTranslationByKey("Great")}|${getTranslationByKey("Extreme")}|${getTranslationByKey("Zero")}}`;
 			a["Number-Of-Dice"] = buildNumdiceFormula();
+			a["Q-Transcendent"] = getTranslationByKey('Transcendent?');
+			a["A-Yes"] = getTranslationByKey('Yes');
+			a["A-No"] = getTranslationByKey('No');
 			log(a);
 			setAttrs(a);
 		});
@@ -125,15 +143,28 @@ script(type="text/worker")
 					a[action+'-Transcend-Total'] += Number(a[list[i]]); 
 				};
 				var cats = ['Sun','Moon','Stars'];
+				var catlow = 4;
 				for(i = 0; i < cats.length; i++) {
 					var cat = cats[i];
 					a[cat+'-Resist-Roll-Formula'] = buildRollFormula(a[cat+'-Resist-Total']);
+					a[cat+'-Eclipse-Roll-Formula'] = buildEclipseRollFormula(a[cat+'-Resist-Total']);
+					if ( a[cat+'-Resist-Total'] < catlow ) {
+						catlow = a[cat+'-Resist-Total'];
+					}
+				}
+				for(i = 0; i < cats.length; i++) {
+					var cat = cats[i];
+					if ( a[cat+'-Resist-Total'] == catlow ) {
+						a[cat+'-Eclipse-Eligible'] = 1;
+					} else {
+						a[cat+'-Eclipse-Eligible'] = 0;
+					}
 				}
 				var acts = Object.keys(actioncats);
 				for(i = 0; i < acts.length; i++) {
 					var act = acts[i];
 					a[act+'-Base-Roll-Formula'] = buildRollFormula(a[act+'-Base-Total'],2);
-					a[act+'-Transcend-Roll-Formula'] = buildRollFormula(a[act+'-Transcend-Total'],2);
+					a[act+'-Transcend-Roll-Formula'] = buildRollFormula(a[act+'-Transcend-Total'],2,'transcend');
 				}
 				log(a);
 				setAttrs(a);

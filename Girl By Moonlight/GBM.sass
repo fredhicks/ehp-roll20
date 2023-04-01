@@ -42,7 +42,7 @@ $statscon: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Gir
 
 // Comment valid?
 
-:root
+:root, .sheet-rolltemplate-GBM
 	--gbm-blue: #006784
 	--gbm-blue-pale: #dee9ed
 	--gbm-blue-shade: #8fb1b5
@@ -64,14 +64,13 @@ $statscon: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Gir
 	--gbm-teal-text: var(--gbm-teal)
 	--gbm-pink-text: var(--gbm-pink)
 	--gbm-purple-text: var(--gbm-purple)
-	--gbm-font-size: 16px
 	--gbm-fg: var(--gbm-blue-text)
 	--gbm-bg: white
 	font-family: #{$bodyfont}
 	color: var(--gbm-fg)
 	background: var(--gbm-bg)
 
-.sheet-darkmode, .sheet-rolltemplate-darkmode
+.sheet-darkmode, .sheet-rolltemplate-GBM.sheet-rolltemplate-darkmode
 	--gbm-fg: var(--gbm-blue-pale)
 	--gbm-bg: #1f1f1f
 	--gbm-blue-shaded: var(--gbm-blue-dark)
@@ -82,6 +81,103 @@ $statscon: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Gir
 	--gbm-teal-text: var(--gbm-teal-pale)
 	--gbm-pink-text: var(--gbm-pink-pale)
 	--gbm-purple-text: var(--gbm-purple-pale)
+
+.sheet-rolltemplate-GBM
+	background-color: var(--gbm-purple-shaded)
+	color: var(--gbm-purple-text)
+	font-family: #{$bodyfont}
+	font-size: #{$bodysize}
+	border-radius: 0px 12px 12px 12px
+	box-shadow: 2px 2px 2px var(--gbm-purple)
+	.sheet-Roll-Result
+		.sheet-Roll-Title
+			color: white
+			background-color: var(--gbm-purple)
+			border-radius: 0px 12px 0px 0px
+			font-size: #{$headsize}
+			padding: 4px
+			.sheet-Roll-Subtitle
+				font-size: #{$bodysize}
+	.sheet-Roll-PnE
+		padding: 4px
+		padding-bottom: 0px
+		display: grid
+		grid-template-columns: 1fr 1fr
+		.sheet-Label-Position, .sheet-Position
+			grid-column-start: 1
+		.sheet-Label-Effect, .sheet-Effect
+			grid-column-start: 2
+		.sheet-Label-Position, .sheet-Label-Effect
+			font-size: #{$smallsize}
+			text-transform: uppercase
+			font-weight: bold
+		.sheet-Position-Risky, .sheet-Position-Controlled
+			display: none
+		.sheet-Position-Desperate
+			padding-top: 4px
+			display: block
+			grid-column: 1 / span 2
+			text-align: center
+			font-style: italic
+	.sheet-Roll-Dice
+		text-align: center
+		vertical-align: middle
+		padding-top: 12px
+		padding-bottom: 0px
+		.sheet-Dicezone
+			padding-bottom: 6px
+		.inlinerollresult
+			display: inline-block
+			color: white
+			background-color: var(--gbm-blue)
+			border: 1px solid var(--gbm-blue-dark)
+			font-size: 36px
+			height: 36px
+			width: 36px
+			line-height: 36px
+			padding-top: 3px
+			padding-bottom: 3px
+			border-radius: 6px
+			margin-left: 4px
+			margin-right: 4px
+			margin-bottom: 8px
+			margin-top: 4px
+			box-shadow: 0px 4px 6px var(--gbm-blue)
+			&.fullcrit
+				background-color: var(--gbm-pink)
+				box-shadow: 0px 4px 12px var(--gbm-pink)
+				border: 1px solid white
+				~ .inlinerollresult.fullcrit
+					background-color: var(--gbm-pink)
+					box-shadow: 0px 4px 12px var(--gbm-pink)
+					border: 3px double white
+			&.fullfail
+				background-color: black
+				font-weight: bold
+				border: 1px solid var(--gbm-purple)
+				box-shadow: unset
+		.sheet-SmallHead
+			text-transform: uppercase
+		.sheet-Instruct
+			font-style: italic
+		.sheet-Only-dice, .sheet-Only-transcenddice, .sheet-Only-zerodice, .sheet-Only-transcendzerodice
+			display: none
+		.sheet-Dicezone-dice
+			.sheet-Only-dice
+				display: block
+		.sheet-Dicezone-transcenddice
+			.sheet-Only-transcenddice
+				display: block
+		// For some punishable reason, sometimes Roll20 gives you a capitalized attribute name
+		.sheet-Dicezone-zerodice, .sheet-Dicezone-Zerodice
+			.sheet-Only-zerodice
+				display: block
+		.sheet-Dicezone-transcendzerodice
+			.sheet-Only-transcendzerodice
+				display: block
+	.sheet-Properties
+		border: 1px solid red
+		display: block
 
 .ui-dialog .charsheet
 	font-family: #{$bodyfont}
@@ -659,3 +755,6 @@ input.sheet-Stress-Total
 			flex-grow: 1
 			font-size: #{$headsize}
 			vertical-align: middle
+
+.sheet-Eclipse-Roll-Stripe, .sheet-Obligation-Roll-Stripe
+	text-align: center

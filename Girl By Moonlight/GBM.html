@@ -8,7 +8,13 @@
   // refer to https://wiki.roll20.net/Macros#Drop-Down_Prompts_for_Roll_Queries
   // and look for "nesting queries" section
   
-  function diceMagic(num,nest) {
+  function diceMagic(num, nest, dicetag) {
+  	if ( typeof(dicetag) == 'undefined' ) {
+  		dicetag = "";
+  	}
+  	log("Dice tag: ["+dicetag+"]");
+  	dicetag = String(dicetag);
+  
   	if ( typeof(nest) == 'undefined' ) {
   		nest = 1;
   	} else {
@@ -21,16 +27,21 @@
   		// actually exist at a third level
   		amp = '&amp;';
   	}
+  	var joint ='';
+  	// joint = amp + "#44" + "; "
   	if (num > 0) {
-  		return `dice=${
-  			[...Array(num).keys()].map(() => "[[d6]]").join(amp + "#44" + "; ")
+  		return `${dicetag}dice=${
+  			[...Array(num).keys()].map(() => "[[d6cf<3cs>6]]").join(joint)
   		}`;
   	} else {
-  		return "zerodice=[[d6]]" + amp + "#44" + "; [[d6]]";
+  		return dicetag + "zerodice=[[d6cf<3cs>6]]" + joint + "[[d6cf<3cs>6]]";
   	}
   }
   
-  function buildRollFormula(base,nest) {
+  function buildRollFormula(base,nest,dicetag) {
+  	if ( typeof(dicetag) == 'undefined' ) {
+  		dicetag = "";
+  	}
   	if ( typeof(nest) == 'undefined' ) {
   		nest = 1;
   	} else {
@@ -49,8 +60,12 @@
   	}
   	return ` ?{${getTranslationByKey("Bonus Dice")}${pipe}${
   		[0, 1, 2, 3, 4, 5, 6, -1, -2, -3]
-  			.map(n => `${n}${comma}${diceMagic(n + (parseInt(base) || 0),nest)}`).join(pipe)
+  			.map(n => `${n}${comma}${diceMagic(n + (parseInt(base) || 0),nest,dicetag)}`).join(pipe)
   	}${endbrace}`;
+  }
+  
+  function buildEclipseRollFormula(base,nest,dicetag) {
+  	return '{{'+diceMagic(base,nest,dicetag)+'}}';
   }
   
   // function buildRollFormulaORIGINAL(base) {
@@ -63,7 +78,7 @@
   // Builds out the list of additional dice I guess
   function buildNumdiceFormula() {
   	return ` {{?{${getTranslationByKey("Number of Dice")}|${
-  		[0, 1, 2, 3, 4, 5, 6].map(n => `${n},${diceMagic(n)}`).join("|")
+  		[0, 1, 2, 3, 4, 5, 6].map(n => `${n},${diceMagic(n,1,'')}`).join("|")
   	}}}}`;
   }
   
@@ -73,6 +88,9 @@
   	a["Position-Query"] = `?{${getTranslationByKey("Position")}|${getTranslationByKey("Risky")},position=${getTranslationByKey("Risky")}|${getTranslationByKey("Controlled")},position=${getTranslationByKey("Controlled")}|${getTranslationByKey("Desperate")},position=${getTranslationByKey("Desperate")}|${getTranslationByKey("Fortune")},short=short}`;
   	a["Effect-Query"] = `?{${getTranslationByKey("Effect")}|${getTranslationByKey("Standard")}|${getTranslationByKey("Limited")}|${getTranslationByKey("Great")}|${getTranslationByKey("Extreme")}|${getTranslationByKey("Zero")}}`;
   	a["Number-Of-Dice"] = buildNumdiceFormula();
+  	a["Q-Transcendent"] = getTranslationByKey('Transcendent?');
+  	a["A-Yes"] = getTranslationByKey('Yes');
+  	a["A-No"] = getTranslationByKey('No');
   	log(a);
   	setAttrs(a);
   });
@@ -119,15 +137,28 @@
   			a[action+'-Transcend-Total'] += Number(a[list[i]]); 
   		};
   		var cats = ['Sun','Moon','Stars'];
+  		var catlow = 4;
   		for(i = 0; i < cats.length; i++) {
   			var cat = cats[i];
   			a[cat+'-Resist-Roll-Formula'] = buildRollFormula(a[cat+'-Resist-Total']);
+  			a[cat+'-Eclipse-Roll-Formula'] = buildEclipseRollFormula(a[cat+'-Resist-Total']);
+  			if ( a[cat+'-Resist-Total'] < catlow ) {
+  				catlow = a[cat+'-Resist-Total'];
+  			}
+  		}
+  		for(i = 0; i < cats.length; i++) {
+  			var cat = cats[i];
+  			if ( a[cat+'-Resist-Total'] == catlow ) {
+  				a[cat+'-Eclipse-Eligible'] = 1;
+  			} else {
+  				a[cat+'-Eclipse-Eligible'] = 0;
+  			}
   		}
   		var acts = Object.keys(actioncats);
   		for(i = 0; i < acts.length; i++) {
   			var act = acts[i];
   			a[act+'-Base-Roll-Formula'] = buildRollFormula(a[act+'-Base-Total'],2);
-  			a[act+'-Transcend-Roll-Formula'] = buildRollFormula(a[act+'-Transcend-Total'],2);
+  			a[act+'-Transcend-Roll-Formula'] = buildRollFormula(a[act+'-Transcend-Total'],2,'transcend');
   		}
   		log(a);
   		setAttrs(a);
@@ -135,7 +166,7 @@
   });
   
   
-  on("clicked:Ability-Veteran clicked:Toggle-Abilities-Expand clicked:Toggle-Abilities-Marked clicked:Toggle-Agenda-Expand clicked:Toggle-Bio-Expand clicked:Toggle-BonusDie-Expand clicked:Toggle-Eclipse-Expand clicked:Toggle-Gaining-XP-Expand clicked:Toggle-GatherInfo-Expand clicked:Toggle-Links-Expand clicked:Toggle-Links-Spend-Expand clicked:Toggle-Notes-Expand clicked:Toggle-Stress-Expand clicked:Toggle-Teamwork-Expand clicked:Toggle-Transcendence-Expand clicked:Toggle-Transcendent-Expand clicked:Toggle-Transcendent-Marked clicked:Ability-Enigma-1 clicked:Ability-Transcendent-Enigma-1 clicked:Ability-Stranger-1 clicked:Ability-Transcendent-Stranger-1 clicked:Ability-TimeTraveller-1 clicked:Ability-Transcendent-TimeTraveller-1 clicked:Ability-Harmony-1 clicked:Ability-Transcendent-Harmony-1 clicked:Ability-Guardian-1 clicked:Ability-Transcendent-Guardian-1 clicked:Ability-Outsider-1 clicked:Ability-Transcendent-Outsider-1 clicked:Ability-UnlikelyHero-1 clicked:Ability-Transcendent-UnlikelyHero-1 clicked:Ability-Enigma-2 clicked:Ability-Transcendent-Enigma-2 clicked:Ability-Stranger-2 clicked:Ability-Transcendent-Stranger-2 clicked:Ability-TimeTraveller-2 clicked:Ability-Transcendent-TimeTraveller-2 clicked:Ability-Harmony-2 clicked:Ability-Transcendent-Harmony-2 clicked:Ability-Guardian-2 clicked:Ability-Transcendent-Guardian-2 clicked:Ability-Outsider-2 clicked:Ability-Transcendent-Outsider-2 clicked:Ability-UnlikelyHero-2 clicked:Ability-Transcendent-UnlikelyHero-2 clicked:Ability-Enigma-3 clicked:Ability-Transcendent-Enigma-3 clicked:Ability-Stranger-3 clicked:Ability-Transcendent-Stranger-3 clicked:Ability-TimeTraveller-3 clicked:Ability-Transcendent-TimeTraveller-3 clicked:Ability-Harmony-3 clicked:Ability-Transcendent-Harmony-3 clicked:Ability-Guardian-3 clicked:Ability-Transcendent-Guardian-3 clicked:Ability-Outsider-3 clicked:Ability-Transcendent-Outsider-3 clicked:Ability-UnlikelyHero-3 clicked:Ability-Transcendent-UnlikelyHero-3 clicked:Ability-Enigma-4 clicked:Ability-Transcendent-Enigma-4 clicked:Ability-Stranger-4 clicked:Ability-Transcendent-Stranger-4 clicked:Ability-TimeTraveller-4 clicked:Ability-Transcendent-TimeTraveller-4 clicked:Ability-Harmony-4 clicked:Ability-Transcendent-Harmony-4 clicked:Ability-Guardian-4 clicked:Ability-Transcendent-Guardian-4 clicked:Ability-Outsider-4 clicked:Ability-Transcendent-Outsider-4 clicked:Ability-UnlikelyHero-4 clicked:Ability-Transcendent-UnlikelyHero-4 clicked:Ability-Enigma-5 clicked:Ability-Transcendent-Enigma-5 clicked:Ability-Stranger-5 clicked:Ability-Transcendent-Stranger-5 clicked:Ability-TimeTraveller-5 clicked:Ability-Transcendent-TimeTraveller-5 clicked:Ability-Harmony-5 clicked:Ability-Transcendent-Harmony-5 clicked:Ability-Guardian-5 clicked:Ability-Transcendent-Guardian-5 clicked:Ability-Outsider-5 clicked:Ability-Transcendent-Outsider-5 clicked:Ability-UnlikelyHero-5 clicked:Ability-Transcendent-UnlikelyHero-5 clicked:Ability-Enigma-6 clicked:Ability-Transcendent-Enigma-6 clicked:Ability-Stranger-6 clicked:Ability-Transcendent-Stranger-6 clicked:Ability-TimeTraveller-6 clicked:Ability-Transcendent-TimeTraveller-6 clicked:Ability-Harmony-6 clicked:Ability-Transcendent-Harmony-6 clicked:Ability-Guardian-6 clicked:Ability-Transcendent-Guardian-6 clicked:Ability-Outsider-6 clicked:Ability-Transcendent-Outsider-6 clicked:Ability-UnlikelyHero-6 clicked:Ability-Transcendent-UnlikelyHero-6 clicked:Ability-Enigma-7 clicked:Ability-Transcendent-Enigma-7 clicked:Ability-Stranger-7 clicked:Ability-Transcendent-Stranger-7 clicked:Ability-TimeTraveller-7 clicked:Ability-Transcendent-TimeTraveller-7 clicked:Ability-Harmony-7 clicked:Ability-Transcendent-Harmony-7 clicked:Ability-Guardian-7 clicked:Ability-Transcendent-Guardian-7 clicked:Ability-Outsider-7 clicked:Ability-Transcendent-Outsider-7 clicked:Ability-UnlikelyHero-7 clicked:Ability-Transcendent-UnlikelyHero-7 clicked:Ability-Enigma-8 clicked:Ability-Transcendent-Enigma-8 clicked:Ability-Stranger-8 clicked:Ability-Transcendent-Stranger-8 clicked:Ability-TimeTraveller-8 clicked:Ability-Transcendent-TimeTraveller-8 clicked:Ability-Harmony-8 clicked:Ability-Transcendent-Harmony-8 clicked:Ability-Guardian-8 clicked:Ability-Transcendent-Guardian-8 clicked:Ability-Outsider-8 clicked:Ability-Transcendent-Outsider-8 clicked:Ability-UnlikelyHero-8 clicked:Ability-Transcendent-UnlikelyHero-8 clicked:Ability-Enigma-9 clicked:Ability-Transcendent-Enigma-9 clicked:Ability-Stranger-9 clicked:Ability-Transcendent-Stranger-9 clicked:Ability-TimeTraveller-9 clicked:Ability-Transcendent-TimeTraveller-9 clicked:Ability-Harmony-9 clicked:Ability-Transcendent-Harmony-9 clicked:Ability-Guardian-9 clicked:Ability-Transcendent-Guardian-9 clicked:Ability-Outsider-9 clicked:Ability-Transcendent-Outsider-9 clicked:Ability-UnlikelyHero-9 clicked:Ability-Transcendent-UnlikelyHero-9", function(e) {
+  on("clicked:Ability-Veteran clicked:Toggle-Abilities-Expand clicked:Toggle-Abilities-Marked clicked:Toggle-Agenda-Expand clicked:Toggle-Bio-Expand clicked:Toggle-BonusDie-Expand clicked:Toggle-Downtime-Expand clicked:Toggle-Eclipse-Expand clicked:Toggle-Eclipse-Roll-Expand clicked:Toggle-Gaining-XP-Expand clicked:Toggle-GatherInfo-Expand clicked:Toggle-Links-Expand clicked:Toggle-Links-Spend-Expand clicked:Toggle-Notes-Expand clicked:Toggle-Obligation-Roll-Expand clicked:Toggle-Stress-Expand clicked:Toggle-Teamwork-Expand clicked:Toggle-Transcendence-Expand clicked:Toggle-Transcendent-Expand clicked:Toggle-Transcendent-Marked clicked:Ability-Enigma-1 clicked:Ability-Transcendent-Enigma-1 clicked:Ability-Stranger-1 clicked:Ability-Transcendent-Stranger-1 clicked:Ability-TimeTraveller-1 clicked:Ability-Transcendent-TimeTraveller-1 clicked:Ability-Harmony-1 clicked:Ability-Transcendent-Harmony-1 clicked:Ability-Guardian-1 clicked:Ability-Transcendent-Guardian-1 clicked:Ability-Outsider-1 clicked:Ability-Transcendent-Outsider-1 clicked:Ability-UnlikelyHero-1 clicked:Ability-Transcendent-UnlikelyHero-1 clicked:Ability-Enigma-2 clicked:Ability-Transcendent-Enigma-2 clicked:Ability-Stranger-2 clicked:Ability-Transcendent-Stranger-2 clicked:Ability-TimeTraveller-2 clicked:Ability-Transcendent-TimeTraveller-2 clicked:Ability-Harmony-2 clicked:Ability-Transcendent-Harmony-2 clicked:Ability-Guardian-2 clicked:Ability-Transcendent-Guardian-2 clicked:Ability-Outsider-2 clicked:Ability-Transcendent-Outsider-2 clicked:Ability-UnlikelyHero-2 clicked:Ability-Transcendent-UnlikelyHero-2 clicked:Ability-Enigma-3 clicked:Ability-Transcendent-Enigma-3 clicked:Ability-Stranger-3 clicked:Ability-Transcendent-Stranger-3 clicked:Ability-TimeTraveller-3 clicked:Ability-Transcendent-TimeTraveller-3 clicked:Ability-Harmony-3 clicked:Ability-Transcendent-Harmony-3 clicked:Ability-Guardian-3 clicked:Ability-Transcendent-Guardian-3 clicked:Ability-Outsider-3 clicked:Ability-Transcendent-Outsider-3 clicked:Ability-UnlikelyHero-3 clicked:Ability-Transcendent-UnlikelyHero-3 clicked:Ability-Enigma-4 clicked:Ability-Transcendent-Enigma-4 clicked:Ability-Stranger-4 clicked:Ability-Transcendent-Stranger-4 clicked:Ability-TimeTraveller-4 clicked:Ability-Transcendent-TimeTraveller-4 clicked:Ability-Harmony-4 clicked:Ability-Transcendent-Harmony-4 clicked:Ability-Guardian-4 clicked:Ability-Transcendent-Guardian-4 clicked:Ability-Outsider-4 clicked:Ability-Transcendent-Outsider-4 clicked:Ability-UnlikelyHero-4 clicked:Ability-Transcendent-UnlikelyHero-4 clicked:Ability-Enigma-5 clicked:Ability-Transcendent-Enigma-5 clicked:Ability-Stranger-5 clicked:Ability-Transcendent-Stranger-5 clicked:Ability-TimeTraveller-5 clicked:Ability-Transcendent-TimeTraveller-5 clicked:Ability-Harmony-5 clicked:Ability-Transcendent-Harmony-5 clicked:Ability-Guardian-5 clicked:Ability-Transcendent-Guardian-5 clicked:Ability-Outsider-5 clicked:Ability-Transcendent-Outsider-5 clicked:Ability-UnlikelyHero-5 clicked:Ability-Transcendent-UnlikelyHero-5 clicked:Ability-Enigma-6 clicked:Ability-Transcendent-Enigma-6 clicked:Ability-Stranger-6 clicked:Ability-Transcendent-Stranger-6 clicked:Ability-TimeTraveller-6 clicked:Ability-Transcendent-TimeTraveller-6 clicked:Ability-Harmony-6 clicked:Ability-Transcendent-Harmony-6 clicked:Ability-Guardian-6 clicked:Ability-Transcendent-Guardian-6 clicked:Ability-Outsider-6 clicked:Ability-Transcendent-Outsider-6 clicked:Ability-UnlikelyHero-6 clicked:Ability-Transcendent-UnlikelyHero-6 clicked:Ability-Enigma-7 clicked:Ability-Transcendent-Enigma-7 clicked:Ability-Stranger-7 clicked:Ability-Transcendent-Stranger-7 clicked:Ability-TimeTraveller-7 clicked:Ability-Transcendent-TimeTraveller-7 clicked:Ability-Harmony-7 clicked:Ability-Transcendent-Harmony-7 clicked:Ability-Guardian-7 clicked:Ability-Transcendent-Guardian-7 clicked:Ability-Outsider-7 clicked:Ability-Transcendent-Outsider-7 clicked:Ability-UnlikelyHero-7 clicked:Ability-Transcendent-UnlikelyHero-7 clicked:Ability-Enigma-8 clicked:Ability-Transcendent-Enigma-8 clicked:Ability-Stranger-8 clicked:Ability-Transcendent-Stranger-8 clicked:Ability-TimeTraveller-8 clicked:Ability-Transcendent-TimeTraveller-8 clicked:Ability-Harmony-8 clicked:Ability-Transcendent-Harmony-8 clicked:Ability-Guardian-8 clicked:Ability-Transcendent-Guardian-8 clicked:Ability-Outsider-8 clicked:Ability-Transcendent-Outsider-8 clicked:Ability-UnlikelyHero-8 clicked:Ability-Transcendent-UnlikelyHero-8 clicked:Ability-Enigma-9 clicked:Ability-Transcendent-Enigma-9 clicked:Ability-Stranger-9 clicked:Ability-Transcendent-Stranger-9 clicked:Ability-TimeTraveller-9 clicked:Ability-Transcendent-TimeTraveller-9 clicked:Ability-Harmony-9 clicked:Ability-Transcendent-Harmony-9 clicked:Ability-Guardian-9 clicked:Ability-Transcendent-Guardian-9 clicked:Ability-Outsider-9 clicked:Ability-Transcendent-Outsider-9 clicked:Ability-UnlikelyHero-9 clicked:Ability-Transcendent-UnlikelyHero-9", function(e) {
   	var id = "";
   	if ( typeof e.sourceAttribute !== "undefined" && e.sourceAttribute !== "" ) {
   		id = e.sourceAttribute;
@@ -465,7 +496,11 @@
 </script>
 <input name="attr_Position-Query" type="hidden" value=""/>
 <input name="attr_Effect-Query" type="hidden" value=""/>
+<input name="attr_Q-Transcendent" type="hidden" value="Transcendent?"/>
+<input name="attr_A-Yes" type="hidden" value="Yes"/>
+<input name="attr_A-No" type="hidden" value="No"/>
 <input name="attr_Sun-Resist-Roll-Formula" type="hidden" value=""/>
+<input name="attr_Sun-Eclipse-Roll-Formula" type="hidden" value=""/>
 <input name="attr_Defy-Base-Roll-Formula" type="hidden" value=""/>
 <input name="attr_Defy-Transcend-Roll-Formula" type="hidden" value=""/>
 <input name="attr_Empathise-Base-Roll-Formula" type="hidden" value=""/>
@@ -473,6 +508,7 @@
 <input name="attr_Express-Base-Roll-Formula" type="hidden" value=""/>
 <input name="attr_Express-Transcend-Roll-Formula" type="hidden" value=""/>
 <input name="attr_Moon-Resist-Roll-Formula" type="hidden" value=""/>
+<input name="attr_Moon-Eclipse-Roll-Formula" type="hidden" value=""/>
 <input name="attr_Confess-Base-Roll-Formula" type="hidden" value=""/>
 <input name="attr_Confess-Transcend-Roll-Formula" type="hidden" value=""/>
 <input name="attr_Forgive-Base-Roll-Formula" type="hidden" value=""/>
@@ -480,12 +516,58 @@
 <input name="attr_Perceive-Base-Roll-Formula" type="hidden" value=""/>
 <input name="attr_Perceive-Transcend-Roll-Formula" type="hidden" value=""/>
 <input name="attr_Stars-Resist-Roll-Formula" type="hidden" value=""/>
+<input name="attr_Stars-Eclipse-Roll-Formula" type="hidden" value=""/>
 <input name="attr_Analyse-Base-Roll-Formula" type="hidden" value=""/>
 <input name="attr_Analyse-Transcend-Roll-Formula" type="hidden" value=""/>
 <input name="attr_Conceal-Base-Roll-Formula" type="hidden" value=""/>
 <input name="attr_Conceal-Transcend-Roll-Formula" type="hidden" value=""/>
 <input name="attr_Flow-Base-Roll-Formula" type="hidden" value=""/>
 <input name="attr_Flow-Transcend-Roll-Formula" type="hidden" value=""/>
+<!-- Maybe eventually transplant this back to mixins.pug-->
+<rolltemplate class="sheet-rolltemplate-GBM">
+  <div class="sheet-Roll-Result">
+    <div class="sheet-Roll-Title">{{title}} 
+      <div class="sheet-Roll-Subtitle">{{charname}} &bull; {{#action}} <span data-i18n="Action Roll"></span>{{/action}} {{#resist}} <span data-i18n="Resistance Roll"></span>{{/resist}} {{#short}} {{^eclipse}} {{^obligation}} <span data-i18n="Fortune Roll"></span>{{/obligation}} {{/eclipse}} {{#eclipse}} <span data-i18n="Eclipse Roll"></span> &bull; {{eclipse}} {{/eclipse}} {{#obligation}} <span data-i18n="Obligation Roll"></span> &bull; {{obligation}} {{/obligation}} {{/short}} 
+      </div>
+    </div>{{^short}} 
+    <div class="sheet-Roll-PnE"><span class="sheet-Label-Position" data-i18n="Position"></span><span class="sheet-Label-Effect" data-i18n="Effect"></span><span class="sheet-Position">{{position}} </span><span class="sheet-Effect">{{effect}} </span><span class="sheet-Position-{{position}}"><span data-i18n="Make sure to mark XP!"></span></span>
+    </div>{{/short}} 
+    <div class="sheet-Roll-Dice">
+      <!-- Roll20 code is so bad, it won't let me access the fields dice, zerodice, transcenddice, or transcendzerodice. Hellaciously bad!!! So I've got to do some really tragically stupid workarounds here.-->{{#allprops() title charname short position effect action resist eclipse obligation}} 
+      <div class="sheet-Dicezone">
+        <div class="sheet-Dicezone-{{key}}">
+          <div class="sheet-Only-transcenddice sheet-Only-transcendzerodice">
+            <div class="sheet-SmallHead"><span data-i18n="Transcending!"></span>
+            </div>
+          </div>{{value}} 
+          <div class="sheet-Only-dice">
+            <!-- Standard Die Roll-->
+          </div>
+          <div class="sheet-Only-zerodice sheet-Only-transcendzerodice">
+            <div class="sheet-SmallHead"><span data-i18n="Zero dice!"></span>
+            </div>
+            <div class="sheet-Instruct"><span data-i18n="Take the lower of the two."></span>
+            </div>
+          </div>
+        </div>{{/allprops() title charname short position effect action resist eclipse obligation}} 
+      </div>
+    </div>
+  </div>
+</rolltemplate>
+<!-- How are them rolls handled?-->
+<!---->
+<!-- Characters-->
+<!-- Action roll - playbook-stats.pug-->
+<!-- Fortune roll - playbook-other-rolls.pug-->
+<!-- Resistance roll - playbook-stats.pug-->
+<!-- Downtime roll - page 84 - several kinds of activities, rolls an action, advances clocks - doesn't seem to need additional support - but added a reference bloc for how to handle the results -->
+<!-- Eclipse roll - playbook-stress.pug-->
+<!-- Obligation roll - playbook-other-rolls.pug-->
+<!-- Recovery roll - page 70 - default, a FRIEND helps you recover during downtime - mainly needs documentation-->
+<!-- -->
+<!-- Missions-->
+<!-- Engagement roll - page 90 - Is its own thing but it's a kind of fortune roll-->
+<!-- Fallout roll - page 98 - sounds like something only the Director (GM) rolls-->
 <input class="sheet-Mode-Playbook" name="attr_Playbook" type="hidden" value=""/>
 <input class="sheet-Mode-Playset" name="attr_playset" type="hidden" value=""/>
 <div class="sheet-Playbooks">
@@ -550,6 +632,40 @@
         </div>
         <input class="sheet-hide-on-zero" name="attr_Stress-9" type="hidden" value=""/>
         <div class="sheet-Stress-Warning"><span data-i18n="in danger of eclipse!"></span>
+        </div>
+        <div class="sheet-Box-Header sheet-Box-Subsection"><span data-i18n="Eclipse Roll"></span>
+          <div class="sheet-Box-Header-Icons">
+            <input class="sheet-hide-on-zero" name="attr_Toggle-Eclipse-Roll-Expand" type="hidden" value="1"/>
+            <button class="sheet-button-header-expand" type="action" name="act_Toggle-Eclipse-Roll-Expand"></button>
+            <input class="sheet-hide-on-one" name="attr_Toggle-Eclipse-Roll-Expand" type="hidden" value="1"/>
+            <button class="sheet-button-header-collapse" type="action" name="act_Toggle-Eclipse-Roll-Expand"></button>
+          </div>
+        </div>
+        <input class="sheet-hide-on-one" name="attr_Toggle-Eclipse-Roll-Expand" type="hidden" value="1"/>
+        <div class="sheet-Stress-Eclipse-Roll">
+          <div class="sheet-Eclipse-Roll-Stripe">
+            <input name="attr_Moon-Resist-Total" type="hidden" value=""/>
+            <input name="attr_Sun-Resist-Total" type="hidden" value=""/>
+            <input name="attr_Stars-Resist-Total" type="hidden" value=""/>
+            <input class="sheet-hide-on-zero" name="attr_Sun-Eclipse-Eligible" type="hidden" value="0"/><span>
+              <button class="sheet-buttonless" name="roll_Eclipse-Sun" type="roll" value="&amp;{template:GBM} {{charname=@{character_name}}} @{Sun-Eclipse-Roll-Formula} {{title=^{Eclipse Roll}}} {{short=yes}} {{eclipse=^{Sun}}}"><span data-i18n="Sun"></span>:
+                <input name="attr_Sun-Resist-Total" type="hidden" value=""/><span name="attr_Sun-Resist-Total"></span>d
+              </button></span>
+            <input class="sheet-hide-on-zero" name="attr_Moon-Eclipse-Eligible" type="hidden" value="0"/><span>
+              <input class="sheet-hide-on-zero" name="attr_Sun-Eclipse-Eligible" type="hidden" value="0"/><span>&bull; </span>
+              <button class="sheet-buttonless" name="roll_Eclipse-Moon" type="roll" value="&amp;{template:GBM} {{charname=@{character_name}}} @{Moon-Eclipse-Roll-Formula} {{title=^{Eclipse Roll}}} {{short=yes}} {{eclipse=^{Moon}}}"><span data-i18n="Moon"></span>:
+                <input name="attr_Moon-Resist-Total" type="hidden" value=""/><span name="attr_Moon-Resist-Total"></span>d
+              </button></span>
+            <input class="sheet-hide-on-zero" name="attr_Stars-Eclipse-Eligible" type="hidden" value="0"/><span>
+              <input class="sheet-hide-on-zero" name="attr_Sun-Eclipse-Eligible" type="hidden" value="0"/><span>&bull; </span>
+              <input class="sheet-hide-on-zero" name="attr_Moon-Eclipse-Eligible" type="hidden" value="0"/><span>
+                <input class="sheet-hide-on-one" name="attr_Sun-Eclipse-Eligible" type="hidden" value="0"/><span>&bull; </span></span>
+              <button class="sheet-buttonless" name="roll_Eclipse-Stars" type="roll" value="&amp;{template:GBM} {{charname=@{character_name}}} @{Stars-Eclipse-Roll-Formula} {{title=^{Eclipse Roll}}} {{short=yes}} {{eclipse=^{Stars}}}"><span data-i18n="Stars"></span>:
+                <input name="attr_Stars-Resist-Total" type="hidden" value=""/><span name="attr_Stars-Resist-Total"></span>d
+              </button></span>
+          </div>
+          <p><span data-i18n="When you reach or exceed your stress limit, you roll for eclipse using your lowest attribute. While at your stress limit and not in eclipse, any additional stress you would take instead triggers another eclipse roll.1-3: You are in eclipse.4/5: Another protagonist can push themselves or spend a link to keep you from succumbing. If they do not, treat it as a 1-3 result and you are in eclipse.6: You hold on to hope, and stay in the struggle. The next time you take stress, roll for eclipse again.On a critical success, erase 1 spent segment of your transcendence track, and recover 5 stress. In addition, on a critical:If sun was rolled, each other player advances their recovery clock by 2.If moon was rolled, each other player recovers 2 stress.If stars was rolled, each other player resets their armour and special armour uses."></span>
+          </p>
         </div>
         <div class="sheet-Box-Header sheet-Box-Subsection"><span data-i18n="Eclipse"></span>
           <div class="sheet-Box-Header-Icons">
@@ -1876,6 +1992,7 @@
           </div>
         </div>
       </div>
+      <!-- include includes/playbook-clocks.pug-->
       <div class="sheet-Box">
         <div class="sheet-Box-Header"><span data-i18n="Notes"></span>
           <div class="sheet-Box-Header-Icons">
@@ -1892,14 +2009,11 @@
       </div>
     </div>
     <div class="sheet-Right">
-      <!-- statsblock exists in variables.pug-->
       <!-- Eventually transplant this back to mixins.pug-->
-      <!-- {{@{"+v+"-Base-Roll-Formula}}}-->
-      <!-- {{?{Transcendent?|No (TOTAL),@{"+v+"-Base-Roll-Formula}|Yes (TOTAL),@{"+v+"-Transcend-Roll-Formula}}}}-->
       <div class="sheet-Box sheet-Playbook-Selected">
         <div class="sheet-Box-Header sheet-Box-XP"><span>
             <input name="attr_Sun-Resist-Total" type="hidden" value=""/>
-            <button class="sheet-buttonless" name="roll_Sun" type="roll" value="&amp;{template:default} {{charname=@{character_name}}} {{@{Position-Query}}} {{effect=@{Effect-Query}}} {{@{Sun-Resist-Roll-Formula}}} {{title=^{Sun}}}"><span data-i18n="Sun"></span>
+            <button class="sheet-buttonless" name="roll_Sun" type="roll" data-i18n-title="Roll-Describe-Sun" value="&amp;{template:GBM} {{charname=@{character_name}}} {{@{Position-Query}}} {{effect=@{Effect-Query}}} {{@{Sun-Resist-Roll-Formula}}} {{title=^{Sun}}} {{resist=yes}}"><span data-i18n="Sun"></span>
             </button></span>
           <div class="sheet-Box-Header-Icons">
             <div class="sheet-XP-Track">
@@ -1960,7 +2074,7 @@
                   </div>
                   <div class="sheet-Stat">
                     <!-- This needs to be complexified to handle rolling while transcendent, but for now, let's get that base -->
-                    <button class="sheet-buttonless" name="roll_Defy" type="roll" value="&amp;{template:default} {{charname=@{character_name}}} {{@{Position-Query}}} {{effect=@{Effect-Query}}} {{?{Transcendent?|No (@{Defy-Base-Total}),@{Defy-Base-Roll-Formula}|Yes (@{Defy-Transcend-Total}),@{Defy-Transcend-Roll-Formula}}}} {{title=^{Defy}}}"><span data-i18n="Defy"></span>
+                    <button class="sheet-buttonless" name="roll_Defy" type="roll" data-i18n-title="Roll-Describe-Defy" value="&amp;{template:GBM} {{charname=@{character_name}}} {{@{Position-Query}}} {{effect=@{Effect-Query}}} {{?{@{Q-Transcendent}|@{A-No} (@{Defy-Base-Total}),@{Defy-Base-Roll-Formula}|@{A-Yes} (@{Defy-Transcend-Total}),@{Defy-Transcend-Roll-Formula}}}} {{title=^{Defy}}} {{action=yes}}"><span data-i18n="Defy"></span>
                     </button>
                   </div>
                 </div>
@@ -1993,7 +2107,7 @@
                   </div>
                   <div class="sheet-Stat">
                     <!-- This needs to be complexified to handle rolling while transcendent, but for now, let's get that base -->
-                    <button class="sheet-buttonless" name="roll_Empathise" type="roll" value="&amp;{template:default} {{charname=@{character_name}}} {{@{Position-Query}}} {{effect=@{Effect-Query}}} {{?{Transcendent?|No (@{Empathise-Base-Total}),@{Empathise-Base-Roll-Formula}|Yes (@{Empathise-Transcend-Total}),@{Empathise-Transcend-Roll-Formula}}}} {{title=^{Empathise}}}"><span data-i18n="Empathise"></span>
+                    <button class="sheet-buttonless" name="roll_Empathise" type="roll" data-i18n-title="Roll-Describe-Empathise" value="&amp;{template:GBM} {{charname=@{character_name}}} {{@{Position-Query}}} {{effect=@{Effect-Query}}} {{?{@{Q-Transcendent}|@{A-No} (@{Empathise-Base-Total}),@{Empathise-Base-Roll-Formula}|@{A-Yes} (@{Empathise-Transcend-Total}),@{Empathise-Transcend-Roll-Formula}}}} {{title=^{Empathise}}} {{action=yes}}"><span data-i18n="Empathise"></span>
                     </button>
                   </div>
                 </div>
@@ -2026,7 +2140,7 @@
                   </div>
                   <div class="sheet-Stat">
                     <!-- This needs to be complexified to handle rolling while transcendent, but for now, let's get that base -->
-                    <button class="sheet-buttonless" name="roll_Express" type="roll" value="&amp;{template:default} {{charname=@{character_name}}} {{@{Position-Query}}} {{effect=@{Effect-Query}}} {{?{Transcendent?|No (@{Express-Base-Total}),@{Express-Base-Roll-Formula}|Yes (@{Express-Transcend-Total}),@{Express-Transcend-Roll-Formula}}}} {{title=^{Express}}}"><span data-i18n="Express"></span>
+                    <button class="sheet-buttonless" name="roll_Express" type="roll" data-i18n-title="Roll-Describe-Express" value="&amp;{template:GBM} {{charname=@{character_name}}} {{@{Position-Query}}} {{effect=@{Effect-Query}}} {{?{@{Q-Transcendent}|@{A-No} (@{Express-Base-Total}),@{Express-Base-Roll-Formula}|@{A-Yes} (@{Express-Transcend-Total}),@{Express-Transcend-Roll-Formula}}}} {{title=^{Express}}} {{action=yes}}"><span data-i18n="Express"></span>
                     </button>
                   </div>
                 </div>
@@ -2035,7 +2149,7 @@
       <div class="sheet-Box sheet-Playbook-Selected">
         <div class="sheet-Box-Header sheet-Box-XP"><span>
             <input name="attr_Moon-Resist-Total" type="hidden" value=""/>
-            <button class="sheet-buttonless" name="roll_Moon" type="roll" value="&amp;{template:default} {{charname=@{character_name}}} {{@{Position-Query}}} {{effect=@{Effect-Query}}} {{@{Moon-Resist-Roll-Formula}}} {{title=^{Moon}}}"><span data-i18n="Moon"></span>
+            <button class="sheet-buttonless" name="roll_Moon" type="roll" data-i18n-title="Roll-Describe-Moon" value="&amp;{template:GBM} {{charname=@{character_name}}} {{@{Position-Query}}} {{effect=@{Effect-Query}}} {{@{Moon-Resist-Roll-Formula}}} {{title=^{Moon}}} {{resist=yes}}"><span data-i18n="Moon"></span>
             </button></span>
           <div class="sheet-Box-Header-Icons">
             <div class="sheet-XP-Track">
@@ -2096,7 +2210,7 @@
                   </div>
                   <div class="sheet-Stat">
                     <!-- This needs to be complexified to handle rolling while transcendent, but for now, let's get that base -->
-                    <button class="sheet-buttonless" name="roll_Confess" type="roll" value="&amp;{template:default} {{charname=@{character_name}}} {{@{Position-Query}}} {{effect=@{Effect-Query}}} {{?{Transcendent?|No (@{Confess-Base-Total}),@{Confess-Base-Roll-Formula}|Yes (@{Confess-Transcend-Total}),@{Confess-Transcend-Roll-Formula}}}} {{title=^{Confess}}}"><span data-i18n="Confess"></span>
+                    <button class="sheet-buttonless" name="roll_Confess" type="roll" data-i18n-title="Roll-Describe-Confess" value="&amp;{template:GBM} {{charname=@{character_name}}} {{@{Position-Query}}} {{effect=@{Effect-Query}}} {{?{@{Q-Transcendent}|@{A-No} (@{Confess-Base-Total}),@{Confess-Base-Roll-Formula}|@{A-Yes} (@{Confess-Transcend-Total}),@{Confess-Transcend-Roll-Formula}}}} {{title=^{Confess}}} {{action=yes}}"><span data-i18n="Confess"></span>
                     </button>
                   </div>
                 </div>
@@ -2129,7 +2243,7 @@
                   </div>
                   <div class="sheet-Stat">
                     <!-- This needs to be complexified to handle rolling while transcendent, but for now, let's get that base -->
-                    <button class="sheet-buttonless" name="roll_Forgive" type="roll" value="&amp;{template:default} {{charname=@{character_name}}} {{@{Position-Query}}} {{effect=@{Effect-Query}}} {{?{Transcendent?|No (@{Forgive-Base-Total}),@{Forgive-Base-Roll-Formula}|Yes (@{Forgive-Transcend-Total}),@{Forgive-Transcend-Roll-Formula}}}} {{title=^{Forgive}}}"><span data-i18n="Forgive"></span>
+                    <button class="sheet-buttonless" name="roll_Forgive" type="roll" data-i18n-title="Roll-Describe-Forgive" value="&amp;{template:GBM} {{charname=@{character_name}}} {{@{Position-Query}}} {{effect=@{Effect-Query}}} {{?{@{Q-Transcendent}|@{A-No} (@{Forgive-Base-Total}),@{Forgive-Base-Roll-Formula}|@{A-Yes} (@{Forgive-Transcend-Total}),@{Forgive-Transcend-Roll-Formula}}}} {{title=^{Forgive}}} {{action=yes}}"><span data-i18n="Forgive"></span>
                     </button>
                   </div>
                 </div>
@@ -2162,7 +2276,7 @@
                   </div>
                   <div class="sheet-Stat">
                     <!-- This needs to be complexified to handle rolling while transcendent, but for now, let's get that base -->
-                    <button class="sheet-buttonless" name="roll_Perceive" type="roll" value="&amp;{template:default} {{charname=@{character_name}}} {{@{Position-Query}}} {{effect=@{Effect-Query}}} {{?{Transcendent?|No (@{Perceive-Base-Total}),@{Perceive-Base-Roll-Formula}|Yes (@{Perceive-Transcend-Total}),@{Perceive-Transcend-Roll-Formula}}}} {{title=^{Perceive}}}"><span data-i18n="Perceive"></span>
+                    <button class="sheet-buttonless" name="roll_Perceive" type="roll" data-i18n-title="Roll-Describe-Perceive" value="&amp;{template:GBM} {{charname=@{character_name}}} {{@{Position-Query}}} {{effect=@{Effect-Query}}} {{?{@{Q-Transcendent}|@{A-No} (@{Perceive-Base-Total}),@{Perceive-Base-Roll-Formula}|@{A-Yes} (@{Perceive-Transcend-Total}),@{Perceive-Transcend-Roll-Formula}}}} {{title=^{Perceive}}} {{action=yes}}"><span data-i18n="Perceive"></span>
                     </button>
                   </div>
                 </div>
@@ -2171,7 +2285,7 @@
       <div class="sheet-Box sheet-Playbook-Selected">
         <div class="sheet-Box-Header sheet-Box-XP"><span>
             <input name="attr_Stars-Resist-Total" type="hidden" value=""/>
-            <button class="sheet-buttonless" name="roll_Stars" type="roll" value="&amp;{template:default} {{charname=@{character_name}}} {{@{Position-Query}}} {{effect=@{Effect-Query}}} {{@{Stars-Resist-Roll-Formula}}} {{title=^{Stars}}}"><span data-i18n="Stars"></span>
+            <button class="sheet-buttonless" name="roll_Stars" type="roll" data-i18n-title="Roll-Describe-Stars" value="&amp;{template:GBM} {{charname=@{character_name}}} {{@{Position-Query}}} {{effect=@{Effect-Query}}} {{@{Stars-Resist-Roll-Formula}}} {{title=^{Stars}}} {{resist=yes}}"><span data-i18n="Stars"></span>
             </button></span>
           <div class="sheet-Box-Header-Icons">
             <div class="sheet-XP-Track">
@@ -2232,7 +2346,7 @@
                   </div>
                   <div class="sheet-Stat">
                     <!-- This needs to be complexified to handle rolling while transcendent, but for now, let's get that base -->
-                    <button class="sheet-buttonless" name="roll_Analyse" type="roll" value="&amp;{template:default} {{charname=@{character_name}}} {{@{Position-Query}}} {{effect=@{Effect-Query}}} {{?{Transcendent?|No (@{Analyse-Base-Total}),@{Analyse-Base-Roll-Formula}|Yes (@{Analyse-Transcend-Total}),@{Analyse-Transcend-Roll-Formula}}}} {{title=^{Analyse}}}"><span data-i18n="Analyse"></span>
+                    <button class="sheet-buttonless" name="roll_Analyse" type="roll" data-i18n-title="Roll-Describe-Analyse" value="&amp;{template:GBM} {{charname=@{character_name}}} {{@{Position-Query}}} {{effect=@{Effect-Query}}} {{?{@{Q-Transcendent}|@{A-No} (@{Analyse-Base-Total}),@{Analyse-Base-Roll-Formula}|@{A-Yes} (@{Analyse-Transcend-Total}),@{Analyse-Transcend-Roll-Formula}}}} {{title=^{Analyse}}} {{action=yes}}"><span data-i18n="Analyse"></span>
                     </button>
                   </div>
                 </div>
@@ -2265,7 +2379,7 @@
                   </div>
                   <div class="sheet-Stat">
                     <!-- This needs to be complexified to handle rolling while transcendent, but for now, let's get that base -->
-                    <button class="sheet-buttonless" name="roll_Conceal" type="roll" value="&amp;{template:default} {{charname=@{character_name}}} {{@{Position-Query}}} {{effect=@{Effect-Query}}} {{?{Transcendent?|No (@{Conceal-Base-Total}),@{Conceal-Base-Roll-Formula}|Yes (@{Conceal-Transcend-Total}),@{Conceal-Transcend-Roll-Formula}}}} {{title=^{Conceal}}}"><span data-i18n="Conceal"></span>
+                    <button class="sheet-buttonless" name="roll_Conceal" type="roll" data-i18n-title="Roll-Describe-Conceal" value="&amp;{template:GBM} {{charname=@{character_name}}} {{@{Position-Query}}} {{effect=@{Effect-Query}}} {{?{@{Q-Transcendent}|@{A-No} (@{Conceal-Base-Total}),@{Conceal-Base-Roll-Formula}|@{A-Yes} (@{Conceal-Transcend-Total}),@{Conceal-Transcend-Roll-Formula}}}} {{title=^{Conceal}}} {{action=yes}}"><span data-i18n="Conceal"></span>
                     </button>
                   </div>
                 </div>
@@ -2298,17 +2412,12 @@
                   </div>
                   <div class="sheet-Stat">
                     <!-- This needs to be complexified to handle rolling while transcendent, but for now, let's get that base -->
-                    <button class="sheet-buttonless" name="roll_Flow" type="roll" value="&amp;{template:default} {{charname=@{character_name}}} {{@{Position-Query}}} {{effect=@{Effect-Query}}} {{?{Transcendent?|No (@{Flow-Base-Total}),@{Flow-Base-Roll-Formula}|Yes (@{Flow-Transcend-Total}),@{Flow-Transcend-Roll-Formula}}}} {{title=^{Flow}}}"><span data-i18n="Flow"></span>
+                    <button class="sheet-buttonless" name="roll_Flow" type="roll" data-i18n-title="Roll-Describe-Flow" value="&amp;{template:GBM} {{charname=@{character_name}}} {{@{Position-Query}}} {{effect=@{Effect-Query}}} {{?{@{Q-Transcendent}|@{A-No} (@{Flow-Base-Total}),@{Flow-Base-Roll-Formula}|@{A-Yes} (@{Flow-Transcend-Total}),@{Flow-Transcend-Roll-Formula}}}} {{title=^{Flow}}} {{action=yes}}"><span data-i18n="Flow"></span>
                     </button>
                   </div>
                 </div>
         </div>
       </div>
-      <!-- Position: Risky, Controlled, Desperate, Fortune-->
-      <!-- Effect: Standard, Limited, Great, Extreme, Zero-->
-      <!-- Bonus Dice: 0 thru 6, -1 thru -3-->
-      <!-- <button class="sheet-rollbutton sheet-label btn ui-draggable" type="roll" name="roll_Skirmish" value="&amp;{template:blades} @{skirmish_formula} @{skirmish_roll_mods} {{charimage=@{chat_image}}} @{title_text}" -->
-      <!-- Have a look at this shit: data-i18n-title="skirmish_description" title="Skirmish with an opponent in close combat; assault or hold a position; brawl and wrestle."><span class="sheet-default-label sheet-inherit" data-i18n="skirmish">Skirmish</span><span class="sheet-custom-label sheet-inherit" name="attr_skirmish_label">Skirmish</span></button>-->
       <div class="sheet-Box sheet-Playbook-Selected">
         <div class="sheet-Box-Header sheet-Box-XP"><span data-i18n="XP"></span>
           <div class="sheet-Box-Header-Icons">
@@ -2377,6 +2486,74 @@
         </div>
       </div>
       <div class="sheet-Box sheet-Playbook-Selected">
+        <div class="sheet-Box-Header"><span data-i18n="Gather Info"></span>
+          <div class="sheet-Box-Header-Icons">
+            <input class="sheet-hide-on-zero" name="attr_Toggle-GatherInfo-Expand" type="hidden" value="0"/>
+            <button class="sheet-button-header-expand" type="action" name="act_Toggle-GatherInfo-Expand"></button>
+            <input class="sheet-hide-on-one" name="attr_Toggle-GatherInfo-Expand" type="hidden" value="0"/>
+            <button class="sheet-button-header-collapse" type="action" name="act_Toggle-GatherInfo-Expand"></button>
+          </div>
+        </div>
+        <input class="sheet-hide-on-one" name="attr_Toggle-GatherInfo-Expand" type="hidden" value=""/>
+        <div class="sheet-GatherInfo-Block"><span class="sheet-Playbook-Enigma" data-i18n="What does [X] intend to do?Who here is keeping secrets?Where can I find [X]?Where’s the vulnerability here?Where can I stay hidden?What does [X] really want?"></span><span class="sheet-Playbook-Stranger" data-i18n="What is hidden here?Where can I gain an edge?What is the purpose of [X]?Who/what doesn’t belong here?What might happen if I [X]?Who/what here is isolated or alone?"></span><span class="sheet-Playbook-TimeTraveller" data-i18n="What do I remember about [X]?What really happen(s/ed) here?What defies the flow of time?What is already in motion here?What might happen if I [X]?What is different about [X] this time?"></span><span class="sheet-Playbook-Harmony" data-i18n="Who here can best help me?What are you really feeling?Who here is at their limit?How are [X] and [Y] connected?Who here feels alone?What here is incomplete?"></span><span class="sheet-Playbook-Guardian" data-i18n="What is most dangerous here?Who here is afraid?How can I help [X]?Who will my foes try to single out?Who here is willing to do violence?Who here is hurting?"></span><span class="sheet-Playbook-Outsider" data-i18n="Where’s my rival, what are they doing?What are your secret pains?How can I gain an edge here?What’s the danger no one else sees?What’s really going on here?What here can be broken?"></span><span class="sheet-Playbook-UnlikelyHero" data-i18n="What is most dangerous here?Who here is feeling [X]?What are you really feeling?Who here is strong or vulnerable?Where can I find beauty here?What are your unmet needs?"></span>
+        </div>
+      </div>
+      <div class="sheet-Box sheet-Playbook-Selected">
+        <div class="sheet-Box-Header">
+          <button class="sheet-buttonless" name="roll_undefined" type="roll" data-i18n-title="Roll-Describe-undefined" value="&amp;{template:GBM} {{charname=@{character_name}}} @{Number-Of-Dice} {{title=^{Fortune Roll}}} {{short=yes}}"><span data-i18n="Fortune Roll"></span>
+          </button>
+        </div>
+      </div>
+      <div class="sheet-Box sheet-Playbook-Selected">
+        <div class="sheet-Box-Header"><span data-i18n="Obligation Roll"></span>
+          <div class="sheet-Box-Header-Icons">
+            <input class="sheet-hide-on-zero" name="attr_Toggle-Obligation-Roll-Expand" type="hidden" value="1"/>
+            <button class="sheet-button-header-expand" type="action" name="act_Toggle-Obligation-Roll-Expand"></button>
+            <input class="sheet-hide-on-one" name="attr_Toggle-Obligation-Roll-Expand" type="hidden" value="1"/>
+            <button class="sheet-button-header-collapse" type="action" name="act_Toggle-Obligation-Roll-Expand"></button>
+          </div>
+        </div>
+        <input class="sheet-hide-on-one" name="attr_Toggle-Obligation-Roll-Expand" type="hidden" value="1"/>
+        <div class="sheet-Obligation-Roll">
+          <div class="sheet-Obligation-Roll-Stripe">
+            <input name="attr_Moon-Resist-Total" type="hidden" value=""/>
+            <input name="attr_Sun-Resist-Total" type="hidden" value=""/>
+            <input name="attr_Stars-Resist-Total" type="hidden" value=""/>
+            <input class="sheet-hide-on-zero" name="attr_Sun-Eclipse-Eligible" type="hidden" value="0"/><span>
+              <button class="sheet-buttonless" name="roll_Obligation-Sun" type="roll" value="&amp;{template:GBM} {{charname=@{character_name}}} @{Sun-Eclipse-Roll-Formula} {{title=^{Obligation Roll}}} {{short=yes}} {{obligation=^{Sun}}}"><span data-i18n="Sun"></span>:
+                <input name="attr_Sun-Resist-Total" type="hidden" value=""/><span name="attr_Sun-Resist-Total"></span>d
+              </button></span>
+            <input class="sheet-hide-on-zero" name="attr_Moon-Eclipse-Eligible" type="hidden" value="0"/><span>
+              <input class="sheet-hide-on-zero" name="attr_Sun-Eclipse-Eligible" type="hidden" value="0"/><span>&bull; </span>
+              <button class="sheet-buttonless" name="roll_Obligation-Moon" type="roll" value="&amp;{template:GBM} {{charname=@{character_name}}} @{Moon-Eclipse-Roll-Formula} {{title=^{Obligation Roll}}} {{short=yes}} {{obligation=^{Moon}}}"><span data-i18n="Moon"></span>:
+                <input name="attr_Moon-Resist-Total" type="hidden" value=""/><span name="attr_Moon-Resist-Total"></span>d
+              </button></span>
+            <input class="sheet-hide-on-zero" name="attr_Stars-Eclipse-Eligible" type="hidden" value="0"/><span>
+              <input class="sheet-hide-on-zero" name="attr_Sun-Eclipse-Eligible" type="hidden" value="0"/><span>&bull; </span>
+              <input class="sheet-hide-on-zero" name="attr_Moon-Eclipse-Eligible" type="hidden" value="0"/><span>
+                <input class="sheet-hide-on-one" name="attr_Sun-Eclipse-Eligible" type="hidden" value="0"/><span>&bull; </span></span>
+              <button class="sheet-buttonless" name="roll_Obligation-Stars" type="roll" value="&amp;{template:GBM} {{charname=@{character_name}}} @{Stars-Eclipse-Roll-Formula} {{title=^{Obligation Roll}}} {{short=yes}} {{obligation=^{Stars}}}"><span data-i18n="Stars"></span>:
+                <input name="attr_Stars-Resist-Total" type="hidden" value=""/><span name="attr_Stars-Resist-Total"></span>d
+              </button></span>
+          </div>
+          <p><span data-i18n="When you roll obligation, roll your lowest attribute, taking stress equal to 6 minus the die result. On a critical success, you get an additional downtime action.For any result, we narrate what this means for the characters. This might mean some dialogue, or moments of in-character play, or you might choose to narrate what happens to the characters. Use the attribute rolled as a guide for the ways in which the obligation affects your character:If sun is rolled, your obligation involves scary people or circumstances, or is physically taxing.If moon is rolled, your obligation breaks your heart, and drives you to despair.If stars is rolled, your obligation puts you under social pressure, or sets off your anxiety."></span>
+          </p>
+        </div>
+      </div>
+      <div class="sheet-Box sheet-Playbook-Selected">
+        <div class="sheet-Box-Header"><span data-i18n="Downtime"></span>
+          <div class="sheet-Box-Header-Icons">
+            <input class="sheet-hide-on-zero" name="attr_Toggle-Downtime-Expand" type="hidden" value="1"/>
+            <button class="sheet-button-header-expand" type="action" name="act_Toggle-Downtime-Expand"></button>
+            <input class="sheet-hide-on-one" name="attr_Toggle-Downtime-Expand" type="hidden" value="1"/>
+            <button class="sheet-button-header-collapse" type="action" name="act_Toggle-Downtime-Expand"></button>
+          </div>
+        </div>
+        <input class="sheet-hide-on-one" name="attr_Toggle-Downtime-Expand" type="hidden" value="1"/>
+        <div class="sheet-Downtime"><span data-i18n="Downtime action results that affect tracks, clocks, or links award them based on the following table:1-3: 2 segments marked or links given4/5: 3 segments marked or links given6: 4 segments marked or links givenA critical success will have different results depending on the specific action, but generally results in 5 segments being marked plus an additional benefit."></span>
+        </div>
+      </div>
+      <div class="sheet-Box sheet-Playbook-Selected">
         <div class="sheet-Box-Header"><span data-i18n="Bonus Die"></span>
           <div class="sheet-Box-Header-Icons">
             <input class="sheet-hide-on-zero" name="attr_Toggle-BonusDie-Expand" type="hidden" value="0"/>
@@ -2399,20 +2576,7 @@
           </div>
         </div>
         <input class="sheet-hide-on-one" name="attr_Toggle-Teamwork-Expand" type="hidden" value=""/>
-        <div class="sheet-Teamwork-Block"><span data-i18n="Assist a teammateLead a group actionSet up a teammateProtect a teammate"></span>
-        </div>
-      </div>
-      <div class="sheet-Box sheet-Playbook-Selected">
-        <div class="sheet-Box-Header"><span data-i18n="Gather Info"></span>
-          <div class="sheet-Box-Header-Icons">
-            <input class="sheet-hide-on-zero" name="attr_Toggle-GatherInfo-Expand" type="hidden" value="0"/>
-            <button class="sheet-button-header-expand" type="action" name="act_Toggle-GatherInfo-Expand"></button>
-            <input class="sheet-hide-on-one" name="attr_Toggle-GatherInfo-Expand" type="hidden" value="0"/>
-            <button class="sheet-button-header-collapse" type="action" name="act_Toggle-GatherInfo-Expand"></button>
-          </div>
-        </div>
-        <input class="sheet-hide-on-one" name="attr_Toggle-GatherInfo-Expand" type="hidden" value=""/>
-        <div class="sheet-GatherInfo-Block"><span class="sheet-Playbook-Enigma" data-i18n="What does [X] intend to do?Who here is keeping secrets?Where can I find [X]?Where’s the vulnerability here?Where can I stay hidden?What does [X] really want?"></span><span class="sheet-Playbook-Stranger" data-i18n="What is hidden here?Where can I gain an edge?What is the purpose of [X]?Who/what doesn’t belong here?What might happen if I [X]?Who/what here is isolated or alone?"></span><span class="sheet-Playbook-TimeTraveller" data-i18n="What do I remember about [X]?What really happen(s/ed) here?What defies the flow of time?What is already in motion here?What might happen if I [X]?What is different about [X] this time?"></span><span class="sheet-Playbook-Harmony" data-i18n="Who here can best help me?What are you really feeling?Who here is at their limit?How are [X] and [Y] connected?Who here feels alone?What here is incomplete?"></span><span class="sheet-Playbook-Guardian" data-i18n="What is most dangerous here?Who here is afraid?How can I help [X]?Who will my foes try to single out?Who here is willing to do violence?Who here is hurting?"></span><span class="sheet-Playbook-Outsider" data-i18n="Where’s my rival, what are they doing?What are your secret pains?How can I gain an edge here?What’s the danger no one else sees?What’s really going on here?What here can be broken?"></span><span class="sheet-Playbook-UnlikelyHero" data-i18n="What is most dangerous here?Who here is feeling [X]?What are you really feeling?Who here is strong or vulnerable?Where can I find beauty here?What are your unmet needs?"></span>
+        <div class="sheet-Teamwork-Block"><span data-i18n="Assist a teammate: Take 1 stress to give another player +1d. You might also suffer consequences from the roll. Only one person may assist a roll.Lead a group action: Roll for each character who participates. The single best roll counts as the action result, which applies to every character that rolled. The leader marks 1 stress for each 1-3 result rolled by the group.Protect a teammate: Face danger on behalf of a teammate. Step in to suffer a consequence in their place. You may roll to resist as normal, if you wish.Set up a teammate: Set up another character with your action. If you achieve it, any team members who follow up get +1 effect or improved position."></span>
         </div>
       </div>
     </div>
@@ -2443,6 +2607,30 @@ translation.json:
 	"Zero": "Zero",
 	"Number of Dice": "Number of Dice",
 	"Bonus Dice": "Bonus Dice",
+	"Transcendent?": "Transcendent?",
+	"Yes": "Yes",
+	"No": "No",
+	"Roll-Describe-Sun": "Sun: Resist consequences from violence and fear.",
+	"Roll-Describe-Moon": "Moon: Resist consequences from despair and heartbreak.",
+	"Roll-Describe-Stars": "Stars: Resist consequences from panic and social pressure.",
+	"Roll-Describe-Analyse": "When you analyse, you search beyond the surface presentation of the world, and discover secrets. You might study an ancient book for information on magic rituals. You might discern a gap in your foe’s defences.",
+	"Roll-Describe-Conceal": "When you conceal, you hide your true intentions and feelings. You might pass unnoticed, as just another face in the crowd. You might choke down your true feelings and lie to someone.",
+	"Roll-Describe-Confess": "When you confess, you expose the inner world of your thoughts and feelings to another. You might reveal to someone that it was you who left anonymous gifts at their doorstep. You might admit to a friend that you were once a servant of the evil empress.",
+	"Roll-Describe-Defy": "When you defy, you muster your courage and face opposition head on. You might stand up to a bully, fixing them with a stern glare. You might unleash your mightiest attack against a dangerous foe.",
+	"Roll-Describe-Empathise": "When you empathise, you understand a person intuitively, and feel their emotions as if they were your own. You might listen to someone’s story, and gain an understanding of their perspective. You might touch a horrifying monster, and feel the frightened heart that beats within it.",
+	"Roll-Describe-Express": "When you express, you use words with an agenda in mind. You might teach someone a valuable lesson about friendship. You might convince a longtime rival to work with you for a time to solve a shared problem.",
+	"Roll-Describe-Flow": "When you flow, you move with grace and adapt to your circumstances. You might leap across a gap to reach safety. You might act in accordance with other’s expectations.",
+	"Roll-Describe-Forgive": "When you forgive, you show that you care for someone despite a mistake they have made. You might offer a chance for reconciliation to a friend that wronged you. You might embrace a monster that was once human, in the hopes that it might be human again someday.",
+	"Roll-Describe-Perceive": "When you perceive, you see the world as it presents itself, without judgement. You might observe someone and note their daily routine. You might see the beauty present in even the darkest and strangest corners of the world.",
+	"Action Roll": "Action Roll",
+	"Resistance Roll": "Resistance Roll",
+	"Fortune Roll": "Fortune Roll",
+	"Eclipse Roll": "Eclipse Roll",
+	"Obligation Roll": "Obligation Roll",
+	"Make sure to mark XP!": "Make sure to mark XP!",
+	"Transcending!": "Transcending!",
+	"Zero dice!": "Zero dice!",
+	"Take the lower of the two.": "Take the lower of the two.",
 	"Enigma": "Enigma",
 	"Stranger": "Stranger",
 	"Time Traveller": "Time Traveller",
@@ -2452,6 +2640,10 @@ translation.json:
 	"Unlikely Hero": "Unlikely Hero",
 	"Stress": "Stress",
 	"in danger of eclipse!": "in danger of eclipse!",
+	"Sun": "Sun",
+	"Moon": "Moon",
+	"Stars": "Stars",
+	"When you reach or exceed your stress limit, you roll for eclipse using your lowest attribute. While at your stress limit and not in eclipse, any additional stress you would take instead triggers another eclipse roll.1-3: You are in eclipse.4/5: Another protagonist can push themselves or spend a link to keep you from succumbing. If they do not, treat it as a 1-3 result and you are in eclipse.6: You hold on to hope, and stay in the struggle. The next time you take stress, roll for eclipse again.On a critical success, erase 1 spent segment of your transcendence track, and recover 5 stress. In addition, on a critical:If sun was rolled, each other player advances their recovery clock by 2.If moon was rolled, each other player recovers 2 stress.If stars was rolled, each other player resets their armour and special armour uses.": "When you reach or exceed your stress limit, you roll for eclipse using your lowest attribute. While at your stress limit and not in eclipse, any additional stress you would take instead triggers another eclipse roll.<ul><li><b>1-3</b>: You are in eclipse.<li><b>4/5</b>: Another protagonist can push themselves or spend a link to keep you from succumbing. If they do not, treat it as a 1-3 result and you are in eclipse.<li><b>6</b>: You hold on to hope, and stay in the struggle. The next time you take stress, roll for eclipse again.</ul><p>On a <b>critical success</b>, erase 1 spent segment of your transcendence track, and recover 5 stress. In addition, on a critical:<ul><li>If <b>sun</b> was rolled, each other player advances their recovery clock by 2.<li>If <b>moon</b> was rolled, each other player recovers 2 stress.<li>If <b>stars</b> was rolled, each other player resets their armour and special armour uses.",
 	"Eclipse": "Eclipse",
 	"When you eclipse—": "When you eclipse—",
 	"Who you really are clearly isn’t enough; only the mask is worthy of their love. You reject all aspects of your everyday self, and embrace the most superficial aspects of your persona. Give them what you know they want—effortless beauty, and extravagant drama!": "Who you really are clearly isn’t enough; only the mask is worthy of their love. You reject all aspects of your everyday self, and embrace the most superficial aspects of your persona. Give them what you know they want—effortless beauty, and extravagant drama!",
@@ -2695,15 +2887,12 @@ translation.json:
 	"an impossible promise": "an impossible promise",
 	"Look": "Look",
 	"Notes": "Notes",
-	"Sun": "Sun",
 	"Defy": "Defy",
 	"Empathise": "Empathise",
 	"Express": "Express",
-	"Moon": "Moon",
 	"Confess": "Confess",
 	"Forgive": "Forgive",
 	"Perceive": "Perceive",
-	"Stars": "Stars",
 	"Analyse": "Analyse",
 	"Conceal": "Conceal",
 	"Flow": "Flow",
@@ -2722,10 +2911,6 @@ translation.json:
 	"You expressed your beliefs, drives, role, or background": "You expressed your beliefs, drives, role, or background",
 	"You struggled with issues from your promises or obligation": "You struggled with issues from your promises or obligation",
 	"You embodied your Eclipse, or displayed the contents of your heart": "You embodied your Eclipse, or displayed the contents of your heart",
-	"Bonus Die": "Bonus Die",
-	"Push yourself (take 2 stress) or accept a Poisoned Promise": "<b>Push yourself</b> (take 2 stress) or accept a <b>Poisoned Promise</b>",
-	"Teamwork": "Teamwork",
-	"Assist a teammateLead a group actionSet up a teammateProtect a teammate": "<ul><li><b>Assist</b> a teammate<li><b>Lead</b> a group action<li><b>Set up</b> a teammate<li><b>Protect</b> a teammate</ul>",
 	"Gather Info": "Gather Info",
 	"What does [X] intend to do?Who here is keeping secrets?Where can I find [X]?Where’s the vulnerability here?Where can I stay hidden?What does [X] really want?": "<ul><li>What does [X] intend to do?<li>Who here is keeping secrets?<li>Where can I find [X]?<li>Where’s the vulnerability here?<li>Where can I stay hidden?<li>What does [X] really want?</ul>",
 	"What is hidden here?Where can I gain an edge?What is the purpose of [X]?Who/what doesn’t belong here?What might happen if I [X]?Who/what here is isolated or alone?": "<ul><li>What is hidden here?<li>Where can I gain an edge?<li>What is the purpose of [X]?<li>Who/what doesn’t belong here?<li>What might happen if I [X]?<li>Who/what here is isolated or alone?</ul>",
@@ -2733,7 +2918,14 @@ translation.json:
 	"Who here can best help me?What are you really feeling?Who here is at their limit?How are [X] and [Y] connected?Who here feels alone?What here is incomplete?": "<ul><li>Who here can best help me?<li>What are you really feeling?<li>Who here is at their limit?<li>How are [X] and [Y] connected?<li>Who here feels alone?<li>What here is incomplete?</ul>",
 	"What is most dangerous here?Who here is afraid?How can I help [X]?Who will my foes try to single out?Who here is willing to do violence?Who here is hurting?": "<ul><li>What is most dangerous here?<li>Who here is afraid?<li>How can I help [X]?<li>Who will my foes try to single out?<li>Who here is willing to do violence?<li>Who here is hurting?</ul>",
 	"Where’s my rival, what are they doing?What are your secret pains?How can I gain an edge here?What’s the danger no one else sees?What’s really going on here?What here can be broken?": "<ul><li>Where’s my rival, what are they doing?<li>What are your secret pains?<li>How can I gain an edge here?<li>What’s the danger no one else sees?<li>What’s really going on here?<li>What here can be broken?</ul>",
-	"What is most dangerous here?Who here is feeling [X]?What are you really feeling?Who here is strong or vulnerable?Where can I find beauty here?What are your unmet needs?": "<ul><li>What is most dangerous here?<li>Who here is feeling [X]?<li>What are you really feeling?<li>Who here is strong or vulnerable?<li>Where can I find beauty here?<li>What are your unmet needs?</ul>"
+	"What is most dangerous here?Who here is feeling [X]?What are you really feeling?Who here is strong or vulnerable?Where can I find beauty here?What are your unmet needs?": "<ul><li>What is most dangerous here?<li>Who here is feeling [X]?<li>What are you really feeling?<li>Who here is strong or vulnerable?<li>Where can I find beauty here?<li>What are your unmet needs?</ul>",
+	"When you roll obligation, roll your lowest attribute, taking stress equal to 6 minus the die result. On a critical success, you get an additional downtime action.For any result, we narrate what this means for the characters. This might mean some dialogue, or moments of in-character play, or you might choose to narrate what happens to the characters. Use the attribute rolled as a guide for the ways in which the obligation affects your character:If sun is rolled, your obligation involves scary people or circumstances, or is physically taxing.If moon is rolled, your obligation breaks your heart, and drives you to despair.If stars is rolled, your obligation puts you under social pressure, or sets off your anxiety.": "When you roll obligation, roll your lowest attribute, taking stress equal to 6 minus the die result. On a critical success, you get an additional downtime action.<p>For any result, we narrate what this means for the characters. This might mean some dialogue, or moments of in-character play, or you might choose to narrate what happens to the characters. Use the attribute rolled as a guide for the ways in which the obligation affects your character:<ul><li>If <b>sun</b> is rolled, your obligation involves scary people or circumstances, or is physically taxing.<li>If <b>moon</b> is rolled, your obligation breaks your heart, and drives you to despair.<li>If <b>stars</b> is rolled, your obligation puts you under social pressure, or sets off your anxiety.",
+	"Downtime": "Downtime",
+	"Downtime action results that affect tracks, clocks, or links award them based on the following table:1-3: 2 segments marked or links given4/5: 3 segments marked or links given6: 4 segments marked or links givenA critical success will have different results depending on the specific action, but generally results in 5 segments being marked plus an additional benefit.": "Downtime action results that affect tracks, clocks, or links award them based on the following table:<ul><li><b>1-3</b>: 2 segments marked or links given<li><b>4/5</b>: 3 segments marked or links given<li><b>6</b>: 4 segments marked or links given</ul>A <b>critical success</b> will have different results depending on the specific action, but generally results in 5 segments being marked plus an additional benefit.",
+	"Bonus Die": "Bonus Die",
+	"Push yourself (take 2 stress) or accept a Poisoned Promise": "<b>Push yourself</b> (take 2 stress) or accept a <b>Poisoned Promise</b>",
+	"Teamwork": "Teamwork",
+	"Assist a teammate: Take 1 stress to give another player +1d. You might also suffer consequences from the roll. Only one person may assist a roll.Lead a group action: Roll for each character who participates. The single best roll counts as the action result, which applies to every character that rolled. The leader marks 1 stress for each 1-3 result rolled by the group.Protect a teammate: Face danger on behalf of a teammate. Step in to suffer a consequence in their place. You may roll to resist as normal, if you wish.Set up a teammate: Set up another character with your action. If you achieve it, any team members who follow up get +1 effect or improved position.": "<ul><li><b>Assist a teammate</b>: Take 1 stress to give another player +1d. You might also suffer consequences from the roll. Only one person may assist a roll.<li><b>Lead a group action</b>: Roll for each character who participates. The single best roll counts as the action result, which applies to every character that rolled. The leader marks 1 stress for each 1-3 result rolled by the group.<li><b>Protect a teammate</b>: Face danger on behalf of a teammate. Step in to suffer a consequence in their place. You may roll to resist as normal, if you wish.<li><b>Set up a teammate</b>: Set up another character with your action. If you achieve it, any team members who follow up get +1 effect or improved position.</ul>"
 }
 END_TRANSLATIONS
 

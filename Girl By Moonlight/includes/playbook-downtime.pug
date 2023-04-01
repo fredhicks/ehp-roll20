@@ -1,0 +1,9 @@
+.sheet-Box.sheet-Playbook-Selected
+	.sheet-Box-Header
+		+translate('Downtime')
+		.sheet-Box-Header-Icons
+			+toggle('Toggle-Downtime-Expand',1)
+	+hidden('Toggle-Downtime-Expand',1).sheet-hide-on-one
+	.sheet-Downtime
+		+translate('Downtime action results that affect tracks, clocks, or links award them based on the following table:<ul><li><b>1-3</b>: 2 segments marked or links given<li><b>4/5</b>: 3 segments marked or links given<li><b>6</b>: 4 segments marked or links given</ul>A <b>critical success</b> will have different results depending on the specific action, but generally results in 5 segments being marked plus an additional benefit.')
+		

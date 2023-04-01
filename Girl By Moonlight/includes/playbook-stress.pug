@@ -14,6 +14,47 @@
 	.sheet-Stress-Warning
 		+translate('in danger of eclipse!')
 	.sheet-Box-Header.sheet-Box-Subsection
+		+translate('Eclipse Roll')
+		.sheet-Box-Header-Icons
+			+toggle('Toggle-Eclipse-Roll-Expand',1)
+	+hidden('Toggle-Eclipse-Roll-Expand',1).sheet-hide-on-one
+	.sheet-Stress-Eclipse-Roll
+		.sheet-Eclipse-Roll-Stripe
+			+hidden('Moon-Resist-Total')
+			+hidden('Sun-Resist-Total')
+			+hidden('Stars-Resist-Total')
+			+hidden('Sun-Eclipse-Eligible',0).sheet-hide-on-zero
+			span
+				button(name="roll_Eclipse-Sun", type="roll", value="&{template:GBM} {{charname=@{character_name}}} @{Sun-Eclipse-Roll-Formula} {{title=^{Eclipse Roll}}} {{short=yes}} {{eclipse=^{Sun}}}").sheet-buttonless
+					+translate('Sun')
+					|:
+					+display('Sun-Resist-Total')
+					|d
+			+hidden('Moon-Eclipse-Eligible',0).sheet-hide-on-zero
+			span
+				+hidden('Sun-Eclipse-Eligible',0).sheet-hide-on-zero
+				span &bull; 
+				button(name="roll_Eclipse-Moon", type="roll", value="&{template:GBM} {{charname=@{character_name}}} @{Moon-Eclipse-Roll-Formula} {{title=^{Eclipse Roll}}} {{short=yes}} {{eclipse=^{Moon}}}").sheet-buttonless
+					+translate('Moon')
+					|:
+					+display('Moon-Resist-Total')
+					|d
+			+hidden('Stars-Eclipse-Eligible',0).sheet-hide-on-zero
+			span
+				+hidden('Sun-Eclipse-Eligible',0).sheet-hide-on-zero
+				span &bull; 
+				+hidden('Moon-Eclipse-Eligible',0).sheet-hide-on-zero
+				span
+					+hidden('Sun-Eclipse-Eligible',0).sheet-hide-on-one
+					span &bull; 
+				button(name="roll_Eclipse-Stars", type="roll", value="&{template:GBM} {{charname=@{character_name}}} @{Stars-Eclipse-Roll-Formula} {{title=^{Eclipse Roll}}} {{short=yes}} {{eclipse=^{Stars}}}").sheet-buttonless
+					+translate('Stars')
+					|:
+					+display('Stars-Resist-Total')
+					|d
+		p
+			+translate('When you reach or exceed your stress limit, you roll for eclipse using your lowest attribute. While at your stress limit and not in eclipse, any additional stress you would take instead triggers another eclipse roll.<ul><li><b>1-3</b>: You are in eclipse.<li><b>4/5</b>: Another protagonist can push themselves or spend a link to keep you from succumbing. If they do not, treat it as a 1-3 result and you are in eclipse.<li><b>6</b>: You hold on to hope, and stay in the struggle. The next time you take stress, roll for eclipse again.</ul><p>On a <b>critical success</b>, erase 1 spent segment of your transcendence track, and recover 5 stress. In addition, on a critical:<ul><li>If <b>sun</b> was rolled, each other player advances their recovery clock by 2.<li>If <b>moon</b> was rolled, each other player recovers 2 stress.<li>If <b>stars</b> was rolled, each other player resets their armour and special armour uses.')
+	.sheet-Box-Header.sheet-Box-Subsection
 		+translate('Eclipse')
 		.sheet-Box-Header-Icons
 			+toggle('Toggle-Eclipse-Expand',1)

@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Kufam:ital,wght@0,400;0,700;1,400;1,700&family=Montserrat:ital,wght@0,400;0,700;1,400;1,700&display=swap");
-:root {
+:root, .sheet-rolltemplate-GBM {
 	--gbm-blue: #006784;
 	--gbm-blue-pale: #dee9ed;
 	--gbm-blue-shade: #8fb1b5;
@@ -21,7 +21,6 @@
 	--gbm-teal-text: var(--gbm-teal);
 	--gbm-pink-text: var(--gbm-pink);
 	--gbm-purple-text: var(--gbm-purple);
-	--gbm-font-size: 16px;
 	--gbm-fg: var(--gbm-blue-text);
 	--gbm-bg: white;
 	font-family: Montserrat, sans-serif;
@@ -29,7 +28,7 @@
 	background: var(--gbm-bg);
 }
 
-.sheet-darkmode, .sheet-rolltemplate-darkmode {
+.sheet-darkmode, .sheet-rolltemplate-GBM.sheet-rolltemplate-darkmode {
 	--gbm-fg: var(--gbm-blue-pale);
 	--gbm-bg: #1f1f1f;
 	--gbm-blue-shaded: var(--gbm-blue-dark);
@@ -40,6 +39,131 @@
 	--gbm-teal-text: var(--gbm-teal-pale);
 	--gbm-pink-text: var(--gbm-pink-pale);
 	--gbm-purple-text: var(--gbm-purple-pale);
+}
+
+.sheet-rolltemplate-GBM {
+	background-color: var(--gbm-purple-shaded);
+	color: var(--gbm-purple-text);
+	font-family: Montserrat, sans-serif;
+	font-size: 14px;
+	border-radius: 0px 12px 12px 12px;
+	-webkit-box-shadow: 2px 2px 2px var(--gbm-purple);
+	        box-shadow: 2px 2px 2px var(--gbm-purple);
+}
+.sheet-rolltemplate-GBM .sheet-Roll-Result .sheet-Roll-Title {
+	color: white;
+	background-color: var(--gbm-purple);
+	border-radius: 0px 12px 0px 0px;
+	font-size: 21px;
+	padding: 4px;
+}
+.sheet-rolltemplate-GBM .sheet-Roll-Result .sheet-Roll-Title .sheet-Roll-Subtitle {
+	font-size: 14px;
+}
+.sheet-rolltemplate-GBM .sheet-Roll-PnE {
+	padding: 4px;
+	padding-bottom: 0px;
+	display: -ms-grid;
+	display: grid;
+	-ms-grid-columns: 1fr 1fr;
+	grid-template-columns: 1fr 1fr;
+}
+.sheet-rolltemplate-GBM .sheet-Roll-PnE .sheet-Label-Position, .sheet-rolltemplate-GBM .sheet-Roll-PnE .sheet-Position {
+	-ms-grid-column: 1;
+	    grid-column-start: 1;
+}
+.sheet-rolltemplate-GBM .sheet-Roll-PnE .sheet-Label-Effect, .sheet-rolltemplate-GBM .sheet-Roll-PnE .sheet-Effect {
+	-ms-grid-column: 2;
+	    grid-column-start: 2;
+}
+.sheet-rolltemplate-GBM .sheet-Roll-PnE .sheet-Label-Position, .sheet-rolltemplate-GBM .sheet-Roll-PnE .sheet-Label-Effect {
+	font-size: 10px;
+	text-transform: uppercase;
+	font-weight: bold;
+}
+.sheet-rolltemplate-GBM .sheet-Roll-PnE .sheet-Position-Risky, .sheet-rolltemplate-GBM .sheet-Roll-PnE .sheet-Position-Controlled {
+	display: none;
+}
+.sheet-rolltemplate-GBM .sheet-Roll-PnE .sheet-Position-Desperate {
+	padding-top: 4px;
+	display: block;
+	-ms-grid-column: 1;
+	-ms-grid-column-span: 2;
+	grid-column: 1/span 2;
+	text-align: center;
+	font-style: italic;
+}
+.sheet-rolltemplate-GBM .sheet-Roll-Dice {
+	text-align: center;
+	vertical-align: middle;
+	padding-top: 12px;
+	padding-bottom: 0px;
+}
+.sheet-rolltemplate-GBM .sheet-Roll-Dice .sheet-Dicezone {
+	padding-bottom: 6px;
+}
+.sheet-rolltemplate-GBM .sheet-Roll-Dice .inlinerollresult {
+	display: inline-block;
+	color: white;
+	background-color: var(--gbm-blue);
+	border: 1px solid var(--gbm-blue-dark);
+	font-size: 36px;
+	height: 36px;
+	width: 36px;
+	line-height: 36px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	border-radius: 6px;
+	margin-left: 4px;
+	margin-right: 4px;
+	margin-bottom: 8px;
+	margin-top: 4px;
+	-webkit-box-shadow: 0px 4px 6px var(--gbm-blue);
+	        box-shadow: 0px 4px 6px var(--gbm-blue);
+}
+.sheet-rolltemplate-GBM .sheet-Roll-Dice .inlinerollresult.fullcrit {
+	background-color: var(--gbm-pink);
+	-webkit-box-shadow: 0px 4px 12px var(--gbm-pink);
+	        box-shadow: 0px 4px 12px var(--gbm-pink);
+	border: 1px solid white;
+}
+.sheet-rolltemplate-GBM .sheet-Roll-Dice .inlinerollresult.fullcrit ~ .inlinerollresult.fullcrit {
+	background-color: var(--gbm-pink);
+	-webkit-box-shadow: 0px 4px 12px var(--gbm-pink);
+	        box-shadow: 0px 4px 12px var(--gbm-pink);
+	border: 3px double white;
+}
+.sheet-rolltemplate-GBM .sheet-Roll-Dice .inlinerollresult.fullfail {
+	background-color: black;
+	font-weight: bold;
+	border: 1px solid var(--gbm-purple);
+	-webkit-box-shadow: unset;
+	        box-shadow: unset;
+}
+.sheet-rolltemplate-GBM .sheet-Roll-Dice .sheet-SmallHead {
+	text-transform: uppercase;
+}
+.sheet-rolltemplate-GBM .sheet-Roll-Dice .sheet-Instruct {
+	font-style: italic;
+}
+.sheet-rolltemplate-GBM .sheet-Roll-Dice .sheet-Only-dice, .sheet-rolltemplate-GBM .sheet-Roll-Dice .sheet-Only-transcenddice, .sheet-rolltemplate-GBM .sheet-Roll-Dice .sheet-Only-zerodice, .sheet-rolltemplate-GBM .sheet-Roll-Dice .sheet-Only-transcendzerodice {
+	display: none;
+}
+.sheet-rolltemplate-GBM .sheet-Roll-Dice .sheet-Dicezone-dice .sheet-Only-dice {
+	display: block;
+}
+.sheet-rolltemplate-GBM .sheet-Roll-Dice .sheet-Dicezone-transcenddice .sheet-Only-transcenddice {
+	display: block;
+}
+.sheet-rolltemplate-GBM .sheet-Roll-Dice .sheet-Dicezone-zerodice .sheet-Only-zerodice, .sheet-rolltemplate-GBM .sheet-Roll-Dice .sheet-Dicezone-Zerodice .sheet-Only-zerodice {
+	display: block;
+}
+.sheet-rolltemplate-GBM .sheet-Roll-Dice .sheet-Dicezone-transcendzerodice .sheet-Only-transcendzerodice {
+	display: block;
+}
+.sheet-rolltemplate-GBM .sheet-Properties {
+	border: 1px solid red;
+	display: block;
 }
 
 .ui-dialog .charsheet {
@@ -830,4 +954,8 @@ input.sheet-Stress-Total[value="9"] ~ .sheet-Stress-Track {
 	        flex-grow: 1;
 	font-size: 21px;
 	vertical-align: middle;
+}
+
+.sheet-Eclipse-Roll-Stripe, .sheet-Obligation-Roll-Stripe {
+	text-align: center;
 }
