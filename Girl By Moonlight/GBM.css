@@ -2,7 +2,6 @@
 :root, .sheet-rolltemplate-GBM {
 	--gbm-blue: #006784;
 	--gbm-blue-pale: #dee9ed;
-	--gbm-blue-shade: #8fb1b5;
 	--gbm-blue-dark: #00394c;
 	--gbm-pink: #a52868;
 	--gbm-pink-pale: #d6b8c2;
@@ -573,7 +572,7 @@ input.sheet-Mode-Playbook[value=UnlikelyHero] ~ div.sheet-Playbook-UnlikelyHero,
 	font-size: 10px;
 }
 
-.ui-dialog .tab-content .charsheet button[type=roll].sheet-buttonless {
+.ui-dialog .tab-content .charsheet button[type=roll].sheet-buttonless, .ui-dialog .tab-content .charsheet button[type=action].sheet-buttonless {
 	border: none;
 	background: none;
 	font-weight: normal;
@@ -592,13 +591,13 @@ input.sheet-Mode-Playbook[value=UnlikelyHero] ~ div.sheet-Playbook-UnlikelyHero,
 	-webkit-box-shadow: unset;
 	        box-shadow: unset;
 }
-.ui-dialog .tab-content .charsheet button[type=roll].sheet-buttonless:before {
+.ui-dialog .tab-content .charsheet button[type=roll].sheet-buttonless:before, .ui-dialog .tab-content .charsheet button[type=action].sheet-buttonless:before {
 	content: "";
 }
-.ui-dialog .tab-content .charsheet button[type=roll].sheet-buttonless:hover {
+.ui-dialog .tab-content .charsheet button[type=roll].sheet-buttonless:hover, .ui-dialog .tab-content .charsheet button[type=action].sheet-buttonless:hover {
 	text-shadow: 0 0 8px white;
 }
-.ui-dialog .tab-content .charsheet button[type=roll].sheet-buttonless:active {
+.ui-dialog .tab-content .charsheet button[type=roll].sheet-buttonless:active, .ui-dialog .tab-content .charsheet button[type=action].sheet-buttonless:active {
 	color: white;
 	text-shadow: 0 0 8px black;
 }
@@ -741,6 +740,28 @@ button.sheet-button-header-xp-off.sheet-xp-end:before {
 	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/xp-box-right-off.svg);
 }
 
+button.sheet-button-plus:before {
+	font-family: "Pictos";
+	font-size: 14px;
+	content: "+";
+}
+
+button.sheet-button-minus:before {
+	font-family: "Pictos";
+	font-size: 14px;
+	content: "-";
+}
+
+.sheet-button-mark-on, .sheet-button-mark-off, .sheet-button-transcendent-on, .sheet-button-transcendent-off, .sheet-button-stress-on, .sheet-button-stress-off, .sheet-button-plus, .sheet-button-minus {
+	border: none;
+	background: none;
+	font-weight: normal;
+	text-align: left;
+	vertical-align: top;
+	padding-left: 0;
+	padding-right: 0;
+}
+
 .sheet-button-header-expand, .sheet-button-header-collapse, .sheet-button-header-edit, .sheet-button-header-close, .sheet-button-header-mark-off, .sheet-button-header-mark-on, .sheet-button-header-transcendent-off, .sheet-button-header-transcendent-on, .sheet-button-header-xp-on, .sheet-button-header-xp-off {
 	border: none;
 	background: none;
@@ -799,16 +820,6 @@ button.sheet-button-header-xp-off.sheet-xp-end:before {
 	padding-bottom: 4px;
 	margin-top: -4px;
 	text-transform: uppercase;
-}
-
-.sheet-button-mark-on, .sheet-button-mark-off, .sheet-button-transcendent-on, .sheet-button-transcendent-off, .sheet-button-stress-on, .sheet-button-stress-off {
-	border: none;
-	background: none;
-	font-weight: normal;
-	text-align: left;
-	vertical-align: top;
-	padding-left: 0;
-	padding-right: 0;
 }
 
 .sheet-hide-on-one[value="1"] + *, .sheet-hide-on-zero[value="0"] + * {
@@ -958,4 +969,244 @@ input.sheet-Stress-Total[value="9"] ~ .sheet-Stress-Track {
 
 .sheet-Eclipse-Roll-Stripe, .sheet-Obligation-Roll-Stripe {
 	text-align: center;
+}
+
+.sheet-Clock {
+	display: inline-block;
+	min-height: 40px;
+	min-width: 40px;
+	height: 40px;
+	width: 40px;
+	margin-bottom: 0px;
+	background-image: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/all-clocks.svg);
+	background-repeat: no-repeat;
+	background-size: 520px 200px;
+	background-clip: padding-box;
+}
+
+input.sheet-Clock-Size[value="4"] + input.sheet-Clock-Ticks[value="0"] + .sheet-Clock {
+	background-position: top 0px left 0px;
+}
+
+input.sheet-Clock-Size[value="4"] + input.sheet-Clock-Ticks[value="1"] + .sheet-Clock {
+	background-position: top 0px left -40px;
+}
+
+input.sheet-Clock-Size[value="4"] + input.sheet-Clock-Ticks[value="2"] + .sheet-Clock {
+	background-position: top 0px left -80px;
+}
+
+input.sheet-Clock-Size[value="4"] + input.sheet-Clock-Ticks[value="3"] + .sheet-Clock {
+	background-position: top 0px left -120px;
+}
+
+input.sheet-Clock-Size[value="4"] + input.sheet-Clock-Ticks[value="4"] + .sheet-Clock {
+	background-position: top 0px left -160px;
+}
+
+input.sheet-Clock-Size[value="6"] + input.sheet-Clock-Ticks[value="0"] + .sheet-Clock {
+	background-position: top -40px left 0px;
+}
+
+input.sheet-Clock-Size[value="6"] + input.sheet-Clock-Ticks[value="1"] + .sheet-Clock {
+	background-position: top -40px left -40px;
+}
+
+input.sheet-Clock-Size[value="6"] + input.sheet-Clock-Ticks[value="2"] + .sheet-Clock {
+	background-position: top -40px left -80px;
+}
+
+input.sheet-Clock-Size[value="6"] + input.sheet-Clock-Ticks[value="3"] + .sheet-Clock {
+	background-position: top -40px left -120px;
+}
+
+input.sheet-Clock-Size[value="6"] + input.sheet-Clock-Ticks[value="4"] + .sheet-Clock {
+	background-position: top -40px left -160px;
+}
+
+input.sheet-Clock-Size[value="6"] + input.sheet-Clock-Ticks[value="5"] + .sheet-Clock {
+	background-position: top -40px left -200px;
+}
+
+input.sheet-Clock-Size[value="6"] + input.sheet-Clock-Ticks[value="6"] + .sheet-Clock {
+	background-position: top -40px left -240px;
+}
+
+input.sheet-Clock-Size[value="8"] + input.sheet-Clock-Ticks[value="0"] + .sheet-Clock {
+	background-position: top -80px left 0px;
+}
+
+input.sheet-Clock-Size[value="8"] + input.sheet-Clock-Ticks[value="1"] + .sheet-Clock {
+	background-position: top -80px left -40px;
+}
+
+input.sheet-Clock-Size[value="8"] + input.sheet-Clock-Ticks[value="2"] + .sheet-Clock {
+	background-position: top -80px left -80px;
+}
+
+input.sheet-Clock-Size[value="8"] + input.sheet-Clock-Ticks[value="3"] + .sheet-Clock {
+	background-position: top -80px left -120px;
+}
+
+input.sheet-Clock-Size[value="8"] + input.sheet-Clock-Ticks[value="4"] + .sheet-Clock {
+	background-position: top -80px left -160px;
+}
+
+input.sheet-Clock-Size[value="8"] + input.sheet-Clock-Ticks[value="5"] + .sheet-Clock {
+	background-position: top -80px left -200px;
+}
+
+input.sheet-Clock-Size[value="8"] + input.sheet-Clock-Ticks[value="6"] + .sheet-Clock {
+	background-position: top -80px left -240px;
+}
+
+input.sheet-Clock-Size[value="8"] + input.sheet-Clock-Ticks[value="7"] + .sheet-Clock {
+	background-position: top -80px left -280px;
+}
+
+input.sheet-Clock-Size[value="8"] + input.sheet-Clock-Ticks[value="8"] + .sheet-Clock {
+	background-position: top -80px left -320px;
+}
+
+input.sheet-Clock-Size[value="10"] + input.sheet-Clock-Ticks[value="0"] + .sheet-Clock {
+	background-position: top -120px left 0px;
+}
+
+input.sheet-Clock-Size[value="10"] + input.sheet-Clock-Ticks[value="1"] + .sheet-Clock {
+	background-position: top -120px left -40px;
+}
+
+input.sheet-Clock-Size[value="10"] + input.sheet-Clock-Ticks[value="2"] + .sheet-Clock {
+	background-position: top -120px left -80px;
+}
+
+input.sheet-Clock-Size[value="10"] + input.sheet-Clock-Ticks[value="3"] + .sheet-Clock {
+	background-position: top -120px left -120px;
+}
+
+input.sheet-Clock-Size[value="10"] + input.sheet-Clock-Ticks[value="4"] + .sheet-Clock {
+	background-position: top -120px left -160px;
+}
+
+input.sheet-Clock-Size[value="10"] + input.sheet-Clock-Ticks[value="5"] + .sheet-Clock {
+	background-position: top -120px left -200px;
+}
+
+input.sheet-Clock-Size[value="10"] + input.sheet-Clock-Ticks[value="6"] + .sheet-Clock {
+	background-position: top -120px left -240px;
+}
+
+input.sheet-Clock-Size[value="10"] + input.sheet-Clock-Ticks[value="7"] + .sheet-Clock {
+	background-position: top -120px left -280px;
+}
+
+input.sheet-Clock-Size[value="10"] + input.sheet-Clock-Ticks[value="8"] + .sheet-Clock {
+	background-position: top -120px left -320px;
+}
+
+input.sheet-Clock-Size[value="10"] + input.sheet-Clock-Ticks[value="9"] + .sheet-Clock {
+	background-position: top -120px left -360px;
+}
+
+input.sheet-Clock-Size[value="10"] + input.sheet-Clock-Ticks[value="10"] + .sheet-Clock {
+	background-position: top -120px left -400px;
+}
+
+input.sheet-Clock-Size[value="12"] + input.sheet-Clock-Ticks[value="0"] + .sheet-Clock {
+	background-position: top -160px left 0px;
+}
+
+input.sheet-Clock-Size[value="12"] + input.sheet-Clock-Ticks[value="1"] + .sheet-Clock {
+	background-position: top -160px left -40px;
+}
+
+input.sheet-Clock-Size[value="12"] + input.sheet-Clock-Ticks[value="2"] + .sheet-Clock {
+	background-position: top -160px left -80px;
+}
+
+input.sheet-Clock-Size[value="12"] + input.sheet-Clock-Ticks[value="3"] + .sheet-Clock {
+	background-position: top -160px left -120px;
+}
+
+input.sheet-Clock-Size[value="12"] + input.sheet-Clock-Ticks[value="4"] + .sheet-Clock {
+	background-position: top -160px left -160px;
+}
+
+input.sheet-Clock-Size[value="12"] + input.sheet-Clock-Ticks[value="5"] + .sheet-Clock {
+	background-position: top -160px left -200px;
+}
+
+input.sheet-Clock-Size[value="12"] + input.sheet-Clock-Ticks[value="6"] + .sheet-Clock {
+	background-position: top -160px left -240px;
+}
+
+input.sheet-Clock-Size[value="12"] + input.sheet-Clock-Ticks[value="7"] + .sheet-Clock {
+	background-position: top -160px left -280px;
+}
+
+input.sheet-Clock-Size[value="12"] + input.sheet-Clock-Ticks[value="8"] + .sheet-Clock {
+	background-position: top -160px left -320px;
+}
+
+input.sheet-Clock-Size[value="12"] + input.sheet-Clock-Ticks[value="9"] + .sheet-Clock {
+	background-position: top -160px left -360px;
+}
+
+input.sheet-Clock-Size[value="12"] + input.sheet-Clock-Ticks[value="10"] + .sheet-Clock {
+	background-position: top -160px left -400px;
+}
+
+input.sheet-Clock-Size[value="12"] + input.sheet-Clock-Ticks[value="11"] + .sheet-Clock {
+	background-position: top -160px left -440px;
+}
+
+input.sheet-Clock-Size[value="12"] + input.sheet-Clock-Ticks[value="12"] + .sheet-Clock {
+	background-position: top -160px left -480px;
+}
+
+.sheet-Clock-Container {
+	display: -ms-grid;
+	display: grid;
+	-ms-grid-columns: 40px 8px 20px 8px 1fr;
+	grid-template-columns: 40px 20px 1fr;
+	-webkit-column-gap: 8px;
+	   -moz-column-gap: 8px;
+	        column-gap: 8px;
+	margin-bottom: 16px;
+}
+.sheet-Clock-Container .sheet-Clock {
+	-ms-grid-column: 1;
+	    grid-column-start: 1;
+}
+.sheet-Clock-Container .sheet-Clock-Controls {
+	margin-top: -3px;
+	-ms-grid-column: 2;
+	    grid-column-start: 2;
+	display: -ms-grid;
+	display: grid;
+	-ms-grid-columns: 1fr;
+	grid-template-columns: 1fr;
+	row-gap: 0px;
+	vertical-align: top;
+}
+.sheet-Clock-Container .sheet-Clock-Controls button {
+	text-align: center;
+	vertical-align: top;
+	padding: 0px;
+	height: 20px;
+}
+.sheet-Clock-Container .sheet-Clock-Controls button:hover {
+	color: white;
+	text-shadow: -1px -1px 2px var(--gbm-blue), 1px -1px 2px var(--gbm-blue), -1px 1px 2px var(--gbm-blue), 1px 1px 2px var(--gbm-blue);
+}
+.sheet-Clock-Container .sheet-Clock-Controls button:active {
+	color: var(--gbm-blue);
+	text-shadow: -1px -1px 4px white, 1px -1px 4px white, -1px 1px 4px white, 1px 1px 4px white;
+}
+.sheet-Clock-Container .sheet-Clock-Fields {
+	-ms-grid-column: 3;
+	    grid-column-start: 3;
+}
+.sheet-Clock-Container .sheet-Clock-Fields input, .sheet-Clock-Container .sheet-Clock-Fields select {
+	width: 100%;
 }

@@ -1,0 +1,24 @@
+.sheet-Box.sheet-Playbook-Selected
+	.sheet-Box-Header
+		+translate('Clocks')
+		.sheet-Box-Header-Icons
+			+toggle('Toggle-Clocks-Expand',1)
+	+hidden('Toggle-Clocks-Expand',1).sheet-hide-on-one
+	.sheet-Clocks
+		fieldset.repeating_clocks
+			.sheet-Clock-Container
+				+hidden('size',4).sheet-Clock-Size
+				+hidden('ticks',0).sheet-Clock-Ticks
+				.sheet-Clock
+				.sheet-Clock-Controls
+					button(type="action",name="act_add").sheet-button-plus
+					button(type="action",name="act_sub").sheet-button-minus
+				.sheet-Clock-Fields
+					+text('name','My Clock')
+					+select('size')
+						+option('Set clock size...')
+						option 4
+						option 6
+						option 8
+						option 10
+						option 12

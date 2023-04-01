@@ -37,6 +37,7 @@ $xpmidon: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl
 $xprightoff: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/xp-box-right-off.svg)
 $xprighton: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/xp-box-right-on.svg)
 $statscon: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/connector-stats-blue-vertical.svg)
+$clock: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/all-clocks.svg)
 
 @import url('https://fonts.googleapis.com/css2?family=Kufam:ital,wght@0,400;0,700;1,400;1,700&family=Montserrat:ital,wght@0,400;0,700;1,400;1,700&display=swap')
 
@@ -45,7 +46,6 @@ $statscon: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Gir
 :root, .sheet-rolltemplate-GBM
 	--gbm-blue: #006784
 	--gbm-blue-pale: #dee9ed
-	--gbm-blue-shade: #8fb1b5
 	--gbm-blue-dark: #00394c
 	--gbm-pink: #a52868
 	--gbm-pink-pale: #d6b8c2
@@ -471,30 +471,31 @@ input.sheet-Mode-Playbook
 	width: 120px
 	font-size: #{$labelsize}
 
-.ui-dialog .tab-content .charsheet button[type="roll"].sheet-buttonless
-	border: none
-	background: none
-	font-weight: normal
-	text-align: left
-	padding: 0px
-	margin: 0px
-	margin-top: -1px
-	margin-bottom: 4px
-	vertical-align: baseline
-	text-shadow: none
-	color: inherit
-	font-weight: inherit
-	font-size: inherit
-	border-radius: unset
-	line-height: inherit
-	box-shadow: unset
-	&:before
-		content: ""
-	&:hover
-		text-shadow: 0 0 8px white
-	&:active
-		color: white
-		text-shadow: 0 0 8px black
+.ui-dialog .tab-content .charsheet 
+	button[type="roll"].sheet-buttonless, button[type="action"].sheet-buttonless
+		border: none
+		background: none
+		font-weight: normal
+		text-align: left
+		padding: 0px
+		margin: 0px
+		margin-top: -1px
+		margin-bottom: 4px
+		vertical-align: baseline
+		text-shadow: none
+		color: inherit
+		font-weight: inherit
+		font-size: inherit
+		border-radius: unset
+		line-height: inherit
+		box-shadow: unset
+		&:before
+			content: ""
+		&:hover
+			text-shadow: 0 0 8px white
+		&:active
+			color: white
+			text-shadow: 0 0 8px black
 
 button.sheet-button-header-collapse:before
 	font-family: 'Pictos'
@@ -603,6 +604,25 @@ button.sheet-button-header-xp-on.sheet-xp-end:before
 button.sheet-button-header-xp-off.sheet-xp-end:before
 	content: #{$xprightoff}
 
+button.sheet-button-plus:before
+	font-family: 'Pictos'
+	font-size: #{$bodysize}
+	content: '+'
+
+button.sheet-button-minus:before
+	font-family: 'Pictos'
+	font-size: #{$bodysize}
+	content: '-'
+
+.sheet-button-mark-on, .sheet-button-mark-off, .sheet-button-transcendent-on, .sheet-button-transcendent-off, .sheet-button-stress-on, .sheet-button-stress-off, .sheet-button-plus, .sheet-button-minus
+	border: none
+	background: none
+	font-weight: normal
+	text-align: left
+	vertical-align: top
+	padding-left: 0
+	padding-right: 0
+
 .sheet-button-header-expand, .sheet-button-header-collapse, .sheet-button-header-edit, .sheet-button-header-close, .sheet-button-header-mark-off, .sheet-button-header-mark-on, .sheet-button-header-transcendent-off, .sheet-button-header-transcendent-on, .sheet-button-header-xp-on, .sheet-button-header-xp-off
 	border: none
 	background: none
@@ -644,15 +664,6 @@ button.sheet-button-header-xp-off.sheet-xp-end:before
 	padding-bottom: 4px
 	margin-top: -4px
 	text-transform: uppercase
-
-.sheet-button-mark-on, .sheet-button-mark-off, .sheet-button-transcendent-on, .sheet-button-transcendent-off, .sheet-button-stress-on, .sheet-button-stress-off
-	border: none
-	background: none
-	font-weight: normal
-	text-align: left
-	vertical-align: top
-	padding-left: 0
-	padding-right: 0
 	
 .sheet-hide-on-one[value="1"], .sheet-hide-on-zero[value="0"] 
 	+ * 
@@ -758,3 +769,49 @@ input.sheet-Stress-Total
 
 .sheet-Eclipse-Roll-Stripe, .sheet-Obligation-Roll-Stripe
 	text-align: center
+
+.sheet-Clock
+	display: inline-block
+	min-height: 40px
+	min-width: 40px
+	height: 40px
+	width: 40px
+	margin-bottom: 0px
+	background-image: #{$clock} 
+	background-repeat: no-repeat
+	background-size: 520px 200px
+	background-clip: padding-box
+@for $i from 2 through 6
+	@for $j from 0 through $i*2	
+		input.sheet-Clock-Size[value="#{$i*2}"] + input.sheet-Clock-Ticks[value="#{$j}"] + .sheet-Clock
+			background-position: top #{$i*-40+80}px left #{$j*-40}px
+
+.sheet-Clock-Container
+	display: grid
+	grid-template-columns: 40px 20px 1fr
+	column-gap: 8px
+	margin-bottom: 16px
+	.sheet-Clock
+		grid-column-start: 1
+	.sheet-Clock-Controls
+		margin-top: -3px
+		grid-column-start: 2
+		display: grid
+		grid-template-columns: 1fr
+		row-gap: 0px
+		vertical-align: top
+		button
+			text-align: center
+			vertical-align: top
+			padding: 0px
+			height: 20px
+			&:hover
+				color: white
+				text-shadow: -1px -1px 2px var(--gbm-blue), 1px -1px 2px var(--gbm-blue), -1px 1px 2px var(--gbm-blue), 1px 1px 2px var(--gbm-blue)
+			&:active
+				color: var(--gbm-blue)
+				text-shadow: -1px -1px 4px white, 1px -1px 4px white, -1px 1px 4px white, 1px 1px 4px white
+	.sheet-Clock-Fields
+		grid-column-start: 3
+		input, select
+			width: 100%

@@ -40,6 +40,10 @@ mixin hidden(a,v)
 	- if ( typeof(v) == "undefined" ) { v = ""; }
 	+input(a)(type="hidden", value=v)&attributes(attributes)
 
+mixin number(a,v)
+	- if ( typeof(v) == "undefined" ) { v = ""; }
+	+input(a)(type="number", value=v)&attributes(attributes)
+
 mixin display(a)
 	+hidden(a)
 	span(name="attr_"+a)&attributes(attributes)

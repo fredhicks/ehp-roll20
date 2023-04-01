@@ -499,3 +499,58 @@ script(type="text/worker")
 			}
 			setAttrs(a);
 		});
+		
+		on("clicked:repeating_clocks:add clicked:repeating_clocks:sub", function(e) {
+			log(e);
+			var rowprefix = (e.sourceAttribute).slice(0,-3); // Strips off the 'add' or 'sub'
+			var direction = (e.sourceAttribute).slice(rowprefix.length); // Strips off the prefix
+			getAttrs([ rowprefix+'size', rowprefix+'ticks' ], function(a) {
+				log(a);
+				if ( typeof(a[rowprefix+'size']) == "undefined" ) {
+					a[rowprefix+'size'] = 4;
+				}
+				if ( typeof(a[rowprefix+'ticks']) == "undefined" ) {
+					a[rowprefix+'ticks'] = 0;
+				}
+				var size = Number(a[rowprefix+'size']);
+				var ticks = Number(a[rowprefix+'ticks']);
+				if(direction == "add") {
+					ticks++;
+				}
+				if(direction == "sub") {
+					ticks--;
+				}
+				if ( ticks > size ) {
+					ticks = size;
+				}
+				if ( ticks < 0 ) {
+					ticks = 0;
+				}
+				a[rowprefix+'ticks'] = ticks;
+				setAttrs(a);
+			});
+		});
+
+		on("change:repeating_clocks:size", function(e) {
+			log(e);
+			var rowprefix = (e.sourceAttribute).slice(0,-4); // Strips off the 'size'
+			getAttrs([ rowprefix+'size', rowprefix+'ticks' ], function(a) {
+				log(a);
+				if ( typeof(a[rowprefix+'size']) == "undefined" ) {
+					a[rowprefix+'size'] = 4;
+				}
+				if ( typeof(a[rowprefix+'ticks']) == "undefined" ) {
+					a[rowprefix+'ticks'] = 0;
+				}
+				var size = Number(a[rowprefix+'size']);
+				var ticks = Number(a[rowprefix+'ticks']);
+				if ( ticks > size ) {
+					ticks = size;
+				}
+				if ( ticks < 0 ) {
+					ticks = 0;
+				}
+				a[rowprefix+'ticks'] = ticks;
+				setAttrs(a);
+			});
+		});
