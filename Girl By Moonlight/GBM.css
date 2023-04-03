@@ -1209,4 +1209,124 @@ input.sheet-Clock-Size[value="12"] + input.sheet-Clock-Ticks[value="12"] + .shee
 }
 .sheet-Clock-Container .sheet-Clock-Fields input, .sheet-Clock-Container .sheet-Clock-Fields select {
 	width: 100%;
+	height: auto;
+}
+
+.sheet-Harm-Track .sheet-Level {
+	max-width: 30px;
+	width: 30px;
+	height: 30px;
+	vertical-align: middle;
+	text-align: center;
+	font-size: 20px;
+	background-color: var(--gbm-pink);
+	color: white;
+	border-radius: 15px;
+}
+.sheet-Harm-Track input.sheet-Harm {
+	-webkit-box-flex: 1;
+	    -ms-flex-positive: 1;
+	        flex-grow: 1;
+	padding-right: 8px;
+	height: 40px;
+}
+.sheet-Harm-Track .sheet-Harm + .sheet-Harm {
+	border-left: 1px dotted var(--gbm-pink-text);
+}
+.sheet-Harm-Track .sheet-Cue {
+	max-width: 40px;
+	width: 40px;
+	font-style: italic;
+	vertical-align: middle;
+	text-align: center;
+	line-height: auto;
+	font-size: calc( 14px * .9 );
+}
+.sheet-Harm-Track .sheet-Level-3, .sheet-Harm-Track .sheet-Level-2, .sheet-Harm-Track .sheet-Level-1 {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	    -ms-flex-flow: row nowrap;
+	        flex-flow: row nowrap;
+	-webkit-box-pack: justify;
+	    -ms-flex-pack: justify;
+	        justify-content: space-between;
+	-webkit-box-align: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+}
+.sheet-Harm-Track .sheet-Level-3 input {
+	width: calc(100% - 76px);
+}
+.sheet-Harm-Track .sheet-Level-2 input, .sheet-Harm-Track .sheet-Level-1 input {
+	width: calc(50% - 38px);
+}
+
+.sheet-Harm-Auxiliary {
+	margin-top: 8px;
+	display: -ms-grid;
+	display: grid;
+	-ms-grid-columns: 100px 1fr;
+	grid-template-columns: 100px 1fr;
+}
+.sheet-Harm-Auxiliary .sheet-Clock-Title {
+	-ms-grid-column: 1;
+	    grid-column-start: 1;
+	-ms-grid-row: 1;
+	    grid-row-start: 1;
+	font-size: 10px;
+	text-transform: uppercase;
+	font-weight: bold;
+	text-align: left;
+	margin-bottom: 4px;
+}
+.sheet-Harm-Auxiliary .sheet-Armor {
+	-ms-grid-column: 2;
+	    grid-column-start: 2;
+	-ms-grid-row: 1;
+	-ms-grid-row-span: 2;
+	grid-row: 1/span 2;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	    -ms-flex-flow: column nowrap;
+	        flex-flow: column nowrap;
+	-webkit-box-pack: space-evenly;
+	    -ms-flex-pack: space-evenly;
+	        justify-content: space-evenly;
+}
+.sheet-Harm-Auxiliary .sheet-Armor .sheet-Armor-Line {
+	background-color: var(--gbm-pink);
+	color: white;
+	display: -ms-grid;
+	display: grid;
+	-ms-grid-columns: 24px 1fr;
+	grid-template-columns: 24px 1fr;
+	margin-bottom: 8px;
+	padding-left: 8px;
+	border-radius: 16px;
+	padding-top: 4px;
+}
+.sheet-Harm-Auxiliary .sheet-Armor .sheet-Armor-Line + .sheet-Armor-Line {
+	margin-bottom: 0px;
+}
+.sheet-Harm-Auxiliary .sheet-Armor .sheet-Armor-Line .sheet-Armor-Button {
+	-ms-grid-column: 1;
+	    grid-column-start: 1;
+}
+.sheet-Harm-Auxiliary .sheet-Armor .sheet-Armor-Line .sheet-Label {
+	-ms-grid-column: 2;
+	    grid-column-start: 2;
+	font-weight: bold;
+}
+.sheet-Harm-Auxiliary .sheet-Clock-Container {
+	margin-bottom: 0px;
+	-ms-grid-column: 1;
+	    grid-column-start: 1;
+	-ms-grid-row: 2;
+	    grid-row-start: 2;
 }

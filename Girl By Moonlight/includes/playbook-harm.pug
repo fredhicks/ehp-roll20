@@ -5,3 +5,39 @@
 			+toggle('Toggle-Harm-Expand')
 	+hidden('Toggle-Harm-Expand').sheet-hide-on-one
 	.sheet-Harm-Track
+		.sheet-Level-3
+			.sheet-Level 3
+			+text('Harm-Level-3').sheet-Harm
+			.sheet-Cue
+				+translate('need help')
+		.sheet-Level-2
+			.sheet-Level 2
+			+text('Harm-Level-2a').sheet-Harm
+			+text('Harm-Level-2b').sheet-Harm
+			.sheet-Cue 
+				span -1d
+		.sheet-Level-1
+			.sheet-Level 1
+			+text('Harm-Level-1a').sheet-Harm
+			+text('Harm-Level-1b').sheet-Harm
+			.sheet-Cue
+				+translate('less effect')
+	.sheet-Harm-Auxiliary
+		.sheet-Clock-Title
+			+translate('Recovery')
+		.sheet-Clock-Container
+			+hidden('Recovery-size',4).sheet-Clock-Size
+			+hidden('Recovery-ticks',0).sheet-Clock-Ticks
+			.sheet-Clock
+			.sheet-Clock-Controls
+				button(type="action",name="act_Recovery-add").sheet-button-plus
+				button(type="action",name="act_Recovery-sub").sheet-button-minus
+		.sheet-Armor
+			.sheet-Armor-Line
+				.sheet-Armor-Button
+					+stressMark('Armor-Mark')
+				+translate('Armor').sheet-Label
+			.sheet-Armor-Line
+				.sheet-Armor-Button
+					+stressMark('Special-Mark')
+				+translate('Special').sheet-Label

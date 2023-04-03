@@ -500,8 +500,11 @@ script(type="text/worker")
 			setAttrs(a);
 		});
 		
-		on("clicked:repeating_clocks:add clicked:repeating_clocks:sub", function(e) {
+		on("clicked:repeating_clocks:add clicked:repeating_clocks:sub clicked:Recovery-add clicked:Recovery-sub", function(e) {
 			log(e);
+			if ( typeof(e.sourceAttribute) == "undefined" ) {
+				e.sourceAttribute = (e.htmlAttributes.name).slice(4); // strip act_
+			}
 			var rowprefix = (e.sourceAttribute).slice(0,-3); // Strips off the 'add' or 'sub'
 			var direction = (e.sourceAttribute).slice(rowprefix.length); // Strips off the prefix
 			getAttrs([ rowprefix+'size', rowprefix+'ticks' ], function(a) {

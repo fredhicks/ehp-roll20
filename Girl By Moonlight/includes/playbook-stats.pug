@@ -19,7 +19,7 @@ each actions, attribute in statsblock
 		.sheet-Box-Header.sheet-Box-XP
 			span
 				+hidden(attribute+'-Resist-Total')
-				button(name="roll_"+attribute, type="roll", data-i18n-title='Roll-Describe-'+attribute, value="&{template:GBM} {{charname=@{character_name}}} {{@{Position-Query}}} {{effect=@{Effect-Query}}} {{@{"+attribute+"-Resist-Roll-Formula}}} {{title=^{"+attribute+"}}} {{resist=yes}}").sheet-buttonless
+				button(name="roll_"+attribute, type="roll", data-i18n-title='Roll-Describe-'+attribute, value="&{template:GBM} {{charname=@{character_name}}} {{@{"+attribute+"-Resist-Roll-Formula}}} {{title=^{"+attribute+"}}} {{resist=yes}}").sheet-buttonless
 					+translate(attribute)
 			.sheet-Box-Header-Icons
 				.sheet-XP-Track
