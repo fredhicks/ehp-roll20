@@ -43,6 +43,7 @@ $conlr: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%2
 $contr: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/connection-TR.svg)
 $contl: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/connection-TL.svg)
 $contlxbr: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/connection-TL-BR.svg)
+$conbr: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/connection-BR.svg)
 $conlbxrb: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/connection-LB-RB.svg)
 
 @import url('https://fonts.googleapis.com/css2?family=Kufam:ital,wght@0,400;0,700;1,400;1,700&family=Montserrat:ital,wght@0,400;0,700;1,400;1,700&display=swap')
@@ -1282,6 +1283,12 @@ input.sheet-Stress-Total
 		background-repeat: no-repeat
 		background-size: 240px 240px
 		background-clip: padding-box
+	&.sheet-BR
+		background-image: #{$conbr} 
+		background-position: center
+		background-repeat: no-repeat
+		background-size: 240px 240px
+		background-clip: padding-box
 	&.sheet-LB-RB
 		background-image: #{$conlbxrb} 
 		background-position: center
@@ -1301,14 +1308,25 @@ input.sheet-Stress-Total
 .sheet-Flagship
 	> .sheet-Box
 		margin-right: -12px
+		.sheet-Box-Header
+			display: flex
+			.sheet-Title
+				flex-grow: 1
 
 .sheet-Flagship-Container
 	display: grid
+	margin-bottom: 12px
+	margin-right: 12px
 	.sheet-Box
 		margin-bottom: 0px
 		.sheet-Box-Header
 			.sheet-Box-Header-Icons
 				padding-right: 4px
+				padding-top: 0px
+				margin-top: -4px
+	.sheet-Room
+		.sheet-Box-Header
+			font-size: #{$bodysize}
 	.sheet-Box.sheet-Solid
 		background-color: var(--gbm-purple)
 		color: white
@@ -1319,10 +1337,9 @@ input.sheet-Stress-Total
 		flex-flow: column nowrap
 		justify-content: space-around
 	$hgap: 12px
-	$hcol: 1fr
-	$hrow: 160px
+	$hcol: 16%
 	grid-template-columns: #{$hcol} repeat(5,#{$hgap} #{$hcol})
-	grid-template-rows: #{$hrow} repeat(2, #{$hgap} #{$hrow})
+	grid-template-rows: 96px #{$hgap} 144px #{$hgap} 126px
 	.sheet-Room, .sheet-Connection
 		align-self: stretch
 		justify-self: stretch
@@ -1332,7 +1349,13 @@ input.sheet-Stress-Total
 	@for $r from 1 through 5
 		.sheet-R#{$r}
 			grid-row-start: #{$r}
+	.sheet-C5-C7
+		grid-column: 5 / span 3
+	.sheet-C9-C11
+		grid-column: 9 / span 3
 	input.sheet-Flagship-Activator[value="1"] + .sheet-Box
 		box-shadow: 2px 2px 0px var(--gbm-purple-text)
 		background-color: var(--gbm-purple)
 		color: white
+		.sheet-Box-Header
+			font-weight: 700

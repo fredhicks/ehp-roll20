@@ -2416,6 +2416,13 @@ input.sheet-Clock-Size[value="12"] + input.sheet-Clock-Ticks[value="12"] + .shee
 	background-size: 240px 240px;
 	background-clip: padding-box;
 }
+.sheet-Connection.sheet-BR {
+	background-image: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/connection-BR.svg);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 240px 240px;
+	background-clip: padding-box;
+}
 .sheet-Connection.sheet-LB-RB {
 	background-image: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/connection-LB-RB.svg);
 	background-position: center;
@@ -2443,14 +2450,26 @@ input.sheet-Clock-Size[value="12"] + input.sheet-Clock-Ticks[value="12"] + .shee
 .sheet-Flagship > .sheet-Box {
 	margin-right: -12px;
 }
+.sheet-Flagship > .sheet-Box .sheet-Box-Header {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+}
+.sheet-Flagship > .sheet-Box .sheet-Box-Header .sheet-Title {
+	-webkit-box-flex: 1;
+	    -ms-flex-positive: 1;
+	        flex-grow: 1;
+}
 
 .sheet-Flagship-Container {
 	display: -ms-grid;
 	display: grid;
-	-ms-grid-columns: 1fr (12px 1fr)[5];
-	grid-template-columns: 1fr repeat(5, 12px 1fr);
-	-ms-grid-rows: 160px (12px 160px)[2];
-	grid-template-rows: 160px repeat(2, 12px 160px);
+	margin-bottom: 12px;
+	margin-right: 12px;
+	-ms-grid-columns: 16% (12px 16%)[5];
+	grid-template-columns: 16% repeat(5, 12px 16%);
+	-ms-grid-rows: 96px 12px 144px 12px 126px;
+	grid-template-rows: 96px 12px 144px 12px 126px;
 }
 
 .sheet-Flagship-Container > *:nth-child(1) {
@@ -2542,11 +2561,76 @@ input.sheet-Clock-Size[value="12"] + input.sheet-Clock-Ticks[value="12"] + .shee
 	-ms-grid-row: 3;
 	-ms-grid-column: 6;
 }
+
+.sheet-Flagship-Container > *:nth-child(19) {
+	-ms-grid-row: 4;
+	-ms-grid-column: 1;
+}
+
+.sheet-Flagship-Container > *:nth-child(20) {
+	-ms-grid-row: 4;
+	-ms-grid-column: 2;
+}
+
+.sheet-Flagship-Container > *:nth-child(21) {
+	-ms-grid-row: 4;
+	-ms-grid-column: 3;
+}
+
+.sheet-Flagship-Container > *:nth-child(22) {
+	-ms-grid-row: 4;
+	-ms-grid-column: 4;
+}
+
+.sheet-Flagship-Container > *:nth-child(23) {
+	-ms-grid-row: 4;
+	-ms-grid-column: 5;
+}
+
+.sheet-Flagship-Container > *:nth-child(24) {
+	-ms-grid-row: 4;
+	-ms-grid-column: 6;
+}
+
+.sheet-Flagship-Container > *:nth-child(25) {
+	-ms-grid-row: 5;
+	-ms-grid-column: 1;
+}
+
+.sheet-Flagship-Container > *:nth-child(26) {
+	-ms-grid-row: 5;
+	-ms-grid-column: 2;
+}
+
+.sheet-Flagship-Container > *:nth-child(27) {
+	-ms-grid-row: 5;
+	-ms-grid-column: 3;
+}
+
+.sheet-Flagship-Container > *:nth-child(28) {
+	-ms-grid-row: 5;
+	-ms-grid-column: 4;
+}
+
+.sheet-Flagship-Container > *:nth-child(29) {
+	-ms-grid-row: 5;
+	-ms-grid-column: 5;
+}
+
+.sheet-Flagship-Container > *:nth-child(30) {
+	-ms-grid-row: 5;
+	-ms-grid-column: 6;
+}
 .sheet-Flagship-Container .sheet-Box {
 	margin-bottom: 0px;
 }
 .sheet-Flagship-Container .sheet-Box .sheet-Box-Header .sheet-Box-Header-Icons {
 	padding-right: 4px;
+	padding-top: 0px;
+	margin-top: -4px;
+}
+.sheet-Flagship-Container .sheet-Room .sheet-Box-Header {
+	font-size: 14px;
 }
 .sheet-Flagship-Container .sheet-Box.sheet-Solid {
 	background-color: var(--gbm-purple);
@@ -2635,9 +2719,22 @@ input.sheet-Clock-Size[value="12"] + input.sheet-Clock-Ticks[value="12"] + .shee
 	-ms-grid-row: 5;
 	    grid-row-start: 5;
 }
+.sheet-Flagship-Container .sheet-C5-C7 {
+	-ms-grid-column: 5;
+	-ms-grid-column-span: 3;
+	grid-column: 5/span 3;
+}
+.sheet-Flagship-Container .sheet-C9-C11 {
+	-ms-grid-column: 9;
+	-ms-grid-column-span: 3;
+	grid-column: 9/span 3;
+}
 .sheet-Flagship-Container input.sheet-Flagship-Activator[value="1"] + .sheet-Box {
 	-webkit-box-shadow: 2px 2px 0px var(--gbm-purple-text);
 	        box-shadow: 2px 2px 0px var(--gbm-purple-text);
 	background-color: var(--gbm-purple);
 	color: white;
+}
+.sheet-Flagship-Container input.sheet-Flagship-Activator[value="1"] + .sheet-Box .sheet-Box-Header {
+	font-weight: 700;
 }

@@ -1,32 +1,119 @@
 .sheet-Playset-Stars.sheet-Flagship
 	.sheet-Box.sheet-Purple
 		.sheet-Box-Header
-			+translate('Flagship')
+			.sheet-Title
+				+translate('Flagship')
 			.sheet-Box-Header-Icons
 				.sheet-XP-Track
 					+xptrack('Flagship-Upgrade',8)
 				.sheet-XP-Track-Label
 					+translate('Upgrade')
+			.sheet-Box-Header-Icons
+				+toggle('Toggle-Flagship-Expand')
 
-	.sheet-Flagship-Container
-		.sheet-Box.sheet-Purple.sheet-Solid.sheet-Room.sheet-R3.sheet-C5
-			+translate('Command Bridge')
+	+hidden('Toggle-Flagship-Expand').sheet-hide-on-one
+	div
+		.sheet-Flagship-Container
 
-		.sheet-Connection.sheet-R1.sheet-C5.sheet-BR
-		.sheet-Connection.sheet-R1.sheet-C6.sheet-LR
-		+hidden('Flagship-R1-C7').sheet-Flagship-Activator
-		.sheet-Box.sheet-Purple.sheet-Room.sheet-R1.sheet-C7
-			.sheet-Box-Header
-				+translate('Observatory')
-				.sheet-Box-Header-Icons
-					+headDot('Flagship-R1-C7')
-			.sheet-Content
-				+translate('+1d to engagement rolls for <i>recover Engine</i> and <i>hunt Leviathan</i> missions')
-		+hidden('Flagship-R1-C9').sheet-Flagship-Activator
-		.sheet-Box.sheet-Purple.sheet-Room.sheet-R1.sheet-C9
-			.sheet-Box-Header
-				+translate('Launch Deck')
-				.sheet-Box-Header-Icons
-					+headDot('Flagship-R1-C9')
-			.sheet-Content
-				+translate('Improved position when fighting on and around the flagship')
+			// .sheet-Connection.sheet-R1.sheet-C5.sheet-BR
+			// .sheet-Connection.sheet-R1.sheet-C6.sheet-LR
+			+hidden('Flagship-R1-C7').sheet-Flagship-Activator
+			.sheet-Box.sheet-Purple.sheet-Room.sheet-R1.sheet-C5-C7
+				.sheet-Box-Header
+					+translate('Observatory')
+					.sheet-Box-Header-Icons
+						+headDot('Flagship-R1-C7')
+				.sheet-Content
+					+translate('+1d to engagement rolls for <i>recover Engine</i> and <i>hunt Leviathan</i> missions')
+			+hidden('Flagship-R1-C9').sheet-Flagship-Activator
+			.sheet-Box.sheet-Purple.sheet-Room.sheet-R1.sheet-C9-C11
+				.sheet-Box-Header
+					+translate('Launch Deck')
+					.sheet-Box-Header-Icons
+						+headDot('Flagship-R1-C9')
+				.sheet-Content
+					+translate('Improved position when fighting on and around the flagship')
+
+			.sheet-Connection.sheet-R2.sheet-C5.sheet-TB
+			.sheet-Connection.sheet-R2.sheet-C7.sheet-TB
+			.sheet-Connection.sheet-R2.sheet-C9.sheet-TB
+
+			+hidden('Flagship-R3-C1').sheet-Flagship-Activator
+			.sheet-Box.sheet-Purple.sheet-Room.sheet-R3.sheet-C1
+				.sheet-Box-Header
+					+translate('Forward Battery')
+					.sheet-Box-Header-Icons
+						+headDot('Flagship-R3-C1')
+				.sheet-Content
+					+translate('Once per mission flagship assists an action with covering fire')
+			.sheet-Connection.sheet-R3.sheet-C2.sheet-LR
+			+hidden('Flagship-R3-C3').sheet-Flagship-Activator
+			.sheet-Box.sheet-Purple.sheet-Room.sheet-R3.sheet-C3
+				.sheet-Box-Header
+					+translate('Extended Berths')
+					.sheet-Box-Header-Icons
+						+headDot('Flagship-R3-C3')
+				.sheet-Content
+					+translate('Expand hangar to store 2 additional Engines')
+			.sheet-Connection.sheet-R3.sheet-C4.sheet-LR
+			.sheet-Box.sheet-Purple.sheet-Solid.sheet-Room.sheet-R3.sheet-C5
+				+translate('Command Bridge')
+			.sheet-Connection.sheet-R3.sheet-C6.sheet-LR
+			+hidden('Flagship-R3-C7').sheet-Flagship-Activator
+			.sheet-Box.sheet-Purple.sheet-Room.sheet-R3.sheet-C7
+				.sheet-Box-Header
+					+translate('Mess Hall')
+					.sheet-Box-Header-Icons
+						+headDot('Flagship-R3-C7')
+				.sheet-Content
+					+translate('+1d to make a connection here')
+			.sheet-Connection.sheet-R3.sheet-C8.sheet-LR
+			+hidden('Flagship-R3-C9').sheet-Flagship-Activator
+			.sheet-Box.sheet-Purple.sheet-Room.sheet-R3.sheet-C9
+				.sheet-Box-Header
+					+translate('Power Source')
+					.sheet-Box-Header-Icons
+						+headDot('Flagship-R3-C9')
+				.sheet-Content
+					+translate('Unused engines mark 2 ticks in recovery during missions')
+			.sheet-Connection.sheet-R3.sheet-C10.sheet-LR
+			+hidden('Flagship-R3-C11').sheet-Flagship-Activator
+			.sheet-Box.sheet-Purple.sheet-Room.sheet-R3.sheet-C11
+				.sheet-Box-Header
+					+translate('Main Thrusters')
+					.sheet-Box-Header-Icons
+						+headDot('Flagship-R3-C11')
+				.sheet-Content
+					+translate('+1d to Last Bastion rolls when flagship is deployed in the field')
+
+			.sheet-Connection.sheet-R4.sheet-C3.sheet-TB
+			.sheet-Connection.sheet-R4.sheet-C5.sheet-TB
+			.sheet-Connection.sheet-R4.sheet-C7.sheet-TB
+			.sheet-Connection.sheet-R4.sheet-C9.sheet-TB
+
+			+hidden('Flagship-R5-C3').sheet-Flagship-Activator
+			.sheet-Box.sheet-Purple.sheet-Room.sheet-R5.sheet-C3
+				.sheet-Box-Header
+					+translate('Runabout')
+					.sheet-Box-Header-Icons
+						+headDot('Flagship-R5-C3')
+				.sheet-Content
+					+translate('Once per mission rescue a stranded pilot or damaged Engine')
+			+hidden('Flagship-R5-C5').sheet-Flagship-Activator
+			.sheet-Box.sheet-Purple.sheet-Room.sheet-R5.sheet-C5
+				.sheet-Box-Header
+					+translate('Training Facility')
+					.sheet-Box-Header-Icons
+						+headDot('Flagship-R5-C5')
+				.sheet-Content
+					+translate('Spend downtime action to gain 2xp in sun')
+			+hidden('Flagship-R5-C7').sheet-Flagship-Activator
+			.sheet-Box.sheet-Purple.sheet-Room.sheet-R5.sheet-C7
+				.sheet-Box-Header
+					+translate('Engineering')
+					.sheet-Box-Header-Icons
+						+headDot('Flagship-R5-C7')
+				.sheet-Content
+					+translate('+1d to work on long term projects here')
+			.sheet-Connection.sheet-R5.sheet-C8.sheet-LR
+			.sheet-Connection.sheet-R5.sheet-C9.sheet-TL
