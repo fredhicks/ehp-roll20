@@ -2194,8 +2194,22 @@ input.sheet-Clock-Size[value="12"] + input.sheet-Clock-Ticks[value="12"] + .shee
 	background-size: 240px 240px;
 	background-clip: padding-box;
 }
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Connection.sheet-TL {
+	background-image: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/connection-TL.svg);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 240px 240px;
+	background-clip: padding-box;
+}
 .sheet-Playset-Sheet-Reference-Blocks .sheet-Connection.sheet-TL-BR {
 	background-image: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/connection-TL-BR.svg);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 240px 240px;
+	background-clip: padding-box;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Connection.sheet-LB-RB {
+	background-image: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/connection-LB-RB.svg);
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: 240px 240px;

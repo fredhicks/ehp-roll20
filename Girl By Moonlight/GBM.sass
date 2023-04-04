@@ -41,7 +41,9 @@ $clock: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%2
 $contb: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/connection-TB.svg)
 $conlr: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/connection-LR.svg)
 $contr: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/connection-TR.svg)
+$contl: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/connection-TL.svg)
 $contlxbr: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/connection-TL-BR.svg)
+$conlbxrb: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/connection-LB-RB.svg)
 
 @import url('https://fonts.googleapis.com/css2?family=Kufam:ital,wght@0,400;0,700;1,400;1,700&family=Montserrat:ital,wght@0,400;0,700;1,400;1,700&display=swap')
 
@@ -1164,8 +1166,20 @@ input.sheet-Stress-Total
 			background-repeat: no-repeat
 			background-size: 240px 240px
 			background-clip: padding-box
+		&.sheet-TL
+			background-image: #{$contl} 
+			background-position: center
+			background-repeat: no-repeat
+			background-size: 240px 240px
+			background-clip: padding-box
 		&.sheet-TL-BR
 			background-image: #{$contlxbr} 
+			background-position: center
+			background-repeat: no-repeat
+			background-size: 240px 240px
+			background-clip: padding-box
+		&.sheet-LB-RB
+			background-image: #{$conlbxrb} 
 			background-position: center
 			background-repeat: no-repeat
 			background-size: 240px 240px
