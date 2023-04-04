@@ -16,10 +16,10 @@
 	--gbm-teal-shaded: var(--gbm-teal-pale);
 	--gbm-pink-shaded: var(--gbm-pink-pale);
 	--gbm-purple-shaded: var(--gbm-purple-pale);
-	--gbm-blue-text: var(--gbm-blue);
-	--gbm-teal-text: var(--gbm-teal);
-	--gbm-pink-text: var(--gbm-pink);
-	--gbm-purple-text: var(--gbm-purple);
+	--gbm-blue-text: var(--gbm-blue-dark);
+	--gbm-teal-text: var(--gbm-teal-dark);
+	--gbm-pink-text: var(--gbm-pink-dark);
+	--gbm-purple-text: var(--gbm-purple-dark);
 	--gbm-fg: var(--gbm-blue-text);
 	--gbm-bg: white;
 	font-family: Montserrat, sans-serif;
@@ -1740,9 +1740,33 @@ input.sheet-Clock-Size[value="12"] + input.sheet-Clock-Ticks[value="12"] + .shee
 .sheet-Playset-Sheet-Reference-Blocks .sheet-Characters .sheet-hide-on-one[value="1"] + .sheet-Notes {
 	display: none;
 }
-.sheet-Playset-Sheet-Reference-Blocks .sheet-Hideout-Container {
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Hideout-Container, .sheet-Playset-Sheet-Reference-Blocks .sheet-Cursed-Container {
 	display: -ms-grid;
 	display: grid;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Hideout-Container .sheet-Box, .sheet-Playset-Sheet-Reference-Blocks .sheet-Cursed-Container .sheet-Box {
+	margin-bottom: 0px;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Hideout-Container .sheet-Box .sheet-Box-Header .sheet-Box-Header-Icons, .sheet-Playset-Sheet-Reference-Blocks .sheet-Cursed-Container .sheet-Box .sheet-Box-Header .sheet-Box-Header-Icons {
+	padding-right: 4px;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Hideout-Container .sheet-Box.sheet-Solid, .sheet-Playset-Sheet-Reference-Blocks .sheet-Cursed-Container .sheet-Box.sheet-Solid {
+	background-color: var(--gbm-purple);
+	color: white;
+	vertical-align: middle;
+	text-align: center;
+	font-size: 21px;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	    -ms-flex-flow: column nowrap;
+	        flex-flow: column nowrap;
+	-ms-flex-pack: distribute;
+	    justify-content: space-around;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Hideout-Container {
 	-ms-grid-columns: 1fr 12px 1fr 12px 1fr;
 	grid-template-columns: 1fr 12px 1fr 12px 1fr;
 	-ms-grid-rows: 135px (12px 135px)[4];
@@ -1911,13 +1935,273 @@ input.sheet-Clock-Size[value="12"] + input.sheet-Clock-Ticks[value="12"] + .shee
 	-ms-grid-row: 9;
 	    grid-row-start: 9;
 }
-.sheet-Playset-Sheet-Reference-Blocks .sheet-Hideout-Container .sheet-Box {
-	margin-bottom: 0px;
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Hideout-Container input.sheet-Hideout-Activator[value="1"] + .sheet-Box {
+	-webkit-box-shadow: 2px 2px 0px var(--gbm-purple-text);
+	        box-shadow: 2px 2px 0px var(--gbm-purple-text);
+	background-color: var(--gbm-purple);
+	color: white;
 }
-.sheet-Playset-Sheet-Reference-Blocks .sheet-Hideout-Container .sheet-Box .sheet-Box-Header .sheet-Box-Header-Icons {
-	padding-right: 8px;
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Cursed-Container {
+	-ms-grid-columns: 1fr 12px 1fr 12px 1fr;
+	grid-template-columns: 1fr 12px 1fr 12px 1fr;
+	-ms-grid-rows: 135px 12px 135px (12px 180px)[3];
+	grid-template-rows: 135px 12px 135px repeat(3, 12px 180px);
 }
-.sheet-Playset-Sheet-Reference-Blocks .sheet-Hideout-Container .sheet-Box.sheet-Solid {
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Cursed-Container > *:nth-child(1) {
+	-ms-grid-row: 1;
+	-ms-grid-column: 1;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Cursed-Container > *:nth-child(2) {
+	-ms-grid-row: 1;
+	-ms-grid-column: 2;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Cursed-Container > *:nth-child(3) {
+	-ms-grid-row: 1;
+	-ms-grid-column: 3;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Cursed-Container > *:nth-child(4) {
+	-ms-grid-row: 1;
+	-ms-grid-column: 4;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Cursed-Container > *:nth-child(5) {
+	-ms-grid-row: 1;
+	-ms-grid-column: 5;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Cursed-Container > *:nth-child(6) {
+	-ms-grid-row: 2;
+	-ms-grid-column: 1;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Cursed-Container > *:nth-child(7) {
+	-ms-grid-row: 2;
+	-ms-grid-column: 2;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Cursed-Container > *:nth-child(8) {
+	-ms-grid-row: 2;
+	-ms-grid-column: 3;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Cursed-Container > *:nth-child(9) {
+	-ms-grid-row: 2;
+	-ms-grid-column: 4;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Cursed-Container > *:nth-child(10) {
+	-ms-grid-row: 2;
+	-ms-grid-column: 5;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Cursed-Container > *:nth-child(11) {
+	-ms-grid-row: 3;
+	-ms-grid-column: 1;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Cursed-Container > *:nth-child(12) {
+	-ms-grid-row: 3;
+	-ms-grid-column: 2;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Cursed-Container > *:nth-child(13) {
+	-ms-grid-row: 3;
+	-ms-grid-column: 3;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Cursed-Container > *:nth-child(14) {
+	-ms-grid-row: 3;
+	-ms-grid-column: 4;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Cursed-Container > *:nth-child(15) {
+	-ms-grid-row: 3;
+	-ms-grid-column: 5;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Cursed-Container > *:nth-child(16) {
+	-ms-grid-row: 4;
+	-ms-grid-column: 1;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Cursed-Container > *:nth-child(17) {
+	-ms-grid-row: 4;
+	-ms-grid-column: 2;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Cursed-Container > *:nth-child(18) {
+	-ms-grid-row: 4;
+	-ms-grid-column: 3;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Cursed-Container > *:nth-child(19) {
+	-ms-grid-row: 4;
+	-ms-grid-column: 4;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Cursed-Container > *:nth-child(20) {
+	-ms-grid-row: 4;
+	-ms-grid-column: 5;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Cursed-Container > *:nth-child(21) {
+	-ms-grid-row: 5;
+	-ms-grid-column: 1;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Cursed-Container > *:nth-child(22) {
+	-ms-grid-row: 5;
+	-ms-grid-column: 2;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Cursed-Container > *:nth-child(23) {
+	-ms-grid-row: 5;
+	-ms-grid-column: 3;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Cursed-Container > *:nth-child(24) {
+	-ms-grid-row: 5;
+	-ms-grid-column: 4;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Cursed-Container > *:nth-child(25) {
+	-ms-grid-row: 5;
+	-ms-grid-column: 5;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Cursed-Container > *:nth-child(26) {
+	-ms-grid-row: 6;
+	-ms-grid-column: 1;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Cursed-Container > *:nth-child(27) {
+	-ms-grid-row: 6;
+	-ms-grid-column: 2;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Cursed-Container > *:nth-child(28) {
+	-ms-grid-row: 6;
+	-ms-grid-column: 3;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Cursed-Container > *:nth-child(29) {
+	-ms-grid-row: 6;
+	-ms-grid-column: 4;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Cursed-Container > *:nth-child(30) {
+	-ms-grid-row: 6;
+	-ms-grid-column: 5;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Cursed-Container .sheet-Room, .sheet-Playset-Sheet-Reference-Blocks .sheet-Cursed-Container .sheet-Connection {
+	-ms-flex-item-align: stretch;
+	    -ms-grid-row-align: stretch;
+	    align-self: stretch;
+	-ms-grid-column-align: stretch;
+	    justify-self: stretch;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Cursed-Container .sheet-C1 {
+	-ms-grid-column: 1;
+	    grid-column-start: 1;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Cursed-Container .sheet-C2 {
+	-ms-grid-column: 2;
+	    grid-column-start: 2;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Cursed-Container .sheet-C3 {
+	-ms-grid-column: 3;
+	    grid-column-start: 3;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Cursed-Container .sheet-C4 {
+	-ms-grid-column: 4;
+	    grid-column-start: 4;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Cursed-Container .sheet-C5 {
+	-ms-grid-column: 5;
+	    grid-column-start: 5;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Cursed-Container .sheet-R1 {
+	-ms-grid-row: 1;
+	    grid-row-start: 1;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Cursed-Container .sheet-R2 {
+	-ms-grid-row: 2;
+	    grid-row-start: 2;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Cursed-Container .sheet-R3 {
+	-ms-grid-row: 3;
+	    grid-row-start: 3;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Cursed-Container .sheet-R4 {
+	-ms-grid-row: 4;
+	    grid-row-start: 4;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Cursed-Container .sheet-R5 {
+	-ms-grid-row: 5;
+	    grid-row-start: 5;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Cursed-Container .sheet-R6 {
+	-ms-grid-row: 6;
+	    grid-row-start: 6;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Cursed-Container .sheet-R7 {
+	-ms-grid-row: 7;
+	    grid-row-start: 7;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Cursed-Container .sheet-R8 {
+	-ms-grid-row: 8;
+	    grid-row-start: 8;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Cursed-Container .sheet-R9 {
+	-ms-grid-row: 9;
+	    grid-row-start: 9;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Cursed-Container .sheet-Box {
+	background-color: var(--gbm-purple-dark);
+	border: 2px solid var(--gbm-purple);
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Cursed-Container .sheet-Box .sheet-Box-Header {
+	border-radius: 0px 11px 0px 0px;
+	white-space: nowrap;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Cursed-Container .sheet-Benefit {
+	padding-bottom: 4px;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top: 1px;
+	margin-top: -5px;
+	margin-left: -4px;
+	margin-right: -4px;
+	color: white;
+	background-color: var(--gbm-purple);
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Cursed-Container .sheet-Curse {
+	padding-top: 4px;
+	padding-left: 6px;
+	padding-right: 6px;
+	margin-left: -4px;
+	margin-right: -4px;
+	color: white;
+	background-color: var(--gbm-purple-dark);
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Cursed-Container input.sheet-Cursed-Activator[value="1"] + .sheet-Box {
+	-webkit-box-shadow: 2px 2px 0px var(--gbm-purple-text);
+	        box-shadow: 2px 2px 0px var(--gbm-purple-text);
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Cursed-Container input.sheet-Cursed-Activator[value="1"] + .sheet-Box .sheet-Benefit, .sheet-Playset-Sheet-Reference-Blocks .sheet-Cursed-Container input.sheet-Cursed-Activator[value="1"] + .sheet-Box .sheet-Box-Header {
+	color: var(--gbm-purple-dark);
+	background-color: var(--gbm-purple-pale);
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Cursed-Container input.sheet-Cursed-Activator[value="1"] + .sheet-Box .sheet-Benefit {
+	margin-left: -3.5px;
+	margin-right: -3.5px;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Cursed-Container .sheet-Box.sheet-Solid {
+	background-color: var(--gbm-purple-dark);
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Connection.sheet-TB {
+	background-image: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/connection-TB.svg);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 240px 240px;
+	background-clip: padding-box;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Connection.sheet-LR {
+	background-image: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/connection-LR.svg);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 240px 240px;
+	background-clip: padding-box;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Connection.sheet-TR {
+	background-image: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/connection-TR.svg);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 240px 240px;
+	background-clip: padding-box;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Connection.sheet-TL-BR {
+	background-image: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/connection-TL-BR.svg);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 240px 240px;
+	background-clip: padding-box;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Connection .sheet-Box.sheet-Solid {
 	background-color: var(--gbm-purple);
 	color: white;
 	vertical-align: middle;
@@ -1932,36 +2216,4 @@ input.sheet-Clock-Size[value="12"] + input.sheet-Clock-Ticks[value="12"] + .shee
 	        flex-flow: column nowrap;
 	-ms-flex-pack: distribute;
 	    justify-content: space-around;
-}
-.sheet-Playset-Sheet-Reference-Blocks .sheet-Hideout-Container input.sheet-Hideout-Activator[value="1"] + .sheet-Box {
-	background-color: var(--gbm-purple);
-	color: white;
-}
-.sheet-Playset-Sheet-Reference-Blocks .sheet-Hideout-Container .sheet-Connection.sheet-TB {
-	background-image: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/connection-TB.svg);
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: 240px 240px;
-	background-clip: padding-box;
-}
-.sheet-Playset-Sheet-Reference-Blocks .sheet-Hideout-Container .sheet-Connection.sheet-LR {
-	background-image: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/connection-LR.svg);
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: 240px 240px;
-	background-clip: padding-box;
-}
-.sheet-Playset-Sheet-Reference-Blocks .sheet-Hideout-Container .sheet-Connection.sheet-TR {
-	background-image: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/connection-TR.svg);
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: 240px 240px;
-	background-clip: padding-box;
-}
-.sheet-Playset-Sheet-Reference-Blocks .sheet-Hideout-Container .sheet-Connection.sheet-TL-BR {
-	background-image: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/connection-TL-BR.svg);
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: 240px 240px;
-	background-clip: padding-box;
 }

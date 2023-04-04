@@ -64,10 +64,10 @@ $contlxbr: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Gir
 	--gbm-teal-shaded: var(--gbm-teal-pale)
 	--gbm-pink-shaded: var(--gbm-pink-pale)
 	--gbm-purple-shaded: var(--gbm-purple-pale)
-	--gbm-blue-text: var(--gbm-blue)
-	--gbm-teal-text: var(--gbm-teal)
-	--gbm-pink-text: var(--gbm-pink)
-	--gbm-purple-text: var(--gbm-purple)
+	--gbm-blue-text: var(--gbm-blue-dark)
+	--gbm-teal-text: var(--gbm-teal-dark)
+	--gbm-pink-text: var(--gbm-pink-dark)
+	--gbm-purple-text: var(--gbm-purple-dark)
 	--gbm-fg: var(--gbm-blue-text)
 	--gbm-bg: white
 	font-family: #{$bodyfont}
@@ -1060,8 +1060,23 @@ input.sheet-Stress-Total
 				height: 100%
 		.sheet-hide-on-one[value="1"] + .sheet-Notes
 			display: none
-	.sheet-Hideout-Container
+	.sheet-Hideout-Container, .sheet-Cursed-Container
 		display: grid
+		.sheet-Box
+			margin-bottom: 0px
+			.sheet-Box-Header
+				.sheet-Box-Header-Icons
+					padding-right: 4px
+		.sheet-Box.sheet-Solid
+			background-color: var(--gbm-purple)
+			color: white
+			vertical-align: middle
+			text-align: center
+			font-size: #{$headsize}
+			display: flex
+			flex-flow: column nowrap
+			justify-content: space-around
+	.sheet-Hideout-Container
 		$hgap: 12px
 		$hcol: 1fr
 		$hrow: 135px
@@ -1076,11 +1091,85 @@ input.sheet-Stress-Total
 		@for $r from 1 through 9
 			.sheet-R#{$r}
 				grid-row-start: #{$r}
+		input.sheet-Hideout-Activator[value="1"] + .sheet-Box
+			box-shadow: 2px 2px 0px var(--gbm-purple-text)
+			background-color: var(--gbm-purple)
+			color: white
+	.sheet-Cursed-Container
+		$hgap: 12px
+		$hcol: 1fr
+		$hrow: 135px
+		$hrowtall: 180px
+		grid-template-columns: #{$hcol} #{$hgap} #{$hcol} #{$hgap} #{$hcol}
+		grid-template-rows: #{$hrow} #{$hgap} #{$hrow} repeat(3, #{$hgap} #{$hrowtall})
+		.sheet-Room, .sheet-Connection
+			align-self: stretch
+			justify-self: stretch
+		@for $c from 1 through 5
+			.sheet-C#{$c}
+				grid-column-start: #{$c}
+		@for $r from 1 through 9
+			.sheet-R#{$r}
+				grid-row-start: #{$r}
 		.sheet-Box
-			margin-bottom: 0px
+			background-color: var(--gbm-purple-dark)
+			border: 2px solid var(--gbm-purple)
 			.sheet-Box-Header
-				.sheet-Box-Header-Icons
-					padding-right: 8px
+				border-radius: 0px 11px 0px 0px
+				white-space: nowrap
+		.sheet-Benefit
+			padding-bottom: 4px
+			padding-left: 5px
+			padding-right: 5px
+			padding-top: 1px
+			margin-top: -5px
+			margin-left: -4px
+			margin-right: -4px
+			color: white
+			background-color: var(--gbm-purple)
+		.sheet-Curse
+			padding-top: 4px
+			padding-left: 6px
+			padding-right: 6px
+			margin-left: -4px
+			margin-right: -4px
+			color: white
+			background-color: var(--gbm-purple-dark)
+		input.sheet-Cursed-Activator[value="1"] + .sheet-Box 
+			box-shadow: 2px 2px 0px var(--gbm-purple-text)
+			.sheet-Benefit, .sheet-Box-Header
+				color: var(--gbm-purple-dark)
+				background-color: var(--gbm-purple-pale)
+			.sheet-Benefit
+				margin-left: -3.5px
+				margin-right: -3.5px
+		.sheet-Box.sheet-Solid
+			background-color: var(--gbm-purple-dark)
+	.sheet-Connection
+		&.sheet-TB
+			background-image: #{$contb} 
+			background-position: center
+			background-repeat: no-repeat
+			background-size: 240px 240px
+			background-clip: padding-box
+		&.sheet-LR
+			background-image: #{$conlr} 
+			background-position: center
+			background-repeat: no-repeat
+			background-size: 240px 240px
+			background-clip: padding-box
+		&.sheet-TR
+			background-image: #{$contr} 
+			background-position: center
+			background-repeat: no-repeat
+			background-size: 240px 240px
+			background-clip: padding-box
+		&.sheet-TL-BR
+			background-image: #{$contlxbr} 
+			background-position: center
+			background-repeat: no-repeat
+			background-size: 240px 240px
+			background-clip: padding-box
 		.sheet-Box.sheet-Solid
 			background-color: var(--gbm-purple)
 			color: white
@@ -1090,31 +1179,3 @@ input.sheet-Stress-Total
 			display: flex
 			flex-flow: column nowrap
 			justify-content: space-around
-		input.sheet-Hideout-Activator[value="1"] + .sheet-Box
-			background-color: var(--gbm-purple)
-			color: white
-		.sheet-Connection
-			&.sheet-TB
-				background-image: #{$contb} 
-				background-position: center
-				background-repeat: no-repeat
-				background-size: 240px 240px
-				background-clip: padding-box
-			&.sheet-LR
-				background-image: #{$conlr} 
-				background-position: center
-				background-repeat: no-repeat
-				background-size: 240px 240px
-				background-clip: padding-box
-			&.sheet-TR
-				background-image: #{$contr} 
-				background-position: center
-				background-repeat: no-repeat
-				background-size: 240px 240px
-				background-clip: padding-box
-			&.sheet-TL-BR
-				background-image: #{$contlxbr} 
-				background-position: center
-				background-repeat: no-repeat
-				background-size: 240px 240px
-				background-clip: padding-box
