@@ -38,6 +38,8 @@ $xprightoff: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/G
 $xprighton: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/xp-box-right-on.svg)
 $statscon: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/connector-stats-blue-vertical.svg)
 $clock: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/all-clocks.svg)
+$contb: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/connection-TB.svg)
+$conlr: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/connection-LR.svg)
 
 @import url('https://fonts.googleapis.com/css2?family=Kufam:ital,wght@0,400;0,700;1,400;1,700&family=Montserrat:ital,wght@0,400;0,700;1,400;1,700&display=swap')
 
@@ -1078,3 +1080,16 @@ input.sheet-Stress-Total
 		input.sheet-Hideout-Activator[value="1"] + .sheet-Box
 			background-color: var(--gbm-purple)
 			color: white
+		.sheet-Connection
+			&.sheet-TB
+				background-image: #{$contb} 
+				background-position: center
+				background-repeat: no-repeat
+				background-size: 240px 240px
+				background-clip: padding-box
+			&.sheet-LR
+				background-image: #{$conlr} 
+				background-position: center
+				background-repeat: no-repeat
+				background-size: 240px 240px
+				background-clip: padding-box

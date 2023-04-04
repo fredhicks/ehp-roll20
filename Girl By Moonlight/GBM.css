@@ -1883,3 +1883,17 @@ input.sheet-Clock-Size[value="12"] + input.sheet-Clock-Ticks[value="12"] + .shee
 	background-color: var(--gbm-purple);
 	color: white;
 }
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Hideout-Container .sheet-Connection.sheet-TB {
+	background-image: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/connection-TB.svg);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 240px 240px;
+	background-clip: padding-box;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Hideout-Container .sheet-Connection.sheet-LR {
+	background-image: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/connection-LR.svg);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 240px 240px;
+	background-clip: padding-box;
+}
