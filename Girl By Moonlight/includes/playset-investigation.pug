@@ -1,0 +1,24 @@
+.sheet-Box.sheet-Purple
+	.sheet-Box-Header
+		span
+			+translate('Investigation').sheet-Playset-Abyss.sheet-Playset-Sky.sheet-Playset-Dreams
+			+translate('Readiness').sheet-Playset-Stars
+		.sheet-Box-Header-Icons
+			+toggle('Toggle-Tracks-Expand')
+	+hidden('Toggle-Tracks-Expand').sheet-hide-on-one
+	.sheet-Tracks
+		.sheet-Box-Header.sheet-Box-Subsection 
+			+translate('Tier I')
+			.sheet-Box-Header-Icons
+				.sheet-XP-Track
+					+xptrack('Investigation-1',6)
+		.sheet-Box-Header.sheet-Box-Subsection 
+			+translate('Tier II')
+			.sheet-Box-Header-Icons
+				.sheet-XP-Track
+					+xptrack('Investigation-2',6)
+		.sheet-Box-Header.sheet-Box-Subsection 
+			+translate('Tier III')
+			.sheet-Box-Header-Icons
+				.sheet-XP-Track
+					+xptrack('Investigation-3',6)

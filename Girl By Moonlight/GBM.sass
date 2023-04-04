@@ -82,6 +82,20 @@ $clock: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%2
 	--gbm-pink-text: var(--gbm-pink-pale)
 	--gbm-purple-text: var(--gbm-purple-pale)
 
+.ui-dialog .charsheet
+	font-family: #{$bodyfont}
+	font-size: #{$bodysize} 
+	color: var(--gbm-fg)
+	background-color: var(--gbm-bg)
+	line-height: unset
+	p
+		font-family: #{$bodyfont}
+		font-size: #{$bodysize} 
+		line-height: unset
+
+.sheet-Playset-Sheets
+	color: var(--gbm-purple-text)
+
 .sheet-rolltemplate-GBM
 	background-color: var(--gbm-purple-shaded)
 	color: var(--gbm-purple-text)
@@ -179,17 +193,6 @@ $clock: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%2
 		border: 1px solid red
 		display: block
 
-.ui-dialog .charsheet
-	font-family: #{$bodyfont}
-	font-size: #{$bodysize} 
-	color: var(--gbm-fg)
-	background-color: var(--gbm-bg)
-	line-height: unset
-	p
-		font-family: #{$bodyfont}
-		font-size: #{$bodysize} 
-		line-height: unset
-
 input[type="text"]
 	background: none
 	border: none
@@ -251,34 +254,48 @@ input.sheet-HideNull
 		+ *
 			display: none
 
+// We'll need to determine how to flag when no playset sheet is selected and no playbook is selected
+
+.sheet-Pick
+	display: none
+div.sheet-Picked
+	display: block
+span.sheet-Picked
+	display: inline
+
+input.sheet-Mode-Playbook[value=""] ~ input.sheet-Mode-Playset-Sheet[value=""]
+	~, ~ *
+		div.sheet-Pick
+			display: block
+		span.sheet-Pick
+			display: inline
+		.sheet-Picked
+			display: none
+
+// General show/hide logic for playset, setsheet, and playbook selections
+
+$playsets: Abyss, Sky, Stars, Dreams
+
 input.sheet-Mode-Playset
 	~, ~ *
-		.sheet-Playset-Abyss, .sheet-Playset-Sky, .sheet-Playset-Stars, .sheet-Playset-Dreams
-			display: none
-	&[value='abyss']
+		@each $set in $playsets
+			.sheet-Playset-#{$set}
+				display: none
+		span.sheet-Playset-Selected
+			display: inline
+		div.sheet-Playset-Selected
+			display: block
+	&[value=""]
 		~, ~ *
-			span.sheet-Playset-Abyss
-				display: inline
-			div.sheet-Playset-Abyss
-				display: block
-	&[value='sky']
-		~, ~ *
-			span.sheet-Playset-Sky
-				display: inline
-			div.sheet-Playset-Sky
-				display: block
-	&[value='stars']
-		~, ~ *
-			span.sheet-Playset-Stars
-				display: inline
-			div.sheet-Playset-Stars
-				display: block
-	&[value='dreams']
-		~, ~ *
-			span.sheet-Playset-Dreams
-				display: inline
-			div.sheet-Playset-Dreams
-				display: block
+			.sheet-Playset-Selected
+				display: none
+	@each $set in $playsets
+		&[value=#{$set}]
+			~, ~ *
+				span.sheet-Playset-#{$set} 
+					display: inline
+				div.sheet-Playset-#{$set}
+					display: block
 
 span.sheet-Icon-Abyss, span.sheet-Icon-Dreams, span.sheet-Icon-Sky, span.sheet-Icon-Stars
 	height: #{$bodysize}
@@ -297,6 +314,29 @@ span.sheet-Icon-Sky
 span.sheet-Icon-Stars
 	display: inline-block
 	content: #{$starsicon}
+
+$setsheets: Protagonists, Adversary, Reference, Creation
+
+input.sheet-Mode-Playset-Sheet
+	~, ~ *
+		@each $sheet in $setsheets
+			.sheet-Playset-Sheet-#{$sheet}
+				display: none
+		span.sheet-Playset-Sheet-Selected
+			display: inline
+		div.sheet-Playset-Sheet-Selected
+			display: block
+	&[value=""]
+		~, ~ *
+			.sheet-Playset-Sheet-Selected
+				display: none
+	@each $sheet in $setsheets
+		&[value=#{$sheet}]
+			~, ~ *
+				span.sheet-Playset-Sheet-#{$sheet} 
+					display: inline
+				div.sheet-Playset-Sheet-#{$sheet}
+					display: block
 
 $playbooks: Enigma, Stranger, TimeTraveller, Harmony, Guardian, Outsider, UnlikelyHero
 
@@ -665,7 +705,7 @@ button.sheet-button-minus:before
 	margin-top: -4px
 	text-transform: uppercase
 	
-.sheet-hide-on-one[value="1"], .sheet-hide-on-zero[value="0"] 
+.sheet-hide-on-one[value="1"], .sheet-hide-on-zero[value="0"], .sheet-hide-on-empty[value=""]
 	+ * 
 		display: none
 
@@ -892,3 +932,149 @@ input.sheet-Stress-Total
 		margin-bottom: 0px
 		grid-column-start: 1
 		grid-row-start: 2
+
+.sheet-Playset-Sheet-Creation-Blocks
+	display: grid
+	grid-template-columns: 1fr 1fr
+	column-gap: 12px
+	.sheet-Left, .sheet-Mid, .sheet-Right
+		vertical-align: top
+	.sheet-Left
+		grid-column-start: 1
+	.sheet-Right
+		grid-column-start: 2
+		display: flex
+		flex-flow: column nowrap
+		justify-content: flex-start
+		.sheet-Box
+			flex-grow: 1
+			display: flex
+			flex-flow: column nowrap
+			justify-content: flex-start
+		.sheet-Notes
+			flex-grow: 1
+			display: flex
+			flex-flow: column nowrap
+			justify-content: flex-start
+			textarea
+				flex-grow: 1
+
+.sheet-Prompt
+	.sheet-Prompt-Instruction
+		font-style: italic
+	.sheet-Prompt-Text
+		display: flex
+		flex-flow: row nowrap
+		input[type=text], textarea
+			flex-grow: 1
+	.sheet-Prompt-Pick
+		grid-column-start: 1
+		display: grid
+		column-gap: 4px
+		grid-template-columns: 24px 1fr
+		.sheet-Prompt-Content
+			grid-column-start: 2
+		.sheet-Prompt-Selector
+			grid-column-start: 1
+
+
+.sheet-Playset-Sheet-Adversary-Blocks
+	display: grid
+	grid-template-columns: 40% 30% 30%
+	column-gap: 12px
+	.sheet-Left, .sheet-Mid, .sheet-Right
+		vertical-align: top
+	.sheet-Left
+		grid-column-start: 1
+	.sheet-Mid
+		grid-column-start: 2
+	.sheet-Right
+		grid-column-start: 3
+		display: flex
+		flex-flow: column nowrap
+		justify-content: flex-start
+		.sheet-Box
+			flex-grow: 1
+			display: flex
+			flex-flow: column nowrap
+			justify-content: flex-start
+		.sheet-Notes
+			flex-grow: 1
+			display: flex
+			flex-flow: column nowrap
+			justify-content: flex-start
+			textarea
+				flex-grow: 1
+
+.sheet-Playset-Sheet-Protagonists-Blocks
+	display: grid
+	grid-template-columns: 30% 40% 30%
+	column-gap: 12px
+	.sheet-Left, .sheet-Mid, .sheet-Right
+		vertical-align: top
+	.sheet-Left
+		grid-column-start: 1
+	.sheet-Mid
+		grid-column-start: 2
+	.sheet-Right
+		grid-column-start: 3
+
+.sheet-Playset-Sheet-Reference-Blocks
+	display: grid
+	grid-template-columns: 30% 70%
+	column-gap: 12px
+	.sheet-Left, .sheet-Mid, .sheet-Right
+		vertical-align: top
+	.sheet-Left
+		grid-column-start: 1
+	.sheet-Right
+		grid-column-start: 2
+	.sheet-Characters
+		display: flex
+		flex-flow: column nowrap
+		justify-content: flex-start
+		.sheet-Box
+			flex-grow: 1
+			display: flex
+			flex-flow: column nowrap
+			justify-content: flex-start
+		.sheet-Notes
+			flex-grow: 1
+			display: flex
+			flex-flow: column nowrap
+			justify-content: flex-start
+			textarea
+				flex-grow: 1
+	.sheet-Hideout-Container
+		display: grid
+		$hgap: 12px
+		$hcol: 1fr
+		$hrow: 120px
+		grid-template-columns: #{$hcol} #{$hgap} #{$hcol} #{$hgap} #{$hcol}
+		grid-template-rows: #{$hrow} repeat(4, #{$hgap} #{$hrow})
+		.sheet-Room, .sheet-Connection
+			align-self: stretch
+			justify-self: stretch
+		@for $c from 1 through 5
+			.sheet-C#{$c}
+				grid-column-start: #{$c}
+		@for $r from 1 through 9
+			.sheet-R#{$r}
+				grid-row-start: #{$r}
+		.sheet-Box
+			margin-bottom: 0px
+			.sheet-Box-Header
+				.sheet-Box-Header-Icons
+					padding-right: 8px
+		.sheet-Box.sheet-Solid
+			background-color: var(--gbm-purple)
+			color: white
+			vertical-align: middle
+			text-align: center
+			font-size: #{$headsize}
+			display: flex
+			flex-flow: column nowrap
+			justify-content: space-around
+		input.sheet-Hideout-Activator[value="1"] + .sheet-Box
+			background-color: var(--gbm-purple)
+			color: white

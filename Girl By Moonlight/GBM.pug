@@ -22,9 +22,28 @@ include includes/rolltemplates.pug
 
 
 +hidden("Playbook").sheet-Mode-Playbook
-+hidden("playset").sheet-Mode-Playset // need to support this
++hidden("Playset").sheet-Mode-Playset
++hidden("Playset-Sheet").sheet-Mode-Playset-Sheet
 
-.sheet-Playbooks
+.sheet-Pick
+	include includes/pick-sheet.pug
+
+.sheet-Playset-Sheets.sheet-Picked.sheet-Playset-Sheet-Selected.sheet-Purple
+	// If we're here, a non-empty playset sheet has been selected
+	.sheet-Purple
+		include includes/playset-sheet-header.pug
+	.sheet-Blocks-Playset-Sheets
+		// Pending (this is the next one to do, since it has more consistency from playset to playset):
+		include includes/playset-protagonists.pug
+		// Done:
+		include includes/playset-adversary.pug
+		// Pending (this is the complicated one with the maps):
+		include includes/playset-reference.pug
+		// Done:
+		include includes/playset-creation.pug
+
+.sheet-Playbooks.sheet-Picked.sheet-Playbook-Selected
+	// If we're here, a non-empty playbook has been selected
 	div
 		include includes/playbook-name-header.pug
 	.sheet-Blocks-Playbooks

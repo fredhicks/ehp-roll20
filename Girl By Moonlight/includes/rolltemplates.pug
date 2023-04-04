@@ -34,6 +34,7 @@ rolltemplate.sheet-rolltemplate-GBM
 				+rtf('/obligation')
 				+rtf('/short')
 		+rtf('^short')
+		+rtf('#position')
 		.sheet-Roll-PnE
 			+translate('Position').sheet-Label-Position
 			+translate('Effect').sheet-Label-Effect
@@ -43,6 +44,7 @@ rolltemplate.sheet-rolltemplate-GBM
 				+rtf('effect')
 			span(class="sheet-Position-{{position}}")
 				+translate("Make sure to mark XP!")
+		+rtf('/position')
 		+rtf('/short')
 		.sheet-Roll-Dice
 			// Roll20 code is so bad, it won't let me access the fields dice, zerodice, transcenddice, or transcendzerodice. Hellaciously bad!!! So I've got to do some really tragically stupid workarounds here.

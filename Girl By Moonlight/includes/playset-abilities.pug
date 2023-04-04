@@ -1,0 +1,169 @@
+include playset-abilities-variables.pug
+
+.sheet-Box.sheet-Purple
+	.sheet-Box-Header
+		.sheet-Box-Header-Text
+			+translate('Series Abilities')
+		.sheet-Box-Header-Icons
+			+hideUnmarked('Toggle-Abilities-Marked')
+			+toggle('Toggle-Abilities-Expand')
+	+hidden('Toggle-Abilities-Expand').sheet-hide-on-one
+	.sheet-Abilities-Block
+		+hidden('Toggle-Abilities-Marked').sheet-unused-toggle
+		each psabs, ps in psabilities
+			- var abc = 0;
+			each ability in psabs
+				-
+					// Make sure the ability object is well-formed
+					abc += 1;
+					var abid = 'Ability-' + ps + '-' + abc;
+					var tfid = 'Ability-' + ps + '-' + abc + '-Text';
+					// What's the name
+					if ( typeof(ability["name"]) == "undefined" ) {
+						ability["name"] = "UNDEFINED";
+					}
+					// What's the effect
+					if ( typeof(ability["effect"]) == "undefined" ) { 
+						ability["effect"] = "UNDEFINED";
+					}
+					// Is it something with a toggle-box (true) or is it automatically taken (false)
+					if ( typeof(ability["selectable"]) == "undefined" ) { 
+						ability["selectable"] = false;
+					}
+					// Is it a transcendent ability rather than a special ability
+					if ( typeof(ability["transcendent"]) == "undefined" ) { 
+						ability["transcendent"] = false;
+					}
+					// Does it have a text field for recording a choice the ability requires
+					if ( typeof(ability["textfield"]) == "undefined" ) { 
+						ability["textfield"] = false;
+					}
+					// Can it be included as a Outside ability? (Ignored if selectable == false, but if selectable but shouldn't be a outside ability, outside should be set to false)
+					if ( typeof(ability["outside"]) == "undefined" ) { 
+						ability["outside"] = true;
+					}
+					// Does it have a list of options you pick from when you take the ability?
+					if ( typeof(ability["sublist"]) == "undefined" ) { 
+						ability["sublist"] = [];
+					}
+					var sublist = ability["sublist"];
+				if ( ! ability['transcendent'] )
+					if ( ability['selectable'] )
+						+hidden(abid,0).sheet-hide-if-unused
+					else
+						+hidden(abid,1).sheet-hide-if-unused
+					.sheet-Ability
+						div(class="sheet-Ability-Selector sheet-Playset-"+ps)
+							if ( ability['selectable'] )
+								+abilityMark(abid)
+						div(class="sheet-Ability-Text sheet-Playset-"+ps)
+							b 
+								+translate(ability['name'])
+							|: 
+							+translate(ability['effect'])
+							if ( ability['textfield'] )
+								+text(tfid)
+							if ( sublist.length > 0 )
+								- var sbc = 0;
+								each suba in sublist
+									-
+										sbc++;
+										var subid = 'Ability-' + ps + '-' + abc + '-' + sbc;
+									+hidden(subid,0).sheet-hide-if-unused
+									.sheet-Ability
+										.sheet-Ability-Selector
+											+abilityMark(subid)
+										.sheet-Ability-Text
+											b 
+												+translate(suba['name'])
+											|: 
+											+translate(suba['effect'])
+		+hidden('Ability-Outside',0).sheet-hide-if-unused
+		.sheet-Box-Header.sheet-Box-Subsection
+			.sheet-Label
+				+translate('Outside Influence')
+		+hidden('Ability-Outside',0).sheet-hide-if-unused
+		.sheet-Ability
+			.sheet-Ability-Selector
+				+abilityMark('Ability-Outside')
+			.sheet-Ability-Text
+				+select("Choose-Outside-Ability")
+					+option('(choose from another source)',"")
+					each psabs, ps in psabilities
+						option(value="0") ---------------------------
+						each ability in psabs
+							if ( ( ability['selectable'] == true ) && ( ability['outside'] == true ) && ( ability['transcendent'] == false ) )
+								-
+									var tf = 0; if ( ability['textfield'] ) { tf = 1; }
+									var sublist = ability['sublist'];
+									var slist = "";
+									if ( sublist.length > 0 ) {
+										slist = "|" + JSON.stringify(sublist);
+									}
+								+option(
+									ability["name"] + " (" + playsets[ps] + ")" ,
+									ability["name"] + "|" + ability["effect"] + "|" + tf + slist
+								)
+				+hidden('Ability-Outside-Name').sheet-HideNull
+				span
+					b
+						+display('Ability-Outside-Name')
+					|: 
+					+display('Ability-Outside-Effect')
+					+hidden('Ability-Outside-Has-Text').sheet-hide-on-zero
+					+text('Ability-Outside-Text')
+					- var osub = 0;
+					while osub < 3
+						- osub++
+						+hidden('Ability-Outside-'+osub+'-Name').sheet-hide-on-empty
+						div
+							+hidden('Ability-Outside-'+osub,0).sheet-hide-if-unused
+							.sheet-Ability
+								.sheet-Ability-Selector
+									+abilityMark('Ability-Outside-'+osub)
+								.sheet-Ability-Text
+									b
+										+display('Ability-Outside-'+osub+'-Name')
+									|: 
+									+display('Ability-Outside-'+osub+'-Effect')
+
+// Transcendent Abilities
+
+.sheet-Box.sheet-Teal
+	.sheet-Box-Header
+		.sheet-Box-Header-Text
+			+translate('Transcendent Abilities')
+		.sheet-Box-Header-Icons
+			+hideUnmarkedTranscendent('Toggle-Transcendent-Marked')
+			+toggle('Toggle-Transcendent-Expand')
+	+hidden('Toggle-Transcendent-Expand').sheet-hide-on-one
+	.sheet-Abilities-Block
+		+hidden('Toggle-Transcendent-Marked').sheet-unused-toggle
+		.sheet-Playset-Dreams
+			.sheet-Ability
+				.sheet-Ability-Selector &nbsp;
+					// Intentionally blank
+				.sheet-Ability-Text
+					+translate('When your actions align with your Avatar’s virtue, clear 1 stress.<p>When your actions align with one of your Avatar’s impulses, or you accept a dark bargain based on its impulse, that action does not deplete your transcendence track, and you mark xp.')
+		each psabs, ps in psabilities
+			- var abc = 0;
+			each ability in psabs
+				if ( ability['transcendent'] )
+					-
+						abc += 1;
+						var abid = 'Ability-Transcendent-' + ps + '-' + abc;
+						var tfid = 'Ability-Transcendent-' + ps + '-' + abc + '-Text';
+						// All the "well-formed" stuff should've been handled in the special abilities section, so we don't need to do the same checks this go-around.
+					// All transcendent abilities are selectable
+					+hidden(abid,0).sheet-hide-if-unused
+					.sheet-Ability
+						div(class="sheet-Ability-Selector sheet-Playset-"+ps)
+							if ( ability['selectable'] )
+								+abilityMarkTranscendent(abid)
+						div(class="sheet-Ability-Text sheet-Playset-"+ps)
+							b 
+								+translate(ability['name'])
+							|: 
+							+translate(ability['effect'])
+							if ( ability['textfield'] )
+								+text(tfid)

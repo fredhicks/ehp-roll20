@@ -1,0 +1,12 @@
+.sheet-Playset-Sheet-Creation
+	.sheet-Playset-Sheet-Creation-Blocks
+		.sheet-Left
+			include playset-prompts.pug
+			// Include this in the bottom left of every playset sheet
+			include pick-playset-sheet.pug
+		.sheet-Right
+			.sheet-Box.sheet-Purple
+				.sheet-Box-Header
+					+translate('Notes')
+				.sheet-Notes
+					+textarea('Creation-Notes')

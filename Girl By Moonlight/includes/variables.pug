@@ -1,42 +1,53 @@
 -
-	var translations = { 
-		"Series Playset": "Series Playset",
-		"Choose a Series Playset": "(Choose a Series Playset)",
-		"Choose a Playset": "(Choose a Playset)",
-		"At the Brink of the Abyss": "At the Brink of the Abyss", 
-		"Beneath a Rotting Sky": "Beneath a Rotting Sky", 
-		"On a Sea of Stars": "On a Sea of Stars", 
-		"In a Maze of Dreams": "In a Maze of Dreams",
-		"Select a Playbook": "(Select a Playbook)",
-		"Position": "Position",
-		"Risky": "Risky",
-		"Controlled": "Controlled",
-		"Desperate": "Desperate",
-		"Fortune": "Fortune",
-		"Effect": "Effect",
-		"Standard": "Standard",
-		"Limited": "Limited",
-		"Great": "Great",
-		"Extreme": "Extreme",
-		"Zero": "Zero",
-		"Number of Dice": "Number of Dice",
-		"Bonus Dice": "Bonus Dice",
-		"Transcendent?": "Transcendent?",
-		"Yes": "Yes",
-		"No": "No",
-		"Roll-Describe-Sun": "Sun: Resist consequences from violence and fear.",
-		"Roll-Describe-Moon": "Moon: Resist consequences from despair and heartbreak.",
-		"Roll-Describe-Stars": "Stars: Resist consequences from panic and social pressure.",
-		"Roll-Describe-Analyze": "When you analyze, you search beyond the surface presentation of the world, and discover secrets. You might study an ancient book for information on magic rituals. You might discern a gap in your foe’s defences.",
-		"Roll-Describe-Conceal": "When you conceal, you hide your true intentions and feelings. You might pass unnoticed, as just another face in the crowd. You might choke down your true feelings and lie to someone.",
-		"Roll-Describe-Confess": "When you confess, you expose the inner world of your thoughts and feelings to another. You might reveal to someone that it was you who left anonymous gifts at their doorstep. You might admit to a friend that you were once a servant of the evil empress.",
-		"Roll-Describe-Defy": "When you defy, you muster your courage and face opposition head on. You might stand up to a bully, fixing them with a stern glare. You might unleash your mightiest attack against a dangerous foe.",
-		"Roll-Describe-Empathize": "When you empathize, you understand a person intuitively, and feel their emotions as if they were your own. You might listen to someone’s story, and gain an understanding of their perspective. You might touch a horrifying monster, and feel the frightened heart that beats within it.",
-		"Roll-Describe-Express": "When you express, you use words with an agenda in mind. You might teach someone a valuable lesson about friendship. You might convince a longtime rival to work with you for a time to solve a shared problem.",
-		"Roll-Describe-Flow": "When you flow, you move with grace and adapt to your circumstances. You might leap across a gap to reach safety. You might act in accordance with other’s expectations.",
-		"Roll-Describe-Forgive": "When you forgive, you show that you care for someone despite a mistake they have made. You might offer a chance for reconciliation to a friend that wronged you. You might embrace a monster that was once human, in the hopes that it might be human again someday.",
-		"Roll-Describe-Perceive": "When you perceive, you see the world as it presents itself, without judgement. You might observe someone and note their daily routine. You might see the beauty present in even the darkest and strangest corners of the world.",
-	};
+	// More toggles added programmatically further below
+
+	var toggles = [
+		"Ability-Veteran",
+		"Ability-Outside",
+		"Ability-Outside-1",
+		"Ability-Outside-2",
+		"Ability-Outside-3",
+		"Armor-Mark",
+		"Special-Mark",
+		"Toggle-Abilities-Expand",
+		"Toggle-Abilities-Marked",
+		"Toggle-Agenda-Expand",
+		"Toggle-Agenda-Expand",
+		"Toggle-Bio-Expand",
+		"Toggle-BonusDie-Expand",
+		"Toggle-Characters-Expand",
+		"Toggle-Clocks-Expand",
+		"Toggle-Downtime-Expand",
+		"Toggle-Eclipse-Expand",
+		"Toggle-Eclipse-Roll-Expand",
+		"Toggle-Fallout-Expand",
+		"Toggle-Gaining-XP-Expand",
+		"Toggle-GatherInfo-Expand",
+		"Toggle-Harm-Expand",
+		"Toggle-Judgment-Expand",
+		"Toggle-Links-Expand",
+		"Toggle-Links-Spend-Expand",
+		"Toggle-Missions-Expand",
+		"Toggle-Mission-Tier-1-Expand",
+		"Toggle-Mission-Tier-2-Expand",
+		"Toggle-Mission-Tier-3-Expand",
+		"Toggle-Mission-Tier-4-Expand",
+		"Toggle-Names-Expand",
+		"Toggle-Notes-Expand",
+		"Toggle-Obligation-Roll-Expand",
+		"Toggle-Picker-Expand",
+		"Toggle-Principles-Expand",
+		"Toggle-Prompts-Expand",
+		"Toggle-Prompts-Marked",
+		"Toggle-Series-Rules-Expand",
+		"Toggle-Stress-Expand",
+		"Toggle-Teamwork-Expand",
+		"Toggle-Tracks-Expand",
+		"Toggle-Transcendence-Expand",
+		"Toggle-Transcendent-Expand",
+		"Toggle-Transcendent-Marked",
+		"Toggle-XP-Expand",
+	];
 
 	var playbooks = { 
 		"Enigma": "Enigma", 
@@ -49,49 +60,816 @@
 	};
 
 	var playsets = {
-		"abyss": "At the Brink of the Abyss",
-		"sky": "Beneath a Rotting Sky",
-		"stars": "On a Sea of Stars",
-		"dreams": "In a Maze of Dreams"
+		"Abyss": "At the Brink of the Abyss",
+		"Sky": "Beneath a Rotting Sky",
+		"Stars": "On a Sea of Stars",
+		"Dreams": "In a Maze of Dreams"
+	};
+
+	var setsheets = {
+		"Adversary": "Adversary Sheet",
+		"Protagonists": "Protagonists and Creation",
+		"Reference": "Reference Sheet",
+		// Redundant → "Creation": "Series Creation Worksheet",
+	};
+
+	var promptsets = {
+		"Abyss": [
+			{
+				"Prompt": "What lies in the abyss?",
+				"Instruction": "",
+				"Pick": true,
+				"List": [
+					"an eternity of pain",
+					"an endless hungering",
+					"the poisoned heart of a world",
+					"a grand cosmic order",
+					"a cruel and ancient deity",
+					"a twisted reflection of our reality"
+				],
+			},
+			{
+				"Prompt": "What is its agenda?",
+				"Instruction": "",
+				"Pick": true,
+				"List": [
+					"to see its emptiness reflected in others",
+					"to sterilize and preserve",
+					"to rule in glory",
+					"to propagate and thrive",
+					"to order the universe",
+					"to exact retribution",
+				],
+			},
+			{
+				"Prompt": "Who are its harbingers?",
+				"Instruction": "",
+				"Pick": true,
+				"List": [
+					"disgraced royalty",
+					"interstellar invaders",
+					"travellers from a dark future",
+					"a court of petty gods",
+					"saints and their attendant priests",
+					"the forces of a peerless general",
+				],
+			},
+			{
+				"Prompt": "What is the mundane world?",
+				"Instruction": "Choose one or two.",
+				"Pick": true,
+				"List": [
+					"an ancient city",
+					"authoritarian government",
+					"religious hierarchy",
+					"class struggle",
+					"a rural community",
+					"a futuristic megacity",
+				],
+			},
+			{
+				"Prompt": "What is held to be sacred?",
+				"Instruction": "Choose one or two.",
+				"Pick": true,
+				"List": [
+					"order",
+					"power",
+					"tradition",
+					"control",
+					"edifices",
+					"organizations",
+					"achievement",
+					"privilege",
+				],
+			},
+			{
+				"Prompt": "What is considered profane?",
+				"Instruction": "Choose one or two.",
+				"Pick": true,
+				"List": [
+					"bodies",
+					"love",
+					"emotion",
+					"gender",
+					"nature",
+					"community",
+					"friendship",
+					"tenderness",
+				],
+			},
+			{
+				"Prompt": "What is our magical origin?",
+				"Instruction": "",
+				"Pick": true,
+				"List": [
+					"reincarnations of interstellar royalty",
+					"a magical world hidden within the mundane",
+					"a crossing of timelines",
+					"embodiments of the stars",
+					"defectors from the adversary",
+					"a heroic refutation of the Abyss",
+				],
+			},
+			{
+				"Prompt": "What role do you play?",
+				"Instruction": "Each protagonist chooses one or two. Instruct each protagonist to select a playbook that reflects the roles they have chosen.",
+				"Pick": false,
+				"List": [
+					"royal heir",
+					"loyal knight",
+					"hopeful suitor",
+					"secret lover",
+					"demanding mentor",
+					"forgotten child",
+					"lowly servant",
+					"enemy turned friend",
+					"fledgling mystic",
+				],
+			},
+			{
+				"Prompt": "What is our shared obligation?",
+				"Instruction": "",
+				"Pick": true,
+				"List": [
+					"high-school",
+					"day job",
+					"temple",
+					"royal court",
+					"summer camp",
+					"family expectations",
+				],
+			},
+			{
+				"Prompt": "Our Hideout",
+				"Instruction": "How did we find it? What ritual grants us access to it? Choose one room to unlock on the series reference sheet.",
+				"Pick": true,
+				"List": [
+					"an ancient temple",
+					"a majestic castle",
+					"a star chamber",
+					"an overlooked place",
+					"a place between worlds",
+				],
+				"Textarea": true
+			},
+			{
+				"Prompt": "Transcendence",
+				"Instruction": "",
+				"Pick": false,
+				"List": [
+					"What does it feel like to transcend?",
+					"What aspect of it is shared by everyone?",
+					"What is different for each of us?",
+					"Your transcendence is an expression of your truest self. How?",
+				],
+				"Textarea": true
+			},
+			{
+				"Prompt": "Our Transgressions",
+				"Instruction": "",
+				"Pick": false,
+				"List": [
+					"How do we transgress against that which is sacred?",
+					"How do we represent that which is profane?",
+				],
+				"Textarea": true
+			},
+			{
+				"Prompt": "Ultimate Destiny",
+				"Instruction": "",
+				"Pick": false,
+				"List": [
+					"What are we striving for?",
+					"What calamity do we seek to prevent?",
+					"What great change are we destined to bring?",
+				],
+				"Textarea": true
+			},
+		],
+		"Sky": [
+			{
+				"Prompt": "What blight is upon the world?",
+				"Instruction": "",
+				"Pick": true,
+				"List": [
+					"an alien infestation",
+					"the rotting body of some dead god",
+					"a haze of otherworldly spores",
+					"a mutagenic plague",
+					"an ancient curse",
+				],
+				"Textarea": false
+			},
+			{
+				"Prompt": "What is its agenda?",
+				"Instruction": "",
+				"Pick": true,
+				"List": [
+					"to harvest human emotions",
+					"to pervert our bodies",
+					"to secretly replace us",
+					"to consume the world",
+					"to poison our hearts",
+					"to drive us all to despair",
+				],
+				"Textarea": false
+			},
+			{
+				"Prompt": "Who are its perpetrators?",
+				"Instruction": "",
+				"Pick": true,
+				"List": [
+					"an unknowable and ancient people",
+					"technicians and scienctists",
+					"heroes fallen to the blight",
+					"cultists and prophets",
+					"heartless outsiders",
+				],
+				"Textarea": false
+			},
+			{
+				"Prompt": "The Mundane World",
+				"Instruction": "Choose one or two.",
+				"Pick": true,
+				"List": [
+					"a tangled metropolis",
+					"poverty and hardship",
+					"wealth and affluence",
+					"a society in ruins",
+					"a pristine and sterile world",
+					"a city cut off from the world",
+				],
+				"Textarea": false
+			},
+			{
+				"Prompt": "What do its people hold sacred?",
+				"Instruction": "",
+				"Pick": true,
+				"List": [
+					"material things",
+					"hierarchies",
+					"control",
+					"hatred",
+					"ambition",
+					"reason",
+					"suffering",
+					"conflict",
+				],
+				"Textarea": false
+			},
+			{
+				"Prompt": "What do they consider profane?",
+				"Instruction": "Choose one or two.",
+				"Pick": true,
+				"List": [
+					"bodies",
+					"love",
+					"emotion",
+					"difference",
+					"nature",
+					"sincerity",
+					"the past",
+					"generosity",
+				],
+				"Textarea": false
+			},
+			{
+				"Prompt": "Who are we that hunt by night? What price did we pay for this power?",
+				"Instruction": "",
+				"Pick": true,
+				"List": [
+					"duped into carrying the blight",
+					"poison seeds blooming in our hearts",
+					"test subjects in foul experiments",
+					"our own bodies made alien",
+					"banished from the mundane world",
+				],
+				"Textarea": false
+			},
+			{
+				"Prompt": "What role do you play?",
+				"Instruction": "Each protagonist chooses one or two. Instruct each protagonist to select a playbook that reflects the roles they have chosen.",
+				"Pick": false,
+				"List": [
+					"innocent hero",
+					"best friend",
+					"naive protector",
+					"embittered fighter",
+					"hapless dupe",
+					"weary veteran",
+					"hopeless victim",
+					"an agent of dystopia",
+					"an unwitting traitor",
+				],
+				"Textarea": false
+			},
+			{
+				"Prompt": "What is our shared obligation? What traps us in this life?",
+				"Instruction": "",
+				"Pick": true,
+				"List": [
+					"boarding school",
+					"internment camp",
+					"isolation ward",
+					"government lab",
+					"supporting dependants",
+					"maintaining appearances",
+				],
+				"Textarea": false
+			},
+			{
+				"Prompt": "Transcendence",
+				"Instruction": "",
+				"Pick": false,
+				"List": [
+					"What does it feel like to transcend?",
+					"What aspect of it is shared by everyone?",
+					"What is different for each of us?",
+					"Your transcendence is an expression of your truest self. How?",
+					"It offers hope of escape from our mundane lives. Why?",
+				],
+				"Textarea": true
+			},
+			{
+				"Prompt": "Our Transgressions",
+				"Instruction": "",
+				"Pick": false,
+				"List": [
+					"How do we transgress against that which is sacred?",
+					"How do we represent that which is profane?"
+				],
+				"Textarea": true
+			},
+			{
+				"Prompt": "What is our prey?",
+				"Instruction": "Choose one or two.",
+				"Pick": true,
+				"List": [
+					"grotesque wildlife",
+					"former humans",
+					"deadly spirits",
+					"living death",
+					"mouths and claws",
+					"venom and spines",
+					"technology and flesh",
+					"feathers and eyes",
+					"spores and haze",
+				],
+				"Textarea": false
+			},
+			{
+				"Prompt": "Where do we hunt?",
+				"Instruction": "",
+				"Pick": true,
+				"List": [
+					"a derelict district",
+					"a beautiful place",
+					"an underground network",
+					"a surreal place",
+					"a dead place",
+				],
+				"Textarea": false
+			},
+			{
+				"Prompt": "Who else is hunting?",
+				"Instruction": "Choose one or two.",
+				"Pick": true,
+				"List": [
+					"a rival crew of magical girls",
+					"blighted predators feeding on their own kind",
+					"agents of the mundane world",
+					"noble heroes",
+					"desperate survivors",
+					"naive victims",
+				],
+				"Textarea": false
+			},
+			{
+				"Prompt": "What is our tragic fate?",
+				"Instruction": "",
+				"Pick": false,
+				"List": [
+						"How does it end? Why can we never win?",
+						"What will ultimately be our undoing?",
+						"Who will betray us, knowingly or otherwise?"
+				],
+				"Textarea": true
+			},
+		],
+		"Stars": [
+			{
+				"Prompt": "What lurks in the void?",
+				"Instruction": "",
+				"Pick": true,
+				"List": [
+					"a world of ghosts and demons",
+					"a storm of psychic energy",
+					"ancient gods re-awoken",
+					"guardians of the natural order",
+					"a vast all consuming organism",
+					"our basest fears made manifest",
+				],
+				"Textarea": false
+			},
+			{
+				"Prompt": "What act of hubris brought doom upon us?",
+				"Instruction": "",
+				"Pick": true,
+				"List": [
+					"an ancient king shattered the gates of death",
+					"our first attempt at interstellar travel",
+					"casting signals across all realities",
+					"meddling with the flow of time",
+					"harnessing a forbidden source of power",
+					"trespassing in their domain",
+				],
+				"Textarea": false
+			},
+			{
+				"Prompt": "Why do the Leviathans come?",
+				"Instruction": "",
+				"Pick": true,
+				"List": [
+					"to reclaim something we stole",
+					"to consume minds and bodies",
+					"to silence our civilization",
+					"to entrap and contain us",
+					"to tear down our great works",
+					"because we are in their path",
+
+				],
+				"Textarea": false
+			},
+			{
+				"Prompt": "What form do the Leviathans take?",
+				"Instruction": "",
+				"Pick": true,
+				"List": [
+					"massive demonic sea monsters",
+					"space faring cephalopods",
+					"cyclopean mechanical horrors",
+					"a hive of colossal insectoid mutants",
+					"mountainous perversions of nature",
+					"blind-eyed subterranean abominations",
+
+				],
+				"Textarea": false
+			},
+			{
+				"Prompt": "Where do we take shelter?",
+				"Instruction": "Choose one or two.",
+				"Pick": true,
+				"List": [
+					"an isolated city-state",
+					"an ancient fortress",
+					"quarantined and sealed",
+					"rebellion and strife",
+					"law and order",
+					"a mobile bunker",
+
+				],
+				"Textarea": false
+			},
+			{
+				"Prompt": "What is held to be sacred?",
+				"Instruction": "Choose one or two.",
+				"Pick": true,
+				"List": [
+					"order",
+					"strength",
+					"hierarchy",
+					"obedience",
+					"edifices",
+					"organizations",
+					"hatred",
+					"sacrifice",
+
+				],
+				"Textarea": false
+			},
+			{
+				"Prompt": "What was humanity forced to give up?",
+				"Instruction": "Choose one or two.",
+				"Pick": true,
+				"List": [
+					"community",
+					"bodies",
+					"intimacy",
+					"emotion",
+					"gender",
+					"growth",
+					"comfort",
+					"hope",
+
+				],
+				"Textarea": false
+			},
+			{
+				"Prompt": "We pilot engines against the leviathans. What separates us from the masses?",
+				"Instruction": "",
+				"Pick": true,
+				"List": [
+					"doomed volunteers",
+					"elevated by the authorities",
+					"vat-grown",
+					"chosen by the engines",
+					"changed by the leviathans",
+					"our drive and ambition",
+
+				],
+				"Textarea": false
+			},
+			{
+				"Prompt": "What role do you play?",
+				"Instruction": "Each protagonist chooses one or two. Instruct each protagonist to select a playbook that reflects the roles they have chosen.",
+				"Pick": false,
+				"List": [
+					"ace pilot",
+					"insubordinate rebel",
+					"weary mechanic",
+					"civilian",
+					"troubled captain",
+					"rejected candidate",
+					"press-ganged convict",
+					"forbidden lover",
+					"naive idealist",
+				],
+				"Textarea": false
+			},
+			{
+				"Prompt": "How do they keep us in line?",
+				"Instruction": "Why can't we just leave?",
+				"Pick": true,
+				"List": [
+					"impossible quotas",
+					"spies & informants",
+					"propaganda & lies",
+					"drugs & addictions",
+					"gilded cages",
+					"threats & fear",
+				],
+				"Textarea": true
+			},
+			{
+				"Prompt": "What is our reputation?",
+				"Instruction": "What part of our reputation is deserved? What isn’t?",
+				"Pick": true,
+				"List": [
+					"celebrated heroes",
+					"figureheads for the authority",
+					"cursed warriors",
+					"cultural icons",
+					"hopeless leviathan fodder",
+					"monsters in our own right",
+				],
+				"Textarea": true
+			},
+			{
+				"Prompt": "The Flagship",
+				"Instruction": "",
+				"Pick": true,
+				"List": [
+					"the last leviathan hunter",
+					"a floating fortress",
+					"a top of the line ship",
+					"a former civilian vessel",
+					"a swarm of smaller ships",
+					"a sleek corvette",
+				],
+				"Textarea": false
+			},
+			{
+				"Prompt": "What is the flagship’s name? What is its history?",
+				"Instruction": "",
+				"Pick": false,
+				"List": [],
+				"Textarea": true
+			},
+			{
+				"Prompt": "The Engines",
+				"Instruction": "Each player adds 1 engine to the hangar. Describe it, name it, and assign it 1 virtue and 1 impulse.",
+				"Pick": false,
+				"List": [
+					"Engines are semi-sentient combat mechs, each unique from the others. They have identities, memories, and emotions of their own. Why can’t we build more? What do they yearn for? What names are they given? How does our transcendence affect them?",
+					"Your character is incompatible with the Engine you create, and cannot pilot it. Why?"
+				],
+				"Textarea": true
+			},
+			{
+				"Prompt": "Our Transgressions",
+				"Instruction": "",
+				"Pick": false,
+				"List": [
+					"How do we transgress against that which is sacred?","Humanity gave it up, so why is it alive in us?"
+				],
+				"Textarea": true
+			},
+			{
+				"Prompt": "What hope do we have?",
+				"Instruction": "",
+				"Pick": false,
+				"List": [
+					"What hope do we have against the Leviathans?", "Who believes we have a chance? Who doesn’t?"
+				],
+				"Textarea": true
+			},
+		],
+		"Dreams": [
+			{
+				"Prompt": "What is the Conspiracy?",
+				"Instruction": "",
+				"Pick": true,
+				"List": [
+					"an ideology turned virus",
+					"a single dream that plagues the world",
+					"a toxic cultural movement",
+					"history haunting the present",
+					"the pull of some alien mind",
+				],
+				"Textarea": false
+			},
+			{
+				"Prompt": "What is its impulse?",
+				"Instruction": "",
+				"Pick": true,
+				"List": [
+					"to re-shape our dreams",
+					"to drive us to self destruction",
+					"to make us shed our bodies",
+					"to shatter the barrier between waking and dreaming",
+					"to instill an alien morality in us",
+					"to turn reality to farce",
+				],
+				"Textarea": false
+			},
+			{
+				"Prompt": "Who are its hosts?",
+				"Instruction": "",
+				"Pick": true,
+				"List": [
+					"a secret society",
+					"artists and luminaries",
+					"a cabal of sorcerers",
+					"an online gestalt",
+					"a sentient dream",
+					"ghosts and echoes",
+				],
+				"Textarea": false
+			},
+			{
+				"Prompt": "By what vector does it infect us?",
+				"Instruction": "",
+				"Pick": true,
+				"List": [
+					"insular communities and coded language",
+					"hopes and desires",
+					"passions and conflict",
+					"fashion and ritual",
+					"consumption and excess",
+					"a half forgotten song",
+				],
+				"Textarea": false
+			},
+			{
+				"Prompt": "The waking world belongs to everyone and no one. What defines the waking world?",
+				"Instruction": "Choose one or two.",
+				"Pick": true,
+				"List": [
+					"looming spires",
+					"the press of bodies",
+					"criss-crossing wires",
+					"media saturation",
+					"protests and riots",
+					"smog and haze",
+				],
+				"Textarea": false
+			},
+			{
+				"Prompt": "What shapes our dreams?",
+				"Instruction": "Choose one or two.",
+				"Pick": true,
+				"List": [
+					"money",
+					"work",
+					"surveillance",
+					"possessions",
+					"edifices",
+					"status",
+					"sexuality",
+					"conformity",
+				],
+				"Textarea": false
+			},
+			{
+				"Prompt": "What do we hide from others?",
+				"Instruction": "Choose one or two.",
+				"Pick": true,
+				"List": [
+					"passion",
+					"emotions",
+					"gender",
+					"vulnerability",
+					"authenticity",
+					"sexuality",
+					"intimacy",
+					"dissatisfaction",
+				],
+				"Textarea": false
+			},
+			{
+				"Prompt": "We who breach the barrier of dreams: Why do we wander in other’s dreams?",
+				"Instruction": "",
+				"Pick": true,
+				"List": [
+					"to uncover truths that others ignore",
+					"to help those whom society has forsaken",
+					"to escape the tedium of our day to day lives",
+					"to understand our waking lives",
+					"to banish the ghosts of our past",
+					"to experience real intimacy",
+				],
+				"Textarea": false
+			},
+			{
+				"Prompt": "What role do you play?",
+				"Instruction": "Each protagonist chooses one or two. Instruct each protagonist to select a playbook that reflects the roles they have chosen.",
+				"Pick": false,
+				"List": [
+					"forbidden lover",
+					"best friend",
+					"reformed conspirator",
+					"disillusioned cynic",
+					"tragic genius",
+					"weary caretaker",
+					"object of desire",
+					"oracle of the dream",
+					"target of the Conspiracy",
+				],
+				"Textarea": false
+			},
+			{
+				"Prompt": "How do we pass our days?",
+				"Instruction": "How does the world see us, if it notices us at all?",
+				"Pick": true,
+				"List": [
+					"mind numbing repetition",
+					"boredom and despair",
+					"isolation and detachment",
+					"grueling dirty work",
+					"fruitless labour",
+					"morally compromising jobs",
+				],
+				"Textarea": true
+			},
+			{
+				"Prompt": "The dream is a personal reflection of the waking world. What is the dream to you?",
+				"Instruction": "",
+				"Pick": false,
+				"List": [
+					"How do we know when we are in the dream?",
+					"How do we navigate the dream?",
+					"What unconcious tell accompanies each of us throughout the dream?"
+				],
+				"Textarea": true
+			},
+			{
+				"Prompt": "What is your Avatar?",
+				"Instruction": "Your Avatar is a subconscious expression of your truest self. They live inside you, but have their own thoughts, emotions, and desires, and are alien to you. When you transcend, your Avatar manifests and takes possession of your body. Describe your Avatar, name it, and assign it 1 virtue and 2 desires from the series sheet.",
+				"Pick": false,
+				"List": [
+					"How did you learn to manifest them?","What terrible secrets are they hiding?","What do they yearn for?","Why do you fear yours?"
+				],
+				"Textarea": true
+			},
+			{
+				"Prompt": "Our Transgressions",
+				"Instruction": "",
+				"Pick": false,
+				"List": [
+					"How do we defy the dream’s form and order?",
+					"What truths can we share only with each other?",
+					"What would happen if anyone found us out?"
+				],
+				"Textarea": true
+			},
+			{
+				"Prompt": "What comes at the dream’s end?",
+				"Instruction": "",
+				"Pick": false,
+				"List": [
+					"What will be left of the waking world, should the Conspiracy devour the dream?",
+					"If our dreams were free of the Conspiracy, what might we wake up to find?"
+				],
+				"Textarea": true
+			},
+		],
 	};
 
 	// Used in sheet-worker.pug
 
-	var pbkeys = [
-		"Enigma", 
-		"Stranger", 
-		"TimeTraveller", 
-		"Harmony", 
-		"Guardian", 
-		"Outsider", 
-		"UnlikelyHero"
-	];
-	var toggles = [
-		"Ability-Veteran",
-		"Toggle-Abilities-Expand",
-		"Toggle-Abilities-Marked",
-		"Toggle-Agenda-Expand",
-		"Toggle-Bio-Expand",
-		"Toggle-BonusDie-Expand",
-		"Toggle-Clocks-Expand",
-		"Toggle-Downtime-Expand",
-		"Toggle-Eclipse-Expand",
-		"Toggle-Eclipse-Roll-Expand",
-		"Toggle-Gaining-XP-Expand",
-		"Toggle-GatherInfo-Expand",
-		"Toggle-Harm-Expand",
-		"Toggle-Links-Expand",
-		"Toggle-Links-Spend-Expand",
-		"Toggle-Notes-Expand",
-		"Toggle-Obligation-Roll-Expand",
-		"Toggle-Stress-Expand",
-		"Toggle-Teamwork-Expand",
-		"Toggle-Transcendence-Expand",
-		"Toggle-Transcendent-Expand",
-		"Toggle-Transcendent-Marked",
-		"Armor-Mark",
-		"Special-Mark",
-	];
+	var pbkeys = Object.keys(playbooks);
+	var setkeys = Object.keys(playsets);
+	var sheetkeys = Object.keys(setsheets);
 
 	var toggleclicks = "";
 	var clicks = 0;
@@ -105,7 +883,46 @@
 			// field = 'Stress-' + i;
 			// toggles.push(field);
 		}
+		for(var ps of setkeys) {
+			var field = 'Ability-' + ps + '-' + i;
+			toggles.push(field);
+			field = 'Ability-Transcendent-' + ps + '-' + i;
+			toggles.push(field);
+			// Currently we have only one sublist and it's only three deep.
+			for(var j = 1; j <= 3; j++) {
+				var field = 'Ability-' + ps + '-' + i + '-' + j;
+				toggles.push(field);
+			}
+			// field = 'Stress-' + i;
+			// toggles.push(field);
+		}
 	}
+
+	for(var i = 1; i < 6; i += 2) {
+		for(var j = 1; j < 10; j += 2) {
+			toggles.push("Hideout-R"+j+"-C"+i);
+		}
+	}
+
+	for(var i = 0; i < setkeys.length; i++) {
+		var pkey = setkeys[i];
+		var prompts = promptsets[pkey];
+		var pnum = 0;
+		for(var j = 0; j < prompts.length; j++) {
+			pnum++;
+			var prompt = prompts[j];
+			var pick = prompt["Pick"];
+			var plist = prompt["List"];
+			toggles.push("Toggle-"+pkey+'-Prompt-'+pnum+'-Expand');
+			if ( pick ) {
+				for(var picount = 1; picount <= plist.length; picount++ ) {
+					toggles.push(pkey+"-Prompt-"+pnum+"-"+picount)
+				}
+			}
+		}
+	}
+
+	// Actually assemble the clicked triggers
 	for(var i of toggles) {
 		clicks++;
 		if ( clicks > 1 )
@@ -171,6 +988,20 @@
 	}
 	pbxpfields = pbxpfields + "]";
 
+	var psxpclicks = "";
+	var psxpfields = "";
+	psxpfields = "[";
+	for(var i = 1; i <= 8; i++) {
+		if ( i > 1 )
+			psxpclicks = psxpclicks + " "; 
+		// I don't know why pug requires this to be a separate thing, but it sure fucking did, so here we go
+		if ( i > 1 )
+		  psxpfields = psxpfields + ", ";
+		psxpclicks = psxpclicks + "clicked:Playset-XP-" + i;
+		psxpfields = psxpfields + '"'+"Playset-XP-"+i+'"';
+	}
+	psxpfields = psxpfields + "]";
+
 	var sunclicks = "";
 	var sunfields = "";
 	sunfields = "[";
@@ -212,6 +1043,40 @@
 		starsfields = starsfields + '"'+"Stars-XP-"+i+'"';
 	}
 	starsfields = starsfields + "]";
+
+	var tierclicks = "";
+	var tierfields = "";
+	tierfields = "[";
+	for(var i = 1; i <= 6; i++) {
+		for(var j = 1; j <= 3; j++) {
+			if ( i > 1 || j > 1 )
+				tierclicks = tierclicks + " "; 
+			// I don't know why pug requires this to be a separate thing, but it sure fucking did, so here we go
+			if ( i > 1 || j > 1  )
+				tierfields = tierfields + ", ";
+			tierclicks = tierclicks + "clicked:Tier-Track-A-"+j+"-" + i + " ";
+			tierfields = tierfields + '"'+"Tier-Track-A-"+j+"-"+i+'", ';
+			tierclicks = tierclicks + "clicked:Tier-Track-B-"+j+"-" + i;
+			tierfields = tierfields + '"'+"Tier-Track-B-"+j+"-"+i+'"';
+		}
+	}
+	tierfields = tierfields + "]";
+
+	var invclicks = "";
+	var invfields = "";
+	invfields = "[";
+	for(var i = 1; i <= 6; i++) {
+		for(var j = 1; j <= 3; j++) {
+			if ( i > 1 || j > 1 )
+				invclicks = invclicks + " "; 
+			// I don't know why pug requires this to be a separate thing, but it sure fucking did, so here we go
+			if ( i > 1 || j > 1  )
+				invfields = invfields + ", ";
+			invclicks = invclicks + "clicked:Investigation-"+j+"-" + i;
+			invfields = invfields + '"'+"Investigation-"+j+"-"+i+'"';
+		}
+	}
+	invfields = invfields + "]";
 
 	var statsblock = {
 		'Sun': [
@@ -272,3 +1137,48 @@
 		}
 	}
 	var actioncats = JSON.stringify(actioncat);
+
+	var translations = { 
+		"Series Playset": "Series Playset",
+		"Choose a Series Playset": "(Choose a Series Playset)",
+		"Choose a Playset": "(Choose a Playset)",
+		"Select a Playbook": "(Select a Playbook)",
+		"Select a Sheet": "(Select a Sheet)",
+		"At the Brink of the Abyss": "At the Brink of the Abyss", 
+		"Beneath a Rotting Sky": "Beneath a Rotting Sky", 
+		"On a Sea of Stars": "On a Sea of Stars", 
+		"In a Maze of Dreams": "In a Maze of Dreams",
+		"Protagonists": "Protagonists",
+		"Adversary": "Adversary",
+		"Reference": "Reference",
+		"Series Creation": "Series Creation",
+		"Position": "Position",
+		"Risky": "Risky",
+		"Controlled": "Controlled",
+		"Desperate": "Desperate",
+		"Fortune": "Fortune",
+		"Effect": "Effect",
+		"Standard": "Standard",
+		"Limited": "Limited",
+		"Great": "Great",
+		"Extreme": "Extreme",
+		"Zero": "Zero",
+		"Number of Dice": "Number of Dice",
+		"Bonus Dice": "Bonus Dice",
+		"Transcendent?": "Transcendent?",
+		"Yes": "Yes",
+		"No": "No",
+		"Roll-Describe-Sun": "Sun: Resist consequences from violence and fear.",
+		"Roll-Describe-Moon": "Moon: Resist consequences from despair and heartbreak.",
+		"Roll-Describe-Stars": "Stars: Resist consequences from panic and social pressure.",
+		"Roll-Describe-Analyze": "When you analyze, you search beyond the surface presentation of the world, and discover secrets. You might study an ancient book for information on magic rituals. You might discern a gap in your foe’s defences.",
+		"Roll-Describe-Conceal": "When you conceal, you hide your true intentions and feelings. You might pass unnoticed, as just another face in the crowd. You might choke down your true feelings and lie to someone.",
+		"Roll-Describe-Confess": "When you confess, you expose the inner world of your thoughts and feelings to another. You might reveal to someone that it was you who left anonymous gifts at their doorstep. You might admit to a friend that you were once a servant of the evil empress.",
+		"Roll-Describe-Defy": "When you defy, you muster your courage and face opposition head on. You might stand up to a bully, fixing them with a stern glare. You might unleash your mightiest attack against a dangerous foe.",
+		"Roll-Describe-Empathize": "When you empathize, you understand a person intuitively, and feel their emotions as if they were your own. You might listen to someone’s story, and gain an understanding of their perspective. You might touch a horrifying monster, and feel the frightened heart that beats within it.",
+		"Roll-Describe-Express": "When you express, you use words with an agenda in mind. You might teach someone a valuable lesson about friendship. You might convince a longtime rival to work with you for a time to solve a shared problem.",
+		"Roll-Describe-Flow": "When you flow, you move with grace and adapt to your circumstances. You might leap across a gap to reach safety. You might act in accordance with other’s expectations.",
+		"Roll-Describe-Forgive": "When you forgive, you show that you care for someone despite a mistake they have made. You might offer a chance for reconciliation to a friend that wronged you. You might embrace a monster that was once human, in the hopes that it might be human again someday.",
+		"Roll-Describe-Perceive": "When you perceive, you see the world as it presents itself, without judgement. You might observe someone and note their daily routine. You might see the beauty present in even the darkest and strangest corners of the world.",
+	};
+

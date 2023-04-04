@@ -1,0 +1,56 @@
+.sheet-Box.sheet-Purple
+	.sheet-Box-Header
+		+translate('Prompts')
+		.sheet-Box-Header-Icons
+			+hideUnmarked('Toggle-Prompts-Marked')
+			+toggle('Toggle-Prompts-Expand')
+	+hidden('Toggle-Prompts-Expand').sheet-hide-on-one
+	.sheet-Prompts-All
+		each prompts, pkey in promptsets
+			- var pnum = 0;
+			each prompt in prompts
+				-
+					pnum++;
+					var query = prompt["Prompt"];
+					var instruction = prompt["Instruction"];
+					var pick = prompt["Pick"];
+					var plist = prompt["List"];
+					var textarea = false;
+					if ( typeof(prompt["Textarea"]) !== "undefined" ) {
+						textarea = prompt["Textarea"]
+					}
+				div(class="sheet-Playset-"+pkey)
+					.sheet-Box-Header.sheet-Box-Subsection 
+						+translate(query)
+						.sheet-Box-Header-Icons
+							+toggle('Toggle-'+pkey+'-Prompt-'+pnum+'-Expand')
+				div(class="sheet-Isolate sheet-Playset-"+pkey)
+					+hidden('Toggle-Prompts-Marked').sheet-unused-toggle
+					+hidden('Toggle-'+pkey+'-Prompt-'+pnum+'-Expand').sheet-hide-on-one
+					.sheet-Prompt
+						if ( instruction != "" )
+							.sheet-Prompt-Instruction
+								+translate(instruction)
+						if ( pick == true )
+							- var picount = 0;
+							each pitem in plist
+								- picount++;
+								+hidden(pkey+"-Prompt-"+pnum+"-"+picount,0).sheet-hide-if-unused
+								.sheet-Prompt-Pick
+									.sheet-Prompt-Selector
+										+abilityMark(pkey+"-Prompt-"+pnum+"-"+picount)
+									.sheet-Prompt-Content
+										+translate(pitem)
+						else
+							ul
+								each pitem in plist
+									li
+										+translate(pitem)
+						if ( textarea )
+							.sheet-Prompt-Text
+								+textarea(pkey+"-Text-"+pnum+"-"+picount)
+		.sheet-Box-Header.sheet-Box-Subsection
+			+translate('Choose a name for the series that reflects these answers.')
+		.sheet-Prompt
+			.sheet-Prompt-Text
+				+text('Series-Name')

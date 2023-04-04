@@ -1,0 +1,133 @@
+.sheet-Box.sheet-Purple
+	.sheet-Box-Header
+		+translate('Missions')
+		.sheet-Box-Header-Icons
+			+toggle('Toggle-Missions-Expand')
+	+hidden('Toggle-Missions-Expand').sheet-hide-on-one
+	.sheet-Missions
+		.sheet-Box-Header.sheet-Box-Subsection.sheet-Playset-Abyss.sheet-Playset-Sky.sheet-Playset-Stars 
+			+translate("Tier I")
+			.sheet-Box-Header-Icons
+				+toggle('Toggle-Mission-Tier-1-Expand')
+		+hidden('Toggle-Mission-Tier-1-Expand').sheet-hide-on-one
+		.sheet-Mission-1.sheet-Playset-Abyss.sheet-Playset-Sky.sheet-Playset-Stars
+			.sheet-Playset-Abyss
+				p
+					b
+						+translate('Cleansing:')
+					|  
+					+translate('Free a special person or place from the grip of the Abyss.')
+				p
+					b
+						+translate('Face a creature of the Abyss:')
+					|  
+					+translate('A deadly creature has emerged to advance the Abyss’ agenda. Stop it.')
+			.sheet-Playset-Sky
+				p
+					b
+						+translate("The hunt:")
+					|  
+					+translate('Locate your prey, best it, and claim its heart. Roll +1d when you devour blighted hearts after this mission.')
+				p
+					b
+						+translate("Secure your hunting grounds:")
+					|  
+					+translate('Patrol your territory and fend off other hunters that would take it from you.')
+			.sheet-Playset-Stars
+				p
+					b
+						+translate("Defend the last bastion")
+					|  
+					+translate('Fend off a Leviathan attack on the bastion.')
+				p
+					b
+						+translate("Explore the ruined world:")
+					|  
+					+translate('Explore the world beyond the bastion, or within it, looking for information, solace, and hope.<p>Gain +1d to the next engagement roll.')
+		.sheet-Box-Header.sheet-Box-Subsection.sheet-Playset-Abyss.sheet-Playset-Sky.sheet-Playset-Stars 
+			+translate("Tier II")
+			.sheet-Box-Header-Icons
+				+toggle('Toggle-Mission-Tier-2-Expand')
+		+hidden('Toggle-Mission-Tier-2-Expand').sheet-hide-on-one
+		.sheet-Mission-2.sheet-Playset-Abyss.sheet-Playset-Sky.sheet-Playset-Stars
+			.sheet-Playset-Abyss
+				p
+					b
+						+translate("Seek answers:")
+					|  
+					+translate('Look for clues to the nature of the Abyss, or its intentions, in unexpected places. Investigation does not reduce by half after this mission.')
+				p
+					b
+						+translate("Reclaim an object of power:")
+					|  
+					+translate('Retrieve a lost relic that relates to the group’s destiny. Unlock a related hideout option for free after successfully completing this mission.')
+			.sheet-Playset-Sky
+				p
+					b
+						+translate("Seek Answers:")
+					|  
+					+translate('Look for clues to the nature of the Blight, or its intentions, in unexpected places. The investigation track does not reset after this mission.')
+				p
+					b
+						+translate("Steal Power:")
+					|  
+					+translate('Use force or deception to claim an object of power. Roll +1d when you devour blighted hearts after this mission, and -1d when you roll fallout.')
+			.sheet-Playset-Stars
+				p
+					b
+						+translate("Hunt a Leviathan:")
+					|  
+					+translate('Make a sortie on the flagship to pursue Leviathans in the wider world.')
+				p
+					b
+						+translate("Recover a fallen engine:")
+					|  
+					+translate('Make a sortie on the flagship to secure an engine that was thought to be lost.<p>If successful, create a new Engine.')
+		.sheet-Box-Header.sheet-Box-Subsection.sheet-Playset-Abyss.sheet-Playset-Sky.sheet-Playset-Stars 
+			+translate("Tier III")
+			.sheet-Box-Header-Icons
+				+toggle('Toggle-Mission-Tier-3-Expand')
+		+hidden('Toggle-Mission-Tier-3-Expand').sheet-hide-on-one
+		.sheet-Mission-3.sheet-Playset-Abyss.sheet-Playset-Sky.sheet-Playset-Stars
+			.sheet-Playset-Abyss
+				p
+					b
+						+translate("Brave the Abyss:")
+					|  
+					+translate('Face the Abyss where it is strongest, in the hopes of disrupting its plans, and giving it pause.<p>After this mission, the current season ends.')
+			.sheet-Playset-Sky
+				p
+					b
+						+translate("Drive back the Blight:")
+					|  
+					+translate('Face the Blight where it is strongest, in the hopes of disrupting its progress, and delaying the world’s undoing.<p>After this mission, the season ends.')
+			.sheet-Playset-Stars
+				p
+					b
+						+translate("Stage a desperate counterattack:")
+					|  
+					+translate('Make a strike against the Leviathans that gives them pause, and buys a moment of peace for the bastion.<p>After this mission, the season ends.')
+		.sheet-Playset-Sky
+			.sheet-Box-Header.sheet-Box-Subsection
+				+translate("Tier IV")
+				.sheet-Box-Header-Icons
+					+toggle('Toggle-Mission-Tier-4-Expand')
+			+hidden('Toggle-Mission-Tier-4-Expand').sheet-hide-on-one
+			.sheet-Mission-4
+				.sheet-Playset-Sky
+					p
+						b
+							+translate("Face Our Tragic Fate:")
+						|  
+						+translate('Fight a hopeless battle against impossible odds.<p>After this mission the series ends.')
+		.sheet-Playset-Dreams
+			p
+				b
+					+translate("Explore a suspect’s dream:")
+				|  
+				+translate('Enter the dream of a suspect in the Conspiracy seeking the truth of their involvement.<p>When a suspects involvement is unknown, the mission’s tier is equal to that of the lowest unfilled role in the Conspiracy map.<p>If the group’s investigations have revealed a suspect’s involvement, the mission tier is equal to the suspect’s role tier.<p>When a suspect’s complicity becomes clear, add them to the Conspiracy map in the appropriate position.')
+			p
+				b
+					+translate("Confront a known conspirator:")
+				|  
+				+translate('Enter the dream of a known conspirator and confront them about their involvement. What judgement awaits them?')

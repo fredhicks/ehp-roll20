@@ -1,0 +1,245 @@
+// The adversary sheet has the series agenda and principles for the director, the fallout table, and the adversary track, as well as any series rules that the director will need to use. This sheet is primarily for the director to reference during play. These are named after the adversity central to each series: The Abyss, The Blight, The Void, and The Conspiracy.
+
+.sheet-Playset-Sheet-Adversary
+	.sheet-Playset-Sheet-Adversary-Blocks
+		.sheet-Left
+
+			.sheet-Box.sheet-Purple
+				.sheet-Box-Header
+					+translate('Series Agenda')
+					.sheet-Box-Header-Icons
+						+toggle('Toggle-Agenda-Expand')
+				+hidden('Toggle-Agenda-Expand').sheet-hide-on-one
+				.sheet-Agenda
+					.sheet-Playset-Abyss
+						.sheet-Box-Header.sheet-Box-Subsection 
+							+translate('Give monsters human hearts')
+						.sheet-Content
+							+translate('When including monsters in your fiction, they should be driven by emotion that the protagonists can recognize. If they have human hearts, then monsters have hope of being reconciled, redeemed, or perhaps made human once more. Use these monsters to show the nature of the Abyss, and to stand as a warning of the cost of failure for the protagonists.')
+						.sheet-Box-Header.sheet-Box-Subsection 
+							+translate('Make adversaries, not villains')
+						.sheet-Content
+							+translate('Give adversity human faces, with motives that justify their antagonistic position. Think about what emotions or circumstances drove the antagonists to this action. Look for opportunities to show the protagonists the true nature of their adversaries. Show how, if circumstances were different, the antagonists might have been allies or friends. Use these adversaries to tempt the protagonists with twisted reflections of their own goals.')
+						.sheet-Box-Header.sheet-Box-Subsection 
+							+translate('Let the mundane world give voice to the Abyss')
+						.sheet-Content
+							+translate('The Abyss is just as much part of the day to day mundane struggles of the protagonists, as it is responsible for the supernatural perils that they contend with. Use mundane supporting characters to embody this. Their actions and words are humble, insidious reflections of the loftier and more obvious magical threat. Magical and mundane troubles are rooted in the same themes, and carry the same gravity for the world and the protagonists.')
+					.sheet-Playset-Sky
+					.sheet-Playset-Stars
+					.sheet-Playset-Dreams
+
+			.sheet-Box.sheet-Purple
+				.sheet-Box-Header
+					+translate('Judgment Calls')
+					.sheet-Box-Header-Icons
+						+toggle('Toggle-Judgment-Expand')
+				+hidden('Toggle-Judgment-Expand').sheet-hide-on-one
+				.sheet-Judgment
+					.sheet-Playset-Abyss
+						+translate('<ul><li>Use smaller consequences to set up larger more severe consequences later.<li>By finding clever approaches, or appealing to the hearts of their foes, even mundane characters may be able to act with standard effect against supernatural threats.<li>Transcended protagonists can achieve moments of total triumph, redeeming their foes, and making the world meaningfully better.<li>Reserve the brightest triumphs, and most sweeping successes for situations where the protagonists work together.</ul>')
+					.sheet-Playset-Sky
+						+translate('<ul><li>Shift the evaluation of position towards more desperate actions.<li>Resisting consequences should rarely if ever avoid them completely: wounds will leave scars, both physical and emotional.<li>Characters will often have less control over outcomes of their actions, especially desperate actions.</ul>')
+					.sheet-Playset-Stars
+						+translate('<ul><li>When the protagonists make mistakes, people die, buildings are ruined, and things are lost that cannot be recovered.<li>Whenever something is damaged or lost, consider its effect on the pilots, or their engines.<li>Should a protagonist find themselves acting against a Leviathan without their engine, the stakes will primarily be survival and escape.<li>When the protagonists are piloting an Engine but not transcended, they will typically be outmatched, reacting and struggling to keep pace with the Leviathans.</ul>')
+					.sheet-Playset-Dreams
+						+translate('<ul><li>Keep the majority of the action in dreams grounded, and tangible.<li>Give extra weight to actions that play into the emotional fabric of the dream.<li>Reward actions that make use of the internal logic of the dream with better position or effect.<li>Breaking the dream’s logic, or directly confronting the dreamer’s psyche, leads to extreme consequences and outcomes, fraying the edges of the dream world.</ul>')
+
+			// Include this in the bottom left of every playset sheet
+			include pick-playset-sheet.pug
+		.sheet-Mid
+
+			.sheet-Box.sheet-Purple
+				.sheet-Box-Header
+					+translate('Director Principles')
+					.sheet-Box-Header-Icons
+						+toggle('Toggle-Principles-Expand')
+				+hidden('Toggle-Principles-Expand').sheet-hide-on-one
+				.sheet-Principles
+					+translate('<ul><li>Be a fan of the other players<li>Address the characters<li>Address the players<li>Ask questions and build on the answers<li>Express consequences by way of the fiction first</ul>')
+
+			// used in more than one place
+
+			include playset-tracks.pug
+
+			.sheet-Box.sheet-Purple
+				.sheet-Box-Header
+					+translate('Fallout')
+					.sheet-Box-Header-Icons
+						+toggle('Toggle-Fallout-Expand')
+				+hidden('Toggle-Fallout-Expand').sheet-hide-on-one
+				.sheet-Tracks
+					.sheet-Playset-Abyss
+						.sheet-Box-Header.sheet-Box-Subsection 
+							+translate('Tier I')
+						.sheet-Content
+							ul
+								li
+									b 1-3: 
+									+translate('An enemy acts against the group')
+								li
+									b 4/5: 
+									+translate('A friend needs urgent help')
+								li
+									b 6: 
+									+translate('Omens loom in the mundane world')
+						.sheet-Box-Header.sheet-Box-Subsection 
+							+translate('Tier II')
+						.sheet-Content
+							ul
+								li
+									b 1-3: 
+									+translate('An enemy is embraced by the abyss')
+								li
+									b 4/5: 
+									+translate('Agents of the abyss stalk a friend')
+								li
+									b 6: 
+									+translate('An obligation causes trouble for the group')
+						.sheet-Box-Header.sheet-Box-Subsection 
+							+translate('Tier III')
+						.sheet-Content
+							ul
+								li
+									b 1-3: 
+									+translate('The abyss advances its agenda')
+								li
+									b 4/5: 
+									+translate('A friend succumbs to the abyss')
+								li
+									b 6: 
+									+translate('An important place falls to the abyss')
+
+					.sheet-Playset-Sky
+						.sheet-Box-Header.sheet-Box-Subsection 
+							+translate('Tier I')
+						.sheet-Content
+							ul
+								li
+									b 1-3: 
+									+translate('A dread power makes itself known')
+								li
+									b 4/5: 
+									+translate('An obligation becomes grotesque')
+								li
+									b 6: 
+									+translate('A friend asks a favour')
+						.sheet-Box-Header.sheet-Box-Subsection 
+							+translate('Tier II')
+						.sheet-Content
+							ul
+								li
+									b 1-3: 
+									+translate('An enemy is empowered by Blight')
+								li
+									b 4/5: 
+									+translate('Agents of dystopia accost a protagonist')
+								li
+									b 6: 
+									+translate('A friend is taken by rival hunters')
+						.sheet-Box-Header.sheet-Box-Subsection 
+							+translate('Tier III')
+						.sheet-Content
+							ul
+								li
+									b 1-3: 
+									+translate('The Blight advances its agenda')
+								li
+									b 4/5: 
+									+translate('Hunters stage an ambush')
+								li
+									b 6: 
+									+translate('A friend is lost to the Blight')
+
+					.sheet-Playset-Stars
+						.sheet-Box-Header.sheet-Box-Subsection 
+							+translate('Tier I')
+						.sheet-Content
+							ul
+								li
+									b 1-3: 
+									+translate('Dissent spreads in the Bastion')
+								li
+									b 4/5: 
+									+translate('An engine is reassigned')
+								li
+									b 6: 
+									+translate('Institutions pressure the pilots')
+						.sheet-Box-Header.sheet-Box-Subsection 
+							+translate('Tier II')
+						.sheet-Content
+							ul
+								li
+									b 1-3: 
+									+translate('Strife breaks out in the Bastion')
+								li
+									b 4/5: 
+									+translate('An engine goes dormant')
+								li
+									b 6: 
+									+translate('A pilot is reprimanded')
+						.sheet-Box-Header.sheet-Box-Subsection 
+							+translate('Tier III')
+						.sheet-Content
+							ul
+								li
+									b 1-3: 
+									+translate('A Leviathan infiltrates the Bastion')
+								li
+									b 4/5: 
+									+translate('An engine breaks down')
+								li
+									b 6: 
+									+translate('The pilots are assigned an overseer')
+						.sheet-Box-Header.sheet-Box-Subsection 
+							+translate('Additional Fallout Rules')
+						.sheet-Content
+							+translate('<p>When the pilots pursue a mission that leaves the Bastion exposed, or internal strife and politics are left unchecked, roll the Readiness tier.<ul><li><b>On a 6</b>, the Bastion handles the trouble, and grows complacent, reduce Readiness by 1 after it drops by half at mission end.<li><b>On a 4/5</b>, the Bastion weathers the trouble. The Last Bastion track reduces by one. There is resentment of the pilots among the citizens.<li><b>On a 1-3</b>, it’s a disaster. The Bastion track reduces by 3, and the pilots must answer for it.<li><b>On a critical success</b>, the Bastion handles the trouble, and rallies around the cause, Readiness does not reduce during fallout.')
+
+					.sheet-Playset-Dreams
+						.sheet-Box-Header.sheet-Box-Subsection 
+							+translate('Tier I')
+						.sheet-Content
+							ul
+								li
+									b 1-3: 
+									+translate('An agent of the Conspiracy acts')
+								li
+									b 4/5: 
+									+translate('A suspect reveals their complicity')
+								li
+									b 6: 
+									+translate('A suspect lets slip a terrible secret')
+						.sheet-Box-Header.sheet-Box-Subsection 
+							+translate('Tier II')
+						.sheet-Content
+							ul
+								li
+									b 1-3: 
+									+translate('The Conspiracy acts on its agenda')
+								li
+									b 4/5: 
+									+translate('A suspect is put in danger')
+								li
+									b 6: 
+									+translate('The dream bleeds into the waking world')
+						.sheet-Box-Header.sheet-Box-Subsection 
+							+translate('Tier III')
+						.sheet-Content
+							ul
+								li
+									b 1-3: 
+									+translate('The Conspiracy makes a suspect its host')
+								li
+									b 4/5: 
+									+translate('The dream claims a suspect')
+								li
+									b 6: 
+									+translate('A suspect weaponizes the dream')
+			// Used in more than one place
+			include playset-names.pug
+		.sheet-Right
+			.sheet-Box.sheet-Purple
+				.sheet-Box-Header
+					+translate('Notes')
+				.sheet-Notes
+					+textarea('Adversary-Notes')

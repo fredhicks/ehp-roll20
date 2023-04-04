@@ -1,0 +1,291 @@
+-
+	var psabilities = {
+		"Abyss": [
+			{
+				"name": "By starlight",
+				"effect": "Each protagonist may add +1 action rating to forgive, empathize, or flow.",
+				"selectable": true,
+				"textfield": false,
+				"transcendent": false
+			},
+			{
+				"name": "Pure hearts",
+				"effect": "Gain +1d when you roll moon, or make a connection.",
+				"selectable": true,
+				"textfield": false,
+				"transcendent": false
+			},
+			{
+				"name": "Never alone",
+				"effect": "Protagonists may use teamwork regardless of the distance separating them. When you assist a teammate from afar, ask that player one question about their character from your gather info list.",
+				"selectable": true,
+				"textfield": false,
+				"transcendent": false
+			},
+			{
+				"name": "Power of the moon",
+				"effect": "The protagonists holds on to hope until the very end, even in the face of utter despair. When rolling eclipse you may adjust your result by one level.",
+				"selectable": true,
+				"textfield": false,
+				"transcendent": false
+			},
+			{
+				"name": "Shrine keepers",
+				"effect": "The protagonists gain a new downtime activity: Maintain the sacred shrine. If one protagonist takes this activity, they all receive the shrine’s benefit until the end of the next mission. Choose a shrine power:",
+				"selectable": true,
+				"textfield": false,
+				"transcendent": false,
+				"sublist": [
+					{
+						"name": "Fox Shrine",
+						"effect": "The protagonists can always tell if someone is lying. Ask an extra follow up question whenever you gather info. What price does the fox demand?"
+					},
+					{
+						"name": "Valkyrie Shrine",
+						"effect": "Once during the next mission, one protagonist may choose to ignore level 4 harm. They die, but return to life moments later. What did death feel like? Whose face did the Valkyrie wear?"
+					},
+					{
+						"name": "Shrine of Eyes",
+						"effect": "The protagonists count as being 1 tier higher on the investigation track. How does the shrine reveal secrets to those that maintain it?"
+					},
+				]
+			},
+			{
+				"name": "Redemption",
+				"effect": "When determining dice for your engagement roll, if you answer yes to “Is this mission particularly noble or heroic?” all protagonists clear 1 stress. When you rescue an innocent or redeem an enemy, mark series xp.",
+				"selectable": true,
+				"textfield": false,
+				"transcendent": false
+			},
+			{
+				"name": "Hope is strength",
+				"effect": "Each protagonist marks a transcendent action dot in forgive, empathize, and flow.",
+				"selectable": true,
+				"textfield": false,
+				"transcendent": true
+			},
+			{
+				"name": "Unshakable",
+				"effect": "While transcended, each protagonist gets +1d to all resistance rolls.",
+				"selectable": true,
+				"textfield": false,
+				"transcendent": true
+			},
+			{
+				"name": "Tireless",
+				"effect": "Your first and last action rolls made while transcended count as recovery rolls for you, in addition to their other effects. If you are still transcended at the end of a mission, mark 2 segments on your recovery clock.",
+				"selectable": true,
+				"textfield": false,
+				"transcendent": true
+			},
+		],
+		"Sky": [
+			{
+				"name": "Troubled hearts",
+				"effect": "Each protagonist may add +1 action rating to confess, defy, or conceal.",
+				"selectable": true,
+				"textfield": false,
+				"transcendent": false
+			},
+			{
+				"name": "Grim determination",
+				"effect": "Gain +1d when you roll stars. When you take harm, recover stress equal to the level of the harm.",
+				"selectable": true,
+				"textfield": false,
+				"transcendent": false
+			},
+			{
+				"name": "Bitter embrace",
+				"effect": "When you accept a Poisoned Promise, gain +2d instead of +1d. Gain +1d to all action rolls made while in eclipse. When rolling eclipse take -1d.",
+				"selectable": true,
+				"textfield": false,
+				"transcendent": false
+			},
+			{
+				"name": "Elusive",
+				"effect": "Gain +1d to all rolls made during fallout. When you advance the Blight track at the end of a mission, mark 1 less.",
+				"selectable": true,
+				"textfield": false,
+				"transcendent": false
+			},
+			{
+				"name": "Gazing into the abyss",
+				"effect": "Permanently fill the first 3 spaces of the Blight track. Gain +1d when you investigate, and mark xp.",
+				"selectable": true,
+				"textfield": false,
+				"transcendent": false
+			},
+			{
+				"name": "Vengeful drive",
+				"effect": "Gain +1d when you help a friend recover from physical harm. The protagonists have a magical awareness of the location of foes who have harmed them.",
+				"selectable": true,
+				"textfield": false,
+				"transcendent": false
+			},
+			{
+				"name": "Night hunters",
+				"effect": "When you set out on the hunt, take +1d to your engagement roll. When your mission involves staging an ambush, mark series xp.		],",
+				"selectable": true,
+				"textfield": false,
+				"transcendent": false
+			},
+			{
+				"name": "Fighting in shadow",
+				"effect": "Each protagonist marks a transcendent action dot in confess, defy, and conceal.",
+				"selectable": true,
+				"textfield": false,
+				"transcendent": true
+			},
+			{
+				"name": "I won’t allow it!",
+				"effect": "If you take fatal harm while transcended, you don’t die. When your transcendence ends, roll eclipse. If you succeed, you’re out of action for the remainder of the mission, but still alive. If you fail, whatever dark power held death at bay fades, and you die. Who catches you when you fall?",
+				"selectable": true,
+				"textfield": false,
+				"transcendent": true
+			},
+			{
+				"name": "For the thrill",
+				"effect": "Desperate rolls made while transcended also count as recovery rolls. While transcended count all controlled rolls as risky.",
+				"selectable": true,
+				"textfield": false,
+				"transcendent": true
+			},
+		],
+		"Stars": [
+			{
+				"name": "Academy trained",
+				"effect": "Each protagonist may add +1 action rating to perceive, flow, or analyze.",
+				"selectable": true,
+				"textfield": false,
+				"transcendent": false
+			},
+			{
+				"name": "Esprit de corps",
+				"effect": "Gain +1d when you roll sun, or help a friend recover.",
+				"selectable": true,
+				"textfield": false,
+				"transcendent": false
+			},
+			{
+				"name": "Sync ratio",
+				"effect": "When you receive an assist and your action succeeds, clear 1 stress. When you use a link to help an ally, they gain +2d instead of +1d.",
+				"selectable": true,
+				"textfield": false,
+				"transcendent": false
+			},
+			{
+				"name": "High alert",
+				"effect": "During downtime, the group gets additional downtime actions to distribute among its members equal to the current Leviathans track tier. These extra actions can only be used to make preparations.",
+				"selectable": true,
+				"textfield": false,
+				"transcendent": false
+			},
+			{
+				"name": "Heroes of the people",
+				"effect": "When your mission protects someone or something important, gain +1d to the engagement roll. When no innocents are harmed during the course of a mission, mark series xp.",
+				"selectable": true,
+				"textfield": false,
+				"transcendent": false
+			},
+			{
+				"name": "On borrowed time",
+				"effect": "During downtime you may remove one segment from the Readiness track after a roll to improve the result level by one step. This cannot be used to make preparations. What is neglected or goes unfinished elsewhere?",
+				"selectable": true,
+				"textfield": false,
+				"transcendent": false
+			},
+			{
+				"name": "Plugged in",
+				"effect": "Each protgonist marks a transcendent action dot in perceive, flow, and analyze.",
+				"selectable": true,
+				"textfield": false,
+				"transcendent": true
+			},
+			{
+				"name": "Heavy gear",
+				"effect": "Harm of level 3 or lower is fully negated when you spend armour to resist it. You may spend your armour to improve your position for a single roll.",
+				"selectable": true,
+				"textfield": false,
+				"transcendent": true
+			},
+			{
+				"name": "Eject!",
+				"effect": "When you suffer level 4 harm while transcended, you may choose to not take the harm, and instead immediately end your transcendence. What do you leave behind? Who gets left in a bad spot?",
+				"selectable": true,
+				"textfield": false,
+				"transcendent": true
+			},
+		],
+		"Dreams": [
+			{
+				"name": "Curiouser",
+				"effect": "Each protagonist may add +1 action rating to forgive, express, or conceal.",
+				"selectable": true,
+				"textfield": false,
+				"transcendent": false
+			},
+			{
+				"name": "Looking for answers",
+				"effect": "Gain +1d when you investigate. When a lead turns out to be a dead end, mark series xp.",
+				"selectable": true,
+				"textfield": false,
+				"transcendent": false
+			},
+			{
+				"name": "Shared burden",
+				"effect": "If you share an intimate moment that reveals your secrets or inner pains, clear 2 stress and your ally marks 1 stress. They ask you one question from their gather info list.",
+				"selectable": true,
+				"textfield": false,
+				"transcendent": false
+			},
+			{
+				"name": "Another face in the crowd",
+				"effect": "Gain +1 effect when concealing yourself in a crowd. When you defer to the majority, mark xp.",
+				"selectable": true,
+				"textfield": false,
+				"transcendent": false
+			},
+			{
+				"name": "Daydreamers",
+				"effect": "Gain +1d when rolling obligation.",
+				"selectable": true,
+				"textfield": false,
+				"transcendent": false
+			},
+			{
+				"name": "Moment of crisis",
+				"effect": "When factoring your engagement roll, if you answer yes to “Does this mission determine the fate of a friend?” gain +2d instead of +1d. Gain +1d when you help a friend recover from emotional harm.",
+				"selectable": true,
+				"textfield": false,
+				"transcendent": false
+			},
+			{
+				"name": "Lucid",
+				"effect": "Each protagonist marks a transcendent action dot in forgive, express, and conceal.",
+				"selectable": true,
+				"textfield": false,
+				"transcendent": true
+			},
+			{
+				"name": "Dream logic",
+				"effect": "When you trigger a flashback while transcended, you receive all applicable benefits of transcendence for any actions taken during that flashback.",
+				"selectable": true,
+				"textfield": false,
+				"transcendent": true
+			},
+			{
+				"name": "Just a dream",
+				"effect": "While you are transcended, others must speak to you truthfully, and you ask an additional follow up question when you gather info during an interrogation.",
+				"selectable": true,
+				"textfield": false,
+				"transcendent": true
+			},
+			{
+				"name": "Hold back the nightmare",
+				"effect": "While you are transcended, any eclipse roll result of 4/5 counts as a 6. While transcended and in eclipse, roll +1d on actions to frighten or upset others.",
+				"selectable": true,
+				"textfield": false,
+				"transcendent": true
+			},
+		],
+	};

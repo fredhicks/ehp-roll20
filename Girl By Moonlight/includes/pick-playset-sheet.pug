@@ -1,0 +1,21 @@
+.sheet-Box.sheet-Purple
+	.sheet-Box-Header
+		+translate('Pick Your Sheet')
+		.sheet-Box-Header-Icons
+			+toggle('Toggle-Picker-Expand')
+	+hidden('Toggle-Picker-Expand').sheet-hide-on-one
+	.sheet-Bio-Block
+		.sheet-Label
+			+translate('Playset')
+		.sheet-Field
+			+select("Playset")
+				+option("Choose a Playset","0")
+				each ps, key in playsets
+					+option(ps,key)
+		.sheet-Label
+			+translate('Playset Sheet')
+		.sheet-Field
+			+select("Playset-Sheet")
+				+option("Select a Sheet","")
+				each sh, key in setsheets
+					+option(sh,key)
