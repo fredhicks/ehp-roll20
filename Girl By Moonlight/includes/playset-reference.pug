@@ -5,6 +5,7 @@
 .sheet-Playset-Sheet-Reference
 	.sheet-Playset-Sheet-Reference-Blocks
 		.sheet-Left
+			+hidden('Toggle-Characters-Expand').sheet-shorten-on-one
 			.sheet-Characters.sheet-Playset-Abyss.sheet-Playset-Sky.sheet-Playset-Dreams
 				.sheet-Box.sheet-Purple
 					.sheet-Box-Header
@@ -15,130 +16,11 @@
 							+toggle('Toggle-Characters-Expand')
 					+hidden('Toggle-Characters-Expand').sheet-hide-on-one
 					.sheet-Notes
-						+textarea('Reference-Characters')
+							+textarea('Reference-Characters')
 			// Include this in the bottom left of every playset sheet
 			include pick-playset-sheet.pug
 		.sheet-Right
-			.sheet-Playset-Abyss
-				.sheet-Hideout-Container
-
-					.sheet-Box.sheet-Purple.sheet-Solid.sheet-Room.sheet-R1.sheet-C1
-						+translate('Hideout')
-					.sheet-Connection.sheet-R1.sheet-C2.sheet-LR
-					+hidden('Hideout-R1-C3').sheet-Hideout-Activator
-					.sheet-Box.sheet-Purple.sheet-Room.sheet-R1.sheet-C3
-						.sheet-Box-Header
-							+translate('Lounge')
-							.sheet-Box-Header-Icons
-								+headDot('Hideout-R1-C3')
-						.sheet-Content
-							+translate('Spend downtime activity to add 2xp to moon')
-					.sheet-Connection.sheet-R1.sheet-C4.sheet-LR
-					+hidden('Hideout-R1-C5').sheet-Hideout-Activator
-					.sheet-Box.sheet-Purple.sheet-Room.sheet-R1.sheet-C5
-						.sheet-Box-Header
-							+translate('Library')
-							.sheet-Box-Header-Icons
-								+headDot('Hideout-R1-C5')
-						.sheet-Content
-							+translate('Spend downtime activity to add 2xp to stars')
-
-					.sheet-Connection.sheet-R2.sheet-C1.sheet-TB
-
-					+hidden('Hideout-R3-C1').sheet-Hideout-Activator
-					.sheet-Box.sheet-Purple.sheet-Room.sheet-R3.sheet-C1
-						.sheet-Box-Header
-							+translate('Practice Room')
-							.sheet-Box-Header-Icons
-								+headDot('Hideout-R3-C1')
-						.sheet-Content
-							+translate('Spend downtime activity to add 2xp to sun')
-					.sheet-Connection.sheet-R3.sheet-C2.sheet-LR
-					+hidden('Hideout-R3-C3').sheet-Hideout-Activator
-					.sheet-Box.sheet-Purple.sheet-Room.sheet-R3.sheet-C3
-						.sheet-Box-Header
-							+translate('Healing Space')
-							.sheet-Box-Header-Icons
-								+headDot('Hideout-R3-C3')
-						.sheet-Content
-							+translate('+1d to recovery rolls during downtime')
-					.sheet-Connection.sheet-R3.sheet-C4.sheet-LR
-					+hidden('Hideout-R3-C5').sheet-Hideout-Activator
-					.sheet-Box.sheet-Purple.sheet-Room.sheet-R3.sheet-C5
-						.sheet-Box-Header
-							+translate('Purification Chamber')
-							.sheet-Box-Header-Icons
-								+headDot('Hideout-R3-C5')
-						.sheet-Content
-							+translate('+1d to engagement for tier I missions')
-
-					.sheet-Connection.sheet-R4.sheet-C3.sheet-TB
-					.sheet-Connection.sheet-R4.sheet-C5.sheet-TB
-
-					+hidden('Hideout-R5-C1').sheet-Hideout-Activator
-					.sheet-Box.sheet-Purple.sheet-Room.sheet-R5.sheet-C1
-						.sheet-Box-Header
-							+translate('Garden')
-							.sheet-Box-Header-Icons
-								+headDot('Hideout-R5-C1')
-						.sheet-Content
-							+translate('Clear 1 stress after rolling obligation (unless in eclipse)')
-					.sheet-Connection.sheet-R5.sheet-C2.sheet-LR
-					.sheet-Connection.sheet-R5.sheet-C3.sheet-TL-BR
-					.sheet-Connection.sheet-R5.sheet-C4.sheet-LR
-					+hidden('Hideout-R5-C5').sheet-Hideout-Activator
-					.sheet-Box.sheet-Purple.sheet-Room.sheet-R5.sheet-C5
-						.sheet-Box-Header
-							+translate('Power Source')
-							.sheet-Box-Header-Icons
-								+headDot('Hideout-R5-C5')
-						.sheet-Content
-							+translate('Mark 1 series transcendent ability')
-
-					.sheet-Connection.sheet-R6.sheet-C3.sheet-TB
-					.sheet-Connection.sheet-R6.sheet-C5.sheet-TB
-
-					+hidden('Hideout-R7-C1').sheet-Hideout-Activator
-					.sheet-Box.sheet-Purple.sheet-Room.sheet-R7.sheet-C1
-						.sheet-Box-Header
-							+translate('Vault')
-							.sheet-Box-Header-Icons
-								+headDot('Hideout-R7-C1')
-						.sheet-Content
-							+translate('Contains an ancient artifact made to counter the Abyss')
-					.sheet-Connection.sheet-R7.sheet-C2.sheet-LR
-					+hidden('Hideout-R7-C3').sheet-Hideout-Activator
-					.sheet-Box.sheet-Purple.sheet-Room.sheet-R7.sheet-C3
-						.sheet-Box-Header
-							+translate('Portal')
-							.sheet-Box-Header-Icons
-								+headDot('Hideout-R7-C3')
-						.sheet-Content
-							+translate('+1d to engagement rolls for tier II and tier III missions')
-					+hidden('Hideout-R7-C5').sheet-Hideout-Activator
-					.sheet-Box.sheet-Purple.sheet-Room.sheet-R7.sheet-C5
-						.sheet-Box-Header
-							+translate('Workshop')
-							.sheet-Box-Header-Icons
-								+headDot('Hideout-R7-C5')
-						.sheet-Content
-							+translate('+1d to all project rolls that require tools or space')
-
-					.sheet-Connection.sheet-R8.sheet-C3.sheet-TB
-					.sheet-Connection.sheet-R8.sheet-C5.sheet-TB
-
-					.sheet-Connection.sheet-R9.sheet-C3
-					.sheet-Connection.sheet-R9.sheet-C4.sheet-TR
-					+hidden('Hideout-R9-C5').sheet-Hideout-Activator
-					.sheet-Box.sheet-Purple.sheet-Room.sheet-R9.sheet-C5
-						.sheet-Box-Header
-							+translate('Containment')
-							.sheet-Box-Header-Icons
-								+headDot('Hideout-R9-C5')
-						.sheet-Content
-							+translate('1 fewer mark to Abyss track during fallout')
-
-
+			include playset-map-hideout.pug
 			.sheet-Playset-Sky
 			.sheet-Playset-Stars
 			.sheet-Playset-Dreams

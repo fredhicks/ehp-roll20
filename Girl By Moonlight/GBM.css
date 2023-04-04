@@ -302,11 +302,31 @@ input.sheet-Mode-Playset[value=Abyss] ~ span.sheet-Playset-Abyss, input.sheet-Mo
 input.sheet-Mode-Playset[value=Abyss] ~ div.sheet-Playset-Abyss, input.sheet-Mode-Playset[value=Abyss] ~ * div.sheet-Playset-Abyss {
 	display: block;
 }
+input.sheet-Mode-Playset[value=Abyss] ~ div.sheet-Playset-Abyss.sheet-Characters, input.sheet-Mode-Playset[value=Abyss] ~ * div.sheet-Playset-Abyss.sheet-Characters {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+}
+input.sheet-Mode-Playset[value=Abyss] ~ .sheet-shorten-on-one[value="1"] + div.sheet-Playset-Abyss.sheet-Characters, input.sheet-Mode-Playset[value=Abyss] ~ * .sheet-shorten-on-one[value="1"] + div.sheet-Playset-Abyss.sheet-Characters {
+	-webkit-box-flex: 0;
+	    -ms-flex-positive: 0;
+	        flex-grow: 0;
+}
 input.sheet-Mode-Playset[value=Sky] ~ span.sheet-Playset-Sky, input.sheet-Mode-Playset[value=Sky] ~ * span.sheet-Playset-Sky {
 	display: inline;
 }
 input.sheet-Mode-Playset[value=Sky] ~ div.sheet-Playset-Sky, input.sheet-Mode-Playset[value=Sky] ~ * div.sheet-Playset-Sky {
 	display: block;
+}
+input.sheet-Mode-Playset[value=Sky] ~ div.sheet-Playset-Sky.sheet-Characters, input.sheet-Mode-Playset[value=Sky] ~ * div.sheet-Playset-Sky.sheet-Characters {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+}
+input.sheet-Mode-Playset[value=Sky] ~ .sheet-shorten-on-one[value="1"] + div.sheet-Playset-Sky.sheet-Characters, input.sheet-Mode-Playset[value=Sky] ~ * .sheet-shorten-on-one[value="1"] + div.sheet-Playset-Sky.sheet-Characters {
+	-webkit-box-flex: 0;
+	    -ms-flex-positive: 0;
+	        flex-grow: 0;
 }
 input.sheet-Mode-Playset[value=Stars] ~ span.sheet-Playset-Stars, input.sheet-Mode-Playset[value=Stars] ~ * span.sheet-Playset-Stars {
 	display: inline;
@@ -314,11 +334,31 @@ input.sheet-Mode-Playset[value=Stars] ~ span.sheet-Playset-Stars, input.sheet-Mo
 input.sheet-Mode-Playset[value=Stars] ~ div.sheet-Playset-Stars, input.sheet-Mode-Playset[value=Stars] ~ * div.sheet-Playset-Stars {
 	display: block;
 }
+input.sheet-Mode-Playset[value=Stars] ~ div.sheet-Playset-Stars.sheet-Characters, input.sheet-Mode-Playset[value=Stars] ~ * div.sheet-Playset-Stars.sheet-Characters {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+}
+input.sheet-Mode-Playset[value=Stars] ~ .sheet-shorten-on-one[value="1"] + div.sheet-Playset-Stars.sheet-Characters, input.sheet-Mode-Playset[value=Stars] ~ * .sheet-shorten-on-one[value="1"] + div.sheet-Playset-Stars.sheet-Characters {
+	-webkit-box-flex: 0;
+	    -ms-flex-positive: 0;
+	        flex-grow: 0;
+}
 input.sheet-Mode-Playset[value=Dreams] ~ span.sheet-Playset-Dreams, input.sheet-Mode-Playset[value=Dreams] ~ * span.sheet-Playset-Dreams {
 	display: inline;
 }
 input.sheet-Mode-Playset[value=Dreams] ~ div.sheet-Playset-Dreams, input.sheet-Mode-Playset[value=Dreams] ~ * div.sheet-Playset-Dreams {
 	display: block;
+}
+input.sheet-Mode-Playset[value=Dreams] ~ div.sheet-Playset-Dreams.sheet-Characters, input.sheet-Mode-Playset[value=Dreams] ~ * div.sheet-Playset-Dreams.sheet-Characters {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+}
+input.sheet-Mode-Playset[value=Dreams] ~ .sheet-shorten-on-one[value="1"] + div.sheet-Playset-Dreams.sheet-Characters, input.sheet-Mode-Playset[value=Dreams] ~ * .sheet-shorten-on-one[value="1"] + div.sheet-Playset-Dreams.sheet-Characters {
+	-webkit-box-flex: 0;
+	    -ms-flex-positive: 0;
+	        flex-grow: 0;
 }
 
 span.sheet-Icon-Abyss, span.sheet-Icon-Dreams, span.sheet-Icon-Sky, span.sheet-Icon-Stars {
@@ -1634,12 +1674,6 @@ input.sheet-Clock-Size[value="12"] + input.sheet-Clock-Ticks[value="12"] + .shee
 .sheet-Playset-Sheet-Reference-Blocks .sheet-Left {
 	-ms-grid-column: 1;
 	    grid-column-start: 1;
-}
-.sheet-Playset-Sheet-Reference-Blocks .sheet-Right {
-	-ms-grid-column: 2;
-	    grid-column-start: 2;
-}
-.sheet-Playset-Sheet-Reference-Blocks .sheet-Characters {
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
@@ -1647,9 +1681,25 @@ input.sheet-Clock-Size[value="12"] + input.sheet-Clock-Ticks[value="12"] + .shee
 	-webkit-box-direction: normal;
 	    -ms-flex-flow: column nowrap;
 	        flex-flow: column nowrap;
-	-webkit-box-pack: start;
-	    -ms-flex-pack: start;
-	        justify-content: flex-start;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Right {
+	-ms-grid-column: 2;
+	    grid-column-start: 2;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Characters {
+	-webkit-box-flex: 1;
+	    -ms-flex-positive: 1;
+	        flex-grow: 1;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	    -ms-flex-flow: column nowrap;
+	        flex-flow: column nowrap;
+	-webkit-box-pack: justify;
+	    -ms-flex-pack: justify;
+	        justify-content: space-between;
 }
 .sheet-Playset-Sheet-Reference-Blocks .sheet-Characters .sheet-Box {
 	-webkit-box-flex: 1;
@@ -1685,14 +1735,18 @@ input.sheet-Clock-Size[value="12"] + input.sheet-Clock-Ticks[value="12"] + .shee
 	-webkit-box-flex: 1;
 	    -ms-flex-positive: 1;
 	        flex-grow: 1;
+	height: 100%;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Characters .sheet-hide-on-one[value="1"] + .sheet-Notes {
+	display: none;
 }
 .sheet-Playset-Sheet-Reference-Blocks .sheet-Hideout-Container {
 	display: -ms-grid;
 	display: grid;
 	-ms-grid-columns: 1fr 12px 1fr 12px 1fr;
 	grid-template-columns: 1fr 12px 1fr 12px 1fr;
-	-ms-grid-rows: 120px (12px 120px)[4];
-	grid-template-rows: 120px repeat(4, 12px 120px);
+	-ms-grid-rows: 135px (12px 135px)[4];
+	grid-template-rows: 135px repeat(4, 12px 135px);
 }
 .sheet-Playset-Sheet-Reference-Blocks .sheet-Hideout-Container > *:nth-child(1) {
 	-ms-grid-row: 1;

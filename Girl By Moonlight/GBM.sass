@@ -300,6 +300,12 @@ input.sheet-Mode-Playset
 					display: inline
 				div.sheet-Playset-#{$set}
 					display: block
+					&.sheet-Characters
+						display: flex
+				.sheet-shorten-on-one[value="1"] + div.sheet-Playset-#{$set}.sheet-Characters
+						// display: block
+						flex-grow: 0
+
 
 span.sheet-Icon-Abyss, span.sheet-Icon-Dreams, span.sheet-Icon-Sky, span.sheet-Icon-Stars
 	height: #{$bodysize}
@@ -795,7 +801,6 @@ input.sheet-Stress-Total
 			text-align: center
 			font-size: #{$headsize}
 			vertical-align: middle
-			// border: 1px solid yellow
 		.sheet-Dot
 			padding-top: 5px
 		.sheet-Star
@@ -1031,12 +1036,15 @@ input.sheet-Stress-Total
 		vertical-align: top
 	.sheet-Left
 		grid-column-start: 1
+		display: flex
+		flex-flow: column nowrap
 	.sheet-Right
 		grid-column-start: 2
 	.sheet-Characters
+		flex-grow: 1
 		display: flex
 		flex-flow: column nowrap
-		justify-content: flex-start
+		justify-content: space-between
 		.sheet-Box
 			flex-grow: 1
 			display: flex
@@ -1049,11 +1057,14 @@ input.sheet-Stress-Total
 			justify-content: flex-start
 			textarea
 				flex-grow: 1
+				height: 100%
+		.sheet-hide-on-one[value="1"] + .sheet-Notes
+			display: none
 	.sheet-Hideout-Container
 		display: grid
 		$hgap: 12px
 		$hcol: 1fr
-		$hrow: 120px
+		$hrow: 135px
 		grid-template-columns: #{$hcol} #{$hgap} #{$hcol} #{$hgap} #{$hcol}
 		grid-template-rows: #{$hrow} repeat(4, #{$hgap} #{$hrow})
 		.sheet-Room, .sheet-Connection
