@@ -633,7 +633,7 @@
   	setAttrs(a);
   });
   
-  on("clicked:repeating_clocks:add clicked:repeating_clocks:sub clicked:Recovery-add clicked:Recovery-sub", function(e) {
+  on("clicked:repeating_clocks:add clicked:repeating_clocks:sub clicked:Recovery-add clicked:Recovery-sub clicked:repeating_Engines:add clicked:repeating_Engines:sub", function(e) {
   	log(e);
   	if ( typeof(e.sourceAttribute) == "undefined" ) {
   		e.sourceAttribute = (e.htmlAttributes.name).slice(4); // strip act_
@@ -720,6 +720,26 @@
   			st = st + Number(a['Flagship-Upgrade-'+i]);
   		}
   		a['Flagship-Upgrade-Total'] = st;
+  		setAttrs(a);
+  	});
+  });
+  
+  on("clicked:repeating_Engines:strength1 clicked:repeating_Engines:strength2 clicked:repeating_Engines:strength3", function(e) {
+  	log("Strength button clicked")
+  	log(e);
+  	var rowprefix = (e.sourceAttribute).slice(0,-1); // Strips off the '[123]'
+  	var signifier = (e.sourceAttribute).slice(rowprefix.length); // Strips off the prefix
+  	getAttrs([rowprefix+"1", rowprefix+"2", rowprefix+"3"], function(a) {
+  		log(a);
+  		if ( a[rowprefix+signifier] == "1" ) {
+  			for(i = Number(signifier); i <= 3; i++) {
+  				a[rowprefix+i] = 0;
+  			}
+  		} else {
+  			for(i = 1; i <= Number(signifier); i++) {
+  				a[rowprefix+i] = 1;
+  			}
+  		}
   		setAttrs(a);
   	});
   });
@@ -838,7 +858,7 @@
           <option value="" data-i18n="Select a Sheet"></option>
           <option value="Adversary" data-i18n="Adversary Sheet"></option>
           <option value="Protagonists" data-i18n="Protagonists and Creation"></option>
-          <option value="Reference" data-i18n="Reference Sheet"></option>
+          <option value="Reference" data-i18n="Reference and Map"></option>
         </select>
       </div>
     </div>
@@ -847,7 +867,7 @@
 <div class="sheet-Playset-Sheets sheet-Picked sheet-Playset-Sheet-Selected sheet-Purple">
   <!-- If we're here, a non-empty playset sheet has been selected-->
   <div class="sheet-Purple">
-    <div class="sheet-bigname sheet-Purple"><span class="sheet-Playset-Abyss"><span class="sheet-Icon-Abyss"></span></span><span class="sheet-Playset-Dreams"><span class="sheet-Icon-Dreams"></span></span><span class="sheet-Playset-Sky"><span class="sheet-Icon-Sky"></span></span><span class="sheet-Playset-Stars"><span class="sheet-Icon-Stars"></span></span><span class="sheet-Playset-Sheet-Protagonists"><span data-i18n="Protagonists’ Sheet"></span></span><span class="sheet-Playset-Sheet-Adversary"><span data-i18n="Adversary Sheet"></span> &bull; <span class="sheet-Playset-Abyss"><span data-i18n="The Abyss"></span></span><span class="sheet-Playset-Dreams"><span data-i18n="The Conspiracy"></span></span><span class="sheet-Playset-Sky"><span data-i18n="The Blight"></span></span><span class="sheet-Playset-Stars"><span data-i18n="The Void"></span></span></span><span class="sheet-Playset-Sheet-Reference"><span data-i18n="Series Reference"></span></span><span class="sheet-Playset-Sheet-Creation"><span data-i18n="Series Creation Workspace"></span></span></div>
+    <div class="sheet-bigname sheet-Purple"><span class="sheet-Playset-Abyss"><span class="sheet-Icon-Abyss"></span></span><span class="sheet-Playset-Dreams"><span class="sheet-Icon-Dreams"></span></span><span class="sheet-Playset-Sky"><span class="sheet-Icon-Sky"></span></span><span class="sheet-Playset-Stars"><span class="sheet-Icon-Stars"></span></span><span class="sheet-Playset-Sheet-Protagonists"><span data-i18n="Protagonists’ Sheet"></span></span>&nbsp;<span class="sheet-Playset-Sheet-Adversary"><span data-i18n="Adversary Sheet"></span> &bull; <span class="sheet-Playset-Abyss"><span data-i18n="The Abyss"></span></span><span class="sheet-Playset-Dreams"><span data-i18n="The Conspiracy"></span></span><span class="sheet-Playset-Sky"><span data-i18n="The Blight"></span></span><span class="sheet-Playset-Stars"><span data-i18n="The Void"></span></span></span><span class="sheet-Playset-Sheet-Reference"><span data-i18n="Series Reference"></span></span><span class="sheet-Playset-Sheet-Creation"><span data-i18n="Series Creation Workspace"></span></span></div>
   </div>
   <div class="sheet-Blocks-Playset-Sheets">
     <!-- Pending (this is the next one to do, since it has more consistency from playset to playset):-->
@@ -4916,7 +4936,7 @@
                   <option value="" data-i18n="Select a Sheet"></option>
                   <option value="Adversary" data-i18n="Adversary Sheet"></option>
                   <option value="Protagonists" data-i18n="Protagonists and Creation"></option>
-                  <option value="Reference" data-i18n="Reference Sheet"></option>
+                  <option value="Reference" data-i18n="Reference and Map"></option>
                 </select>
               </div>
             </div>
@@ -6515,7 +6535,7 @@
                   <option value="" data-i18n="Select a Sheet"></option>
                   <option value="Adversary" data-i18n="Adversary Sheet"></option>
                   <option value="Protagonists" data-i18n="Protagonists and Creation"></option>
-                  <option value="Reference" data-i18n="Reference Sheet"></option>
+                  <option value="Reference" data-i18n="Reference and Map"></option>
                 </select>
               </div>
             </div>
@@ -7309,6 +7329,38 @@
             </div>
           </div>
         </div>
+        <div class="sheet-Flagship-Container">
+          <div class="sheet-Box sheet-Purple sheet-Solid sheet-Room sheet-R3 sheet-C5"><span data-i18n="Command Bridge"></span>
+          </div>
+          <div class="sheet-Connection sheet-R1 sheet-C5 sheet-BR"></div>
+          <div class="sheet-Connection sheet-R1 sheet-C6 sheet-LR"></div>
+          <input class="sheet-Flagship-Activator" name="attr_Flagship-R1-C7" type="hidden" value=""/>
+          <div class="sheet-Box sheet-Purple sheet-Room sheet-R1 sheet-C7">
+            <div class="sheet-Box-Header"><span data-i18n="Observatory"></span>
+              <div class="sheet-Box-Header-Icons">
+                <input class="sheet-hide-on-zero" name="attr_Flagship-R1-C7" type="hidden" value="0"/>
+                <button class="sheet-button-header-mark-on" type="action" name="act_Flagship-R1-C7"></button>
+                <input class="sheet-hide-on-one" name="attr_Flagship-R1-C7" type="hidden" value="0"/>
+                <button class="sheet-button-header-mark-off" type="action" name="act_Flagship-R1-C7"></button>
+              </div>
+            </div>
+            <div class="sheet-Content"><span data-i18n="+1d to engagement rolls for recover Engine and hunt Leviathan missions"></span>
+            </div>
+          </div>
+          <input class="sheet-Flagship-Activator" name="attr_Flagship-R1-C9" type="hidden" value=""/>
+          <div class="sheet-Box sheet-Purple sheet-Room sheet-R1 sheet-C9">
+            <div class="sheet-Box-Header"><span data-i18n="Launch Deck"></span>
+              <div class="sheet-Box-Header-Icons">
+                <input class="sheet-hide-on-zero" name="attr_Flagship-R1-C9" type="hidden" value="0"/>
+                <button class="sheet-button-header-mark-on" type="action" name="act_Flagship-R1-C9"></button>
+                <input class="sheet-hide-on-one" name="attr_Flagship-R1-C9" type="hidden" value="0"/>
+                <button class="sheet-button-header-mark-off" type="action" name="act_Flagship-R1-C9"></button>
+              </div>
+            </div>
+            <div class="sheet-Content"><span data-i18n="Improved position when fighting on and around the flagship"></span>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="sheet-Playset-Sheet-Reference-Blocks">
         <div class="sheet-Left">
@@ -7552,7 +7604,7 @@
                   <option value="" data-i18n="Select a Sheet"></option>
                   <option value="Adversary" data-i18n="Adversary Sheet"></option>
                   <option value="Protagonists" data-i18n="Protagonists and Creation"></option>
-                  <option value="Reference" data-i18n="Reference Sheet"></option>
+                  <option value="Reference" data-i18n="Reference and Map"></option>
                 </select>
               </div>
             </div>
@@ -7873,14 +7925,37 @@
               <div class="sheet-Content">
                 <fieldset class="repeating_Engines">
                   <div class="sheet-Content sheet-Teal sheet-Engine">
-                    <div class="sheet-Name"><span data-i18n="Name"></span>
+                    <div class="sheet-Name"><span class="sheet-Label" data-i18n="Name"></span>
                       <input name="attr_Name" type="text" value=""/>
                     </div>
-                    <div class="sheet-Strength"><span data-i18n="Strength"></span>
+                    <div class="sheet-Strength"><span class="sheet-Label" data-i18n="Strength"></span>
+                      <div class="sheet-Track">
+                        <input class="sheet-hide-on-zero" name="attr_strength1" type="hidden" value="1"/>
+                        <button class="sheet-button-mark-on" type="action" name="act_strength1"></button>
+                        <input class="sheet-hide-on-one" name="attr_strength1" type="hidden" value="1"/>
+                        <button class="sheet-button-mark-off" type="action" name="act_strength1"></button>
+                        <input class="sheet-hide-on-zero" name="attr_strength2" type="hidden" value="1"/>
+                        <button class="sheet-button-mark-on" type="action" name="act_strength2"></button>
+                        <input class="sheet-hide-on-one" name="attr_strength2" type="hidden" value="1"/>
+                        <button class="sheet-button-mark-off" type="action" name="act_strength2"></button>
+                        <input class="sheet-hide-on-zero" name="attr_strength3" type="hidden" value="1"/>
+                        <button class="sheet-button-mark-on" type="action" name="act_strength3"></button>
+                        <input class="sheet-hide-on-one" name="attr_strength3" type="hidden" value="1"/>
+                        <button class="sheet-button-mark-off" type="action" name="act_strength3"></button>
+                      </div>
                     </div>
-                    <div class="sheet-Recovery"><span data-i18n="Recovery"></span>
+                    <div class="sheet-Recovery"><span class="sheet-Label" data-i18n="Recovery"></span>
+                      <div class="sheet-Container">
+                        <input class="sheet-Clock-Size" name="attr_size" type="hidden" value="4"/>
+                        <input class="sheet-Clock-Ticks" name="attr_ticks" type="hidden" value="0"/>
+                        <div class="sheet-Clock"></div>
+                        <div class="sheet-Clock-Controls">
+                          <button class="sheet-button-plus" type="action" name="act_add"></button>
+                          <button class="sheet-button-minus" type="action" name="act_sub"></button>
+                        </div>
+                      </div>
                     </div>
-                    <div class="sheet-Impulses"><span data-i18n="Virtue &amp; Impulses"></span>
+                    <div class="sheet-Impulses"><span class="sheet-Label" data-i18n="Virtue &amp; Impulses"></span>
                       <input name="attr_Impulses" type="text" value=""/>
                     </div>
                   </div>
@@ -11976,7 +12051,7 @@
                   <option value="" data-i18n="Select a Sheet"></option>
                   <option value="Adversary" data-i18n="Adversary Sheet"></option>
                   <option value="Protagonists" data-i18n="Protagonists and Creation"></option>
-                  <option value="Reference" data-i18n="Reference Sheet"></option>
+                  <option value="Reference" data-i18n="Reference and Map"></option>
                 </select>
               </div>
             </div>
@@ -14171,7 +14246,7 @@ translation.json:
 	"or Playset Sheet": "or Playset Sheet",
 	"Adversary Sheet": "Adversary Sheet",
 	"Protagonists and Creation": "Protagonists and Creation",
-	"Reference Sheet": "Reference Sheet",
+	"Reference and Map": "Reference and Map",
 	"Protagonists’ Sheet": "Protagonists’ Sheet",
 	"The Abyss": "The Abyss",
 	"The Conspiracy": "The Conspiracy",
@@ -14774,6 +14849,11 @@ translation.json:
 	"A suspect weaponizes the dream": "A suspect weaponizes the dream",
 	"Flagship": "Flagship",
 	"Upgrade": "Upgrade",
+	"Command Bridge": "Command Bridge",
+	"Observatory": "Observatory",
+	"+1d to engagement rolls for recover Engine and hunt Leviathan missions": "+1d to engagement rolls for <i>recover Engine</i> and <i>hunt Leviathan</i> missions",
+	"Launch Deck": "Launch Deck",
+	"Improved position when fighting on and around the flagship": "Improved position when fighting on and around the flagship",
 	"Secondary Characters": "Secondary Characters",
 	"Suspects": "Suspects",
 	"Creating Secondary Characters": "Creating Secondary Characters",

@@ -7,3 +7,26 @@
 					+xptrack('Flagship-Upgrade',8)
 				.sheet-XP-Track-Label
 					+translate('Upgrade')
+
+	.sheet-Flagship-Container
+		.sheet-Box.sheet-Purple.sheet-Solid.sheet-Room.sheet-R3.sheet-C5
+			+translate('Command Bridge')
+
+		.sheet-Connection.sheet-R1.sheet-C5.sheet-BR
+		.sheet-Connection.sheet-R1.sheet-C6.sheet-LR
+		+hidden('Flagship-R1-C7').sheet-Flagship-Activator
+		.sheet-Box.sheet-Purple.sheet-Room.sheet-R1.sheet-C7
+			.sheet-Box-Header
+				+translate('Observatory')
+				.sheet-Box-Header-Icons
+					+headDot('Flagship-R1-C7')
+			.sheet-Content
+				+translate('+1d to engagement rolls for <i>recover Engine</i> and <i>hunt Leviathan</i> missions')
+		+hidden('Flagship-R1-C9').sheet-Flagship-Activator
+		.sheet-Box.sheet-Purple.sheet-Room.sheet-R1.sheet-C9
+			.sheet-Box-Header
+				+translate('Launch Deck')
+				.sheet-Box-Header-Icons
+					+headDot('Flagship-R1-C9')
+			.sheet-Content
+				+translate('Improved position when fighting on and around the flagship')

@@ -2239,64 +2239,6 @@ input.sheet-Clock-Size[value="12"] + input.sheet-Clock-Ticks[value="12"] + .shee
 .sheet-Playset-Sheet-Reference-Blocks .sheet-Cursed-Container .sheet-Box.sheet-Solid {
 	background-color: var(--gbm-purple-dark);
 }
-.sheet-Playset-Sheet-Reference-Blocks .sheet-Connection.sheet-TB {
-	background-image: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/connection-TB.svg);
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: 240px 240px;
-	background-clip: padding-box;
-}
-.sheet-Playset-Sheet-Reference-Blocks .sheet-Connection.sheet-LR {
-	background-image: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/connection-LR.svg);
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: 240px 240px;
-	background-clip: padding-box;
-}
-.sheet-Playset-Sheet-Reference-Blocks .sheet-Connection.sheet-TR {
-	background-image: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/connection-TR.svg);
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: 240px 240px;
-	background-clip: padding-box;
-}
-.sheet-Playset-Sheet-Reference-Blocks .sheet-Connection.sheet-TL {
-	background-image: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/connection-TL.svg);
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: 240px 240px;
-	background-clip: padding-box;
-}
-.sheet-Playset-Sheet-Reference-Blocks .sheet-Connection.sheet-TL-BR {
-	background-image: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/connection-TL-BR.svg);
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: 240px 240px;
-	background-clip: padding-box;
-}
-.sheet-Playset-Sheet-Reference-Blocks .sheet-Connection.sheet-LB-RB {
-	background-image: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/connection-LB-RB.svg);
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: 240px 240px;
-	background-clip: padding-box;
-}
-.sheet-Playset-Sheet-Reference-Blocks .sheet-Connection .sheet-Box.sheet-Solid {
-	background-color: var(--gbm-purple);
-	color: white;
-	vertical-align: middle;
-	text-align: center;
-	font-size: 21px;
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: flex;
-	-webkit-box-orient: vertical;
-	-webkit-box-direction: normal;
-	    -ms-flex-flow: column nowrap;
-	        flex-flow: column nowrap;
-	-ms-flex-pack: distribute;
-	    justify-content: space-around;
-}
 .sheet-Playset-Sheet-Reference-Blocks .repcontainer .sheet-Content {
 	margin-bottom: 8px;
 	margin-top: 8px;
@@ -2306,8 +2248,8 @@ input.sheet-Clock-Size[value="12"] + input.sheet-Clock-Ticks[value="12"] + .shee
 	display: grid;
 	-ms-grid-columns: 1fr 4px 60px 4px 60px;
 	grid-template-columns: 1fr 60px 60px;
-	-ms-grid-rows: 1fr 4px 2fr;
-	grid-template-rows: 1fr 2fr;
+	-ms-grid-rows: 30px 4px 30;
+	grid-template-rows: 30px 30;
 	row-gap: 4px;
 	-webkit-column-gap: 4px;
 	   -moz-column-gap: 4px;
@@ -2337,24 +2279,82 @@ input.sheet-Clock-Size[value="12"] + input.sheet-Clock-Ticks[value="12"] + .shee
 	-ms-grid-row: 3;
 	-ms-grid-column: 5;
 }
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Engine .sheet-Label {
+	font-size: 10px;
+	text-transform: uppercase;
+}
 .sheet-Playset-Sheet-Reference-Blocks .sheet-Engine .sheet-Name {
 	-ms-grid-column: 1;
 	    grid-column-start: 1;
 	-ms-grid-row: 1;
 	    grid-row-start: 1;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	    -ms-flex-flow: row nowrap;
+	        flex-flow: row nowrap;
+	padding-right: 8px;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Engine .sheet-Name .sheet-Label {
+	padding-right: 8px;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Engine .sheet-Name input[type=text] {
+	-webkit-box-flex: 1;
+	    -ms-flex-positive: 1;
+	        flex-grow: 1;
 }
 .sheet-Playset-Sheet-Reference-Blocks .sheet-Engine .sheet-Strength {
 	-ms-grid-column: 2;
 	    grid-column-start: 2;
 	-ms-grid-row: 1;
 	    grid-row-start: 1;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	    -ms-flex-flow: column nowrap;
+	        flex-flow: column nowrap;
+	-webkit-box-pack: start;
+	    -ms-flex-pack: start;
+	        justify-content: flex-start;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Engine .sheet-Strength .sheet-Label, .sheet-Playset-Sheet-Reference-Blocks .sheet-Engine .sheet-Strength .sheet-Track {
+	text-align: center;
 }
 .sheet-Playset-Sheet-Reference-Blocks .sheet-Engine .sheet-Recovery {
-	-ms-grid-column: 2;
-	    grid-column-start: 2;
+	-ms-grid-column: 3;
+	    grid-column-start: 3;
 	-ms-grid-row: 1;
 	-ms-grid-row-span: 2;
 	grid-row: 1/span 2;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	    -ms-flex-flow: column nowrap;
+	        flex-flow: column nowrap;
+	-webkit-box-pack: start;
+	    -ms-flex-pack: start;
+	        justify-content: flex-start;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Engine .sheet-Recovery .sheet-Label, .sheet-Playset-Sheet-Reference-Blocks .sheet-Engine .sheet-Recovery .sheet-Container {
+	text-align: center;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Engine .sheet-Recovery .sheet-Container {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	    -ms-flex-flow: row nowrap;
+	        flex-flow: row nowrap;
+	-webkit-box-pack: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
 }
 .sheet-Playset-Sheet-Reference-Blocks .sheet-Engine .sheet-Impulses {
 	-ms-grid-column: 1;
@@ -2362,8 +2362,282 @@ input.sheet-Clock-Size[value="12"] + input.sheet-Clock-Ticks[value="12"] + .shee
 	grid-column: 1/span 2;
 	-ms-grid-row: 2;
 	grid-row: 2;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	    -ms-flex-flow: row nowrap;
+	        flex-flow: row nowrap;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Engine .sheet-Impulses .sheet-Label {
+	display: inline-block;
+	padding-right: 8px;
+	width: 60px;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Engine .sheet-Impulses input[type=text] {
+	-webkit-box-flex: 1;
+	    -ms-flex-positive: 1;
+	        flex-grow: 1;
 }
 
-.sheet-Flagship .sheet-Box {
+.sheet-Connection.sheet-TB {
+	background-image: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/connection-TB.svg);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 240px 240px;
+	background-clip: padding-box;
+}
+.sheet-Connection.sheet-LR {
+	background-image: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/connection-LR.svg);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 240px 240px;
+	background-clip: padding-box;
+}
+.sheet-Connection.sheet-TR {
+	background-image: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/connection-TR.svg);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 240px 240px;
+	background-clip: padding-box;
+}
+.sheet-Connection.sheet-TL {
+	background-image: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/connection-TL.svg);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 240px 240px;
+	background-clip: padding-box;
+}
+.sheet-Connection.sheet-TL-BR {
+	background-image: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/connection-TL-BR.svg);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 240px 240px;
+	background-clip: padding-box;
+}
+.sheet-Connection.sheet-LB-RB {
+	background-image: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/connection-LB-RB.svg);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 240px 240px;
+	background-clip: padding-box;
+}
+.sheet-Connection .sheet-Box.sheet-Solid {
+	background-color: var(--gbm-purple);
+	color: white;
+	vertical-align: middle;
+	text-align: center;
+	font-size: 21px;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	    -ms-flex-flow: column nowrap;
+	        flex-flow: column nowrap;
+	-ms-flex-pack: distribute;
+	    justify-content: space-around;
+}
+
+.sheet-Flagship > .sheet-Box {
 	margin-right: -12px;
+}
+
+.sheet-Flagship-Container {
+	display: -ms-grid;
+	display: grid;
+	-ms-grid-columns: 1fr (12px 1fr)[5];
+	grid-template-columns: 1fr repeat(5, 12px 1fr);
+	-ms-grid-rows: 160px (12px 160px)[2];
+	grid-template-rows: 160px repeat(2, 12px 160px);
+}
+
+.sheet-Flagship-Container > *:nth-child(1) {
+	-ms-grid-row: 1;
+	-ms-grid-column: 1;
+}
+
+.sheet-Flagship-Container > *:nth-child(2) {
+	-ms-grid-row: 1;
+	-ms-grid-column: 2;
+}
+
+.sheet-Flagship-Container > *:nth-child(3) {
+	-ms-grid-row: 1;
+	-ms-grid-column: 3;
+}
+
+.sheet-Flagship-Container > *:nth-child(4) {
+	-ms-grid-row: 1;
+	-ms-grid-column: 4;
+}
+
+.sheet-Flagship-Container > *:nth-child(5) {
+	-ms-grid-row: 1;
+	-ms-grid-column: 5;
+}
+
+.sheet-Flagship-Container > *:nth-child(6) {
+	-ms-grid-row: 1;
+	-ms-grid-column: 6;
+}
+
+.sheet-Flagship-Container > *:nth-child(7) {
+	-ms-grid-row: 2;
+	-ms-grid-column: 1;
+}
+
+.sheet-Flagship-Container > *:nth-child(8) {
+	-ms-grid-row: 2;
+	-ms-grid-column: 2;
+}
+
+.sheet-Flagship-Container > *:nth-child(9) {
+	-ms-grid-row: 2;
+	-ms-grid-column: 3;
+}
+
+.sheet-Flagship-Container > *:nth-child(10) {
+	-ms-grid-row: 2;
+	-ms-grid-column: 4;
+}
+
+.sheet-Flagship-Container > *:nth-child(11) {
+	-ms-grid-row: 2;
+	-ms-grid-column: 5;
+}
+
+.sheet-Flagship-Container > *:nth-child(12) {
+	-ms-grid-row: 2;
+	-ms-grid-column: 6;
+}
+
+.sheet-Flagship-Container > *:nth-child(13) {
+	-ms-grid-row: 3;
+	-ms-grid-column: 1;
+}
+
+.sheet-Flagship-Container > *:nth-child(14) {
+	-ms-grid-row: 3;
+	-ms-grid-column: 2;
+}
+
+.sheet-Flagship-Container > *:nth-child(15) {
+	-ms-grid-row: 3;
+	-ms-grid-column: 3;
+}
+
+.sheet-Flagship-Container > *:nth-child(16) {
+	-ms-grid-row: 3;
+	-ms-grid-column: 4;
+}
+
+.sheet-Flagship-Container > *:nth-child(17) {
+	-ms-grid-row: 3;
+	-ms-grid-column: 5;
+}
+
+.sheet-Flagship-Container > *:nth-child(18) {
+	-ms-grid-row: 3;
+	-ms-grid-column: 6;
+}
+.sheet-Flagship-Container .sheet-Box {
+	margin-bottom: 0px;
+}
+.sheet-Flagship-Container .sheet-Box .sheet-Box-Header .sheet-Box-Header-Icons {
+	padding-right: 4px;
+}
+.sheet-Flagship-Container .sheet-Box.sheet-Solid {
+	background-color: var(--gbm-purple);
+	color: white;
+	vertical-align: middle;
+	text-align: center;
+	font-size: 21px;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	    -ms-flex-flow: column nowrap;
+	        flex-flow: column nowrap;
+	-ms-flex-pack: distribute;
+	    justify-content: space-around;
+}
+.sheet-Flagship-Container .sheet-Room, .sheet-Flagship-Container .sheet-Connection {
+	-ms-flex-item-align: stretch;
+	    -ms-grid-row-align: stretch;
+	    align-self: stretch;
+	-ms-grid-column-align: stretch;
+	    justify-self: stretch;
+}
+.sheet-Flagship-Container .sheet-C1 {
+	-ms-grid-column: 1;
+	    grid-column-start: 1;
+}
+.sheet-Flagship-Container .sheet-C2 {
+	-ms-grid-column: 2;
+	    grid-column-start: 2;
+}
+.sheet-Flagship-Container .sheet-C3 {
+	-ms-grid-column: 3;
+	    grid-column-start: 3;
+}
+.sheet-Flagship-Container .sheet-C4 {
+	-ms-grid-column: 4;
+	    grid-column-start: 4;
+}
+.sheet-Flagship-Container .sheet-C5 {
+	-ms-grid-column: 5;
+	    grid-column-start: 5;
+}
+.sheet-Flagship-Container .sheet-C6 {
+	-ms-grid-column: 6;
+	    grid-column-start: 6;
+}
+.sheet-Flagship-Container .sheet-C7 {
+	-ms-grid-column: 7;
+	    grid-column-start: 7;
+}
+.sheet-Flagship-Container .sheet-C8 {
+	-ms-grid-column: 8;
+	    grid-column-start: 8;
+}
+.sheet-Flagship-Container .sheet-C9 {
+	-ms-grid-column: 9;
+	    grid-column-start: 9;
+}
+.sheet-Flagship-Container .sheet-C10 {
+	-ms-grid-column: 10;
+	    grid-column-start: 10;
+}
+.sheet-Flagship-Container .sheet-C11 {
+	-ms-grid-column: 11;
+	    grid-column-start: 11;
+}
+.sheet-Flagship-Container .sheet-R1 {
+	-ms-grid-row: 1;
+	    grid-row-start: 1;
+}
+.sheet-Flagship-Container .sheet-R2 {
+	-ms-grid-row: 2;
+	    grid-row-start: 2;
+}
+.sheet-Flagship-Container .sheet-R3 {
+	-ms-grid-row: 3;
+	    grid-row-start: 3;
+}
+.sheet-Flagship-Container .sheet-R4 {
+	-ms-grid-row: 4;
+	    grid-row-start: 4;
+}
+.sheet-Flagship-Container .sheet-R5 {
+	-ms-grid-row: 5;
+	    grid-row-start: 5;
+}
+.sheet-Flagship-Container input.sheet-Flagship-Activator[value="1"] + .sheet-Box {
+	-webkit-box-shadow: 2px 2px 0px var(--gbm-purple-text);
+	        box-shadow: 2px 2px 0px var(--gbm-purple-text);
+	background-color: var(--gbm-purple);
+	color: white;
 }

@@ -1196,52 +1196,6 @@ input.sheet-Stress-Total
 				margin-right: -3.5px
 		.sheet-Box.sheet-Solid
 			background-color: var(--gbm-purple-dark)
-	.sheet-Connection
-		&.sheet-TB
-			background-image: #{$contb} 
-			background-position: center
-			background-repeat: no-repeat
-			background-size: 240px 240px
-			background-clip: padding-box
-		&.sheet-LR
-			background-image: #{$conlr} 
-			background-position: center
-			background-repeat: no-repeat
-			background-size: 240px 240px
-			background-clip: padding-box
-		&.sheet-TR
-			background-image: #{$contr} 
-			background-position: center
-			background-repeat: no-repeat
-			background-size: 240px 240px
-			background-clip: padding-box
-		&.sheet-TL
-			background-image: #{$contl} 
-			background-position: center
-			background-repeat: no-repeat
-			background-size: 240px 240px
-			background-clip: padding-box
-		&.sheet-TL-BR
-			background-image: #{$contlxbr} 
-			background-position: center
-			background-repeat: no-repeat
-			background-size: 240px 240px
-			background-clip: padding-box
-		&.sheet-LB-RB
-			background-image: #{$conlbxrb} 
-			background-position: center
-			background-repeat: no-repeat
-			background-size: 240px 240px
-			background-clip: padding-box
-		.sheet-Box.sheet-Solid
-			background-color: var(--gbm-purple)
-			color: white
-			vertical-align: middle
-			text-align: center
-			font-size: #{$headsize}
-			display: flex
-			flex-flow: column nowrap
-			justify-content: space-around
 	.repcontainer
 		.sheet-Content
 			margin-bottom: 8px
@@ -1249,21 +1203,136 @@ input.sheet-Stress-Total
 	.sheet-Engine
 		display: grid
 		grid-template-columns: 1fr 60px 60px
-		grid-template-rows: 1fr 2fr
+		grid-template-rows: 30px 30
 		row-gap: 4px
 		column-gap: 4px
+		.sheet-Label
+			font-size: #{$smallsize}
+			text-transform: uppercase
 		.sheet-Name
 			grid-column-start: 1
 			grid-row-start: 1
+			display: flex
+			flex-flow: row nowrap
+			padding-right: 8px
+			.sheet-Label
+				padding-right: 8px
+			input[type="text"]
+				flex-grow: 1
 		.sheet-Strength
 			grid-column-start: 2
 			grid-row-start: 1
+			display: flex
+			flex-flow: column nowrap
+			justify-content: flex-start
+			.sheet-Label, .sheet-Track
+				text-align: center
 		.sheet-Recovery
-			grid-column-start: 2
+			grid-column-start: 3
 			grid-row: 1 / span 2
+			display: flex
+			flex-flow: column nowrap
+			justify-content: flex-start
+			.sheet-Label, .sheet-Container
+				text-align: center
+			.sheet-Container
+				display: flex
+				flex-flow: row nowrap
+				justify-content: center
 		.sheet-Impulses
 			grid-column: 1 / span 2
 			grid-row: 2
+			display: flex
+			flex-flow: row nowrap
+			.sheet-Label
+				display: inline-block
+				padding-right: 8px
+				width: 60px
+			input[type="text"]
+				flex-grow: 1
+
+.sheet-Connection
+	&.sheet-TB
+		background-image: #{$contb} 
+		background-position: center
+		background-repeat: no-repeat
+		background-size: 240px 240px
+		background-clip: padding-box
+	&.sheet-LR
+		background-image: #{$conlr} 
+		background-position: center
+		background-repeat: no-repeat
+		background-size: 240px 240px
+		background-clip: padding-box
+	&.sheet-TR
+		background-image: #{$contr} 
+		background-position: center
+		background-repeat: no-repeat
+		background-size: 240px 240px
+		background-clip: padding-box
+	&.sheet-TL
+		background-image: #{$contl} 
+		background-position: center
+		background-repeat: no-repeat
+		background-size: 240px 240px
+		background-clip: padding-box
+	&.sheet-TL-BR
+		background-image: #{$contlxbr} 
+		background-position: center
+		background-repeat: no-repeat
+		background-size: 240px 240px
+		background-clip: padding-box
+	&.sheet-LB-RB
+		background-image: #{$conlbxrb} 
+		background-position: center
+		background-repeat: no-repeat
+		background-size: 240px 240px
+		background-clip: padding-box
+	.sheet-Box.sheet-Solid
+		background-color: var(--gbm-purple)
+		color: white
+		vertical-align: middle
+		text-align: center
+		font-size: #{$headsize}
+		display: flex
+		flex-flow: column nowrap
+		justify-content: space-around
+
 .sheet-Flagship
-	.sheet-Box
+	> .sheet-Box
 		margin-right: -12px
+
+.sheet-Flagship-Container
+	display: grid
+	.sheet-Box
+		margin-bottom: 0px
+		.sheet-Box-Header
+			.sheet-Box-Header-Icons
+				padding-right: 4px
+	.sheet-Box.sheet-Solid
+		background-color: var(--gbm-purple)
+		color: white
+		vertical-align: middle
+		text-align: center
+		font-size: #{$headsize}
+		display: flex
+		flex-flow: column nowrap
+		justify-content: space-around
+	$hgap: 12px
+	$hcol: 1fr
+	$hrow: 160px
+	grid-template-columns: #{$hcol} repeat(5,#{$hgap} #{$hcol})
+	grid-template-rows: #{$hrow} repeat(2, #{$hgap} #{$hrow})
+	.sheet-Room, .sheet-Connection
+		align-self: stretch
+		justify-self: stretch
+	@for $c from 1 through 11
+		.sheet-C#{$c}
+			grid-column-start: #{$c}
+	@for $r from 1 through 5
+		.sheet-R#{$r}
+			grid-row-start: #{$r}
+	input.sheet-Flagship-Activator[value="1"] + .sheet-Box
+		box-shadow: 2px 2px 0px var(--gbm-purple-text)
+		background-color: var(--gbm-purple)
+		color: white

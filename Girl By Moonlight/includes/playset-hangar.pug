@@ -6,14 +6,25 @@
 			fieldset.repeating_Engines
 				.sheet-Content.sheet-Teal.sheet-Engine
 					.sheet-Name
-						+translate('Name')
+						+translate('Name').sheet-Label
 						+text('Name')
 					.sheet-Strength
-						+translate('Strength')
+						+translate('Strength').sheet-Label
+						.sheet-Track
+							+abilityMark('strength1',1)
+							+abilityMark('strength2',1)
+							+abilityMark('strength3',1)
 					.sheet-Recovery
-						+translate('Recovery')
+						+translate('Recovery').sheet-Label
+						.sheet-Container
+							+hidden('size',4).sheet-Clock-Size
+							+hidden('ticks',0).sheet-Clock-Ticks
+							.sheet-Clock
+							.sheet-Clock-Controls
+								button(type="action",name="act_add").sheet-button-plus
+								button(type="action",name="act_sub").sheet-button-minus
 					.sheet-Impulses
-						+translate('Virtue & Impulses')
+						+translate('Virtue & Impulses').sheet-Label
 						+text('Impulses')
 
 		.sheet-Box-Header.sheet-Box-Subsection.sheet-Purple

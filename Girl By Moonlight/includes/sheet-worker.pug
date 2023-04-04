@@ -639,7 +639,7 @@ script(type="text/worker")
 			setAttrs(a);
 		});
 		
-		on("clicked:repeating_clocks:add clicked:repeating_clocks:sub clicked:Recovery-add clicked:Recovery-sub", function(e) {
+		on("clicked:repeating_clocks:add clicked:repeating_clocks:sub clicked:Recovery-add clicked:Recovery-sub clicked:repeating_Engines:add clicked:repeating_Engines:sub", function(e) {
 			log(e);
 			if ( typeof(e.sourceAttribute) == "undefined" ) {
 				e.sourceAttribute = (e.htmlAttributes.name).slice(4); // strip act_
@@ -729,3 +729,24 @@ script(type="text/worker")
 				setAttrs(a);
 			});
 		});
+
+		on("clicked:repeating_Engines:strength1 clicked:repeating_Engines:strength2 clicked:repeating_Engines:strength3", function(e) {
+			log("Strength button clicked")
+			log(e);
+			var rowprefix = (e.sourceAttribute).slice(0,-1); // Strips off the '[123]'
+			var signifier = (e.sourceAttribute).slice(rowprefix.length); // Strips off the prefix
+			getAttrs([rowprefix+"1", rowprefix+"2", rowprefix+"3"], function(a) {
+				log(a);
+				if ( a[rowprefix+signifier] == "1" ) {
+					for(i = Number(signifier); i <= 3; i++) {
+						a[rowprefix+i] = 0;
+					}
+				} else {
+					for(i = 1; i <= Number(signifier); i++) {
+						a[rowprefix+i] = 1;
+					}
+				}
+				setAttrs(a);
+			});
+		});
+
