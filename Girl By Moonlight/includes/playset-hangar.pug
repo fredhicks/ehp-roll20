@@ -1,0 +1,39 @@
+.sheet-Playset-Stars
+	.sheet-Box.sheet-Purple
+		.sheet-Box-Header
+			+translate('The Hangar')
+		.sheet-Content
+			fieldset.repeating_Engines
+				.sheet-Content.sheet-Teal.sheet-Engine
+					.sheet-Name
+						+translate('Name')
+						+text('Name')
+					.sheet-Strength
+						+translate('Strength')
+					.sheet-Recovery
+						+translate('Recovery')
+					.sheet-Impulses
+						+translate('Virtue & Impulses')
+						+text('Impulses')
+
+		.sheet-Box-Header.sheet-Box-Subsection.sheet-Purple
+			+translate('Engine Rules')
+			.sheet-Box-Header-Icons
+				+toggle('Toggle-Series-Rules-Engine-Expand',1)
+		+hidden('Toggle-Series-Rules-Engine-Expand',1).sheet-hide-on-one
+		.sheet-Content.sheet-Purple
+			+translate('<p>Each Engine has a hidden second impulse, sealed by a poisoned promise. During play, if a situation seems compelling, offer a poisoned promise that adds an impulse for an engine someone is piloting. The Engine permanently acquires that impulse.<p>Each Engine begins play with 3 strength. Engine strength is reduced when:<ul><li>A character’s last transcendent action is used while piloting it<li>When a consequence affecting the engine goes unresisted<li>When its pilot falls into eclipse<li>As the cost from a poisoned promise<li>When a pilot suffers level 4 harm in it<li>When it is abandoned in the field</ul><p>When an Engine’s strength is completely depleted, it is non-functional and cannot be piloted. It can be retrieved and repaired, but its prospective pilot must bond with the Engine in downtime before it can return to action.<p>Engines have recovery clocks of their own, which advance when protagonists help them recover in downtime. When an Engine’s recovery track fills, it recovers 1 strength.')
+		.sheet-Box-Header.sheet-Box-Subsection.sheet-Teal
+			+translate('Engine Virtues')
+			.sheet-Box-Header-Icons
+				+toggle('Toggle-Series-Rules-Engine-Virtues-Expand',1)
+		+hidden('Toggle-Series-Rules-Engine-Virtues-Expand',1).sheet-hide-on-one
+		.sheet-Content.sheet-Teal
+			+translate('<p>elegant, fierce, clever, powerful, bright, wise, brave, serene<p>When a pilot’s actions align with their engine’s virtue, the engine provides a bonus die.')
+		.sheet-Box-Header.sheet-Box-Subsection.sheet-Pink
+			+translate('Engine Impulses')
+			.sheet-Box-Header-Icons
+				+toggle('Toggle-Series-Rules-Engine-Impulses-Expand',1)
+		+hidden('Toggle-Series-Rules-Engine-Impulses-Expand',1).sheet-hide-on-one
+		.sheet-Content.sheet-Pink
+			+translate('<p>cursed, imperious, sentimental, lost, tormented, weary, lonely, ancient, principled, haunted, wounded, unfinished, morbid, calculating, feral, hungry<p>When a pilot’s actions align with their engine’s impulse, or they accept a poisoned promise based on its impulse, they mark xp and that action does not deplete their transcendence track.')

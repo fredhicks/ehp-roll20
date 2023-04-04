@@ -67,28 +67,7 @@
 				.sheet-XP-Track
 					+xptrack('Tier-Track-A-3',6)
 
-.sheet-Box.sheet-Purple.sheet-Playset-Stars
-	.sheet-Box-Header
-		+translate('The Last Bastion')
-		.sheet-Box-Header-Icons
-			+toggle('Toggle-Tracks-Expand')
-	+hidden('Toggle-Tracks-Expand').sheet-hide-on-one
-	.sheet-Tracks
-		.sheet-Box-Header.sheet-Box-Subsection 
-			+translate('Tier I')
-			.sheet-Box-Header-Icons
-				.sheet-XP-Track
-					+xptrack('Tier-Track-B-1',6)
-		.sheet-Box-Header.sheet-Box-Subsection 
-			+translate('Tier II')
-			.sheet-Box-Header-Icons
-				.sheet-XP-Track
-					+xptrack('Tier-Track-B-2',6)
-		.sheet-Box-Header.sheet-Box-Subsection 
-			+translate('Tier III')
-			.sheet-Box-Header-Icons
-				.sheet-XP-Track
-					+xptrack('Tier-Track-B-3',6)
+include playset-tracks-bastion.pug
 
 .sheet-Box.sheet-Purple.sheet-Playset-Dreams
 	.sheet-Box-Header

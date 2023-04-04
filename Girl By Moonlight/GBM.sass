@@ -88,6 +88,12 @@ $conlbxrb: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Gir
 	--gbm-pink-text: var(--gbm-pink-pale)
 	--gbm-purple-text: var(--gbm-purple-pale)
 
+.repcontrol, .itemcontrol
+	.btn
+		background: unset
+		color: var(--gbm-fg)
+		background-color: var(--gbm-bg)
+
 .ui-dialog .charsheet
 	font-family: #{$bodyfont}
 	font-size: #{$bodysize} 
@@ -302,7 +308,7 @@ input.sheet-Mode-Playset
 					display: inline
 				div.sheet-Playset-#{$set}
 					display: block
-					&.sheet-Characters
+					&.sheet-Characters, &.sheet-Subsection, &.sheet-Box-Header
 						display: flex
 				.sheet-shorten-on-one[value="1"] + div.sheet-Playset-#{$set}.sheet-Characters
 						// display: block
@@ -510,6 +516,42 @@ input.sheet-Mode-Playbook
 			border: 0.5px solid var(--gbm-purple)
 			background-color: var(--gbm-purple)
 
+.sheet-Box .sheet-Box-Header, .sheet-Box-Subsection
+	&.sheet-Pink
+		border: 0.5px solid var(--gbm-pink)
+		background-color: var(--gbm-pink)
+	&.sheet-Purple
+		border: 0.5px solid var(--gbm-purple)
+		background-color: var(--gbm-purple)
+	&.sheet-Teal
+		border: 0.5px solid var(--gbm-teal)
+		background-color: var(--gbm-teal)
+	&.sheet-Blue
+		border: 0.5px solid var(--gbm-blue)
+		background-color: var(--gbm-blue)
+.sheet-Box .sheet-Content
+	&.sheet-Pink, &.sheet-Purple, &.sheet-Teal, &.sheet-Blue
+		margin-top: -4px
+		margin-left: -4px
+		margin-right: -4px
+		margin-bottom: -4px
+		padding-top: 4px
+		padding-left: 4px
+		padding-right: 4px
+		padding-bottom: 2px
+		border-radius: 0px 0px 12px 12px
+	&.sheet-Pink
+		color: var(--gbm-pink-text)
+		background-color: var(--gbm-pink-shaded)
+	&.sheet-Purple
+		color: var(--gbm-purple-text)
+		background-color: var(--gbm-purple-shaded)
+	&.sheet-Teal
+		color: var(--gbm-teal-text)
+		background-color: var(--gbm-teal-shaded)
+	&.sheet-Blue
+		color: var(--gbm-blue-text)
+		background-color: var(--gbm-blue-shaded)
 /* Not currently in use but it looks cool, so keep this defintion around */
 
 .sheet-Lozenge-Label
@@ -1060,8 +1102,9 @@ input.sheet-Stress-Total
 			textarea
 				flex-grow: 1
 				height: 100%
-		.sheet-hide-on-one[value="1"] + .sheet-Notes
-			display: none
+		.sheet-hide-on-one[value="1"] 
+			+ .sheet-Notes, + div
+				display: none
 	.sheet-Hideout-Container, .sheet-Cursed-Container
 		display: grid
 		.sheet-Box
@@ -1113,6 +1156,12 @@ input.sheet-Stress-Total
 		@for $r from 1 through 9
 			.sheet-R#{$r}
 				grid-row-start: #{$r}
+		.sheet-R3-R5
+			grid-row: 3 / span 3
+			display: flex
+			flex-flow: column nowrap
+			justify-content: space-around
+			text-align: center
 		.sheet-Box
 			background-color: var(--gbm-purple-dark)
 			border: 2px solid var(--gbm-purple)
@@ -1193,3 +1242,28 @@ input.sheet-Stress-Total
 			display: flex
 			flex-flow: column nowrap
 			justify-content: space-around
+	.repcontainer
+		.sheet-Content
+			margin-bottom: 8px
+			margin-top: 8px
+	.sheet-Engine
+		display: grid
+		grid-template-columns: 1fr 60px 60px
+		grid-template-rows: 1fr 2fr
+		row-gap: 4px
+		column-gap: 4px
+		.sheet-Name
+			grid-column-start: 1
+			grid-row-start: 1
+		.sheet-Strength
+			grid-column-start: 2
+			grid-row-start: 1
+		.sheet-Recovery
+			grid-column-start: 2
+			grid-row: 1 / span 2
+		.sheet-Impulses
+			grid-column: 1 / span 2
+			grid-row: 2
+.sheet-Flagship
+	.sheet-Box
+		margin-right: -12px

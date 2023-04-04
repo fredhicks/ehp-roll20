@@ -3,6 +3,7 @@
 // This is the one with the high-complexity map objects.
 
 .sheet-Playset-Sheet-Reference
+	include playset-flagship.pug
 	.sheet-Playset-Sheet-Reference-Blocks
 		.sheet-Left
 			+hidden('Toggle-Characters-Expand').sheet-shorten-on-one
@@ -15,12 +16,25 @@
 						.sheet-Box-Header-Icons
 							+toggle('Toggle-Characters-Expand')
 					+hidden('Toggle-Characters-Expand').sheet-hide-on-one
+					div
+						.sheet-Box-Header.sheet-Box-Subsection.sheet-Playset-Sky
+							+translate('Creating Secondary Characters')
+							.sheet-Box-Header-Icons
+								+toggle('Toggle-Characters-Instruct-Expand')
+						+hidden('Toggle-Characters-Instruct-Expand').sheet-hide-on-one
+						.sheet-Playset-Sky
+							+translate('Each protagonist creates one secondary character as normal, but the other character must be a member of the dystopian authorities, a rival hunter, or a former magical girl fallen to the Blight. These traitors were once trusted friends or allies, but betrayed you to forward their own interests.')
+						.sheet-Box-Header.sheet-Box-Subsection.sheet-Playset-Sky
+							+translate('Secondary Characters')
+					+hidden('Toggle-Characters-Expand').sheet-hide-on-one
 					.sheet-Notes
 							+textarea('Reference-Characters')
+			include playset-tracks-bastion.pug
+			include playset-rules.pug
 			// Include this in the bottom left of every playset sheet
 			include pick-playset-sheet.pug
 		.sheet-Right
 			include playset-map-hideout.pug
 			include playset-map-cursed-fates.pug
-			.sheet-Playset-Stars
+			include playset-hangar.pug
 			.sheet-Playset-Dreams

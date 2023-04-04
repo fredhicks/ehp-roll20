@@ -16,6 +16,7 @@
 		"Toggle-Bio-Expand",
 		"Toggle-BonusDie-Expand",
 		"Toggle-Characters-Expand",
+		"Toggle-Characters-Instruct-Expand",
 		"Toggle-Clocks-Expand",
 		"Toggle-Downtime-Expand",
 		"Toggle-Eclipse-Expand",
@@ -40,6 +41,14 @@
 		"Toggle-Prompts-Expand",
 		"Toggle-Prompts-Marked",
 		"Toggle-Series-Rules-Expand",
+		"Toggle-Series-Rules-Devour-Expand",
+		"Toggle-Series-Rules-Disagreement-Expand",
+		"Toggle-Series-Rules-Engine-Expand",
+		"Toggle-Series-Rules-Engine-Virtues-Expand",
+		"Toggle-Series-Rules-Engine-Impulses-Expand",
+		"Toggle-Series-Rules-Bond-Expand",
+		"Toggle-Series-Rules-Preparations-Expand",
+		"Toggle-Series-Rules-Bastion-Track-Expand",
 		"Toggle-Stress-Expand",
 		"Toggle-Teamwork-Expand",
 		"Toggle-Tracks-Expand",
@@ -988,6 +997,20 @@
 		pbxpfields = pbxpfields + '"'+"Playbook-XP-"+i+'"';
 	}
 	pbxpfields = pbxpfields + "]";
+
+	var flagshipclicks = "";
+	var flagshipfields = "";
+	flagshipfields = "[";
+	for(var i = 1; i <= 8; i++) {
+		if ( i > 1 )
+			flagshipclicks = flagshipclicks + " "; 
+		// I don't know why pug requires this to be a separate thing, but it sure fucking did, so here we go
+		if ( i > 1 )
+		  flagshipfields = flagshipfields + ", ";
+		flagshipclicks = flagshipclicks + "clicked:Flagship-Upgrade-" + i;
+		flagshipfields = flagshipfields + '"'+"Flagship-Upgrade-"+i+'"';
+	}
+	flagshipfields = flagshipfields + "]";
 
 	var psxpclicks = "";
 	var psxpfields = "";

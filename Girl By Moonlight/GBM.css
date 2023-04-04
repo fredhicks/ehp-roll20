@@ -40,6 +40,12 @@
 	--gbm-purple-text: var(--gbm-purple-pale);
 }
 
+.repcontrol .btn, .itemcontrol .btn {
+	background: unset;
+	color: var(--gbm-fg);
+	background-color: var(--gbm-bg);
+}
+
 .ui-dialog .charsheet {
 	font-family: Montserrat, sans-serif;
 	font-size: 14px;
@@ -302,7 +308,7 @@ input.sheet-Mode-Playset[value=Abyss] ~ span.sheet-Playset-Abyss, input.sheet-Mo
 input.sheet-Mode-Playset[value=Abyss] ~ div.sheet-Playset-Abyss, input.sheet-Mode-Playset[value=Abyss] ~ * div.sheet-Playset-Abyss {
 	display: block;
 }
-input.sheet-Mode-Playset[value=Abyss] ~ div.sheet-Playset-Abyss.sheet-Characters, input.sheet-Mode-Playset[value=Abyss] ~ * div.sheet-Playset-Abyss.sheet-Characters {
+input.sheet-Mode-Playset[value=Abyss] ~ div.sheet-Playset-Abyss.sheet-Characters, input.sheet-Mode-Playset[value=Abyss] ~ div.sheet-Playset-Abyss.sheet-Subsection, input.sheet-Mode-Playset[value=Abyss] ~ div.sheet-Playset-Abyss.sheet-Box-Header, input.sheet-Mode-Playset[value=Abyss] ~ * div.sheet-Playset-Abyss.sheet-Characters, input.sheet-Mode-Playset[value=Abyss] ~ * div.sheet-Playset-Abyss.sheet-Subsection, input.sheet-Mode-Playset[value=Abyss] ~ * div.sheet-Playset-Abyss.sheet-Box-Header {
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
@@ -318,7 +324,7 @@ input.sheet-Mode-Playset[value=Sky] ~ span.sheet-Playset-Sky, input.sheet-Mode-P
 input.sheet-Mode-Playset[value=Sky] ~ div.sheet-Playset-Sky, input.sheet-Mode-Playset[value=Sky] ~ * div.sheet-Playset-Sky {
 	display: block;
 }
-input.sheet-Mode-Playset[value=Sky] ~ div.sheet-Playset-Sky.sheet-Characters, input.sheet-Mode-Playset[value=Sky] ~ * div.sheet-Playset-Sky.sheet-Characters {
+input.sheet-Mode-Playset[value=Sky] ~ div.sheet-Playset-Sky.sheet-Characters, input.sheet-Mode-Playset[value=Sky] ~ div.sheet-Playset-Sky.sheet-Subsection, input.sheet-Mode-Playset[value=Sky] ~ div.sheet-Playset-Sky.sheet-Box-Header, input.sheet-Mode-Playset[value=Sky] ~ * div.sheet-Playset-Sky.sheet-Characters, input.sheet-Mode-Playset[value=Sky] ~ * div.sheet-Playset-Sky.sheet-Subsection, input.sheet-Mode-Playset[value=Sky] ~ * div.sheet-Playset-Sky.sheet-Box-Header {
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
@@ -334,7 +340,7 @@ input.sheet-Mode-Playset[value=Stars] ~ span.sheet-Playset-Stars, input.sheet-Mo
 input.sheet-Mode-Playset[value=Stars] ~ div.sheet-Playset-Stars, input.sheet-Mode-Playset[value=Stars] ~ * div.sheet-Playset-Stars {
 	display: block;
 }
-input.sheet-Mode-Playset[value=Stars] ~ div.sheet-Playset-Stars.sheet-Characters, input.sheet-Mode-Playset[value=Stars] ~ * div.sheet-Playset-Stars.sheet-Characters {
+input.sheet-Mode-Playset[value=Stars] ~ div.sheet-Playset-Stars.sheet-Characters, input.sheet-Mode-Playset[value=Stars] ~ div.sheet-Playset-Stars.sheet-Subsection, input.sheet-Mode-Playset[value=Stars] ~ div.sheet-Playset-Stars.sheet-Box-Header, input.sheet-Mode-Playset[value=Stars] ~ * div.sheet-Playset-Stars.sheet-Characters, input.sheet-Mode-Playset[value=Stars] ~ * div.sheet-Playset-Stars.sheet-Subsection, input.sheet-Mode-Playset[value=Stars] ~ * div.sheet-Playset-Stars.sheet-Box-Header {
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
@@ -350,7 +356,7 @@ input.sheet-Mode-Playset[value=Dreams] ~ span.sheet-Playset-Dreams, input.sheet-
 input.sheet-Mode-Playset[value=Dreams] ~ div.sheet-Playset-Dreams, input.sheet-Mode-Playset[value=Dreams] ~ * div.sheet-Playset-Dreams {
 	display: block;
 }
-input.sheet-Mode-Playset[value=Dreams] ~ div.sheet-Playset-Dreams.sheet-Characters, input.sheet-Mode-Playset[value=Dreams] ~ * div.sheet-Playset-Dreams.sheet-Characters {
+input.sheet-Mode-Playset[value=Dreams] ~ div.sheet-Playset-Dreams.sheet-Characters, input.sheet-Mode-Playset[value=Dreams] ~ div.sheet-Playset-Dreams.sheet-Subsection, input.sheet-Mode-Playset[value=Dreams] ~ div.sheet-Playset-Dreams.sheet-Box-Header, input.sheet-Mode-Playset[value=Dreams] ~ * div.sheet-Playset-Dreams.sheet-Characters, input.sheet-Mode-Playset[value=Dreams] ~ * div.sheet-Playset-Dreams.sheet-Subsection, input.sheet-Mode-Playset[value=Dreams] ~ * div.sheet-Playset-Dreams.sheet-Box-Header {
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
@@ -687,6 +693,51 @@ input.sheet-Mode-Playbook[value=UnlikelyHero] ~ div.sheet-Playbook-UnlikelyHero,
 .sheet-Box.sheet-Purple .sheet-Box-Header {
 	border: 0.5px solid var(--gbm-purple);
 	background-color: var(--gbm-purple);
+}
+
+.sheet-Box .sheet-Box-Header.sheet-Pink, .sheet-Box-Subsection.sheet-Pink {
+	border: 0.5px solid var(--gbm-pink);
+	background-color: var(--gbm-pink);
+}
+.sheet-Box .sheet-Box-Header.sheet-Purple, .sheet-Box-Subsection.sheet-Purple {
+	border: 0.5px solid var(--gbm-purple);
+	background-color: var(--gbm-purple);
+}
+.sheet-Box .sheet-Box-Header.sheet-Teal, .sheet-Box-Subsection.sheet-Teal {
+	border: 0.5px solid var(--gbm-teal);
+	background-color: var(--gbm-teal);
+}
+.sheet-Box .sheet-Box-Header.sheet-Blue, .sheet-Box-Subsection.sheet-Blue {
+	border: 0.5px solid var(--gbm-blue);
+	background-color: var(--gbm-blue);
+}
+
+.sheet-Box .sheet-Content.sheet-Pink, .sheet-Box .sheet-Content.sheet-Purple, .sheet-Box .sheet-Content.sheet-Teal, .sheet-Box .sheet-Content.sheet-Blue {
+	margin-top: -4px;
+	margin-left: -4px;
+	margin-right: -4px;
+	margin-bottom: -4px;
+	padding-top: 4px;
+	padding-left: 4px;
+	padding-right: 4px;
+	padding-bottom: 2px;
+	border-radius: 0px 0px 12px 12px;
+}
+.sheet-Box .sheet-Content.sheet-Pink {
+	color: var(--gbm-pink-text);
+	background-color: var(--gbm-pink-shaded);
+}
+.sheet-Box .sheet-Content.sheet-Purple {
+	color: var(--gbm-purple-text);
+	background-color: var(--gbm-purple-shaded);
+}
+.sheet-Box .sheet-Content.sheet-Teal {
+	color: var(--gbm-teal-text);
+	background-color: var(--gbm-teal-shaded);
+}
+.sheet-Box .sheet-Content.sheet-Blue {
+	color: var(--gbm-blue-text);
+	background-color: var(--gbm-blue-shaded);
 }
 
 /* Not currently in use but it looks cool, so keep this defintion around */
@@ -1737,7 +1788,7 @@ input.sheet-Clock-Size[value="12"] + input.sheet-Clock-Ticks[value="12"] + .shee
 	        flex-grow: 1;
 	height: 100%;
 }
-.sheet-Playset-Sheet-Reference-Blocks .sheet-Characters .sheet-hide-on-one[value="1"] + .sheet-Notes {
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Characters .sheet-hide-on-one[value="1"] + .sheet-Notes, .sheet-Playset-Sheet-Reference-Blocks .sheet-Characters .sheet-hide-on-one[value="1"] + div {
 	display: none;
 }
 .sheet-Playset-Sheet-Reference-Blocks .sheet-Hideout-Container, .sheet-Playset-Sheet-Reference-Blocks .sheet-Cursed-Container {
@@ -2130,6 +2181,21 @@ input.sheet-Clock-Size[value="12"] + input.sheet-Clock-Ticks[value="12"] + .shee
 	-ms-grid-row: 9;
 	    grid-row-start: 9;
 }
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Cursed-Container .sheet-R3-R5 {
+	-ms-grid-row: 3;
+	-ms-grid-row-span: 3;
+	grid-row: 3/span 3;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	    -ms-flex-flow: column nowrap;
+	        flex-flow: column nowrap;
+	-ms-flex-pack: distribute;
+	    justify-content: space-around;
+	text-align: center;
+}
 .sheet-Playset-Sheet-Reference-Blocks .sheet-Cursed-Container .sheet-Box {
 	background-color: var(--gbm-purple-dark);
 	border: 2px solid var(--gbm-purple);
@@ -2230,4 +2296,74 @@ input.sheet-Clock-Size[value="12"] + input.sheet-Clock-Ticks[value="12"] + .shee
 	        flex-flow: column nowrap;
 	-ms-flex-pack: distribute;
 	    justify-content: space-around;
+}
+.sheet-Playset-Sheet-Reference-Blocks .repcontainer .sheet-Content {
+	margin-bottom: 8px;
+	margin-top: 8px;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Engine {
+	display: -ms-grid;
+	display: grid;
+	-ms-grid-columns: 1fr 4px 60px 4px 60px;
+	grid-template-columns: 1fr 60px 60px;
+	-ms-grid-rows: 1fr 4px 2fr;
+	grid-template-rows: 1fr 2fr;
+	row-gap: 4px;
+	-webkit-column-gap: 4px;
+	   -moz-column-gap: 4px;
+	        column-gap: 4px;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Engine > *:nth-child(1) {
+	-ms-grid-row: 1;
+	-ms-grid-column: 1;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Engine > *:nth-child(2) {
+	-ms-grid-row: 1;
+	-ms-grid-column: 3;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Engine > *:nth-child(3) {
+	-ms-grid-row: 1;
+	-ms-grid-column: 5;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Engine > *:nth-child(4) {
+	-ms-grid-row: 3;
+	-ms-grid-column: 1;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Engine > *:nth-child(5) {
+	-ms-grid-row: 3;
+	-ms-grid-column: 3;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Engine > *:nth-child(6) {
+	-ms-grid-row: 3;
+	-ms-grid-column: 5;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Engine .sheet-Name {
+	-ms-grid-column: 1;
+	    grid-column-start: 1;
+	-ms-grid-row: 1;
+	    grid-row-start: 1;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Engine .sheet-Strength {
+	-ms-grid-column: 2;
+	    grid-column-start: 2;
+	-ms-grid-row: 1;
+	    grid-row-start: 1;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Engine .sheet-Recovery {
+	-ms-grid-column: 2;
+	    grid-column-start: 2;
+	-ms-grid-row: 1;
+	-ms-grid-row-span: 2;
+	grid-row: 1/span 2;
+}
+.sheet-Playset-Sheet-Reference-Blocks .sheet-Engine .sheet-Impulses {
+	-ms-grid-column: 1;
+	-ms-grid-column-span: 2;
+	grid-column: 1/span 2;
+	-ms-grid-row: 2;
+	grid-row: 2;
+}
+
+.sheet-Flagship .sheet-Box {
+	margin-right: -12px;
 }

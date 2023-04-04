@@ -1,0 +1,41 @@
+.sheet-Box.sheet-Purple.sheet-Playset-Sky.sheet-Playset-Stars.sheet-Playset-Dreams
+	.sheet-Box-Header
+		+translate('Series Rules')
+		.sheet-Box-Header-Icons
+			+toggle('Toggle-Series-Rules-Expand')
+	+hidden('Toggle-Series-Rules-Expand').sheet-hide-on-one
+	.sheet-Content
+		.sheet-Playset-Sky
+			+translate('<p><b>Make a connection</b> is replaced with <b>have a disagreement.</b> All abilities that apply to make a connection also apply to have a disagreement.<p>When you complete a mission, do not clear stress and transcendence as normal. To recover stress and transcendence the group must <b>devour blighted hearts</b>.')
+			.sheet-Box-Header.sheet-Box-Subsection
+				+translate('Devour Blighted Hearts')
+				.sheet-Box-Header-Icons
+					+toggle('Toggle-Series-Rules-Devour-Expand',1)
+			+hidden('Toggle-Series-Rules-Devour-Expand',1).sheet-hide-on-one
+			.sheet-Content
+				+translate('When you complete a mission, do not clear stress and transcendence as normal. To recover stress and transcendence the group must devour blighted hearts. During fallout, roll the mission’s tier and consult the following chart:<ul><li><b>6:</b> clear all stress and transcendence<li><b>4/5:</b> clear 6 stress and 2 transcendence<li><b>1-3:</b> clear 3 stress and 1 transcendence<li><b>critical success:</b> also mark 4 ticks in recovery</ul>')
+			.sheet-Box-Header.sheet-Box-Subsection
+				+translate('Have a disagreement')
+				.sheet-Box-Header-Icons
+					+toggle('Toggle-Series-Rules-Disagreement-Expand',1)
+			+hidden('Toggle-Series-Rules-Disagreement-Expand',1).sheet-hide-on-one
+			.sheet-Content
+				+translate('When you have a disagreement, pick another protagonist and describe what sets off your conflict. Ask the other player “Is your heart in this fight?” then take a moment to play out the disagreement.<p>Each player marks 1 stress on their sheet, the player initiating the argument rolls an appropriate action, the other player rolls an attribute, as though they were resisting.<ul><li>The character with the higher result gains 3 links.<li>The character with the lower result gains 1 link.<li>If the results are tied, both players mark 1 additional stress and each gain 2 links.</ul>If a critical success is rolled, that player marks 1 additional link, and the other player marks 1 additional stress.')
+		.sheet-Playset-Stars
+			+translate('<p>Investigate is replaced with <b>make preparations</b>.<p>Pilots can <b>bond with an Engine</b> as a downtime activity.')
+			.sheet-Box-Header.sheet-Box-Subsection
+				+translate('Make Preparations')
+				.sheet-Box-Header-Icons
+					+toggle('Toggle-Series-Rules-Preparations-Expand',1)
+			+hidden('Toggle-Series-Rules-Preparations-Expand',1).sheet-hide-on-one
+			.sheet-Content
+				+translate('<b>When you make preparations</b>, describe how you are readying the Bastion for the next attack, and roll an appropriate action. Advance the <b>Readiness</b> track based on the result. Ask the director one or two questions from your gather info list.')
+			.sheet-Box-Header.sheet-Box-Subsection
+				+translate('Bond with an Engine')
+				.sheet-Box-Header-Icons
+					+toggle('Toggle-Series-Rules-Bond-Expand',1)
+			+hidden('Toggle-Series-Rules-Bond-Expand',1).sheet-hide-on-one
+			.sheet-Content
+				+translate('<p><b>When you bond with an Engine</b>, you make a connection with it. Write the Engine’s name in the link section of your sheet and assign all links to it.<p>While piloting that Engine during a mission, you may spend links with it to gain benefits, as though someone had spent a link with you.')
+		.sheet-Playset-Dreams
+			+translate('<p><b>Make a connection</b> is replaced with <b>share an intimate moment</b>. All abilities relating to make a connection apply to share an intimate moment instead.<p>In downtime, you may share an intimate moment with another protagonist. Describe the circumstances of your encounter, and how you are vulnerable in this moment. Ask them “Do you share this moment, or hold yourself apart?”<ul><li>If they share it with you, roll +1d.<li>If they hold themselves apart, mark xp.</ul><p>Roll a suitable action, the other player assigns links as they choose between your characters.<ul><li><b>6:</b> 4 links<li><b>4/5:</b> 3 links<li><b>1-3:</b> 2 link<li><b>Critical success:</b> 5 links</ul>')

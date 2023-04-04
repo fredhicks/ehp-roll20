@@ -696,3 +696,36 @@ script(type="text/worker")
 				setAttrs(a);
 			});
 		});
+
+		on("#{flagshipclicks}", function(e) {
+			var id = "";
+			id = (e.htmlAttributes.name).substring(4); // Strips off the 'act_'
+			log("Flagship-Upgrade Toggle Handler: " + id);
+			getAttrs(!{flagshipfields}, function(a) {
+				if ( Number(a[id]) === 1 ) {
+					log(id+"=1");
+					a[id] = "0";
+					// We want to empty others past the one turned on
+					var endnum = Number(id.substring('17')); // Strips off the 'Flagship-Upgrade-'
+					for(i = endnum; i <= 8; i++) {
+						log('Setting Flagship-Upgrade-'+i+"=0")
+						a['Flagship-Upgrade-'+i] = 0;
+					}
+				} else {
+					log(id+"=0");
+					a[id] = "1";
+					// We want to fill others up to the one turned on
+					var endnum = Number(id.substring('17')); // Strips off the 'Flagship-Upgrade-'
+					for(i = 1; i < endnum; i++) {
+						log('Setting Flagship-Upgrade-'+i+"=1")
+						a['Flagship-Upgrade-'+i] = 1;
+					}
+				}
+				var st = 0;
+				for(i = 1; i <= 8; i++) {
+					st = st + Number(a['Flagship-Upgrade-'+i]);
+				}
+				a['Flagship-Upgrade-Total'] = st;
+				setAttrs(a);
+			});
+		});

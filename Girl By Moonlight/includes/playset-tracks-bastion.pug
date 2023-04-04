@@ -1,0 +1,29 @@
+.sheet-Box.sheet-Purple.sheet-Playset-Stars
+	.sheet-Box-Header
+		+translate('The Last Bastion')
+		.sheet-Box-Header-Icons
+			+toggle('Toggle-Tracks-Expand')
+	+hidden('Toggle-Tracks-Expand').sheet-hide-on-one
+	.sheet-Tracks
+		.sheet-Box-Header.sheet-Box-Subsection 
+			+translate('Tier I')
+			.sheet-Box-Header-Icons
+				.sheet-XP-Track
+					+xptrack('Tier-Track-B-1',6)
+		.sheet-Box-Header.sheet-Box-Subsection 
+			+translate('Tier II')
+			.sheet-Box-Header-Icons
+				.sheet-XP-Track
+					+xptrack('Tier-Track-B-2',6)
+		.sheet-Box-Header.sheet-Box-Subsection 
+			+translate('Tier III')
+			.sheet-Box-Header-Icons
+				.sheet-XP-Track
+					+xptrack('Tier-Track-B-3',6)
+	.sheet-Box-Header.sheet-Box-Subsection
+		+translate('The Last Bastion Track')
+		.sheet-Box-Header-Icons
+			+toggle('Toggle-Series-Rules-Bastion-Track-Expand',1)
+	+hidden('Toggle-Series-Rules-Bastion-Track-Expand',1).sheet-hide-on-one
+	.sheet-Content
+		+translate('<p>The Last Bastion track represents the state of the population of the Bastion. It starts play completely filled. At the beginning of downtime, the Bastion performs a number of downtime actions equal to the current Leviathan track tier (always at least 1), and rolls a number of dice equal to the current Bastion tier.<p>It prioritizes actions as follows:<ol><li><b>Pride:</b> Work on a long term project for the flagship upgrade, if one is already under way.<li><b>State of emergency:</b> Make preparations if Leviathan track exceeds Readiness.<li><b>Patchwork:</b> If Bastion track is depleted, repair Bastion track. Roll as make preparations, but apply result to Bastion track.<li><b>Complacency:</b> Increase the adversary track. Roll as make preparations, but apply result to adversary track.')
