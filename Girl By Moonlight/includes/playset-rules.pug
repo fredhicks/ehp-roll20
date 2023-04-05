@@ -38,4 +38,11 @@
 			.sheet-Content
 				+translate('<p><b>When you bond with an Engine</b>, you make a connection with it. Write the Engine’s name in the link section of your sheet and assign all links to it.<p>While piloting that Engine during a mission, you may spend links with it to gain benefits, as though someone had spent a link with you.')
 		.sheet-Playset-Dreams
-			+translate('<p><b>Make a connection</b> is replaced with <b>share an intimate moment</b>. All abilities relating to make a connection apply to share an intimate moment instead.<p>In downtime, you may share an intimate moment with another protagonist. Describe the circumstances of your encounter, and how you are vulnerable in this moment. Ask them “Do you share this moment, or hold yourself apart?”<ul><li>If they share it with you, roll +1d.<li>If they hold themselves apart, mark xp.</ul><p>Roll a suitable action, the other player assigns links as they choose between your characters.<ul><li><b>6:</b> 4 links<li><b>4/5:</b> 3 links<li><b>1-3:</b> 2 link<li><b>Critical success:</b> 5 links</ul>')
+			+translate('<p><b>Make a connection</b> is replaced with <b>share an intimate moment</b>. All abilities relating to make a connection apply to share an intimate moment instead.')
+			.sheet-Box-Header.sheet-Box-Subsection
+				+translate('Share an Intimate Moment')
+				.sheet-Box-Header-Icons
+					+toggle('Toggle-Series-Rules-Intimate-Expand',1)
+			+hidden('Toggle-Series-Rules-Intimate-Expand',1).sheet-hide-on-one
+			.sheet-Content
+				+translate('<p>In downtime, you may <b>share an intimate moment</b> with another protagonist. Describe the circumstances of your encounter, and how you are vulnerable in this moment. Ask them “Do you share this moment, or hold yourself apart?”<ul><li>If they share it with you, roll +1d.<li>If they hold themselves apart, mark xp.</ul><p>Roll a suitable action, the other player assigns links as they choose between your characters.<ul><li><b>6:</b> 4 links<li><b>4/5:</b> 3 links<li><b>1-3:</b> 2 link<li><b>Critical success:</b> 5 links</ul>')

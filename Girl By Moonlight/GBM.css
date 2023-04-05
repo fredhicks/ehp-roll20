@@ -1736,11 +1736,6 @@ input.sheet-Clock-Size[value="12"] + input.sheet-Clock-Ticks[value="12"] + .shee
 .sheet-Playset-Sheet-Reference-Blocks .sheet-Right {
 	-ms-grid-column: 2;
 	    grid-column-start: 2;
-}
-.sheet-Playset-Sheet-Reference-Blocks .sheet-Characters {
-	-webkit-box-flex: 1;
-	    -ms-flex-positive: 1;
-	        flex-grow: 1;
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
@@ -1748,48 +1743,6 @@ input.sheet-Clock-Size[value="12"] + input.sheet-Clock-Ticks[value="12"] + .shee
 	-webkit-box-direction: normal;
 	    -ms-flex-flow: column nowrap;
 	        flex-flow: column nowrap;
-	-webkit-box-pack: justify;
-	    -ms-flex-pack: justify;
-	        justify-content: space-between;
-}
-.sheet-Playset-Sheet-Reference-Blocks .sheet-Characters .sheet-Box {
-	-webkit-box-flex: 1;
-	    -ms-flex-positive: 1;
-	        flex-grow: 1;
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: flex;
-	-webkit-box-orient: vertical;
-	-webkit-box-direction: normal;
-	    -ms-flex-flow: column nowrap;
-	        flex-flow: column nowrap;
-	-webkit-box-pack: start;
-	    -ms-flex-pack: start;
-	        justify-content: flex-start;
-}
-.sheet-Playset-Sheet-Reference-Blocks .sheet-Characters .sheet-Notes {
-	-webkit-box-flex: 1;
-	    -ms-flex-positive: 1;
-	        flex-grow: 1;
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: flex;
-	-webkit-box-orient: vertical;
-	-webkit-box-direction: normal;
-	    -ms-flex-flow: column nowrap;
-	        flex-flow: column nowrap;
-	-webkit-box-pack: start;
-	    -ms-flex-pack: start;
-	        justify-content: flex-start;
-}
-.sheet-Playset-Sheet-Reference-Blocks .sheet-Characters .sheet-Notes textarea {
-	-webkit-box-flex: 1;
-	    -ms-flex-positive: 1;
-	        flex-grow: 1;
-	height: 100%;
-}
-.sheet-Playset-Sheet-Reference-Blocks .sheet-Characters .sheet-hide-on-one[value="1"] + .sheet-Notes, .sheet-Playset-Sheet-Reference-Blocks .sheet-Characters .sheet-hide-on-one[value="1"] + div {
-	display: none;
 }
 .sheet-Playset-Sheet-Reference-Blocks .sheet-Hideout-Container, .sheet-Playset-Sheet-Reference-Blocks .sheet-Cursed-Container {
 	display: -ms-grid;
@@ -2381,6 +2334,61 @@ input.sheet-Clock-Size[value="12"] + input.sheet-Clock-Ticks[value="12"] + .shee
 	        flex-grow: 1;
 }
 
+.sheet-Characters {
+	-webkit-box-flex: 1;
+	    -ms-flex-positive: 1;
+	        flex-grow: 1;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	    -ms-flex-flow: column nowrap;
+	        flex-flow: column nowrap;
+	-webkit-box-pack: justify;
+	    -ms-flex-pack: justify;
+	        justify-content: space-between;
+}
+.sheet-Characters .sheet-Box {
+	-webkit-box-flex: 1;
+	    -ms-flex-positive: 1;
+	        flex-grow: 1;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	    -ms-flex-flow: column nowrap;
+	        flex-flow: column nowrap;
+	-webkit-box-pack: start;
+	    -ms-flex-pack: start;
+	        justify-content: flex-start;
+}
+.sheet-Characters .sheet-Notes {
+	-webkit-box-flex: 1;
+	    -ms-flex-positive: 1;
+	        flex-grow: 1;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	    -ms-flex-flow: column nowrap;
+	        flex-flow: column nowrap;
+	-webkit-box-pack: start;
+	    -ms-flex-pack: start;
+	        justify-content: flex-start;
+}
+.sheet-Characters .sheet-Notes textarea {
+	-webkit-box-flex: 1;
+	    -ms-flex-positive: 1;
+	        flex-grow: 1;
+	height: 100%;
+}
+.sheet-Characters .sheet-hide-on-one[value="1"] + .sheet-Notes, .sheet-Characters .sheet-hide-on-one[value="1"] + div {
+	display: none;
+}
+
 .sheet-Connection.sheet-TB {
 	background-image: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/connection-TB.svg);
 	background-position: center;
@@ -2737,4 +2745,324 @@ input.sheet-Clock-Size[value="12"] + input.sheet-Clock-Ticks[value="12"] + .shee
 }
 .sheet-Flagship-Container input.sheet-Flagship-Activator[value="1"] + .sheet-Box .sheet-Box-Header {
 	font-weight: 700;
+}
+
+.sheet-Conspiracy-Container {
+	display: -ms-grid;
+	display: grid;
+	-ms-grid-columns: 18% (12px 18%)[4];
+	grid-template-columns: 18% repeat(4, 12px 18%);
+	-ms-grid-rows: 186px (12px 186px)[4];
+	grid-template-rows: 186px repeat(4, 12px 186px);
+}
+
+.sheet-Conspiracy-Container > *:nth-child(1) {
+	-ms-grid-row: 1;
+	-ms-grid-column: 1;
+}
+
+.sheet-Conspiracy-Container > *:nth-child(2) {
+	-ms-grid-row: 1;
+	-ms-grid-column: 2;
+}
+
+.sheet-Conspiracy-Container > *:nth-child(3) {
+	-ms-grid-row: 1;
+	-ms-grid-column: 3;
+}
+
+.sheet-Conspiracy-Container > *:nth-child(4) {
+	-ms-grid-row: 1;
+	-ms-grid-column: 4;
+}
+
+.sheet-Conspiracy-Container > *:nth-child(5) {
+	-ms-grid-row: 1;
+	-ms-grid-column: 5;
+}
+
+.sheet-Conspiracy-Container > *:nth-child(6) {
+	-ms-grid-row: 2;
+	-ms-grid-column: 1;
+}
+
+.sheet-Conspiracy-Container > *:nth-child(7) {
+	-ms-grid-row: 2;
+	-ms-grid-column: 2;
+}
+
+.sheet-Conspiracy-Container > *:nth-child(8) {
+	-ms-grid-row: 2;
+	-ms-grid-column: 3;
+}
+
+.sheet-Conspiracy-Container > *:nth-child(9) {
+	-ms-grid-row: 2;
+	-ms-grid-column: 4;
+}
+
+.sheet-Conspiracy-Container > *:nth-child(10) {
+	-ms-grid-row: 2;
+	-ms-grid-column: 5;
+}
+
+.sheet-Conspiracy-Container > *:nth-child(11) {
+	-ms-grid-row: 3;
+	-ms-grid-column: 1;
+}
+
+.sheet-Conspiracy-Container > *:nth-child(12) {
+	-ms-grid-row: 3;
+	-ms-grid-column: 2;
+}
+
+.sheet-Conspiracy-Container > *:nth-child(13) {
+	-ms-grid-row: 3;
+	-ms-grid-column: 3;
+}
+
+.sheet-Conspiracy-Container > *:nth-child(14) {
+	-ms-grid-row: 3;
+	-ms-grid-column: 4;
+}
+
+.sheet-Conspiracy-Container > *:nth-child(15) {
+	-ms-grid-row: 3;
+	-ms-grid-column: 5;
+}
+
+.sheet-Conspiracy-Container > *:nth-child(16) {
+	-ms-grid-row: 4;
+	-ms-grid-column: 1;
+}
+
+.sheet-Conspiracy-Container > *:nth-child(17) {
+	-ms-grid-row: 4;
+	-ms-grid-column: 2;
+}
+
+.sheet-Conspiracy-Container > *:nth-child(18) {
+	-ms-grid-row: 4;
+	-ms-grid-column: 3;
+}
+
+.sheet-Conspiracy-Container > *:nth-child(19) {
+	-ms-grid-row: 4;
+	-ms-grid-column: 4;
+}
+
+.sheet-Conspiracy-Container > *:nth-child(20) {
+	-ms-grid-row: 4;
+	-ms-grid-column: 5;
+}
+
+.sheet-Conspiracy-Container > *:nth-child(21) {
+	-ms-grid-row: 5;
+	-ms-grid-column: 1;
+}
+
+.sheet-Conspiracy-Container > *:nth-child(22) {
+	-ms-grid-row: 5;
+	-ms-grid-column: 2;
+}
+
+.sheet-Conspiracy-Container > *:nth-child(23) {
+	-ms-grid-row: 5;
+	-ms-grid-column: 3;
+}
+
+.sheet-Conspiracy-Container > *:nth-child(24) {
+	-ms-grid-row: 5;
+	-ms-grid-column: 4;
+}
+
+.sheet-Conspiracy-Container > *:nth-child(25) {
+	-ms-grid-row: 5;
+	-ms-grid-column: 5;
+}
+.sheet-Conspiracy-Container .sheet-Box {
+	margin-bottom: 0px;
+}
+.sheet-Conspiracy-Container .sheet-Box .sheet-Box-Header {
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	    -ms-flex-flow: column nowrap;
+	        flex-flow: column nowrap;
+}
+.sheet-Conspiracy-Container .sheet-Box .sheet-Box-Header > span + span {
+	font-size: 14px;
+	text-transform: uppercase;
+}
+.sheet-Conspiracy-Container .sheet-Box.sheet-Solid {
+	background-color: var(--gbm-purple-shaded);
+	color: var(--gbm-purple-text);
+	border: 2px solid var(--gbm-purple);
+	padding: 4px;
+	vertical-align: middle;
+	text-align: center;
+	font-size: 14px;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	    -ms-flex-flow: column nowrap;
+	        flex-flow: column nowrap;
+	-ms-flex-pack: distribute;
+	    justify-content: space-around;
+}
+.sheet-Conspiracy-Container .sheet-Room, .sheet-Conspiracy-Container .sheet-Connection {
+	-ms-flex-item-align: stretch;
+	    -ms-grid-row-align: stretch;
+	    align-self: stretch;
+	-ms-grid-column-align: stretch;
+	    justify-self: stretch;
+}
+.sheet-Conspiracy-Container .sheet-C1 {
+	-ms-grid-column: 1;
+	    grid-column-start: 1;
+}
+.sheet-Conspiracy-Container .sheet-C2 {
+	-ms-grid-column: 2;
+	    grid-column-start: 2;
+}
+.sheet-Conspiracy-Container .sheet-C3 {
+	-ms-grid-column: 3;
+	    grid-column-start: 3;
+}
+.sheet-Conspiracy-Container .sheet-C4 {
+	-ms-grid-column: 4;
+	    grid-column-start: 4;
+}
+.sheet-Conspiracy-Container .sheet-C5 {
+	-ms-grid-column: 5;
+	    grid-column-start: 5;
+}
+.sheet-Conspiracy-Container .sheet-C6 {
+	-ms-grid-column: 6;
+	    grid-column-start: 6;
+}
+.sheet-Conspiracy-Container .sheet-C7 {
+	-ms-grid-column: 7;
+	    grid-column-start: 7;
+}
+.sheet-Conspiracy-Container .sheet-C8 {
+	-ms-grid-column: 8;
+	    grid-column-start: 8;
+}
+.sheet-Conspiracy-Container .sheet-C9 {
+	-ms-grid-column: 9;
+	    grid-column-start: 9;
+}
+.sheet-Conspiracy-Container .sheet-R1 {
+	-ms-grid-row: 1;
+	    grid-row-start: 1;
+}
+.sheet-Conspiracy-Container .sheet-R2 {
+	-ms-grid-row: 2;
+	    grid-row-start: 2;
+}
+.sheet-Conspiracy-Container .sheet-R3 {
+	-ms-grid-row: 3;
+	    grid-row-start: 3;
+}
+.sheet-Conspiracy-Container .sheet-R4 {
+	-ms-grid-row: 4;
+	    grid-row-start: 4;
+}
+.sheet-Conspiracy-Container .sheet-R5 {
+	-ms-grid-row: 5;
+	    grid-row-start: 5;
+}
+.sheet-Conspiracy-Container .sheet-R6 {
+	-ms-grid-row: 6;
+	    grid-row-start: 6;
+}
+.sheet-Conspiracy-Container .sheet-R7 {
+	-ms-grid-row: 7;
+	    grid-row-start: 7;
+}
+.sheet-Conspiracy-Container .sheet-R8 {
+	-ms-grid-row: 8;
+	    grid-row-start: 8;
+}
+.sheet-Conspiracy-Container .sheet-R9 {
+	-ms-grid-row: 9;
+	    grid-row-start: 9;
+}
+.sheet-Conspiracy-Container input[type=text] {
+	width: 100%;
+	font-weight: 700;
+}
+.sheet-Conspiracy-Container input.sheet-Conspiracy-Activator + .sheet-Box {
+	-webkit-box-shadow: 2px 2px 0px var(--gbm-purple-text);
+	        box-shadow: 2px 2px 0px var(--gbm-purple-text);
+	background-color: var(--gbm-purple);
+	color: white;
+}
+.sheet-Conspiracy-Container input.sheet-Conspiracy-Activator + .sheet-Box input[type=text] {
+	color: white;
+}
+.sheet-Conspiracy-Container input.sheet-Conspiracy-Activator + .sheet-Box input[type=text]:hover, .sheet-Conspiracy-Container input.sheet-Conspiracy-Activator + .sheet-Box input[type=text]:active, .sheet-Conspiracy-Container input.sheet-Conspiracy-Activator + .sheet-Box input[type=text]:focus {
+	background-color: black;
+}
+.sheet-Conspiracy-Container input.sheet-Conspiracy-Activator + .sheet-Box .sheet-Confront-Line {
+	background-color: var(--gbm-purple-dark);
+}
+.sheet-Conspiracy-Container input.sheet-Conspiracy-Activator[value=""] + .sheet-Box {
+	-webkit-box-shadow: unset;
+	        box-shadow: unset;
+	background-color: var(--gbm-purple-shaded);
+	color: var(--gbm-purple-text);
+}
+.sheet-Conspiracy-Container input.sheet-Conspiracy-Activator[value=""] + .sheet-Box input[type=text] {
+	color: black;
+}
+.sheet-Conspiracy-Container input.sheet-Conspiracy-Activator[value=""] + .sheet-Box input[type=text]:hover, .sheet-Conspiracy-Container input.sheet-Conspiracy-Activator[value=""] + .sheet-Box input[type=text]:active, .sheet-Conspiracy-Container input.sheet-Conspiracy-Activator[value=""] + .sheet-Box input[type=text]:focus {
+	background-color: white;
+}
+.sheet-Conspiracy-Container input.sheet-Conspiracy-Activator[value=""] + .sheet-Box .sheet-Confront-Line {
+	background-color: var(--gbm-purple);
+}
+.sheet-Conspiracy-Container input.sheet-Overseer-Activator[value="1"] + .sheet-Box {
+	-webkit-box-shadow: 2px 2px 0px var(--gbm-purple-text);
+	        box-shadow: 2px 2px 0px var(--gbm-purple-text);
+	background-color: var(--gbm-purple);
+	color: white;
+}
+.sheet-Conspiracy-Container .sheet-Confront {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	    -ms-flex-flow: column nowrap;
+	        flex-flow: column nowrap;
+	-webkit-box-pack: space-evenly;
+	    -ms-flex-pack: space-evenly;
+	        justify-content: space-evenly;
+}
+.sheet-Conspiracy-Container .sheet-Confront .sheet-Confront-Line {
+	background-color: var(--gbm-purple);
+	color: white;
+	display: -ms-grid;
+	display: grid;
+	-ms-grid-columns: 24px 1fr;
+	grid-template-columns: 24px 1fr;
+	margin-bottom: 8px;
+	padding-left: 8px;
+	border-radius: 16px;
+	padding-top: 4px;
+}
+.sheet-Conspiracy-Container .sheet-Confront .sheet-Confront-Line + .sheet-Confront-Line {
+	margin-bottom: 0px;
+}
+.sheet-Conspiracy-Container .sheet-Confront .sheet-Confront-Line .sheet-Confront-Button {
+	-ms-grid-column: 1;
+	    grid-column-start: 1;
+}
+.sheet-Conspiracy-Container .sheet-Confront .sheet-Confront-Line .sheet-Label {
+	-ms-grid-column: 2;
+	    grid-column-start: 2;
+	font-weight: bold;
 }

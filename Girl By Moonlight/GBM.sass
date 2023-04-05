@@ -1085,27 +1085,8 @@ input.sheet-Stress-Total
 		flex-flow: column nowrap
 	.sheet-Right
 		grid-column-start: 2
-	.sheet-Characters
-		flex-grow: 1
 		display: flex
 		flex-flow: column nowrap
-		justify-content: space-between
-		.sheet-Box
-			flex-grow: 1
-			display: flex
-			flex-flow: column nowrap
-			justify-content: flex-start
-		.sheet-Notes
-			flex-grow: 1
-			display: flex
-			flex-flow: column nowrap
-			justify-content: flex-start
-			textarea
-				flex-grow: 1
-				height: 100%
-		.sheet-hide-on-one[value="1"] 
-			+ .sheet-Notes, + div
-				display: none
 	.sheet-Hideout-Container, .sheet-Cursed-Container
 		display: grid
 		.sheet-Box
@@ -1252,6 +1233,28 @@ input.sheet-Stress-Total
 			input[type="text"]
 				flex-grow: 1
 
+.sheet-Characters
+	flex-grow: 1
+	display: flex
+	flex-flow: column nowrap
+	justify-content: space-between
+	.sheet-Box
+		flex-grow: 1
+		display: flex
+		flex-flow: column nowrap
+		justify-content: flex-start
+	.sheet-Notes
+		flex-grow: 1
+		display: flex
+		flex-flow: column nowrap
+		justify-content: flex-start
+		textarea
+			flex-grow: 1
+			height: 100%
+	.sheet-hide-on-one[value="1"] 
+		+ .sheet-Notes, + div
+			display: none
+
 .sheet-Connection
 	&.sheet-TB
 		background-image: #{$contb} 
@@ -1359,3 +1362,86 @@ input.sheet-Stress-Total
 		color: white
 		.sheet-Box-Header
 			font-weight: 700
+
+.sheet-Conspiracy-Container
+	display: grid
+	$hgap: 12px
+	$hcol: 18%
+	$hrow: 186px
+	grid-template-columns: #{$hcol} repeat(4, #{$hgap} #{$hcol})
+	grid-template-rows: #{$hrow} repeat(4, #{$hgap} #{$hrow})
+	.sheet-Box
+		margin-bottom: 0px
+		.sheet-Box-Header
+			flex-flow: column nowrap
+			> span + span
+				font-size: #{$bodysize}
+				text-transform: uppercase
+	.sheet-Box.sheet-Solid
+		background-color: var(--gbm-purple-shaded)
+		color: var(--gbm-purple-text)
+		border: 2px solid var(--gbm-purple)
+		padding: 4px
+		vertical-align: middle
+		text-align: center
+		font-size: #{$bodysize}
+		display: flex
+		flex-flow: column nowrap
+		justify-content: space-around
+	.sheet-Room, .sheet-Connection
+		align-self: stretch
+		justify-self: stretch
+	@for $c from 1 through 9
+		.sheet-C#{$c}
+			grid-column-start: #{$c}
+	@for $r from 1 through 9
+		.sheet-R#{$r}
+			grid-row-start: #{$r}
+	input[type="text"]
+		width: 100%
+		font-weight: 700
+	input.sheet-Conspiracy-Activator
+		+ .sheet-Box
+			box-shadow: 2px 2px 0px var(--gbm-purple-text)
+			background-color: var(--gbm-purple)
+			color: white
+			input[type="text"]
+				color: white
+				&:hover, &:active, &:focus
+					background-color: black
+			.sheet-Confront-Line
+				background-color: var(--gbm-purple-dark)
+		&[value=""] + .sheet-Box
+			box-shadow: unset
+			background-color: var(--gbm-purple-shaded)
+			color: var(--gbm-purple-text)
+			input[type="text"]
+				color: black
+				&:hover, &:active, &:focus
+					background-color: white
+			.sheet-Confront-Line
+				background-color: var(--gbm-purple)
+	input.sheet-Overseer-Activator[value="1"] + .sheet-Box
+		box-shadow: 2px 2px 0px var(--gbm-purple-text)
+		background-color: var(--gbm-purple)
+		color: white
+	.sheet-Confront
+		display: flex
+		flex-flow: column nowrap
+		justify-content: space-evenly
+		.sheet-Confront-Line
+			background-color: var(--gbm-purple)
+			color: white
+			display: grid
+			grid-template-columns: 24px 1fr
+			margin-bottom: 8px
+			padding-left: 8px
+			border-radius: 16px
+			+ .sheet-Confront-Line
+				margin-bottom: 0px
+			padding-top: 4px
+			.sheet-Confront-Button
+				grid-column-start: 1
+			.sheet-Label
+				grid-column-start: 2
+				font-weight: bold

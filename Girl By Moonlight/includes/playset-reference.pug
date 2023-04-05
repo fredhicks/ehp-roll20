@@ -4,15 +4,15 @@
 
 .sheet-Playset-Sheet-Reference
 	include playset-flagship.pug
+
 	.sheet-Playset-Sheet-Reference-Blocks
 		.sheet-Left
 			+hidden('Toggle-Characters-Expand').sheet-shorten-on-one
-			.sheet-Characters.sheet-Playset-Abyss.sheet-Playset-Sky.sheet-Playset-Dreams
+			.sheet-Characters.sheet-Playset-Abyss.sheet-Playset-Sky
 				.sheet-Box.sheet-Purple
 					.sheet-Box-Header
 						span
-							+translate('Secondary Characters').sheet-Playset-Abyss.sheet-Playset-Sky
-							+translate('Suspects').sheet-Playset-Dreams
+							+translate('Secondary Characters')
 						.sheet-Box-Header-Icons
 							+toggle('Toggle-Characters-Expand')
 					+hidden('Toggle-Characters-Expand').sheet-hide-on-one
@@ -37,4 +37,15 @@
 			include playset-map-hideout.pug
 			include playset-map-cursed-fates.pug
 			include playset-hangar.pug
-			.sheet-Playset-Dreams
+			.sheet-Characters.sheet-Playset-Dreams
+				.sheet-Box.sheet-Purple
+					.sheet-Box-Header
+						span
+							+translate('Suspects')
+						.sheet-Box-Header-Icons
+							+toggle('Toggle-Characters-Expand')
+					+hidden('Toggle-Characters-Expand').sheet-hide-on-one
+					.sheet-Notes
+							+textarea('Reference-Characters')
+
+	include playset-conspiracy.pug

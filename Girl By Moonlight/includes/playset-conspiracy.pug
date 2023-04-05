@@ -1,0 +1,140 @@
+.sheet-Playset-Dreams
+	.sheet-Conspiracy-Container
+
+		+hidden('Conspiracy-R1-C3',"").sheet-Conspiracy-Activator
+		.sheet-Box.sheet-Purple.sheet-Room.sheet-R1.sheet-C3
+			.sheet-Box-Header
+				+translate('Propagator')
+				+translate('Tier I')
+			.sheet-Name
+				+text('Conspiracy-R1-C3',"")
+			.sheet-Content
+				+translate('Fallout results are 1 level worse until <b>all</b> propagators are <b>identified</b>.')
+		+hidden('Conspiracy-R1-C7',"").sheet-Conspiracy-Activator
+		.sheet-Box.sheet-Purple.sheet-Room.sheet-R1.sheet-C7
+			.sheet-Box-Header
+				+translate('Propagator')
+				+translate('Tier I')
+			.sheet-Name
+				+text('Conspiracy-R1-C7',"")
+			.sheet-Content
+				+translate('Fallout results are 1 level worse until <b>all</b> propagators are <b>identified</b>.')
+
+		.sheet-Connection.sheet-R2.sheet-C3.sheet-TB
+		.sheet-Connection.sheet-R2.sheet-C7.sheet-TB
+
+		+hidden('Conspiracy-R3-C1',"").sheet-Conspiracy-Activator
+		.sheet-Box.sheet-Purple.sheet-Room.sheet-R3.sheet-C1
+			.sheet-Box-Header
+				+translate('Follower')
+				+translate('Tier I')
+			.sheet-Name
+				+text('Conspiracy-R3-C1',"")
+			.sheet-Content
+				+translate('Foes are at +1 scale until <b>all</b> followers are <b>identified</b>.')
+		.sheet-Connection.sheet-R3.sheet-C2.sheet-LR
+		+hidden('Overseer-Indoctrination').sheet-Overseer-Activator
+		.sheet-Box.sheet-Purple.sheet-Room.sheet-Solid.sheet-R3.sheet-C3
+			+translate('<b>Indoctrination</b>: -1d to engagement until all are <b>identified</b> and overseer is <b>confronted</b>.')
+		.sheet-Connection.sheet-R3.sheet-C4.sheet-LR
+		.sheet-Connection.sheet-R3.sheet-C5.sheet-LB-RB
+		.sheet-Connection.sheet-R3.sheet-C6.sheet-LR
+		+hidden('Overseer-Acquisitions').sheet-Overseer-Activator
+		.sheet-Box.sheet-Purple.sheet-Room.sheet-Solid.sheet-R3.sheet-C7
+			+translate('<b>Acquisitions</b>: The Conspiracy track advances by an additional 1 during fallout until all are <b>identified</b> and overseer is <b>confronted</b>.')
+		.sheet-Connection.sheet-R3.sheet-C8.sheet-LR
+		+hidden('Conspiracy-R3-C9',"").sheet-Conspiracy-Activator
+		.sheet-Box.sheet-Purple.sheet-Room.sheet-R3.sheet-C9
+			.sheet-Box-Header
+				+translate('Follower')
+				+translate('Tier I')
+			.sheet-Name
+				+text('Conspiracy-R3-C9',"")
+			.sheet-Content
+				+translate('Foes are at +1 scale until <b>all</b> followers are <b>identified</b>.')
+
+		.sheet-Connection.sheet-R4.sheet-C3.sheet-TB
+		.sheet-Connection.sheet-R4.sheet-C5.sheet-TB
+		.sheet-Connection.sheet-R4.sheet-C7.sheet-TB
+
+		+hidden('Conspiracy-R5-C3',"").sheet-Conspiracy-Activator
+		.sheet-Box.sheet-Purple.sheet-Room.sheet-R5.sheet-C3
+			.sheet-Box-Header
+				+translate('Overseer')
+				+translate('Tier II')
+			.sheet-Name
+				+text('Conspiracy-R5-C3',"")
+			.sheet-Content
+				+translate('-1 effect against the host until at least 2 overseers are <b>confronted</b>.')
+			.sheet-Confront
+				.sheet-Confront-Line
+					.sheet-Confront-Button
+						+abilityMark('Overseer-Indoctrination')
+					+translate('Confronted').sheet-Label
+
+		+hidden('Conspiracy-R5-C5',"").sheet-Conspiracy-Activator
+		.sheet-Box.sheet-Purple.sheet-Room.sheet-R5.sheet-C5
+			.sheet-Box-Header
+				+translate('Host')
+				+translate('Tier III')
+			.sheet-Name
+				+text('Conspiracy-R5-C5',"")
+			.sheet-Content
+				+translate('Season ends after <b>confronting</b> the host in their dream.')
+		+hidden('Conspiracy-R5-C7',"").sheet-Conspiracy-Activator
+		.sheet-Box.sheet-Purple.sheet-Room.sheet-R5.sheet-C7
+			.sheet-Box-Header
+				+translate('Overseer')
+				+translate('Tier II')
+			.sheet-Name
+				+text('Conspiracy-R5-C7',"")
+			.sheet-Content
+				+translate('-1 effect against the host until at least 2 overseers are <b>confronted</b>.')
+			.sheet-Confront
+				.sheet-Confront-Line
+					.sheet-Confront-Button
+						+abilityMark('Overseer-Acquisitions')
+					+translate('Confronted').sheet-Label
+
+		.sheet-Connection.sheet-R6.sheet-C5.sheet-TB
+
+		+hidden('Conspiracy-R7-C3',"").sheet-Conspiracy-Activator
+		.sheet-Box.sheet-Purple.sheet-Room.sheet-R7.sheet-C3
+			.sheet-Box-Header
+				+translate('Propagator')
+				+translate('Tier I')
+			.sheet-Name
+				+text('Conspiracy-R7-C3',"")
+			.sheet-Content
+				+translate('Fallout results are 1 level worse until <b>all</b> propagators are <b>identified</b>.')
+		.sheet-Connection.sheet-R7.sheet-C4.sheet-LR
+		+hidden('Overseer-Surveillance').sheet-Overseer-Activator
+		.sheet-Box.sheet-Purple.sheet-Room.sheet-Solid.sheet-R7.sheet-C5
+			+translate('<b>Surveillance</b>: -1d to investigate until all are <b>identified</b> and overseer is <b>confronted</b>.')
+		.sheet-Connection.sheet-R7.sheet-C6.sheet-LR
+		+hidden('Conspiracy-R7-C7',"").sheet-Conspiracy-Activator
+		.sheet-Box.sheet-Purple.sheet-Room.sheet-R7.sheet-C7
+			.sheet-Box-Header
+				+translate('Follower')
+				+translate('Tier I')
+			.sheet-Name
+				+text('Conspiracy-R7-C7',"")
+			.sheet-Content
+				+translate('Foes are at +1 scale until <b>all</b> followers are <b>identified</b>.')
+
+		.sheet-Connection.sheet-R8.sheet-C5.sheet-TB
+
+		+hidden('Conspiracy-R9-C5',"").sheet-Conspiracy-Activator
+		.sheet-Box.sheet-Purple.sheet-Room.sheet-R9.sheet-C5
+			.sheet-Box-Header
+				+translate('Overseer')
+				+translate('Tier II')
+			.sheet-Name
+				+text('Conspiracy-R9-C5',"")
+			.sheet-Content
+				+translate('-1 effect against the host until at least 2 overseers are <b>confronted</b>.')
+			.sheet-Confront
+				.sheet-Confront-Line
+					.sheet-Confront-Button
+						+abilityMark('Overseer-Surveillance')
+					+translate('Confronted').sheet-Label
