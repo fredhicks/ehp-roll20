@@ -2,6 +2,18 @@
 
 mixin rtf(f)
 	| {{#{f}}} 
+	block
+
+rolltemplate.sheet-rolltemplate-chatshare
+	.sheet-Roll-Result
+		.sheet-Roll-Title
+			+rtf('title')
+			.sheet-Roll-Subtitle
+				+rtf('charname')
+		.sheet-Content
+			+rtf('effect')
+			.sheet-Additional
+				+rtf('textfield')
 
 rolltemplate.sheet-rolltemplate-GBM
 	.sheet-Roll-Result
@@ -63,3 +75,74 @@ rolltemplate.sheet-rolltemplate-GBM
 						.sheet-Instruct
 							+translate("Take the lower of the two.")
 				+rtf('/allprops() title charname short position effect action resist eclipse obligation')
+		.sheet-Roll-Context
+			+rtf('#action')
+				div(class="sheet-Picker-{{position}}")
+				.sheet-Pick-Controlled
+					.sheet-Popper
+						| &darr;&nbsp;
+						i
+							+translate("Controlled Position...")
+						.sheet-Popped
+							+translate("<ul><li><b>Critical</b>: You do it with increased effect.<li><b>6</b>: You do it.<li><b>4/5</b>: You do it, but there's a consequence: you suffer harm, a complication occurs, you have reduced effect, or you end up in a desperate position.<li><b>1-3</b>: Things go badly: you suffer harm, a complication occurs, you end up in a desperate position, you lose this opportunity.")
+				.sheet-Pick-Risky
+					.sheet-Popper
+						| &darr;&nbsp;
+						i
+							+translate("Risky Position...")
+						.sheet-Popped
+							+translate("<ul><li><b>Critical</b>: You do it with increased effect.<li><b>6</b>: You do it.<li><b>4/5</b>: You do it, but there's a consequence: you suffer harm, a complication occurs, you have reduced effect, or you end up in a desperate position.<li><b>1-3</b>: Things go badly: you suffer harm, a complication occurs, you end up in a desperate position, you lose this opportunity.")
+				.sheet-Pick-Desperate
+					.sheet-Popper
+						| &darr;&nbsp;
+						i
+							+translate("Desperate Position...")
+						.sheet-Popped
+							+translate("<ul><li><b>Critical</b>: You do it with increased effect.<li><b>6</b>: You do it.<li><b>4/5</b>: You do it, but there's a consequence: you suffer severe harm, a serious complication occurs, or you have reduced effect.<li><b>1-3</b>: It’s the worst outcome. You suffer severe harm, a serious complication occurs, or you lose this opportunity for action.")
+			+rtf('/action')
+			+rtf('#resist')
+					.sheet-Popper
+						| &darr;&nbsp;
+						i
+							+translate("Resistance Roll...")
+						.sheet-Popped
+							+translate("<ul><li>You reduce or avoid the consequence, and take 6 stress minus your highest die result.<li>When you roll a critical on resistance, clear 1 stress.</ul>")
+			+rtf('/resist')
+			+rtf('#short')
+			+rtf('^eclipse')
+			+rtf('^obligation')
+				// Fortune Roll - Nothing supplemental to display
+			+rtf('/obligation')
+			+rtf('/eclipse')
+			+rtf('#eclipse')
+				.sheet-Popper
+					| &darr;&nbsp;
+					i
+						+translate("Eclipse Roll...")
+					.sheet-Popped
+						ul
+							+translate("<li><b>1-3</b>: You are in eclipse.<li><b>4/5</b>: Another protagonist can push themselves or spend a link to keep you from succumbing. If they do not, treat it as a 1-3 result and you are in eclipse.<li><b>6</b>: You hold on to hope, and stay in the struggle. The next time you take stress, roll for eclipse again.")
+							li
+								+translate("<b>Critical</b>: Erase 1 spent segment of your transcendence track, and recover 5 stress.")
+								| 
+								span(class="sheet-Picker-{{eclipse}}")
+								+translate('If sun was rolled, each other player advances their recovery clock by two.').sheet-Pick-Sun
+								+translate('If moon was rolled, each other player recovers 2 stress.').sheet-Pick-Moon
+								+translate('If stars was rolled, each other player resets their armour and special armour uses.').sheet-Pick-Stars
+			+rtf('/eclipse')
+			+rtf('#obligation')
+				.sheet-Popper
+					| &darr;&nbsp;
+					i
+						+translate("Obligation Roll...")
+					.sheet-Popped
+						+translate("<ul><li>When you roll obligation, roll your lowest attribute, taking stress equal to 6 minus the die result.<li>On a critical success, you get an additional downtime action.</ul>")
+						div(class="sheet-Picker-{{obligation}}", style="margin-top: 4px")
+						.sheet-Pick-Sun
+							+translate("Sun: Your obligation involves scary people or circumstances, or is physically taxing.")
+						.sheet-Pick-Moon
+							+translate("Moon: Your obligation breaks your heart, and drives you to despair.")
+						.sheet-Pick-Stars
+							+translate("Stars: Your obligation puts you under social pressure, or sets off your anxiety.")
+			+rtf('/obligation')
+			+rtf('/short')

@@ -47,6 +47,7 @@ include playset-abilities-variables.pug
 						ability["sublist"] = [];
 					}
 					var sublist = ability["sublist"];
+					// End code block
 				if ( ! ability['transcendent'] )
 					if ( ability['selectable'] )
 						+hidden(abid,0).sheet-hide-if-unused
@@ -61,8 +62,11 @@ include playset-abilities-variables.pug
 								+translate(ability['name'])
 							|: 
 							+translate(ability['effect'])
+							button(name="share_"+abid, type="roll", data-i18n-title='Share to chat', value="&{template:chatshare} {{charname=@{character_name}}} {{title=^{"+ability['name']+"}}} {{effect=^{"+ability['effect']+"}}} {{textfield=@{"+tfid+"}}}").sheet-button-chatshare
 							if ( ability['textfield'] )
 								+text(tfid)
+							else
+								+hidden(tfid)
 							if ( sublist.length > 0 )
 								- var sbc = 0;
 								each suba in sublist
@@ -78,6 +82,8 @@ include playset-abilities-variables.pug
 												+translate(suba['name'])
 											|: 
 											+translate(suba['effect'])
+											button(name="share_"+subid, type="roll", data-i18n-title='Share to chat', value="&{template:chatshare} {{charname=@{character_name}}} {{title=^{"+suba['name']+"}}} {{effect=^{"+suba['effect']+"}}}").sheet-button-chatshare
+
 		+hidden('Ability-Outside',0).sheet-hide-if-unused
 		.sheet-Box-Header.sheet-Box-Subsection
 			.sheet-Label
@@ -110,6 +116,7 @@ include playset-abilities-variables.pug
 						+display('Ability-Outside-Name')
 					|: 
 					+display('Ability-Outside-Effect')
+					button(name="share_Outside", type="roll", data-i18n-title='Share to chat', value="&{template:chatshare} {{charname=@{character_name}}} {{title=@{Ability-Outside-Name}}} {{effect=@{Ability-Outside-Effect}}} {{textfield=@{Ability-Outside-Text}}}").sheet-button-chatshare
 					+hidden('Ability-Outside-Has-Text').sheet-hide-on-zero
 					+text('Ability-Outside-Text')
 					- var osub = 0;
@@ -126,6 +133,7 @@ include playset-abilities-variables.pug
 										+display('Ability-Outside-'+osub+'-Name')
 									|: 
 									+display('Ability-Outside-'+osub+'-Effect')
+									button(name="share_Outside-"+osub, type="roll", data-i18n-title='Share to chat', value="&{template:chatshare} {{charname=@{character_name}}} {{title=@{Ability-Outside-"+osub+"-Name}}} {{effect=@{Ability-Outside-"+osub+"-Effect}}}").sheet-button-chatshare
 
 // Transcendent Abilities
 
@@ -165,5 +173,8 @@ include playset-abilities-variables.pug
 								+translate(ability['name'])
 							|: 
 							+translate(ability['effect'])
+							button(name="share_"+abid, type="roll", data-i18n-title='Share to chat', value="&{template:chatshare} {{charname=@{character_name}}} {{title=^{"+ability['name']+"}}} {{effect=^{"+ability['effect']+"}}} {{textfield=@{"+tfid+"}}}").sheet-button-chatshare
 							if ( ability['textfield'] )
 								+text(tfid)
+							else
+								+hidden(tfid)

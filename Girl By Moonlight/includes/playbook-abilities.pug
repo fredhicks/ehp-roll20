@@ -60,8 +60,11 @@ include playbook-abilities-variables.pug
 								+translate(ability['name'])
 							|: 
 							+translate(ability['effect'])
+							button(name="share_"+abid, type="roll", data-i18n-title='Share to chat', value="&{template:chatshare} {{charname=@{character_name}}} {{title=^{"+ability['name']+"}}} {{effect=^{"+ability['effect']+"}}} {{textfield=@{"+tfid+"}}}").sheet-button-chatshare
 							if ( ability['textfield'] )
 								+text(tfid)
+							else
+								+hidden(tfid)
 		+hidden('Ability-Veteran',0).sheet-hide-if-unused
 		.sheet-Ability-Veteran-Header
 			.sheet-Label
@@ -88,6 +91,9 @@ include playbook-abilities-variables.pug
 						+display('Ability-Veteran-Name')
 					|: 
 					+display('Ability-Veteran-Effect')
+					button(name="share_"+abid, type="roll", data-i18n-title='Share to chat', value="&{template:chatshare} {{charname=@{character_name}}} {{title=@{Ability-Veteran-Name}}} {{effect=@{Ability-Veteran-Effect}}} {{textfield=@{Ability-Veteran-Text}}}").sheet-button-chatshare
+
+					+hidden('Ability-Veteran-Text')
 					+hidden('Ability-Veteran-Has-Text').sheet-hide-on-zero
 					+text('Ability-Veteran-Text')
 
@@ -139,6 +145,8 @@ include playbook-abilities-variables.pug
 										+display(abid+'-Name')
 									|: 
 									+display(abid+'-Effect')
+									button(name="share_"+abid, type="roll", data-i18n-title='Share to chat', value="&{template:chatshare} {{charname=@{character_name}}} {{title=@{"+abid+"-Name}}} {{effect=@{"+abid+"-Effect}}} {{textfield=@{"+abid+"-Text}}}").sheet-button-chatshare
+									+hidden(abid+'-Text')
 									+hidden(abid+'-Has-Text').sheet-hide-on-zero
 									+text(abid+'-Text')
 							else
@@ -146,5 +154,8 @@ include playbook-abilities-variables.pug
 									+translate(ability['name'])
 								|: 
 								+translate(ability['effect'])
+								button(name="share_"+abid, type="roll", data-i18n-title='Share to chat', value="&{template:chatshare} {{charname=@{character_name}}} {{title=^{"+ability['name']+"}}} {{effect=^{"+ability['effect']+"}}} {{textfield=@{"+tfid+"}}}").sheet-button-chatshare
 								if ( ability['textfield'] )
 									+text(tfid)
+								else
+									+hidden(tfid)

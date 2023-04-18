@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Kufam:ital,wght@0,400;0,700;1,400;1,700&family=Montserrat:ital,wght@0,400;0,700;1,400;1,700&display=swap");
-:root, .sheet-rolltemplate-GBM {
+:root, .sheet-rolltemplate-GBM, .sheet-rolltemplate-chatshare {
 	--gbm-blue: #006784;
 	--gbm-blue-pale: #dee9ed;
 	--gbm-blue-dark: #00394c;
@@ -27,7 +27,7 @@
 	background: var(--gbm-bg);
 }
 
-.sheet-darkmode, .sheet-rolltemplate-GBM.sheet-rolltemplate-darkmode {
+.sheet-darkmode, .sheet-rolltemplate-GBM.sheet-rolltemplate-darkmode, .sheet-rolltemplate-chatshare.sheet-rolltemplate-darkmode {
 	--gbm-fg: var(--gbm-blue-pale);
 	--gbm-bg: #1f1f1f;
 	--gbm-blue-shaded: var(--gbm-blue-dark);
@@ -38,6 +38,7 @@
 	--gbm-teal-text: var(--gbm-teal-pale);
 	--gbm-pink-text: var(--gbm-pink-pale);
 	--gbm-purple-text: var(--gbm-purple-pale);
+	color: var(--gbm-fg);
 }
 
 .repcontrol .btn, .itemcontrol .btn {
@@ -48,14 +49,14 @@
 
 .ui-dialog .charsheet {
 	font-family: Montserrat, sans-serif;
-	font-size: 14px;
+	font-size: 16px;
 	color: var(--gbm-fg);
 	background-color: var(--gbm-bg);
 	line-height: unset;
 }
 .ui-dialog .charsheet p {
 	font-family: Montserrat, sans-serif;
-	font-size: 14px;
+	font-size: 16px;
 	line-height: unset;
 }
 
@@ -66,23 +67,49 @@
 .sheet-rolltemplate-GBM {
 	background-color: var(--gbm-purple-shaded);
 	color: var(--gbm-purple-text);
-	font-family: Montserrat, sans-serif;
-	font-size: 14px;
-	border-radius: 0px 12px 12px 12px;
-	-webkit-box-shadow: 2px 2px 2px var(--gbm-purple);
-	        box-shadow: 2px 2px 2px var(--gbm-purple);
+	line-height: unset;
 }
-.sheet-rolltemplate-GBM .sheet-Roll-Result .sheet-Roll-Title {
+.sheet-rolltemplate-GBM .sheet-Roll-Title {
+	line-height: 21px;
 	color: white;
 	background-color: var(--gbm-purple);
 	border-radius: 0px 12px 0px 0px;
 	font-size: 21px;
 	padding: 4px;
 }
-.sheet-rolltemplate-GBM .sheet-Roll-Result .sheet-Roll-Title .sheet-Roll-Subtitle {
-	font-size: 14px;
+.sheet-rolltemplate-GBM .sheet-Roll-Title .sheet-Roll-Subtitle {
+	font-size: 16px;
 }
-.sheet-rolltemplate-GBM .sheet-Roll-PnE {
+
+.sheet-rolltemplate-chatshare {
+	background-color: var(--gbm-blue-shaded);
+	color: var(--gbm-blue-text);
+	line-height: unset;
+}
+.sheet-rolltemplate-chatshare .sheet-Content {
+	padding: 4px;
+	line-height: calc( 16px + 4px );
+}
+.sheet-rolltemplate-chatshare .sheet-Roll-Title {
+	line-height: 21px;
+	color: white;
+	background-color: var(--gbm-blue);
+	border-radius: 0px 12px 0px 0px;
+	font-size: 21px;
+	padding: 4px;
+}
+.sheet-rolltemplate-chatshare .sheet-Roll-Title .sheet-Roll-Subtitle {
+	font-size: 16px;
+}
+
+.sheet-rolltemplate-GBM, .sheet-rolltemplate-chatshare {
+	font-family: Montserrat, sans-serif;
+	font-size: 16px;
+	border-radius: 0px 12px 12px 12px;
+	-webkit-box-shadow: 2px 2px 2px var(--gbm-purple);
+	        box-shadow: 2px 2px 2px var(--gbm-purple);
+}
+.sheet-rolltemplate-GBM .sheet-Roll-PnE, .sheet-rolltemplate-chatshare .sheet-Roll-PnE {
 	padding: 4px;
 	padding-bottom: 0px;
 	display: -ms-grid;
@@ -90,23 +117,23 @@
 	-ms-grid-columns: 1fr 1fr;
 	grid-template-columns: 1fr 1fr;
 }
-.sheet-rolltemplate-GBM .sheet-Roll-PnE .sheet-Label-Position, .sheet-rolltemplate-GBM .sheet-Roll-PnE .sheet-Position {
+.sheet-rolltemplate-GBM .sheet-Roll-PnE .sheet-Label-Position, .sheet-rolltemplate-GBM .sheet-Roll-PnE .sheet-Position, .sheet-rolltemplate-chatshare .sheet-Roll-PnE .sheet-Label-Position, .sheet-rolltemplate-chatshare .sheet-Roll-PnE .sheet-Position {
 	-ms-grid-column: 1;
 	    grid-column-start: 1;
 }
-.sheet-rolltemplate-GBM .sheet-Roll-PnE .sheet-Label-Effect, .sheet-rolltemplate-GBM .sheet-Roll-PnE .sheet-Effect {
+.sheet-rolltemplate-GBM .sheet-Roll-PnE .sheet-Label-Effect, .sheet-rolltemplate-GBM .sheet-Roll-PnE .sheet-Effect, .sheet-rolltemplate-chatshare .sheet-Roll-PnE .sheet-Label-Effect, .sheet-rolltemplate-chatshare .sheet-Roll-PnE .sheet-Effect {
 	-ms-grid-column: 2;
 	    grid-column-start: 2;
 }
-.sheet-rolltemplate-GBM .sheet-Roll-PnE .sheet-Label-Position, .sheet-rolltemplate-GBM .sheet-Roll-PnE .sheet-Label-Effect {
-	font-size: 10px;
+.sheet-rolltemplate-GBM .sheet-Roll-PnE .sheet-Label-Position, .sheet-rolltemplate-GBM .sheet-Roll-PnE .sheet-Label-Effect, .sheet-rolltemplate-chatshare .sheet-Roll-PnE .sheet-Label-Position, .sheet-rolltemplate-chatshare .sheet-Roll-PnE .sheet-Label-Effect {
+	font-size: 12px;
 	text-transform: uppercase;
 	font-weight: bold;
 }
-.sheet-rolltemplate-GBM .sheet-Roll-PnE .sheet-Position-Risky, .sheet-rolltemplate-GBM .sheet-Roll-PnE .sheet-Position-Controlled {
+.sheet-rolltemplate-GBM .sheet-Roll-PnE .sheet-Position-Risky, .sheet-rolltemplate-GBM .sheet-Roll-PnE .sheet-Position-Controlled, .sheet-rolltemplate-chatshare .sheet-Roll-PnE .sheet-Position-Risky, .sheet-rolltemplate-chatshare .sheet-Roll-PnE .sheet-Position-Controlled {
 	display: none;
 }
-.sheet-rolltemplate-GBM .sheet-Roll-PnE .sheet-Position-Desperate {
+.sheet-rolltemplate-GBM .sheet-Roll-PnE .sheet-Position-Desperate, .sheet-rolltemplate-chatshare .sheet-Roll-PnE .sheet-Position-Desperate {
 	padding-top: 4px;
 	display: block;
 	-ms-grid-column: 1;
@@ -115,16 +142,60 @@
 	text-align: center;
 	font-style: italic;
 }
-.sheet-rolltemplate-GBM .sheet-Roll-Dice {
+.sheet-rolltemplate-GBM .sheet-Roll-Context b, .sheet-rolltemplate-chatshare .sheet-Roll-Context b {
+	font-weight: 700;
+}
+.sheet-rolltemplate-GBM .sheet-Roll-Context .sheet-Popper, .sheet-rolltemplate-chatshare .sheet-Roll-Context .sheet-Popper {
+	padding-left: 4px;
+	padding-right: 4px;
+	padding-bottom: 4px;
+}
+.sheet-rolltemplate-GBM .sheet-Roll-Context .sheet-Popper .sheet-Popped, .sheet-rolltemplate-chatshare .sheet-Roll-Context .sheet-Popper .sheet-Popped {
+	display: none;
+}
+.sheet-rolltemplate-GBM .sheet-Roll-Context .sheet-Popper:hover .sheet-Popped, .sheet-rolltemplate-GBM .sheet-Roll-Context .sheet-Popper:active .sheet-Popped, .sheet-rolltemplate-GBM .sheet-Roll-Context .sheet-Popper:focus .sheet-Popped, .sheet-rolltemplate-chatshare .sheet-Roll-Context .sheet-Popper:hover .sheet-Popped, .sheet-rolltemplate-chatshare .sheet-Roll-Context .sheet-Popper:active .sheet-Popped, .sheet-rolltemplate-chatshare .sheet-Roll-Context .sheet-Popper:focus .sheet-Popped {
+	display: block;
+	padding: 4px;
+	margin-top: 4px;
+	border: 1px dotted white;
+	border-radius: 0px 0px 8px 8px;
+	line-height: calc( 16px + 4px );
+}
+.sheet-rolltemplate-GBM .sheet-Roll-Context .sheet-Popper:hover .sheet-Popped ul, .sheet-rolltemplate-GBM .sheet-Roll-Context .sheet-Popper:active .sheet-Popped ul, .sheet-rolltemplate-GBM .sheet-Roll-Context .sheet-Popper:focus .sheet-Popped ul, .sheet-rolltemplate-chatshare .sheet-Roll-Context .sheet-Popper:hover .sheet-Popped ul, .sheet-rolltemplate-chatshare .sheet-Roll-Context .sheet-Popper:active .sheet-Popped ul, .sheet-rolltemplate-chatshare .sheet-Roll-Context .sheet-Popper:focus .sheet-Popped ul {
+	margin-bottom: 0px;
+	padding-bottom: 0px;
+}
+.sheet-rolltemplate-GBM .sheet-Roll-Context .sheet-Picker-Risky ~ .sheet-Pick-Risky, .sheet-rolltemplate-GBM .sheet-Roll-Context .sheet-Picker-Risky ~ .sheet-Pick-Controlled, .sheet-rolltemplate-GBM .sheet-Roll-Context .sheet-Picker-Risky ~ .sheet-Pick-Desperate, .sheet-rolltemplate-GBM .sheet-Roll-Context .sheet-Picker-Risky ~ .sheet-Pick-Sun, .sheet-rolltemplate-GBM .sheet-Roll-Context .sheet-Picker-Risky ~ .sheet-Pick-Moon, .sheet-rolltemplate-GBM .sheet-Roll-Context .sheet-Picker-Risky ~ .sheet-Pick-Stars, .sheet-rolltemplate-GBM .sheet-Roll-Context .sheet-Picker-Controlled ~ .sheet-Pick-Risky, .sheet-rolltemplate-GBM .sheet-Roll-Context .sheet-Picker-Controlled ~ .sheet-Pick-Controlled, .sheet-rolltemplate-GBM .sheet-Roll-Context .sheet-Picker-Controlled ~ .sheet-Pick-Desperate, .sheet-rolltemplate-GBM .sheet-Roll-Context .sheet-Picker-Controlled ~ .sheet-Pick-Sun, .sheet-rolltemplate-GBM .sheet-Roll-Context .sheet-Picker-Controlled ~ .sheet-Pick-Moon, .sheet-rolltemplate-GBM .sheet-Roll-Context .sheet-Picker-Controlled ~ .sheet-Pick-Stars, .sheet-rolltemplate-GBM .sheet-Roll-Context .sheet-Picker-Desperate ~ .sheet-Pick-Risky, .sheet-rolltemplate-GBM .sheet-Roll-Context .sheet-Picker-Desperate ~ .sheet-Pick-Controlled, .sheet-rolltemplate-GBM .sheet-Roll-Context .sheet-Picker-Desperate ~ .sheet-Pick-Desperate, .sheet-rolltemplate-GBM .sheet-Roll-Context .sheet-Picker-Desperate ~ .sheet-Pick-Sun, .sheet-rolltemplate-GBM .sheet-Roll-Context .sheet-Picker-Desperate ~ .sheet-Pick-Moon, .sheet-rolltemplate-GBM .sheet-Roll-Context .sheet-Picker-Desperate ~ .sheet-Pick-Stars, .sheet-rolltemplate-GBM .sheet-Roll-Context .sheet-Picker-Sun ~ .sheet-Pick-Risky, .sheet-rolltemplate-GBM .sheet-Roll-Context .sheet-Picker-Sun ~ .sheet-Pick-Controlled, .sheet-rolltemplate-GBM .sheet-Roll-Context .sheet-Picker-Sun ~ .sheet-Pick-Desperate, .sheet-rolltemplate-GBM .sheet-Roll-Context .sheet-Picker-Sun ~ .sheet-Pick-Sun, .sheet-rolltemplate-GBM .sheet-Roll-Context .sheet-Picker-Sun ~ .sheet-Pick-Moon, .sheet-rolltemplate-GBM .sheet-Roll-Context .sheet-Picker-Sun ~ .sheet-Pick-Stars, .sheet-rolltemplate-GBM .sheet-Roll-Context .sheet-Picker-Moon ~ .sheet-Pick-Risky, .sheet-rolltemplate-GBM .sheet-Roll-Context .sheet-Picker-Moon ~ .sheet-Pick-Controlled, .sheet-rolltemplate-GBM .sheet-Roll-Context .sheet-Picker-Moon ~ .sheet-Pick-Desperate, .sheet-rolltemplate-GBM .sheet-Roll-Context .sheet-Picker-Moon ~ .sheet-Pick-Sun, .sheet-rolltemplate-GBM .sheet-Roll-Context .sheet-Picker-Moon ~ .sheet-Pick-Moon, .sheet-rolltemplate-GBM .sheet-Roll-Context .sheet-Picker-Moon ~ .sheet-Pick-Stars, .sheet-rolltemplate-GBM .sheet-Roll-Context .sheet-Picker-Stars ~ .sheet-Pick-Risky, .sheet-rolltemplate-GBM .sheet-Roll-Context .sheet-Picker-Stars ~ .sheet-Pick-Controlled, .sheet-rolltemplate-GBM .sheet-Roll-Context .sheet-Picker-Stars ~ .sheet-Pick-Desperate, .sheet-rolltemplate-GBM .sheet-Roll-Context .sheet-Picker-Stars ~ .sheet-Pick-Sun, .sheet-rolltemplate-GBM .sheet-Roll-Context .sheet-Picker-Stars ~ .sheet-Pick-Moon, .sheet-rolltemplate-GBM .sheet-Roll-Context .sheet-Picker-Stars ~ .sheet-Pick-Stars, .sheet-rolltemplate-chatshare .sheet-Roll-Context .sheet-Picker-Risky ~ .sheet-Pick-Risky, .sheet-rolltemplate-chatshare .sheet-Roll-Context .sheet-Picker-Risky ~ .sheet-Pick-Controlled, .sheet-rolltemplate-chatshare .sheet-Roll-Context .sheet-Picker-Risky ~ .sheet-Pick-Desperate, .sheet-rolltemplate-chatshare .sheet-Roll-Context .sheet-Picker-Risky ~ .sheet-Pick-Sun, .sheet-rolltemplate-chatshare .sheet-Roll-Context .sheet-Picker-Risky ~ .sheet-Pick-Moon, .sheet-rolltemplate-chatshare .sheet-Roll-Context .sheet-Picker-Risky ~ .sheet-Pick-Stars, .sheet-rolltemplate-chatshare .sheet-Roll-Context .sheet-Picker-Controlled ~ .sheet-Pick-Risky, .sheet-rolltemplate-chatshare .sheet-Roll-Context .sheet-Picker-Controlled ~ .sheet-Pick-Controlled, .sheet-rolltemplate-chatshare .sheet-Roll-Context .sheet-Picker-Controlled ~ .sheet-Pick-Desperate, .sheet-rolltemplate-chatshare .sheet-Roll-Context .sheet-Picker-Controlled ~ .sheet-Pick-Sun, .sheet-rolltemplate-chatshare .sheet-Roll-Context .sheet-Picker-Controlled ~ .sheet-Pick-Moon, .sheet-rolltemplate-chatshare .sheet-Roll-Context .sheet-Picker-Controlled ~ .sheet-Pick-Stars, .sheet-rolltemplate-chatshare .sheet-Roll-Context .sheet-Picker-Desperate ~ .sheet-Pick-Risky, .sheet-rolltemplate-chatshare .sheet-Roll-Context .sheet-Picker-Desperate ~ .sheet-Pick-Controlled, .sheet-rolltemplate-chatshare .sheet-Roll-Context .sheet-Picker-Desperate ~ .sheet-Pick-Desperate, .sheet-rolltemplate-chatshare .sheet-Roll-Context .sheet-Picker-Desperate ~ .sheet-Pick-Sun, .sheet-rolltemplate-chatshare .sheet-Roll-Context .sheet-Picker-Desperate ~ .sheet-Pick-Moon, .sheet-rolltemplate-chatshare .sheet-Roll-Context .sheet-Picker-Desperate ~ .sheet-Pick-Stars, .sheet-rolltemplate-chatshare .sheet-Roll-Context .sheet-Picker-Sun ~ .sheet-Pick-Risky, .sheet-rolltemplate-chatshare .sheet-Roll-Context .sheet-Picker-Sun ~ .sheet-Pick-Controlled, .sheet-rolltemplate-chatshare .sheet-Roll-Context .sheet-Picker-Sun ~ .sheet-Pick-Desperate, .sheet-rolltemplate-chatshare .sheet-Roll-Context .sheet-Picker-Sun ~ .sheet-Pick-Sun, .sheet-rolltemplate-chatshare .sheet-Roll-Context .sheet-Picker-Sun ~ .sheet-Pick-Moon, .sheet-rolltemplate-chatshare .sheet-Roll-Context .sheet-Picker-Sun ~ .sheet-Pick-Stars, .sheet-rolltemplate-chatshare .sheet-Roll-Context .sheet-Picker-Moon ~ .sheet-Pick-Risky, .sheet-rolltemplate-chatshare .sheet-Roll-Context .sheet-Picker-Moon ~ .sheet-Pick-Controlled, .sheet-rolltemplate-chatshare .sheet-Roll-Context .sheet-Picker-Moon ~ .sheet-Pick-Desperate, .sheet-rolltemplate-chatshare .sheet-Roll-Context .sheet-Picker-Moon ~ .sheet-Pick-Sun, .sheet-rolltemplate-chatshare .sheet-Roll-Context .sheet-Picker-Moon ~ .sheet-Pick-Moon, .sheet-rolltemplate-chatshare .sheet-Roll-Context .sheet-Picker-Moon ~ .sheet-Pick-Stars, .sheet-rolltemplate-chatshare .sheet-Roll-Context .sheet-Picker-Stars ~ .sheet-Pick-Risky, .sheet-rolltemplate-chatshare .sheet-Roll-Context .sheet-Picker-Stars ~ .sheet-Pick-Controlled, .sheet-rolltemplate-chatshare .sheet-Roll-Context .sheet-Picker-Stars ~ .sheet-Pick-Desperate, .sheet-rolltemplate-chatshare .sheet-Roll-Context .sheet-Picker-Stars ~ .sheet-Pick-Sun, .sheet-rolltemplate-chatshare .sheet-Roll-Context .sheet-Picker-Stars ~ .sheet-Pick-Moon, .sheet-rolltemplate-chatshare .sheet-Roll-Context .sheet-Picker-Stars ~ .sheet-Pick-Stars {
+	display: none;
+}
+.sheet-rolltemplate-GBM .sheet-Roll-Context .sheet-Picker-Controlled ~ .sheet-Pick-Controlled, .sheet-rolltemplate-chatshare .sheet-Roll-Context .sheet-Picker-Controlled ~ .sheet-Pick-Controlled {
+	display: initial;
+}
+.sheet-rolltemplate-GBM .sheet-Roll-Context .sheet-Picker-Risky ~ .sheet-Pick-Risky, .sheet-rolltemplate-chatshare .sheet-Roll-Context .sheet-Picker-Risky ~ .sheet-Pick-Risky {
+	display: initial;
+}
+.sheet-rolltemplate-GBM .sheet-Roll-Context .sheet-Picker-Desperate ~ .sheet-Pick-Desperate, .sheet-rolltemplate-chatshare .sheet-Roll-Context .sheet-Picker-Desperate ~ .sheet-Pick-Desperate {
+	display: initial;
+}
+.sheet-rolltemplate-GBM .sheet-Roll-Context .sheet-Picker-Sun ~ .sheet-Pick-Sun, .sheet-rolltemplate-chatshare .sheet-Roll-Context .sheet-Picker-Sun ~ .sheet-Pick-Sun {
+	display: initial;
+}
+.sheet-rolltemplate-GBM .sheet-Roll-Context .sheet-Picker-Moon ~ .sheet-Pick-Moon, .sheet-rolltemplate-chatshare .sheet-Roll-Context .sheet-Picker-Moon ~ .sheet-Pick-Moon {
+	display: initial;
+}
+.sheet-rolltemplate-GBM .sheet-Roll-Context .sheet-Picker-Stars ~ .sheet-Pick-Stars, .sheet-rolltemplate-chatshare .sheet-Roll-Context .sheet-Picker-Stars ~ .sheet-Pick-Stars {
+	display: initial;
+}
+.sheet-rolltemplate-GBM .sheet-Roll-Dice, .sheet-rolltemplate-chatshare .sheet-Roll-Dice {
 	text-align: center;
 	vertical-align: middle;
 	padding-top: 12px;
 	padding-bottom: 0px;
 }
-.sheet-rolltemplate-GBM .sheet-Roll-Dice .sheet-Dicezone {
+.sheet-rolltemplate-GBM .sheet-Roll-Dice .sheet-Dicezone, .sheet-rolltemplate-chatshare .sheet-Roll-Dice .sheet-Dicezone {
 	padding-bottom: 6px;
 }
-.sheet-rolltemplate-GBM .sheet-Roll-Dice .inlinerollresult {
+.sheet-rolltemplate-GBM .sheet-Roll-Dice .inlinerollresult, .sheet-rolltemplate-chatshare .sheet-Roll-Dice .inlinerollresult {
 	display: inline-block;
 	color: white;
 	background-color: var(--gbm-blue);
@@ -143,47 +214,47 @@
 	-webkit-box-shadow: 0px 4px 6px var(--gbm-blue);
 	        box-shadow: 0px 4px 6px var(--gbm-blue);
 }
-.sheet-rolltemplate-GBM .sheet-Roll-Dice .inlinerollresult.fullcrit {
+.sheet-rolltemplate-GBM .sheet-Roll-Dice .inlinerollresult.fullcrit, .sheet-rolltemplate-chatshare .sheet-Roll-Dice .inlinerollresult.fullcrit {
 	background-color: var(--gbm-pink);
 	-webkit-box-shadow: 0px 4px 12px var(--gbm-pink);
 	        box-shadow: 0px 4px 12px var(--gbm-pink);
 	border: 1px solid white;
 }
-.sheet-rolltemplate-GBM .sheet-Roll-Dice .inlinerollresult.fullcrit ~ .inlinerollresult.fullcrit {
+.sheet-rolltemplate-GBM .sheet-Roll-Dice .inlinerollresult.fullcrit ~ .inlinerollresult.fullcrit, .sheet-rolltemplate-chatshare .sheet-Roll-Dice .inlinerollresult.fullcrit ~ .inlinerollresult.fullcrit {
 	background-color: var(--gbm-pink);
 	-webkit-box-shadow: 0px 4px 12px var(--gbm-pink);
 	        box-shadow: 0px 4px 12px var(--gbm-pink);
 	border: 3px double white;
 }
-.sheet-rolltemplate-GBM .sheet-Roll-Dice .inlinerollresult.fullfail {
+.sheet-rolltemplate-GBM .sheet-Roll-Dice .inlinerollresult.fullfail, .sheet-rolltemplate-chatshare .sheet-Roll-Dice .inlinerollresult.fullfail {
 	background-color: black;
 	font-weight: bold;
 	border: 1px solid var(--gbm-purple);
 	-webkit-box-shadow: unset;
 	        box-shadow: unset;
 }
-.sheet-rolltemplate-GBM .sheet-Roll-Dice .sheet-SmallHead {
+.sheet-rolltemplate-GBM .sheet-Roll-Dice .sheet-SmallHead, .sheet-rolltemplate-chatshare .sheet-Roll-Dice .sheet-SmallHead {
 	text-transform: uppercase;
 }
-.sheet-rolltemplate-GBM .sheet-Roll-Dice .sheet-Instruct {
+.sheet-rolltemplate-GBM .sheet-Roll-Dice .sheet-Instruct, .sheet-rolltemplate-chatshare .sheet-Roll-Dice .sheet-Instruct {
 	font-style: italic;
 }
-.sheet-rolltemplate-GBM .sheet-Roll-Dice .sheet-Only-dice, .sheet-rolltemplate-GBM .sheet-Roll-Dice .sheet-Only-transcenddice, .sheet-rolltemplate-GBM .sheet-Roll-Dice .sheet-Only-zerodice, .sheet-rolltemplate-GBM .sheet-Roll-Dice .sheet-Only-transcendzerodice {
+.sheet-rolltemplate-GBM .sheet-Roll-Dice .sheet-Only-dice, .sheet-rolltemplate-GBM .sheet-Roll-Dice .sheet-Only-transcenddice, .sheet-rolltemplate-GBM .sheet-Roll-Dice .sheet-Only-zerodice, .sheet-rolltemplate-GBM .sheet-Roll-Dice .sheet-Only-transcendzerodice, .sheet-rolltemplate-chatshare .sheet-Roll-Dice .sheet-Only-dice, .sheet-rolltemplate-chatshare .sheet-Roll-Dice .sheet-Only-transcenddice, .sheet-rolltemplate-chatshare .sheet-Roll-Dice .sheet-Only-zerodice, .sheet-rolltemplate-chatshare .sheet-Roll-Dice .sheet-Only-transcendzerodice {
 	display: none;
 }
-.sheet-rolltemplate-GBM .sheet-Roll-Dice .sheet-Dicezone-dice .sheet-Only-dice {
+.sheet-rolltemplate-GBM .sheet-Roll-Dice .sheet-Dicezone-dice .sheet-Only-dice, .sheet-rolltemplate-chatshare .sheet-Roll-Dice .sheet-Dicezone-dice .sheet-Only-dice {
 	display: block;
 }
-.sheet-rolltemplate-GBM .sheet-Roll-Dice .sheet-Dicezone-transcenddice .sheet-Only-transcenddice {
+.sheet-rolltemplate-GBM .sheet-Roll-Dice .sheet-Dicezone-transcenddice .sheet-Only-transcenddice, .sheet-rolltemplate-chatshare .sheet-Roll-Dice .sheet-Dicezone-transcenddice .sheet-Only-transcenddice {
 	display: block;
 }
-.sheet-rolltemplate-GBM .sheet-Roll-Dice .sheet-Dicezone-zerodice .sheet-Only-zerodice, .sheet-rolltemplate-GBM .sheet-Roll-Dice .sheet-Dicezone-Zerodice .sheet-Only-zerodice {
+.sheet-rolltemplate-GBM .sheet-Roll-Dice .sheet-Dicezone-zerodice .sheet-Only-zerodice, .sheet-rolltemplate-GBM .sheet-Roll-Dice .sheet-Dicezone-Zerodice .sheet-Only-zerodice, .sheet-rolltemplate-chatshare .sheet-Roll-Dice .sheet-Dicezone-zerodice .sheet-Only-zerodice, .sheet-rolltemplate-chatshare .sheet-Roll-Dice .sheet-Dicezone-Zerodice .sheet-Only-zerodice {
 	display: block;
 }
-.sheet-rolltemplate-GBM .sheet-Roll-Dice .sheet-Dicezone-transcendzerodice .sheet-Only-transcendzerodice {
+.sheet-rolltemplate-GBM .sheet-Roll-Dice .sheet-Dicezone-transcendzerodice .sheet-Only-transcendzerodice, .sheet-rolltemplate-chatshare .sheet-Roll-Dice .sheet-Dicezone-transcendzerodice .sheet-Only-transcendzerodice {
 	display: block;
 }
-.sheet-rolltemplate-GBM .sheet-Properties {
+.sheet-rolltemplate-GBM .sheet-Properties, .sheet-rolltemplate-chatshare .sheet-Properties {
 	border: 1px solid red;
 	display: block;
 }
@@ -194,7 +265,7 @@ input[type=text] {
 	color: var(--gbm-fg);
 	padding: 2px;
 	padding-top: 0px;
-	font-size: 14px;
+	font-size: 16px;
 	border-bottom: 1px dotted var(--gbm-fg);
 	margin-bottom: 3px;
 }
@@ -206,7 +277,7 @@ textarea, select {
 	background: none;
 	border: none;
 	color: var(--gbm-fg);
-	font-size: 14px;
+	font-size: 16px;
 	border-bottom: 1px dotted var(--gbm-fg);
 	padding: 2px;
 	padding-top: 0px;
@@ -368,8 +439,8 @@ input.sheet-Mode-Playset[value=Dreams] ~ .sheet-shorten-on-one[value="1"] + div.
 }
 
 span.sheet-Icon-Abyss, span.sheet-Icon-Dreams, span.sheet-Icon-Sky, span.sheet-Icon-Stars {
-	height: 14px;
-	width: 14px;
+	height: 16px;
+	width: 16px;
 	vertical-align: middle;
 }
 
@@ -531,7 +602,7 @@ input.sheet-Mode-Playbook[value=UnlikelyHero] ~ div.sheet-Playbook-UnlikelyHero,
  * grid-column: 1 / span 2
  * .sheet-Field, .sheet-Field-Wide
  * .sheet-Prompt
- * font-size: 10px
+ * font-size: 12px
  * font-style: italic
  * text-align: right
  * input[type='text'], select, textarea
@@ -552,7 +623,7 @@ input.sheet-Mode-Playbook[value=UnlikelyHero] ~ div.sheet-Playbook-UnlikelyHero,
 	margin-bottom: 8px;
 }
 .sheet-Bio-Block .sheet-Field .sheet-Prompt, .sheet-Bio-Block .sheet-Field-Wide .sheet-Prompt {
-	font-size: 10px;
+	font-size: 12px;
 	font-style: italic;
 	text-align: right;
 }
@@ -562,6 +633,23 @@ input.sheet-Mode-Playbook[value=UnlikelyHero] ~ div.sheet-Playbook-UnlikelyHero,
 .sheet-Bio-Block .sheet-Field textarea, .sheet-Bio-Block .sheet-Field-Wide textarea {
 	height: 50px;
 	margin-bottom: 0px;
+}
+.sheet-Bio-Block .sheet-Pick-Split {
+	display: -ms-grid;
+	display: grid;
+	-ms-grid-columns: 50% 8px 50%;
+	grid-template-columns: 50% 50%;
+	-webkit-column-gap: 8px;
+	   -moz-column-gap: 8px;
+	        column-gap: 8px;
+}
+.sheet-Bio-Block .sheet-Pick-Split .sheet-Left {
+	-ms-grid-column: 1;
+	    grid-column-start: 1;
+}
+.sheet-Bio-Block .sheet-Pick-Split .sheet-Right {
+	-ms-grid-column: 2;
+	    grid-column-start: 2;
 }
 
 .sheet-Abilities-Block .sheet-Ability {
@@ -660,7 +748,7 @@ input.sheet-Mode-Playbook[value=UnlikelyHero] ~ div.sheet-Playbook-UnlikelyHero,
 }
 .sheet-Box .sheet-Box-Header.sheet-Box-Subsection {
 	margin-top: 8px;
-	font-size: 14px;
+	font-size: 16px;
 	border-radius: 0px 6px 0px 0px;
 }
 .sheet-Box .sheet-Box-Header.sheet-Box-Subsection .sheet-button-header-expand, .sheet-Box .sheet-Box-Header.sheet-Box-Subsection .sheet-button-header-collapse, .sheet-Box .sheet-Box-Header.sheet-Box-Subsection .sheet-button-header-edit, .sheet-Box .sheet-Box-Header.sheet-Box-Subsection .sheet-button-header-close, .sheet-Box .sheet-Box-Header.sheet-Box-Subsection .sheet-button-header-mark-off, .sheet-Box .sheet-Box-Header.sheet-Box-Subsection .sheet-button-header-mark-on, .sheet-Box .sheet-Box-Header.sheet-Box-Subsection .sheet-button-header-transcendent-off, .sheet-Box .sheet-Box-Header.sheet-Box-Subsection .sheet-button-header-transcendent-on {
@@ -668,7 +756,7 @@ input.sheet-Mode-Playbook[value=UnlikelyHero] ~ div.sheet-Playbook-UnlikelyHero,
 	padding-bottom: 0px;
 }
 .sheet-Box .sheet-Box-Header.sheet-Box-Subsection .sheet-button-header-expand:before, .sheet-Box .sheet-Box-Header.sheet-Box-Subsection .sheet-button-header-collapse:before, .sheet-Box .sheet-Box-Header.sheet-Box-Subsection .sheet-button-header-edit:before, .sheet-Box .sheet-Box-Header.sheet-Box-Subsection .sheet-button-header-close:before, .sheet-Box .sheet-Box-Header.sheet-Box-Subsection .sheet-button-header-mark-off:before, .sheet-Box .sheet-Box-Header.sheet-Box-Subsection .sheet-button-header-mark-on:before, .sheet-Box .sheet-Box-Header.sheet-Box-Subsection .sheet-button-header-transcendent-off:before, .sheet-Box .sheet-Box-Header.sheet-Box-Subsection .sheet-button-header-transcendent-on:before {
-	font-size: 14px;
+	font-size: 16px;
 }
 .sheet-Box.sheet-Teal {
 	color: var(--gbm-teal-text);
@@ -783,6 +871,13 @@ input.sheet-Mode-Playbook[value=UnlikelyHero] ~ div.sheet-Playbook-UnlikelyHero,
 	text-shadow: 0 0 8px black;
 }
 
+.ui-dialog .charsheet button.sheet-button-chatshare:before {
+	color: var(--gbm-fg);
+	font-family: "Pictos";
+	font-size: 16px;
+	content: "f";
+}
+
 button.sheet-button-header-collapse:before {
 	font-family: "Pictos";
 	font-size: 21px;
@@ -809,14 +904,14 @@ button.sheet-button-header-close:before {
 
 button.sheet-button-mark-on:before {
 	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/mark-on.svg);
-	height: 14px;
-	width: 14px;
+	height: 16px;
+	width: 16px;
 }
 
 button.sheet-button-mark-off:before {
 	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/mark-off.svg);
-	height: 14px;
-	width: 14px;
+	height: 16px;
+	width: 16px;
 }
 
 button.sheet-button-header-mark-on:before {
@@ -833,8 +928,8 @@ button.sheet-button-header-mark-off:before {
 
 button.sheet-button-transcendent-on:before {
 	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/transcendent-on.svg);
-	height: 16px;
-	width: 16px;
+	height: 18px;
+	width: 18px;
 }
 
 .sheet-darkmode button.sheet-button-transcendent-on:before {
@@ -843,8 +938,8 @@ button.sheet-button-transcendent-on:before {
 
 button.sheet-button-transcendent-off:before {
 	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/transcendent-off.svg);
-	height: 16px;
-	width: 16px;
+	height: 18px;
+	width: 18px;
 }
 
 .sheet-darkmode button.sheet-button-transcendent-off:before {
@@ -853,14 +948,14 @@ button.sheet-button-transcendent-off:before {
 
 button.sheet-button-stress-on:before {
 	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/stress-on.svg);
-	height: 14px;
-	width: 14px;
+	height: 16px;
+	width: 16px;
 }
 
 button.sheet-button-stress-off:before {
 	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Girl%20By%20Moonlight/icons/stress-off.svg);
-	height: 14px;
-	width: 14px;
+	height: 16px;
+	width: 16px;
 }
 
 button.sheet-button-header-transcendent-on:before {
@@ -923,17 +1018,17 @@ button.sheet-button-header-xp-off.sheet-xp-end:before {
 
 button.sheet-button-plus:before {
 	font-family: "Pictos";
-	font-size: 14px;
+	font-size: 16px;
 	content: "+";
 }
 
 button.sheet-button-minus:before {
 	font-family: "Pictos";
-	font-size: 14px;
+	font-size: 16px;
 	content: "-";
 }
 
-.sheet-button-mark-on, .sheet-button-mark-off, .sheet-button-transcendent-on, .sheet-button-transcendent-off, .sheet-button-stress-on, .sheet-button-stress-off, .sheet-button-plus, .sheet-button-minus {
+.ui-dialog .charsheet .sheet-button-mark-on, .ui-dialog .charsheet .sheet-button-mark-off, .ui-dialog .charsheet .sheet-button-transcendent-on, .ui-dialog .charsheet .sheet-button-transcendent-off, .ui-dialog .charsheet .sheet-button-stress-on, .ui-dialog .charsheet .sheet-button-stress-off, .ui-dialog .charsheet .sheet-button-plus, .ui-dialog .charsheet .sheet-button-minus, .ui-dialog .charsheet .sheet-button-chatshare {
 	border: none;
 	background: none;
 	font-weight: normal;
@@ -941,6 +1036,12 @@ button.sheet-button-minus:before {
 	vertical-align: top;
 	padding-left: 0;
 	padding-right: 0;
+	text-shadow: unset;
+	-webkit-box-shadow: unset;
+	        box-shadow: unset;
+	border-radius: unset;
+	margin: unset;
+	line-height: 16px;
 }
 
 .sheet-button-header-expand, .sheet-button-header-collapse, .sheet-button-header-edit, .sheet-button-header-close, .sheet-button-header-mark-off, .sheet-button-header-mark-on, .sheet-button-header-transcendent-off, .sheet-button-header-transcendent-on, .sheet-button-header-xp-on, .sheet-button-header-xp-off {
@@ -1072,8 +1173,8 @@ input.sheet-Stress-Total[value="9"] ~ .sheet-Stress-Track {
 .sheet-Links-Block .sheet-Link {
 	display: -ms-grid;
 	display: grid;
-	-ms-grid-columns: 1fr 4px 116px;
-	grid-template-columns: 1fr 116px;
+	-ms-grid-columns: 1fr 4px 120px;
+	grid-template-columns: 1fr 120px;
 	-webkit-column-gap: 4px;
 	   -moz-column-gap: 4px;
 	        column-gap: 4px;
@@ -1421,7 +1522,7 @@ input.sheet-Clock-Size[value="12"] + input.sheet-Clock-Ticks[value="12"] + .shee
 	vertical-align: middle;
 	text-align: center;
 	line-height: auto;
-	font-size: calc( 14px * .9 );
+	font-size: calc( 16px * .9 );
 }
 .sheet-Harm-Track .sheet-Level-3, .sheet-Harm-Track .sheet-Level-2, .sheet-Harm-Track .sheet-Level-1 {
 	display: -webkit-box;
@@ -1457,7 +1558,7 @@ input.sheet-Clock-Size[value="12"] + input.sheet-Clock-Ticks[value="12"] + .shee
 	    grid-column-start: 1;
 	-ms-grid-row: 1;
 	    grid-row-start: 1;
-	font-size: 10px;
+	font-size: 12px;
 	text-transform: uppercase;
 	font-weight: bold;
 	text-align: left;
@@ -2233,7 +2334,7 @@ input.sheet-Clock-Size[value="12"] + input.sheet-Clock-Ticks[value="12"] + .shee
 	-ms-grid-column: 5;
 }
 .sheet-Playset-Sheet-Reference-Blocks .sheet-Engine .sheet-Label {
-	font-size: 10px;
+	font-size: 12px;
 	text-transform: uppercase;
 }
 .sheet-Playset-Sheet-Reference-Blocks .sheet-Engine .sheet-Name {
@@ -2638,7 +2739,7 @@ input.sheet-Clock-Size[value="12"] + input.sheet-Clock-Ticks[value="12"] + .shee
 	margin-top: -4px;
 }
 .sheet-Flagship-Container .sheet-Room .sheet-Box-Header {
-	font-size: 14px;
+	font-size: 16px;
 }
 .sheet-Flagship-Container .sheet-Box.sheet-Solid {
 	background-color: var(--gbm-purple);
@@ -2890,7 +2991,7 @@ input.sheet-Clock-Size[value="12"] + input.sheet-Clock-Ticks[value="12"] + .shee
 	        flex-flow: column nowrap;
 }
 .sheet-Conspiracy-Container .sheet-Box .sheet-Box-Header > span + span {
-	font-size: 14px;
+	font-size: 16px;
 	text-transform: uppercase;
 }
 .sheet-Conspiracy-Container .sheet-Box.sheet-Solid {
@@ -2900,7 +3001,7 @@ input.sheet-Clock-Size[value="12"] + input.sheet-Clock-Ticks[value="12"] + .shee
 	padding: 4px;
 	vertical-align: middle;
 	text-align: center;
-	font-size: 14px;
+	font-size: 16px;
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;

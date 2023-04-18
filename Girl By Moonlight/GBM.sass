@@ -1,8 +1,8 @@
 $bodyfont: 'Montserrat', sans-serif
-$bodysize: 14px
-$bodystarsize: 16px
+$bodysize: 16px
+$bodystarsize: 18px
 $labelsize: 10px
-$smallsize: 10px
+$smallsize: 12px
 $headsize: 21px
 $headstarsize: 23px
 $bigsize: 28px
@@ -50,7 +50,7 @@ $conlbxrb: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Gir
 
 // Comment valid?
 
-:root, .sheet-rolltemplate-GBM
+:root, .sheet-rolltemplate-GBM, .sheet-rolltemplate-chatshare
 	--gbm-blue: #006784
 	--gbm-blue-pale: #dee9ed
 	--gbm-blue-dark: #00394c
@@ -77,7 +77,7 @@ $conlbxrb: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Gir
 	color: var(--gbm-fg)
 	background: var(--gbm-bg)
 
-.sheet-darkmode, .sheet-rolltemplate-GBM.sheet-rolltemplate-darkmode
+.sheet-darkmode, .sheet-rolltemplate-GBM.sheet-rolltemplate-darkmode, .sheet-rolltemplate-chatshare.sheet-rolltemplate-darkmode
 	--gbm-fg: var(--gbm-blue-pale)
 	--gbm-bg: #1f1f1f
 	--gbm-blue-shaded: var(--gbm-blue-dark)
@@ -88,6 +88,8 @@ $conlbxrb: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Gir
 	--gbm-teal-text: var(--gbm-teal-pale)
 	--gbm-pink-text: var(--gbm-pink-pale)
 	--gbm-purple-text: var(--gbm-purple-pale)
+	color: var(--gbm-fg)
+	// background: var(--gbm-bg)
 
 .repcontrol, .itemcontrol
 	.btn
@@ -112,19 +114,39 @@ $conlbxrb: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Gir
 .sheet-rolltemplate-GBM
 	background-color: var(--gbm-purple-shaded)
 	color: var(--gbm-purple-text)
+	line-height: unset
+	.sheet-Roll-Title
+		line-height: #{$headsize}
+		color: white
+		background-color: var(--gbm-purple)
+		border-radius: 0px 12px 0px 0px
+		font-size: #{$headsize}
+		padding: 4px
+		.sheet-Roll-Subtitle
+			font-size: #{$bodysize}
+
+.sheet-rolltemplate-chatshare
+	background-color: var(--gbm-blue-shaded)
+	color: var(--gbm-blue-text)
+	line-height: unset
+	.sheet-Content
+		padding: 4px
+		line-height: calc( #{$bodysize} + 4px )
+	.sheet-Roll-Title
+		line-height: #{$headsize}
+		color: white
+		background-color: var(--gbm-blue)
+		border-radius: 0px 12px 0px 0px
+		font-size: #{$headsize}
+		padding: 4px
+		.sheet-Roll-Subtitle
+			font-size: #{$bodysize}
+
+.sheet-rolltemplate-GBM, .sheet-rolltemplate-chatshare
 	font-family: #{$bodyfont}
 	font-size: #{$bodysize}
 	border-radius: 0px 12px 12px 12px
 	box-shadow: 2px 2px 2px var(--gbm-purple)
-	.sheet-Roll-Result
-		.sheet-Roll-Title
-			color: white
-			background-color: var(--gbm-purple)
-			border-radius: 0px 12px 0px 0px
-			font-size: #{$headsize}
-			padding: 4px
-			.sheet-Roll-Subtitle
-				font-size: #{$bodysize}
 	.sheet-Roll-PnE
 		padding: 4px
 		padding-bottom: 0px
@@ -146,6 +168,43 @@ $conlbxrb: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Gir
 			grid-column: 1 / span 2
 			text-align: center
 			font-style: italic
+	.sheet-Roll-Context
+		b
+			font-weight: 700
+		.sheet-Popper
+			padding-left: 4px
+			padding-right: 4px
+			padding-bottom: 4px
+		.sheet-Popper .sheet-Popped
+				display: none
+		.sheet-Popper
+			&:hover, &:active, &:focus
+				.sheet-Popped
+					display: block
+					padding: 4px
+					margin-top: 4px
+					border: 1px dotted white
+					border-radius: 0px 0px 8px 8px
+					line-height: calc( #{$bodysize} + 4px )
+					ul
+						margin-bottom: 0px
+						padding-bottom: 0px
+		.sheet-Picker-Risky, .sheet-Picker-Controlled, .sheet-Picker-Desperate, .sheet-Picker-Sun, .sheet-Picker-Moon, .sheet-Picker-Stars
+			~
+				.sheet-Pick-Risky, .sheet-Pick-Controlled, .sheet-Pick-Desperate, .sheet-Pick-Sun, .sheet-Pick-Moon, .sheet-Pick-Stars
+					display: none
+		.sheet-Picker-Controlled ~ .sheet-Pick-Controlled
+			display: initial
+		.sheet-Picker-Risky ~ .sheet-Pick-Risky
+			display: initial
+		.sheet-Picker-Desperate ~ .sheet-Pick-Desperate
+			display: initial
+		.sheet-Picker-Sun ~ .sheet-Pick-Sun
+			display: initial
+		.sheet-Picker-Moon ~ .sheet-Pick-Moon
+			display: initial
+		.sheet-Picker-Stars ~ .sheet-Pick-Stars
+			display: initial
 	.sheet-Roll-Dice
 		text-align: center
 		vertical-align: middle
@@ -428,7 +487,14 @@ input.sheet-Mode-Playbook
 		textarea
 			height: 50px
 			margin-bottom: 0px
-
+	.sheet-Pick-Split
+		display: grid
+		grid-template-columns: 50% 50%
+		column-gap: 8px
+		.sheet-Left
+			grid-column-start: 1
+		.sheet-Right
+			grid-column-start: 2
 
 .sheet-Abilities-Block
 	.sheet-Ability
@@ -592,6 +658,12 @@ input.sheet-Mode-Playbook
 			color: white
 			text-shadow: 0 0 8px black
 
+.ui-dialog .charsheet button.sheet-button-chatshare:before
+	color: var(--gbm-fg)
+	font-family: 'Pictos'
+	font-size: #{$bodysize}
+	content: 'f'
+
 button.sheet-button-header-collapse:before
 	font-family: 'Pictos'
 	font-size: #{$headsize}
@@ -709,14 +781,20 @@ button.sheet-button-minus:before
 	font-size: #{$bodysize}
 	content: '-'
 
-.sheet-button-mark-on, .sheet-button-mark-off, .sheet-button-transcendent-on, .sheet-button-transcendent-off, .sheet-button-stress-on, .sheet-button-stress-off, .sheet-button-plus, .sheet-button-minus
-	border: none
-	background: none
-	font-weight: normal
-	text-align: left
-	vertical-align: top
-	padding-left: 0
-	padding-right: 0
+.ui-dialog .charsheet 
+	.sheet-button-mark-on, .sheet-button-mark-off, .sheet-button-transcendent-on, .sheet-button-transcendent-off, .sheet-button-stress-on, .sheet-button-stress-off, .sheet-button-plus, .sheet-button-minus, .sheet-button-chatshare
+		border: none
+		background: none
+		font-weight: normal
+		text-align: left
+		vertical-align: top
+		padding-left: 0
+		padding-right: 0
+		text-shadow: unset
+		box-shadow: unset
+		border-radius: unset
+		margin: unset
+		line-height: #{$bodysize}
 
 .sheet-button-header-expand, .sheet-button-header-collapse, .sheet-button-header-edit, .sheet-button-header-close, .sheet-button-header-mark-off, .sheet-button-header-mark-on, .sheet-button-header-transcendent-off, .sheet-button-header-transcendent-on, .sheet-button-header-xp-on, .sheet-button-header-xp-off
 	border: none
@@ -813,7 +891,7 @@ input.sheet-Stress-Total
 .sheet-Links-Block
 	.sheet-Link
 		display: grid
-		grid-template-columns: 1fr 116px
+		grid-template-columns: 1fr 120px
 		column-gap: 4px
 		margin-bottom: 4px
 		input[type='text'], select, textarea
