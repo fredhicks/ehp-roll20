@@ -898,6 +898,7 @@
 			// toggles.push(field);
 		}
 		for(var ps of setkeys) {
+			// For playset ability toggles
 			var field = 'Ability-' + ps + '-' + i;
 			toggles.push(field);
 			field = 'Ability-Transcendent-' + ps + '-' + i;
@@ -909,6 +910,12 @@
 			}
 			// field = 'Stress-' + i;
 			// toggles.push(field);
+			// But also... playset ad hoc prompts
+			var fpre = "repeating_Prompts"+ps;
+			for (var j = 1; j <= 20; j++) {
+				var field = fpre + j + ":toggle";
+				toggles.push(field);
+			}
 		}
 	}
 

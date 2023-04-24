@@ -35,17 +35,33 @@
 							- var picount = 0;
 							each pitem in plist
 								- picount++;
+								// pkey == "Abyss", etc
 								+hidden(pkey+"-Prompt-"+pnum+"-"+picount,0).sheet-hide-if-unused
 								.sheet-Prompt-Pick
 									.sheet-Prompt-Selector
 										+abilityMark(pkey+"-Prompt-"+pnum+"-"+picount)
 									.sheet-Prompt-Content
 										+translate(pitem)
+							fieldset(class="repeating_Prompts"+pkey+pnum)
+								+hidden("toggle",0).sheet-hide-if-unused
+								.sheet-Prompt-Pick
+									.sheet-Prompt-Selector
+										+abilityMark("toggle")
+									.sheet-Prompt-Content
+										+textarea('prompt')
 						else
-							ul
-								each pitem in plist
-									li
+							each pitem in plist
+								.sheet-Prompt-Pick
+									.sheet-Prompt-Selector.sheet-Prompt-Bullet
+										| &bull;
+									.sheet-Prompt-Content
 										+translate(pitem)
+							fieldset(class="repeating_Prompts"+pkey+pnum)
+								.sheet-Prompt-Pick
+									.sheet-Prompt-Selector.sheet-Prompt-Bullet
+										| &bull;
+									.sheet-Prompt-Content
+										+textarea('prompt')
 						if ( textarea )
 							.sheet-Prompt-Text
 								+textarea(pkey+"-Text-"+pnum+"-"+picount)

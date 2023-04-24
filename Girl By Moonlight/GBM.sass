@@ -96,6 +96,11 @@ $conlbxrb: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/Gir
 		background: unset
 		color: var(--gbm-fg)
 		background-color: var(--gbm-bg)
+		text-shadow: unset
+		padding: 2px
+		margin-top: 4px
+		font-size: #{$smallsize}
+		line-height: #{$smallsize}
 
 .ui-dialog .charsheet
 	font-family: #{$bodyfont}
@@ -560,7 +565,7 @@ input.sheet-Mode-Playbook
 			font-size: #{$bodysize}
 			border-radius: 0px 6px 0px 0px
 			.sheet-button-header-expand, .sheet-button-header-collapse, .sheet-button-header-edit, .sheet-button-header-close, .sheet-button-header-mark-off, .sheet-button-header-mark-on, .sheet-button-header-transcendent-off, .sheet-button-header-transcendent-on
-				padding-top: 0px
+				padding-top: 3px
 				padding-bottom: 0px
 				&:before
 					font-size: #{$bodysize}
@@ -1108,6 +1113,20 @@ input.sheet-Stress-Total
 			grid-column-start: 2
 		.sheet-Prompt-Selector
 			grid-column-start: 1
+			&.sheet-Prompt-Bullet
+				font-size: 36px
+				text-align: right
+				line-height: 18px
+				margin-top: -2px
+				padding-left: 4px
+	button.repcontrol_edit, button.repcontrol_add
+		padding: 2px
+		margin-top: 4px
+		font-size: #{$smallsize}
+		line-height: #{$smallsize}
+	textarea
+		height: calc( 4px + 2 * #{$bodysize} )
+		margin-bottom: 0px
 
 
 .sheet-Playset-Sheet-Adversary-Blocks
