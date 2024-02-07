@@ -1222,10 +1222,9 @@ input.sheet-Stress-Total
 	.sheet-Cursed-Container
 		$hgap: 12px
 		$hcol: 1fr
-		$hrow: 135px
-		$hrowtall: 180px
+		$hrow: 210px
 		grid-template-columns: #{$hcol} #{$hgap} #{$hcol} #{$hgap} #{$hcol}
-		grid-template-rows: #{$hrow} #{$hgap} #{$hrow} repeat(3, #{$hgap} #{$hrowtall})
+		grid-template-rows: #{$hrow} repeat(5, #{$hgap} #{$hrow}) 
 		.sheet-Room, .sheet-Connection
 			align-self: stretch
 			justify-self: stretch
