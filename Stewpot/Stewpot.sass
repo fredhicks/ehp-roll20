@@ -1,0 +1,448 @@
+// Font defs
+$font: 'Alegreya', serif
+$lfont: 'Kurale', serif
+
+// Color defs
+$peach: #fabeaf
+$yellow: #ffce71
+$parchment: #fffcf7
+$green: #999c4c
+$lightbrown: #9c7822
+$brown: #6d4634
+$darkbg: #1f1f1f
+$lightbg: #ffffff
+
+// Job Lists
+$ajobs: Paladin, Wizard, Fighter, Rogue, Druid, Bard, Ranger, Swashbuckler
+$tjobs: Farmer, Healer, Chef, Poet, Merchant, Crafter, Scholar, Lookout, Apothecary, Hunter
+
+// Begin actual CSS render
+
+@import url('https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,700;1,400;1,700&family=Kurale&family=Material+Symbols+Outlined&display=swap')
+
+// Replace/Iterate ANYTEMPLATE if you've got any of them
+
+:root, .sheet-rolltemplate-ANYTEMPLATE
+	--stew-fg: #{$brown}
+	--stew-bg: #{$lightbg}
+	--stew-boxb: #{$green}
+	--stew-boxc: #{$lightbg}
+	--stew-keep: #{$yellow}
+	--stew-keepb: #{$brown}
+	--stew-shader: rgba(255,255,255,0.5)
+	--stew-crossed: #{$lightbrown}
+	--stew-peach: #{$peach}
+	--stew-green: #{$green}
+	--stew-yellow: #{$yellow}
+	font-family: #{$font}
+
+.sheet-darkmode, .sheet-rolltemplate-darkmode
+	--stew-fg: #{$yellow}
+	--stew-bg: #{$darkbg}
+	--stew-boxb: #{$green}
+	--stew-boxc: #{$darkbg}
+	--stew-keep: #{$lightbrown}
+	--stew-keepb: #{$yellow}
+	--stew-shader: rgba(31,31,31,0.5)
+	--stew-crossed: #{$lightbrown}
+
+.wrapper p,
+.ui-dialog .charsheet
+	font-family: #{$font}
+	font-size: 18px
+	color: var(--stew-fg) !important
+	background-color: var(--stew-bg)
+	line-height: unset
+
+.ui-dialog .charsheet
+	input, select, textarea
+		font-family: #{$font}
+		font-size: 18px
+		color: var(--stew-fg)
+		background-color: var(--stew-bg)
+		border: none
+		padding-top: 0px
+		padding-bottom: 0px
+		border-bottom: 1px solid var(--stew-boxb)
+
+.wrapper
+	.tavern
+		display: flex
+		flex-direction: column
+		.topline
+			margin-bottom: 10px
+			.nameblock, .lookblock, .locblock
+				display: grid
+				grid-template-columns: 75px 1fr
+				column-gap: 5px
+				padding-right: 10px
+				input[type=text]
+					width: 100%
+					+ input[type=text]
+						margin-left: 5px
+				.flabel
+					vertical-align: bottom
+		.columns
+			display: flex
+			flex-direction: row
+			column-gap: 10px
+			.column
+				width: calc( 50% - 5px )
+				flex-grow: 0
+				flex-shrink: 0
+				.rateblock
+					border: 1px solid var(--stew-boxb)
+					.shead
+						color: var(--stew-boxc)
+						background-color: var(--stew-boxb)
+						.flabel
+							text-align: center
+							font-size: 18px
+					> .shead .flabel
+						font-size: 22px
+					.ratebox
+						margin: 5px
+						.shead
+							color: var(--stew-fg)
+							background-color: var(--stew-bg)
+						.cuisine, .atmosphere, .service
+							display: grid
+							grid-template-columns: 40px 1fr
+							column-gap: 5px
+							padding: 5px
+							border: 3px double var(--stew-boxb)
+							border-radius: 10px
+							.description
+								color: var(--stew-green)
+								grid-column: 2
+							$vlist: 1, 2, 3, 4
+							@each $v in $vlist 
+								input.state[value="#{$v}"] + input.highlighter[value="#{$v}"] + .description
+									color: var(--stew-fg)
+				.advblock, .npcblock
+					border: 1px solid var(--stew-boxb)
+					margin-bottom: 10px
+					.shead
+						color: var(--stew-boxc)
+						background-color: var(--stew-boxb)
+						.flabel
+							text-align: center
+							font-size: 22px
+					.instruction
+						font-style: italic
+						color: var(--stew-boxb)
+					.instruction, .content
+						padding: 5px
+						margin-bottom: 0px
+						.repcontainer
+							padding: 0px
+						// .repitem
+							// border: 1px solid var(--stew-keepb)
+							// border-radius: 5px
+							// margin-bottom: 5px
+						.btn
+							background-color: var(--stew-bg)
+							color: var(--stew-boxb)
+							border: 1px solid var(--stew-boxb)
+							text-shadow: none
+							box-shadow: none
+							background-image: unset
+							&.repcontrol_move
+								font-size: 16px
+				.advblock
+					input[type="text"]
+						width: 100%
+						margin-bottom: 5px
+				.npcblock
+					.repitem
+						display: grid
+						grid-template-columns: 1fr 100px
+						column-gap: 5px
+						input[type="text"]
+							width: 100%
+							&.left
+								font-size: 18px
+								font-weight: bold
+						.left
+							grid-column: 1
+						.right
+							grid-column: 2
+							text-align: right
+						.substruct
+							font-style: italic
+							font-size: 14px
+							color: var(--stew-boxb)
+						textarea
+							grid-column: 1 / span 2
+							border: 1px solid var(--stew-keepb)
+							border-radius: 5px
+							margin-bottom: 10px
+							width: calc( 100% - 10px )
+							height: calc( 3 * 18px + 6px )
+							resize: none
+							padding: 5px
+							background: rgba(0,0,0,0)
+							background-image: linear-gradient(to bottom, var(--stew-shader), var(--stew-shader)), radial-gradient(circle farthest-side at 50%, rgba(0,0,0,0) 50%, var(--stew-keep)), linear-gradient(to bottom, var(--stew-keep), rgba(0,0,0,0) 10%, rgba(0,0,0,0) 90%, var(--stew-keep))
+							text-shadow: 1px 1px 2px var(--stew-bg), -1px 1px 2px var(--stew-bg), 1px -1px 2px var(--stew-bg), -1px -1px 2px var(--stew-bg)
+					.repitem:nth-of-type(3n)
+						textarea
+							background-image: linear-gradient(to bottom, var(--stew-shader), var(--stew-shader)), radial-gradient(circle farthest-side at 50%, rgba(0,0,0,0) 50%, var(--stew-peach)), linear-gradient(to bottom, var(--stew-peach), rgba(0,0,0,0) 10%, rgba(0,0,0,0) 90%, var(--stew-peach))
+					.repitem:nth-of-type(3n+1)
+						textarea
+							background-image: linear-gradient(to bottom, var(--stew-shader), var(--stew-shader)), radial-gradient(circle farthest-side at 50%, rgba(0,0,0,0) 50%, var(--stew-green)), linear-gradient(to bottom, var(--stew-green), rgba(0,0,0,0) 10%, rgba(0,0,0,0) 90%, var(--stew-green))
+
+
+	// Begin Character Section
+
+	.character
+		display: flex
+		flex-direction: column
+		.topline
+			margin-bottom: 10px
+			.nameblock, .lookblock
+				display: grid
+				grid-template-columns: 75px 1fr 100px
+				column-gap: 5px
+				padding-right: 10px
+				input[type=text]
+					width: 100%
+					+ input[type=text]
+						margin-left: 5px
+				.sublabel
+					text-align: right
+					font-style: italic
+					grid-column: 3
+					font-size: 80%
+				.flabel
+					vertical-align: bottom
+			.lookblock
+				input[type=text]
+					grid-column: 2 / span 2
+		.columns
+			display: flex
+			flex-direction: row
+			.column
+				width: calc( 50% - 5px )
+				flex-grow: 0
+				flex-shrink: 0
+				column-gap: 10px
+				.waqblock
+					display: flex
+					flex-direction: column
+					margin-right: 10px
+					.fbox
+						flex-grow: 1
+						display: grid
+						grid-template-columns: 75px 1fr
+						grid-template-rows: 100%
+						column-gap: 5px
+						padding-left: 0px
+						padding-top: 0px
+						padding-bottom: 0px
+						padding-right: 10px
+						margin-bottom: 5px
+						border: 1px solid var(--stew-boxb)
+						border-radius: 10px
+						background-image: radial-gradient(circle farthest-side at 60%, var(--stew-bg) 30%, var(--stew-boxb))
+						.flabel
+							text-align: center
+							padding-top: 18px
+							color: var(--stew-boxc)
+							background-color: var(--stew-boxb)
+							border-radius: 9px 0 0 9px
+						select
+							width: 100%
+						textarea
+							width: calc( 100% - 5px )
+							height: 48px
+							resize: none
+							overflow: hidden
+							border-bottom: unset
+							margin-top: 5px
+							margin-bottom: 0px
+							background: none
+							text-shadow: 1px 1px 2px var(--stew-bg), -1px 1px 2px var(--stew-bg), 1px -1px 2px var(--stew-bg), -1px -1px 2px var(--stew-bg)
+				.keepblock
+					padding-left: 0px
+					padding-top: 0px
+					padding-bottom: 0px
+					padding-right: 0px
+					margin-right: 10px
+					margin-bottom: 5px
+					margin-top: 10px
+					border: 1px solid var(--stew-boxb)
+					.shead .flabel
+						text-align: center
+						color: var(--stew-boxc)
+						background-color: var(--stew-boxb)
+						font-size: 22px
+					.kbody
+						padding: 5px
+						.repcontainer
+							padding: 0px
+						.repitem
+							background-image: linear-gradient(to bottom, var(--stew-shader), var(--stew-shader)), radial-gradient(circle farthest-side at 50%, rgba(0,0,0,0) 50%, var(--stew-keep)), linear-gradient(to bottom, var(--stew-keep), rgba(0,0,0,0) 10%, rgba(0,0,0,0) 90%, var(--stew-keep))
+							border: 1px solid var(--stew-keepb)
+							border-radius: 5px
+							margin-bottom: 5px
+						.btn
+							background-color: var(--stew-bg)
+							color: var(--stew-boxb)
+							border: 1px solid var(--stew-boxb)
+							text-shadow: none
+							box-shadow: none
+							background-image: unset
+							&.repcontrol_move
+								font-size: 16px
+						textarea
+							width: calc( 100% - 10px )
+							height: calc( 3 * 18px + 6px )
+							resize: none
+							padding: 5px
+							margin-bottom: 0px
+							background: rgba(0,0,0,0)
+							border: none
+							text-shadow: 1px 1px 2px var(--stew-bg), -1px 1px 2px var(--stew-bg), 1px -1px 2px var(--stew-bg), -1px -1px 2px var(--stew-bg)
+				.advblock, .townblock
+					padding-left: 0px
+					padding-top: 0px
+					padding-bottom: 0px
+					padding-right: 0px
+					margin-right: 10px
+					margin-bottom: 10px
+					border: 4px double var(--stew-boxb)
+					.shead .flabel
+						text-align: center
+						color: var(--stew-boxc)
+						background-color: var(--stew-boxb)
+						&.big
+							font-size: 22px
+					.jbody
+						padding: 5px
+						input[type=text]
+							width: 100%
+						select
+							width: 100%
+						select.job
+							height: 30px
+							text-align: center
+							font-size: 22px
+							font-weight: bold
+							border-bottom: 0
+						textarea
+							width: calc( 100% - 10px )
+							height: calc( 3 * 18px + 6px )
+							resize: none
+							margin-top: 5px
+							margin-bottom: 0px
+						.markable
+							display: flex
+							flex-direction: row
+							textarea, .blank
+								flex-grow: 1
+							.blank
+								width: 100%
+								// margin-right: 5px
+							input.state[value="1"] ~ .blank div.crossout
+								margin-left: 5px
+								text-decoration: line-through
+								color: var(--stew-crossed)
+
+input.thider[value="0"], input.hider[value=""], input.mhider[value=""], input.mhider[value="character"], input.mhider[value="tavern"]
+	+ *
+		display: none
+
+input.tshower[value="1"], input.shower:not([value=""])
+	+ *
+		display: none
+
+input.rshower[value="1"] + button[value="1"].unmarked
+	display: none
+input.rshower[value="2"] + button[value="2"].unmarked
+	display: none
+input.rshower[value="3"] + button[value="3"].unmarked
+	display: none
+input.rshower[value="4"] + button[value="4"].unmarked
+	display: none
+input.rhider[value="1"] + button:not([value="1"]).marked
+	display: none
+input.rhider[value="2"] + button:not([value="2"]).marked
+	display: none
+input.rhider[value="3"] + button:not([value="3"]).marked
+	display: none
+input.rhider[value="4"] + button:not([value="4"]).marked
+	display: none
+
+
+input.hideunless + *
+	display: none
+@each $j in $ajobs
+	input.hideunless[value="#{$j}"] + .#{$j}
+		display: initial
+@each $j in $tjobs
+	input.hideunless[value="#{$j}"] + .#{$j}
+		display: initial
+
+input.mhider[value="character"] + .character, input.mhider[value="tavern"] + .tavern
+	display: initial
+
+.cbox, .rbox
+	background: none
+	color: none
+	border: none
+	padding: 0
+	&::before
+		font-family: 'Material Symbols Outlined'
+		font-weight: normal
+		font-style: normal
+		font-size: 20px
+		color: var(--stew-boxb)
+		display: inline-block
+		line-height: 1
+		text-transform: none
+		letter-spacing: normal
+		word-wrap: normal
+		white-space: nowrap
+		direction: ltr
+		padding-top: 5px
+
+.rbox::before
+	font-size: 40px
+
+.cbox::before
+	content: 'check_box_outline_blank'
+
+.cbox.marked::before
+	content: 'select_check_box'
+
+.rbox::before
+	content: 'radio_button_unchecked'
+
+.rbox.marked::before
+	content: 'radio_button_checked'
+
+$vlist: 1, 2, 3, 4
+@each $v in $vlist 
+	button.rbox.marked[value="#{$v}"]::before
+		color: var(--stew-fg)
+		content: 'counter_#{$v}'
+	button.rbox.unmarked[value="#{$v}"]:hover::before
+		content: 'counter_#{$v}'
+
+.flabel
+	font-family: #{$lfont}
+	text-transform: uppercase
+	// font-weight: 700
+	font-size: 16px
+
+//	.character
+//		.nameblock
+//		.lookblock
+//		.waqblock
+//		.advblock
+//		.townblock
+//		.keepblock
+
+
+
+

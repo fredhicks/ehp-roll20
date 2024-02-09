@@ -1,0 +1,134 @@
+-
+	const ajobs = [ 'Paladin', 'Wizard', 'Fighter', 'Rogue', 'Druid', 'Bard', 'Ranger', 'Swashbuckler' ];
+	const tjobs = [ 'Farmer', 'Healer', 'Chef', 'Poet', 'Merchant', 'Crafter', 'Scholar', 'Lookout', 'Apothecary', 'Hunter' ];
+	const axps = {
+		'Paladin': [ "Guidance: A sign from your deity", "Holy Armor: Divine protection", "Healing Touch: Treat wounds", "Smite: Destroy the unholy", "Taunt: Draw enemies towards you" ],
+		'Wizard': [ "Prestidigitation: Small wonders", "Fireball: Mastery of flame", "Invisibility: Move unseen", "Magic Missile: Projectiles of astounding accuracy", "Arcana: Vast knowledge of the magical and unusual" ],
+		'Fighter': [ "Intimidation: Make them do what you want", "Master of Arms: Armed and dangerous with anything", "Brute Strength: Move the immovable", "Endurance: Nothing can stop you", "Legendary Weapon: An artifact of immense power" ],
+		'Rogue': [ "Cat’s Grace: Extraordinary agility", "Nimble Fingers: No lock stays locked, no trap can catch you", "Lightfoot: Act undetected", "Adder’s Fangs: Deadly poisons and their antidotes", "Sixth Sense: Never be caught off guard" ],
+		'Druid': [ "Green Thumb: An affinity for plant magic", "Natural Armor: Skin becomes bark or stone", "Shapeshifter: Various animal forms", "Naturespeak: Understand plants and animals", "Force of Nature: Bend the land around you to your will" ],
+		'Bard': [ "Bag of Tricks: Card magic, juggling clubs, and other spectacles", "Devil’s Fingers: Prodigious skill with an instrument", "Alluring Voice: The voice of an angel", "Golden Words: Convince anyone of anything", "Inspiration: Power up your friends" ],
+		'Ranger': [ "Deadeye: Pinpoint accuracy", "True North: Unerring sense of direction", "Animal Companion: A wild friend", "Tracking: Follow any trail", "Camouflage: Disappear into nature" ],
+		'Swashbuckler': [ "Duellist: Master of the blade", "In the Rigging: Climbing and acrobatic feats", "Sea Legs: Balance on any surface", "Barbed Tongue: Your words hit where they hurt", "Bravado: Never falter" ]
+	};
+	const txps = {
+		'Farmer': [ "Preservation: Make food taste better and last longer", "Weathervane: Predict the weather a few days in advance", "Bounty: Your harvests are large and exquisite", "Handler: Caring for and communicating with animals", "Home Remedies: Unconventional solutions" ],
+		'Healer': [ "Warm Presence: You are comforting to be around", "Safe Haven: Know how to make a space feel welcoming", "Thanatologist: Help the dead find peace, help the living grieve", "Ritual: Know the traditions and customs of many ", "Bandage Wounds: Treat injuries" ],
+		'Chef': [ "Clean Cut: Mince, dice, chop, slice", "Grillmaster: Expert at grilling food and subordinates", "Parts Unknown: Knowledge of ingredients from all over", "Refined Palate: A sense of taste second to none", "Call the Shots: Quick thinking and split-second decisions" ],
+		'Poet': [ "Spin Straw into Gold: Tell enchanting stories", "Say the Right Thing: Tell them what they want or need to hear", "Chronicler: Make sure people will remember", "Parable: A lesson for every situation", "A Friend in Need: Know who to call for a favor" ],
+		'Merchant': [ "Trader: Something I need for something you need", "Network: Able to obtain anything ", "The Back Room: Satisfy most everyday needs", "The Perfect Gift: Know exactly what people want", "Well-Traveled: Know the customs and languages of the world" ],
+		'Crafter': [ "Finesse: Acute manual dexterity", "Repair: Fix anything, with enough time", "Artisan: Create beautiful things", "Mason: Build strong structures", "Patron: You have a wealthy benefactor" ],
+		'Scholar': [ "Well Read: You know it, or you know where to learn it ", "Jury Rigging: Invent your way out of a sticky situation", "Keen Observation: Something only you could see", "Defuse: Handle something dangerous", "Streamline: Get it done faster" ],
+		'Lookout': [ "Eyes on the Horizon: Spot trouble before it starts", "Ears on the Ground: You heard it first", "Organizer: Bring people together", "Garrison: You never have to work alone", "Shoulder Throw: Defend yourself when necessary" ],
+		'Apothecary': [ "Brewer: Concoct potions, salves, balms, and more", "Smell the Flowers: A keen nose, mastery of scents", "Pipeleaf: Calm the nerves", "Botanist: Know every plant in the area", "Distillation: Strengthen the good in something" ],
+		'Hunter': [ "The Usual Spot: Know the best areas for hunting and foraging", "Trapper: A steady supply of meat and furs", "Secret Paths: Know the area like the back of your hand", "Lying in Wait: Master of concealment", "Offerings: On good terms with the local spirits" ]
+	};
+
+.character
+	.topline
+		.nameblock
+			+flabel("Name")
+			+text("character_name").fillblank
+			+text("character_pronouns").fillblank
+			.sublabel
+				+translate("pronouns")
+		.lookblock
+			+flabel("Look")
+			+text("character_look").fillblank
+	.columns
+		.column
+			.waqblock
+				.fbox
+					+flabel("Weapon")
+					.blank
+						+textarea("character_weapon").fillblank
+						+shower("character_weapon")
+						.tidy
+							+select("select_character_weapon")
+								+option('(pick an option or fill in the blank)','')
+								- var l = [ "A giant sword, all blunt edges and fierce", "A staff of dark wood, worn smooth", "A sturdy shield polished to a shine", "Twin jeweled daggers", "A bow that seems to hum when drawn", "Spiked gauntlets covered in dents", "A crossbow covered in unknown mechanisms", "A simple sabre", "A dirk with a curious carved hilt", "An enormous hammer carved from bone", "A sword that whispers in its scabbard" ];
+								each v in l
+									+option(v)
+				.fbox
+					+flabel("Armor")
+					.blank
+						+textarea("character_armor").fillblank
+						+shower("character_armor")
+						+select("select_character_armor")
+							+option('(pick an option or fill in the blank)','')
+							- var l =  [ 'A rusty suit of armor with a deadly curse', 'An iridescent cloak of feathers', 'Concealed leather and chainmail', 'Black boots with not a speck of dust on them', 'Gloves covered in runes', 'Clothes the color of deep forest', 'A mask', 'A well kept traveling cloak', 'A warm coat', 'Armor crafted from a giant insect shell', 'A tattered royal tunic' ];
+							each v in l
+								+option(v)
+				.fbox
+					+flabel("Quirk")
+					.blank
+						+textarea("character_quirk").fillblank
+						+shower("character_quirk")
+						+select("select_character_quirk")
+							+option('(pick an option or fill in the blank)','')
+							- var l = [ 'Eyes always watching', 'One hand hidden under a cloak', 'Hair cut short with a knife', 'Slow, measured movements', 'A smile that doesn’t reach your eyes', 'Shoulders that tense to the sound of metal', 'A preference for sitting in dark corners', 'Sleeping with one eye open ', 'Perfectly straight posture', 'Always muttering wards of protection', 'A gleaming smile' ];
+							each v in l
+								+option(v)
+			.keepblock
+				.shead
+					+flabel("Keepsakes")
+				.kbody
+					+fieldset("keepsakes")
+						+textarea("keepsake")
+		.column
+			.advblock
+				.shead
+					+bflabel("Adventurer Job")
+				.jbody
+					+select("ajob").job
+						+option('(pick an adventurer job)','')
+						each v in ajobs
+							+option(v,v)
+				.shead
+					+flabel("Adventurer Experiences")
+				.jbody
+					each xp in [1,2,3]
+						.markable
+							+togglebox("axp"+xp)
+							.blank
+								+tshower("axp"+xp)
+								+textarea("axp"+xp)
+								+thider("axp"+xp)
+								.crossout
+									+display("axp"+xp)
+								+shower("axp"+xp)
+								.tidy
+									each j in ajobs
+										+hideunless("ajob")
+										+select('select_axp'+xp)(class=j)
+											- var article = 'a'; var atext = j.charAt(0); 
+											- if ( atext == "A" || atext == "E" || atext == "I" || atext == "O" || atext == "U" ) { article = 'an'; }
+											+option('(pick '+article+' '+j+' experience or fill in the blank)','')
+											each x in axps[j]
+												+option(x)
+			.townblock
+				.shead
+					+bflabel("Town Job")
+				.jbody
+					+select("tjob").job
+						+option('(pick a town job)','')
+						each v in tjobs
+							+option(v,v)
+				.shead
+					+flabel("Town Experiences")
+				.jbody
+					each xp in [0,1,2,3]
+						if xp > 0
+							+thider("axp"+xp)
+						.blank
+							+textarea("txp"+xp)
+							+shower("txp"+xp)
+							.tidy
+								each j in tjobs
+									+hideunless("tjob")
+									+select('select_txp'+xp)(class=j)
+										- var article = 'a'; var atext = j.charAt(0); 
+										- if ( atext == "A" || atext == "E" || atext == "I" || atext == "O" || atext == "U" ) { article = 'an'; }
+										+option('(pick '+article+' '+j+' experience or fill in the blank)','')
+										each x in txps[j]
+											+option(x)

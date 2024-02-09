@@ -1,0 +1,115 @@
+- 
+	var translations = { 
+		"Stewpot": "Stewpot",
+	};
+
+mixin translate(text)
+	- if ( typeof(translations[text]) == "undefined" ) { translations[text] = text; }
+	span(data-i18n=text)&attributes(attributes) #{text}
+	| 
+
+mixin select(f)
+	select(name='attr_'+f class!=attributes.class)
+		if block
+			block
+
+mixin option(t,v)
+	- if ( typeof(translations[t]) == "undefined" ) { translations[t] = t; }
+	if ( typeof(v) == "undefined" )
+		option(data-i18n=t)
+	else
+		option(value=v data-i18n=t)
+
+mixin translations
+	- var contents = JSON.stringify(translations,null,"\t");
+	//
+		translation.json:
+		!{contents}
+
+mixin text(f)
+	input(type='text' name='attr_'+f class!=attributes.class)
+
+mixin textarea(f)
+	textarea(name='attr_'+f class!=attributes.class)
+		if block
+			block
+
+mixin display(f)
+	span(name="attr_"+f class!=attributes.class)
+		if block
+			block
+
+mixin flabel(t)
+	div.flabel
+		+translate(t)
+		if block
+			block
+
+mixin bflabel(t)
+	div.flabel.big
+		+translate(t)
+		if block
+			block
+
+mixin fieldset(f)
+	fieldset(class="repeating_"+f)
+		if block
+			block
+
+mixin togglebox(f)
+	div
+		+cbox(f)
+	input(name="attr_toggle_"+f type="hidden" class="state" value="0")
+
+mixin cbox(f)
+	+thider(f)
+	button(type="action" name="act_unmark" value=f).cbox.marked
+	+tshower(f)
+	button(type="action" name="act_mark" value=f).cbox.unmarked
+
+- var rads = {};
+
+mixin radbox(f)
+	- 
+		if ( typeof(rads[f]) === "undefined" ) {
+			rads[f] = 1;
+		} else {
+			rads[f]++;
+		}
+	div
+		+rbox(f)
+	input(name="attr_radio_"+f type="hidden" class="state" value=1)
+	input(type="hidden" class="highlighter" value=rads[f])
+
+mixin rbox(f)
+	+rhider(f,rads[f])
+	button(type="action" name="act_unmark_"+f value=rads[f]).rbox.marked
+	+rshower(f,rads[f])
+	button(type="action" name="act_mark_"+f value=rads[f]).rbox.unmarked
+
+mixin hider(f)
+	input(name="attr_"+f type="hidden" class="hider" value="")
+
+mixin shower(f)
+	input(name="attr_"+f type="hidden" class="shower" value="")
+
+mixin thider(f)
+	input(name="attr_toggle_"+f type="hidden" class="thider" value="0")
+
+mixin tshower(f)
+	input(name="attr_toggle_"+f type="hidden" class="tshower" value="0")
+
+mixin rhider(f)
+	input(name="attr_radio_"+f type="hidden" class="rhider" value="1")
+
+mixin rshower(f)
+	input(name="attr_radio_"+f type="hidden" class="rshower" value="1")
+
+mixin mhider(f)
+	input(name="attr_"+f type="hidden" class="mhider" value="")
+
+mixin hideunless(f)
+	input(name="attr_"+f type="hidden" class="hideunless" value="")
+
+
+

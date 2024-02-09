@@ -1,0 +1,86 @@
+.tavern
+	.topline
+		.nameblock
+			+flabel("Name")
+			+text("character_name").fillblank
+		.locblock
+			+flabel("Location")
+			+text("tavern_location").fillblank
+		.lookblock
+			+flabel("Look")
+			+text("tavern_look").fillblank
+	.columns
+		.column
+			.rateblock
+				.shead
+					+flabel("Tavern Ratings")
+				.ratebox
+					.shead
+						+flabel("Cuisine")
+					.cuisine
+						+radbox("cuisine")
+						.description
+							+translate("A cramped kitchen. Plenty of staples but nothing fancy.")
+						+radbox("cuisine")
+						.description
+							+translate("A modest kitchen. New friends at the market.")
+						+radbox("cuisine")
+						.description
+							+translate("A bustling kitchen. Brand new cookware. A well-stocked spice cabinet.")
+						+radbox("cuisine")
+						.description
+							+translate("A splendid kitchen. Good deals on ingredients and fresh deliveries. Specialized tools.")
+				.ratebox
+					.shead
+						+flabel("Atmosphere")
+					.atmosphere
+						+radbox("atmosphere")
+						.description
+							+translate("Comfortable enough, but a little boring. Things feel slightly off.")
+						+radbox("atmosphere")
+						.description
+							+translate("A little plain, but homey. Not a bad place to get a good night’s sleep.")
+						+radbox("atmosphere")
+						.description
+							+translate("Furniture and decorations that highlight the area. Lots of personal touches. It’s really starting to come together.")
+						+radbox("atmosphere")
+						.description
+							+translate("The comfiest beds you’ve ever slept in. Lots of light and good company. Adventurers seek you out after long journeys.")
+				.ratebox
+					.shead
+						+flabel("Service")
+					.service
+						+radbox("service")
+						.description
+							+translate("A former farmhand, an injured local guard.")
+						+radbox("service")
+						.description
+							+translate("An experienced line cook, good wait staff.")
+						+radbox("service")
+						.description
+							+translate("An interior decorator, a skilled executive chef.")
+						+radbox("service")
+						.description
+							+translate("An accomplished head of staff, a prestigious sommelier.")
+		.column
+			.advblock
+				.shead
+					+flabel("Advancement Details")
+				.instruction
+					+translate("Each time a Tavern Rating increases, each player may describe a new detail or feature for the tavern.")
+				.content
+					+fieldset("details")
+						+text("detail")
+
+			.npcblock
+				.shead
+					+flabel("NPCs")
+				.content
+					+fieldset("npcs")
+						+text("name").left
+						+text("pronouns").right
+						.substruct.left
+							+translate("name")
+						.substruct.right
+							+translate("pronouns")
+						+textarea("description")
