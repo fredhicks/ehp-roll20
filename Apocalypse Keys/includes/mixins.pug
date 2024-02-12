@@ -342,10 +342,11 @@ mixin multicheckable(item,qty,updatefield,checkgroup,maxq)
 			+translate(item)
 
 - var blankcons = { "": 0 }; 
-mixin condition(con,blank,locked)
+mixin condition(con,blank,locked,temporary)
 	- var key = con;
 	- if ( typeof(blank) == "undefined" || blank == "" ) { blank = false; } else { var bpre = ""; if ( blank != true ) { bpre = blank; blank = true; if ( typeof(blankcons[bpre]) == "undefined") { blankcons[bpre] = 0; } } blankcons[bpre] = blankcons[bpre] + 1; key = "blank"+bpre+blankcons[bpre]; }
 	- if ( typeof(locked) == "undefined" || locked == "" ) { locked = false; } else { locked == true; }
+	- if ( typeof(temporary) == "undefined" || temporary == "" ) { temporary = false; } else { temporary == true; }
 	- key = key.toLowerCase();
 	- key = key.replace(/[^a-z0-9]/g,"_");
 	- ckey = "condition_"+key;
@@ -379,9 +380,13 @@ mixin condition(con,blank,locked)
 					input(type='hidden' name="attr_"+bkey)
 					span(name='attr_'+bkey)
 				- else
+					- if ( temporary )
+						+translate("Temporary:")
 					input(type='text' name="attr_"+bkey)
 			- else
 				+translate(con)
+				- if ( temporary )
+					+translate("(Temporary)")
 		div.buttons
 			- if ( locked )
 				// Simply establish that this field is always checked, but don't provide buttons to make it toggle-able.

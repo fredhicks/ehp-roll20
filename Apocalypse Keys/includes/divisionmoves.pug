@@ -527,3 +527,129 @@
 			li
 				+translate("SHADY:")(class="bold term") 
 				+translate("The subcontractor is not exactly an expert, and they may not always provide reliable information or have the best scruples. But they show up immediately and offer a good lead to start with.")
++move("Get In Loser, We’re Doing Alien Stuff (ABYSS)","DIVISION Moves","selectable","dismissable")
+	p
+		+translate("ABYSS has a dozen or so bio-ships in residence at any given time. While conversation takes a bit more effort without an alien liaison, agents are encouraged to interact with those not hibernating—and even use them for transport.")
+	p
+		+translate("When you take this move,")(class="trigger")
+		+translate("answer at least one of the following questions:")
+		ul
+			li
+				+translate("Which bio-ship is the favorite on base? What has that ship privately shared with you?")(class="italic")
+			li
+				+translate("Which bio-ship refuses to interact with you, personally? What did you do to raise its ire?")(class="italic")
+			li
+				+translate("Which bio-ship can no longer leave the base? Why does it love you?")(class="italic")
+		textarea(name="attr_movetaken_question-getinloser" class="bio")
+	p
+		+translate("When you ask a bio-ship to take you somewhere,")(class="trigger")
+		+translate("spend Darkness Tokens and roll.")
+		+rolldark("Get In Loser, We’re Doing Alien Stuff")
+	p
+		+translate("On an 8-10")(class="result") 
+		+translate("the bio-ship takes you somewhere interesting or helpful,")(class="bold")
+		+translate("and you uncover")
+		+translate("a Key.")(class="bold term")
+		+translate("In addition, gain")
+		+headlink("1 Bond","bonds")(class="bold term") 
+		+translate("with that bio-ship.")
+	p
+		+translate("On an 11+")(class="result") 
+		+translate("the bio-ship takes you somewhere confusing or dangerous")(class="bold")
+		+translate("but you uncover")
+		+translate("a Key.")(class="bold term")
+		+translate("Draw a line between that Key and a Facet on the Mystery Map. Declare an irrevocable truth about the Mystery.")
+	p
+		+translate("On a 7-")(class="result") 
+		+translate("the bio-ship goes without you.")(class="bold") 
+		+translate("The Keeper describes how long it’s gone, and what horror it brings back with it.")
++move("Reality Shift Manipulation (Change)","DIVISION Moves","selectable","dismissable")
+	p
+		+translate("When you use the resources of the Department of Change to directly interact with a Reality Shift Incident,")(class="trigger")
+		+translate("describe how you touch the very fabric of the universe. Spend Darkness Tokens and roll.")
+		+rolldark("Reality Shift Manipulation")
+	p
+		+translate("On an 8-10")(class="result") 
+		+translate("reality bends to your will,").bold
+		+translate("the truth of the universe being molded to your vision. Choose one:")
+	ul
+		li
+			+translate("You prevent a RSI from occurring and stabilize it. This corner of the world becomes a Foundational Reality Point. Clear")
+			+headlink("1 Condition.","conditions")(class="bold term")
+		li
+			+translate("You reverse a change that was made, even if it was many versions ago. Name a person who benefits from this and gain")
+			+headlink("1 Bond","bonds")(class="bold term") 
+			+translate("with them.")
+		li
+			+translate("You nudge a Reality Shift Incident to make a change that you want. Uncover")
+			+translate("a Key.")(class="bold term")
+			+translate("at great cost.")
+	p
+		+translate("On an 11+")(class="result") 
+		+translate("your meddling causes additional warping of reality,")(class="bold")
+		+translate("rippling far beyond your touch. Choose one from above and one below:")
+	ul
+		li
+			+translate("A dark whisper remarks how terribly beautiful it is to manipulate the universe. Mark")
+			+ruin(1)
+			|.
+		li
+			+translate("The universe pushes back, reflecting the power you have poured into it. Mark")
+			+headlink("1 Condition.","conditions")(class="bold term")
+		li
+			+translate("The Reality Shift Incident changes a relationship you have with someone. Destroy")
+			+headlink("1 Bond","bonds")(class="bold term") 
+			+translate("with them.")
+	p
+		+translate("On a 7-")(class="result") 
+		+translate("the fabric of the universe collapses onto itself,")(class="bold")
+		+translate("folding multiple versions of reality together into a horrific paradoxical combination. The Keeper will tell you what happens next.")
++move("The Shattered Me (HOURGLASS)","DIVISION Moves","selectable","dismissable")
+	p
+		+translate("When you use the resources of Project HOURGLASS to look through the shatterpoint,").trigger
+		+translate("describe an alternative version of yourself from another timeline and how you reach out to them. Spend Darkness Tokens and roll.")
+		+rolldark("The Shattered Me")
+	p
+		+translate("On an 8-10")(class="result") 
+		+translate("a part of the shatterpoint heals").trigger
+		+translate("and the timeline is strengthened. Choose one:")
+	ul
+		li
+			+translate("Uncover")
+			+translate("a Key.")(class="bold term")
+			+translate("The Keeper describes the great cost your alternative self pays.")
+		li
+			+translate("Gain")
+			+headlink("a new temporary Condition,","conditions")(class="bold term")
+			+translate("Timelost.").italic
+			+translate("When you mark this Condition, gain a memory from a future that will soon come to pass—erase this Condition from your playbook.") 
+			div
+				input(type='hidden' name="attr_view_timelost" value="0" class="toggle")
+				div
+					+button()(type='action' name='act_unview' value="timelost" class="dismiss colorized")
+						+translate("Hide Timelost (unmark it first)")
+				div
+					+button()(type='action' name='act_view' value="timelost" class="view colorized")
+						+translate("Gain Timelost")
+		li
+			+translate("Gain one new temporary")
+			+headlink("power of darkness:","powers","darkness").bold.term
+			+translate("time clone creation, memory distortion, temporal storm control,").bold
+			+translate("or something similar.")
+	p
+		+translate("On an 11+")(class="result") 
+		+translate("a new crack forms along the shatterpoint.").trigger
+		+translate("Choose one:")
+	ul
+		li
+			+translate("Several alternative versions of you awaken the Harbinger within them. The Keeper describes which one comes through and what it awakens within you in turn. Write down")
+			+headlink("What the Darkness Demands of You","demands","darkness")
+			+translate("and gain")
+			+headlink("1 Bond","bonds")(class="bold term") 
+			+translate("with it.")
+		li
+			+translate("Ask any one question, the Keeper will answer it honestly and with great detail by showing you shattered visions of the truth. For every follow-up question you ask, an aspect of this timeline is corrupted.")
+	p
+		+translate("On a 7-")(class="result") 
+		+translate("the shatterpoint cracks along several timelines as the Harbinger within you stirs,").trigger
+		+translate("and your alternative self slips into this reality and escapes. This timeline buckles and warps, irreversibly distorting reality. The Keeper will tell you what happens next.")

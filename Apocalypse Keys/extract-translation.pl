@@ -12,10 +12,10 @@ $htext = $stext;
 $htext =~ s/<!--\ntranslation.json:\n.*}\n\n-->//s;
 
 if ( $text ne $stext ) {
-	open(F,">translation.json");
+	open(F,">/Users/evilhat/Dropbox/GitHub/ehp-roll20/Apocalypse\ Keys/translation.json") || die $!;
 	print F $text;
 	close(F);
-	open(F,">ApocalypseKeys.html");
+	open(F,">/Users/evilhat/Dropbox/GitHub/ehp-roll20/Apocalypse\ Keys/ApocalypseKeys.html") || die $!;
 	print F $htext;
 	close(F);
 }

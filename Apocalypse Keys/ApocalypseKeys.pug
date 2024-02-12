@@ -149,6 +149,10 @@ input(type='hidden' name='attr_scrollstyle' value='compact' class="scrollstyle")
 							include includes/fallenconditions.pug
 						div(class='pbhungry')
 							include includes/hungryconditions.pug
+						div
+							input.view(type="hidden" name="attr_view_timelost" value="0")
+							div.viewable
+								+condition('Timelost',false,false,true)
 						each instance in [1,2]
 							div
 								input.view(type="hidden" name="attr_check_checkableruinadvance_newruincon_"+instance value="0")
@@ -517,6 +521,9 @@ input(type='hidden' name='attr_scrollstyle' value='compact' class="scrollstyle")
 								+briefmove("The Peacemaker")
 								+briefmove("Psychic Invokers")
 								+briefmove("Subcontractor")
+								+briefmove("Get In Loser, We’re Doing Alien Stuff (ABYSS)")
+								+briefmove("Reality Shift Manipulation (Change)")
+								+briefmove("The Shattered Me (HOURGLASS)")
 						div
 							input(type='hidden' name="attr_final_mystery_toggle" class="rollup")
 							.roller
