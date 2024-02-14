@@ -1,4 +1,4 @@
-$playbooks: summoned, surge, found, shade, last, fallen, hungry
+$playbooks: summoned, surge, found, shade, last, fallen, hungry, betrayed, chained, untethered
 $font: 'Nunito', sans-serif
 
 @import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap')
@@ -72,6 +72,13 @@ $font: 'Nunito', sans-serif
 	text-align: right
 
 .ui-dialog .charsheet
+	.repcontrol 
+		margin-top: 5px
+		button.btn
+			background: var(--ak-bg)
+			color: var(--ak-pink)
+			border: 1px solid var(--ak-pink)
+			text-shadow: none
 	ul
 		list-style: none
 		li
@@ -86,7 +93,7 @@ $font: 'Nunito', sans-serif
 	input, select, textarea
 		color: var(--ak-fg)
 		background-color: var(--ak-bg)
-	textarea
+	textarea, input[type=text].bio
 		border-color: var(--ak-pink)
 	a, a.icon
 		text-decoration: none
@@ -495,6 +502,7 @@ $font: 'Nunito', sans-serif
 				text-transform: capitalize
 				font-size: 16px
 				input[type="text"]
+					text-transform: capitalize
 					font-size: 16px
 					height: 18px
 					border-bottom: 1px solid var(--ak-pink)

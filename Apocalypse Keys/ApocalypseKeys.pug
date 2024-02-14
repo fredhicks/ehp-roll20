@@ -1,6 +1,6 @@
 include includes/mixins.pug 
 
-- var playbooks = ['summoned','surge','found','shade','last','fallen','hungry']
+- var playbooks = ['summoned','surge','found','shade','last','fallen','hungry','betrayed','chained','untethered']
 
 script(type='text/worker')
 	include includes/sheet-worker.js 
@@ -40,6 +40,12 @@ input(type='hidden' name='attr_scrollstyle' value='compact' class="scrollstyle")
 						include includes/fallencolor.pug
 					div(class='pbhungry')
 						include includes/hungrycolor.pug
+					div(class='pbbetrayed')
+						include includes/betrayedcolor.pug
+					div(class='pbchained')
+						include includes/chainedcolor.pug
+					div(class='pbuntethered')
+						include includes/untetheredcolor.pug
 					+expandablesub("Character Creation Options")
 						input(type='hidden' name='attr_playbook' class='pbselector' value='')
 						div(class='pbsummoned')
@@ -56,6 +62,12 @@ input(type='hidden' name='attr_scrollstyle' value='compact' class="scrollstyle")
 							include includes/fallencco.pug
 						div(class='pbhungry')
 							include includes/hungrycco.pug
+						div(class='pbbetrayed')
+							include includes/betrayedcco.pug
+						div(class='pbchained')
+							include includes/chainedcco.pug
+						div(class='pbuntethered')
+							include includes/untetheredcco.pug
 				+expandable("Darkness")
 					+translate("Current Darkness Tokens")(class="bold")
 					div
@@ -97,6 +109,15 @@ input(type='hidden' name='attr_scrollstyle' value='compact' class="scrollstyle")
 						div(class='pbhungry')
 							ul
 								include includes/hungrygains.pug
+						div(class='pbbetrayed')
+							ul
+								include includes/betrayedgains.pug
+						div(class='pbchained')
+							ul
+								include includes/chainedgains.pug
+						div(class='pbuntethered')
+							ul
+								include includes/untetheredgains.pug
 						+translate("Click to gain")(class="bold")
 						br
 						+dark(2)
@@ -132,49 +153,13 @@ input(type='hidden' name='attr_scrollstyle' value='compact' class="scrollstyle")
 								include includes/fallenbondprompts.pug
 							div(class='pbhungry')
 								include includes/hungrybondprompts.pug
-				+expandable("Conditions")
-					.conditions
-						input(type='hidden' name='attr_playbook' class='pbselector' value='')
-						div(class='pbsummoned')
-							include includes/summonedconditions.pug
-						div(class='pbsurge')
-							include includes/surgeconditions.pug
-						div(class='pbfound')
-							include includes/foundconditions.pug
-						div(class='pbshade')
-							include includes/shadeconditions.pug
-						div(class='pblast')
-							include includes/lastconditions.pug
-						div(class='pbfallen')
-							include includes/fallenconditions.pug
-						div(class='pbhungry')
-							include includes/hungryconditions.pug
-						div
-							input.view(type="hidden" name="attr_view_timelost" value="0")
-							div.viewable
-								+condition('Timelost',false,false,true)
-						each instance in [1,2]
-							div
-								input.view(type="hidden" name="attr_check_checkableruinadvance_newruincon_"+instance value="0")
-								div.viewable
-									+condition('',"ruincon",true)
-					+expandablesub("Breaking Point")
-						+translate("(when you mark your last named condition)")(class="instruction")
-						input(type='hidden' name='attr_playbook' class='pbselector' value='')
-						div(class='pbsummoned')
-							include includes/summonedbreaking.pug
-						div(class='pbsurge')
-							include includes/surgebreaking.pug
-						div(class='pbfound')
-							include includes/foundbreaking.pug
-						div(class='pbshade')
-							include includes/shadebreaking.pug
-						div(class='pblast')
-							include includes/lastbreaking.pug
-						div(class='pbfallen')
-							include includes/fallenbreaking.pug
-						div(class='pbhungry')
-							include includes/hungrybreaking.pug
+							div(class='pbbetrayed')
+								include includes/betrayedbondprompts.pug
+							div(class='pbchained')
+								include includes/chainedbondprompts.pug
+							div(class='pbuntethered')
+								include includes/untetheredbondprompts.pug
+				include includes/conditions.pug
 				+expandable("Experience and Ruin")
 					.columns
 						.wide.centered(style="margin-right: 18px;")
@@ -210,6 +195,12 @@ input(type='hidden' name='attr_scrollstyle' value='compact' class="scrollstyle")
 							include includes/fallenimpulse.pug
 						div(class='pbhungry')
 							include includes/hungryimpulse.pug
+						div(class='pbbetrayed')
+							include includes/betrayedimpulse.pug
+						div(class='pbchained')
+							include includes/chainedimpulse.pug
+						div(class='pbuntethered')
+							include includes/untetheredimpulse.pug
 						div.instruction
 							p
 								+translate("At the end of the session,")(class="trigger")
@@ -274,6 +265,12 @@ input(type='hidden' name='attr_scrollstyle' value='compact' class="scrollstyle")
 							+multicheckable("Take a new Fallen move",2,'',"fallen_xpadvance",2)
 						div(class='pbhungry')
 							+multicheckable("Take a new Hungry move",2,'',"hungry_xpadvance",2)
+						div(class='pbbetrayed')
+							+multicheckable("Take a new Betrayed move",2,'',"betrayed_xpadvance",2)
+						div(class='pbchained')
+							+multicheckable("Take a new Chainged move",2,'',"chained_xpadvance",2)
+						div(class='pbuntethered')
+							+multicheckable("Take a new Untethered move",2,'',"untethered_xpadvance",2)
 						+multicheckable("Take a new DIVISION move",2,'',"xpadvance",2)
 						+multicheckable("Take a move from another playbook",2,'',"xpadvance",2)
 						+multicheckable("Describe a new way to gain Darkness Tokens",1,'',"xpadvance_newtokens",2)
@@ -348,6 +345,12 @@ input(type='hidden' name='attr_scrollstyle' value='compact' class="scrollstyle")
 							include includes/fallenremember.pug
 						div(class='pbhungry')
 							include includes/hungryremember.pug
+						div(class='pbbetrayed')
+							include includes/betrayedremember.pug
+						div(class='pbchained')
+							include includes/chainedremember.pug
+						div(class='pbuntethered')
+							include includes/untetheredremember.pug
 				+expandable("Bio")
 					+minihead("Your Look")
 						textarea.bio(name="attr_look")
@@ -376,6 +379,19 @@ input(type='hidden' name='attr_scrollstyle' value='compact' class="scrollstyle")
 						div(class='pbsurge')
 							+minihead("What Collateral Damage Do You Leave in Your Wake?")
 								textarea.bio(name="attr_surge_damage")
+						div(class='pbbetrayed')
+							+minihead("What has taken residence in your soul to deliver merciless retribution?")
+								textarea.bio(name="attr_betrayed_resident")
+						div(class='pbchained')
+							+minihead("What is the violent nature of the Fury that has taken up residence inside you?")
+								textarea.bio(name="attr_chained_fury")
+							+minihead("How is the reach of your Handler far longer than you know?")
+								textarea.bio(name="attr_chained_handler")
+						div(class='pbuntethered')
+							+minihead("Who could you have been if your community had kept you?")
+								textarea.bio(name="attr_untethered_community")
+							+minihead("What weakness do your doppelgangers show that you would never permit in yourself?")
+								textarea.bio(name="attr_untethered_weakness")
 				+expandable("Notes")
 					textarea.notes(name="attr_notes")
 				+expandable("Preferences")
@@ -426,6 +442,12 @@ input(type='hidden' name='attr_scrollstyle' value='compact' class="scrollstyle")
 								+briefmove("Call Me Master","fallen",'no')
 							div(class='pbhungry')
 								+briefmove("The Gnawing Edge of Hunger","hungry",'no')
+							div(class='pbbetrayed')
+								+briefmove("I Am Vengeance","betrayed","no")
+							div(class='pbchained')
+								+briefmove("Ego Death","chained","no")
+							div(class='pbuntethered')
+								+briefmove("In Another Life, Perhaps","untethered","no")
 						+expandablesub("Playbook Moves",'',"pbchecked")
 							input(type="hidden" name="attr_check_pbchecked" class="checksonly" value="0")
 							div(class='pbsummoned')
@@ -469,6 +491,24 @@ input(type='hidden' name='attr_scrollstyle' value='compact' class="scrollstyle")
 								+briefmove("Gaze Into My Heart’s Abyss","hungry")
 								+briefmove("Enthralled by You","hungry")
 								+briefmove("I Remember the Taste of You","hungry")
+							div(class='pbbetrayed')
+								+briefmove("Vengeance Reveals the Truth","betrayed")
+								+briefmove("An Eye for an Eye","betrayed")
+								+briefmove("The Bindings of Retribution","betrayed")
+								+briefmove("In Service of a Greater Power","betrayed")
+								+briefmove("The Weakness of my Heart","betrayed")
+							div(class='pbchained')
+								+briefmove("Another Link in the Chain","chained")
+								+briefmove("Obedient Dog","chained")
+								+briefmove("Eruption","chained")
+								+briefmove("Ties that Bind, Ties that Bite","chained")
+								+briefmove("Monstrous Bonds","chained")
+							div(class='pbuntethered')
+								+briefmove("The Price of Perfection","untethered")
+								+briefmove("Your Desires Laid Bare","untethered")
+								+briefmove("Conceal Your Heart","untethered")
+								+briefmove("Best Friends","untethered")
+								+briefmove("My Double-edged Blade","untethered")
 						+expandablesub("Ruin Moves",'',"pbchecked")
 							input(type="hidden" name="attr_check_pbchecked" class="checksonly" value="0")
 							div(class='pbsummoned')
@@ -506,6 +546,21 @@ input(type='hidden' name='attr_scrollstyle' value='compact' class="scrollstyle")
 								+briefmove("Your Ruin on My Lips","hungry")
 								+briefmove("The Purity of My Reflection","hungry")
 								+briefmove("Until Only Hunger Remains","hungry")
+							div(class='pbbetrayed')
+								+briefmove("Shadows of a Life Unlived","betrayed")
+								+briefmove("The Blade of Forgiveness","betrayed")
+								+briefmove("We Who Serve Vengeance","betrayed")
+								+briefmove("The Face of My Betrayal","betrayed")
+							div(class='pbchained')
+								+briefmove("Behold, A White Horse","chained")
+								+briefmove("Hero of Hell","chained")
+								+briefmove("Together Forever","chained")
+								+briefmove("Crown of Thorns","chained")
+							div(class='pbuntethered')
+								+briefmove("Unparalleled Resilience","untethered")
+								+briefmove("I’ll Make You Proud","untethered")
+								+briefmove("My Happy Family","untethered")
+								+briefmove("Immaculate Reflection","untethered")
 						+expandablesub("DIVISION Moves",'',"pbchecked")
 							input(type="hidden" name="attr_check_pbchecked" class="checksonly" value="0")
 							div
@@ -543,6 +598,12 @@ input(type='hidden' name='attr_scrollstyle' value='compact' class="scrollstyle")
 										+briefmove('Glory Be My Name','fallen','no')
 									div(class='pbhungry')
 										+briefmove('The Gift','hungry','no')
+									div(class='pbbetrayed')
+										+briefmove("Mine is a Soul Still Unbroken","betrayed",'no')
+									div(class='pbchained')
+										+briefmove("Roaring Finality","chained",'no')
+									div(class='pbuntethered')
+										+briefmove("The Frayed Dream","untethered",'no')
 						+expandablesub("Basic Moves")
 							+briefmove("Unleash the Dark",'',"no")
 							+briefmove("Power Through Darkness",'',"no")
@@ -562,6 +623,9 @@ input(type='hidden' name='attr_scrollstyle' value='compact' class="scrollstyle")
 						include includes/lastmoves.pug
 						include includes/fallenmoves.pug
 						include includes/hungrymoves.pug
+						include includes/betrayedmoves.pug
+						include includes/chainedmoves.pug
+						include includes/untetheredmoves.pug
 						include includes/summonedruinmoves.pug
 						include includes/surgeruinmoves.pug
 						include includes/foundruinmoves.pug
@@ -569,6 +633,9 @@ input(type='hidden' name='attr_scrollstyle' value='compact' class="scrollstyle")
 						include includes/lastruinmoves.pug
 						include includes/fallenruinmoves.pug
 						include includes/hungryruinmoves.pug
+						include includes/betrayedruinmoves.pug
+						include includes/chainedruinmoves.pug
+						include includes/untetheredruinmoves.pug
 						include includes/divisionmoves.pug
 						include includes/basicmoves.pug
 

@@ -1,0 +1,169 @@
++move("The Price of Perfection","untethered","selectable","dismissable")
+	p
+		+translate("You will be flawless, no matter the cost. You can reach through the fabric of reality and access weaker counterparts of yourself with one redeeming quality.")
+		+translate("When you take this move,").trigger
+		+translate("choose one basic move. You cannot choose")
+		+movelink("Unlock Doom’s Door","Unlock Doom’s Door.") 
+		input(type="text" name="attr_movetaken_question-price_of_perfection_basic_move").bio
+	p
+		+translate("When you trigger that basic move,").trigger
+		+translate("instead of rolling you can shatter one of your alternate selves to harvest their redeeming quality. You add it to your perfection.").bold
+		+translate("Choose one:")
+	ul
+		li
+			+translate("Describe how you take more than you can handle from your counterpart and absorb them completely. Mark two")
+			+headlink("Conditions","conditions")
+			+translate("and gain")
+			+headlink("1 Bond","bonds")
+			+translate("with")
+			+headlink("What the Darkness Demands of You.","demands","darkness")
+			+translate("Trigger the move as if you had rolled an 8-10 instead.")
+		li
+			+translate("Describe what part of yourself shatters in the process. Mark")
+			+ruin(1)
+			+translate("and trigger the move as if you had rolled an 11+ instead. In addition, rewrite one of the ways you gain")
+			+headlink("Darkness Tokens:",'darkness')
+			+translate("to reflect the redeeming quality you stole.")
++move("Your Desires Laid Bare","untethered","selectable","dismissable")
+	p
+		+translate("You have doppelgangers hidden in this reality, and they spy on the hearts of others. When you take this move, you can listen to the whispers of your spies at any time to learn what someone else’s base desire is.")
+		+translate("When you").trigger
+		+movelink("Unleash the Dark","Unleash the Dark").trigger
+		+translate("by telling someone what they truly want,").trigger
+		+translate("choose one from below, even on a miss.")
+	ul
+		li
+			+translate("They believe you can help them achieve their desire. They’ll put themselves in harm’s way for you as long as they believe your promises.")
+		li
+			+translate("They falter and reveal a permanent weakness that involves you.")
+		li
+			+translate("They are afraid of what you know. They submit to your commands, for a time.")
++move("Conceal Your Heart","untethered","selectable","dismissable")
+	p
+		+translate("You can’t stand to be vulnerable with others, even though your soul screams for it.")
+		+translate("When you would").trigger
+		+movelink("Reveal Your Heart","Reveal Your Heart,").trigger
+		+translate("you can choose to lie and maintain the mask of perfection you wear. When you do this, you")
+		+movelink("Conceal Your Heart","Conceal Your Heart")
+		+translate("instead. Spend Darkness Tokens and roll.")
+		+rolldark("Conceal Your Heart")
+	p
+		+translate("On an 8-10").result
+		+translate("you turn away from your feelings.").bold
+		+translate("Choose two:")
+	ul
+		li
+			+translate("You close yourself off and behave the way you think they want. Convert")
+			+headlink("1 Bond","bonds")(class="bold term")
+			+translate("with them into")
+			+headlink("1 Bond","bonds")(class="bold term")
+			+translate("with")
+			+headlink("What the Darkness Demands of You.","demands","darkness")
+			+translate("If you have no Bond with them, gain")
+			+headlink("2 Bonds","bonds")(class="bold term")
+			+translate("with")
+			+headlink("What the Darkness Demands of You.","demands","darkness")
+		li
+			+translate("Your heart sighs in relief, safe from their prying. Clear one")
+			+headlink("Condition.","conditions")
+		li
+			+translate("Your heart hardens to protect you from the pain of being known.")
+			+xp(1,"Mark XP.")
+	p
+		+translate("On an 11+").result
+		+translate("your grip on your heart tightens painfully and noticeably.").bold
+		+translate("Ask each other, “Why do you trust me?” After you both answer, you each choose one:")
+	ul
+		li
+			+translate("Tell them how much you loathe being vulnerable, on a scale of 0 to 4. That becomes the number of Ruin that they can erase and the number of Darkness Tokens they now have.")
+		li
+			+translate("They tell you what makes them believe you care for them. They choose another power of darkness from any playbook. They have access to it, for now.")
+	p
+		+translate("On a 7-").result
+		+translate("they know you’re hiding something.").bold
+		+translate("If you")
+		+movelink("Conceal Your Heart","Concealed Your Heart")
+		+translate("from a PC: until the end of the Mystery, they have a new way of gaining Darkness Tokens. They choose one:")
+	ul
+		li
+			+translate("Feel suspicious or secretive")
+		li
+			+translate("Know that the Untethered is telling a lie")
+		li
+			+translate("Ask the Untethered a sincere question and receive an honest answer")
+		li
+			+translate("Ask somebody else to tell them about the Untethered")
+		li
+			+translate("Embody a")
+			+headlink("Condition","conditions")
+			+translate("that affects the Untethered")
+	p
+		+translate("If you")
+		+movelink("Conceal Your Heart","Concealed Your Heart")
+		+translate("from an NPC: the Keeper describes what flaw of yours they notice and how they take advantage of it.")
++move("Best Friends","untethered","selectable","dismissable")
+	p
+		+translate("You hold your allies to the same impossible standards as yourself.")
+		+translate("When another PC fails to act perfectly,").trigger
+		+translate("tell them how much they’ve disappointed you and what they should have done instead.")
+	p
+		+translate("If they accept your truth,").trigger
+		+translate("they mark a Condition and they choose one:")
+	ul
+		li
+			+translate("You gain")
+			+headlink("1 Bond","bonds")(class="bold term")
+			+translate("with")
+			+headlink("What the Darkness Demands of You","demands","darkness")
+			+translate("and the PC in question gains one Bond with you.")
+		li
+			+translate("They get the chance to do exactly what they should have done, to horrifying effect.")
+	p
+		+translate("If they respond otherwise, or not at all, they deny your truth.").trigger
+		+translate("Choose one:")
+		li
+			+translate("You feel the disappointment of the Harbinger within you. The PC transfers one of their Ruin marks")
+			+ruin(1,"to your own track.")
+		li
+			+translate("Your disappointment in them becomes disappointment in yourself. They clear one Condition and you mark one")
+			+headlink("Condition.","conditions")
++move("My Double-edged Blade","untethered","selectable","dismissable")
+	p
+		+translate("You have learned to weaponize your multitudinous feelings about your rejection to manipulate others without sacrificing your own integrity.")
+		+translate("When you share an intimate moment with another and tell them what quality of yours you wished your community accepted,").trigger
+		+translate("ask them if they accept that part of you. Gain")
+		+headlink("1 Bond","bonds")(class="bold term")
+		+translate("with them and describe how you hint at one of the following emotions.")
+	ul
+		li
+			+translate("the ardent fury that roils inside you")
+		li
+			+translate("the empty sadness that gnaws at you")
+		li
+			+translate("the weighty shame that crushes you")
+		li
+			+translate("the cold fear that constricts you")
+		li
+			+translate("the hazy confusion that traps you")
+		li
+			+translate("the endless exhaustion that erodes you")
+	p
+		+translate("If they are a PC and they accept:").trigger
+		+translate("they gain one Bond with you and they choose one:")
+	ul
+		li
+			+translate("They reveal one of their weaknesses to you.")
+		li
+			+translate("They share one of their secrets with you.")
+		li
+			+translate("They tell you what your display of emotion compels them to do.")
+	p
+		+translate("If they are an NPC and they accept:").trigger
+		+translate("the Keeper tells you how best to use one of their weaknesses to your advantage.")
+	p
+		+translate("If they respond otherwise, or not at all, take that as a sign of rejection.").trigger
+		+translate("You gain")
+		+headlink("1 Bond","bonds")(class="bold term")
+		+translate("with")
+		+headlink("What the Darkness Demands of You","demands","darkness")
+		+translate("and the dark whispers one of their secrets to you. Ask them what you learn.")

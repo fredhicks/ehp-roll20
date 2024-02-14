@@ -21,7 +21,10 @@ const exclusives = {
 	"shade": [ "Death Walked Here", "In Death There Is Only Love" ],
 	"last": [ "Ashes to Ashes", "Stolen Time" ],
 	"fallen": [ "Call Me Master", "Glory Be My Name" ],
-	"hungry": [ "The Gnawing Edge of Hunger", "The Gift" ]
+	"hungry": [ "The Gnawing Edge of Hunger", "The Gift" ],
+	"betrayed": [ "I Am Vengeance", "Mine is a Soul Still Unbroken" ],
+	"chained": [ "Ego Death", "Roaring Finality" ],
+	"untethered": [ "In Another Life, Perhaps", "The Frayed Dream" ]
 };
 
 on("change:playbook", function(event) {
@@ -90,16 +93,26 @@ on("clicked:uncheck", function(event) {
 	log(what + " unchecked");
 });
 
-on("clicked:checklist", function(event) {
+// ZOD
+
+on("clicked:checklist clicked:repeating_conditions:checklist", function(event) {
+	log(event);
 	var source = event.htmlAttributes.value;
 	var what = source.replace(/\|.*$/,"");
-	var atname = "check_" + what;
+	var prefix = "";
+	// In order to handle the stuff from repeating_conditions, we must detect that.
+	if ( event.triggerName !== "clicked:checklist" ) {
+		// Then we're looking at a repeater
+		prefix = event.triggerName.replace(/^clicked:/,"").replace(/checklist$/,""); // Should strip "checklist" off the end.
+	}
+	var atname = prefix + "check_" + what;
+	log(">>> "+atname);
 	var ats = {};
 	ats[atname] = 1;
 	if ( what !== source ) { // then there was more
-		var field = source.replace(/^.*\|/,"");
-		var fname = field.replace(/=.*$/,"");
-		var fval = field.replace(/^.*=/,"");
+		var field = source.replace(/^.*\|/,""); // current_conditions=>condition_obsessive_text
+		var fname = field.replace(/=.*$/,""); // current_conditions — should not be altered by prefix
+		var fval = field.replace(/^.*=>/,">"+prefix); // condition_obsessive_text
 		var isblank = false;
 		var blankfield = fval.replace(/^>/,"");
 		var gets = [fname];
@@ -109,7 +122,9 @@ on("clicked:checklist", function(event) {
 		} else {
 			fval = gTBK(String(fval));
 		}
+		log(gets);
 		getAttrs(gets, function(f) {
+			log(f);
 			if ( isblank ) { fval = f[blankfield].replace(/^ */,"").replace(/ *$/,""); }
 			if ( typeof(fval) !== "undefined" && fval !== "" ) {
 				if ( f[fname] == "" ) {
@@ -127,16 +142,22 @@ on("clicked:checklist", function(event) {
 	log(what + " checked");
 });
 
-on("clicked:unchecklist", function(event) {
+on("clicked:unchecklist clicked:repeating_conditions:unchecklist", function(event) {
 	var source = event.htmlAttributes.value;
 	var what = source.replace(/\|.*$/,"");
-	var atname = "check_" + what;
+	var prefix = "";
+	// In order to handle the stuff from repeating_conditions, we must detect that.
+	if ( event.triggerName !== "clicked:checklist" ) {
+		// Then we're looking at a repeater
+		prefix = event.triggerName.replace(/^clicked:/,"").replace(/unchecklist$/,""); // Should strip "checklist" off the end.
+	}
+	var atname = prefix + "check_" + what;
 	var ats = {};
 	ats[atname] = 0;
 	if ( what !== source ) { // then there was more
 		var field = source.replace(/^.*\|/,"");
 		var fname = field.replace(/=.*$/,"");
-		var fval = field.replace(/^.*=/,"");
+		var fval = field.replace(/^.*=>/,">"+prefix);
 		var isblank = false;
 		var blankfield = fval.replace(/^>/,"");
 		var gets = [fname];

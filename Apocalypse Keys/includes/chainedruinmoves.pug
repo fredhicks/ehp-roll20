@@ -1,0 +1,83 @@
++move("Behold, A White Horse","chained ruin move","selectable","dismissable")
+	p
+		+translate("Your Handler knows that you make mistakes; even the most obedient of dogs will occasionally make a mess. Despite this, they are ever so graciously there for you. This time.")
+	p
+		+translate("When you are utterly convinced that only your Handler can pull you out of this current disaster,").trigger
+		+translate("choose one:")
+	ul
+		li
+			+translate("Mark")
+			+ruin(1,"1 Ruin")
+			+translate("and explain to your Handler how this mess is your fault, and how grateful you are for their guidance. Your Handler will effortlessly right your wrongs using their formidable and far-reaching resources.")
+		li
+			+translate("Mark ")
+			+ruin(2,"2 Ruin")
+			+translate(" to beg your Handler to swoop in and pull you out of the deep end. Describe a valuable resource your Handler must use to assist you, and how pleased they are with your barks. In addition, uncover a Key.")
++move("Hero of Hell","chained ruin move","selectable","dismissable")
+	p
+		+translate("When you give in completely and entirely to").trigger
+		+headlink("What the Darkness Demands of You,","demands","darkness")
+
+		+translate("your wretched Fury temporarily assumes control, subsuming your being and performing feats of terrible, impossible might. Your Fury has placed you in the path of the oncoming storm. In addition, describe how your Fury irreparably changes the current circumstances to better suit")
+		+headlink("What the Darkness Demands of You,","demands","darkness")
+		+translate("leaving an indelible mark upon the world. Choose one:")
+	ul
+		li
+			+translate("Mark")
+			+ruin(1,"1 Ruin")
+			+translate("to decimate a Facet, leaving it hollow and ruinous. Declare an irrevocable truth about the Mystery. Rewrite the Facet to reflect how your Fury fills the space left behind.")
+		li
+			+translate("Mark")
+			+ruin(2,"2 Ruin")
+			+translate("to lash yourself to the Mystery. Write your name down as a Key and draw a line between your name and a Facet of the Mystery. Declare how your Fury has transformed you into an irrevocable truth.")
++move("Together Forever","chained ruin move","selectable","dismissable")
+	p
+		+translate("These are the chains you choose for yourself. When you take this move, declare which monster you wish to chain yourself to forever. Ask them if they will shackle their fate eternally with yours. If they say yes, you both")
+		+ruin(1,"mark Ruin")
+		+translate("and your destinies become one. They become your")
+		+translate("Anchor.").bold.term
+		div
+			+translate("Your Anchor:").bold
+			input(type="text" name="attr_movetaken_question-chained_anchor").bio
+	p
+		+translate("Taking this move means you are always attuned to their state. No matter the size of it, you know what danger they might be in. There is something deep within you that neither your Fury nor your Handler can claim, that knows your Anchor must be protected at any cost.")
+	p
+		+translate("When you choose to protect your precious Anchor,").trigger
+		+translate("immediately appearing at their side, defying all logic and plausibility, choose one;")
+	ul
+		li
+			+translate("Mark")
+			+ruin(1,"1 Ruin")
+			+translate("to save your Anchor from danger. You show up to ‘fix’ the problem. But your chains are thorny and alive, seemingly ready to clutch at unsuspecting obstacles, connecting your Anchor to your Fury or Handler. Your Anchor gains one Bond with your Fury or Handler. Ask your Anchor what about your Fury or Handler calls out to them.")
+		li
+			+translate("Mark")
+			+ruin(2,"2 Ruin")
+			+translate("to completely destroy that which dares to threaten your Anchor. You have saved them but your chains grow heavier around them. Both of you gain")
+			+headlink("1 Bond","bonds")
+			+translate("with")
+			+headlink("What the Darkness Demands of You.","demands","darkness")
+			+translate("In addition, your Anchor gains one Bond with your Fury or Handler. Ask your Anchor how they think your Fury or your Handler can help their own darkness grow ever-deeper.")
++move("Crown of Thorns","chained ruin move","selectable","dismissable")
+	p
+		+translate("Your chains are needy, seeking out connections to bolster your ruinous might. You begin to resemble your Fury and Handler ever more so. Mark")
+		+ruin(1,"1 Ruin")
+		+translate("to immediately gain")
+		+headlink("2 Bonds","bonds")
+		+translate("with any NPC that you know.")
+	p
+		+translate("For any NPC that you have a")
+		+headlink("Bond","bonds")
+		+translate("with, at any time mark")
+		+ruin(1,"1 Ruin")
+		+translate("and choose one:")
+	ul
+		li
+			+translate("See through their eyes and know what they hold most precious")
+		li
+			+translate("Feel their emotions and replace them with one that better suits your schemes")
+		li
+			+translate("Know what they fear most and wear it like a mask")
+		li
+			+translate("Plant the seed of an idea and force it to grow and consume their drive")
+		li
+			+translate("Stoke the embers of their rage and let it lead to blazing violence")

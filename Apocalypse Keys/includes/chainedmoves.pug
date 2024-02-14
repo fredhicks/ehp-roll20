@@ -1,0 +1,254 @@
++move("Another Link in the Chain","chained","selectable","dismissable")
+	p
+		+translate("There are times when you may long for a reprieve from the pull of your Fury and Handler but these chains are inescapable.")
+		+translate("When you seek an intimate moment with another PC,").trigger
+		+translate("describe how they remind you of your Fury or your Handler.").bold
+		+translate("Spend Darkness Tokens and roll.")
+		+rolldark("Another Link in the Chain")
+	p
+		+translate("On an 8-10").result
+		+translate("Ask them if their darkness draws them closer to resonate with yours, drawing them closer to you.").bold
+		+translate("If they say yes, choose two:")
+	ul
+		li
+			+translate("Gain")
+			+headlink("1 Bond","bonds")
+			+translate("with them")
+		li
+			+translate("Choose a")
+			+headlink("Power of Darkness","powers","darkness")
+			+translate("from their playbook, you have access to it, for now")
+		li
+			+translate("They clear one Condition")
+		li
+			+translate("They gain a Bond with you")
+	p
+		+translate("If they say anything that isn’t yes, take it as a rejection. It stings, but you’re used to this. Tick")
+		+translate("Edge of Destruction").bold.italic
+		+translate("or")
+		+translate("Spirals and Shadows").bold.italic
+		+translate("once, and choose two:")
+	ul
+		li
+			+translate("Gain as many")
+			+headlink("Darkness Tokens",'darkness')
+			+translate("as you’d like")
+		li
+			+translate("Gain")
+			+headlink("1 Bond","bonds")
+			+translate("with your Fury")
+		li
+			+translate("Gain")
+			+headlink("1 Bond","bonds")
+			+translate("with your Handler")
+		li
+			+translate("Gain")
+			+headlink("1 Bond","bonds")
+			+translate("with")
+			+headlink("What the Darkness Demands of You","demands","darkness")
+	p
+		+translate("On an 11+").result
+		+translate("They become entangled in your chains,").bold
+		+translate("tick")
+		+translate("Edge of Destruction").bold.italic
+		+translate("or")
+		+translate("Spirals and Shadows").bold.italic
+		+translate("once and choose one.")
+	ul
+		li
+			+translate("The storm that swirls around you reaches out and beckons to them. They gain a Bond with both your Fury and Handler. Both of you mark")
+			+ruin(1,"1 Ruin.")
+		li
+			+translate("They stand strong, stronger than you, against the tides. They erase 1 Ruin mark,")
+			+ruin(1,"transferring it to your own track.")
+			+translate("You gain")
+			+headlink("1 Bond","bonds")
+			+translate("with them.")
+		li
+			+translate("You allow them to take the lead. They gain two Bonds with What the Darkness Demands of You and you mark one")
+			+headlink("Condition.","conditions")
+	p
+		+translate("On a 7-").result
+		+translate("The darkness around you all reacts violently,").bold
+		+translate("creating a dangerous maelstrom. The Keeper will tell you how both of your darknesses clash against each other to pose a threat to everyone around you.")
++move("Obedient Dog","chained","selectable","dismissable")
+	p
+		+translate("When you pause to reflect on the Mystery,").trigger
+		+translate("remembering the cold wisdom and dark advice of your Handler,").bold
+		+translate("spend Darkness Tokens and roll.")
+		+rolldark("Obedient Dog")
+	p
+		+translate("On an 8-10").result
+		+translate("your Handler’s instructions come through, as though they were whispering it directly in your ear.").bold
+		+translate("Gain")
+		+headlink("1 Bond","bonds")
+		+translate("with your Handler and choose two:")
+	ul
+		li
+			+translate("Your Handler sends words of cold encouragement. Gain")
+			+headlink("1 Bond","bonds")
+			+translate("with your Handler.")
+		li
+			+translate("Your Handler soothes your bruises with dispassionate caresses. Clear one")
+			+headlink("Condition.","conditions")
+		li
+			+translate("Your Handler leaves you a cryptic piece of information. Uncover a Key. However, your Handler assigns you a seemingly innocuous task you must complete by the end of the session or your Handler will punish you.")
+		li
+			+translate("Your Handler communicates how you are the perfect weapon to target an enemy’s weakness. Gain")
+			+headlink("1 Bond","bonds")
+			+translate("with the target.")
+		li
+			+translate("Your Handler grants you special permissions. Temporarily gain a useful and classified item from their personal stash.")
+	p
+		+translate("On an 11+").result
+		+translate("your Handler unexpectedly tightens the collar around your throat as they bring you to heel.").bold
+		+translate("They are far more involved in this Mystery than you could ever have imagined. Tick")
+		+translate("Spirals and Shadows").bold.italic
+		+translate("once and choose one.")
+	ul
+		li
+			+translate("Draw a line between a Key and a Facet of the Mystery. Declare an irrevocable truth that reveals how your Handler is playing a dangerous role in the Mystery.")
+		li
+			+translate("Gain")
+			+headlink("1 Bond","bonds")
+			+translate("with your Fury and describe how its fury and violence is just enough to keep your Handler from dragging you further into their shadow.")
+		li
+			+translate("Your Handler schemes, planting seeds of doubt in your mind. Mark")
+			+ruin(1,"1 Ruin.")
+	p
+		+translate("On a 7-").result
+		+translate("your Handler continues to erode your sense of self.").bold
+		+translate("Tick")
+		+translate("Spirals and Shadows").bold.italic
+		+translate("once. The Keeper will tell you how you play the role of the perfect pawn.")
++move("Eruption","chained","selectable","dismissable")
+	p
+		+translate("When you admit that you lack the strength to tackle the problem on your own and recede into the hot,").trigger
+		+translate("grasping flames of your Fury,").bold
+		+translate("your Fury violently transforms your body into the perfect weapon for this moment. Spend Darkness Tokens and roll.")
+		+rolldark("Eruption")
+	p
+		+translate("On an 8-10").result
+		+translate("the form your Fury grants you is finely calibrated to the necessary destruction,").bold
+		+translate("choose two:")
+	ul
+		li
+			+translate("Your Fury rushes out like a flash flood. Deal massive, monstrous, damage to a target. Inflict two Conditions on them.")
+		li
+			+translate("You become like a Harbinger, in all your glorious fury. Force an enemy that is more powerful than you to stand down in awe of what you may one day become. Gain")
+			+headlink("1 Bond","bonds")
+			+translate("with the Harbinger that lurks within you.")
+		li
+			+translate("The raw monstrousness of your Fury is staggering and beautiful. Other monsters are drawn to your displays of violence. Gain")
+			+headlink("1 Bond","bonds")
+			+translate("with another PC.")
+		li
+			+translate("The boundary between you and your Fury grows ever-hazier as you find yourself relishing the destruction you wreak. Gain")
+			+headlink("1 Bond","bonds")
+			+translate("with your Fury")
+		li
+			+translate("Your Fury worms its way to your very core, reshaping you in explosive and immutable ways. Permanently rewrite a")
+			+headlink("Condition","conditions")
+			+translate("to better reflect the tempestuous nature of your Fury.")
+	p
+		+translate("On an 11+").result
+		+translate("your Fury transmutes you into a form that is raw, unchecked, and truly monstrous. Every step you take leaves storms of destruction in your wake.").bold
+		+translate("Tick")
+		+translate("Edge of Destruction").bold.italic
+		+translate("once and choose one:")
+	ul
+		li
+			+translate("Your Fury takes more than you wanted. Destroy the immediate area around you.")
+		li
+			+translate("Gain")
+			+headlink("1 Bond","bonds")
+			+translate("with your Handler and describe how their will is the only thing that keeps the worst of your Fury at bay.")
+		li
+			+translate("Your Fury explodes outward, wrecking everything around you but leaves you drained and vulnerable. You hate feeling this way. Ask the Keeper what cruel whispers your Fury leaves you with as it retreats inside your heart. Gain")
+			+headlink("1 Bond","bonds")
+			+translate("with")
+			+headlink("What the Darkness Demands of You.","demands","darkness")
+	p
+		+translate("On a 7-").result
+		+translate("your Fury takes control of your wrathful, weaponous body,").bold
+		+translate("running free, rampaging out of control, destroying too much. Tick")
+		+translate("Edge of Destruction").bold.italic
+		+translate("once. The Keeper will tell you something important that you cared for, that your Fury destroys.")
++move("Ties that Bind, Ties that Bite","chained","selectable","dismissable")
+	p
+		+translate("Choose one NPC that your chains reach out to, one who will elevate you into something greater.").bold
+		+translate("Gain")
+		+headlink("1 Bond","bonds")
+		+translate("with that NPC. Create another personal Doomsday Clock with 4 ticks and name it")
+		+translate("Crown, or a Collar?").bold.italic
+		+translate("You may only have one")
+		+translate("Crown, or a Collar?").bold.italic
+		+translate("clock active at any given time.")
+		+doomclock(4,0,"Crown, or a Collar?")
+	p
+		+translate("Every time you ask for protection from that NPC, at great personal cost to them, gain")
+		+headlink("1 Bond","bonds")
+		+translate("with them.")
+	p
+		+translate("When you spend")
+		+headlink("a Bond","bonds")
+		+translate("with that NPC,").trigger
+		+translate("choose two.")
+	ul
+		li
+			+translate("Crown, or a Collar?").bold.italic
+			+translate("does not tick once. If this option is not chosen, tic")
+			+translate("Crown, or a Collar?").bold.italic
+			+translate("once.")
+		li
+			+translate("The Bond instead grants a +2 or a -2 bonus.")
+		li
+			+translate("The NPC is touched by your Fury and becomes stronger for it. But you see a growing darkness in their eyes.")
+		li
+			+translate("The NPC gains a valuable piece of insight because of your Handler’s whispers. But you now see how that NPC’s ambition grows ever-sharper and ever more subtle.")
+	p
+		+translate("When the").trigger
+		+translate("Crown, or a Collar?").bold.italic.trigger
+		+translate("clock fills,").trigger
+		+translate("choose one.")
+	ul
+		li
+			+translate("Your Handler sinks their hooks into the NPC and they become their new right-hand, now instrumental in their dark schemes. Gain")
+			+headlink("1 Bond","bonds")
+			+translate("with your Handler and tick")
+			+translate("Spirals and Shadows").bold.italic
+			+translate("once.")
+		li
+			+translate("Your Fury corrupts them and they become filled with its darkness before setting out to violently reshape the world. Gain")
+			+headlink("1 Bond","bonds")
+			+translate("with your Fury and tick")
+			+translate("Edge of Destruction").bold.italic
+			+translate("once.")
+		li
+			+translate("Burn the")
+			+headlink("Bond","bonds")
+			+translate("forever, you can never form a Bond with them again. They will never be able to trust you again, and your memories of them only bring you pain. However, they are freed from the threat of ever being tangled in your ultimate fate.")
++move("Monstrous Bonds","chained","selectable","dismissable")
+	p
+		+translate("You can reinforce the ties that you have with other monsters, with those who are closest to understanding you. When someone spends a Bond with you to modify a roll by +1 or -1, they choose one:")
+	ul
+		li
+			+translate("You mark a")
+			+headlink("Condition","conditions")
+			+translate("and they clear one of their own.")
+		li
+			+translate("The Bond instead grants a +2 or a -2 bonus.")
+		li
+			+translate("They choose one of your playbook’s")
+			+headlink("Powers of Darkness","powers","darkness")
+			+translate("to gain temporary access to. Tick")
+			+translate("Edge of Destruction").bold.italic
+			+translate("once.")
+		li
+			+translate("They gain a piece of valuable insight. Tick")
+			+translate("Spirals and Shadows").bold.italic
+			+translate("once.")
+		li
+			+translate("You gain")
+			+headlink("1 Bond","bonds")
+			+translate("with them.")

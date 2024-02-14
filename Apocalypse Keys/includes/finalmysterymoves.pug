@@ -255,3 +255,119 @@ div
 						+translate("The Keeper will describe how they become stronger than you will ever be. Gain")
 						+headlink("1 Bond","bonds")(class="bold term") 
 						+translate("with them, until the end of the Final Mystery they will assist you in fighting back the apocalypse. At the end of the Final Mystery they’ll disappear, taking an aspect of the hunger with them.")
+		+move("Mine is a Soul Still Unbroken","betrayed","","")
+			p
+				+translate("The weight of vengeance on your soul is beyond measure, and yet, you are human still.")
+				+translate("When you wield the last of your humanity and take back your soul from the entity of vengeance,").trigger
+				+translate("spend Darkness Tokens and roll.")
+				+rolldark("Mine is a Soul Still Unbroken")
+			p
+				+translate("On an 8-10").result
+				+translate("your soul burns away all that holds you back and you take control of the entity of vengeance, for now.").bold
+				+translate("Choose one:")
+			ul
+				li
+					+translate("You tear apart the entity within you and pour smoldering shreds into the souls of your comrades. All PCs clear all their Conditions and gain one Bond with you.")
+			ul
+				li
+					+translate("You share the horrors of your mantle with your fellow monsters. Describe how you reforge the entity of vengeance to create fearsome visages for you and your comrades. Until the end of the Final Mystery, you and every PC have a new way of gaining")
+					+headlink("Darkness Tokens:",'darkness')
+					+translate("Reveal the face of Vengeance").italic
+			ul
+				li
+					+translate("In the flames of vengeance, you find new shades of darkness and its inherent power. Gain every")
+					+headlink("Power of Darkness","powers","darkness")
+					+translate("from your playbook until the end of the Final Mystery.")
+			p
+				+translate("On an 11+").result
+				+translate("your soul will become a new and fearsome thing, unbound and free.").bold
+				+translate("Choose one:")
+			ul
+				li
+					+translate("Your soul feeds on conflict. Until the end of the Final Mystery, when you")
+					+movelink("Unleash the Dark","Unleash the Dark") 
+					+translate("and show no mercy, you always clear one of your")
+					+headlink("Conditions.","conditions")
+				li
+					+translate("You will pass the burden of vengeance to another. In the remaining time you have, you will be unstoppable. You no longer mark")
+					+headlink("Conditions.","conditions")
+					+translate("At the end of the Final Mystery, you will forcefully expel the entity of vengeance within you and place it in a willing victim. Leave DIVISION and live the rest of your life on what little remains of your humanity. Make any changes to this playbook to reflect the new character who has accepted the entity of vengeance within them. From here out, you’ll play that character.")
+			p
+				+translate("On a 7-").result
+				+translate("your soul weakens and falters as more of your humanity turns to ash.").bold
+				+translate("The entity of vengeance grows stronger within you and will punish you for your hubris, prepare for the worst.")
+		+move("Roaring Finality","chained","","")
+			p
+				+translate("What happens when the Chained is forced to choose between two terrible forces?")
+			p
+				+translate("When you choose to finally pledge yourself to one of the forces that have been tearing you apart,").trigger
+				+translate("give your everything to them and choose one:")
+			ul
+				li
+					+translate("Wield the full terrible force of your Fury, finally under your own control.").bold
+					+translate("You decimate, destroy, completely undo the area around you, instilling it with embers of your Fury that will smolder here for all eternity. Gain")
+					+headlink("2 Bonds","bonds")
+					+translate("with your Fury. Until the end of the Final Mystery you no longer mark any")
+					+headlink("Conditions","conditions")
+					+translate("as your Fury forces your body to keep moving and fighting. At the end of the Final Mystery, your Fury subsumes you finally, completely.")
+				li
+					+translate("Pull the threads of your Handler’s web so that everything falls into place before you.").bold
+					+translate("The unseen connections between everything that your Handler has laid out snap into place. The whispers of your Handler reveal to you how everything is connected, and you finally perceive how your Handler truly sees you. Your true inner strength is revealed at last. Gain")
+					+headlink("2 Bonds","bonds")
+					+translate("with your Handler. Until the end of the Mystery, you may declare what your Handler’s plan is for any NPC and how that plan directly empowers you. Your Handler will deliver that information, truthful and terrible, through the Keeper to you. You may only declare this once per NPC. By the end of the Final Mystery, your Handler’s ultimate plan will come to beautiful and cruel fruition.")
+				li
+					+translate("In a final last-second moment of rebellion, you reject the chains of both your Fury and your Handler, dramatically gaining personal gnosis and taking the reins from them.").bold
+					+translate("Your chains burst forth, pulling all the facets of your personal darkness to you as you now wield your Fury and Handler, as they once wielded you. Gain access to all the other PCs’ current")
+					+headlink("Powers of Darkness","powers","darkness")
+					+translate("until the end of the Final Mystery. Gain")
+					+headlink("1 Bond","bonds")
+					+translate("with each PC. You now have a new way of gaining")
+					+headlink("Darkness Tokens:",'darkness')
+					+translate("Draw power from the connections you have made.").italic
+			p
+				+translate("Then ask the Keeper what vital, missing aspect of your inner self is locked behind the Final Door, and who, of the options you chose above, will be instrumental in obtaining it, and how. This move may only be used once.")
+		+move("The Frayed Dream","untethered","","")
+			p
+				+translate("The unthinkable has happened: your first community invites you to come home. Ask the Keeper why they want you back, and how your choice will hasten the apocalypse.")
+				+translate("This move can only be triggered once during the Final Mystery.").bold
+			p
+				+translate("If you return to your community,").trigger
+				+translate("choose one:")
+			ul
+				li
+					+translate("Describe the façade that your community puts on to welcome you and your group. All PCs clear all their")
+					+headlink("Conditions","conditions")
+					+translate("and gain")
+					+headlink("1 Bond","bonds")(class="bold term")
+					+translate("with your community.")
+				li
+					+translate("Describe how your efforts to prove yourself have warped your community and reshaped them. The people you knew are now an army of your doppelgangers under your command, unrecognizable as who they were. Until the end of the Final Mystery, they will assist you in fighting back the apocalypse.")
+			p
+				+translate("If you reject the invitation,").trigger
+				+translate("choose one:")
+			ul
+				li
+					+translate("Tell everyone how you no longer need your first community because your community is made up of those you choose and who choose you, not those who cast you out. Mark a")
+					+headlink("Condition","conditions")
+					+translate("and choose a new")
+					+headlink("Power of Darkness","powers","darkness")
+					+translate("from the list below for each PC. They have access to it until the end of the Final Mystery.")
+					ul
+						li
+							+translate("Dimensional Teleportation")
+						li
+							+translate("Energy Corruption")
+						li
+							+translate("Reality Distortion")
+						li
+							+translate("Rotting Touch")
+			ul
+				li
+					+translate("Tell everyone how you’re not ready to return to your community, not until you break yourself again and again to become perfect.")
+					+translate("Until the end of the Final Mystery, gain").bold
+					+headlink("1 Bond","bonds").bold
+					+translate("with").bold
+					+headlink("What the Darkness Demands of You","demands","darkness").bold
+					+translate("before you").bold
+					+movelink("Power Through Darkness","Power Through Darkness.").bold
+

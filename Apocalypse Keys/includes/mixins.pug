@@ -8,6 +8,9 @@
 		"shade": "The Shade",
 		"summoned": "The Summoned",
 		"surge": "The Surge",
+		"untethered": "The Untethered",
+		"chained": "The Chained",
+		"betrayed": "The Betrayed",
 		"summoned ruin move": "Summoned Ruin Move",
 		"shade ruin move": "Shade Ruin Move",
 		"surge ruin move": "Surge Ruin Move",
@@ -15,6 +18,9 @@
 		"last ruin move": "Last Ruin Move",
 		"fallen ruin move": "Fallen Ruin Move",
 		"hungry ruin move": "Hungry Ruin Move",
+		"untethered ruin move": "Untethered Ruin Move",
+		"chained ruin move": "Chained Ruin Move",
+		"betrayed ruin move": "Betrayed Ruin Move",
 		"Experience and Ruin": "XP and Ruin",
 		"Character Creation Options": "Character Options",
 		"Move Index": "Moves List",
@@ -372,8 +378,11 @@ mixin condition(con,blank,locked,temporary)
 						+button()(type='action' name='act_unchecklist' value=ckey+"|current_conditions=>"+bkey class="checked ")
 						+button()(type='action' name='act_checklist' value=ckey+"|current_conditions=>"+bkey class="unchecked ")
 					- else
-						+button()(type='action' name='act_unchecklist' value=ckey+"|current_conditions="+con class="checked ")
-						+button()(type='action' name='act_checklist' value=ckey+"|current_conditions="+con class="unchecked ")
+						+button()(type='action' name='act_unchecklist' value=ckey+"|current_conditions=>"+bkey class="checked ")
+						+button()(type='action' name='act_checklist' value=ckey+"|current_conditions=>"+bkey class="unchecked ")
+						// Below is how we used to do it — until all conditions had to become text fields!
+						// +button()(type='action' name='act_unchecklist' value=ckey+"|current_conditions="+con class="checked ")
+						// +button()(type='action' name='act_checklist' value=ckey+"|current_conditions="+con class="unchecked ")
 		div.conditiontext
 			- if ( blank ) 
 				- if ( locked )
@@ -384,7 +393,8 @@ mixin condition(con,blank,locked,temporary)
 						+translate("Temporary:")
 					input(type='text' name="attr_"+bkey)
 			- else
-				+translate(con)
+				input(type='text' name="attr_"+bkey value=con)
+				// +translate(con)
 				- if ( temporary )
 					+translate("(Temporary)")
 		div.buttons

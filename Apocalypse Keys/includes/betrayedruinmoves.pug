@@ -1,0 +1,129 @@
++move("Shadows of a Life Unlived","betrayed ruin move","selectable","dismissable")
+	p
+		+translate("Your betrayal eats away at what remains of your soul as you obsess over who you could have been if life were kinder to you.")
+		+translate("When you ask the entity within you what could have been,").trigger
+		+translate("mark")
+		+ruin(1)
+		+translate("and ask one of the questions below. The Keeper will answer you honestly and with great detail.")
+	ul
+		li
+			+translate("How could I have avoided betrayal, if I had been more cruel?").bold
+			+translate("Gain")
+			+headlink("2 Bonds","bonds")
+			+translate("with")
+			+headlink("What the Darkness Demands of You.","demands","darkness")
+			+translate("If you accept this answer, cross out the question and clear all your")
+			+headlink("Conditions.","conditions")
+		li
+			+translate("What kind of life would I have had, if vengeance had not claimed me?").bold
+			+translate("Gain a new")
+			+headlink("Power of Darkness","powers","darkness")
+			+translate("permanently that reflects this truth. If you accept this answer, cross out the question and")
+			+spendruin(99,"clear your Ruin track.")
+		li
+			+translate("Which PC would have saved me, if I had allowed myself to be weak?").bold
+			+translate("Gain")
+			+headlink("2 Bonds","bonds")
+			+translate("with them. If you accept this answer, cross out the question. Both of you permanently gain the")
+			+headlink("Condition","conditions")
+			+translate("“Soulbound”.").bold.term
+		li
+			+translate("Who would have loved me, if I had never become vengeance?").bold
+			+translate("Gain")
+			+headlink("1 Bond","bonds")
+			+translate("with them, and")
+			+headlink("1 Bond","bonds")
+			+translate("with")
+			+headlink("What the Darkness Demands of You.","demands","darkness")
+			+translate("If they’re a PC, they erase one Ruin. You can never accept this answer.")
++move("The Blade of Forgiveness","betrayed ruin move","selectable","dismissable")
+	p
+		+translate("In your time as serving as a vessel of vengeance, the cosmic forces of the universe have responded to your actions. The spirit of forgiveness was forged but it embodies unknowable laws that are beyond the ken of men. To be forgiven is perhaps a heavier burden to bear than anything in the known universe.")
+	p
+		+translate("When you call upon the Spirit of Forgiveness,").trigger
+		+translate("describe how the sharp light cuts through you to reveal a monstrous truth about you.").bold
+		+translate("The Keeper will describe the avatar of Forgiveness that comes to your side. Choose one:")
+	ul
+		li
+			+translate("Mark")
+			+ruin(1)
+			|. 
+			+translate("Ask the avatar a question and they will answer it honestly and with great detail. In addition, gain a temporary")
+			+headlink("Power of Darkness","powers","darkness")
+			+translate("that reflects what you have learned.")
+		li
+			+translate("Mark")
+			+ruin(2)
+			+translate(". Reach out and ask the avatar to cut through to your heart, and gain")
+			+headlink("1 Bond","bonds")
+			+translate("with Forgiveness. In addition, clear all your")
+			+headlink("Conditions","conditions")
+			+translate("and replace one of them with one of the Forgiveness Conditions below:")
+			+checkable("Ephemeral","","betrayedshadowsconditions")
+			+checkable("Haughty","","betrayedshadowsconditions")
+			+checkable("Deceptive","","betrayedshadowsconditions")
+			+checkable("Cryptic","","betrayedshadowsconditions")
+	p
+		+translate("When you have replaced all your").trigger
+		+headlink("Conditions","conditions").trigger
+		+translate("with Forgiveness Conditions,").trigger
+		+translate("replace your Breaking Point with the one below:")
+	p
+		+translate("The Vengeance you have sought and delivered forces the universe to respond with the cold cosmic nature of Forgiveness.").bold
+		+translate("Your humanity hollows out to reveal the vessel you are, the bright light within you burns away the darkness and recolors your memories to the palest shade of nothingness. In this moment you are only the cosmic avatar of Forgiveness, and nothing else.")
+	p
+		+translate("Describe what cold revelation Forgiveness speaks through you and who you empower to balance the scales of the universe.").bold
+		+translate("The Keeper will tell you how celestial fire reshapes the world around you, revealing the terrifying truth beneath the surface of reality.")
++move("We Who Serve Vengeance","betrayed ruin move","selectable","dismissable")
+	p
+		+translate("The entity within you can always recognize another wretched soul broken enough to be vulnerable to vengeance’s desire.")
+		+translate("When you perceive the full weight of a soul vulnerable to you,").trigger
+		+translate("describe how you draw down the entity of vengeance into their being.").bold
+		+translate("Choose:")
+	ul
+		li
+			+translate("Mark")
+			+ruin(1)
+			+translate("and create a temporary Envoy of Vengeance.").bold
+			+translate("Until the end of the Mystery they will assist you in fighting back the apocalypse but will become a Harbinger and retreat to the shadows.")
+		li
+			+translate("Mark")
+			+ruin(2)
+			+translate("and create a terrifying Emissary of Vengeance, grant them more power than you yourself possess.").bold
+			+translate("As an Emissary they will perform horrifying feats of supernatural power before they vanish. The Emissary will spend the rest of their immortality working towards fulfilling")
+			+headlink("What the Darkness Demands of You.","demands","darkness")
++move("The Face of My Betrayal","betrayed ruin move","selectable","dismissable")
+	p
+		+translate("You are determined to free yourself from this soul-crushing servitude, even at the expense of the innocent. Describe an innocent being that trusts you. The Keeper will describe how they know you will ultimately betray them and why they still love you.")
+	+doomclock(12,0,"I Had No Other Choice")
+	p
+		+translate("When you take this move, create your own personal Doomsday Clock with 12 ticks and name it")
+		+translate("I Had No Other Choice.").bold.italic
+		+translate("When you share a vulnerable moment with this innocent,").trigger
+		+translate("choose:")
+	ul
+		li
+			+translate("Mark")
+			+ruin(1,"1 Ruin,")
+			+translate("and tick")
+			+translate("I Had No Other Choice").bold.italic
+			+translate("once. Ask them to care for you, and turn away from how the entity within you corrupts them. Clear all your")
+			+headlink("Conditions","conditions")
+			+translate("and gain")
+			+headlink("1 Bond","bonds")
+			+translate("with")
+			+headlink("What the Darkness Demands of You.","demands","darkness")
+		li
+			+translate("Mark")
+			+ruin(2)
+			+translate("and tick")
+			+translate("I Had No Other Choice").bold.italic
+			+translate("twice. Ask them to perform one cruel deed for you, no matter how impossible, and touch them with the hand of vengeance. They will gain temporary powers of darkness to fulfill your will perfectly.")
+	p
+		+translate("When the")
+		+translate("I Had No Other Choice").bold.italic
+		+translate("clock fills, their innocence is shattered and your full betrayal comes to pass. They are now a new entity of Vengeance, completely separate from your own power and calling upon the full might of the encroaching apocalypse. The current Mystery is set aside. In this moment, they have become the next Harbinger of the apocalypse, emerging from an ancient Door of Power. The vengeance they offer the world is mesmerizing and cruel, loving and despairing. Give them a new name and title befitting the unspeakable horror they have become.")
+	p
+		+translate("You and the other PCs must deal with them, one way or another. Once this apocalyptic threat is dealt with, decide if you will be fully consumed by vengeance as penance or seek another innocent. If you are consumed by vengeance, say your last goodbyes and retire this character and create a new one. If you seek another innocent, clear the Doomsday Clock")
+		+translate("I Had No Other Choice").bold.italic
+		+translate("and choose a new innocent to betray.")

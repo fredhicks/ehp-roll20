@@ -168,7 +168,9 @@
 				+translate("Ask the Keeper any question, they will answer it honestly and with great detail.")
 			li
 				+translate("Awaken latent abilities within.")(class="bold") 
-				+translate("Choose another Power of Darkness from another playbook, you have access to it, for now.")
+				+translate("Choose another")
+				+headlink("Power of Darkness","powers","darkness")
+				+translate("from another playbook, you have access to it, for now.")
 			li
 				+translate("Recognize the signs of portent hanging over your fellow monsters.")(class="bold") 
 				+translate("Each PC gains")
@@ -251,7 +253,7 @@
 				+translate("with")
 				+headlink("What the Darkness Demands of You.","demands","darkness")
 				+translate("If you give into the Harbinger, clear")
-				+headlink("1 Condition.","Conditions")(class="bold term")
+				+headlink("1 Condition.","conditions")(class="bold term")
 			li
 				+translate("Give into the worst of your Hunger and go too far, inviting chaos and terror. Name a new fear you have and create or replace a")
 				+headlink("Hunger Condition","conditions")(class="bold term") 
@@ -259,5 +261,180 @@
 	p
 		+translate("On a 7-")(class="result") 
 		+translate("you lose control of the Hunger completely, the Keeper describes how your form twists into obscene and heartbreaking new shapes. Prepare for the worst.")
++move("I Am Vengeance","betrayed","","")
+	p
+		+translate("The entity within you can always sense those nearby who bear the scars of trespass and the burden of regret.")
+		+translate("When you merge with the entity and deepen your senses to see the full weight of a soul,").trigger
+		+translate("describe what you find there. Spend Darkness Tokens and roll.")
+		+rolldark("I Am Vengeance")
+	p
+		+translate("On an 8-10").result
+		+translate("the entity within you tempers justice with mercy, choose two:")
+	ul
+		li
+			+translate("Their greatest trespass is revealed by the darkness. Create a")
+			+headlink("Power of Darkness","powers","darkness")
+			+translate("that you have access to, for now.")
+		li
+			+translate("Declare how they must make amends to appease your need for justice. Gain")
+			+headlink("1 Bond","bonds")(class="bold term")
+			+translate("with them.")
+		li
+			+translate("Your souls burn and resonate together. Inflict two Conditions on them but")
+			+headlink("take one","conditions")
+			+translate("in return.")
+		li
+			+translate("The soul you peer into cannot hide the truth from you. Ask the Keeper any question, they will answer it honestly and with great detail.")
+	p
+		+translate("On an 11+").result
+		+translate("the entity within you demands retribution and horror, choose one:")
+	ul
+		li
+			+translate("The vengeance you deliver eclipses the trespass. Describe how you go too far and the suffering you cause. The Keeper will tell you what supernatural beings of power take notice and their response.")
+		li
+			+translate("The entity within you claims a new soul to strengthen itself. Gain a new")
+			+headlink("Power of Darkness","powers","darkness")
+			+translate("that reflects the screaming soul within you, trapped for eternity.")
+	p
+		+translate("On a 7-").result
+		+translate("the entity reshapes another part of your soul and replaces it with what may better serve horrific vengeance. The Keeper will tell you what happens next.")
++move("Ego Death","chained","","")
+	p
+		+translate("The Chained is pulled in two different directions; lured toward violent and bloody destruction by the monstrous Fury within them, or pulled into a web of schemes and oblivion as a pawn of their Handler. The Chained’s identity is inseparable from their connections to others. You desire any form of connection, and have a bad habit of drawing others into your ever tangling web.")
+	p
+		+translate("At the start of each session").trigger
+		+translate("choose one:")
+	ul
+		li
+			+translate("Gain")
+			+headlink("1 Bond","bonds")(class="bold term")
+			+translate("with your Fury and swap out one of your")
+			+headlink("Powers of Darkness","powers","darkness")
+			+translate("with a new one for the rest of the session. What does your Fury crave that you do not want it to have?")
+		li
+			+translate("Gain")
+			+headlink("1 Bond","bonds")(class="bold term")
+			+translate("with your Handler and uncover one")
+			+translate("Shadow Key.").bold.term
+			+translate("This Key is shrouded in shadow for now. Write down “Shadow Key” on the Mystery Map. What do you believe your Handler wants from you in the coming moments?")
+			ul
+				li
+					+translate("When anyone")
+					+movelink("Unlock Doom’s Door","Unlocks Doom’s Door,") 
+					+translate("your Handler speaks in spirals and reveals a version of truth, exposing the nature of the aforementioned Shadow Key. At that moment flesh out the details of what this Key is, and how it connects your Handler to the Mystery.")
+		li
+			+translate("Gain")
+			+headlink("1 Bond","bonds")(class="bold term")
+			+translate("with another PC and choose one of the options below as a new way of gaining")
+			+headlink("Darkness Tokens",'darkness')
+			+translate("when interacting with them for the rest of the session. What about that PC resonates with your Handler or Fury right now?")
+			ul
+				li
+					+translate("Feel drawn to their raw power")
+				li
+					+translate("Feel chilled by their cold logic")
+				li
+					+translate("Feel ensnared by and tangled in their own chains")
+	+doomclock(4,0,"Edge of Destruction")
+	+doomclock(4,0,"Spirals and Shadows")
+	p
+		+translate("You have two personal")
+		+translate("Doomsday Clocks").bold.term
+		+translate("with 4 ticks each. They are named")
+		+translate("Edge of Destruction").bold.italic
+		+translate("and")
+		+translate("Spirals and Shadows.").bold.italic
+		+translate("When either clock is filled, clear the Doomsday Clock and you are")
+		+movelink("Torn Between","Torn Between.")
+		+translate("Resolve Torn Between after every other move has been resolved in the scene.")
+	p
+		+translate("When you spend a Bond with your Fury,").trigger
+		+translate("tick")
+		+translate("Edge of Destruction").bold.italic
+		+translate("once and clear")
+		+headlink("1 Condition.","conditions")
+		+translate("If no Conditions are marked, mark")
+		+ruin(1)
+		+translate("instead.")
+	p
+		+translate("When you spend")
+		+headlink("a Bond","bonds")(class="bold term")
+		+translate("with your Handler,").trigger
+		+translate("tick")
+		+translate("Spirals and Shadows")
+		+translate("once and choose one question to put to the Keeper who will answer it honestly and with great detail.")
+	ul
+		li
+			+translate("What did my Handler do in the past that is now affecting this investigation?")
+		li
+			+translate("Who has a secret connection to my Handler?")
+		li
+			+translate("What truth has been hidden by my Handler?")
+	p
+		+translate("If you spend")
+		+headlink("Bonds","bonds")(class="bold term")
+		+translate("with both your Fury and Handler for the same roll, choose only one clock to tick once. In addition, if you spend multiple Bonds at a time with your Fury or Handler, the effect activates only once.")
+	p
+		+translate("The following choices replace the standard")
+		+movelink("Torn Between")
+		+translate("options when Ego Death is triggered. Choose one:")
+	ul
+		li
+			+translate("Describe how your Fury permanently changes your body and mind,").bold
+			+translate("as it explodes outward in a sudden and dangerous outburst. Mark")
+			+ruin(1)
+		li
+			+translate("Describe how your Handler slowly advances their shadowy plans behind the scenes.").bold
+			+translate("You have no knowledge or power to stop this. Lose all")
+			+headlink("Darkness Tokens.",'darkness')
+		li
+			+translate("Spend")
+			+headlink("1 Bond","bonds")(class="bold term")
+			+translate("with someone who is not your Fury or Handler.").bold
+			+translate("Describe how you latch onto them in this moment, resisting the pull of your Fury or Handler at least for a time.")
++move("In Another Life, Perhaps","untethered","","")
+	p
+		+translate("There exist multiple realities in which your community kept you, but that’s not the one you’re in.")
+		+translate("When you reach through realities to connect to an alternate version of yourself that your community accepted,").trigger
+		+translate("spend Darkness Tokens and roll:")
+		+rolldark("In Another Life, Perhaps")
+	p
+		+translate("On an 8-10").result
+		+translate("you resonate with your alternate self and subtly rewrite this reality. ").bold
+		+translate("Choose two:")
+	ul
+		li
+			+translate("If you can embody who you could have been, perhaps you could be them one day.").bold
+			+translate("You emulate your alternate self’s perfect grace and inspire those around you. You and another PC")
+			+xp(1,"mark XP.")
+		li
+			+translate("For a moment, you feel the love your alternative self feels. They relinquish their strength to you, and you share it with a PC or NPC of your choosing.").bold
+			+translate("You gain")
+			+headlink("1 Bond","bonds")(class="bold term")
+			+translate("with the recipient of this strength. If they’re a PC, they also gain one Bond with you.")
+		li
+			+translate("You see the disturbing shadows of who your fellow monsters are in another reality.").bold
+			+translate("You and each PC gain")
+			+dark(1)
+			|.
+	p
+		+translate("On an 11+").result
+		+translate("that alternate version of you tears a hole in reality, manifesting at your side.").bold
+		+translate("Choose one from above and one from below.")
+	ul
+		li
+			+translate("You swap places with them, leaving a void in this reality that they struggle to fill. You are now them, and they are now you.")
+		li
+			+translate("The alternate version is permanently tainted by meeting you. They escape into this reality, entirely corrupted by one of your worst flaws.")
+		li
+			+translate("To send them back to where they came from, mark")
+			+headlink("1 Condition","conditions")(class="bold term") 
+			+translate("or")
+			+ruin(1)
+			+translate("and describe how you are both permanently changed.")
+	p
+		+translate("On a 7-").result
+		+translate("your failure erodes reality around you.").bold
+		+translate("The Keeper will tell you what happens next. Prepare for the worst.")
 
 include finalmysterymoves.pug

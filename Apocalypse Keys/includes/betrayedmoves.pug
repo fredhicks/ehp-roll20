@@ -1,0 +1,142 @@
++move("Vengeance Reveals the Truth","betrayed","selectable","dismissable")
+	p
+		+translate("When you hold the vulnerable close,").trigger
+		+translate("describe how you become vengeance incarnate and perceive what connects them to the encroaching apocalypse.").bold
+		+translate("Spend Darkness Tokens and roll.")
+		+rolldark("Vengeance Reveals the Truth")
+	p
+		+translate("On an 8-10").result
+		+translate("the soul reveals all,").bold
+		+translate("choose two:")
+	ul
+		li
+			+translate("Declare the trespasses of their past").bold
+			+translate("and declare an irrevocable truth about the Mystery—rewrite or add a Facet of the Mystery that reflects this evil.")
+		li
+			+translate("Declare the trespasses that their future holds,").bold
+			+translate("draw a line between a Key and a Facet of the Mystery. Declare an irrevocable truth about the Mystery that reflects this evil.")
+		li
+			+translate("Declare the shared trespass that binds your souls together.").bold
+			+translate("Uncover a Key at great cost.")
+	p
+		+translate("On an 11+").result
+		+translate("the soul burns and threatens to consume you whole.").bold
+		+translate("Choose one:")
+	ul
+		li
+			+translate("Choose one from above but carry the full weight of those who suffered.").bold
+			+translate("Until the end of the Mystery, you now have a new way of gaining")
+			+headlink("Darkness Tokens:",'darkness')
+			+translate("Give voice to the wronged and seek cruel justice.").italic
+		li
+			+translate("Your power burns away their regret and shame,").bold
+			+translate("and the vengeance within you hollows out an additional host. Before they vanish, they give you a Key at great cost. When they return, they will be a more powerful servant of vengeance than you are.")
+	p
+		+translate("On a 7-").result
+		+translate("your own soul buckles under the weight of their sin,").bold
+		+translate("leaving you vulnerable to the entity residing in what remains of your soul. The Keeper will tell you what happens next.")
++move("An Eye for an Eye","betrayed","selectable","dismissable")
+	p
+		+translate("You are a scion of vengeance, you are enslaved and empowered through eternal punishment. When you")
+			+movelink("Unleash the Dark","Unleash the Dark") 
+			+translate("by acting out on the behalf of vengeance, you can also choose one from below, even on a miss:")
+	ul
+		li
+			+translate("Infect them with inescapable guilt and horror for their trespasses")
+		li
+			+translate("Grant immeasurable power to those they have wronged most")
+		li
+			+translate("Cleanse their soul of all trespasses, binding it to your own")
+		li
+			+translate("Declare a just punishment for the trespasses on their soul—it will come to pass by the end of the Mystery, in one way or another")
++move("The Bindings of Retribution","betrayed","selectable","dismissable")
+	p
+		+translate("Every soul chosen to mete vengeance is bound to your soul, for better or worse.")
+		+translate("When you travel the paths of betrayal and vengeance that connect all hearts,").trigger
+		+translate("ask one and gain")
+		+headlink("1 Bond","bonds")
+		+translate("with one who the Keeper names:")
+	ul
+		li
+			+translate("Who here suffers from betrayal in silence?")
+		li
+			+translate("Who here proudly wears the scars of betrayal?")
+		li
+			+translate("Who here is unaware they are held in the grasp of coming vengeance?")
+		li
+			+translate("Who here will become a tool of vengeance?")
+	p
+		+translate("The Keeper will answer you honestly and with great detail. Mark")
+		+headlink("a Condition","conditions")
+		+translate("that reflects how this makes you feel.")
+	p
+		+translate("You may ask a second question and uncover a Key but the Keeper will give you a difficult task to appease the entity of vengeance within you. If you are unable to fulfill it by the end of the current Mystery, prepare for the worst.")
++move("In Service of a Greater Power","betrayed","selectable","dismissable")
+	p
+		+translate("One day your quest for vengeance will break you and leave nothing of your soul but for now you must persevere and survive all odds.")
+		+translate("At the end of each session, reflect on your quest for vengeance.").bold
+		+translate("Choose two:")
+	ul
+		li
+			+translate("Did you serve vengeance over yourself and what you care for?").bold
+			+translate("Clear")
+			+headlink("1 Condition.","conditions")
+		li
+			+translate("Did you feed the entity within your fear, anger, or despair?").bold
+			+translate("Mark")
+			+ruin(1)
+		li
+			+translate("Did you revel in the monster that you are and cast aside your humanity?").bold
+			+translate("Gain")
+			+headlink("1 Bond","bonds")
+			+translate("with")
+			+headlink("What the Darkness Demands of You.","demands","darkness")
++move("The Weakness of my Heart","betrayed","selectable","dismissable")
+	p
+		+translate("There is one human, weak and imperfect, who looks you in the eyes and sees past the monster you are. Declare who your Heart is and what makes them vulnerable. The Keeper will describe what measures DIVISION has taken to ensure their safety.")
+		+translate("When you share an intimate moment with your Heart,").trigger
+		+translate("spend Darkness Tokens and roll.")
+		+rolldark("The Weakness of My Heart")
+	p
+		+translate("On an 8-10").result
+		+translate("the entity within you loses its grasp on you,").bold
+		+translate("and your humanity blooms in fragile hands. Choose one:")
+	ul
+		li
+			+translate("Describe who you wish to be for your Heart,").bold
+			+translate("and clear all your")
+			+headlink("Conditions.","conditions")
+		li
+			+translate("Describe who you wish your Heart could be for you,").bold
+			+translate("gain")
+			+headlink("1 Bond","bonds")
+			+translate("with them and")
+			+headlink("1 Bond","bonds")
+			+translate("with")
+			+headlink("What the Darkness Demands of You.","demands","darkness")
+		li
+			+translate("Describe what you could have been together, if vengeance hadn’t claimed you.").bold
+			+translate("The entity within you changes in response, gain a temporary")
+			+headlink("Power of Darkness","powers","darkness")
+			+translate("that reflects this.")
+	p
+		+translate("On an 11+").result
+		+translate("the entity within you seeks control and your Heart goes too far to protect you.").bold
+		+translate("Choose one:")
+	ul
+		li
+			+translate("You push them away, betraying their love for you.").bold
+			+translate("Gain")
+			+headlink("2 Bonds","bonds")
+			+translate("with")
+			+headlink("What the Darkness Demands of You","demands","darkness")
+			+translate("but mark")
+			+headlink("a Condition","conditions")
+			+translate("to reflect how this makes you feel.")
+		li
+			+translate("You hold them close and watch vengeance consume a part of them.")
+			+spendruin(99,"Erase your Ruin track")
+			+translate("as the entity reshapes your Heart.")
+	p
+		+translate("On a 7-").result
+		+translate("your enemies use this opportunity to endanger your Heart. The Keeper will tell you what happens next, prepare for the worst.")

@@ -1,0 +1,60 @@
++expandable("Conditions")
+	div.instruction
+		+translate("Before changing a Condition’s name, make sure it is unmarked.")
+	.conditions
+		input(type='hidden' name='attr_playbook' class='pbselector' value='')
+		div(class='pbsummoned')
+			include summonedconditions.pug
+		div(class='pbsurge')
+			include surgeconditions.pug
+		div(class='pbfound')
+			include foundconditions.pug
+		div(class='pbshade')
+			include shadeconditions.pug
+		div(class='pblast')
+			include lastconditions.pug
+		div(class='pbfallen')
+			include fallenconditions.pug
+		div(class='pbhungry')
+			include hungryconditions.pug
+		div(class='pbbetrayed')
+			include betrayedconditions.pug
+		div(class='pbchained')
+			include chainedconditions.pug
+		div(class='pbuntethered')
+			include untetheredconditions.pug
+		div
+			input.view(type="hidden" name="attr_view_timelost" value="0")
+			div.viewable
+				+condition('Timelost',false,false,true)
+		each instance in [1,2]
+			div
+				input.view(type="hidden" name="attr_check_checkableruinadvance_newruincon_"+instance value="0")
+				div.viewable
+					+condition('',"ruincon",true)
+		div
+			fieldset(class="repeating_conditions")
+				+condition("additional",true)
+	+expandablesub("Breaking Point")
+		+translate("(when you mark your last named condition)")(class="instruction")
+		input(type='hidden' name='attr_playbook' class='pbselector' value='')
+		div(class='pbsummoned')
+			include summonedbreaking.pug
+		div(class='pbsurge')
+			include surgebreaking.pug
+		div(class='pbfound')
+			include foundbreaking.pug
+		div(class='pbshade')
+			include shadebreaking.pug
+		div(class='pblast')
+			include lastbreaking.pug
+		div(class='pbfallen')
+			include fallenbreaking.pug
+		div(class='pbhungry')
+			include hungrybreaking.pug
+		div(class='pbbetrayed')
+			include betrayedbreaking.pug
+		div(class='pbchained')
+			include chainedbreaking.pug
+		div(class='pbuntethered')
+			include untetheredbreaking.pug

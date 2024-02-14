@@ -1,0 +1,127 @@
++move("Unparalleled Resilience","untethered ruin move","selectable","dismissable")
+	p
+		+translate("You survived the unthinkable; your first community took away the love and safety of your home. That didn’t end you—and neither will holding back the apocalypse.")
+		+translate("When you are about to hit your Breaking Point,").trigger
+		+translate("you can choose to embrace perfection instead.").bold
+		+translate("Choose one:")
+	ul
+		li
+			+translate("Mark")
+			+ruin(1)
+			+translate("and tell everyone how a part of your body shows the imperfection that lies beneath your surface. You clear one")
+			+headlink("Condition","conditions")
+			+translate("and you avoid hitting your Breaking Point.")
+		li
+			+translate("Mark")
+			+ruin(2)
+			+translate("and reject one of your")
+			+headlink("Conditions,","conditions")
+			+translate("declaring that it will never control you again. Tell everyone how a part of your body becomes eerie and perfect when you purge yourself of this weakness. You permanently remove the rejected Condition from play. This removed Condition can’t be marked and is no longer on your list of Conditions. Cross it out. You clear all of your remaining Conditions and you avoid hitting your Breaking Point. You can choose this option until you have one Condition left.")
++move("I’ll Make You Proud","untethered ruin move","selectable","dismissable")
+	p
+		+translate("The one who made sure you were expelled from your community is alive and well, thriving in your absence. When you take this move, tell the Keeper why they rejected you and what lies they tell about you. Explain why you still crave their approval. Gain ")
+		+headlink("1 Bond","bonds")(class="bold term")
+		+translate(" with them.")
+	p
+		+translate("When you wonder if what you’re doing right now would impress them,").trigger
+		+translate("choose one:")
+	ul
+		li
+			+translate("Mark")
+			+ruin(1)
+			+translate("and describe a flashback in which they corrected your behavior and implied that they could be proud of you one day. How does it spur your need for acceptance? Clear one")
+			+headlink("Condition","conditions")
+			+translate("and gain")
+			+headlink("1 Bond","bonds")(class="bold term")
+			+translate("with them.")
+		li
+			+translate("Mark")
+			+ruin(2)
+			+translate("and they appear on the scene, defying logic or plausibility. They mysteriously offer to help you, for now. Gain")
+			+headlink("1 Bond","bonds")(class="bold term")
+			+translate("with them and")
+			+headlink("1 Bond","bonds")(class="bold term")
+			+translate("with")
+			+headlink("What the Darkness Demands of You.","demands","darkness")
++move("My Happy Family","untethered ruin move","selectable","dismissable")
+	p
+		+translate("You try to build something beautiful by creating a new community of your own.")
+		+translate("When you take this move,").trigger
+		+translate("declare who the first")
+		+translate("clone").bold.term
+		+translate("you create is, and why they love you.").bold
+		+translate("The Keeper will tell you what the new community needs to thrive. Name your community. Then, create your own personal Doomsday Clock with 8 ticks and name it")
+		+translate("My Happy Family.").bold.italic
+		+doomclock(8,0,"My Happy Family")
+	p
+		+translate("When you create a clone based on someone you know,").trigger
+		+translate("choose one:")
+	p
+		+translate("Mark")
+		+ruin(1,"1 Ruin")
+		+translate("and tick")
+		+translate("My Happy Family").bold.italic
+		+translate("once. Choose an NPC you have met, and create a clone of them. The Keeper tells you the one sign that reveals they are a clone. You gain")
+		+headlink("1 Bond","bonds")(class="bold term")
+		+translate("with them and they obey one order of yours before going home to your new community.")
+	p
+		+translate("Mark")
+		+ruin(2)
+		+translate("and tick")
+		+translate("My Happy Family").bold.italic
+		+translate("twice. Choose an NPC you have met, and describe the clone of them that you create right now to aid you. Each PC gains")
+		+headlink("1 Bond","bonds")(class="bold term")
+		+translate("with them. They do everything you ask and they would die for you if you demanded it. When they have carried out your order, they wait for your next command. If you dismiss them, they return to your new community.")
+	p
+		+translate("When the clock fills, the Keeper tells you what event makes your new community see you, their creator, for the monster you are. They turn against you and become a Faction, intent on hunting you down and destroying you. Give them a new name befitting their hatred. Once this Faction is established, clear the Doomsday Clock")
+		+translate("My Happy Family,").bold.italic
+		+translate("create a new clone for another new community and start a new clock.")
++move("Immaculate Reflection","untethered ruin move","selectable","dismissable")
+	p
+		+translate("A secret facility within DIVISION houses several of your alternate selves. You are drawn to one of your doppelgangers in particular—they are now your")
+		+translate("Mirror.").bold.term
+		+translate("Choose why you are drawn to your Mirror:")
+	ul
+		li
+			+translate("Their flaws remind you of your own")
+		li
+			+translate("They are closer to perfection than you could ever be")
+		li
+			+translate("They make you feel wanted")
+	p
+		+translate("When you take this move,").trigger
+		+translate("create your own personal Doomsday Clock with 6 ticks and name it").bold
+		+translate("Immaculate Reflection.").bold.italic
+		+translate("When you have a moment of intimacy with your Mirror, describe how it becomes harder to tell you apart and choose one:")
+		+doomclock(6,0,"Immaculate Reflection")
+	ul
+		li
+			+translate("Mark")
+			+ruin(1)
+			+translate("and tick")
+			+translate("Immaculate Reflection").bold.italic
+			+translate("once. Your Mirror tells you exactly what you want to hear: how perfect and brilliant and beautiful you are. Gain")
+			+headlink("1 Bond","bonds")(class="bold term")
+			+translate("with your Mirror and choose one")
+			+headlink("Power of Darkness","powers","darkness")
+			+translate("from any playbook that reflects your love. You have access to it, for now.")
+		li
+			+translate("Mark")
+			+ruin(2)
+			+translate("and tick")
+			+translate("Immaculate Reflection").bold.italic
+			+translate("twice. You tell your Mirror how your love will destroy them. Gain")
+			+headlink("1 Bond","bonds")(class="bold term")
+			+translate("with your Mirror and gain two new permanent")
+			+headlink("Powers of Darkness,","powers","darkness")
+			+translate("one that reflects the Harbinger in you, and one that reflects the Harbinger in them.")
+	p
+		+translate("When the")
+		+translate("Immaculate Reflection").bold.italic
+		+translate("clock fills, your Mirror reveals to you that the only way to reach perfection is to give into the darkness. They offer you a choice: embrace them now and join with them to become the next Harbinger of the apocalypse, or remain as you are.")
+	p
+		+translate("Whatever the current Mystery is, it is set aside. In this moment, if you join with your Mirror, you become the next Harbinger of the apocalypse, emerging from an ancient Door of Power. You are no longer part of DIVISION. You merge and become the most powerful version of yourself that you could ever imagine. Give yourself a new name and title befitting your transcendence. Tell everyone how your first community reacts when your darkness threatens to tear apart the world. The other PCs must deal with you, one way or another. Once your apocalyptic threat is dealt with, retire this character and create a new one.")
+	p
+		+translate("If you reject your Mirror, you remain as you are and they wield your power with more beauty and devastation than you ever could. Give them a new name and title befitting their flawlessness. You and the other PCs must deal with your Mirror, one way or another. Once this apocalyptic threat is dealt with, decide if you will leave DIVISION or stay. If you leave, retire this character and create a new one. If you stay, clear the Doomsday Clock")
+		+translate("Immaculate Reflection").bold.italic
+		+translate("and choose a new Mirror.")
