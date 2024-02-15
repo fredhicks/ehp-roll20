@@ -325,6 +325,9 @@ select
 	span.sheet-Icon-Abyss, span.sheet-Icon-Dreams, span.sheet-Icon-Sky, span.sheet-Icon-Stars
 		height: #{$bigicon}
 		width: #{$bigicon}
+	input[type="text"]
+		font-size: #{$bigsize}
+		width: 300px
 
 input.sheet-HideNull
 	&[value=""], &[value="0"]
@@ -421,7 +424,20 @@ input.sheet-Mode-Playset-Sheet
 				div.sheet-Playset-Sheet-#{$sheet}
 					display: block
 
-$playbooks: Enigma, Stranger, TimeTraveller, Harmony, Guardian, Outsider, UnlikelyHero
+$playbooks: Enigma, Stranger, TimeTraveller, Harmony, Guardian, Outsider, UnlikelyHero, CUSTOM
+
+.sheet-Playbook-CUSTOM
+	.repitem
+		.sheet-Ability
+			input[type="text"]
+				font-weight: bold
+			.sheet-Ability-Text
+				button.sheet-button-header-expand
+					padding: 2px
+					&:before
+						font-size: #{$bodysize}
+						content: 'p'
+
 
 input.sheet-Mode-Playbook
 	~, ~ *

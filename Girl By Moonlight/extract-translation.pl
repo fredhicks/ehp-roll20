@@ -12,10 +12,10 @@ $htext = $stext;
 $htext =~ s/<!--\ntranslation.json:\n.*\n}\nEND_TRANSLATIONS\n*-->//s;
 
 if ( $text ne $stext ) {
-	open(F,">translation.json");
+	open(F,">/Users/evilhat/Dropbox/GitHub/ehp-roll20/Girl\ By\ Moonlight/translation.json");
 	print F $text;
 	close(F);
-	open(F,">GBM.html");
+	open(F,">/Users/evilhat/Dropbox/GitHub/ehp-roll20/Girl\ By\ Moonlight/GBM.html");
 	print F $htext;
 	close(F);
 }

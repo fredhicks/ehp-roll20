@@ -58,6 +58,8 @@ mixin select(a)
 
 mixin textarea(a)
 	textarea(name="attr_"+a)&attributes(attributes)
+		if block
+			block
 
 mixin toggle(a,v)
 	- if ( typeof(v) == "undefined" ) { v = 0; }

@@ -172,7 +172,7 @@ script(type="text/worker")
 		});
 
 
-		on("#{toggleclicks}", function(e) {
+		on("#{toggleclicks} clicked:repeating_customabilities:mark clicked:repeating_customabilities:editme clicked:repeating_customtranscendent:mark clicked:repeating_customtranscendent:editme", function(e) {
 			var id = "";
 			if ( typeof e.sourceAttribute !== "undefined" && e.sourceAttribute !== "" ) {
 				id = e.sourceAttribute;
@@ -623,7 +623,8 @@ script(type="text/worker")
 				"Harmony": ["Empathize","Forgive"],
 				"Guardian": ["Defy","Perceive"],
 				"Outsider": ["Defy","Express"],
-				"UnlikelyHero": ["Confess","Forgive"]
+				"UnlikelyHero": ["Confess","Forgive"],
+				"CUSTOM": []
 			};
 			var a = {};
 			if ( prev != "" ) {

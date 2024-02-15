@@ -65,6 +65,34 @@ include playbook-abilities-variables.pug
 								+text(tfid)
 							else
 								+hidden(tfid)
+		.sheet-Playbook-CUSTOM
+			i
+				+translate("Add your custom abilities here.")
+			fieldset.repeating_customabilities
+				.sheet-Ability
+					.sheet-Ability-Selector
+						+abilityMark("mark")
+						+hidden('editme',0).sheet-hide-on-one
+						.extra-stuff
+							+toggle("editme",0)
+						+hidden('editme',0).sheet-hide-on-one
+						.extra-stuff
+							button(name="share_ability", type="roll", data-i18n-title='Share to chat', value="&{template:chatshare} {{charname=@{character_name}}} {{title=@{name}}} {{effect=@{effect}}}", style="padding: 0; margin: 0").sheet-button-chatshare
+					.sheet-Ability-Text
+						+hidden('editme',0).sheet-hide-on-zero
+						.displaymode
+							b
+								+display("name")
+								|:
+							+display("effect")
+							+toggle("editme",0)(style="padding: 0; margin: 0")
+							button(name="share_ability", type="roll", data-i18n-title='Share to chat', value="&{template:chatshare} {{charname=@{character_name}}} {{title=@{name}}} {{effect=@{effect}}}", style="padding: 0; margin: 0").sheet-button-chatshare
+						+hidden('editme',0).sheet-hide-on-one
+						.editmode
+							+text('name','Ability Name')
+							+textarea('effect')
+								|Ability Text
+
 		+hidden('Ability-Veteran',0).sheet-hide-if-unused
 		.sheet-Ability-Veteran-Header
 			.sheet-Label
@@ -159,3 +187,30 @@ include playbook-abilities-variables.pug
 									+text(tfid)
 								else
 									+hidden(tfid)
+		.sheet-Playbook-CUSTOM
+			i
+				+translate("Add your custom transcendent abilities here.")
+			fieldset.repeating_customtranscendent
+				.sheet-Ability
+					.sheet-Ability-Selector
+						+abilityMarkTranscendent("mark")
+						+hidden('editme',0).sheet-hide-on-one
+						.extra-stuff
+							+toggle("editme",0)
+						+hidden('editme',0).sheet-hide-on-one
+						.extra-stuff
+							button(name="share_ability", type="roll", data-i18n-title='Share to chat', value="&{template:chatshare} {{charname=@{character_name}}} {{title=@{name}}} {{effect=@{effect}}}", style="padding: 0; margin: 0").sheet-button-chatshare
+					.sheet-Ability-Text
+						+hidden('editme',0).sheet-hide-on-zero
+						.displaymode
+							b
+								+display("name")
+								|:
+							+display("effect")
+							+toggle("editme",0)(style="padding: 0; margin: 0")
+							button(name="share_ability", type="roll", data-i18n-title='Share to chat', value="&{template:chatshare} {{charname=@{character_name}}} {{title=@{name}}} {{effect=@{effect}}}", style="padding: 0; margin: 0").sheet-button-chatshare
+						+hidden('editme',0).sheet-hide-on-one
+						.editmode
+							+text('name','Ability Name')
+							+textarea('effect')
+								|Ability Text
