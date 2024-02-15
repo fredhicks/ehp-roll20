@@ -69,6 +69,7 @@ include playbook-abilities-variables.pug
 			i
 				+translate("Add your custom abilities here.")
 			fieldset.repeating_customabilities
+				+hidden("mark",0).sheet-hide-if-unused
 				.sheet-Ability
 					.sheet-Ability-Selector
 						+abilityMark("mark")
@@ -191,6 +192,7 @@ include playbook-abilities-variables.pug
 			i
 				+translate("Add your custom transcendent abilities here.")
 			fieldset.repeating_customtranscendent
+				+hidden("mark",0).sheet-hide-if-unused
 				.sheet-Ability
 					.sheet-Ability-Selector
 						+abilityMarkTranscendent("mark")
