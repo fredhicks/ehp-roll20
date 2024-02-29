@@ -12,4 +12,25 @@
 		+translate('<ul><li>What is most dangerous here?<li>Who here is afraid?<li>How can I help [X]?<li>Who will my foes try to single out?<li>Who here is willing to do violence?<li>Who here is hurting?</ul>').sheet-Playbook-Guardian
 		+translate('<ul><li>Where’s my rival, what are they doing?<li>What are your secret pains?<li>How can I gain an edge here?<li>What’s the danger no one else sees?<li>What’s really going on here?<li>What here can be broken?</ul>').sheet-Playbook-Outsider
 		+translate('<ul><li>What is most dangerous here?<li>Who here is feeling [X]?<li>What are you really feeling?<li>Who here is strong or vulnerable?<li>Where can I find beauty here?<li>What are your unmet needs?</ul>').sheet-Playbook-UnlikelyHero
+		.sheet-Playbook-CUSTOM
+			.extra-stuff
+				+editToggle("Toggle-CUSTOM-GatherInfo-Questions-Edit",0)
+				b
+					+translate("Gather Info questions:")
+			+hidden('Toggle-CUSTOM-GatherInfo-Questions-Edit',0).sheet-hide-on-one
+			.editzone
+				ul
+					- var i = 1;
+					while i <= 6
+						li
+							+text("CUSTOM-GatherInfo-item-"+i)
+						- i++;
+			+hidden('Toggle-CUSTOM-GatherInfo-Questions-Edit',0).sheet-hide-on-zero
+			.displayzone
+				ul
+					- var i = 1;
+					while i <= 6
+						li
+							+display("CUSTOM-GatherInfo-item-"+i)
+						- i++;
 		+translate('<b>When you roll...</b><ul><li><b>1-3</b>: 1 question.<li><b>4-5</b>: 1 question and 1 follow-up.<li><b>6</b>: 2 questions and 1 follow-up.<li><b>Critical</b>: Improved effect, additional questions, or volunteered information.</ul>')

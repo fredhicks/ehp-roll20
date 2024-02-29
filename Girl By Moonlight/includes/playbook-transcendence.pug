@@ -6,13 +6,24 @@
 	+hidden('Transcendence-Total',0).sheet-Stress-Total
 	+hidden('Toggle-Transcendence-Expand').sheet-hide-on-one
 	.sheet-Transcendence-Track
-		span.sheet-Playbook-Enigma.sheet-Playbook-Stranger.sheet-Playbook-TimeTraveller.sheet-Playbook-Harmony.sheet-Playbook-Guardian.sheet-Playbook-Outsider
+		.sheet-Playbook-Enigma.sheet-Playbook-Stranger.sheet-Playbook-TimeTraveller.sheet-Playbook-Harmony.sheet-Playbook-Guardian.sheet-Playbook-Outsider.sheet-Playbook-UnlikelyHero
+			span.sheet-Playbook-Enigma.sheet-Playbook-Stranger.sheet-Playbook-TimeTraveller.sheet-Playbook-Harmony.sheet-Playbook-Guardian.sheet-Playbook-Outsider
 
-			+starMark('Transcendence-1')
-		- var i = 2;
-		while i <= 4
-			+starMark('Transcendence-'+i)
-			- i++;
+				+starMark('Transcendence-1')
+			- var i = 2;
+			while i <= 4
+				+starMark('Transcendence-'+i)
+				- i++;
+		.sheet-Playbook-CUSTOM
+			- var i = 1;
+			while i <= 4
+				+hidden('customstars'+i,'1').sheet-hide-on-zero
+				span
+					+starMark('Transcendence-'+i)
+				- i++;
 	+hidden('Transcendence-4','0').sheet-hide-on-zero
 	.sheet-Transcendence-Warning
 		+translate('transcendence ends')
+	.sheet-Playbook-CUSTOM(style="text-align: center")
+		+translate("Custom track length:")
+		+number("customstars",4)(min=1,max=4)

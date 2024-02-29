@@ -190,6 +190,31 @@ script(type="text/worker")
 			});
 		});
 
+		on("change:customstars", function(e) {
+			log("Custom Stars Changed");
+			var snum = 4;
+			var atts = {};
+			if( typeof(e.newValue) !== "undefined" && e.newValue !== "" ) {
+				if ( !Number.isNaN(e.newValue) ) {
+					snum = Math.floor(Number(e.newValue));
+					if ( snum < 1 ) { snum = 1; }
+					if ( snum > 4 ) { snum = 4; }
+				} else {
+					snum = 4;
+				}
+			}
+			atts["customstars"] = snum;
+			for ( var i = 1 ; i <= 4 ; i++ ) {
+				if ( i <= snum ) {
+					atts["customstars"+(5-i)] = 1; // It needs to count down from 4 rather than up from 1, because Transcendence-4 is what triggers the warning that you're falling into Eclipse
+				} else {
+					atts["customstars"+(5-i)] = 0;
+				}
+			}
+			log(atts);
+			setAttrs(atts);
+		});
+
 		on("change:Choose-Veteran-Ability", function(e) {
 			// e.previousValue
 			// e.newValue
