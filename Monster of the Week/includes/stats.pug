@@ -32,7 +32,10 @@
 		.sheet-Expander
 			input.sheet-SkinCheck(type='hidden', name='attr_SkinCheck', value='0')
 			|  
-			span(data-i18n='stats-overwrite-warning') Choose your set of starting stats. (This will overwrite current stats values!)
+			.sheet-NoSurvivor
+				span(data-i18n='stats-overwrite-warning') Choose your set of starting stats. (This will overwrite current stats values!)
+			.sheet-Survivor
+				+translate('Allocate the following values amongst the ratings (Charm, Cool, Sharp, Tough, and Weird) as suited to your concept: +1, =0, -1, -1, -2.')
 			.sheet-Chosen
 				select.sheet-StartingStats(name='attr_StartingStats', width='150px')
 					option(value='', checked='', data-i1n='', data-i18n='choose-starting-stats') Choose a set

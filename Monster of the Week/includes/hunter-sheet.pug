@@ -93,6 +93,9 @@
 					// Custom Playbook Specials
 					include specials-custom.pug
 
+					// Survivor Playbook Specials
+					include specials-survivor.pug
+
 					// Havens
 					include havens.pug
 
@@ -132,6 +135,9 @@
 				.sheet-col
 					// right column
 					input.sheet-SkinCheck(type='hidden', name='attr_SkinCheck', value='0')
+
+					// Survivor Playbook's special leveling mechanism
+					include survivor-leveling.pug
 
 					// Monstrous Playbook's Attacks
 					include attacks-monstrous.pug

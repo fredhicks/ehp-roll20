@@ -10,6 +10,13 @@ span.sheet-ExpHeader
 		include sheet-header-pronouns.pug
 		include sheet-header-selection.pug
 	input.sheet-SkinCheck(type='hidden', name='attr_SkinCheck', value='0')
+	.sheet-Survivor
+		p
+			+translate('Concept').sheet-Label
+			|  
+			br
+			input(type='text', name='attr_Look', style='width: 98%')
+	input.sheet-SkinCheck(type='hidden', name='attr_SkinCheck', value='0')
 	.sheet-NoKeep.sheet-NoTeams.sheet-NoCommunity
 		span.sheet-Label(data-i18n='character-look') Look
 		|  

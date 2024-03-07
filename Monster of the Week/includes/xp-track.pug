@@ -1,4 +1,5 @@
 .sheet-XP
+	input.sheet-SkinCheck(type='hidden', name='attr_SkinCheck', value='0')
 	.sheet-Subsection
 		span(data-i18n='experience') Experience
 	p(align='center')
@@ -12,19 +13,28 @@
 		span.sheet-altbox
 		input.sheet-checkbox(type='checkbox', name='attr_XP5')
 		span.sheet-altbox
-	input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-XP-Instructions', value='1', checked='')
-	span.sheet-anglebox
-	|  
-	span.sheet-ExpHeader
-		span(data-i18n='instructions') Instructions
-	.sheet-Expander
-		span(data-i18n='experience-description')
-			| Mark 
-			i Experience
-			|  when a roll totals 6 or less; or when a move tells you to do so
-		| .
-		span(data-i18n='xp-description')
-			| Once you have filled all 5 boxes, uncheck them and choose an 
-			i Improvement
-			|  option
-		| .
+	.sheet-NoSurvivor
+		input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-XP-Instructions', value='1', checked='')
+		span.sheet-anglebox
+		|  
+		span.sheet-ExpHeader
+			span(data-i18n='instructions') Instructions
+		.sheet-Expander
+			span(data-i18n='experience-description')
+				| Mark 
+				i Experience
+				|  when a roll totals 6 or less; or when a move tells you to do so
+			| . 
+			span(data-i18n='xp-description')
+				| Once you have filled all 5 boxes, uncheck them and choose an 
+				i Improvement
+				|  option
+			| .
+	.sheet-Survivor
+		input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-XP-Instructions', value='1', checked='')
+		span.sheet-anglebox
+		|  
+		span.sheet-ExpHeader
+			span(data-i18n='instructions') Instructions
+		.sheet-Expander
+			+translate('Mark an experience box whenever:<ul><li>You roll for a move.<li>You roll a 6 or less on a move (in addition to the mark for rolling a move).<li>You suffer harm.<li>Something else tells you to.</ul>')

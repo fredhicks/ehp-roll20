@@ -1,3 +1,41 @@
+To create a survivor, follow these steps:
+- Pick a name, pronouns, and basic concept (such as a job, interest, or stereotype).
+- Pick your looks.
+- Set your ratings. Allocate +1, 0, -1, -1, -2 amongst Charm, Cool, Sharp, Tough, and Weird to fit your concept.
+- Pick a personal move from the list in the survivor playbook.
+- Pick an option from the fighting and gear list. You also have your regular clothes and personal possessions.
+- Decide on any final details about your survivor.
+- Wait for everyone to catch up and then in turn introduce your survivor(s) to the group.
+- Go around the group again and on your turn, pick a history option for another survivor. Optionally add one or two more history picks, but one is enough.
+
+Survivors are different from hunters in a few important ways. Folks familiar with playing hunters in Monster of the Week need to know:
+- Your ratings are much lower.
+- You don’t start with any Luck points, although you can earn them (either via a personal survivor move or when levelling up).
+- You don’t have access to the hunter basic moves. Instead, you’ll use the much less effective survivor basic move set (these are in the playbook). In particular, be aware that starting survivors can’t fight monsters effectively or use magic.
+- You have your own survivor agenda, different to the hunter agenda.
+- The Keeper has an updated agenda and principles too, making things harder.
+- Most of the other rules (like the Keeper’s moves and peripheral moves) are the same.
+
+HIDE
+x Luck Special
+x Allies and Teams
+x Standard Improvements instructions/subsections
+
+KEEP 
+x History
+x Gear
+x Moves 
+	x Short list of personal moves
+	x Improved Survivor Moves
+
+SPECIAL
+x Survivor-only in-playbook representation of the basic moves
+x "Levelling" as a way of tracking improvements
+x Instructions on XP gain triggers is different: Default: "Mark Experience when a roll totals 6 or less; or when a move tells you to do so.Once you have filled all 5 boxes, uncheck them and choose an Improvement option." Survivor adds: When you roll for a move; when you suffer harm; when something else tells you to. The "once you have filled in" differs a little bit too. 
+x You start with no Luck available, but may earn it in play—fill in the box border then, and you may later mark it.
+x Scenario Aftermath Tracker
+x Survivor Agenda
+
 Playbooks:
 - Codex Apocrypha
 	- New Playbooks

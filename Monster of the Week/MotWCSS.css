@@ -116,8 +116,8 @@ span.sheet-Custom, div.sheet-Custom
 }
 
 .sheet-SkinCheck[value="30"] ~ div.sheet-NoSurvivor,
-.sheet-SkinCheck[value="30"] ~  div > span > span.sheet-NoSurvivor,
-.sheet-SkinCheck[value="30"] ~  div > span.sheet-NoSurvivor {
+.sheet-SkinCheck[value="30"] ~ div > span > span.sheet-NoSurvivor,
+.sheet-SkinCheck[value="30"] ~ div > span.sheet-NoSurvivor {
 	display: none;
 }
 
@@ -1172,4 +1172,40 @@ table.sheet-Bone-Materials td {
 
 .sheet-darkmode .tab-content .charsheet table.sheet-Bone-Materials td {
 	border: 1px solid #990000;
+}
+
+input.sheet-UpToSeven ~ span {
+	display: none;
+}
+
+input.sheet-UpToSeven[value="7"] + span, 
+input.sheet-UpToSeven[value="7"] + span + span, 
+input.sheet-UpToSeven[value="7"] + span + span + span, 
+input.sheet-UpToSeven[value="7"] + span + span + span + span, 
+input.sheet-UpToSeven[value="7"] + span + span + span + span + span, 
+input.sheet-UpToSeven[value="7"] + span + span + span + span + span + span, 
+input.sheet-UpToSeven[value="7"] + span + span + span + span + span + span + span, 
+input.sheet-UpToSeven[value="6"] + span + span, 
+input.sheet-UpToSeven[value="6"] + span + span + span, 
+input.sheet-UpToSeven[value="6"] + span + span + span + span, 
+input.sheet-UpToSeven[value="6"] + span + span + span + span + span, 
+input.sheet-UpToSeven[value="6"] + span + span + span + span + span + span, 
+input.sheet-UpToSeven[value="6"] + span + span + span + span + span + span + span, 
+input.sheet-UpToSeven[value="5"] + span + span + span, 
+input.sheet-UpToSeven[value="5"] + span + span + span + span, 
+input.sheet-UpToSeven[value="5"] + span + span + span + span + span, 
+input.sheet-UpToSeven[value="5"] + span + span + span + span + span + span, 
+input.sheet-UpToSeven[value="5"] + span + span + span + span + span + span + span, 
+input.sheet-UpToSeven[value="4"] + span + span + span + span, 
+input.sheet-UpToSeven[value="4"] + span + span + span + span + span, 
+input.sheet-UpToSeven[value="4"] + span + span + span + span + span + span, 
+input.sheet-UpToSeven[value="4"] + span + span + span + span + span + span + span, 
+input.sheet-UpToSeven[value="3"] + span + span + span + span + span, 
+input.sheet-UpToSeven[value="3"] + span + span + span + span + span + span, 
+input.sheet-UpToSeven[value="3"] + span + span + span + span + span + span + span, 
+input.sheet-UpToSeven[value="2"] + span + span + span + span + span + span, 
+input.sheet-UpToSeven[value="2"] + span + span + span + span + span + span + span, 
+input.sheet-UpToSeven[value="1"] + span + span + span + span + span + span + span 
+{
+	display: initial;
 }

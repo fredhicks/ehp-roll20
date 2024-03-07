@@ -1,0 +1,25 @@
+.sheet-Survivor
+	input.sheet-SkinCheck(type='hidden', name='attr_SkinCheck', value='0')
+	.sheet-Subsection
+		+translate('Levelling Up')
+	p(align='center')
+		- var i = 1;
+		while i < 11
+			if i == 6
+				| &nbsp;&nbsp;
+			input.sheet-checkbox(type='checkbox', name='attr_Level'+i)
+			span.sheet-altbox
+			- i++;
+	div
+		input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Level-Instructions', value='1', checked='')
+		span.sheet-anglebox
+		|  
+		span.sheet-ExpHeader
+			span(data-i18n='instructions') Instructions
+		.sheet-Expander
+			+translate('When you’ve filled all five experience boxes, you level up. Erase all experience marks, pick an improvement, and mark a level gained here.')
+	p
+	.sheet-MinorHead
+		+translate('Improvements')
+	+expander('Survivor-Improvements-Expand')
+		+translate('You may select each as many times as appropriate.<ul><li>Get +1 to a rating. The maximum you can have are a +2, two +1, a 0, and a -1.<li>Gain an improved survivor move.<li>Find a useful tool or weapon.<li>Gain a Luck box, to be spent in the future. Maximum is 7 Luck boxes.<li>Heal 1 harm and clear “unstable.”</ul>')

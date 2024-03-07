@@ -1,0 +1,20 @@
+.sheet-Survivor
+	input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-GearUnused-Hider', value='1', checked='')
+	p
+		+translate('You start with your clothing and personal possessions (as appropriate to the scenario).')
+	p
+		+translate('You can use this attack:')
+	+move('Survivor-Gear','Untrained and unarmed (0-harm hand)',false,true)
+	p
+		+translate('You also get one of these:')
+	+move('Survivor-Gear','Martial artist (0-harm intimate/hand 1-armour)')
+	+move('Survivor-Gear','Handgun (2-harm close loud reload)')
+	+move('Survivor-Gear','Baseball bat or similar (1-harm hand)')
+	+move('Survivor-Gear','Leather or padded jacket (1-armour)')
+	+move('Survivor-Gear','Multitool')
+	+move('Survivor-Gear','Flashlight')
+	+move('Survivor-Gear','Flask or bottle of booze')
+	+move('Survivor-Gear','Music player')
+	+move('Survivor-Gear','Snacks')
+	+move('Survivor-Gear','Pocket first aid kit (clear unstable or heal 1-harm, one use only)')

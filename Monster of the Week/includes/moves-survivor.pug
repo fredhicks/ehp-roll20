@@ -1,0 +1,44 @@
+.sheet-Survivor
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-MovesUnused', value='1', checked='')
+	.sheet-MinorHead
+		br
+		+translate('Personal Moves')
+	p
+		i
+			+translate('You get all the basic survivor moves, and one personal move. Pick one of these:')
+	+move('Survivor-Move-Personal','<b>Authoritative:</b> People tend to pay attention to what you say and take it seriously. You get +1 ongoing to <b>call for help,</b> and bystanders will go along with your suggestions (unless obviously dangerous).','share')
+	+move('Survivor-Move-Personal','<b>Baggage:</b> You had a previous encounter with this evil. The Keeper will immediately give you a terrible insight about what’s going on, and a useful fact that will help you survive. You may ask follow-up questions, but you’re not owed any answers.','share')
+	+move('Survivor-Move-Personal','<b>Banter:</b> If you have some time out of danger, you may make jokes and chat. Everyone present takes +1 forward.','share')
+	+move('Survivor-Move-Personal','<b>Bonded:</b> Pick another person. Get +1 ongoing when they’re the focus of a move roll you make.','share')
+	+move('Survivor-Move-Personal','<b>Cautious:</b> When you suffer harm that you had a chance to prepare for, take 1 less.','share')
+	+move('Survivor-Move-Personal','<b>Curious:</b> When you roll <b>what’s going on</b> or <b>figure it out,</b> you learn an extra fact.','share')
+	+move('Survivor-Move-Personal','<b>Geared Up:</b> You brought lots of stuff. Take three more items from the gear list, and one extra of your choice (with the Keeper’s agreement).','share')
+	+move('Survivor-Move-Personal','<b>Healthy:</b> When you get a few minutes of rest after a danger has passed, heal 1-harm or clear unstable.','share')
+	+move('Survivor-Move-Personal','<b>Lucky:</b> Start with 2 Luck boxes instead of none.','share')
+	+move('Survivor-Move-Personal','<b>Self-Taught Magician:</b> You start knowing the <b>attempt a spell</b> move, plus you’ve found or otherwise learned one spell. Choose the spell’s single effect from the hunter basic <b>use magic</b> move options, the Keeper chooses requirements as usual.','share')
+	+move('Survivor-Move-Personal','<b>This Old Thing?:</b> You have some small, special item that will be useful to survive this situation. Decide what it is with the Keeper.','share')
+	+move('Survivor-Move-Personal','<b>Touch of the Odd:</b> When you <b>open yourself to the evil here,</b> gain an extra insight. When you <b>attempt a spell,</b> take +1 forward your first time for each spell.','share')
+	+move('Survivor-Move-Personal','<b>Warrior Soul:</b> When you attack someone or something, you do +1 harm.','share')
+
+	.sheet-MinorHead
+		br
+		+translate('Improved Survivor Moves')
+	p
+		i
+			+translate('You may gain these as you level up.')
+	+move('Survivor-Move-Improved','<b>Attempt a Spell:</b> When you try to cast a spell you found, ask the Keeper what it requires. When you have prepared the necessaries, roll +Weird. On a 10+, it works but you suffer 1-harm or draw unwanted attention (your choice). On a 7–9, something isn’t right—you may stop, redo your preparations, and try again with +1 forward, or go ahead and cast but suffer 3-harm or release uncontrolled magic (Keeper’s choice). On a 6 or less, something terrible happens.','share')
+		button.sheet-2d6-button(type='roll', value="&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Attempt a Spell}} {{Roll=[[2d6+?{Attempt a Spell with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}", name='roll_dplay')
+	+move('Survivor-Move-Improved','<b>Avoid Danger:</b> When you or someone else is about to suffer harm and you try to avoid or prevent it, roll +Tough. On a 10+, you avoid it—reduce harm suffered by 3. On a 7–9, you avoid 1-harm. On a 6 or less, it’s worse than you thought (maybe because of what you tried).','share')
+		button.sheet-2d6-button(type='roll', value="&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Avoid Danger}} {{Roll=[[2d6+?{Avoid Danger with|Tough (Default),@{Tough}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}", name='roll_dplay')
+	+move('Survivor-Move-Improved','<b>Fight Back:</b> When you are attacked and you fight right back, roll +Tough. On a 10+, deal your harm to it and either suffer half harm back or suffer full harm and drive it away momentarily. On a 7–9, deal and suffer full harm. On a 6 or less, it’s going to go very badly for you.','share')
+		button.sheet-2d6-button(type='roll', value="&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Fight Back}} {{Roll=[[2d6+?{Fight Back with|Tough (Default),@{Tough}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}", name='roll_dplay')
+	+move('Survivor-Move-Improved','<b>Help Someone Out:</b> When you help someone with a difficult task, roll +Cool. On a 10+, your help makes a difference and they take +1 forward. On a 7–9, you help at a cost—they get +1 forward and you suffer a consequence. On a 6 or less, your help puts you both at greater risk.','share')
+		button.sheet-2d6-button(type='roll', value="&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Help Someone Out}} {{Roll=[[2d6+?{Help Someone Out with|Cool (Default),@{Cool}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}", name='roll_dplay')
+	+move('Survivor-Move-Improved','<b>Figure It Out:</b> When you investigate and try to work out what the fuck is going on here, roll +Sharp. On a 10+, you learn a fact that’ll help you survive. On a 7–9, you learn a fact that’ll help you survive but it comes at a cost. On a 6 or less, you learn a fact you really don’t want to be true. In all cases, the Keeper will tell you something you might have seen, deduced, or otherwise figured out.','share')
+		button.sheet-2d6-button(type='roll', value="&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Figure It Out}} {{Roll=[[2d6+?{Figure It Out with|Sharp (Default),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}", name='roll_dplay')
+	+move('Survivor-Move-Improved','<b>Look for Danger:</b> When you scan the area for hidden threats, dangers, or potential advantages, roll +Sharp. On a 10+, you learn two things. On a 7–9, you learn one thing. On a 6 or less, you learn one thing but it’s all worse than you thought. In all cases, the Keeper will tell you something you could have noticed or figured out.','share')
+		button.sheet-2d6-button(type='roll', value="&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Look for Danger}} {{Roll=[[2d6+?{Look for Danger with|Sharp (Default),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}", name='roll_dplay')
+	+move('Survivor-Move-Improved','<b>Plead:</b> When you plead for someone to act against their interests, roll +Charm. For another survivor, on a 10+, they may do it or not but if they do, they gain an experience mark and you get +1 forward. On a 7–9, it’s the same but they suffer extra consequences. For other people, on a 10+, they do it—you owe them—and you get +1 forward. On a 7–9, it’s the same but they’re put into danger. For all, on a 6 or less, you waste time.','share')
+		button.sheet-2d6-button(type='roll', value="&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Plead}} {{Roll=[[2d6+?{Plead with|Charm (Default),@{Charm}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}", name='roll_dplay')
+	+move('Survivor-Move-Improved','<b>Stay Calm:</b> When you need to stay calm to do something hard, roll +Cool. On a 10+, you do it just fine. On a 7–9, you may withdraw and try something else or do it at a cost. On a 6 or less, you’re freaking out—do it very badly, or give up your plan in despair.','share')
+		button.sheet-2d6-button(type='roll', value="&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Stay Calm}} {{Roll=[[2d6+?{Stay Calm with|Cool (Default),@{Cool}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}", name='roll_dplay')

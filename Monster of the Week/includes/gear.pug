@@ -1,6 +1,10 @@
 .sheet-Gear
+	input.sheet-SkinCheck(type='hidden', name='attr_SkinCheck', value='0')
 	.sheet-Subsection
 		span(data-i18n='gear') Gear
+		|  
+		span.sheet-Survivor
+			+translate('and Fighting')
 	input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-GearAll-Hider', value='1', checked='')
 	span.sheet-anglebox
 	|  
@@ -44,6 +48,7 @@
 		include gear-spooktacular.pug
 		include gear-spooky.pug
 		include gear-summoned.pug
+		include gear-survivor.pug
 		include gear-traveler.pug
 		include gear-wronged.pug
 		include gear-nonlethal.pug
