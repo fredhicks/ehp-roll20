@@ -2,18 +2,16 @@
 
 print "should only be run the once\n"; exit;
 
-# @playbooks = qw(agents road entourage guardians imps crisis survivors league mercenaries mysteryclub nightshift suburbanwatch band whistleblowers fugitives);
-@playbooks = qw(league mercenaries mysteryclub nightshift suburbanwatch band whistleblowers fugitives);
+@playbooks = qw(hauntbusters armyofone squareone doomedworld monsterrevs lineage thrillseekers);
 @files = qw(style moves enemies allies assets);
 %pbs = (
-	'league' => 'League',
-	'mercenaries' => 'Mercenaries',
-	'mysteryclub' => 'MysteryClub',
-	'nightshift' => 'NightShift',
-	'suburbanwatch' => 'SuburbanWatch',
-	'band' => 'Band',
-	'whistleblowers' => 'Whistleblowers',
-	'fugitives' => 'Fugitives',
+	'hauntbusters' => 'Hauntbusters',
+	'armyofone' => 'ArmyOfOne',
+	'squareone' => 'SquareOne',
+	'doomedworld' => 'DoomedWorld',
+	'monsterrevs' => 'MonsterRevs',
+	'lineage' => 'Lineage',
+	'thrillseekers' => 'ThrillSeekers',
 );
 
 foreach $f ( @files ) {

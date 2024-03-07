@@ -1,0 +1,13 @@
+.sheet-ThrillSeekers
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Style-Unused', value='1', checked='')
+	+move('ThrillSeekers-Style','<b>Up the Ante:</b> We came here to play and slay. At the end of each session, ask: “Did we make things more challenging, just for the fun of it?”')
+	+move('ThrillSeekers-Style','<b>No Hesitation:</b> In a monster hunter’s life, there’s no room for doubt. At the end of each session, ask: “Did we take on impossible odds, throwing caution to the wind?”')
+	+move('ThrillSeekers-Style','<b>The Biggest and the Baddest:</b> Monsters will learn to fear us, and look for us in the shadows. At the end of each session, ask: “Did we prove that no one else is as dangerous as we are?”')
+	+move('ThrillSeekers-Style','<b>Custom:</b> What’s your story?')
+		div
+			textarea(rows='2' name='attr_ThrillSeekers-Style-Custom-Story')
+		div
+			+translate('At the end of each session, ask:')
+		div
+			textarea(rows='2' name='attr_ThrillSeekers-Style-Custom-Question')
+

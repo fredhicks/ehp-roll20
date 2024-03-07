@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 
-@playbooks = qw(agents road entourage guardians imps crisis survivors league mercenaries mysteryclub nightshift suburbanwatch band whistleblowers fugitives);
+@playbooks = qw(hauntbusters armyofone squareone doomedworld monsterrevs lineage thrillseekers);
 @files = qw(style moves enemies allies assets);
 
 foreach $f ( @files ) {

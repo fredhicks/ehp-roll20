@@ -4,12 +4,21 @@ div
 	+expanderInstructions('Team-Getting-Started')
 		ul
 			input.sheet-TeamCheck(type='hidden', name='attr_TeamCheck', value='0')
+			.sheet-ArmyOfOne
+				li
+					+translate('Decide who you all are.')
+			.sheet-DoomedWorld
+				li
+					+translate('Describe your doomed world and what doomed it.')
 			.sheet-Survivors
 				li
 					+translate('Determine the nature of the Event.')
 			.sheet-Fugitives
 				li
 					+translate('Decide the history between you and the Wild Hunt.')
+			.sheet-Lineage
+				li
+					+translate('Pick your family name.')
 			li
 				+translate('Pick your style (and associated improvement question).')
 			.sheet-Agents
@@ -33,7 +42,10 @@ div
 			.sheet-Fugitives
 				li
 					+translate('Pick a starting team ally, move, and assets.')
-			.sheet-Agents.sheet-Road.sheet-Entourage.sheet-Guardians.sheet-IMPS.sheet-Crisis.sheet-Survivors.sheet-League.sheet-Mercenaries.sheet-MysteryClub.sheet-NightShift.sheet-SuburbanWatch.sheet-Band
+			.sheet-MonsterRevs
+				li
+					+translate('Pick your show’s format and name.')
+			.sheet-Agents.sheet-Road.sheet-Entourage.sheet-Guardians.sheet-IMPS.sheet-Crisis.sheet-Survivors.sheet-League.sheet-Mercenaries.sheet-MysteryClub.sheet-NightShift.sheet-SuburbanWatch.sheet-Band.sheet-Hauntbusters.sheet-ArmyOfOne.sheet-SquareOne.sheet-DoomedWorld.sheet-MonsterRevs.sheet-Lineage.sheet-ThrillSeekers
 				li
 					+translate('Pick a starting team enemy, ally, move, and 2 boxes of assets.')
 			.sheet-Road
@@ -78,3 +90,15 @@ div
 			.sheet-Fugitives
 				li
 					+translate('Stay wary, that sounded like howls on the wind.')
+			.sheet-Hauntbusters
+				li
+					+translate('Type “spooky places in [place I’m in now]” into a search engine.')
+			.sheet-SquareOne
+				li
+					+translate('Choose what caused your loss.')
+			.sheet-Lineage
+				li
+					+translate('Pick an heirloom for each team member.')
+			.sheet-ThrillSeekers
+				li
+					+translate('Describe why you teamed up to become thrill-seekers.')

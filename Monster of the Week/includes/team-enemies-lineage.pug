@@ -1,0 +1,13 @@
+.sheet-Lineage
+	p
+		+translate('This enemy has known of the family for generations. They know the lineage’s strengths and weaknesses, just as you know theirs. The enemy knows what the family heirlooms are and the family’s team moves.')
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Enemies-Unused', value='1', checked='')
+	+move('Lineage-Enemy','Tiamat, mother of dragons.')
+	+move('Lineage-Enemy','All the evil ghosts.')
+	+move('Lineage-Enemy','Lady Chaos, an immortal constantly working to increase her corrupt power.')
+	+move('Lineage-Enemy','The Malevolent One, a god of mischief.')
+	+move('Lineage-Enemy','The Awakened Astral Souls, a monster-worshipping cult that has been causing problems for millennia.')
+	+move('Lineage-Enemy','Something else:')
+		div
+			textarea(rows='2' name='attr_Lineage-Enemies-Custom')
+

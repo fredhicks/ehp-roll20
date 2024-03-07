@@ -1,0 +1,18 @@
+.sheet-Lineage
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Style-Unused', value='1', checked='')
+	+move('Lineage-Style','<b>It’s On Us:</b> When things get bad, you’re the ones who pick up the pieces. At the end of each session, ask: “Did we solve a mystery involving other hunter deaths, or did we prevent an apocalyptic threat?”')
+	+move('Lineage-Style','<b>Price of Celebrity:</b> It seems like every monster and hunter has heard of you. At the end of each session, ask: “Did our family’s fame amongst monsters and hunters cause or solve any problems?”')
+	+move('Lineage-Style','<b>Not You Again!:</b> Your family has a particular nemesis who is always causing problems. Pick your enemy with care, as their actions will be behind most mysteries. At the end of each session, ask: “Did we hurt our enemy or hinder their plots and machinations?”')
+	+move('Lineage-Style','<b>We Have a Duty:</b> What is your family sworn to do? At the end of each session, ask: “Did we fulfil the family duties?”')
+		b
+			+translate('The duty:')
+		input(type='text' name='attr_Lineage-Style-Duty')
+	+move('Lineage-Style','<b>Look after Each Other:</b> At the end of each session, ask: “Did we save a family member from certain death or terrible suffering?” This definitely includes family outside the team.')
+	+move('Lineage-Style','<b>Custom:</b> What’s your story?')
+		div
+			textarea(rows='2' name='attr_Lineage-Style-Custom-Story')
+		div
+			+translate('At the end of each session, ask:')
+		div
+			textarea(rows='2' name='attr_Lineage-Style-Custom-Question')
+

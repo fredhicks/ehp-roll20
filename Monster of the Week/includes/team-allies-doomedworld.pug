@@ -1,0 +1,11 @@
+.sheet-DoomedWorld
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Allies-Unused', value='1', checked='')
+	+move('DoomedWorld-Allies','A bystander who first found you in this world, and believes your story. Name them:')
+		input(type='text' name='attr_DoomedWorld-Allies-Bystander')
+	+move('DoomedWorld-Allies','Your descendants, ancestors, or alternate versions in this world.')
+	+move('DoomedWorld-Allies','Old Earth, a druid circle tasked with making sure the world won’t end before its time.')
+	+move('DoomedWorld-Allies','Yog-Sothoth, a time-space incarnation wounded by your world’s doom and trying to evade another such injury by effective yet unsettling means.')
+	+move('DoomedWorld-Allies','Someone else:')
+		div
+			textarea(rows='2' name='attr_DoomedWorld-Allies-Custom')
+

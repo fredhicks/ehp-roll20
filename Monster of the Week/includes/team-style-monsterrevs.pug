@@ -1,0 +1,14 @@
+.sheet-MonsterRevs
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Style-Unused', value='1', checked='')
+	+move('MonsterRevs-Style','<b>Just the Facts:</b> You care about finding what’s really going on. At the end of each session, ask: “Did we publish the truth we discovered about this mystery?”')
+	+move('MonsterRevs-Style','<b>People’s Voice:</b> You are here for justice and to fight the power. At the end of each session, ask: “Did we publish details of someone abusing their power during this mystery?”')
+	+move('MonsterRevs-Style','<b>Can’t Look Away:</b> You’re here to do stupid stunts to amuse your fans. At the end of each session, ask: “Did we publish ourselves doing something truly dangerous and ill-advised?”')
+	+move('MonsterRevs-Style','<b>Looking for Weirdness:</b> You want to show off the hidden wonders of the world. At the end of each session, ask: “Did we publish a revelation about some new and strange monster, phenomenon, or supernatural event?”')
+	+move('MonsterRevs-Style','<b>Custom:</b> What’s your story?')
+		div
+			textarea(rows='2' name='attr_MonsterRevs-Style-Custom-Story')
+		div
+			+translate('At the end of each session, ask:')
+		div
+			textarea(rows='2' name='attr_MonsterRevs-Style-Custom-Question')
+

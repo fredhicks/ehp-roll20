@@ -1,0 +1,147 @@
+.sheet-SheetGrid.sheet-NoKeep.sheet-NoCommunity.sheet-NoTeams
+	include stats.pug
+	.sheet-Specifics
+		.sheet-3colrow.sheet-NoNull
+			// Contains common elements found in all playbooks
+			.sheet-col
+				include luck-track.pug
+			.sheet-col
+				include harm-track.pug
+			.sheet-col
+				include xp-track.pug
+		// This needs to be located just prior to the hidden sheets so it'll switch between them correctly!
+		input.sheet-SkinCheck(type='hidden', name='attr_SkinCheck', value='0')
+		// Begin significantly rearchitected playbooks
+		.sheet-playbooks.sheet-NoNull
+			.sheet-3colrow
+				.sheet-col
+					// left column
+					input.sheet-SkinCheck(type='hidden', name='attr_SkinCheck', value='0')
+					|  
+					.sheet-Custom.sheet-CustomName
+						.sheet-Subsection(data-i18n='playbook-name') Playbook Name
+						input(type='text', name='attr_Name-Custom')
+
+					// Luck specials
+					include luck-specials.pug
+
+					// Gothic Century's Dark Pasts
+					include gothic-dark-pasts.pug
+
+					// Playbook Specific Oddities
+
+					// Chosen Playbook Specials
+					include specials-chosen.pug
+
+					// Crooked Playbook Specials
+					include specials-crooked.pug
+
+					// Divine Playbook Specials
+					include specials-divine.pug
+
+					// Monstrous Playbook Specials
+					include specials-monstrous.pug
+
+					// Professional Playbook Specials
+					include specials-professional.pug
+
+					// Spellslinger Playbook Specials
+					include specials-spellslinger.pug
+
+					// Spooktacular Playbook Specials
+					include specials-spooktacular.pug
+
+					// Constructed Playbook Specials
+					include specials-constructed.pug
+
+					// Spooky Playbook Specials
+					include specials-spooky.pug
+
+					// Wronged Playbook Specials
+					include specials-wronged.pug
+
+					// Gumshoe Playbook Specials
+					include specials-gumshoe.pug
+
+					// Hex Playbook Specials
+					include specials-hex.pug
+
+					// Pararomantic Playbook Specials
+					include specials-pararomantic.pug
+
+					// Exile Playbook Specials
+					include specials-exile.pug
+
+					// Sidekick Playbook Specials
+					include specials-sidekick.pug
+
+					// Snoop Playbook Specials
+					include specials-snoop.pug
+
+					// Summoned Playbook Specials
+					include specials-summoned.pug
+
+					// Traveler Playbook Specials
+					include specials-traveler.pug
+
+					// Hardcase 2020 Playbook Specials
+					include specials-hardcase2020.pug
+
+					// Curse-Eater Playbook Specials
+					include specials-curseeater.pug
+
+					// Custom Playbook Specials
+					include specials-custom.pug
+
+					// Havens
+					include havens.pug
+
+					// Initiate's Sect 
+					include initiate-sect.pug
+
+					// Allies 
+					include allies.pug
+
+					// Summoned playbook Hobby section
+					include hobby-summoned.pug
+
+					// History Section
+					include history.pug
+
+				// .sheet-col, left
+				.sheet-col
+					// mid column
+					input.sheet-SkinCheck(type='hidden', name='attr_SkinCheck', value='0')
+
+					// 'Fire' Track for the Hardcase 2020 playbook
+					include hardcase2020-fire-track.pug
+
+					// Big Inclusion of Playbook Moves
+					include moves.pug
+
+					// Hex Rotes
+					include rotes-hex.pug
+
+					// Advanced Basic Moves
+					include moves-advanced-basic.pug
+
+					// Other Moves
+					include moves-other.pug
+
+				// .sheet-col, mid
+				.sheet-col
+					// right column
+					input.sheet-SkinCheck(type='hidden', name='attr_SkinCheck', value='0')
+
+					// Monstrous Playbook's Attacks
+					include attacks-monstrous.pug
+
+					// Gear Section Include
+					include gear.pug
+
+					// Improvements Section
+					include improvements.pug
+
+				// .sheet-col, right
+			// .sheet-3colrow
+	// Hopefully this is the end of the class=sheet-Specifics div

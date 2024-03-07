@@ -25,9 +25,7 @@
 	|  
 	.sheet-StartingStatsSidebar
 		.sheet-MinorHead
-			span(data-i18n='starting') Starting
-			|  
-			span(data-i18n='stats') Stats
+			+translate('Starting Stats')
 		input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-StartingStats', value='1', checked='')
 		span.sheet-anglebox
 		span.sheet-ExpHeader
@@ -260,5 +258,14 @@
 					option(value='-1 2 0 2 -1', data-i18n='starting-stats-choices', data-i18n-vars='-1|+2|=0|+2|-1') Charm{{0}}, Cool{{1}}, Sharp{{2}}, Tough{{3}}, Weird{{4}}
 					option(value='-1 -1 0 2 2', data-i18n='starting-stats-choices', data-i18n-vars='-1|-1|=0|+2|+2') Charm{{0}}, Cool{{1}}, Sharp{{2}}, Tough{{3}}, Weird{{4}}
 					option(value='-1 1 1 2 0', data-i18n='starting-stats-choices', data-i18n-vars='-1|+1|+1|+2|=0') Charm{{0}}, Cool{{1}}, Sharp{{2}}, Tough{{3}}, Weird{{4}}
+			.sheet-CurseEater
+				select.sheet-StartingStats(name='attr_StartingStats')
+					option(value='', checked='', data-i1n='', data-i18n='choose-starting-stats') Choose a set
+					option(value='1 2 1 0 -1', data-i18n='starting-stats-choices', data-i18n-vars='+1|+2|+1|=0|-1') Charm{{0}}, Cool{{1}}, Sharp{{2}}, Tough{{3}}, Weird{{4}}
+					option(value='0 1 2 -1 1', data-i18n='starting-stats-choices', data-i18n-vars='=0|+1|+2|-1|+1') Charm{{0}}, Cool{{1}}, Sharp{{2}}, Tough{{3}}, Weird{{4}}
+					option(value='-1 2 2 -1 0', data-i18n='starting-stats-choices', data-i18n-vars='-1|+2|+2|-1|=0') Charm{{0}}, Cool{{1}}, Sharp{{2}}, Tough{{3}}, Weird{{4}}
+					option(value='-1 1 2 1 0', data-i18n='starting-stats-choices', data-i18n-vars='-1|+1|+2|+1|=0') Charm{{0}}, Cool{{1}}, Sharp{{2}}, Tough{{3}}, Weird{{4}}
+					option(value='1 2 0 -1 1', data-i18n='starting-stats-choices', data-i18n-vars='+1|+2|=0|-1|+1') Charm{{0}}, Cool{{1}}, Sharp{{2}}, Tough{{3}}, Weird{{4}}
+
 	// End Starting Stats Sidebar Section
 // end of sheet-Stats

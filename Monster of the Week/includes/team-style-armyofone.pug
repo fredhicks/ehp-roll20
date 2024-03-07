@@ -1,0 +1,12 @@
+.sheet-ArmyOfOne
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Style-Unused', value='1', checked='')
+	+move('ArmyOfOne-Style','<b>A Perfect Team:</b> You relish your similarities and work together perfectly. At the end of each session, ask: “Did we act like a single individual in many bodies?”')
+	+move('ArmyOfOne-Style','<b>Subtle Differences:</b> You want to show others, and yourselves, that you aren’t really the same person. At the end of each session, ask: “Did we prove that we differ more than we thought before?”')
+	+move('ArmyOfOne-Style','<b>One and Onlys:</b> First and foremost, you are utterly different from other people. At the end of each session, ask: “Did we prove how unique we all are?”')
+	+move('ArmyOfOne-Style','<b>Custom:</b> What’s your story?')
+		div
+			textarea(rows='2' name='attr_ArmyOfOne-Style-Custom-Story')
+		div
+			+translate('At the end of each session, ask:')
+		div
+			textarea(rows='2' name='attr_ArmyOfOne-Style-Custom-Question')

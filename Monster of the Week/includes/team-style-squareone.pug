@@ -1,0 +1,14 @@
+.sheet-SquareOne
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Style-Unused', value='1', checked='')
+	+move('SquareOne-Style','<b>Doing Our Best:</b> Our powers have diminished, but our goal stays the same. At the end of each session, ask: “Did we do what we would have done before, despite being weaker now?”')
+	+move('SquareOne-Style','<b>Regain Power:</b> We will get our full potential back by any means necessary. At the end of each session, ask: “Did we get closer to regaining our potential?”')
+	+move('SquareOne-Style','<b>No Past:</b> We’re not really sure who we were before, and we need to find out. At the end of each session, ask: “Did we rediscover something from our past that had been lost?”')
+	+move('SquareOne-Style','<b>Fresh Start:</b> Maybe this whole situation is a chance to start fresh and lose the burden of the past? At the end of each session, ask: “Did we do something totally differently than we would have done before?”')
+	+move('SquareOne-Style','<b>Custom:</b> What’s your story?')
+		div
+			textarea(rows='2' name='attr_SquareOne-Style-Custom-Story')
+		div
+			+translate('At the end of each session, ask:')
+		div
+			textarea(rows='2' name='attr_SquareOne-Style-Custom-Question')
+

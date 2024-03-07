@@ -38,6 +38,8 @@
 				+translate('As you mark off <i>Favour</i> boxes, your dark side’s needs will get nastier.')
 			.sheet-Wronged
 				+translate('When you spend a point of <i>Favour</i>, you find a dangerous lead on your prey.')
+			.sheet-CurseEater
+				+translate('Whenever you spend a point of <i>Favour</i>, you develop a permanent mark related to one of your consumed magics.')
 		.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 			input.sheet-SkinCheck(type='hidden', name='attr_SkinCheck', value='0')
 			.sheet-Chosen
@@ -69,6 +71,8 @@
 				span.sheet-highlights(data-i18n='luck-special-wronged')
 			.sheet-Pararomantic
 				span.sheet-highlights(data-i18n='luck-special-pararomantic')
+			.sheet-CurseEater
+				+translate('Whenever you spend a Luck point, you develop a permanent mark related to one of your consumed magics.').sheet-highlights
 		.sheet-Flake
 			span.sheet-highlights(data-i18n='luck-special-flake')
 		.sheet-Professional

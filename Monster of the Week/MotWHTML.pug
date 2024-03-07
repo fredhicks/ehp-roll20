@@ -1,5 +1,4 @@
 include includes/mixins.pug
-+translate('Patron Spirit')
 
 script(type='text/worker')
 	include includes/MOTW-sheet-worker.js
@@ -19,154 +18,12 @@ include includes/MOTW-rolltemplates.html
 	include includes/community-sheet.pug
 	// Teams Sheet
 	include includes/teams-sheet.pug
-	.sheet-SheetGrid.sheet-NoKeep.sheet-NoCommunity.sheet-NoTeams
-		include includes/stats.pug
-		.sheet-Specifics
-			.sheet-3colrow.sheet-NoNull
-				// Contains common elements found in all playbooks
-				.sheet-col
-					include includes/luck-track.pug
-				.sheet-col
-					include includes/harm-track.pug
-				.sheet-col
-					include includes/xp-track.pug
-			// This needs to be located just prior to the hidden sheets so it'll switch between them correctly!
-			input.sheet-SkinCheck(type='hidden', name='attr_SkinCheck', value='0')
-			// Begin significantly rearchitected playbooks
-			.sheet-playbooks.sheet-NoNull
-				.sheet-3colrow
-					.sheet-col
-						// left column
-						input.sheet-SkinCheck(type='hidden', name='attr_SkinCheck', value='0')
-						|  
-						.sheet-Custom.sheet-CustomName
-							.sheet-Subsection(data-i18n='playbook-name') Playbook Name
-							input(type='text', name='attr_Name-Custom')
-
-						// Luck specials
-						include includes/luck-specials.pug
-
-						// Gothic Century's Dark Pasts
-						include includes/gothic-dark-pasts.pug
-
-						// Playbook Specific Oddities
-
-						// Chosen Playbook Specials
-						include includes/specials-chosen.pug
-
-						// Crooked Playbook Specials
-						include includes/specials-crooked.pug
-
-						// Divine Playbook Specials
-						include includes/specials-divine.pug
-
-						// Monstrous Playbook Specials
-						include includes/specials-monstrous.pug
-
-						// Professional Playbook Specials
-						include includes/specials-professional.pug
-
-						// Spellslinger Playbook Specials
-						include includes/specials-spellslinger.pug
-
-						// Spooktacular Playbook Specials
-						include includes/specials-spooktacular.pug
-
-						// Constructed Playbook Specials
-						include includes/specials-constructed.pug
-
-						// Spooky Playbook Specials
-						include includes/specials-spooky.pug
-
-						// Wronged Playbook Specials
-						include includes/specials-wronged.pug
-
-						// Gumshoe Playbook Specials
-						include includes/specials-gumshoe.pug
-
-						// Hex Playbook Specials
-						include includes/specials-hex.pug
-
-						// Pararomantic Playbook Specials
-						include includes/specials-pararomantic.pug
-
-						// Exile Playbook Specials
-						include includes/specials-exile.pug
-
-						// Sidekick Playbook Specials
-						include includes/specials-sidekick.pug
-
-						// Snoop Playbook Specials
-						include includes/specials-snoop.pug
-
-						// Summoned Playbook Specials
-						include includes/specials-summoned.pug
-
-						// Traveler Playbook Specials
-						include includes/specials-traveler.pug
-
-						// Hardcase 2020 Playbook Specials
-						include includes/specials-hardcase2020.pug
-
-						// Custom Playbook Specials
-						include includes/specials-custom.pug
-
-						// Havens
-						include includes/havens.pug
-
-						// Initiate's Sect 
-						include includes/initiate-sect.pug
-
-						// Allies 
-						include includes/allies.pug
-
-						// Summoned playbook Hobby section
-						include includes/hobby-summoned.pug
-
-						// History Section
-						include includes/history.pug
-
-					// .sheet-col, left
-					.sheet-col
-						// mid column
-						input.sheet-SkinCheck(type='hidden', name='attr_SkinCheck', value='0')
-
-						// 'Fire' Track for the Hardcase 2020 playbook
-						include includes/hardcase2020-fire-track.pug
-
-						// Big Inclusion of Playbook Moves
-						include includes/moves.pug
-
-						// Hex Rotes
-						include includes/rotes-hex.pug
-
-						// Advanced Basic Moves
-						include includes/moves-advanced-basic.pug
-
-						// Other Moves
-						include includes/moves-other.pug
-
-					// .sheet-col, mid
-					.sheet-col
-						// right column
-						input.sheet-SkinCheck(type='hidden', name='attr_SkinCheck', value='0')
-
-						// Monstrous Playbook's Attacks
-						include includes/attacks-monstrous.pug
-
-						// Gear Section Include
-						include includes/gear.pug
-
-						// Improvements Section
-						include includes/improvements.pug
-
-					// .sheet-col, right
-				// .sheet-3colrow
-		// Hopefully this is the end of the class=sheet-Specifics div
+	// Hunter Sheet
+	include includes/hunter-sheet.pug
 	hr
 	font(size='0.5')
 		span(data-i18n='sheet-version') sheet version
-		|  2.0.
+		|  2.1.
 		span(data-i18n='copyright') Monster of the Week is copyright Evil Hat Productions, LLC and Generic Games.
 
 +translations

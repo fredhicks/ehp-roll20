@@ -1,0 +1,16 @@
+.sheet-ThrillSeekers
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Assets-Unused', value='1', checked='')
+	+asset('ThrillSeekers-Asset','<b>Mobile Base:</b> A loud tour bus or sponsored aeroplane with mystery investigation supplies on board.',2)
+	+asset('ThrillSeekers-Asset','<b>Individual Transport:</b> A fancy car, sleek motorbike, or tricked out bicycle for every team member.',1)
+	+asset('ThrillSeekers-Asset','<b>Little Black Book of Monsters:</b> You inherited this from a retired group of hunters—a list of big bads that elude capture and defeat. Any of these names promise danger and excitement, and offer a lead to start the hunt.',1)
+	+asset('ThrillSeekers-Asset','<b>Party House:</b> A relatively secure space to use as a base, though anyone who’s anyone knows you live here. There are secret rooms for all your monster hunting gear, rare books, and clandestine meetings. Most importantly, there’s everything you need to throw a wild party: huge kitchen, gorgeous infinity pool, and a fancy gaming room.',2)
+	+asset('ThrillSeekers-Asset','<b>Forbidden Magical Equipment:</b> In one of your famous adventures, you burned down the imperial school full of evil wizards and killed the monster behind it all. You kept some of the more helpful magical artifacts. Any of these tools can stand in for one requirement of a <b>use magic</b> or <b>big magic</b> move.',2)
+	+asset('ThrillSeekers-Asset','<b>Trophy Case:</b> You have a collection of dangerous items, each one from an exhilarating monster kill. It’s in poor taste, but once per mystery, you can take one of these trophies and fashion an unwieldy but special weapon from it. Some suggestions for these temporary special weapons are:<ul><li><b>Up close and personal:</b> Dangerous trophy (2-harm hand messy)<li><b>Precise and quiet:</b> Throwable trophy (2-harm close quick)<li><b>Leftover magic:</b> Mystical trophy (1-harm hand/close/far magic)</ul>Add an extra tag to represent what sort of creature it came from (such as “vampiric,” “talon,” or “infernal”) or reflect the story of how you killed it (such as “blessed,” “ancient,” or “fae-bane”).',1)
+		textarea(rows='2' name='attr_ThrillSeekers-Asset-CurrentTrophy')
+	+asset('ThrillSeekers-Asset','<b>PR Team:</b> When you go a little too far in searching for the thrill, you have a group of experts who can cover up regular mistakes and provide a temporary distraction.',1)
+	+asset('ThrillSeekers-Asset','<b>Small Convention:</b> With enough lead time, your team can set up a minor gathering to attract hunters in the area. There’s always an appropriate cover story, and you’re likely to meet at least one famous hunter willing to share their wisdom.',1)
+	+asset('ThrillSeekers-Asset','<b>Coordinated Fashion:</b> You have several looks as a team that cover a wide spectrum. From disguises that will help you blend in and disappear, to cutting-edge couture looks that will draw every eye.',1)
+	+asset('ThrillSeekers-Asset','<b>Custom:</b>',1)
+		div
+			textarea(rows='2' name='attr_ThrillSeekers-Asset-Custom')
+

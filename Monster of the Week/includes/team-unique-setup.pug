@@ -308,3 +308,175 @@
 		+move('Fugitives-Escape-Find','Make you slaves.')
 		+move('Fugitives-Escape-Find','Something else:')
 			input(type='text' name='attr_Fugitives-Escape-Find-Other')
+
+.sheet-ArmyOfOne
+	.sheet-Subsection
+		+translate('Who Are You?')
+	+expanderMoveSection('ArmyOfOne-Who')
+		p
+			+translate('You all are, on some level, the same person. When choosing the looks of your hunters, each of you underlines one of the options they’ve chosen and reads it aloud. This option applies to all of you. It’s also your decision if your hunters need to be the same age, gender, ethnicity, etc.<p>What is the source of your radical similarity?')
+		+move('ArmyOfOne-Who-Answer','We’re all clones of the same person.')
+		+move('ArmyOfOne-Who-Answer','We’re alternate versions of the same person from alternate universes or timelines.')
+		+move('ArmyOfOne-Who-Answer','We were created, or radically altered, by the same magical phenomenon.')
+		+move('ArmyOfOne-Who-Answer','We are all vessels for a single otherworldly consciousness.')
+		+move('ArmyOfOne-Who-Answer','Something else:')
+			div
+				textarea(rows='2' name='attr_ArmyOfOne-Who-Answer-Custom')
+
+.sheet-SquareOne
+	.sheet-Subsection
+		+translate('Your Loss')
+	+expanderMoveSection('SquareOne-Loss')
+		p
+			+translate('When creating hunters, choose four improvements, including one advanced improvement, for each of them. Those are the abilities they once had, but now have lost. Your enemies and allies can expect you to have those abilities or excel at those areas, and you might be able to regain those improvements outside of normal advancement by team moves or <b>big magic</b>.')
+		div
+			+translate('Choose why you lost your powers:')(class='sheet-Label')
+		+move('SquareOne-Loss-Why','We lost our memories.')
+		+move('SquareOne-Loss-Why','Someone stole our power.')
+		+move('SquareOne-Loss-Why','We sacrificed them as part of a ritual to stop a disaster.')
+		+move('SquareOne-Loss-Why','We were powered by an outside force, and now it’s left us.')
+		+move('SquareOne-Loss-Why','We were regenerated, rejuvenated, or even reincarnated, but it has also lessened our experience.')
+
+		+move('SquareOne-Loss-Why','Something else:')
+			div
+				textarea(rows='2' name='attr_SquareOne-Loss-Why-Custom')
+		div
+			+translate('Choose one or more people or groups who already know of your loss:')(class='sheet-Label')
+		+move('SquareOne-Loss-Know','An innocent we were protecting, namely')
+			input(type='text', name='attr_SquareOne-Loss-Know-Innocent')
+		+move('SquareOne-Loss-Know','Our nemesis, chosen in the next step.')
+		+move('SquareOne-Loss-Know','Our ally, chosen in the next step.')
+		+move('SquareOne-Loss-Know','Our teachers, who put all their hopes in us.')
+		+move('SquareOne-Loss-Know','Someone else:')
+			div
+				textarea(rows='2' name='attr_SquareOne-Loss-Know-Custom')
+
+.sheet-DoomedWorld
+	.sheet-Subsection
+		+translate('Your Doomed World')
+	+expanderMoveSection('DoomedWorld-World')
+		div
+			+translate('What ended the world?')(class='sheet-Label')
+		+move('DoomedWorld-World-End','An attack by an army of monsters.')
+		+move('DoomedWorld-World-End','A magical catastrophe.')
+		+move('DoomedWorld-World-End','An experiment gone horribly wrong.')
+		+move('DoomedWorld-World-End','A depletion of its energy.')
+		+move('DoomedWorld-World-End','Sins of its inhabitants.')
+		+move('DoomedWorld-World-End','It hasn’t ended, but is a hellish dystopia now.')
+		+move('DoomedWorld-World-End','Something else:')
+			div
+				textarea(rows='2' name='attr_DoomedWorld-World-End-Custom')
+		div
+			+translate('What was your role in this?')(class='sheet-Label')
+		+move('DoomedWorld-World-Role','We were fighting until the very end, but failed.')
+		+move('DoomedWorld-World-Role','We caused the apocalypse.')
+		+move('DoomedWorld-World-Role','We made others cause the apocalypse.')
+		+move('DoomedWorld-World-Role','We were caught by surprise.')
+		+move('DoomedWorld-World-Role','We were chosen to be the exiles.')
+		+move('DoomedWorld-World-Role','Something else:')
+			div
+				textarea(rows='2' name='attr_DoomedWorld-World-Role-Custom')
+		div
+			+translate('How did you end up where you are now?')(class='sheet-Label')
+		+move('DoomedWorld-World-Where','We travelled in time to before the apocalypse started.')
+		+move('DoomedWorld-World-Where','We were looking for a safe world, and found this one.')
+		+move('DoomedWorld-World-Where','It was the official safety protocol to go here if our world is doomed.')
+		+move('DoomedWorld-World-Where','We wished for another chance, and it seems it worked.')
+		+move('DoomedWorld-World-Where','We know the apocalypse will strike here next.')
+		+move('DoomedWorld-World-Where','We were merged with Yog-Sothoth, the eldritch incarnation of space-time.')
+		+move('DoomedWorld-World-Where','We have no idea how we got here.')
+		+move('DoomedWorld-World-Where','Something else:')
+			div
+				textarea(rows='2' name='attr_DoomedWorld-World-Where-Custom')
+		div
+			+translate('What signs of the apocalypse are here now?')(class='sheet-Label')
+		+move('DoomedWorld-World-Signs','The same kinds of monsters are active here.')
+		+move('DoomedWorld-World-Signs','The same phenomena are observed more and more often.')
+		+move('DoomedWorld-World-Signs','People are making the same mistakes.')
+		+move('DoomedWorld-World-Signs','Seemingly innocuous things are happening, and you know they were the apocalypse’s catalysts.')
+		+move('DoomedWorld-World-Signs','You, and maybe someone else, are having prophetic dreams about the apocalypse.')
+		+move('DoomedWorld-World-Signs','A prophecy about the coming apocalypse was recently revealed, but nobody believes it.')
+		+move('DoomedWorld-World-Signs','Something else:')
+			div
+				textarea(rows='2' name='attr_DoomedWorld-World-Signs-Custom')
+
+.sheet-MonsterRevs
+	.sheet-Subsection
+		+translate('Show Format and Name')
+	+expanderMoveSection('MonsterRevs-Show')
+		div
+			+translate('How do you publish your discoveries?')(class='sheet-Label')
+		+move('MonsterRevs-Show-Publish','Internet video service')
+		+move('MonsterRevs-Show-Publish','Podcast')
+		+move('MonsterRevs-Show-Publish','Radio show')
+		+move('MonsterRevs-Show-Publish','Television documentary series')
+		+move('MonsterRevs-Show-Publish','Magazine')
+		+move('MonsterRevs-Show-Publish','Newspaper articles')
+		+move('MonsterRevs-Show-Publish','Social media or internet forum')
+		+move('MonsterRevs-Show-Publish','Something else:')
+			div
+				textarea(rows='2' name='attr_MonsterRevs-Show-Publish-Custom')
+		div
+			+translate('What are you called?')(class='sheet-Label')
+		input(type='text' name='attr_MonsterRevs-Show-Name')
+
+.sheet-Lineage
+	.sheet-Subsection
+		+translate('Family Name')
+	input(type='text' name="attr_Lineage-Family-Name")
+	.sheet-Subsection
+		+translate('Heirlooms')
+	+expanderMoveSection('Lineage-Family-Heirlooms')
+		p
+			+translate('Each hunter on the team is allocated a family heirloom by the family elders. Select which one your hunter was entrusted with. There is only one of each.<p>At the family elders’ discretion, a hunter might be allowed to swap out their heirloom for another if their needs change. If the hunter’s heirloom is broken, lost, or destroyed they will not be given a replacement.')
+		+move('Lineage-Heirloom','<b>Old Sword:</b> 2-harm hand valuable ancient magic. It’s especially effective against one class of monster—pick one with the Keeper’s agreement. Do +1-harm when you use it on those creatures. ','share')
+			+translate("Bearer:")
+			input(type='text' name="attr_Lineage-Heirloom-Bearer-1")
+		+move('Lineage-Heirloom','<b>Old Pistol:</b> 2-harm close loud antique. It has a set of 12 bullets enchanted against certain monsters—these bullets count as a weakness. Define the targets of six of the bullets when the game begins; the others may be selected in play (including during a mystery when you definitely identify a monster). Creating new enchanted bullets is <b>big magic.</b>','share')
+			+translate("Bearer:")
+			input(type='text' name="attr_Lineage-Heirloom-Bearer-2")
+		+move('Lineage-Heirloom','<b>Jewelled Bee Brooch:</b> While you wear it, you have a general feeling about how close and which direction your family members are (the team in particular). If any of them are in trouble, you’ll know it.','share')
+			+translate("Bearer:")
+			input(type='text' name="attr_Lineage-Heirloom-Bearer-3")
+		+move('Lineage-Heirloom','<b>Necklace:</b> A mystical rune shaped in gold. The wearer may ignore one case of harm suffered each mystery—a bright gold flare deflects the danger. This does not prevent harm from the <b>Thicker than Water</b> team move.','share')
+			+translate("Bearer:")
+			input(type='text' name="attr_Lineage-Heirloom-Bearer-4")
+		+move('Lineage-Heirloom','<b>Beadwork belt:</b> Twice each mystery, you may automatically succeed on an <b>act under pressure</b> roll. The first time, it’s as if you rolled a 10. The second time, it’s as if you rolled a 7. Nothing can modify this result.','share')
+			+translate("Bearer:")
+			input(type='text' name="attr_Lineage-Heirloom-Bearer-5")
+		+move('Lineage-Heirloom','<b>Pen:</b> While you have the pen on your person, you may choose to have a monster that is attacking another team member or bystander target you instead, as long as they can do so. Tell the Keeper when you activate this power (such as when they say who a monster is about to attack).','share')
+			+translate("Bearer:")
+			input(type='text' name="attr_Lineage-Heirloom-Bearer-6")
+		+move('Lineage-Heirloom','<b>Crystal:</b> The crystal magnifies your mystical energies. When you <b>use magic</b>, the effects are more powerful (assume double the normal effect, however that makes sense). Glitches, magical backlashes, and <b>big magic</b> are also amplified.','share')
+			+translate("Bearer:")
+			input(type='text' name="attr_Lineage-Heirloom-Bearer-7")
+
+.sheet-ThrillSeekers
+	.sheet-Subsection
+		+translate('What Past Did You Leave Behind?')
+	+expanderMoveSection('ThrillSeekers-Past')
+		p
+			+translate('Each player can choose a different answer:')
+		+move('ThrillSeekers-Past-Choice','I followed the rules of life and gained all the money and success that came with it—only to feel empty, dissatisfied, and yearning.')
+			+translate("Hunter(s):")
+			input(type='text' name="attr_ThrillSeekers-Past-Choice-1")
+		+move('ThrillSeekers-Past-Choice','A monster took everything from me—the only thrill I have left is in hunting more of them.')
+			+translate("Hunter(s):")
+			input(type='text' name="attr_ThrillSeekers-Past-Choice-2")
+		+move('ThrillSeekers-Past-Choice','I was created to be a monster that hunts monsters—but now I do this on my own terms.')
+			+translate("Hunter(s):")
+			input(type='text' name="attr_ThrillSeekers-Past-Choice-3")
+		+move('ThrillSeekers-Past-Choice','I don’t have much time left—I’m going to make every second count, make it all mean something.')
+			+translate("Hunter(s):")
+			input(type='text' name="attr_ThrillSeekers-Past-Choice-4")
+		+move('ThrillSeekers-Past-Choice','Something else that explains why monster hunting provides a thrill nothing else can:')
+			input(type='text' name="attr_ThrillSeekers-Past-Choice-Custom")
+			+translate("Hunter(s):")
+			input(type='text' name="attr_ThrillSeekers-Past-Choice-5")
+
+
+
+
+
+
+

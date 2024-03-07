@@ -1,0 +1,13 @@
+.sheet-DoomedWorld
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Style-Unused', value='1', checked='')
+	+move('DoomedWorld-Style','<b>Confused Survivors:</b> Your biggest problem is how little of the coming doom you understand. At the end of each session, ask: “Did we learn more about the apocalypse?”')
+	+move('DoomedWorld-Style','<b>Key Witnesses:</b> You’re driven by a deep conviction that your memories and knowledge offer the only chance of preventing the incoming disaster. At the end of each session, ask: “Did our experience of our world’s doom help save the day?”')
+	+move('DoomedWorld-Style','<b>Wrenches in the Machine:</b> You believe that the doom is destined to happen again, but you want to oppose it anyway. At the end of each session, ask: “Did we defy Fate?”')
+	+move('DoomedWorld-Style','<b>Custom:</b> What’s your story?')
+		div
+			textarea(rows='2' name='attr_DoomedWorld-Style-Custom-Story')
+		div
+			+translate('At the end of each session, ask:')
+		div
+			textarea(rows='2' name='attr_DoomedWorld-Style-Custom-Question')
+

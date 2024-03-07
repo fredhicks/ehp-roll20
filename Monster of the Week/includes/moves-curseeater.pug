@@ -1,0 +1,24 @@
+// Curse-Eater moves
+.sheet-OPBHead.sheet-MinorHead.sheet-space-above
+	+translate('The Curse-Eater')
+.sheet-CurseEater
+	i
+		+translate('You get all the basic moves, and four Curse-eater moves. You get these two:')
+.sheet-CurseEater.sheet-OPB
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-MovesUnused', value='1', checked='')
+	+move('CurseEater-Move','<b>Devour Evil:</b> When you absorb a curse—from a monster, phenomenon, minion, or evil magic—roll one die. If the die shows a 1-3, mark one corruption, on a 4-5, mark two, and on a 6, mark three. For a monster or minion with half or more harm capacity remaining, mark one extra. If you have more corruption than consumed magics, ask the Keeper to provide you a power and downside this curse gives you. If the curse was small or short-lived, it is destroyed. If the curse is strong or long lasting (monsters, phenomenon, minions in particular) <i>and</i> you used its weakness, then the curse is lifted. Some curses cannot be lifted this way—these are temporarily but significantly reduced in power instead.','share')
+	+move('CurseEater-Move','<b>Unleash Corruption:</b> When you have marked corruption, you may release a power you have consumed. Say how you use the power and clear one corruption, then choose whether to keep control or not. Controlled, the power does what you want. You erase the consumed magic line (including the power and downside). Uncontrolled, the power and downside both activate and the Keeper determines how it goes.','share')
+.sheet-CurseEater
+	i
+		+translate('Then pick two of these:')
+.sheet-CurseEater.sheet-OPB
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-MovesUnused', value='1', checked='')
+	+move('CurseEater-Move','<b>Devour Harm:</b> Touch someone (or some creature) who’s hurt and mark one corruption to completely heal them. Mark half the harm they had suffered.','share')
+	+move('CurseEater-Move','<b>Reach:</b> When you <b>use magic</b>, you may choose one of these alternate effects:<ul><li>Use the <b>devour evil</b> move at range.<li>Use the <b>unleash corruption</b> move at range.<li>Learn whether this magic may be devoured, and what the power and downside will be.</ul>','share')
+		button.sheet-2d6-button(type='roll', value="&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Use Magic}} {{Roll=[[2d6+?{Use Magic with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}", name='roll_dplay')
+	+move('CurseEater-Move','<b>Curse Whispers:</b> When you <b>investigate a mystery</b>, you may also ask:<ul><li>What sort of curse is this?<li>Where did this curse come from?<li> Is there a curse here that I can consume?</ul>If you discover a curse (by any method) matching one you have previously consumed, take +1 forward.','share')
+	+move('CurseEater-Move','<b>Ropes of Fate:</b> You can mystically hold a cursed being or object restrained (range: close). Roll +Cool.<ul><li>On a 10 or more, they’re restrained for at least an hour.<li>On a 7-9, they’re restrained but choose one: it’s not for long, you suffer 1-harm, or <b>unleash corruption</b>.<li>On a 6 or less, it’s unrestrained and very angry.</ul>','share')
+		button.sheet-2d6-button(type='roll', value="&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Ropes of Fate}} {{Roll=[[2d6+?{Ropes of Fate with|Cool (Default),@{Cool}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}", name='roll_dplay')
+	+move('CurseEater-Move','<b>Feel the Burn:</b> When you <b>unleash corruption</b>, you may clear one extra corruption, but you suffer 2-harm that cannot be reduced by any means.','share')
+	+move('CurseEater-Move','<b>Fortune’s Fool:</b> Mark three corruption to gain the effects of spending one Luck. Don’t mark a consumed magic.','share')
+	+move('CurseEater-Move','<b>Let It Go:</b> When you have three or more consumed magics marked, you may spend all consumed magics in place of all requirements for <b>use magic</b>. For <b>big magic</b>, the Keeper will tell you how many consumed magics you can lose in place of each requirement. Keep the corruption.','share')

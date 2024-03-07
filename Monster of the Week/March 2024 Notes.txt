@@ -1,0 +1,18 @@
+Playbooks:
+- Codex Apocrypha
+	- New Playbooks
+		- Curse-Eater (p6)
+	- Wait, Monsters Are Real?
+		- Survivor Playbook (p152)
+			- Special creation rules? (p151)
+
+Teambooks Implemented:
+- Modern Haunts
+	- Hauntbusters
+- Codex Apocrypha
+	- Army Of One
+	- Back to Square One
+	- Doomed World Exiles
+	- Monster Revelations
+	- Storied Hunter Lineage
+	- Thrill-Seekers

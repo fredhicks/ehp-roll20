@@ -1,0 +1,15 @@
+.sheet-SquareOne
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Assets-Unused', value='1', checked='')
+	+move('SquareOne-Asset','<b>Mobile Base:</b> A truck or bus with bunks and mystery investigation supplies on board.',2)
+	+move('SquareOne-Asset','<b>Individual Transport:</b> A regular car, motorbike, or bicycle for every team member.',1)
+	+move('SquareOne-Asset','<b>Improved Weapons:</b> Bigger and more unstable versions of one of each team member’s weapons. The weapons get +1 harm and two tags from this list: slow, heavy, unwieldy, reload, or clumsy. Add your big unstable weapon to your gear list.',1)
+	+move('SquareOne-Asset','<b>Headquarters:</b> A relatively secure space to use as a base. There’s room for all your monster hunting gear and books, maybe even space to sleep and a kitchen.',2)
+	+move('SquareOne-Asset','<b>Mystical Workroom:</b> A space set aside for magical operations. It can stand in for one requirement of a use magic or big magic move.',2)
+	+move('SquareOne-Asset','<b>Workshop:</b> A big space for craft and repair projects, with plenty of tools and materials.',1)
+	+move('SquareOne-Asset','<b>Secret Plans:</b> Plans of a villain or monster you stole before you’ve lost your powers.',1)
+	+move('SquareOne-Asset','<b>World-Class Fitness Equipment:</b> Training on it allows you to get +1 to kick some ass or reduce harm by 1 once per mystery.',1)
+	+move('SquareOne-Asset','<b>News Clippings:</b> An archive of your exploits described, but misinterpreted, by mainstream press.',1)
+	+asset('SquareOne-Asset','<b>Custom:</b>',1)
+		div
+			textarea(rows='2' name='attr_SquareOne-Asset-Custom')
+

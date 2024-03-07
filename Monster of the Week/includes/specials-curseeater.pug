@@ -1,0 +1,76 @@
+.sheet-CurseEater
+	.sheet-Subsection
+		+translate('Corruption')
+	p(align='center')
+		b.sheet-statelabel
+			+translate('Okay')
+		input.sheet-checkbox(type='checkbox', name='attr_Corruption1')
+		span.sheet-altbox
+		input.sheet-checkbox(type='checkbox', name='attr_Corruption2')
+		span.sheet-altbox
+		input.sheet-checkbox(type='checkbox', name='attr_Corruption3')
+		span.sheet-altbox
+		input.sheet-checkbox(type='checkbox', name='attr_Corruption4')
+		span.sheet-altbox
+		input.sheet-checkbox(type='checkbox', name='attr_Corruption5')
+		span.sheet-altbox
+		input.sheet-checkbox(type='checkbox', name='attr_Corruption6')
+		span.sheet-altbox
+		input.sheet-checkbox(type='checkbox', name='attr_Corruption7')
+		span.sheet-altbox
+		| 
+		b.sheet-statelabel
+			+translate('Lost')
+	+expanderInstructions('CurseEater-Corruption-Instruct')
+		p
+			+translate('When you consume evil magic, you gain corruption as well as the ability to use some of those powers. Record what the magic was, the power it offers you, and the downside it asks of you. The Keeper will provide these, and can also confirm whether you are in the presence of a consumable curse. Repeated <b>devouring evil</b> may give the same or different effects. Other moves, starting with <b>unleash corruption,</b> depend on these corruptions.')
+		p
+			+translate('If you <i>should</i> take corruption, but the track is full, you become a monster under the Keeper’s control.')
+	.sheet-Subsection
+		+translate('Consumed Magic')
+	p
+		+translate('[Magic] ([Power], [Downside])')
+	input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-CurseEater-Consumed-All', value='1', checked='')
+	span.sheet-anglebox
+	span.sheet-ExpHeader
+		span(data-i18n='all')
+	.sheet-Expander
+		fieldset.repeating_ConsumedMagic
+			div
+				input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Edit-Hider', value='1', checked='')
+				span.sheet-anglebox
+				|  
+				span.sheet-ExpHeader
+					span(data-i18n='edit') Edit
+				.sheet-EditControls.sheet-Expander
+					div
+						b
+							+translate('Consumed Magic:')
+					input(type='text', name='attr_Consumed-Magic')
+					div
+						b
+							+translate('Power:')
+					input(type='text', name='attr_Consumed-Power')
+					div
+						b
+							+translate('Downside:')
+					input(type='text', name='attr_Consumed-Downside')
+			.sheet-move
+				b
+					span(name='attr_Consumed-Magic')
+				| &nbsp;(
+				span(name='attr_Consumed-Power')
+				| , 
+				span(name='attr_Consumed-Downside')
+				| )
+	.sheet-Subsection
+		+translate('How It Works')
+	+expanderMoveSection('CurseEater-Works')
+		p
+			+translate('When you consume/absorb evil magic, how does it work?')
+		+move('CurseEater-Works-How','You lay your hands on it and a visible glowing smoke transports the curse.')
+		+move('CurseEater-Works-How','You ritually eat some part of it.')
+		+move('CurseEater-Works-How','You closely embrace the cursed thing and spend several minutes bonding with it.')
+		+move('CurseEater-Works-How','You have an amulet that you must hold against it.')
+		+move('CurseEater-Works-How','Something else:')
+			input(type='text' name='attr_CurseEater-Works-How-Custom')
