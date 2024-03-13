@@ -92,6 +92,7 @@ $tjobs: Farmer, Healer, Chef, Poet, Merchant, Crafter, Scholar, Lookout, Apothec
 				flex-shrink: 0
 				.rateblock
 					border: 1px solid var(--stew-boxb)
+					margin-bottom: 10px
 					.shead
 						color: var(--stew-boxc)
 						background-color: var(--stew-boxb)
@@ -119,7 +120,7 @@ $tjobs: Farmer, Healer, Chef, Poet, Merchant, Crafter, Scholar, Lookout, Apothec
 							@each $v in $vlist 
 								input.state[value="#{$v}"] + input.highlighter[value="#{$v}"] + .description
 									color: var(--stew-fg)
-				.advblock, .npcblock
+				.advblock, .npcblock, .listblock
 					border: 1px solid var(--stew-boxb)
 					margin-bottom: 10px
 					.shead
@@ -149,10 +150,23 @@ $tjobs: Farmer, Healer, Chef, Poet, Merchant, Crafter, Scholar, Lookout, Apothec
 							background-image: unset
 							&.repcontrol_move
 								font-size: 16px
-				.advblock
+				.advblock, .listblock
 					input[type="text"]
 						width: 100%
 						margin-bottom: 5px
+					textarea
+						height: calc( 3 * 18px + 6px )
+						border: 1px solid var(--stew-keepb)
+						border-radius: 5px
+						margin-bottom: 10px
+						width: calc( 100% - 10px )
+						height: calc( 2 * 18px + 6px )
+						resize: none
+						padding: 5px
+						background: rgba(0,0,0,0)
+				.readonly
+					.btn
+						display: none
 				.npcblock
 					.repitem
 						display: grid
@@ -347,6 +361,49 @@ $tjobs: Farmer, Healer, Chef, Poet, Merchant, Crafter, Scholar, Lookout, Apothec
 								margin-left: 5px
 								text-decoration: line-through
 								color: var(--stew-crossed)
+				.listblock
+					border: 1px solid var(--stew-boxb)
+					margin-bottom: 10px
+					.shead
+						color: var(--stew-boxc)
+						background-color: var(--stew-boxb)
+						.flabel
+							text-align: center
+							font-size: 22px
+					.content
+						padding: 5px
+						margin-bottom: 0px
+						.repcontainer
+							padding: 0px
+						// .repitem
+							// border: 1px solid var(--stew-keepb)
+							// border-radius: 5px
+							// margin-bottom: 5px
+						.btn
+							background-color: var(--stew-bg)
+							color: var(--stew-boxb)
+							border: 1px solid var(--stew-boxb)
+							text-shadow: none
+							box-shadow: none
+							background-image: unset
+							&.repcontrol_move
+								font-size: 16px
+					input[type="text"]
+						width: 100%
+						margin-bottom: 5px
+					textarea
+						height: calc( 3 * 18px + 6px )
+						border: 1px solid var(--stew-keepb)
+						border-radius: 5px
+						margin-bottom: 10px
+						width: calc( 100% - 10px )
+						height: calc( 2 * 18px + 6px )
+						resize: none
+						padding: 5px
+						background: rgba(0,0,0,0)
+				.readonly
+					.btn
+						display: none
 
 input.thider[value="0"], input.hider[value=""], input.mhider[value=""], input.mhider[value="character"], input.mhider[value="tavern"]
 	+ *
@@ -373,6 +430,9 @@ input.rhider[value="3"] + button:not([value="3"]).marked
 input.rhider[value="4"] + button:not([value="4"]).marked
 	display: none
 
+input.lhider:not([value="1"]), input.lshower[value="1"]
+	+ *
+		display: none
 
 input.hideunless + *
 	display: none
@@ -386,7 +446,7 @@ input.hideunless + *
 input.mhider[value="character"] + .character, input.mhider[value="tavern"] + .tavern
 	display: initial
 
-.cbox, .rbox
+.cbox, .rbox, .ebox
 	background: none
 	color: none
 	border: none
@@ -420,6 +480,25 @@ input.mhider[value="character"] + .character, input.mhider[value="tavern"] + .ta
 
 .rbox.marked::before
 	content: 'radio_button_checked'
+
+.ebox::before
+	content: 'edit'
+
+.ebox.marked::before
+	content: 'visibility'
+
+.ebox .eboxtext
+	line-height: 1
+	color: var(--stew-boxb)
+	font-weight: normal
+	font-style: normal
+	font-size: 16px
+	color: var(--stew-boxb)
+	display: inline-block
+	text-transform: uppercase
+	white-space: nowrap
+	padding-top: 6px
+	vertical-align: top
 
 $vlist: 1, 2, 3, 4
 @each $v in $vlist 

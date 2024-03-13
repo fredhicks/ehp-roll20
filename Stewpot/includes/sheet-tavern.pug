@@ -3,12 +3,6 @@
 		.nameblock
 			+flabel("Name")
 			+text("character_name").fillblank
-		.locblock
-			+flabel("Location")
-			+text("tavern_location").fillblank
-		.lookblock
-			+flabel("Look")
-			+text("tavern_look").fillblank
 	.columns
 		.column
 			.rateblock
@@ -62,15 +56,13 @@
 						+radbox("service")
 						.description
 							+translate("An accomplished head of staff, a prestigious sommelier.")
-		.column
-			.advblock
+
+			.listblock
 				.shead
-					+flabel("Advancement Details")
-				.instruction
-					+translate("Each time a Tavern Rating increases, each player may describe a new detail or feature for the tavern.")
-				.content
-					+fieldset("details")
-						+text("detail")
+					+flabel("Notes")
+				+editoggle("notes")
+
+		.column
 
 			.npcblock
 				.shead
@@ -84,3 +76,21 @@
 						.substruct.right
 							+translate("pronouns")
 						+textarea("description")
+
+			.advblock
+				.shead
+					+flabel("Advancement Details")
+				.instruction
+					+translate("Each time a Tavern Rating increases, each player may describe a new detail or feature for the tavern.")
+				+editoggle("details")
+
+			.listblock
+				.shead
+					+flabel("Location")
+				+editoggle("tavernlocation")
+
+			.listblock
+				.shead
+					+flabel("Look")
+				+editoggle("tavernlook")
+

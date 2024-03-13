@@ -99,6 +99,41 @@ mixin thider(f)
 mixin tshower(f)
 	input(name="attr_toggle_"+f type="hidden" class="tshower" value="0")
 
+mixin lhider(f)
+	input(name="attr_toggle_"+f type="hidden" class="lhider" value="1")
+
+mixin lshower(f)
+	input(name="attr_toggle_"+f type="hidden" class="lshower" value="1")
+
+mixin editbox(f)
+	div
+		+ebox(f)
+	input(name="attr_toggle_"+f type="hidden" class="state" value="0")
+
+mixin ebox(f)
+	+lhider(f)
+	span
+		button(type="action" name="act_unmark" value=f).ebox.marked
+			+translate("Display").eboxtext
+	+lshower(f)
+	span
+		button(type="action" name="act_mark" value=f).ebox.unmarked
+			+translate("Edit").eboxtext
+
+mixin editoggle(f)
+	.togglemode
+		+editbox(f)
+		+lhider(f)
+		.content
+			+fieldset(f)
+				+textarea("detail")
+		+lshower(f)
+		.readonly
+			ul
+				+fieldset(f)
+					li
+						+display("detail")
+
 mixin rhider(f)
 	input(name="attr_radio_"+f type="hidden" class="rhider" value="1")
 
