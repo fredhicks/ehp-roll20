@@ -1,0 +1,283 @@
+// Font defs
+$font: 'Laila', serif
+$lfont: 'Cinzel', serif
+$symbols: 'Material Symbols Outlined'
+$nsymbols: 'Noto Sans Symbols 2'
+$fsize: 16px
+$lsize: 14px
+$ssize: 12px
+$bsize: 24px
+$cgap: 8px
+$rgap: 12px
+$ttime: 0.333s
+
+// Color defs
+$lighttext: rgba(0, 0, 0, 1)
+$lightbg: rgba(255, 255, 255, 1)
+$lightlit: rgba(102, 51, 51, 1)
+$lightfaint: rgba(102, 51, 51, 0.5)
+$lightshade: rgba(102, 0, 0, 0.1)
+$darktext: rgba(255, 255, 255, 1)
+$darkbg: rgba(31, 31, 31, 1)
+$darklit: rgba(255, 238, 204, 1)
+$darkfaint: rgba(255, 238, 204, 0.5)
+$darkshade: rgba(255, 238, 0, 0.1)
+$seethru: rgba(0, 0, 0, 0)
+
+// Begin actual CSS render
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Laila:wght@300;400;500;600;700&family=Noto+Sans+Symbols+2&display=swap&family=Material+Symbols+Outlined&display=swap')
+
+// Replace/Iterate ANYTEMPLATE if you've got any of them
+
+:root, .sheet-rolltemplate-ANYTEMPLATE
+	--gk-fg: #{$lighttext}
+	--gk-bg: #{$lightbg}
+	--gk-lit: #{$lightlit}
+	--gk-faint: #{$lightfaint}
+	--gk-shade: #{$lightshade}
+	font-family: #{$font}
+	font-weight: 400
+
+.sheet-darkmode, .sheet-rolltemplate-darkmode
+	--gk-fg: #{$darktext}
+	--gk-bg: #{$darkbg}
+	--gk-lit: #{$darklit}
+	--gk-faint: #{$darkfaint}
+	--gk-shade: #{$darkshade}
+
+.wrapper p,
+.ui-dialog .charsheet
+	font-family: #{$font}
+	font-size: #{$fsize}
+	font-weight: 400
+	color: var(--gk-fg) !important
+	background-color: var(--gk-bg)
+	line-height: unset
+
+.ui-dialog .charsheet
+
+	div
+		&.lefted
+			text-align: left
+		&.centered
+			text-align: center
+		&.righted
+			text-align: right
+		&.spaceunder
+			margin-bottom: #{$rgap}
+
+		&.rightflex
+			display: flex
+			flex-direction: row
+			flex-wrap: none
+			justify-content: right
+			align-items: center
+			column-gap: 1px
+
+	.repcontainer
+		padding: 0px
+	// .repitem
+		// border: 1px solid var(--stew-keepb)
+		// border-radius: 5px
+		// margin-bottom: 5px
+	.btn
+		background-color: var(--gk-bg)
+		color: var(--gk-faint)
+		border: 1px solid var(--gk-shade)
+		text-shadow: none
+		box-shadow: none
+		background-image: unset
+		font-family: #{$lfont}
+		font-size: #{$ssize}
+		&.pictos
+			font-family: Pictos
+		&.repcontrol_move
+			font-size: #{$fsize}
+		&:hover
+			color: var(--gk-fg)
+			border: 1px solid var(--gk-fg)
+			font-weight: 600
+		&:active
+			color: var(--gk-bg)
+			background: var(--gk-lit)
+
+	.shaded
+		padding: #{$rgap}
+		background-color: var(--gk-shade)
+		border-radius: #{$rgap}
+		&.flatbottom
+			padding-bottom: 0
+		input, select
+			border-bottom: 1px solid #{$seethru}
+		textarea
+			border: 1px solid #{$seethru}
+
+	.bordered
+		padding: #{$rgap}
+		border-radius: #{$rgap}
+		border: 1px solid var(--gk-faint)
+		margin-bottom: 3px
+		&.flatbottom
+			padding-bottom: 0
+
+	input, select, textarea
+		font-family: #{$font}
+		font-size: #{$fsize}
+		color: var(--gk-fg) 
+		background-color: #{$seethru}
+		border: none
+		padding-top: 0px
+		padding-bottom: 0px
+		transition: all #{$ttime} ease-in
+		border-bottom: 1px solid var(--gk-bg)
+		line-height: calc( #{$fsize} + #{$rgap} )
+		&:focus
+			border: none
+	input, select
+		width: calc( 100% - 2px )
+	textarea
+		border: 1px solid var(--gk-bg)
+		width: calc( 100% - #{$cgap} - 4px )
+		margin-bottom: 0px
+		height: calc( #{$rgap} * 4 + #{$fsize} * 3 )
+		resize: none
+		&.shorter
+			height: calc( #{$rgap} * 3 + #{$fsize} * 2 )
+
+	.nameblock
+		text-align: center
+		input[type="text"]
+			text-align: center
+			width: 100%
+			font-family: #{$lfont}
+			font-size: #{$bsize}
+			font-weight: 800
+			letter-spacing: 1px
+
+	.hlabel
+		font-family: #{$lfont}
+		font-size: #{$fsize}
+		font-weight: 600
+		color: var(--gk-fg) 
+		letter-spacing: 1px
+		transition: all #{$ttime} ease-in
+		&.bigger
+			font-size: #{$bsize}
+
+	.flabel
+		font-family: #{$lfont}
+		font-size: #{$lsize}
+		font-weight: 500
+		color: var(--gk-fg) 
+		letter-spacing: 1px
+		transition: all #{$ttime} ease-in
+		padding: 1px
+
+	.fcon
+		&:hover, &:focus, &:focus-within
+			.flabel
+				font-weight: 700
+				letter-spacing: 1px
+				color: var(--gk-lit)
+			.hlabel
+				font-weight: 800
+				letter-spacing: 2px
+				color: var(--gk-lit)
+			input, select, textarea
+				color: var(--gk-lit)
+				border-bottom: 1px solid var(--gk-lit)
+			textarea
+				border: 1px solid var(--gk-lit)
+
+	.symbol
+		font-family: #{$symbols}
+		color: var(--gk-lit)
+		&.targeted::before
+			content: 'brightness_5'
+		&.killed::before
+			content: 'close' // block
+		&.spared::before
+			content: 'wb_sunny'
+
+	.cbox, .dbox
+		background: none
+		border: none
+		padding: 0
+		&::before
+			display: inline-block
+			line-height: 1
+			text-transform: none
+			letter-spacing: normal
+			word-wrap: normal
+			white-space: nowrap
+			direction: ltr
+			padding-top: 5px
+	.cbox
+		&::before
+			font-size: calc( #{$fsize} + 2px )
+			content: 'check_box_outline_blank'
+			font-family: #{$symbols}
+	.cbox.unmarked::before
+		content: 'check_box_outline_blank'
+	.cbox.marked::before
+		content: 'select_check_box'
+	.dbox
+		&::before
+			font-size: calc( #{$bsize} + 8px )
+			content: '\25C6'
+			font-family: #{$nsymbols}
+			text-shadow: 0px 2px 0px var(--gk-lit), 0px -2px 0px var(--gk-lit), 2px 0px 0px var(--gk-lit), -2px 0px 0px var(--gk-lit)
+	.dbox.unmarked::before
+		color: var(--gk-bg)
+
+	.nopadding
+		padding: 0px
+		padding-bottom: calc( #{$rgap} / 2 )
+
+	input.tshower[value="1"], input.shower:not([value=""])
+		+ *
+			display: none
+	input.thider[value="0"]
+		+ *
+			display: none
+
+	.glowing
+		// text-shadow: 1px 1px 0px var(--gk-lit), -1px 1px 0px var(--gk-lit), 1px -1px 0px var(--gk-lit), -1px -1px 0px var(--gk-lit), 0px 2px 0px var(--gk-lit), 0px -1px 0px var(--gk-lit), 1px 0px 0px var(--gk-lit), -1px 0px 1px var(--gk-lit), 0px 0px 9px var(--gk-lit)
+		color: var(--gk-lit)
+		font-weight: 700
+	.fcon
+		&:hover, &:focus, &:focus-within
+			.glowing
+				color: var(--gk-lit)
+				font-weight: 700
+
+	.godkiller
+
+		.columns
+			display: flex
+			flex-direction: row
+			flex-wrap: wrap
+			justify-content: space-between
+			align-items: flex-start
+			column-gap: #{$cgap}
+			margin-bottom: #{$rgap}
+			.column
+				width: calc( 50% - #{$cgap} / 2 - 2px)
+				flex-grow: 0
+				flex-shrink: 0
+				// border: 0.5px solid green
+
+		.flexfield
+			display: flex
+			flex-direction: row
+			flex-wrap: none
+			justify-content: space-between
+			align-items: center
+			column-gap: 1px
+			.flabel
+				flex-grow: 0
+				flex-shrink: 0
+			input[type="text"]
+				flex-grow: 1
+				flex-shrink: 1

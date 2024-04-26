@@ -1,0 +1,220 @@
+
+<script type="text/worker">// Sheetworker for Godkiller
+
+on("clicked:mark", function(event) {
+	var what = event.htmlAttributes.value;
+	var atname = "toggle_" + what;
+	var ats = {};
+	ats[atname] = 1;
+	setAttrs(ats);
+	log(what + " mark");
+});
+
+on("clicked:unmark", function(event) {
+	var what = event.htmlAttributes.value;
+	var atname = "toggle_" + what;
+	var ats = {};
+	ats[atname] = 0;
+	setAttrs(ats);
+	log(what + " unmark");
+});
+
+</script>
+<div class="wrapper">
+  <div class="godkiller">
+    <div class="topline">
+      <div class="nameblock fcon spaceunder">
+        <input class="fillblank" type="text" name="attr_character_name"/>
+        <div class="flabel"><span data-i18n="Godkiller Name, Pronouns, &amp; Gender">Godkiller Name, Pronouns, &amp; Gender</span> 
+        </div>
+      </div>
+    </div>
+    <div class="columns">
+      <div class="column">
+        <div>
+          <div class="spaceunder fcon bordered">
+            <div class="columns">
+              <div class="column hlabel bigger"><span data-i18n="Divinity">Divinity</span> 
+              </div>
+              <div class="column rightflex">
+                <div>
+                  <input class="thider" name="attr_toggle_awakened" type="hidden" value="0"/><span class="flabel glowing" data-i18n="AWAKENED!">AWAKENED!</span> 
+                  <input class="tshower" name="attr_toggle_awakened" type="hidden" value="0"/><span class="flabel" data-i18n="Awakened?">Awakened?</span> 
+                </div>
+                <input class="thider" name="attr_toggle_awakened" type="hidden" value="0"/>
+                <button class="cbox marked" type="action" name="act_unmark" value="awakened"></button>
+                <input class="tshower" name="attr_toggle_awakened" type="hidden" value="0"/>
+                <button class="cbox unmarked" type="action" name="act_mark" value="awakened"></button>
+              </div>
+            </div>
+            <div>
+              <textarea name="attr_divinity"></textarea>
+            </div>
+            <div class="flexfield spaceunder"><span class="flabel" data-i18n="Divine Trigger:">Divine Trigger:</span> 
+              <input type="text" name="attr_trigger-divine"/>
+            </div>
+            <div class="flexfield"><span class="flabel" data-i18n="Mortal Trigger:">Mortal Trigger:</span> 
+              <input type="text" name="attr_trigger-mortal"/>
+            </div>
+          </div>
+          <div class="columns">
+            <div class="column fcon">
+              <div class="centered hlabel"><span data-i18n="Powers">Powers</span> 
+              </div>
+              <fieldset class="repeating_powers">
+                <div class="spaceunder shaded">
+                  <div class="flatbottom">
+                    <textarea class="shorter" name="attr_power"></textarea>
+                  </div>
+                  <div class="flexfield"><span class="flabel" data-i18n="From:">From:</span> 
+                    <input type="text" name="attr_power-source"/>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+            <div class="column fcon">
+              <div class="centered hlabel"><span data-i18n="Covenants">Covenants</span> 
+              </div>
+              <fieldset class="repeating_covenants">
+                <div class="spaceunder shaded">
+                  <div class="flatbottom">
+                    <textarea class="shorter" name="attr_covenant"></textarea>
+                  </div>
+                  <div class="flexfield"><span class="flabel" data-i18n="With:">With:</span> 
+                    <input type="text" name="attr_covenant-with"/>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <div>
+          <div class="spaceunder fcon bordered flatbottom">
+            <div class="hlabel"><span data-i18n="Flaws">Flaws</span> 
+            </div>
+            <textarea class="shorter" name="attr_flaws"></textarea>
+          </div>
+          <div class="columns">
+            <div class="column">
+              <div class="spaceunder fcon">
+                <div class="centered hlabel"><span data-i18n="Strain">Strain</span> 
+                </div>
+                <div class="centered shaded nopadding">
+                  <input class="thider" name="attr_toggle_strain1" type="hidden" value="0"/>
+                  <button class="dbox marked" type="action" name="act_unmark" value="strain1"></button>
+                  <input class="tshower" name="attr_toggle_strain1" type="hidden" value="0"/>
+                  <button class="dbox unmarked" type="action" name="act_mark" value="strain1"></button>
+                  <input class="thider" name="attr_toggle_strain2" type="hidden" value="0"/>
+                  <button class="dbox marked" type="action" name="act_unmark" value="strain2"></button>
+                  <input class="tshower" name="attr_toggle_strain2" type="hidden" value="0"/>
+                  <button class="dbox unmarked" type="action" name="act_mark" value="strain2"></button>
+                  <input class="thider" name="attr_toggle_strain3" type="hidden" value="0"/>
+                  <button class="dbox marked" type="action" name="act_unmark" value="strain3"></button>
+                  <input class="tshower" name="attr_toggle_strain3" type="hidden" value="0"/>
+                  <button class="dbox unmarked" type="action" name="act_mark" value="strain3"></button>
+                  <input class="thider" name="attr_toggle_strain4" type="hidden" value="0"/>
+                  <button class="dbox marked" type="action" name="act_unmark" value="strain4"></button>
+                  <input class="tshower" name="attr_toggle_strain4" type="hidden" value="0"/>
+                  <button class="dbox unmarked" type="action" name="act_mark" value="strain4"></button>
+                  <input class="thider" name="attr_toggle_strain5" type="hidden" value="0"/>
+                  <button class="dbox marked" type="action" name="act_unmark" value="strain5"></button>
+                  <input class="tshower" name="attr_toggle_strain5" type="hidden" value="0"/>
+                  <button class="dbox unmarked" type="action" name="act_mark" value="strain5"></button>
+                </div>
+              </div>
+              <div class="spaceunder">
+                <div class="fcon spaceunder">
+                  <div class="centered hlabel"><span data-i18n="Gods to Kill">Gods to Kill</span> 
+                  </div>
+                  <fieldset class="repeating_tokill">
+                    <div class="flexfield">
+                      <div class="symbol targeted"></div>
+                      <input type="text" name="attr_god"/>
+                    </div>
+                  </fieldset>
+                </div>
+                <div class="fcon spaceunder">
+                  <div class="centered hlabel"><span data-i18n="Killed">Killed</span> 
+                  </div>
+                  <fieldset class="repeating_killed">
+                    <div class="flexfield">
+                      <div class="symbol killed"></div>
+                      <input type="text" name="attr_god"/>
+                    </div>
+                  </fieldset>
+                </div>
+                <div class="fcon">
+                  <div class="centered hlabel"><span data-i18n="Spared">Spared</span> 
+                  </div>
+                  <fieldset class="repeating_spared">
+                    <div class="flexfield">
+                      <div class="symbol spared"></div>
+                      <input type="text" name="attr_god"/>
+                    </div>
+                  </fieldset>
+                </div>
+              </div>
+            </div>
+            <div class="column">
+              <div class="spaceunder">
+                <div class="fcon">
+                  <div class="centered hlabel"><span data-i18n="Curses">Curses</span> 
+                  </div>
+                  <div>
+                    <fieldset class="repeating_curses">
+                      <div class="spaceunder shaded">
+                        <div class="flatbottom"><span class="flabel" data-i18n="Thou shalt not...">Thou shalt not...</span> 
+                          <textarea class="shorter" name="attr_curse"></textarea>
+                        </div>
+                        <div class="flexfield"><span class="flabel" data-i18n="Cursed by: ">Cursed by: </span> 
+                          <input type="text" name="attr_source"/>
+                        </div>
+                      </div>
+                    </fieldset>
+                  </div>
+                </div>
+              </div>
+              <div class="fcon">
+                <div class="centered hlabel"><span data-i18n="Notes">Notes</span> 
+                </div>
+                <fieldset class="repeating_notes">
+                  <div>
+                    <textarea class="shorter" name="attr_entry"></textarea>
+                  </div>
+                </fieldset>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--
+translation.json:
+{
+	"Godkiller": "Godkiller",
+	"Godkiller Name, Pronouns, & Gender": "Godkiller Name, Pronouns, & Gender",
+	"Divinity": "Divinity",
+	"AWAKENED!": "AWAKENED!",
+	"Awakened?": "Awakened?",
+	"Divine Trigger:": "Divine Trigger:",
+	"Mortal Trigger:": "Mortal Trigger:",
+	"Powers": "Powers",
+	"From:": "From:",
+	"Covenants": "Covenants",
+	"With:": "With:",
+	"Flaws": "Flaws",
+	"Strain": "Strain",
+	"Gods to Kill": "Gods to Kill",
+	"Killed": "Killed",
+	"Spared": "Spared",
+	"Curses": "Curses",
+	"Thou shalt not...": "Thou shalt not...",
+	"Cursed by: ": "Cursed by: ",
+	"Notes": "Notes"
+}
+
+-->
