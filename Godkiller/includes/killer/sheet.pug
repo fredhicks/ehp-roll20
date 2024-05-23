@@ -2,7 +2,8 @@
 	.topline
 		.nameblock.fcon.spaceunder
 			+text("character_name").fillblank
-			+flabel("Godkiller Name, Pronouns, & Gender")
+			.flabel
+				+display("gender")
 	.columns
 		.column
 			div
@@ -19,10 +20,10 @@
 							+cbox('awakened')
 					div
 						+textarea("divinity")
-					.flexfield.spaceunder
+					.flexfield(style="margin-bottom: 4px;")
 						+t("Divine Trigger:").flabel
 						+text("trigger-divine")
-					.flexfield
+					.flexfield.spaceunder
 						+t("Mortal Trigger:").flabel
 						+text("trigger-mortal")
 				.columns
@@ -50,6 +51,14 @@
 		.column
 			div
 				div.spaceunder.fcon.bordered.flatbottom
+					.hlabel.bigger
+						+t("Ego")
+					.hlabel
+						+t("Name and Pronouns")
+					+text("character_name").fillblank
+					.hlabel
+						+t("Gender")
+					+text("gender").fillblank
 					.hlabel
 						+t("Flaws")
 					+textarea('flaws').shorter

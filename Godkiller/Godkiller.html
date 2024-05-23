@@ -25,7 +25,7 @@ on("clicked:unmark", function(event) {
     <div class="topline">
       <div class="nameblock fcon spaceunder">
         <input class="fillblank" type="text" name="attr_character_name"/>
-        <div class="flabel"><span data-i18n="Godkiller Name, Pronouns, &amp; Gender">Godkiller Name, Pronouns, &amp; Gender</span> 
+        <div class="flabel"><span name="attr_gender"></span>
         </div>
       </div>
     </div>
@@ -50,10 +50,10 @@ on("clicked:unmark", function(event) {
             <div>
               <textarea name="attr_divinity"></textarea>
             </div>
-            <div class="flexfield spaceunder"><span class="flabel" data-i18n="Divine Trigger:">Divine Trigger:</span> 
+            <div class="flexfield" style="margin-bottom: 4px;"><span class="flabel" data-i18n="Divine Trigger:">Divine Trigger:</span> 
               <input type="text" name="attr_trigger-divine"/>
             </div>
-            <div class="flexfield"><span class="flabel" data-i18n="Mortal Trigger:">Mortal Trigger:</span> 
+            <div class="flexfield spaceunder"><span class="flabel" data-i18n="Mortal Trigger:">Mortal Trigger:</span> 
               <input type="text" name="attr_trigger-mortal"/>
             </div>
           </div>
@@ -92,6 +92,14 @@ on("clicked:unmark", function(event) {
       <div class="column">
         <div>
           <div class="spaceunder fcon bordered flatbottom">
+            <div class="hlabel bigger"><span data-i18n="Ego">Ego</span> 
+            </div>
+            <div class="hlabel"><span data-i18n="Name and Pronouns">Name and Pronouns</span> 
+            </div>
+            <input class="fillblank" type="text" name="attr_character_name"/>
+            <div class="hlabel"><span data-i18n="Gender">Gender</span> 
+            </div>
+            <input class="fillblank" type="text" name="attr_gender"/>
             <div class="hlabel"><span data-i18n="Flaws">Flaws</span> 
             </div>
             <textarea class="shorter" name="attr_flaws"></textarea>
@@ -196,7 +204,6 @@ on("clicked:unmark", function(event) {
 translation.json:
 {
 	"Godkiller": "Godkiller",
-	"Godkiller Name, Pronouns, & Gender": "Godkiller Name, Pronouns, & Gender",
 	"Divinity": "Divinity",
 	"AWAKENED!": "AWAKENED!",
 	"Awakened?": "Awakened?",
@@ -206,6 +213,9 @@ translation.json:
 	"From:": "From:",
 	"Covenants": "Covenants",
 	"With:": "With:",
+	"Ego": "Ego",
+	"Name and Pronouns": "Name and Pronouns",
+	"Gender": "Gender",
 	"Flaws": "Flaws",
 	"Strain": "Strain",
 	"Gods to Kill": "Gods to Kill",
