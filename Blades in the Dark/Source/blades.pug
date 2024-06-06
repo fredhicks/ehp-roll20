@@ -1,0 +1,200 @@
+-
+	const range = (start, end) => [...Array(end+1).keys()].slice(start),
+		zerodiceFormula = " {{?{@{bonusdice}|0,zerodice=[[d6]]&#44; [[d6]]|1,dice=[[d6]]|2,dice=[[d6]]&#44; [[d6]]|3,dice=[[d6]]&#44; [[d6]]&#44; [[d6]]|4,dice=[[d6]]&#44; [[d6]]&#44; [[d6]]&#44; [[d6]]|5,dice=[[d6]]&#44; [[d6]]&#44; [[d6]]&#44; [[d6]]&#44; [[d6]]|6,dice=[[d6]]&#44; [[d6]]&#44; [[d6]]&#44; [[d6]]&#44; [[d6]]&#44; [[d6]]|-1,zerodice=[[d6]]&#44; [[d6]]|-2,zerodice=[[d6]]&#44; [[d6]]|-3,zerodice=[[d6]]&#44; [[d6]]}}}";
+
+//- Mixins for code reuse
+mixin translate(name)
+	span(data-i18n!=name)
+
+mixin checkbox(name, extraclass)
+	input(type="checkbox", class=[attributes.class, extraclass || ""], name=(name ? `attr_${name}` : false), value=attributes.value||"1", checked=attributes.checked)
+	span(class=extraclass, data-i18n!=attributes["data-i18n"])
+		block
+
+mixin radio(name)
+	input(type="radio", class!=attributes.class, name=`attr_${name}`, value!=attributes.value, checked=attributes.checked)
+	span(data-i18n!=attributes["data-i18n"])
+		block
+
+mixin text-input(name)
+	input(type="text", spellcheck="false", name=`attr_${name}`)&attributes(attributes)
+
+mixin number-input(name)
+	input(type="number", name=`attr_${name}`)&attributes(attributes)
+
+mixin textarea(name)
+	textarea(spellcheck="false", name=`attr_${name}`)&attributes(attributes)
+		block
+
+mixin hidden-input(name)
+	input(type="hidden", name=`attr_${name}`)&attributes(attributes)
+
+mixin hidden-checkbox(name)
+	- classes = attributes.class;
+	- delete attributes.class;
+	input(type="checkbox", name=`attr_${name}`, class=["hidden", classes])&attributes(attributes)
+
+mixin autoexpand(name)
+	div(class=["auto-expand", attributes.class])
+		span(name=`attr_${name}`)
+			block
+		+textarea(name)(data-i18n-placeholder!=attributes["data-i18n-placeholder"])
+			block
+
+mixin roll(name, templatedata)
+	button(
+		type="roll",
+		name=`roll_${name}`,
+		value!=`&{template:blades} {{charname=@{character_name}}} ${templatedata} {{charimage=@{chat_image}}} @{title_text}`
+	)&attributes(attributes)
+		block
+
+mixin fortuneroll(name, templatedata, useNotes)
+	button(
+		type="roll",
+		name=`roll_${name}`,
+		value!=`&{template:blades} {{charname=@{character_name}}} ${templatedata} @{numberofdice}` +
+			`${useNotes ? " {{notes=@{notes_query}}}" : ""} {{charimage=@{chat_image}}} @{title_text}`
+	)&attributes(attributes)
+
+mixin makecohort(prefix, isCharacter)
+	.cohort
+		+hidden-input(`${prefix}verb`)(value=isCharacter ? "^{rolls_their}" : "^{roll_their}")
+		+hidden-input(`${prefix}roll_formula`)(value=zerodiceFormula)
+		.cohort-title.flex.sheet-label
+			+text-input(`${prefix}name`)(value="Cohort").inherit
+			+roll(`${prefix}roll`, "{{type=resist}} {{short=short}} {{charname=@{"+prefix+"name} (^{@{"+prefix+"type}}, @{"+prefix+"subtype})}} {{title-cohort_quality=1}} {{title=^{cohort_quality}}} {{subtitle=@{"+prefix+"verb}}} @{"+prefix+"roll_formula}")(data-i18n="roll-inf").inherit.rollbutton
+		.cohort-info.flex.uppercase
+			.cohort-dropdown
+				div
+					span(name=`attr_${prefix}type`, data-i18n-dynamic)
+				div
+					+radio(`${prefix}type`)(value="gang", checked=!isCharacter, data-i18n="gang")
+				div
+					+radio(`${prefix}type`)(value="elite", data-i18n="elite")
+				div
+					+radio(`${prefix}type`)(value="expert", checked=isCharacter, data-i18n="expert")
+			+text-input(`${prefix}subtype`)(data-i18n-placeholder=isCharacter ? "hunter" : "gang_type").inherit
+			if (isCharacter)
+				.sheet-label.cohort-quality-label(data-i18n="quality_abbreviated") Q:
+				+number-input(`${prefix}quality`)(min="0", max="5", value="1").sheet-label
+		.cohort-condition.flex
+			each name in ["weak", "impaired", "broken", "armor"]
+				label
+					span(class="cohort-condition-name " + (name ==="armor" ? "sheet-label" : "uppercase"), data-i18n=name)
+					+checkbox(prefix + name).tooth.stresstooth
+		each name in ["edges", "flaws"]
+			label.cohort-edgeflaw
+				span.uppercase(data-i18n=name)
+				+autoexpand(prefix + name)
+		+textarea(`${prefix}description`).cohort-description
+
+mixin makeclock(isFaction)
+	+hidden-input("size")(value="").size
+	+autoexpand("name")(data-i18n-placeholder="clock_name").smallcaps
+	button.broadcast-button(type="roll", name="roll_Show", value="&{template:bitd-broadcast}" + (!isFaction ? "{{charname=@{character_name}}} " : "") + "{{title=@{name}}} {{clock=1}} {{clocksize=@{size}}} {{clockprogress=@{progress}}} {{charimage=@{chat_image}}}", data-i18n-title="send_details_to_chat") :
+	.size-choice
+		each num in [4,6,8,10,12]
+			label.text-button
+				+radio("size")(value=num)=num
+	.clock-container
+		.spoke-0.all
+		.spoke-30.sheet-12clock
+		.spoke-45.sheet-8clock
+		.spoke-36.sheet-10clock
+		.spoke-60.sheet-6clock.sheet-12clock
+		.spoke-72.sheet-10clock
+		.spoke-90.sheet-4clock.sheet-8clock.sheet-12clock
+		.spoke-108.sheet-10clock
+		.spoke-120.sheet-6clock.sheet-12clock
+		.spoke-135.sheet-8clock
+		.spoke-144.sheet-10clock
+		.spoke-150.sheet-12clock
+		+radio("progress")(value="0", checked).zero.input-progress
+		input.input-progress.all(type="radio", name="attr_progress", value="1")
+		input.input-progress.all(type="radio", name="attr_progress", value="2")
+		input.input-progress.all(type="radio", name="attr_progress", value="3")
+		input.input-progress.all(type="radio", name="attr_progress", value="4")
+		input.input-progress.sheet-6clock.sheet-8clock.sheet-10clock.sheet-12clock(type="radio", name="attr_progress", value="5")
+		input.input-progress.sheet-6clock.sheet-8clock.sheet-10clock.sheet-12clock(type="radio", name="attr_progress", value="6")
+		input.input-progress.sheet-8clock.sheet-10clock.sheet-12clock(type="radio", name="attr_progress", value="7")
+		input.input-progress.sheet-8clock.sheet-10clock.sheet-12clock(type="radio", name="attr_progress", value="8")
+		input.input-progress.sheet-10clock.sheet-12clock(type="radio", name="attr_progress", value="9")
+		input.input-progress.sheet-10clock.sheet-12clock(type="radio", name="attr_progress", value="10")
+		input.input-progress.sheet-12clock(type="radio", name="attr_progress", value="11")
+		input.input-progress.sheet-12clock(type="radio", name="attr_progress", value="12")
+		.clock
+
+-	const templateTitles = ["insight", "prowess", "resolve", "hunt", "study", "survey", "tinker", "finesse", "prowl", "skirmish", "wreck", "attune", "command", "consort", "sway", "fortune", "vice", "crew_tier", "entanglement", "cohort_quality", "lifestyle", "recovery", "engagement"];
+-	const teeth = ["xptooth-red", "xptooth-white", "stresstooth-red", "stresstooth-black", "stresstooth-halfgrey", "stresstooth-white", "shorttooth-red", "shorttooth-grey"];
+-
+	const actionData = {
+		insight: ["hunt", "study", "survey", "tinker"],
+		prowess: ["finesse", "prowl", "skirmish", "wreck"],
+		resolve: ["attune", "command", "consort", "sway"]
+	};
+
+	function TitleCase(str) {
+		return `${str[0].toUpperCase()}${str.substring(1)}`;
+	}
+
+//- Image preloading
+.preload
+	each tooth in teeth
+		img(src=`https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/Blades%20in%20the%20Dark/Assets/teeth/${tooth}.png`)
+		img(src=`https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/art/Blades%20in%20the%20Dark/Assets/darkmode/teeth/${tooth}.png`)
+	each title in [...templateTitles, "harm"]
+		img(src=`https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/Blades%20in%20the%20Dark/Assets/rolltemplate/rolltemplate-title-${title}.png`)
+
+//- Hidden inputs
+div
+	+hidden-input("stress_max")(value="9")
+	+hidden-input("trauma_max")(value="4")
+	+hidden-input("coin_max")(value="4")
+	+hidden-input("stash_max")(value="40")
+	+hidden-input("playbook_xp_max")(value="8")
+	+hidden-input("rep_max")(value="12")
+	+hidden-input("turf_max")(value="6")
+	+hidden-input("crew_tier_max")(value="4")
+	+hidden-input("heat_max")(value="9")
+	+hidden-input("wanted_max")(value="4")
+	+hidden-input("crewcoin_max")(value="16")
+	+hidden-input("crew_xp_max")(value="8")
+	+hidden-input("changed_attributes")(value="")
+	+hidden-input("bonusdice")(value="Bonus dice")
+	+hidden-input("numberofdice")(value=" {{?{Number of dice|0,zerodice=[[d6]]&#44; [[d6]]|1,dice=[[d6]]|2,dice=[[d6]]&#44; [[d6]]|3,dice=[[d6]]&#44; [[d6]]&#44; [[d6]]|4,dice=[[d6]]&#44; [[d6]]&#44; [[d6]]&#44; [[d6]]|5,dice=[[d6]]&#44; [[d6]]&#44; [[d6]]&#44; [[d6]]&#44; [[d6]]|6,dice=[[d6]]&#44; [[d6]]&#44; [[d6]]&#44; [[d6]]&#44; [[d6]]&#44; [[d6]]}}}")
+	+hidden-input("notes_query")(value="?{Notes}")
+	+hidden-input("position_query")(value="?{Position|Risky,position=Risky|Controlled,position=Controlled|Desperate,position=Desperate|Fortune roll,short=short}")
+	+hidden-input("effect_query")(value="?{Effect|Standard|Limited|Great|Extreme|Zero}")
+	+hidden-input("title_text")(value="")
+	+hidden-input("consequence_query")(value="^{a_consequence}")
+
+//- Global settings
++hidden-input("setting_focus_shadow")(value="1").focus-shadow
++hidden-input("setting_show_broadcast")(value="1").show-broadcast
++hidden-input("setting_show_itemdesc")(value="1").show-itemdesc
++hidden-input("setting_show_frienddesc")(value="1").show-frienddesc
++hidden-input("setting_usekirsty")(value="0").use-kirsty
++hidden-input("setting_flexwidth")(value="0").flexwidth
++hidden-input("setting_clocks_only")(value="0").clocks-only
++hidden-input("setting_custom_actions")(value="0").custom-action-toggle
+
+//- Actual sheet
+.container
+	+hidden-input("sheet_type")(value="character").type
+	include pug/title.pug
+	.type-character.grid
+		include pug/character.pug
+	.type-crew.grid
+		include pug/crew.pug
+	.type-faction.grid
+		include pug/faction.pug
+
+//- Force a line break
+|
+|
+include pug/rolltemplate.pug
+|
+|
+script(type='text/worker')
+	include sheetworkers.js

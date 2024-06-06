@@ -1,0 +1,447 @@
+mixin claimbox(number)
+	+hidden-input(`claim_${number}_check`)(value="0")
+	.claimbox
+		label
+			+checkbox(`claim_${number}_check`).checkbox.squarebox-small
+		+textarea(`claim_${number}_name`).sheet-label
+		+textarea(`claim_${number}_desc`).claim-desc
+
+mixin riverbox(target)
+	+hidden-input(`river_${target}_check`)(value="0")
+	.riverbox.rivertarget&attributes(attributes)
+		label
+			+checkbox(`river_${target}_check`).checkbox.squarebox-small
+		+textarea(`river_${target}`)(data-i18n=`claim_river_${target}`).sheet-label
+		+textarea(`river_${target}_desc`)(data-i18n=`claim_river_${target}_description`).river-desc
+
+mixin plot(target)
+	+hidden-input(`roots_plot_${target}_planting`)(value="0")
+	.plotbox&attributes(attributes)
+		+textarea(`roots_plot_${target}`)(data-i18n=`roots_plot_${target}`).sheet-label
+		+textarea(`roots_plot_${target}_benefit`)(data-i18n=`roots_plot_${target}_benefit`).plot-benefit
+		.plot-clock
+			+hidden-input(`roots_plot_${target}_planting_max`)(value="6").size
+			.clock-container
+				.spoke-0.all
+				.spoke-60.all
+				.spoke-120.all
+				+radio(`roots_plot_${target}_planting`)(value="0", checked).zero.input-progress
+				each num in range(1,6)
+					input.input-progress.all(type="radio", name=`attr_roots_plot_${target}_planting`, value=num)
+				.clock
+		+textarea(`roots_plot_${target}_sacrifice`)(data-i18n=`roots_plot_${target}_sacrifice`).plot-sacrifice
+
+mixin blood(first,second)
+	+hidden-input(`river_${first}_check`)(value="0")
+	+hidden-input(`river_${second}_check`)(value="0")
+	.riverbox.bloodflow&attributes(attributes)
+		block
+
+mixin claimbridge(number, type)
+	label(class=["claimbridge", type === "vert" ? "claims-vertsep" : "claims-horisep"])
+		+checkbox(`claim_bridge_${number}`)(checked)
+
+mixin makeupgrade(label, numboxes, def, desc)
+	div
+		.item
+			+checkbox(`upgrade_${label}_check_1`).checkbox.squarebox
+			if (numboxes === 2)
+				+checkbox(`upgrade_${label}_check_2`).checkbox.squarebox
+			+text-input(`upgrade_${label}_name`)(value=def).itemname
+		.item-description
+			+checkbox(null).expand
+			+textarea(`upgrade_${label}_description`)(data-i18n-placeholder="description")= desc
+
+
+//- Left column
+.left-column
+	//- Logo, Header text fields
+	.header.grid
+		.bladeslogo
+		.crewheader.sheet-label(data-i18n="crew_sheet")
+		label
+			+text-input("crew_name")
+			.sheet-label.text.title(data-i18n="name")
+		label
+			+text-input("reputation")
+			.sheet-label.text.title(data-i18n="reputation")
+		label.sheet-2col
+			+text-input("lair")
+			.sheet-label.text.title(data-i18n="lair")
+		+hidden-input("setting_show_deity")(value="0").hider
+		label
+			+text-input("crew_deity")
+			.sheet-label.text.title
+				span(name="attr_setting_deity_label")
+		+hidden-input("setting_show_deity")(value="0").hider
+		label
+			+text-input("crew_deity_features")(data-i18n-placeholder="choose_2_features")
+			+hidden-input("crew_deity_features")(value="")
+			.text
+				span.sheet-label.title
+					span(name="attr_setting_deity_label").space-after
+					span(data-i18n="features")
+				span.uppercase.info(data-i18n="deity_features_info")
+		+hidden-input("setting_show_origin")(value="0").hider
+		label.sheet-2col
+			+text-input("origin")
+			.sheet-label.text.title(data-i18n="origin")
+	//- Rep, Hold, and Tier
+	.rep-and-hold.flex.def-margin
+		.rep.flex.col45
+			.rep1.blackheader
+				.sheet-label(data-i18n="rep")
+			.rep2.blackborder.flex
+				.turfbox
+					each num in range(1,6)
+						+radio("turf")(value=num)
+				+hidden-input("turf")(value="0").turf-input
+				+radio("rep")(value="0", checked).tooth.zero
+				each num in range(1,12)
+					+radio("rep")(class=["tooth", "stresstooth", ...((num < 6) ? [] : [...Array(num-6).keys()].map(x => `turf${6-x}`))], value=num)
+			.rep3.blackborder
+				.black-on-grey
+					.sheet-label(data-i18n="turf")
+				.turfzero-holder
+					+radio("turf")(value="0", checked).zero
+		//- Hold
+		.hold.flex
+			.hold1.blackheader
+				.sheet-label(data-i18n="hold")
+			label.blackborder
+				.black-on-grey
+					.sheet-label(data-i18n="weak")
+				+radio("hold")(value="weak").tooth.holdtooth
+			label.blackborder
+				.black-on-grey
+					.sheet-label(data-i18n="strong")
+				+radio("hold")(value="strong", checked).tooth.holdtooth
+			//- Tier
+			.blackheader
+				+roll("Tier", "{{type=resist}} {{short=short}} {{title-crew_tier=1}} {{title=^{crew_tier}}} {{subtitle=^{roll_their}}} @{crew_tier_formula}")(data-i18n="tier").sheet-label.inherit.rollbutton
+				+hidden-input("crew_tier_formula")(value=zerodiceFormula)
+			.tier.flex
+				+hidden-checkbox("crew_tier")(value="0", checked).fakeradio
+				each num in range(1,4)
+					+checkbox("crew_tier")(value=num).checkbox.circlebox.fakeradio
+	//- Claims
+	+hidden-input("setting_hide_standard_claims")(value=0).claimhider
+	.claims.free-repcontrol
+		.claimsbody
+			each num in range(1,5)
+				+claimbox(num)
+				if (num !== 5)
+					+claimbridge(`${num}_${num+1}`, "hori")
+			each num in range(1,5)
+				+claimbridge(`${num}_${num+5}`, "vert")
+				if (num !== 5)
+					div
+			+claimbox(6)
+			+claimbridge("6_7", "hori")
+			+claimbox(7)
+			+claimbridge("7_8", "hori")
+			.lairbox.flex-center.uppercase(data-i18n="lair")
+			+claimbridge("8_9", "hori")
+			+claimbox(9)
+			+claimbridge("9_10", "hori")
+			+claimbox(10)
+			each num in range(6,10)
+				+claimbridge(`${num}_${num+5}`, "vert")
+				if (num !== 10)
+					div
+			each num in range(11,15)
+				+claimbox(num)
+				if (num !== 15)
+					+claimbridge(`${num}_${num+1}`, "hori")
+		fieldset.repeating_claim
+			each num in range(1,5)
+				+claimbridge(`top_${num}`, "vert")
+				if (num !== 5)
+					div
+			each num in range(1,5)
+				+claimbox(num)
+				if (num !== 5)
+					+claimbridge(`${num}_${num+1}`, "hori")
+	// The River of Names
+	+hidden-input("setting_river_mode")(value=0).riverhider
+	.river
+		.riverbody
+			+riverbox('land_owner').col4.span3row1.roundtl.roundtr
+			+riverbox('chief_legislator').col8.span3row1.roundtl.roundtr
+			+riverbox('financier').col2.span3row3.roundtl
+			+riverbox('cartel_leader').col6.span3row3.roundbr
+			+riverbox('the_mayor').col10.span3row3.roundtr.roundbl
+			+riverbox('state_treasurer').col4.span3row5.roundbl.roundbr
+			+riverbox('surgeon_general').col8.span3row5.roundtl.roundtr
+			+riverbox('the_general').col2.span3row7.roundtr.roundbl
+			+riverbox('chief_magistrate').col6.span3row7.roundtl
+			+riverbox('detective_inspector').col10.span3row7.roundbr
+			+riverbox('editor-in-chief').col4.span3row9.roundbr.roundbl
+			+riverbox('the_governor').col8.span3row9.roundbr.roundbl
+			+blood('financier','financier').col1.row4.vflow
+				.riverbend.roundbr
+			+blood('financier','financier').col1.row5.vflow
+			+blood('financier','the_general').col1.row6.vflow
+			+blood('the_general','the_general').col1.row7.vflow
+			+blood('the_general','the_general').col1.row8.vflow
+				.riverbend.roundtr
+			+blood('financier','the_general').col2.row6.vflow
+				.riverbend.roundtl.roundbl
+			+blood('financier','land_owner').col3.row3
+			+blood('financier','land_owner').col3.row2
+				.riverbend.roundbr
+			+blood('financier','land_owner').col3.row4
+				.riverbend.roundtl.roundbl
+			+blood('financier','state_treasurer').col3.row5
+			+blood('financier','state_treasurer').col3.row6
+				.riverbend.roundtr
+			+blood('the_general','editor-in-chief').col3.row9
+			+blood('the_general','editor-in-chief').col3.row8
+				.riverbend.roundbl
+			+blood('the_general','editor-in-chief').col3.row10
+				.riverbend.roundtr
+			+blood('land_owner','cartel_leader').col5.row3
+			+blood('land_owner','cartel_leader').col5.row2
+				.riverbend.roundbl
+			+blood('land_owner','cartel_leader').col5.row4
+				.riverbend.roundtr.roundbr
+			+blood('state_treasurer','cartel_leader').col5.row5
+			+blood('state_treasurer','cartel_leader').col5.row6
+				.riverbend.roundtl
+			+blood('editor-in-chief','chief_magistrate').col5.row9
+			+blood('editor-in-chief','chief_magistrate').col5.row8
+				.riverbend.roundbr
+			+blood('editor-in-chief','chief_magistrate').col5.row10
+				.riverbend.roundtl
+			+blood('cartel_leader','chief_legislator').col7.row3
+			+blood('cartel_leader','chief_legislator').col7.row2
+				.riverbend.roundbr
+			+blood('cartel_leader','chief_legislator').col7.row4
+				.riverbend.roundtl
+			+blood('chief_magistrate','surgeon_general').col7.row6
+				.riverbend.roundbr
+			+blood('chief_magistrate','surgeon_general').col7.row7
+			+blood('chief_magistrate','surgeon_general').col7.row8
+				.riverbend.roundbl.roundtl
+			+blood('chief_magistrate','the_governor').col7.row9
+			+blood('chief_magistrate','the_governor').col7.row10
+				.riverbend.roundtr
+			+blood('chief_legislator','the_mayor').col9.row3
+			+blood('chief_legislator','the_mayor').col9.row2
+				.riverbend.roundbl
+			+blood('chief_legislator','the_mayor').col9.row4
+				.riverbend.roundtr
+			+blood('surgeon_general','detective_inspector').col9.row7
+			+blood('surgeon_general','detective_inspector').col9.row6
+				.riverbend.roundbl
+			+blood('the_governor','detective_inspector').col9.row8
+				.riverbend.roundbr.roundtr
+			+blood('the_governor','detective_inspector').col9.row9
+			+blood('the_governor','detective_inspector').col9.row10
+				.riverbend.roundtl
+			+blood('the_mayor','detective_inspector').col10.row6.vflow
+				.riverbend.roundtr.roundbr
+			+blood('the_mayor','the_mayor').col11.row4.vflow
+				.riverbend.roundbl
+			+blood('the_mayor','the_mayor').col11.row5.vflow
+			+blood('the_mayor','detective_inspector').col11.row6.vflow 
+			+blood('detective_inspector','detective_inspector').col11.row7.vflow
+			+blood('detective_inspector','detective_inspector').col11.row8.vflow
+				.riverbend.roundtl
+	// Plots for the Roots Crew
+	+hidden-input("setting_roots_mode")(value=0).plotshider
+	.plots
+		.plotsbody
+			+plot('beautiful_dish')
+			+plot('filling_portion')
+			+plot('poison')
+			+plot('religious_meal')
+			+plot('foreign_delicacy')
+			+plot('invigorating_sample')
+			+plot('seasonal_treat')
+			+plot('well_aged_treat')
+			+plot('simple_fare')
+			+plot('staple')
+			+plot('morish_delight')
+			+plot('addiction')
+			+plot('luxury')
+			+plot('companion_product')
+			+plot('bounty')
+
+	//- Heat and Coin
+	.heat-and-vault.flex.def-margin
+		//- Heat
+		.heat.col45.flex
+			//- Heat markers
+			.heat1.blackheader
+				.sheet-label
+					span(name="attr_setting_heat_label")
+			.heat2.blackborder.flex
+				+radio("heat")(value="0", checked).tooth.zero
+				each num in range(1,9)
+					+radio("heat")(value=num).tooth.stresstooth
+			//- Wanted Level
+			.heat3
+				.blackheader
+					+roll("Wanted", "{{type=vice}} {{short=short}} {{title-entanglement=1}} {{title=^{entanglement}}} {{subtitle=^{wantedroll1}@{heat}&nbsp;@{setting_heat_label}^{wantedroll2}}} @{wanted_formula}").sheet-label.inherit.rollbutton
+						span(name="attr_setting_wanted_label")
+					+hidden-input("wanted_formula")(value=zerodiceFormula)
+				.wantedholder.flex
+					+radio("wanted")(value="0", checked).tooth.zero
+					each num in range(1,4)
+						+radio("wanted")(value=num).tooth.regulartooth
+		//- Coin
+		.crewcoin.col52b
+			.col100.flex
+				.blackheader.crewcoin1
+					.sheet-label(data-i18n="coin")
+				.greyheader.crewcoin2
+					.sheet-label(data-i18n="vaults")
+			.col100.flex.crewcoin-coins
+				+radio("crewcoin")(value="0", checked).zero
+				each num in range(1,4)
+					+radio("crewcoin")(value=num).radiobox
+				.crewcoinbar
+				each num in range(5,8)
+					+radio("crewcoin")(value=num).radiobox.vaultcoin
+				.crewcoinbar
+				each num in range(9,16)
+					+radio("crewcoin")(value=num).radiobox.vaultcoin
+			.col100.crewcoin-desc(data-i18n="upon_crew_advance")
+	//- Special abilities
+	.specialabilities.def-margin
+		.specialheader.sheet-label(data-i18n="special_abilities")
+		.greyholder
+			fieldset.repeating_crewability
+				.specialability.flex
+					button.broadcast-button(type="roll", name="roll_Show", value="&{template:bitd-broadcast} {{charname=@{character_name}}} {{type=^{special_ability}}} {{title=@{name}}} {{content=@{description}}} {{charimage=@{chat_image}}}", data-i18n-title="send_details_to_chat") :
+					+checkbox("check").checkbox.circlebox
+					+autoexpand("name")(data-i18n-placeholder="ability_name").abilityname.smallcaps
+					+autoexpand("description")(data-i18n-placeholder="ability_description").abilitydesc
+	//- Advancement
+	.advancement.def-margin
+		.advancement-header.flex.blackheader
+			.sheet-label.markxp(data-i18n="mark_xp:")
+			.sheet-label(data-i18n="crew_advancement")
+			.xpholder.flex
+				+radio("crew_xp")(value="0", checked).tooth.zero
+				each num in range(1,10)
+					+radio("crew_xp")(value=num).tooth.xptooth
+		ul.advancement-desc
+			li.nondot(data-i18n="xp_top")
+			li
+				+autoexpand("crew_xp_condition")(data-i18n-placeholder="xp_crew_specific")
+			+hidden-input("setting_extra_xp")(value="0").hider
+			li
+				+autoexpand("xp_condition_extra")(data-i18n-placeholder="xp_specific_extra")
+			li(data-i18n="xp_contend")
+			li(data-i18n="xp_bolster")
+			li(data-i18n="xp_express")
+//- Right column
+.right-column.grid
+	//- Crew Type
+	.playbook.sheet-2col.flex
+		+text-input("crew_type")(data-i18n-placeholder="crew").sheet-label
+		+textarea("crew_description")(data-i18n-placeholder="crew_description").sheet-label
+		+hidden-input("show_playbook_reminder")(value="1").hider
+		.reminder
+			span(data-i18n="autofill_reminder_crew")
+			br
+			span(data-i18n="list_crews")
+	//- Upgrades and Hunting Grounds
+	.upgradecolumn
+		//- Upgrades
+		.itemheader
+			span.sheet-label(data-i18n="crew_upgrades")
+		.itemholder.upgrades
+			//- Specific upgrades
+			.playbookitems.free-repcontrol
+				fieldset.repeating_upgrade
+					+hidden-input("boxes_chosen")(value="0").boxes-chosen
+					.item.numboxes-chooser
+						div(data-i18n="how_many_boxes")
+						+number-input("numboxes")(min="1", max="3", value="1")
+						label
+							+checkbox("boxes_chosen")(data-i18n="ok")
+					.item
+						+hidden-input("numboxes")(value="1").numboxes
+						+checkbox("check_1").checkbox.squarebox
+						span.floatingbar.boxesgeq2
+						+checkbox("check_2", "boxesgeq2").checkbox.squarebox
+						span.floatingbar.boxesgeq3.boxesgeq2
+						+checkbox("check_3", "boxesgeq2 boxesgeq3").checkbox.squarebox
+						+autoexpand("name")(data-i18n-placeholder="an_upgrade").itemname
+					.item-description
+						+checkbox(null).expand
+						+textarea("description")(data-i18n-placeholder="description")
+			//- Regular upgrades
+			.regularitems.upgrades.grid
+				.upgradecaption.sheet-label(data-i18n="lair")
+				.upgradecaption.sheet-label(data-i18n="quality")
+				+makeupgrade("carriage", 2, "Carriage", "You have a carriage, two goats to pull it, and a stable. A second upgrade improves the carriage with armor and larger, swifter goats. Horses are very rare in Doskvol — most carriages in the city use the large Akorosian goat as their draft animal.")
+				+makeupgrade("documents", 1, "Documents", "+1 quality for Documents.")
+				+makeupgrade("boat", 2, "Boat", "You have a boat, a dock on a waterway, and a small shack to store boating supplies. A second upgrade improves the boat with armor and more cargo capacity.")
+				+makeupgrade("gear", 1, "Gear", "+1 quality for Burglary Gear and Climbing Gear.")
+				+makeupgrade("hidden", 1, "Hidden", "Your lair has a secret location and is disguised to hide it from view. If your lair is discovered, use two downtime activities and pay coin equal to your Tier to relocate it and hide it once again.")
+				+makeupgrade("implements", 1, "Implements", "+1 quality for Arcane Implements.")
+				+makeupgrade("quarters", 1, "Quarters", "Your lair includes living quarters for the crew. Without this upgrade, each PC sleeps elsewhere, and is vulnerable when they do so.")
+				+makeupgrade("supplies", 1, "Supplies", "+1 quality for Subterfuge Supplies.")
+				+makeupgrade("secure", 2, "Secure", "Your lair has locks, alarms, and traps to thwart intruders. A second upgrade improves the defenses to include arcane measures that work against spirits. You might roll your crew\'s Tier if these measures are ever put to the test, to see how well they thwart an intruder.")
+				+makeupgrade("tools", 1, "Tools", "+1 quality for Demolition Tools and Tinkering Tools.")
+				+makeupgrade("vault", 2, "Vault", "Your lair has a secure vault, increasing your storage capacity for coin to 8. A second upgrade increases your capacity to 16. A separate part of your vault can be used as a holding cell.")
+				+makeupgrade("weapons", 1, "Weapons", "+1 quality for Weapons.")
+				+makeupgrade("workshop", 1, "Workshop", "Your lair has a workshop appointed with tools for tinkering and alchemy, as well as a small library of books, documents, and maps. You may accomplish long-term projects with these assets without leaving your lair.")
+				div
+				.upgradecaption.sheet-label(data-i18n="training")
+				.upgradecaption.sheet-label(data-i18n="cohorts")
+				+makeupgrade("insight", 1, "Insight", "Earn 2 xp when training insight during downtime.")
+				.upgradecosts.sheet-label(data-i18n="upgrade_costs")
+				+makeupgrade("prowess", 1, "Prowess", "Earn 2 xp when training prowess during downtime.")
+				.upgradecosts(data-i18n="new_cohort")
+				+makeupgrade("resolve", 1, "Resolve", "Earn 2 xp when training resolve during downtime.")
+				.upgradecosts(data-i18n="add_type")
+				+makeupgrade("personal", 1, "Personal", "Earn 2 xp when training playbook during downtime.")
+				.sheet-2col
+					.item
+						each num in range(1,4)
+							+checkbox(`upgrade_mastery_check_${num}`).checkbox.squarebox
+							if (num < 4)
+								span.floatingbar
+						+text-input("upgrade_mastery_name")(value="Mastery").itemname
+					.item-description
+						+checkbox(null).expand
+						+textarea("upgrade_mastery_description")(data-i18n-placeholder="description")
+							| Your crew has access to master level training. You may advance your PCs' action ratings to 4 (until you unlock this upgrade, PC action ratings are capped at 3). This costs four upgrade boxes to unlock.
+		.hunting-grounds.def-margin
+			+autoexpand("hunting_grounds_type")(data-i18n-placeholder="hunting_grounds").plainheader.sheet-label
+			+autoexpand("hunting_grounds_description")(data-i18n-placeholder="hunting_grounds_description").description
+		+fortuneroll("Engagement", "{{type=action}} {{short=short}} {{small-title=small-title}} {{subtitle=^{roll_for}}} {{title-engagement=1}} {{title=^{engagement}}}")(data-i18n="roll_engagement").engagementbutton.borderbutton
+	//- Cohorts and Contacts
+	.cohortcolumn
+		//- First Cohort
+		+makecohort("cohort1_")
+		//- Cohort repeating section
+		.cohorts.free-repcontrol
+			fieldset.repeating_cohort
+				+makecohort("")
+		//- Contacts
+		.contacts
+			.specialheader.sheet-label.flex
+				+text-input("contacts_title")(value="Contacts").inherit
+			.greyholder
+				fieldset.repeating_contact
+					.friend-contact.contact.flex
+						+hidden-input("check")(value="0").friendstate
+						label
+							+checkbox("check").checkbox
+						+autoexpand("name")(data-i18n-placeholder="contact_name")
+					+checkbox(null).expand
+					+textarea("description")(data-i18n-placeholder="notes").description
+		//- Roll Fortune
+		+fortuneroll("Fortune_crew", "{{type=fortune}} {{subtitle=^{roll}}} {{title-fortune=1}} {{title=^{fortune}}}", true)(data-i18n="roll_fortune").fortunebutton.borderbutton
+	//- Clocks
+	.clocks.sheet-2col.free-repcontrol
+		.specialheader.sheet-label(data-i18n="clocks")
+		fieldset.repeating_crewclock
+			+makeclock
+	+textarea("crew_notes")(data-i18n-placeholder="notes").notes.sheet-2col.small-margin

@@ -1,0 +1,17 @@
+@mixin clock($angle) {
+	@if $angle == 0 {
+		background: var(--blades-whitetext);
+	} @else if $angle == 360 {
+		background: red;
+	} @else if $angle < 180 {
+		background-image: linear-gradient(90deg, var(--blades-whitetext) 50%, transparent 50%), linear-gradient(#{90 + $angle}deg, red 50%, var(--blades-whitetext) 50%);
+	} @else if $angle == 180 {
+		background-image: linear-gradient(90deg, var(--blades-whitetext) 50%, red 50%);
+	} @else {
+		background-image: linear-gradient(#{$angle - 90}deg, transparent 50%, red 50%), linear-gradient(90deg, var(--blades-whitetext) 50%, red 50%);
+	}
+}
+
+@import 'scss/sheet.scss';
+
+@import 'scss/rolltemplate.scss';

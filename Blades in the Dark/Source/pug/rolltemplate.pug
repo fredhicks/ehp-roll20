@@ -1,0 +1,81 @@
+//- ROLL TEMPLATE
+rolltemplate.sheet-rolltemplate-blades
+	div(class!="holder {{type}} {{short}} {{language}}")
+		| {{#charimage}}
+		.char-image [Image]({{charimage}})
+		| {{/charimage}}
+		div(class!="header{{#charimage}} narrow{{/charimage}}") {{charname}} {{subtitle}}
+		.title
+			| {{#title-text}}
+			span(class="{{small-title}}") {{title}}
+			| {{/title-text}}{{^title-text}}{{#rolltypetext}}[{{rolltypetext}}]({{rolltypeimage}}){{/rolltypetext}}
+			each title in templateTitles
+				= `{{#title-${title}}}`
+				img(data-i18n-alt=title, src=`https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/Blades%20in%20the%20Dark/Assets/rolltemplate/rolltemplate-title-${title}.png`)
+				= `{{/title-${title}}}`
+			| {{/title-text}}
+		.dice
+			| {{^zerodice}}{{dice}}{{/zerodice}}{{#zerodice}}
+			.zerodice1 {{zerodice}}
+			.zerodice2(data-i18n="zerodice")
+			| {{/zerodice}}
+		| {{#position}}
+		.position {{position}}
+		| {{/position}}{{#effect}}
+		.effect {{effect}}
+		| {{/effect}}{{#instructions}}
+		.instructions {{instructions}}
+		| {{/instructions}}{{#notes}}
+		.notes {{notes}}
+		| {{/notes}}
+
+//- BROADCAST
+rolltemplate.sheet-rolltemplate-bitd-broadcast
+	div(class="{{#korean}}korean{{/korean}}")
+		| {{#charimage}}{{^clock}}
+		.char-image [Image]({{charimage}})
+		| {{/clock}}{{/charimage}}
+		div(class!="header{{#charimage}}{{^clock}} narrow{{/clock}}{{/charimage}}")
+			div {{charname}}
+			div {{type}}
+		| {{#content}}
+		.title {{title}}
+		.content {{content}}
+		| {{/content}}{{#clock}}
+		.flex
+			.clock(class="size-{{clocksize}} progress-{{clockprogress}}")
+				.spoke-0
+				.spoke-30
+				.spoke-36
+				.spoke-45
+				.spoke-60
+				.spoke-72
+				.spoke-90
+				.spoke-108
+				.spoke-135
+				.spoke-144
+				.spoke-120
+				.spoke-150
+			.title {{title}}
+		| {{/clock}}{{#harm}}{{#title-text}}
+		.title(data-i18n="harm")
+		| {{/title-text}}{{^title-text}}
+		.title
+			img(src="https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/Blades%20in%20the%20Dark/Assets/rolltemplate/rolltemplate-title-harm.png")
+		| {{/title-text}}
+		table.harm
+			tr
+				td 3
+				td #[.harm-inner {{harm3}}]
+				td(data-i18n="need_help")
+			tr
+				td 2
+				td
+					| {{#harm2_1}}#[.harm-inner {{harm2_1}}]{{/harm2_1}}{{#harm2_2}}#[.harm-inner {{harm2_2}}]{{/harm2_2}}
+				td(data-i18n="minus1d")
+			tr
+				td 1
+				td
+					| {{#harm1_1}}#[.harm-inner {{harm1_1}}]{{/harm1_1}}{{#harm1_2}}#[.harm-inner {{harm1_2}}]{{/harm1_2}}
+				td(data-i18n="less_effect")
+		| {{/harm}}
