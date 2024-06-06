@@ -2,7 +2,7 @@
   "dependencies": {
     "jstransformer": "^1.0.0",
     "jstransformer-uglify-es": "^0.2.1",
-    "pug": "^3.0.2",
+    "pug": "^3.0.3",
     "sass": "^1.49.9"
   },
   "license": "MIT",
