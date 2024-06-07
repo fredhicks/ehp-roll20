@@ -2118,17 +2118,23 @@ $redriver_d: #600; // #500 in light mode
 
 /* Support for The River (City of Red Waters) */
 
+// Hide normal claims area when an alternative claims mode is active
+
 .charsheet .claimhider[value="1"] ~ {
 	.claims, .claims .claimbody { 
 		display: none; 
 	}
 }
 
+// Display the River claims area only when it's activated
+
 .charsheet .riverhider[value="0"] ~ {
 	.river, .river .riverbody { 
 		display: none; 
 	}
 }
+
+// Definitions for formatting River claims area
 
 .charsheet {
 	.river { margin-top: 15px; }
@@ -2224,6 +2230,17 @@ $redriver_d: #600; // #500 in light mode
 }
 
 /* Support for Roots (City of Red Waters) */
+
+// Display the Roots claims area (plots) only when it's activated
+
+.charsheet .plotshider[value="0"] ~ {
+	.plots, .plots .plotsbody { 
+		display: none; 
+	}
+}
+
+// Definitions for formatting Roots plots area
+
 .charsheet {
 	.plots { margin-top: 15px; }
 	.plotsbody {
