@@ -449,132 +449,132 @@ $broadcast-white: #ccc;
 	}
 	.sheet-size-4 {
 		&.sheet-progress-1 {
-			@include clock(90);
+			@include clock(90, white);
 		}
 		&.sheet-progress-2 {
-			@include clock(180);
+			@include clock(180, white);
 		}
 		&.sheet-progress-3 {
-			@include clock(270);
+			@include clock(270, white);
 		}
 		&.sheet-progress-4 {
-			@include clock(360);
+			@include clock(360, white);
 		}
 	}
 	.sheet-size-6 {
 		&.sheet-progress-1 {
-			@include clock(60);
+			@include clock(60, white);
 		}
 		&.sheet-progress-2 {
-			@include clock(120);
+			@include clock(120, white);
 		}
 		&.sheet-progress-3 {
-			@include clock(180);
+			@include clock(180, white);
 		}
 		&.sheet-progress-4 {
-			@include clock(240);
+			@include clock(240, white);
 		}
 		&.sheet-progress-5 {
-			@include clock(300);
+			@include clock(300, white);
 		}
 		&.sheet-progress-6 {
-			@include clock(360);
+			@include clock(360, white);
 		}
 	}
 	.sheet-size-8 {
 		&.sheet-progress-1 {
-			@include clock(45);
+			@include clock(45, white);
 		}
 		&.sheet-progress-2 {
-			@include clock(90);
+			@include clock(90, white);
 		}
 		&.sheet-progress-3 {
-			@include clock(135);
+			@include clock(135, white);
 		}
 		&.sheet-progress-4 {
-			@include clock(180);
+			@include clock(180, white);
 		}
 		&.sheet-progress-5 {
-			@include clock(225);
+			@include clock(225, white);
 		}
 		&.sheet-progress-6 {
-			@include clock(270);
+			@include clock(270, white);
 		}
 		&.sheet-progress-7 {
-			@include clock(315);
+			@include clock(315, white);
 		}
 		&.sheet-progress-8 {
-			@include clock(360);
+			@include clock(360, white);
 		}
 	}
 	.sheet-size-10 {
 		&.sheet-progress-1 {
-			@include clock(36);
+			@include clock(36, white);
 		}
 		&.sheet-progress-2 {
-			@include clock(72);
+			@include clock(72, white);
 		}
 		&.sheet-progress-3 {
-			@include clock(108);
+			@include clock(108, white);
 		}
 		&.sheet-progress-4 {
-			@include clock(144);
+			@include clock(144, white);
 		}
 		&.sheet-progress-5 {
-			@include clock(180);
+			@include clock(180, white);
 		}
 		&.sheet-progress-6 {
-			@include clock(216);
+			@include clock(216, white);
 		}
 		&.sheet-progress-7 {
-			@include clock(252);
+			@include clock(252, white);
 		}
 		&.sheet-progress-8 {
-			@include clock(288);
+			@include clock(288, white);
 		}
 		&.sheet-progress-9 {
-			@include clock(324);
+			@include clock(324, white);
 		}
 		&.sheet-progress-10 {
-			@include clock(360);
+			@include clock(360, white);
 		}
 	}
 	.sheet-size-12 {
 		&.sheet-progress-1 {
-			@include clock(30);
+			@include clock(30, white);
 		}
 		&.sheet-progress-2 {
-			@include clock(60);
+			@include clock(60, white);
 		}
 		&.sheet-progress-3 {
-			@include clock(90);
+			@include clock(90, white);
 		}
 		&.sheet-progress-4 {
-			@include clock(120);
+			@include clock(120, white);
 		}
 		&.sheet-progress-5 {
-			@include clock(150);
+			@include clock(150, white);
 		}
 		&.sheet-progress-6 {
-			@include clock(180);
+			@include clock(180, white);
 		}
 		&.sheet-progress-7 {
-			@include clock(210);
+			@include clock(210, white);
 		}
 		&.sheet-progress-8 {
-			@include clock(240);
+			@include clock(240, white);
 		}
 		&.sheet-progress-9 {
-			@include clock(270);
+			@include clock(270, white);
 		}
 		&.sheet-progress-10 {
-			@include clock(300);
+			@include clock(300, white);
 		}
 		&.sheet-progress-11 {
-			@include clock(330);
+			@include clock(330, white);
 		}
 		&.sheet-progress-12 {
-			@include clock(360);
+			@include clock(360, white);
 		}
 	}
 }
