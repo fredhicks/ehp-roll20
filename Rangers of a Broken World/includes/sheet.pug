@@ -1,0 +1,181 @@
+.rangers
+	// .topline
+		.nameblock.fcon.spaceunder.hlabel.bigger
+			+display("character_name")
+	.columns
+		.column
+			.columns.topstats
+				.column
+					.hlabel
+						+t("Name")
+					.entry
+						+text("character_name").fillblank
+					.hlabel
+						+t("Class")
+					.entry
+						+text("class").fillblank
+				.column
+					.hlabel
+						+t("Pronouns")
+					.entry
+						+text("pronouns").fillblank
+					.hlabel
+						+t("Season")
+					.entry
+						+text("season").fillblank
+
+			.tracks
+				.hlabel.bigger
+					+t("Scatter")
+					+t('Used to cast spells.').instruct
+				.boxTrack.flexfield
+					each val in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+						+bigbox("blur"+val)
+					+t("lose consciousness").warning.cboxtext
+				.hlabel.bigger
+					+t("Blur")
+					+t('Used to Assist Abilities.').instruct
+				.boxTrack.flexfield
+					each val in [1, 2, 3, 4, 5]
+						+bigbox("blur"+val)
+					+t("face the consequences").warning.cboxtext
+				.skipGridCell
+				.flexfield
+					.hlabel
+						+t("Ally")
+					+text("ally").fillblank
+				+t('Gives you Spell Notes.').instruct
+				// Should make note that this is the same as the page-two field
+
+			.facets
+				.hlabel.bigger
+					+t("Facets")
+					span.instruct
+						+t("Used to perform Assist Abilities.")
+				each facet in ['Daring','Understanding','Sensitivity','Subtlety','Adaptability']
+					.facetGrid
+						.hlabel
+							+t(facet)
+						.facetTrack
+							+dboxMarked(facet+"Facet1")
+							each val in [2, 3, 4, 5]
+								+dbox(facet+"Facet"+val)
+
+			.spellnotes
+				.hlabel.bigger
+					+t("Spell Notes")
+				.instruct
+					+t("Personal Spell Notes use:").bolded
+					+t("Gain Scatter.")
+					+t("Ally Notes use:").bolded
+					+t("Gain Blur.")
+				+t("Personal:").bolded
+				+text("personalSpellWords").fillblank
+				+t("Ally:").bolded
+				+text("allySpellWords").fillblank
+
+			.ally
+				.hlabel.bigger
+					+t("Ally Pool")
+				+text("ally").fillblank.bolded
+				.hlabel
+					+t("Assist Abilities")
+					span.instruct
+						+t("Gain Blur to use.")
+				+t("Ally Spell Notes").bolded
+				+t("(Using these words in a spell adds 1 Blur)").instruct
+				+text("allySpellWords").bordered.bolded
+				+fieldset('assistAbilities')
+					+text("abilityName").fillblank.bolded
+					+textarea("abilityDesc").bordered
+
+			.consequence
+				.hlabel.bigger
+					+t("Consequence")
+					span.instruct
+						+t("When you fill all your Blur.")
+				+text("consequence").fillblank.bolded
+				+textarea("consequenceText").bordered
+
+		.column
+
+			.abilities
+				.hlabel.bigger
+					+t("Abilities")
+				.instruct
+					+t("Choose one of the Season One abilities from the Advancement section for your class.")
+				+fieldset('abilities')
+					+text("abilityName").fillblank.bolded
+					+textarea("abilityDesc").bordered.shorter
+
+			.skills
+				.hlabel.bigger
+					+t("Skills")
+				.instruct
+					+t("You start with each of your class skills, after which you may choose 4 additional skills.")
+				.columns
+					each val in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+						.column
+							+text("skill"+val).fillblank
+
+			.key
+				.hlabel.bigger
+					+t("Key")
+				.instruct
+					+t("If all five of your motives are marked off, you have completed your Key. When your Key is complete, you remove all of your Scatter and gain access to your Signature Spell Notes.")
+				each val in [1, 2, 3, 4, 5]
+					.flexfield
+						+cbox("key"+val)
+						+text("motive"+val).fillblank
+				.hlabel
+					+t("Signature Spell").warncolor
+				.columns
+					.column
+						+text("signatureNote1").fillblank.warncolor
+					.column
+						+text("signatureNote2").fillblank.warncolor
+
+			.survival
+				.hlabel.bigger
+					+t("Survival Specialty")
+				+text("survivalSpecialty").fillblank.bolded
+				+textarea("survivalDesc").bordered.shorter
+
+			.crisis
+				.hlabel.bigger
+					+t("Crisis Specialty") 
+				+text("crisisSpecialty").fillblank.bolded
+				+textarea("crisisDesc").bordered.shorter
+
+			.hits
+				.hlabel.bigger
+					+t("Hits")
+				.flexfield
+					+cbox("hits1")
+					.cboxtext
+						+t("Lose access to highest Facet.")
+				.flexfield
+					+cbox("hits2")
+					.cboxtext
+						+t("Gain 5 Scatter.")
+				.flexfield
+					+cbox("hits3")
+					.cboxtext
+						+t("Can no longer use Assist Abilities.")
+				.flexfield
+					+cbox("hits4")
+					.cboxtext
+						+t("Lose next action.")
+				.flexfield
+					+cbox("hits5")
+					.cboxtext
+						+t("Next Crisis Action is inevitable.")
+				.flexfield
+					+cbox("hits6")
+					.cboxtext
+						+t("Removed from the scene.").warncolor
+
+			.notes
+				.hlabel.bigger
+					+t("Character Description, Notes")
+					+textarea("notes").bordered.resize

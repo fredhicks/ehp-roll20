@@ -1,0 +1,38 @@
+Name (text)
+Pronouns (text)
+Class (text, but it's a menu selection to populate) {Beckoning Infiltrators, Enduring Legionnaires, Tidal Navigators, Volcanic Trackers, Wailing Arcanists, Wandering Magi, Windswept Cavaliers}
+Season (text)
+
+Scatter (10 checkmarks, sequence, mark multiple at once)
+Blur (5 checkmarks, sequence, mark multiple at once)
+
+Facets (5 star-boxes, but one is always marked to start, so really 4)
+	{Daring, Understanding, Sensitivity, Subtlety, Adaptability}
+
+Spell Notes (there's a 'ranger class list' to pick from, consider a hook)
+	Personal — list of words
+	Ally — list of words
+
+Survival Specialty (text, multi-line)
+
+Crisis Specialty (text, multi-line)
+
+Abilities (text, multi-line)
+
+Skills (multi-field, short text per field; at least ten; many populated based on class choice, consider a hook)
+
+Key
+	Musical scale nice-to-have, but really, five fields, five checkboxes
+	Signature Spell (two text fields, made of separate spell notes — see if you can figure a way to make those 'auto' but nbd if not)
+
+Hits
+	Series of checkboxes with static text for each one. Might consider sheet triggers for the ones that apply
+
+Ally Pool
+	Name field
+	Assist Abilities (text, multi-line, multi-entry, each with some sort of label e.g. Lightning Field)
+
+Consequence
+	text, multi-line, single-entry, has a label field e.g. The Wild Speech
+
+Character Description & Notes (text, multi-line)
