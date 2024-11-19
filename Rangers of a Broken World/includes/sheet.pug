@@ -30,7 +30,7 @@
 					+t('Used to cast spells.').instruct
 				.boxTrack.flexfield
 					each val in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-						+bigbox("blur"+val)
+						+bigbox("scatter"+val)
 					+t("lose consciousness").warning.cboxtext
 				.hlabel.bigger
 					+t("Blur")
@@ -122,7 +122,7 @@
 				.hlabel.bigger
 					+t("Key")
 				.instruct
-					+t("If all five of your motives are marked off, you have completed your Key. When your Key is complete, you remove all of your Scatter and gain access to your Signature Spell Notes.")
+					+t("When you mark off a motive, add 2 dice to a roll. If all five of your motives are marked off, you have completed your Key. When your Key is complete, you remove all of your Scatter and gain access to your Signature Spell Notes.")
 				each val in [1, 2, 3, 4, 5]
 					.flexfield
 						+cbox("key"+val)
