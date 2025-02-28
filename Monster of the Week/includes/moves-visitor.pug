@@ -1,0 +1,33 @@
+.sheet-OPBHead.sheet-MinorHead.sheet-space-above
+	+t("The Visitor")
+// .sheet-Visitor .sheet-OPB
+.sheet-Visitor
+	i
+		+t("You get all the basic moves, plus three Visitor moves. Choose three of these:")
+.sheet-Visitor.sheet-OPB
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-MovesUnused', value='1', checked='')
+
+	+move("Visitor-Move","<b>Something Strange:</b> You have an odd adaptation natural to you. Pick one:")
+		input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-MovesUnused', value='1', checked='')
+		+move("Visitor-Something-Choice","You breathe water as well as air and swim incredibly well.",true)
+		+move("Visitor-Something-Choice","You have 1-armour and great strength.",true)
+		+move("Visitor-Something-Choice","You can smell the difference between types of magic.",true)
+		+move("Visitor-Something-Choice","You can glide and take no fall damage. You also don’t trigger most weight sensors.",true)
+		+move("Visitor-Something-Choice","Something else (with the group’s agreement):")
+			input(type="text", name="attr_Visitor-Something-Choice-Else")
+
+	+move("Visitor-Move","<b>Always Learning:</b> When you <i>make the effort to learn from someone of another culture</i>, mark experience and take +1 ongoing to tasks related to the lesson until the current mystery ends.",true)
+
+	+move("Visitor-Move","<b>Being Neighbourly:</b> At the beginning of each session, you may roll +Cool. <ul><li>On a 10+, you’re doing fine—locals provide you some useful resources or information. <li>On a 7–9, local friends can help, but they need something first. <li>On a miss, there’s bad feelings: either from yourself, such as feeling guilty when you mistakenly think you’ve upset someone, or from other people, such as when you accidentally remind someone of painful personal history.</ul>",true)
+		+2d6("Being Neighbourly","Cool","beingneighbourly")
+
+	+move("Visitor-Move","<b>Different World, Different Rules:</b> You’ve learned some of the rules and tricks that work here. When you’re in conflict with an entity less familiar with this world than you are, take +1 ongoing.",true)
+
+	+move("Visitor-Move","<b>Taste of Home:</b> When you and another hunter <i>share something one of you loves that is new to the other</i>, they explain how it is important to either them or their culture. The other hunter picks one:<ul><li>Relate a similar memory or element of your culture or background. Each hunter gains +1 ongoing to aid each other until the mystery ends.<li>Relate a contrasting memory or element of your culture or background. Each hunter marks experience.<li>Relate how this is entirely alien to you. Each hunter gains +1 forward to <b>investigate a mystery</b> or <b>read a bad situation</b> because it has put them in a questioning frame of mind.</ul>",true)
+
+	+move("Visitor-Move","<b>Alien Anatomy:</b> When you <b>suffer harm</b> from someone not from your homeworld, take 1 less harm.",true)
+
+	+move("Visitor-Move","<b>Otherworldly Techniques:</b> At the start of each session, you gain 2 hold. You can spend hold to gain +1 forward on a move when you use gear from your home culture.",true)
+
+
+// .sheet-Visitor .sheet-OPB

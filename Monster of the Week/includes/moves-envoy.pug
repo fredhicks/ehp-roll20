@@ -1,0 +1,27 @@
+.sheet-OPBHead.sheet-MinorHead.sheet-space-above
+	+t("The Envoy")
+// .sheet-Envoy .sheet-OPB
+.sheet-Envoy
+	i
+		+t("You get all the basic moves and two Envoy moves. Pick two of these:")
+.sheet-Envoy.sheet-OPB
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-MovesUnused', value='1', checked='')
+
+	+move("Envoy-Move","<b>Strangely Normal:</b> When you <i>behave with casual confidence</i> despite doing something weird, roll +Charm.<ul><li>On a 10+, your odd behaviour is accepted and gives you an icebreaker to start a longer conversation if you want.<li>On a 7–9, someone becomes suspicious, starting a pointed conversation with you.<li>On a miss, someone takes offence.</ul>",true)
+		+2d6("Strangely Normal","Charm","strangelynormal")
+
+	+move("Envoy-Move","<b>Too Much Has Been Lost:</b> When you <i>research old tales</i> to <b>investigate a mystery</b>, ask one of these in addition to your normal questions:<ul><li>What in this record is exaggerated?<li>What in this record is understated?<li>What in this record is manufactured?<li>What is this record missing?</ul>",true)
+
+	+move("Envoy-Move","<b>The Council Has Made a Decision:</b> When you <i>defy a direct command</i> from the Overseers, hold 2. Spend this hold to turn a rolled move into a 10+, but the fallout gets worse each time you do.",true)
+
+	+move("Envoy-Move","<b>Prime Directive:</b> When the Overseers’ Values conflict with what you need to do, make a choice: uphold the Value or do what you need. You get +1 ongoing on moves that heighten the conflict. If the conclusion leaves the Overseers, hunters, and bystanders all content, mark experience.",true)
+
+	+move("Envoy-Move","<b>Servant of the Secret Fire:</b> When you <b>help out</b> another hunter using supernatural or weird means, you also gain +1 forward. Once per session, you may use a basic Weird move you don’t normally have access to. If you are not playing with alternate Weird moves, you may instead <b>use magic</b> as if you rolled a 10+.",true)
+
+	+move("Envoy-Move","<b>From a Certain Point of View:</b> Your style of cooperation can appear dishonest. When you <i>use deceit to manipulate bystanders or allies</i>, roll +Cool.<ul><li>On a 10+, everything goes smoothly.<li>On a 7–9, there is some collateral damage you didn’t expect. Do you consider the success worth the cost?<li>On a miss, that went badly.</ul>",true)
+		+2d6("From a Certain Point of View","Cool","certainpov")
+
+	+move("Envoy-Move","<b>No One Listens to Zathras:</b> Once per mystery for each hunter, when you <i>give cryptic advice to another hunter</i>, they may ask the Keeper “What have I missed?” If they choose not to do so, they mark experience.",true)
+
+
+// .sheet-Envoy .sheet-OPB

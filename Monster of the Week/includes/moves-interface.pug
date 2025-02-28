@@ -1,0 +1,24 @@
+.sheet-OPBHead.sheet-MinorHead.sheet-space-above
+	+t("The Interface")
+// .sheet-Interface .sheet-OPB
+.sheet-Interface
+	i
+		+t("You get all the basic moves, plus three Interface moves. Pick three of these:")
+.sheet-Interface.sheet-OPB
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-MovesUnused', value='1', checked='')
+
+	+move("Interface-Move","<b>Technomancer:</b> When you <i>repurpose a machine on the fly</i> to do something it wasn’t designed for, roll +Cool. On a 10+, it does what you want, pick three effects. On a 7–9, it does it and shuts down, pick one effect:<ul><li>The machine is repairable afterwards.<li>There is no collateral damage.<li>It works longer than expected.<li>You can shut it down safely.<li>It’s stronger than you expected.<li>You have full control.</ul>",true)
+		+2d6("Technomancer","Cool","technomancer")
+
+	+move("Interface-Move","<b>Expert Troll:</b> You can <b>read a bad situation</b> on any dangerous, thinking entity. When you do, you may ask these as well as the usual questions:<ul><li>What will infuriate them?<li>What do they want most?</ul>On a miss, they act while you’re making plans.",true)
+
+	+move("Interface-Move","<b>Keep Going and Going:</b> You don’t need sleep, and are immune to sedating effects from any source.",true)
+
+	+move("Interface-Move","<b>Take the Shot:</b> You may forgo +1 ongoing from <b>read a bad situation</b> to gain +2 forward on a single relevant roll.",true)
+
+	+move("Interface-Move","<b>Hack the Planet:</b> You immediately know whether a system you’re connected to has hidden directories or connections. When you successfully manipulate technology, give another hunter +1 forward.",true)
+
+	+move("Interface-Move","<b>Virus Whisperer:</b> When you <i>quarantine or create a virus</i>, roll +Cool. On a 10+, pick two. On a 7–9, pick one:<ul><li>You safely contain the virus.<li>It erases or changes specific information.<li>It locks down the system.<li>Ask one question from the <b>investigate a mystery</b> list.</ul>",true)
+		+2d6("Virus Whisperer","Cool","viruswhisperer")
+
+// .sheet-Interface .sheet-OPB

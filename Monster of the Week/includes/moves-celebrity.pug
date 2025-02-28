@@ -1,0 +1,27 @@
+.sheet-OPBHead.sheet-MinorHead.sheet-space-above
+	+t("The Celebrity")
+// .sheet-Celebrity .sheet-OPB
+.sheet-Celebrity
+	i
+		+t("You get all the basic moves, plus three Celebrity moves. You get this one:")
+.sheet-Celebrity.sheet-OPB
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-MovesUnused', value='1', checked='')
+	+move("Celebrity-Move","<b>Fakelore:</b> When you use “facts” learned from your work, roll +Sharp. On a 10+, pick two. On a 7–9, pick one. On a miss, pick two, but one is true, one isn’t, and you won’t find out which until it really matters.<ul><li>You coincidentally expose a vulnerability of the monster.<li>You kept a useful prop and can make use of it now.<li>You don’t set yourself up to be attacked.<li>It works for the reason you say it should.</ul>",true)
+		+2d6("Fakelore","Sharp","fakelore")
+.sheet-Celebrity
+	i
+		+t("Then pick two of these:")
+.sheet-Celebrity.sheet-OPB
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-MovesUnused', value='1', checked='')
+	+move("Celebrity-Move","<b>Scream Queen:</b> When you <i>make a commotion</i>, roll +Cool. On a 10+, you draw all the attention you want. On a 7–9, you either attract something you didn’t want or don’t attract everything you wanted.",true)
+		+2d6("Scream Queen","Cool","screamqueen")
+	+move("Celebrity-Move","<b>The Price of Fame:</b> When <i>your career interferes with a hunt or puts someone in harm’s way</i>, mark experience. When dealing with fans, your fame usually serves as a reason for <b>manipulating someone</b>.",true)
+	+move("Celebrity-Move","<b>I Have People:</b> You have friends in high places. When you <i>ask them for help</i>, roll +Charm.<ul><li>On a 10+, they’re available and helpful—they can fix something, use connections to get around authority figures, do background research, or get you special information.<li>On a 7–9, they’re prepared to help, but it’s either going to take some time or you owe them a favour.<li>On a miss, you offend them.</ul>",true)
+		+2d6("I Have People","Charm","ihavepeople")
+	+move("Celebrity-Move","<b>I Do My Own Stunts:</b> You’ve been hurt on the job enough that you know how to manage your own injuries. As long as you’re conscious, you never go unstable.",true)
+	+move("Celebrity-Move","<b>Disarming:</b> You know how to look harmless. When you <i>dissuade someone or something from hurting you</i>, roll +Charm. On a 10+, they hesitate long enough for someone to act. On a 7–9, they either hold back or attack someone else.",true)
+		+2d6("Disarming","Charm","disarming")
+	+move("Celebrity-Move","<b>But I Play One on TV:</b> You’ve picked up tricks from a lot of fields. Once per session, you can use a move from any not-in-use playbook, or an alternate Weird move.",true)
+	+move("Celebrity-Move","<b>Acting, My Dear Boy:</b> If you suffer harm that would take you to <b>dying</b>, you ignore it and survive—but you’re out of action, presumed dead. Later you reappear as if nothing happened, revealing you played dead or fainted. It may go badly for you if anything takes advantage of your apparent helplessness.",true)
+
+// .sheet-Celebrity .sheet-OPB

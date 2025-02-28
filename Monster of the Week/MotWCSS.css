@@ -6,6 +6,10 @@
 
 /* The above style is in place to "absorb" the consequences of a hidden character that appears to show up in roll20 production environment */
 
+.sheet-move ul {
+	margin-bottom: 0px;
+}
+
 .sheet-nowrap {
 	white-space: nowrap;
 }

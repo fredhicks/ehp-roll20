@@ -1,0 +1,19 @@
+.sheet-Covenant
+	+subsection("Covenant")
+	+expander("Covenant-Covenant")
+		div
+			+t("You have a knack for keeping allies safe. Once per session, if an ally would be killed, describe how you help them survive and escape. They return, fully or mostly recovered, at the start of the next mystery.")
+	+subsection("Friendship")
+	+expanderMoveSection("Covenant-Friendship")
+		div
+			+t("You start with an ally. Pick a type (<i>MOTW</i> hardcover, page 131) and a style:")
+		+move("Covenant-Friendship-Style","<b>Watson:</b> An individual, extra-competent ally.")
+		+move("Covenant-Friendship-Style","<b>Rolodex:</b> An ally team with various skills; tends to operate individually.")
+		+move("Covenant-Friendship-Style","<b>Unit:</b> A small group that usually operates as a team.")
+		div
+			+t("Describe the ally:")
+		+move("Covenant-Friendship-Desc","Long-time coworker")
+		+move("Covenant-Friendship-Desc","Good buddy")
+		+move("Covenant-Friendship-Desc","Supernatural creature")
+		+move("Covenant-Friendship-Desc","Romantic interest")
+		+move("Covenant-Friendship-Desc","Friendly employer")

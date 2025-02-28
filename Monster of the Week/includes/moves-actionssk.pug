@@ -1,110 +1,18 @@
 // The Action Scientist Moves
-.sheet-OPBHead.sheet-MinorHead.sheet-space-above(data-i18n='The Action Scientist') The Action Scientist
-.sheet-ActionScientistSSK
-	i
-		span(data-i18n='1-fixed-move') You get this
-		| :
-.sheet-ActionScientistSSK.sheet-OPB
-	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-MovesUnused', value='1', checked='')
-	.sheet-move
-		input.sheet-checkbox(type='checkbox', name='attr_FixedMoves-AS1')
-		span.sheet-mainbox
-		span.sheet-grayable
-			span(data-i18n='AS-fixed-move1')
-				b Science!
-				|  You may use the 
-				i Weird Science
-				|  move in addition to whatever the default weird move is for the game. If Weird Science is the default move, you gain access to 
-				i Advanced Weird Science
-				| . When you roll for Weird Science you may use Sharp instead of Weird. Regardless of the result you may remove your choice of one of the requirements after they&apos;ve all been determined. Say how you&apos;ve figured out a way around that requirement.
-			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Weird Science}} {{Roll=[[2d6+?{Weird Science with|Sharp (Default),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_techserve')
-			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=AS-fixed-move1}}', data-i18n-title='send_details_to_chat')
+.sheet-OPBHead.sheet-MinorHead.sheet-space-above
+	+t("The Action Scientist")
 // .sheet-ActionScientistSSK .sheet-OPB
 .sheet-ActionScientistSSK
 	i
-		span(data-i18n='2-moves-then') Then pick two of these
-		| :
+		+t("You get all the basic moves, plus two Action Scientist moves. Pick two of these:")
 .sheet-ActionScientistSSK.sheet-OPB
 	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-MovesUnused', value='1', checked='')
-	.sheet-move
-		input.sheet-checkbox(type='checkbox', name='attr_Moves-AS1')
-		span.sheet-mainbox
-		span.sheet-grayable
-			span(data-i18n='AS-move1')
-				b Oblivious to Danger
-				| : As well as generally not looking out for danger, you are immune to all fear-based moves and powers. You never need to 
-				i act under pressure
-				|  to resist fear from any source.
-			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=AS-move1}}', data-i18n-title='send_details_to_chat')
-	.sheet-move
-		input.sheet-checkbox(type='checkbox', name='attr_Moves-AS2')
-		span.sheet-mainbox
-		span.sheet-grayable
-			span(data-i18n='AS-move2')
-				b Cross-disciplinary Study
-				| : Take a move from one of the other hunters&apos; playbooks.
-			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=AS-move2}}', data-i18n-title='send_details_to_chat')
-	.sheet-move
-		input.sheet-checkbox(type='checkbox', name='attr_Moves-AS3')
-		span.sheet-mainbox
-		span.sheet-grayable
-			span(data-i18n='AS-move3')
-				b Engineering
-				| : When 
-				i you need to quickly fix (or break) a complicated gadget
-				| , roll +Sharp. On a 10+, it&rsquo;s fixed (or broken) just like you wanted. On a 7-9 you need more time to study it: choose to fix (or break) it now with unknown side-effects, or take more time. On a miss, you do the worst thing possible to the gadget, which usually involves an explosion.
-			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Engineering}} {{Roll=[[2d6+?{Engineering with|Sharp (Default),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_engineering')
-			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=AS-move3}}', data-i18n-title='send_details_to_chat')
-	.sheet-move
-		input.sheet-checkbox(type='checkbox', name='attr_Moves-AS4')
-		span.sheet-mainbox
-		span.sheet-grayable
-			span(data-i18n='AS-move4')
-				b The Doors of Perception
-				| : By using advanced psychological, pharmacological, or mental interface techniques, you may 
-				i use magic
-				|  with +Sharp instead of +Weird. You may choose one of these additional effects:
-			ul
-				li
-					span(data-i18n='AS-move4.1')
-						| Communicate with someone or something that you cannot communicate with by normal means.
-				li
-					span(data-i18n='AS-move4.2')
-						| Analyse a clue (allowing you to 
-						i investigate a mystery
-						|  in a way that you would not normally be able to).
-				li
-					span(data-i18n='AS-move4.3')
-						| Give a hunter (including yourself) +1 to a rating for the remainder of the mystery (maximum +3).
-					button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Use Magic}} {{Roll=[[2d6+?{Use Magic with|Sharp (Default),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_um-sharp')
-					button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=AS-move4}} {{key1=AS-move4.1}} {{key2=AS-move4.2}} {{key3=AS-move4.3}}', data-i18n-title='send_details_to_chat')
-	.sheet-move
-		input.sheet-checkbox(type='checkbox', name='attr_Moves-AS5')
-		span.sheet-mainbox
-		span.sheet-grayable
-			span(data-i18n='AS-move5')
-				b Mind of Steel
-				| : Get +1 Cool (max +3).
-			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=AS-move5}}', data-i18n-title='send_details_to_chat')
-	.sheet-move
-		input.sheet-checkbox(type='checkbox', name='attr_Moves-AS6')
-		span.sheet-mainbox
-		span.sheet-grayable
-			span(data-i18n='AS-move6')
-				b Re-factoring
-				| : You may take any two devices and rebuild them together, gaining all the abilities of each component device. The new device is the same size as the larger component. It will have 
-				i all
-				|  the tags of the components, except you may delete or change one tag.
-			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=AS-move6}}', data-i18n-title='send_details_to_chat')
-	.sheet-move
-		input.sheet-checkbox(type='checkbox', name='attr_Moves-AS7')
-		span.sheet-mainbox
-		span.sheet-grayable
-			span(data-i18n='AS-move7')
-				b Two-Fisted Science
-				| : You may roll +Sharp to 
-				i kick some ass
-				|  instead of +Tough.
-			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Kick Some Ass}} {{Roll=[[2d6+?{Kick Some Ass with|Sharp (Default),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_ksa-sharp')
-			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=AS-move7}}', data-i18n-title='send_details_to_chat')
+	+move("ActionSSK-Move","<b>Test Hypothesis:</b> When you <i>test a potential explanation based on data gathered,</i> roll +Sharp. The Keeper will tell you if you’re on the right track, missing some critical data, or on the wrong track.<ul><li>On a 10+, you can trust that answer.<li>On a 7–9, the Keeper answers honestly, but you wasted time or the testing process destroyed some evidence.<li>On a miss, the Keeper’s answer is unrelated to the facts.</ul>",true)
+		+2d6("Test Hypothesis","Sharp","testhypothesis")
+	+move("ActionSSK-Move","<b>Sabotage:</b> When you <i>quickly break a complicated gadget</i>, roll +Sharp.<ul><li>On a 10+, it’s broken. Your choice if it’s done quietly or left totally irreparable.<li>On a 7–9, it’s broken, but not too hard to fix and you made a bit of a ruckus.<li>On a miss, the worst thing possible happens—usually explosions.</ul>",true)
+		+2d6("Sabotage","Sharp","sabotage")
+	+move("ActionSSK-Move","<b>Oblivious to Danger:</b> As well as generally not looking out for danger, you are immune to all fear-based moves and powers. You never need to <b>act under pressure</b> to resist fear from any source.",true)
+	+move("ActionSSK-Move","<b>The Doors of Perception:</b> When you <i>use psychological, pharmacological, or meditation techniques to open your mind to transcendental knowledge</i>, roll +Weird.<ul><li>On a 10+, pick two effects.<li>On a 7–9, pick one effect but your mind and perceptions are confused and foggy.<li>On a miss, you get lost in altered states of consciousness.</ul>Effects available:<ul><li>Communicate with someone or something that you normally couldn’t.<li>See what is normally invisible: things like physical forces, ghosts and spirits, incursions of other dimensions, and magical effects.<li>Ask one question from the <b>investigate a mystery</b> list.<li>Clarity: Get +1 Cool, Sharp, or Weird for the next hour or so (maximum +3).</ul>",true)
+		+2d6("Doors of Perception","Weird","doorsofperception")
+	+move("ActionSSK-Move","<b>Fieldwork:</b> When you <i>put yourself in danger to test a hypothesis,</i> get +1 forward. When you <i>confirm the hypothesis as true or false,</i> mark experience.",true)
 // .sheet-ActionScientistSSK .sheet-OPB

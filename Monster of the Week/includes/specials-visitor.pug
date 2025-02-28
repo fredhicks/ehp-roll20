@@ -1,0 +1,32 @@
+.sheet-Visitor
+	+subsection("Expatriation")
+	+expanderMoveSection("Visitor-Expat")
+		div
+			+t("What was your home culture like?")
+			+expander("Visitor-Expat-Culture-Picks","Pick List")
+				+t("Pick one or more from at least two lines:<ul><li>Feudal, imperial, democratic, theocratic, mercantile, egalitarian, meritocratic, [something else]<li>Lone homeworld, lone system, space habitats, interstellar, nomadic, scattered worlds, [something else]<li>Caste system, wartorn, tyrannical, peaceful, rationalist, high-tech, low-tech, [something else]</ul>")
+			textarea(name="Visitor-Expat-Culture")
+		div
+			+t("Why did you leave?")
+		+move("Visitor-Expat-Leave","You had to escape")
+		+move("Visitor-Expat-Leave","You’re a scout, exploring new worlds")
+		+move("Visitor-Expat-Leave","You’re a tourist, looking for interesting experiences")
+		+move("Visitor-Expat-Leave","You’re an emissary")
+		+move("Visitor-Expat-Leave","Something else:")
+			+itext("Visitor-Expat-Leave-Else")
+		div
+			+t("Why have you stayed on Earth?")
+		+move("Visitor-Expat-Stay","To befriend")
+		+move("Visitor-Expat-Stay","To teach")
+		+move("Visitor-Expat-Stay","To learn")
+		+move("Visitor-Expat-Stay","To protect it")
+		+move("Visitor-Expat-Stay","Something else:")
+			+itext("Visitor-Expat-Stay-Else")
+		div
+			+t("What pulls you back home?")
+		+move("Visitor-Expat-Pull","Relationships")
+		+move("Visitor-Expat-Pull","Enemies")
+		+move("Visitor-Expat-Pull","Obligations")
+		+move("Visitor-Expat-Pull","Homesickness")
+		+move("Visitor-Expat-Pull","Something else:")
+			+itext("Visitor-Expat-Pull-Else")

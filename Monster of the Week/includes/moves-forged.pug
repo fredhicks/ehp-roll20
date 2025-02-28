@@ -1,0 +1,51 @@
+.sheet-OPBHead.sheet-MinorHead.sheet-space-above
+	+t("The Forged")
+// .sheet-Forged .sheet-OPB
+.sheet-Forged
+	i
+		+t("You get all the basic moves, plus two Forged moves. You get this one:")
+.sheet-Forged.sheet-OPB
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-MovesUnused', value='1', checked='')
+	+move("Forged-Move","<b>Partner:</b> Choose another hunter or create an ally to be your wielder/partner, then pick two bonds and one burden. The partner can be changed via a <b>big magic</b> ritual (maybe including a duel or gift-giving), or if they die.",true)
+		br
+		br
+		input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-MovesUnused', value='1', checked='')
+		+t("<b>Bonds (pick two):</b>")
+		+move("Forged-Partner-Bond","Telepathic link")
+		+move("Forged-Partner-Bond","Locational awareness")
+		+move("Forged-Partner-Bond","Imitate your partner")
+		+move("Forged-Partner-Bond","Speaking in each other’s name")
+		+move("Forged-Partner-Bond","Something else:")
+			input(type="text", name="attr_Forged-Partner-Bond-Else")
+		br
+		+t("<b>Burdens (pick one):</b>")
+		+move("Forged-Partner-Burden","Emotional bleed-over")
+		+move("Forged-Partner-Burden","Dire curse")
+		+move("Forged-Partner-Burden","Dread enemy")
+		+move("Forged-Partner-Burden","Separation pains")
+		+move("Forged-Partner-Burden","Covetous seeker")
+		+move("Forged-Partner-Burden","Something else:")
+			input(type="text", name="attr_Forged-Partner-Burden-Else")
+
+.sheet-Forged
+	i
+		+t("Then pick one of these:")
+.sheet-Forged.sheet-OPB
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-MovesUnused', value='1', checked='')
+
+	+move("Forged-Move","<b>Tactical Advice:</b> When working closely with your partner, you may transfer any +1 ongoing benefits from <b>read a bad situation</b> to them. You and your partner also have +1 ongoing to <b>help each other out</b>.",true)
+
+	+move("Forged-Move","<b>My Outlet:</b> You have a hobby that deepens your sense of self. Well, you hope that’s what it does anyhow. Once per mystery, when you <i>spend time on your hobby</i>, roll +Cool. On a 10+, hold 2. On a 7–9, hold 1. On a miss, something happens to shake your confidence.<ul><li>Spend 1 hold for +1 forward.<li>Spend 2 hold to upgrade your level of success. A miss becomes a 7–9, a 7–9 becomes a 10+, and, if the move is advanced, a 10+ becomes a 12+.</ul>",true)
+		+2d6("My Outlet","Cool","myoutlet")
+
+	+move("Forged-Move","<b>To My Side:</b> You’re always ready to magically come to your partner. Roll +Weird and pick one:<ul><li>Summon your partner to your position, or vice versa.<li>Switch positions with your partner.</ul>On a 10+, it happens. On a 7–9, either one or both of you ends up in slightly the wrong spot, Keeper’s decision. On a miss, you’re both scattered and lose contact.",true)
+		+2d6("To My Side","Weird","tomyside")
+
+	+move("Forged-Move","<b>Ritual Use: </b>When doing<b> big magic</b>, pick one:<ul><li>Gain +1 ongoing while taking part in the ritual.<li>Your involvement replaces one requirement.</ul>",true)
+
+	+move("Forged-Move","<b>Don’t Worry About Me:</b> When you <i>neglect your needs to aid someone</i>, mark experience and if it’s for your partner, take +1 forward. When you <i>assure a non-partner hunter you’re fine</i> after suffering harm, they get +1 forward.",true)
+
+	+move("Forged-Move","<b>Pointing the Way: </b>When you <i>remind someone of their obligations</i>, you take +1 forward to <b>manipulate someone</b>. When you <b>read a bad situation</b>, add “What should we do to keep our promises?” to your list of questions.",true)
+
+
+// .sheet-Forged .sheet-OPB

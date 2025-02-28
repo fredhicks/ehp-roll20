@@ -1,0 +1,38 @@
+.sheet-OPBHead.sheet-MinorHead.sheet-space-above
+	+t("The Host")
+// .sheet-Host .sheet-OPB
+.sheet-Host
+	i
+		+t("You get all the basic moves, plus three Host moves. You get this one:")
+.sheet-Host.sheet-OPB
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-MovesUnused', value='1', checked='')
+	+move("Host-Move","<b>Defensive Adaptation:</b> Your symbiote protects you. Pick one:")
+		input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-MovesUnused', value='1', checked='')
+		+move("IDENTIFIER","Silk threads: 0-harm close entangle sticky.",true)
+		+move("IDENTIFIER","Acid spray: 1-harm close blinding acid.",true)
+		+move("IDENTIFIER","Soothe thoughts: 0-harm intimate/hand sedative calming.",true)
+		+move("IDENTIFIER","Scales: 1-armour.",true)
+		+move("IDENTIFIER","Camouflage: +1 ongoing to stay out of sight.",true)
+		+move("IDENTIFIER","Whispered advice: Get +1 hold to <b>read a bad situation</b>, even on a miss.",true)
+
+.sheet-Host
+	i
+		+t("Then pick two of these:")
+.sheet-Host.sheet-OPB
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-MovesUnused', value='1', checked='')
+
+	+move("Host-Move","<b>Mutual Survival:</b> Your symbiote helps you heal. Take 1 less harm from attacks and hazards when unstable. Whenever you heal, heal one extra harm.",true)
+
+	+move("Host-Move","<b>Balanced Neurochemistry:</b> Take +1 ongoing <i>resisting emotional manipulation or mental assault</i>. Your blood or other bodily substances sometimes count as a special requirement for <b>big magic</b> or <b>weird science</b> (unlike a normal human).",true)
+
+	+move("Host-Move","<b>Open Your Mind:</b> When you <b>investigate a mystery</b>, you may ask the following questions as well as the usual options:<ul><li>“What about the creature isn’t immediately obvious?”<li>“What forms can they take?”<li>“What do they need?”</ul>",true)
+
+	+move("Host-Move","<b>Predator and Prey:</b> Your symbiote is a skilled hunter. When you <i>take a stealthy approach</i>, roll +Cool. Spend a hold to keep yourself or someone else hidden when they would otherwise be found. On a 10+, hold 3. On a 7–9, hold 2. On a miss, you find yourself in an awkward or dangerous position.",true)
+		+2d6("Predator and Prey","Cool","predatorandprey")
+
+	+move("Host-Move","<b>Collaborative Effort:</b> You have a better understanding of how to work with others. When you <b>help out</b>, grant +1 forward to another hunter. This may be the same hunter you’re helping, if so they get +1 forward on their next two rolls.",true)
+
+	+move("Host-Move","<b>Separation Anxiety:</b> Your symbiote can leave your body for short time periods to carry out tasks. During this time, the symbiote counts as an ally, and moves related to the union may be unavailable or suffer –1 ongoing. Roll +Cool. On a 10+, mark unstable in 30 minutes. On a 7–9, mark unstable in 10 minutes. On a miss, mark unstable right now. Remove unstable if you rejoin.",true)
+		+2d6("Separation Anxiety","Cool","separationanxiety")
+
+// .sheet-Host .sheet-OPB

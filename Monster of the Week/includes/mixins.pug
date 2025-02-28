@@ -53,6 +53,14 @@ mixin translations
 		translation.json:
 		!{contents}
 
+mixin 2d6(name,stat,rname)
+	- 
+		if ( typeof(name) == "undefined" ) { name = 'ERROR'; }
+		if ( typeof(rname) == "undefined" ) { rname = 'unnamedroller'; }
+		if ( typeof(stat) == "undefined" || ( stat !== 'Charm' && stat !== 'Cool' && stat !== 'Sharp' && stat !== 'Tough' && stat !== 'Weird' ) ) { stat = 'ERROR'; }
+	button.sheet-2d6-button(
+		type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title='+name+'}} {{Roll=[[2d6+?{'+name+' with|'+stat+' (Default),@{'+stat+'}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_')
+
 mixin movelegacy(toggle,text,share,checked)
 	- 
 		if ( typeof(toggle) == "undefined" ) { toggle = 'ERROR'; }
@@ -204,3 +212,25 @@ mixin otherTeamPlaybooksHeader(tag)
 	input.sheet-triggerbox.sheet-OPBToggle(type='checkbox', name='attr_Toggle-Other-Team-Playbooks', value='1')
 	.sheet-OPBHead.sheet-MinorHead.sheet-space-above
 		+translate(tag)
+
+mixin gearhead(header,instruct)
+	- 
+		if ( typeof(header) == "undefined" ) { header = 'ERROR'; }
+		if ( typeof(instruct) == "undefined" ) { instruct = ''; } else { instruct = instruct + ":"; }
+	div&attributes(attributes)
+		.sheet-MinorHead
+			+translate(header)
+		div
+			i
+				+translate(instruct)
+
+mixin subsection(header)
+	- 
+		if ( typeof(header) == "undefined" ) { header = 'ERROR'; }
+	.sheet-Subsection
+		+t(header)
+
+mixin itext(name)
+	- 
+		if ( typeof(name) == "undefined" ) { name = 'ERROR'; }
+	input(type="text", name="attr_"+name)

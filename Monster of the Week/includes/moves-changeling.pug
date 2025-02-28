@@ -1,0 +1,26 @@
+.sheet-OPBHead.sheet-MinorHead.sheet-space-above
+	+t("The Changeling")
+// .sheet-Changeling .sheet-OPB
+.sheet-Changeling
+	i
+		+t("You get all the basic moves, plus three Changeling moves. You get this one:")
+.sheet-Changeling.sheet-OPB
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-MovesUnused', value='1', checked='')
+	+move("Changeling-Move","<b>Glamour:</b> Your appearance is clearly inhuman, making regular interaction with bystanders difficult. However, when feeling calm, you can maintain an illusion of humanity. You may drop your glamour and display your supernatural power to turn any roll into a 10. Your unknown heritage stirs up trouble right away or soon after.",true)
+.sheet-Changeling
+	i
+		+t("Then pick two of these:")
+.sheet-Changeling.sheet-OPB
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-MovesUnused', value='1', checked='')
+	+move("Changeling-Move","<b>Inhuman Talent:</b> You’re naturally skilled with a specific type of magic—perhaps plants, ice, illusions, or summer. You have +1 ongoing when you use a basic Weird move that uses these powers. In addition, at the start of each session, hold 2. Spend your hold for +1 forward on a move your powers can enhance.",true)
+	+move("Changeling-Move","<b>They Are My People:</b> Once per session, when you <b>protect someone</b>, act as if you rolled a 12. You gain +1 forward when <b>acting under pressure</b> to resist instincts like your unknown heritage, other dark urges, and “fight or flight” situations.",true)
+	+move("Changeling-Move","<b>Force of Nature:</b> You have a supernatural attack from your heritage. Choose its type: lightning, insect swarms, magical blades, or something else. When you <i>unleash your power</i>, roll +Weird. On any 7+, you summon a 1-harm close weapon for a short time. On a 10+, pick two extras. On a 7–9, pick one. On a miss, the power turns against you.<ul><li>Extras: +1 harm, hand, far, autonomous, distracting, ignore-armour, area, grab, blind, stun</ul>",true)
+		+2d6("Force of Nature","Weird","forceofnature")
+	+move("Changeling-Move","<b>Lockdown:</b> You can stun people with a power like a petrifying gaze, overwhelming illusions, or bewildering moths. When you <i>freeze someone</i>, roll +Weird.<ul><li>On a 10+, the target is immobilised for a few minutes or until something snaps them out of it.<li>On a 7–9, the target is immobilised for as long as you focus your attention, or until something snaps them out of it.<li>On a miss, it causes a magical backlash.</ul>Harming the target always snaps them out of it.",true)
+		+2d6("Lockdown","Weird","lockdown")
+	+move("Changeling-Move","<b>Faerie Gossip:</b> You can communicate with local spirits and mystical creatures. When you <b>investigate a mystery</b> by questioning these beings, you may roll +Weird instead of +Sharp, and may ask the following questions as well as the usual ones:<ul><li>Is anything affecting the supernatural environment?<li>How long has [name] been in the area?<li>When did [name] first arrive?</ul>",true)
+		+2d6("Faerie Gossip","Weird","faeriegossip")
+	+move("Changeling-Move","<b>Renewal:</b> You can speed the healing of those around you. When teammates and allies in your presence recover harm by any means, they recover 1 extra harm.",true)
+	+move("Changeling-Move","<b>Strange Paths:</b> You can walk (or drive) between worlds. However, you don’t know the way very well. When you <i>take an otherworld shortcut</i>, roll +Weird.<ul><li>On a 10+, you arrive quicker than otherwise possible.<li>On a 7–9, you find trouble along the way. Perhaps you get only partway, encounter locals, or only save a little time.<li>On a miss, you arrive a little too late or have to deal with something blocking the way.</ul>",true)
+		+2d6("Strange Paths","Weird","strangepaths")
+// .sheet-Changeling .sheet-OPB
