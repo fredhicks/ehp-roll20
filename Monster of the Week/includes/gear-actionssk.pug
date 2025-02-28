@@ -1,0 +1,73 @@
+.sheet-ActionScientistSSK
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-GearUnused-Hider', value='1', checked='')
+	p
+		+t("You have toolkits containing everything you need for your normal science, engineering, and analysis tasks.")
+	+expanderInstructions("ActionScientistSSK-Gear")
+		p
+			+t("The “batteries” tag works like “reload”: the weapon is liable to run out of power at the worst moment. “Autonomous” means you program it and it’ll go do its thing.")
+	.sheet-MinorHead
+		+translate('Science Weapons')
+	p
+		i
+			+translate('Pick two:')
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_AS-gear1')
+		span.sheet-mainbox
+		span.sheet-grayable
+			+t("Lightning gun (3-harm close loud area electricity batteries)")
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_AS-gear2')
+		span.sheet-mainbox
+		span.sheet-grayable
+			+t("Portable particle accelerator (3-harm close/far messy batteries)")
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_AS-gear3')
+		span.sheet-mainbox
+		span.sheet-grayable
+			+t("Laser cannon (2-harm close/far quiet batteries)")
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_AS-gear4')
+		span.sheet-mainbox
+		span.sheet-grayable(data-i18n='AS-gear4')
+			| Net Launcher (0-harm close entangling)
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_AS-gear5')
+		span.sheet-mainbox
+		span.sheet-grayable
+			+t("Scalpel (1-harm intimate/hand)")
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_AS-gear6')
+		span.sheet-mainbox
+		span.sheet-grayable(data-i18n='AS-gear6')
+			| Force Knife (2-harm hand batteries)
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_AS-gear7')
+		span.sheet-mainbox
+		span.sheet-grayable
+			+t("Tranquiliser rifle (1-harm close/far sedating)")
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_AS-gear8')
+		span.sheet-mainbox
+		span.sheet-grayable(data-i18n='AS-gear8')
+			| Stun-ray Pistol (0-harm close sedating)
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_AS-gear9')
+		span.sheet-mainbox
+		span.sheet-grayable(data-i18n='AS-gear9')
+			| Autonomous Drone (2-harm far autonomous)
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_AS-gear10')
+		span.sheet-mainbox
+		span.sheet-grayable(data-i18n='AS-gear10')
+			| Atomic Pistol (3-harm close radiation)
+	.sheet-MinorHead
+		+translate('Personal protective equipment')
+	p
+		i
+			+translate('Pick one:')
+	+move('AS-SSK-Gear',"Biohazard suit (air-supply sealed)")
+	+move('AS-SSK-Gear',"Lab coat (chemical-resistant)")
+	+move('AS-SSK-Gear',"Engineering coveralls")
+	+move('AS-SSK-Gear',"Space suit (air-supply sealed climate-control)")
+	+move('AS-SSK-Gear',"Science armour (2-armour batteries heavy)")
+// .sheet-ActionScientistSSK

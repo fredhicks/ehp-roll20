@@ -1,0 +1,55 @@
+
+<!-- The Action Scientist Moves-->
+<div class="sheet-OPBHead sheet-MinorHead sheet-space-above" data-i18n="The Action Scientist">The Action Scientist</div>
+<div class="sheet-ActionScientistSSK"><i><span data-i18n="1-fixed-move">You get this</span>:</i></div>
+<div class="sheet-ActionScientistSSK sheet-OPB">
+  <input class="sheet-triggerbox sheet-ExpToggle" type="checkbox" name="attr_Toggle-MovesUnused" value="1" checked=""/>
+  <div class="sheet-move">
+    <input class="sheet-checkbox" type="checkbox" name="attr_FixedMoves-AS1"/><span class="sheet-mainbox"></span><span class="sheet-grayable"><span data-i18n="AS-fixed-move1"><b>Science!</b> You may use the <i>Weird Science</i> move in addition to whatever the default weird move is for the game. If Weird Science is the default move, you gain access to <i>Advanced Weird Science</i>. When you roll for Weird Science you may use Sharp instead of Weird. Regardless of the result you may remove your choice of one of the requirements after they&apos;ve all been determined. Say how you&apos;ve figured out a way around that requirement.</span>
+      <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Weird Science}} {{Roll=[[2d6+?{Weird Science with|Sharp (Default),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_techserve"></button>
+      <button class="sheet-broadcast-button" type="roll" name="roll_Show" value="&amp;{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=AS-fixed-move1}}" data-i18n-title="send_details_to_chat"></button></span>
+  </div>
+</div>
+<!-- .sheet-ActionScientistSSK .sheet-OPB-->
+<div class="sheet-ActionScientistSSK"><i><span data-i18n="2-moves-then">Then pick two of these</span>:</i></div>
+<div class="sheet-ActionScientistSSK sheet-OPB">
+  <input class="sheet-triggerbox sheet-ExpToggle" type="checkbox" name="attr_Toggle-MovesUnused" value="1" checked=""/>
+  <div class="sheet-move">
+    <input class="sheet-checkbox" type="checkbox" name="attr_Moves-AS1"/><span class="sheet-mainbox"></span><span class="sheet-grayable"><span data-i18n="AS-move1"><b>Oblivious to Danger</b>: As well as generally not looking out for danger, you are immune to all fear-based moves and powers. You never need to <i>act under pressure</i> to resist fear from any source.</span>
+      <button class="sheet-broadcast-button" type="roll" name="roll_Show" value="&amp;{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=AS-move1}}" data-i18n-title="send_details_to_chat"></button></span>
+  </div>
+  <div class="sheet-move">
+    <input class="sheet-checkbox" type="checkbox" name="attr_Moves-AS2"/><span class="sheet-mainbox"></span><span class="sheet-grayable"><span data-i18n="AS-move2"><b>Cross-disciplinary Study</b>: Take a move from one of the other hunters&apos; playbooks.</span>
+      <button class="sheet-broadcast-button" type="roll" name="roll_Show" value="&amp;{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=AS-move2}}" data-i18n-title="send_details_to_chat"></button></span>
+  </div>
+  <div class="sheet-move">
+    <input class="sheet-checkbox" type="checkbox" name="attr_Moves-AS3"/><span class="sheet-mainbox"></span><span class="sheet-grayable"><span data-i18n="AS-move3"><b>Engineering</b>: When <i>you need to quickly fix (or break) a complicated gadget</i>, roll +Sharp. On a 10+, it&rsquo;s fixed (or broken) just like you wanted. On a 7-9 you need more time to study it: choose to fix (or break) it now with unknown side-effects, or take more time. On a miss, you do the worst thing possible to the gadget, which usually involves an explosion.</span>
+      <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Engineering}} {{Roll=[[2d6+?{Engineering with|Sharp (Default),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_engineering"></button>
+      <button class="sheet-broadcast-button" type="roll" name="roll_Show" value="&amp;{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=AS-move3}}" data-i18n-title="send_details_to_chat"></button></span>
+  </div>
+  <div class="sheet-move">
+    <input class="sheet-checkbox" type="checkbox" name="attr_Moves-AS4"/><span class="sheet-mainbox"></span><span class="sheet-grayable"><span data-i18n="AS-move4"><b>The Doors of Perception</b>: By using advanced psychological, pharmacological, or mental interface techniques, you may <i>use magic</i> with +Sharp instead of +Weird. You may choose one of these additional effects:</span>
+      <ul>
+        <li><span data-i18n="AS-move4.1">Communicate with someone or something that you cannot communicate with by normal means.</span></li>
+        <li><span data-i18n="AS-move4.2">Analyse a clue (allowing you to <i>investigate a mystery</i> in a way that you would not normally be able to).</span></li>
+        <li><span data-i18n="AS-move4.3">Give a hunter (including yourself) +1 to a rating for the remainder of the mystery (maximum +3).</span>
+          <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Use Magic}} {{Roll=[[2d6+?{Use Magic with|Sharp (Default),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_um-sharp"></button>
+          <button class="sheet-broadcast-button" type="roll" name="roll_Show" value="&amp;{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=AS-move4}} {{key1=AS-move4.1}} {{key2=AS-move4.2}} {{key3=AS-move4.3}}" data-i18n-title="send_details_to_chat"></button>
+        </li>
+      </ul></span>
+  </div>
+  <div class="sheet-move">
+    <input class="sheet-checkbox" type="checkbox" name="attr_Moves-AS5"/><span class="sheet-mainbox"></span><span class="sheet-grayable"><span data-i18n="AS-move5"><b>Mind of Steel</b>: Get +1 Cool (max +3).</span>
+      <button class="sheet-broadcast-button" type="roll" name="roll_Show" value="&amp;{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=AS-move5}}" data-i18n-title="send_details_to_chat"></button></span>
+  </div>
+  <div class="sheet-move">
+    <input class="sheet-checkbox" type="checkbox" name="attr_Moves-AS6"/><span class="sheet-mainbox"></span><span class="sheet-grayable"><span data-i18n="AS-move6"><b>Re-factoring</b>: You may take any two devices and rebuild them together, gaining all the abilities of each component device. The new device is the same size as the larger component. It will have <i>all</i> the tags of the components, except you may delete or change one tag.</span>
+      <button class="sheet-broadcast-button" type="roll" name="roll_Show" value="&amp;{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=AS-move6}}" data-i18n-title="send_details_to_chat"></button></span>
+  </div>
+  <div class="sheet-move">
+    <input class="sheet-checkbox" type="checkbox" name="attr_Moves-AS7"/><span class="sheet-mainbox"></span><span class="sheet-grayable"><span data-i18n="AS-move7"><b>Two-Fisted Science</b>: You may roll +Sharp to <i>kick some ass</i> instead of +Tough.</span>
+      <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Kick Some Ass}} {{Roll=[[2d6+?{Kick Some Ass with|Sharp (Default),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_ksa-sharp"></button>
+      <button class="sheet-broadcast-button" type="roll" name="roll_Show" value="&amp;{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=AS-move7}}" data-i18n-title="send_details_to_chat"></button></span>
+  </div>
+</div>
+<!-- .sheet-ActionScientistSSK .sheet-OPB-->

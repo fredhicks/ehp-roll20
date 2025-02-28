@@ -6,6 +6,9 @@ include translations-preload.pug
 
 // mixin definitions
 
+mixin t(text)
+	+translate(text)
+
 mixin translate(text)
 	if text !== ''
 		- 
@@ -37,11 +40,41 @@ mixin option(t,v)
 	else
 		option(value=v data-i18n=t)
 
+mixin optgroup(t)
+	- if ( typeof(translations[t]) == "undefined" ) { translations[t] = t; }
+	option(disabled, value='')
+	option.sheet-OptgroupHeader(disabled, data-i18n=t)
+	if block
+		block
+
 mixin translations
 	- var contents = JSON.stringify(translations,null,"\t");
 	//
 		translation.json:
 		!{contents}
+
+mixin movelegacy(toggle,text,share,checked)
+	- 
+		if ( typeof(toggle) == "undefined" ) { toggle = 'ERROR'; }
+		toggle = 'attr_' + toggle;
+		if ( typeof(text) == "undefined" ) { text = 'NO TEXT'; }
+		if ( typeof(share) == "undefined" ) { 
+			share = false; } 
+		else {
+			if ( share !== false ) {
+				share = true; 
+			}
+		}
+		if ( typeof(checked) == "undefined" ) { 
+			checked = false; } 
+		else {
+			if ( checked !== false ) {
+				checked = true;  
+			}
+		}
+	+movecontents(toggle,text,share,checked)&attributes(attributes).sheet-move-legacy
+		if block
+			block
 
 mixin move(toggle,text,share,checked)
 	- 
@@ -65,6 +98,11 @@ mixin move(toggle,text,share,checked)
 				checked = true;  
 			}
 		}
+	+movecontents(toggle,text,share,checked)&attributes(attributes)
+		if block
+			block
+
+mixin movecontents(toggle,text,share,checked)
 	.sheet-move&attributes(attributes)
 		input.sheet-checkbox(type='checkbox', name=toggle, checked=checked)
 		span.sheet-mainbox

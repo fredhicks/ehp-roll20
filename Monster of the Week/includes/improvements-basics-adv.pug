@@ -1,0 +1,37 @@
+input.sheet-triggerbox(type='checkbox', name='attr_AdvImp-Forged-AdvBasic')
+input.sheet-triggerbox(type='checkbox', name='attr_AdvImp-AdvBasic')
+.sheet-triggerframe
+	.sheet-advmoves
+		input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+		input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-AdvanceBasicMovesList', value='1', checked='')
+		span.sheet-anglebox
+		span.sheet-ExpHeader
+			span(data-i18n='unused') Unused
+		+movelegacy("advanced-aup","")
+			span(data-i18n='aup')
+		+movelegacy("advanced-crafting","").sheet-Setting-Bone
+			+translate('Crafting')
+		+movelegacy("advanced-helpout","")
+			span(data-i18n='helpout')
+		+movelegacy("advanced-iam","")
+			span(data-i18n='iam')
+		+movelegacy("advanced-iam-alt","")
+			span(data-i18n='iam')
+			|  (
+			span(data-i18n='flex-alt')
+			| )
+		+movelegacy("advanced-intimidate","").sheet-Setting-Bone
+			+translate('Intimidate')
+		+movelegacy("advanced-kickass","")
+			span(data-i18n='kickass')
+		+movelegacy("advanced-manipulate","").sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
+			span(data-i18n='manipulate')
+		+movelegacy("advanced-persuade","").sheet-Setting-Bone
+			+translate('Persuade')
+		+movelegacy("advanced-protect-someone","")
+			span(data-i18n='protect-someone')
+		+movelegacy("advanced-pursuit","").sheet-Setting-Bone
+			+translate('Pursuit')
+		+movelegacy("advanced-rabs","")
+			span(data-i18n='rabs')
+		include improvements-basics-adv-weird.pug

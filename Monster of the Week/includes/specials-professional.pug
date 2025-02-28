@@ -1,3 +1,4 @@
+input.sheet-triggerbox.sheet-AgencyRevealer(type='checkbox', name='attr_Imp-Agency')
 .sheet-Professional.sheet-Agency-Professional
 	.sheet-Subsection
 		span(data-i18n='agency') Agency
@@ -15,13 +16,23 @@
 			| Is the Agency&apos;s goal to: destroy monsters, study the supernatural, protect people, gain power, or something else?
 		input(type='text', name='attr_AgencyGoal-Professional')
 		br
-		div
+		input.sheet-SkinCheck(type='hidden', name='attr_SkinCheck', value='0')
+		.sheet-Professional
 			b
 				span(data-i18n='resources') Resources
 			|  
 			i
 				| &nbsp;(
-				span(data-i18n='pick-two') pick two
+				span(data-i18n='pick-two')
+				| )
+			| :
+		.sheet-Changeling
+			b
+				span(data-i18n='resources') Resources
+			|  
+			i
+				| &nbsp;(
+				span(data-i18n='pick-one')
 				| )
 			| :
 		input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Agency-Professional-Unused', value='1', checked='')
@@ -94,15 +105,25 @@
 			span.sheet-mainbox
 			span.sheet-grayable
 				span(data-i18n='agency10') Support teams
-		b
-			span(data-i18n='red-tape') Red Tape
-		|  
-		i
-			| &nbsp;(
-			span(data-i18n='pick-two') pick two
-			| )
-		| :
-		br
+		input.sheet-SkinCheck(type='hidden', name='attr_SkinCheck', value='0')
+		.sheet-Professional
+			b
+				span(data-i18n='red-tape') Red Tape
+			|  
+			i
+				| &nbsp;(
+				span(data-i18n='pick-two')
+				| )
+			| :
+		.sheet-Changeling
+			b
+				span(data-i18n='red-tape') Red Tape
+			|  
+			i
+				| &nbsp;(
+				span(data-i18n='pick-one')
+				| )
+			| :
 		.sheet-move
 			input.sheet-checkbox(type='checkbox', name='attr_Agency-Professiona11')
 			span.sheet-mainbox

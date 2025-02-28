@@ -18,14 +18,25 @@ input.sheet-triggerbox.sheet-SectRevealer(type='checkbox', name='attr_Imp-Sect')
 			span.sheet-ExpHeader
 				span(data-i18n='unused') Unused
 			.sheet-MinorHead(data-i18n='sect-traditions') Sect&apos;s Traditions
-			b
-				span(data-i18n='good-traditions') Good Traditions
-			|  
-			i
-				| &nbsp;(
-				span(data-i18n='pick-two') pick two
-				| )
-			| :
+			input.sheet-SkinCheck(type='hidden', name='attr_SkinCheck', value='0')
+			.sheet-Initiate.sheet-Summoned
+				b
+					span(data-i18n='good-traditions') Good Traditions
+				|  
+				i
+					| &nbsp;(
+					span(data-i18n='pick-two')
+					| )
+				| :
+			.sheet-Changeling
+				b
+					span(data-i18n='good-traditions') Good Traditions
+				|  
+				i
+					| &nbsp;(
+					span(data-i18n='pick-one')
+					| )
+				| :
 			.sheet-move
 				input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate1')
 				span.sheet-mainbox

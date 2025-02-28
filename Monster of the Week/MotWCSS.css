@@ -87,6 +87,15 @@ span.sheet-Spooktacular, div.sheet-Spooktacular,
 span.sheet-Hardcase2020, div.sheet-Hardcase2020,
 span.sheet-CurseEater, div.sheet-CurseEater,
 span.sheet-Survivor, div.sheet-Survivor,
+span.sheet-Celebrity, div.sheet-Celebrity,
+span.sheet-Changeling, div.sheet-Changeling,
+span.sheet-Covenant, div.sheet-Covenant,
+span.sheet-Envoy, div.sheet-Envoy,
+span.sheet-Forged, div.sheet-Forged,
+span.sheet-Host, div.sheet-Host,
+span.sheet-Interface, div.sheet-Interface,
+span.sheet-Visitor, div.sheet-Visitor,
+span.sheet-ActionScientistSSK, div.sheet-ActionScientistSSK,
 span.sheet-TeamPick, div.sheet-TeamPick,
 span.sheet-Agents, div.sheet-Agents,
 span.sheet-Road, div.sheet-Road,
@@ -254,6 +263,15 @@ span.sheet-Custom, div.sheet-Custom
 .sheet-SkinCheck[value="28"] ~ div.sheet-CurseEater,
 .sheet-SkinCheck[value="29"] ~ div.sheet-Spooktacular,
 .sheet-SkinCheck[value="30"] ~ div.sheet-Survivor,
+.sheet-SkinCheck[value="31"] ~ div.sheet-Celebrity,
+.sheet-SkinCheck[value="32"] ~ div.sheet-Changeling,
+.sheet-SkinCheck[value="33"] ~ div.sheet-Covenant,
+.sheet-SkinCheck[value="34"] ~ div.sheet-Envoy,
+.sheet-SkinCheck[value="35"] ~ div.sheet-Forged,
+.sheet-SkinCheck[value="36"] ~ div.sheet-Host,
+.sheet-SkinCheck[value="37"] ~ div.sheet-Interface,
+.sheet-SkinCheck[value="38"] ~ div.sheet-Visitor,
+.sheet-SkinCheck[value="39"] ~ div.sheet-ActionScientistSSK,
 .sheet-SkinCheck[value="99"] ~ div.sheet-Custom
 {
 	display: block;
@@ -329,6 +347,24 @@ span.sheet-Custom, div.sheet-Custom
 .sheet-SkinCheck[value="29"] ~  div > span.sheet-Spooktacular,
 .sheet-SkinCheck[value="30"] ~  div > span > span.sheet-Survivor,
 .sheet-SkinCheck[value="30"] ~  div > span.sheet-Survivor,
+.sheet-SkinCheck[value="31"] ~  div > span > span.sheet-Celebrity,
+.sheet-SkinCheck[value="31"] ~  div > span.sheet-Celebrity,
+.sheet-SkinCheck[value="32"] ~  div > span > span.sheet-Changeling,
+.sheet-SkinCheck[value="32"] ~  div > span.sheet-Changeling,
+.sheet-SkinCheck[value="33"] ~  div > span > span.sheet-Covenant,
+.sheet-SkinCheck[value="33"] ~  div > span.sheet-Covenant,
+.sheet-SkinCheck[value="34"] ~  div > span > span.sheet-Envoy,
+.sheet-SkinCheck[value="34"] ~  div > span.sheet-Envoy,
+.sheet-SkinCheck[value="35"] ~  div > span > span.sheet-Forged,
+.sheet-SkinCheck[value="35"] ~  div > span.sheet-Forged,
+.sheet-SkinCheck[value="36"] ~  div > span > span.sheet-Host,
+.sheet-SkinCheck[value="36"] ~  div > span.sheet-Host,
+.sheet-SkinCheck[value="37"] ~  div > span > span.sheet-Interface,
+.sheet-SkinCheck[value="37"] ~  div > span.sheet-Interface,
+.sheet-SkinCheck[value="38"] ~  div > span > span.sheet-Visitor,
+.sheet-SkinCheck[value="38"] ~  div > span.sheet-Visitor,
+.sheet-SkinCheck[value="39"] ~  div > span > span.sheet-ActionScientistSSK,
+.sheet-SkinCheck[value="39"] ~  div > span.sheet-ActionScientistSSK,
 .sheet-SkinCheck[value="99"] ~  div > span > span.sheet-Custom,
 .sheet-SkinCheck[value="99"] ~  div > span.sheet-Custom
 {
@@ -893,15 +929,19 @@ input[type="checkbox"].sheet-triggerbox:checked + span.sheet-triggertext
 }
 
 input[type="checkbox"].sheet-AllyRevealer:checked ~ div.sheet-Ally,
-input[type="checkbox"].sheet-HavenRevealer:checked + div.sheet-Haven,
-input[type="checkbox"].sheet-SectRevealer:checked + div.sheet-Sect,
+input[type="checkbox"].sheet-AgencyRevealer:checked ~ div.sheet-Agency-Professional,
+input[type="checkbox"].sheet-HavenRevealer:checked ~ div.sheet-Haven,
+input[type="checkbox"].sheet-SectRevealer:checked ~ div.sheet-Sect,
 input[type="checkbox"].sheet-inverted-triggerbox + div.sheet-triggerframe,
+input[type="checkbox"].sheet-triggerbox:checked + input[type="checkbox"].sheet-triggerbox + div.sheet-triggerframe,
+input[type="checkbox"].sheet-triggerbox:checked + input[type="checkbox"].sheet-triggerbox + input[type="checkbox"].sheet-triggerbox + div.sheet-triggerframe,
 input[type="checkbox"].sheet-triggerbox:checked + div.sheet-triggerframe
 {
 	display: block;
 }
 
 .sheet-AllyRevealer:checked ~ .sheet-Ally,
+.sheet-AgencyRevealer:checked ~ .sheet-Agency-Professional,
 .sheet-HavenRevealer:checked ~ .sheet-Haven,
 .sheet-SectRevealer:checked ~ .sheet-Sect
 {
