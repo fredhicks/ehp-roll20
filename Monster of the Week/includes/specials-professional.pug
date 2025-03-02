@@ -35,10 +35,13 @@ input.sheet-triggerbox.sheet-AgencyRevealer(type='checkbox', name='attr_Imp-Agen
 				span(data-i18n='pick-one')
 				| )
 			| :
-		input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Agency-Professional-Unused', value='1', checked='')
-		span.sheet-anglebox
-		span.sheet-ExpHeader
-			span(data-i18n='unused') Unused
+			
+		.sheet-isolator
+			input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_SSK-Tags-Enable', value='1', checked='')
+			span.sheet-anglebox
+			span.sheet-ExpHeader
+				+t("SSK Org Tags")
+
 		.sheet-move
 			input.sheet-checkbox(type='checkbox', name='attr_Agency-Professiona1')
 			span.sheet-mainbox
@@ -105,6 +108,24 @@ input.sheet-triggerbox.sheet-AgencyRevealer(type='checkbox', name='attr_Imp-Agen
 			span.sheet-mainbox
 			span.sheet-grayable
 				span(data-i18n='agency10') Support teams
+
+		input.sheet-triggerbox(type='checkbox', name='attr_SSK-Tags-Enable', value="1")
+		+move("SSK-Org-Tag-Positive","Non-human integration").sheet-triggerframe
+		input.sheet-triggerbox(type='checkbox', name='attr_SSK-Tags-Enable', value="1")
+		+move("SSK-Org-Tag-Positive","Extradimensional presence").sheet-triggerframe
+		input.sheet-triggerbox(type='checkbox', name='attr_SSK-Tags-Enable', value="1")
+		+move("SSK-Org-Tag-Positive","Well-regarded").sheet-triggerframe
+		input.sheet-triggerbox(type='checkbox', name='attr_SSK-Tags-Enable', value="1")
+		+move("SSK-Org-Tag-Positive","Strong allies").sheet-triggerframe
+		input.sheet-triggerbox(type='checkbox', name='attr_SSK-Tags-Enable', value="1")
+		+move("SSK-Org-Tag-Positive","Occult diplomacy").sheet-triggerframe
+		input.sheet-triggerbox(type='checkbox', name='attr_SSK-Tags-Enable', value="1")
+		+move("SSK-Org-Tag-Positive","Otherworldly connections").sheet-triggerframe
+		input.sheet-triggerbox(type='checkbox', name='attr_SSK-Tags-Enable', value="1")
+		+move("SSK-Org-Tag-Positive","Like family").sheet-triggerframe
+		input.sheet-triggerbox(type='checkbox', name='attr_SSK-Tags-Enable', value="1")
+		+move("SSK-Org-Tag-Positive","Good communication").sheet-triggerframe
+
 		input.sheet-SkinCheck(type='hidden', name='attr_SkinCheck', value='0')
 		.sheet-Professional
 			b
@@ -124,6 +145,13 @@ input.sheet-triggerbox.sheet-AgencyRevealer(type='checkbox', name='attr_Imp-Agen
 				span(data-i18n='pick-one')
 				| )
 			| :
+
+		.sheet-isolator
+			input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_SSK-Tags-Enable', value='1', checked='')
+			span.sheet-anglebox
+			span.sheet-ExpHeader
+				+t("SSK Org Tags")
+
 		.sheet-move
 			input.sheet-checkbox(type='checkbox', name='attr_Agency-Professiona11')
 			span.sheet-mainbox
@@ -169,3 +197,20 @@ input.sheet-triggerbox.sheet-AgencyRevealer(type='checkbox', name='attr_Imp-Agen
 			span.sheet-mainbox
 			span.sheet-grayable
 				span(data-i18n='agency19') Live capture policy
+
+		input.sheet-triggerbox(type='checkbox', name='attr_SSK-Tags-Enable', value="1")
+		+move("SSK-Org-Tag-Negative","No good monsters").sheet-triggerframe
+		input.sheet-triggerbox(type='checkbox', name='attr_SSK-Tags-Enable', value="1")
+		+move("SSK-Org-Tag-Negative","Skepticism").sheet-triggerframe
+		input.sheet-triggerbox(type='checkbox', name='attr_SSK-Tags-Enable', value="1")
+		+move("SSK-Org-Tag-Negative","Despised").sheet-triggerframe
+		input.sheet-triggerbox(type='checkbox', name='attr_SSK-Tags-Enable', value="1")
+		+move("SSK-Org-Tag-Negative","Under siege").sheet-triggerframe
+		input.sheet-triggerbox(type='checkbox', name='attr_SSK-Tags-Enable', value="1")
+		+move("SSK-Org-Tag-Negative","Enemies abound").sheet-triggerframe
+		input.sheet-triggerbox(type='checkbox', name='attr_SSK-Tags-Enable', value="1")
+		+move("SSK-Org-Tag-Negative","False family").sheet-triggerframe
+		input.sheet-triggerbox(type='checkbox', name='attr_SSK-Tags-Enable', value="1")
+		+move("SSK-Org-Tag-Negative","Isolated").sheet-triggerframe
+		input.sheet-triggerbox(type='checkbox', name='attr_SSK-Tags-Enable', value="1")
+		+move("SSK-Org-Tag-Negative","Otherworldly meddling").sheet-triggerframe

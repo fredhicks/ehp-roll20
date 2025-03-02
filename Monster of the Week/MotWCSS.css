@@ -4,6 +4,28 @@
 	display: inherit;
 }
 
+.sheet-rolltemplate-motw-moveshare,
+.sheet-rolltemplate-motw-dieroll,
+:root {
+	--motw-red: #990000;
+	--motw-dieroll-red: #990000;
+	--motw-border: black;
+	--motw-bg: white;
+	--motw-fg: black;
+	--motw-fade: rgba(0,0,0,0.5);
+}
+
+.sheet-rolltemplate-motw-moveshare.sheet-rolltemplate-darkmode,
+.sheet-rolltemplate-motw-dieroll.sheet-rolltemplate-darkmode,
+.sheet-darkmode .tab-content .charsheet {
+	--motw-red: #ff4848;
+	--motw-dieroll-red: #990000;
+	--motw-bg: #1f1f1f;
+	--motw-fg: #fff;
+	--motw-border: #999;
+	--motw-fade: rgba(255,255,255,0.5);
+}
+
 /* The above style is in place to "absorb" the consequences of a hidden character that appears to show up in roll20 production environment */
 
 .sheet-move ul {
@@ -22,8 +44,8 @@
 .sheet-darkmode .tab-content .charsheet textarea,
 .sheet-darkmode .tab-content .charsheet
 {
-	background-color: #1f1f1f;
-	color: #eee;
+	background-color: var(--motw-bg);
+	color: var(--motw-fg);
 }
 
 .sheet-DarkPast-Dead,
@@ -477,11 +499,11 @@ option.sheet-SkinSelect:checked
 	font-weight: bold;
 	font-size: 80%;
 	text-transform: uppercase;
-	color: #990000;
+	color: var(--motw-red);
 }
 
 .sheet-darkmode .tab-content .charsheet .sheet-statelabel {
-	color: #ff0000;
+	color: var(--motw-red);
 }
 
 .sheet-Stats, .sheet-Subsection {
@@ -497,20 +519,14 @@ option.sheet-SkinSelect:checked
 .sheet-Subsection
 {
 	font-size: 120%;
-	border-bottom: 1px solid black;
+	border-bottom: 1px solid var(--motw-border);
 	margin-bottom: 3px;
-}
-
-.sheet-darkmode .tab-content .charsheet .sheet-Subsection,
-.sheet-darkmode .tab-content .charsheet .sheet-SubSubsection
-{
-	border-bottom: 1px solid #999;
 }
 
 .sheet-SubSubsection
 {
 	font-size: 110%;
-	border-bottom: 0.5px solid black;
+	border-bottom: 0.5px solid var(--motw-border);
 	margin-bottom: 3px;
 }
 
@@ -559,14 +575,15 @@ option.sheet-SkinSelect:checked
 
 .sheet-rolltemplate-motw-moveshare .sheet-template-container
 {
-	background-color: white;
+	background-color: var(--motw-bg);
+	color: var(--motw-fg)
 	border: 1px solid black;
 }
 
 .sheet-rolltemplate-motw-dieroll .sheet-template-container 
 {
 	background-color: white;
-	border: 1px solid #990000;
+	border: 1px solid var(--motw-dieroll-red);
 }
 
 .sheet-rolltemplate-motw-moveshare .sheet-moveshare-title,
@@ -589,15 +606,20 @@ option.sheet-SkinSelect:checked
 
 .sheet-rolltemplate-motw-dieroll .sheet-dieroll-title 
 {
-	background-color: #990000;
+	background-color: var(--motw-dieroll-red);
 }
 
 .sheet-rolltemplate-motw-moveshare .sheet-moveshare-content, 
 .sheet-rolltemplate-motw-dieroll .sheet-dieroll-content 
 {
-	background-color: white;
+	background-color: var(--motw-bg);
 	padding: 3px;
-	color: black;
+	color: var(--motw-fg);
+}
+
+.sheet-rolltemplate-motw-moveshare .sheet-template-container div b,
+.sheet-rolltemplate-motw-moveshare .sheet-template-container div i {
+	color: var(--motw-red);
 }
 
 .sheet-rolltemplate-motw-dieroll .sheet-dieroll-content 
@@ -620,7 +642,7 @@ option.sheet-SkinSelect:checked
 .sheet-rolltemplate-motw-dieroll .sheet-dieroll-content-failure 
 {
 	background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/Monster%20of%20the%20Week%20Official/pics/result-failure.png");
-	background-color: white;
+	background-color: black;
 }
 
 .sheet-rolltemplate-motw-dieroll .sheet-dieroll-content-success 
@@ -638,7 +660,7 @@ option.sheet-SkinSelect:checked
 .sheet-rolltemplate-motw-dieroll .sheet-dieroll-content-mixed
 {
 	background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/Monster%20of%20the%20Week%20Official/pics/result-mixed.png");
-	background-color: white;
+	background-color: black;
 }
 
 .sheet-rolltemplate-motw-dieroll .sheet-dieroll-roll .inlinerollresult,
@@ -677,8 +699,7 @@ option.sheet-SkinSelect:checked
 }
 
 .sheet-darkmode .tab-content .charsheet button.btn:hover::before {
-	background-color: #990000;
-	color: #eee;
+	color: var(--motw-fg);
 }
 
 .sheet-rolltemplate-darkmode .sheet-template-container div i {
@@ -691,14 +712,14 @@ button[type=roll].sheet-2d6-button {
 	padding: 0px;
 	margin: 0px;
 	margin-right: 6px;
-	background-color: white;
-	color: #990000;
+	background-color: var(--motw-bg);
+	color: var(--motw-red);
 }
 
 .sheet-darkmode .tab-content .charsheet button[type=roll].sheet-broadcast-button,
 .sheet-darkmode .tab-content .charsheet button[type=roll].sheet-2d6-button {
-	background-color: #1f1f1f;
-	color: #ff0000;
+	background-color: var(--motw-bg);
+	color: var(--motw-red);
 	background-position: 0 0;
 }
 
@@ -760,7 +781,7 @@ input[type="checkbox"].sheet-checkbox + span.sheet-anglebox::before {
 	display: inline-block;
 	vertical-align: top;
  	content: "►";
-	color: #990000;
+	color: var(--motw-red);
 	width: 14px;
 	height: 14px;
 	font-size: 12px;
@@ -774,7 +795,7 @@ span.sheet-ExpHeader {
 	font-weight: bold;
 	font-size: 75%;
 	text-transform: uppercase;
-	color: #999999;
+	color: var(--motw-fade);
 }
 
 input[type="checkbox"].sheet-ExpOPBToggle + span.sheet-anglebox + span.sheet-ExpHeader::before, 
@@ -834,18 +855,13 @@ input[type="radio"].sheet-radio:checked + span.sheet-altbox::before {
 }
 
 .sheet-grayable {
-	color: #999999;
+	color: var(--motw-fade);
 }
 
 input[type="checkbox"].sheet-checkbox:checked ~ span.sheet-grayable,
 input[type="radio"].sheet-radio:checked ~ span.sheet-grayable
 {
-	color: #000000;
-}
-
-.sheet-darkmode .tab-content .charsheet input[type="checkbox"].sheet-checkbox:checked ~ span.sheet-grayable,
-.sheet-darkmode .tab-content .charsheet input[type="radio"].sheet-radio:checked ~ span.sheet-grayable {
-	color: #eee;
+	color: var(--motw-fg);
 }
 
 input[type="checkbox"].sheet-checkbox:checked ~ span.sheet-grayable b,
@@ -853,15 +869,7 @@ input[type="radio"].sheet-radio:checked ~ span.sheet-grayable b,
 input[type="checkbox"].sheet-checkbox:checked ~ span.sheet-grayable i,
 input[type="radio"].sheet-radio:checked ~ span.sheet-grayable i
 {
-	color: #990000;
-}
-
-.sheet-darkmode .tab-content .charsheet input[type="checkbox"].sheet-checkbox:checked ~ span.sheet-grayable b,
-.sheet-darkmode .tab-content .charsheet input[type="radio"].sheet-radio:checked ~ span.sheet-grayable b,
-.sheet-darkmode .tab-content .charsheet input[type="checkbox"].sheet-checkbox:checked ~ span.sheet-grayable i,
-.sheet-darkmode .tab-content .charsheet input[type="radio"].sheet-radio:checked ~ span.sheet-grayable i
-{
-	color: #ff0000;
+	color: var(--motw-red);
 }
 
 .sheet-OPBHead {
@@ -960,14 +968,14 @@ input[type="checkbox"].sheet-triggerbox:checked + div.sheet-triggerframe
 .sheet-highlights > i,
 .sheet-redtext
 {
-	color: #990000;
+	color: var(--motw-red);
 }
 
 .sheet-darkmode .tab-content .charsheet .sheet-highlights > b,
 .sheet-darkmode .tab-content .charsheet .sheet-highlights > i,
 .sheet-darkmode .tab-content .charsheet .sheet-redtext
 {
-	color: #ff0000;
+	color: var(--motw-red);
 }
 
 .sheet-kflex {
@@ -1073,7 +1081,7 @@ input.sheet-99-hider[value="99"] + *
 }
 
 .sheet-darkmode .tab-content .charsheet .sheet-CountEvent {
-	color: #eee;
+	color: var(--motw-darkmode-fg);
 }
 
 .sheet-Day {
@@ -1107,7 +1115,7 @@ input.sheet-99-hider[value="99"] + *
 }
 
 .sheet-EditControls {
-	border: 1px solid #990000;
+	border: 1px solid var(--motw-red);
 	background-color: #EEEEEE;
 	padding: 6px;
 }
@@ -1122,7 +1130,7 @@ div.sheet-KItem-Subtype > div {
 
 .sheet-othermove b
 {
-	color: #990000;
+	color: var(--motw-red);
 }
 
 .sheet-othermovename {
@@ -1204,8 +1212,8 @@ table.sheet-Bone-Materials th, td {
 table.sheet-Bone-Materials th {
 	font-weight: bold;
 	color: white;
-	background-color: #990000;
-	border: 1px solid #990000;
+	background-color: var(--motw-red);
+	border: 1px solid var(--motw-red);
 	vertical-align: bottom;
 }
 
@@ -1215,7 +1223,7 @@ table.sheet-Bone-Materials td {
 }
 
 .sheet-darkmode .tab-content .charsheet table.sheet-Bone-Materials td {
-	border: 1px solid #990000;
+	border: 1px solid var(--motw-red);
 }
 
 input.sheet-UpToSeven ~ span {

@@ -15,6 +15,11 @@
 		span.sheet-altbox
 		input.sheet-checkbox(type='checkbox', name='attr_Harm3')
 		span.sheet-altbox
+		// Hardcase2020 offers an extra Harm box on the Okay side
+		input.sheet-triggerbox(type='checkbox', name='attr_Imp-OkayHarm')
+		input.sheet-checkbox(type='checkbox', name='attr_Extra-OkayHarm1')
+		span.sheet-altbox
+		// Constructed does not have an okay/dying divide
 		input.sheet-inverted-triggerbox(type='checkbox', name='attr_Moves-Constructed1')
 		span.sheet-triggertext
 			b |
@@ -61,6 +66,17 @@
 			| 
 			b.sheet-statelabel
 				span(data-i18n='unstable') Unstable
+
+	.sheet-isolator
+		input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Harm-Wounds', value='1', checked='')
+		span.sheet-anglebox
+		|  
+		+t("Wounds").sheet-ExpHeader
+		.sheet-Expander
+			+t("If you’re tracking wounds, track them here.")
+			fieldset.repeating_wounds
+				+itext("wound")
+
 	input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Unstable-Instructions', value='1', checked='')
 	span.sheet-anglebox
 	|  

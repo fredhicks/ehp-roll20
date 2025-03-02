@@ -210,4 +210,16 @@ input.sheet-triggerbox(type='checkbox', name='attr_AdvImp-AdvBasic')
 					span(data-i18n='weirdsci')
 				|  
 				span(data-i18n='weirdsci-advanced')
+
+each sskmove in ['Benevolence','CentipedeHost','Hacking','Medium','Pyrokinesis','Summoner','Tradecraft','Warding']
+	input.sheet-triggerbox(type='checkbox', name='attr_advanced-'+sskmove)
+	.sheet-move.sheet-triggerframe
+		input.sheet-checkbox(type='checkbox', name='attr_advanced-'+sskmove)
+		span.sheet-mainbox
+		span.sheet-grayable
+			b
+				+t(sskmove)
+			|  
+			+t(sskmove+'-advanced')
+
 // end Advanced Basic Moves

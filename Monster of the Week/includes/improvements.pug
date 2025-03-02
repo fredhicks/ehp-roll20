@@ -136,7 +136,7 @@
 			span.sheet-Searcher(data-i18n='Searcher') Searcher
 			span.sheet-Exile(data-i18n='Exile') Exile
 			span.sheet-Hardcase(data-i18n='Hardcase') Hard Case
-			span.sheet-Hardcase2020(data-i18n='Hardcase') Hard Case
+			span.sheet-Hardcase2020(data-i18n='Hardcase2020') Hard Case
 			span.sheet-Luchador(data-i18n='Luchador') Luchador
 			span.sheet-Meddlingkid(data-i18n='Meddlingkid') Meddling Kid
 			span.sheet-Sidekick(data-i18n='Sidekick') Sidekick
@@ -158,7 +158,7 @@
 			input.sheet-triggerbox(type='checkbox', name='attr_Imp-PlaybookMove-1')
 			span.sheet-triggertext
 				input(type='text', name='attr_Imp-PlaybookMove-1-Choice')
-		+movelegacy("Imp-PlaybookMove-2","")(class="sheet-Constructed sheet-Spooktacular sheet-Actionscientist sheet-Chosen sheet-Crooked sheet-Divine sheet-Expert sheet-Flake sheet-Initiate sheet-Monstrous sheet-Mundane sheet-Professional sheet-Spellslinger sheet-Spooky sheet-Wronged sheet-Gumshoe sheet-Hex sheet-Pararomantic sheet-Searcher sheet-Exile sheet-Hardcase sheet-Luchador sheet-Meddlingkid sheet-Sidekick sheet-Summoned sheet-Traveler sheet-Custom sheet-CurseEater sheet-ActionScientistSSK sheet-Celebrity sheet-Changeling sheet-Covenant sheet-Envoy sheet-Forged sheet-Host sheet-Interface sheet-Visitor")
+		+movelegacy("Imp-PlaybookMove-2","")(class="sheet-Constructed sheet-Spooktacular sheet-Actionscientist sheet-Chosen sheet-Crooked sheet-Divine sheet-Expert sheet-Flake sheet-Initiate sheet-Monstrous sheet-Mundane sheet-Professional sheet-Spellslinger sheet-Spooky sheet-Wronged sheet-Gumshoe sheet-Hex sheet-Pararomantic sheet-Searcher sheet-Exile sheet-Hardcase sheet-Hardcase2020 sheet-Luchador sheet-Meddlingkid sheet-Sidekick sheet-Summoned sheet-Traveler sheet-Custom sheet-CurseEater sheet-ActionScientistSSK sheet-Celebrity sheet-Changeling sheet-Covenant sheet-Envoy sheet-Forged sheet-Host sheet-Interface sheet-Visitor")
 			span(data-i18n='another') Take another
 			|  
 			span.sheet-Constructed(data-i18n='constructed') Constructed
@@ -210,7 +210,7 @@
 			span.sheet-Searcher(data-i18n='Searcher') Searcher
 			span.sheet-Exile(data-i18n='Exile') Exile
 			span.sheet-Hardcase(data-i18n='Hardcase') Hard Case
-			span.sheet-Hardcase2020(data-i18n='Hardcase') Hard Case
+			span.sheet-Hardcase2020(data-i18n='Hardcase2020') Hard Case
 			span.sheet-Luchador(data-i18n='Luchador') Luchador
 			span.sheet-Meddlingkid(data-i18n='Meddlingkid') Meddling Kid
 			span.sheet-Sidekick(data-i18n='Sidekick') Sidekick
@@ -436,8 +436,10 @@
 				i Initiate
 				| . Describe the Sect and its Traditions (or join a Sect that already exists in your game). Gain the move for 
 				i when you are in good standing with your Sect
-		+movelegacy("Imp-Dying","")(class="sheet-Gumshoe sheet-Hardcase sheet-Hardcase2020")
+		+movelegacy("Imp-Dying","")(class="sheet-Gumshoe sheet-Hardcase")
 			span(data-i18n='hardcase-advance2') Add an extra harm box on the Dying side
+		+movelegacy("Imp-OkayHarm","")(class="sheet-Hardcase2020")
+			+t("Add an extra harm box to your harm track on the “Okay” side")
 		+movelegacy("Imp-Sidekick-ChangePlaybook","")(class="sheet-Sidekick")
 			span(data-i18n='sidekick-advance1')
 				| Change playbooks to the same as your hero (overrides the rule that only one of each playbook may be in play)

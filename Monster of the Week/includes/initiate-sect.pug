@@ -37,6 +37,13 @@ input.sheet-triggerbox.sheet-SectRevealer(type='checkbox', name='attr_Imp-Sect')
 					span(data-i18n='pick-one')
 					| )
 				| :
+
+			.sheet-isolator
+				input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_SSK-Tags-Enable', value='1', checked='')
+				span.sheet-anglebox
+				span.sheet-ExpHeader
+					+t("SSK Org Tags")
+
 			.sheet-move
 				input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate1')
 				span.sheet-mainbox
@@ -118,6 +125,24 @@ input.sheet-triggerbox.sheet-SectRevealer(type='checkbox', name='attr_Imp-Sect')
 				span.sheet-mainbox
 				span.sheet-grayable
 					span(data-i18n='good-tradition13') Magical items
+
+			input.sheet-triggerbox(type='checkbox', name='attr_SSK-Tags-Enable', value="1")
+			+move("SSK-Org-Tag-Positive","Non-human integration").sheet-triggerframe
+			input.sheet-triggerbox(type='checkbox', name='attr_SSK-Tags-Enable', value="1")
+			+move("SSK-Org-Tag-Positive","Extradimensional presence").sheet-triggerframe
+			input.sheet-triggerbox(type='checkbox', name='attr_SSK-Tags-Enable', value="1")
+			+move("SSK-Org-Tag-Positive","Well-regarded").sheet-triggerframe
+			input.sheet-triggerbox(type='checkbox', name='attr_SSK-Tags-Enable', value="1")
+			+move("SSK-Org-Tag-Positive","Strong allies").sheet-triggerframe
+			input.sheet-triggerbox(type='checkbox', name='attr_SSK-Tags-Enable', value="1")
+			+move("SSK-Org-Tag-Positive","Occult diplomacy").sheet-triggerframe
+			input.sheet-triggerbox(type='checkbox', name='attr_SSK-Tags-Enable', value="1")
+			+move("SSK-Org-Tag-Positive","Otherworldly connections").sheet-triggerframe
+			input.sheet-triggerbox(type='checkbox', name='attr_SSK-Tags-Enable', value="1")
+			+move("SSK-Org-Tag-Positive","Like family").sheet-triggerframe
+			input.sheet-triggerbox(type='checkbox', name='attr_SSK-Tags-Enable', value="1")
+			+move("SSK-Org-Tag-Positive","Good communication").sheet-triggerframe
+
 			b
 				span(data-i18n='bad-traditions') Bad Traditions
 			|  
@@ -126,6 +151,13 @@ input.sheet-triggerbox.sheet-SectRevealer(type='checkbox', name='attr_Imp-Sect')
 				span(data-i18n='pick-one') pick one
 				| )
 			| :
+
+			.sheet-isolator
+				input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_SSK-Tags-Enable', value='1', checked='')
+				span.sheet-anglebox
+				span.sheet-ExpHeader
+					+t("SSK Org Tags")
+
 			.sheet-move
 				input.sheet-checkbox(type='checkbox', name='attr_Sect-Initiate14')
 				span.sheet-mainbox
@@ -186,8 +218,24 @@ input.sheet-triggerbox.sheet-SectRevealer(type='checkbox', name='attr_Imp-Sect')
 				span.sheet-mainbox
 				span.sheet-grayable
 					span(data-i18n='bad-tradition12') Poor
-					|  
-					br
+
+			input.sheet-triggerbox(type='checkbox', name='attr_SSK-Tags-Enable', value="1")
+			+move("SSK-Org-Tag-Negative","No good monsters").sheet-triggerframe
+			input.sheet-triggerbox(type='checkbox', name='attr_SSK-Tags-Enable', value="1")
+			+move("SSK-Org-Tag-Negative","Skepticism").sheet-triggerframe
+			input.sheet-triggerbox(type='checkbox', name='attr_SSK-Tags-Enable', value="1")
+			+move("SSK-Org-Tag-Negative","Despised").sheet-triggerframe
+			input.sheet-triggerbox(type='checkbox', name='attr_SSK-Tags-Enable', value="1")
+			+move("SSK-Org-Tag-Negative","Under siege").sheet-triggerframe
+			input.sheet-triggerbox(type='checkbox', name='attr_SSK-Tags-Enable', value="1")
+			+move("SSK-Org-Tag-Negative","Enemies abound").sheet-triggerframe
+			input.sheet-triggerbox(type='checkbox', name='attr_SSK-Tags-Enable', value="1")
+			+move("SSK-Org-Tag-Negative","False family").sheet-triggerframe
+			input.sheet-triggerbox(type='checkbox', name='attr_SSK-Tags-Enable', value="1")
+			+move("SSK-Org-Tag-Negative","Isolated").sheet-triggerframe
+			input.sheet-triggerbox(type='checkbox', name='attr_SSK-Tags-Enable', value="1")
+			+move("SSK-Org-Tag-Negative","Otherworldly meddling").sheet-triggerframe
+
 	.sheet-Setting-Bone
 		input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Initiate-Sect-All', value='1', checked='')
 		span.sheet-anglebox

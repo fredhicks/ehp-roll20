@@ -24,3 +24,8 @@ input.sheet-triggerbox(type='checkbox', name='attr_Alt-Move-Telekinesis', value=
 input.sheet-triggerbox(type='checkbox', name='attr_Alt-Move-WS', value='1')
 +movelegacy("advanced-weirdsci","").sheet-triggerframe
 	span(data-i18n='weirdsci')
+
+each sskmove in ['Benevolence','CentipedeHost','Hacking','Medium','Pyrokinesis','Summoner','Tradecraft','Warding']
+	input.sheet-triggerbox(type='checkbox', name='attr_Alt-Move-'+sskmove, value='1')
+	+movelegacy("advanced-"+sskmove,"").sheet-triggerframe
+		+t(sskmove)

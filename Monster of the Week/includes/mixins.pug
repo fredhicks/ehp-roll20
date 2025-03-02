@@ -7,7 +7,7 @@ include translations-preload.pug
 // mixin definitions
 
 mixin t(text)
-	+translate(text)
+	+translate(text)&attributes(attributes)
 
 mixin translate(text)
 	if text !== ''
@@ -234,3 +234,44 @@ mixin itext(name)
 	- 
 		if ( typeof(name) == "undefined" ) { name = 'ERROR'; }
 	input(type="text", name="attr_"+name)
+
+mixin weirdmove(wmove, stat, text, advtext, etitle, etext)
+	- 
+		if ( typeof(wmove) == "undefined" ) { wmove = "ERROR"; }
+		if ( typeof(stat) == "undefined" || ( stat !== 'Charm' && stat !== 'Cool' && stat !== 'Sharp' && stat !== 'Tough' && stat !== 'Weird' ) ) { stat = 'ERROR'; }
+		if ( typeof(text) == "undefined" ) { text = "ERROR"; }
+		if ( typeof(advtext) == "undefined" ) { advtext = "ERROR"; }
+		if ( typeof(etitle) == "undefined" ) { etitle = ""; }
+		if ( typeof(etext) == "undefined" ) { etext = ""; }
+		var tagname = wmove.replace(/[^A-Za-z]/g,'');
+	.sheet-isolator
+		input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-'+tagname, value='1')
+		span.sheet-anglebox
+		|  
+		input.sheet-checkbox(type='checkbox', name='attr_Alt-Move-'+tagname, value='1')
+		span.sheet-altbox
+		+t(wmove).sheet-MinorHead
+		+2d6(wmove,stat,tagname)
+		.sheet-Reference
+			+t(text)
+			.sheet-isolator
+				input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-'+tagname+'-Advanced', value='1')
+				span.sheet-anglebox
+				|  
+				span.sheet-MinorHead
+					+t("advanced")
+					|  
+					+t(wmove)
+					|  
+					input.sheet-triggerbox(type='checkbox', name='attr_advanced-'+tagname)
+					+t("enabled").sheet-triggertext.sheet-redtext
+				.sheet-Reference
+					+t(advtext)
+			if etitle !== ""
+				.sheet-isolator
+					input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-'+tagname+'-Extra', value='1')
+					span.sheet-anglebox
+					|  
+					+t(etitle).sheet-MinorHead
+					.sheet-Reference
+						+t(etext)

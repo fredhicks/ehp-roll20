@@ -1,0 +1,449 @@
+.sheet-isolator
+	input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-AltWeird', value='1')
+	span.sheet-anglebox
+	|  
+	span.sheet-MinorHead(data-i18n='altwm') Alternative Weird Moves
+	.sheet-Reference
+
+		input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+		div
+			+t("If you’re using alternative weird moves options (from MOTW hardcover, Tome of Mysteries, or Slayer’s Survival Kit), here they are. To keep track, tick the checkbox next to the move you’re using. Marking your weird move will also ensure it is available to be advanced.")
+
+		.sheet-isolator
+			input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-AltWeirdStd', value='1')
+			span.sheet-anglebox
+			|  
+			+t("“Standard” Weird Moves").sheet-MinorHead
+			.sheet-Reference
+				input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+				.sheet-isolator
+					input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-Empath', value='1')
+					span.sheet-anglebox
+					|  
+					input.sheet-checkbox(type='checkbox', name='attr_Alt-Move-Empath', value='1')
+					span.sheet-altbox
+					span.sheet-MinorHead(data-i18n='empath') Empath
+					button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Empath}} {{Roll=[[2d6+?{Empath with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_Empath')
+					|  
+					.sheet-Reference
+						div(data-i18n='empath-move')
+							ul
+								li
+									| When you open up your brain to feel the emotions of something right there in front of you, roll +Weird:
+								li
+									| On a 10 or more, you gain a clear impression of their current emotional state and intentions. Take +1 forward when acting on this knowledge.
+								li
+									| On a 7-9, you gain a hazy impression of their current emotional state and intentions.
+								li
+									| On a miss, your brain is overwhelmed with emotion.
+							| You can use empath on anything with emotions, but the less human they are, the less it&apos;s safe for you. If the emotions are especially strong or alien, you might need to act under pressure.
+						.sheet-isolator
+							input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-Empath-Advanced', value='1')
+							span.sheet-anglebox
+							|  
+							span.sheet-MinorHead
+								span(data-i18n='advanced') Advanced
+								|  
+								span(data-i18n='empath') Empath
+								|  
+								input.sheet-triggerbox(type='checkbox', name='attr_advanced-empath')
+								span.sheet-triggertext.sheet-redtext(data-i18n='enabled') (Enabled)
+							.sheet-Reference(data-i18n='empath-advanced')
+								b Advanced:
+								|  When you advance your empath move, add this:
+								ul
+									li
+										| On a 12 or more, you get an impression (as for 10 or more), and you may ask one follow-up question that the Keeper will answer honestly.
+				.sheet-isolator
+					input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-Illuminated', value='1')
+					span.sheet-anglebox
+					input.sheet-checkbox(type='checkbox', name='attr_Alt-Move-Illuminated', value='1')
+					span.sheet-altbox
+					span.sheet-MinorHead(data-i18n='illuminated') Illuminated
+					button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Illuminated}} {{Roll=[[2d6+?{Illuminated with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_Illuminated')
+					|  
+					.sheet-Reference
+						div(data-i18n='illuminated-move')
+							| When you telepathically ask the Secret Masters for aid, roll +Weird:
+							ul
+								li
+									| On a 10 or more, the Secret Masters reveal a key fact, clue, or technique that will help you.
+								li
+									| On a 7-9, the Secret Masters need you to complete a task for them. Once it is done, they reveal a key fact, clue, or technique that will help you.
+								li
+									| On a miss, the Secret Masters&apos; reply is terrible, garbled, or somehow dangerously wrong.
+						.sheet-isolator
+							input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-Illuminated-Advanced', value='1')
+							span.sheet-anglebox
+							|  
+							span.sheet-MinorHead
+								span(data-i18n='advanced') Advanced
+								|  
+								span(data-i18n='illuminated') Illuminated
+								|  
+								input.sheet-triggerbox(type='checkbox', name='attr_advanced-illuminated')
+								span.sheet-triggertext.sheet-redtext(data-i18n='enabled') (Enabled)
+							.sheet-Reference(data-i18n='illuminated-advanced')
+								b Advanced:
+								|  When you advance your illuminated move, add this:
+								ul
+									li
+										| On a 12 or more, the Secret Masters reveal a key fact, clue, or technique that will help you. You may ask one follow-up question that the Keeper will answer honestly.
+				.sheet-isolator
+					input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-NoLimits', value='1')
+					span.sheet-anglebox
+					input.sheet-checkbox(type='checkbox', name='attr_Alt-Move-NoLimits', value='1')
+					span.sheet-altbox
+					span.sheet-MinorHead(data-i18n='nolimits') No Limits
+					button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=No Limits}} {{Roll=[[2d6+?{No Limits with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_NoLimits')
+					|  
+					.sheet-Reference
+						span(data-i18n='nolimits-move')
+							| When you push your physical body past its limits, roll +Weird:
+							ul
+								li
+									| On a 10 or more, your body obeys your will, to the limits of physical possibility (see below), for a moment.
+								li
+									| On a 7-9, you do it but choose one consequence: suffer 1-harm, take &ndash;1 forward, or you need to rest right now.
+								li
+									| On a miss, something goes horribly wrong.
+						.sheet-isolator
+							input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-NoLimits-Advanced', value='1')
+							span.sheet-anglebox
+							|  
+							span.sheet-MinorHead
+								span(data-i18n='advanced') Advanced
+								|  
+								span(data-i18n='nolimits') No Limits
+								|  
+								input.sheet-triggerbox(type='checkbox', name='attr_advanced-nolimits')
+								span.sheet-triggertext.sheet-redtext(data-i18n='enabled') (Enabled)
+							.sheet-Reference(data-i18n='nolimits-advanced')
+								b Advanced:
+								|  If you advance your no limits move, add this:
+								ul
+									li
+										| On a 12 or more, you can continue acting at your body&apos;s limits for 30 seconds
+				.sheet-isolator
+					input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-PastLives', value='1')
+					span.sheet-anglebox
+					input.sheet-checkbox(type='checkbox', name='attr_Alt-Move-PastLives', value='1')
+					span.sheet-altbox
+					span.sheet-MinorHead(data-i18n='pastlives') Past Lives
+					button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Past Lives}} {{Roll=[[2d6+?{Past Lives with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_PastLives')
+					|  
+					.sheet-Reference
+						div(data-i18n='pastlives-move')
+							| When you channel your previous incarnations to discover something, pose your question and roll +Weird:
+							ul
+								li
+									| On a 10 or more, a past life has something useful to offer. Ask the Keeper two of the questions below.
+								li
+									| On a 7-9, a past life has a little experience with this. Ask the Keeper one of the questions below.
+								li
+									| On a miss, a past life takes over for a while.
+						.sheet-isolator
+							input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-PastLives-Advanced', value='1')
+							span.sheet-anglebox
+							|  
+							span.sheet-MinorHead
+								span(data-i18n='advanced') Advanced
+								|  
+								span(data-i18n='pastlives') Past Lives
+								|  
+								input.sheet-triggerbox(type='checkbox', name='attr_advanced-pastlives')
+								span.sheet-triggertext.sheet-redtext(data-i18n='enabled') (Enabled)
+							.sheet-Reference(data-i18n='pastlives-advanced')
+								| Advanced Past Lives. If you advance your past lives move, add this:
+								ul
+									li
+										| On a 12 or more, a past life knows exactly what you were after. Ask the Keeper one of the questions below, and one free-form question. Gain +1 ongoing while acting on the answers.
+						.sheet-isolator
+							input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-PLQ', value='1')
+							span.sheet-anglebox
+							|  
+							span.sheet-MinorHead
+								span(data-i18n='pastlives') Past Lives
+								|  
+								span(data-i18n='questions') Questions
+							.sheet-Reference(data-i18n='pastlives-questions')
+								ul
+									li
+										| What did a past life discover about [topic] ?
+									li
+										| How did a past life deal with [topic]?
+									li
+										| What important hidden secret can a past life show me the way to?
+									li
+										| What did a past life learn too late to help them?
+									li
+										| What does a past life advise me to do now?
+				.sheet-isolator
+					input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-Sensitive', value='1')
+					span.sheet-anglebox
+					input.sheet-checkbox(type='checkbox', name='attr_Alt-Move-Sensitive', value='1')
+					span.sheet-altbox
+					span.sheet-MinorHead(data-i18n='sensitive') Sensitive
+					button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Sensitive}} {{Roll=[[2d6+?{Sensitive with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_Sensitive')
+					|  
+					.sheet-Reference
+						div(data-i18n='sensitive-move')
+							| When you open up your brain to the psychic environment, roll +Weird:
+							ul
+								li
+									| On a 10 or more, you gain a definite impression (a vision, tangible aura, overheard thought, etc) about something important.
+								li
+									| On a 7-9, you gain a hazy impression about something important.
+								li
+									| On a miss, your brain makes contact with something dangerous.
+						.sheet-isolator
+							input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-Sensitive-Advanced', value='1')
+							span.sheet-anglebox
+							|  
+							span.sheet-MinorHead
+								span(data-i18n='advanced') Advanced
+								|  
+								span(data-i18n='sensitive') Sensitive
+								|  
+								input.sheet-triggerbox(type='checkbox', name='attr_advanced-sensitive')
+								span.sheet-triggertext.sheet-redtext(data-i18n='enabled') (Enabled)
+							.sheet-Reference(data-i18n='sensitive-advanced')
+								b Advanced:
+								|  When you advance your sensitive move, add this:
+								ul
+									li
+										| On a 12 or more, you get an impression as for 10 or more, plus you may ask one follow-up question that the Keeper will answer honestly.
+				.sheet-isolator.sheet-Setting-Bone
+					// Isolation divs necessary to keep one pivot-toggle from controlling others outside of this container
+					input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-SpiritFriend', value='1')
+					span.sheet-anglebox
+					input.sheet-checkbox(type='checkbox', name='attr_Alt-Move-SpiritFriend', value='1')
+					span.sheet-altbox
+					span.sheet-MinorHead
+						+translate('Spirit Friend')
+					.sheet-Reference
+						+translate('Spirits like you, and one is your good friend. You must follow certain rules to retain its goodwill—restrictions to how you live, often self-denial such as fasting or celibacy. Create a spirit ally with the Keeper and agree what rules you must follow. You may roll +Weird instead of +Charm when you persuade a spirit.')
+				.sheet-isolator
+					input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-TYG', value='1')
+					span.sheet-anglebox
+					input.sheet-checkbox(type='checkbox', name='attr_Alt-Move-TYG', value='1')
+					span.sheet-altbox
+					span.sheet-MinorHead(data-i18n='tyg') Trust Your Gut
+					button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Trust Your Gut}} {{Roll=[[2d6+?{Trust Your Gut with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_TYG')
+					|  
+					.sheet-Reference
+						div(data-i18n='tyg-move')
+							| When you consult your instincts about what to do next, roll +Weird:
+							ul
+								li
+									| On a 10 or more, the Keeper will tell where you should go. Wherever that is, it will be important. You get +1 ongoing on the way to this place.
+								li
+									| On a 7-9, the Keeper will tell you a general direction to go. Take +1 forward as you explore that.
+								li
+									| On a miss, your instincts lead you into danger.
+						.sheet-isolator
+							input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-TYG-Advanced', value='1')
+							span.sheet-anglebox
+							|  
+							span.sheet-MinorHead
+								span(data-i18n='advanced') Advanced
+								|  
+								span(data-i18n='tyg') Trust Your Gut
+								|  
+								input.sheet-triggerbox(type='checkbox', name='attr_advanced-tyg')
+								span.sheet-triggertext.sheet-redtext(data-i18n='enabled') (Enabled)
+							.sheet-Reference(data-i18n='tyg-advanced')
+								b Advanced:
+								|  If you advance your trust your gut move, add this:
+								ul
+									li
+										| On a 12 or more, in addition to the usual 10+ result, the Keeper will tell you about one important thing you should investigate further.
+				.sheet-isolator.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
+					input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-Telekinesis', value='1')
+					span.sheet-anglebox
+					input.sheet-checkbox(type='checkbox', name='attr_Alt-Move-Telekinesis', value='1')
+					span.sheet-altbox
+					span.sheet-MinorHead(data-i18n='tk') Telekinesis
+					button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Telekinesis}} {{Roll=[[2d6+?{Telekinesis with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_Telekinesis')
+					|  
+					.sheet-Reference
+						div(data-i18n='tk-move')
+							| When you fling something with your mind, roll +Weird:
+							ul
+								li
+									| On a 10 or more, you move it. Choose two options and mark 1-harm.
+								li
+									| On a 7-9, you move it but it hurts. Choose one option and mark 2-harm.
+								li
+									| On a miss, something goes horribly wrong.
+							| By default you can move something smaller than a person. You don&apos;t have much control, and you can&apos;t move it strongly enough to hurt anything.
+						.sheet-isolator
+							input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-TKO', value='1')
+							span.sheet-anglebox
+							|  
+							span.sheet-MinorHead
+								span(data-i18n='tk') Telekinesis
+								|  
+								span(data-i18n='options') Options
+							.sheet-Reference(data-i18n='tk-options')
+								| Anything not picked is not true:
+								ul
+									li
+										| Something is held fast.
+									li
+										| Something is hurt (2-harm smash).
+									li
+										| Something catches fire.
+									li
+										| You can fling something bigger than a person.
+									li
+										| You keep it basically under your control.
+									li
+										| You suffer 1 less harm.
+						.sheet-isolator
+							input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-Telekinesis-Advanced', value='1')
+							span.sheet-anglebox
+							|  
+							span.sheet-MinorHead
+								span(data-i18n='advanced') Advanced
+								|  
+								span(data-i18n='tk') Telekinesis
+								|  
+								input.sheet-triggerbox(type='checkbox', name='attr_advanced-tk')
+								span.sheet-triggertext.sheet-redtext(data-i18n='enabled') (Enabled)
+							.sheet-Reference(data-i18n='tk-advanced')
+								b Advanced:
+								|  When you advance your telekinesis move, add this:
+								ul
+									li
+										| On a 12 or more, choose three options. You may also choose from these advanced options:
+										ul
+											li
+												| Something explodes (3-harm close fire area messy)
+											li
+												| Something implodes (3-harm close crush)
+											li
+												| Lots of stuff is flying under your control.
+											li
+												| You have perfect and precise control over exactly what happens.
+				.sheet-isolator.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
+					input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-WS', value='1')
+					span.sheet-anglebox
+					input.sheet-checkbox(type='checkbox', name='attr_Alt-Move-WS', value='1')
+					span.sheet-altbox
+					span.sheet-MinorHead(data-i18n='weirdsci') Weird Science
+					button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Weird Science}} {{Roll=[[2d6+?{Weird Science with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_WS')
+					|  
+					.sheet-Reference
+						div(data-i18n='weirdsci-move')
+							| When you create or adapt a device to analyse or deal with strangeness, say what it will do and roll +Weird:
+							ul
+								li
+									| On a 10 or more, you pick two requirements.
+								li
+									| On a 7-9, you pick one requirement and the Keeper picks a second one.
+								li
+									| On a miss, something goes horribly wrong. You are still able to create your device, but the Keeper picks three requirements.
+						.sheet-isolator
+							input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-WSR', value='1')
+							span.sheet-anglebox
+							|  
+							span.sheet-MinorHead
+								span(data-i18n='weirdsci') Weird Science
+								|  
+								span(data-i18n='requirements') Requirements
+							.sheet-Reference(data-i18n='weirdsci-reqs')
+								ul
+									li
+										| It needs a rare and/or weird material.
+									li
+										| It won&apos;t be very reliable.
+									li
+										| It requires huge amounts of power or fuel.
+									li
+										| It will take a long time to get it working.
+									li
+										| It won&apos;t work exactly as you intended.
+									li
+										| You&apos;ll need help (beyond the hunters on your team) to finish it.
+						.sheet-isolator
+							input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-WS-Advanced', value='1')
+							span.sheet-anglebox
+							|  
+							span.sheet-MinorHead
+								span(data-i18n='advanced') Advanced
+								|  
+								span(data-i18n='weirdsci') Weird Science
+								|  
+								input.sheet-triggerbox(type='checkbox', name='attr_advanced-weirdsci')
+								span.sheet-triggertext.sheet-redtext(data-i18n='enabled') (Enabled)
+							.sheet-Reference(data-i18n='weirdsci-advanced')
+								b Advanced:
+								|  When you advance your weird science move, add this: 
+								ul
+									li  On a 12 or more, you gain +1 ongoing when operating the device. 
+
+		.sheet-isolator
+
+			input.sheet-checkbox.sheet-RefToggle(type='checkbox', name='attr_Toggle-AltWeirdSSK', value='1')
+			span.sheet-anglebox
+			|  
+			+t("Slayer’s Survival Kit Weird Moves").sheet-MinorHead
+	
+			.sheet-Reference
+				+weirdmove(
+					"Benevolence",
+					"Weird",
+					"You are able to channel a benevolent elemental force. How does it manifest? Sacred light, darkness, fire, song, or something else? When you <i>channel power</i>, roll +Weird.<br><br>On a 10+, pick one:<ul><li>A display of power strikes awe or inspires hope.<li>All hunters get +1 forward against supernatural evil.<li>Create a barrier, or shelter, impassable to evil.<li>An omen directs you where you’re most needed.</ul>On a 7–9, pick one of the 10+ options and one of these:<ul><li>All malevolence is focused on you.<li>You must sacrifice something (not someone) important to you.<li>You will be exhausted afterwards, take –1 ongoing until you rest.</ul>If you use this power selfishly, the Keeper chooses one:<ul><li>The power refuses to answer when next channelled.<li>Malevolent forces are drawn to you.<li>You have a terrifying vision showing the consequences of your actions.</ul>",
+					"Benevolence-advanced")
+		
+				+weirdmove(
+					"Centipede Host",
+					"Weird",
+					"You are able to manifest a centipede as an extension of your mind and soul out of your body. When <i>the centipede bursts from your body</i>, roll +Weird. On any 7+, a centipede the size of a large cat appears to defend you. It has 2 harm capacity and bite: 2-harm intimate.<ul><li>On a 10+, suffer 1-harm and hold 2<li>On a 7–9, suffer 2-harm and hold 1.</ul>Spend your hold:<ul><li>You manifest two centipedes (costs 2 hold).<li>You suffer 1 less harm.<li>The centipede has 1-armour.<li>The centipede has +1 harm capacity.<li>The centipede bite gets +1 harm, poison, or stun)<li>The centipede gains a useful trait, such as stealthy, fast, dextrous.</ul>On a miss, the manifestation goes awry, and the Keeper chooses one of these:<ul><li>The centipede manifests violently; you suffer 3-harm.<li>The centipede operates on your rawest instincts, out of control. The Keeper controls it as a minion: brute.</ul>",
+					"CentipedeHost-advanced"
+				)
+		
+				+weirdmove(
+					"Hacking",
+					"Weird",
+					"You have a way with computers, going beyond just skill and knowledge.<br><br>The Keeper may require one or more of the following for a hacking attempt:<ul><li>Physical connection to the target network.<li>Good internet connection.<li>Time to set it up.<li>Passwords and credentials for initial access.</ul>When you <i>hack a computer</i>, roll +Weird. On a 10+, hold 2; On a 7–9, hold 1; On a miss, things go wrong and the Keeper holds 1.<br><br>Spend your hold to:<ul><li>Access something within, or controlled by, the system.<li>Ask a question from <b>investigate a mystery</b> or <b>read a bad situation</b>.<li>Use, control, or shut down a system function (such as permissions, communications, websites, or cameras).<li>Place or remove information.</ul>The Keeper can spend their hold to:<ul><li>Have the hunter trip an alarm.<li>Destroy data or shut down a system function.<li>Infect the hacker’s computer with a virus (potentially mystical).</ul>",
+					"Hacking-advanced",
+				)
+		
+				+weirdmove(
+					"Medium",
+					"Weird",
+					"You can’t always sense ghosts and spirits, but you also know how to invoke and speak with them. If the spirit is a monster, the seance will be especially dangerous.<br><br>The Keeper may require one or more of these preparations:<ul><li>Communication tools, such as a ouija board, tarot cards, automatic writing, or crystal ball.<li>The spirit possesses you during the seance.<li>You suffer 1-harm ignore-armour.<li>You need the presence of someone or something with a connection to the spirit.</ul>When you <i>invoke a spirit</i>, roll +Weird. On a 10+, pick one:<ul><li>All present may communicate with the spirit, not just you.<li>Trap the spirit within you.<li>Ask the Keeper any question about the ghost’s life or motivations. They’ll answer honestly, but perhaps not in full.</ul>On a 7–9, pick one of the 10+ options and one of these:<ul><li>The spirit demands a service before helping you.<li>It’s disturbed or confused.<li>Other malevolent spirits also manifest.</ul>On a miss, the Keeper decides if the spirit is malevolent, dangerous, and/or just doesn’t leave.",
+					"Medium-advanced",
+				)
+		
+				+weirdmove(
+					"Pyrokinesis",
+					"Weird",
+					"You can control and produce fire. (This may be re-themed for other elemental effects, such as cold or lightning; just change the fire-related effects to match your element.)<br><br>When you <i>control or ignite flames</i>, roll +Weird.<ul><li>On a 10+, pick one, or pick two and the Keeper chooses another.<li>On a 7–9, pick one and the Keeper chooses another.<li>On a miss, the Keeper chooses one.</ul>Keeper guideline for fire harm: fireplace or smaller: 1-harm; bonfire: 2-harm; burning room: 3-harm; raging inferno: 5-harm.<br><br>Pyrokinesis options:<ul><li>A fire gets bigger, smaller, moves, or goes out.<li>A flammable object catches fire.<li>You or someone else take 1 less harm from fires for a few minutes.<li>Smoke thickens, dissipates, or moves.</ul>",
+					"Pyrokinesis-advanced",
+				)
+		
+				+weirdmove(
+					"Summoner",
+					"Weird",
+					"You can summon magical creatures to serve you. The Keeper may require one or more of the following:<ul><li>Magic spell preparations, such as a magic circle or sacrificial materials.<li>You suffer 1-harm.<li>Specific spells or names must be known.</ul>When you <i>summon a creature to perform a task</i>, roll +Weird. On any 7+, it does the task to the best of its ability. On a 10+, pick two things about how the creature carries out the task. On a 7–9, pick one. The options you don’t choose won’t be true.<ul><li>It follows the spirit—not just the letter—of your orders.<li>It acts quickly.<li>It leaves when its task is done.<li>It avoids collateral damage.</ul>On a miss, the summoning goes horribly wrong.",
+					"Summoner-advanced",
+					"Defining Creatures",
+					"<p>When you first gain this move, you can summon two beings. Decide their nature with the Keeper—you may ask for a certain style and abilities, but the Keeper has the final word on all other ratings, powers, and weaknesses. You may later learn to summon other beings you’ve encountered or learned about. A creature is considered an ally for the duration of the spell, unless it’s a monster (which remains a monster—summoned with caution)."
+				)
+		
+				+weirdmove(
+					"Tradecraft",
+					"Weird",
+					"You’re a spy, but your intuition is more than just years of training and experience. You just know what to do. When you <i>use your espionage intuition</i>, choose a goal, then roll +Weird. <ul><li>A safe place to hole up.<li>A useful contact.<li>A false identity for this situation.<li>Cutting-edge or specific gear.<li>To know if you are being followed or watched.<li>To encrypt a message that only the intended recipient can understand.<li>To communicate with someone undetectably.</ul>On a 10+, it’s all good. On a 7–9, it’s a little dicey. Maybe you have to deal with some security, owe a favour, or use a roundabout method. On a miss, you’re in immediate danger.",
+					"Tradecraft-advanced",
+				)
+		
+				+weirdmove(
+					"Warding",
+					"Weird",
+					"You’ve learned protective spells, or maybe just weaponised a certain skepticism.<br><br>Protections:<ul><li>Suppress an existing supernatural effect for a few moments. <b>If strong</b>, disrupt it until the source renews it.<li>Give one person +1 ongoing to resist a specific effect. <b>If strong</b>, affect several people, or give one person total protection.<li>Create an area that is uncomfortable to a chosen type of supernatural entity. Most avoid the area. If they enter, they’ll suffer pain or sensory overload. <b>If the ward is strong</b>, they also suffer 1-harm for every minute in the area.</ul>When you <i>ward yourself against the supernatural</i>, describe the protection you want and roll +Weird.<ul><li>On a 10+, the ward is strong, gaining the “strong” benefit as well.<li>On a 7–9, the ward works.<li>On a miss, the ward fails in the worst possible way.</ul>",
+					"Warding-advanced",
+				)

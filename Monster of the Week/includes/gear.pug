@@ -19,6 +19,16 @@
 			|  
 			span.sheet-ExpHeader
 				span(data-i18n='unused') Unused
+
+			// Tags Reference
+			.sheet-isolator
+				input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-GearTagRef', value='1')
+				span.sheet-anglebox
+				|  
+				+t("Gear Tags Reference").sheet-ExpHeader
+				.sheet-Expander
+					include gear-tags.pug
+
 		// Custom Playbook gear
 		include gear-custom.pug
 		include gear-actionscientist.pug
@@ -68,4 +78,5 @@
 	// end big expander for sheet-Gear
 // end sheet-Gear
 
+// Custom Gear
 include gear-other.pug

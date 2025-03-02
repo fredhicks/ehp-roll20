@@ -105,9 +105,7 @@ input.sheet-triggerbox.sheet-HavenRevealer(type='checkbox', name='attr_Imp-Haven
 			span.sheet-grayable
 				input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
 				span.sheet-Setting-Default.sheet-Setting-Gothic
-					span(data-i18n='haven6').sheet-Setting-Default.sheet-Setting-Gothic
-						b Workshop
-						| : You have a space for building and repairing guns, cars, and other gadgets. Work out with the Keeper how long any repair or construction will take, and if you need extra supplies or help.
+					+translate('haven6')
 					button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=haven6}}', data-i18n-title='send_details_to_chat')
 				span.sheet-Setting-Dreaming
 					+translate('<b>Alchemical Workshop</b>: You have a space for working on alchemical contrivances. Work out with the Keeper how long any repair or construction will take, and if you need extra supplies or help.')
