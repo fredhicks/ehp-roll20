@@ -1,0 +1,14 @@
+.sheet-MedicalTeam
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Style-Unused', value='1', checked='')
+	+move("MedicalTeam-Style","<b>Morgue:</b> Corpses come through day in and day out. Some are a bit on the weird side. At the end of each session, ask: “Did we respectfully deal with the remains and bystanders involved?”")
+	+move("MedicalTeam-Style","<b>All-Hours Clinic:</b> You work out of a local clinic for walk-ins. At the end of each session, ask: “Did we help someone who was overlooked by the system?”")
+	+move("MedicalTeam-Style","<b>General Practitioner:</b> You’re a general practice dealing mostly in common ailments and the long-term health of your everyday patients. At the end of each session, ask: “Did we successfully balance our monster hunting with the obligations of our practice?”")
+	+move("MedicalTeam-Style","<b>Hospital:</b> A large hospital with an emergency room and urgent care facilities. At the end of each session, ask: “Did we deal with bureaucracy and the concerns of the administrators?”")
+	+move("MedicalTeam-Style","<b>Medical School:</b> You’re teachers and students at a medical school. At the end of each session, ask: “Were we able to find some logic behind the nature of the strange beings we’ve encountered?”")
+	+move('MedicalTeam-Style','<b>Custom:</b> What’s your story?')
+		div
+			textarea(rows='2' name='attr_MedicalTeam-Style-Custom-Story')
+		div
+			+translate('At the end of each session, ask:')
+		div
+			textarea(rows='2' name='attr_MedicalTeam-Style-Custom-Question')

@@ -1,0 +1,14 @@
+.sheet-MundaneMonstrosities
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Style-Unused', value='1', checked='')
+	+move("MundaneMonstrosities-Style","<b>Life, Interrupted:</b> Your routines are constantly messed up by crisis after crisis. At the end of each session, ask: “Were we able to enjoy some normal life?”")
+	+move("MundaneMonstrosities-Style","<b>Playtime’s Over:</b> You’ve had it easy so far, but now something dangerous is on the horizon. At the end of each session, ask: “How did we adapt to or help prevent the coming evil?”")
+	+move("MundaneMonstrosities-Style","<b>A Calling:</b> Your powers and skills could help people, and now it’s time. At the end of each session, ask: “Did we become better defenders of the innocent?”")
+	+move("MundaneMonstrosities-Style","<b>Fitting In:</b> You want to be accepted for what you are. At the end of each session, ask: “Did we improve the reputation of supernatural people?”")
+	+move("MundaneMonstrosities-Style","<b>Hush:</b> Supernatural society must be kept secret, even as you solve mysteries. At the end of each session, ask: “Did we keep the secret from getting out?”")
+	+move('MundaneMonstrosities-Style','<b>Custom:</b> What’s your story?')
+		div
+			textarea(rows='2' name='attr_MundaneMonstrosities-Style-Custom-Story')
+		div
+			+translate('At the end of each session, ask:')
+		div
+			textarea(rows='2' name='attr_MundaneMonstrosities-Style-Custom-Question')

@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 
-@playbooks = qw(hauntbusters armyofone squareone doomedworld monsterrevs lineage thrillseekers);
+@playbooks = qw(artifactcollectors coven escapedexperiments goodmonsters medicalteam mundanemonstrosities radiostation researchlab swipetoslay);
 @files = qw(style moves enemies allies assets);
 
 foreach $f ( @files ) {

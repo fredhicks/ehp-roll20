@@ -1,0 +1,13 @@
+.sheet-GoodMonsters
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Style-Unused', value='1', checked='')
+	+move("GoodMonsters-Style","<b>Walk the Line:</b> You all have to fight against what your instincts want to unleash to be good. At the end of each session, ask: “Did we struggle with temptations from the evil side of our natures?”")
+	+move("GoodMonsters-Style","<b>Outcasts:</b> Humans don’t trust or like you, even as you fight for them. At the end of each session, ask: “Did we help people who were suspicious of, or feared, our natures?”")
+	+move("GoodMonsters-Style","<b>Being Human:</b> You just want to have a regular life. At the end of each session, ask: “Did dealing with the supernatural complicate our normal relationships with family, friends, or each other?”")
+	+move("GoodMonsters-Style","<b>On the Inside:</b> You are working for good while trying to stay part of the supernatural or monster world. At the end of each session ask: “Did we hide our involvement in foiling the plans of monsters we pretend to be allied with?”")
+	+move('GoodMonsters-Style','<b>Custom:</b> What’s your story?')
+		div
+			textarea(rows='2' name='attr_GoodMonsters-Style-Custom-Story')
+		div
+			+translate('At the end of each session, ask:')
+		div
+			textarea(rows='2' name='attr_GoodMonsters-Style-Custom-Question')

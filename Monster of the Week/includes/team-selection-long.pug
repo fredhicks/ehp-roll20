@@ -1,6 +1,7 @@
 .sheet-TeamPick(name='sheet-TeamPick')
 	.sheet-Subsection(data-i18n='team-playbook-choice') Choose a Team Playbook
 	div(data-i18n='pick-teambook-desc')
+
 	.sheet-Subsection
 		+translate("Codex of Worlds")
 	.sheet-move
@@ -123,6 +124,7 @@
 			| :
 		|  
 		span(data-i18n='You joined or were abducted by the Wild Hunt. You gained some supernatural skills while riding with it, but then escaped it. Now you use your experience to hunt monsters, evade the Hunt and, maybe, destroy it one day.')
+
 	.sheet-Subsection
 		+translate("Apocrypha")
 	.sheet-move
@@ -173,6 +175,7 @@
 			| :
 		|  
 		+translate("You are hunters who have gotten a taste for going after the biggest and baddest monsters, and there’s no other high worth chasing after. You’ve all somehow cheated death—or worse—again and again. Maybe the next thrill will be your last, but until then, you’ll give it all you’ve got.")
+
 	.sheet-Subsection
 		+translate("Modern Haunts")
 	.sheet-move
@@ -183,8 +186,37 @@
 			| :
 		|  
 		+translate("This new team playbook is concerned with neutralising haunts and other places of malevolent power. It’s a great team if you want to run a modern series centred on haunts, a Gothic Century series, or a This Strange Old House series focused on researching the house itself.")
+
 	.sheet-Subsection
 		+translate("Slayer's Survival Kit")
+	.sheet-move
+		input(type='radio', name='attr_TeamName', value='23')
+		+translate('<b>Artifact Collectors:</b> Holy relics, cursed artifacts, cultural treasures; there are many important objects out there in the hands of people and things that don’t deserve them. Your team aims to change that. Examples: <i>Warehouse 13</i> or <i>The Librarians</i>.')
+	.sheet-move
+		input(type='radio', name='attr_TeamName', value='24')
+		+translate('<b>Coven:</b> A group of supernatural beings protecting the innocent from malevolent forces. Examples: <i>Gargoyles</i> or the jujutsu sorcerers of <i>Jujutsu Kaisen</i>.')
+	.sheet-move
+		input(type='radio', name='attr_TeamName', value='25')
+		+translate('<b>Escaped Experiments:</b> A group of people or beings in hiding from a nefarious project that seeks to recapture you. Examples: <i>Dark Angel</i> or <i>Legion</i>.')
+	.sheet-move
+		input(type='radio', name='attr_TeamName', value='26')
+		+translate('<b>Good Monsters:</b> A group of monsters who have made a pact to use their powers for good instead of evil. Examples: <i>Being Human</i> or monstrous agents in the <i>Hellboy</i> and <i>BPRD</i> graphic novels.')
+	.sheet-move
+		input(type='radio', name='attr_TeamName', value='27')
+		+translate('<b>Medical Team:</b> Staff of a medical facility that deals with an inordinate number of supernatural cases. Examples: <i>House, M.D.</i> or <i>Forever</i>.')
+	.sheet-move
+		input(type='radio', name='attr_TeamName', value='28')
+		+translate('<b>Mundane Monstrosities:</b> Some supernatural creatures are just average people. Examples: <i>The Addams Family</i>, <i>Wednesday</i>, or <i>Grimm</i>.')
+	.sheet-move
+		input(type='radio', name='attr_TeamName', value='29')
+		+translate('<b>Radio Station:</b> Staff of a local radio station who find themselves often receiving calls about dark forces. Examples: The Deb of Night from <i>Vampire the Masquerade: Bloodlines</i> or <i>Welcome to Nightvale</i>.')
+	.sheet-move
+		input(type='radio', name='attr_TeamName', value='30')
+		+translate('<b>Research Lab:</b> Plucky staff at an advanced research facility. Examples: <i>Eureka</i> or the SCP Foundation.')
+	.sheet-move
+		input(type='radio', name='attr_TeamName', value='31')
+		+translate('<b>Swipe to Slay:</b> Users of an app that promised money in exchange for hunting monsters and ghosts. Examples: <i>Phasmophobia</i> or <i>Lockwood & Co</i>.')
+
 	.sheet-Subsection
 		+translate("byo")
 	.sheet-move
@@ -195,9 +227,3 @@
 			| :
 		|  
 		+translate("A shell so you can build out your own custom team.")
-
-
-
-
-
-

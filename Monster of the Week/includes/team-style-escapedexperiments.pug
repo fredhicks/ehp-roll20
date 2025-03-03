@@ -1,0 +1,12 @@
+.sheet-EscapedExperiments
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Style-Unused', value='1', checked='')
+	+move("EscapedExperiments-Style","<b>Hostile Acquisition:</b> The lab you were part of originally was run ethically and with consideration, until new management took over. At the end of each session, ask: “Did we call out treachery or loyalty?”")
+	+move("EscapedExperiments-Style","<b>Scales from the Eyes:</b> You were volunteers and true believers, but something opened your eyes. At the end of each session, ask: “Did we unveil a harmful deception?”")
+	+move("EscapedExperiments-Style","<b>Never Asked For This:</b> You had no choice, it was participate or die. At the end of each session, ask: “Did we fight back against oppression?”")
+	+move('EscapedExperiments-Style','<b>Custom:</b> What’s your story?')
+		div
+			textarea(rows='2' name='attr_EscapedExperiments-Style-Custom-Story')
+		div
+			+translate('At the end of each session, ask:')
+		div
+			textarea(rows='2' name='attr_EscapedExperiments-Style-Custom-Question')

@@ -1,0 +1,14 @@
+.sheet-ResearchLab
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Style-Unused', value='1', checked='')
+	+move("ResearchLab-Style","<b>Middle of Nowhere:</b> There’s nothing around you but a small town and weird stuff going on. At the end of each session, ask: “Did we stop a threat from spreading beyond the town?”")
+	+move("ResearchLab-Style","<b>0 Days Since Last Incident:</b> There are constantly accidents here. At least, you hope they’re accidents. At the end of each session, ask: “Did we uncover or fix something our lab caused?”")
+	+move("ResearchLab-Style","<b>Explorers:</b> Your team and facility seek out and send expeditions to study strange events. At the end of each session, ask: “Did we discover something that amazed the scientific community?”")
+	+move("ResearchLab-Style","<b>Hazardous Research:</b> Your facility has discovered things with as much potential for evil as good. At the end of each session, ask: “Did we find safe and beneficial applications for the dangerous things we learned about?”")
+	+move("ResearchLab-Style","<b>Action Science:</b> It’s not real research if it can’t bite you—or destroy the world! At the end of each session, ask: “Did we defeat extreme danger with science?”")
+	+move('ResearchLab-Style','<b>Custom:</b> What’s your story?')
+		div
+			textarea(rows='2' name='attr_ResearchLab-Style-Custom-Story')
+		div
+			+translate('At the end of each session, ask:')
+		div
+			textarea(rows='2' name='attr_ResearchLab-Style-Custom-Question')

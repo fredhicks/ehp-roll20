@@ -1,0 +1,13 @@
+.sheet-Coven
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Style-Unused', value='1', checked='')
+	+move("Coven-Style","<b>Villains to Heroes:</b> You’ve turned from evil to start a new life. At the end of each session, ask: “Did we atone for a past wrongdoing we caused?”")
+	+move("Coven-Style","<b>Superheroes with Fangs:</b> You made an oath to use your powers only for good. Detail what the oath requires. At the end of each session, ask: “Did we hold true to our oath?”")
+	+move("Coven-Style","<b>Forgotten History:</b> You discovered that your coven was originally created to protect, but something went wrong along the way. At the end of each session, ask: “Did we dig into our forgotten past?”")
+	+move("Coven-Style","<b>Ulterior Motives:</b> Protecting people benefits you, but there’s always something more. What do you gain by stopping other monsters? At the end of each session, ask: “Did we profit from ending this threat?”")
+	+move('Coven-Style','<b>Custom:</b> What’s your story?')
+		div
+			textarea(rows='2' name='attr_Coven-Style-Custom-Story')
+		div
+			+translate('At the end of each session, ask:')
+		div
+			textarea(rows='2' name='attr_Coven-Style-Custom-Question')

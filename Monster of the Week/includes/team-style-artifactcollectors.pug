@@ -1,0 +1,14 @@
+.sheet-ArtifactCollectors
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Style-Unused', value='1', checked='')
+	+move("ArtifactCollectors-Style","<b>Vault of Curses:</b> You’ve been collecting malevolent artifacts. At the end of each session, ask: “Did we fight the temptation to use dangerous powers?”")
+	+move("ArtifactCollectors-Style","<b>Arcane Study:</b> You recover artifacts because not enough is known about them. At the end of each session, ask: “Did we take risks to study something weird?”")
+	+move("ArtifactCollectors-Style","<b>Unworthy Hands:</b> A lot of artifacts are owned by people who shouldn’t have them. It’s your job to take them out of the hands of the selfish. At the end of each session, ask: “Did we correct a wrongdoing?”")
+	+move("ArtifactCollectors-Style","<b>Safe Storage:</b> Powerful items should be locked away in your vaults, whatever the current owners think. At the end of each session, ask: “Did we lock away something that is too dangerous for the world?”")
+	+move("ArtifactCollectors-Style","<b>My Precious:</b> You (or your boss) have a collection of mystical artifacts and want more. At the end of each session, ask: “Did we plan and pull off a mystical heist?”")
+	+move('ArtifactCollectors-Style','<b>Custom:</b> What’s your story?')
+		div
+			textarea(rows='2' name='attr_ArtifactCollectors-Style-Custom-Story')
+		div
+			+translate('At the end of each session, ask:')
+		div
+			textarea(rows='2' name='attr_ArtifactCollectors-Style-Custom-Question')

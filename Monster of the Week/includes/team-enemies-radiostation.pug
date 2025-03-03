@@ -1,0 +1,11 @@
+.sheet-RadioStation
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Enemies-Unused', value='1', checked='')
+	+move("RadioStation-Enemy","The Ghost in the Machine, you’re not sure what it is, but it hates you.")
+	+move("RadioStation-Enemy","“A Frowning Devil,” a cult.")
+	+move("RadioStation-Enemy","Ulmer Broadcasting Interests, a corporation determined to buy out or close down your station.")
+	+move("RadioStation-Enemy","The Looming Stalker, a serial killer (and disciples) with a grudge against your community.")
+	+move("RadioStation-Enemy","Savidan, a being of trickery and chaos, who loves to bedevil the station with situations that carry potentially disastrous consequences.")
+	+move('RadioStation-Enemy','Something else:')
+		div
+			textarea(rows='2' name='attr_RadioStation-Enemies-Custom')
+

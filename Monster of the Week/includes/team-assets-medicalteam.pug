@@ -1,0 +1,16 @@
+.sheet-MedicalTeam
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Assets-Unused', value='1', checked='')
+	+t("You start with one asset in addition to your Infirmary.")
+	+asset("MedicalTeam-Asset","<b>Infirmary:</b> Access to a full, professional medical facility.",1,false,true)
+	+asset("MedicalTeam-Asset","<b>Ambulance Fleet:</b> Access to ambulances. Use these with the sirens on when you need to get to an emergency, and there’s plenty of medical supplies in each.",1)
+	+asset("MedicalTeam-Asset","<b>Cutting-Edge Diagnostics:</b> Access to test labs, providing results quicker than sending them out for analysis.",2)
+	+asset("MedicalTeam-Asset","<b>Medical Database:</b> Access to the national medical database. Includes details of unusual cases and individual medical histories.",1)
+	+asset("MedicalTeam-Asset","<b>Local Support:</b> The hunters and their facility have a good reputation with the local community and can depend on support from them.",1)
+	+asset("MedicalTeam-Asset","<b>Housing:</b> The hunters all have comfortable houses or condos to live in.",1)
+	+asset("MedicalTeam-Asset","<b>Individual Transport:</b> Each hunter has a quality car, truck, or motorcycle.",1)
+	+asset("MedicalTeam-Asset","<b>Experimental Medicine:</b> The facility has access to a lot of new procedures approved for volunteer or emergency use.",2)
+	+asset("MedicalTeam-Asset","<b>Funding:</b> The facility gets a lot of money coming in.",1)
+	+asset('MedicalTeam-Asset','<b>Custom:</b>',1)
+		div
+			textarea(rows='2' name='attr_MedicalTeam-Asset-Custom')
+

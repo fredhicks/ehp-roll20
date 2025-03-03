@@ -1,0 +1,17 @@
+.sheet-RadioStation
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Assets-Unused', value='1', checked='')
+	+t("You start with one asset in addition to The Station.")
+	+asset("RadioStation-Asset","<b>The Station:</b> The team has all the facilities necessary to record and broadcast. The local community has collectively decided you’re who to call about weird stuff.",1,false,true)
+	+asset("RadioStation-Asset","<b>Headquarters:</b> Whether it’s an extension to the studio or a separate building, the team has established a headquarters to store all their hunting gear, along with some places to crash and administer basic first aid.",1)
+	+asset("RadioStation-Asset","<b>Tight Security:</b> The team’s facilities are all hardened to block mundane attempts at intrusion and slow down supernatural or high-tech infiltrators.",1)
+	+asset("RadioStation-Asset","<b>Station Archives:</b> The team has access to an archive of old supernatural reports and cases. They’re useful more often than you’d expect.",2)
+	+asset("RadioStation-Asset","<b>Housing:</b> Each team member gets modest but comfortable housing. Two or more hunters may share a nicer place.",1)
+	+asset("RadioStation-Asset","<b>Signal Boosters:</b> With cutting-edge gear, the station’s signal reaches through any interference.",1)
+	+asset("RadioStation-Asset","<b>Paranatural Boosters:</b> Your communication will even carry on into other worlds, as long as there’s a portal open.",1)
+	+asset("RadioStation-Asset","<b>Station Vans:</b> The team has a fleet of liveried vehicles. Sometimes this provides a little clout and authenticity.",1)
+	+asset("RadioStation-Asset","<b>Helicopter:</b> The team has a helicopter. Officially for reporting on traffic, it may double as a search and rescue vehicle.",2)
+	+asset("RadioStation-Asset","<b>Shelter:</b> The station can act as a disaster shelter in the case of natural (or unnatural) disasters. It has supplies for a few days for a few dozen people.",1)
+	+asset('RadioStation-Asset','<b>Custom:</b>',1)
+		div
+			textarea(rows='2' name='attr_RadioStation-Asset-Custom')
+

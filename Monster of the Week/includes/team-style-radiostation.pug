@@ -1,0 +1,12 @@
+.sheet-RadioStation
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Style-Unused', value='1', checked='')
+	+move("RadioStation-Style","<b>Casual Absurdity:</b> The weird and bizarre are an almost daily occurrence in the day-to-day life of your community. At the end of each session, ask: “Did we face the strange with hilarious calm?”")
+	+move("RadioStation-Style","<b>Shock and Terror:</b> Every time you convince yourself it’s the last time, and then the next call comes in and the terror starts again. At the end of each session, ask: “Did we face horror and persevere?”")
+	+move("RadioStation-Style","<b>Exuberance:</b> It’s always an exciting time at the station as the calls come in and it’s time to be a superhero. At the end of each session, ask: “Did we have fun while heroically saving the day?”")
+	+move('RadioStation-Style','<b>Custom:</b> What’s your story?')
+		div
+			textarea(rows='2' name='attr_RadioStation-Style-Custom-Story')
+		div
+			+translate('At the end of each session, ask:')
+		div
+			textarea(rows='2' name='attr_RadioStation-Style-Custom-Question')

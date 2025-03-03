@@ -1,0 +1,14 @@
+.sheet-SwipeToSlay
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Style-Unused', value='1', checked='')
+	+move("SwipeToSlay-Style","<b>Side Racket:</b> The team uses the app to get some extra money. At the end of each session, ask: “Did the app interfere with the rest of our lives?”")
+	+move("SwipeToSlay-Style","<b>Already Doing It:</b> You’re hunters with or without the app, but it provides more support. At the end of each session, ask: “Did the app help us save or protect someone?”")
+	+move("SwipeToSlay-Style","<b>Can’t Escape:</b> From the moment you opened it, it became impossible to escape from the app. At the end of each session, ask: “Did we learn something new about the app?”")
+	+move("SwipeToSlay-Style","<b>Fight the Power:</b> The app provides independent monster hunters a chance to go up against the established system. At the end of each session, ask: “Did we stick it to the big, evil, monster hunting corporations?”")
+	+move('SwipeToSlay-Style','<b>Custom:</b> What’s your story?')
+		div
+			textarea(rows='2' name='attr_SwipeToSlay-Style-Custom-Story')
+		div
+			+translate('At the end of each session, ask:')
+		div
+			textarea(rows='2' name='attr_SwipeToSlay-Style-Custom-Question')
+
