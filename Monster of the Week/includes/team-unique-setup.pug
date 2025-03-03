@@ -474,9 +474,241 @@
 			+translate("Hunter(s):")
 			input(type='text' name="attr_ThrillSeekers-Past-Choice-5")
 
+.sheet-ArtifactCollectors
+	// Nothing for Artifact Collectors
 
+.sheet-Coven
+	.sheet-isolator
+		.sheet-Subsection
+			+translate('Coven Nature')
+		+expanderMoveSection("Coven-Nature")
+			p
+				+t("What sort of coven are you?")
+			+move("Coven-Nature","Witches")
+			+move("Coven-Nature","Vampires")
+			+move("Coven-Nature","Werewolves")
+			+move("Coven-Nature","Jinn")
+			+move("Coven-Nature","Yōkai")
+			+move("Coven-Nature","Eclectic")
+			+move("Coven-Nature","Something else:")
+				+itext("Coven-Nature-Else")
+			+t("The coven’s Nature provides some potentially shared powers. A pack of harpies can all take <b>flight</b>, a group of witches can all start with rotes. Hunters can also take different powers if they have varied backgrounds.")
+	.sheet-isolator
+		.sheet-Subsection
+			+translate('Recruitment Method')
+		+expanderMoveSection("Coven-Recruitment")
+			p
+				+t("How did you come to be part of the coven?")
+			+move("Coven-Recruitment","Birth")
+			+move("Coven-Recruitment","Initiation")
+			+move("Coven-Recruitment","Prophecy")
+			+move("Coven-Recruitment","Transformation")
+			+move("Coven-Recruitment","Died and reborn")
+			+move("Coven-Recruitment","Something else:")
+				+itext("Coven-Recruitment-Else")
+	.sheet-isolator
+		.sheet-Subsection
+			+translate('Mark of Kinship')
+		+expander("Coven-Kinship")
+			p
+				+t("Pick whatever hunter playbook you want and then add this on top. Each member chooses one of the following to represent their nature:<ul><li>A curse and either a Monstrous move or a natural attack (with 1 base and 1 extra) from the Monstrous playbook.<li>Two rotes and a Temptation from the Hex playbook.<li>A Spooky move and two Dark Secret tags from the Spooky playbook.<li>A Changeling move and two Unknown Heritage tags from the Changeling playbook.</ul>")
 
+.sheet-EscapedExperiments
+	.sheet-isolator
+		.sheet-Subsection
+			+translate('The Project')
+		+expanderMoveSection("EscapedExperiments-Project")
+			p
+				+t("Create the details of the Project. Choose options from the following lists:")
+			div
+				+t("<b>Modification techniques (pick one or more):</b>")
+			+move("EscapedExperiments-Project-Mod","Genetic modification")
+			+move("EscapedExperiments-Project-Mod","Organic grafting and symbiosis")
+			+move("EscapedExperiments-Project-Mod","Cybernetics and robotics")
+			+move("EscapedExperiments-Project-Mod","Psionic aptitude")
+			+move("EscapedExperiments-Project-Mod","Chemical enhancement")
+			+move("EscapedExperiments-Project-Mod","Uplifted animals")
+			+move("EscapedExperiments-Project-Mod","Something else:")
+				+itext("EscapedExperiments-Project-Mod-Else")
+			div
+				+t("<b>Goals (pick two):</b>")
+			+move("EscapedExperiments-Project-Goal","Protect common people")
+			+move("EscapedExperiments-Project-Goal","Shape society to their image")
+			+move("EscapedExperiments-Project-Goal","Burn everything down")
+			+move("EscapedExperiments-Project-Goal","Cruel curiosity")
+			+move("EscapedExperiments-Project-Goal","Elevate humanity")
+			+move("EscapedExperiments-Project-Goal","Serve the nation")
+			+move("EscapedExperiments-Project-Goal","Expand our understanding of reality")
+			+move("EscapedExperiments-Project-Goal","Maintain the status quo")
+			+move("EscapedExperiments-Project-Goal","Something else:")
+				+itext("EscapedExperiments-Project-Goal-Else")
+			div
+				+t("<b>Resources and policies (pick three):</b>")
+			+move("EscapedExperiments-Project-Policy","Invasive intel")
+			+move("EscapedExperiments-Project-Policy","Rigorous training")
+			+move("EscapedExperiments-Project-Policy","Emotional blackmail")
+			+move("EscapedExperiments-Project-Policy","Substantial manpower")
+			+move("EscapedExperiments-Project-Policy","Advanced laboratories")
+			+move("EscapedExperiments-Project-Policy","Fleet of vehicles")
+			+move("EscapedExperiments-Project-Policy","Good PR")
+			+move("EscapedExperiments-Project-Policy","Leveraging law enforcement")
+			+move("EscapedExperiments-Project-Policy","No witnesses")
+			+move("EscapedExperiments-Project-Policy","Something else:")
+				+itext("EscapedExperiments-Project-Policy-Else")
+			div
+				+t("<b>Weaknesses (pick one):</b>")
+			+move("EscapedExperiments-Project-Weakness","Sympathisers in the ranks")
+			+move("EscapedExperiments-Project-Weakness","Bureaucratic")
+			+move("EscapedExperiments-Project-Weakness","Hostile superiors")
+			+move("EscapedExperiments-Project-Weakness","Paranoia and secrecy")
+			+move("EscapedExperiments-Project-Weakness","Bad public image")
+			+move("EscapedExperiments-Project-Weakness","Harsh discipline")
+			+move("EscapedExperiments-Project-Weakness","Delusions of family")
+			+move("EscapedExperiments-Project-Weakness","Fragile brainwashing")
+			+move("EscapedExperiments-Project-Weakness","Something else:")
+				+itext("EscapedExperiments-Project-Weakness-Else")
+			div
+				+t("<b>Suspicions (pick three, after which the Keeper determines two that are true):</b>")
+			+move("EscapedExperiments-Project-Suspicion","Sleeper agents")
+			+move("EscapedExperiments-Project-Suspicion","Extradimensional contacts")
+			+move("EscapedExperiments-Project-Suspicion","Paving the way for conquest")
+			+move("EscapedExperiments-Project-Suspicion","Alien obligations")
+			+move("EscapedExperiments-Project-Suspicion","Extensive bribes")
+			+move("EscapedExperiments-Project-Suspicion","Time travel tech")
+			+move("EscapedExperiments-Project-Suspicion","Seeking immortality")
+			+move("EscapedExperiments-Project-Suspicion","Alien technology")
+			+move("EscapedExperiments-Project-Suspicion","Something else:")
+				+itext("EscapedExperiments-Project-Suspicion-Else")
+			div
+				+t("<b>How did you escape? Pick one:</b>")
+			+move("EscapedExperiments-Project-Escape","One of us was trusted and took advantage of that to open an opportunity.")
+			+move("EscapedExperiments-Project-Escape","An accident in a Project facility gave us a chance to escape.")
+			+move("EscapedExperiments-Project-Escape","They underestimated how strong we are.")
+			+move("EscapedExperiments-Project-Escape","We escaped during a field test.")
+			+move("EscapedExperiments-Project-Escape","The Project was attacked and we escaped in the chaos.")
+			+move("EscapedExperiments-Project-Escape","We were going to be purged and took the risk to escape.")
+			+move("EscapedExperiments-Project-Escape","Something else:")
+				+itext("EscapedExperiments-Project-Escape-Else")
+	.sheet-isolator
+		.sheet-Subsection
+			+translate('Scrubs and Gowns')
+		+expander("EscapedExperiments-SanG")
+			p
+				+t("Choose whatever playbook you want and then add this on top of it. Each team member chooses to have been a Scrub (staff) or Gown (subject) in the Project. Pick one of the options under that role.")
+			.sheet-MinorHead
+				+translate('Scrubs')
+			+t("<ul><li><b>Abnormal Medicine:</b> You’re an expert at unusual medical procedures. You may do first aid without equipment, or heal +1 harm if you have gear. You’re familiar with unusual anatomies; when you <b>help out</b> another hunter with a basic Weird move, you give them +2 forward.<li><b>Elite:</b> You gain +1 to any rating, max +3.<li><b>Specialist:</b> Name an area of specialisation, such as stealth, security systems, or pursuit (with the Keeper’s agreement). When you use a basic move within this specialty, it is considered advanced.<li><b>Good Under Pressure:</b> Once per session, you may upgrade a roll by a success level. A miss becomes a 7–9, a 7–9 becomes a 10+, and, if the move is advanced, a 10+ becomes a 12+.</ul>")
+			.sheet-MinorHead
+				+translate('Gowns')
+			+t("<ul><li><b>Versatile:</b> You developed a range of abilities. Take a second Weird basic move.<li><b>Extreme Power:</b> Your power level is higher than other subjects. Your basic Weird move is advanced.<li><b>Healing Factor:</b> Every 30 minutes, you may clear unstable or heal 1-harm. When the team has a chance to recover, you heal +1 harm.<li><b>Evolution:</b> Something happened that caused you to develop a specific ability. Take a supernatural move from another playbook.<li><b>Energy Blast:</b> You have an intrinsic Weird attack: 2-harm close magic energy. Decide how it works and looks.<li><b>Mind Over Matter:</b> Any time you roll a move, you may take 2-harm (which can’t be reduced by any means) to improve the result as if you rolled a 10.</ul>")
 
+.sheet-GoodMonsters
+	.sheet-Subsection
+		+translate('Monster Sides')
+	+expander('GoodMonsters-Sides')
+		+t("<p>Each hunter picks a playbook as usual (except the Monstrous). Then you each choose options for your monster breed as if you were a Monstrous (<i>MOTW</i> hardcover, page 61). You must choose a curse and natural attack, but moves are at your discretion. In addition, all hunters may count the usual Monstrous playbook moves as additional playbook moves on top of those in your main playbook. When selecting history, use either your main playbook or Monstrous history options.<p>For improvements, use your main playbook’s improvement options. Add the following regular improvements:<ul><li>Get +1 Weird, max +3<li>Pick another natural attack</ul>And the following advanced improvements:<ul><li>Free yourself from the curse of your species. Your curse no longer applies, but lose 1 Weird.<li>You turn evil (again). Retire this character; they become one of the Keeper’s threats.</ul>All the hunters on this team are monsters, and so they’re all effectively a Monstrous overlaid on their main playbook.<p>If someone wants to play one of the other explicitly supernatural playbooks (such as the Divine, Summoned, or Changeling), figure out if that is enough “monster side” in itself.<p>Some players might wish to play “the normal human” in the team, perhaps not really aware what they are getting themselves into. If they do, they ignore the Monster Side steps for hunter creation. Instead, they get 1 extra Luck box. If they ever become a monster or change to an overtly supernatural playbook, they immediately lose 1 unused Luck box.")
 
+.sheet-MedicalTeam
+	// Nothing for Medical Team
 
+.sheet-MundaneMonstrosities
+	.sheet-isolator
+		.sheet-Subsection
+			+translate('Upbringing')
+		+expanderMoveSection('MundaneMonstrosities-Upbringing')
+			p
+				+t("How did your team grow up?")
+			+move("MundaneMonstrosities-Upbringing","<b>Unseen Community:</b> The local community is mostly supernatural, or at least in the know. You get plenty of news and rumours about local happenings.")
+			+move("MundaneMonstrosities-Upbringing","<b>Precocious Youth:</b> The hunters are students at a school that caters to the supernatural. There’s an extensive occult library.")
+			+move("MundaneMonstrosities-Upbringing","<b>Protected and Subsidised:</b> A powerful, wealthy benefactor protects the community. Well-funded medical facilities and sanctuaries are available here.")
+			+move("MundaneMonstrosities-Upbringing","<b>Scattered Individuals:</b> The hunters met by happenstance. Between them, they have contacts with several different supernatural groups.")
+			+move("MundaneMonstrosities-Upbringing","<b>Secret Haven:</b> You grew up in an isolated community of supernatural people, set apart from the rest of the world. When you go back home, it’s very difficult to track you.")
+			+move("MundaneMonstrosities-Upbringing","<b>Weird Town:</b> Not everyone who lives here is supernatural, but everyone is at least a bit eccentric. Nobody pays much attention if you cast a spell, or have bright blue skin. Your friends and contacts all have unusual hobbies, often coming in handy during mysteries.")
+			+move("MundaneMonstrosities-Upbringing","Something else:")
+				+itext("MundaneMonstrosities-Upbringing-Else")
+	.sheet-isolator
+		.sheet-Subsection
+			+translate('Minor Weirdness')
+		+expander("MundaneMonstrosities-MinWeird")
+			+t("<p>Each team member starts with one of the following moves:<ul><li><b>Artifact</b> (from the Crooked playbook).<li><b>Claws of the beast</b>, <b>flight</b>, <b>incorporeal</b>, <b>mental dominion</b>, or <b>shapeshifter</b> (from the Monstrous playbook).<li><b>Guardian</b> (from the Searcher playbook).<li><b>Inhuman talent</b> (from the Changeling playbook).<li><b>Jinx</b> or <b>the Sight</b> (from the Spooky playbook).<li><b>Soothe</b> (from the Divine playbook).<li><b>Third eye</b> (from the Spell-Slinger playbook).</ul>")
 
+.sheet-RadioStation
+	.sheet-isolator
+		.sheet-Subsection
+			+translate('Who Does What?')
+		+expander("RadioStation-DoWhat")
+			+t("Lots of different jobs are needed to run a radio station. Engineers manage sound and maintain equipment. Marketers find sponsors and opportunities. Clerks keep money going in and out. And, of course, personalities MC the airwaves. In a small station, some end up doing double or triple duty, maybe everyone even has their own show. Decide together what job or jobs each hunter has.")
+			textarea(name="attr_RadioStation-DoWhat-JobsList")
+	.sheet-isolator
+		.sheet-Subsection
+			+translate('Community')
+		+expanderMoveSection("RadioStation-Community")
+			p
+				+t("What community do you serve?")
+			+move("RadioStation-Community","College station")
+			+move("RadioStation-Community","Remote village or outpost")
+			+move("RadioStation-Community","Scattered townships")
+			+move("RadioStation-Community","Big city")
+			+move("RadioStation-Community","Global audience")
+			+move("RadioStation-Community","Something else:")
+				+itext("RadioStation-Community-Else")
+
+.sheet-ResearchLab
+	// Nothing for Research Lab
+
+.sheet-SwipeToSlay
+	.sheet-Subsection
+		+translate('The App')
+	+expanderMoveSection("SwipeToSlay-TheApp")
+		div
+			+t("How did you learn about it? Each hunter answers for themself:<ul><li>From a spam email.<li>It was just there on your phone one day.<li>You saw it in the app store.<li>From an ad while watching a stream.<li>You thought it was an ARG.<li>A friend recommended it.<li>Something else.</ul>")
+		div
+			+t("Why did you start using it? Each hunter answers for themself:<ul><li>You were a customer first.<li>It listed a hunt you were already doing.<li>No, really, you thought it was a video game.<li>It was a joke!<li>You needed the money.<li>It sounded exciting.<li>Something else.</ul>")
+		div
+			+t("What are the clients like? Pick three:")
+		+move("SwipeToSlay-TheApp-Clients","They’re surprised to see us")
+		+move("SwipeToSlay-TheApp-Clients","Entitled and irritating")
+		+move("SwipeToSlay-TheApp-Clients","In desperate need")
+		+move("SwipeToSlay-TheApp-Clients","Often dead")
+		+move("SwipeToSlay-TheApp-Clients","Skeptical and disbelieving")
+		+move("SwipeToSlay-TheApp-Clients","Curious and excited")
+		+move("SwipeToSlay-TheApp-Clients","Grateful and appreciative")
+		+move("SwipeToSlay-TheApp-Clients","Suspicious and shady")
+		+move("SwipeToSlay-TheApp-Clients","Not human")
+		+move("SwipeToSlay-TheApp-Clients","Something else:")
+			+itext("SwipeToSlay-TheApp-Clients-Else")
+		br
+		+t("Pick two good things about the app:")
+		+move("SwipeToSlay-TheApp-Good","Good support staff")
+		+move("SwipeToSlay-TheApp-Good","Clear mission parameters")
+		+move("SwipeToSlay-TheApp-Good","Good pay")
+		+move("SwipeToSlay-TheApp-Good","Discounts on gear")
+		+move("SwipeToSlay-TheApp-Good","Strong community")
+		+move("SwipeToSlay-TheApp-Good","Medical insurance")
+		+move("SwipeToSlay-TheApp-Good","Good intel")
+		+move("SwipeToSlay-TheApp-Good","Something else:")
+			+itext("SwipeToSlay-TheApp-Good-Else")
+		br
+		+t("Pick two bad things about the app:")
+		+move("SwipeToSlay-TheApp-Bad","Cutthroat community")
+		+move("SwipeToSlay-TheApp-Bad","Obscure mission requests")
+		+move("SwipeToSlay-TheApp-Bad","Uncaring “support” staff")
+		+move("SwipeToSlay-TheApp-Bad","“Trial by fire” approach")
+		+move("SwipeToSlay-TheApp-Bad","Terrible pay")
+		+move("SwipeToSlay-TheApp-Bad","Expensive gear")
+		+move("SwipeToSlay-TheApp-Bad","Misleading intel")
+		+move("SwipeToSlay-TheApp-Bad","No medical coverage")
+		+move("SwipeToSlay-TheApp-Bad","Something else:")
+			+itext("SwipeToSlay-TheApp-Bad-Else")
+		br
+		+t("What do you suspect may be behind the app? Pick two:")
+		+move("SwipeToSlay-TheApp-Suspicion","Eldritch entities")
+		+move("SwipeToSlay-TheApp-Suspicion","A greedy tech-bro")
+		+move("SwipeToSlay-TheApp-Suspicion","Chaos witches")
+		+move("SwipeToSlay-TheApp-Suspicion","A well-meaning spirit")
+		+move("SwipeToSlay-TheApp-Suspicion","Odin")
+		+move("SwipeToSlay-TheApp-Suspicion","Vengeful ghosts")
+		+move("SwipeToSlay-TheApp-Suspicion","An organisation wanting deniable assets")
+		+move("SwipeToSlay-TheApp-Suspicion","Destiny")
+		+move("SwipeToSlay-TheApp-Suspicion","Something else:")
+			+itext("SwipeToSlay-TheApp-Suspicion-Else")
