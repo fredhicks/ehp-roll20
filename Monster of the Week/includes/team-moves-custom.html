@@ -1,0 +1,18 @@
+
+<div class="sheet-CustomTeam">
+  <fieldset class="repeating_TeamMoves">
+    <div>
+      <input class="sheet-checkbox sheet-ExpToggle" type="checkbox" name="attr_Toggle-Edit-Hider" value="1" checked=""/><span class="sheet-anglebox"></span> <span class="sheet-ExpHeader"><span data-i18n="edit">Edit</span></span>
+      <div class="sheet-EditControls sheet-Expander">
+        <div><b><span data-i18n="name">Name</span></b>:</div>
+        <input type="text" name="attr_SkinMoveName"/>
+        <div><b><span data-i18n="description">Description</span></b>:</div>
+        <textarea name="attr_SkinMoveDescrip" rows="4" cols="40"></textarea>
+      </div>
+    </div>
+    <div class="sheet-move">
+      <input class="sheet-checkbox" type="checkbox" name="attr_SkinMoveCheck" checked=""/><span class="sheet-mainbox"></span><span class="sheet-grayable"><b><span name="attr_SkinMoveName"></span>:</b> <span name="attr_SkinMoveDescrip"></span></span>
+      <button class="sheet-broadcast-button" type="roll" name="roll_Show" value="&amp;{template:motw-moveshare} {{CharName=@{character_name}}} {{movetext=**@{SkinMoveName}:** @{SkinMoveDescrip}}}" data-i18n-title="send_details_to_chat"></button>
+    </div>
+  </fieldset>
+</div>

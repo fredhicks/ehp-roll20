@@ -41,8 +41,8 @@ on("change:startingstats", function() {
 		});
 });
 
-on("sheet:opened change:harm1 change:harm2 change:harm3 change:harm4 change:harm5 change:harm6 change:harm7 change:moves-constructed1 change:constructed-harm1 change:constructed-harm2 change:constructed-harm3 change:imp-dying change:extra-harm1 change:advimp-dying change:extra-harm2", function() {
-	const alist = [ "Harm1", "Harm2", "Harm3", "Harm4", "Harm5", "Harm6", "Harm7", "Moves-Constructed1", "Constructed-Harm1", "Constructed-Harm2", "Constructed-Harm3", "Imp-Dying", "Extra-Harm1", "AdvImp-Dying", "Extra-Harm2" ];
+on("sheet:opened change:harm1 change:harm2 change:harm3 change:harm4 change:harm5 change:harm6 change:harm7 change:moves-constructed1 change:constructed-harm1 change:constructed-harm2 change:constructed-harm3 change:imp-dying change:extra-harm1 change:advimp-dying change:extra-harm2 change:extra-okayharm1", function() {
+	const alist = [ "Harm1", "Harm2", "Harm3", "Harm4", "Harm5", "Harm6", "Harm7", "Moves-Constructed1", "Constructed-Harm1", "Constructed-Harm2", "Constructed-Harm3", "Imp-Dying", "Extra-Harm1", "AdvImp-Dying", "Extra-Harm2", "Extra-OkayHarm1", "Imp-OkayHarm" ];
 	getAttrs(alist,function(a) {
 
 		// Values are "0" if not checked, "on" if checked. First we must adapt for this, as we want them numeric, 0 or 1.
@@ -61,9 +61,11 @@ on("sheet:opened change:harm1 change:harm2 change:harm3 change:harm4 change:harm
 		var constructed = false; if ( a["Moves-Constructed1"] == 1 ) { constructed = true; capacity += 3; }
 		var dying = false; if ( a["Imp-Dying"] == 1 ) { dying = true; capacity += 1; }
 		var advdying = false; if ( a["AdvImp-Dying"] == 1 ) { advdying = true; capacity += 1; }
+		var okay = false; if ( a["Imp-OkayHarm"] == 1 ) { okay = true; capacity += 1; }
 		var taken = a["Harm1"] + a["Harm2"] + a["Harm3"] + a["Harm4"] + a["Harm5"] + a["Harm6"] + a["Harm7"];
 		if ( constructed ) { taken += a["Constructed-Harm1"] + a["Constructed-Harm2"] + a["Constructed-Harm3"]; }
 		if ( dying ) { taken += a["Extra-Harm1"]; }
+		if ( okay ) { taken += a["Extra-OkayHarm1"]; }
 		if ( advdying ) { taken += a["Extra-Harm2"]; }
 		var remaining = capacity - taken;
 
@@ -74,6 +76,15 @@ on("sheet:opened change:harm1 change:harm2 change:harm3 change:harm4 change:harm
 		setAttrs(atts);
 
 	});
+});
+
+// Needed for SkinMoves because that call to +custommoves has the rollable flag set to true; you'll need to add any other repeating_XXXes where that flag is set to true for it to work right.
+on("change:repeating_skinmoves:rollable", function(e) {
+	var rollable = e.sourceAttribute;
+	var rowid = (e.sourceAttribute).slice(0,-8); // strips off 'rollable'
+	var atts = {};
+	atts[rowid+'RollableStat'] = '@{'+e.newValue+'}';
+	setAttrs(atts);
 });
 
 on("change:repeating_comfolk:preload", function(e) {

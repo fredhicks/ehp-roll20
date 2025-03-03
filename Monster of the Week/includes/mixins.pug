@@ -36,9 +36,9 @@ mixin shareButton(text,extracode)
 mixin option(t,v)
 	- if ( typeof(translations[t]) == "undefined" ) { translations[t] = t; }
 	if ( typeof(v) == "undefined" )
-		option(data-i18n=t)
+		option(data-i18n=t)&attributes(attributes)
 	else
-		option(value=v data-i18n=t)
+		option(value=v data-i18n=t)&attributes(attributes)
 
 mixin optgroup(t)
 	- if ( typeof(translations[t]) == "undefined" ) { translations[t] = t; }
@@ -59,7 +59,7 @@ mixin 2d6(name,stat,rname)
 		if ( typeof(rname) == "undefined" ) { rname = 'unnamedroller'; }
 		if ( typeof(stat) == "undefined" || ( stat !== 'Charm' && stat !== 'Cool' && stat !== 'Sharp' && stat !== 'Tough' && stat !== 'Weird' ) ) { stat = 'ERROR'; }
 	button.sheet-2d6-button(
-		type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title='+name+'}} {{Roll=[[2d6+?{'+name+' with|'+stat+' (Default),@{'+stat+'}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_')
+		type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title='+name+'}} {{Roll=[[2d6+?{'+name+' with|'+stat+' (Default),@{'+stat+'}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_'+rname)
 
 mixin movelegacy(toggle,text,share,checked)
 	- 
@@ -275,3 +275,72 @@ mixin weirdmove(wmove, stat, text, advtext, etitle, etext)
 					+t(etitle).sheet-MinorHead
 					.sheet-Reference
 						+t(etext)
+
+mixin custommoves(cmove, rollopt, shareopt, twobox)
+	// If you're doing a call that sets rollopt = true, you'll need to take a look at MOTW-sheet-worker.js and update the listener that triggers when repeating_skinmoves:rollable changes, to include whatever non-SkinMoves repeater you just created.
+	- 
+		if ( typeof(cmove) == "undefined" ) { cmove = "ERROR"; }
+		if ( typeof(rollopt) == "undefined" ) { rollopt = false; } 
+		if ( typeof(shareopt) == "undefined" ) { shareopt = true; }
+		if ( typeof(twobox) == "undefined" ) { twobox = false; }
+	fieldset(class="repeating_"+cmove)
+		.sheet-move
+			input.sheet-checkbox(type='checkbox', name='attr_SkinMoveCheck', checked)
+			span.sheet-mainbox
+				if twobox
+					input(type="hidden", name="attr_TwoBoxed", value="").sheet-null-hider
+					span.sheet-extrabox
+						input.sheet-checkbox(type='checkbox', name='attr_SkinMoveCheck-2', checked)
+						span.sheet-mainbox
+			span.sheet-grayable
+				b
+					span(name='attr_SkinMoveName')
+					| :
+				|  
+				span(name='attr_SkinMoveDescrip')
+				if shareopt
+					button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movetext=**@{SkinMoveName}:** @{SkinMoveDescrip}}}', data-i18n-title='send_details_to_chat')
+				if rollopt
+					input(type='hidden',name="attr_RollableStat","")
+					input(type="hidden", name="attr_Rollable", value="").sheet-null-hider
+					button.sheet-2d6-button(
+						type='roll', 
+						value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=@{SkinMoveName}}} {{Roll=[[2d6+?{@{SkinMoveName} with|@{Rollable} (Default),@{RollableStat}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}',
+						name='roll_custommoveroll')
+				.sheet-custom-editbox
+					.sheet-isolator
+						input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Edit-Hider', value='1', checked='')
+						span.sheet-anglebox
+						span.sheet-ExpHeader
+							span(data-i18n='edit') Edit
+						.sheet-EditControls.sheet-Expander
+							div
+								b
+									span(data-i18n='name') Name
+								| :
+							input(type='text', name='attr_SkinMoveName', style="width: 95%;")
+							div
+								b
+									span(data-i18n='description') Description
+								| :
+							textarea(name='attr_SkinMoveDescrip', rows='4', cols='40', style="width: 95%;")
+							if rollopt
+								div
+									b
+										+translate('Roll?')
+										| :
+									select(name="attr_Rollable", style="width: 95%;")
+										+option("None","")
+										+option("charm","Charm")
+										+option("cool","Cool")
+										+option("sharp","Sharp")
+										+option("tough","Tough")
+										+option("weird","Weird")
+							if twobox
+								div
+									b
+										+translate('Two Boxes?')
+										| :
+									select(name="attr_TwoBoxed", style="width: 95%;")
+										+option("No","")
+										+option("Yes",1)

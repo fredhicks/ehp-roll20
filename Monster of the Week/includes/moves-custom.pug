@@ -4,32 +4,5 @@
 		input.sheet-triggerbox.sheet-OPBToggle(type='checkbox', name='attr_Toggle-OtherPlaybooks', value='1')
 		.sheet-OPBHead.sheet-MinorHead.sheet-space-above(data-i18n='custom-playbook') Custom Playbook
 	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-MovesUnused', value='1', checked='')
-	fieldset.repeating_SkinMoves
-		div
-			input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Edit-Hider', value='1', checked='')
-			span.sheet-anglebox
-			|  
-			span.sheet-ExpHeader
-				span(data-i18n='edit') Edit
-			.sheet-EditControls.sheet-Expander
-				div
-					b
-						span(data-i18n='name') Name
-					| :
-				input(type='text', name='attr_SkinMoveName')
-				div
-					b
-						span(data-i18n='description') Description
-					| :
-				textarea(name='attr_SkinMoveDescrip', rows='4', cols='40')
-		.sheet-move
-			input.sheet-checkbox(type='checkbox', name='attr_SkinMoveCheck', checked='')
-			span.sheet-mainbox
-			span.sheet-grayable
-				b
-					span(name='attr_SkinMoveName')
-					| :
-				|  
-				span(name='attr_SkinMoveDescrip')
-			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movetext=**@{SkinMoveName}:** @{SkinMoveDescrip}}}', data-i18n-title='send_details_to_chat')
+	+custommoves("SkinMoves",true)
 // .sheet-Custom

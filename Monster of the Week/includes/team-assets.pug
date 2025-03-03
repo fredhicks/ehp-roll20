@@ -1,11 +1,12 @@
 div
 	.sheet-Subsection
 		+translate('Assets')
-	+expanderInstructions('Assets')
-		p
-			+translate('Choose from these available assets. If there are two boxes, you need to mark both to earn that asset. (If you are making partial progress towards taking a two-box asset, mark the leftmost box first.)')
 	+expanderMoveSection('Assets')
+		+expanderInstructions('Assets')
+			p
+				+translate('Choose from these available assets. If there are two boxes, you need to mark both to earn that asset. (If you are making partial progress towards taking a two-box asset, mark the leftmost box first.)')
 		input.sheet-TeamCheck(type='hidden', name='attr_TeamCheck', value='0')
+		include team-assets-custom.pug
 		include team-assets-agents.pug
 		include team-assets-road.pug
 		include team-assets-entourage.pug

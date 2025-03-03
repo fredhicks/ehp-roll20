@@ -1,0 +1,6 @@
+.sheet-CustomTeam
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Allies-Unused', value='1', checked='')
+	+custommoves("TeamAllies",false,false)
+	+move('CustomTeam-Enemy','Someone else:')
+		div
+			textarea(rows='2' name='attr_CustomTeam-Allies-Custom')

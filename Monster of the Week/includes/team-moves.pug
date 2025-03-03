@@ -1,16 +1,18 @@
 div
 	.sheet-Subsection
 		+translate('Team Moves')
-	+expanderInstructions('Team-Moves')
-		p
-			+translate('Choose your team moves from this list. The first one is a good default choice:')
 	+expanderMoveSection('Team-Moves')
 		br
 		input.sheet-checkbox.sheet-OPBToggle(type='checkbox', name='attr_Toggle-Other-Team-Playbooks', value='1')
 		span.sheet-anglebox
 		span.sheet-ExpHeader
 			span(data-i18n='other-playbook-moves') Other Playbook Moves
+		.sheet-isolator
+			+expanderInstructions('Team-Moves')
+				p
+					+translate('Choose your team moves from this list. The first one is a good default choice:')
 		input.sheet-TeamCheck(type='hidden', name='attr_TeamCheck', value='0')
+		include team-moves-custom.pug
 		include team-moves-agents.pug
 		include team-moves-road.pug
 		include team-moves-entourage.pug

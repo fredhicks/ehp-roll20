@@ -145,6 +145,7 @@ span.sheet-DoomedWorld, div.sheet-DoomedWorld,
 span.sheet-MonsterRevs, div.sheet-MonsterRevs,
 span.sheet-Lineage, div.sheet-Lineage,
 span.sheet-ThrillSeekers, div.sheet-ThrillSeekers,
+span.sheet-CustomTeam, div.sheet-CustomTeam,
 span.sheet-Custom, div.sheet-Custom
 {
 	display: none;
@@ -248,7 +249,8 @@ span.sheet-Custom, div.sheet-Custom
 .sheet-TeamCheck[value="19"] ~ div.sheet-DoomedWorld,
 .sheet-TeamCheck[value="20"] ~ div.sheet-MonsterRevs,
 .sheet-TeamCheck[value="21"] ~ div.sheet-Lineage,
-.sheet-TeamCheck[value="22"] ~ div.sheet-ThrillSeekers
+.sheet-TeamCheck[value="22"] ~ div.sheet-ThrillSeekers,
+.sheet-TeamCheck[value="99"] ~ div.sheet-CustomTeam
 {
 	display: block;
 }
@@ -440,7 +442,9 @@ span.sheet-Custom, div.sheet-Custom
 .sheet-TeamCheck[value="21"] ~  div > span > span.sheet-Lineage,
 .sheet-TeamCheck[value="21"] ~  div > span.sheet-Lineage,
 .sheet-TeamCheck[value="22"] ~  div > span > span.sheet-ThrillSeekers,
-.sheet-TeamCheck[value="22"] ~  div > span.sheet-ThrillSeekers
+.sheet-TeamCheck[value="22"] ~  div > span.sheet-ThrillSeekers,
+.sheet-TeamCheck[value="99"] ~  div > span > span.sheet-CustomTeam,
+.sheet-TeamCheck[value="99"] ~  div > span.sheet-CustomTeam
 {
 	display: inline;
 }
@@ -919,6 +923,33 @@ input[type="radio"].sheet-radio:checked ~ span.sheet-grayable i
 	display: inline;
 }
 
+/* This is for making sure the unused hide/show works inside of fieldsets */
+
+.sheet-ExpToggle[value="1"]:checked ~ .repcontainer .repitem .sheet-move > .sheet-checkbox,
+.sheet-ExpToggle[value="1"]:checked ~ .repcontainer .repitem .sheet-move > .sheet-checkbox + .sheet-mainbox,
+.sheet-ExpToggle[value="1"]:checked ~ .repcontainer .repitem .sheet-move > .sheet-checkbox + .sheet-mainbox + .sheet-grayable,
+.sheet-ExpToggle[value="1"]:checked ~ .repcontainer .repitem .sheet-move > .sheet-checkbox + .sheet-mainbox + .sheet-extrabox,
+.sheet-ExpToggle[value="1"]:checked ~ .repcontainer .repitem .sheet-move > .sheet-checkbox + .sheet-mainbox + .sheet-extrabox + .sheet-grayable,
+.sheet-ExpToggle[value="1"] ~ .repcontainer .repitem .sheet-move > .sheet-checkbox:checked,
+.sheet-ExpToggle[value="1"] ~ .repcontainer .repitem .sheet-move > .sheet-checkbox:checked + .sheet-mainbox,
+.sheet-ExpToggle[value="1"] ~ .repcontainer .repitem .sheet-move > .sheet-checkbox:checked + .sheet-mainbox + .sheet-grayable,
+.sheet-ExpToggle[value="1"] ~ .repcontainer .repitem .sheet-move > .sheet-checkbox:checked + .sheet-mainbox + .sheet-extrabox,
+.sheet-ExpToggle[value="1"] ~ .repcontainer .repitem .sheet-move > .sheet-checkbox:checked + .sheet-mainbox + .sheet-extrabox + .sheet-grayable
+{
+	display: inline
+}
+
+.sheet-ExpToggle[value="1"] ~ .repcontainer .repitem .sheet-move > .sheet-checkbox,
+.sheet-ExpToggle[value="1"] ~ .repcontainer .repitem .sheet-move > .sheet-checkbox + .sheet-mainbox,
+.sheet-ExpToggle[value="1"] ~ .repcontainer .repitem .sheet-move > .sheet-checkbox + .sheet-mainbox + .sheet-grayable,
+.sheet-ExpToggle[value="1"] ~ .repcontainer .repitem .sheet-move > .sheet-checkbox + .sheet-mainbox + .sheet-extrabox,
+.sheet-ExpToggle[value="1"] ~ .repcontainer .repitem .sheet-move > .sheet-checkbox + .sheet-mainbox + .sheet-extrabox + .sheet-grayable
+{
+	display: none;
+}
+
+/**/
+
 input[type="checkbox"].sheet-inverted-triggerbox, 
 input[type="checkbox"].sheet-inverted-triggerbox:checked,
 input[type="checkbox"].sheet-inverted-triggerbox:checked + div.sheet-triggerframe,
@@ -997,7 +1028,7 @@ input[type="checkbox"].sheet-triggerbox:checked + div.sheet-triggerframe
 	width: 150px;
 }
 
-.sheet-kflex > .repcontainer > .repitem {
+.sheet-kflex > .repcontainer > .repitem > {
 	margin-right: 20px;
 	padding-bottom: 10px;
 	min-width: 20em;

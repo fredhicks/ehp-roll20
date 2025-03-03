@@ -1,12 +1,12 @@
 div
 	.sheet-Subsection
 		+translate('Allies')
-	+expanderInstructions('Team-Allies')
-		p
-			+translate('Choose your team allies from this list:') 
 	+expanderMoveSection('Allies')
+		+expanderInstructions('Team-Allies')
+			p
+				+translate('Choose your team allies from this list:') 
 		input.sheet-TeamCheck(type='hidden', name='attr_TeamCheck', value='0')
-		include team-allies-agents.pug
+		include team-allies-custom.pug
 		include team-allies-agents.pug
 		include team-allies-road.pug
 		include team-allies-entourage.pug

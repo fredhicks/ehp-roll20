@@ -44,8 +44,8 @@ on("change:startingstats", function() {
 		});
 });
 
-on("sheet:opened change:harm1 change:harm2 change:harm3 change:harm4 change:harm5 change:harm6 change:harm7 change:moves-constructed1 change:constructed-harm1 change:constructed-harm2 change:constructed-harm3 change:imp-dying change:extra-harm1 change:advimp-dying change:extra-harm2", function() {
-	const alist = [ "Harm1", "Harm2", "Harm3", "Harm4", "Harm5", "Harm6", "Harm7", "Moves-Constructed1", "Constructed-Harm1", "Constructed-Harm2", "Constructed-Harm3", "Imp-Dying", "Extra-Harm1", "AdvImp-Dying", "Extra-Harm2" ];
+on("sheet:opened change:harm1 change:harm2 change:harm3 change:harm4 change:harm5 change:harm6 change:harm7 change:moves-constructed1 change:constructed-harm1 change:constructed-harm2 change:constructed-harm3 change:imp-dying change:extra-harm1 change:advimp-dying change:extra-harm2 change:extra-okayharm1", function() {
+	const alist = [ "Harm1", "Harm2", "Harm3", "Harm4", "Harm5", "Harm6", "Harm7", "Moves-Constructed1", "Constructed-Harm1", "Constructed-Harm2", "Constructed-Harm3", "Imp-Dying", "Extra-Harm1", "AdvImp-Dying", "Extra-Harm2", "Extra-OkayHarm1", "Imp-OkayHarm" ];
 	getAttrs(alist,function(a) {
 
 		// Values are "0" if not checked, "on" if checked. First we must adapt for this, as we want them numeric, 0 or 1.
@@ -64,9 +64,11 @@ on("sheet:opened change:harm1 change:harm2 change:harm3 change:harm4 change:harm
 		var constructed = false; if ( a["Moves-Constructed1"] == 1 ) { constructed = true; capacity += 3; }
 		var dying = false; if ( a["Imp-Dying"] == 1 ) { dying = true; capacity += 1; }
 		var advdying = false; if ( a["AdvImp-Dying"] == 1 ) { advdying = true; capacity += 1; }
+		var okay = false; if ( a["Imp-OkayHarm"] == 1 ) { okay = true; capacity += 1; }
 		var taken = a["Harm1"] + a["Harm2"] + a["Harm3"] + a["Harm4"] + a["Harm5"] + a["Harm6"] + a["Harm7"];
 		if ( constructed ) { taken += a["Constructed-Harm1"] + a["Constructed-Harm2"] + a["Constructed-Harm3"]; }
 		if ( dying ) { taken += a["Extra-Harm1"]; }
+		if ( okay ) { taken += a["Extra-OkayHarm1"]; }
 		if ( advdying ) { taken += a["Extra-Harm2"]; }
 		var remaining = capacity - taken;
 
@@ -77,6 +79,15 @@ on("sheet:opened change:harm1 change:harm2 change:harm3 change:harm4 change:harm
 		setAttrs(atts);
 
 	});
+});
+
+// Needed for SkinMoves because that call to +custommoves has the rollable flag set to true; you'll need to add any other repeating_XXXes where that flag is set to true for it to work right.
+on("change:repeating_skinmoves:rollable", function(e) {
+	var rollable = e.sourceAttribute;
+	var rowid = (e.sourceAttribute).slice(0,-8); // strips off 'rollable'
+	var atts = {};
+	atts[rowid+'RollableStat'] = '@{'+e.newValue+'}';
+	setAttrs(atts);
 });
 
 on("change:repeating_comfolk:preload", function(e) {
@@ -243,11 +254,11 @@ on("change:repeating_comfolk:preload", function(e) {
             <option class="sheet-OptgroupHeader" disabled="disabled" data-i18n="Bone Spear"></option>
             <option class="sheet-SkinSelect" value="1" data-i18n="the-chosen">The Chosen</option>
             <option class="sheet-SkinSelect" value="6" data-i18n="the-initiate">The Initiate</option>
-            <option value="2" data-i18n="The Loner"></option>
-            <option value="4" data-i18n="The Lore-Holder"></option>
+            <option class="sheet-SkinSelect" value="2" data-i18n="The Loner"></option>
+            <option class="sheet-SkinSelect" value="4" data-i18n="The Lore-Holder"></option>
             <option class="sheet-SkinSelect" value="8" data-i18n="the-mundane">The Mundane</option>
-            <option value="7" data-i18n="The Other-Folk"></option>
-            <option value="3" data-i18n="The Spirit-Touched"></option>
+            <option class="sheet-SkinSelect" value="7" data-i18n="The Other-Folk"></option>
+            <option class="sheet-SkinSelect" value="3" data-i18n="The Spirit-Touched"></option>
             <option class="sheet-SkinSelect" value="11" data-i18n="the-spooky">The Spooky</option>
             <option class="sheet-SkinSelect" value="12" data-i18n="the-wronged">The Wronged</option>
             <option class="sheet-SkinSelect" value="15" data-i18n="the-pararomantic">The Pararomantic</option>
@@ -429,7 +440,8 @@ on("change:repeating_comfolk:preload", function(e) {
           <div>
             <select class="sheet-TeamSelect" name="attr_TeamName">
               <option class="sheet-TeamSelect" value="0" data-i18n="team-playbook-choice">Choose a Team Playbook</option>
-              <option class="sheet-TeamSelect" value="">------------------</option>
+              <option disabled="disabled" value=""></option>
+              <option class="sheet-OptgroupHeader" disabled="disabled" data-i18n="Codex of Worlds"></option>
               <option class="sheet-TeamSelect" value="1" data-i18n="Agents in Black">Agents in Black</option>
               <option class="sheet-TeamSelect" value="2" data-i18n="Always on the Road">Always on the Road</option>
               <option class="sheet-TeamSelect" value="3" data-i18n="The Chosen One and Entourage">The Chosen One and Entourage</option>
@@ -445,15 +457,22 @@ on("change:repeating_comfolk:preload", function(e) {
               <option class="sheet-TeamSelect" value="13" data-i18n="Touring Band">Touring Band</option>
               <option class="sheet-TeamSelect" value="14" data-i18n="Whistleblowers">Whistleblowers</option>
               <option class="sheet-TeamSelect" value="15" data-i18n="Wild Hunt Fugitives">Wild Hunt Fugitives</option>
-              <option class="sheet-TeamSelect" value="">------------------</option>
+              <option disabled="disabled" value=""></option>
+              <option class="sheet-OptgroupHeader" disabled="disabled" data-i18n="Apocrypha"></option>
               <option class="sheet-TeamSelect" value="17" data-i18n="Army Of One">Army Of One</option>
               <option class="sheet-TeamSelect" value="18" data-i18n="Back to Square One">Back to Square One</option>
               <option class="sheet-TeamSelect" value="19" data-i18n="Doomed World Exiles">Doomed World Exiles</option>
               <option class="sheet-TeamSelect" value="20" data-i18n="Monster Revelations">Monster Revelations</option>
               <option class="sheet-TeamSelect" value="21" data-i18n="Storied Hunter Lineage">Storied Hunter Lineage</option>
               <option class="sheet-TeamSelect" value="22" data-i18n="Thrill-Seekers">Thrill-Seekers</option>
-              <option class="sheet-TeamSelect" value="">------------------</option>
+              <option disabled="disabled" value=""></option>
+              <option class="sheet-OptgroupHeader" disabled="disabled" data-i18n="Modern Haunts"></option>
               <option class="sheet-TeamSelect" value="16" data-i18n="Hauntbusters">Hauntbusters</option>
+              <option disabled="disabled" value=""></option>
+              <option class="sheet-OptgroupHeader" disabled="disabled" data-i18n="Slayer's Survival Kit"></option>
+              <option disabled="disabled" value=""></option>
+              <option class="sheet-OptgroupHeader" disabled="disabled" data-i18n="byo"></option>
+              <option class="sheet-TeamSelect" value="99" data-i18n="Custom Team Playbook">Custom Team Playbook</option>
             </select>
           </div>
         </div>
@@ -1466,7 +1485,7 @@ on("change:repeating_comfolk:preload", function(e) {
               <div class="sheet-isolator">
                 <input class="sheet-checkbox sheet-RefToggle" type="checkbox" name="attr_Toggle-Benevolence" value="1"/><span class="sheet-anglebox"></span> 
                 <input class="sheet-checkbox" type="checkbox" name="attr_Alt-Move-Benevolence" value="1"/><span class="sheet-altbox"></span><span class="sheet-MinorHead" data-i18n="Benevolence"></span> 
-                <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Benevolence}} {{Roll=[[2d6+?{Benevolence with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_"></button>
+                <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Benevolence}} {{Roll=[[2d6+?{Benevolence with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_Benevolence"></button>
                 <div class="sheet-Reference"><span data-i18n="You are able to channel a benevolent elemental force. How does it manifest? Sacred light, darkness, fire, song, or something else? When you channel power, roll +Weird.On a 10+, pick one:A display of power strikes awe or inspires hope.All hunters get +1 forward against supernatural evil.Create a barrier, or shelter, impassable to evil.An omen directs you where you’re most needed.On a 7–9, pick one of the 10+ options and one of these:All malevolence is focused on you.You must sacrifice something (not someone) important to you.You will be exhausted afterwards, take –1 ongoing until you rest.If you use this power selfishly, the Keeper chooses one:The power refuses to answer when next channelled.Malevolent forces are drawn to you.You have a terrifying vision showing the consequences of your actions."></span> 
                   <div class="sheet-isolator">
                     <input class="sheet-checkbox sheet-RefToggle" type="checkbox" name="attr_Toggle-Benevolence-Advanced" value="1"/><span class="sheet-anglebox"></span> <span class="sheet-MinorHead"><span data-i18n="advanced"></span>  <span data-i18n="Benevolence"></span>  
@@ -1479,7 +1498,7 @@ on("change:repeating_comfolk:preload", function(e) {
               <div class="sheet-isolator">
                 <input class="sheet-checkbox sheet-RefToggle" type="checkbox" name="attr_Toggle-CentipedeHost" value="1"/><span class="sheet-anglebox"></span> 
                 <input class="sheet-checkbox" type="checkbox" name="attr_Alt-Move-CentipedeHost" value="1"/><span class="sheet-altbox"></span><span class="sheet-MinorHead" data-i18n="Centipede Host"></span> 
-                <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Centipede Host}} {{Roll=[[2d6+?{Centipede Host with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_"></button>
+                <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Centipede Host}} {{Roll=[[2d6+?{Centipede Host with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_CentipedeHost"></button>
                 <div class="sheet-Reference"><span data-i18n="You are able to manifest a centipede as an extension of your mind and soul out of your body. When the centipede bursts from your body, roll +Weird. On any 7+, a centipede the size of a large cat appears to defend you. It has 2 harm capacity and bite: 2-harm intimate.On a 10+, suffer 1-harm and hold 2On a 7–9, suffer 2-harm and hold 1.Spend your hold:You manifest two centipedes (costs 2 hold).You suffer 1 less harm.The centipede has 1-armour.The centipede has +1 harm capacity.The centipede bite gets +1 harm, poison, or stun)The centipede gains a useful trait, such as stealthy, fast, dextrous.On a miss, the manifestation goes awry, and the Keeper chooses one of these:The centipede manifests violently; you suffer 3-harm.The centipede operates on your rawest instincts, out of control. The Keeper controls it as a minion: brute."></span> 
                   <div class="sheet-isolator">
                     <input class="sheet-checkbox sheet-RefToggle" type="checkbox" name="attr_Toggle-CentipedeHost-Advanced" value="1"/><span class="sheet-anglebox"></span> <span class="sheet-MinorHead"><span data-i18n="advanced"></span>  <span data-i18n="Centipede Host"></span>  
@@ -1492,7 +1511,7 @@ on("change:repeating_comfolk:preload", function(e) {
               <div class="sheet-isolator">
                 <input class="sheet-checkbox sheet-RefToggle" type="checkbox" name="attr_Toggle-Hacking" value="1"/><span class="sheet-anglebox"></span> 
                 <input class="sheet-checkbox" type="checkbox" name="attr_Alt-Move-Hacking" value="1"/><span class="sheet-altbox"></span><span class="sheet-MinorHead" data-i18n="Hacking"></span> 
-                <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Hacking}} {{Roll=[[2d6+?{Hacking with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_"></button>
+                <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Hacking}} {{Roll=[[2d6+?{Hacking with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_Hacking"></button>
                 <div class="sheet-Reference"><span data-i18n="You have a way with computers, going beyond just skill and knowledge.The Keeper may require one or more of the following for a hacking attempt:Physical connection to the target network.Good internet connection.Time to set it up.Passwords and credentials for initial access.When you hack a computer, roll +Weird. On a 10+, hold 2; On a 7–9, hold 1; On a miss, things go wrong and the Keeper holds 1.Spend your hold to:Access something within, or controlled by, the system.Ask a question from investigate a mystery or read a bad situation.Use, control, or shut down a system function (such as permissions, communications, websites, or cameras).Place or remove information.The Keeper can spend their hold to:Have the hunter trip an alarm.Destroy data or shut down a system function.Infect the hacker’s computer with a virus (potentially mystical)."></span> 
                   <div class="sheet-isolator">
                     <input class="sheet-checkbox sheet-RefToggle" type="checkbox" name="attr_Toggle-Hacking-Advanced" value="1"/><span class="sheet-anglebox"></span> <span class="sheet-MinorHead"><span data-i18n="advanced"></span>  <span data-i18n="Hacking"></span>  
@@ -1505,7 +1524,7 @@ on("change:repeating_comfolk:preload", function(e) {
               <div class="sheet-isolator">
                 <input class="sheet-checkbox sheet-RefToggle" type="checkbox" name="attr_Toggle-Medium" value="1"/><span class="sheet-anglebox"></span> 
                 <input class="sheet-checkbox" type="checkbox" name="attr_Alt-Move-Medium" value="1"/><span class="sheet-altbox"></span><span class="sheet-MinorHead" data-i18n="Medium"></span> 
-                <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Medium}} {{Roll=[[2d6+?{Medium with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_"></button>
+                <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Medium}} {{Roll=[[2d6+?{Medium with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_Medium"></button>
                 <div class="sheet-Reference"><span data-i18n="You can’t always sense ghosts and spirits, but you also know how to invoke and speak with them. If the spirit is a monster, the seance will be especially dangerous.The Keeper may require one or more of these preparations:Communication tools, such as a ouija board, tarot cards, automatic writing, or crystal ball.The spirit possesses you during the seance.You suffer 1-harm ignore-armour.You need the presence of someone or something with a connection to the spirit.When you invoke a spirit, roll +Weird. On a 10+, pick one:All present may communicate with the spirit, not just you.Trap the spirit within you.Ask the Keeper any question about the ghost’s life or motivations. They’ll answer honestly, but perhaps not in full.On a 7–9, pick one of the 10+ options and one of these:The spirit demands a service before helping you.It’s disturbed or confused.Other malevolent spirits also manifest.On a miss, the Keeper decides if the spirit is malevolent, dangerous, and/or just doesn’t leave."></span> 
                   <div class="sheet-isolator">
                     <input class="sheet-checkbox sheet-RefToggle" type="checkbox" name="attr_Toggle-Medium-Advanced" value="1"/><span class="sheet-anglebox"></span> <span class="sheet-MinorHead"><span data-i18n="advanced"></span>  <span data-i18n="Medium"></span>  
@@ -1518,7 +1537,7 @@ on("change:repeating_comfolk:preload", function(e) {
               <div class="sheet-isolator">
                 <input class="sheet-checkbox sheet-RefToggle" type="checkbox" name="attr_Toggle-Pyrokinesis" value="1"/><span class="sheet-anglebox"></span> 
                 <input class="sheet-checkbox" type="checkbox" name="attr_Alt-Move-Pyrokinesis" value="1"/><span class="sheet-altbox"></span><span class="sheet-MinorHead" data-i18n="Pyrokinesis"></span> 
-                <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Pyrokinesis}} {{Roll=[[2d6+?{Pyrokinesis with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_"></button>
+                <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Pyrokinesis}} {{Roll=[[2d6+?{Pyrokinesis with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_Pyrokinesis"></button>
                 <div class="sheet-Reference"><span data-i18n="You can control and produce fire. (This may be re-themed for other elemental effects, such as cold or lightning; just change the fire-related effects to match your element.)When you control or ignite flames, roll +Weird.On a 10+, pick one, or pick two and the Keeper chooses another.On a 7–9, pick one and the Keeper chooses another.On a miss, the Keeper chooses one.Keeper guideline for fire harm: fireplace or smaller: 1-harm; bonfire: 2-harm; burning room: 3-harm; raging inferno: 5-harm.Pyrokinesis options:A fire gets bigger, smaller, moves, or goes out.A flammable object catches fire.You or someone else take 1 less harm from fires for a few minutes.Smoke thickens, dissipates, or moves."></span> 
                   <div class="sheet-isolator">
                     <input class="sheet-checkbox sheet-RefToggle" type="checkbox" name="attr_Toggle-Pyrokinesis-Advanced" value="1"/><span class="sheet-anglebox"></span> <span class="sheet-MinorHead"><span data-i18n="advanced"></span>  <span data-i18n="Pyrokinesis"></span>  
@@ -1531,7 +1550,7 @@ on("change:repeating_comfolk:preload", function(e) {
               <div class="sheet-isolator">
                 <input class="sheet-checkbox sheet-RefToggle" type="checkbox" name="attr_Toggle-Summoner" value="1"/><span class="sheet-anglebox"></span> 
                 <input class="sheet-checkbox" type="checkbox" name="attr_Alt-Move-Summoner" value="1"/><span class="sheet-altbox"></span><span class="sheet-MinorHead" data-i18n="Summoner"></span> 
-                <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Summoner}} {{Roll=[[2d6+?{Summoner with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_"></button>
+                <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Summoner}} {{Roll=[[2d6+?{Summoner with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_Summoner"></button>
                 <div class="sheet-Reference"><span data-i18n="You can summon magical creatures to serve you. The Keeper may require one or more of the following:Magic spell preparations, such as a magic circle or sacrificial materials.You suffer 1-harm.Specific spells or names must be known.When you summon a creature to perform a task, roll +Weird. On any 7+, it does the task to the best of its ability. On a 10+, pick two things about how the creature carries out the task. On a 7–9, pick one. The options you don’t choose won’t be true.It follows the spirit—not just the letter—of your orders.It acts quickly.It leaves when its task is done.It avoids collateral damage.On a miss, the summoning goes horribly wrong."></span> 
                   <div class="sheet-isolator">
                     <input class="sheet-checkbox sheet-RefToggle" type="checkbox" name="attr_Toggle-Summoner-Advanced" value="1"/><span class="sheet-anglebox"></span> <span class="sheet-MinorHead"><span data-i18n="advanced"></span>  <span data-i18n="Summoner"></span>  
@@ -1549,7 +1568,7 @@ on("change:repeating_comfolk:preload", function(e) {
               <div class="sheet-isolator">
                 <input class="sheet-checkbox sheet-RefToggle" type="checkbox" name="attr_Toggle-Tradecraft" value="1"/><span class="sheet-anglebox"></span> 
                 <input class="sheet-checkbox" type="checkbox" name="attr_Alt-Move-Tradecraft" value="1"/><span class="sheet-altbox"></span><span class="sheet-MinorHead" data-i18n="Tradecraft"></span> 
-                <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Tradecraft}} {{Roll=[[2d6+?{Tradecraft with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_"></button>
+                <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Tradecraft}} {{Roll=[[2d6+?{Tradecraft with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_Tradecraft"></button>
                 <div class="sheet-Reference"><span data-i18n="You’re a spy, but your intuition is more than just years of training and experience. You just know what to do. When you use your espionage intuition, choose a goal, then roll +Weird. A safe place to hole up.A useful contact.A false identity for this situation.Cutting-edge or specific gear.To know if you are being followed or watched.To encrypt a message that only the intended recipient can understand.To communicate with someone undetectably.On a 10+, it’s all good. On a 7–9, it’s a little dicey. Maybe you have to deal with some security, owe a favour, or use a roundabout method. On a miss, you’re in immediate danger."></span> 
                   <div class="sheet-isolator">
                     <input class="sheet-checkbox sheet-RefToggle" type="checkbox" name="attr_Toggle-Tradecraft-Advanced" value="1"/><span class="sheet-anglebox"></span> <span class="sheet-MinorHead"><span data-i18n="advanced"></span>  <span data-i18n="Tradecraft"></span>  
@@ -1562,7 +1581,7 @@ on("change:repeating_comfolk:preload", function(e) {
               <div class="sheet-isolator">
                 <input class="sheet-checkbox sheet-RefToggle" type="checkbox" name="attr_Toggle-Warding" value="1"/><span class="sheet-anglebox"></span> 
                 <input class="sheet-checkbox" type="checkbox" name="attr_Alt-Move-Warding" value="1"/><span class="sheet-altbox"></span><span class="sheet-MinorHead" data-i18n="Warding"></span> 
-                <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Warding}} {{Roll=[[2d6+?{Warding with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_"></button>
+                <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Warding}} {{Roll=[[2d6+?{Warding with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_Warding"></button>
                 <div class="sheet-Reference"><span data-i18n="You’ve learned protective spells, or maybe just weaponised a certain skepticism.Protections:Suppress an existing supernatural effect for a few moments. If strong, disrupt it until the source renews it.Give one person +1 ongoing to resist a specific effect. If strong, affect several people, or give one person total protection.Create an area that is uncomfortable to a chosen type of supernatural entity. Most avoid the area. If they enter, they’ll suffer pain or sensory overload. If the ward is strong, they also suffer 1-harm for every minute in the area.When you ward yourself against the supernatural, describe the protection you want and roll +Weird.On a 10+, the ward is strong, gaining the “strong” benefit as well.On a 7–9, the ward works.On a miss, the ward fails in the worst possible way."></span> 
                   <div class="sheet-isolator">
                     <input class="sheet-checkbox sheet-RefToggle" type="checkbox" name="attr_Toggle-Warding-Advanced" value="1"/><span class="sheet-anglebox"></span> <span class="sheet-MinorHead"><span data-i18n="advanced"></span>  <span data-i18n="Warding"></span>  
@@ -3323,6 +3342,13 @@ on("change:repeating_comfolk:preload", function(e) {
       <div class="sheet-move">
         <input type="radio" name="attr_TeamName" value="16"/> <b><span data-i18n="Hauntbusters"></span> :</b> <span data-i18n="This new team playbook is concerned with neutralising haunts and other places of malevolent power. It’s a great team if you want to run a modern series centred on haunts, a Gothic Century series, or a This Strange Old House series focused on researching the house itself."></span> 
       </div>
+      <div class="sheet-Subsection"><span data-i18n="Slayer's Survival Kit"></span> 
+      </div>
+      <div class="sheet-Subsection"><span data-i18n="byo"></span> 
+      </div>
+      <div class="sheet-move">
+        <input type="radio" name="attr_TeamName" value="99"/> <b><span data-i18n="Custom Team Playbook"></span> :</b> <span data-i18n="A shell so you can build out your own custom team."></span> 
+      </div>
     </div>
     <div class="sheet-NoNull">
       <input class="sheet-TeamCheck" type="hidden" name="attr_TeamCheck" value="0"/>
@@ -3462,7 +3488,7 @@ on("change:repeating_comfolk:preload", function(e) {
                     <li><span data-i18n="Pick your show’s format and name."></span> 
                     </li>
                   </div>
-                  <div class="sheet-Agents sheet-Road sheet-Entourage sheet-Guardians sheet-IMPS sheet-Crisis sheet-Survivors sheet-League sheet-Mercenaries sheet-MysteryClub sheet-NightShift sheet-SuburbanWatch sheet-Band sheet-Hauntbusters sheet-ArmyOfOne sheet-SquareOne sheet-DoomedWorld sheet-MonsterRevs sheet-Lineage sheet-ThrillSeekers">
+                  <div class="sheet-Agents sheet-Road sheet-Entourage sheet-Guardians sheet-IMPS sheet-Crisis sheet-Survivors sheet-League sheet-Mercenaries sheet-MysteryClub sheet-NightShift sheet-SuburbanWatch sheet-Band sheet-Hauntbusters sheet-ArmyOfOne sheet-SquareOne sheet-DoomedWorld sheet-MonsterRevs sheet-Lineage sheet-ThrillSeekers sheet-CustomTeam">
                     <li><span data-i18n="Pick a starting team enemy, ally, move, and 2 boxes of assets."></span> 
                     </li>
                   </div>
@@ -4469,18 +4495,41 @@ on("change:repeating_comfolk:preload", function(e) {
           <div>
             <div class="sheet-Subsection"><span data-i18n="Team Moves"></span> 
             </div>
-            <div>
-              <input class="sheet-checkbox sheet-ExpToggle" type="checkbox" name="attr_Toggle-Team-Moves-Instructions" value="1" checked=""/><span class="sheet-anglebox"></span><span class="sheet-ExpHeader"><span data-i18n="instructions">Instructions</span></span>
-              <div class="sheet-Expander">
-                <p><span data-i18n="Choose your team moves from this list. The first one is a good default choice:"></span> 
-                </p>
-              </div>
-            </div>
             <input class="sheet-checkbox sheet-ExpToggle" type="checkbox" name="attr_Toggle-Team-Moves-All" value="1" checked=""/><span class="sheet-anglebox"></span><span class="sheet-ExpHeader"><span data-i18n="all">All</span></span>
             <div class="sheet-Expander">
               <input class="sheet-checkbox sheet-ExpToggle" type="checkbox" name="attr_Toggle-Team-Moves-Unused" value="1" checked=""/><span class="sheet-anglebox"></span><span class="sheet-ExpHeader"><span data-i18n="unused">Unused</span></span><br/>
               <input class="sheet-checkbox sheet-OPBToggle" type="checkbox" name="attr_Toggle-Other-Team-Playbooks" value="1"/><span class="sheet-anglebox"></span><span class="sheet-ExpHeader"><span data-i18n="other-playbook-moves">Other Playbook Moves</span></span>
+              <div class="sheet-isolator">
+                <div>
+                  <input class="sheet-checkbox sheet-ExpToggle" type="checkbox" name="attr_Toggle-Team-Moves-Instructions" value="1" checked=""/><span class="sheet-anglebox"></span><span class="sheet-ExpHeader"><span data-i18n="instructions">Instructions</span></span>
+                  <div class="sheet-Expander">
+                    <p><span data-i18n="Choose your team moves from this list. The first one is a good default choice:"></span> 
+                    </p>
+                  </div>
+                </div>
+              </div>
               <input class="sheet-TeamCheck" type="hidden" name="attr_TeamCheck" value="0"/>
+              <div class="sheet-CustomTeam">
+                <input class="sheet-triggerbox sheet-ExpToggle" type="checkbox" name="attr_Toggle-Team-Moves-Unused" value="1" checked=""/>
+                <!-- If you're doing a call that sets rollopt = true, you'll need to take a look at MOTW-sheet-worker.js and update the listener that triggers when repeating_skinmoves:rollable changes, to include whatever non-SkinMoves repeater you just created.-->
+                <fieldset class="repeating_TeamMoves">
+                  <div class="sheet-move">
+                    <input class="sheet-checkbox" type="checkbox" name="attr_SkinMoveCheck" checked="checked"/><span class="sheet-mainbox"></span><span class="sheet-grayable"><b><span name="attr_SkinMoveName"></span>:</b> <span name="attr_SkinMoveDescrip"></span>
+                      <button class="sheet-broadcast-button" type="roll" name="roll_Show" value="&amp;{template:motw-moveshare} {{CharName=@{character_name}}} {{movetext=**@{SkinMoveName}:** @{SkinMoveDescrip}}}" data-i18n-title="send_details_to_chat"></button>
+                      <div class="sheet-custom-editbox">
+                        <div class="sheet-isolator">
+                          <input class="sheet-checkbox sheet-ExpToggle" type="checkbox" name="attr_Toggle-Edit-Hider" value="1" checked=""/><span class="sheet-anglebox"></span><span class="sheet-ExpHeader"><span data-i18n="edit">Edit</span></span>
+                          <div class="sheet-EditControls sheet-Expander">
+                            <div><b><span data-i18n="name">Name</span></b>:</div>
+                            <input type="text" name="attr_SkinMoveName" style="width: 95%;"/>
+                            <div><b><span data-i18n="description">Description</span></b>:</div>
+                            <textarea name="attr_SkinMoveDescrip" rows="4" cols="40" style="width: 95%;"></textarea>
+                          </div>
+                        </div>
+                      </div></span>
+                  </div>
+                </fieldset>
+              </div>
               <input class="sheet-triggerbox sheet-UnusedToggle" type="checkbox" name="attr_Toggle-Team-Moves-Unused" value="1" checked=""/>
               <input class="sheet-triggerbox sheet-OPBToggle" type="checkbox" name="attr_Toggle-Other-Team-Playbooks" value="1"/>
               <div class="sheet-OPBHead sheet-MinorHead sheet-space-above"><span data-i18n="Agents in Black"></span> 
@@ -5248,17 +5297,46 @@ on("change:repeating_comfolk:preload", function(e) {
           <div>
             <div class="sheet-Subsection"><span data-i18n="Assets"></span> 
             </div>
-            <div>
-              <input class="sheet-checkbox sheet-ExpToggle" type="checkbox" name="attr_Toggle-Assets-Instructions" value="1" checked=""/><span class="sheet-anglebox"></span><span class="sheet-ExpHeader"><span data-i18n="instructions">Instructions</span></span>
-              <div class="sheet-Expander">
-                <p><span data-i18n="Choose from these available assets. If there are two boxes, you need to mark both to earn that asset. (If you are making partial progress towards taking a two-box asset, mark the leftmost box first.)"></span> 
-                </p>
-              </div>
-            </div>
             <input class="sheet-checkbox sheet-ExpToggle" type="checkbox" name="attr_Toggle-Assets-All" value="1" checked=""/><span class="sheet-anglebox"></span><span class="sheet-ExpHeader"><span data-i18n="all">All</span></span>
             <div class="sheet-Expander">
               <input class="sheet-checkbox sheet-ExpToggle" type="checkbox" name="attr_Toggle-Assets-Unused" value="1" checked=""/><span class="sheet-anglebox"></span><span class="sheet-ExpHeader"><span data-i18n="unused">Unused</span></span>
+              <div>
+                <input class="sheet-checkbox sheet-ExpToggle" type="checkbox" name="attr_Toggle-Assets-Instructions" value="1" checked=""/><span class="sheet-anglebox"></span><span class="sheet-ExpHeader"><span data-i18n="instructions">Instructions</span></span>
+                <div class="sheet-Expander">
+                  <p><span data-i18n="Choose from these available assets. If there are two boxes, you need to mark both to earn that asset. (If you are making partial progress towards taking a two-box asset, mark the leftmost box first.)"></span> 
+                  </p>
+                </div>
+              </div>
               <input class="sheet-TeamCheck" type="hidden" name="attr_TeamCheck" value="0"/>
+              <div class="sheet-CustomTeam">
+                <input class="sheet-triggerbox sheet-ExpToggle" type="checkbox" name="attr_Toggle-Assets-Unused" value="1" checked=""/>
+                <!-- If you're doing a call that sets rollopt = true, you'll need to take a look at MOTW-sheet-worker.js and update the listener that triggers when repeating_skinmoves:rollable changes, to include whatever non-SkinMoves repeater you just created.-->
+                <fieldset class="repeating_TeamAssets">
+                  <div class="sheet-move">
+                    <input class="sheet-checkbox" type="checkbox" name="attr_SkinMoveCheck" checked="checked"/><span class="sheet-mainbox">
+                      <input class="sheet-null-hider" type="hidden" name="attr_TwoBoxed" value=""/><span class="sheet-extrabox">
+                        <input class="sheet-checkbox" type="checkbox" name="attr_SkinMoveCheck-2" checked="checked"/><span class="sheet-mainbox"></span></span></span><span class="sheet-grayable"><b><span name="attr_SkinMoveName"></span>:</b> <span name="attr_SkinMoveDescrip"></span>
+                      <button class="sheet-broadcast-button" type="roll" name="roll_Show" value="&amp;{template:motw-moveshare} {{CharName=@{character_name}}} {{movetext=**@{SkinMoveName}:** @{SkinMoveDescrip}}}" data-i18n-title="send_details_to_chat"></button>
+                      <div class="sheet-custom-editbox">
+                        <div class="sheet-isolator">
+                          <input class="sheet-checkbox sheet-ExpToggle" type="checkbox" name="attr_Toggle-Edit-Hider" value="1" checked=""/><span class="sheet-anglebox"></span><span class="sheet-ExpHeader"><span data-i18n="edit">Edit</span></span>
+                          <div class="sheet-EditControls sheet-Expander">
+                            <div><b><span data-i18n="name">Name</span></b>:</div>
+                            <input type="text" name="attr_SkinMoveName" style="width: 95%;"/>
+                            <div><b><span data-i18n="description">Description</span></b>:</div>
+                            <textarea name="attr_SkinMoveDescrip" rows="4" cols="40" style="width: 95%;"></textarea>
+                            <div><b><span data-i18n="Two Boxes?"></span> :</b>
+                              <select name="attr_TwoBoxed" style="width: 95%;">
+                                <option value="" data-i18n="No"></option>
+                                <option value="1" data-i18n="Yes"></option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                      </div></span>
+                  </div>
+                </fieldset>
+              </div>
               <div class="sheet-Agents">
                 <input class="sheet-triggerbox sheet-ExpToggle" type="checkbox" name="attr_Toggle-Assets-Unused" value="1" checked=""/>
                 <div class="sheet-move">
@@ -6170,7 +6248,7 @@ on("change:repeating_comfolk:preload", function(e) {
                   <li><span data-i18n="Gain two new asset selections."></span> 
                   </li>
                   <input class="sheet-TeamCheck" type="hidden" name="attr_TeamCheck" value="0"/>
-                  <div class="sheet-Agents sheet-Road sheet-Entourage sheet-Guardians sheet-IMPS sheet-Crisis sheet-Survivors sheet-League sheet-Mercenaries sheet-MysteryClub sheet-NightShift sheet-SuburbanWatch sheet-Band sheet-Hauntbusters sheet-ArmyOfOne sheet-Hauntbusters sheet-ArmyOfOne sheet-SquareOne sheet-DoomedWorld sheet-MonsterRevs sheet-Lineage sheet-ThrillSeekers">
+                  <div class="sheet-Agents sheet-Road sheet-Entourage sheet-Guardians sheet-IMPS sheet-Crisis sheet-Survivors sheet-League sheet-Mercenaries sheet-MysteryClub sheet-NightShift sheet-SuburbanWatch sheet-Band sheet-Hauntbusters sheet-ArmyOfOne sheet-Hauntbusters sheet-ArmyOfOne sheet-SquareOne sheet-DoomedWorld sheet-MonsterRevs sheet-Lineage sheet-ThrillSeekers sheet-CustomTeam">
                     <li><span data-i18n="Make the next mystery about your team enemy, giving you a chance to interfere in their plans."></span> 
                     </li>
                   </div>
@@ -6205,17 +6283,38 @@ on("change:repeating_comfolk:preload", function(e) {
           <div>
             <div class="sheet-Subsection"><span data-i18n="Style"></span> 
             </div>
-            <div>
-              <input class="sheet-checkbox sheet-ExpToggle" type="checkbox" name="attr_Toggle-Style-Instructions" value="1" checked=""/><span class="sheet-anglebox"></span><span class="sheet-ExpHeader"><span data-i18n="instructions">Instructions</span></span>
-              <div class="sheet-Expander">
-                <p><span data-i18n="Pick one of these styles (and the associated improvement question):"></span> 
-                </p>
-              </div>
-            </div>
             <input class="sheet-checkbox sheet-ExpToggle" type="checkbox" name="attr_Toggle-Style-All" value="1" checked=""/><span class="sheet-anglebox"></span><span class="sheet-ExpHeader"><span data-i18n="all">All</span></span>
             <div class="sheet-Expander">
               <input class="sheet-checkbox sheet-ExpToggle" type="checkbox" name="attr_Toggle-Style-Unused" value="1" checked=""/><span class="sheet-anglebox"></span><span class="sheet-ExpHeader"><span data-i18n="unused">Unused</span></span>
+              <div>
+                <input class="sheet-checkbox sheet-ExpToggle" type="checkbox" name="attr_Toggle-Style-Instructions" value="1" checked=""/><span class="sheet-anglebox"></span><span class="sheet-ExpHeader"><span data-i18n="instructions">Instructions</span></span>
+                <div class="sheet-Expander">
+                  <p><span data-i18n="Pick one of these styles (and the associated improvement question):"></span> 
+                  </p>
+                </div>
+              </div>
               <input class="sheet-TeamCheck" type="hidden" name="attr_TeamCheck" value="0"/>
+              <div class="sheet-CustomTeam">
+                <input class="sheet-triggerbox sheet-ExpToggle" type="checkbox" name="attr_Toggle-Style-Unused" value="1" checked=""/>
+                <!-- If you're doing a call that sets rollopt = true, you'll need to take a look at MOTW-sheet-worker.js and update the listener that triggers when repeating_skinmoves:rollable changes, to include whatever non-SkinMoves repeater you just created.-->
+                <fieldset class="repeating_TeamStyle">
+                  <div class="sheet-move">
+                    <input class="sheet-checkbox" type="checkbox" name="attr_SkinMoveCheck" checked="checked"/><span class="sheet-mainbox"></span><span class="sheet-grayable"><b><span name="attr_SkinMoveName"></span>:</b> <span name="attr_SkinMoveDescrip"></span>
+                      <button class="sheet-broadcast-button" type="roll" name="roll_Show" value="&amp;{template:motw-moveshare} {{CharName=@{character_name}}} {{movetext=**@{SkinMoveName}:** @{SkinMoveDescrip}}}" data-i18n-title="send_details_to_chat"></button>
+                      <div class="sheet-custom-editbox">
+                        <div class="sheet-isolator">
+                          <input class="sheet-checkbox sheet-ExpToggle" type="checkbox" name="attr_Toggle-Edit-Hider" value="1" checked=""/><span class="sheet-anglebox"></span><span class="sheet-ExpHeader"><span data-i18n="edit">Edit</span></span>
+                          <div class="sheet-EditControls sheet-Expander">
+                            <div><b><span data-i18n="name">Name</span></b>:</div>
+                            <input type="text" name="attr_SkinMoveName" style="width: 95%;"/>
+                            <div><b><span data-i18n="description">Description</span></b>:</div>
+                            <textarea name="attr_SkinMoveDescrip" rows="4" cols="40" style="width: 95%;"></textarea>
+                          </div>
+                        </div>
+                      </div></span>
+                  </div>
+                </fieldset>
+              </div>
               <div class="sheet-Agents">
                 <input class="sheet-triggerbox sheet-ExpToggle" type="checkbox" name="attr_Toggle-Style-Unused" value="1" checked=""/>
                 <div class="sheet-move">
@@ -6757,20 +6856,46 @@ on("change:repeating_comfolk:preload", function(e) {
               </div>
             </div>
           </div>
-          <div class="sheet-Agents sheet-Road sheet-Entourage sheet-Guardians sheet-IMPS sheet-Crisis sheet-Survivors sheet-League sheet-Mercenaries sheet-MysteryClub sheet-NightShift sheet-SuburbanWatch sheet-Band sheet-Hauntbusters sheet-ArmyOfOne sheet-SquareOne sheet-DoomedWorld sheet-MonsterRevs sheet-Lineage sheet-ThrillSeekers">
+          <div class="sheet-Agents sheet-Road sheet-Entourage sheet-Guardians sheet-IMPS sheet-Crisis sheet-Survivors sheet-League sheet-Mercenaries sheet-MysteryClub sheet-NightShift sheet-SuburbanWatch sheet-Band sheet-Hauntbusters sheet-ArmyOfOne sheet-SquareOne sheet-DoomedWorld sheet-MonsterRevs sheet-Lineage sheet-ThrillSeekers sheet-CustomTeam">
             <div class="sheet-Subsection"><span data-i18n="Enemies"></span> 
-            </div>
-            <div>
-              <input class="sheet-checkbox sheet-ExpToggle" type="checkbox" name="attr_Toggle-Enemies-Instructions" value="1" checked=""/><span class="sheet-anglebox"></span><span class="sheet-ExpHeader"><span data-i18n="instructions">Instructions</span></span>
-              <div class="sheet-Expander">
-                <p><span data-i18n="Pick an enemy for your team:"></span> 
-                </p>
-              </div>
             </div>
             <input class="sheet-checkbox sheet-ExpToggle" type="checkbox" name="attr_Toggle-Enemies-All" value="1" checked=""/><span class="sheet-anglebox"></span><span class="sheet-ExpHeader"><span data-i18n="all">All</span></span>
             <div class="sheet-Expander">
               <input class="sheet-checkbox sheet-ExpToggle" type="checkbox" name="attr_Toggle-Enemies-Unused" value="1" checked=""/><span class="sheet-anglebox"></span><span class="sheet-ExpHeader"><span data-i18n="unused">Unused</span></span>
+              <div>
+                <input class="sheet-checkbox sheet-ExpToggle" type="checkbox" name="attr_Toggle-Enemies-Instructions" value="1" checked=""/><span class="sheet-anglebox"></span><span class="sheet-ExpHeader"><span data-i18n="instructions">Instructions</span></span>
+                <div class="sheet-Expander">
+                  <p><span data-i18n="Pick an enemy for your team:"></span> 
+                  </p>
+                </div>
+              </div>
               <input class="sheet-TeamCheck" type="hidden" name="attr_TeamCheck" value="0"/>
+              <div class="sheet-CustomTeam">
+                <input class="sheet-triggerbox sheet-ExpToggle" type="checkbox" name="attr_Toggle-Enemies-Unused" value="1" checked=""/>
+                <!-- If you're doing a call that sets rollopt = true, you'll need to take a look at MOTW-sheet-worker.js and update the listener that triggers when repeating_skinmoves:rollable changes, to include whatever non-SkinMoves repeater you just created.-->
+                <fieldset class="repeating_TeamEnemies">
+                  <div class="sheet-move">
+                    <input class="sheet-checkbox" type="checkbox" name="attr_SkinMoveCheck" checked="checked"/><span class="sheet-mainbox"></span><span class="sheet-grayable"><b><span name="attr_SkinMoveName"></span>:</b> <span name="attr_SkinMoveDescrip"></span>
+                      <div class="sheet-custom-editbox">
+                        <div class="sheet-isolator">
+                          <input class="sheet-checkbox sheet-ExpToggle" type="checkbox" name="attr_Toggle-Edit-Hider" value="1" checked=""/><span class="sheet-anglebox"></span><span class="sheet-ExpHeader"><span data-i18n="edit">Edit</span></span>
+                          <div class="sheet-EditControls sheet-Expander">
+                            <div><b><span data-i18n="name">Name</span></b>:</div>
+                            <input type="text" name="attr_SkinMoveName" style="width: 95%;"/>
+                            <div><b><span data-i18n="description">Description</span></b>:</div>
+                            <textarea name="attr_SkinMoveDescrip" rows="4" cols="40" style="width: 95%;"></textarea>
+                          </div>
+                        </div>
+                      </div></span>
+                  </div>
+                </fieldset>
+                <div class="sheet-move">
+                  <input class="sheet-checkbox" type="checkbox" name="attr_CustomTeam-Enemy1"/><span class="sheet-mainbox"></span><span class="sheet-grayable"><span data-i18n="Something else:"></span> 
+                    <div>
+                      <textarea rows="2" name="attr_CustomTeam-Enemies-Custom"></textarea>
+                    </div></span>
+                </div>
+              </div>
               <div class="sheet-Agents">
                 <input class="sheet-triggerbox sheet-ExpToggle" type="checkbox" name="attr_Toggle-Enemies-Unused" value="1" checked=""/>
                 <div class="sheet-move">
@@ -6790,30 +6915,6 @@ on("change:repeating_comfolk:preload", function(e) {
                 </div>
                 <div class="sheet-move">
                   <input class="sheet-checkbox" type="checkbox" name="attr_Agents-Enemy6"/><span class="sheet-mainbox"></span><span class="sheet-grayable"><span data-i18n="Something else:"></span> 
-                    <div>
-                      <textarea rows="2" name="attr_Agents-Enemies-Custom"></textarea>
-                    </div></span>
-                </div>
-              </div>
-              <div class="sheet-Agents">
-                <input class="sheet-triggerbox sheet-ExpToggle" type="checkbox" name="attr_Toggle-Enemies-Unused" value="1" checked=""/>
-                <div class="sheet-move">
-                  <input class="sheet-checkbox" type="checkbox" name="attr_Agents-Enemy7"/><span class="sheet-mainbox"></span><span class="sheet-grayable"><span data-i18n="General Grox, alien warlord."></span> </span>
-                </div>
-                <div class="sheet-move">
-                  <input class="sheet-checkbox" type="checkbox" name="attr_Agents-Enemy8"/><span class="sheet-mainbox"></span><span class="sheet-grayable"><span data-i18n="The werewolf conspiracy."></span> </span>
-                </div>
-                <div class="sheet-move">
-                  <input class="sheet-checkbox" type="checkbox" name="attr_Agents-Enemy9"/><span class="sheet-mainbox"></span><span class="sheet-grayable"><span data-i18n="The Order of the Silvery Stars, who worship some very bad alien god-things."></span> </span>
-                </div>
-                <div class="sheet-move">
-                  <input class="sheet-checkbox" type="checkbox" name="attr_Agents-Enemy10"/><span class="sheet-mainbox"></span><span class="sheet-grayable"><span data-i18n="The Old Gods, who want to return and rule the world again."></span> </span>
-                </div>
-                <div class="sheet-move">
-                  <input class="sheet-checkbox" type="checkbox" name="attr_Agents-Enemy11"/><span class="sheet-mainbox"></span><span class="sheet-grayable"><span data-i18n="A rival Bureau with dubious methods and goals."></span> </span>
-                </div>
-                <div class="sheet-move">
-                  <input class="sheet-checkbox" type="checkbox" name="attr_Agents-Enemy12"/><span class="sheet-mainbox"></span><span class="sheet-grayable"><span data-i18n="Something else:"></span> 
                     <div>
                       <textarea rows="2" name="attr_Agents-Enemies-Custom"></textarea>
                     </div></span>
@@ -7285,17 +7386,43 @@ on("change:repeating_comfolk:preload", function(e) {
           <div>
             <div class="sheet-Subsection"><span data-i18n="Allies"></span> 
             </div>
-            <div>
-              <input class="sheet-checkbox sheet-ExpToggle" type="checkbox" name="attr_Toggle-Team-Allies-Instructions" value="1" checked=""/><span class="sheet-anglebox"></span><span class="sheet-ExpHeader"><span data-i18n="instructions">Instructions</span></span>
-              <div class="sheet-Expander">
-                <p><span data-i18n="Choose your team allies from this list:"></span> 
-                </p>
-              </div>
-            </div>
             <input class="sheet-checkbox sheet-ExpToggle" type="checkbox" name="attr_Toggle-Allies-All" value="1" checked=""/><span class="sheet-anglebox"></span><span class="sheet-ExpHeader"><span data-i18n="all">All</span></span>
             <div class="sheet-Expander">
               <input class="sheet-checkbox sheet-ExpToggle" type="checkbox" name="attr_Toggle-Allies-Unused" value="1" checked=""/><span class="sheet-anglebox"></span><span class="sheet-ExpHeader"><span data-i18n="unused">Unused</span></span>
+              <div>
+                <input class="sheet-checkbox sheet-ExpToggle" type="checkbox" name="attr_Toggle-Team-Allies-Instructions" value="1" checked=""/><span class="sheet-anglebox"></span><span class="sheet-ExpHeader"><span data-i18n="instructions">Instructions</span></span>
+                <div class="sheet-Expander">
+                  <p><span data-i18n="Choose your team allies from this list:"></span> 
+                  </p>
+                </div>
+              </div>
               <input class="sheet-TeamCheck" type="hidden" name="attr_TeamCheck" value="0"/>
+              <div class="sheet-CustomTeam">
+                <input class="sheet-triggerbox sheet-ExpToggle" type="checkbox" name="attr_Toggle-Allies-Unused" value="1" checked=""/>
+                <!-- If you're doing a call that sets rollopt = true, you'll need to take a look at MOTW-sheet-worker.js and update the listener that triggers when repeating_skinmoves:rollable changes, to include whatever non-SkinMoves repeater you just created.-->
+                <fieldset class="repeating_TeamAllies">
+                  <div class="sheet-move">
+                    <input class="sheet-checkbox" type="checkbox" name="attr_SkinMoveCheck" checked="checked"/><span class="sheet-mainbox"></span><span class="sheet-grayable"><b><span name="attr_SkinMoveName"></span>:</b> <span name="attr_SkinMoveDescrip"></span>
+                      <div class="sheet-custom-editbox">
+                        <div class="sheet-isolator">
+                          <input class="sheet-checkbox sheet-ExpToggle" type="checkbox" name="attr_Toggle-Edit-Hider" value="1" checked=""/><span class="sheet-anglebox"></span><span class="sheet-ExpHeader"><span data-i18n="edit">Edit</span></span>
+                          <div class="sheet-EditControls sheet-Expander">
+                            <div><b><span data-i18n="name">Name</span></b>:</div>
+                            <input type="text" name="attr_SkinMoveName" style="width: 95%;"/>
+                            <div><b><span data-i18n="description">Description</span></b>:</div>
+                            <textarea name="attr_SkinMoveDescrip" rows="4" cols="40" style="width: 95%;"></textarea>
+                          </div>
+                        </div>
+                      </div></span>
+                  </div>
+                </fieldset>
+                <div class="sheet-move">
+                  <input class="sheet-checkbox" type="checkbox" name="attr_CustomTeam-Enemy2"/><span class="sheet-mainbox"></span><span class="sheet-grayable"><span data-i18n="Someone else:"></span> 
+                    <div>
+                      <textarea rows="2" name="attr_CustomTeam-Allies-Custom"></textarea>
+                    </div></span>
+                </div>
+              </div>
               <div class="sheet-Agents">
                 <input class="sheet-triggerbox sheet-ExpToggle" type="checkbox" name="attr_Toggle-Allies-Unused" value="1" checked=""/>
                 <div class="sheet-move">
@@ -7315,30 +7442,6 @@ on("change:repeating_comfolk:preload", function(e) {
                 </div>
                 <div class="sheet-move">
                   <input class="sheet-checkbox" type="checkbox" name="attr_Agents-Allies6"/><span class="sheet-mainbox"></span><span class="sheet-grayable"><span data-i18n="Someone else:"></span> 
-                    <div>
-                      <textarea rows="2" name="attr_Agents-Allies-Custom"></textarea>
-                    </div></span>
-                </div>
-              </div>
-              <div class="sheet-Agents">
-                <input class="sheet-triggerbox sheet-ExpToggle" type="checkbox" name="attr_Toggle-Allies-Unused" value="1" checked=""/>
-                <div class="sheet-move">
-                  <input class="sheet-checkbox" type="checkbox" name="attr_Agents-Allies7"/><span class="sheet-mainbox"></span><span class="sheet-grayable"><span data-i18n="Doctor “Blue,” a physician. They can help you recover from harm."></span> </span>
-                </div>
-                <div class="sheet-move">
-                  <input class="sheet-checkbox" type="checkbox" name="attr_Agents-Allies8"/><span class="sheet-mainbox"></span><span class="sheet-grayable"><span data-i18n="Professor “Blood,” a forensic scientist. They are who you go to when you need evidence analysed."></span> </span>
-                </div>
-                <div class="sheet-move">
-                  <input class="sheet-checkbox" type="checkbox" name="attr_Agents-Allies9"/><span class="sheet-mainbox"></span><span class="sheet-grayable"><span data-i18n="Agent “Will,” a field investigator. They’re a veteran of the Bureau, and can help you navigate problems with colleagues."></span> </span>
-                </div>
-                <div class="sheet-move">
-                  <input class="sheet-checkbox" type="checkbox" name="attr_Agents-Allies10"/><span class="sheet-mainbox"></span><span class="sheet-grayable"><span data-i18n="Aquila Squad, an ally team. They are unofficially known as “the Extreme Problems” squad. They can handle anything unfazed, but their solutions can be a little... messy."></span> </span>
-                </div>
-                <div class="sheet-move">
-                  <input class="sheet-checkbox" type="checkbox" name="attr_Agents-Allies11"/><span class="sheet-mainbox"></span><span class="sheet-grayable"><span data-i18n="SkullFangz, an ally team. This is a group of hackers you’ve made a sort of alliance with. They can help you get information through unorthodox channels, but they sometimes need you to do some odd or dubious favours in return."></span> </span>
-                </div>
-                <div class="sheet-move">
-                  <input class="sheet-checkbox" type="checkbox" name="attr_Agents-Allies12"/><span class="sheet-mainbox"></span><span class="sheet-grayable"><span data-i18n="Someone else:"></span> 
                     <div>
                       <textarea rows="2" name="attr_Agents-Allies-Custom"></textarea>
                     </div></span>
@@ -10212,7 +10315,7 @@ on("change:repeating_comfolk:preload", function(e) {
                 <div class="sheet-Expander">
                   <div class="sheet-move">
                     <input class="sheet-checkbox" type="checkbox" name="attr_Envoy-Wisdom-Move1" checked="checked"/><span class="sheet-mainbox"></span><span class="sheet-grayable"><span data-i18n="Secret Wisdom: You’ve received insight from your Task. At the start of each session, roll +Cool. On a 10+, hold 2. On a 7–9, hold 1. On a miss, hold 1, but the Keeper introduces a cruel choice or terrible truth related to your Task."></span>  
-                      <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Secret Wisdom}} {{Roll=[[2d6+?{Secret Wisdom with|Cool (Default),@{Cool}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_"></button>
+                      <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Secret Wisdom}} {{Roll=[[2d6+?{Secret Wisdom with|Cool (Default),@{Cool}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_secretwisdom"></button>
                       <button class="sheet-broadcast-button" type="roll" name="roll_Show" value="&amp;{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=Secret Wisdom: You’ve received insight from your Task. At the start of each session, roll +Cool. On a 10+, hold 2. On a 7–9, hold 1. On a miss, hold 1, but the Keeper introduces a cruel choice or terrible truth related to your Task.}}" data-i18n-title="send_details_to_chat"></button></span>
                   </div>
                   <p><span data-i18n="Hold can be spent in different ways based on your Task:Guide: When you advise as instructed by the Overseers, spend 1 hold to help out without needing to be in the same place, or spend 2 hold to help out on a start-of-mystery or start-of-session move.Herald: When you announce your Overseers’ demands, spend 1 hold to manipulate a monster, if it is capable of communication.Watcher: When you examine the patterns of Fate, spend 1 hold to protect someone even when you are not in the same place.Witness: When you report to the Overseers, spend 1 hold to grant any hunter one question as if they just investigated a mystery."></span> 
@@ -11257,19 +11360,35 @@ on("change:repeating_comfolk:preload", function(e) {
                     <div class="sheet-OPBHead sheet-MinorHead sheet-space-above" data-i18n="custom-playbook">Custom Playbook</div>
                   </div>
                   <input class="sheet-triggerbox sheet-ExpToggle" type="checkbox" name="attr_Toggle-MovesUnused" value="1" checked=""/>
+                  <!-- If you're doing a call that sets rollopt = true, you'll need to take a look at MOTW-sheet-worker.js and update the listener that triggers when repeating_skinmoves:rollable changes, to include whatever non-SkinMoves repeater you just created.-->
                   <fieldset class="repeating_SkinMoves">
-                    <div>
-                      <input class="sheet-checkbox sheet-ExpToggle" type="checkbox" name="attr_Toggle-Edit-Hider" value="1" checked=""/><span class="sheet-anglebox"></span> <span class="sheet-ExpHeader"><span data-i18n="edit">Edit</span></span>
-                      <div class="sheet-EditControls sheet-Expander">
-                        <div><b><span data-i18n="name">Name</span></b>:</div>
-                        <input type="text" name="attr_SkinMoveName"/>
-                        <div><b><span data-i18n="description">Description</span></b>:</div>
-                        <textarea name="attr_SkinMoveDescrip" rows="4" cols="40"></textarea>
-                      </div>
-                    </div>
                     <div class="sheet-move">
-                      <input class="sheet-checkbox" type="checkbox" name="attr_SkinMoveCheck" checked=""/><span class="sheet-mainbox"></span><span class="sheet-grayable"><b><span name="attr_SkinMoveName"></span>:</b> <span name="attr_SkinMoveDescrip"></span></span>
-                      <button class="sheet-broadcast-button" type="roll" name="roll_Show" value="&amp;{template:motw-moveshare} {{CharName=@{character_name}}} {{movetext=**@{SkinMoveName}:** @{SkinMoveDescrip}}}" data-i18n-title="send_details_to_chat"></button>
+                      <input class="sheet-checkbox" type="checkbox" name="attr_SkinMoveCheck" checked="checked"/><span class="sheet-mainbox"></span><span class="sheet-grayable"><b><span name="attr_SkinMoveName"></span>:</b> <span name="attr_SkinMoveDescrip"></span>
+                        <button class="sheet-broadcast-button" type="roll" name="roll_Show" value="&amp;{template:motw-moveshare} {{CharName=@{character_name}}} {{movetext=**@{SkinMoveName}:** @{SkinMoveDescrip}}}" data-i18n-title="send_details_to_chat"></button>
+                        <input type="hidden" name="attr_RollableStat" =""/>
+                        <input class="sheet-null-hider" type="hidden" name="attr_Rollable" value=""/>
+                        <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=@{SkinMoveName}}} {{Roll=[[2d6+?{@{SkinMoveName} with|@{Rollable} (Default),@{RollableStat}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_custommoveroll"></button>
+                        <div class="sheet-custom-editbox">
+                          <div class="sheet-isolator">
+                            <input class="sheet-checkbox sheet-ExpToggle" type="checkbox" name="attr_Toggle-Edit-Hider" value="1" checked=""/><span class="sheet-anglebox"></span><span class="sheet-ExpHeader"><span data-i18n="edit">Edit</span></span>
+                            <div class="sheet-EditControls sheet-Expander">
+                              <div><b><span data-i18n="name">Name</span></b>:</div>
+                              <input type="text" name="attr_SkinMoveName" style="width: 95%;"/>
+                              <div><b><span data-i18n="description">Description</span></b>:</div>
+                              <textarea name="attr_SkinMoveDescrip" rows="4" cols="40" style="width: 95%;"></textarea>
+                              <div><b><span data-i18n="Roll?"></span> :</b>
+                                <select name="attr_Rollable" style="width: 95%;">
+                                  <option value="" data-i18n="None"></option>
+                                  <option value="Charm" data-i18n="charm"></option>
+                                  <option value="Cool" data-i18n="cool"></option>
+                                  <option value="Sharp" data-i18n="sharp"></option>
+                                  <option value="Tough" data-i18n="tough"></option>
+                                  <option value="Weird" data-i18n="weird"></option>
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                        </div></span>
                     </div>
                   </fieldset>
                 </div>
@@ -11283,12 +11402,12 @@ on("change:repeating_comfolk:preload", function(e) {
                   <input class="sheet-triggerbox sheet-ExpToggle" type="checkbox" name="attr_Toggle-MovesUnused" value="1" checked=""/>
                   <div class="sheet-move">
                     <input class="sheet-checkbox" type="checkbox" name="attr_ActionSSK-Move1"/><span class="sheet-mainbox"></span><span class="sheet-grayable"><span data-i18n="Test Hypothesis: When you test a potential explanation based on data gathered, roll +Sharp. The Keeper will tell you if you’re on the right track, missing some critical data, or on the wrong track.On a 10+, you can trust that answer.On a 7–9, the Keeper answers honestly, but you wasted time or the testing process destroyed some evidence.On a miss, the Keeper’s answer is unrelated to the facts."></span> 
-                      <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Test Hypothesis}} {{Roll=[[2d6+?{Test Hypothesis with|Sharp (Default),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_"></button>
+                      <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Test Hypothesis}} {{Roll=[[2d6+?{Test Hypothesis with|Sharp (Default),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_testhypothesis"></button>
                       <button class="sheet-broadcast-button" type="roll" name="roll_Show" value="&amp;{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=Test Hypothesis: When you test a potential explanation based on data gathered, roll +Sharp. The Keeper will tell you if you’re on the right track, missing some critical data, or on the wrong track.On a 10+, you can trust that answer.On a 7–9, the Keeper answers honestly, but you wasted time or the testing process destroyed some evidence.On a miss, the Keeper’s answer is unrelated to the facts.}}" data-i18n-title="send_details_to_chat"></button></span>
                   </div>
                   <div class="sheet-move">
                     <input class="sheet-checkbox" type="checkbox" name="attr_ActionSSK-Move2"/><span class="sheet-mainbox"></span><span class="sheet-grayable"><span data-i18n="Sabotage: When you quickly break a complicated gadget, roll +Sharp.On a 10+, it’s broken. Your choice if it’s done quietly or left totally irreparable.On a 7–9, it’s broken, but not too hard to fix and you made a bit of a ruckus.On a miss, the worst thing possible happens—usually explosions."></span> 
-                      <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Sabotage}} {{Roll=[[2d6+?{Sabotage with|Sharp (Default),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_"></button>
+                      <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Sabotage}} {{Roll=[[2d6+?{Sabotage with|Sharp (Default),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_sabotage"></button>
                       <button class="sheet-broadcast-button" type="roll" name="roll_Show" value="&amp;{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=Sabotage: When you quickly break a complicated gadget, roll +Sharp.On a 10+, it’s broken. Your choice if it’s done quietly or left totally irreparable.On a 7–9, it’s broken, but not too hard to fix and you made a bit of a ruckus.On a miss, the worst thing possible happens—usually explosions.}}" data-i18n-title="send_details_to_chat"></button></span>
                   </div>
                   <div class="sheet-move">
@@ -11297,7 +11416,7 @@ on("change:repeating_comfolk:preload", function(e) {
                   </div>
                   <div class="sheet-move">
                     <input class="sheet-checkbox" type="checkbox" name="attr_ActionSSK-Move4"/><span class="sheet-mainbox"></span><span class="sheet-grayable"><span data-i18n="The Doors of Perception: When you use psychological, pharmacological, or meditation techniques to open your mind to transcendental knowledge, roll +Weird.On a 10+, pick two effects.On a 7–9, pick one effect but your mind and perceptions are confused and foggy.On a miss, you get lost in altered states of consciousness.Effects available:Communicate with someone or something that you normally couldn’t.See what is normally invisible: things like physical forces, ghosts and spirits, incursions of other dimensions, and magical effects.Ask one question from the investigate a mystery list.Clarity: Get +1 Cool, Sharp, or Weird for the next hour or so (maximum +3)."></span> 
-                      <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Doors of Perception}} {{Roll=[[2d6+?{Doors of Perception with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_"></button>
+                      <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Doors of Perception}} {{Roll=[[2d6+?{Doors of Perception with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_doorsofperception"></button>
                       <button class="sheet-broadcast-button" type="roll" name="roll_Show" value="&amp;{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=The Doors of Perception: When you use psychological, pharmacological, or meditation techniques to open your mind to transcendental knowledge, roll +Weird.On a 10+, pick two effects.On a 7–9, pick one effect but your mind and perceptions are confused and foggy.On a miss, you get lost in altered states of consciousness.Effects available:Communicate with someone or something that you normally couldn’t.See what is normally invisible: things like physical forces, ghosts and spirits, incursions of other dimensions, and magical effects.Ask one question from the investigate a mystery list.Clarity: Get +1 Cool, Sharp, or Weird for the next hour or so (maximum +3).}}" data-i18n-title="send_details_to_chat"></button></span>
                   </div>
                   <div class="sheet-move">
@@ -11368,7 +11487,7 @@ on("change:repeating_comfolk:preload", function(e) {
                   <input class="sheet-triggerbox sheet-ExpToggle" type="checkbox" name="attr_Toggle-MovesUnused" value="1" checked=""/>
                   <div class="sheet-move">
                     <input class="sheet-checkbox" type="checkbox" name="attr_Celebrity-Move1"/><span class="sheet-mainbox"></span><span class="sheet-grayable"><span data-i18n="Fakelore: When you use “facts” learned from your work, roll +Sharp. On a 10+, pick two. On a 7–9, pick one. On a miss, pick two, but one is true, one isn’t, and you won’t find out which until it really matters.You coincidentally expose a vulnerability of the monster.You kept a useful prop and can make use of it now.You don’t set yourself up to be attacked.It works for the reason you say it should."></span> 
-                      <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Fakelore}} {{Roll=[[2d6+?{Fakelore with|Sharp (Default),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_"></button>
+                      <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Fakelore}} {{Roll=[[2d6+?{Fakelore with|Sharp (Default),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_fakelore"></button>
                       <button class="sheet-broadcast-button" type="roll" name="roll_Show" value="&amp;{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=Fakelore: When you use “facts” learned from your work, roll +Sharp. On a 10+, pick two. On a 7–9, pick one. On a miss, pick two, but one is true, one isn’t, and you won’t find out which until it really matters.You coincidentally expose a vulnerability of the monster.You kept a useful prop and can make use of it now.You don’t set yourself up to be attacked.It works for the reason you say it should.}}" data-i18n-title="send_details_to_chat"></button></span>
                   </div>
                 </div>
@@ -11377,7 +11496,7 @@ on("change:repeating_comfolk:preload", function(e) {
                   <input class="sheet-triggerbox sheet-ExpToggle" type="checkbox" name="attr_Toggle-MovesUnused" value="1" checked=""/>
                   <div class="sheet-move">
                     <input class="sheet-checkbox" type="checkbox" name="attr_Celebrity-Move2"/><span class="sheet-mainbox"></span><span class="sheet-grayable"><span data-i18n="Scream Queen: When you make a commotion, roll +Cool. On a 10+, you draw all the attention you want. On a 7–9, you either attract something you didn’t want or don’t attract everything you wanted."></span> 
-                      <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Scream Queen}} {{Roll=[[2d6+?{Scream Queen with|Cool (Default),@{Cool}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_"></button>
+                      <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Scream Queen}} {{Roll=[[2d6+?{Scream Queen with|Cool (Default),@{Cool}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_screamqueen"></button>
                       <button class="sheet-broadcast-button" type="roll" name="roll_Show" value="&amp;{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=Scream Queen: When you make a commotion, roll +Cool. On a 10+, you draw all the attention you want. On a 7–9, you either attract something you didn’t want or don’t attract everything you wanted.}}" data-i18n-title="send_details_to_chat"></button></span>
                   </div>
                   <div class="sheet-move">
@@ -11386,7 +11505,7 @@ on("change:repeating_comfolk:preload", function(e) {
                   </div>
                   <div class="sheet-move">
                     <input class="sheet-checkbox" type="checkbox" name="attr_Celebrity-Move4"/><span class="sheet-mainbox"></span><span class="sheet-grayable"><span data-i18n="I Have People: You have friends in high places. When you ask them for help, roll +Charm.On a 10+, they’re available and helpful—they can fix something, use connections to get around authority figures, do background research, or get you special information.On a 7–9, they’re prepared to help, but it’s either going to take some time or you owe them a favour.On a miss, you offend them."></span> 
-                      <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=I Have People}} {{Roll=[[2d6+?{I Have People with|Charm (Default),@{Charm}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_"></button>
+                      <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=I Have People}} {{Roll=[[2d6+?{I Have People with|Charm (Default),@{Charm}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_ihavepeople"></button>
                       <button class="sheet-broadcast-button" type="roll" name="roll_Show" value="&amp;{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=I Have People: You have friends in high places. When you ask them for help, roll +Charm.On a 10+, they’re available and helpful—they can fix something, use connections to get around authority figures, do background research, or get you special information.On a 7–9, they’re prepared to help, but it’s either going to take some time or you owe them a favour.On a miss, you offend them.}}" data-i18n-title="send_details_to_chat"></button></span>
                   </div>
                   <div class="sheet-move">
@@ -11395,7 +11514,7 @@ on("change:repeating_comfolk:preload", function(e) {
                   </div>
                   <div class="sheet-move">
                     <input class="sheet-checkbox" type="checkbox" name="attr_Celebrity-Move6"/><span class="sheet-mainbox"></span><span class="sheet-grayable"><span data-i18n="Disarming: You know how to look harmless. When you dissuade someone or something from hurting you, roll +Charm. On a 10+, they hesitate long enough for someone to act. On a 7–9, they either hold back or attack someone else."></span> 
-                      <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Disarming}} {{Roll=[[2d6+?{Disarming with|Charm (Default),@{Charm}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_"></button>
+                      <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Disarming}} {{Roll=[[2d6+?{Disarming with|Charm (Default),@{Charm}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_disarming"></button>
                       <button class="sheet-broadcast-button" type="roll" name="roll_Show" value="&amp;{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=Disarming: You know how to look harmless. When you dissuade someone or something from hurting you, roll +Charm. On a 10+, they hesitate long enough for someone to act. On a 7–9, they either hold back or attack someone else.}}" data-i18n-title="send_details_to_chat"></button></span>
                   </div>
                   <div class="sheet-move">
@@ -11432,17 +11551,17 @@ on("change:repeating_comfolk:preload", function(e) {
                   </div>
                   <div class="sheet-move">
                     <input class="sheet-checkbox" type="checkbox" name="attr_Changeling-Move4"/><span class="sheet-mainbox"></span><span class="sheet-grayable"><span data-i18n="Force of Nature: You have a supernatural attack from your heritage. Choose its type: lightning, insect swarms, magical blades, or something else. When you unleash your power, roll +Weird. On any 7+, you summon a 1-harm close weapon for a short time. On a 10+, pick two extras. On a 7–9, pick one. On a miss, the power turns against you.Extras: +1 harm, hand, far, autonomous, distracting, ignore-armour, area, grab, blind, stun"></span> 
-                      <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Force of Nature}} {{Roll=[[2d6+?{Force of Nature with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_"></button>
+                      <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Force of Nature}} {{Roll=[[2d6+?{Force of Nature with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_forceofnature"></button>
                       <button class="sheet-broadcast-button" type="roll" name="roll_Show" value="&amp;{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=Force of Nature: You have a supernatural attack from your heritage. Choose its type: lightning, insect swarms, magical blades, or something else. When you unleash your power, roll +Weird. On any 7+, you summon a 1-harm close weapon for a short time. On a 10+, pick two extras. On a 7–9, pick one. On a miss, the power turns against you.Extras: +1 harm, hand, far, autonomous, distracting, ignore-armour, area, grab, blind, stun}}" data-i18n-title="send_details_to_chat"></button></span>
                   </div>
                   <div class="sheet-move">
                     <input class="sheet-checkbox" type="checkbox" name="attr_Changeling-Move5"/><span class="sheet-mainbox"></span><span class="sheet-grayable"><span data-i18n="Lockdown: You can stun people with a power like a petrifying gaze, overwhelming illusions, or bewildering moths. When you freeze someone, roll +Weird.On a 10+, the target is immobilised for a few minutes or until something snaps them out of it.On a 7–9, the target is immobilised for as long as you focus your attention, or until something snaps them out of it.On a miss, it causes a magical backlash.Harming the target always snaps them out of it."></span> 
-                      <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Lockdown}} {{Roll=[[2d6+?{Lockdown with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_"></button>
+                      <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Lockdown}} {{Roll=[[2d6+?{Lockdown with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_lockdown"></button>
                       <button class="sheet-broadcast-button" type="roll" name="roll_Show" value="&amp;{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=Lockdown: You can stun people with a power like a petrifying gaze, overwhelming illusions, or bewildering moths. When you freeze someone, roll +Weird.On a 10+, the target is immobilised for a few minutes or until something snaps them out of it.On a 7–9, the target is immobilised for as long as you focus your attention, or until something snaps them out of it.On a miss, it causes a magical backlash.Harming the target always snaps them out of it.}}" data-i18n-title="send_details_to_chat"></button></span>
                   </div>
                   <div class="sheet-move">
                     <input class="sheet-checkbox" type="checkbox" name="attr_Changeling-Move6"/><span class="sheet-mainbox"></span><span class="sheet-grayable"><span data-i18n="Faerie Gossip: You can communicate with local spirits and mystical creatures. When you investigate a mystery by questioning these beings, you may roll +Weird instead of +Sharp, and may ask the following questions as well as the usual ones:Is anything affecting the supernatural environment?How long has [name] been in the area?When did [name] first arrive?"></span> 
-                      <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Faerie Gossip}} {{Roll=[[2d6+?{Faerie Gossip with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_"></button>
+                      <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Faerie Gossip}} {{Roll=[[2d6+?{Faerie Gossip with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_faeriegossip"></button>
                       <button class="sheet-broadcast-button" type="roll" name="roll_Show" value="&amp;{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=Faerie Gossip: You can communicate with local spirits and mystical creatures. When you investigate a mystery by questioning these beings, you may roll +Weird instead of +Sharp, and may ask the following questions as well as the usual ones:Is anything affecting the supernatural environment?How long has [name] been in the area?When did [name] first arrive?}}" data-i18n-title="send_details_to_chat"></button></span>
                   </div>
                   <div class="sheet-move">
@@ -11451,7 +11570,7 @@ on("change:repeating_comfolk:preload", function(e) {
                   </div>
                   <div class="sheet-move">
                     <input class="sheet-checkbox" type="checkbox" name="attr_Changeling-Move8"/><span class="sheet-mainbox"></span><span class="sheet-grayable"><span data-i18n="Strange Paths: You can walk (or drive) between worlds. However, you don’t know the way very well. When you take an otherworld shortcut, roll +Weird.On a 10+, you arrive quicker than otherwise possible.On a 7–9, you find trouble along the way. Perhaps you get only partway, encounter locals, or only save a little time.On a miss, you arrive a little too late or have to deal with something blocking the way."></span> 
-                      <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Strange Paths}} {{Roll=[[2d6+?{Strange Paths with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_"></button>
+                      <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Strange Paths}} {{Roll=[[2d6+?{Strange Paths with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_strangepaths"></button>
                       <button class="sheet-broadcast-button" type="roll" name="roll_Show" value="&amp;{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=Strange Paths: You can walk (or drive) between worlds. However, you don’t know the way very well. When you take an otherworld shortcut, roll +Weird.On a 10+, you arrive quicker than otherwise possible.On a 7–9, you find trouble along the way. Perhaps you get only partway, encounter locals, or only save a little time.On a miss, you arrive a little too late or have to deal with something blocking the way.}}" data-i18n-title="send_details_to_chat"></button></span>
                   </div>
                 </div>
@@ -11568,12 +11687,12 @@ on("change:repeating_comfolk:preload", function(e) {
                   </div>
                   <div class="sheet-move">
                     <input class="sheet-checkbox" type="checkbox" name="attr_Covenant-Move2"/><span class="sheet-mainbox"></span><span class="sheet-grayable"><span data-i18n="Fast Friends: When you meet a new being and spend time befriending them, roll +Charm. On a 10+, they become your ally. On a 7–9, they become your ally until the end of the mystery. On a miss, you’ve offended them. You can only gain one permanent ally per mystery with this move (a second 10+ makes them an ally for the rest of the mystery)."></span> 
-                      <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Fast Friends}} {{Roll=[[2d6+?{Fast Friends with|Charm (Default),@{Charm}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_"></button>
+                      <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Fast Friends}} {{Roll=[[2d6+?{Fast Friends with|Charm (Default),@{Charm}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_fastfriends"></button>
                       <button class="sheet-broadcast-button" type="roll" name="roll_Show" value="&amp;{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=Fast Friends: When you meet a new being and spend time befriending them, roll +Charm. On a 10+, they become your ally. On a 7–9, they become your ally until the end of the mystery. On a miss, you’ve offended them. You can only gain one permanent ally per mystery with this move (a second 10+ makes them an ally for the rest of the mystery).}}" data-i18n-title="send_details_to_chat"></button></span>
                   </div>
                   <div class="sheet-move">
                     <input class="sheet-checkbox" type="checkbox" name="attr_Covenant-Move3"/><span class="sheet-mainbox"></span><span class="sheet-grayable"><span data-i18n="Smash Cut: Once per mystery, when you reveal you asked an ally to do something for you, describe the task as a flashback and roll +Cool.On a 10+, it went off smoothly. The Keeper describes the results.On a 7–9, it was either more dangerous or less effective than you hoped. The Keeper describes the results.On a miss, your allies are in serious danger right now."></span> 
-                      <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Smash Cut}} {{Roll=[[2d6+?{Smash Cut with|Cool (Default),@{Cool}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_"></button>
+                      <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Smash Cut}} {{Roll=[[2d6+?{Smash Cut with|Cool (Default),@{Cool}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_smashcut"></button>
                       <button class="sheet-broadcast-button" type="roll" name="roll_Show" value="&amp;{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=Smash Cut: Once per mystery, when you reveal you asked an ally to do something for you, describe the task as a flashback and roll +Cool.On a 10+, it went off smoothly. The Keeper describes the results.On a 7–9, it was either more dangerous or less effective than you hoped. The Keeper describes the results.On a miss, your allies are in serious danger right now.}}" data-i18n-title="send_details_to_chat"></button></span>
                   </div>
                   <div class="sheet-move">
@@ -11857,7 +11976,7 @@ on("change:repeating_comfolk:preload", function(e) {
                   <input class="sheet-triggerbox sheet-ExpToggle" type="checkbox" name="attr_Toggle-MovesUnused" value="1" checked=""/>
                   <div class="sheet-move">
                     <input class="sheet-checkbox" type="checkbox" name="attr_Envoy-Move1"/><span class="sheet-mainbox"></span><span class="sheet-grayable"><span data-i18n="Strangely Normal: When you behave with casual confidence despite doing something weird, roll +Charm.On a 10+, your odd behaviour is accepted and gives you an icebreaker to start a longer conversation if you want.On a 7–9, someone becomes suspicious, starting a pointed conversation with you.On a miss, someone takes offence."></span> 
-                      <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Strangely Normal}} {{Roll=[[2d6+?{Strangely Normal with|Charm (Default),@{Charm}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_"></button>
+                      <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Strangely Normal}} {{Roll=[[2d6+?{Strangely Normal with|Charm (Default),@{Charm}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_strangelynormal"></button>
                       <button class="sheet-broadcast-button" type="roll" name="roll_Show" value="&amp;{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=Strangely Normal: When you behave with casual confidence despite doing something weird, roll +Charm.On a 10+, your odd behaviour is accepted and gives you an icebreaker to start a longer conversation if you want.On a 7–9, someone becomes suspicious, starting a pointed conversation with you.On a miss, someone takes offence.}}" data-i18n-title="send_details_to_chat"></button></span>
                   </div>
                   <div class="sheet-move">
@@ -11878,7 +11997,7 @@ on("change:repeating_comfolk:preload", function(e) {
                   </div>
                   <div class="sheet-move">
                     <input class="sheet-checkbox" type="checkbox" name="attr_Envoy-Move6"/><span class="sheet-mainbox"></span><span class="sheet-grayable"><span data-i18n="From a Certain Point of View: Your style of cooperation can appear dishonest. When you use deceit to manipulate bystanders or allies, roll +Cool.On a 10+, everything goes smoothly.On a 7–9, there is some collateral damage you didn’t expect. Do you consider the success worth the cost?On a miss, that went badly."></span> 
-                      <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=From a Certain Point of View}} {{Roll=[[2d6+?{From a Certain Point of View with|Cool (Default),@{Cool}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_"></button>
+                      <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=From a Certain Point of View}} {{Roll=[[2d6+?{From a Certain Point of View with|Cool (Default),@{Cool}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_certainpov"></button>
                       <button class="sheet-broadcast-button" type="roll" name="roll_Show" value="&amp;{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=From a Certain Point of View: Your style of cooperation can appear dishonest. When you use deceit to manipulate bystanders or allies, roll +Cool.On a 10+, everything goes smoothly.On a 7–9, there is some collateral damage you didn’t expect. Do you consider the success worth the cost?On a miss, that went badly.}}" data-i18n-title="send_details_to_chat"></button></span>
                   </div>
                   <div class="sheet-move">
@@ -12131,12 +12250,12 @@ on("change:repeating_comfolk:preload", function(e) {
                   </div>
                   <div class="sheet-move">
                     <input class="sheet-checkbox" type="checkbox" name="attr_Forged-Move3"/><span class="sheet-mainbox"></span><span class="sheet-grayable"><span data-i18n="My Outlet: You have a hobby that deepens your sense of self. Well, you hope that’s what it does anyhow. Once per mystery, when you spend time on your hobby, roll +Cool. On a 10+, hold 2. On a 7–9, hold 1. On a miss, something happens to shake your confidence.Spend 1 hold for +1 forward.Spend 2 hold to upgrade your level of success. A miss becomes a 7–9, a 7–9 becomes a 10+, and, if the move is advanced, a 10+ becomes a 12+."></span> 
-                      <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=My Outlet}} {{Roll=[[2d6+?{My Outlet with|Cool (Default),@{Cool}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_"></button>
+                      <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=My Outlet}} {{Roll=[[2d6+?{My Outlet with|Cool (Default),@{Cool}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_myoutlet"></button>
                       <button class="sheet-broadcast-button" type="roll" name="roll_Show" value="&amp;{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=My Outlet: You have a hobby that deepens your sense of self. Well, you hope that’s what it does anyhow. Once per mystery, when you spend time on your hobby, roll +Cool. On a 10+, hold 2. On a 7–9, hold 1. On a miss, something happens to shake your confidence.Spend 1 hold for +1 forward.Spend 2 hold to upgrade your level of success. A miss becomes a 7–9, a 7–9 becomes a 10+, and, if the move is advanced, a 10+ becomes a 12+.}}" data-i18n-title="send_details_to_chat"></button></span>
                   </div>
                   <div class="sheet-move">
                     <input class="sheet-checkbox" type="checkbox" name="attr_Forged-Move4"/><span class="sheet-mainbox"></span><span class="sheet-grayable"><span data-i18n="To My Side: You’re always ready to magically come to your partner. Roll +Weird and pick one:Summon your partner to your position, or vice versa.Switch positions with your partner.On a 10+, it happens. On a 7–9, either one or both of you ends up in slightly the wrong spot, Keeper’s decision. On a miss, you’re both scattered and lose contact."></span> 
-                      <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=To My Side}} {{Roll=[[2d6+?{To My Side with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_"></button>
+                      <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=To My Side}} {{Roll=[[2d6+?{To My Side with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_tomyside"></button>
                       <button class="sheet-broadcast-button" type="roll" name="roll_Show" value="&amp;{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=To My Side: You’re always ready to magically come to your partner. Roll +Weird and pick one:Summon your partner to your position, or vice versa.Switch positions with your partner.On a 10+, it happens. On a 7–9, either one or both of you ends up in slightly the wrong spot, Keeper’s decision. On a miss, you’re both scattered and lose contact.}}" data-i18n-title="send_details_to_chat"></button></span>
                   </div>
                   <div class="sheet-move">
@@ -12437,7 +12556,7 @@ on("change:repeating_comfolk:preload", function(e) {
                   </div>
                   <div class="sheet-move">
                     <input class="sheet-checkbox" type="checkbox" name="attr_Host-Move5"/><span class="sheet-mainbox"></span><span class="sheet-grayable"><span data-i18n="Predator and Prey: Your symbiote is a skilled hunter. When you take a stealthy approach, roll +Cool. Spend a hold to keep yourself or someone else hidden when they would otherwise be found. On a 10+, hold 3. On a 7–9, hold 2. On a miss, you find yourself in an awkward or dangerous position."></span> 
-                      <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Predator and Prey}} {{Roll=[[2d6+?{Predator and Prey with|Cool (Default),@{Cool}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_"></button>
+                      <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Predator and Prey}} {{Roll=[[2d6+?{Predator and Prey with|Cool (Default),@{Cool}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_predatorandprey"></button>
                       <button class="sheet-broadcast-button" type="roll" name="roll_Show" value="&amp;{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=Predator and Prey: Your symbiote is a skilled hunter. When you take a stealthy approach, roll +Cool. Spend a hold to keep yourself or someone else hidden when they would otherwise be found. On a 10+, hold 3. On a 7–9, hold 2. On a miss, you find yourself in an awkward or dangerous position.}}" data-i18n-title="send_details_to_chat"></button></span>
                   </div>
                   <div class="sheet-move">
@@ -12446,7 +12565,7 @@ on("change:repeating_comfolk:preload", function(e) {
                   </div>
                   <div class="sheet-move">
                     <input class="sheet-checkbox" type="checkbox" name="attr_Host-Move7"/><span class="sheet-mainbox"></span><span class="sheet-grayable"><span data-i18n="Separation Anxiety: Your symbiote can leave your body for short time periods to carry out tasks. During this time, the symbiote counts as an ally, and moves related to the union may be unavailable or suffer –1 ongoing. Roll +Cool. On a 10+, mark unstable in 30 minutes. On a 7–9, mark unstable in 10 minutes. On a miss, mark unstable right now. Remove unstable if you rejoin."></span> 
-                      <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Separation Anxiety}} {{Roll=[[2d6+?{Separation Anxiety with|Cool (Default),@{Cool}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_"></button>
+                      <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Separation Anxiety}} {{Roll=[[2d6+?{Separation Anxiety with|Cool (Default),@{Cool}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_separationanxiety"></button>
                       <button class="sheet-broadcast-button" type="roll" name="roll_Show" value="&amp;{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=Separation Anxiety: Your symbiote can leave your body for short time periods to carry out tasks. During this time, the symbiote counts as an ally, and moves related to the union may be unavailable or suffer –1 ongoing. Roll +Cool. On a 10+, mark unstable in 30 minutes. On a 7–9, mark unstable in 10 minutes. On a miss, mark unstable right now. Remove unstable if you rejoin.}}" data-i18n-title="send_details_to_chat"></button></span>
                   </div>
                 </div>
@@ -12523,7 +12642,7 @@ on("change:repeating_comfolk:preload", function(e) {
                   <input class="sheet-triggerbox sheet-ExpToggle" type="checkbox" name="attr_Toggle-MovesUnused" value="1" checked=""/>
                   <div class="sheet-move">
                     <input class="sheet-checkbox" type="checkbox" name="attr_Interface-Move1"/><span class="sheet-mainbox"></span><span class="sheet-grayable"><span data-i18n="Technomancer: When you repurpose a machine on the fly to do something it wasn’t designed for, roll +Cool. On a 10+, it does what you want, pick three effects. On a 7–9, it does it and shuts down, pick one effect:The machine is repairable afterwards.There is no collateral damage.It works longer than expected.You can shut it down safely.It’s stronger than you expected.You have full control."></span> 
-                      <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Technomancer}} {{Roll=[[2d6+?{Technomancer with|Cool (Default),@{Cool}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_"></button>
+                      <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Technomancer}} {{Roll=[[2d6+?{Technomancer with|Cool (Default),@{Cool}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_technomancer"></button>
                       <button class="sheet-broadcast-button" type="roll" name="roll_Show" value="&amp;{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=Technomancer: When you repurpose a machine on the fly to do something it wasn’t designed for, roll +Cool. On a 10+, it does what you want, pick three effects. On a 7–9, it does it and shuts down, pick one effect:The machine is repairable afterwards.There is no collateral damage.It works longer than expected.You can shut it down safely.It’s stronger than you expected.You have full control.}}" data-i18n-title="send_details_to_chat"></button></span>
                   </div>
                   <div class="sheet-move">
@@ -12544,7 +12663,7 @@ on("change:repeating_comfolk:preload", function(e) {
                   </div>
                   <div class="sheet-move">
                     <input class="sheet-checkbox" type="checkbox" name="attr_Interface-Move6"/><span class="sheet-mainbox"></span><span class="sheet-grayable"><span data-i18n="Virus Whisperer: When you quarantine or create a virus, roll +Cool. On a 10+, pick two. On a 7–9, pick one:You safely contain the virus.It erases or changes specific information.It locks down the system.Ask one question from the investigate a mystery list."></span> 
-                      <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Virus Whisperer}} {{Roll=[[2d6+?{Virus Whisperer with|Cool (Default),@{Cool}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_"></button>
+                      <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Virus Whisperer}} {{Roll=[[2d6+?{Virus Whisperer with|Cool (Default),@{Cool}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_viruswhisperer"></button>
                       <button class="sheet-broadcast-button" type="roll" name="roll_Show" value="&amp;{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=Virus Whisperer: When you quarantine or create a virus, roll +Cool. On a 10+, pick two. On a 7–9, pick one:You safely contain the virus.It erases or changes specific information.It locks down the system.Ask one question from the investigate a mystery list.}}" data-i18n-title="send_details_to_chat"></button></span>
                   </div>
                 </div>
@@ -13576,7 +13695,7 @@ on("change:repeating_comfolk:preload", function(e) {
                   </div>
                   <div class="sheet-move">
                     <input class="sheet-checkbox" type="checkbox" name="attr_Visitor-Move3"/><span class="sheet-mainbox"></span><span class="sheet-grayable"><span data-i18n="Being Neighbourly: At the beginning of each session, you may roll +Cool. On a 10+, you’re doing fine—locals provide you some useful resources or information. On a 7–9, local friends can help, but they need something first. On a miss, there’s bad feelings: either from yourself, such as feeling guilty when you mistakenly think you’ve upset someone, or from other people, such as when you accidentally remind someone of painful personal history."></span> 
-                      <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Being Neighbourly}} {{Roll=[[2d6+?{Being Neighbourly with|Cool (Default),@{Cool}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_"></button>
+                      <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Being Neighbourly}} {{Roll=[[2d6+?{Being Neighbourly with|Cool (Default),@{Cool}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_beingneighbourly"></button>
                       <button class="sheet-broadcast-button" type="roll" name="roll_Show" value="&amp;{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=Being Neighbourly: At the beginning of each session, you may roll +Cool. On a 10+, you’re doing fine—locals provide you some useful resources or information. On a 7–9, local friends can help, but they need something first. On a miss, there’s bad feelings: either from yourself, such as feeling guilty when you mistakenly think you’ve upset someone, or from other people, such as when you accidentally remind someone of painful personal history.}}" data-i18n-title="send_details_to_chat"></button></span>
                   </div>
                   <div class="sheet-move">
@@ -20051,10 +20170,14 @@ translation.json:
 	"Summoner-advanced": "<b>Advanced:</b> When you advance <b>summoner</b>, add this:<ul><li>On a 12+, choose one: either the creature stays to complete an extra task, or it reveals a useful secret.</ul>",
 	"Tradecraft-advanced": "<b>Advanced:</b> When you advance <b>tradecraft</b>, add this:<ul><li>On a 12+, you also choose one of these:<ul><li>The goal works out better than expected.<li>Choose a second, extra, goal.</ul></ul>",
 	"Warding-advanced": "<b>Advanced Warding:</b> When you advance <b>warding</b>, add this:<ul><li>On a 12+, your ward has a secondary effect. Take the strong intended effect plus another standard effect.</ul>",
+	"Custom Team Playbook": "Custom Team Playbook",
 	"The Loner": "The Loner",
 	"The Lore-Holder": "The Lore-Holder",
 	"The Other-Folk": "The Other-Folk",
 	"The Spirit-Touched": "The Spirit-Touched",
+	"Codex of Worlds": "Codex of Worlds",
+	"Apocrypha": "Apocrypha",
+	"Modern Haunts": "Modern Haunts",
 	"Concept": "Concept",
 	"Mark of the Spirit-Touched": "Mark of the Spirit-Touched",
 	"Game Options": "Game Options",
@@ -20325,8 +20448,6 @@ translation.json:
 	"Hunter Support": "Hunter Support",
 	"End of the Mystery": "End of the Mystery",
 	"At the end of each mystery, the hunters may choose one person who was directly helped by what they did (by default, use the person who initially contacted them). This person gains one support mark.": "At the end of each mystery, the hunters may choose one person who was directly helped by what they did (by default, use the person who initially contacted them). This person gains one support mark.",
-	"Codex of Worlds": "Codex of Worlds",
-	"Apocrypha": "Apocrypha",
 	"Army Of One": "Army Of One",
 	"All hunters in this team are various versions of the same person. It creates many opportunities to cooperate closely and trick their opponents in ways other teams can’t, but can also lead to lots of drama between them. What’s more, there are many people and groups who would like to learn how this singular group came to be.": "All hunters in this team are various versions of the same person. It creates many opportunities to cooperate closely and trick their opponents in ways other teams can’t, but can also lead to lots of drama between them. What’s more, there are many people and groups who would like to learn how this singular group came to be.",
 	"Back to Square One": "Back to Square One",
@@ -20339,9 +20460,9 @@ translation.json:
 	"The hunters in this team are members of a family who have hunted monsters for generations, perhaps even into the mists of history. Your archives and heirlooms give you a head start against monsters, but your family’s fame means monsters already know about you, too.": "The hunters in this team are members of a family who have hunted monsters for generations, perhaps even into the mists of history. Your archives and heirlooms give you a head start against monsters, but your family’s fame means monsters already know about you, too.",
 	"Thrill-Seekers": "Thrill-Seekers",
 	"You are hunters who have gotten a taste for going after the biggest and baddest monsters, and there’s no other high worth chasing after. You’ve all somehow cheated death—or worse—again and again. Maybe the next thrill will be your last, but until then, you’ll give it all you’ve got.": "You are hunters who have gotten a taste for going after the biggest and baddest monsters, and there’s no other high worth chasing after. You’ve all somehow cheated death—or worse—again and again. Maybe the next thrill will be your last, but until then, you’ll give it all you’ve got.",
-	"Modern Haunts": "Modern Haunts",
 	"Hauntbusters": "Hauntbusters",
 	"This new team playbook is concerned with neutralising haunts and other places of malevolent power. It’s a great team if you want to run a modern series centred on haunts, a Gothic Century series, or a This Strange Old House series focused on researching the house itself.": "This new team playbook is concerned with neutralising haunts and other places of malevolent power. It’s a great team if you want to run a modern series centred on haunts, a Gothic Century series, or a This Strange Old House series focused on researching the house itself.",
+	"A shell so you can build out your own custom team.": "A shell so you can build out your own custom team.",
 	"Getting Started": "Getting Started",
 	"Decide who you all are.": "Decide who you all are.",
 	"Describe your doomed world and what doomed it.": "Describe your doomed world and what doomed it.",
@@ -20731,6 +20852,9 @@ translation.json:
 	"Viral Personality: Every once in a while, someone catches your dare and panache on video. There’s always plausible deniability that the monster you fought was really good CGI. When you describe a viral video and say you’re the same group in the video, it works as a reason for people to do as you ask when you manipulate someone.": "<b>Viral Personality:</b> Every once in a while, someone catches your dare and panache on video. There’s always plausible deniability that the monster you fought was really good CGI. When you describe a viral video and say you’re the same group in the video, it works as a reason for people to do as you ask when you <b>manipulate someone.</b>",
 	"Assets": "Assets",
 	"Choose from these available assets. If there are two boxes, you need to mark both to earn that asset. (If you are making partial progress towards taking a two-box asset, mark the leftmost box first.)": "Choose from these available assets. If there are two boxes, you need to mark both to earn that asset. (If you are making partial progress towards taking a two-box asset, mark the leftmost box first.)",
+	"Two Boxes?": "Two Boxes?",
+	"No": "No",
+	"Yes": "Yes",
 	"Mobile Base: A helicopter, aeroplane, truck, or bus with facilities and mystery investigation supplies on board.": "<b>Mobile Base:</b> A helicopter, aeroplane, truck, or bus with facilities and mystery investigation supplies on board.",
 	"Individual Transport: Each mission, a regular car, motorbike, or bicycle is assigned to every team member.": "<b>Individual Transport:</b> Each mission, a regular car, motorbike, or bicycle is assigned to every team member.",
 	"R&D Access: Your team is issued with a useful high technology experiment from R&D each mission. The Keeper decides what it is (always useful, usually with problematic side effects).": "<b>R&D Access:</b> Your team is issued with a useful high technology experiment from R&D each mission. The Keeper decides what it is (always useful, usually with problematic side effects).",
@@ -21612,6 +21736,8 @@ translation.json:
 	"They were instrumental in you encountering and bonding with your symbiote. Decide together how this happened.Your meeting with them was not coincidental. Why did you seek them out? Ask them if they are suspicious of you.You’re related, and another close relative has recently gone missing. Ask if their memories of this person are good or bad, then tell them if your memories are the same.They’ve always treated you with respect. Ask whether it’s because of how you bonded with the symbiote or how you handle it.You’ll protect them before anybody else. Do you know why you act this way? Ask them how they feel about it.They seem to always be watching you. Ask them what they’re concerned about. How do you respond to this surveillance?You have been friends since you met over a shared, relaxing interest. Decide together what it is. Was this before your symbiosis? If not, which part did they meet?They used to bear the same symbiote you do. Ask them how they became separated and how they feel about it. Have you discussed how they feel about their former symbiote being yours now?": "<ul><li>They were instrumental in you encountering and bonding with your symbiote. Decide together how this happened.<li>Your meeting with them was not coincidental. Why did you seek them out? Ask them if they are suspicious of you.<li>You’re related, and another close relative has recently gone missing. Ask if their memories of this person are good or bad, then tell them if your memories are the same.<li>They’ve always treated you with respect. Ask whether it’s because of how you bonded with the symbiote or how you handle it.<li>You’ll protect them before anybody else. Do you know why you act this way? Ask them how they feel about it.<li>They seem to always be watching you. Ask them what they’re concerned about. How do you respond to this surveillance?<li>You have been friends since you met over a shared, relaxing interest. Decide together what it is. Was this before your symbiosis? If not, which part did they meet?<li>They used to bear the same symbiote you do. Ask them how they became separated and how they feel about it. Have you discussed how they feel about their former symbiote being yours now?</ul>",
 	"They knew you before your abilities really took off. Ask them what they think about the change.You’ve learned a secret about them. Decide together what it is and if they’re aware you know.They’re a relative—cousins or closer. Ask them what part they played in you becoming what you are.They always give you the space you need. What method do they use when they really need to get through to you?Why can’t you ever say the right thing to them no matter how much you want to? Ask them if they’ve noticed your struggle.You suspect they know more about you than they’re saying. Ask them what they suspect.You share a surprising hobby. What is it?How did you ruin an important day in their life?": "<ul><li>They knew you before your abilities really took off. Ask them what they think about the change.<li>You’ve learned a secret about them. Decide together what it is and if they’re aware you know.<li>They’re a relative—cousins or closer. Ask them what part they played in you becoming what you are.<li>They always give you the space you need. What method do they use when they really need to get through to you?<li>Why can’t you ever say the right thing to them no matter how much you want to? Ask them if they’ve noticed your struggle.<li>You suspect they know more about you than they’re saying. Ask them what they suspect.<li>You share a surprising hobby. What is it?<li>How did you ruin an important day in their life?</ul>",
 	"They were the first local resident you ever had a conversation with. Was there a language barrier? What was the conversation about?This hunter seems to know things about the history of your homeland you only vaguely know about.Tests indicate that one of their ancestors was from your people. Did you know this was possible? Have you told them?You frequently have deep conversations with this hunter about your respective cultures.It especially bothers you to be misunderstood by this hunter. You don’t understand why. Ask them if they’ve noticed.One of the hunters has had a past experience with your people. Ask them whether it was a good experience or a bad one? Were you there?How have you and this hunter shared hobbies from each other’s upbringings?One of you mistook the other for a threat people needed to be protected from. Decide together how that played out.": "<ul><li>They were the first local resident you ever had a conversation with. Was there a language barrier? What was the conversation about?<li>This hunter seems to know things about the history of your homeland you only vaguely know about.<li>Tests indicate that one of their ancestors was from your people. Did you know this was possible? Have you told them?<li>You frequently have deep conversations with this hunter about your respective cultures.<li>It especially bothers you to be misunderstood by this hunter. You don’t understand why. Ask them if they’ve noticed.<li>One of the hunters has had a past experience with your people. Ask them whether it was a good experience or a bad one? Were you there?<li>How have you and this hunter shared hobbies from each other’s upbringings?<li>One of you mistook the other for a threat people needed to be protected from. Decide together how that played out.</ul>",
+	"Roll?": "Roll?",
+	"None": "None",
 	"You get all the basic moves, plus two Action Scientist moves. Pick two of these:": "You get all the basic moves, plus two Action Scientist moves. Pick two of these:",
 	"Test Hypothesis: When you test a potential explanation based on data gathered, roll +Sharp. The Keeper will tell you if you’re on the right track, missing some critical data, or on the wrong track.On a 10+, you can trust that answer.On a 7–9, the Keeper answers honestly, but you wasted time or the testing process destroyed some evidence.On a miss, the Keeper’s answer is unrelated to the facts.": "<b>Test Hypothesis:</b> When you <i>test a potential explanation based on data gathered,</i> roll +Sharp. The Keeper will tell you if you’re on the right track, missing some critical data, or on the wrong track.<ul><li>On a 10+, you can trust that answer.<li>On a 7–9, the Keeper answers honestly, but you wasted time or the testing process destroyed some evidence.<li>On a miss, the Keeper’s answer is unrelated to the facts.</ul>",
 	"Sabotage: When you quickly break a complicated gadget, roll +Sharp.On a 10+, it’s broken. Your choice if it’s done quietly or left totally irreparable.On a 7–9, it’s broken, but not too hard to fix and you made a bit of a ruckus.On a miss, the worst thing possible happens—usually explosions.": "<b>Sabotage:</b> When you <i>quickly break a complicated gadget</i>, roll +Sharp.<ul><li>On a 10+, it’s broken. Your choice if it’s done quietly or left totally irreparable.<li>On a 7–9, it’s broken, but not too hard to fix and you made a bit of a ruckus.<li>On a miss, the worst thing possible happens—usually explosions.</ul>",
@@ -21964,7 +22090,6 @@ translation.json:
 	"Shortbow (2-harm close)": "Shortbow (2-harm close)",
 	"Dagger (1-harm hand/close small)": "Dagger (1-harm hand/close small)",
 	"Vehicles": "Vehicles",
-	"None": "None",
 	"Pickup": "Pickup",
 	"Truck": "Truck",
 	"Old car": "Old car",
