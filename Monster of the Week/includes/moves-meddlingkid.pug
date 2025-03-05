@@ -10,23 +10,42 @@
 		input.sheet-checkbox(type='checkbox', name='attr_Moves-Meddlingkid1')
 		span.sheet-mainbox
 		span.sheet-grayable
-			span(data-i18n='meddlingkid-move1')
-				b Unmasked!
-				| : When you have a monster captured or at bay, you may explain it is not a monster after all but a specific person in a mask. You must explain the real reason for all the seemingly supernatural events you have seen, and how the villain was behind them. When you reveal the culprit, roll +Sharp. On a 10+, your deduction is correct and it really is that person in a mask! On a 7-9, the Keeper must choose one of
-			| :
-			ul
-				li
-					span(data-i18n='meddlingkid-move1.1')
-						| This really is a monster, but the named bystander was secretly their ally all along.
-				li
-					span(data-i18n='meddlingkid-move1.2') You are correct, but while you talked, they found a way to attempt an escape.
-				li
-					span(data-i18n='meddlingkid-move1.3')
-						| The explanation for all the events is correct but you picked the wrong person; when you unmask them, the villain is someone unexpected.
-			span(data-i18n='meddlingkid-move1.4')
-				| On a miss, the monster gets an opportunity to create chaos while you explain your (incorrect) deductions.
-			button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Unmasked!}} {{Roll=[[2d6+?{Unmasked! with|Sharp (Default),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_unmasked')
-			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=meddlingkid-move1}} {{codakey=meddlingkid-move1.4}} {{key1=meddlingkid-move1.1}} {{key2=meddlingkid-move1.2}} {{key3=meddlingkid-move1.3}}', data-i18n-title='send_details_to_chat')
+			input.sheet-inverted-triggerbox(type='checkbox', name='attr_HJ-Meddlingkid-Enable', value='1')
+			span.sheet-triggertext
+				span(data-i18n='meddlingkid-move1')
+					b Unmasked!
+					| : When you have a monster captured or at bay, you may explain it is not a monster after all but a specific person in a mask. You must explain the real reason for all the seemingly supernatural events you have seen, and how the villain was behind them. When you reveal the culprit, roll +Sharp. On a 10+, your deduction is correct and it really is that person in a mask! On a 7-9, the Keeper must choose one of
+				| :
+				ul
+					li
+						span(data-i18n='meddlingkid-move1.1')
+							| This really is a monster, but the named bystander was secretly their ally all along.
+					li
+						span(data-i18n='meddlingkid-move1.2') You are correct, but while you talked, they found a way to attempt an escape.
+					li
+						span(data-i18n='meddlingkid-move1.3')
+							| The explanation for all the events is correct but you picked the wrong person; when you unmask them, the villain is someone unexpected.
+				span(data-i18n='meddlingkid-move1.4')
+					| On a miss, the monster gets an opportunity to create chaos while you explain your (incorrect) deductions.
+				button.sheet-2d6-button(type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Unmasked!}} {{Roll=[[2d6+?{Unmasked! with|Sharp (Default),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_unmasked')
+				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=meddlingkid-move1}} {{codakey=meddlingkid-move1.4}} {{key1=meddlingkid-move1.1}} {{key2=meddlingkid-move1.2}} {{key3=meddlingkid-move1.3}}', data-i18n-title='send_details_to_chat')
+				.sheet-isolator
+					input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_HJ-Meddlingkid-Enable', value='1')
+					span.sheet-anglebox
+					span.sheet-ExpHeader
+						+t("HJ Alternative")
+
+			input.sheet-triggerbox(type='checkbox', name='attr_HJ-Meddlingkid-Enable', value='1')
+			span.sheet-triggertext
+				+translate("<b>Seriously Unmasked!:</b> When you have a monster captured or phenomenon contained, you may explain how it was stirred up by a specific hidden enemy. You must explain how that villain manipulated all the events you have seen and what they hoped to gain from it before uncovering how they watched and controlled things. When you expose the mastermind, roll +Sharp. On a 10+, your deduction is correct and it really is that person behind it all! On a 7–9, the Keeper must choose one:<ul><li>The monster or phenomenon is the true source of evil, but the enemy was secretly their minion all along.<li>You are correct, but while you talked, the enemy found a way to attempt an escape.<li>The explanation for all the events is correct, but you picked the wrong person. When you find the enemy, it turns out to be someone unexpected.</ul>On a miss, the monster gets an opportunity to create chaos while you explain your (incorrect) deductions.","Meddlingkid-Alt-Unmasked")
+				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=Meddlingkid-Alt-Unmasked}}', data-i18n-title='send_details_to_chat')
+				+2d6("Seriously Unmasked!","Sharp","seriouslyunmasked")
+				.sheet-isolator
+					input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_HJ-Meddlingkid-Enable', value='1', checked='')
+					span.sheet-anglebox
+					span.sheet-ExpHeader
+						+t("HJ Alternative")
+
 	.sheet-move
 		input.sheet-checkbox(type='checkbox', name='attr_Moves-Meddlingkid2')
 		span.sheet-mainbox

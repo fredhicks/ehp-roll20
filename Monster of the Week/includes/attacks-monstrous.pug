@@ -10,6 +10,11 @@
 		span.sheet-anglebox
 		span.sheet-ExpHeader
 			span(data-i18n='unused') Unused
+		.sheet-isolator
+			input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_HJ-Monstrous-Enable', value='1', checked='')
+			span.sheet-anglebox
+			span.sheet-ExpHeader
+				+t("Hunter's Journal Options")
 		div
 			i
 				| (
@@ -36,6 +41,8 @@
 			span.sheet-mainbox
 			span.sheet-grayable
 				span(data-i18n='monstrous-attacks4') Base: life-drain (1 harm, intimate, life-drain)
+		input.sheet-triggerbox(type='checkbox', name='attr_HJ-Monstrous-Enable', value="1")
+		+move("HJ-Monstrous-Base","Base: Energy (2-harm close heat)").sheet-triggerframe
 		.sheet-move
 			input.sheet-checkbox(type='checkbox', name='attr_Attacks-Monstrous5')
 			span.sheet-mainbox
@@ -52,3 +59,14 @@
 			span.sheet-grayable
 				span(data-i18n='monstrous-attacks7') Extra: Add an extra range to a base (intimate, hand, or close)
 				input(type='text', name='attr_Attacks-Monstrous7-ExtraRange', placeholder='intimate, hand, or close')
+		input.sheet-triggerbox(type='checkbox', name='attr_HJ-Monstrous-Enable', value="1")
+		+move("HJ-Monstrous-Extra","Extra: Mark (you can track the victim later)").sheet-triggerframe
+		input.sheet-triggerbox(type='checkbox', name='attr_HJ-Monstrous-Enable', value="1")
+		+move("HJ-Monstrous-Extra","Extra: Poison (victim becomes unstable)").sheet-triggerframe
+		input.sheet-triggerbox(type='checkbox', name='attr_HJ-Monstrous-Enable', value="1")
+		+move("HJ-Monstrous-Extra","Extra: Petrification (victim turns to stone)").sheet-triggerframe
+		input.sheet-triggerbox(type='checkbox', name='attr_HJ-Monstrous-Enable', value="1")
+		+move("HJ-Monstrous-Extra","Extra: Infection (victim is infected with a disease or parasite)").sheet-triggerframe
+		input.sheet-triggerbox(type='checkbox', name='attr_HJ-Monstrous-Enable', value="1")
+		+move("HJ-Monstrous-Extra","Extra: Material (specify type, such as “iron teeth” or “wooden claws”)").sheet-triggerframe
+			+itext("HJ-Monstrous-Extra-Material-Type")

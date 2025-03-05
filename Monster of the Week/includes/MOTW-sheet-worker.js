@@ -102,7 +102,7 @@ on("change:repeating_comfolk:preload", function(e) {
 		var atts = {};
 		var preload = e.sourceAttribute;
 		atts[e.sourceAttribute] = '';
-		var rowid = (e.sourceAttribute).slice(0,-7); // strips off 'preload';\
+		var rowid = (e.sourceAttribute).slice(0,-7); // strips off 'preload';
 		var loadtext = String(e.newValue);
 		var loadparts = loadtext.split("|");
 		atts[rowid+'specialty'] = loadparts[0];
@@ -116,4 +116,24 @@ on("change:repeating_comfolk:preload", function(e) {
 		atts[e.sourceAttribute] = '';
 		setAttrs(atts);
 	}
+});
+
+
+on("change:repeating_hunterstory:story", function(e) {
+	log(e);
+	var atts = {};
+	var sfield = e.sourceAttribute;
+	var rowid = sfield.slice(0,-5); // strips off 'story';
+	var oldstory = e.previousValue;
+	if ( typeof(oldstory) !== "undefined" && oldstory !== "" ) {
+		// then we have an attribute name for old story
+		atts[rowid+"HunterStory-"+oldstory] = "";
+	}
+	var newstory = e.newValue;
+	if ( typeof(newstory) !== "undefined" && newstory !== "" ) {
+		// then we have an attribute name for new story
+		atts[rowid+"HunterStory-"+newstory] = 1;
+	}
+	log(atts)
+	setAttrs(atts);
 });

@@ -28,3 +28,12 @@ input.sheet-SkinCheck(type='hidden', name='attr_SkinCheck', value='0')
 					br
 					i
 						+translate("(Turn on to add the non-lethal gear options from Codex of Worlds to your playbook’s Gear section.)")
+				p
+					b
+						+translate("Hunter Stories")
+					select(name='attr_Hunter-Stories')
+						option(value='0', selected='', data-i18n='Off')
+						option(value='1', selected='', data-i18n='On')
+					br
+					i
+						+translate("(Turn on to add an area for tracking Hunter Stories from the <b>Hunter’s Journal</b>.)")

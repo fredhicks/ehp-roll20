@@ -9,15 +9,22 @@
 			|  (
 			span(data-i18n='optional') optional
 			| )
-		br
-		| &nbsp;
+			br
+			| &nbsp;
 	.sheet-MinorHead
 		span(data-i18n='chosen-gear2') Special Weapon
+	.sheet-isolator
+		input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_HJ-Chosen-Enable', value='1', checked='')
+		span.sheet-anglebox
+		span.sheet-ExpHeader
+			+t("Hunter's Journal Options")
+
 	span(data-i18n='chosen-special-descrip')
 		| Design your weapon by choosing a Form, three Business-end options (which are added to the base tags), and a material that the business-end is made from.
 	input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
 	span.sheet-Setting-Bone
 		+translate('Your special weapon has unlimited wear.')
+	br
 	br
 	b
 		span(data-i18n='form') Form
@@ -29,28 +36,65 @@
 	| :
 	br
 	input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
-	span.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
-		select.sheet-Gear-Chosen(name='attr_Chosen_gearchoice')
-			option.sheet-Gear-Chosen(name='attr_Chosen_gearchoice', value='staff', checked='', data-i18n='chosen-gear3') Staff (1 harm, hand/close)
-			option.sheet-Gear-Chosen(name='attr_Chosen_gearchoice', value='haft', data-i18n='chosen-gear4') Haft (2 harm, hand, heavy)
-			option.sheet-Gear-Chosen(name='attr_Chosen_gearchoice', value='handle', data-i18n='chosen-gear5') Handle (1 harm, hand, balanced)
-			option.sheet-Gear-Chosen(name='attr_Chosen_gearchoice', value='chain', data-i18n='chosen-gear6') Chain (1 harm, hand, area)
-	span.sheet-Setting-Bone
-		select.sheet-Gear-Chosen(name='attr_Chosen_gearchoice')
-			option.sheet-Gear-Chosen(name='attr_Chosen_gearchoice', value='staff', checked='', data-i18n='chosen-gear3') Staff (1 harm, hand/close)
-			option.sheet-Gear-Chosen(name='attr_Chosen_gearchoice', value='haft', data-i18n='chosen-gear4') Haft (2 harm, hand, heavy)
-			option.sheet-Gear-Chosen(name='attr_Chosen_gearchoice', value='handle', data-i18n='chosen-gear5') Handle (1 harm, hand, balanced)
-			+option('Cord (1 harm, hand, area)','chain')
-	br
-	|  
-	b
-		span(data-i18n='business-end') Business-end
-	|  
-	i
-		| &nbsp;(
-		span(data-i18n='pick-three') pick three
-		| )
-	| :
+	input.sheet-triggerbox(type='checkbox', name='attr_HJ-Chosen-Enable', value="0")
+	.sheet-triggerframe
+		input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+
+		span.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
+			select.sheet-Gear-Chosen(name='attr_Chosen_gearchoice')
+				+option('chosen-gear3', 'staff') Staff (1 harm, hand/close)
+				+option('chosen-gear4', 'haft') Haft (2 harm, hand, heavy)
+				+option('chosen-gear5', 'handle') Handle (1 harm, hand, balanced)
+				+option('chosen-gear6', 'chain') Chain (1 harm, hand, area)
+		span.sheet-Setting-Bone
+			select.sheet-Gear-Chosen(name='attr_Chosen_gearchoice')
+				+option('chosen-gear3', 'staff') Staff (1 harm, hand/close)
+				+option('chosen-gear4', 'haft') Haft (2 harm, hand, heavy)
+				+option('chosen-gear5', 'handle') Handle (1 harm, hand, balanced)
+				+option('Cord (1 harm, hand, area)','chain')
+		
+	mixin hjChosenGear
+		+option("Tome (0-harm, hand, lore)", "tome")
+		+option("Shield (1-harm, intimate/hand, 1-armour)", "shield")
+		+option("Tool (1-harm, hand, useful)", "tool")
+	
+	mixin hjChosenGearBone
+		+hjChosenGear
+		+option("Sling (1-harm, close, reload)", "pistol")
+		+option("Bow (2-harm, far, reload)", "bow")
+
+	mixin hjChosenGearModern
+		+hjChosenGear
+		+option("Pistol (1-harm, close, reload)", "pistol")
+		+option("Rifle or Bow (2-harm, far, reload)", "bow")
+
+	input.sheet-triggerbox(type='checkbox', name='attr_HJ-Chosen-Enable', value="1")
+	.sheet-triggerframe
+		input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
+		span.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
+			select.sheet-Gear-Chosen(name='attr_Chosen_gearchoice')
+				+option('chosen-gear3', 'staff') Staff (1 harm, hand/close)
+				+option('chosen-gear4', 'haft') Haft (2 harm, hand, heavy)
+				+option('chosen-gear5', 'handle') Handle (1 harm, hand, balanced)
+				+option('chosen-gear6', 'chain') Chain (1 harm, hand, area)
+				+hjChosenGearModern
+		span.sheet-Setting-Bone
+			select.sheet-Gear-Chosen(name='attr_Chosen_gearchoice')
+				+option('chosen-gear3', 'staff') Staff (1 harm, hand/close)
+				+option('chosen-gear4', 'haft') Haft (2 harm, hand, heavy)
+				+option('chosen-gear5', 'handle') Handle (1 harm, hand, balanced)
+				+option('Cord (1 harm, hand, area)','chain')
+				+hjChosenGearBone
+	div
+		|  
+		b
+			span(data-i18n='business-end') Business-end
+		|  
+		i
+			| &nbsp;(
+			span(data-i18n='pick-three') pick three
+			| )
+		| :
 	.sheet-move
 		input.sheet-checkbox(type='checkbox', name='attr_Chosen_gearchoice1')
 		span.sheet-mainbox
@@ -90,11 +134,35 @@
 		span.sheet-mainbox
 		span.sheet-grayable
 			input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
-			span.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
-				span(data-i18n='chosen-gear13') Chain (+area)
-			span.sheet-Setting-Bone
-				+translate('Cord (+area)')
-	.sheet-move
+			+t('chosen-gear13').sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
+			+t('Cord (+area)').sheet-Setting-Bone
+	input.sheet-triggerbox(type='checkbox', name='attr_HJ-Chosen-Enable', value="1")
+	+move("Chosen-Gear-HJ","Blessed (+holy)").sheet-triggerframe
+	input.sheet-triggerbox(type='checkbox', name='attr_HJ-Chosen-Enable', value="1")
+	+move("Chosen-Gear-HJ","Distant (+far)").sheet-triggerframe
+	input.sheet-triggerbox(type='checkbox', name='attr_HJ-Chosen-Enable', value="1")
+	+move("Chosen-Gear-HJ","Elemental (+fire, +ice, +lightning, +magma, or similar)").sheet-triggerframe
+		+itext("Chosen-Gear-Elemental-Type")
+	input.sheet-triggerbox(type='checkbox', name='attr_HJ-Chosen-Enable', value="1")
+	+move("Chosen-Gear-HJ","Melee (+hand)").sheet-triggerframe
+	input.sheet-triggerbox(type='checkbox', name='attr_HJ-Chosen-Enable', value="1")
+	+move("Chosen-Gear-HJ","Tiny (+intimate)").sheet-triggerframe
+	input.sheet-triggerbox(type='checkbox', name='attr_HJ-Chosen-Enable', value="1")
+	+move("Chosen-Gear-HJ","Spectacular (+1-harm, +loud)").sheet-triggerframe
+	input.sheet-triggerbox(type='checkbox', name='attr_HJ-Chosen-Enable', value="1")
+	+move("Chosen-Gear-HJ","Electric (+1-harm, +battery)").sheet-triggerframe
+	input.sheet-triggerbox(type='checkbox', name='attr_HJ-Chosen-Enable', value="1")
+	+move("Chosen-Gear-HJ","Cursed (+1-harm, +curse)").sheet-triggerframe
+	input.sheet-triggerbox(type='checkbox', name='attr_HJ-Chosen-Enable', value="1")
+	+move("Chosen-Gear-HJ","Focus (+1 forward on your first Weird move at each new location)").sheet-triggerframe
+	input.sheet-triggerbox(type='checkbox', name='attr_HJ-Chosen-Enable', value="1")
+	+move("Chosen-Gear-HJ","Empowered (always fulfils one requirement for big magic)").sheet-triggerframe
+	input.sheet-triggerbox(type='checkbox', name='attr_HJ-Chosen-Enable', value="1")
+	+move("Chosen-Gear-HJ","Sapient (+sapient, counts as an ally)").sheet-triggerframe
+	input.sheet-triggerbox(type='checkbox', name='attr_HJ-Chosen-Enable', value="1")
+	+move("Chosen-Gear-HJ","Versatile (+useful)").sheet-triggerframe
+
+	.sheet-space-above
 		b
 			span(data-i18n='material') Material
 		|  
@@ -106,9 +174,14 @@
 		br
 		input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
 		span.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
-			span(data-i18n='material-desc')
-				| &nbsp;(+steel, +cold iron, +silver, +wood, +stone, +bone, +teeth, +obsidian, or anything else you want)
+			+t("Steel, cold iron, silver, wood, stone, bone, teeth, obsidian,")
+			input.sheet-triggerbox(type='checkbox', name='attr_HJ-Chosen-Enable', value="1")
+			+t("living flesh, orichalcum, time crystal, fossil dinosaur talon, nanobot matrix, bronze from Gilgamesh’s spear, alien chitin, one of your own bones, dragonscale, eldritch sinews,").sheet-triggertext
+			+t("or anything else you want")
 		span.sheet-Setting-Bone
-			+translate('antler, fangs, flint, ivory, jade, talon, beak, ebony, oak, thorn, holly, ash, whalebone, ironwood, or anything else you want. Metal is allowed, but only as a specifically unusual and unique option—most likely copper or meteoric iron.')
+			+translate('Antler, fangs, flint, ivory, jade, talon, beak, ebony, oak, thorn, holly, ash, whalebone, ironwood, or anything else you want. Metal is allowed, but only as a specifically unusual and unique option—most likely copper or meteoric iron.')
+			input.sheet-triggerbox(type='checkbox', name='attr_HJ-Chosen-Enable', value="1")
+			+t("Also consider living flesh, orichalcum, time crystal, fossil dinosaur talon, bronze from Gilgamesh’s spear, alien chitin, one of your own bones, dragonscale, eldritch sinews.").sheet-triggertext
+
 		br
 		input(type='text', name='attr_gear-chosen')

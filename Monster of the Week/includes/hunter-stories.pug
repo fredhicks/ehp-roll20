@@ -1,0 +1,172 @@
+// load hstories variable
+include hunter-stories-data.pug
+
+input(type="hidden", name="attr_Hunter-Stories" value="0").sheet-null-hider
+.sheet-Hunter-Stories
+	.sheet-Subsection
+		+t("Hunter Stories")
+	+expander("Hunter-Story-Fieldset")
+		+fieldset("HunterStory")
+			select(name="attr_story")
+				+option("Pick a Story","")
+				+option("Custom Story","Custom-Hunter-Story")
+				each stories, pbook in hstories
+					- var scount = 0;
+					each story in stories
+						- scount++
+						- var pbns = pbook.replace(/[^A-Za-z0-9-_]/g,'');
+						+option(pbook + ": " + story["title"], pbns + scount)
+
+			// Custom Hunter Story Section
+
+			input(type="hidden", name="attr_HunterStory-Custom-Hunter-Story", value="").sheet-null-hider
+			.sheet-Hunter-Story
+				.sheet-MinorHead
+					+itext("title")(value="Custom Story")
+				+expander("Hunter-Story-Desc","Description")
+					.sheet-Hunter-Story-Desc
+						+display("desc")
+						+expander("Hunter-Story-Desc-Edit","Edit")
+							+textarea("desc")
+				.sheet-Hunter-Story-EntryPoints
+					div
+						.sheet-MinorHead
+							+t("Entry Points")
+					+expander("Hunter-Story-EntryPoints","Entry Points")
+						+display("entryintro")
+						each val in [1,2,3,4,5]
+							ul
+								+ihide("entry"+val)(value="").sheet-null-hider
+								li
+									+display("entry"+val)
+						+expander("Hunter-Story-EP-Edit","Edit")
+							+textarea("entryintro","A perfect opportunity to start this hunter story is when:")
+							each val in [1,2,3,4,5]
+								ul
+									if ( val > 3 )
+										+ihide("entry"+(val-2))(value="").sheet-null-hider
+									li
+										+itext("entry"+val)
+				.sheet-Hunter-Story-Choices
+					// List of prompts, checkboxes, text fields
+					.sheet-MinorHead
+						+t("Hunter Choices")
+					+expanderMoveSection("Hunter-Story-HunterChoices","Hunter Choices")
+						each pval in [1,2,3,4,5,6,7,8,9,10]
+							.sheet-Hunter-Story-Prompt
+								+display("prompt"+pval)
+							each val in [1,2,3,4,5,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
+								+ihide("prompt"+pval+"-opt"+val)(value="").sheet-null-hider
+								+imove("prompt"+pval+"-opt"+val, "", "prompt"+pval+"-opt"+val, false)
+						+expander("Hunter-Story-Choice-Edit","Edit")
+							each pval in [1,2,3,4,5,6,7,8,9,10]
+								if ( pval > 3 )
+									+ihide("prompt"+(pval-1))(value="").sheet-null-hider
+								div
+									+itext("prompt"+pval)(value="")
+									each val in [1,2,3,4,5,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
+										ul
+											if ( val > 5 )
+												+ihide("prompt"+pval+"-opt"+(val-2))(value="").sheet-null-hider
+											li
+												+itext("prompt"+pval+"-opt"+val)
+				.sheet-Hunter-Story-Beats
+					// Story Beats
+					.sheet-MinorHead
+						+t("Story Beats")
+					+expander("Hunter-Story-StoryBeats","Story Beats")
+						each val in [1,2,3,4,5,6,7,8,9,10]
+							ul
+								+ihide("beat"+val)(value="").sheet-null-hider
+								li
+									+display("beat"+val)
+						+expander("Hunter-Story-Beats-Edit","Edit")
+							each val in [1,2,3,4,5,6,7,8,9,10]
+								ul
+									if ( val > 4 )
+										+ihide("beat"+(val-2))(value="").sheet-null-hider
+									li
+										+itext("beat"+val)
+				.sheet-Hunter-Story-Resolutions
+					.sheet-MinorHead
+						+t("Resolution Moves")
+					+expander("Hunter-Story-Resolution","Resolution Moves Edit")
+						div
+							+t("Display of the moves is in the column to the right.")
+						div
+							b
+								+t("Resolution Moves Instructions")
+							+textarea("resolutionintro","After each session, consider if this story has been resolved. If so, tell the other players. You can take one of the resolution moves to show how this story changed you.")
+							each val in [1,2,3,4,5]
+								if ( val > 2 )
+									+ihide("mname"+(val-1))(value="").sheet-null-hider
+								div
+									b
+										+t("Move "+val+" Name")
+									+itext("mname"+val)(value="", style="font-weight: bold;")
+									b
+										+t("Move "+val+" Description")
+									+textarea("mdesc"+val)
+
+			// PUG builds out the rest of the hunter stories from hunter-stories-data.pug here
+			
+			each stories, pbook in hstories
+				- var scount = 0;
+				- var ocount = 0;
+				each story in stories
+					- scount++
+					- var pbns = pbook.replace(/[^A-Za-z0-9-_]/g,'');
+					// This attribute will get set to "1" by a sheetworker function when the attr_story select gets changed
+					input(type="hidden", name="attr_HunterStory-"+pbns+scount, value="").sheet-null-hider
+					.sheet-Hunter-Story
+						.sheet-MinorHead
+							+t(story["title"])(style="font-size: 115%")
+						+expander("Hunter-Story-Desc","Description")
+							.sheet-Hunter-Story-Desc
+								+t(story["desc"])
+						.sheet-Hunter-Story-EntryPoints
+							div
+								.sheet-MinorHead
+									+t("Entry Points")
+							+expander("Hunter-Story-EntryPoints","Entry Points")
+								+t(story["entryintro"])
+								ul
+									each entry in story["entries"]
+										li
+											+t(entry)
+						.sheet-Hunter-Story-Choices
+							// List of prompts, checkboxes, text fields
+							.sheet-MinorHead
+								+t("Hunter Choices")
+							+expanderMoveSection("Hunter-Story-HunterChoices","Hunter Choices")
+								each choice in story["choices"]
+									.sheet-Hunter-Story-Prompt
+										+t(choice["prompt"])
+									each option in choice["options"]
+										- ocount++;
+										+movelegacy(pbns+scount+"-Choice-Prompt"+ocount,option["option"])
+											if ( typeof(option["hasblank"]) !== "undefined" && option["hasblank"] )
+												+itext(pbns+scount+"-Choice-Prompt"+ocount+"-Text")
+						.sheet-Hunter-Story-Beats
+							// Story Beats
+							.sheet-MinorHead
+								+t("Story Beats")
+							+expander("Hunter-Story-StoryBeats","Story Beats")
+								ul
+									each beat in story["beats"]
+										li
+											+t(beat)
+//
+						.sheet-Hunter-Story-Resolutions
+							.sheet-MinorHead
+								+t("Resolution Moves")
+							+expanderMoveSection("Hunter-Story-Resolution","Resolution Moves")
+								div
+									+expander("Hunter-Story-Resolution-Instructions","Instructions")
+										+t(story["resolutionintro"])
+								- var rescount = 0;
+								each res in story["resolutions"]
+									- rescount++;
+									+move( "Resolution"+rescount, "<b>"+res["mname"]+":</b> "+res["mdesc"], true )
+										if ( typeof(res["rollable"]) !== "undefined" && res["rollable"] !== "" )
+											+2d6(res["mname"], res["rollable"], "Resolution"+rescount )

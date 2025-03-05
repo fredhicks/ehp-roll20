@@ -89,3 +89,22 @@
 		span.sheet-mainbox
 		span.sheet-grayable
 			span(data-i18n='exile-gear14') Martial arts (1 harm, hand)
+
+	input.sheet-triggerbox(type='checkbox', name='attr_HJ-Exile-Enable', value="1")
+	.sheet-space-above.sheet-triggerframe
+		div
+			b
+				+translate("Future Traveller Gear Options")
+		div
+			+t("In place of one ancient weapons pick, you may choose one of these:")
+	.sheet-isolator
+		input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_HJ-Exile-Enable', value='1', checked='')
+		span.sheet-anglebox
+		span.sheet-ExpHeader
+			+t("HJ Future Traveller")
+	input.sheet-triggerbox(type='checkbox', name='attr_HJ-Exile-Enable', value="1")
+	+move("HJ-Exile-Gear","Laser Pistol (2-harm, close, energy, obvious)").sheet-triggerframe
+	input.sheet-triggerbox(type='checkbox', name='attr_HJ-Exile-Enable', value="1")
+	+move("HJ-Exile-Gear","Stunner (0-harm, close, stun)").sheet-triggerframe
+	input.sheet-triggerbox(type='checkbox', name='attr_HJ-Exile-Enable', value="1")
+	+move("HJ-Exile-Gear","Laser Blade (2-harm, hand, ignore-armour, messy)").sheet-triggerframe

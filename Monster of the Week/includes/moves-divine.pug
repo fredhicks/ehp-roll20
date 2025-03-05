@@ -50,15 +50,28 @@
 				| : You may store any small object you own, putting it into a magical space nobody can get to. You may retrieve anything you stored at any time; it appears in your hand.
 			|  
 			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=divine-move3}}', data-i18n-title='send_details_to_chat')
+
 	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 		input.sheet-checkbox(type='checkbox', name='attr_Moves-Divine4')
 		span.sheet-mainbox
 		span.sheet-grayable
-			span(data-i18n='divine-move4')
-				b Smite
-				| : Your body and divine weapon always count as a weakness against the monsters you fight. Your unarmed attacks are 2 harm, intimate/hand, messy.
-			|  
-			button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=divine-move4}}', data-i18n-title='send_details_to_chat')
+			input.sheet-inverted-triggerbox(type='checkbox', name='attr_HJ-Divine-Enable', value='1')
+			span.sheet-triggertext
+				span(data-i18n='divine-move4')
+					b Smite
+					| : Your body and divine weapon always count as a weakness against the monsters you fight. Your unarmed attacks are 2 harm, intimate/hand, messy.
+				|  
+				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=divine-move4}}', data-i18n-title='send_details_to_chat')
+			input.sheet-triggerbox(type='checkbox', name='attr_HJ-Divine-Enable', value='1', checked='')
+			span.sheet-triggertext
+				+translate("<b>Smite</b>: Your body and divine weapon always count as any nonunique weakness against monsters you fight. Your unarmed attacks are 2-harm intimate/hand messy. Non-unique weaknesses are things like fire, rock salt, and sunlight. Unique weaknesses, like “the Spear of Humwawa” or “being at a particular spot at dawn on the summer solstice” work as usual.",'divine-alt-smite')
+				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey=divine-alt-smite}}', data-i18n-title='send_details_to_chat')
+		.sheet-isolator
+			input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_HJ-Divine-Enable', value='1')
+			span.sheet-anglebox
+			span.sheet-ExpHeader
+				+t("HJ Alternative")
+
 	.sheet-move.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 		input.sheet-checkbox(type='checkbox', name='attr_Moves-Divine5')
 		span.sheet-mainbox

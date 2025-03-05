@@ -4,5 +4,6 @@
 		input.sheet-triggerbox.sheet-OPBToggle(type='checkbox', name='attr_Toggle-OtherPlaybooks', value='1')
 		.sheet-OPBHead.sheet-MinorHead.sheet-space-above(data-i18n='custom-playbook') Custom Playbook
 	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-MovesUnused', value='1', checked='')
-	+custommoves("SkinMoves",true)
+	// custommoves(cmove, rollopt, shareopt, twobox, aprefix)
+	+custommoves("SkinMoves",true,true,false,'Skin')
 // .sheet-Custom

@@ -1,8 +1,9 @@
 .sheet-Keeper
+	// Edit block
 	input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Concept-Hider', value='1', checked='')
 	span.sheet-anglebox
 	span.sheet-ExpHeader
-		span(data-i18n='edit') Edit
+		+t("Edit Type, Concept, Etc")
 	.sheet-Expander
 		input.sheet-SkinCheck(type='hidden', name='attr_SkinCheck', value='0')
 		.sheet-Keeper
@@ -10,37 +11,52 @@
 			.sheet-isolator.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 				+translate('Mystery Type')(class="sheet-Label")
 				select.sheet-KItem-input(name='attr_Mystery-Type')
-					option(value='0', selected="", data-i18n='Standard Mystery')
-					option(value='1', data-i18n='Atonement Mystery')
-				input.sheet-null-hider(type='hidden', name='attr_Mystery-Type', value='')
-				p
-					+translate('A “transgression” field will be added to Monsters and Phenomena. Enter the sin or wrongdoing for the mystery there. In case you want to use a Weaknesses as well, that field is left intact but may be ignored.')
+					+option('Standard Mystery','0')(selected="")
+					+option('Atonement Mystery (Codex)','1')
+					+option('Survival Scenario (Apocrypha)','2')
+				input.sheet-Atonement-Hider(type='hidden', name='attr_Mystery-Type', value='')
+				.sheet-Atonement
+					p
+						+translate('A “transgression” field will be added to Monsters and Phenomena. Enter the sin or wrongdoing for the mystery there. In case you want to use a Weaknesses as well, that field is left intact but may be ignored.')
+				input.sheet-Survival-Hider(type='hidden', name='attr_Mystery-Type', value='')
+				.sheet-Survival
+					p
+						+translate('In Survival scenarios, the Hook is replaced with a Revelation. It also adds a Survival section that covers the ways the Survivors can make it—a way to escape, a way to remove the curse, a way not to be found.')
 		.sheet-Keeper
 			span.sheet-Label(data-i18n='mystery-concept') Mystery&apos;s Concept
 			textarea(name='attr_Concept', style='width: 98%; margin-bottom: 0px;')
 		input.sheet-SkinCheck(type='hidden', name='attr_SkinCheck', value='0')
 		.sheet-Keeper
-			span.sheet-Label(data-i18n='mystery-hook') Mystery&apos;s Hook
-			textarea(name='attr_Hook', style='width: 98%; margin-bottom: 0px;')
-			input.sheet-null-hider(type='hidden', name='attr_Hook', value='')
-			ul
-				li
-					input(type='text', name='attr_Hook-List1', value='', style='width: 90%')
-				input.sheet-null-hider(type='hidden', name='attr_Hook-List1', value='')
-				li
-					input(type='text', name='attr_Hook-List2', value='', style='width: 90%')
-				input.sheet-null-hider(type='hidden', name='attr_Hook-List2', value='')
-				li
-					input(type='text', name='attr_Hook-List3', value='', style='width: 90%')
-				input.sheet-null-hider(type='hidden', name='attr_Hook-List3', value='')
-				li
-					input(type='text', name='attr_Hook-List4', value='', style='width: 90%')
-				input.sheet-null-hider(type='hidden', name='attr_Hook-List4', value='')
-				li
-					input(type='text', name='attr_Hook-List5', value='', style='width: 90%')
-				input.sheet-null-hider(type='hidden', name='attr_Hook-List5', value='')
-				li
-					input(type='text', name='attr_Hook-List6', value='', style='width: 90%')
+			input.sheet-Atonement-Hider.sheet-StandardMystery-Hider.sheet-Survival-Hider(type='hidden', name='attr_Mystery-Type', value='0')
+			.sheet-StandardMystery.sheet-Atonement
+				+t('mystery-hook').sheet-Label
+				textarea(name='attr_Hook', style='width: 98%; margin-bottom: 0px;')
+				input.sheet-null-hider(type='hidden', name='attr_Hook', value='')
+				ul
+					li
+						input(type='text', name='attr_Hook-List1', value='', style='width: 90%')
+					input.sheet-null-hider(type='hidden', name='attr_Hook-List1', value='')
+					li
+						input(type='text', name='attr_Hook-List2', value='', style='width: 90%')
+					input.sheet-null-hider(type='hidden', name='attr_Hook-List2', value='')
+					li
+						input(type='text', name='attr_Hook-List3', value='', style='width: 90%')
+					input.sheet-null-hider(type='hidden', name='attr_Hook-List3', value='')
+					li
+						input(type='text', name='attr_Hook-List4', value='', style='width: 90%')
+					input.sheet-null-hider(type='hidden', name='attr_Hook-List4', value='')
+					li
+						input(type='text', name='attr_Hook-List5', value='', style='width: 90%')
+					input.sheet-null-hider(type='hidden', name='attr_Hook-List5', value='')
+					li
+						input(type='text', name='attr_Hook-List6', value='', style='width: 90%')
+			.sheet-Survival
+				+t('Revelation').sheet-Label
+				textarea(name='attr_Revelation', style='width: 98%; margin-bottom: 0px;')
+				+t('Survival').sheet-Label
+				textarea(name='attr_Survival', style='width: 98%; margin-bottom: 0px;')
+	// End Edit
+
 	input.sheet-null-hider(type='hidden', name='attr_Concept', value='')
 	.sheet-space-above
 		div
@@ -72,3 +88,15 @@
 			input.sheet-null-hider(type='hidden', name='attr_Hook-List6', value='')
 			li
 				span(name='attr_Hook-List6')
+	input.sheet-null-hider(type='hidden', name='attr_Revelation', value='')
+	.sheet-space-above
+		+t("Revelation").sheet-Label
+	input.sheet-null-hider(type='hidden', name='attr_Revelation', value='')
+	div
+		+display("Revelation")
+	input.sheet-null-hider(type='hidden', name='attr_Survival', value='')
+	.sheet-space-above
+		+t("Survival").sheet-Label
+	input.sheet-null-hider(type='hidden', name='attr_Survival', value='')
+	div
+		+display("Survival")

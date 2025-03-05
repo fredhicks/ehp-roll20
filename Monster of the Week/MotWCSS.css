@@ -58,6 +58,8 @@
 .sheet-Setting-Marches,
 .sheet-Setting-Bone,
 .sheet-Atonement,
+.sheet-Survival,
+.sheet-StandardMystery,
 .sheet-KItem-Type-New,
 .sheet-KItem-Type-Countdown,
 .sheet-KItem-Type-Monster,
@@ -166,8 +168,14 @@ span.sheet-Custom, div.sheet-Custom
 	display: none;
 }
 
+.sheet-StandardMystery-Hider[value=""] ~ .sheet-kflex span.sheet-StandardMystery,
+.sheet-StandardMystery-Hider[value=""] ~ span.sheet-StandardMystery,
+.sheet-StandardMystery-Hider[value="0"] ~ .sheet-kflex span.sheet-StandardMystery,
+.sheet-StandardMystery-Hider[value="0"] ~ span.sheet-StandardMystery,
 .sheet-Atonement-Hider[value="1"] ~ .sheet-kflex span.sheet-Atonement,
 .sheet-Atonement-Hider[value="1"] ~ span.sheet-Atonement,
+.sheet-Survival-Hider[value="2"] ~ .sheet-kflex span.sheet-Survival,
+.sheet-Survival-Hider[value="2"] ~ span.sheet-Survival,
 .sheet-KTyper[value="0"] ~ span.sheet-KItem-Type-New,
 .sheet-KTyper[value="7"] ~ span.sheet-KItem-Type-Text,
 .sheet-KTyper[value="1"] ~ span.sheet-KItem-Type-Countdown,
@@ -181,8 +189,14 @@ span.sheet-Custom, div.sheet-Custom
 	display: inline;
 }
 
+.sheet-StandardMystery-Hider[value=""] ~ .sheet-kflex div.sheet-StandardMystery,
+.sheet-StandardMystery-Hider[value=""] ~ div.sheet-StandardMystery,
+.sheet-StandardMystery-Hider[value="0"] ~ .sheet-kflex div.sheet-StandardMystery,
+.sheet-StandardMystery-Hider[value="0"] ~ div.sheet-StandardMystery,
 .sheet-Atonement-Hider[value="1"] ~ .sheet-kflex div.sheet-Atonement,
 .sheet-Atonement-Hider[value="1"] ~ div.sheet-Atonement,
+.sheet-Survival-Hider[value="2"] ~ .sheet-kflex div.sheet-Survival,
+.sheet-Survival-Hider[value="2"] ~ div.sheet-Survival,
 .sheet-KTyper[value="0"] ~ div.sheet-KItem-Type-New,
 .sheet-KTyper[value="7"] ~ div.sheet-KItem-Type-Text,
 .sheet-KTyper[value="1"] ~ div.sheet-KItem-Type-Countdown,
@@ -836,6 +850,21 @@ span.sheet-ExpHeader {
 	font-size: 75%;
 	text-transform: uppercase;
 	color: var(--motw-fade);
+	vertical-align: text-top;
+}
+
+input[type="checkbox"].sheet-ExpOPBToggle:hover + span.sheet-anglebox + span.sheet-ExpHeader, 
+input[type="checkbox"].sheet-ExpToggle:hover + span.sheet-anglebox + span.sheet-ExpHeader,
+input[type="checkbox"].sheet-OPBToggle:hover + span.sheet-anglebox + span.sheet-ExpHeader
+{
+	color: var(--motw-fg)
+}
+
+input[type="checkbox"].sheet-ExpOPBToggle:active + span.sheet-anglebox + span.sheet-ExpHeader, 
+input[type="checkbox"].sheet-ExpToggle:active + span.sheet-anglebox + span.sheet-ExpHeader,
+input[type="checkbox"].sheet-OPBToggle:active + span.sheet-anglebox + span.sheet-ExpHeader
+{
+	color: var(--motw-red)
 }
 
 input[type="checkbox"].sheet-ExpOPBToggle + span.sheet-anglebox + span.sheet-ExpHeader::before, 
@@ -1083,6 +1112,7 @@ input[type="checkbox"].sheet-triggerbox:checked + div.sheet-triggerframe
 	width: 90%;
 }
 
+input.sheet-hide-controls + fieldset + .repcontainer + .repcontrol,
 input.sheet-null-hider[value=""] + *,
 input.sheet-null-hider[value="0"] + *,
 input.sheet-99-hider[value="99"] + *
@@ -1327,4 +1357,14 @@ input.sheet-UpToSeven[value="2"] + span + span + span + span + span + span + spa
 input.sheet-UpToSeven[value="1"] + span + span + span + span + span + span + span 
 {
 	display: initial;
+}
+
+.sheet-Hunter-Story-EntryPoints, .sheet-Hunter-Story-Choices, .sheet-Hunter-Story-Beats, .sheet-Hunter-Story-Resolutions
+{
+	margin-top: 8px;
+}
+
+.sheet-Hunter-Story-Prompt
+{
+	margin-top: 6px;
 }

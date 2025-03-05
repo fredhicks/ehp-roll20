@@ -14,9 +14,15 @@ input.sheet-triggerbox.sheet-HavenRevealer(type='checkbox', name='attr_Imp-Haven
 		span.sheet-anglebox
 		span.sheet-ExpHeader
 			span(data-i18n='unused') Unused
+		.sheet-isolator
+			input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_HJ-Haven-Enable', value='1', checked='')
+			span.sheet-anglebox
+			span.sheet-ExpHeader
+				+t("Hunter's Journal Options")
+
 		div
 			span(data-i18n='haven-description') You have set up a haven, a safe place to work
-			span.sheet-Snoop.sheet-Actionscientist . 
+			span.sheet-Snoop.sheet-Actionscientist .
 			span.sheet-Expert
 				i
 					| &nbsp;(
@@ -148,3 +154,33 @@ input.sheet-triggerbox.sheet-HavenRevealer(type='checkbox', name='attr_Imp-Haven
 		+move('Bone-Haven','<b>Oubliette</b>: You have a place prepared, isolated from every kind of monster, spirit, or magic that you know about. Anything you stash in there can’t be found, can’t do any magic, and can’t get out.',true).sheet-Setting-Bone
 		+move('Bone-Haven','<b>Protection Spells</b>: Your haven is safe from monsters—they can’t enter. Monsters might be able to do something special to evade the wards, but not easily.',true).sheet-Setting-Bone
 		+move('Bone-Haven','<b>Workshop</b>: You have a space for building and repairing gear. When you <i>craft</i> in your workshop, your creation has +1 maximum wear. If you want to do something more elaborate, work out with the Keeper how long it will take and if you need extra supplies or help.',true).sheet-Setting-Bone
+
+		input.sheet-triggerbox(type='checkbox', name='attr_HJ-Haven-Enable', value="1")
+		+move('HJ-Haven',"<b>Science Laboratory:</b> A well-stocked facility for research, experiments, and analysis. Using these tools, get +1 forward to <b>investigate a mystery</b> whenever scientific tools and tests help.",true).sheet-triggerframe
+		input.sheet-triggerbox(type='checkbox', name='attr_HJ-Haven-Enable', value="1")
+		+move('HJ-Haven',"<b>Supercomputer</b>: Powerful computer servers. This can be used as a requirement for <b>hacking</b> (SSK, page 171) or other programming or computer-related moves.",true).sheet-triggerframe
+		input.sheet-triggerbox(type='checkbox', name='attr_HJ-Haven-Enable', value="1")
+		+move('HJ-Haven',"<b>Communications</b>: With a scrying table or powerful transmitter, your haven has ways to reach out and talk to your allies. Or receive threats from enemies. This provides cinematic-style earbuds to all team members for constant communication, wherever they are.",true).sheet-triggerframe
+		input.sheet-triggerbox(type='checkbox', name='attr_HJ-Haven-Enable', value="1")
+		+move('HJ-Haven',"<b>Vault</b>: A space in which you keep a few special, potentially useful items (not weapons). If you need a specific tool, roll +Weird. On a 10+, you have it (and plenty if that matters). On a 7–9, you have it, but only the minimum. On a miss, the only thing you have that might work is horribly cursed.",true).sheet-triggerframe
+			+2d6("Vault","Weird","vault")
+		input.sheet-triggerbox(type='checkbox', name='attr_HJ-Haven-Enable', value="1")
+		+move('HJ-Haven',"<b>Public Cover</b>: A public face that people overlook. It might also help fund some of the bills, if it’s a business.",true).sheet-triggerframe
+			+t("Choose the cover: small store, magic shoppe, library, generic office, something else:")
+			+itext("HJ-Haven-Public-Cover")
+		input.sheet-triggerbox(type='checkbox', name='attr_HJ-Haven-Enable', value="1")
+		+move('HJ-Haven',"<b>Guardian</b>: An ally that lives in your haven. They protect and monitor the haven while you’re away and provide aid in the case of an attack. ",true).sheet-triggerframe
+			+t("Their nature: spirit, AI, mysterious housekeeper, friendly monster, something else:")
+			+itext("HJ-Haven-Guardian-Nature")
+			+t("Their ally type:")
+			+itext("HJ-Haven-Guardian-Type")
+		input.sheet-triggerbox(type='checkbox', name='attr_HJ-Haven-Enable', value="1")
+		+move('HJ-Haven',"<b>Security System</b>: The walls, floors, and ceilings of the haven have been rigged with traps and tricks to harm and delay intruders. Archives mystical and digital have firewalls to keep people out. While armed, it can be a danger to allies and innocents as well as intruders.",true).sheet-triggerframe
+		input.sheet-triggerbox(type='checkbox', name='attr_HJ-Haven-Enable', value="1")
+		+move('HJ-Haven',"<b>Luxurious</b>: The haven is particularly well-appointed and luxurious. Team members who take an hour to relax and enjoy the refreshments recover 1-harm.",true).sheet-triggerframe
+		input.sheet-triggerbox(type='checkbox', name='attr_HJ-Haven-Enable', value="1")
+		+move('HJ-Haven',"<b>Hidden</b>: The haven is difficult to find or locate for those that haven’t been invited.",true).sheet-triggerframe
+		input.sheet-triggerbox(type='checkbox', name='attr_HJ-Haven-Enable', value="1")
+		+move('HJ-Haven',"<b>Convenient</b>: The haven is right in the centre of your town, close to almost everything you’ll need.",true).sheet-triggerframe
+		input.sheet-triggerbox(type='checkbox', name='attr_HJ-Haven-Enable', value="1")
+		+move('HJ-Haven',"<b>Mobile</b>: You have a method of taking your base out on the road.",true).sheet-triggerframe

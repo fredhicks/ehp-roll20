@@ -6,6 +6,11 @@
 	span.sheet-ExpHeader
 		span(data-i18n='all') All
 	.sheet-Expander
+		.sheet-isolator
+			input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_HJ-Monstrous-Enable', value='1', checked='')
+			span.sheet-anglebox
+			span.sheet-ExpHeader
+				+t("Hunter's Journal Options")
 		div
 			span(data-i18n='breed-description')
 				| You&apos;re half-human, half-monster. Were you always this way, or were you originally human and were transformed somehow? Were you always fighting for good, or were you once evil and then changed sides?
@@ -39,6 +44,9 @@
 					+translate('<ul><li><b>Changed</b>: Curse: pure drive (anger). Natural attacks: Base: fists (works like claws), add +1 harm to base. Moves: Something Borrowed, Dark Negotiator.<li><b>Permanently Possessed</b>: Curse: dark master (other spirits). Natural attacks: Base: claws, add ignore-armour to base. Moves: Unnatural Appeal, Shapeshifter.<li><b>Corporeal Spirit</b>: Curse: pure drive (hate). Natural attacks: Base: claws, add +1 harm to base. Moves: Immortal, Mental Dominion.<li><b>Fed with Mutagens</b>: Curse: vulnerability (cold iron). Natural attacks: Base: magical force, add far to the base. Moves: Unholy Strength, Unquenchable Vitality.<li><b>Wyvern</b>: Curse: Dark Master (incorporeal spirits). Natural attacks: Base: teeth, add ignore-armour to base. Moves: Flight, Preternatural Speed. The wyvern can’t take human form, but will be accepted or even revered in some Marches settlements.</ul>')
 				.sheet-Setting-Bone
 					+translate('<ul><li><b>Animal-kin</b>: Curse: vulnerability (a specific plant). Natural attacks: Teeth, claws. Moves: Shapeshifter.<li><b>Big Folk</b>: Curse: pure drive or feed. Natural attacks: claws, +1 harm. Moves: Claws of the Beast, Unholy Strength.<li><b>Ghost</b>: Curse: Duty (protect your family). Natural attacks: Magic, add hand range. Moves: Incorporeal.<li><b>Predator</b>: Curse: feed. Natural attacks: life-drain or teeth, +1 harm. Moves: Unquenchable Vitality.<li><b>Small Folk</b>: Curse: pure drive (playing tricks). Natural attacks: teeth, ignore armour. Moves: Unnatural Appeal or Preternatural Speed.<li><b>Walking Dead</b>: Curse: duty (protect your family). Natural attacks: Teeth, add harm. Moves: Immortal.<li><b>Wilderness Spirit</b>: Curse: duty (guard your home). Natural attacks: Magic attack, add far range. Moves: Wild Language.<li><b>Night Folk</b>: Curse: duty (walk under the sky every night). Natural attacks: Claws, +1 harm. Moves: Shadowsight.</ul>')
+				input.sheet-triggerbox(type='checkbox', name='attr_HJ-Monstrous-Enable', value="1")
+				.sheet-triggerframe
+					+translate("Also consider:<ul><li><b>Death Omen</b>: Curse: spirit. Natural attack: Scream/howl (magical force plus +1 harm). Weird move: Trust your gut. Moves: incorporeal, something borrowed: Premonitions from the Spooky playbook.<li><b>Reaper</b>: Curse: duty (psychopomp). Natural attack: Shadow weapon (claws plus either ignore-armour or mark). Weird move: Past lives. Moves: unquenchable vitality, either preternatural speed or something borrowed: mobility from the Professional playbook.<li><b>Genie</b>: Curse: obligations. Natural attack: Bend reality (magical force plus ignore-armour). Weird move: Use magic. Moves: dark negotiator, immortal.<li><b>Gorgon</b>: Curse: inimical. Natural attacks: Snake bite (claws plus poison); or Deadly gaze (magical force plus petrification). Weird move: Use magic. Moves: preternatural speed, something borrowed: tools matter from the Wronged playbook.<li><b>Eldritch Extraterrestrial</b>: Curse: dark master (the high command). Natural attack: Psychic blast (magical force plus ignore-armour). Weird move: Illuminated. Moves: flight, mental domination.<li><b>Spider-Folk</b>: Curse: forced change (melancholy music). Natural attack: Fangs (teeth plus ignore-armour or poison). Weird move: Empath. Moves: shapeshifter, unnatural appeal, or extra arms.</ul>")
 		div
 			b
 				span(data-i18n='curses') Curses
@@ -95,4 +103,26 @@
 				span(data-i18n='curse4')
 					b Dark Master
 					| : You have an evil lord who doesn&apos;t know you changed sides. They still give you orders, and they do not tolerate refusal, or failure.
+		input.sheet-triggerbox(type='checkbox', name='attr_HJ-Monstrous-Enable', value="1")
+		+move("HJ-Monstrous-Curse","<b>Inimical</b>: There’s something about your true nature that harms mortals. You mostly keep it contained, but in moments of high emotion or stress, you need to <b>act under pressure</b> to keep your mere presence from harming those around you.").sheet-triggerframe
+			+2d6("Act Under Pressure","Cool","aup")
+		input.sheet-triggerbox(type='checkbox', name='attr_HJ-Monstrous-Enable', value="1")
+		+move("HJ-Monstrous-Curse","<b>Duty</b>: You have an onerous ongoing responsibility, such as: protect someone or something, escort the dead, patrol an area, or preserve specific knowledge. You must do this for a few hours each day.").sheet-triggerframe
+		input.sheet-triggerbox(type='checkbox', name='attr_HJ-Monstrous-Enable', value="1")
+		+move("HJ-Monstrous-Curse","<b>Spirit</b> (requires <b>Incorporeal</b>): You are almost always incorporeal. You have a way to communicate with the other hunters, but it can be disrupted in a crisis. When you absolutely need to interact with the physical world, you must <b>act under pressure</b> or <b>use magic</b> to manifest physically.").sheet-triggerframe
+			+2d6("Manifest Physically","Cool","manifest")
+		input.sheet-triggerbox(type='checkbox', name='attr_HJ-Monstrous-Enable', value="1")
+		+move("HJ-Monstrous-Curse","<b>Obligations</b> (requires <b>Dark Negotiator</b>): Your penchant for deals has kept you ahead so far, but you have many, many outstanding contracts. You can’t break any agreement you have freely made. If you ever do, all those other deals are called in immediately, or null and void—whichever is worse for you.").sheet-triggerframe
+		input.sheet-triggerbox(type='checkbox', name='attr_HJ-Monstrous-Enable', value="1")
+		+move("HJ-Monstrous-Curse","<b>Forced Change</b> (requires <b>Shapeshifter</b>): You sometimes change involuntarily. Pick what circumstance forces you to change—a time of day, a certain emotion, any strong emotion, seeing the moon in the sky, a certain plant, or similar. When it’s present, you transform automatically, unless you <b>act under pressure</b>, <b>use magic</b>, or use some other method to avoid it.").sheet-triggerframe
+			+2d6("Resist the Change","Cool","resistchange")
+
+
+
+
+
+
+
+
+
 		input(type='text', name='attr_Curse-Monstrous')

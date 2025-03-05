@@ -1,6 +1,11 @@
 // The Monstrous Moves
 .sheet-OPBHead.sheet-MinorHead.sheet-space-above(data-i18n='the-monstrous') The Monstrous
 .sheet-Monstrous
+	.sheet-isolator
+		input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_HJ-Monstrous-Enable', value='1', checked='')
+		span.sheet-anglebox
+		span.sheet-ExpHeader
+			+t("Hunter's Journal Options")
 	i
 		span(data-i18n='2-moves') Pick two of these
 		| :
@@ -127,5 +132,23 @@
 			|  
 			textarea(name='attr_Borrowed-Monstrous', rows='3', cols='40')
 	+move('Bone-Monstrous-Move','<b>Wild Language</b>: You may speak to the animating spirits within all beings, objects, and places (people, animals, plants, rocks, the air, fires, etc.) without needing to awaken them first with <i>use magic</i>.',true).sheet-Setting-Bone
+
+	// These are both the same, but available in different contexts: one if you're in Bone Spear; the other is if you enable HJ options for the Monstrous.
+
 	+move('Bone-Monstrous-Move','<b>Shadowsight</b>: You can see in darkness as if it were daylight.',true).sheet-Setting-Bone
+	input.sheet-triggerbox(type='checkbox', name='attr_HJ-Monstrous-Enable', value="1")
+	+move("HJ-Monstrous-Move","<b>Shadowsight:</b> You can see in darkness as if it were daylight.").sheet-triggerframe.sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
+
+	input.sheet-triggerbox(type='checkbox', name='attr_HJ-Monstrous-Enable', value="1")
+	+move("HJ-Monstrous-Move","<b>Wild Language:</b> You may speak to the spirits within all living things, even if they can’t normally talk. They don’t necessarily have anything interesting to say.").sheet-triggerframe
+	input.sheet-triggerbox(type='checkbox', name='attr_HJ-Monstrous-Enable', value="1")
+	+move("HJ-Monstrous-Move","<b>Toxic:</b> You’re poisonous. If anything bites you, it becomes poisoned (taking 2-harm and becoming unstable). Add “poison” to one natural attack.").sheet-triggerframe
+	input.sheet-triggerbox(type='checkbox', name='attr_HJ-Monstrous-Enable', value="1")
+	+move("HJ-Monstrous-Move","<b>Camouflage:</b> You can blend into the background and don’t need cover to hide.").sheet-triggerframe
+	input.sheet-triggerbox(type='checkbox', name='attr_HJ-Monstrous-Enable', value="1")
+	+move("HJ-Monstrous-Move","<b>Supernatural Sense: You have a sense vastly beyond normal human capabilities. Pick one:</b> sight, hearing, smell, touch, taste, or a sense humans don’t have.").sheet-triggerframe
+		+itext("HJ-Monstrous-Move-Supernatural-Sense")
+	input.sheet-triggerbox(type='checkbox', name='attr_HJ-Monstrous-Enable', value="1")
+	+move("HJ-Monstrous-Move","<b>Extra Arms:</b> You have extra arms that you can use to manipulate objects.").sheet-triggerframe
+
 // .sheet-Monstrous .sheet-OPB

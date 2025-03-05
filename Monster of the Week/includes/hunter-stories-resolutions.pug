@@ -1,0 +1,46 @@
+// load hstories variable
+include hunter-stories-data.pug
+
+input(type="hidden", name="attr_Hunter-Stories" value="0").sheet-null-hider
+.sheet-Hunter-Stories
+	+fieldset("HunterStory",false)
+
+		// Custom Story Area
+
+		+ihide("HunterStory-Custom-Hunter-Story")(value="").sheet-null-hider
+		.sheet-Hunter-Story
+			.sheet-Hunter-Story-Resolutions
+				.sheet-Subsection
+					+display("title")
+				+expanderMoveSection("Hunter-Story-Resolution","Resolution Moves")
+					div
+						+expander("Hunter-Story-Resolution-Instructions","Instructions")
+							+display("resolutionintro")
+					each val in [1,2,3,4,5]
+						+ihide("mname"+val)(value="").sheet-null-hider
+						+imove("mname"+val, "mname"+val, "mdesc"+val, true)
+
+		// Main Buildout
+
+		each stories, pbook in hstories
+			- var scount = 0;
+			- var ocount = 0;
+			each story in stories
+				- scount++
+				- var pbns = pbook.replace(/[^A-Za-z0-9-_]/g,'');
+				// This attribute will get set to "1" by a sheetworker function when the attr_story select gets changed
+				input(type="hidden", name="attr_HunterStory-"+pbns+scount, value="").sheet-null-hider
+				.sheet-Hunter-Story
+					.sheet-Hunter-Story-Resolutions
+						.sheet-Subsection
+							+t(story["title"])
+						+expanderMoveSection("Hunter-Story-Resolution","Resolution Moves")
+							div
+								+expander("Hunter-Story-Resolution-Instructions","Instructions")
+									+t(story["resolutionintro"])
+							- var rescount = 0;
+							each res in story["resolutions"]
+								- rescount++;
+								+move( "Resolution"+rescount, "<b>"+res["mname"]+":</b> "+res["mdesc"], true )
+									if ( typeof(res["rollable"]) !== "undefined" && res["rollable"] !== "" )
+										+2d6(res["mname"], res["rollable"], "Resolution"+rescount )

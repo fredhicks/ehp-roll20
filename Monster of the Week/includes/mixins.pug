@@ -6,32 +6,36 @@ include translations-preload.pug
 
 // mixin definitions
 
+// Translation Support
+
 mixin t(text)
 	+translate(text)&attributes(attributes)
 
-mixin translate(text)
+mixin translate(text,tkey)
+	- if ( typeof(tkey) == "undefined" ) { tkey = ""; }
 	if text !== ''
 		- 
-			var rtext = text.replace(/<[^>]*>/g,'');
-			if ( rtext !== text ) {
-				translations[rtext] = text;
-				text = rtext;
+			if ( tkey == "" ) {
+				var rtext = text.replace(/<[^>]*>/g,'');
+				if ( rtext !== text ) {
+					translations[rtext] = text;
+					text = rtext;
+				}
+			} else {
+				translations[tkey] = text;
+				text = tkey;
 			}
 			if ( typeof(translations[text]) == "undefined" ) { translations[text] = text; }
 		span(data-i18n=text)&attributes(attributes)
 		| 
 
-mixin shareButton(text,extracode)
-	if text !== ''
-		- 
-			var rtext = text.replace(/<[^>]*>/g,'');
-			if ( rtext !== text ) {
-				translations[rtext] = text;
-				text = rtext;
-			}
-			if ( typeof(translations[text]) == "undefined" ) { translations[text] = text; }
-			if ( typeof(extracode) == "undefined" ) { extracode = ""; }
-		button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey='+text+'}} '+extracode, data-i18n-title='send_details_to_chat')
+mixin translations
+	- var contents = JSON.stringify(translations,null,"\t");
+	//
+		translation.json:
+		!{contents}
+
+// Input Elements Support
 
 mixin option(t,v)
 	- if ( typeof(translations[t]) == "undefined" ) { translations[t] = t; }
@@ -47,11 +51,64 @@ mixin optgroup(t)
 	if block
 		block
 
-mixin translations
-	- var contents = JSON.stringify(translations,null,"\t");
-	//
-		translation.json:
-		!{contents}
+mixin itext(name)
+	- 
+		if ( typeof(name) == "undefined" ) { name = 'ERROR'; }
+	input(type="text", name="attr_"+name)&attributes(attributes)
+
+mixin ihide(name)
+	- 
+		if ( typeof(name) == "undefined" ) { name = 'ERROR'; }
+	input(type="hidden", name="attr_"+name)&attributes(attributes)
+
+mixin display(name)
+	input(type="hidden", name="attr_"+name)
+	span(name="attr_"+name)
+
+mixin textarea(name,translated)
+	- 
+		if ( typeof(name) == "undefined" ) { name = 'ERROR'; }
+		if ( typeof(translated) == "undefined" ) { translated = ""; }
+		if ( translated !== '' ) {
+			var rtext = translated.replace(/<[^>]*>/g,'');
+			if ( rtext !== translated ) {
+				translations[rtext] = translated;
+				translated = rtext;
+			}
+			if ( typeof(translations[translated]) == "undefined" ) { translations[translated] = translated; }
+		}
+	if translated !== ''
+		textarea(name="attr_"+name, data-i18n=translated)&attributes(attributes)
+	else
+		textarea(name="attr_"+name)&attributes(attributes)
+			if block
+				block
+
+mixin fieldset(fname, control)
+	-
+		if ( typeof(fname) == "undefined" ) { fname = 'ERROR'; }
+		if ( typeof(control) == "undefined" ) {
+			control = true;
+		}
+	if ( control !== true )
+		input(type="hidden", name=fname+"-NoRepcontrol").sheet-hide-controls
+	fieldset(class="repeating_"+fname)
+		if block
+			block
+
+// Button Support
+
+mixin shareButton(text,extracode)
+	if text !== ''
+		- 
+			var rtext = text.replace(/<[^>]*>/g,'');
+			if ( rtext !== text ) {
+				translations[rtext] = text;
+				text = rtext;
+			}
+			if ( typeof(translations[text]) == "undefined" ) { translations[text] = text; }
+			if ( typeof(extracode) == "undefined" ) { extracode = ""; }
+		button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey='+text+'}} '+extracode, data-i18n-title='send_details_to_chat')
 
 mixin 2d6(name,stat,rname)
 	- 
@@ -60,6 +117,67 @@ mixin 2d6(name,stat,rname)
 		if ( typeof(stat) == "undefined" || ( stat !== 'Charm' && stat !== 'Cool' && stat !== 'Sharp' && stat !== 'Tough' && stat !== 'Weird' ) ) { stat = 'ERROR'; }
 	button.sheet-2d6-button(
 		type='roll', value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title='+name+'}} {{Roll=[[2d6+?{'+name+' with|'+stat+' (Default),@{'+stat+'}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}', name='roll_'+rname)
+
+// Headers & Expanders
+
+mixin expander(tag,name)
+	div
+		input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-'+tag, value='1', checked='')
+		span.sheet-anglebox
+		span.sheet-ExpHeader
+			if name
+				+translate(name)
+		.sheet-Expander
+			if block
+				block
+
+mixin expanderMoveSection(tag)
+	input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-'+tag+'-All', value='1', checked='')
+	span.sheet-anglebox
+	span.sheet-ExpHeader
+		span(data-i18n='all') All
+	.sheet-Expander
+		input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-'+tag+'-Unused', value='1', checked='')
+		span.sheet-anglebox
+		span.sheet-ExpHeader
+			span(data-i18n='unused') Unused
+		if block
+			block
+
+mixin expanderInstructions(tag)
+	div
+		input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-'+tag+'-Instructions', value='1', checked='')
+		span.sheet-anglebox
+		span.sheet-ExpHeader
+			span(data-i18n='instructions') Instructions
+		.sheet-Expander
+			if block
+				block
+
+mixin otherTeamPlaybooksHeader(tag)
+	input.sheet-triggerbox.sheet-UnusedToggle(type='checkbox', name='attr_Toggle-Team-Moves-Unused', value='1', checked='')
+	input.sheet-triggerbox.sheet-OPBToggle(type='checkbox', name='attr_Toggle-Other-Team-Playbooks', value='1')
+	.sheet-OPBHead.sheet-MinorHead.sheet-space-above
+		+translate(tag)
+
+mixin gearhead(header,instruct)
+	- 
+		if ( typeof(header) == "undefined" ) { header = 'ERROR'; }
+		if ( typeof(instruct) == "undefined" ) { instruct = ''; } else { instruct = instruct + ":"; }
+	div&attributes(attributes)
+		.sheet-MinorHead
+			+translate(header)
+		div
+			i
+				+translate(instruct)
+
+mixin subsection(header)
+	- 
+		if ( typeof(header) == "undefined" ) { header = 'ERROR'; }
+	.sheet-Subsection
+		+t(header)
+
+// Move Support
 
 mixin movelegacy(toggle,text,share,checked)
 	- 
@@ -121,6 +239,26 @@ mixin movecontents(toggle,text,share,checked)
 			if share
 				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey='+text.replace(/<[^>]*>/g,'')+'}}', data-i18n-title='send_details_to_chat')
 
+// Specialty Support
+
+mixin imove(aprefix,namefield,textfield,shareopt)
+	- 
+		if ( typeof(namefield) == "undefined" ) { namefield = ""; }
+		if ( typeof(textfield) == "undefined" ) { textfield = "ERROR"; }
+		if ( typeof(shareopt) == "undefined" ) { shareopt = true; }
+		if ( typeof(aprefix) == "undefined" ) { aprefix = ""; }
+	.sheet-move
+		input.sheet-checkbox(type='checkbox', name='attr_'+aprefix+'MoveCheck')
+		span.sheet-mainbox
+		span.sheet-grayable
+			if namefield !== ""
+				b
+					+display(namefield)
+					| :
+			+display(textfield)
+			if shareopt
+				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movetext=**@{'+namefield+'}:** @{'+textfield+'}}}', data-i18n-title='send_details_to_chat')
+
 mixin bonegear(toggle,text,wear)
 	- 
 		if ( typeof(toggle) == "undefined" ) { toggle = 'ERROR'; }
@@ -173,68 +311,6 @@ mixin asset(toggle,text,boxes,share,checked)
 			if share == true
 				button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movekey='+text.replace(/<[^>]*>/g,'')+'}}', data-i18n-title='send_details_to_chat')
 
-mixin expander(tag,name)
-	div
-		input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-'+tag, value='1', checked='')
-		span.sheet-anglebox
-		span.sheet-ExpHeader
-			if name
-				+translate(name)
-		.sheet-Expander
-			if block
-				block
-
-mixin expanderMoveSection(tag)
-	input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-'+tag+'-All', value='1', checked='')
-	span.sheet-anglebox
-	span.sheet-ExpHeader
-		span(data-i18n='all') All
-	.sheet-Expander
-		input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-'+tag+'-Unused', value='1', checked='')
-		span.sheet-anglebox
-		span.sheet-ExpHeader
-			span(data-i18n='unused') Unused
-		if block
-			block
-
-mixin expanderInstructions(tag)
-	div
-		input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-'+tag+'-Instructions', value='1', checked='')
-		span.sheet-anglebox
-		span.sheet-ExpHeader
-			span(data-i18n='instructions') Instructions
-		.sheet-Expander
-			if block
-				block
-				
-mixin otherTeamPlaybooksHeader(tag)
-	input.sheet-triggerbox.sheet-UnusedToggle(type='checkbox', name='attr_Toggle-Team-Moves-Unused', value='1', checked='')
-	input.sheet-triggerbox.sheet-OPBToggle(type='checkbox', name='attr_Toggle-Other-Team-Playbooks', value='1')
-	.sheet-OPBHead.sheet-MinorHead.sheet-space-above
-		+translate(tag)
-
-mixin gearhead(header,instruct)
-	- 
-		if ( typeof(header) == "undefined" ) { header = 'ERROR'; }
-		if ( typeof(instruct) == "undefined" ) { instruct = ''; } else { instruct = instruct + ":"; }
-	div&attributes(attributes)
-		.sheet-MinorHead
-			+translate(header)
-		div
-			i
-				+translate(instruct)
-
-mixin subsection(header)
-	- 
-		if ( typeof(header) == "undefined" ) { header = 'ERROR'; }
-	.sheet-Subsection
-		+t(header)
-
-mixin itext(name)
-	- 
-		if ( typeof(name) == "undefined" ) { name = 'ERROR'; }
-	input(type="text", name="attr_"+name)
-
 mixin weirdmove(wmove, stat, text, advtext, etitle, etext)
 	- 
 		if ( typeof(wmove) == "undefined" ) { wmove = "ERROR"; }
@@ -276,36 +352,37 @@ mixin weirdmove(wmove, stat, text, advtext, etitle, etext)
 					.sheet-Reference
 						+t(etext)
 
-mixin custommoves(cmove, rollopt, shareopt, twobox)
+mixin custommoves(cmove, rollopt, shareopt, twobox, aprefix)
 	// If you're doing a call that sets rollopt = true, you'll need to take a look at MOTW-sheet-worker.js and update the listener that triggers when repeating_skinmoves:rollable changes, to include whatever non-SkinMoves repeater you just created.
 	- 
 		if ( typeof(cmove) == "undefined" ) { cmove = "ERROR"; }
 		if ( typeof(rollopt) == "undefined" ) { rollopt = false; } 
 		if ( typeof(shareopt) == "undefined" ) { shareopt = true; }
 		if ( typeof(twobox) == "undefined" ) { twobox = false; }
+		if ( typeof(aprefix) == "undefined" ) { aprefix = ""; }
 	fieldset(class="repeating_"+cmove)
 		.sheet-move
-			input.sheet-checkbox(type='checkbox', name='attr_SkinMoveCheck', checked)
+			input.sheet-checkbox(type='checkbox', name='attr_'+aprefix+'MoveCheck', checked)
 			span.sheet-mainbox
 				if twobox
 					input(type="hidden", name="attr_TwoBoxed", value="").sheet-null-hider
 					span.sheet-extrabox
-						input.sheet-checkbox(type='checkbox', name='attr_SkinMoveCheck-2', checked)
+						input.sheet-checkbox(type='checkbox', name='attr_'+aprefix+'MoveCheck-2', checked)
 						span.sheet-mainbox
 			span.sheet-grayable
 				b
-					span(name='attr_SkinMoveName')
+					span(name='attr_'+aprefix+'MoveName')
 					| :
 				|  
-				span(name='attr_SkinMoveDescrip')
+				span(name='attr_'+aprefix+'MoveDescrip')
 				if shareopt
-					button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movetext=**@{SkinMoveName}:** @{SkinMoveDescrip}}}', data-i18n-title='send_details_to_chat')
+					button.sheet-broadcast-button(type='roll', name='roll_Show', value='&{template:motw-moveshare} {{CharName=@{character_name}}} {{movetext=**@{'+aprefix+'MoveName}:** @{'+aprefix+'MoveDescrip}}}', data-i18n-title='send_details_to_chat')
 				if rollopt
 					input(type='hidden',name="attr_RollableStat","")
 					input(type="hidden", name="attr_Rollable", value="").sheet-null-hider
 					button.sheet-2d6-button(
 						type='roll', 
-						value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=@{SkinMoveName}}} {{Roll=[[2d6+?{@{SkinMoveName} with|@{Rollable} (Default),@{RollableStat}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}',
+						value='&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=@{'+aprefix+'MoveName}}} {{Roll=[[2d6+?{@{'+aprefix+'MoveName} with|@{Rollable} (Default),@{RollableStat}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}',
 						name='roll_custommoveroll')
 				.sheet-custom-editbox
 					.sheet-isolator
@@ -318,18 +395,18 @@ mixin custommoves(cmove, rollopt, shareopt, twobox)
 								b
 									span(data-i18n='name') Name
 								| :
-							input(type='text', name='attr_SkinMoveName', style="width: 95%;")
+							input(type='text', name='attr_'+aprefix+'MoveName', style="width: 98%;")
 							div
 								b
 									span(data-i18n='description') Description
 								| :
-							textarea(name='attr_SkinMoveDescrip', rows='4', cols='40', style="width: 95%;")
+							textarea(name='attr_'+aprefix+'MoveDescrip', rows='4', cols='40', style="width: 94%;")
 							if rollopt
 								div
 									b
 										+translate('Roll?')
 										| :
-									select(name="attr_Rollable", style="width: 95%;")
+									select(name="attr_Rollable", style="width: 98%;")
 										+option("None","")
 										+option("charm","Charm")
 										+option("cool","Cool")
@@ -341,6 +418,6 @@ mixin custommoves(cmove, rollopt, shareopt, twobox)
 									b
 										+translate('Two Boxes?')
 										| :
-									select(name="attr_TwoBoxed", style="width: 95%;")
+									select(name="attr_TwoBoxed", style="width: 98%;")
 										+option("No","")
 										+option("Yes",1)
