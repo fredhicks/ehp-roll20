@@ -112,7 +112,8 @@ on("clicked:checklist clicked:repeating_conditions:checklist", function(event) {
 	if ( what !== source ) { // then there was more
 		var field = source.replace(/^.*\|/,""); // current_conditions=>condition_obsessive_text
 		var fname = field.replace(/=.*$/,""); // current_conditions — should not be altered by prefix
-		var fval = field.replace(/^.*=>/,">"+prefix); // condition_obsessive_text
+		// var fval = field.replace(/^.*=>/,">"+prefix); // condition_obsessive_text
+		var fval = field.replace(/^.*=/,""); // condition_obsessive_text
 		var isblank = false;
 		var blankfield = fval.replace(/^>/,"");
 		var gets = [fname];
@@ -157,7 +158,8 @@ on("clicked:unchecklist clicked:repeating_conditions:unchecklist", function(even
 	if ( what !== source ) { // then there was more
 		var field = source.replace(/^.*\|/,"");
 		var fname = field.replace(/=.*$/,"");
-		var fval = field.replace(/^.*=>/,">"+prefix);
+		// var fval = field.replace(/^.*=>/,">"+prefix);
+		var fval = field.replace(/^.*=/,"");
 		var isblank = false;
 		var blankfield = fval.replace(/^>/,"");
 		var gets = [fname];
