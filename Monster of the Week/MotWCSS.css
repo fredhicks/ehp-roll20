@@ -756,10 +756,6 @@ option.sheet-SkinSelect:checked
 	color: var(--motw-fg);
 }
 
-.sheet-rolltemplate-darkmode .sheet-template-container div i {
-	color: #000
-}
-
 button[type=roll].sheet-broadcast-button, 
 button[type=roll].sheet-2d6-button {
 	border: 0px;
