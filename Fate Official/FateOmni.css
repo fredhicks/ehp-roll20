@@ -1436,11 +1436,11 @@ input.hideAllBut[value="1"] + .iblock {
 }
 
 .ui-dialog .tab-content .charsheet button[type="roll"].share:hover {
-	opacity: 100%;
+	opacity: 1.0;
 }
 
 .ui-dialog .tab-content .charsheet button[type="roll"].share {
-	opacity: 25%;
+	opacity: 0.25;
 	background: transparent;
 	border-style: none;
 	margin: 0px;
@@ -1449,7 +1449,7 @@ input.hideAllBut[value="1"] + .iblock {
 }
 
 .sheet-darkmode .ui-dialog .tab-content .charsheet button[type="roll"].share {
-	opacity: 40%;
+	opacity: 0.4;
 }
 
 /* Color Theme Shenanigans */
@@ -2980,11 +2980,9 @@ input[value="orange"].theme + .Wrapper .SkillEdit > .repcontainer {
 
 /* Media Change Block — Hopefully to help us get mobile support working. Needs to come after everything previously defined, so it can override previously defined elements when the interface resizes. */
 
-/*
 .Mobile {
 	display: none;
 }
-*/
 
 @media only screen and (max-width: 720px) {
 
@@ -2995,6 +2993,8 @@ input[value="orange"].theme + .Wrapper .SkillEdit > .repcontainer {
 		grid-template-columns: 1fr 2fr;
 	}
 
+	input[type="checkbox"].triggerbox:checked + .logobox, 
+	input[type="checkbox"].triggerbox + .logobox, 
 	.logobox {
 		display: none;
 	}
@@ -3029,6 +3029,8 @@ input[value="orange"].theme + .Wrapper .SkillEdit > .repcontainer {
 	}
 
 	/* This will help me notice when width is narrowed to Mobile view */
+
+	/*
 	.Mobile {
 		display: block;
 		background-color: yellow;
@@ -3040,19 +3042,6 @@ input[value="orange"].theme + .Wrapper .SkillEdit > .repcontainer {
 		width: 100%;
 		height: 400px;
 	}
-
-	/*
-	.fpbox, .pronounbox, .logobox, .namebox {
-		border: 1px solid yellow;
-	}
-
-	.fpbox > * {
-		border: 1px solid green;
-	}
-
-	.fpbox > * > * {
-		border: 1px solid red;
-	}
 	*/
 
 	.SheetFlex {
@@ -3061,6 +3050,28 @@ input[value="orange"].theme + .Wrapper .SkillEdit > .repcontainer {
 
 	.SheetCol {
 		margin-left: 0px;
+	}
+
+	.StuntFrame,
+	.PowerFrame,
+	.NoteFrame,
+	.SkillFrame {
+		flex-direction: column;
+		justify-content: flex-start;
+	}
+
+	.sheet-darkmode .ui-dialog .tab-content .charsheet button[type="roll"].share,
+	.sheet-darkmode .ui-dialog .tab-content .charsheet .pencilbox,
+	.sheet-darkmode .ui-dialog .tab-content .charsheet .optionsbox,
+	input[type="checkbox"].checkbox:hover + span.checkmark::before {
+		opacity: 0.8
+	}
+
+	.ui-dialog .tab-content .charsheet button[type="roll"].share,
+	.pencilbox,
+	.optionsbox,
+	input[type="checkbox"].checkbox + span.checkmark::before {
+		opacity: 0.6
 	}
 
 }
