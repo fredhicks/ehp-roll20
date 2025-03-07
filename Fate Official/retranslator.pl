@@ -465,7 +465,6 @@ $docroot = '/Users/evilhat/Dropbox/GitHub/ehp-roll20/Fate\ Official';
 $text = `cat $docroot/FateOmni.html`;
 
 foreach $k ( keys %t ) {
-	print "Scanning for $k\n";
 	$text =~ s/<([^>]*)data-i18n=(["'])$k(["'][^>]*)></<$1data-i18n=$2$k$3>$t{$k}</g;
 }
 
