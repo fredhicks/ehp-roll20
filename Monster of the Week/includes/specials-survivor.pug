@@ -1,48 +1,52 @@
+input.sheet-SkinCheck(type='hidden', name='attr_SkinCheck', value='0')
 .sheet-Survivor
-	.sheet-Subsection
-		+translate('Basic Survivor Moves')
-	+expanderMoveSection('Survivor-Move-Basics')
-		+move('Survivor-Move-Basic','<b>Call for Help:</b> When you need some aid, call on another survivor and roll +Charm. They may help you, or refuse. On a 10+, you get +1 forward. On a 7–9, get +1 forward with an extra complication. On a 6 or less, something bad happens to both of you. On any 7 or higher, if they helped, they mark experience; if they didn’t, you mark experience.','share',true)
-			button.sheet-2d6-button(type='roll', value="&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Call for Help}} {{Roll=[[2d6+?{Call for Help with|Charm (Default),@{Charm}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}", name='roll_dplay')
-		+move('Survivor-Move-Basic','<b>Fend It Off:</b> When you try to avoid imminent harm, roll +Tough. On a 10+, you push the danger away for the moment. On a 7–9, suffer 1 less harm. On a 6 or less, it’s worse than you expected.','share',true)
-			button.sheet-2d6-button(type='roll', value="&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Fend It Off}} {{Roll=[[2d6+?{Fend It Off with|Tough (Default),@{Tough}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}", name='roll_dplay')
-		+move('Survivor-Move-Basic','<b>Hold It Together:</b> When you are confronted by horror or attempt something stressful, roll +Cool. On a 10+, you’re okay—do what’s needed. On a 7–9, you can do it at a cost—suffer 1-harm, take -1 forward, or suffer another complication (Keeper’s choice). On a 6 or less, you freak out and put yourself in greater danger.','share',true)
-			button.sheet-2d6-button(type='roll', value="&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Hold It Together}} {{Roll=[[2d6+?{Hold It Together with|Cool (Default),@{Cool}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}", name='roll_dplay')
-		+move('Survivor-Move-Basic','<b>Open Yourself to the Evil Here:</b> When you let the evil get inside your mind, roll +Weird. You always draw the evil’s attention. On a 10+, the Keeper will tell you a terrible insight about what’s going on. On a 7–9, the Keeper gives you a terrible hint about what’s going on. On a 6 or less, you’re filled with horrific visions and emotions.','share',true)
-			button.sheet-2d6-button(type='roll', value="&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Open Yourself to the Evil Here}} {{Roll=[[2d6+?{Open Yourself to the Evil Here with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}", name='roll_dplay')
-		+move('Survivor-Move-Basic','<b>What’s Going On?:</b> When you try to understand what’s happening, ask the Keeper a question and roll +Sharp. On a 10+, they’ll answer with one solid fact. On a 7–9, they’ll answer with a general impression. On a 6 or less, you get an answer you really don’t want. The Keeper answers with facts you could directly observe, or figure out from direct observation.','share',true)
-			button.sheet-2d6-button(type='roll', value="&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=What’s Going On?}} {{Roll=[[2d6+?{What’s Going On? with|Sharp (Default),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}", name='roll_dplay')
+	.sheet-isolator
+		.sheet-Subsection
+			+translate('Basic Survivor Moves')
+		+expanderMoveSection('Survivor-Move-Basics')
+			+move('Survivor-Move-Basic','<b>Call for Help:</b> When you need some aid, call on another survivor and roll +Charm. They may help you, or refuse. On a 10+, you get +1 forward. On a 7–9, get +1 forward with an extra complication. On a 6 or less, something bad happens to both of you. On any 7 or higher, if they helped, they mark experience; if they didn’t, you mark experience.','share',true)
+				button.sheet-2d6-button(type='roll', value="&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Call for Help}} {{Roll=[[2d6+?{Call for Help with|Charm (Default),@{Charm}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}", name='roll_dplay')
+			+move('Survivor-Move-Basic','<b>Fend It Off:</b> When you try to avoid imminent harm, roll +Tough. On a 10+, you push the danger away for the moment. On a 7–9, suffer 1 less harm. On a 6 or less, it’s worse than you expected.','share',true)
+				button.sheet-2d6-button(type='roll', value="&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Fend It Off}} {{Roll=[[2d6+?{Fend It Off with|Tough (Default),@{Tough}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}", name='roll_dplay')
+			+move('Survivor-Move-Basic','<b>Hold It Together:</b> When you are confronted by horror or attempt something stressful, roll +Cool. On a 10+, you’re okay—do what’s needed. On a 7–9, you can do it at a cost—suffer 1-harm, take -1 forward, or suffer another complication (Keeper’s choice). On a 6 or less, you freak out and put yourself in greater danger.','share',true)
+				button.sheet-2d6-button(type='roll', value="&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Hold It Together}} {{Roll=[[2d6+?{Hold It Together with|Cool (Default),@{Cool}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}", name='roll_dplay')
+			+move('Survivor-Move-Basic','<b>Open Yourself to the Evil Here:</b> When you let the evil get inside your mind, roll +Weird. You always draw the evil’s attention. On a 10+, the Keeper will tell you a terrible insight about what’s going on. On a 7–9, the Keeper gives you a terrible hint about what’s going on. On a 6 or less, you’re filled with horrific visions and emotions.','share',true)
+				button.sheet-2d6-button(type='roll', value="&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Open Yourself to the Evil Here}} {{Roll=[[2d6+?{Open Yourself to the Evil Here with|Weird (Default),@{Weird}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}", name='roll_dplay')
+			+move('Survivor-Move-Basic','<b>What’s Going On?:</b> When you try to understand what’s happening, ask the Keeper a question and roll +Sharp. On a 10+, they’ll answer with one solid fact. On a 7–9, they’ll answer with a general impression. On a 6 or less, you get an answer you really don’t want. The Keeper answers with facts you could directly observe, or figure out from direct observation.','share',true)
+				button.sheet-2d6-button(type='roll', value="&{template:motw-dieroll} {{CharName=@{character_name}}} {{title=What’s Going On?}} {{Roll=[[2d6+?{What’s Going On? with|Sharp (Default),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}", name='roll_dplay')
 
-	.sheet-Subsection
-		+translate('Survivor Agenda')
-	+expander('Survivor-Agenda')
-		+translate('You won’t need the usual hunter agenda here, as you’re not playing heroes. Instead, use this survivor agenda:<ul><li>Try to survive, but don’t expect it.<li>Prove you can be a hero.<li>Take the evil out, or make your escape.<li>Play your survivor like they’re a real person.</ul><p>Additionally, hold your survivor characters lightly. If they die, quickly create a new one from the reserves and carry on playing.<p>Pay attention to that third agenda item, too. Don’t expect you’ll defeat the evil here—escaping from it alive is just as much a win.')
+	.sheet-isolator
+		.sheet-Subsection
+			+translate('Survivor Agenda')
+		+expander('Survivor-Agenda')
+			+translate('You won’t need the usual hunter agenda here, as you’re not playing heroes. Instead, use this survivor agenda:<ul><li>Try to survive, but don’t expect it.<li>Prove you can be a hero.<li>Take the evil out, or make your escape.<li>Play your survivor like they’re a real person.</ul><p>Additionally, hold your survivor characters lightly. If they die, quickly create a new one from the reserves and carry on playing.<p>Pay attention to that third agenda item, too. Don’t expect you’ll defeat the evil here—escaping from it alive is just as much a win.')
 
-	.sheet-Subsection
-		+translate('Scenario Aftermath')
-	+expanderMoveSection('Survivor-Aftermath')
-		div
-			b
-				+translate('Scenario:')
-			input(type='text' name='attr_Survivor-Scenario-Title')
-		div
-			br
-			b
-				+translate('This survivor:')
-		+move('Survivor-Scenario-Result','died')
-		+move('Survivor-Scenario-Result','escaped')
-		+move('Survivor-Scenario-Result','was transformed')
-		+move('Survivor-Scenario-Result','defeated the evil')
-		+move('Survivor-Scenario-Result','was never seen again')
-		div
-			br
-			b
-				+translate('If they survived, afterwards, they:')
-		+move('Survivor-Scenario-Afterwards','trained to be a hunter')
-		+move('Survivor-Scenario-Afterwards','avoided the supernatural')
-		+move('Survivor-Scenario-Afterwards','were never the same')
-		div
-			br
-			b
-				+translate('Details:')
-		textarea(name='attr_Survivor-Scenario-Details')
+	.sheet-isolator
+		.sheet-Subsection
+			+translate('Scenario Aftermath')
+		+expanderMoveSection('Survivor-Aftermath')
+			div
+				b
+					+translate('Scenario:')
+				input(type='text' name='attr_Survivor-Scenario-Title')
+			div
+				br
+				b
+					+translate('This survivor:')
+			+move('Survivor-Scenario-Result','died')
+			+move('Survivor-Scenario-Result','escaped')
+			+move('Survivor-Scenario-Result','was transformed')
+			+move('Survivor-Scenario-Result','defeated the evil')
+			+move('Survivor-Scenario-Result','was never seen again')
+			div
+				br
+				b
+					+translate('If they survived, afterwards, they:')
+			+move('Survivor-Scenario-Afterwards','trained to be a hunter')
+			+move('Survivor-Scenario-Afterwards','avoided the supernatural')
+			+move('Survivor-Scenario-Afterwards','were never the same')
+			div
+				br
+				b
+					+translate('Details:')
+			textarea(name='attr_Survivor-Scenario-Details')

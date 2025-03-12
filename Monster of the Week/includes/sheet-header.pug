@@ -2,7 +2,7 @@ input.sheet-SkinCheck(type='hidden', name='attr_SkinCheck', value='0')
 input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Basics', value='1', checked='')
 span.sheet-anglebox
 span.sheet-ExpHeader
-.sheet-Expander
+.sheet-Expander.sheet-Basics
 	input.sheet-SkinCheck(type='hidden', name='attr_SkinCheck', value='0')
 	.sheet-3colrow
 		input.sheet-SkinCheck(type='hidden', name='attr_SkinCheck', value='0')
@@ -10,25 +10,25 @@ span.sheet-ExpHeader
 		include sheet-header-pronouns.pug
 		include sheet-header-selection.pug
 	input.sheet-SkinCheck(type='hidden', name='attr_SkinCheck', value='0')
-	.sheet-Survivor
+	.sheet-Survivor.sheet-Look
 		p
 			+translate('Concept').sheet-Label
 			|  
 			br
-			input(type='text', name='attr_Look', style='width: 98%')
+			input(type='text', name='attr_Concept')
 	input.sheet-SkinCheck(type='hidden', name='attr_SkinCheck', value='0')
-	.sheet-NoKeep.sheet-NoTeams.sheet-NoCommunity
+	.sheet-NoKeep.sheet-NoTeams.sheet-NoCommunity.sheet-Look
 		span.sheet-Label(data-i18n='character-look') Look
 		|  
 		br
-		input(type='text', name='attr_Look', style='width: 98%')
+		input(type='text', name='attr_Look')
 		input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
 		.sheet-Setting-Marches
 			span.sheet-Label
 				+translate('Mark of the Spirit-Touched')
 			|  
 			br
-			input(type='text', name='attr_Marches-Spirit-Touched-Mark', style='width: 98%')
+			input(type='text', name='attr_Marches-Spirit-Touched-Mark')
 	include game-options-config.pug
 	// References
 	.space-above.sheet-NoCommunity.sheet-NoTeams

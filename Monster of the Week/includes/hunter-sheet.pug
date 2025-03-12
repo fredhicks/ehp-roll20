@@ -1,20 +1,20 @@
-.sheet-SheetGrid.sheet-NoKeep.sheet-NoCommunity.sheet-NoTeams
+.sheet-SheetGrid.sheet-NoKeep.sheet-NoCommunity.sheet-NoTeams.sheet-Hunter
 	include stats.pug
 	.sheet-Specifics
-		.sheet-3colrow.sheet-NoNull
+		.sheet-3colrow.sheet-NoNull.sheet-HunterTracks
 			// Contains common elements found in all playbooks
-			.sheet-col
+			.sheet-col.sheet-Track-Luck
 				include luck-track.pug
-			.sheet-col
+			.sheet-col.sheet-Track-Harm
 				include harm-track.pug
-			.sheet-col
+			.sheet-col.sheet-Track-XP
 				include xp-track.pug
 		// This needs to be located just prior to the hidden sheets so it'll switch between them correctly!
 		input.sheet-SkinCheck(type='hidden', name='attr_SkinCheck', value='0')
 		// Begin significantly rearchitected playbooks
 		.sheet-playbooks.sheet-NoNull
 			.sheet-3colrow
-				.sheet-col
+				.sheet-col.sheet-playbooks-specials
 					// left column
 					input.sheet-SkinCheck(type='hidden', name='attr_SkinCheck', value='0')
 					|  
@@ -23,7 +23,8 @@
 						input(type='text', name='attr_Name-Custom')
 
 					// Luck specials
-					include luck-specials.pug
+					.sheet-Display-Only-Wide
+						include luck-specials.pug
 
 					// Gothic Century's Dark Pasts
 					include gothic-dark-pasts.pug
@@ -91,7 +92,8 @@
 					include specials-custom.pug
 
 					// Survivor Playbook Specials
-					include specials-survivor.pug
+					.sheet-Display-Only-Wide
+						include specials-survivor.pug
 					
 					// Action Scientist SSK
 					include specials-actionssk.pug
@@ -139,7 +141,7 @@
 					include history.pug
 
 				// .sheet-col, left
-				.sheet-col
+				.sheet-col.sheet-playbooks-moves
 					// mid column
 					input.sheet-SkinCheck(type='hidden', name='attr_SkinCheck', value='0')
 
@@ -158,16 +160,20 @@
 					// Hunter Stories - From HJ
 					include hunter-stories-resolutions.pug
 
+					.sheet-Display-Only-Narrow
+						include specials-survivor.pug
+
 					// Other Moves
 					include moves-other.pug
 
 				// .sheet-col, mid
-				.sheet-col
+				.sheet-col.sheet-playbooks-gear-imp
 					// right column
 					input.sheet-SkinCheck(type='hidden', name='attr_SkinCheck', value='0')
 
 					// Survivor Playbook's special leveling mechanism
-					include survivor-leveling.pug
+					.sheet-Display-Only-Wide
+						include survivor-leveling.pug
 
 					// Monstrous Playbook's Attacks
 					include attacks-monstrous.pug
@@ -176,7 +182,8 @@
 					include gear.pug
 
 					// Improvements Section
-					include improvements.pug
+					.sheet-Display-Only-Wide
+						include improvements.pug
 
 				// .sheet-col, right
 			// .sheet-3colrow
