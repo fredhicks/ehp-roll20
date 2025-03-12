@@ -3,7 +3,7 @@ var gTBK = function(t) {
 		return "";
 	} else {
 		var result = getTranslationByKey(t);
-		// log(`${t} -> ${result}`,"translation")
+		log(`${t} -> ${result}`,"translation");
 		if ( result === false ) {
 			log("could not translate: " + t);
 			return "UNTRANSLATED ["+t+"]";
@@ -93,59 +93,94 @@ on("clicked:uncheck", function(event) {
 	log(what + " unchecked");
 });
 
-// ZOD
+// gotta scrub out untranslated errors!
+
+var scrubUntranslated = function(t) {
+	var nt = t.replace(/,? ?UNTRANSLATED \[.*?\],? ?/g,", ").replace(/, , /g,", ").replace(/, $/,"").replace(/^, /,"");
+	if ( nt !== t ) {
+		log("scrubbing check: '"+t+"' has UNTRANSLATED text, cleaning it up");
+		return nt;
+	} else {
+		return t;
+	}
+};
+
+// Make sure usual suspects get cleaned up
+on("sheet:opened", function(event) {
+	var flist = ['chosenimpulse','powers','demands','look','origin','current_conditions'];
+	getAttrs(flist, function(f) {
+		log("Cleaning untranslated errors from usual suspects")
+		var a = {};
+		for(var i=0; i < flist.length; i++) {
+			a[flist[i]] = scrubUntranslated(f[flist[i]]);
+		}
+		log(a); // how'd it go
+		setAttrs(a);
+	});
+});
 
 on("clicked:checklist clicked:repeating_conditions:checklist", function(event) {
+	log("enter clicked:checklist clicked:repeating_conditions:checklist");
 	log(event);
-	var source = event.htmlAttributes.value;
-	var what = source.replace(/\|.*$/,"");
+	var source = event.htmlAttributes.value; // e.g., checkable_91|powers=Telekinesis
+	var what = source.replace(/\|.*$/,""); // e.g., checkable_91
 	var prefix = "";
 	// In order to handle the stuff from repeating_conditions, we must detect that.
 	if ( event.triggerName !== "clicked:checklist" ) {
 		// Then we're looking at a repeater
 		prefix = event.triggerName.replace(/^clicked:/,"").replace(/checklist$/,""); // Should strip "checklist" off the end.
 	}
-	var atname = prefix + "check_" + what;
+	var atname = prefix + "check_" + what; // e.g., check_checkable_91 or [rowid]_check_checkable_91
 	log(">>> "+atname);
 	var ats = {};
 	ats[atname] = 1;
-	if ( what !== source ) { // then there was more
-		var field = source.replace(/^.*\|/,""); // current_conditions=>condition_obsessive_text
-		var fname = field.replace(/=.*$/,""); // current_conditions — should not be altered by prefix
-		// var fval = field.replace(/^.*=>/,">"+prefix); // condition_obsessive_text
-		var fval = field.replace(/^.*=/,""); // condition_obsessive_text
+	if ( what !== source ) { // then there was more // e.g., "checkable_91" !== "checkable_91|powers=Telekinesis"
+		var field = source.replace(/^.*\|/,""); // powers=Telekinesis
+		var fname = field.replace(/=.*$/,""); // powers
+		var fval = field.replace(/^.*=/,""); // Telekinesis
 		var isblank = false;
-		var blankfield = fval.replace(/^>/,"");
+		var blankfield = fval.replace(/^#/,"");
 		var gets = [fname];
-		if ( blankfield !== fval ) {
+		if ( blankfield !== fval ) { // Then that means the field started with a #, which means we want to get the contents of a text field that matches the fieldname that followed the # — e.g., condition_raging|current_conditions=#condition_raging_text means that the field current_conditions should be set to include the value of the attribute condition_raging_text rather than translate "#condition_raging_text".
 			isblank = true;
-			gets[1] = blankfield;
+			gets[1] = prefix + blankfield; // gotta include the prefix!
 		} else {
-			fval = gTBK(String(fval));
+			fval = gTBK(String(fval)); // this is giving UNTRANSLATED errors on stuff that didn't get properly broken apart above
 		}
+		log("here's what we're planning to retrieve from attributes");
 		log(gets);
 		getAttrs(gets, function(f) {
+			log("enter getAttrs within clicked:checklist clicked:repeating_conditions:checklist");
 			log(f);
-			if ( isblank ) { fval = f[blankfield].replace(/^ */,"").replace(/ *$/,""); }
+			if ( isblank ) { 
+				log("checking on value of a blank field "+blankfield);
+				fval = f[prefix+blankfield].replace(/^ */,"").replace(/ *$/,""); 
+			}
 			if ( typeof(fval) !== "undefined" && fval !== "" ) {
 				if ( f[fname] == "" ) {
 					ats[fname] = fval;
 				} else {
 					ats[fname] = f[fname] + ", " + fval;
 				}
+				log("scrubbing")
+				log(ats);
+				ats[fname] = scrubUntranslated(ats[fname]); // gotta scrub out untranslated errors
+				log("scrubbed")
 				log(ats);
 				setAttrs(ats);
+				log("exit getAttrs within clicked:checklist clicked:repeating_conditions:checklist");
 			}
 		});
 	} else {
 		setAttrs(ats);
 	}
 	log(what + " checked");
+	log("exit clicked:checklist clicked:repeating_conditions:checklist");
 });
 
 on("clicked:unchecklist clicked:repeating_conditions:unchecklist", function(event) {
-	var source = event.htmlAttributes.value;
-	var what = source.replace(/\|.*$/,"");
+	var source = event.htmlAttributes.value; // checkable_91|powers=Telekinesis
+	var what = source.replace(/\|.*$/,""); // checkable_91
 	var prefix = "";
 	// In order to handle the stuff from repeating_conditions, we must detect that.
 	if ( event.triggerName !== "clicked:checklist" ) {
@@ -155,23 +190,22 @@ on("clicked:unchecklist clicked:repeating_conditions:unchecklist", function(even
 	var atname = prefix + "check_" + what;
 	var ats = {};
 	ats[atname] = 0;
-	if ( what !== source ) { // then there was more
-		var field = source.replace(/^.*\|/,"");
-		var fname = field.replace(/=.*$/,"");
-		// var fval = field.replace(/^.*=>/,">"+prefix);
-		var fval = field.replace(/^.*=/,"");
+	if ( what !== source ) { // then there was more, e.g., checkable_91|powers=Telekinesis
+		var field = source.replace(/^.*\|/,""); // e.g., powers=Telekinesis
+		var fname = field.replace(/=.*$/,""); // powers
+		var fval = field.replace(/^.*=/,""); // Telekinesis
 		var isblank = false;
-		var blankfield = fval.replace(/^>/,"");
+		var blankfield = fval.replace(/^#/,""); // not sure this is needed
 		var gets = [fname];
-		if ( blankfield !== fval ) {
+		if ( blankfield !== fval ) { // Then that means the field started with a #, which means we want to get the contents of a text field that matches the fieldname that followed the # — e.g., condition_raging|current_conditions=#condition_raging_text means that the field current_conditions should be set to include the value of the attribute condition_raging_text rather than translate "#condition_raging_text".
 			isblank = true;
-			gets[1] = blankfield;
+			gets[1] = prefix + blankfield;
 		} else {
-			fval = gTBK(String(fval));
+			fval = gTBK(String(fval)); // Only translate if it makes sense to translate, i.e., this wasn't a text-blank field.
 		}
-		getAttrs(gets, function(f) {
-			if ( isblank ) { fval = f[blankfield].replace(/^ */,"").replace(/ *$/,""); }
-			if ( typeof(fval) !== "undefined" && fval !== "" ) {
+		getAttrs(gets, function(f) { // this part just builds out the comma list of selections
+			if ( isblank ) { fval = f[prefix+blankfield].replace(/^ */,"").replace(/ *$/,""); } // make sure there are no leading or trailing whitespaces on the contents of the user-input text field
+			if ( typeof(fval) !== "undefined" && fval !== "" ) { 
 				if ( f[fname] == fval ) {
 					ats[fname] = "";
 				} else {
@@ -179,6 +213,9 @@ on("clicked:unchecklist clicked:repeating_conditions:unchecklist", function(even
 					ats[fname] = ats[fname].replace(fval + ", ",""); // if there's a comma after it
 					ats[fname] = ats[fname].replace(", " + fval,""); // if there's one before it
 				}
+				log(ats);
+				ats[fname] = scrubUntranslated(ats[fname]); // gotta scrub out untranslated errors
+				log(ats);
 				setAttrs(ats);
 				log(ats);
 			}
