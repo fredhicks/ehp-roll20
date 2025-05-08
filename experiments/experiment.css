@@ -1,0 +1,46 @@
+.grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+	gap: 5px;
+	justify-items: stretch;
+	align-items: stretch;
+	width: 100%;
+	height: 400px;
+}
+
+.grid div {
+	border: 1px solid black;
+}
+.seeme {
+	background: red;
+}
+input.rowpos[value="1"] + .colpos + div {
+	grid-row: 1;
+}
+input.colpos[value="1"] + div {
+	grid-column: 1;
+}
+input.rowpos[value="2"] + .colpos + div {
+	grid-row: 2;
+}
+input.colpos[value="2"] + div {
+	grid-column: 2;
+}
+input.rowpos[value="3"] + .colpos + div {
+	grid-row: 3;
+}
+input.colpos[value="3"] + div {
+	grid-column: 3;
+}
+input.rowpos[value="4"] + .colpos + div {
+	grid-row: 4;
+}
+input.colpos[value="4"] + div {
+	grid-column: 4;
+}
+
+.grid input[type="text"].rowpos,
+.grid input[type="text"].colpos {
+	grid-row: 6;
+}
