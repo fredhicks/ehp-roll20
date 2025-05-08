@@ -72,21 +72,27 @@ input(type="hidden", name="attr_Hunter-Stories" value="0").sheet-null-hider
 												+itext("prompt"+pval+"-opt"+val)
 				.sheet-Hunter-Story-Beats
 					// Story Beats
+					// This is the CUSTOM STORY Story Beats, NOT the ALL OTHER THINGS Story Beats.
 					.sheet-MinorHead
 						+t("Story Beats")
 					+expander("Hunter-Story-StoryBeats","Story Beats")
-						each val in [1,2,3,4,5,6,7,8,9,10]
-							ul
+
+						include hunter-story-beats-track.pug
+
+						ul
+							each val in [1,2,3,4,5]
 								+ihide("beat"+val)(value="").sheet-null-hider
 								li
 									+display("beat"+val)
+							include hunter-story-beats-other-beats.pug
 						+expander("Hunter-Story-Beats-Edit","Edit")
-							each val in [1,2,3,4,5,6,7,8,9,10]
+							each val in [1,2,3,4,5]
 								ul
 									if ( val > 4 )
 										+ihide("beat"+(val-2))(value="").sheet-null-hider
 									li
 										+itext("beat"+val)
+						include hunter-story-beats-benefits.pug
 				.sheet-Hunter-Story-Resolutions
 					.sheet-MinorHead
 						+t("Resolution Moves")
@@ -149,13 +155,18 @@ input(type="hidden", name="attr_Hunter-Stories" value="0").sheet-null-hider
 												+itext(pbns+scount+"-Choice-Prompt"+ocount+"-Text")
 						.sheet-Hunter-Story-Beats
 							// Story Beats
+							// Behold, the STANDARD Story Beats for PREMADE Hunter Stories
 							.sheet-MinorHead
 								+t("Story Beats")
 							+expander("Hunter-Story-StoryBeats","Story Beats")
+								include hunter-story-beats-track.pug
 								ul
 									each beat in story["beats"]
 										li
 											+t(beat)
+									include hunter-story-beats-other-beats.pug
+								include hunter-story-beats-benefits.pug
+
 //
 						.sheet-Hunter-Story-Resolutions
 							.sheet-MinorHead
