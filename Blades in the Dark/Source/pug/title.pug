@@ -67,6 +67,37 @@
 	.setting-faction.generaterow
 		label.generatebutton
 			+checkbox("generate_factions")(data-i18n="generate_factions")
+
+	// Deep Cuts stuff
+
+	.setting-char.setting-crew
+		label
+			span(data-i18n="deep_cuts_modules")
+			span
+			+checkbox("setting_dc_harm").checkbox.squarebox
+			span(data-i18n="Harm")
+			+checkbox("setting_dc_load").checkbox.squarebox
+			span(data-i18n="Load")
+			+checkbox("setting_dc_advancement").checkbox.squarebox
+			span(data-i18n="Advancement")
+			+checkbox("setting_dc_downtime").checkbox.squarebox
+			span(data-i18n="Downtime")
+			+checkbox("setting_dc_action").checkbox.squarebox
+			span(data-i18n="Action")
+
+	+hidden-input("setting_dc_harm")(value="0").hider
+	.setting-char
+		+checkbox("setting_extra_harm3").checkbox.squarebox
+		span(data-i18n="add_second_harm3")
+
+	.setting-faction
+	.setting-faction.generaterow
+		label
+			+checkbox("setting_dc_new_factions").checkbox.squarebox
+			span(data-i18n="new_dc_factions")
+
+	// End Deep Cuts stuff
+
 	.setting-char
 		label
 			select(name="attr_setting_extra_stress")
@@ -199,6 +230,7 @@
 				option(value="hull", data-i18n="hull")
 				option(value="vampire", data-i18n="vampire")
 			span(data-i18n="vice")
+
 	.setting-char.setting-crew.setting-faction
 		label
 			+checkbox("setting_flexwidth").checkbox.squarebox

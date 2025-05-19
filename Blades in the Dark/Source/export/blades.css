@@ -323,6 +323,10 @@
 	display: none;
 }
 
+.charsheet .hider-inverted[value="1"] + li, .charsheet .hider-inverted[value="1"] + div, .charsheet .hider-inverted[value="1"] + label {
+	display: none;
+}
+
 /* Sheet container */
 .charsheet .container {
 	position: relative;
@@ -1743,6 +1747,13 @@
 	-ms-grid-row-span: 2;
 	grid-row: 1/3;
 }
+.charsheet .harmbody.deepcuts {
+	grid: 52px/12px auto auto;
+	border-right: 1px solid var(--blades-blacktext);
+}
+.charsheet .harmbody.deepcuts textarea.taller {
+	height: 78px;
+}
 .charsheet .harmbody {
 	display: -ms-grid;
 	display: grid;
@@ -2441,6 +2452,9 @@
 }
 
 /* COHORTS */
+.charsheet {
+	/* ZOD */
+}
 .charsheet .cohort-title {
 	font-size: 11px;
 }
@@ -2488,6 +2502,24 @@
 	-webkit-box-pack: justify;
 	    -ms-flex-pack: justify;
 	        justify-content: space-between;
+}
+.charsheet .cohort-condition.deepcuts {
+	-webkit-column-gap: 5px;
+	   -moz-column-gap: 5px;
+	        column-gap: 5px;
+}
+.charsheet .cohort-condition.deepcuts label.spread {
+	-webkit-box-flex: 1;
+	    -ms-flex-positive: 1;
+	        flex-grow: 1;
+}
+.charsheet .deepcuts-cohort-harm[value="0"] ~ .cohort .cohort-condition.deepcuts,
+.charsheet .deepcuts-cohort-harm[value="0"] ~ .cohorts.free-repcontrol .repcontainer .cohort .cohort-condition.deepcuts {
+	display: none;
+}
+.charsheet .deepcuts-cohort-harm[value="1"] ~ .cohort .cohort-condition.standard,
+.charsheet .deepcuts-cohort-harm[value="1"] ~ .cohorts.free-repcontrol .repcontainer .cohort .cohort-condition.standard {
+	display: none;
 }
 .charsheet .cohort-condition-name {
 	font-size: 7.5px;

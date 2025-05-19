@@ -419,6 +419,8 @@ mixin makeupgrade(label, numboxes, def, desc)
 	//- Cohorts and Contacts
 	.cohortcolumn
 		//- First Cohort
+		// We need this hidden input .deepcuts-cohort-harm in order to make sure a setting outside the fieldset conveys an effect into the contents of that fieldset. Leave it be, and in this relative position!
+		+hidden-input("setting_dc_harm")(value="0").deepcuts-cohort-harm
 		+makecohort("cohort1_")
 		//- Cohort repeating section
 		.cohorts.free-repcontrol

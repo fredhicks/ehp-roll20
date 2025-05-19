@@ -29,6 +29,7 @@
         name: getTranslationByKey(`crew_${crew}_contact_${i}`)
       }));
       crewData[crew].crewability = crewData[crew].crewability.map(name => ({
+				key: name, // added for Deep Cuts ability swapping support
         name: getTranslationByKey(`crew_ability_${name}`),
         description: getTranslationByKey(`crew_ability_${name}_description`)
       }));
@@ -90,6 +91,7 @@
       } else playbookData[playbook].friend = [];
       playbookData[playbook].ability = playbookData[playbook].ability
         .map(name => ({
+        	key: name, // added this for Deep Cuts support, as otherwise this mapping blows away the ability to confidently locate a specific known ability using an untranslated lookup key
           name: getTranslationByKey(`playbook_ability_${name}`),
           description:
             getTranslationByKey(`playbook_ability_${name}_description`)
@@ -685,6 +687,164 @@
       });
       mySetAttrs(setting);
     });
+  }
+
+	function setDCPlaybookAbilitySwap(pbook, akey) {
+    getAttrs(["setting_dc_harm"], v => {
+    	if (v.setting_dc_harm == "1") {
+    		// Then we are in the DC (Deep Cuts) mode
+    		// Noteworthily, the initialization process OVERWRITES THE PROVIDED STARTING VALUE OF THE ABILITY FIELD FOR EACH PLAYBOOK with a multi-key object instead of just a static key. I had to introduce a new value, key, to that object, so we could have any chance at all of locating a known ability for a swap-out.
+    		// Cutter: vigorous changes to vigorousdc
+    		// log(`Looking for ${pbook}'s ${akey} (errors on some but not all)`);
+    		Object.keys(playbookData[pbook].ability).forEach(ability => {
+    			if (typeof playbookData[pbook].ability[ability].key !== 'undefined' && playbookData[pbook].ability[ability].key == akey) {
+    				const newname = getTranslationByKey(`playbook_ability_${akey}dc`);
+    				const newdesc = getTranslationByKey(`playbook_ability_${akey}dc_description`);
+  	 				const oldname = getTranslationByKey(`playbook_ability_${akey}`);
+    				const olddesc = getTranslationByKey(`playbook_ability_${akey}_description`);
+    				playbookData[pbook].ability[ability].key = akey+'dc';
+    				playbookData[pbook].ability[ability].name = newname;
+    				playbookData[pbook].ability[ability].description = newdesc;
+						getSectionIDs(`repeating_ability`, idList => {
+							const existingRowAttributes = [
+								...idList.map(id => `repeating_ability_${id}_name`),
+								...idList.map(id => `repeating_ability_${id}_description`)
+							];
+							getAttrs(existingRowAttributes, v => {
+								let atts = {};
+								idList.forEach(id => {
+									if (v[`repeating_ability_${id}_name`] == oldname && ( v[`repeating_ability_${id}_description`] == olddesc || v[`repeating_ability_${id}_description`] == "" ) ) {
+										// Then we have the old description and the old name, so let's switch them to the new ones.
+										atts[`repeating_ability_${id}_name`] = newname;
+										atts[`repeating_ability_${id}_description`] = newdesc;
+									}
+								});
+								setAttrs(atts);
+							});
+						});
+    			}
+    		});
+    		// log(playbookData);
+    	} else {
+    		// Then we are not in the DC mode and should reset any dc specific changes
+    		// log(`Looking for ${pbook}'s ${akey}dc (no problem)`);
+    		Object.keys(playbookData[pbook].ability).forEach(ability => {
+    			if (typeof playbookData[pbook].ability[ability].key !== 'undefined' && playbookData[pbook].ability[ability].key == akey+'dc') {
+    				const newname = getTranslationByKey(`playbook_ability_${akey}`);
+    				const newdesc = getTranslationByKey(`playbook_ability_${akey}_description`);
+  	 				const oldname = getTranslationByKey(`playbook_ability_${akey}dc`);
+    				const olddesc = getTranslationByKey(`playbook_ability_${akey}dc_description`);
+    				playbookData[pbook].ability[ability].key = akey;
+    				playbookData[pbook].ability[ability].name = newname;
+    				playbookData[pbook].ability[ability].description = newdesc;
+						getSectionIDs(`repeating_ability`, idList => {
+							const existingRowAttributes = [
+								...idList.map(id => `repeating_ability_${id}_name`),
+								...idList.map(id => `repeating_ability_${id}_description`)
+							];
+							getAttrs(existingRowAttributes, v => {
+								let atts = {};
+								idList.forEach(id => {
+									if (v[`repeating_ability_${id}_name`] == oldname && ( v[`repeating_ability_${id}_description`] == olddesc || v[`repeating_ability_${id}_description`] == "" ) ) {
+										// Then we have the old description and the old name, so let's switch them to the new ones.
+										atts[`repeating_ability_${id}_name`] = newname;
+										atts[`repeating_ability_${id}_description`] = newdesc;
+									}
+								});
+								setAttrs(atts);
+							});
+						});
+    			}
+    		});
+    		// log(playbookData);
+    	}
+    });
+	}
+
+	function setDCCrewAbilitySwap(pbook, akey) {
+    getAttrs(["setting_dc_harm"], v => {
+    	if (v.setting_dc_harm == "1") {
+    		// Then we are in the DC (Deep Cuts) mode
+    		// Noteworthily, the initialization process OVERWRITES THE PROVIDED STARTING VALUE OF THE ABILITY FIELD FOR EACH PLAYBOOK with a multi-key object instead of just a static key. I had to introduce a new value, key, to that object, so we could have any chance at all of locating a known ability for a swap-out.
+    		// Cutter: vigorous changes to vigorousdc
+    		// log(`Looking for ${pbook}'s ${akey} (errors on some but not all)`);
+				log(`Crew ${pbook} Ability ${akey}`);
+				log(crewData[pbook].crewability);
+    		Object.keys(crewData[pbook].crewability).forEach(ability => {
+    			if (typeof crewData[pbook].crewability[ability].key !== 'undefined' && crewData[pbook].crewability[ability].key == akey) {
+    				const newname = getTranslationByKey(`crew_ability_${akey}dc`);
+    				const newdesc = getTranslationByKey(`crew_ability_${akey}dc_description`);
+  	 				const oldname = getTranslationByKey(`crew_ability_${akey}`);
+    				const olddesc = getTranslationByKey(`crew_ability_${akey}_description`);
+    				crewData[pbook].crewability[ability].key = akey+'dc';
+    				crewData[pbook].crewability[ability].name = newname;
+    				crewData[pbook].crewability[ability].description = newdesc;
+						getSectionIDs(`repeating_crewability`, idList => {
+							const existingRowAttributes = [
+								...idList.map(id => `repeating_crewability_${id}_name`),
+								...idList.map(id => `repeating_crewability_${id}_description`)
+							];
+							getAttrs(existingRowAttributes, v => {
+								let atts = {};
+								idList.forEach(id => {
+									if (v[`repeating_crewability_${id}_name`] == oldname && ( v[`repeating_crewability_${id}_description`] == olddesc || v[`repeating_crewability_${id}_description`] == "" ) ) {
+										// Then we have the old description and the old name, so let's switch them to the new ones.
+										atts[`repeating_crewability_${id}_name`] = newname;
+										atts[`repeating_crewability_${id}_description`] = newdesc;
+									}
+								});
+								setAttrs(atts);
+							});
+						});
+    			}
+    		});
+    		// log(playbookData);
+    	} else {
+    		// Then we are not in the DC mode and should reset any dc specific changes
+    		// log(`Looking for ${pbook}'s ${akey}dc (no problem)`);
+    		Object.keys(crewData[pbook].crewability).forEach(ability => {
+    			if (typeof crewData[pbook].crewability[ability].key !== 'undefined' && crewData[pbook].crewability[ability].key == akey+'dc') {
+    				const newname = getTranslationByKey(`crew_ability_${akey}`);
+    				const newdesc = getTranslationByKey(`crew_ability_${akey}_description`);
+  	 				const oldname = getTranslationByKey(`crew_ability_${akey}dc`);
+    				const olddesc = getTranslationByKey(`crew_ability_${akey}dc_description`);
+    				crewData[pbook].crewability[ability].key = akey;
+    				crewData[pbook].crewability[ability].name = newname;
+    				crewData[pbook].crewability[ability].description = newdesc;
+						getSectionIDs(`repeating_crewability`, idList => {
+							const existingRowAttributes = [
+								...idList.map(id => `repeating_crewability_${id}_name`),
+								...idList.map(id => `repeating_crewability_${id}_description`)
+							];
+							getAttrs(existingRowAttributes, v => {
+								let atts = {};
+								idList.forEach(id => {
+									if (v[`repeating_crewability_${id}_name`] == oldname && ( v[`repeating_crewability_${id}_description`] == olddesc || v[`repeating_crewability_${id}_description`] == "" ) ) {
+										// Then we have the old description and the old name, so let's switch them to the new ones.
+										atts[`repeating_crewability_${id}_name`] = newname;
+										atts[`repeating_crewability_${id}_description`] = newdesc;
+									}
+								});
+								setAttrs(atts);
+							});
+						});
+    			}
+    		});
+    		// log(playbookData);
+    	}
+    });
+	}
+
+  function setDCModHarm() {
+  	if ( 1 == 1 ) {
+			getAttrs(["setting_dc_harm"], v => {
+				log('Addressing modification of Deep Cuts harm module')
+				setDCPlaybookAbilitySwap('cutter','vigorous');
+				setDCPlaybookAbilitySwap('hound','tough_as_nails');
+				setDCCrewAbilitySwap('cult','anointed');
+				log('Modification of Deep Cuts harm module setting complete')
+			});
+		}
   }
 
   /* DATA */
@@ -2556,6 +2716,8 @@
   on("sheet:opened change:setting_usekirsty change:setting_custom_actions",
     setupTranslatedAttrs);
   on("change:setting_custom_actions", setRollMods);
+  /* Deep Cuts modules mods */
+  on("sheet:opened change:setting_dc_harm", setDCModHarm);
   /* INITIALISATION AND UPGRADES */
   on("sheet:opened", handleSheetInit);
 })();

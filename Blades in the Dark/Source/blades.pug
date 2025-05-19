@@ -78,11 +78,23 @@ mixin makecohort(prefix, isCharacter)
 			if (isCharacter)
 				.sheet-label.cohort-quality-label(data-i18n="quality_abbreviated") Q:
 				+number-input(`${prefix}quality`)(min="0", max="5", value="1").sheet-label
-		.cohort-condition.flex
+		.cohort-condition.flex.standard
 			each name in ["weak", "impaired", "broken", "armor"]
 				label
 					span(class="cohort-condition-name " + (name ==="armor" ? "sheet-label" : "uppercase"), data-i18n=name)
 					+checkbox(prefix + name).tooth.stresstooth
+		.cohort-condition.flex.deepcuts
+			label
+				span(class="cohort-condition-name uppercase", data-i18n='harm')
+				+checkbox(prefix + 'weak').tooth.stresstooth
+			label
+				+checkbox(prefix + 'impaired').tooth.stresstooth
+			label
+				+checkbox(prefix + 'broken').tooth.stresstooth
+			label.spread
+			label
+				span(class="cohort-condition-name sheet-label", data-i18n='armor')
+				+checkbox(prefix + 'armor').tooth.stresstooth
 		each name in ["edges", "flaws"]
 			label.cohort-edgeflaw
 				span.uppercase(data-i18n=name)

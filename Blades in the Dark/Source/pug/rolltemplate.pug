@@ -64,18 +64,30 @@ rolltemplate.sheet-rolltemplate-bitd-broadcast
 			img(src="https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/Blades%20in%20the%20Dark/Assets/rolltemplate/rolltemplate-title-harm.png")
 		| {{/title-text}}
 		table.harm
+			| {{#deepcuts}}
+			tr
+				td 4
+				td #[.harm-inner {{harm4}}]
+			| {{/deepcuts}}
 			tr
 				td 3
-				td #[.harm-inner {{harm3}}]
+				td 
+					| {{#harm3}}#[.harm-inner {{harm3}}]{{/harm3}}{{#harm3_2}}#[.harm-inner {{harm3_2}}]{{/harm3_2}}
+				| {{^deepcuts}}
 				td(data-i18n="need_help")
+				| {{/deepcuts}}
 			tr
 				td 2
 				td
 					| {{#harm2_1}}#[.harm-inner {{harm2_1}}]{{/harm2_1}}{{#harm2_2}}#[.harm-inner {{harm2_2}}]{{/harm2_2}}
+				| {{^deepcuts}}
 				td(data-i18n="minus1d")
+				| {{/deepcuts}}
 			tr
 				td 1
 				td
 					| {{#harm1_1}}#[.harm-inner {{harm1_1}}]{{/harm1_1}}{{#harm1_2}}#[.harm-inner {{harm1_2}}]{{/harm1_2}}
+				| {{^deepcuts}}
 				td(data-i18n="less_effect")
+				| {{/deepcuts}}
 		| {{/harm}}

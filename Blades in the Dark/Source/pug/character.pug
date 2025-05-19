@@ -102,9 +102,13 @@
 	.harm-coin.grid.sheet-2col
 		//- Harm
 		.harm
+
+			// Standard Harm
+			+hidden-input("setting_dc_harm")(value="0").hider-inverted
 			.blackheader
 				.sheet-label(data-i18n="harm")
 				button.broadcast-button(type="roll", name="roll_Harm", value="&{template:bitd-broadcast} {{charname=@{character_name}}} {{harm=1}} {{harm3=@{harm3}}} {{harm2_1=@{harm2_1}}} {{harm2_2=@{harm2_2}}} {{harm1_1=@{harm1_1}}} {{harm1_2=@{harm1_2}}} {{charimage=@{chat_image}}} @{title_text}", data-i18n-title="send_details_to_chat") :
+			+hidden-input("setting_dc_harm")(value="0").hider-inverted
 			.harmbody
 				.flex-center.harmnumber 3
 				+textarea("harm3").twocols
@@ -117,6 +121,38 @@
 				+textarea("harm1_1")
 				+textarea("harm1_2")
 				.flex-center.harmeffect(data-i18n="less_effect")
+
+			// Deep Cuts Harm
+			+hidden-input("setting_dc_harm")(value="0").hider
+			.blackheader
+				.sheet-label(data-i18n="harm")
+				button.broadcast-button(type="roll", name="roll_HarmDC", value="&{template:bitd-broadcast} {{charname=@{character_name}}} {{harm=1}} {{deepcuts=1}} {{harm4=@{harm4}}} {{harm3=@{harm3}}} {{harm3_2=@{harm3_2}}} {{harm2_1=@{harm2_1}}} {{harm2_2=@{harm2_2}}} {{harm1_1=@{harm1_1}}} {{charimage=@{chat_image}}} @{title_text}", data-i18n-title="send_details_to_chat") :
+			+hidden-input("setting_dc_harm")(value="0").hider
+			div
+				+hidden-input("setting_extra_harm3")(value="0").hider-inverted
+				.harmbody.deepcuts
+					.flex-center.harmnumber 4
+					+textarea("harm4").twocols
+					.flex-center.harmnumber 3
+					+textarea("harm3").twocols
+					.flex-center.harmnumber 2
+					+textarea("harm2_1")
+					+textarea("harm2_2")
+					.flex-center.harmnumber 1
+					+textarea("harm1_1").twocols.taller
+				+hidden-input("setting_extra_harm3")(value="0").hider
+				.harmbody.deepcuts
+					.flex-center.harmnumber 4
+					+textarea("harm4").twocols
+					.flex-center.harmnumber 3
+					+textarea("harm3")
+					+textarea("harm3_2")
+					.flex-center.harmnumber 2
+					+textarea("harm2_1")
+					+textarea("harm2_2")
+					.flex-center.harmnumber 1
+					+textarea("harm1_1").twocols.taller
+
 		//- Healing
 		.healing
 			.blackheader
