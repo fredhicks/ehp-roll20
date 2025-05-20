@@ -118,11 +118,20 @@
     </div>
     <!-- Deep Cuts stuff-->
     <div class="setting-char setting-crew">
-      <label><span data-i18n="deep_cuts_modules"></span><span></span>
+      <label><span data-i18n="deep_cuts_modules"></span><span></span></label>
+      <label>
         <input class="checkbox squarebox" type="checkbox" name="attr_setting_dc_harm" value="1"/><span></span><span data-i18n="Harm"></span>
+      </label>
+      <label>
         <input class="checkbox squarebox" type="checkbox" name="attr_setting_dc_load" value="1"/><span></span><span data-i18n="Load"></span>
+      </label>
+      <label>
         <input class="checkbox squarebox" type="checkbox" name="attr_setting_dc_advancement" value="1"/><span></span><span data-i18n="Advancement"></span>
+      </label>
+      <label>
         <input class="checkbox squarebox" type="checkbox" name="attr_setting_dc_downtime" value="1"/><span></span><span data-i18n="Downtime"></span>
+      </label>
+      <label>
         <input class="checkbox squarebox" type="checkbox" name="attr_setting_dc_action" value="1"/><span></span><span data-i18n="Action"></span>
       </label>
     </div>
@@ -261,6 +270,7 @@
         <input class="checkbox squarebox" type="checkbox" name="attr_setting_consequence_query" value="1"/><span></span><span data-i18n="query_for_consequence"></span>
       </label>
     </div>
+    <input class="hider-inverted" type="hidden" name="attr_setting_dc_load" value="0"/>
     <div class="setting-char"><span data-i18n="load:"></span>
       <label>
         <input type="number" name="attr_setting_load_l" value="3"/><span data-i18n="light"></span>
@@ -272,7 +282,16 @@
         <input type="number" name="attr_setting_load_h" value="6"/><span data-i18n="heavy"></span>
       </label>
     </div>
-    <div class="setting-char">
+    <input class="hider" type="hidden" name="attr_setting_dc_load" value="0"/>
+    <div class="setting-char deepcuts"><span data-i18n="load:"></span>
+      <label>
+        <input type="number" name="attr_setting_load_d" value="4"/><span data-i18n="discreet"></span><span></span><span data-i18n="(no heavy items)"></span>
+      </label>
+      <label>
+        <input type="number" name="attr_setting_load_c" value="6"/><span data-i18n="conspicuous"></span>
+      </label>
+    </div>
+    <div class="setting-char generaterow">
       <label>
         <select name="attr_setting_traumata_set">
           <option value="normal" data-i18n="normal" selected="selected"></option>
@@ -848,6 +867,7 @@
         <div class="reminder"><span data-i18n="autofill_reminder_playbook"></span><br/><span data-i18n="list_playbooks"></span></div>
       </div>
       <div class="itemcolumn">
+        <input class="hider-inverted" type="hidden" name="attr_setting_dc_load" value="0"/>
         <div class="loadheader flex">
           <div class="sheet-label" data-i18n="load"></div>
           <label>
@@ -858,6 +878,16 @@
           </label>
           <label>
             <input class="checkbox" type="checkbox" name="attr_load" value="heavy"/><span></span><span class="loadnumber" name="attr_setting_load_h"></span><span data-i18n="heavy"></span>
+          </label>
+        </div>
+        <input class="hider" type="hidden" name="attr_setting_dc_load" value="0"/>
+        <div class="loadheader flex deepcuts">
+          <div class="sheet-label" data-i18n="load"></div>
+          <label>
+            <input class="checkbox" type="checkbox" name="attr_load" value="discreet"/><span></span><span class="loadnumber" name="attr_setting_load_d"></span><span data-i18n="discreet"></span>
+          </label>
+          <label>
+            <input class="checkbox" type="checkbox" name="attr_load" value="conspicuous"/><span></span><span class="loadnumber" name="attr_setting_load_c"></span><span data-i18n="conspicuous"></span>
           </label>
         </div>
         <div class="itemheader small-margin flex">
@@ -907,6 +937,7 @@
               </fieldset>
             </div>
           </div>
+          <input class="hider-inverted" type="hidden" name="attr_setting_dc_load" value="0"/>
           <div class="regularitems free-repcontrol">
             <fieldset class="repeating_item">
               <input class="input-short" type="hidden" name="attr_short" value="0"/>
@@ -936,6 +967,69 @@
                 </div>
               </div>
             </fieldset>
+          </div>
+          <input class="hider" type="hidden" name="attr_setting_dc_load" value="0"/>
+          <div class="regularitems deepcuts">
+            <div class="itemheader"><span class="italic" data-i18n="light_items"></span></div>
+            <div class="free-repcontrol light">
+              <fieldset class="repeating_item">
+                <!-- Hide the heavy items!-->
+                <input class="heavy-hider" type="hidden" name="attr_numboxes" value="0"/>
+                <input class="input-short" type="hidden" name="attr_short" value="0"/>
+                <input class="input-expand" type="hidden" name="attr_expand" value="0"/>
+                <div class="item-container">
+                  <input class="boxes-chosen" type="hidden" name="attr_boxes_chosen" value="0"/>
+                  <div class="item numboxes-chooser">
+                    <div data-i18n="how_much_load"></div>
+                    <input type="number" name="attr_numboxes" min="0" max="3" value="0"/>
+                    <label>
+                      <input type="checkbox" name="attr_boxes_chosen" value="1"/><span data-i18n="ok"></span>
+                    </label>
+                  </div>
+                  <div class="item">
+                    <input class="numboxes" type="hidden" name="attr_numboxes" value="0"/>
+                    <input class="checkbox squarebox" type="checkbox" name="attr_check_1" value="1"/><span></span><span class="floatingbar boxesgeq2"></span>
+                    <input class="checkbox squarebox boxesgeq2" type="checkbox" name="attr_check_2" value="1"/><span class="boxesgeq2"></span><span class="floatingbar boxesgeq3 boxesgeq2"></span>
+                    <input class="checkbox squarebox boxesgeq2 boxesgeq3" type="checkbox" name="attr_check_3" value="1"/><span class="boxesgeq2 boxesgeq3"></span>
+                    <input class="itemname" type="text" spellcheck="false" name="attr_name" data-i18n-placeholder="item_name"/>
+                  </div>
+                  <div class="item-description">
+                    <input class="expand" type="checkbox" name="attr_expand" value="1"/><span></span>
+                    <textarea spellcheck="false" name="attr_description" data-i18n-placeholder="description"></textarea>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+            <div class="itemheader"><span class="italic" data-i18n="heavy_items"></span></div>
+            <div class="free-repcontrol heavy">
+              <fieldset class="repeating_item">
+                <!-- Hide the light items!-->
+                <input class="light-hider" type="hidden" name="attr_numboxes" value="0"/>
+                <input class="input-short" type="hidden" name="attr_short" value="0"/>
+                <input class="input-expand" type="hidden" name="attr_expand" value="0"/>
+                <div class="item-container">
+                  <input class="boxes-chosen" type="hidden" name="attr_boxes_chosen" value="0"/>
+                  <div class="item numboxes-chooser">
+                    <div data-i18n="how_much_load"></div>
+                    <input type="number" name="attr_numboxes" min="0" max="3" value="0"/>
+                    <label>
+                      <input type="checkbox" name="attr_boxes_chosen" value="1"/><span data-i18n="ok"></span>
+                    </label>
+                  </div>
+                  <div class="item">
+                    <input class="numboxes" type="hidden" name="attr_numboxes" value="0"/>
+                    <input class="checkbox squarebox" type="checkbox" name="attr_check_1" value="1"/><span></span><span class="floatingbar boxesgeq2"></span>
+                    <input class="checkbox squarebox boxesgeq2" type="checkbox" name="attr_check_2" value="1"/><span class="boxesgeq2"></span><span class="floatingbar boxesgeq3 boxesgeq2"></span>
+                    <input class="checkbox squarebox boxesgeq2 boxesgeq3" type="checkbox" name="attr_check_3" value="1"/><span class="boxesgeq2 boxesgeq3"></span>
+                    <input class="itemname" type="text" spellcheck="false" name="attr_name" data-i18n-placeholder="item_name"/>
+                  </div>
+                  <div class="item-description">
+                    <input class="expand" type="checkbox" name="attr_expand" value="1"/><span></span>
+                    <textarea spellcheck="false" name="attr_description" data-i18n-placeholder="description"></textarea>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
           </div>
         </div>
         <div class="def-margin">
@@ -3234,6 +3328,7 @@
         description: getTranslationByKey(`crew_ability_${name}_description`)
       }));
       crewData[crew].upgrade.forEach(upgrade => {
+      	upgrade.key = upgrade.name; // added for Deep Cuts upgrade swapping support
         upgrade.name = getTranslationByKey(upgrade.name);
         upgrade.boxes_chosen = "1";
       });
@@ -3889,9 +3984,9 @@
     });
   }
 
-	function setDCPlaybookAbilitySwap(pbook, akey) {
-    getAttrs(["setting_dc_harm"], v => {
-    	if (v.setting_dc_harm == "1") {
+	function setDCPlaybookAbilitySwap(pbook, akey, dc) {
+    getAttrs([`setting_dc_${dc}`], v => {
+    	if (v[`setting_dc_${dc}`] == "1") {
     		// Then we are in the DC (Deep Cuts) mode
     		// Noteworthily, the initialization process OVERWRITES THE PROVIDED STARTING VALUE OF THE ABILITY FIELD FOR EACH PLAYBOOK with a multi-key object instead of just a static key. I had to introduce a new value, key, to that object, so we could have any chance at all of locating a known ability for a swap-out.
     		// Cutter: vigorous changes to vigorousdc
@@ -3961,9 +4056,9 @@
     });
 	}
 
-	function setDCCrewAbilitySwap(pbook, akey) {
-    getAttrs(["setting_dc_harm"], v => {
-    	if (v.setting_dc_harm == "1") {
+	function setDCCrewAbilitySwap(pbook, akey, dc) {
+    getAttrs([`setting_dc_${dc}`], v => {
+    	if (v[`setting_dc_${dc}`] == "1") {
     		// Then we are in the DC (Deep Cuts) mode
     		// Noteworthily, the initialization process OVERWRITES THE PROVIDED STARTING VALUE OF THE ABILITY FIELD FOR EACH PLAYBOOK with a multi-key object instead of just a static key. I had to introduce a new value, key, to that object, so we could have any chance at all of locating a known ability for a swap-out.
     		// Cutter: vigorous changes to vigorousdc
@@ -4035,13 +4130,90 @@
     });
 	}
 
+	function setDCCrewUpgradeSwap(pbook, akey, dc) {
+		log(`setDCCrewUpgradeSwap(pbook = ${pbook}, akey = ${akey}, dc = ${dc})`)
+    getAttrs([`setting_dc_${dc}`], v => {
+    	if (v[`setting_dc_${dc}`] == "1") {
+    		// Then we are in the DC (Deep Cuts) mode
+    		// Noteworthily, the initialization process OVERWRITES THE PROVIDED STARTING VALUE OF THE NAME FIELD FOR EACH CREW. I had to introduce a new value, key, to that object, so we could have any chance at all of locating a known ability for a swap-out.
+    		Object.keys(crewData[pbook].upgrade).forEach(upg => {
+    			if (typeof crewData[pbook].upgrade[upg].key !== 'undefined' && crewData[pbook].upgrade[upg].key == akey) {
+    				const newname = getTranslationByKey(`${akey}dc`);
+  	 				const oldname = getTranslationByKey(`${akey}`);
+    				crewData[pbook].upgrade[upg].key = akey+'dc';
+    				crewData[pbook].upgrade[upg].name = newname;
+						getSectionIDs(`repeating_upgrade`, idList => {
+							const existingRowAttributes = [
+								...idList.map(id => `repeating_upgrade_${id}_name`),
+							];
+							getAttrs(existingRowAttributes, v => {
+								let atts = {};
+								idList.forEach(id => {
+									if (v[`repeating_upgrade_${id}_name`] == oldname 
+									) {
+										atts[`repeating_upgrade_${id}_name`] = newname;
+									}
+								});
+								setAttrs(atts);
+							});
+						});
+    			}
+    		});
+    	} else {
+    		// Then we are not in the DC mode and should reset any dc specific changes
+    		Object.keys(crewData[pbook].upgrade).forEach(upg => {
+    			if (typeof crewData[pbook].upgrade[upg].key !== 'undefined' && crewData[pbook].upgrade[upg].key == akey+'dc') {
+    				const newname = getTranslationByKey(`${akey}`);
+  	 				const oldname = getTranslationByKey(`${akey}dc`);
+    				crewData[pbook].upgrade[upg].key = akey;
+    				crewData[pbook].upgrade[upg].name = newname;
+						getSectionIDs(`repeating_upgrade`, idList => {
+							const existingRowAttributes = [
+								...idList.map(id => `repeating_upgrade_${id}_name`),
+								...idList.map(id => `repeating_upgrade_${id}_description`)
+							];
+							getAttrs(existingRowAttributes, v => {
+								let atts = {};
+								idList.forEach(id => {
+									if (v[`repeating_upgrade_${id}_name`] == oldname 
+									) {
+										atts[`repeating_upgrade_${id}_name`] = newname;
+									}
+								});
+								setAttrs(atts);
+							});
+						});
+    			}
+    		});
+    	}
+    });
+	}
+
+  function setDCModLoad() {
+  	if ( 1 == 1 ) {
+			getAttrs(["setting_dc_load"], v => {
+				log('Addressing modification of Deep Cuts load module')
+				setDCPlaybookAbilitySwap('cutter','mule','load');
+				setDCCrewUpgradeSwap('assassins','crew_upgrade_assassin_rigging','load')
+				setDCCrewUpgradeSwap('bravos','crew_upgrade_bravos_rigging','load')
+				setDCCrewUpgradeSwap('cult','crew_upgrade_cult_rigging','load')
+				setDCCrewUpgradeSwap('emcees','crew_upgrade_emcee_rigging','load')
+				setDCCrewUpgradeSwap('hawkers',"crew_upgrade_hawker's_rigging",'load')
+				setDCCrewUpgradeSwap('roots','crew_upgrade_roots_rigging','load')
+				setDCCrewUpgradeSwap('smugglers',"crew_upgrade_smuggler's_rigging",'load')
+				setDCCrewUpgradeSwap('shadows','crew_upgrade_thief_rigging','load')
+				log('Modification of Deep Cuts load module setting complete')
+			});
+		}
+  }
+
   function setDCModHarm() {
   	if ( 1 == 1 ) {
 			getAttrs(["setting_dc_harm"], v => {
 				log('Addressing modification of Deep Cuts harm module')
-				setDCPlaybookAbilitySwap('cutter','vigorous');
-				setDCPlaybookAbilitySwap('hound','tough_as_nails');
-				setDCCrewAbilitySwap('cult','anointed');
+				setDCPlaybookAbilitySwap('cutter','vigorous','harm');
+				setDCPlaybookAbilitySwap('hound','tough_as_nails','harm');
+				setDCCrewAbilitySwap('cult','anointed','harm');
 				log('Modification of Deep Cuts harm module setting complete')
 			});
 		}
@@ -5918,6 +6090,7 @@
   on("change:setting_custom_actions", setRollMods);
   /* Deep Cuts modules mods */
   on("sheet:opened change:setting_dc_harm", setDCModHarm);
+  on("sheet:opened change:setting_dc_load", setDCModLoad);
   /* INITIALISATION AND UPGRADES */
   on("sheet:opened", handleSheetInit);
 })();

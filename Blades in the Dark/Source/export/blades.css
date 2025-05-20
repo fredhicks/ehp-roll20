@@ -327,6 +327,14 @@
 	display: none;
 }
 
+.charsheet .hider[value="0"] + li, .charsheet .hider[value="0"] + div, .charsheet .hider[value="0"] + label {
+	display: none;
+}
+
+.charsheet .heavy-hider[value="0"] ~ .item-container, .charsheet .heavy-hider[value="0"] ~ .item-container .item, .charsheet .heavy-hider[value="0"] ~ .item-container .item-description, .charsheet .light-hider[value="1"] ~ .item-container, .charsheet .light-hider[value="1"] ~ .item-container .item, .charsheet .light-hider[value="1"] ~ .item-container .item-description, .charsheet .heavy-hider[value="2"] ~ .item-container, .charsheet .heavy-hider[value="2"] ~ .item-container .item, .charsheet .heavy-hider[value="2"] ~ .item-container .item-description, .charsheet .heavy-hider[value="3"] ~ .item-container, .charsheet .heavy-hider[value="3"] ~ .item-container .item, .charsheet .heavy-hider[value="3"] ~ .item-container .item-description {
+	display: none;
+}
+
 /* Sheet container */
 .charsheet .container {
 	position: relative;
@@ -557,6 +565,9 @@
 }
 
 /* ITEMS/UPGRADES */
+.charsheet {
+	/* hide the add button on the 'light' listing since it's only part of the damn list */
+}
 .charsheet .itemholder > div {
 	padding: 5px;
 }
@@ -567,6 +578,20 @@
 }
 .charsheet .playbookitems {
 	background: var(--blades-lightest);
+}
+.charsheet .regularitems.deepcuts {
+	padding: 0px;
+}
+.charsheet .regularitems.deepcuts .repcontainer {
+	display: block;
+}
+.charsheet .regularitems.deepcuts .free-repcontrol.light button.btn.repcontrol_add {
+	/* border: 1px solid yellow; */
+	display: none !important;
+}
+.charsheet .regularitems.deepcuts .free-repcontrol.heavy .repcontainer .itemcontrol:has(+ .light-hider[value="1"]) {
+	/* border: 1px solid green; */
+	display: none;
 }
 .charsheet .regularitems {
 	-ms-grid-columns: 50% 50%;

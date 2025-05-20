@@ -278,9 +278,19 @@
 	//- Items and Planning
 	.itemcolumn
 		//- Load
+
+		+hidden-input("setting_dc_load")(value="0").hider-inverted
 		.loadheader.flex
 			.sheet-label(data-i18n="load")
 			each val in ["light", "normal", "heavy"]
+				label
+					+checkbox("load")(value=val).checkbox
+					span.loadnumber(name=`attr_setting_load_${val[0]}`)
+					span(data-i18n=val)
+		+hidden-input("setting_dc_load")(value="0").hider
+		.loadheader.flex.deepcuts
+			.sheet-label(data-i18n="load")
+			each val in ["discreet", "conspicuous"]
 				label
 					+checkbox("load")(value=val).checkbox
 					span.loadnumber(name=`attr_setting_load_${val[0]}`)
@@ -324,6 +334,7 @@
 							+checkbox("check").checkbox.circlebox
 							+text-input("name")(data-i18n-placeholder="frame_feature").itemname
 			//- Regular items
+			+hidden-input("setting_dc_load")(value="0").hider-inverted
 			.regularitems.free-repcontrol
 				fieldset.repeating_item
 					+hidden-input("short")(value="0").input-short
@@ -348,6 +359,60 @@
 						.item-description
 							+checkbox("expand").expand
 							+textarea("description")(data-i18n-placeholder="description")
+			+hidden-input("setting_dc_load")(value="0").hider
+			.regularitems.deepcuts
+				.itemheader
+					span(data-i18n="light_items").italic
+				.free-repcontrol.light
+					fieldset.repeating_item
+						// Hide the heavy items!
+						+hidden-input("numboxes")(value="0").heavy-hider
+						+hidden-input("short")(value="0").input-short
+						+hidden-input("expand")(value="0").input-expand
+						.item-container
+							+hidden-input("boxes_chosen")(value="0").boxes-chosen
+							.item.numboxes-chooser
+								div(data-i18n="how_much_load")
+								+number-input("numboxes")(min="0", max="3", value="0")
+								label
+									+checkbox("boxes_chosen")(data-i18n="ok")
+							.item
+								+hidden-input("numboxes")(value="0").numboxes
+								+checkbox("check_1").checkbox.squarebox
+								span.floatingbar.boxesgeq2
+								+checkbox("check_2", "boxesgeq2").checkbox.squarebox
+								span.floatingbar.boxesgeq3.boxesgeq2
+								+checkbox("check_3", "boxesgeq2 boxesgeq3").checkbox.squarebox
+								+text-input("name")(data-i18n-placeholder="item_name").itemname
+							.item-description
+								+checkbox("expand").expand
+								+textarea("description")(data-i18n-placeholder="description")
+				.itemheader
+					span(data-i18n="heavy_items").italic
+				.free-repcontrol.heavy
+					fieldset.repeating_item
+						// Hide the light items!
+						+hidden-input("numboxes")(value="0").light-hider
+						+hidden-input("short")(value="0").input-short
+						+hidden-input("expand")(value="0").input-expand
+						.item-container
+							+hidden-input("boxes_chosen")(value="0").boxes-chosen
+							.item.numboxes-chooser
+								div(data-i18n="how_much_load")
+								+number-input("numboxes")(min="0", max="3", value="0")
+								label
+									+checkbox("boxes_chosen")(data-i18n="ok")
+							.item
+								+hidden-input("numboxes")(value="0").numboxes
+								+checkbox("check_1").checkbox.squarebox
+								span.floatingbar.boxesgeq2
+								+checkbox("check_2", "boxesgeq2").checkbox.squarebox
+								span.floatingbar.boxesgeq3.boxesgeq2
+								+checkbox("check_3", "boxesgeq2 boxesgeq3").checkbox.squarebox
+								+text-input("name")(data-i18n-placeholder="item_name").itemname
+							.item-description
+								+checkbox("expand").expand
+								+textarea("description")(data-i18n-placeholder="description")
 		//- Alchemicals
 		.def-margin
 			input.title-checkbox(type="checkbox", name="attr_show_alchemicals", value="1")

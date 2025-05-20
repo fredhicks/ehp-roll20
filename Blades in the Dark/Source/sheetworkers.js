@@ -34,6 +34,7 @@
         description: getTranslationByKey(`crew_ability_${name}_description`)
       }));
       crewData[crew].upgrade.forEach(upgrade => {
+      	upgrade.key = upgrade.name; // added for Deep Cuts upgrade swapping support
         upgrade.name = getTranslationByKey(upgrade.name);
         upgrade.boxes_chosen = "1";
       });
@@ -689,9 +690,9 @@
     });
   }
 
-	function setDCPlaybookAbilitySwap(pbook, akey) {
-    getAttrs(["setting_dc_harm"], v => {
-    	if (v.setting_dc_harm == "1") {
+	function setDCPlaybookAbilitySwap(pbook, akey, dc) {
+    getAttrs([`setting_dc_${dc}`], v => {
+    	if (v[`setting_dc_${dc}`] == "1") {
     		// Then we are in the DC (Deep Cuts) mode
     		// Noteworthily, the initialization process OVERWRITES THE PROVIDED STARTING VALUE OF THE ABILITY FIELD FOR EACH PLAYBOOK with a multi-key object instead of just a static key. I had to introduce a new value, key, to that object, so we could have any chance at all of locating a known ability for a swap-out.
     		// Cutter: vigorous changes to vigorousdc
@@ -761,9 +762,9 @@
     });
 	}
 
-	function setDCCrewAbilitySwap(pbook, akey) {
-    getAttrs(["setting_dc_harm"], v => {
-    	if (v.setting_dc_harm == "1") {
+	function setDCCrewAbilitySwap(pbook, akey, dc) {
+    getAttrs([`setting_dc_${dc}`], v => {
+    	if (v[`setting_dc_${dc}`] == "1") {
     		// Then we are in the DC (Deep Cuts) mode
     		// Noteworthily, the initialization process OVERWRITES THE PROVIDED STARTING VALUE OF THE ABILITY FIELD FOR EACH PLAYBOOK with a multi-key object instead of just a static key. I had to introduce a new value, key, to that object, so we could have any chance at all of locating a known ability for a swap-out.
     		// Cutter: vigorous changes to vigorousdc
@@ -835,13 +836,90 @@
     });
 	}
 
+	function setDCCrewUpgradeSwap(pbook, akey, dc) {
+		log(`setDCCrewUpgradeSwap(pbook = ${pbook}, akey = ${akey}, dc = ${dc})`)
+    getAttrs([`setting_dc_${dc}`], v => {
+    	if (v[`setting_dc_${dc}`] == "1") {
+    		// Then we are in the DC (Deep Cuts) mode
+    		// Noteworthily, the initialization process OVERWRITES THE PROVIDED STARTING VALUE OF THE NAME FIELD FOR EACH CREW. I had to introduce a new value, key, to that object, so we could have any chance at all of locating a known ability for a swap-out.
+    		Object.keys(crewData[pbook].upgrade).forEach(upg => {
+    			if (typeof crewData[pbook].upgrade[upg].key !== 'undefined' && crewData[pbook].upgrade[upg].key == akey) {
+    				const newname = getTranslationByKey(`${akey}dc`);
+  	 				const oldname = getTranslationByKey(`${akey}`);
+    				crewData[pbook].upgrade[upg].key = akey+'dc';
+    				crewData[pbook].upgrade[upg].name = newname;
+						getSectionIDs(`repeating_upgrade`, idList => {
+							const existingRowAttributes = [
+								...idList.map(id => `repeating_upgrade_${id}_name`),
+							];
+							getAttrs(existingRowAttributes, v => {
+								let atts = {};
+								idList.forEach(id => {
+									if (v[`repeating_upgrade_${id}_name`] == oldname 
+									) {
+										atts[`repeating_upgrade_${id}_name`] = newname;
+									}
+								});
+								setAttrs(atts);
+							});
+						});
+    			}
+    		});
+    	} else {
+    		// Then we are not in the DC mode and should reset any dc specific changes
+    		Object.keys(crewData[pbook].upgrade).forEach(upg => {
+    			if (typeof crewData[pbook].upgrade[upg].key !== 'undefined' && crewData[pbook].upgrade[upg].key == akey+'dc') {
+    				const newname = getTranslationByKey(`${akey}`);
+  	 				const oldname = getTranslationByKey(`${akey}dc`);
+    				crewData[pbook].upgrade[upg].key = akey;
+    				crewData[pbook].upgrade[upg].name = newname;
+						getSectionIDs(`repeating_upgrade`, idList => {
+							const existingRowAttributes = [
+								...idList.map(id => `repeating_upgrade_${id}_name`),
+								...idList.map(id => `repeating_upgrade_${id}_description`)
+							];
+							getAttrs(existingRowAttributes, v => {
+								let atts = {};
+								idList.forEach(id => {
+									if (v[`repeating_upgrade_${id}_name`] == oldname 
+									) {
+										atts[`repeating_upgrade_${id}_name`] = newname;
+									}
+								});
+								setAttrs(atts);
+							});
+						});
+    			}
+    		});
+    	}
+    });
+	}
+
+  function setDCModLoad() {
+  	if ( 1 == 1 ) {
+			getAttrs(["setting_dc_load"], v => {
+				log('Addressing modification of Deep Cuts load module')
+				setDCPlaybookAbilitySwap('cutter','mule','load');
+				setDCCrewUpgradeSwap('assassins','crew_upgrade_assassin_rigging','load')
+				setDCCrewUpgradeSwap('bravos','crew_upgrade_bravos_rigging','load')
+				setDCCrewUpgradeSwap('cult','crew_upgrade_cult_rigging','load')
+				setDCCrewUpgradeSwap('emcees','crew_upgrade_emcee_rigging','load')
+				setDCCrewUpgradeSwap('hawkers',"crew_upgrade_hawker's_rigging",'load')
+				setDCCrewUpgradeSwap('roots','crew_upgrade_roots_rigging','load')
+				setDCCrewUpgradeSwap('smugglers',"crew_upgrade_smuggler's_rigging",'load')
+				setDCCrewUpgradeSwap('shadows','crew_upgrade_thief_rigging','load')
+				log('Modification of Deep Cuts load module setting complete')
+			});
+		}
+  }
+
   function setDCModHarm() {
   	if ( 1 == 1 ) {
 			getAttrs(["setting_dc_harm"], v => {
 				log('Addressing modification of Deep Cuts harm module')
-				setDCPlaybookAbilitySwap('cutter','vigorous');
-				setDCPlaybookAbilitySwap('hound','tough_as_nails');
-				setDCCrewAbilitySwap('cult','anointed');
+				setDCPlaybookAbilitySwap('cutter','vigorous','harm');
+				setDCPlaybookAbilitySwap('hound','tough_as_nails','harm');
+				setDCCrewAbilitySwap('cult','anointed','harm');
 				log('Modification of Deep Cuts harm module setting complete')
 			});
 		}
@@ -2718,6 +2796,7 @@
   on("change:setting_custom_actions", setRollMods);
   /* Deep Cuts modules mods */
   on("sheet:opened change:setting_dc_harm", setDCModHarm);
+  on("sheet:opened change:setting_dc_load", setDCModLoad);
   /* INITIALISATION AND UPGRADES */
   on("sheet:opened", handleSheetInit);
 })();

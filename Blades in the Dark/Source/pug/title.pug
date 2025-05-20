@@ -74,14 +74,19 @@
 		label
 			span(data-i18n="deep_cuts_modules")
 			span
+		label
 			+checkbox("setting_dc_harm").checkbox.squarebox
 			span(data-i18n="Harm")
+		label
 			+checkbox("setting_dc_load").checkbox.squarebox
 			span(data-i18n="Load")
+		label
 			+checkbox("setting_dc_advancement").checkbox.squarebox
 			span(data-i18n="Advancement")
+		label
 			+checkbox("setting_dc_downtime").checkbox.squarebox
 			span(data-i18n="Downtime")
+		label
 			+checkbox("setting_dc_action").checkbox.squarebox
 			span(data-i18n="Action")
 
@@ -203,6 +208,7 @@
 		label
 			+checkbox("setting_consequence_query").checkbox.squarebox
 			span(data-i18n="query_for_consequence")
+	+hidden-input("setting_dc_load")(value="0").hider-inverted
 	.setting-char
 		span(data-i18n="load:")
 		label
@@ -214,7 +220,18 @@
 		label
 			+number-input("setting_load_h")(value="6")
 			span(data-i18n="heavy")
-	.setting-char
+	+hidden-input("setting_dc_load")(value="0").hider
+	.setting-char.deepcuts
+		span(data-i18n="load:")
+		label
+			+number-input("setting_load_d")(value="4")
+			span(data-i18n="discreet")
+			span
+			span(data-i18n="(no heavy items)")
+		label
+			+number-input("setting_load_c")(value="6")
+			span(data-i18n="conspicuous")
+	.setting-char.generaterow
 		label
 			select(name="attr_setting_traumata_set")
 				option(value="normal", data-i18n="normal", selected)
