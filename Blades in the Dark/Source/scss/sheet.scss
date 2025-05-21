@@ -355,7 +355,9 @@ $redriver_d: #600; // #500 in light mode
 .charsheet .grid {
 	display: grid;
 	.sheet-2col { grid-column: span 2 }
+	/* > div { border: 1px solid green; } */
 }
+
 .charsheet .type-character .left-column {
 	grid: auto / 1.1fr .9fr;
 	align-content: start;
@@ -959,6 +961,9 @@ $redriver_d: #600; // #500 in light mode
 		.clocks-only[value="1"] ~ & {
 			grid-template-columns: repeat(4, 1fr);
 		}
+	}
+	.container .type-faction .clocks.sheet-4cols .repcontainer {
+			grid-template-columns: repeat(4, 1fr);
 	}
 	.clocks-only[value="1"] ~ .container .type-faction {
 		grid: auto / auto;

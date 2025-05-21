@@ -20,22 +20,42 @@ mixin makefactions(number, title)
 	label.generatebutton
 		+checkbox("generate_factions")(data-i18n="generate_factions")
 	+fortuneroll("Fortune_faction", "{{type=fortune}} {{title-fortune=1}} {{title=^{fortune}}} {{short=short}} {{charname=}}", true)(data-i18n="roll_fortune").fortunebutton.borderbutton
-.factions.sheet-2col.grid.free-repcontrol
-	+makefactions(1, "Underworld").sheet-2row
-	+makefactions(2, "Institutions").sheet-2row
-	+makefactions(3, "Labor & Trade")
-	+makefactions(5, "Citizenry")
-	+makefactions(4, "The Fringe")
-	.warblurb
-		.sheet-label(data-i18n="war")
-		ul
-			li.nondot(data-i18n="warblurb1")
-			li(data-i18n="warblurb2")
-			li(data-i18n="warblurb3")
-			li(data-i18n="warblurb4")
-			li(data-i18n="warblurb5")
-.clocks.free-repcontrol
+.clocks.free-repcontrol.sheet-4cols.sheet-2col
 	.specialheader.sheet-label(data-i18n="clocks")
 	fieldset.repeating_factionclock
 		+makeclock
+.factions.sheet-2col.grid.free-repcontrol
+	.column
+		+makefactions(1, "Underworld")
+		+hidden-input("setting_dc_new_factions")(value="0").hider
+		+makefactions(8, "Others")
+	.column
+		+makefactions(2, "Institutions")
+	.column.sheet-2row
+		+makefactions(3, "Labor & Trade")
+		+makefactions(4, "The Fringe")
+	.column.sheet-2row
+		// Lose Citizenry when it's Deep Cuts
+		+hidden-input("setting_dc_new_factions")(value="0").hider-inverted
+		+makefactions(5, "Citizenry")
+		// Gain Nobility/Bosses + Citizens + blank Others when it's Deep Cuts
+		+hidden-input("setting_dc_new_factions")(value="0").hider
+		+makefactions(6, "Nobility/Bosses")
+		+hidden-input("setting_dc_new_factions")(value="0").hider
+		+makefactions(7, "Citizens")
+// Not doing clocks like this now, moved them up top instead
+	.clocks.free-repcontrol.grid.sheet-2col
+		.specialheader.sheet-label(data-i18n="clocks")
+		fieldset.repeating_factionclock
+			+makeclock
 +textarea("faction_notes")(data-i18n-placeholder="notes").notes
+// Lose the warblurb when it's Deep Cuts
++hidden-input("setting_dc_new_factions")(value="0").hider-inverted
+.warblurb
+	.sheet-label(data-i18n="war")
+	ul
+		li.nondot(data-i18n="warblurb1")
+		li(data-i18n="warblurb2")
+		li(data-i18n="warblurb3")
+		li(data-i18n="warblurb4")
+		li(data-i18n="warblurb5")

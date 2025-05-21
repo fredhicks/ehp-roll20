@@ -361,6 +361,7 @@
 .charsheet .grid {
 	display: -ms-grid;
 	display: grid;
+	/* > div { border: 1px solid green; } */
 }
 .charsheet .grid .sheet-2col {
 	-ms-grid-column-span: 2;
@@ -1135,6 +1136,10 @@
 	grid-template-columns: repeat(3, 1fr);
 }
 .clocks-only[value="1"] ~ .charsheet .container .type-faction .clocks .repcontainer {
+	-ms-grid-columns: (1fr)[4];
+	grid-template-columns: repeat(4, 1fr);
+}
+.charsheet .container .type-faction .clocks.sheet-4cols .repcontainer {
 	-ms-grid-columns: (1fr)[4];
 	grid-template-columns: repeat(4, 1fr);
 }

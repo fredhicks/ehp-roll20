@@ -48,8 +48,15 @@
       translatedDefaults[k] = getTranslationByKey(translatedDefaults[k]);
     });
     Object.assign(defaultValues, translatedDefaults);
-    Object.keys(factionsData).forEach(x => {
-      factionsData[x].forEach(faction => {
+    Object.keys(factionsDataStd).forEach(x => {
+      factionsDataStd[x].forEach(faction => {
+      	faction.key = faction.name; // In case I need access to the authoritative originating key again
+        faction.name = getTranslationByKey(faction.name);
+      });
+    });
+    Object.keys(factionsDataDC).forEach(x => {
+      factionsDataDC[x].forEach(faction => {
+      	faction.key = faction.name; // In case I need access to the authoritative originating key again
         faction.name = getTranslationByKey(faction.name);
       });
     });
@@ -120,7 +127,7 @@
       return [x.name.toLowerCase(), x.description];
     }));
     [
-      crewData, playbookData, factionsData, actionData, traumaData, itemData,
+      crewData, playbookData, factionsDataStd, factionsDataDC, actionData, traumaData, itemData,
       translatedDefaults, defaultValues, spiritPlaybooks, alchemicalData,
     ].forEach(x => Object.freeze(x));
     return [playbookAbilityMap, crewAbilityMap];
@@ -664,10 +671,23 @@
 
   function generateFactions() {
     setAttr("show_faction_generatebutton", "0");
-    Object.keys(factionsData).forEach(sectionName => {
-      fillRepeatingSectionFromData(sectionName, factionsData[sectionName]);
-    });
+		getAttrs(["setting_dc_new_factions"], v => {
+			let factionsData = factionsDataStd;
+			if ( v["setting_dc_new_factions"] == 1 ) {
+				factionsData = factionsDataDC;
+			}
+			Object.keys(factionsData).forEach(sectionName => {
+				fillRepeatingSectionFromData(sectionName, factionsData[sectionName]);
+			});
+		});
   }
+
+	function setDCModFactions() {
+		log('Addressing modification of Deep Cuts factions module')
+		generateFactions(); // this is sensitive to the setting
+		log('Modification of Deep Cuts factions module setting complete')
+	}
+
 
   function setRollMods() {
     getAttrs(["setting_custom_actions"], v => {
@@ -896,33 +916,25 @@
 	}
 
   function setDCModLoad() {
-  	if ( 1 == 1 ) {
-			getAttrs(["setting_dc_load"], v => {
-				log('Addressing modification of Deep Cuts load module')
-				setDCPlaybookAbilitySwap('cutter','mule','load');
-				setDCCrewUpgradeSwap('assassins','crew_upgrade_assassin_rigging','load')
-				setDCCrewUpgradeSwap('bravos','crew_upgrade_bravos_rigging','load')
-				setDCCrewUpgradeSwap('cult','crew_upgrade_cult_rigging','load')
-				setDCCrewUpgradeSwap('emcees','crew_upgrade_emcee_rigging','load')
-				setDCCrewUpgradeSwap('hawkers',"crew_upgrade_hawker's_rigging",'load')
-				setDCCrewUpgradeSwap('roots','crew_upgrade_roots_rigging','load')
-				setDCCrewUpgradeSwap('smugglers',"crew_upgrade_smuggler's_rigging",'load')
-				setDCCrewUpgradeSwap('shadows','crew_upgrade_thief_rigging','load')
-				log('Modification of Deep Cuts load module setting complete')
-			});
-		}
+		log('Addressing modification of Deep Cuts load module')
+		setDCPlaybookAbilitySwap('cutter','mule','load');
+		setDCCrewUpgradeSwap('assassins','crew_upgrade_assassin_rigging','load')
+		setDCCrewUpgradeSwap('bravos','crew_upgrade_bravos_rigging','load')
+		setDCCrewUpgradeSwap('cult','crew_upgrade_cult_rigging','load')
+		setDCCrewUpgradeSwap('emcees','crew_upgrade_emcee_rigging','load')
+		setDCCrewUpgradeSwap('hawkers',"crew_upgrade_hawker's_rigging",'load')
+		setDCCrewUpgradeSwap('roots','crew_upgrade_roots_rigging','load')
+		setDCCrewUpgradeSwap('smugglers',"crew_upgrade_smuggler's_rigging",'load')
+		setDCCrewUpgradeSwap('shadows','crew_upgrade_thief_rigging','load')
+		log('Modification of Deep Cuts load module setting complete')
   }
 
   function setDCModHarm() {
-  	if ( 1 == 1 ) {
-			getAttrs(["setting_dc_harm"], v => {
-				log('Addressing modification of Deep Cuts harm module')
-				setDCPlaybookAbilitySwap('cutter','vigorous','harm');
-				setDCPlaybookAbilitySwap('hound','tough_as_nails','harm');
-				setDCCrewAbilitySwap('cult','anointed','harm');
-				log('Modification of Deep Cuts harm module setting complete')
-			});
-		}
+		log('Addressing modification of Deep Cuts harm module')
+		setDCPlaybookAbilitySwap('cutter','vigorous','harm');
+		setDCPlaybookAbilitySwap('hound','tough_as_nails','harm');
+		setDCCrewAbilitySwap('cult','anointed','harm');
+		log('Modification of Deep Cuts harm module setting complete')
   }
 
   /* DATA */
@@ -2112,7 +2124,8 @@
       }]
     }
   };
-  const factionsData = {
+
+  const factionsDataStd = {
     factions1: [
       {
         name: "faction_the_unseen",
@@ -2424,6 +2437,438 @@
       }
     ]
   };
+
+  const factionsDataDC = {
+    factions1: [
+      {
+        name: "faction_the_unseen",
+        tier: "IV",
+        hold: "S"
+      },
+      {
+        name: "faction_the_hive",
+        tier: "IV",
+        hold: "S"
+      },
+      {
+        name: "faction_the_circle_of_flame",
+        tier: "III",
+        hold: "S"
+      },
+      {
+        name: "faction_the_silver_nails",
+        tier: "III",
+        hold: "S"
+      },
+      {
+        name: "faction_lord_scurlock",
+        tier: "III",
+        hold: "S"
+      },
+      {
+      	name: "faction_tangletown",
+      	tier: "II",
+      	hold: "S"
+      },
+      {
+        name: "faction_the_crows",
+        tier: "II",
+        hold: "W"
+      },
+      {
+        name: "faction_the_lampblacks",
+        tier: "II",
+        hold: "W"
+      },
+      {
+        name: "faction_the_red_sashes",
+        tier: "II",
+        hold: "W"
+      },
+      {
+        name: "faction_the_dimmer_sisters",
+        tier: "II",
+        hold: "S"
+      },
+      {
+        name: "faction_the_grinders",
+        tier: "II",
+        hold: "W"
+      },
+      {
+        name: "faction_the_billhooks",
+        tier: "II",
+        hold: "W"
+      },
+      {
+        name: "faction_the_wraiths",
+        tier: "II",
+        hold: "W"
+      },
+      {
+        name: "faction_the_gray_cloaks",
+        tier: "II",
+        hold: "S"
+      },
+      {
+        name: "faction_ulf_ironborn",
+        tier: "I",
+        hold: "S"
+      },
+      {
+        name: "faction_the_foghounds",
+        tier: "I",
+        hold: "W"
+      },
+      {
+        name: "faction_the_lost",
+        tier: "I",
+        hold: "W"
+      }
+    ],
+    factions2: [
+      {
+        name: "faction_imperial_military",
+        tier: "VI",
+        hold: "S"
+      },
+      {
+        name: "faction_covenant",
+        tier: "VI",
+        hold: "S"
+      },
+      {
+        name: "faction_city_council",
+        tier: "V",
+        hold: "S"
+      },
+      {
+        name: "faction_ministry_of_preservation",
+        tier: "V",
+        hold: "S"
+      },
+      {
+        name: "faction_leviathan_hunters",
+        tier: "V",
+        hold: "S"
+      },
+      {
+        name: "faction_unity_commission",
+        tier: "V",
+        hold: "S"
+      },
+      {
+        name: "faction_ironhook_prison",
+        tier: "IV",
+        hold: "S"
+      },
+      {
+        name: "faction_sparkwrights",
+        tier: "IV",
+        hold: "S"
+      },
+      {
+        name: "faction_spirit_wardens",
+        tier: "IV",
+        hold: "S"
+      },
+      {
+        name: "faction_rowan_house",
+        tier: "IV",
+        hold: "S"
+      },
+      {
+        name: "faction_bluecoats",
+        tier: "III",
+        hold: "S"
+      },
+      {
+        name: "faction_inspectors",
+        tier: "III",
+        hold: "S"
+      },
+      {
+        name: "faction_iruvian_consulate",
+        tier: "III",
+        hold: "S"
+      },
+      {
+        name: "faction_skovlan_consulate",
+        tier: "III",
+        hold: "W"
+      },
+      {
+        name: "faction_strangford_house",
+        tier: "III",
+        hold: "W"
+      },
+      {
+        name: "faction_the_brigade",
+        tier: "II",
+        hold: "S"
+      },
+      {
+        name: "faction_severosi_consulate",
+        tier: "I",
+        hold: "S"
+      },
+      {
+        name: "faction_dagger_isles_consulate",
+        tier: "I",
+        hold: "S"
+      }
+    ],
+    factions3: [
+      {
+        name: "faction_the_foundation",
+        tier: "IV",
+        hold: "S"
+      },
+      {
+        name: "faction_dockers",
+        tier: "III",
+        hold: "S"
+      },
+      {
+        name: "faction_gondoliers",
+        tier: "III",
+        hold: "S"
+      },
+      {
+        name: "faction_sailors",
+        tier: "III",
+        hold: "W"
+      },
+      {
+        name: "faction_laborers",
+        tier: "III",
+        hold: "W"
+      },
+      {
+        name: "faction_cabbies",
+        tier: "II",
+        hold: "W"
+      },
+      {
+        name: "faction_cyphers",
+        tier: "II",
+        hold: "S"
+      },
+      {
+        name: "faction_ink_rakes",
+        tier: "II",
+        hold: "W"
+      },
+      {
+        name: "faction_ironworks_labor",
+        tier: "II",
+        hold: "S"
+      },
+      {
+        name: "faction_rail_jacks",
+        tier: "II",
+        hold: "W"
+      },
+      {
+        name: "faction_servants",
+        tier: "II",
+        hold: "W"
+      },
+      {
+        name: "faction_void_divers",
+        tier: "II",
+        hold: "S"
+      }
+   ],
+    factions4: [
+      {
+        name: "faction_the_church_of_ecstasy",
+        tier: "IV",
+        hold: "S"
+      },
+      {
+        name: "faction_the_horde",
+        tier: "III",
+        hold: "S"
+      },
+      {
+        name: "faction_the_path_of_echoes",
+        tier: "III",
+        hold: "S"
+      },
+      {
+        name: "faction_the_forgotten_gods",
+        tier: "III",
+        hold: "W"
+      },
+      {
+        name: "faction_the_reconciled",
+        tier: "III",
+        hold: "S"
+      },
+      {
+        name: "faction_skovlander_refugees",
+        tier: "III",
+        hold: "W"
+      },
+      {
+        name: "faction_ragskulla",
+        tier: "II",
+        hold: "S"
+      },
+      {
+        name: "faction_the_weeping_lady",
+        tier: "II",
+        hold: "S"
+      },
+      {
+        name: "faction_deathlands_scavengers",
+        tier: "II",
+        hold: "W"
+      },
+      {
+        name: "faction_sparkrunners",
+        tier: "I",
+        hold: "S"
+      },
+      {
+        name: "faction_unchained",
+        tier: "I",
+        hold: "S"
+      },
+      {
+        name: "faction_strangers",
+        tier: "0",
+        hold: "W"
+      }
+    ],
+    factions5: [], // Not used in Deep Cuts version
+    factions6: [ // Nobility/Bosses
+      {
+        name: "faction_whitecrown",
+        tier: "V",
+        hold: "S"
+      },
+      {
+        name: "faction_brightstone",
+        tier: "IV",
+        hold: "S"
+      },
+      {
+        name: "faction_charterhall",
+        tier: "IV",
+        hold: "S"
+      },
+      {
+        name: "faction_six_towers",
+        tier: "III",
+        hold: "W"
+      },
+      {
+        name: "faction_silkshore",
+        tier: "II",
+        hold: "S"
+      },
+      {
+        name: "faction_nightmarket",
+        tier: "II",
+        hold: "S"
+      },
+      {
+        name: "faction_crow's_foot",
+        tier: "II",
+        hold: "S"
+      },
+      {
+        name: "faction_the_docks",
+        tier: "IV",
+        hold: "S"
+      },
+      {
+        name: "faction_barrowcleft",
+        tier: "IV",
+        hold: "S"
+      },
+      {
+        name: "faction_coalridge",
+        tier: "III",
+        hold: "S"
+      },
+      {
+        name: "faction_charhollow",
+        tier: "II",
+        hold: "S"
+      },
+      {
+        name: "faction_dunslough",
+        tier: "II",
+        hold: "S"
+      }
+    ],
+    factions7: [ // Citizens
+      {
+        name: "faction_whitecrown",
+        tier: "III",
+        hold: "S"
+      },
+      {
+        name: "faction_brightstone",
+        tier: "III",
+        hold: "S"
+      },
+      {
+        name: "faction_charterhall",
+        tier: "III",
+        hold: "S"
+      },
+      {
+        name: "faction_six_towers",
+        tier: "II",
+        hold: "W"
+      },
+      {
+        name: "faction_silkshore",
+        tier: "II",
+        hold: "S"
+      },
+      {
+        name: "faction_nightmarket",
+        tier: "II",
+        hold: "S"
+      },
+      {
+        name: "faction_crow's_foot",
+        tier: "I",
+        hold: "S"
+      },
+      {
+        name: "faction_the_docks",
+        tier: "I",
+        hold: "S"
+      },
+      {
+        name: "faction_barrowcleft",
+        tier: "I",
+        hold: "S"
+      },
+      {
+        name: "faction_coalridge",
+        tier: "I",
+        hold: "S"
+      },
+      {
+        name: "faction_charhollow",
+        tier: "I",
+        hold: "W"
+      },
+      {
+        name: "faction_dunslough",
+        tier: "0",
+        hold: "S"
+      }
+    ]
+  };
+
   const actionData = {
     insight: [
       "hunt",
@@ -2797,6 +3242,7 @@
   /* Deep Cuts modules mods */
   on("sheet:opened change:setting_dc_harm", setDCModHarm);
   on("sheet:opened change:setting_dc_load", setDCModLoad);
+  on("change:setting_dc_new_factions", setDCModFactions); // I *think* this doesn't need sheet:opened
   /* INITIALISATION AND UPGRADES */
   on("sheet:opened", handleSheetInit);
 })();
