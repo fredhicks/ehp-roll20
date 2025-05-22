@@ -331,6 +331,10 @@
 	display: none;
 }
 
+.charsheet .heavy-hider[value="0"] ~ li, .charsheet .heavy-hider[value="0"] div, .charsheet .heavy-hider[value="0"] label {
+	display: none;
+}
+
 .charsheet .heavy-hider[value="0"] ~ .item-container, .charsheet .heavy-hider[value="0"] ~ .item-container .item, .charsheet .heavy-hider[value="0"] ~ .item-container .item-description, .charsheet .light-hider[value="1"] ~ .item-container, .charsheet .light-hider[value="1"] ~ .item-container .item, .charsheet .light-hider[value="1"] ~ .item-container .item-description, .charsheet .heavy-hider[value="2"] ~ .item-container, .charsheet .heavy-hider[value="2"] ~ .item-container .item, .charsheet .heavy-hider[value="2"] ~ .item-container .item-description, .charsheet .heavy-hider[value="3"] ~ .item-container, .charsheet .heavy-hider[value="3"] ~ .item-container .item, .charsheet .heavy-hider[value="3"] ~ .item-container .item-description {
 	display: none;
 }
@@ -838,10 +842,19 @@
 .charsheet .advancement-desc li.nondot::before, .charsheet .warblurb li.nondot::before {
 	display: none;
 }
+.charsheet .advancement-preamble {
+	color: var(--blades-blacktext);
+	background: var(--blades-lightest);
+	padding-left: 4px;
+}
+.charsheet .advancement-preamble div, .charsheet .advancement-preamble span {
+	color: var(--blades-blacktext);
+	font-size: 10px;
+}
 .charsheet .advancement-desc {
 	width: 99%;
 	background: var(--blades-lightest);
-	padding: 15px 10px 4px 11px;
+	padding: 4px 10px 4px 11px;
 }
 .charsheet .advancement-desc li {
 	font-style: italic;
@@ -983,6 +996,35 @@
 .charsheet {
 	/* Faction clocks */
 	/* End positioning */
+}
+.charsheet .deepcuts.flexp {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	    -ms-flex-direction: row;
+	        flex-direction: row;
+	background: var(--blades-lightest);
+	gap: 6px;
+	-webkit-box-align: start;
+	    -ms-flex-align: start;
+	        align-items: flex-start;
+}
+.charsheet .deepcuts.flexp .instructions {
+	-webkit-box-flex: 1;
+	    -ms-flex-positive: 1;
+	        flex-grow: 1;
+}
+.charsheet .deepcuts .xpclocks {
+	background: var(--blades-lightest);
+	display: -ms-grid;
+	display: grid;
+	-ms-grid-columns: 1fr 6px 1fr;
+	grid-template-columns: 1fr 1fr;
+	grid-gap: 6px;
+	padding-top: 4px;
+	padding-right: 10px;
 }
 .charsheet .clocks .repcontainer {
 	display: -ms-grid;

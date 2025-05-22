@@ -208,7 +208,9 @@
 	.advancement.sheet-2col
 		.advancement-header.flex.blackheader
 			.sheet-label.markxp(data-i18n="mark_xp:")
+			+hidden-input("setting_dc_advancement")(value="0").hider-inverted
 			.sheet-label(data-i18n="playbook_advancement")
+			+hidden-input("setting_dc_advancement")(value="0").hider-inverted
 			.xpholder.flex
 				+hidden-input("setting_vampirexp")(value="0").vampirexp
 				+radio("playbook_xp")(value="0", checked).tooth.zero
@@ -216,18 +218,62 @@
 					if (num === 9)
 						+hidden-input("setting_vampirexp")(value="0").toothhider
 					+radio("playbook_xp")(value=num).tooth.xptooth
-		ul.advancement-desc
-			li(data-i18n="xp_desperate")
-			li.nondot(data-i18n="xp_top")
-			li
-				+autoexpand("xp_condition")(data-i18n-placeholder="xp_specific")
-			+hidden-input("setting_extra_xp")(value="0").hider
-			li
-				+autoexpand("xp_condition_extra")(data-i18n-placeholder="xp_specific_extra")
-			li
-				+autoexpand("xp_condition2") You expressed your beliefs, drives, heritage, or background.
-			li
-				+autoexpand("xp_condition3") You struggled with issues from your vice or traumas during the session.
+		+hidden-input("setting_dc_advancement")(value="0").hider-inverted
+		.standard
+			ul.advancement-desc
+				li(data-i18n="xp_desperate")
+				li.nondot(data-i18n="xp_top")
+				li
+					+autoexpand("xp_condition")(data-i18n-placeholder="xp_specific")
+				+hidden-input("setting_extra_xp")(value="0").hider
+				li
+					+autoexpand("xp_condition_extra")(data-i18n-placeholder="xp_specific_extra")
+				li
+					+autoexpand("xp_condition2") You expressed your beliefs, drives, heritage, or background.
+				li
+					+autoexpand("xp_condition3") You struggled with issues from your vice or traumas during the session.
+		+hidden-input("setting_dc_advancement")(value="0").hider
+		.deepcuts.advancement-preamble
+			span(data-i18n="xp_top_dc")
+		+hidden-input("setting_dc_advancement")(value="0").hider
+		.deepcuts.flexp
+			.instructions
+				ul.advancement-desc
+					li.nondot(data-i18n="xp_dc_marking")
+					li
+						+autoexpand("xp_conditiondc")
+					+hidden-input("setting_extra_xp")(value="0").hider
+					li
+						+autoexpand("xp_condition_extra")(data-i18n-placeholder="xp_specific_extra")
+					li
+						+autoexpand("xp_conditiondc2") You expressed your beliefs, drives, heritage, or background.
+					li
+						+autoexpand("xp_conditiondc3") You struggled with issues from your vice or traumas during the session.
+			.xpclocks
+				each xpc in range(1,4)
+					+hidden-input("dc_xp_clocksize")(value="6").size
+					.clock-container
+						.spoke-0.all
+						.spoke-30.sheet-12clock
+						.spoke-45.sheet-8clock
+						.spoke-36.sheet-10clock
+						.spoke-60.sheet-6clock.sheet-12clock
+						.spoke-72.sheet-10clock
+						.spoke-90.sheet-4clock.sheet-8clock.sheet-12clock
+						.spoke-108.sheet-10clock
+						.spoke-120.sheet-6clock.sheet-12clock
+						.spoke-135.sheet-8clock
+						.spoke-144.sheet-10clock
+						.spoke-150.sheet-12clock
+						+radio(`dc_xpclock_${xpc}`)(value="0", checked).zero.input-progress
+						each num in range(1,8)
+							if num <= 4
+								input.input-progress.all(type="radio", name=`attr_dc_xpclock_${xpc}`, value=num)
+							else if num <= 6
+								input.input-progress.sheet-6clock.sheet-8clock(type="radio", name=`attr_dc_xpclock_${xpc}`, value=num)
+							else if num <= 8
+								input.input-progress.sheet-8clock(type="radio", name=`attr_dc_xpclock_${xpc}`, value=num)
+						.clock
 	//- Teamwork
 	.teamwork
 		.plainheader.sheet-label(data-i18n="teamwork")
@@ -472,6 +518,7 @@
 					+hidden-input(`${attribute}_formula`)(value=zerodiceFormula)
 					+hidden-input(`${attribute}_xp_max`)(value="6")
 					+hidden-input(`${attribute}_roll_mods`)(value="")
+					+hidden-input("setting_dc_advancement")(value="0").hider-inverted
 					.attribute-xp-box.flex
 						+hidden-input("setting_vampirexp")(value="0").vampirexp
 						+radio(`${attribute}_xp`)(value="0", checked).tooth.zero

@@ -83,7 +83,10 @@
           "special_abilities_title",
           "xp_condition",
           "xp_condition2",
-          "xp_condition3"
+          "xp_condition3",
+          "xp_conditiondc",
+          "xp_conditiondc2",
+          "xp_conditiondc3"
         ];
       Object.keys(base).forEach(attr => {
         if (translatedBaseAttributes.includes(attr)) {
@@ -681,13 +684,6 @@
 			});
 		});
   }
-
-	function setDCModFactions() {
-		log('Addressing modification of Deep Cuts factions module')
-		generateFactions(); // this is sensitive to the setting
-		log('Modification of Deep Cuts factions module setting complete')
-	}
-
 
   function setRollMods() {
     getAttrs(["setting_custom_actions"], v => {
@@ -1598,7 +1594,10 @@
         special_abilities_title: "ghost_traits",
         xp_condition: "playbook_ghost_xp_condition",
         xp_condition2: "playbook_ghost_xp_condition2",
-        xp_condition3: "playbook_ghost_xp_condition3"
+        xp_condition3: "playbook_ghost_xp_condition3",
+        xp_conditiondc: "playbook_ghost_xp_condition",
+        xp_conditiondc2: "playbook_ghost_xp_condition2",
+        xp_conditiondc3: "playbook_ghost_xp_condition3"
       },
       playbookitem: []
     },
@@ -1662,7 +1661,10 @@
         special_abilities_title: "hull_traits",
         xp_condition: "playbook_hull_xp_condition",
         xp_condition2: "playbook_hull_xp_condition2",
-        xp_condition3: "playbook_hull_xp_condition3"
+        xp_condition3: "playbook_hull_xp_condition3",
+        xp_conditiondc: "playbook_hull_xp_condition",
+        xp_conditiondc2: "playbook_hull_xp_condition2",
+        xp_conditiondc3: "playbook_hull_xp_condition3"
       },
       playbookitem: []
     },
@@ -1989,7 +1991,10 @@
         trauma: "4",
         xp_condition: "playbook_vampire_xp_condition",
         xp_condition2: "playbook_vampire_xp_condition2",
-        xp_condition3: "playbook_vampire_xp_condition3"
+        xp_condition3: "playbook_vampire_xp_condition3",
+        xp_conditiondc: "playbook_vampire_xp_condition",
+        xp_conditiondc2: "playbook_vampire_xp_condition2",
+        xp_conditiondc3: "playbook_vampire_xp_condition3"
       },
       playbookitem: [{
         bold: "1",
@@ -3037,7 +3042,10 @@
     upgrade_mastery_name: "mastery",
     upgrade_mastery_description: "upgrade_mastery_description",
     xp_condition2: "xp_beliefs",
-    xp_condition3: "xp_vice"
+    xp_condition3: "xp_vice",
+    xp_conditiondc: "xp_conditiondc",
+    xp_conditiondc2: "xp_conditiondc2",
+    xp_conditiondc3: "xp_conditiondc3",
   };
   const defaultValues = {
     attune: "0",
@@ -3142,6 +3150,9 @@
     "xp_condition_extra",
     "xp_condition2",
     "xp_condition3",
+    "xp_conditiondc",
+    "xp_conditiondc2",
+    "xp_conditiondc3",
     "crew_xp_condition",
     "hunting_grounds_type",
     "hunting_grounds_description",
@@ -3242,7 +3253,6 @@
   /* Deep Cuts modules mods */
   on("sheet:opened change:setting_dc_harm", setDCModHarm);
   on("sheet:opened change:setting_dc_load", setDCModLoad);
-  on("change:setting_dc_new_factions", setDCModFactions); // I *think* this doesn't need sheet:opened
   /* INITIALISATION AND UPGRADES */
   on("sheet:opened", handleSheetInit);
 })();

@@ -145,6 +145,16 @@
         <input class="checkbox squarebox" type="checkbox" name="attr_setting_dc_new_factions" value="1"/><span></span><span data-i18n="new_dc_factions"></span>
       </label>
     </div>
+    <input class="hider" type="hidden" name="attr_setting_dc_advancement" value="0"/>
+    <div class="setting-char setting-crew">
+      <label>
+        <select name="attr_dc_xp_clocksize">
+          <option value="6">6</option>
+          <option value="4">4</option>
+          <option value="8">8</option>
+        </select><span data-i18n="advancement_clock_size"></span>
+      </label>
+    </div>
     <!-- End Deep Cuts stuff-->
     <div class="setting-char">
       <label>
@@ -752,7 +762,9 @@
       <div class="advancement sheet-2col">
         <div class="advancement-header flex blackheader">
           <div class="sheet-label markxp" data-i18n="mark_xp:"></div>
+          <input class="hider-inverted" type="hidden" name="attr_setting_dc_advancement" value="0"/>
           <div class="sheet-label" data-i18n="playbook_advancement"></div>
+          <input class="hider-inverted" type="hidden" name="attr_setting_dc_advancement" value="0"/>
           <div class="xpholder flex">
             <input class="vampirexp" type="hidden" name="attr_setting_vampirexp" value="0"/>
             <input class="tooth zero" type="radio" name="attr_playbook_xp" value="0" checked="checked"/><span></span>
@@ -769,31 +781,167 @@
             <input class="tooth xptooth" type="radio" name="attr_playbook_xp" value="10"/><span></span>
           </div>
         </div>
-        <ul class="advancement-desc">
-          <li data-i18n="xp_desperate"></li>
-          <li class="nondot" data-i18n="xp_top"></li>
-          <li>
-            <div class="auto-expand"><span name="attr_xp_condition"></span>
-              <textarea spellcheck="false" name="attr_xp_condition" data-i18n-placeholder="xp_specific"></textarea>
+        <input class="hider-inverted" type="hidden" name="attr_setting_dc_advancement" value="0"/>
+        <div class="standard">
+          <ul class="advancement-desc">
+            <li data-i18n="xp_desperate"></li>
+            <li class="nondot" data-i18n="xp_top"></li>
+            <li>
+              <div class="auto-expand"><span name="attr_xp_condition"></span>
+                <textarea spellcheck="false" name="attr_xp_condition" data-i18n-placeholder="xp_specific"></textarea>
+              </div>
+            </li>
+            <input class="hider" type="hidden" name="attr_setting_extra_xp" value="0"/>
+            <li>
+              <div class="auto-expand"><span name="attr_xp_condition_extra"></span>
+                <textarea spellcheck="false" name="attr_xp_condition_extra" data-i18n-placeholder="xp_specific_extra"></textarea>
+              </div>
+            </li>
+            <li>
+              <div class="auto-expand"><span name="attr_xp_condition2">You expressed your beliefs, drives, heritage, or background.</span>
+                <textarea spellcheck="false" name="attr_xp_condition2">You expressed your beliefs, drives, heritage, or background.</textarea>
+              </div>
+            </li>
+            <li>
+              <div class="auto-expand"><span name="attr_xp_condition3">You struggled with issues from your vice or traumas during the session.</span>
+                <textarea spellcheck="false" name="attr_xp_condition3">You struggled with issues from your vice or traumas during the session.</textarea>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <input class="hider" type="hidden" name="attr_setting_dc_advancement" value="0"/>
+        <div class="deepcuts advancement-preamble"><span data-i18n="xp_top_dc"></span></div>
+        <input class="hider" type="hidden" name="attr_setting_dc_advancement" value="0"/>
+        <div class="deepcuts flexp">
+          <div class="instructions">
+            <ul class="advancement-desc">
+              <li class="nondot" data-i18n="xp_dc_marking"></li>
+              <li>
+                <div class="auto-expand"><span name="attr_xp_conditiondc"></span>
+                  <textarea spellcheck="false" name="attr_xp_conditiondc"></textarea>
+                </div>
+              </li>
+              <input class="hider" type="hidden" name="attr_setting_extra_xp" value="0"/>
+              <li>
+                <div class="auto-expand"><span name="attr_xp_condition_extra"></span>
+                  <textarea spellcheck="false" name="attr_xp_condition_extra" data-i18n-placeholder="xp_specific_extra"></textarea>
+                </div>
+              </li>
+              <li>
+                <div class="auto-expand"><span name="attr_xp_conditiondc2">You expressed your beliefs, drives, heritage, or background.</span>
+                  <textarea spellcheck="false" name="attr_xp_conditiondc2">You expressed your beliefs, drives, heritage, or background.</textarea>
+                </div>
+              </li>
+              <li>
+                <div class="auto-expand"><span name="attr_xp_conditiondc3">You struggled with issues from your vice or traumas during the session.</span>
+                  <textarea spellcheck="false" name="attr_xp_conditiondc3">You struggled with issues from your vice or traumas during the session.</textarea>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="xpclocks">
+            <input class="size" type="hidden" name="attr_dc_xp_clocksize" value="6"/>
+            <div class="clock-container">
+              <div class="spoke-0 all"></div>
+              <div class="spoke-30 sheet-12clock"></div>
+              <div class="spoke-45 sheet-8clock"></div>
+              <div class="spoke-36 sheet-10clock"></div>
+              <div class="spoke-60 sheet-6clock sheet-12clock"></div>
+              <div class="spoke-72 sheet-10clock"></div>
+              <div class="spoke-90 sheet-4clock sheet-8clock sheet-12clock"></div>
+              <div class="spoke-108 sheet-10clock"></div>
+              <div class="spoke-120 sheet-6clock sheet-12clock"></div>
+              <div class="spoke-135 sheet-8clock"></div>
+              <div class="spoke-144 sheet-10clock"></div>
+              <div class="spoke-150 sheet-12clock"></div>
+              <input class="zero input-progress" type="radio" name="attr_dc_xpclock_1" value="0" checked="checked"/><span></span>
+              <input class="input-progress all" type="radio" name="attr_dc_xpclock_1" value="1"/>
+              <input class="input-progress all" type="radio" name="attr_dc_xpclock_1" value="2"/>
+              <input class="input-progress all" type="radio" name="attr_dc_xpclock_1" value="3"/>
+              <input class="input-progress all" type="radio" name="attr_dc_xpclock_1" value="4"/>
+              <input class="input-progress sheet-6clock sheet-8clock" type="radio" name="attr_dc_xpclock_1" value="5"/>
+              <input class="input-progress sheet-6clock sheet-8clock" type="radio" name="attr_dc_xpclock_1" value="6"/>
+              <input class="input-progress sheet-8clock" type="radio" name="attr_dc_xpclock_1" value="7"/>
+              <input class="input-progress sheet-8clock" type="radio" name="attr_dc_xpclock_1" value="8"/>
+              <div class="clock"></div>
             </div>
-          </li>
-          <input class="hider" type="hidden" name="attr_setting_extra_xp" value="0"/>
-          <li>
-            <div class="auto-expand"><span name="attr_xp_condition_extra"></span>
-              <textarea spellcheck="false" name="attr_xp_condition_extra" data-i18n-placeholder="xp_specific_extra"></textarea>
+            <input class="size" type="hidden" name="attr_dc_xp_clocksize" value="6"/>
+            <div class="clock-container">
+              <div class="spoke-0 all"></div>
+              <div class="spoke-30 sheet-12clock"></div>
+              <div class="spoke-45 sheet-8clock"></div>
+              <div class="spoke-36 sheet-10clock"></div>
+              <div class="spoke-60 sheet-6clock sheet-12clock"></div>
+              <div class="spoke-72 sheet-10clock"></div>
+              <div class="spoke-90 sheet-4clock sheet-8clock sheet-12clock"></div>
+              <div class="spoke-108 sheet-10clock"></div>
+              <div class="spoke-120 sheet-6clock sheet-12clock"></div>
+              <div class="spoke-135 sheet-8clock"></div>
+              <div class="spoke-144 sheet-10clock"></div>
+              <div class="spoke-150 sheet-12clock"></div>
+              <input class="zero input-progress" type="radio" name="attr_dc_xpclock_2" value="0" checked="checked"/><span></span>
+              <input class="input-progress all" type="radio" name="attr_dc_xpclock_2" value="1"/>
+              <input class="input-progress all" type="radio" name="attr_dc_xpclock_2" value="2"/>
+              <input class="input-progress all" type="radio" name="attr_dc_xpclock_2" value="3"/>
+              <input class="input-progress all" type="radio" name="attr_dc_xpclock_2" value="4"/>
+              <input class="input-progress sheet-6clock sheet-8clock" type="radio" name="attr_dc_xpclock_2" value="5"/>
+              <input class="input-progress sheet-6clock sheet-8clock" type="radio" name="attr_dc_xpclock_2" value="6"/>
+              <input class="input-progress sheet-8clock" type="radio" name="attr_dc_xpclock_2" value="7"/>
+              <input class="input-progress sheet-8clock" type="radio" name="attr_dc_xpclock_2" value="8"/>
+              <div class="clock"></div>
             </div>
-          </li>
-          <li>
-            <div class="auto-expand"><span name="attr_xp_condition2">You expressed your beliefs, drives, heritage, or background.</span>
-              <textarea spellcheck="false" name="attr_xp_condition2">You expressed your beliefs, drives, heritage, or background.</textarea>
+            <input class="size" type="hidden" name="attr_dc_xp_clocksize" value="6"/>
+            <div class="clock-container">
+              <div class="spoke-0 all"></div>
+              <div class="spoke-30 sheet-12clock"></div>
+              <div class="spoke-45 sheet-8clock"></div>
+              <div class="spoke-36 sheet-10clock"></div>
+              <div class="spoke-60 sheet-6clock sheet-12clock"></div>
+              <div class="spoke-72 sheet-10clock"></div>
+              <div class="spoke-90 sheet-4clock sheet-8clock sheet-12clock"></div>
+              <div class="spoke-108 sheet-10clock"></div>
+              <div class="spoke-120 sheet-6clock sheet-12clock"></div>
+              <div class="spoke-135 sheet-8clock"></div>
+              <div class="spoke-144 sheet-10clock"></div>
+              <div class="spoke-150 sheet-12clock"></div>
+              <input class="zero input-progress" type="radio" name="attr_dc_xpclock_3" value="0" checked="checked"/><span></span>
+              <input class="input-progress all" type="radio" name="attr_dc_xpclock_3" value="1"/>
+              <input class="input-progress all" type="radio" name="attr_dc_xpclock_3" value="2"/>
+              <input class="input-progress all" type="radio" name="attr_dc_xpclock_3" value="3"/>
+              <input class="input-progress all" type="radio" name="attr_dc_xpclock_3" value="4"/>
+              <input class="input-progress sheet-6clock sheet-8clock" type="radio" name="attr_dc_xpclock_3" value="5"/>
+              <input class="input-progress sheet-6clock sheet-8clock" type="radio" name="attr_dc_xpclock_3" value="6"/>
+              <input class="input-progress sheet-8clock" type="radio" name="attr_dc_xpclock_3" value="7"/>
+              <input class="input-progress sheet-8clock" type="radio" name="attr_dc_xpclock_3" value="8"/>
+              <div class="clock"></div>
             </div>
-          </li>
-          <li>
-            <div class="auto-expand"><span name="attr_xp_condition3">You struggled with issues from your vice or traumas during the session.</span>
-              <textarea spellcheck="false" name="attr_xp_condition3">You struggled with issues from your vice or traumas during the session.</textarea>
+            <input class="size" type="hidden" name="attr_dc_xp_clocksize" value="6"/>
+            <div class="clock-container">
+              <div class="spoke-0 all"></div>
+              <div class="spoke-30 sheet-12clock"></div>
+              <div class="spoke-45 sheet-8clock"></div>
+              <div class="spoke-36 sheet-10clock"></div>
+              <div class="spoke-60 sheet-6clock sheet-12clock"></div>
+              <div class="spoke-72 sheet-10clock"></div>
+              <div class="spoke-90 sheet-4clock sheet-8clock sheet-12clock"></div>
+              <div class="spoke-108 sheet-10clock"></div>
+              <div class="spoke-120 sheet-6clock sheet-12clock"></div>
+              <div class="spoke-135 sheet-8clock"></div>
+              <div class="spoke-144 sheet-10clock"></div>
+              <div class="spoke-150 sheet-12clock"></div>
+              <input class="zero input-progress" type="radio" name="attr_dc_xpclock_4" value="0" checked="checked"/><span></span>
+              <input class="input-progress all" type="radio" name="attr_dc_xpclock_4" value="1"/>
+              <input class="input-progress all" type="radio" name="attr_dc_xpclock_4" value="2"/>
+              <input class="input-progress all" type="radio" name="attr_dc_xpclock_4" value="3"/>
+              <input class="input-progress all" type="radio" name="attr_dc_xpclock_4" value="4"/>
+              <input class="input-progress sheet-6clock sheet-8clock" type="radio" name="attr_dc_xpclock_4" value="5"/>
+              <input class="input-progress sheet-6clock sheet-8clock" type="radio" name="attr_dc_xpclock_4" value="6"/>
+              <input class="input-progress sheet-8clock" type="radio" name="attr_dc_xpclock_4" value="7"/>
+              <input class="input-progress sheet-8clock" type="radio" name="attr_dc_xpclock_4" value="8"/>
+              <div class="clock"></div>
             </div>
-          </li>
-        </ul>
+          </div>
+        </div>
       </div>
       <div class="teamwork">
         <div class="plainheader sheet-label" data-i18n="teamwork"></div>
@@ -1078,6 +1226,7 @@
             <input type="hidden" name="attr_insight_formula" value=" {{?{@{bonusdice}|0,zerodice=[[d6]]&amp;#44; [[d6]]|1,dice=[[d6]]|2,dice=[[d6]]&amp;#44; [[d6]]|3,dice=[[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]|4,dice=[[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]|5,dice=[[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]|6,dice=[[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]|-1,zerodice=[[d6]]&amp;#44; [[d6]]|-2,zerodice=[[d6]]&amp;#44; [[d6]]|-3,zerodice=[[d6]]&amp;#44; [[d6]]}}}"/>
             <input type="hidden" name="attr_insight_xp_max" value="6"/>
             <input type="hidden" name="attr_insight_roll_mods" value=""/>
+            <input class="hider-inverted" type="hidden" name="attr_setting_dc_advancement" value="0"/>
             <div class="attribute-xp-box flex">
               <input class="vampirexp" type="hidden" name="attr_setting_vampirexp" value="0"/>
               <input class="tooth zero" type="radio" name="attr_insight_xp" value="0" checked="checked"/><span></span>
@@ -1159,6 +1308,7 @@
             <input type="hidden" name="attr_prowess_formula" value=" {{?{@{bonusdice}|0,zerodice=[[d6]]&amp;#44; [[d6]]|1,dice=[[d6]]|2,dice=[[d6]]&amp;#44; [[d6]]|3,dice=[[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]|4,dice=[[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]|5,dice=[[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]|6,dice=[[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]|-1,zerodice=[[d6]]&amp;#44; [[d6]]|-2,zerodice=[[d6]]&amp;#44; [[d6]]|-3,zerodice=[[d6]]&amp;#44; [[d6]]}}}"/>
             <input type="hidden" name="attr_prowess_xp_max" value="6"/>
             <input type="hidden" name="attr_prowess_roll_mods" value=""/>
+            <input class="hider-inverted" type="hidden" name="attr_setting_dc_advancement" value="0"/>
             <div class="attribute-xp-box flex">
               <input class="vampirexp" type="hidden" name="attr_setting_vampirexp" value="0"/>
               <input class="tooth zero" type="radio" name="attr_prowess_xp" value="0" checked="checked"/><span></span>
@@ -1240,6 +1390,7 @@
             <input type="hidden" name="attr_resolve_formula" value=" {{?{@{bonusdice}|0,zerodice=[[d6]]&amp;#44; [[d6]]|1,dice=[[d6]]|2,dice=[[d6]]&amp;#44; [[d6]]|3,dice=[[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]|4,dice=[[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]|5,dice=[[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]|6,dice=[[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]|-1,zerodice=[[d6]]&amp;#44; [[d6]]|-2,zerodice=[[d6]]&amp;#44; [[d6]]|-3,zerodice=[[d6]]&amp;#44; [[d6]]}}}"/>
             <input type="hidden" name="attr_resolve_xp_max" value="6"/>
             <input type="hidden" name="attr_resolve_roll_mods" value=""/>
+            <input class="hider-inverted" type="hidden" name="attr_setting_dc_advancement" value="0"/>
             <div class="attribute-xp-box flex">
               <input class="vampirexp" type="hidden" name="attr_setting_vampirexp" value="0"/>
               <input class="tooth zero" type="radio" name="attr_resolve_xp" value="0" checked="checked"/><span></span>
@@ -2565,7 +2716,9 @@
       <div class="advancement def-margin">
         <div class="advancement-header flex blackheader">
           <div class="sheet-label markxp" data-i18n="mark_xp:"></div>
+          <input class="hider-inverted" type="hidden" name="attr_setting_dc_advancement" value="0"/>
           <div class="sheet-label" data-i18n="crew_advancement"></div>
+          <input class="hider-inverted" type="hidden" name="attr_setting_dc_advancement" value="0"/>
           <div class="xpholder flex">
             <input class="tooth zero" type="radio" name="attr_crew_xp" value="0" checked="checked"/><span></span>
             <input class="tooth xptooth" type="radio" name="attr_crew_xp" value="1"/><span></span>
@@ -2580,23 +2733,150 @@
             <input class="tooth xptooth" type="radio" name="attr_crew_xp" value="10"/><span></span>
           </div>
         </div>
-        <ul class="advancement-desc">
-          <li class="nondot" data-i18n="xp_top"></li>
-          <li>
-            <div class="auto-expand"><span name="attr_crew_xp_condition"></span>
-              <textarea spellcheck="false" name="attr_crew_xp_condition" data-i18n-placeholder="xp_crew_specific"></textarea>
+        <input class="hider" type="hidden" name="attr_setting_dc_advancement" value="0"/>
+        <div class="deepcuts advancement-preamble"><span data-i18n="xp_top_crew_dc"></span></div>
+        <input class="hider-inverted" type="hidden" name="attr_setting_dc_advancement" value="0"/>
+        <div class="standard">
+          <ul class="advancement-desc">
+            <li class="nondot" data-i18n="xp_top"></li>
+            <li>
+              <div class="auto-expand"><span name="attr_crew_xp_condition"></span>
+                <textarea spellcheck="false" name="attr_crew_xp_condition" data-i18n-placeholder="xp_crew_specific"></textarea>
+              </div>
+            </li>
+            <input class="hider" type="hidden" name="attr_setting_extra_xp" value="0"/>
+            <li>
+              <div class="auto-expand"><span name="attr_xp_condition_extra"></span>
+                <textarea spellcheck="false" name="attr_xp_condition_extra" data-i18n-placeholder="xp_specific_extra"></textarea>
+              </div>
+            </li>
+            <li data-i18n="xp_contend"></li>
+            <li data-i18n="xp_bolster"></li>
+            <li data-i18n="xp_express"></li>
+          </ul>
+        </div>
+        <input class="hider" type="hidden" name="attr_setting_dc_advancement" value="0"/>
+        <div class="deepcuts flexp">
+          <ul class="advancement-desc">
+            <li class="nondot" data-i18n="xp_top"></li>
+            <li>
+              <div class="auto-expand"><span name="attr_crew_xp_condition"></span>
+                <textarea spellcheck="false" name="attr_crew_xp_condition" data-i18n-placeholder="xp_crew_specific"></textarea>
+              </div>
+            </li>
+            <input class="hider" type="hidden" name="attr_setting_extra_xp" value="0"/>
+            <li>
+              <div class="auto-expand"><span name="attr_xp_condition_extra"></span>
+                <textarea spellcheck="false" name="attr_xp_condition_extra" data-i18n-placeholder="xp_specific_extra"></textarea>
+              </div>
+            </li>
+            <li data-i18n="xp_contend"></li>
+            <li data-i18n="xp_bolster"></li>
+            <li data-i18n="xp_express"></li>
+          </ul>
+          <div class="xpclocks">
+            <input class="size" type="hidden" name="attr_dc_xp_clocksize" value="6"/>
+            <div class="clock-container">
+              <div class="spoke-0 all"></div>
+              <div class="spoke-30 sheet-12clock"></div>
+              <div class="spoke-45 sheet-8clock"></div>
+              <div class="spoke-36 sheet-10clock"></div>
+              <div class="spoke-60 sheet-6clock sheet-12clock"></div>
+              <div class="spoke-72 sheet-10clock"></div>
+              <div class="spoke-90 sheet-4clock sheet-8clock sheet-12clock"></div>
+              <div class="spoke-108 sheet-10clock"></div>
+              <div class="spoke-120 sheet-6clock sheet-12clock"></div>
+              <div class="spoke-135 sheet-8clock"></div>
+              <div class="spoke-144 sheet-10clock"></div>
+              <div class="spoke-150 sheet-12clock"></div>
+              <input class="zero input-progress" type="radio" name="attr_dc_crew_xpclock_1" value="0" checked="checked"/><span></span>
+              <input class="input-progress all" type="radio" name="attr_dc_crew_xpclock_1" value="1"/>
+              <input class="input-progress all" type="radio" name="attr_dc_crew_xpclock_1" value="2"/>
+              <input class="input-progress all" type="radio" name="attr_dc_crew_xpclock_1" value="3"/>
+              <input class="input-progress all" type="radio" name="attr_dc_crew_xpclock_1" value="4"/>
+              <input class="input-progress sheet-6clock sheet-8clock" type="radio" name="attr_dc_crew_xpclock_1" value="5"/>
+              <input class="input-progress sheet-6clock sheet-8clock" type="radio" name="attr_dc_crew_xpclock_1" value="6"/>
+              <input class="input-progress sheet-8clock" type="radio" name="attr_dc_crew_xpclock_1" value="7"/>
+              <input class="input-progress sheet-8clock" type="radio" name="attr_dc_crew_xpclock_1" value="8"/>
+              <div class="clock"></div>
             </div>
-          </li>
-          <input class="hider" type="hidden" name="attr_setting_extra_xp" value="0"/>
-          <li>
-            <div class="auto-expand"><span name="attr_xp_condition_extra"></span>
-              <textarea spellcheck="false" name="attr_xp_condition_extra" data-i18n-placeholder="xp_specific_extra"></textarea>
+            <input class="size" type="hidden" name="attr_dc_xp_clocksize" value="6"/>
+            <div class="clock-container">
+              <div class="spoke-0 all"></div>
+              <div class="spoke-30 sheet-12clock"></div>
+              <div class="spoke-45 sheet-8clock"></div>
+              <div class="spoke-36 sheet-10clock"></div>
+              <div class="spoke-60 sheet-6clock sheet-12clock"></div>
+              <div class="spoke-72 sheet-10clock"></div>
+              <div class="spoke-90 sheet-4clock sheet-8clock sheet-12clock"></div>
+              <div class="spoke-108 sheet-10clock"></div>
+              <div class="spoke-120 sheet-6clock sheet-12clock"></div>
+              <div class="spoke-135 sheet-8clock"></div>
+              <div class="spoke-144 sheet-10clock"></div>
+              <div class="spoke-150 sheet-12clock"></div>
+              <input class="zero input-progress" type="radio" name="attr_dc_crew_xpclock_2" value="0" checked="checked"/><span></span>
+              <input class="input-progress all" type="radio" name="attr_dc_crew_xpclock_2" value="1"/>
+              <input class="input-progress all" type="radio" name="attr_dc_crew_xpclock_2" value="2"/>
+              <input class="input-progress all" type="radio" name="attr_dc_crew_xpclock_2" value="3"/>
+              <input class="input-progress all" type="radio" name="attr_dc_crew_xpclock_2" value="4"/>
+              <input class="input-progress sheet-6clock sheet-8clock" type="radio" name="attr_dc_crew_xpclock_2" value="5"/>
+              <input class="input-progress sheet-6clock sheet-8clock" type="radio" name="attr_dc_crew_xpclock_2" value="6"/>
+              <input class="input-progress sheet-8clock" type="radio" name="attr_dc_crew_xpclock_2" value="7"/>
+              <input class="input-progress sheet-8clock" type="radio" name="attr_dc_crew_xpclock_2" value="8"/>
+              <div class="clock"></div>
             </div>
-          </li>
-          <li data-i18n="xp_contend"></li>
-          <li data-i18n="xp_bolster"></li>
-          <li data-i18n="xp_express"></li>
-        </ul>
+            <input class="size" type="hidden" name="attr_dc_xp_clocksize" value="6"/>
+            <div class="clock-container">
+              <div class="spoke-0 all"></div>
+              <div class="spoke-30 sheet-12clock"></div>
+              <div class="spoke-45 sheet-8clock"></div>
+              <div class="spoke-36 sheet-10clock"></div>
+              <div class="spoke-60 sheet-6clock sheet-12clock"></div>
+              <div class="spoke-72 sheet-10clock"></div>
+              <div class="spoke-90 sheet-4clock sheet-8clock sheet-12clock"></div>
+              <div class="spoke-108 sheet-10clock"></div>
+              <div class="spoke-120 sheet-6clock sheet-12clock"></div>
+              <div class="spoke-135 sheet-8clock"></div>
+              <div class="spoke-144 sheet-10clock"></div>
+              <div class="spoke-150 sheet-12clock"></div>
+              <input class="zero input-progress" type="radio" name="attr_dc_crew_xpclock_3" value="0" checked="checked"/><span></span>
+              <input class="input-progress all" type="radio" name="attr_dc_crew_xpclock_3" value="1"/>
+              <input class="input-progress all" type="radio" name="attr_dc_crew_xpclock_3" value="2"/>
+              <input class="input-progress all" type="radio" name="attr_dc_crew_xpclock_3" value="3"/>
+              <input class="input-progress all" type="radio" name="attr_dc_crew_xpclock_3" value="4"/>
+              <input class="input-progress sheet-6clock sheet-8clock" type="radio" name="attr_dc_crew_xpclock_3" value="5"/>
+              <input class="input-progress sheet-6clock sheet-8clock" type="radio" name="attr_dc_crew_xpclock_3" value="6"/>
+              <input class="input-progress sheet-8clock" type="radio" name="attr_dc_crew_xpclock_3" value="7"/>
+              <input class="input-progress sheet-8clock" type="radio" name="attr_dc_crew_xpclock_3" value="8"/>
+              <div class="clock"></div>
+            </div>
+            <input class="size" type="hidden" name="attr_dc_xp_clocksize" value="6"/>
+            <div class="clock-container">
+              <div class="spoke-0 all"></div>
+              <div class="spoke-30 sheet-12clock"></div>
+              <div class="spoke-45 sheet-8clock"></div>
+              <div class="spoke-36 sheet-10clock"></div>
+              <div class="spoke-60 sheet-6clock sheet-12clock"></div>
+              <div class="spoke-72 sheet-10clock"></div>
+              <div class="spoke-90 sheet-4clock sheet-8clock sheet-12clock"></div>
+              <div class="spoke-108 sheet-10clock"></div>
+              <div class="spoke-120 sheet-6clock sheet-12clock"></div>
+              <div class="spoke-135 sheet-8clock"></div>
+              <div class="spoke-144 sheet-10clock"></div>
+              <div class="spoke-150 sheet-12clock"></div>
+              <input class="zero input-progress" type="radio" name="attr_dc_crew_xpclock_4" value="0" checked="checked"/><span></span>
+              <input class="input-progress all" type="radio" name="attr_dc_crew_xpclock_4" value="1"/>
+              <input class="input-progress all" type="radio" name="attr_dc_crew_xpclock_4" value="2"/>
+              <input class="input-progress all" type="radio" name="attr_dc_crew_xpclock_4" value="3"/>
+              <input class="input-progress all" type="radio" name="attr_dc_crew_xpclock_4" value="4"/>
+              <input class="input-progress sheet-6clock sheet-8clock" type="radio" name="attr_dc_crew_xpclock_4" value="5"/>
+              <input class="input-progress sheet-6clock sheet-8clock" type="radio" name="attr_dc_crew_xpclock_4" value="6"/>
+              <input class="input-progress sheet-8clock" type="radio" name="attr_dc_crew_xpclock_4" value="7"/>
+              <input class="input-progress sheet-8clock" type="radio" name="attr_dc_crew_xpclock_4" value="8"/>
+              <div class="clock"></div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="right-column grid">
@@ -3444,7 +3724,10 @@
           "special_abilities_title",
           "xp_condition",
           "xp_condition2",
-          "xp_condition3"
+          "xp_condition3",
+          "xp_conditiondc",
+          "xp_conditiondc2",
+          "xp_conditiondc3"
         ];
       Object.keys(base).forEach(attr => {
         if (translatedBaseAttributes.includes(attr)) {
@@ -4042,13 +4325,6 @@
 			});
 		});
   }
-
-	function setDCModFactions() {
-		log('Addressing modification of Deep Cuts factions module')
-		generateFactions(); // this is sensitive to the setting
-		log('Modification of Deep Cuts factions module setting complete')
-	}
-
 
   function setRollMods() {
     getAttrs(["setting_custom_actions"], v => {
@@ -4959,7 +5235,10 @@
         special_abilities_title: "ghost_traits",
         xp_condition: "playbook_ghost_xp_condition",
         xp_condition2: "playbook_ghost_xp_condition2",
-        xp_condition3: "playbook_ghost_xp_condition3"
+        xp_condition3: "playbook_ghost_xp_condition3",
+        xp_conditiondc: "playbook_ghost_xp_condition",
+        xp_conditiondc2: "playbook_ghost_xp_condition2",
+        xp_conditiondc3: "playbook_ghost_xp_condition3"
       },
       playbookitem: []
     },
@@ -5023,7 +5302,10 @@
         special_abilities_title: "hull_traits",
         xp_condition: "playbook_hull_xp_condition",
         xp_condition2: "playbook_hull_xp_condition2",
-        xp_condition3: "playbook_hull_xp_condition3"
+        xp_condition3: "playbook_hull_xp_condition3",
+        xp_conditiondc: "playbook_hull_xp_condition",
+        xp_conditiondc2: "playbook_hull_xp_condition2",
+        xp_conditiondc3: "playbook_hull_xp_condition3"
       },
       playbookitem: []
     },
@@ -5350,7 +5632,10 @@
         trauma: "4",
         xp_condition: "playbook_vampire_xp_condition",
         xp_condition2: "playbook_vampire_xp_condition2",
-        xp_condition3: "playbook_vampire_xp_condition3"
+        xp_condition3: "playbook_vampire_xp_condition3",
+        xp_conditiondc: "playbook_vampire_xp_condition",
+        xp_conditiondc2: "playbook_vampire_xp_condition2",
+        xp_conditiondc3: "playbook_vampire_xp_condition3"
       },
       playbookitem: [{
         bold: "1",
@@ -6398,7 +6683,10 @@
     upgrade_mastery_name: "mastery",
     upgrade_mastery_description: "upgrade_mastery_description",
     xp_condition2: "xp_beliefs",
-    xp_condition3: "xp_vice"
+    xp_condition3: "xp_vice",
+    xp_conditiondc: "xp_conditiondc",
+    xp_conditiondc2: "xp_conditiondc2",
+    xp_conditiondc3: "xp_conditiondc3",
   };
   const defaultValues = {
     attune: "0",
@@ -6503,6 +6791,9 @@
     "xp_condition_extra",
     "xp_condition2",
     "xp_condition3",
+    "xp_conditiondc",
+    "xp_conditiondc2",
+    "xp_conditiondc3",
     "crew_xp_condition",
     "hunting_grounds_type",
     "hunting_grounds_description",
@@ -6603,7 +6894,6 @@
   /* Deep Cuts modules mods */
   on("sheet:opened change:setting_dc_harm", setDCModHarm);
   on("sheet:opened change:setting_dc_load", setDCModLoad);
-  on("change:setting_dc_new_factions", setDCModFactions); // I *think* this doesn't need sheet:opened
   /* INITIALISATION AND UPGRADES */
   on("sheet:opened", handleSheetInit);
 })();

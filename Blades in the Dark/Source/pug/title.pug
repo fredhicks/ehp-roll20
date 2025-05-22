@@ -101,6 +101,14 @@
 			+checkbox("setting_dc_new_factions").checkbox.squarebox
 			span(data-i18n="new_dc_factions")
 
+	+hidden-input("setting_dc_advancement")(value="0").hider
+	.setting-char.setting-crew
+		label
+			select(name="attr_dc_xp_clocksize")
+				option(value="6") 6
+				option(value="4") 4
+				option(value="8") 8
+			span(data-i18n="advancement_clock_size")
 	// End Deep Cuts stuff
 
 	.setting-char
