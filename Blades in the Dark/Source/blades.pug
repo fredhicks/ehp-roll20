@@ -137,6 +137,19 @@ mixin makeclock(isFaction)
 		input.input-progress.sheet-12clock(type="radio", name="attr_progress", value="12")
 		.clock
 
+mixin debtclock(id)
+	// needs an 'id' so it can keep each instance apart from each other, turns out, otherwise they try to mark each other simultaneously and it causes headaches, apparently
+	.debtclock
+		.debt.sheet-label(data-i18n="debt")
+		+hidden-input(`${id}_debt_dc_max`)(value="4").size
+		.clock-container
+			.spoke-0.all
+			.spoke-90.all
+			+radio(`${id}_debt_dc`)(value="0", checked).zero.input-progress
+			each num in range(1,4)
+				input.input-progress.all(type="radio", name=`attr_${id}_debt_dc`, value=num)
+			.clock
+
 -	const templateTitles = ["insight", "prowess", "resolve", "hunt", "study", "survey", "tinker", "finesse", "prowl", "skirmish", "wreck", "attune", "command", "consort", "sway", "fortune", "vice", "crew_tier", "entanglement", "cohort_quality", "lifestyle", "recovery", "engagement"];
 -	const teeth = ["xptooth-red", "xptooth-white", "stresstooth-red", "stresstooth-black", "stresstooth-halfgrey", "stresstooth-white", "shorttooth-red", "shorttooth-grey"];
 -

@@ -37,27 +37,38 @@
 				span.sheet-label.title(data-i18n="background")
 				span.uppercase.info(data-i18n="background_info")
 		+hidden-input("setting_vice_type")(value="normal").vice-input
-		label.vice.normal
-			+autoexpand("vice_purveyor")
-			+hidden-input("vice_purveyor")(value="")
-			.text
-				span.sheet-label.title(data-i18n="vice_purveyor")
-				span.uppercase.info(data-i18n="vice_info")
-			+roll("Vice", "{{subtitle=^{viceroll1}@{stress}&nbsp;@{setting_stress_label}^{viceroll2}}} {{type=vice}} {{title-vice=1}} {{title=^{vice}}} @{vice_formula} {{instructions=^{vice_instructions}}}")(data-i18n="indulge_vice").vicebutton.borderbutton
-			+hidden-input("vice_formula")(value=zerodiceFormula)
-		.vice.ghost
+		.vice.normal.vicebuttondebt
+			.vice
+				+autoexpand("vice_purveyor")
+				+hidden-input("vice_purveyor")(value="")
+				.text
+					span.sheet-label.title(data-i18n="vice_purveyor")
+					span.uppercase.info(data-i18n="vice_info")
+			+hidden-input("setting_dc_downtime")(value="0").hider-inverted
+			.buttonzone
+				+roll("Vice", "{{subtitle=^{viceroll1}@{stress}&nbsp;@{setting_stress_label}^{viceroll2}}} {{type=vice}} {{title-vice=1}} {{title=^{vice}}} @{vice_formula} {{instructions=^{vice_instructions}}}")(data-i18n="indulge_vice").vicebutton.borderbutton
+				+hidden-input("vice_formula")(value=zerodiceFormula)
+			+hidden-input("setting_dc_downtime")(value="0").hider
+			.buttonzone
+				+debtclock('normal')
+		.vice.ghost.vicebuttondebt
 			span.italic(data-i18n="ghost_viceblurb")
-		.vice.hull
+		.vice.hull.vicebuttondebt
 			label
 				+text-input("hull_functions")(data-i18n-placeholder="choose_3_functions")
 				+hidden-input("hull_functions")(value="")
 				.text
 					span.sheet-label.title(data-i18n="functions")
 					span.uppercase.info(data-i18n="functions_info")
-			span.italic(data-i18n="hull_viceblurb")
-		.vice.vampire
+		.vice.vampire.vicebuttondebt
 			span.italic(data-i18n="vampire_viceblurb")
-			+roll("Vice", "{{subtitle=^{viceroll1}@{stress}&nbsp;@{setting_stress_label}^{viceroll2}}} {{type=vice}} {{title-vice=1}} {{title=^{vice}}} @{vice_formula} {{instructions=^{vice_instructions}}}")(data-i18n="indulge_vice").vicebutton.borderbutton
+			+hidden-input("setting_dc_downtime")(value="0").hider-inverted
+			.buttonzone
+				+roll("Vice", "{{subtitle=^{viceroll1}@{stress}&nbsp;@{setting_stress_label}^{viceroll2}}} {{type=vice}} {{title-vice=1}} {{title=^{vice}}} @{vice_formula} {{instructions=^{vice_instructions}}}")(data-i18n="indulge_vice").vicebutton.borderbutton
+			+hidden-input("setting_dc_downtime")(value="0").hider
+			.buttonzone
+				+debtclock('vampire')
+
 	//- Stress and Trauma
 	.stress.flex.sheet-2col
 		//- Stress markers

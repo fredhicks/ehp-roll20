@@ -1,0 +1,65 @@
+setting_dc_new_factions
+x Added setting toggle for factions module to gear menu
+x Display modestly reconfigures itself when toggling the module.
+x Codework done to switch between two different faction list data objects depending on whether or not the DC Factions module is activated.
+x For DC factions, got the districts Citizenry list to split into new Citizens vs Nobility/Bosses lists
+x Added Deep Cuts factions: Tangletown, Covenant, Unity Commission, Rowan House, Strangford House, Ironworks Labor, Void Divers, Ragskulla, Sparkrunners, Unchained, Strangers
+x Added "Other" faction area for ad hoc creation of factions that don't fit any other category
+x Reworked the display of the Faction sheet in general (both with and without DC) to give it some more pleasant flexibility rather than having hard (invisible) grid structure vertically.
+
+setting_dc_harm
+x Added setting toggle for harm module to gear menu
+x Harm area reconfig
+x Harm share button (bell) reimplementation
+x Cutter playbook. Change the ability: Vigorous becomes Like Hardened Steel: Permanently fill one segment of your healing clock. When you fight unarmed, your body is a fine weapon.
+x Hound playbook. Change the ability: Tough as Nails: You gain a second space to record level 3 Harm. When you suffer a mortal wound, you may mark 3 Stress to stabilize it and stay alive. 
+x The playbook doesn't automatically alter itself when you take the new version of Tough as Nails, but there is a setting in the gear menu now that shows up when the Harm module is active and which you can toggle to get the second level 3 harm box.
+x Crew Sheet: Cult. Change ability: Anointed: Choose a type of supernatural being: ghost, vampire, or demon —you now bear a ritual tattoo of warding against them. When you suffer Harm from a creature of that type, reduce its level by one.
+x Crew Sheet: Alter crew's harm-tracking display to lose the "weak/impaired/broken" labels and instead just give three markers after the word "harm". Armor remains as is.
+
+setting_dc_load
+x Added setting toggle for load module to gear menu
+x Added ability to override the default Load values when load module is active (swapping out the override controls for the non-module defaults)
+x Change Load choices To: Discreet: 4 (no heavy items) Conspicuous: 6
+x Cutter. Change Ability: Mule: Your load limits are higher. Conspicuous: 8. Discreet: 6. You’re encumbered at 9 boxes of load and can carry a maximum of 10 load. Carrying heavy items doesn't affect your speed or agility
+x Separate list of normal items, heavy items, and playbook items. (This was complex to engineer without completely redoing how items are handled in the character sheet, which was a nonstarter conceptually. But, I've gotten a pretty good fit in place.)
+x Crew: Change all Rigging options: Rigging: Carry 2 free load of [a particular class of item], including a heavy item while your load is discreet, if you wish.
+
+setting_dc_advancement
+x Added setting toggle for advancement module to gear menu
+x Ability to set the advancement clocks sizes at 4, 6, or 8 segments (default 6)
+x Removed XP tracker Above the Character Special Abilities
+x Removed XP trackers next to Insight, Prowess, and Resolve
+x Replaced XP triggers (below the special abilities) with Deep Cuts versions
+x Added XP clocks in XP section, along with instructions
+x Removed XP tracker above the Crew Special Abilities
+x Added XP clocks in Crew XP section.
+
+setting_dc_downtime
+x Added setting toggle for downtime module to gear menu
+x Added a 4-tick Debt clock to all playbook sheets, to the right of the vice/purveyor area, "north" from healing and coin area. When the Downtime module is active, the "indulge vice" button disappears at the debt clock takes up its space.
+x Made the Connected, Functioning Vice, Vigorous, Physicker, and Sinister Guile playbook abilities swap to their Deep Cuts Downtime Module versions
+x Made the No Traces, Patron, and Slippery crew abilities swap to their Deep Cuts Downtime Module versions
+x Implemented function to handle swapping certain crew Claims in response to the Downtime module being active; used for Warehouse and Warehouses claims.
+x Increased size of crew vaults when in Downtime Module mode; ensured that current balance is reflected in new vault config when switching the module on/off.
+x Added a "bank" field, right underneath vaults, to display when in Downtime Module mode
+x Added "Ward Boss" field for both standard and deep cuts modes
+x Made a debt clock appear next to Ward Boss when the downtime module is active
+
+	- Change all crew upgrades to have a coin cost
+
+COMMIT GITHUB
+
+THEN BEFORE MOVING ON AFTER COMPLETING THIS MODULE, patch all those dc → _dc nomenclatures.
+
+setting_dc_action
+x Added setting toggle for action module to gear menu
+
+IMPLEMENT NEW STRANGER PLAYBOOK
+
+ITEMS PENDING CONFIRMATION
+- Downtime module:
+	- Determine if it's correct to have a Debt clock on Vampire playbook. [pending John]
+	- Determine if it's correct to *lack* a Debt clock on Ghost and Hull playbooks. [pending John]
+	- Determine if it's correct to have a coin track on the Ghost playbook [pending John]
+	- Determine if we should have a Ward Boss in both standard and deep cuts mode

@@ -706,9 +706,20 @@
     });
   }
 
-	function setDCPlaybookAbilitySwap(pbook, akey, dc) {
-    getAttrs([`setting_dc_${dc}`], v => {
-    	if (v[`setting_dc_${dc}`] == "1") {
+	function setDCPlaybookAbilitySwap(pbook, akey, dc, dc2) {
+		let gets = [`setting_dc_${dc}`];
+		let hastwo = false;
+		if ( typeof dc2 !== 'undefined' ) {
+			log(`We have a second context, ${dc2}`)
+			gets[1] = `setting_dc_${dc2}`;
+			hastwo = true;
+		}
+    getAttrs(gets, v => {
+			// Okay, so basically, if we have two deep cuts modules where this swaps (to the same DC alternative, e.g., Vigorous → Like Hardened Steel for both the harm and downtime modules), we want to make sure we treat it as deep cuts enabled if EITHER of them is active.
+			let deepcutsactive = false;
+    	if (v[`setting_dc_${dc}`] == "1") { deepcutsactive = true; }
+    	if (hastwo && v[`setting_dc_${dc2}`] == "1") { deepcutsactive = true; }
+    	if (deepcutsactive) {
     		// Then we are in the DC (Deep Cuts) mode
     		// Noteworthily, the initialization process OVERWRITES THE PROVIDED STARTING VALUE OF THE ABILITY FIELD FOR EACH PLAYBOOK with a multi-key object instead of just a static key. I had to introduce a new value, key, to that object, so we could have any chance at all of locating a known ability for a swap-out.
     		// Cutter: vigorous changes to vigorousdc
@@ -774,6 +785,29 @@
     			}
     		});
     		// log(playbookData);
+    	}
+    });
+	}
+
+	function setDCCrewTurfSwap(pbook, claimnum, claimname, dc) {
+		let claimkeyprefix = `claim_${claimnum}_`;
+    getAttrs([`setting_dc_${dc}`,'crew_type'], v => {
+    	if (v[`setting_dc_${dc}`] == "1") {
+    		// Then relevant deep cuts module is active
+    		// So swap the claim for the dc version
+    		crewData[pbook].base[`${claimkeyprefix}name`] = getTranslationByKey(`claim_${claimname}dc`);
+    		crewData[pbook].base[`${claimkeyprefix}desc`] = getTranslationByKey(`claim_${claimname}dc_description`);;
+    	} else {
+    		crewData[pbook].base[`${claimkeyprefix}name`] = getTranslationByKey(`claim_${claimname}`);
+    		crewData[pbook].base[`${claimkeyprefix}desc`] = getTranslationByKey(`claim_${claimname}_description`);;
+    	}
+			// We should only change the actual current attributes if they're relevant to the currently selected playbook
+    	if ( v.crew_type == pbook ) {
+				let updates = {};
+				updates[`${claimkeyprefix}name`] = crewData[pbook].base[`${claimkeyprefix}name`];
+				updates[`${claimkeyprefix}desc`] = crewData[pbook].base[`${claimkeyprefix}desc`];
+				log(updates);
+				setAttrs(updates);
     	}
     });
 	}
@@ -927,11 +961,48 @@
 
   function setDCModHarm() {
 		log('Addressing modification of Deep Cuts harm module')
-		setDCPlaybookAbilitySwap('cutter','vigorous','harm');
+		setDCPlaybookAbilitySwap('cutter','vigorous','harm','downtime'); // add second module that also governs whether or not this swaps back or stays put when toggled off
 		setDCPlaybookAbilitySwap('hound','tough_as_nails','harm');
 		setDCCrewAbilitySwap('cult','anointed','harm');
 		log('Modification of Deep Cuts harm module setting complete')
   }
+
+  function setDCModDowntime(event) {
+		log('Addressing modification of Deep Cuts downtime module')
+		setDCPlaybookAbilitySwap('cutter','vigorous','downtime','harm'); // add second module that also governs whether or not this swaps back or stays put when toggled off
+		setDCPlaybookAbilitySwap('spider','connected','downtime');
+		setDCPlaybookAbilitySwap('spider','functioning_vice','downtime');
+		setDCPlaybookAbilitySwap('leech','physicker','downtime');
+		setDCPlaybookAbilitySwap('vampire','sinister_guile','downtime');
+		setDCCrewAbilitySwap('assassins','no_traces','downtime');
+		setDCCrewAbilitySwap('assassins','patron','downtime');
+		setDCCrewAbilitySwap('bravos','patron','downtime');
+		setDCCrewAbilitySwap('hawkers','patron','downtime');
+		setDCCrewAbilitySwap('shadows','patron','downtime');
+		setDCCrewAbilitySwap('shadows','slippery','downtime');
+		setDCCrewTurfSwap('bravos',14,'warehouses','downtime');
+		setDCCrewTurfSwap('smugglers',15,'warehouse','downtime');
+		if ( event.triggerName !== "sheet:opened" ) {
+			// Only transfer coin when the toggle is changed, NOT when the sheet is opened. Other changes, above, are fine.
+			transferCrewCoinDC();
+		}
+		log('Modification of Deep Cuts downtime module setting complete');
+  }
+
+	function transferCrewCoinDC() {
+		getAttrs(['setting_dc_downtime','crewcoin','crewcoindc'], v => {
+			let updates = {};
+			if ( v.setting_dc_downtime == "1" ) {
+				// then move the standard coin into the dc coin
+				updates.crewcoindc = v.crewcoin;
+			} else {
+				// then move the dc coin into standard coin
+				updates.crewcoin = v.crewcoindc;
+			}
+			log(updates);
+			setAttrs(updates);
+		});
+	}
 
   /* DATA */
   const sheetVersion = "3.10";
@@ -980,19 +1051,19 @@
       crewability: ["deadly", "crow's_veil", "emberdeath", "no_traces", "patron", "predators", "vipers", "veteran"],
       upgrade: [{
         name: "crew_upgrade_hardened",
-        numboxes: "3"
+        numboxes: "3", cost: "8"
       }, {
         name: "crew_upgrade_assassin_rigging",
-        numboxes: "1"
+        numboxes: "1", cost: "6"
       }, {
         name: "crew_upgrade_ironhook_contacts",
-        numboxes: "1"
+        numboxes: "1", cost: "8"
       }, {
         name: "crew_upgrade_elite_skulks",
-        numboxes: "1"
+        numboxes: "1", cost: "10"
       }, {
         name: "crew_upgrade_elite_thugs",
-        numboxes: "1",
+        numboxes: "1", cost: "10"
       }]
     },
     bravos: {
@@ -1035,19 +1106,19 @@
       crewability: ["dangerous", "blood_brothers", "door_kickers", "fiends", "forged_in_the_fire", "patron", "war_dogs", "veteran"],
       upgrade: [{
         name: "crew_upgrade_hardened",
-        numboxes: "3"
+        numboxes: "3", cost: "8"
       }, {
         name: "crew_upgrade_bravos_rigging",
-        numboxes: "1"
+        numboxes: "1", cost: "6"
       }, {
         name: "crew_upgrade_ironhook_contacts",
-        numboxes: "1"
+        numboxes: "1", cost: "8"
       }, {
         name: "crew_upgrade_elite_rovers",
-        numboxes: "1"
+        numboxes: "1", cost: "10"
       }, {
         name: "crew_upgrade_elite_thugs",
-        numboxes: "1",
+        numboxes: "1", cost: "10"
       }]
     },
     cult: {
@@ -1093,19 +1164,19 @@
       crewability: ["chosen", "anointed", "bound_in_darkness", "conviction", "glory_incarnate", "sealed_in_blood", "zealotry", "veteran"],
       upgrade: [{
         name: "crew_upgrade_ordained",
-        numboxes: "3"
+        numboxes: "3", cost: "8"
       }, {
         name: "crew_upgrade_cult_rigging",
-        numboxes: "1"
+        numboxes: "1", cost: "6"
       }, {
         name: "crew_upgrade_ritual_sanctum_in_lair",
-        numboxes: "1"
+        numboxes: "1", cost: "8"
       }, {
         name: "crew_upgrade_elite_adepts",
-        numboxes: "1"
+        numboxes: "1", cost: "10"
       }, {
         name: "crew_upgrade_elite_thugs",
-        numboxes: "1",
+        numboxes: "1", cost: "10"
       }]
     },
     emcees: {
@@ -1148,19 +1219,19 @@
       crewability: ["persuasive", "troupe_performance", "hungry_friends", "high_society", "professional_drunks", "discerning_customers", "mere_magic", "veteran"],
       upgrade: [{
         name: "crew_upgrade_emcee_rigging",
-        numboxes: "1"
+        numboxes: "1", cost: "6"
       }, {
         name: "crew_upgrade_full_pockets",
-        numboxes: "1"
+        numboxes: "1", cost: "8"
       }, {
         name: "crew_upgrade_elite_rooks",
-        numboxes: "1"
+        numboxes: "1", cost: "10"
       }, {
         name: "crew_upgrade_elite_skulks",
-        numboxes: "1"
+        numboxes: "1", cost: "10"
       }, {
         name: "crew_upgrade_calm",
-        numboxes: "3",
+        numboxes: "3", cost: "8"
       }]
     },
     hawkers: {
@@ -1205,19 +1276,19 @@
       crewability: ["silver_tongues", "accord", "the_good_stuff", "ghost_market", "high_society", "hooked", "patron", "veteran"],
       upgrade: [{
         name: "crew_upgrade_composed",
-        numboxes: "3"
+        numboxes: "3", cost: "8"
       }, {
         name: "crew_upgrade_hawker's_rigging",
-        numboxes: "1"
+        numboxes: "1", cost: "6"
       }, {
         name: "crew_upgrade_ironhook_contacts",
-        numboxes: "1"
+        numboxes: "1", cost: "8"
       }, {
         name: "crew_upgrade_elite_rooks",
-        numboxes: "1"
+        numboxes: "1", cost: "10"
       }, {
         name: "crew_upgrade_elite_thugs",
-        numboxes: "1",
+        numboxes: "1", cost: "10"
       }]
     },
     river: {
@@ -1235,19 +1306,19 @@
       crewability: ["deadly_focus", "saboteurs", "fight_with_tools", "together_we_rise", "nobodies", "forged_in_the_fire", "red_wave", "community", "veteran"],
       upgrade: [{
         name: "crew_upgrade_improvised_load",
-        numboxes: "1"
+        numboxes: "1", cost: "8"
       }, {
         name: "crew_upgrade_jailbird_contacts",
-        numboxes: "1"
+        numboxes: "1", cost: "8"
       }, {
         name: "crew_upgrade_elite_thugs",
-        numboxes: "1"
+        numboxes: "1", cost: "10"
       }, {
         name: "crew_upgrade_elite_skulks",
-        numboxes: "1"
+        numboxes: "1", cost: "10"
       }, {
         name: "crew_upgrade_hardened",
-        numboxes: "3"
+        numboxes: "3", cost: "8"
       }]
     },
     roots: {
@@ -1264,19 +1335,19 @@
       crewability: ["anointed", "locals", "shadows", "exquisite_delights", "as_one", "ritual_of_bleeding", "dark_clientele", "all_hands", "veteran"],
       upgrade: [{
         name: "crew_upgrade_roots_rigging",
-        numboxes: "1"
+        numboxes: "1", cost: "6"
       }, {
         name: "crew_upgrade_rituals_of_earth_and_blood",
-        numboxes: "1"
+        numboxes: "1", cost: "8"
       }, {
         name: "crew_upgrade_elite_thugs",
-        numboxes: "1"
+        numboxes: "1", cost: "10"
       }, {
         name: "crew_upgrade_elite_rovers",
-        numboxes: "1"
+        numboxes: "1", cost: "10"
       }, {
         name: "crew_upgrade_sustained",
-        numboxes: "3"
+        numboxes: "3", cost: "8"
       }]
     },
 
@@ -1321,19 +1392,19 @@
       crewability: ["everyone_steals", "ghost_echoes", "pack_rats", "patron", "second_story", "slippery", "synchronized", "veteran"],
       upgrade: [{
         name: "crew_upgrade_steady",
-        numboxes: "3"
+        numboxes: "3", cost: "8"
       }, {
         name: "crew_upgrade_thief_rigging",
-        numboxes: "1"
+        numboxes: "1", cost: "6"
       }, {
         name: "crew_upgrade_underground_maps_&_passkeys",
-        numboxes: "1"
+        numboxes: "1", cost: "6"
       }, {
         name: "crew_upgrade_elite_rooks",
-        numboxes: "1"
+        numboxes: "1", cost: "10"
       }, {
         name: "crew_upgrade_elite_skulks",
-        numboxes: "1",
+        numboxes: "1", cost: "10"
       }]
     },
     smugglers: {
@@ -1383,19 +1454,19 @@
       crewability: ["like_part_of_the_family", "all_hands", "ghost_passage", "just_passing_through", "leverage", "reavers", "renegades", "veteran"],
       upgrade: [{
         name: "crew_upgrade_steady",
-        numboxes: "3"
+        numboxes: "3", cost: "8"
       }, {
         name: "crew_upgrade_smuggler's_rigging",
-        numboxes: "1"
+        numboxes: "1", cost: "6"
       }, {
         name: "crew_upgrade_camouflage",
-        numboxes: "1"
+        numboxes: "1", cost: "6"
       }, {
         name: "crew_upgrade_elite_rovers",
-        numboxes: "1"
+        numboxes: "1", cost: "10"
       }, {
         name: "crew_upgrade_barge",
-        numboxes: "1",
+        numboxes: "1", cost: "10"
       }]
     },
     vigilantes: {
@@ -1443,19 +1514,19 @@
       crewability: ["as_good_as_your_word", "avengers", "thorn_in_your_side", "misdirection", "uncanny_preparation", "moral_compass", "favors", "roots", "veteran"],
       upgrade: [{
         name: "crew_upgrade_unbroken",
-        numboxes: "3"
+        numboxes: "3", cost: "8"
       }, {
         name: "crew_upgrade_vigilantes_attire",
-        numboxes: "1"
+        numboxes: "1", cost: "6"
       }, {
         name: "crew_upgrade_dedicated_crafters",
-        numboxes: "1",
+        numboxes: "1", cost: "10"
       }, {
         name: "crew_upgrade_irregulars",
-        numboxes: "1"
+        numboxes: "1", cost: "8"
       }, {
         name: "crew_upgrade_willing_to_fight",
-        numboxes: "1"
+        numboxes: "1", cost: "8"
       }]
     }
   };
@@ -3138,6 +3209,7 @@
     "repeating_crewability:description",
     "repeating_playbookitem:name",
     "repeating_upgrade:name",
+    "repeating_upgrade:cost",
     "repeating_friend:name",
     "repeating_contact:name",
     "repeating_clock:name",
@@ -3253,6 +3325,7 @@
   /* Deep Cuts modules mods */
   on("sheet:opened change:setting_dc_harm", setDCModHarm);
   on("sheet:opened change:setting_dc_load", setDCModLoad);
+  on("sheet:opened change:setting_dc_downtime", function(event) {setDCModDowntime(event)} );
   /* INITIALISATION AND UPGRADES */
   on("sheet:opened", handleSheetInit);
 })();

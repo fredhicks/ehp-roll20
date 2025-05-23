@@ -86,6 +86,13 @@ mixin makeupgrade(label, numboxes, def, desc)
 		label.sheet-2col
 			+text-input("origin")
 			.sheet-label.text.title(data-i18n="origin")
+	.header.ward-boss.crew-debt.deepcuts
+		label.ward-boss
+			+text-input("ward_boss")
+			.sheet-label.text.title(data-i18n="ward_boss")
+		+hidden-input("setting_dc_downtime")(value="0").hider
+		.crew-debt-clock
+			+debtclock('crew')
 	//- Rep, Hold, and Tier
 	.rep-and-hold.flex.def-margin
 		.rep.flex.col45
@@ -291,7 +298,9 @@ mixin makeupgrade(label, numboxes, def, desc)
 					each num in range(1,4)
 						+radio("wanted")(value=num).tooth.regulartooth
 		//- Coin
-		.crewcoin.col52b
+		// setting_dc_downtime
+		+hidden-input("setting_dc_downtime")(value="0").hider-inverted
+		.crewcoin.col52b.standard
 			.col100.flex
 				.blackheader.crewcoin1
 					.sheet-label(data-i18n="coin")
@@ -308,6 +317,30 @@ mixin makeupgrade(label, numboxes, def, desc)
 				each num in range(9,16)
 					+radio("crewcoin")(value=num).radiobox.vaultcoin
 			.col100.crewcoin-desc(data-i18n="upon_crew_advance")
+		+hidden-input("setting_dc_downtime")(value="0").hider
+		.crewcoin.col52b.deepcuts
+			.col100.flex
+				.headers.crewcoin1
+					.blackheader
+						.sheet-label(data-i18n="coin")
+					.greyheader
+						.sheet-label(data-i18n="vaults")
+					.greyheader
+					.blackheader
+						.sheet-label(data-i18n="bank")
+				.col100.crewcoin-coins
+					+radio("crewcoindc")(value="0", checked).zero
+					each num in range(1,4)
+						+radio("crewcoindc")(value=num).radiobox
+					.crewcoinbar
+					each num in range(5,12)
+						+radio("crewcoindc")(value=num).radiobox.vaultcoin
+					.crewcoinbar
+					each num in range(13,24)
+						+radio("crewcoindc")(value=num).radiobox.vaultcoin
+					.crewcoinbar
+						+text-input("crew_bank")
+
 	//- Special abilities
 	.specialabilities.def-margin
 		.specialheader.sheet-label(data-i18n="special_abilities")
@@ -396,11 +429,14 @@ mixin makeupgrade(label, numboxes, def, desc)
 	//- Upgrades and Hunting Grounds
 	.upgradecolumn
 		//- Upgrades
-		.itemheader
-			span.sheet-label(data-i18n="crew_upgrades")
+		.itemheader.flex
+			.col100.sheet-label(data-i18n="crew_upgrades")
+			+hidden-input("setting_dc_downtime")(value="0").hider
+			.sheet-label(data-i18n="coin_per_box")
 		.itemholder.upgrades
 			//- Specific upgrades
 			.playbookitems.free-repcontrol
+				+hidden-input("setting_dc_downtime")(value="0").item-cost-hider
 				fieldset.repeating_upgrade
 					+hidden-input("boxes_chosen")(value="0").boxes-chosen
 					.item.numboxes-chooser
@@ -416,6 +452,8 @@ mixin makeupgrade(label, numboxes, def, desc)
 						span.floatingbar.boxesgeq3.boxesgeq2
 						+checkbox("check_3", "boxesgeq2 boxesgeq3").checkbox.squarebox
 						+autoexpand("name")(data-i18n-placeholder="an_upgrade").itemname
+						.item-cost
+							+text-input("cost")
 					.item-description
 						+checkbox(null).expand
 						+textarea("description")(data-i18n-placeholder="description")
@@ -442,9 +480,15 @@ mixin makeupgrade(label, numboxes, def, desc)
 				+makeupgrade("insight", 1, "Insight", "Earn 2 xp when training insight during downtime.")
 				.upgradecosts.sheet-label(data-i18n="upgrade_costs")
 				+makeupgrade("prowess", 1, "Prowess", "Earn 2 xp when training prowess during downtime.")
+				+hidden-input("setting_dc_downtime")(value="0").hider-inverted
 				.upgradecosts(data-i18n="new_cohort")
+				+hidden-input("setting_dc_downtime")(value="0").hider
+				.upgradecosts(data-i18n="new_cohort_dc")
 				+makeupgrade("resolve", 1, "Resolve", "Earn 2 xp when training resolve during downtime.")
+				+hidden-input("setting_dc_downtime")(value="0").hider-inverted
 				.upgradecosts(data-i18n="add_type")
+				+hidden-input("setting_dc_downtime")(value="0").hider
+				.upgradecosts(data-i18n="add_type_dc")
 				+makeupgrade("personal", 1, "Personal", "Earn 2 xp when training playbook during downtime.")
 				.sheet-2col
 					.item
@@ -457,6 +501,8 @@ mixin makeupgrade(label, numboxes, def, desc)
 						+checkbox(null).expand
 						+textarea("upgrade_mastery_description")(data-i18n-placeholder="description")
 							| Your crew has access to master level training. You may advance your PCs' action ratings to 4 (until you unlock this upgrade, PC action ratings are capped at 3). This costs four upgrade boxes to unlock.
+				+hidden-input("setting_dc_downtime")(value="0").hider
+				.upgradecosts.sheet-2col(data-i18n="standard_upgrade_costs_dc")
 		.hunting-grounds.def-margin
 			+autoexpand("hunting_grounds_type")(data-i18n-placeholder="hunting_grounds").plainheader.sheet-label
 			+autoexpand("hunting_grounds_description")(data-i18n-placeholder="hunting_grounds_description").description

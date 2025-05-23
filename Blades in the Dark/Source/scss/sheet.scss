@@ -309,7 +309,7 @@ $redriver_d: #600; // #500 in light mode
 
 }
 
-/* SETTINGS FOR HIDING STUFF ON THE SHEET */
+/* HIDERS - SETTINGS FOR HIDING STUFF ON THE SHEET */
 .charsheet .toothhider[value="0"] ~ {
 	.tooth, .tooth + span { display: none }
 }
@@ -623,6 +623,20 @@ $redriver_d: #600; // #500 in light mode
 		input:checked + span { font-weight: bold }
 	}
 	.show-itemdesc[value="0"] ~ div .item-description { display: none }
+	.item-cost { /* ZOD */
+		font-size: 10px;
+		text-align: right;
+		margin-right: 12px;
+		input[type="text"] {
+			font-size: 10px;
+			text-align: right;
+			width: 12px;
+		}
+	}
+	.item-cost-hider[value="0"] ~ .repcontainer .repitem .item .item-cost {
+		display: none;
+	}
+
 	.itemholder .expand {
 		top: 4px;
 		right: 1px;
@@ -887,6 +901,30 @@ $redriver_d: #600; // #500 in light mode
 		grid-gap: 6px;
 		padding-top: 4px;
 		padding-right: 10px;
+	}
+	.debt {
+		line-height: 14px;
+		text-align: center;
+		padding-bottom: 6px;
+	}
+	.crew-debt.deepcuts {
+		width: 100%;
+		display: flex;
+		flex-direction: row;
+		column-gap: 10px;
+		.ward-boss { flex-grow: 1; }
+		.debtclock {
+			flex-grow: 0; 
+			display: flex;
+			flex-direction: column-reverse;
+			align-content: flex-start;
+			.debt.sheet-label { 
+				color: var(--blades-blacktext);
+				font-size: 10px;
+				letter-spacing: 1px;
+				padding-bottom: 2px;
+			}
+		}
 	}
 	.clocks {
 		.repcontainer {
@@ -1795,6 +1833,25 @@ $redriver_d: #600; // #500 in light mode
 		position: relative;
 	}
 	.crewcoin1 { width: 26% }
+	.crewcoin.deepcuts {
+		.crewcoin1 { width: 35%; }
+		.crewcoin-coins {
+			padding-top: 1px;
+			line-height: 0;
+		}
+		input.radiobox {
+			margin-top: -11px;
+			margin-right: -11.5px;
+			margin-left: 2px;
+		}
+		.crewcoinbar {
+			border-bottom: 1px solid var(--blades-lighter);
+			height: 1px;
+			width: 100%;
+			margin-top: 2.5px;
+			margin-bottom: 2.5px;
+		}
+	}
 	.regulartooth + span,
 	.rep .tooth + span,
 	.heat2 .tooth + span,
@@ -1856,8 +1913,18 @@ $redriver_d: #600; // #500 in light mode
 		font-size: 13px;
 		border-color: var(--blades-darkgrey);
 	}
+	div.vicebuttondebt {
+		display: flex;
+		width: 100%;
+		flex-direction: row;
+		align-items: center;
+		gap: 10px;
+		.text, .vice {
+			flex-grow: 2;
+		}
+	}
 	button[type=roll].vicebutton {
-		float: right;
+		/* float: right; */ 
 		margin: 5px 3px -5px auto;
 		line-height: 13px;
 		padding: 4px;

@@ -314,7 +314,7 @@
 	height: 18px;
 }
 
-/* SETTINGS FOR HIDING STUFF ON THE SHEET */
+/* HIDERS - SETTINGS FOR HIDING STUFF ON THE SHEET */
 .charsheet .toothhider[value="0"] ~ .tooth, .charsheet .toothhider[value="0"] ~ .tooth + span {
 	display: none;
 }
@@ -715,6 +715,19 @@
 .charsheet .show-itemdesc[value="0"] ~ div .item-description {
 	display: none;
 }
+.charsheet .item-cost { /* ZOD */
+	font-size: 10px;
+	text-align: right;
+	margin-right: 12px;
+}
+.charsheet .item-cost input[type=text] {
+	font-size: 10px;
+	text-align: right;
+	width: 12px;
+}
+.charsheet .item-cost-hider[value="0"] ~ .repcontainer .repitem .item .item-cost {
+	display: none;
+}
 .charsheet .itemholder .expand {
 	top: 4px;
 	right: 1px;
@@ -1025,6 +1038,49 @@
 	grid-gap: 6px;
 	padding-top: 4px;
 	padding-right: 10px;
+}
+.charsheet .debt {
+	line-height: 14px;
+	text-align: center;
+	padding-bottom: 6px;
+}
+.charsheet .crew-debt.deepcuts {
+	width: 100%;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	    -ms-flex-direction: row;
+	        flex-direction: row;
+	-webkit-column-gap: 10px;
+	   -moz-column-gap: 10px;
+	        column-gap: 10px;
+}
+.charsheet .crew-debt.deepcuts .ward-boss {
+	-webkit-box-flex: 1;
+	    -ms-flex-positive: 1;
+	        flex-grow: 1;
+}
+.charsheet .crew-debt.deepcuts .debtclock {
+	-webkit-box-flex: 0;
+	    -ms-flex-positive: 0;
+	        flex-grow: 0;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: reverse;
+	    -ms-flex-direction: column-reverse;
+	        flex-direction: column-reverse;
+	-ms-flex-line-pack: start;
+	    align-content: flex-start;
+}
+.charsheet .crew-debt.deepcuts .debtclock .debt.sheet-label {
+	color: var(--blades-blacktext);
+	font-size: 10px;
+	letter-spacing: 1px;
+	padding-bottom: 2px;
 }
 .charsheet .clocks .repcontainer {
 	display: -ms-grid;
@@ -2223,6 +2279,25 @@
 .charsheet .crewcoin1 {
 	width: 26%;
 }
+.charsheet .crewcoin.deepcuts .crewcoin1 {
+	width: 35%;
+}
+.charsheet .crewcoin.deepcuts .crewcoin-coins {
+	padding-top: 1px;
+	line-height: 0;
+}
+.charsheet .crewcoin.deepcuts input.radiobox {
+	margin-top: -11px;
+	margin-right: -11.5px;
+	margin-left: 2px;
+}
+.charsheet .crewcoin.deepcuts .crewcoinbar {
+	border-bottom: 1px solid var(--blades-lighter);
+	height: 1px;
+	width: 100%;
+	margin-top: 2.5px;
+	margin-bottom: 2.5px;
+}
 .charsheet .regulartooth + span,
 .charsheet .rep .tooth + span,
 .charsheet .heat2 .tooth + span,
@@ -2295,8 +2370,27 @@
 	font-size: 13px;
 	border-color: var(--blades-darkgrey);
 }
+.charsheet div.vicebuttondebt {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	width: 100%;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	    -ms-flex-direction: row;
+	        flex-direction: row;
+	-webkit-box-align: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+	gap: 10px;
+}
+.charsheet div.vicebuttondebt .text, .charsheet div.vicebuttondebt .vice {
+	-webkit-box-flex: 2;
+	    -ms-flex-positive: 2;
+	        flex-grow: 2;
+}
 .charsheet button[type=roll].vicebutton {
-	float: right;
+	/* float: right; */
 	margin: 5px 3px -5px auto;
 	line-height: 13px;
 	padding: 4px;
