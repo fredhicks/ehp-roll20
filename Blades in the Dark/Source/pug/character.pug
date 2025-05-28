@@ -515,12 +515,24 @@
 					span.italic(data-i18n="detail_transport")
 	//- Action ratings
 	.actioncolumn
+		// actionData comes from sheetworkers.js
 		each actions, attribute in actionData
 			.attribute
 				.attribute-title.flex
+					// Standard button displays when Deep Cuts Action Module is active. Mainly a subtitle change.
+					+hidden-input("setting_dc_action")(value="0").button-hider-inverted
 					+roll(TitleCase(attribute),
 						"{{type=resist}} {{subtitle=^{resists} @{consequence_query} ^{with}}} {{title-" + attribute + "=1}} " +
 						"{{title=^{" + attribute + "}}} @{" + attribute + "_formula} {{instructions=^{resist_instructions}}} " +
+						`@{${attribute}_roll_mods}`
+					)(data-i18n-title=`${attribute}_description`).rollbutton.sheet-label
+						span(data-i18n=attribute).default-label.inherit
+						span(name=`attr_${attribute}_label`).custom-label.inherit
+					// Alt button displays when Deep Cuts Action Module is active. Changes the subtitle and the instructions, otherwise functions the same.
+					+hidden-input("setting_dc_action")(value="0").button-hider.deepcuts
+					+roll(TitleCase(attribute),
+						"{{type=resist}} {{subtitle=^{pushes_against} @{consequence_query} ^{with}}} {{title-" + attribute + "=1}} " +
+						"{{title=^{" + attribute + "}}} @{" + attribute + "_formula} {{instructions=^{resist_instructions_dc}}} " +
 						`@{${attribute}_roll_mods}`
 					)(data-i18n-title=`${attribute}_description`).rollbutton.sheet-label
 						span(data-i18n=attribute).default-label.inherit
@@ -548,12 +560,28 @@
 							.divider
 							each num in range(2,5)
 								+checkbox(action)(value=num).checkbox.circlebox.fakeradio
-							+roll(TitleCase(action),
-								"{{type=action}} {{subtitle=^{rolls}}} {{title-" + action + "=1}} {{title=^{" + action + "}}} " +
-								`{{@{position_query}}} {{effect=@{effect_query}}} @{${action}_formula} @{${action}_roll_mods}`
-							)(data-i18n-title=`${action}_description`).rollbutton.sheet-label
-								span(data-i18n=action).default-label.inherit
-								span(name=`attr_${action}_label`).custom-label.inherit
+							.rollinglabels
+								// Standard button displays when Deep Cuts Action Module is inactive.
+								+hidden-input("setting_dc_action")(value="0").button-hider-inverted
+								+roll(TitleCase(action),
+									"{{type=action}} {{subtitle=^{rolls}}} {{title-" + action + "=1}} {{title=^{" + action + "}}} " +
+									`{{@{position_query}}} {{effect=@{effect_query}}} @{${action}_formula} @{${action}_roll_mods}`
+								)(data-i18n-title=`${action}_description`).rollbutton.sheet-label
+									span(data-i18n=action).default-label.inherit
+									span(name=`attr_${action}_label`).custom-label.inherit
+								// Alt button displays when Deep Cuts Action Module is active.
+								+hidden-input("setting_dc_action")(value="0").button-hider.deepcuts
+								+roll(TitleCase(action),
+									"{{type=action}} {{subtitle=^{rolls}}} {{title-" + action + "=1}} {{title=^{" + action + "}}} " +
+									`{{@{position_query_dc}}} {{effect=@{effect_query}}} @{${action}_formula} @{${action}_roll_mods}`
+								)(data-i18n-title=`${action}_description`).rollbutton.sheet-label
+									span(data-i18n=action).default-label.inherit
+									span(name=`attr_${action}_label`).custom-label.inherit
+		+hidden-input("setting_dc_action")(value="0").hider
+		.edge.deepcuts
+			.sheet-label(data-i18n="edge")
+			.edgetext
+				+number-input("edge_amount")(value="0", min="0", max="99", size="2")
 		//- Cohort
 		+hidden-input("setting_show_cohort")(value="0").hider
 		+makecohort("char_cohort_", true)
@@ -563,10 +591,15 @@
 			.flex
 				.flex-center.bonusdieplus +
 				.bonusdietext
-					.sheet-label(data-i18n="push_yourself")
-					span(data-i18n="push_yourself_desc1")
-					span(name="attr_setting_stress_label")
-					span(data-i18n="push_yourself_desc2")
+					+hidden-input("setting_dc_action")(value="0").hider-inverted
+					div
+						.sheet-label(data-i18n="push_yourself")
+						span(data-i18n="push_yourself_desc1")
+						span(name="attr_setting_stress_label")
+						span(data-i18n="push_yourself_desc2")
+					+hidden-input("setting_dc_action")(value="0").hider
+					div
+						span(data-i18n="accept_a")
 					.sheet-label(data-i18n="devils_bargain")
 		//- Friends
 		.friends

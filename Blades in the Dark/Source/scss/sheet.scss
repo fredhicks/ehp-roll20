@@ -313,14 +313,17 @@ $redriver_d: #600; // #500 in light mode
 .charsheet .toothhider[value="0"] ~ {
 	.tooth, .tooth + span { display: none }
 }
-.charsheet .hider[value="0"] + {
-	li, div, label { display: none }
-}
 .charsheet .hider-inverted[value="1"] + {
 	li, div, label { display: none }
 }
 .charsheet .hider[value="0"] + {
 	li, div, label { display: none }
+}
+.charsheet .button-hider[value="0"] + {
+	button.rollbutton { display: none }
+}
+.charsheet .button-hider-inverted[value="1"] + {
+	button.rollbutton { display: none }
 }
 .charsheet {
 	.heavy-hider[value="0"] {
@@ -1718,6 +1721,25 @@ $redriver_d: #600; // #500 in light mode
 	}
 }
 
+/* EDGE SECTION */
+.charsheet {
+	.edge {
+		display: flex;
+		flex-direction: row;
+		gap: 6px;
+	}
+	.edge .sheet-label { font-size: 12px }
+	.edgetext {
+		background: var(--blades-lightest);
+		width: 90%;
+		padding: 3px;
+		font-size: 11px;
+		line-height: 14px;
+		text-align: center;
+		input[type="number"] { background: white; color: black; }
+	}
+}
+
 /* BONUS DIE SECTION */
 .charsheet {
 	.bonusdie .sheet-label { font-size: 12px }
@@ -2746,6 +2768,7 @@ $redriver_d: #600; // #500 in light mode
 		.loadheader :first-child,
 		.attribute-title button[type=roll].rollbutton,
 		.bonusdie > .sheet-label:first-child,
+		.edge.deepcuts > .sheet-label:first-child,
 		.cohort-title,
 		.claimbox .sheet-label,
 		.lairbox,
@@ -2765,6 +2788,7 @@ $redriver_d: #600; // #500 in light mode
 			font-weight: 400;
 		}
 		.factions-header input[type="text"],
+		.edge.deepcuts > .sheet-label:first-child,
 		.bonusdie > .sheet-label:first-child {
 			font-size: 14px;
 			font-weight: 400;
@@ -2880,6 +2904,7 @@ $redriver_d: #600; // #500 in light mode
 	.action button[type="roll"].rollbutton { font-size: 15px }
 	button[type="roll"].borderbutton { font-size: 15px }
 	.bonusdietext, .bonusdie .sheet-label { font-size: 13px }
+	.edgetext, .edge .sheet-label { font-size: 13px }
 	.friend-contact .auto-expand { font-size: 13px }
 	.clocks .auto-expand { font-size: 12px }
 	.crewcoin-desc { font-style: normal }

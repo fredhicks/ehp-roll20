@@ -609,6 +609,12 @@
         getTranslationByKey("desperate")},position=${
         getTranslationByKey("desperate")}|${
         getTranslationByKey("fortune_roll")},short=short}`,
+      position_query_dc: `?{${getTranslationByKey("position")}|${
+        getTranslationByKey("risky")},position=${
+        getTranslationByKey("risky")}|${
+        getTranslationByKey("desperate")},position=${
+        getTranslationByKey("desperate")}|${
+        getTranslationByKey("fortune_roll")},short=short}`,
       title_text: "",
     };
     getAttrs([
@@ -1003,6 +1009,31 @@
 			setAttrs(updates);
 		});
 	}
+
+  function setDCModAction(event) {
+		log('Addressing modification of Deep Cuts action module')
+		setDCPlaybookAbilitySwap('lurk','ambush','action');
+		setDCPlaybookAbilitySwap('cutter','bodyguard','action');
+		setDCPlaybookAbilitySwap('lurk','daredevil','action');
+		setDCPlaybookAbilitySwap('lurk','expertise','action');
+		setDCPlaybookAbilitySwap('spider','foresight','action');
+		setDCPlaybookAbilitySwap('whisper','ghost_mind','action');
+		setDCPlaybookAbilitySwap('whisper','iron_will','action');
+		setDCPlaybookAbilitySwap('spider','mastermind','action');
+		setDCPlaybookAbilitySwap('cutter','savage','action');
+		setDCPlaybookAbilitySwap('hound','scout','action');
+		setDCPlaybookAbilitySwap('slide','trust_in_me','action');
+		setDCCrewAbilitySwap('bravos','blood_brothers','action');
+		setDCCrewAbilitySwap('cult','bound_in_darkness','action');
+		setDCCrewAbilitySwap('shadows','synchronized','action');
+		setDCCrewTurfSwap('assassins',4,'informants','action');
+		setDCCrewTurfSwap('bravos',4,'informants','action');
+		setDCCrewTurfSwap('emcees',7,'informants','action');
+		setDCCrewTurfSwap('hawkers',5,'informants','action');
+		setDCCrewTurfSwap('shadows',7,'informants','action');
+		setDCCrewTurfSwap('smugglers',12,'informants','action');
+		log('Modification of Deep Cuts downtime module setting complete');
+  }
 
   /* DATA */
   const sheetVersion = "3.10";
@@ -3326,6 +3357,7 @@
   on("sheet:opened change:setting_dc_harm", setDCModHarm);
   on("sheet:opened change:setting_dc_load", setDCModLoad);
   on("sheet:opened change:setting_dc_downtime", function(event) {setDCModDowntime(event)} );
+  on("sheet:opened change:setting_dc_action", setDCModAction);
   /* INITIALISATION AND UPGRADES */
   on("sheet:opened", handleSheetInit);
 })();

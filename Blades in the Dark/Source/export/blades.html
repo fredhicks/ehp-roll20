@@ -19,6 +19,7 @@
   <input type="hidden" name="attr_numberofdice" value=" {{?{Number of dice|0,zerodice=[[d6]]&amp;#44; [[d6]]|1,dice=[[d6]]|2,dice=[[d6]]&amp;#44; [[d6]]|3,dice=[[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]|4,dice=[[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]|5,dice=[[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]|6,dice=[[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]}}}"/>
   <input type="hidden" name="attr_notes_query" value="?{Notes}"/>
   <input type="hidden" name="attr_position_query" value="?{Position|Risky,position=Risky|Controlled,position=Controlled|Desperate,position=Desperate|Fortune roll,short=short}"/>
+  <input type="hidden" name="attr_position_query_dc" value="?{Position|Risky,position=Risky|Desperate,position=Desperate|Fortune roll,short=short}"/>
   <input type="hidden" name="attr_effect_query" value="?{Effect|Standard|Limited|Great|Extreme|Zero}"/>
   <input type="hidden" name="attr_title_text" value=""/>
   <input type="hidden" name="attr_consequence_query" value="^{a_consequence}"/>
@@ -1262,9 +1263,16 @@
         </div>
       </div>
       <div class="actioncolumn">
+        <!-- actionData comes from sheetworkers.js-->
         <div class="attribute">
           <div class="attribute-title flex">
+            <!-- Standard button displays when Deep Cuts Action Module is active. Mainly a subtitle change.-->
+            <input class="button-hider-inverted" type="hidden" name="attr_setting_dc_action" value="0"/>
             <button class="rollbutton sheet-label" type="roll" name="roll_Insight" value="&{template:blades} {{charname=@{character_name}}} {{type=resist}} {{subtitle=^{resists} @{consequence_query} ^{with}}} {{title-insight=1}} {{title=^{insight}}} @{insight_formula} {{instructions=^{resist_instructions}}} @{insight_roll_mods} {{charimage=@{chat_image}}} @{title_text}" data-i18n-title="insight_description"><span class="default-label inherit" data-i18n="insight"></span><span class="custom-label inherit" name="attr_insight_label"></span>
+            </button>
+            <!-- Alt button displays when Deep Cuts Action Module is active. Changes the subtitle and the instructions, otherwise functions the same.-->
+            <input class="button-hider deepcuts" type="hidden" name="attr_setting_dc_action" value="0"/>
+            <button class="rollbutton sheet-label" type="roll" name="roll_Insight" value="&{template:blades} {{charname=@{character_name}}} {{type=resist}} {{subtitle=^{pushes_against} @{consequence_query} ^{with}}} {{title-insight=1}} {{title=^{insight}}} @{insight_formula} {{instructions=^{resist_instructions_dc}}} @{insight_roll_mods} {{charimage=@{chat_image}}} @{title_text}" data-i18n-title="insight_description"><span class="default-label inherit" data-i18n="insight"></span><span class="custom-label inherit" name="attr_insight_label"></span>
             </button>
             <input type="hidden" name="attr_insight" value="0"/>
             <input type="hidden" name="attr_insight_formula" value=" {{?{@{bonusdice}|0,zerodice=[[d6]]&amp;#44; [[d6]]|1,dice=[[d6]]|2,dice=[[d6]]&amp;#44; [[d6]]|3,dice=[[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]|4,dice=[[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]|5,dice=[[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]|6,dice=[[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]|-1,zerodice=[[d6]]&amp;#44; [[d6]]|-2,zerodice=[[d6]]&amp;#44; [[d6]]|-3,zerodice=[[d6]]&amp;#44; [[d6]]}}}"/>
@@ -1297,8 +1305,16 @@
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_hunt" value="3"/><span></span>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_hunt" value="4"/><span></span>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_hunt" value="5"/><span></span>
-              <button class="rollbutton sheet-label" type="roll" name="roll_Hunt" value="&{template:blades} {{charname=@{character_name}}} {{type=action}} {{subtitle=^{rolls}}} {{title-hunt=1}} {{title=^{hunt}}} {{@{position_query}}} {{effect=@{effect_query}}} @{hunt_formula} @{hunt_roll_mods} {{charimage=@{chat_image}}} @{title_text}" data-i18n-title="hunt_description"><span class="default-label inherit" data-i18n="hunt"></span><span class="custom-label inherit" name="attr_hunt_label"></span>
-              </button>
+              <div class="rollinglabels">
+                <!-- Standard button displays when Deep Cuts Action Module is inactive.-->
+                <input class="button-hider-inverted" type="hidden" name="attr_setting_dc_action" value="0"/>
+                <button class="rollbutton sheet-label" type="roll" name="roll_Hunt" value="&{template:blades} {{charname=@{character_name}}} {{type=action}} {{subtitle=^{rolls}}} {{title-hunt=1}} {{title=^{hunt}}} {{@{position_query}}} {{effect=@{effect_query}}} @{hunt_formula} @{hunt_roll_mods} {{charimage=@{chat_image}}} @{title_text}" data-i18n-title="hunt_description"><span class="default-label inherit" data-i18n="hunt"></span><span class="custom-label inherit" name="attr_hunt_label"></span>
+                </button>
+                <!-- Alt button displays when Deep Cuts Action Module is active.-->
+                <input class="button-hider deepcuts" type="hidden" name="attr_setting_dc_action" value="0"/>
+                <button class="rollbutton sheet-label" type="roll" name="roll_Hunt" value="&{template:blades} {{charname=@{character_name}}} {{type=action}} {{subtitle=^{rolls}}} {{title-hunt=1}} {{title=^{hunt}}} {{@{position_query_dc}}} {{effect=@{effect_query}}} @{hunt_formula} @{hunt_roll_mods} {{charimage=@{chat_image}}} @{title_text}" data-i18n-title="hunt_description"><span class="default-label inherit" data-i18n="hunt"></span><span class="custom-label inherit" name="attr_hunt_label"></span>
+                </button>
+              </div>
             </div>
             <div class="action flex">
               <input type="hidden" name="attr_study_formula" value=" {{?{@{bonusdice}|0,zerodice=[[d6]]&amp;#44; [[d6]]|1,dice=[[d6]]|2,dice=[[d6]]&amp;#44; [[d6]]|3,dice=[[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]|4,dice=[[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]|5,dice=[[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]|6,dice=[[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]|-1,zerodice=[[d6]]&amp;#44; [[d6]]|-2,zerodice=[[d6]]&amp;#44; [[d6]]|-3,zerodice=[[d6]]&amp;#44; [[d6]]}}}"/>
@@ -1311,8 +1327,16 @@
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_study" value="3"/><span></span>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_study" value="4"/><span></span>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_study" value="5"/><span></span>
-              <button class="rollbutton sheet-label" type="roll" name="roll_Study" value="&{template:blades} {{charname=@{character_name}}} {{type=action}} {{subtitle=^{rolls}}} {{title-study=1}} {{title=^{study}}} {{@{position_query}}} {{effect=@{effect_query}}} @{study_formula} @{study_roll_mods} {{charimage=@{chat_image}}} @{title_text}" data-i18n-title="study_description"><span class="default-label inherit" data-i18n="study"></span><span class="custom-label inherit" name="attr_study_label"></span>
-              </button>
+              <div class="rollinglabels">
+                <!-- Standard button displays when Deep Cuts Action Module is inactive.-->
+                <input class="button-hider-inverted" type="hidden" name="attr_setting_dc_action" value="0"/>
+                <button class="rollbutton sheet-label" type="roll" name="roll_Study" value="&{template:blades} {{charname=@{character_name}}} {{type=action}} {{subtitle=^{rolls}}} {{title-study=1}} {{title=^{study}}} {{@{position_query}}} {{effect=@{effect_query}}} @{study_formula} @{study_roll_mods} {{charimage=@{chat_image}}} @{title_text}" data-i18n-title="study_description"><span class="default-label inherit" data-i18n="study"></span><span class="custom-label inherit" name="attr_study_label"></span>
+                </button>
+                <!-- Alt button displays when Deep Cuts Action Module is active.-->
+                <input class="button-hider deepcuts" type="hidden" name="attr_setting_dc_action" value="0"/>
+                <button class="rollbutton sheet-label" type="roll" name="roll_Study" value="&{template:blades} {{charname=@{character_name}}} {{type=action}} {{subtitle=^{rolls}}} {{title-study=1}} {{title=^{study}}} {{@{position_query_dc}}} {{effect=@{effect_query}}} @{study_formula} @{study_roll_mods} {{charimage=@{chat_image}}} @{title_text}" data-i18n-title="study_description"><span class="default-label inherit" data-i18n="study"></span><span class="custom-label inherit" name="attr_study_label"></span>
+                </button>
+              </div>
             </div>
             <div class="action flex">
               <input type="hidden" name="attr_survey_formula" value=" {{?{@{bonusdice}|0,zerodice=[[d6]]&amp;#44; [[d6]]|1,dice=[[d6]]|2,dice=[[d6]]&amp;#44; [[d6]]|3,dice=[[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]|4,dice=[[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]|5,dice=[[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]|6,dice=[[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]|-1,zerodice=[[d6]]&amp;#44; [[d6]]|-2,zerodice=[[d6]]&amp;#44; [[d6]]|-3,zerodice=[[d6]]&amp;#44; [[d6]]}}}"/>
@@ -1325,8 +1349,16 @@
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_survey" value="3"/><span></span>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_survey" value="4"/><span></span>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_survey" value="5"/><span></span>
-              <button class="rollbutton sheet-label" type="roll" name="roll_Survey" value="&{template:blades} {{charname=@{character_name}}} {{type=action}} {{subtitle=^{rolls}}} {{title-survey=1}} {{title=^{survey}}} {{@{position_query}}} {{effect=@{effect_query}}} @{survey_formula} @{survey_roll_mods} {{charimage=@{chat_image}}} @{title_text}" data-i18n-title="survey_description"><span class="default-label inherit" data-i18n="survey"></span><span class="custom-label inherit" name="attr_survey_label"></span>
-              </button>
+              <div class="rollinglabels">
+                <!-- Standard button displays when Deep Cuts Action Module is inactive.-->
+                <input class="button-hider-inverted" type="hidden" name="attr_setting_dc_action" value="0"/>
+                <button class="rollbutton sheet-label" type="roll" name="roll_Survey" value="&{template:blades} {{charname=@{character_name}}} {{type=action}} {{subtitle=^{rolls}}} {{title-survey=1}} {{title=^{survey}}} {{@{position_query}}} {{effect=@{effect_query}}} @{survey_formula} @{survey_roll_mods} {{charimage=@{chat_image}}} @{title_text}" data-i18n-title="survey_description"><span class="default-label inherit" data-i18n="survey"></span><span class="custom-label inherit" name="attr_survey_label"></span>
+                </button>
+                <!-- Alt button displays when Deep Cuts Action Module is active.-->
+                <input class="button-hider deepcuts" type="hidden" name="attr_setting_dc_action" value="0"/>
+                <button class="rollbutton sheet-label" type="roll" name="roll_Survey" value="&{template:blades} {{charname=@{character_name}}} {{type=action}} {{subtitle=^{rolls}}} {{title-survey=1}} {{title=^{survey}}} {{@{position_query_dc}}} {{effect=@{effect_query}}} @{survey_formula} @{survey_roll_mods} {{charimage=@{chat_image}}} @{title_text}" data-i18n-title="survey_description"><span class="default-label inherit" data-i18n="survey"></span><span class="custom-label inherit" name="attr_survey_label"></span>
+                </button>
+              </div>
             </div>
             <div class="action flex">
               <input type="hidden" name="attr_tinker_formula" value=" {{?{@{bonusdice}|0,zerodice=[[d6]]&amp;#44; [[d6]]|1,dice=[[d6]]|2,dice=[[d6]]&amp;#44; [[d6]]|3,dice=[[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]|4,dice=[[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]|5,dice=[[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]|6,dice=[[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]|-1,zerodice=[[d6]]&amp;#44; [[d6]]|-2,zerodice=[[d6]]&amp;#44; [[d6]]|-3,zerodice=[[d6]]&amp;#44; [[d6]]}}}"/>
@@ -1339,14 +1371,28 @@
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_tinker" value="3"/><span></span>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_tinker" value="4"/><span></span>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_tinker" value="5"/><span></span>
-              <button class="rollbutton sheet-label" type="roll" name="roll_Tinker" value="&{template:blades} {{charname=@{character_name}}} {{type=action}} {{subtitle=^{rolls}}} {{title-tinker=1}} {{title=^{tinker}}} {{@{position_query}}} {{effect=@{effect_query}}} @{tinker_formula} @{tinker_roll_mods} {{charimage=@{chat_image}}} @{title_text}" data-i18n-title="tinker_description"><span class="default-label inherit" data-i18n="tinker"></span><span class="custom-label inherit" name="attr_tinker_label"></span>
-              </button>
+              <div class="rollinglabels">
+                <!-- Standard button displays when Deep Cuts Action Module is inactive.-->
+                <input class="button-hider-inverted" type="hidden" name="attr_setting_dc_action" value="0"/>
+                <button class="rollbutton sheet-label" type="roll" name="roll_Tinker" value="&{template:blades} {{charname=@{character_name}}} {{type=action}} {{subtitle=^{rolls}}} {{title-tinker=1}} {{title=^{tinker}}} {{@{position_query}}} {{effect=@{effect_query}}} @{tinker_formula} @{tinker_roll_mods} {{charimage=@{chat_image}}} @{title_text}" data-i18n-title="tinker_description"><span class="default-label inherit" data-i18n="tinker"></span><span class="custom-label inherit" name="attr_tinker_label"></span>
+                </button>
+                <!-- Alt button displays when Deep Cuts Action Module is active.-->
+                <input class="button-hider deepcuts" type="hidden" name="attr_setting_dc_action" value="0"/>
+                <button class="rollbutton sheet-label" type="roll" name="roll_Tinker" value="&{template:blades} {{charname=@{character_name}}} {{type=action}} {{subtitle=^{rolls}}} {{title-tinker=1}} {{title=^{tinker}}} {{@{position_query_dc}}} {{effect=@{effect_query}}} @{tinker_formula} @{tinker_roll_mods} {{charimage=@{chat_image}}} @{title_text}" data-i18n-title="tinker_description"><span class="default-label inherit" data-i18n="tinker"></span><span class="custom-label inherit" name="attr_tinker_label"></span>
+                </button>
+              </div>
             </div>
           </div>
         </div>
         <div class="attribute">
           <div class="attribute-title flex">
+            <!-- Standard button displays when Deep Cuts Action Module is active. Mainly a subtitle change.-->
+            <input class="button-hider-inverted" type="hidden" name="attr_setting_dc_action" value="0"/>
             <button class="rollbutton sheet-label" type="roll" name="roll_Prowess" value="&{template:blades} {{charname=@{character_name}}} {{type=resist}} {{subtitle=^{resists} @{consequence_query} ^{with}}} {{title-prowess=1}} {{title=^{prowess}}} @{prowess_formula} {{instructions=^{resist_instructions}}} @{prowess_roll_mods} {{charimage=@{chat_image}}} @{title_text}" data-i18n-title="prowess_description"><span class="default-label inherit" data-i18n="prowess"></span><span class="custom-label inherit" name="attr_prowess_label"></span>
+            </button>
+            <!-- Alt button displays when Deep Cuts Action Module is active. Changes the subtitle and the instructions, otherwise functions the same.-->
+            <input class="button-hider deepcuts" type="hidden" name="attr_setting_dc_action" value="0"/>
+            <button class="rollbutton sheet-label" type="roll" name="roll_Prowess" value="&{template:blades} {{charname=@{character_name}}} {{type=resist}} {{subtitle=^{pushes_against} @{consequence_query} ^{with}}} {{title-prowess=1}} {{title=^{prowess}}} @{prowess_formula} {{instructions=^{resist_instructions_dc}}} @{prowess_roll_mods} {{charimage=@{chat_image}}} @{title_text}" data-i18n-title="prowess_description"><span class="default-label inherit" data-i18n="prowess"></span><span class="custom-label inherit" name="attr_prowess_label"></span>
             </button>
             <input type="hidden" name="attr_prowess" value="0"/>
             <input type="hidden" name="attr_prowess_formula" value=" {{?{@{bonusdice}|0,zerodice=[[d6]]&amp;#44; [[d6]]|1,dice=[[d6]]|2,dice=[[d6]]&amp;#44; [[d6]]|3,dice=[[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]|4,dice=[[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]|5,dice=[[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]|6,dice=[[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]|-1,zerodice=[[d6]]&amp;#44; [[d6]]|-2,zerodice=[[d6]]&amp;#44; [[d6]]|-3,zerodice=[[d6]]&amp;#44; [[d6]]}}}"/>
@@ -1379,8 +1425,16 @@
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_finesse" value="3"/><span></span>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_finesse" value="4"/><span></span>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_finesse" value="5"/><span></span>
-              <button class="rollbutton sheet-label" type="roll" name="roll_Finesse" value="&{template:blades} {{charname=@{character_name}}} {{type=action}} {{subtitle=^{rolls}}} {{title-finesse=1}} {{title=^{finesse}}} {{@{position_query}}} {{effect=@{effect_query}}} @{finesse_formula} @{finesse_roll_mods} {{charimage=@{chat_image}}} @{title_text}" data-i18n-title="finesse_description"><span class="default-label inherit" data-i18n="finesse"></span><span class="custom-label inherit" name="attr_finesse_label"></span>
-              </button>
+              <div class="rollinglabels">
+                <!-- Standard button displays when Deep Cuts Action Module is inactive.-->
+                <input class="button-hider-inverted" type="hidden" name="attr_setting_dc_action" value="0"/>
+                <button class="rollbutton sheet-label" type="roll" name="roll_Finesse" value="&{template:blades} {{charname=@{character_name}}} {{type=action}} {{subtitle=^{rolls}}} {{title-finesse=1}} {{title=^{finesse}}} {{@{position_query}}} {{effect=@{effect_query}}} @{finesse_formula} @{finesse_roll_mods} {{charimage=@{chat_image}}} @{title_text}" data-i18n-title="finesse_description"><span class="default-label inherit" data-i18n="finesse"></span><span class="custom-label inherit" name="attr_finesse_label"></span>
+                </button>
+                <!-- Alt button displays when Deep Cuts Action Module is active.-->
+                <input class="button-hider deepcuts" type="hidden" name="attr_setting_dc_action" value="0"/>
+                <button class="rollbutton sheet-label" type="roll" name="roll_Finesse" value="&{template:blades} {{charname=@{character_name}}} {{type=action}} {{subtitle=^{rolls}}} {{title-finesse=1}} {{title=^{finesse}}} {{@{position_query_dc}}} {{effect=@{effect_query}}} @{finesse_formula} @{finesse_roll_mods} {{charimage=@{chat_image}}} @{title_text}" data-i18n-title="finesse_description"><span class="default-label inherit" data-i18n="finesse"></span><span class="custom-label inherit" name="attr_finesse_label"></span>
+                </button>
+              </div>
             </div>
             <div class="action flex">
               <input type="hidden" name="attr_prowl_formula" value=" {{?{@{bonusdice}|0,zerodice=[[d6]]&amp;#44; [[d6]]|1,dice=[[d6]]|2,dice=[[d6]]&amp;#44; [[d6]]|3,dice=[[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]|4,dice=[[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]|5,dice=[[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]|6,dice=[[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]|-1,zerodice=[[d6]]&amp;#44; [[d6]]|-2,zerodice=[[d6]]&amp;#44; [[d6]]|-3,zerodice=[[d6]]&amp;#44; [[d6]]}}}"/>
@@ -1393,8 +1447,16 @@
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_prowl" value="3"/><span></span>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_prowl" value="4"/><span></span>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_prowl" value="5"/><span></span>
-              <button class="rollbutton sheet-label" type="roll" name="roll_Prowl" value="&{template:blades} {{charname=@{character_name}}} {{type=action}} {{subtitle=^{rolls}}} {{title-prowl=1}} {{title=^{prowl}}} {{@{position_query}}} {{effect=@{effect_query}}} @{prowl_formula} @{prowl_roll_mods} {{charimage=@{chat_image}}} @{title_text}" data-i18n-title="prowl_description"><span class="default-label inherit" data-i18n="prowl"></span><span class="custom-label inherit" name="attr_prowl_label"></span>
-              </button>
+              <div class="rollinglabels">
+                <!-- Standard button displays when Deep Cuts Action Module is inactive.-->
+                <input class="button-hider-inverted" type="hidden" name="attr_setting_dc_action" value="0"/>
+                <button class="rollbutton sheet-label" type="roll" name="roll_Prowl" value="&{template:blades} {{charname=@{character_name}}} {{type=action}} {{subtitle=^{rolls}}} {{title-prowl=1}} {{title=^{prowl}}} {{@{position_query}}} {{effect=@{effect_query}}} @{prowl_formula} @{prowl_roll_mods} {{charimage=@{chat_image}}} @{title_text}" data-i18n-title="prowl_description"><span class="default-label inherit" data-i18n="prowl"></span><span class="custom-label inherit" name="attr_prowl_label"></span>
+                </button>
+                <!-- Alt button displays when Deep Cuts Action Module is active.-->
+                <input class="button-hider deepcuts" type="hidden" name="attr_setting_dc_action" value="0"/>
+                <button class="rollbutton sheet-label" type="roll" name="roll_Prowl" value="&{template:blades} {{charname=@{character_name}}} {{type=action}} {{subtitle=^{rolls}}} {{title-prowl=1}} {{title=^{prowl}}} {{@{position_query_dc}}} {{effect=@{effect_query}}} @{prowl_formula} @{prowl_roll_mods} {{charimage=@{chat_image}}} @{title_text}" data-i18n-title="prowl_description"><span class="default-label inherit" data-i18n="prowl"></span><span class="custom-label inherit" name="attr_prowl_label"></span>
+                </button>
+              </div>
             </div>
             <div class="action flex">
               <input type="hidden" name="attr_skirmish_formula" value=" {{?{@{bonusdice}|0,zerodice=[[d6]]&amp;#44; [[d6]]|1,dice=[[d6]]|2,dice=[[d6]]&amp;#44; [[d6]]|3,dice=[[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]|4,dice=[[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]|5,dice=[[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]|6,dice=[[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]|-1,zerodice=[[d6]]&amp;#44; [[d6]]|-2,zerodice=[[d6]]&amp;#44; [[d6]]|-3,zerodice=[[d6]]&amp;#44; [[d6]]}}}"/>
@@ -1407,8 +1469,16 @@
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_skirmish" value="3"/><span></span>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_skirmish" value="4"/><span></span>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_skirmish" value="5"/><span></span>
-              <button class="rollbutton sheet-label" type="roll" name="roll_Skirmish" value="&{template:blades} {{charname=@{character_name}}} {{type=action}} {{subtitle=^{rolls}}} {{title-skirmish=1}} {{title=^{skirmish}}} {{@{position_query}}} {{effect=@{effect_query}}} @{skirmish_formula} @{skirmish_roll_mods} {{charimage=@{chat_image}}} @{title_text}" data-i18n-title="skirmish_description"><span class="default-label inherit" data-i18n="skirmish"></span><span class="custom-label inherit" name="attr_skirmish_label"></span>
-              </button>
+              <div class="rollinglabels">
+                <!-- Standard button displays when Deep Cuts Action Module is inactive.-->
+                <input class="button-hider-inverted" type="hidden" name="attr_setting_dc_action" value="0"/>
+                <button class="rollbutton sheet-label" type="roll" name="roll_Skirmish" value="&{template:blades} {{charname=@{character_name}}} {{type=action}} {{subtitle=^{rolls}}} {{title-skirmish=1}} {{title=^{skirmish}}} {{@{position_query}}} {{effect=@{effect_query}}} @{skirmish_formula} @{skirmish_roll_mods} {{charimage=@{chat_image}}} @{title_text}" data-i18n-title="skirmish_description"><span class="default-label inherit" data-i18n="skirmish"></span><span class="custom-label inherit" name="attr_skirmish_label"></span>
+                </button>
+                <!-- Alt button displays when Deep Cuts Action Module is active.-->
+                <input class="button-hider deepcuts" type="hidden" name="attr_setting_dc_action" value="0"/>
+                <button class="rollbutton sheet-label" type="roll" name="roll_Skirmish" value="&{template:blades} {{charname=@{character_name}}} {{type=action}} {{subtitle=^{rolls}}} {{title-skirmish=1}} {{title=^{skirmish}}} {{@{position_query_dc}}} {{effect=@{effect_query}}} @{skirmish_formula} @{skirmish_roll_mods} {{charimage=@{chat_image}}} @{title_text}" data-i18n-title="skirmish_description"><span class="default-label inherit" data-i18n="skirmish"></span><span class="custom-label inherit" name="attr_skirmish_label"></span>
+                </button>
+              </div>
             </div>
             <div class="action flex">
               <input type="hidden" name="attr_wreck_formula" value=" {{?{@{bonusdice}|0,zerodice=[[d6]]&amp;#44; [[d6]]|1,dice=[[d6]]|2,dice=[[d6]]&amp;#44; [[d6]]|3,dice=[[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]|4,dice=[[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]|5,dice=[[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]|6,dice=[[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]|-1,zerodice=[[d6]]&amp;#44; [[d6]]|-2,zerodice=[[d6]]&amp;#44; [[d6]]|-3,zerodice=[[d6]]&amp;#44; [[d6]]}}}"/>
@@ -1421,14 +1491,28 @@
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_wreck" value="3"/><span></span>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_wreck" value="4"/><span></span>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_wreck" value="5"/><span></span>
-              <button class="rollbutton sheet-label" type="roll" name="roll_Wreck" value="&{template:blades} {{charname=@{character_name}}} {{type=action}} {{subtitle=^{rolls}}} {{title-wreck=1}} {{title=^{wreck}}} {{@{position_query}}} {{effect=@{effect_query}}} @{wreck_formula} @{wreck_roll_mods} {{charimage=@{chat_image}}} @{title_text}" data-i18n-title="wreck_description"><span class="default-label inherit" data-i18n="wreck"></span><span class="custom-label inherit" name="attr_wreck_label"></span>
-              </button>
+              <div class="rollinglabels">
+                <!-- Standard button displays when Deep Cuts Action Module is inactive.-->
+                <input class="button-hider-inverted" type="hidden" name="attr_setting_dc_action" value="0"/>
+                <button class="rollbutton sheet-label" type="roll" name="roll_Wreck" value="&{template:blades} {{charname=@{character_name}}} {{type=action}} {{subtitle=^{rolls}}} {{title-wreck=1}} {{title=^{wreck}}} {{@{position_query}}} {{effect=@{effect_query}}} @{wreck_formula} @{wreck_roll_mods} {{charimage=@{chat_image}}} @{title_text}" data-i18n-title="wreck_description"><span class="default-label inherit" data-i18n="wreck"></span><span class="custom-label inherit" name="attr_wreck_label"></span>
+                </button>
+                <!-- Alt button displays when Deep Cuts Action Module is active.-->
+                <input class="button-hider deepcuts" type="hidden" name="attr_setting_dc_action" value="0"/>
+                <button class="rollbutton sheet-label" type="roll" name="roll_Wreck" value="&{template:blades} {{charname=@{character_name}}} {{type=action}} {{subtitle=^{rolls}}} {{title-wreck=1}} {{title=^{wreck}}} {{@{position_query_dc}}} {{effect=@{effect_query}}} @{wreck_formula} @{wreck_roll_mods} {{charimage=@{chat_image}}} @{title_text}" data-i18n-title="wreck_description"><span class="default-label inherit" data-i18n="wreck"></span><span class="custom-label inherit" name="attr_wreck_label"></span>
+                </button>
+              </div>
             </div>
           </div>
         </div>
         <div class="attribute">
           <div class="attribute-title flex">
+            <!-- Standard button displays when Deep Cuts Action Module is active. Mainly a subtitle change.-->
+            <input class="button-hider-inverted" type="hidden" name="attr_setting_dc_action" value="0"/>
             <button class="rollbutton sheet-label" type="roll" name="roll_Resolve" value="&{template:blades} {{charname=@{character_name}}} {{type=resist}} {{subtitle=^{resists} @{consequence_query} ^{with}}} {{title-resolve=1}} {{title=^{resolve}}} @{resolve_formula} {{instructions=^{resist_instructions}}} @{resolve_roll_mods} {{charimage=@{chat_image}}} @{title_text}" data-i18n-title="resolve_description"><span class="default-label inherit" data-i18n="resolve"></span><span class="custom-label inherit" name="attr_resolve_label"></span>
+            </button>
+            <!-- Alt button displays when Deep Cuts Action Module is active. Changes the subtitle and the instructions, otherwise functions the same.-->
+            <input class="button-hider deepcuts" type="hidden" name="attr_setting_dc_action" value="0"/>
+            <button class="rollbutton sheet-label" type="roll" name="roll_Resolve" value="&{template:blades} {{charname=@{character_name}}} {{type=resist}} {{subtitle=^{pushes_against} @{consequence_query} ^{with}}} {{title-resolve=1}} {{title=^{resolve}}} @{resolve_formula} {{instructions=^{resist_instructions_dc}}} @{resolve_roll_mods} {{charimage=@{chat_image}}} @{title_text}" data-i18n-title="resolve_description"><span class="default-label inherit" data-i18n="resolve"></span><span class="custom-label inherit" name="attr_resolve_label"></span>
             </button>
             <input type="hidden" name="attr_resolve" value="0"/>
             <input type="hidden" name="attr_resolve_formula" value=" {{?{@{bonusdice}|0,zerodice=[[d6]]&amp;#44; [[d6]]|1,dice=[[d6]]|2,dice=[[d6]]&amp;#44; [[d6]]|3,dice=[[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]|4,dice=[[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]|5,dice=[[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]|6,dice=[[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]|-1,zerodice=[[d6]]&amp;#44; [[d6]]|-2,zerodice=[[d6]]&amp;#44; [[d6]]|-3,zerodice=[[d6]]&amp;#44; [[d6]]}}}"/>
@@ -1461,8 +1545,16 @@
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_attune" value="3"/><span></span>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_attune" value="4"/><span></span>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_attune" value="5"/><span></span>
-              <button class="rollbutton sheet-label" type="roll" name="roll_Attune" value="&{template:blades} {{charname=@{character_name}}} {{type=action}} {{subtitle=^{rolls}}} {{title-attune=1}} {{title=^{attune}}} {{@{position_query}}} {{effect=@{effect_query}}} @{attune_formula} @{attune_roll_mods} {{charimage=@{chat_image}}} @{title_text}" data-i18n-title="attune_description"><span class="default-label inherit" data-i18n="attune"></span><span class="custom-label inherit" name="attr_attune_label"></span>
-              </button>
+              <div class="rollinglabels">
+                <!-- Standard button displays when Deep Cuts Action Module is inactive.-->
+                <input class="button-hider-inverted" type="hidden" name="attr_setting_dc_action" value="0"/>
+                <button class="rollbutton sheet-label" type="roll" name="roll_Attune" value="&{template:blades} {{charname=@{character_name}}} {{type=action}} {{subtitle=^{rolls}}} {{title-attune=1}} {{title=^{attune}}} {{@{position_query}}} {{effect=@{effect_query}}} @{attune_formula} @{attune_roll_mods} {{charimage=@{chat_image}}} @{title_text}" data-i18n-title="attune_description"><span class="default-label inherit" data-i18n="attune"></span><span class="custom-label inherit" name="attr_attune_label"></span>
+                </button>
+                <!-- Alt button displays when Deep Cuts Action Module is active.-->
+                <input class="button-hider deepcuts" type="hidden" name="attr_setting_dc_action" value="0"/>
+                <button class="rollbutton sheet-label" type="roll" name="roll_Attune" value="&{template:blades} {{charname=@{character_name}}} {{type=action}} {{subtitle=^{rolls}}} {{title-attune=1}} {{title=^{attune}}} {{@{position_query_dc}}} {{effect=@{effect_query}}} @{attune_formula} @{attune_roll_mods} {{charimage=@{chat_image}}} @{title_text}" data-i18n-title="attune_description"><span class="default-label inherit" data-i18n="attune"></span><span class="custom-label inherit" name="attr_attune_label"></span>
+                </button>
+              </div>
             </div>
             <div class="action flex">
               <input type="hidden" name="attr_command_formula" value=" {{?{@{bonusdice}|0,zerodice=[[d6]]&amp;#44; [[d6]]|1,dice=[[d6]]|2,dice=[[d6]]&amp;#44; [[d6]]|3,dice=[[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]|4,dice=[[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]|5,dice=[[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]|6,dice=[[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]|-1,zerodice=[[d6]]&amp;#44; [[d6]]|-2,zerodice=[[d6]]&amp;#44; [[d6]]|-3,zerodice=[[d6]]&amp;#44; [[d6]]}}}"/>
@@ -1475,8 +1567,16 @@
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_command" value="3"/><span></span>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_command" value="4"/><span></span>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_command" value="5"/><span></span>
-              <button class="rollbutton sheet-label" type="roll" name="roll_Command" value="&{template:blades} {{charname=@{character_name}}} {{type=action}} {{subtitle=^{rolls}}} {{title-command=1}} {{title=^{command}}} {{@{position_query}}} {{effect=@{effect_query}}} @{command_formula} @{command_roll_mods} {{charimage=@{chat_image}}} @{title_text}" data-i18n-title="command_description"><span class="default-label inherit" data-i18n="command"></span><span class="custom-label inherit" name="attr_command_label"></span>
-              </button>
+              <div class="rollinglabels">
+                <!-- Standard button displays when Deep Cuts Action Module is inactive.-->
+                <input class="button-hider-inverted" type="hidden" name="attr_setting_dc_action" value="0"/>
+                <button class="rollbutton sheet-label" type="roll" name="roll_Command" value="&{template:blades} {{charname=@{character_name}}} {{type=action}} {{subtitle=^{rolls}}} {{title-command=1}} {{title=^{command}}} {{@{position_query}}} {{effect=@{effect_query}}} @{command_formula} @{command_roll_mods} {{charimage=@{chat_image}}} @{title_text}" data-i18n-title="command_description"><span class="default-label inherit" data-i18n="command"></span><span class="custom-label inherit" name="attr_command_label"></span>
+                </button>
+                <!-- Alt button displays when Deep Cuts Action Module is active.-->
+                <input class="button-hider deepcuts" type="hidden" name="attr_setting_dc_action" value="0"/>
+                <button class="rollbutton sheet-label" type="roll" name="roll_Command" value="&{template:blades} {{charname=@{character_name}}} {{type=action}} {{subtitle=^{rolls}}} {{title-command=1}} {{title=^{command}}} {{@{position_query_dc}}} {{effect=@{effect_query}}} @{command_formula} @{command_roll_mods} {{charimage=@{chat_image}}} @{title_text}" data-i18n-title="command_description"><span class="default-label inherit" data-i18n="command"></span><span class="custom-label inherit" name="attr_command_label"></span>
+                </button>
+              </div>
             </div>
             <div class="action flex">
               <input type="hidden" name="attr_consort_formula" value=" {{?{@{bonusdice}|0,zerodice=[[d6]]&amp;#44; [[d6]]|1,dice=[[d6]]|2,dice=[[d6]]&amp;#44; [[d6]]|3,dice=[[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]|4,dice=[[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]|5,dice=[[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]|6,dice=[[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]|-1,zerodice=[[d6]]&amp;#44; [[d6]]|-2,zerodice=[[d6]]&amp;#44; [[d6]]|-3,zerodice=[[d6]]&amp;#44; [[d6]]}}}"/>
@@ -1489,8 +1589,16 @@
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_consort" value="3"/><span></span>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_consort" value="4"/><span></span>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_consort" value="5"/><span></span>
-              <button class="rollbutton sheet-label" type="roll" name="roll_Consort" value="&{template:blades} {{charname=@{character_name}}} {{type=action}} {{subtitle=^{rolls}}} {{title-consort=1}} {{title=^{consort}}} {{@{position_query}}} {{effect=@{effect_query}}} @{consort_formula} @{consort_roll_mods} {{charimage=@{chat_image}}} @{title_text}" data-i18n-title="consort_description"><span class="default-label inherit" data-i18n="consort"></span><span class="custom-label inherit" name="attr_consort_label"></span>
-              </button>
+              <div class="rollinglabels">
+                <!-- Standard button displays when Deep Cuts Action Module is inactive.-->
+                <input class="button-hider-inverted" type="hidden" name="attr_setting_dc_action" value="0"/>
+                <button class="rollbutton sheet-label" type="roll" name="roll_Consort" value="&{template:blades} {{charname=@{character_name}}} {{type=action}} {{subtitle=^{rolls}}} {{title-consort=1}} {{title=^{consort}}} {{@{position_query}}} {{effect=@{effect_query}}} @{consort_formula} @{consort_roll_mods} {{charimage=@{chat_image}}} @{title_text}" data-i18n-title="consort_description"><span class="default-label inherit" data-i18n="consort"></span><span class="custom-label inherit" name="attr_consort_label"></span>
+                </button>
+                <!-- Alt button displays when Deep Cuts Action Module is active.-->
+                <input class="button-hider deepcuts" type="hidden" name="attr_setting_dc_action" value="0"/>
+                <button class="rollbutton sheet-label" type="roll" name="roll_Consort" value="&{template:blades} {{charname=@{character_name}}} {{type=action}} {{subtitle=^{rolls}}} {{title-consort=1}} {{title=^{consort}}} {{@{position_query_dc}}} {{effect=@{effect_query}}} @{consort_formula} @{consort_roll_mods} {{charimage=@{chat_image}}} @{title_text}" data-i18n-title="consort_description"><span class="default-label inherit" data-i18n="consort"></span><span class="custom-label inherit" name="attr_consort_label"></span>
+                </button>
+              </div>
             </div>
             <div class="action flex">
               <input type="hidden" name="attr_sway_formula" value=" {{?{@{bonusdice}|0,zerodice=[[d6]]&amp;#44; [[d6]]|1,dice=[[d6]]|2,dice=[[d6]]&amp;#44; [[d6]]|3,dice=[[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]|4,dice=[[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]|5,dice=[[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]|6,dice=[[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]&amp;#44; [[d6]]|-1,zerodice=[[d6]]&amp;#44; [[d6]]|-2,zerodice=[[d6]]&amp;#44; [[d6]]|-3,zerodice=[[d6]]&amp;#44; [[d6]]}}}"/>
@@ -1503,9 +1611,24 @@
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_sway" value="3"/><span></span>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_sway" value="4"/><span></span>
               <input class="checkbox circlebox fakeradio" type="checkbox" name="attr_sway" value="5"/><span></span>
-              <button class="rollbutton sheet-label" type="roll" name="roll_Sway" value="&{template:blades} {{charname=@{character_name}}} {{type=action}} {{subtitle=^{rolls}}} {{title-sway=1}} {{title=^{sway}}} {{@{position_query}}} {{effect=@{effect_query}}} @{sway_formula} @{sway_roll_mods} {{charimage=@{chat_image}}} @{title_text}" data-i18n-title="sway_description"><span class="default-label inherit" data-i18n="sway"></span><span class="custom-label inherit" name="attr_sway_label"></span>
-              </button>
+              <div class="rollinglabels">
+                <!-- Standard button displays when Deep Cuts Action Module is inactive.-->
+                <input class="button-hider-inverted" type="hidden" name="attr_setting_dc_action" value="0"/>
+                <button class="rollbutton sheet-label" type="roll" name="roll_Sway" value="&{template:blades} {{charname=@{character_name}}} {{type=action}} {{subtitle=^{rolls}}} {{title-sway=1}} {{title=^{sway}}} {{@{position_query}}} {{effect=@{effect_query}}} @{sway_formula} @{sway_roll_mods} {{charimage=@{chat_image}}} @{title_text}" data-i18n-title="sway_description"><span class="default-label inherit" data-i18n="sway"></span><span class="custom-label inherit" name="attr_sway_label"></span>
+                </button>
+                <!-- Alt button displays when Deep Cuts Action Module is active.-->
+                <input class="button-hider deepcuts" type="hidden" name="attr_setting_dc_action" value="0"/>
+                <button class="rollbutton sheet-label" type="roll" name="roll_Sway" value="&{template:blades} {{charname=@{character_name}}} {{type=action}} {{subtitle=^{rolls}}} {{title-sway=1}} {{title=^{sway}}} {{@{position_query_dc}}} {{effect=@{effect_query}}} @{sway_formula} @{sway_roll_mods} {{charimage=@{chat_image}}} @{title_text}" data-i18n-title="sway_description"><span class="default-label inherit" data-i18n="sway"></span><span class="custom-label inherit" name="attr_sway_label"></span>
+                </button>
+              </div>
             </div>
+          </div>
+        </div>
+        <input class="hider" type="hidden" name="attr_setting_dc_action" value="0"/>
+        <div class="edge deepcuts">
+          <div class="sheet-label" data-i18n="edge"></div>
+          <div class="edgetext">
+            <input type="number" name="attr_edge_amount" value="0" min="0" max="99" size="2"/>
           </div>
         </div>
         <input class="hider" type="hidden" name="attr_setting_show_cohort" value="0"/>
@@ -1580,7 +1703,12 @@
           <div class="flex">
             <div class="flex-center bonusdieplus">+</div>
             <div class="bonusdietext">
-              <div class="sheet-label" data-i18n="push_yourself"></div><span data-i18n="push_yourself_desc1"></span><span name="attr_setting_stress_label"></span><span data-i18n="push_yourself_desc2"></span>
+              <input class="hider-inverted" type="hidden" name="attr_setting_dc_action" value="0"/>
+              <div>
+                <div class="sheet-label" data-i18n="push_yourself"></div><span data-i18n="push_yourself_desc1"></span><span name="attr_setting_stress_label"></span><span data-i18n="push_yourself_desc2"></span>
+              </div>
+              <input class="hider" type="hidden" name="attr_setting_dc_action" value="0"/>
+              <div><span data-i18n="accept_a"></span></div>
               <div class="sheet-label" data-i18n="devils_bargain"></div>
             </div>
           </div>
@@ -4385,6 +4513,12 @@
         getTranslationByKey("desperate")},position=${
         getTranslationByKey("desperate")}|${
         getTranslationByKey("fortune_roll")},short=short}`,
+      position_query_dc: `?{${getTranslationByKey("position")}|${
+        getTranslationByKey("risky")},position=${
+        getTranslationByKey("risky")}|${
+        getTranslationByKey("desperate")},position=${
+        getTranslationByKey("desperate")}|${
+        getTranslationByKey("fortune_roll")},short=short}`,
       title_text: "",
     };
     getAttrs([
@@ -4779,6 +4913,31 @@
 			setAttrs(updates);
 		});
 	}
+
+  function setDCModAction(event) {
+		log('Addressing modification of Deep Cuts action module')
+		setDCPlaybookAbilitySwap('lurk','ambush','action');
+		setDCPlaybookAbilitySwap('cutter','bodyguard','action');
+		setDCPlaybookAbilitySwap('lurk','daredevil','action');
+		setDCPlaybookAbilitySwap('lurk','expertise','action');
+		setDCPlaybookAbilitySwap('spider','foresight','action');
+		setDCPlaybookAbilitySwap('whisper','ghost_mind','action');
+		setDCPlaybookAbilitySwap('whisper','iron_will','action');
+		setDCPlaybookAbilitySwap('spider','mastermind','action');
+		setDCPlaybookAbilitySwap('cutter','savage','action');
+		setDCPlaybookAbilitySwap('hound','scout','action');
+		setDCPlaybookAbilitySwap('slide','trust_in_me','action');
+		setDCCrewAbilitySwap('bravos','blood_brothers','action');
+		setDCCrewAbilitySwap('cult','bound_in_darkness','action');
+		setDCCrewAbilitySwap('shadows','synchronized','action');
+		setDCCrewTurfSwap('assassins',4,'informants','action');
+		setDCCrewTurfSwap('bravos',4,'informants','action');
+		setDCCrewTurfSwap('emcees',7,'informants','action');
+		setDCCrewTurfSwap('hawkers',5,'informants','action');
+		setDCCrewTurfSwap('shadows',7,'informants','action');
+		setDCCrewTurfSwap('smugglers',12,'informants','action');
+		log('Modification of Deep Cuts downtime module setting complete');
+  }
 
   /* DATA */
   const sheetVersion = "3.10";
@@ -7102,6 +7261,7 @@
   on("sheet:opened change:setting_dc_harm", setDCModHarm);
   on("sheet:opened change:setting_dc_load", setDCModLoad);
   on("sheet:opened change:setting_dc_downtime", function(event) {setDCModDowntime(event)} );
+  on("sheet:opened change:setting_dc_action", setDCModAction);
   /* INITIALISATION AND UPGRADES */
   on("sheet:opened", handleSheetInit);
 })();

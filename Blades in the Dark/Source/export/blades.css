@@ -319,15 +319,19 @@
 	display: none;
 }
 
-.charsheet .hider[value="0"] + li, .charsheet .hider[value="0"] + div, .charsheet .hider[value="0"] + label {
-	display: none;
-}
-
 .charsheet .hider-inverted[value="1"] + li, .charsheet .hider-inverted[value="1"] + div, .charsheet .hider-inverted[value="1"] + label {
 	display: none;
 }
 
 .charsheet .hider[value="0"] + li, .charsheet .hider[value="0"] + div, .charsheet .hider[value="0"] + label {
+	display: none;
+}
+
+.charsheet .button-hider[value="0"] + button.rollbutton {
+	display: none;
+}
+
+.charsheet .button-hider-inverted[value="1"] + button.rollbutton {
 	display: none;
 }
 
@@ -2105,6 +2109,33 @@
 	line-height: 16px;
 }
 
+/* EDGE SECTION */
+.charsheet .edge {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	    -ms-flex-direction: row;
+	        flex-direction: row;
+	gap: 6px;
+}
+.charsheet .edge .sheet-label {
+	font-size: 12px;
+}
+.charsheet .edgetext {
+	background: var(--blades-lightest);
+	width: 90%;
+	padding: 3px;
+	font-size: 11px;
+	line-height: 14px;
+	text-align: center;
+}
+.charsheet .edgetext input[type=number] {
+	background: white;
+	color: black;
+}
+
 /* BONUS DIE SECTION */
 .charsheet .bonusdie .sheet-label {
 	font-size: 12px;
@@ -3815,6 +3846,7 @@
 .charsheet .use-kirsty[value="1"] ~ .container .loadheader :first-child,
 .charsheet .use-kirsty[value="1"] ~ .container .attribute-title button[type=roll].rollbutton,
 .charsheet .use-kirsty[value="1"] ~ .container .bonusdie > .sheet-label:first-child,
+.charsheet .use-kirsty[value="1"] ~ .container .edge.deepcuts > .sheet-label:first-child,
 .charsheet .use-kirsty[value="1"] ~ .container .cohort-title,
 .charsheet .use-kirsty[value="1"] ~ .container .claimbox .sheet-label,
 .charsheet .use-kirsty[value="1"] ~ .container .lairbox,
@@ -3836,6 +3868,7 @@
 	font-weight: 400;
 }
 .charsheet .use-kirsty[value="1"] ~ .container .factions-header input[type=text],
+.charsheet .use-kirsty[value="1"] ~ .container .edge.deepcuts > .sheet-label:first-child,
 .charsheet .use-kirsty[value="1"] ~ .container .bonusdie > .sheet-label:first-child {
 	font-size: 14px;
 	font-weight: 400;
@@ -4000,6 +4033,9 @@
 	font-size: 15px;
 }
 .charsheet.lang-ko .bonusdietext, .charsheet.lang-ko .bonusdie .sheet-label {
+	font-size: 13px;
+}
+.charsheet.lang-ko .edgetext, .charsheet.lang-ko .edge .sheet-label {
 	font-size: 13px;
 }
 .charsheet.lang-ko .friend-contact .auto-expand {
