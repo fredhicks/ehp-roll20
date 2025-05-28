@@ -252,14 +252,14 @@
 				ul.advancement-desc
 					li.nondot(data-i18n="xp_dc_marking")
 					li
-						+autoexpand("xp_conditiondc")
+						+autoexpand("xp_condition_dc")
 					+hidden-input("setting_extra_xp")(value="0").hider
 					li
 						+autoexpand("xp_condition_extra")(data-i18n-placeholder="xp_specific_extra")
 					li
-						+autoexpand("xp_conditiondc2") You expressed your beliefs, drives, heritage, or background.
+						+autoexpand("xp_condition_dc2") You expressed your beliefs, drives, heritage, or background.
 					li
-						+autoexpand("xp_conditiondc3") You struggled with issues from your vice or traumas during the session.
+						+autoexpand("xp_condition_dc3") You struggled with issues from your vice or traumas during the session.
 			.xpclocks
 				each xpc in range(1,4)
 					+hidden-input("dc_xp_clocksize")(value="6").size

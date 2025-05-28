@@ -329,15 +329,15 @@ mixin makeupgrade(label, numboxes, def, desc)
 					.blackheader
 						.sheet-label(data-i18n="bank")
 				.col100.crewcoin-coins
-					+radio("crewcoindc")(value="0", checked).zero
+					+radio("crewcoin_dc")(value="0", checked).zero
 					each num in range(1,4)
-						+radio("crewcoindc")(value=num).radiobox
+						+radio("crewcoin_dc")(value=num).radiobox
 					.crewcoinbar
 					each num in range(5,12)
-						+radio("crewcoindc")(value=num).radiobox.vaultcoin
+						+radio("crewcoin_dc")(value=num).radiobox.vaultcoin
 					.crewcoinbar
 					each num in range(13,24)
-						+radio("crewcoindc")(value=num).radiobox.vaultcoin
+						+radio("crewcoin_dc")(value=num).radiobox.vaultcoin
 					.crewcoinbar
 						+text-input("crew_bank")
 
