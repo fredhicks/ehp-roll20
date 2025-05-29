@@ -325,14 +325,19 @@ $redriver_d: #600; // #500 in light mode
 .charsheet .button-hider-inverted[value="1"] + {
 	button.rollbutton { display: none }
 }
-.charsheet {
-	.heavy-hider[value="0"] {
-		~ li, div, label { display: none; }
-	}
+
+.charsheet .light-hider[value="0"] ~, .charsheet .light-hider[value="1"] ~, .charsheet .heavy-hider[value="2"] ~, .charsheet .heavy-hider[value="3"] ~ {
+	 .item-container, .item-container .item, .item-container .item-description { display: none }
 }
 
-.charsheet .heavy-hider[value="0"] ~, .charsheet .light-hider[value="1"] ~, .charsheet .heavy-hider[value="2"] ~, .charsheet .heavy-hider[value="3"] ~ {
-	 .item-container, .item-container .item, .item-container .item-description { display: none }
+/* Make sure the editing item controls don't show up for items whose appearance has been otherwise suppressed */ 
+.charsheet .repcontainer.editmode .repitem {
+	.itemcontrol:has(+ .light-hider[value="0"]), 
+	.itemcontrol:has(+ .light-hider[value="1"]), 
+	.itemcontrol:has(+ .heavy-hider[value="2"]), 
+	.itemcontrol:has(+ .heavy-hider[value="3"]) { 
+		display: none
+	}
 }
 
 /* Sheet container */
@@ -626,7 +631,7 @@ $redriver_d: #600; // #500 in light mode
 		input:checked + span { font-weight: bold }
 	}
 	.show-itemdesc[value="0"] ~ div .item-description { display: none }
-	.item-cost { /* ZOD */
+	.item-cost { 
 		font-size: 10px;
 		text-align: right;
 		margin-right: 12px;
@@ -2175,8 +2180,6 @@ $redriver_d: #600; // #500 in light mode
 		.cohort .cohort-condition.standard,
 		.cohorts.free-repcontrol .repcontainer .cohort .cohort-condition.standard { display: none }
 	}
-
-	/* ZOD */
 
 	.cohort-condition-name {
 		font-size: 7.5px;

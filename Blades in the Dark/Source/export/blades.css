@@ -335,11 +335,15 @@
 	display: none;
 }
 
-.charsheet .heavy-hider[value="0"] ~ li, .charsheet .heavy-hider[value="0"] div, .charsheet .heavy-hider[value="0"] label {
+.charsheet .light-hider[value="0"] ~ .item-container, .charsheet .light-hider[value="0"] ~ .item-container .item, .charsheet .light-hider[value="0"] ~ .item-container .item-description, .charsheet .light-hider[value="1"] ~ .item-container, .charsheet .light-hider[value="1"] ~ .item-container .item, .charsheet .light-hider[value="1"] ~ .item-container .item-description, .charsheet .heavy-hider[value="2"] ~ .item-container, .charsheet .heavy-hider[value="2"] ~ .item-container .item, .charsheet .heavy-hider[value="2"] ~ .item-container .item-description, .charsheet .heavy-hider[value="3"] ~ .item-container, .charsheet .heavy-hider[value="3"] ~ .item-container .item, .charsheet .heavy-hider[value="3"] ~ .item-container .item-description {
 	display: none;
 }
 
-.charsheet .heavy-hider[value="0"] ~ .item-container, .charsheet .heavy-hider[value="0"] ~ .item-container .item, .charsheet .heavy-hider[value="0"] ~ .item-container .item-description, .charsheet .light-hider[value="1"] ~ .item-container, .charsheet .light-hider[value="1"] ~ .item-container .item, .charsheet .light-hider[value="1"] ~ .item-container .item-description, .charsheet .heavy-hider[value="2"] ~ .item-container, .charsheet .heavy-hider[value="2"] ~ .item-container .item, .charsheet .heavy-hider[value="2"] ~ .item-container .item-description, .charsheet .heavy-hider[value="3"] ~ .item-container, .charsheet .heavy-hider[value="3"] ~ .item-container .item, .charsheet .heavy-hider[value="3"] ~ .item-container .item-description {
+/* Make sure the editing item controls don't show up for items whose appearance has been otherwise suppressed */
+.charsheet .repcontainer.editmode .repitem .itemcontrol:has(+ .light-hider[value="0"]),
+.charsheet .repcontainer.editmode .repitem .itemcontrol:has(+ .light-hider[value="1"]),
+.charsheet .repcontainer.editmode .repitem .itemcontrol:has(+ .heavy-hider[value="2"]),
+.charsheet .repcontainer.editmode .repitem .itemcontrol:has(+ .heavy-hider[value="3"]) {
 	display: none;
 }
 
@@ -719,7 +723,7 @@
 .charsheet .show-itemdesc[value="0"] ~ div .item-description {
 	display: none;
 }
-.charsheet .item-cost { /* ZOD */
+.charsheet .item-cost {
 	font-size: 10px;
 	text-align: right;
 	margin-right: 12px;
@@ -2649,9 +2653,6 @@
 }
 
 /* COHORTS */
-.charsheet {
-	/* ZOD */
-}
 .charsheet .cohort-title {
 	font-size: 11px;
 }

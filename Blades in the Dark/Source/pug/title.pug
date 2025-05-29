@@ -38,6 +38,8 @@
 				option(value="rakshasa", data-i18n="rakshasa")
 				option(value="vizier", data-i18n="vizier")
 				option(value="zindiq", data-i18n="zindiq")
+			optgroup(data-i18n-label="deepcuts")
+				option(value="stranger", data-i18n="stranger")
 		label.generatebutton
 			+checkbox("generate_ability")(data-i18n="add_abilities")
 		label.generatebutton
@@ -73,13 +75,10 @@
 	.setting-char.setting-crew
 		label
 			span(data-i18n="deep_cuts_modules")
-			span
+			span &nbsp;
 		label
-			+checkbox("setting_dc_harm").checkbox.squarebox
-			span(data-i18n="Harm")
-		label
-			+checkbox("setting_dc_load").checkbox.squarebox
-			span(data-i18n="Load")
+			+checkbox("setting_dc_action").checkbox.squarebox
+			span(data-i18n="Action")
 		label
 			+checkbox("setting_dc_advancement").checkbox.squarebox
 			span(data-i18n="Advancement")
@@ -87,8 +86,14 @@
 			+checkbox("setting_dc_downtime").checkbox.squarebox
 			span(data-i18n="Downtime")
 		label
-			+checkbox("setting_dc_action").checkbox.squarebox
-			span(data-i18n="Action")
+			+checkbox("setting_dc_harm").checkbox.squarebox
+			span(data-i18n="Harm")
+		label
+			+checkbox("setting_dc_load").checkbox.squarebox
+			span(data-i18n="Load")
+		label
+			+checkbox("setting_dc_innovations").checkbox.squarebox
+			span(data-i18n="Innovations")
 
 	+hidden-input("setting_dc_harm")(value="0").hider
 	.setting-char

@@ -44,6 +44,11 @@
       item.name = getTranslationByKey(item.name);
       item.description = getTranslationByKey(item.description);
     });
+    itemDataDC.forEach(item => {
+      item.boxes_chosen = "1";
+      item.name = getTranslationByKey(item.name);
+      item.description = getTranslationByKey(item.description);
+    });
     Object.keys(translatedDefaults).forEach(k => {
       translatedDefaults[k] = getTranslationByKey(translatedDefaults[k]);
     });
@@ -130,8 +135,7 @@
       return [x.name.toLowerCase(), x.description];
     }));
     [
-      crewData, playbookData, factionsDataStd, factionsDataDC, actionData, traumaData, itemData,
-      translatedDefaults, defaultValues, spiritPlaybooks, alchemicalData,
+      crewData, playbookData, factionsDataStd, factionsDataDC, actionData, traumaData, itemData, itemDataDC, translatedDefaults, defaultValues, spiritPlaybooks, alchemicalData,
     ].forEach(x => Object.freeze(x));
     return [playbookAbilityMap, crewAbilityMap];
   }
@@ -545,7 +549,13 @@
           mySetAttrs(setting);
           console.log("Initialising new sheet.");
         });
-        fillRepeatingSectionFromData("item", itemData);
+        getAttrs(['setting_dc_innovations'], v => {
+        	if ( v['setting_dc_innovations'] == "1" ) { // If deep cuts tech innovations are active, this should start out with that item data, not the standard item data
+						fillRepeatingSectionFromData("item", itemDataDC);
+        	} else {
+						fillRepeatingSectionFromData("item", itemData);
+        	}
+        });
       };
       if (v.version) upgradeSheet(v.version);
       else initialiseSheet();
@@ -1058,6 +1068,16 @@
 		setDCCrewTurfSwap('shadows',7,'informants','action');
 		setDCCrewTurfSwap('smugglers',12,'informants','action');
 		log('Modification of Deep Cuts action module setting complete');
+  }
+  
+  function setDCModInnovations() {
+		getAttrs(['setting_dc_innovations'], v => {
+			if ( v['setting_dc_innovations'] == "1" ) { // If deep cuts tech innovations are active, this should start out with that item data, not the standard item data
+				fillRepeatingSectionFromData("item", itemDataDC);
+			} else {
+				fillRepeatingSectionFromData("item", itemData);
+			}
+		});
   }
 
   /* DATA */
@@ -2098,6 +2118,36 @@
         numboxes: "0"
       }]
     },
+    stranger: {
+      ability: ["fractured_base", "fractured_handle", "fractured_endured", "fractured_driven", "fractured_changed", "fractured_blend", "fractured_occult", "fractured_trained", "assimilated", "veteran"],
+      base: {
+        friends_title: "playbook_stranger_friends_title",
+        gatherinfo1: "gatherinfo_what_do_they_intend",
+        gatherinfo2: "gatherinfo_how_can_I_get_them",
+        gatherinfo3: "gatherinfo_what_are_they_really",
+        gatherinfo4: "gatherinfo_what_should_I_look",
+        gatherinfo5: "gatherinfo_wheres_the_weakness",
+        gatherinfo6: "gatherinfo_how_can_I_find",
+        playbook_description: "playbook_stranger_description"
+      },
+      playbookitem: [{
+        bold: "1",
+        name: "playbook_item_strange_luxury_item",
+        numboxes: "0"
+      }, {
+        name: "playbook_item_strange_weapon",
+        numboxes: "1"
+      }, {
+        name: "playbook_item_strange_tool",
+        numboxes: "1"
+      }, {
+        name: "playbook_item_strange_clothes",
+        numboxes: "0"
+      }, {
+        name: "playbook_item_strange_documents",
+        numboxes: "0"
+      }]
+    },
     vampire: {
       ability: ["undead", "terrible_power", "arcane_sight", "a_void_in_the_echo", "dark_talent", "sinister_guile", "veteran"],
       base: {
@@ -3113,6 +3163,112 @@
       numboxes: "1"
     }
   ];
+  const itemDataDC = [
+    {
+      name: "a_blade_or_two",
+      description: "a_blade_or_two_description",
+      numboxes: "1"
+    },
+    {
+      name: "throwing_knives",
+      description: "throwing_knives_description",
+      numboxes: "1"
+    },
+    {
+      name: "a_pistol",
+      description: "a_pistol_description",
+      numboxes: "1",
+      short: "1"
+    },
+    {
+      name: "a_2nd_pistol",
+      description: "a_pistol_description",
+      numboxes: "1",
+      short: "1"
+    },
+    {
+      name: "slugger_pistol",
+      description: "slugger_pistol_description",
+      numboxes: "1"
+    },
+    {
+      name: "slugger_rifle",
+      description: "slugger_rifle_description",
+      numboxes: "2"
+    },
+    {
+      name: "a_large_weapon",
+      description: "a_large_weapon_description",
+      numboxes: "2"
+    },
+    {
+      name: "an_unusual_weapon",
+      description: "an_unusual_weapon_description",
+      numboxes: "1"
+    },
+    {
+      name: "armor",
+      description: "armor_description",
+      numboxes: "2",
+      short: "1"
+    },
+    {
+      name: "+heavy",
+      description: "+heavy_description",
+      numboxes: "3",
+      short: "1"
+    },
+    {
+      name: "burglary_gear",
+      description: "burglary_gear_description",
+      numboxes: "1"
+    },
+    {
+      name: "climbing_gear",
+      description: "climbing_gear_description",
+      numboxes: "2"
+    },
+    {
+      name: "arcane_implements",
+      description: "arcane_implements_description",
+      numboxes: "1"
+    },
+    {
+      name: "documents",
+      description: "documents_description",
+      numboxes: "1"
+    },
+    {
+      name: "subterfuge_supplies",
+      description: "subterfuge_supplies_description",
+      numboxes: "1"
+    },
+    {
+      name: "demolition_tools",
+      description: "demolition_tools_description",
+      numboxes: "2"
+    },
+    {
+      name: "tinkering_tools",
+      description: "tinkering_tools_description",
+      numboxes: "1"
+    },
+    {
+      name: "prichard_camera",
+      description: "prichard_camera_description",
+      numboxes: "1"
+    },
+    {
+      name: "spiritbane_charm",
+      description: "spiritbane_charm_description",
+      numboxes: "0"
+    },
+    {
+      name: "arclighter_glimmer",
+      description: "arclighter_glimmer_description",
+      numboxes: "0"
+    }
+  ];
   const translatedDefaults = {
     char_cohort_name: "cohort",
     cohort1_name: "cohort",
@@ -3383,6 +3539,7 @@
   on("sheet:opened change:setting_dc_load", setDCModLoad);
   on("sheet:opened change:setting_dc_downtime", function(event) {setDCModDowntime(event)} );
   on("sheet:opened change:setting_dc_action", setDCModAction);
+  on("change:setting_dc_innovations", setDCModInnovations); // shouldn't need to fire off on open
   /* INITIALISATION AND UPGRADES */
   on("sheet:opened", handleSheetInit);
 })();
