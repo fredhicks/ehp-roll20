@@ -417,7 +417,10 @@
   }
 
   function fillAbility(prefix, abilityMap) {
+  	log(`fillAbility - prefix = ${prefix}`);
+  	log(abilityMap);
     getAttrs([`${prefix}_name`, `${prefix}_description`], v => {
+    	log(v);
       if (!v[`${prefix}_description`]) {
         const description = abilityMap.get((v[`${prefix}_name`] || "")
           .toLowerCase());
@@ -739,6 +742,8 @@
     				playbookData[pbook].ability[ability].key = akey+'_dc';
     				playbookData[pbook].ability[ability].name = newname;
     				playbookData[pbook].ability[ability].description = newdesc;
+    				// Update the playbookAbilityMap structure so when people type in the name of a thing they get the new thing, not the old thing!
+    				playbookAbilityMap.set(newname.toLowerCase(), newdesc);
 						getSectionIDs(`repeating_ability`, idList => {
 							const existingRowAttributes = [
 								...idList.map(id => `repeating_ability_${id}_name`),
@@ -747,7 +752,7 @@
 							getAttrs(existingRowAttributes, v => {
 								let atts = {};
 								idList.forEach(id => {
-									if (v[`repeating_ability_${id}_name`] == oldname && ( v[`repeating_ability_${id}_description`] == olddesc || v[`repeating_ability_${id}_description`] == "" ) ) {
+									if (v[`repeating_ability_${id}_name`].toLowerCase() == oldname.toLowerCase() && ( v[`repeating_ability_${id}_description`] == olddesc || v[`repeating_ability_${id}_description`] == "" ) ) {
 										// Then we have the old description and the old name, so let's switch them to the new ones.
 										atts[`repeating_ability_${id}_name`] = newname;
 										atts[`repeating_ability_${id}_description`] = newdesc;
@@ -771,6 +776,8 @@
     				playbookData[pbook].ability[ability].key = akey;
     				playbookData[pbook].ability[ability].name = newname;
     				playbookData[pbook].ability[ability].description = newdesc;
+    				// Update the playbookAbilityMap structure so when people type in the name of a thing they get the new thing, not the old thing!
+    				playbookAbilityMap.set(newname.toLowerCase(), newdesc);
 						getSectionIDs(`repeating_ability`, idList => {
 							const existingRowAttributes = [
 								...idList.map(id => `repeating_ability_${id}_name`),
@@ -779,7 +786,7 @@
 							getAttrs(existingRowAttributes, v => {
 								let atts = {};
 								idList.forEach(id => {
-									if (v[`repeating_ability_${id}_name`] == oldname && ( v[`repeating_ability_${id}_description`] == olddesc || v[`repeating_ability_${id}_description`] == "" ) ) {
+									if (v[`repeating_ability_${id}_name`].toLowerCase() == oldname.toLowerCase() && ( v[`repeating_ability_${id}_description`] == olddesc || v[`repeating_ability_${id}_description`] == "" ) ) {
 										// Then we have the old description and the old name, so let's switch them to the new ones.
 										atts[`repeating_ability_${id}_name`] = newname;
 										atts[`repeating_ability_${id}_description`] = newdesc;
@@ -836,6 +843,7 @@
     				crewData[pbook].crewability[ability].key = akey+'_dc';
     				crewData[pbook].crewability[ability].name = newname;
     				crewData[pbook].crewability[ability].description = newdesc;
+    				crewAbilityMap.set(newname.toLowerCase(), newdesc);
 						getSectionIDs(`repeating_crewability`, idList => {
 							const existingRowAttributes = [
 								...idList.map(id => `repeating_crewability_${id}_name`),
@@ -844,7 +852,7 @@
 							getAttrs(existingRowAttributes, v => {
 								let atts = {};
 								idList.forEach(id => {
-									if (v[`repeating_crewability_${id}_name`] == oldname && ( v[`repeating_crewability_${id}_description`] == olddesc || v[`repeating_crewability_${id}_description`] == "" ) ) {
+									if (v[`repeating_crewability_${id}_name`].toLowerCase() == oldname.toLowerCase() && ( v[`repeating_crewability_${id}_description`] == olddesc || v[`repeating_crewability_${id}_description`] == "" ) ) {
 										// Then we have the old description and the old name, so let's switch them to the new ones.
 										atts[`repeating_crewability_${id}_name`] = newname;
 										atts[`repeating_crewability_${id}_description`] = newdesc;
@@ -868,6 +876,7 @@
     				crewData[pbook].crewability[ability].key = akey;
     				crewData[pbook].crewability[ability].name = newname;
     				crewData[pbook].crewability[ability].description = newdesc;
+    				crewAbilityMap.set(newname.toLowerCase(), newdesc);
 						getSectionIDs(`repeating_crewability`, idList => {
 							const existingRowAttributes = [
 								...idList.map(id => `repeating_crewability_${id}_name`),
@@ -876,7 +885,7 @@
 							getAttrs(existingRowAttributes, v => {
 								let atts = {};
 								idList.forEach(id => {
-									if (v[`repeating_crewability_${id}_name`] == oldname && ( v[`repeating_crewability_${id}_description`] == olddesc || v[`repeating_crewability_${id}_description`] == "" ) ) {
+									if (v[`repeating_crewability_${id}_name`].toLowerCase() == oldname.toLowerCase() && ( v[`repeating_crewability_${id}_description`] == olddesc || v[`repeating_crewability_${id}_description`] == "" ) ) {
 										// Then we have the old description and the old name, so let's switch them to the new ones.
 										atts[`repeating_crewability_${id}_name`] = newname;
 										atts[`repeating_crewability_${id}_description`] = newdesc;
@@ -954,6 +963,7 @@
   function setDCModLoad() {
 		log('Addressing modification of Deep Cuts load module')
 		setDCPlaybookAbilitySwap('cutter','mule','load');
+		setDCPlaybookAbilitySwap('janissary','mule','load');
 		setDCCrewUpgradeSwap('assassins','crew_upgrade_assassin_rigging','load')
 		setDCCrewUpgradeSwap('bravos','crew_upgrade_bravos_rigging','load')
 		setDCCrewUpgradeSwap('cult','crew_upgrade_cult_rigging','load')
@@ -969,17 +979,26 @@
 		log('Addressing modification of Deep Cuts harm module')
 		setDCPlaybookAbilitySwap('cutter','vigorous','harm','downtime'); // add second module that also governs whether or not this swaps back or stays put when toggled off
 		setDCPlaybookAbilitySwap('hound','tough_as_nails','harm');
+		setDCPlaybookAbilitySwap('faris','vigorous','harm','downtime'); // add second module that also governs whether or not this swaps back or stays put when toggled off
+		setDCPlaybookAbilitySwap('janissary','tough_as_nails','harm');
 		setDCCrewAbilitySwap('cult','anointed','harm');
 		log('Modification of Deep Cuts harm module setting complete')
   }
 
   function setDCModDowntime(event) {
 		log('Addressing modification of Deep Cuts downtime module')
+
 		setDCPlaybookAbilitySwap('cutter','vigorous','downtime','harm'); // add second module that also governs whether or not this swaps back or stays put when toggled off
 		setDCPlaybookAbilitySwap('spider','connected','downtime');
 		setDCPlaybookAbilitySwap('spider','functioning_vice','downtime');
 		setDCPlaybookAbilitySwap('leech','physicker','downtime');
 		setDCPlaybookAbilitySwap('vampire','sinister_guile','downtime');
+
+		setDCPlaybookAbilitySwap('faris','vigorous','downtime','harm'); // add second module that also governs whether or not this swaps back or stays put when toggled off
+		setDCPlaybookAbilitySwap('forger','connected','downtime');
+		setDCPlaybookAbilitySwap('rafiq','functioning_vice','downtime');
+		setDCPlaybookAbilitySwap('janissary','physicker','downtime');
+
 		setDCCrewAbilitySwap('assassins','no_traces','downtime');
 		setDCCrewAbilitySwap('assassins','patron','downtime');
 		setDCCrewAbilitySwap('bravos','patron','downtime');
@@ -1023,6 +1042,12 @@
 		setDCPlaybookAbilitySwap('cutter','savage','action');
 		setDCPlaybookAbilitySwap('hound','scout','action');
 		setDCPlaybookAbilitySwap('slide','trust_in_me','action');
+		setDCPlaybookAbilitySwap('rakshasa','ambush','action');
+		setDCPlaybookAbilitySwap('janissary','bodyguard','action');
+		setDCPlaybookAbilitySwap('faris','expertise','action');
+		setDCPlaybookAbilitySwap('vizier','ghost_mind','action');
+		setDCPlaybookAbilitySwap('rakshasa','scout','action');
+		setDCPlaybookAbilitySwap('rafiq','trust_in_me','action');
 		setDCCrewAbilitySwap('bravos','blood_brothers','action');
 		setDCCrewAbilitySwap('cult','bound_in_darkness','action');
 		setDCCrewAbilitySwap('shadows','synchronized','action');
@@ -1032,7 +1057,7 @@
 		setDCCrewTurfSwap('hawkers',5,'informants','action');
 		setDCCrewTurfSwap('shadows',7,'informants','action');
 		setDCCrewTurfSwap('smugglers',12,'informants','action');
-		log('Modification of Deep Cuts downtime module setting complete');
+		log('Modification of Deep Cuts action module setting complete');
   }
 
   /* DATA */
