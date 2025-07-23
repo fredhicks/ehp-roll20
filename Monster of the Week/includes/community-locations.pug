@@ -20,13 +20,13 @@
 				input(type='hidden', name='attr_location')
 				input(type='hidden', name='attr_desc')
 				input(type='hidden', name='attr_type')
-				| &#x2022&nbsp;
 				b
 					span(name='attr_location')
-					| .&nbsp;
-				span(name='attr_desc')
+				br
 				i
-					| &nbsp;(
+					| (
 					+translate('Type:')
 					span(name='attr_type')
 					| )
+				br
+				span(name='attr_desc')
