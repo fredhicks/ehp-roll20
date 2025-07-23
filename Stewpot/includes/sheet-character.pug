@@ -14,6 +14,7 @@
 		'Shadowspinner',
 		'Spiritcaller',
 		'Warlock',
+		'Custom',
 	];
 	const tjobs = [ 
 		'Apothecary',
@@ -32,6 +33,7 @@
 		'Mezzo-Soprano',
 		'Playwright',
 		'Tattoo-Artist',
+		'Custom',
 	];
 	const axps = {
 		'Bard': [ "Bag of Tricks: Card magic, juggling clubs, and other spectacles", "Devil’s Fingers: Prodigious skill with an instrument", "Alluring Voice: The voice of an angel", "Golden Words: Convince anyone of anything", "Inspiration: Power up your friends" ],
@@ -84,6 +86,7 @@
 			'Hex: Vengeful curses',
 			'Possession: Channel your patron',
 		],
+		'Custom': [],
 	};
 	const txps = {
 		'Apothecary': [ "Brewer: Concoct potions, salves, balms, and more", "Smell the Flowers: A keen nose, mastery of scents", "Pipeleaf: Calm the nerves", "Botanist: Know every plant in the area", "Distillation: Strengthen the good in something" ],
@@ -138,6 +141,7 @@
 			'Visionary: Recreate imagery from verbal descriptions',
 			'Welcome Home: Make people feel at ease in their body',
 		],
+		'Custom': [],
 	};
 
 .character
@@ -202,10 +206,13 @@
 				.shead
 					+bflabel("Adventurer Job")
 				.jbody
-					+select("ajob").job
+					+select("ajob").job.jobcustomcheck
 						+option('(pick an adventurer job)','')
 						each v in ajobs
 							+option(v,v)
+					+hideunless("ajob")
+					.Custom
+						+text('custom_ajob_name')
 				.shead
 					+flabel("Adventurer Experiences")
 				.jbody
@@ -221,13 +228,14 @@
 								+shower("axp"+xp)
 								.tidy
 									each j in ajobs
-										+hideunless("ajob")
-										+select('select_axp'+xp)(class=j)
-											- var article = 'a'; var atext = j.charAt(0); 
-											- if ( atext == "A" || atext == "E" || atext == "I" || atext == "O" || atext == "U" ) { article = 'an'; }
-											+option('(pick '+article+' '+j+' experience or fill in the blank)','')
-											each x in axps[j]
-												+option(x)
+										- if ( axps[j].length > 0 )
+											+hideunless("ajob")
+											+select('select_axp'+xp)(class=j)
+												- var article = 'a'; var atext = j.charAt(0); 
+												- if ( atext == "A" || atext == "E" || atext == "I" || atext == "O" || atext == "U" ) { article = 'an'; }
+												+option('(pick '+article+' '+j+' experience or fill in the blank)','')
+												each x in axps[j]
+													+option(x)
 			.townblock
 				.shead
 					+bflabel("Town Job")
@@ -236,6 +244,9 @@
 						+option('(pick a town job)','')
 						each v in tjobs
 							+option(v,v)
+					+hideunless("tjob")
+					.Custom
+						+text('custom_tjob_name')
 				.shead
 					+flabel("Town Experiences")
 				.jbody
@@ -247,10 +258,11 @@
 							+shower("txp"+xp)
 							.tidy
 								each j in tjobs
-									+hideunless("tjob")
-									+select('select_txp'+xp)(class=j)
-										- var article = 'a'; var atext = j.charAt(0); 
-										- if ( atext == "A" || atext == "E" || atext == "I" || atext == "O" || atext == "U" ) { article = 'an'; }
-										+option('(pick '+article+' '+j+' experience or fill in the blank)','')
-										each x in txps[j]
-											+option(x)
+									- if ( txps[j].length > 0 )
+										+hideunless("tjob")
+										+select('select_txp'+xp)(class=j)
+											- var article = 'a'; var atext = j.charAt(0); 
+											- if ( atext == "A" || atext == "E" || atext == "I" || atext == "O" || atext == "U" ) { article = 'an'; }
+											+option('(pick '+article+' '+j+' experience or fill in the blank)','')
+											each x in txps[j]
+												+option(x)
