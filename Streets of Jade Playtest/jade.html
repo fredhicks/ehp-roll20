@@ -1,0 +1,1337 @@
+
+<!-- Translation-->
+<!-- Attribute Display-->
+<!-- Input Elements-->
+<!-- Fieldset structure-->
+<!-- Visibility Controls-->
+<!-- Checkboxes-->
+<!-- STEWPOT STUFF BELOW HERE -- UNSURE WHICH STUFF WE'LL NEED JUST YET-->
+<script type="text/worker">// Behold, the Script Worker for Streets of Jade
+
+on("clicked:mark", function(event) {
+	var what = event.htmlAttributes.value;
+	var atname = "toggle_" + what;
+	var ats = {};
+	ats[atname] = 1;
+	var numfind = /[0-9]*$/;
+	var numfound = numfind.exec(atname);
+	var namefind = /^.*[^0-9]/;
+	var namefound = namefind.exec(atname);
+	if ( numfound[0] == "" || numfound[0] == "1" ) { 
+		setAttrs(ats);
+		log(what + " mark");
+		log(numfound);
+		log(event);
+		log(ats);
+	} else {
+		log("we have a potential sequence");
+		var seq = Number(numfound[0]);
+		var seqs = []; var s = 0;
+		while(seq > 1) {
+			seq--;
+			seqs[s] = namefound+seq;
+			s++;
+		}
+		log(seqs);
+		getAttrs(seqs,function(a) {
+			for(var i = 0; i < seqs.length; i++) {
+				var val = a[seqs[i]];
+				if ( val == "0" ) { // We only auto-mark empty boxes, not "itched" ones (val == 2)
+					ats[seqs[i]] = "1";
+				}
+			}
+			setAttrs(ats);
+			log(namefound);
+			log(what + " mark");
+			log(numfound);
+			log(event);
+			log(ats);
+		});
+	}
+});
+
+on("clicked:repeating_favors:mark", function(e) {
+	var what = e.htmlAttributes.value;
+	var ats = {};
+	var rowprefix = (e.sourceAttribute).slice(0,-4); // Strips off the 'mark'
+	var atname = rowprefix + "toggle_" + what;
+	ats[atname] = 1;
+	setAttrs(ats);
+	log(what + " mark");
+	log(e);
+	log(ats);
+	log(rowprefix);
+});
+
+on("clicked:unmark", function(event) {
+	var what = event.htmlAttributes.value;
+	var atname = "toggle_" + what;
+	var ats = {};
+	ats[atname] = 0;
+
+	var numfind = /[0-9]*$/;
+	var numfound = numfind.exec(atname);
+	var namefind = /^.*[^0-9]/;
+	var namefound = namefind.exec(atname);
+	if ( numfound[0] == "" ) { 
+		setAttrs(ats);
+		log(what + " unmark");
+		log(numfound);
+		log(event);
+		log(ats);
+	} else {
+		log("we have a potential sequence");
+		var seq = Number(numfound[0]);
+		var seqs = []; var s = 0;
+		while(seq < 41) {
+			seq++;
+			seqs[s] = namefound+seq;
+			s++;
+		}
+		log(seqs);
+		getAttrs(seqs,function(a) {
+			log(a);
+			for(var i = 0; i < seqs.length; i++) {
+				var val = a[seqs[i]];
+				if ( val == "1" ) { // We only change it to unmarked if it's normal-marked. If val == "2", then it's "itched" and requires special attention.
+					ats[seqs[i]] = "0";
+				}
+			}
+			setAttrs(ats);
+			log(namefound);
+			log(what + " unmark");
+			log(numfound);
+			log(event);
+			log(ats);
+		});
+	}
+});
+
+on("clicked:repeating_favors:unmark", function(e) {
+	var what = e.htmlAttributes.value;
+	var ats = {};
+	var rowprefix = (e.sourceAttribute).slice(0,-6); // Strips off the 'unmark'
+	var atname = rowprefix + "toggle_" + what;
+	ats[atname] = 0;
+	setAttrs(ats);
+	log(what + " mark");
+	log(e);
+	log(ats);
+	log(rowprefix);
+});
+
+on("clicked:itch", function(event) {
+	var what = event.htmlAttributes.value;
+	var atname = "toggle_" + what;
+	var ats = {};
+	ats[atname] = 2;
+	setAttrs(ats);
+	log(what + " itch");
+});
+
+</script>
+<!-- Eventually I'll need to come up with a mode-selector where you choose whether this is a Character Sheet or a Tavern Sheet. -->
+<div class="wrapper">
+  <div class="modeblock">
+    <input class="shower" name="attr_sheetmode" type="hidden" value=""/>
+    <select name="attr_sheetmode">
+      <option value="" data-i18n="Which kind of sheet?"></option>
+      <option value="character" data-i18n="Character"></option>
+      <option value="faction" data-i18n="Faction"></option>
+    </select>
+  </div>
+  <input class="mhider" name="attr_sheetmode" type="hidden" value=""/>
+  <div class="character">
+    <div class="rolling bordered">
+      <div class="choices">
+        <!-- IF YOU'RE WOUNDED, REMOVE ONE DIE BEFORE ROLLING.-->
+        <div class="choice">
+          <div class="toptag"><span data-i18n="Build Your Pool">Build Your Pool</span> 
+          </div>
+          <div class="bordered">
+            <!-- Name die - always, unless you deliberately remove it--><span data-i18n="Name Die">Name Die</span> 
+            <input class="thider" name="attr_toggle_roll-family-die" type="hidden" value="1"/>
+            <button class="cbox marked" type="action" name="act_unmark" value="roll-family-die"></button>
+            <input class="tshower" name="attr_toggle_roll-family-die" type="hidden" value="1"/>
+            <button class="cbox unmarked" type="action" name="act_mark" value="roll-family-die"></button>
+            <!-- Main skill - always pick one--><span data-i18n="Main Skill">Main Skill</span> 
+            <!-- Second skill - pick one, but only if you mark 1 pathos-->
+            <select name="attr_roll-main-skill">
+              <option value="" data-i18n="(Choose)"></option>
+              <option value="arts-oration" data-i18n="Arts and Oration"></option>
+              <option value="blood-valor" data-i18n="Blood and Valor"></option>
+              <option value="craft-reason" data-i18n="Craft and Reason"></option>
+              <option value="resolve-spirit" data-i18n="Resolve and Spirit"></option>
+            </select><span data-i18n="Second Skill">Second Skill</span> 
+            <select name="attr_roll-second-skill">
+              <option value="" data-i18n="(Spend 1 Pathos)"></option>
+              <option value="arts-oration" data-i18n="Arts and Oration"></option>
+              <option value="blood-valor" data-i18n="Blood and Valor"></option>
+              <option value="craft-reason" data-i18n="Craft and Reason"></option>
+              <option value="resolve-spirit" data-i18n="Resolve and Spirit"></option>
+            </select>
+            <!-- Reputation die (if warranted; optional)-->
+            <!-- ZOD ZOD ZOD ZOD ZOD LEFT OFF HERE ZOD ZOD ZOD ZOD ZOD--><span data-i18n="Reputation">Reputation</span> 
+            <!-- First Jade discipline dice-->
+            <!-- Second Jade discipline dice--><span data-i18n="Jade">Jade</span> 
+            <!-- Advantage dice (d6, d8, d10, arbitrary number of them)--><span data-i18n="Advantage">Advantage</span> 
+            <!-- Support (any die, a name, a reputation, or a skill die from a supporter)--><span data-i18n="Support">Support</span> 
+            <!-- Faction (or Neighborhood) Backing (an asset, neighborhood, or command die no one else is using)--><span data-i18n="Faction/Neighborhood">Faction/Neighborhood</span> 
+          </div>
+        </div>
+      </div>
+      <div class="dice">
+        <!-- Display all the dice you've queued up-->
+        <!-- Click to roll them-->
+        <!-- Sum the two highest results plus your highest jade die if any.-->
+        <!-- If any jade dice rolled doubles, mark an itch.-->
+        <!-- If you met or exceeded the challenge level, you prevail!-->
+        <!-- Name Die - always, unless you deliberately remove it-->
+        <div class="choice">
+          <div class="toptag"><span data-i18n="Name Die">Name Die</span> 
+          </div>
+          <div class="bordered">
+            <input class="tdimmer" name="attr_toggle_roll-family-die" type="hidden" value="1"/>
+            <div class="diebox"> 
+              <input class="chosendie" type="hidden" name="attr_family-name-die" value=""/>
+              <div class="polyhedral d4 df-d4-4"></div>
+              <div class="polyhedral d6 df-d6-6"></div>
+              <div class="polyhedral d8 df-d8-8"></div>
+              <div class="polyhedral d10 df-d10-10"></div>
+              <div class="polyhedral d12 df-d12-12"></div>
+            </div>
+          </div>
+        </div>
+        <!-- Main skill-->
+        <div class="choice">
+          <div class="toptag"><span data-i18n="Main Skill">Main Skill</span> 
+          </div>
+          <div class="bordered"></div>
+        </div>
+        <!-- Second skill (if you mark 1 pathos to push yourself)-->
+        <div class="choice">
+          <div class="toptag"><span data-i18n="Second Skill">Second Skill</span> 
+          </div>
+          <div class="bordered"></div>
+        </div>
+        <!-- Reputation die (if warranted; optional)-->
+        <div class="choice">
+          <div class="toptag"><span data-i18n="Reputation">Reputation</span> 
+          </div>
+          <div class="bordered"></div>
+        </div>
+        <!-- First Jade discipline dice-->
+        <!-- Second Jade discipline dice-->
+        <div class="choice">
+          <div class="toptag"><span data-i18n="Jade">Jade</span> 
+          </div>
+          <div class="bordered"></div>
+        </div>
+        <!-- Advantage dice (d6, d8, d10, arbitrary number of them)-->
+        <div class="choice">
+          <div class="toptag"><span data-i18n="Advantage">Advantage</span> 
+          </div>
+          <div class="bordered"></div>
+        </div>
+        <!-- Support (any die, a name, a reputation, or a skill die from a supporter)-->
+        <div class="choice">
+          <div class="toptag"><span data-i18n="Support">Support</span> 
+          </div>
+          <div class="bordered"></div>
+        </div>
+        <!-- Faction (or Neighborhood) Backing (an asset, neighborhood, or command die no one else is using)-->
+        <div class="choice">
+          <div class="toptag"><span data-i18n="Faction/Neighborhood">Faction/Neighborhood</span> 
+          </div>
+          <div class="bordered"></div>
+        </div>
+        <div class="choice">
+          <div class="toptag golden"><span data-i18n="Roll!">Roll!</span> 
+          </div>
+          <div class="bordered golden">Button goes here</div>
+        </div>
+      </div>
+    </div>
+    <div class="c2-1">
+      <div class="bio">
+        <div class="player"><span data-i18n="Introducing">Introducing</span> 
+          <input class="blankline" type="text" name="attr_player-name-and-pronouns"/><span data-i18n="as ...">as ...</span> 
+        </div>
+        <div class="names">
+            <div class="lozenge">
+              <input type="text" name="attr_family-name"/>
+              <div class="tag"><span data-i18n="Family Name">Family Name</span> 
+              </div>
+            </div>
+          <div class="connect-line"></div>
+            <div class="die">
+              <input class="chosendie" type="hidden" name="attr_family-name-die" value=""/>
+              <select name="attr_family-name-die">
+                <option value=""></option>
+                <option value="4">4</option>
+                <option value="6">6</option>
+                <option value="8">8</option>
+                <option value="10">10</option>
+                <option value="12">12</option>
+              </select>
+              <div class="polyhedral d4 df-d4-4"></div>
+              <div class="polyhedral d6 df-d6-6"></div>
+              <div class="polyhedral d8 df-d8-8"></div>
+              <div class="polyhedral d10 df-d10-10"></div>
+              <div class="polyhedral d12 df-d12-12"></div>
+            </div>
+          <div class="connect-line"></div>
+            <div class="lozenge">
+              <input type="text" name="attr_given-name"/>
+              <div class="tag"><span data-i18n="Given Name/Nickname">Given Name/Nickname</span> 
+              </div>
+            </div>
+          <div class="connect-line"></div>
+            <div class="lozenge">
+              <input type="text" name="attr_pronouns"/>
+              <div class="tag"><span data-i18n="Pronouns">Pronouns</span> 
+              </div>
+            </div>
+        </div>
+        <div class="c2">
+            <div class="lozenge">
+              <input type="text" name="attr_concept"/>
+              <div class="tag"><span data-i18n="Concept">Concept</span> 
+              </div>
+            </div>
+          <div class="spacer"></div>
+            <div class="lozenge">
+              <input type="text" name="attr_ethnicities"/>
+              <div class="tag"><span data-i18n="Ethnicities/Nation">Ethnicities/Nation</span> 
+              </div>
+            </div>
+        </div>
+        <div class="c2">
+            <div class="lozenge">
+              <input type="text" name="attr_allegiance"/>
+              <div class="tag"><span data-i18n="Allegiance">Allegiance</span> 
+              </div>
+            </div>
+          <div class="connect-line"></div>
+          <div class="c2-die">
+              <div class="lozenge">
+                <input type="text" name="attr_reputation"/>
+                <div class="tag"><span data-i18n="Reputation">Reputation</span> 
+                </div>
+              </div>
+            <div class="connect-line"></div>
+              <div class="die">
+                <input class="chosendie" type="hidden" name="attr_reputation-die" value=""/>
+                <select name="attr_reputation-die">
+                  <option value=""></option>
+                  <option value="4">4</option>
+                  <option value="6">6</option>
+                  <option value="8">8</option>
+                  <option value="10">10</option>
+                  <option value="12">12</option>
+                </select>
+                <div class="polyhedral d4 df-d4-4"></div>
+                <div class="polyhedral d6 df-d6-6"></div>
+                <div class="polyhedral d8 df-d8-8"></div>
+                <div class="polyhedral d10 df-d10-10"></div>
+                <div class="polyhedral d12 df-d12-12"></div>
+              </div>
+          </div>
+        </div>
+        <div class="c2">
+            <div class="lozenge golden">
+              <input type="text" name="attr_allegiance-plus"/>
+              <div class="tag"><span data-i18n="+ Allegiance">+ Allegiance</span> 
+              </div>
+            </div>
+          <div class="connect-line"></div>
+          <div class="c2-die">
+              <div class="lozenge golden">
+                <input type="text" name="attr_reputation-plus"/>
+                <div class="tag"><span data-i18n="+ Reputation">+ Reputation</span> 
+                </div>
+              </div>
+            <div class="connect-line"></div>
+              <div class="die">
+                <input class="chosendie" type="hidden" name="attr_reputation-plus-die" value=""/>
+                <select name="attr_reputation-plus-die">
+                  <option value=""></option>
+                  <option value="4">4</option>
+                  <option value="6">6</option>
+                  <option value="8">8</option>
+                  <option value="10">10</option>
+                  <option value="12">12</option>
+                </select>
+                <div class="polyhedral d4 df-d4-4"></div>
+                <div class="polyhedral d6 df-d6-6"></div>
+                <div class="polyhedral d8 df-d8-8"></div>
+                <div class="polyhedral d10 df-d10-10"></div>
+                <div class="polyhedral d12 df-d12-12"></div>
+              </div>
+          </div>
+        </div>
+        <div class="c2">
+            <div class="lozenge">
+              <input type="text" name="attr_personal-style"/>
+              <div class="tag"><span data-i18n="Personal Style">Personal Style</span> 
+              </div>
+            </div>
+          <div class="spacer"></div>
+            <div class="lozenge">
+              <input type="text" name="attr_fighting-style"/>
+              <div class="tag"><span data-i18n="Fighting Style">Fighting Style</span> 
+              </div>
+            </div>
+        </div>
+        <div class="c2 wounds-pathos">
+          <div class="wounds">
+            <div class="toptag"><span data-i18n="Wounds">Wounds</span> 
+            </div>
+            <div class="boxbox"><span>
+                <input class="thider" name="attr_toggle_wound1" type="hidden" value="0"/>
+                <button class="cbox marked" type="action" name="act_itch" value="wound1"></button>
+                <input class="tshower" name="attr_toggle_wound1" type="hidden" value="0"/>
+                <button class="cbox unmarked" type="action" name="act_mark" value="wound1"></button>
+                <input class="titcher" name="attr_toggle_wound1" type="hidden" value="0"/>
+                <button class="cbox itched" type="action" name="act_unmark" value="wound1"></button></span><span>
+                <input class="thider" name="attr_toggle_wound2" type="hidden" value="0"/>
+                <button class="cbox marked" type="action" name="act_itch" value="wound2"></button>
+                <input class="tshower" name="attr_toggle_wound2" type="hidden" value="0"/>
+                <button class="cbox unmarked" type="action" name="act_mark" value="wound2"></button>
+                <input class="titcher" name="attr_toggle_wound2" type="hidden" value="0"/>
+                <button class="cbox itched" type="action" name="act_unmark" value="wound2"></button></span><span>
+                <input class="thider" name="attr_toggle_wound3" type="hidden" value="0"/>
+                <button class="cbox marked" type="action" name="act_itch" value="wound3"></button>
+                <input class="tshower" name="attr_toggle_wound3" type="hidden" value="0"/>
+                <button class="cbox unmarked" type="action" name="act_mark" value="wound3"></button>
+                <input class="titcher" name="attr_toggle_wound3" type="hidden" value="0"/>
+                <button class="cbox itched" type="action" name="act_unmark" value="wound3"></button></span><span>
+                <input class="thider" name="attr_toggle_wound4" type="hidden" value="0"/>
+                <button class="cbox marked" type="action" name="act_itch" value="wound4"></button>
+                <input class="tshower" name="attr_toggle_wound4" type="hidden" value="0"/>
+                <button class="cbox unmarked" type="action" name="act_mark" value="wound4"></button>
+                <input class="titcher" name="attr_toggle_wound4" type="hidden" value="0"/>
+                <button class="cbox itched" type="action" name="act_unmark" value="wound4"></button></span><span>
+                <input class="thider" name="attr_toggle_wound5" type="hidden" value="0"/>
+                <button class="cbox marked" type="action" name="act_itch" value="wound5"></button>
+                <input class="tshower" name="attr_toggle_wound5" type="hidden" value="0"/>
+                <button class="cbox unmarked" type="action" name="act_mark" value="wound5"></button>
+                <input class="titcher" name="attr_toggle_wound5" type="hidden" value="0"/>
+                <button class="cbox itched" type="action" name="act_unmark" value="wound5"></button></span><span>
+                <input class="thider" name="attr_toggle_wound6" type="hidden" value="0"/>
+                <button class="cbox marked" type="action" name="act_itch" value="wound6"></button>
+                <input class="tshower" name="attr_toggle_wound6" type="hidden" value="0"/>
+                <button class="cbox unmarked" type="action" name="act_mark" value="wound6"></button>
+                <input class="titcher" name="attr_toggle_wound6" type="hidden" value="0"/>
+                <button class="cbox itched" type="action" name="act_unmark" value="wound6"></button></span><span>
+                <input class="thider" name="attr_toggle_wound7" type="hidden" value="0"/>
+                <button class="cbox marked" type="action" name="act_itch" value="wound7"></button>
+                <input class="tshower" name="attr_toggle_wound7" type="hidden" value="0"/>
+                <button class="cbox unmarked" type="action" name="act_mark" value="wound7"></button>
+                <input class="titcher" name="attr_toggle_wound7" type="hidden" value="0"/>
+                <button class="cbox itched" type="action" name="act_unmark" value="wound7"></button></span><span>
+                <input class="thider" name="attr_toggle_wound8" type="hidden" value="0"/>
+                <button class="cbox marked" type="action" name="act_itch" value="wound8"></button>
+                <input class="tshower" name="attr_toggle_wound8" type="hidden" value="0"/>
+                <button class="cbox unmarked" type="action" name="act_mark" value="wound8"></button>
+                <input class="titcher" name="attr_toggle_wound8" type="hidden" value="0"/>
+                <button class="cbox itched" type="action" name="act_unmark" value="wound8"></button></span><span>
+                <input class="thider" name="attr_toggle_wound9" type="hidden" value="0"/>
+                <button class="cbox marked" type="action" name="act_itch" value="wound9"></button>
+                <input class="tshower" name="attr_toggle_wound9" type="hidden" value="0"/>
+                <button class="cbox unmarked" type="action" name="act_mark" value="wound9"></button>
+                <input class="titcher" name="attr_toggle_wound9" type="hidden" value="0"/>
+                <button class="cbox itched" type="action" name="act_unmark" value="wound9"></button></span><span>
+                <input class="thider" name="attr_toggle_wound10" type="hidden" value="0"/>
+                <button class="cbox marked" type="action" name="act_itch" value="wound10"></button>
+                <input class="tshower" name="attr_toggle_wound10" type="hidden" value="0"/>
+                <button class="cbox unmarked" type="action" name="act_mark" value="wound10"></button>
+                <input class="titcher" name="attr_toggle_wound10" type="hidden" value="0"/>
+                <button class="cbox itched" type="action" name="act_unmark" value="wound10"></button></span>
+              <div class="itches">
+                <input class="itchider" type="hidden" name="attr_toggle_wound1" value=""/>
+                <input class="itchider" type="hidden" name="attr_toggle_wound2" value=""/>
+                <input class="itchider" type="hidden" name="attr_toggle_wound3" value=""/>
+                <input class="itchider" type="hidden" name="attr_toggle_wound4" value=""/>
+                <input class="itchider" type="hidden" name="attr_toggle_wound5" value=""/>
+                <input class="itchider" type="hidden" name="attr_toggle_wound6" value=""/>
+                <input class="itchider" type="hidden" name="attr_toggle_wound7" value=""/>
+                <input class="itchider" type="hidden" name="attr_toggle_wound8" value=""/>
+                <input class="itchider" type="hidden" name="attr_toggle_wound9" value=""/>
+                <input class="itchider" type="hidden" name="attr_toggle_wound10" value=""/>
+                <div class="itchy"><span data-i18n="Itched!">Itched!</span> 
+                </div>
+              </div>
+            </div>
+            <div class="btw"><span class="smallnote italic" data-i18n="While you have any wounds marked, lose one die from all pools before rolling in a contest.">While you have any wounds marked, lose one die from all pools before rolling in a contest.</span> 
+            </div>
+          </div>
+          <div class="spacer"></div>
+          <div class="pathos">
+            <div class="toptag"><span data-i18n="Pathos">Pathos</span> 
+            </div>
+            <div class="boxbox"><span>
+                <input class="thider" name="attr_toggle_pathos1" type="hidden" value="0"/>
+                <button class="cbox marked" type="action" name="act_itch" value="pathos1"></button>
+                <input class="tshower" name="attr_toggle_pathos1" type="hidden" value="0"/>
+                <button class="cbox unmarked" type="action" name="act_mark" value="pathos1"></button>
+                <input class="titcher" name="attr_toggle_pathos1" type="hidden" value="0"/>
+                <button class="cbox itched" type="action" name="act_unmark" value="pathos1"></button></span><span>
+                <input class="thider" name="attr_toggle_pathos2" type="hidden" value="0"/>
+                <button class="cbox marked" type="action" name="act_itch" value="pathos2"></button>
+                <input class="tshower" name="attr_toggle_pathos2" type="hidden" value="0"/>
+                <button class="cbox unmarked" type="action" name="act_mark" value="pathos2"></button>
+                <input class="titcher" name="attr_toggle_pathos2" type="hidden" value="0"/>
+                <button class="cbox itched" type="action" name="act_unmark" value="pathos2"></button></span><span>
+                <input class="thider" name="attr_toggle_pathos3" type="hidden" value="0"/>
+                <button class="cbox marked" type="action" name="act_itch" value="pathos3"></button>
+                <input class="tshower" name="attr_toggle_pathos3" type="hidden" value="0"/>
+                <button class="cbox unmarked" type="action" name="act_mark" value="pathos3"></button>
+                <input class="titcher" name="attr_toggle_pathos3" type="hidden" value="0"/>
+                <button class="cbox itched" type="action" name="act_unmark" value="pathos3"></button></span><span>
+                <input class="thider" name="attr_toggle_pathos4" type="hidden" value="0"/>
+                <button class="cbox marked" type="action" name="act_itch" value="pathos4"></button>
+                <input class="tshower" name="attr_toggle_pathos4" type="hidden" value="0"/>
+                <button class="cbox unmarked" type="action" name="act_mark" value="pathos4"></button>
+                <input class="titcher" name="attr_toggle_pathos4" type="hidden" value="0"/>
+                <button class="cbox itched" type="action" name="act_unmark" value="pathos4"></button></span><span>
+                <input class="thider" name="attr_toggle_pathos5" type="hidden" value="0"/>
+                <button class="cbox marked" type="action" name="act_itch" value="pathos5"></button>
+                <input class="tshower" name="attr_toggle_pathos5" type="hidden" value="0"/>
+                <button class="cbox unmarked" type="action" name="act_mark" value="pathos5"></button>
+                <input class="titcher" name="attr_toggle_pathos5" type="hidden" value="0"/>
+                <button class="cbox itched" type="action" name="act_unmark" value="pathos5"></button></span><span>
+                <input class="thider" name="attr_toggle_pathos6" type="hidden" value="0"/>
+                <button class="cbox marked" type="action" name="act_itch" value="pathos6"></button>
+                <input class="tshower" name="attr_toggle_pathos6" type="hidden" value="0"/>
+                <button class="cbox unmarked" type="action" name="act_mark" value="pathos6"></button>
+                <input class="titcher" name="attr_toggle_pathos6" type="hidden" value="0"/>
+                <button class="cbox itched" type="action" name="act_unmark" value="pathos6"></button></span><span>
+                <input class="thider" name="attr_toggle_pathos7" type="hidden" value="0"/>
+                <button class="cbox marked" type="action" name="act_itch" value="pathos7"></button>
+                <input class="tshower" name="attr_toggle_pathos7" type="hidden" value="0"/>
+                <button class="cbox unmarked" type="action" name="act_mark" value="pathos7"></button>
+                <input class="titcher" name="attr_toggle_pathos7" type="hidden" value="0"/>
+                <button class="cbox itched" type="action" name="act_unmark" value="pathos7"></button></span><span>
+                <input class="thider" name="attr_toggle_pathos8" type="hidden" value="0"/>
+                <button class="cbox marked" type="action" name="act_itch" value="pathos8"></button>
+                <input class="tshower" name="attr_toggle_pathos8" type="hidden" value="0"/>
+                <button class="cbox unmarked" type="action" name="act_mark" value="pathos8"></button>
+                <input class="titcher" name="attr_toggle_pathos8" type="hidden" value="0"/>
+                <button class="cbox itched" type="action" name="act_unmark" value="pathos8"></button></span><span>
+                <input class="thider" name="attr_toggle_pathos9" type="hidden" value="0"/>
+                <button class="cbox marked" type="action" name="act_itch" value="pathos9"></button>
+                <input class="tshower" name="attr_toggle_pathos9" type="hidden" value="0"/>
+                <button class="cbox unmarked" type="action" name="act_mark" value="pathos9"></button>
+                <input class="titcher" name="attr_toggle_pathos9" type="hidden" value="0"/>
+                <button class="cbox itched" type="action" name="act_unmark" value="pathos9"></button></span><span>
+                <input class="thider" name="attr_toggle_pathos10" type="hidden" value="0"/>
+                <button class="cbox marked" type="action" name="act_itch" value="pathos10"></button>
+                <input class="tshower" name="attr_toggle_pathos10" type="hidden" value="0"/>
+                <button class="cbox unmarked" type="action" name="act_mark" value="pathos10"></button>
+                <input class="titcher" name="attr_toggle_pathos10" type="hidden" value="0"/>
+                <button class="cbox itched" type="action" name="act_unmark" value="pathos10"></button></span>
+              <div class="itches">
+                <input class="itchider" type="hidden" name="attr_toggle_pathos1" value=""/>
+                <input class="itchider" type="hidden" name="attr_toggle_pathos2" value=""/>
+                <input class="itchider" type="hidden" name="attr_toggle_pathos3" value=""/>
+                <input class="itchider" type="hidden" name="attr_toggle_pathos4" value=""/>
+                <input class="itchider" type="hidden" name="attr_toggle_pathos5" value=""/>
+                <input class="itchider" type="hidden" name="attr_toggle_pathos6" value=""/>
+                <input class="itchider" type="hidden" name="attr_toggle_pathos7" value=""/>
+                <input class="itchider" type="hidden" name="attr_toggle_pathos8" value=""/>
+                <input class="itchider" type="hidden" name="attr_toggle_pathos9" value=""/>
+                <input class="itchider" type="hidden" name="attr_toggle_pathos10" value=""/>
+                <div class="itchy"><span data-i18n="Itched!">Itched!</span> 
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="glory">
+          <div class="toptag"><span data-i18n="Glory">Glory</span> 
+          </div>
+          <div class="bordered">
+            <input class="thider" name="attr_toggle_glory1" type="hidden" value="0"/>
+            <button class="cbox marked" type="action" name="act_unmark" value="glory1"></button>
+            <input class="tshower" name="attr_toggle_glory1" type="hidden" value="0"/>
+            <button class="cbox unmarked" type="action" name="act_mark" value="glory1"></button>
+            <input class="thider" name="attr_toggle_glory2" type="hidden" value="0"/>
+            <button class="cbox marked" type="action" name="act_unmark" value="glory2"></button>
+            <input class="tshower" name="attr_toggle_glory2" type="hidden" value="0"/>
+            <button class="cbox unmarked" type="action" name="act_mark" value="glory2"></button>
+            <input class="thider" name="attr_toggle_glory3" type="hidden" value="0"/>
+            <button class="cbox marked" type="action" name="act_unmark" value="glory3"></button>
+            <input class="tshower" name="attr_toggle_glory3" type="hidden" value="0"/>
+            <button class="cbox unmarked" type="action" name="act_mark" value="glory3"></button>
+            <input class="thider" name="attr_toggle_glory4" type="hidden" value="0"/>
+            <button class="cbox marked" type="action" name="act_unmark" value="glory4"></button>
+            <input class="tshower" name="attr_toggle_glory4" type="hidden" value="0"/>
+            <button class="cbox unmarked" type="action" name="act_mark" value="glory4"></button>
+            <input class="thider" name="attr_toggle_glory5" type="hidden" value="0"/>
+            <button class="cbox marked" type="action" name="act_unmark" value="glory5"></button>
+            <input class="tshower" name="attr_toggle_glory5" type="hidden" value="0"/>
+            <button class="cbox unmarked" type="action" name="act_mark" value="glory5"></button>
+            <input class="thider" name="attr_toggle_glory6" type="hidden" value="0"/>
+            <button class="cbox marked" type="action" name="act_unmark" value="glory6"></button>
+            <input class="tshower" name="attr_toggle_glory6" type="hidden" value="0"/>
+            <button class="cbox unmarked" type="action" name="act_mark" value="glory6"></button>
+            <input class="thider" name="attr_toggle_glory7" type="hidden" value="0"/>
+            <button class="cbox marked" type="action" name="act_unmark" value="glory7"></button>
+            <input class="tshower" name="attr_toggle_glory7" type="hidden" value="0"/>
+            <button class="cbox unmarked" type="action" name="act_mark" value="glory7"></button>
+            <input class="thider" name="attr_toggle_glory8" type="hidden" value="0"/>
+            <button class="cbox marked" type="action" name="act_unmark" value="glory8"></button>
+            <input class="tshower" name="attr_toggle_glory8" type="hidden" value="0"/>
+            <button class="cbox unmarked" type="action" name="act_mark" value="glory8"></button>
+            <input class="thider" name="attr_toggle_glory9" type="hidden" value="0"/>
+            <button class="cbox marked" type="action" name="act_unmark" value="glory9"></button>
+            <input class="tshower" name="attr_toggle_glory9" type="hidden" value="0"/>
+            <button class="cbox unmarked" type="action" name="act_mark" value="glory9"></button>
+            <input class="thider" name="attr_toggle_glory10" type="hidden" value="0"/>
+            <button class="cbox marked" type="action" name="act_unmark" value="glory10"></button>
+            <input class="tshower" name="attr_toggle_glory10" type="hidden" value="0"/>
+            <button class="cbox unmarked" type="action" name="act_mark" value="glory10"></button>
+            <input class="thider" name="attr_toggle_glory11" type="hidden" value="0"/>
+            <button class="cbox marked" type="action" name="act_unmark" value="glory11"></button>
+            <input class="tshower" name="attr_toggle_glory11" type="hidden" value="0"/>
+            <button class="cbox unmarked" type="action" name="act_mark" value="glory11"></button>
+            <input class="thider" name="attr_toggle_glory12" type="hidden" value="0"/>
+            <button class="cbox marked" type="action" name="act_unmark" value="glory12"></button>
+            <input class="tshower" name="attr_toggle_glory12" type="hidden" value="0"/>
+            <button class="cbox unmarked" type="action" name="act_mark" value="glory12"></button>
+            <input class="thider" name="attr_toggle_glory13" type="hidden" value="0"/>
+            <button class="cbox marked" type="action" name="act_unmark" value="glory13"></button>
+            <input class="tshower" name="attr_toggle_glory13" type="hidden" value="0"/>
+            <button class="cbox unmarked" type="action" name="act_mark" value="glory13"></button>
+            <input class="thider" name="attr_toggle_glory14" type="hidden" value="0"/>
+            <button class="cbox marked" type="action" name="act_unmark" value="glory14"></button>
+            <input class="tshower" name="attr_toggle_glory14" type="hidden" value="0"/>
+            <button class="cbox unmarked" type="action" name="act_mark" value="glory14"></button>
+            <input class="thider" name="attr_toggle_glory15" type="hidden" value="0"/>
+            <button class="cbox marked" type="action" name="act_unmark" value="glory15"></button>
+            <input class="tshower" name="attr_toggle_glory15" type="hidden" value="0"/>
+            <button class="cbox unmarked" type="action" name="act_mark" value="glory15"></button>
+            <input class="thider" name="attr_toggle_glory16" type="hidden" value="0"/>
+            <button class="cbox marked" type="action" name="act_unmark" value="glory16"></button>
+            <input class="tshower" name="attr_toggle_glory16" type="hidden" value="0"/>
+            <button class="cbox unmarked" type="action" name="act_mark" value="glory16"></button>
+            <input class="thider" name="attr_toggle_glory17" type="hidden" value="0"/>
+            <button class="cbox marked" type="action" name="act_unmark" value="glory17"></button>
+            <input class="tshower" name="attr_toggle_glory17" type="hidden" value="0"/>
+            <button class="cbox unmarked" type="action" name="act_mark" value="glory17"></button>
+            <input class="thider" name="attr_toggle_glory18" type="hidden" value="0"/>
+            <button class="cbox marked" type="action" name="act_unmark" value="glory18"></button>
+            <input class="tshower" name="attr_toggle_glory18" type="hidden" value="0"/>
+            <button class="cbox unmarked" type="action" name="act_mark" value="glory18"></button>
+            <input class="thider" name="attr_toggle_glory19" type="hidden" value="0"/>
+            <button class="cbox marked" type="action" name="act_unmark" value="glory19"></button>
+            <input class="tshower" name="attr_toggle_glory19" type="hidden" value="0"/>
+            <button class="cbox unmarked" type="action" name="act_mark" value="glory19"></button>
+            <input class="thider" name="attr_toggle_glory20" type="hidden" value="0"/>
+            <button class="cbox marked" type="action" name="act_unmark" value="glory20"></button>
+            <input class="tshower" name="attr_toggle_glory20" type="hidden" value="0"/>
+            <button class="cbox unmarked" type="action" name="act_mark" value="glory20"></button>
+            <input class="thider" name="attr_toggle_glory21" type="hidden" value="0"/>
+            <button class="cbox marked" type="action" name="act_unmark" value="glory21"></button>
+            <input class="tshower" name="attr_toggle_glory21" type="hidden" value="0"/>
+            <button class="cbox unmarked" type="action" name="act_mark" value="glory21"></button>
+            <input class="thider" name="attr_toggle_glory22" type="hidden" value="0"/>
+            <button class="cbox marked" type="action" name="act_unmark" value="glory22"></button>
+            <input class="tshower" name="attr_toggle_glory22" type="hidden" value="0"/>
+            <button class="cbox unmarked" type="action" name="act_mark" value="glory22"></button>
+            <input class="thider" name="attr_toggle_glory23" type="hidden" value="0"/>
+            <button class="cbox marked" type="action" name="act_unmark" value="glory23"></button>
+            <input class="tshower" name="attr_toggle_glory23" type="hidden" value="0"/>
+            <button class="cbox unmarked" type="action" name="act_mark" value="glory23"></button>
+            <input class="thider" name="attr_toggle_glory24" type="hidden" value="0"/>
+            <button class="cbox marked" type="action" name="act_unmark" value="glory24"></button>
+            <input class="tshower" name="attr_toggle_glory24" type="hidden" value="0"/>
+            <button class="cbox unmarked" type="action" name="act_mark" value="glory24"></button>
+            <input class="thider" name="attr_toggle_glory25" type="hidden" value="0"/>
+            <button class="cbox marked" type="action" name="act_unmark" value="glory25"></button>
+            <input class="tshower" name="attr_toggle_glory25" type="hidden" value="0"/>
+            <button class="cbox unmarked" type="action" name="act_mark" value="glory25"></button>
+            <input class="thider" name="attr_toggle_glory26" type="hidden" value="0"/>
+            <button class="cbox marked" type="action" name="act_unmark" value="glory26"></button>
+            <input class="tshower" name="attr_toggle_glory26" type="hidden" value="0"/>
+            <button class="cbox unmarked" type="action" name="act_mark" value="glory26"></button>
+            <input class="thider" name="attr_toggle_glory27" type="hidden" value="0"/>
+            <button class="cbox marked" type="action" name="act_unmark" value="glory27"></button>
+            <input class="tshower" name="attr_toggle_glory27" type="hidden" value="0"/>
+            <button class="cbox unmarked" type="action" name="act_mark" value="glory27"></button>
+            <input class="thider" name="attr_toggle_glory28" type="hidden" value="0"/>
+            <button class="cbox marked" type="action" name="act_unmark" value="glory28"></button>
+            <input class="tshower" name="attr_toggle_glory28" type="hidden" value="0"/>
+            <button class="cbox unmarked" type="action" name="act_mark" value="glory28"></button>
+            <input class="thider" name="attr_toggle_glory29" type="hidden" value="0"/>
+            <button class="cbox marked" type="action" name="act_unmark" value="glory29"></button>
+            <input class="tshower" name="attr_toggle_glory29" type="hidden" value="0"/>
+            <button class="cbox unmarked" type="action" name="act_mark" value="glory29"></button>
+            <input class="thider" name="attr_toggle_glory30" type="hidden" value="0"/>
+            <button class="cbox marked" type="action" name="act_unmark" value="glory30"></button>
+            <input class="tshower" name="attr_toggle_glory30" type="hidden" value="0"/>
+            <button class="cbox unmarked" type="action" name="act_mark" value="glory30"></button>
+            <input class="thider" name="attr_toggle_glory31" type="hidden" value="0"/>
+            <button class="cbox marked" type="action" name="act_unmark" value="glory31"></button>
+            <input class="tshower" name="attr_toggle_glory31" type="hidden" value="0"/>
+            <button class="cbox unmarked" type="action" name="act_mark" value="glory31"></button>
+            <input class="thider" name="attr_toggle_glory32" type="hidden" value="0"/>
+            <button class="cbox marked" type="action" name="act_unmark" value="glory32"></button>
+            <input class="tshower" name="attr_toggle_glory32" type="hidden" value="0"/>
+            <button class="cbox unmarked" type="action" name="act_mark" value="glory32"></button>
+            <input class="thider" name="attr_toggle_glory33" type="hidden" value="0"/>
+            <button class="cbox marked" type="action" name="act_unmark" value="glory33"></button>
+            <input class="tshower" name="attr_toggle_glory33" type="hidden" value="0"/>
+            <button class="cbox unmarked" type="action" name="act_mark" value="glory33"></button>
+            <input class="thider" name="attr_toggle_glory34" type="hidden" value="0"/>
+            <button class="cbox marked" type="action" name="act_unmark" value="glory34"></button>
+            <input class="tshower" name="attr_toggle_glory34" type="hidden" value="0"/>
+            <button class="cbox unmarked" type="action" name="act_mark" value="glory34"></button>
+            <input class="thider" name="attr_toggle_glory35" type="hidden" value="0"/>
+            <button class="cbox marked" type="action" name="act_unmark" value="glory35"></button>
+            <input class="tshower" name="attr_toggle_glory35" type="hidden" value="0"/>
+            <button class="cbox unmarked" type="action" name="act_mark" value="glory35"></button>
+            <input class="thider" name="attr_toggle_glory36" type="hidden" value="0"/>
+            <button class="cbox marked" type="action" name="act_unmark" value="glory36"></button>
+            <input class="tshower" name="attr_toggle_glory36" type="hidden" value="0"/>
+            <button class="cbox unmarked" type="action" name="act_mark" value="glory36"></button>
+            <input class="thider" name="attr_toggle_glory37" type="hidden" value="0"/>
+            <button class="cbox marked" type="action" name="act_unmark" value="glory37"></button>
+            <input class="tshower" name="attr_toggle_glory37" type="hidden" value="0"/>
+            <button class="cbox unmarked" type="action" name="act_mark" value="glory37"></button>
+            <input class="thider" name="attr_toggle_glory38" type="hidden" value="0"/>
+            <button class="cbox marked" type="action" name="act_unmark" value="glory38"></button>
+            <input class="tshower" name="attr_toggle_glory38" type="hidden" value="0"/>
+            <button class="cbox unmarked" type="action" name="act_mark" value="glory38"></button>
+            <input class="thider" name="attr_toggle_glory39" type="hidden" value="0"/>
+            <button class="cbox marked" type="action" name="act_unmark" value="glory39"></button>
+            <input class="tshower" name="attr_toggle_glory39" type="hidden" value="0"/>
+            <button class="cbox unmarked" type="action" name="act_mark" value="glory39"></button>
+            <input class="thider" name="attr_toggle_glory40" type="hidden" value="0"/>
+            <button class="cbox marked" type="action" name="act_unmark" value="glory40"></button>
+            <input class="tshower" name="attr_toggle_glory40" type="hidden" value="0"/>
+            <button class="cbox unmarked" type="action" name="act_mark" value="glory40"></button>
+          </div>
+        </div>
+        <div class="boons">
+          <div class="toptag golden"><span data-i18n="Boons">Boons</span> 
+          </div>
+          <div class="tagnote smallnote italic"><span data-i18n="When you fill the glory track, clear it and take a Boon.">When you fill the glory track, clear it and take a Boon.</span> 
+          </div>
+          <div class="bordered">
+            <div class="boxes">
+              <input class="thider" name="attr_toggle_boon-new-rep" type="hidden" value="0"/>
+              <button class="cbox marked" type="action" name="act_unmark" value="boon-new-rep"></button>
+              <input class="tshower" name="attr_toggle_boon-new-rep" type="hidden" value="0"/>
+              <button class="cbox unmarked" type="action" name="act_mark" value="boon-new-rep"></button>
+            </div><span data-i18n="Add a new reputation">Add a new reputation</span> 
+            <div class="boxes">
+              <input class="thider" name="attr_toggle_boon-new-allegiance" type="hidden" value="0"/>
+              <button class="cbox marked" type="action" name="act_unmark" value="boon-new-allegiance"></button>
+              <input class="tshower" name="attr_toggle_boon-new-allegiance" type="hidden" value="0"/>
+              <button class="cbox unmarked" type="action" name="act_mark" value="boon-new-allegiance"></button>
+            </div><span data-i18n="Add a new allegiance">Add a new allegiance</span> 
+            <div class="boxes">
+              <input class="thider" name="attr_toggle_boon-rep-step-1" type="hidden" value="0"/>
+              <button class="cbox marked" type="action" name="act_unmark" value="boon-rep-step-1"></button>
+              <input class="tshower" name="attr_toggle_boon-rep-step-1" type="hidden" value="0"/>
+              <button class="cbox unmarked" type="action" name="act_mark" value="boon-rep-step-1"></button>
+              <input class="thider" name="attr_toggle_boon-rep-step-2" type="hidden" value="0"/>
+              <button class="cbox marked" type="action" name="act_unmark" value="boon-rep-step-2"></button>
+              <input class="tshower" name="attr_toggle_boon-rep-step-2" type="hidden" value="0"/>
+              <button class="cbox unmarked" type="action" name="act_mark" value="boon-rep-step-2"></button>
+              <input class="thider" name="attr_toggle_boon-rep-step-3" type="hidden" value="0"/>
+              <button class="cbox marked" type="action" name="act_unmark" value="boon-rep-step-3"></button>
+              <input class="tshower" name="attr_toggle_boon-rep-step-3" type="hidden" value="0"/>
+              <button class="cbox unmarked" type="action" name="act_mark" value="boon-rep-step-3"></button>
+              <input class="thider" name="attr_toggle_boon-rep-step-4" type="hidden" value="0"/>
+              <button class="cbox marked" type="action" name="act_unmark" value="boon-rep-step-4"></button>
+              <input class="tshower" name="attr_toggle_boon-rep-step-4" type="hidden" value="0"/>
+              <button class="cbox unmarked" type="action" name="act_mark" value="boon-rep-step-4"></button>
+            </div><span data-i18n="Step up a reputation">Step up a reputation</span> 
+            <div class="boxes">
+              <input class="thider" name="attr_toggle_boon-jade-1" type="hidden" value="0"/>
+              <button class="cbox marked" type="action" name="act_unmark" value="boon-jade-1"></button>
+              <input class="tshower" name="attr_toggle_boon-jade-1" type="hidden" value="0"/>
+              <button class="cbox unmarked" type="action" name="act_mark" value="boon-jade-1"></button>
+              <input class="thider" name="attr_toggle_boon-jade-2" type="hidden" value="0"/>
+              <button class="cbox marked" type="action" name="act_unmark" value="boon-jade-2"></button>
+              <input class="tshower" name="attr_toggle_boon-jade-2" type="hidden" value="0"/>
+              <button class="cbox unmarked" type="action" name="act_mark" value="boon-jade-2"></button>
+              <input class="thider" name="attr_toggle_boon-jade-3" type="hidden" value="0"/>
+              <button class="cbox marked" type="action" name="act_unmark" value="boon-jade-3"></button>
+              <input class="tshower" name="attr_toggle_boon-jade-3" type="hidden" value="0"/>
+              <button class="cbox unmarked" type="action" name="act_mark" value="boon-jade-3"></button>
+              <input class="thider" name="attr_toggle_boon-jade-4" type="hidden" value="0"/>
+              <button class="cbox marked" type="action" name="act_unmark" value="boon-jade-4"></button>
+              <input class="tshower" name="attr_toggle_boon-jade-4" type="hidden" value="0"/>
+              <button class="cbox unmarked" type="action" name="act_mark" value="boon-jade-4"></button>
+            </div><span data-i18n="Add 1d4 to a jade ability">Add 1d4 to a jade ability</span> 
+            <div class="boxes">
+              <input class="thider" name="attr_toggle_boon-skill-1" type="hidden" value="0"/>
+              <button class="cbox marked" type="action" name="act_unmark" value="boon-skill-1"></button>
+              <input class="tshower" name="attr_toggle_boon-skill-1" type="hidden" value="0"/>
+              <button class="cbox unmarked" type="action" name="act_mark" value="boon-skill-1"></button>
+              <input class="thider" name="attr_toggle_boon-skill-2" type="hidden" value="0"/>
+              <button class="cbox marked" type="action" name="act_unmark" value="boon-skill-2"></button>
+              <input class="tshower" name="attr_toggle_boon-skill-2" type="hidden" value="0"/>
+              <button class="cbox unmarked" type="action" name="act_mark" value="boon-skill-2"></button>
+              <input class="thider" name="attr_toggle_boon-skill-3" type="hidden" value="0"/>
+              <button class="cbox marked" type="action" name="act_unmark" value="boon-skill-3"></button>
+              <input class="tshower" name="attr_toggle_boon-skill-3" type="hidden" value="0"/>
+              <button class="cbox unmarked" type="action" name="act_mark" value="boon-skill-3"></button>
+              <input class="thider" name="attr_toggle_boon-skill-4" type="hidden" value="0"/>
+              <button class="cbox marked" type="action" name="act_unmark" value="boon-skill-4"></button>
+              <input class="tshower" name="attr_toggle_boon-skill-4" type="hidden" value="0"/>
+              <button class="cbox unmarked" type="action" name="act_mark" value="boon-skill-4"></button>
+            </div><span data-i18n="Step up a skill">Step up a skill</span> 
+            <div class="boxes">
+              <input class="thider" name="attr_toggle_boon-gift-1" type="hidden" value="0"/>
+              <button class="cbox marked" type="action" name="act_unmark" value="boon-gift-1"></button>
+              <input class="tshower" name="attr_toggle_boon-gift-1" type="hidden" value="0"/>
+              <button class="cbox unmarked" type="action" name="act_mark" value="boon-gift-1"></button>
+              <input class="thider" name="attr_toggle_boon-gift-2" type="hidden" value="0"/>
+              <button class="cbox marked" type="action" name="act_unmark" value="boon-gift-2"></button>
+              <input class="tshower" name="attr_toggle_boon-gift-2" type="hidden" value="0"/>
+              <button class="cbox unmarked" type="action" name="act_mark" value="boon-gift-2"></button>
+              <input class="thider" name="attr_toggle_boon-gift-3" type="hidden" value="0"/>
+              <button class="cbox marked" type="action" name="act_unmark" value="boon-gift-3"></button>
+              <input class="tshower" name="attr_toggle_boon-gift-3" type="hidden" value="0"/>
+              <button class="cbox unmarked" type="action" name="act_mark" value="boon-gift-3"></button>
+              <input class="thider" name="attr_toggle_boon-gift-4" type="hidden" value="0"/>
+              <button class="cbox marked" type="action" name="act_unmark" value="boon-gift-4"></button>
+              <input class="tshower" name="attr_toggle_boon-gift-4" type="hidden" value="0"/>
+              <button class="cbox unmarked" type="action" name="act_mark" value="boon-gift-4"></button>
+            </div><span data-i18n="Acquire a gift">Acquire a gift</span> 
+          </div>
+        </div>
+        <div class="gifts">
+          <div class="toptag"><span data-i18n="Gifts">Gifts</span> 
+          </div>
+          <div class="bordered">
+            <fieldset class="repeating_gifts">
+              <div class="gift">
+                <input class="blankline overline" type="text" name="attr_name"/>
+                <div class="weetitle"><span class="smallnote" data-i18n="Usage">Usage</span> 
+                </div>
+                <div class="giftbox">
+                  <textarea class="smallnote" name="attr_usage"></textarea>
+                </div>
+                <div class="weetitle"><span class="smallnote" data-i18n="Counters">Counters</span> 
+                </div>
+                <div class="giftbox">
+                  <textarea class="smallnote" name="attr_counters"></textarea>
+                </div>
+                <div class="weetitle"><span class="smallnote" data-i18n="Weak to">Weak to</span> 
+                </div>
+                <div class="giftbox">
+                  <textarea class="smallnote" name="attr_weakness"></textarea>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+      </div>
+      <div class="spacer"></div>
+      <div class="abilities">
+        <div class="skills">
+          <div class="bighead golden topline"><span data-i18n="Skills">Skills</span> 
+          </div>
+          <div class="c2-die">
+              <div class="dielabel golden"><span data-i18n="Arts and Oration">Arts and Oration</span> 
+              </div>
+            <div class="connect-line golden"></div>
+              <div class="die smalldie">
+                <input class="chosendie" type="hidden" name="attr_skill-arts-oration-die" value=""/>
+                <select name="attr_skill-arts-oration-die">
+                  <option value=""></option>
+                  <option value="4">4</option>
+                  <option value="6">6</option>
+                  <option value="8">8</option>
+                  <option value="10">10</option>
+                  <option value="12">12</option>
+                </select>
+                <div class="polyhedral d4 df-d4-4"></div>
+                <div class="polyhedral d6 df-d6-6"></div>
+                <div class="polyhedral d8 df-d8-8"></div>
+                <div class="polyhedral d10 df-d10-10"></div>
+                <div class="polyhedral d12 df-d12-12"></div>
+              </div>
+          </div>
+          <div class="c2-die">
+              <div class="dielabel golden"><span data-i18n="Blood and Valor">Blood and Valor</span> 
+              </div>
+            <div class="connect-line golden"></div>
+              <div class="die smalldie">
+                <input class="chosendie" type="hidden" name="attr_skill-blood-valor-die" value=""/>
+                <select name="attr_skill-blood-valor-die">
+                  <option value=""></option>
+                  <option value="4">4</option>
+                  <option value="6">6</option>
+                  <option value="8">8</option>
+                  <option value="10">10</option>
+                  <option value="12">12</option>
+                </select>
+                <div class="polyhedral d4 df-d4-4"></div>
+                <div class="polyhedral d6 df-d6-6"></div>
+                <div class="polyhedral d8 df-d8-8"></div>
+                <div class="polyhedral d10 df-d10-10"></div>
+                <div class="polyhedral d12 df-d12-12"></div>
+              </div>
+          </div>
+          <div class="c2-die">
+              <div class="dielabel golden"><span data-i18n="Craft and Reason">Craft and Reason</span> 
+              </div>
+            <div class="connect-line golden"></div>
+              <div class="die smalldie">
+                <input class="chosendie" type="hidden" name="attr_skill-craft-reason-die" value=""/>
+                <select name="attr_skill-craft-reason-die">
+                  <option value=""></option>
+                  <option value="4">4</option>
+                  <option value="6">6</option>
+                  <option value="8">8</option>
+                  <option value="10">10</option>
+                  <option value="12">12</option>
+                </select>
+                <div class="polyhedral d4 df-d4-4"></div>
+                <div class="polyhedral d6 df-d6-6"></div>
+                <div class="polyhedral d8 df-d8-8"></div>
+                <div class="polyhedral d10 df-d10-10"></div>
+                <div class="polyhedral d12 df-d12-12"></div>
+              </div>
+          </div>
+          <div class="c2-die">
+              <div class="dielabel golden"><span data-i18n="Resolve and Spirit">Resolve and Spirit</span> 
+              </div>
+            <div class="connect-line golden"></div>
+              <div class="die smalldie">
+                <input class="chosendie" type="hidden" name="attr_skill-resolve-spirit-die" value=""/>
+                <select name="attr_skill-resolve-spirit-die">
+                  <option value=""></option>
+                  <option value="4">4</option>
+                  <option value="6">6</option>
+                  <option value="8">8</option>
+                  <option value="10">10</option>
+                  <option value="12">12</option>
+                </select>
+                <div class="polyhedral d4 df-d4-4"></div>
+                <div class="polyhedral d6 df-d6-6"></div>
+                <div class="polyhedral d8 df-d8-8"></div>
+                <div class="polyhedral d10 df-d10-10"></div>
+                <div class="polyhedral d12 df-d12-12"></div>
+              </div>
+          </div>
+        </div>
+        <div class="jade">
+          <div class="bighead"><span data-i18n="Jade">Jade</span> 
+          </div>
+          <div class="c2-die-jade">
+              <div class="dielabel"><span data-i18n="Channeling">Channeling</span> 
+              </div>
+            <div class="connect-line"></div>
+              <div class="die smalldie">
+                <input class="chosendie" type="hidden" name="attr_jade-Channeling-die-1" value=""/>
+                <select name="attr_jade-Channeling-die-1">
+                  <option value=""></option>
+                  <option value="4">4</option>
+                </select>
+                <div class="polyhedral d4 df-d4-4"></div>
+                <div class="polyhedral d6 df-d6-6"></div>
+                <div class="polyhedral d8 df-d8-8"></div>
+                <div class="polyhedral d10 df-d10-10"></div>
+                <div class="polyhedral d12 df-d12-12"></div>
+              </div>
+            <div class="connect-line margin-fix"></div>
+              <div class="die smalldie">
+                <input class="chosendie" type="hidden" name="attr_jade-Channeling-die-2" value=""/>
+                <select name="attr_jade-Channeling-die-2">
+                  <option value=""></option>
+                  <option value="4">4</option>
+                </select>
+                <div class="polyhedral d4 df-d4-4"></div>
+                <div class="polyhedral d6 df-d6-6"></div>
+                <div class="polyhedral d8 df-d8-8"></div>
+                <div class="polyhedral d10 df-d10-10"></div>
+                <div class="polyhedral d12 df-d12-12"></div>
+              </div>
+            <div class="connect-line margin-fix"></div>
+              <div class="die smalldie">
+                <input class="chosendie" type="hidden" name="attr_jade-Channeling-die-3" value=""/>
+                <select name="attr_jade-Channeling-die-3">
+                  <option value=""></option>
+                  <option value="4">4</option>
+                </select>
+                <div class="polyhedral d4 df-d4-4"></div>
+                <div class="polyhedral d6 df-d6-6"></div>
+                <div class="polyhedral d8 df-d8-8"></div>
+                <div class="polyhedral d10 df-d10-10"></div>
+                <div class="polyhedral d12 df-d12-12"></div>
+              </div>
+          </div>
+          <div class="c2-die-jade">
+              <div class="dielabel"><span data-i18n="Deflection">Deflection</span> 
+              </div>
+            <div class="connect-line"></div>
+              <div class="die smalldie">
+                <input class="chosendie" type="hidden" name="attr_jade-Deflection-die-1" value=""/>
+                <select name="attr_jade-Deflection-die-1">
+                  <option value=""></option>
+                  <option value="4">4</option>
+                </select>
+                <div class="polyhedral d4 df-d4-4"></div>
+                <div class="polyhedral d6 df-d6-6"></div>
+                <div class="polyhedral d8 df-d8-8"></div>
+                <div class="polyhedral d10 df-d10-10"></div>
+                <div class="polyhedral d12 df-d12-12"></div>
+              </div>
+            <div class="connect-line margin-fix"></div>
+              <div class="die smalldie">
+                <input class="chosendie" type="hidden" name="attr_jade-Deflection-die-2" value=""/>
+                <select name="attr_jade-Deflection-die-2">
+                  <option value=""></option>
+                  <option value="4">4</option>
+                </select>
+                <div class="polyhedral d4 df-d4-4"></div>
+                <div class="polyhedral d6 df-d6-6"></div>
+                <div class="polyhedral d8 df-d8-8"></div>
+                <div class="polyhedral d10 df-d10-10"></div>
+                <div class="polyhedral d12 df-d12-12"></div>
+              </div>
+            <div class="connect-line margin-fix"></div>
+              <div class="die smalldie">
+                <input class="chosendie" type="hidden" name="attr_jade-Deflection-die-3" value=""/>
+                <select name="attr_jade-Deflection-die-3">
+                  <option value=""></option>
+                  <option value="4">4</option>
+                </select>
+                <div class="polyhedral d4 df-d4-4"></div>
+                <div class="polyhedral d6 df-d6-6"></div>
+                <div class="polyhedral d8 df-d8-8"></div>
+                <div class="polyhedral d10 df-d10-10"></div>
+                <div class="polyhedral d12 df-d12-12"></div>
+              </div>
+          </div>
+          <div class="c2-die-jade">
+              <div class="dielabel"><span data-i18n="Lightness">Lightness</span> 
+              </div>
+            <div class="connect-line"></div>
+              <div class="die smalldie">
+                <input class="chosendie" type="hidden" name="attr_jade-Lightness-die-1" value=""/>
+                <select name="attr_jade-Lightness-die-1">
+                  <option value=""></option>
+                  <option value="4">4</option>
+                </select>
+                <div class="polyhedral d4 df-d4-4"></div>
+                <div class="polyhedral d6 df-d6-6"></div>
+                <div class="polyhedral d8 df-d8-8"></div>
+                <div class="polyhedral d10 df-d10-10"></div>
+                <div class="polyhedral d12 df-d12-12"></div>
+              </div>
+            <div class="connect-line margin-fix"></div>
+              <div class="die smalldie">
+                <input class="chosendie" type="hidden" name="attr_jade-Lightness-die-2" value=""/>
+                <select name="attr_jade-Lightness-die-2">
+                  <option value=""></option>
+                  <option value="4">4</option>
+                </select>
+                <div class="polyhedral d4 df-d4-4"></div>
+                <div class="polyhedral d6 df-d6-6"></div>
+                <div class="polyhedral d8 df-d8-8"></div>
+                <div class="polyhedral d10 df-d10-10"></div>
+                <div class="polyhedral d12 df-d12-12"></div>
+              </div>
+            <div class="connect-line margin-fix"></div>
+              <div class="die smalldie">
+                <input class="chosendie" type="hidden" name="attr_jade-Lightness-die-3" value=""/>
+                <select name="attr_jade-Lightness-die-3">
+                  <option value=""></option>
+                  <option value="4">4</option>
+                </select>
+                <div class="polyhedral d4 df-d4-4"></div>
+                <div class="polyhedral d6 df-d6-6"></div>
+                <div class="polyhedral d8 df-d8-8"></div>
+                <div class="polyhedral d10 df-d10-10"></div>
+                <div class="polyhedral d12 df-d12-12"></div>
+              </div>
+          </div>
+          <div class="c2-die-jade">
+              <div class="dielabel"><span data-i18n="Steel">Steel</span> 
+              </div>
+            <div class="connect-line"></div>
+              <div class="die smalldie">
+                <input class="chosendie" type="hidden" name="attr_jade-Steel-die-1" value=""/>
+                <select name="attr_jade-Steel-die-1">
+                  <option value=""></option>
+                  <option value="4">4</option>
+                </select>
+                <div class="polyhedral d4 df-d4-4"></div>
+                <div class="polyhedral d6 df-d6-6"></div>
+                <div class="polyhedral d8 df-d8-8"></div>
+                <div class="polyhedral d10 df-d10-10"></div>
+                <div class="polyhedral d12 df-d12-12"></div>
+              </div>
+            <div class="connect-line margin-fix"></div>
+              <div class="die smalldie">
+                <input class="chosendie" type="hidden" name="attr_jade-Steel-die-2" value=""/>
+                <select name="attr_jade-Steel-die-2">
+                  <option value=""></option>
+                  <option value="4">4</option>
+                </select>
+                <div class="polyhedral d4 df-d4-4"></div>
+                <div class="polyhedral d6 df-d6-6"></div>
+                <div class="polyhedral d8 df-d8-8"></div>
+                <div class="polyhedral d10 df-d10-10"></div>
+                <div class="polyhedral d12 df-d12-12"></div>
+              </div>
+            <div class="connect-line margin-fix"></div>
+              <div class="die smalldie">
+                <input class="chosendie" type="hidden" name="attr_jade-Steel-die-3" value=""/>
+                <select name="attr_jade-Steel-die-3">
+                  <option value=""></option>
+                  <option value="4">4</option>
+                </select>
+                <div class="polyhedral d4 df-d4-4"></div>
+                <div class="polyhedral d6 df-d6-6"></div>
+                <div class="polyhedral d8 df-d8-8"></div>
+                <div class="polyhedral d10 df-d10-10"></div>
+                <div class="polyhedral d12 df-d12-12"></div>
+              </div>
+          </div>
+          <div class="c2-die-jade">
+              <div class="dielabel"><span data-i18n="Strength">Strength</span> 
+              </div>
+            <div class="connect-line"></div>
+              <div class="die smalldie">
+                <input class="chosendie" type="hidden" name="attr_jade-Strength-die-1" value=""/>
+                <select name="attr_jade-Strength-die-1">
+                  <option value=""></option>
+                  <option value="4">4</option>
+                </select>
+                <div class="polyhedral d4 df-d4-4"></div>
+                <div class="polyhedral d6 df-d6-6"></div>
+                <div class="polyhedral d8 df-d8-8"></div>
+                <div class="polyhedral d10 df-d10-10"></div>
+                <div class="polyhedral d12 df-d12-12"></div>
+              </div>
+            <div class="connect-line margin-fix"></div>
+              <div class="die smalldie">
+                <input class="chosendie" type="hidden" name="attr_jade-Strength-die-2" value=""/>
+                <select name="attr_jade-Strength-die-2">
+                  <option value=""></option>
+                  <option value="4">4</option>
+                </select>
+                <div class="polyhedral d4 df-d4-4"></div>
+                <div class="polyhedral d6 df-d6-6"></div>
+                <div class="polyhedral d8 df-d8-8"></div>
+                <div class="polyhedral d10 df-d10-10"></div>
+                <div class="polyhedral d12 df-d12-12"></div>
+              </div>
+            <div class="connect-line margin-fix"></div>
+              <div class="die smalldie">
+                <input class="chosendie" type="hidden" name="attr_jade-Strength-die-3" value=""/>
+                <select name="attr_jade-Strength-die-3">
+                  <option value=""></option>
+                  <option value="4">4</option>
+                </select>
+                <div class="polyhedral d4 df-d4-4"></div>
+                <div class="polyhedral d6 df-d6-6"></div>
+                <div class="polyhedral d8 df-d8-8"></div>
+                <div class="polyhedral d10 df-d10-10"></div>
+                <div class="polyhedral d12 df-d12-12"></div>
+              </div>
+          </div>
+          <div class="c2-die-jade">
+              <div class="dielabel"><span data-i18n="Perception">Perception</span> 
+              </div>
+            <div class="connect-line"></div>
+              <div class="die smalldie">
+                <input class="chosendie" type="hidden" name="attr_jade-Perception-die-1" value=""/>
+                <select name="attr_jade-Perception-die-1">
+                  <option value=""></option>
+                  <option value="4">4</option>
+                </select>
+                <div class="polyhedral d4 df-d4-4"></div>
+                <div class="polyhedral d6 df-d6-6"></div>
+                <div class="polyhedral d8 df-d8-8"></div>
+                <div class="polyhedral d10 df-d10-10"></div>
+                <div class="polyhedral d12 df-d12-12"></div>
+              </div>
+            <div class="connect-line margin-fix"></div>
+              <div class="die smalldie">
+                <input class="chosendie" type="hidden" name="attr_jade-Perception-die-2" value=""/>
+                <select name="attr_jade-Perception-die-2">
+                  <option value=""></option>
+                  <option value="4">4</option>
+                </select>
+                <div class="polyhedral d4 df-d4-4"></div>
+                <div class="polyhedral d6 df-d6-6"></div>
+                <div class="polyhedral d8 df-d8-8"></div>
+                <div class="polyhedral d10 df-d10-10"></div>
+                <div class="polyhedral d12 df-d12-12"></div>
+              </div>
+            <div class="connect-line margin-fix"></div>
+              <div class="die smalldie">
+                <input class="chosendie" type="hidden" name="attr_jade-Perception-die-3" value=""/>
+                <select name="attr_jade-Perception-die-3">
+                  <option value=""></option>
+                  <option value="4">4</option>
+                </select>
+                <div class="polyhedral d4 df-d4-4"></div>
+                <div class="polyhedral d6 df-d6-6"></div>
+                <div class="polyhedral d8 df-d8-8"></div>
+                <div class="polyhedral d10 df-d10-10"></div>
+                <div class="polyhedral d12 df-d12-12"></div>
+              </div>
+          </div>
+        </div>
+        <div class="favors">
+          <div class="toptag"><span data-i18n="I Owe Shine...">I Owe Shine...</span> 
+          </div>
+          <div class="favor shine">
+            <div class="favorbox">
+              <textarea class="favored" name="attr_shine-name"></textarea>
+            </div>
+            <div class="favormarks">
+              <input class="thider" name="attr_toggle_shine-owe-1" type="hidden" value="0"/>
+              <button class="cbox marked" type="action" name="act_unmark" value="shine-owe-1"></button>
+              <input class="tshower" name="attr_toggle_shine-owe-1" type="hidden" value="0"/>
+              <button class="cbox unmarked" type="action" name="act_mark" value="shine-owe-1"></button>
+              <input class="thider" name="attr_toggle_shine-owe-2" type="hidden" value="0"/>
+              <button class="cbox marked" type="action" name="act_unmark" value="shine-owe-2"></button>
+              <input class="tshower" name="attr_toggle_shine-owe-2" type="hidden" value="0"/>
+              <button class="cbox unmarked" type="action" name="act_mark" value="shine-owe-2"></button>
+              <input class="thider" name="attr_toggle_shine-owe-3" type="hidden" value="0"/>
+              <button class="cbox marked" type="action" name="act_unmark" value="shine-owe-3"></button>
+              <input class="tshower" name="attr_toggle_shine-owe-3" type="hidden" value="0"/>
+              <button class="cbox unmarked" type="action" name="act_mark" value="shine-owe-3"></button>
+              <input class="thider" name="attr_toggle_shine-owe-4" type="hidden" value="0"/>
+              <button class="cbox marked" type="action" name="act_unmark" value="shine-owe-4"></button>
+              <input class="tshower" name="attr_toggle_shine-owe-4" type="hidden" value="0"/>
+              <button class="cbox unmarked" type="action" name="act_mark" value="shine-owe-4"></button>
+              <input class="thider" name="attr_toggle_shine-owe-5" type="hidden" value="0"/>
+              <button class="cbox marked" type="action" name="act_unmark" value="shine-owe-5"></button>
+              <input class="tshower" name="attr_toggle_shine-owe-5" type="hidden" value="0"/>
+              <button class="cbox unmarked" type="action" name="act_mark" value="shine-owe-5"></button>
+              <input class="thider" name="attr_toggle_shine-owe-6" type="hidden" value="0"/>
+              <button class="cbox marked" type="action" name="act_unmark" value="shine-owe-6"></button>
+              <input class="tshower" name="attr_toggle_shine-owe-6" type="hidden" value="0"/>
+              <button class="cbox unmarked" type="action" name="act_mark" value="shine-owe-6"></button>
+            </div>
+          </div>
+          <div class="toptag golden"><span data-i18n="Favors Held Over Others">Favors Held Over Others</span> 
+          </div>
+          <fieldset class="repeating_favors">
+              <div class="favor">
+                <div class="favorbox">
+                  <textarea class="favored" name="attr_favored-name"></textarea><span class="owe smallnote italic" data-i18n="I owe them...">I owe them...</span> <span class="owed smallnote italic" data-i18n="They owe me...">They owe me...</span> 
+                </div>
+                <div class="favormarks">
+                  <input class="thider" name="attr_toggle_favor-owe-1" type="hidden" value="0"/>
+                  <button class="cbox marked" type="action" name="act_unmark" value="favor-owe-1"></button>
+                  <input class="tshower" name="attr_toggle_favor-owe-1" type="hidden" value="0"/>
+                  <button class="cbox unmarked" type="action" name="act_mark" value="favor-owe-1"></button>
+                  <input class="thider" name="attr_toggle_favor-owe-2" type="hidden" value="0"/>
+                  <button class="cbox marked" type="action" name="act_unmark" value="favor-owe-2"></button>
+                  <input class="tshower" name="attr_toggle_favor-owe-2" type="hidden" value="0"/>
+                  <button class="cbox unmarked" type="action" name="act_mark" value="favor-owe-2"></button>
+                  <input class="thider" name="attr_toggle_favor-owe-3" type="hidden" value="0"/>
+                  <button class="cbox marked" type="action" name="act_unmark" value="favor-owe-3"></button>
+                  <input class="tshower" name="attr_toggle_favor-owe-3" type="hidden" value="0"/>
+                  <button class="cbox unmarked" type="action" name="act_mark" value="favor-owe-3"></button>
+                  <input class="thider" name="attr_toggle_favor-owed-1" type="hidden" value="0"/>
+                  <button class="cbox marked" type="action" name="act_unmark" value="favor-owed-1"></button>
+                  <input class="tshower" name="attr_toggle_favor-owed-1" type="hidden" value="0"/>
+                  <button class="cbox unmarked" type="action" name="act_mark" value="favor-owed-1"></button>
+                  <input class="thider" name="attr_toggle_favor-owed-2" type="hidden" value="0"/>
+                  <button class="cbox marked" type="action" name="act_unmark" value="favor-owed-2"></button>
+                  <input class="tshower" name="attr_toggle_favor-owed-2" type="hidden" value="0"/>
+                  <button class="cbox unmarked" type="action" name="act_mark" value="favor-owed-2"></button>
+                  <input class="thider" name="attr_toggle_favor-owed-3" type="hidden" value="0"/>
+                  <button class="cbox marked" type="action" name="act_unmark" value="favor-owed-3"></button>
+                  <input class="tshower" name="attr_toggle_favor-owed-3" type="hidden" value="0"/>
+                  <button class="cbox unmarked" type="action" name="act_mark" value="favor-owed-3"></button>
+                </div>
+              </div>
+          </fieldset>
+        </div>
+        <div class="notes">
+          <div class="toptag"><span data-i18n="Notes">Notes</span> 
+          </div>
+          <div class="bordered">
+            <textarea class="smallnote" name="attr_notes"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <input class="mhider" name="attr_sheetmode" type="hidden" value=""/>
+  <!-- include includes/sheet-faction.pug-->
+</div>
+<!--
+translation.json:
+{
+	"Streets of Jade": "Streets of Jade",
+	"Which kind of sheet?": "Which kind of sheet?",
+	"Character": "Character",
+	"Faction": "Faction",
+	"Build Your Pool": "Build Your Pool",
+	"Name Die": "Name Die",
+	"Main Skill": "Main Skill",
+	"(Choose)": "(Choose)",
+	"Arts and Oration": "Arts and Oration",
+	"Blood and Valor": "Blood and Valor",
+	"Craft and Reason": "Craft and Reason",
+	"Resolve and Spirit": "Resolve and Spirit",
+	"Second Skill": "Second Skill",
+	"(Spend 1 Pathos)": "(Spend 1 Pathos)",
+	"Reputation": "Reputation",
+	"Jade": "Jade",
+	"Advantage": "Advantage",
+	"Support": "Support",
+	"Faction/Neighborhood": "Faction/Neighborhood",
+	"Roll!": "Roll!",
+	"Introducing": "Introducing",
+	"as ...": "as ...",
+	"Family Name": "Family Name",
+	"Given Name/Nickname": "Given Name/Nickname",
+	"Pronouns": "Pronouns",
+	"Concept": "Concept",
+	"Ethnicities/Nation": "Ethnicities/Nation",
+	"Allegiance": "Allegiance",
+	"+ Allegiance": "+ Allegiance",
+	"+ Reputation": "+ Reputation",
+	"Personal Style": "Personal Style",
+	"Fighting Style": "Fighting Style",
+	"Wounds": "Wounds",
+	"Itched!": "Itched!",
+	"While you have any wounds marked, lose one die from all pools before rolling in a contest.": "While you have any wounds marked, lose one die from all pools before rolling in a contest.",
+	"Pathos": "Pathos",
+	"Glory": "Glory",
+	"Boons": "Boons",
+	"When you fill the glory track, clear it and take a Boon.": "When you fill the glory track, clear it and take a Boon.",
+	"Add a new reputation": "Add a new reputation",
+	"Add a new allegiance": "Add a new allegiance",
+	"Step up a reputation": "Step up a reputation",
+	"Add 1d4 to a jade ability": "Add 1d4 to a jade ability",
+	"Step up a skill": "Step up a skill",
+	"Acquire a gift": "Acquire a gift",
+	"Gifts": "Gifts",
+	"Usage": "Usage",
+	"Counters": "Counters",
+	"Weak to": "Weak to",
+	"Skills": "Skills",
+	"Channeling": "Channeling",
+	"Deflection": "Deflection",
+	"Lightness": "Lightness",
+	"Steel": "Steel",
+	"Strength": "Strength",
+	"Perception": "Perception",
+	"I Owe Shine...": "I Owe Shine...",
+	"Favors Held Over Others": "Favors Held Over Others",
+	"I owe them...": "I owe them...",
+	"They owe me...": "They owe me...",
+	"Notes": "Notes"
+}
+
+-->

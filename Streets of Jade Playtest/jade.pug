@@ -1,0 +1,20 @@
+include includes/mixins.pug
+
+script(type='text/worker')
+	include includes/sheet-worker.js 
+
+// Eventually I'll need to come up with a mode-selector where you choose whether this is a Character Sheet or a Tavern Sheet. 
+
+.wrapper
+	.modeblock
+		+shower("sheetmode")
+		+select("sheetmode")
+			+option("Which kind of sheet?","")
+			+option("Character","character")
+			+option("Faction","faction")
+	+mhider("sheetmode")
+	include includes/sheet-character.pug
+	+mhider("sheetmode")
+	// include includes/sheet-faction.pug
+
++translations

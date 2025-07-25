@@ -1,0 +1,191 @@
+- 
+	var translations = { 
+		"Streets of Jade": "Streets of Jade",
+	};
+
+// Translation
+
+mixin translate(text)
+	- if ( typeof(translations[text]) == "undefined" ) { translations[text] = text; }
+	span(data-i18n=text)&attributes(attributes) #{text}
+	| 
+
+mixin t(text)
+	+translate(text)&attributes(attributes)
+
+mixin translations
+	- var contents = JSON.stringify(translations,null,"\t");
+	//
+		translation.json:
+		!{contents}
+
+// Attribute Display
+
+mixin display(f)
+	span(name="attr_"+f class!=attributes.class)
+		if block
+			block
+
+// Input Elements
+
+mixin select(f)
+	select(name='attr_'+f class!=attributes.class)
+		if block
+			block
+
+mixin option(t,v)
+	- if ( typeof(translations[t]) == "undefined" ) { translations[t] = t; }
+	if ( typeof(v) == "undefined" )
+		option(data-i18n=t)
+	else
+		option(value=v data-i18n=t)
+
+mixin hidden(f,v)
+	- if ( typeof(v) == "undefined" ) { v = ""; }
+	input(type='hidden' name='attr_'+f value=v class!=attributes.class)
+
+mixin text(f)
+	input(type='text' name='attr_'+f class!=attributes.class)
+
+mixin textarea(f)
+	textarea(name='attr_'+f class!=attributes.class)
+		if block
+			block
+
+// Fieldset structure
+
+mixin fieldset(f)
+	fieldset(class="repeating_"+f)
+		if block
+			block
+
+// Visibility Controls
+
+mixin hider(f)
+	input(name="attr_"+f type="hidden" class="hider" value="")
+
+mixin shower(f)
+	input(name="attr_"+f type="hidden" class="shower" value="")
+
+mixin mhider(f)
+	input(name="attr_"+f type="hidden" class="mhider" value="")
+
+mixin thider(f,v)
+	- if ( typeof(v) == "undefined" ) { v = "0"; }
+	input(name="attr_toggle_"+f type="hidden" class="thider" value=v)
+
+mixin tdimmer(f,v)
+	- if ( typeof(v) == "undefined" ) { v = "0"; }
+	input(name="attr_toggle_"+f type="hidden" class="tdimmer" value=v)
+
+mixin tshower(f,v)
+	- if ( typeof(v) == "undefined" ) { v = "0"; }
+	input(name="attr_toggle_"+f type="hidden" class="tshower" value=v)
+
+mixin titcher(f,v)
+	- if ( typeof(v) == "undefined" ) { v = "0"; }
+	input(name="attr_toggle_"+f type="hidden" class="titcher" value=v)
+
+// Checkboxes
+
+mixin ibox(f)
+	span
+		+thider(f)
+		button(type="action" name="act_itch" value=f).cbox.marked
+		+tshower(f)
+		button(type="action" name="act_mark" value=f).cbox.unmarked
+		+titcher(f)
+		button(type="action" name="act_unmark" value=f).cbox.itched
+
+mixin cbox(f,v)
+	- if ( typeof(v) == "undefined" ) { v = "0"; }
+	+thider(f,v)
+	button(type="action" name="act_unmark" value=f).cbox.marked
+	+tshower(f,v)
+	button(type="action" name="act_mark" value=f).cbox.unmarked
+
+mixin togglebox(f)
+	div
+		+cbox(f)
+	input(name="attr_toggle_"+f type="hidden" class="state" value="0")
+
+
+// STEWPOT STUFF BELOW HERE -- UNSURE WHICH STUFF WE'LL NEED JUST YET
+mixin flabel(t)
+	div.flabel
+		+translate(t)
+		if block
+			block
+
+mixin bflabel(t)
+	div.flabel.big
+		+translate(t)
+		if block
+			block
+
+- var rads = {};
+
+mixin radbox(f)
+	- 
+		if ( typeof(rads[f]) === "undefined" ) {
+			rads[f] = 1;
+		} else {
+			rads[f]++;
+		}
+	div
+		+rbox(f)
+	input(name="attr_radio_"+f type="hidden" class="state" value=1)
+	input(type="hidden" class="highlighter" value=rads[f])
+
+mixin rbox(f)
+	+rhider(f,rads[f])
+	button(type="action" name="act_unmark_"+f value=rads[f]).rbox.marked
+	+rshower(f,rads[f])
+	button(type="action" name="act_mark_"+f value=rads[f]).rbox.unmarked
+
+mixin lhider(f)
+	input(name="attr_toggle_"+f type="hidden" class="lhider" value="1")
+
+mixin lshower(f)
+	input(name="attr_toggle_"+f type="hidden" class="lshower" value="1")
+
+mixin editbox(f)
+	div
+		+ebox(f)
+	input(name="attr_toggle_"+f type="hidden" class="state" value="0")
+
+mixin ebox(f)
+	+lhider(f)
+	span
+		button(type="action" name="act_unmark" value=f).ebox.marked
+			+translate("Display").eboxtext
+	+lshower(f)
+	span
+		button(type="action" name="act_mark" value=f).ebox.unmarked
+			+translate("Edit").eboxtext
+
+mixin editoggle(f)
+	.togglemode
+		+editbox(f)
+		+lhider(f)
+		.content
+			+fieldset(f)
+				+textarea("detail")
+		+lshower(f)
+		.readonly
+			ul
+				+fieldset(f)
+					li
+						+display("detail")
+
+mixin rhider(f)
+	input(name="attr_radio_"+f type="hidden" class="rhider" value="1")
+
+mixin rshower(f)
+	input(name="attr_radio_"+f type="hidden" class="rshower" value="1")
+
+mixin hideunless(f)
+	input(name="attr_"+f type="hidden" class="hideunless" value="")
+
+
+

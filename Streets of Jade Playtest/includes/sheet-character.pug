@@ -1,0 +1,303 @@
+mixin lozenge(f,t)
+	.lozenge(class!=attributes.class)
+		+text(f)
+		.tag
+			+t(t)
+
+mixin dielabel(t)
+	.dielabel(class!=attributes.class)
+		+t(t)
+
+mixin die(f,dlist)
+	- if ( typeof(dlist) == "undefined" ) { dlist = [4,6,8,10,12]; }
+	.die(class!=attributes.class)
+		+hidden(f).chosendie
+		+select(f)
+			option(value="")
+			each val in dlist
+				option(value=val)= val
+		.polyhedral.d4.df-d4-4
+		.polyhedral.d6.df-d6-6
+		.polyhedral.d8.df-d8-8
+		.polyhedral.d10.df-d10-10
+		.polyhedral.d12.df-d12-12
+
+mixin favor
+	.favor
+		.favorbox
+			+textarea("favored-name").favored
+			+t("I owe them...").owe.smallnote.italic
+			+t("They owe me...").owed.smallnote.italic
+		.favormarks
+			each o in [1,2,3]
+				+cbox("favor-owe-"+o)
+			each o in [1,2,3]
+				+cbox("favor-owed-"+o)
+
+.character
+	.rolling.bordered
+		.choices
+			// IF YOU'RE WOUNDED, REMOVE ONE DIE BEFORE ROLLING.
+			.choice
+				.toptag
+					+t("Build Your Pool")
+				.bordered
+					// Name die - always, unless you deliberately remove it
+					+t("Name Die")
+					+cbox("roll-family-die","1")
+					// Main skill - always pick one
+					+t("Main Skill")
+					// Second skill - pick one, but only if you mark 1 pathos
+					+select("roll-main-skill")
+						+option("(Choose)","")
+						+option("Arts and Oration","arts-oration")
+						+option("Blood and Valor","blood-valor")
+						+option("Craft and Reason","craft-reason")
+						+option("Resolve and Spirit","resolve-spirit")
+					+t("Second Skill")
+					+select("roll-second-skill")
+						+option("(Spend 1 Pathos)","")
+						+option("Arts and Oration","arts-oration")
+						+option("Blood and Valor","blood-valor")
+						+option("Craft and Reason","craft-reason")
+						+option("Resolve and Spirit","resolve-spirit")
+					// Reputation die (if warranted; optional)
+					// ZOD ZOD ZOD ZOD ZOD LEFT OFF HERE ZOD ZOD ZOD ZOD ZOD
+					+t("Reputation")
+					// First Jade discipline dice
+					// Second Jade discipline dice
+					+t("Jade")
+					// Advantage dice (d6, d8, d10, arbitrary number of them)
+					+t("Advantage")
+					// Support (any die, a name, a reputation, or a skill die from a supporter)
+					+t("Support")
+					// Faction (or Neighborhood) Backing (an asset, neighborhood, or command die no one else is using)
+					+t("Faction/Neighborhood")
+		.dice
+			// Display all the dice you've queued up
+			// Click to roll them
+			// Sum the two highest results plus your highest jade die if any.
+			// If any jade dice rolled doubles, mark an itch.
+			// If you met or exceeded the challenge level, you prevail!
+			// Name Die - always, unless you deliberately remove it
+			.choice
+				.toptag
+					+t("Name Die")
+				.bordered
+					+tdimmer("roll-family-die","1")
+					.diebox 
+						+hidden("family-name-die").chosendie
+						.polyhedral.d4.df-d4-4
+						.polyhedral.d6.df-d6-6
+						.polyhedral.d8.df-d8-8
+						.polyhedral.d10.df-d10-10
+						.polyhedral.d12.df-d12-12
+			// Main skill
+			.choice
+				.toptag
+					+t("Main Skill")
+				.bordered
+			// Second skill (if you mark 1 pathos to push yourself)
+			.choice
+				.toptag
+					+t("Second Skill")
+				.bordered
+			// Reputation die (if warranted; optional)
+			.choice
+				.toptag
+					+t("Reputation")
+				.bordered
+			// First Jade discipline dice
+			// Second Jade discipline dice
+			.choice
+				.toptag
+					+t("Jade")
+				.bordered
+			// Advantage dice (d6, d8, d10, arbitrary number of them)
+			.choice
+				.toptag
+					+t("Advantage")
+				.bordered
+			// Support (any die, a name, a reputation, or a skill die from a supporter)
+			.choice
+				.toptag
+					+t("Support")
+				.bordered
+			// Faction (or Neighborhood) Backing (an asset, neighborhood, or command die no one else is using)
+			.choice
+				.toptag
+					+t("Faction/Neighborhood")
+				.bordered
+			.choice
+				.toptag.golden
+					+t("Roll!")
+				.bordered.golden
+					| Button goes here
+	.c2-1
+		.bio
+			.player
+				+t("Introducing")
+				+text("player-name-and-pronouns").blankline
+				+t("as ...")
+			.names
+				+lozenge("family-name","Family Name")
+				.connect-line
+				+die("family-name-die")
+				.connect-line
+				+lozenge("given-name","Given Name/Nickname")
+				.connect-line
+				+lozenge("pronouns","Pronouns")
+			.c2
+				+lozenge("concept","Concept")
+				.spacer
+				+lozenge("ethnicities","Ethnicities/Nation")
+			.c2
+				+lozenge("allegiance","Allegiance")
+				.connect-line
+				.c2-die
+					+lozenge("reputation","Reputation")
+					.connect-line
+					+die("reputation-die")
+			.c2
+				+lozenge("allegiance-plus","+ Allegiance").golden
+				.connect-line
+				.c2-die
+					+lozenge("reputation-plus","+ Reputation").golden
+					.connect-line
+					+die("reputation-plus-die")
+			.c2
+				+lozenge("personal-style","Personal Style")
+				.spacer
+				+lozenge("fighting-style","Fighting Style")
+			.c2.wounds-pathos
+				.wounds
+					.toptag
+						+t("Wounds")
+					.boxbox
+						each box in [1,2,3,4,5,6,7,8,9,10]
+							+ibox("wound"+box)
+						.itches
+							each box in [1,2,3,4,5,6,7,8,9,10]
+								+hidden("toggle_wound"+box).itchider
+							.itchy
+								+t("Itched!")
+					.btw
+						+t("While you have any wounds marked, lose one die from all pools before rolling in a contest.").smallnote.italic
+				.spacer
+				.pathos
+					.toptag
+						+t("Pathos")
+					.boxbox
+						each box in [1,2,3,4,5,6,7,8,9,10]
+							+ibox("pathos"+box)
+						.itches
+							each box in [1,2,3,4,5,6,7,8,9,10]
+								+hidden("toggle_pathos"+box).itchider
+							.itchy
+								+t("Itched!")
+			.glory
+				.toptag
+					+t("Glory")
+				.bordered
+					- var g = 1;
+					while g <= 40
+						+cbox("glory"+g)
+						- g++;
+			.boons
+				.toptag.golden
+					+t("Boons")
+				.tagnote.smallnote.italic
+					+t("When you fill the glory track, clear it and take a Boon.")
+				.bordered
+						.boxes
+							+cbox("boon-new-rep")
+						+t("Add a new reputation")
+						.boxes
+							+cbox("boon-new-allegiance")
+						+t("Add a new allegiance")
+						.boxes
+							each box in [1,2,3,4]
+								+cbox("boon-rep-step-"+box)
+						+t("Step up a reputation")
+						.boxes
+							each box in [1,2,3,4]
+								+cbox("boon-jade-"+box)
+						+t("Add 1d4 to a jade ability")
+						.boxes
+							each box in [1,2,3,4]
+								+cbox("boon-skill-"+box)
+						+t("Step up a skill")
+						.boxes
+							each box in [1,2,3,4]
+								+cbox("boon-gift-"+box)
+						+t("Acquire a gift")
+			.gifts
+				.toptag
+					+t("Gifts")
+				.bordered
+					+fieldset("gifts")
+						.gift
+							+text("name").blankline.overline
+							.weetitle
+								+t("Usage").smallnote
+							.giftbox
+								+textarea("usage").smallnote
+							.weetitle
+								+t("Counters").smallnote
+							.giftbox
+								+textarea("counters").smallnote
+							.weetitle
+								+t("Weak to").smallnote
+							.giftbox
+								+textarea("weakness").smallnote
+		.spacer
+		.abilities
+			.skills
+				.bighead.golden.topline
+					+t("Skills")
+				.c2-die
+					+dielabel("Arts and Oration").golden
+					.connect-line.golden
+					+die("skill-arts-oration-die").smalldie
+				.c2-die
+					+dielabel("Blood and Valor").golden
+					.connect-line.golden
+					+die("skill-blood-valor-die").smalldie
+				.c2-die
+					+dielabel("Craft and Reason").golden
+					.connect-line.golden
+					+die("skill-craft-reason-die").smalldie
+				.c2-die
+					+dielabel("Resolve and Spirit").golden
+					.connect-line.golden
+					+die("skill-resolve-spirit-die").smalldie
+			.jade
+				.bighead
+						+t("Jade")
+				each ability in ["Channeling","Deflection","Lightness","Steel","Strength","Perception"]
+					.c2-die-jade
+						+dielabel(ability)
+						each num in [1,2,3]
+							if num == 1
+								.connect-line
+							else
+								.connect-line.margin-fix
+							+die("jade-"+ability+"-die-"+num,[4]).smalldie
+			.favors
+				.toptag
+					+t("I Owe Shine...")
+				.favor.shine
+					.favorbox
+						+textarea("shine-name").favored
+					.favormarks
+						each o in [1,2,3,4,5,6]
+							+cbox("shine-owe-"+o)
+				.toptag.golden
+					+t("Favors Held Over Others")
+				+fieldset("favors")
+					+favor
+			.notes
+				.toptag
+					+t("Notes")
+				.bordered
+					+textarea("notes").smallnote

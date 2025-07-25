@@ -1,0 +1,493 @@
+// DEFINITIONS =============================================
+// Font defs - need new ones
+$font: 'Smythe', serif
+
+// Color definitions
+$jadeaqua: #37b09d
+$jadedragon: #08685c 
+$gold: #d2c762
+$golddark: #999047
+$darkbg: #1f1f1f
+$lightbg: #ffffff
+
+// STYLESHEET ==============================================
+// Begin actual CSS render
+
+// Grab Google Fonts
+@import url('https://fonts.googleapis.com/css2?family=Smythe&family=Roboto+Condensed:ital@0;1&family=Material+Symbols+Outlined&display=swap')
+
+// Grab the excellent DiceFont from https://dicefont.com/#/
+@import url('https://cdn.rawgit.com/fponticelli/dicefont/fc6b8c47/dist/dicefont/dicefont.css')
+
+// Establish CSS variables
+:root, .sheet-rolltemplate-ANYTEMPLATE
+	--jade-fg: #{$jadedragon}
+	--jade-bg: #{$lightbg}
+	--jade-golden: #{$golddark}
+	--jade-brightgold: #{$gold}
+	--jade-darkgold: #{$golddark}
+	--jade-dragon: #{$jadedragon}
+	--jade-aqua: #{$jadeaqua}
+	font-family: #{$font}
+
+.sheet-darkmode, .sheet-rolltemplate-darkmode
+	--jade-fg: #{$jadeaqua}
+	--jade-bg: #{$darkbg}
+	--jade-golden: #{$gold}
+	--jade-brightgold: #{$gold}
+	--jade-darkgold: #{$golddark}
+	--jade-dragon: #{$jadedragon}
+	--jade-aqua: #{$jadeaqua}
+
+// Sheetwide Font and Color Defaults
+
+.wrapper p,
+.ui-dialog .charsheet
+	font-family: #{$font}
+	font-size: 21px
+	color: var(--jade-fg) !important
+	background-color: var(--jade-bg)
+	line-height: unset
+
+.ui-dialog .charsheet
+	input, select, textarea
+		font-family: #{$font}
+		letter-spacing: .5px
+		font-size: 21px
+		color: var(--jade-golden)
+		background-color: var(--jade-bg)
+		border: none
+		padding-top: 0px
+		padding-bottom: 0px
+
+// Visibility Controls
+
+input.tshower[value="1"], input.tshower[value="2"], input.shower:not([value=""])
+	+ *
+		display: none
+		
+input.thider[value="0"], input.thider[value="2"], input.hider[value=""], input.mhider[value=""], input.mhider[value="character"], input.mhider[value="faction"]
+	+ *
+		display: none
+
+input.tdimmer[value="0"]
+	+ *
+		opacity: 0.25
+
+input.titcher[value="0"], input.titcher[value="1"]
+	+ *
+		display: none
+
+input.mhider[value="character"] + .character, input.mhider[value="faction"] + .faction
+	display: initial
+
+// Itches!
+
+.itches, .itchy
+	line-height: 24px
+	color: var(--jade-golden)
+
+input.itchider ~ .itchy
+	display: none
+
+input.itchider[value="2"] ~ .itchy
+	display: initial
+	margin-top: -12px
+	baseline-shift: -12px
+
+// Overall Layout
+
+.ui-dialog .charsheet .wrapper
+	.modeblock
+		// No specific styling
+	.character
+		// Character mode
+		.player
+			display: flex
+			flex-direction: row
+			gap: 3px
+			*
+				flex-grow: 0
+			.grower
+				flex-grow: 1
+		.names
+			margin-top: 8px
+			display: grid
+			gap: 0px
+			grid-template-columns: 2fr 12px 56px 12px 3fr 12px 1fr
+		.connect-line
+			margin-top: 16px
+			border-top: 2px solid var(--jade-dragon)
+			&.golden
+				border-top: 2px solid var(--jade-golden)
+		.lozenge.golden
+			input[type="text"]
+				border-color: var(--jade-darkgold)
+			.tag
+				span
+					color: white
+					background: var(--jade-golden) /* fallback */
+					background: linear-gradient(135deg, transparent 0px, var(--jade-darkgold) 0) top left, linear-gradient(225deg, transparent 0px, var(--jade-darkgold) 0) top right, linear-gradient(315deg, transparent 3px, var(--jade-darkgold) 0) bottom right, linear-gradient(45deg, transparent 3px, var(--jade-darkgold) 0) bottom left
+					background-size: 51% 51%
+					background-repeat: no-repeat
+		.lozenge
+			input[type="text"]
+				border: 2px solid var(--jade-dragon)
+				background-color: var(--jade-bg)
+				border-radius: 0
+				width: 100%
+				margin-bottom: 0px
+		.tag
+			padding-top: 0px
+			margin-top: -5px
+			// text-transform: uppercase
+			letter-spacing: .5px
+			span
+				color: white
+				background: var(--jade-dragon) /* fallback */
+				background: linear-gradient(135deg, transparent 0px, var(--jade-dragon) 0) top left, linear-gradient(225deg, transparent 0px, var(--jade-dragon) 0) top right, linear-gradient(315deg, transparent 3px, var(--jade-dragon) 0) bottom right, linear-gradient(45deg, transparent 3px, var(--jade-dragon) 0) bottom left
+				background-size: 51% 51%
+				background-repeat: no-repeat
+				margin-top: 0px
+				padding-top: 0px
+				padding-left: 3px
+				padding-right: 6px
+				padding-bottom: 3px
+				font-size: 90%
+		.toptag
+			padding-top: 0px
+			margin-top: 5px
+			// text-transform: uppercase
+			letter-spacing: .5px
+			span
+				color: white
+				background: var(--jade-dragon) /* fallback */
+				background: linear-gradient(135deg, transparent 3px, var(--jade-dragon) 0) top left, linear-gradient(225deg, transparent 3px, var(--jade-dragon) 0) top right, linear-gradient(315deg, transparent 0px, var(--jade-dragon) 0) bottom right, linear-gradient(45deg, transparent 0px, var(--jade-dragon) 0) bottom left
+				background-size: 51% 51%
+				background-repeat: no-repeat
+				margin-top: 0px
+				padding-top: 0px
+				padding-left: 3px
+				padding-right: 6px
+				padding-bottom: 3px
+				font-size: 90%
+			&.golden
+				span
+					color: white
+					background: var(--jade-golden) /* fallback */
+					background: linear-gradient(135deg, transparent 3px, var(--jade-darkgold) 0) top left, linear-gradient(225deg, transparent 3px, var(--jade-darkgold) 0) top right, linear-gradient(315deg, transparent 0px, var(--jade-darkgold) 0) bottom right, linear-gradient(45deg, transparent 0px, var(--jade-darkgold) 0) bottom left
+					background-size: 51% 51%
+					background-repeat: no-repeat
+		.dielabel
+			border: 2px solid var(--jade-dragon)
+			text-align: center
+			vertical-align: middle
+			height: 36px
+			font-size: 24px
+			line-height: 36px
+			&.golden
+				border: 2px solid var(--jade-golden)
+				color: var(--jade-golden)
+		.die.smalldie
+			width: 36px
+			height: 36px
+			line-height: 36px
+			select
+				width: 34px
+				height: 34px
+			.d4, .d6, .d8, .d10, .d12
+				font-size: 32px
+				top: -42px
+		.die
+			width: 52px
+			height: 52px
+			line-height: 52px
+			text-align: center
+			vertical-align: middle
+			border: 2px solid var(--jade-aqua)
+			padding: 0px
+			select
+				// display: none
+				opacity: 0
+				width: 50px
+				&:hover, &:focus
+					opacity: 1.0
+					~ .polyhedral
+						opacity: 0
+			input.chosendie[value=""] ~ select
+				opacity: 1
+			.d4, .d6, .d8, .d10, .d12
+				position: relative
+				top: -50px
+				padding: 0px
+				margin: 0px
+				display: none
+				font-size: 44px
+				color: var(--jade-golden)
+			input.chosendie[value="4"] ~ .d4
+				display: initial
+			input.chosendie[value="6"] ~ .d6
+				display: initial
+			input.chosendie[value="8"] ~ .d8
+				display: initial
+			input.chosendie[value="10"] ~ .d10
+				display: initial
+			input.chosendie[value="12"] ~ .d12
+				display: initial
+			&:hover
+				border-color: var(--jade-golden)
+				select
+					display: initial
+					width: 50px
+				input.chosendie ~ 
+					.d4, .d6, .d8, .d10, .d12
+						display: none
+
+		.rolling .choices, .rolling .dice
+			display: flex
+			flex-direction: row
+			.choice
+				margin-left: 6px
+				margin-bottom: 6px
+				.bordered
+					text-align: center
+					// ZOD
+				.toptag
+					white-space: nowrap
+				.diebox
+					height: 50px
+					text-align: center
+				.d4, .d6, .d8, .d10, .d12
+					line-height: 44px
+					padding: 0px
+					margin: 0px
+					display: none
+					font-size: 44px
+					color: var(--jade-golden)
+				input.chosendie[value="4"] ~ .d4
+					display: initial
+				input.chosendie[value="6"] ~ .d6
+					display: initial
+				input.chosendie[value="8"] ~ .d8
+					display: initial
+				input.chosendie[value="10"] ~ .d10
+					display: initial
+				input.chosendie[value="12"] ~ .d12
+					display: initial
+				.bordered.golden
+					border-color: var(--jade-darkgold)
+
+
+		.favor
+			display: flex
+			flex-direction: row
+			.favorbox
+				flex-grow: 1
+				display: grid
+				grid-template-columns: 1fr 90px
+				border: 2px solid var(--jade-darkgold)
+				margin-top: -1px
+				height: 54px
+				textarea.favored
+					grid-column: 1 / 1
+					grid-row: 1 / span 2
+					width: 100%
+					height: 100%
+					vertical-align: middle
+					padding-top: 3px
+					resize: none
+					height: 50px
+					background: transparent
+				.owe, .owed
+					grid-column: 2 / 2
+					height: 25px
+					white-space: nowrap
+					text-align: right
+			.favormarks
+				flex-grow: 0
+				flex-shrink: 0
+				display: grid
+				grid-template-columns: 1fr 1fr 1fr
+		.favor.shine
+			.favorbox
+				border: 2px solid var(--jade-dragon)
+				grid-template-columns: 1fr
+				textarea.favored
+					width: calc(100% - 12px)
+			.cbox::before
+				color: var(--jade-fg)
+		.glory .bordered
+			display: grid
+			grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr
+			.cbox::before
+				color: var(--jade-fg)
+		.boons
+			display: grid
+			grid-template-columns: auto 1fr
+			align-items: end
+			.tagnote
+				padding-left: 6px
+			.bordered
+				display: grid
+				grid-template-columns: auto auto auto auto
+				white-space: nowrap
+				align-items: start
+				.boxes
+					text-align: right
+					margin-right: 6px
+				.boxes + span
+					color: var(--jade-golden)
+		.boons .bordered
+			grid-row: 2
+			grid-column: 1 / span 2
+			border: 2px solid var(--jade-darkgold)
+		.notes
+			textarea
+				width: calc(100% - 12px)
+				height: 300px
+				margin-bottom: 0px
+
+		.c2
+			margin-top: 8px
+			display: grid
+			gap: 0px
+			grid-template-columns: 1fr 24px 1fr
+		.bordered
+			margin-top: -1px
+			border: 2px solid var(--jade-dragon)
+		.c2-1
+			margin-top: 8px
+			display: grid
+			gap: 0px
+			grid-template-columns: 2fr 24px 1fr
+		.c2-die
+			display: grid
+			gap: 0px
+			grid-template-columns: 1fr 12px 56px
+		.c2-die-jade
+			display: grid
+			gap: 0px
+			grid-template-columns: 1fr 12px 36px 12px 36px 12px 36px
+			.connect-line.margin-fix
+				margin-left: 4px
+		.skills .c2-die
+			grid-template-columns: 1fr 12px 36px
+		.skills, .jade
+			.c2-die, .c2-die-jade
+				margin-bottom: 8px
+		.gift
+			.giftbox
+				line-height: 14px
+				.golden
+					color: var(--jade-golden)
+			textarea
+				width: calc(100% - 12px)
+				height: 60px
+				resize: none
+				margin-bottom: 0px
+			input[type="text"]
+				width: 100%
+				padding-top: 0px
+				margin-bottom: 0px
+	.faction
+		// Faction mode
+
+// Checkboxes
+
+.cbox
+	background: none
+	color: none
+	border: none
+	padding: 0px
+	margin-left: 0px
+	width: 22px
+	&::before
+		font-family: 'Material Symbols Outlined'
+		font-weight: normal
+		font-style: normal
+		font-size: 26px
+		width: 22px
+		color: var(--jade-golden)
+		display: inline-block
+		line-height: 1
+		text-transform: none
+		margin-left: -8px
+		padding-left: 0px
+		word-wrap: normal
+		white-space: nowrap
+		direction: ltr
+		padding: 0px
+		margin-left: 0px
+		margin-right: 0px
+
+.cbox::before
+	content: 'check_box_outline_blank'
+
+.cbox.marked::before
+	content: 'dialogs'
+
+.cbox.itched::before
+	// content: 'disabled_by_default'
+	// content: 'dataset'
+	// content: 'square_dot'
+	// content: 'image'
+	// content: 'broken_image'
+	// content: 'pages'
+	// content: 'escalator'
+	// content: 'grid_guides'
+	// content: 'background_dot_small'
+	content: 'grid_on'
+	// content: 'data_thresholding'
+	// content: 'add_box'
+	// content: 'indeterminate_check_box'
+	// content: 'select_check_box'
+
+// Other Styling
+
+input[type="text"].blankline
+	border-bottom: 1px solid var(--jade-fg)
+input[type="text"].overline
+	border-top: 1px solid var(--jade-fg)
+
+.bighead
+	font-size: 200%
+	&.topline
+		margin-top: -18px
+	&.golden
+		color: var(--jade-golden)
+	// text-transform: uppercase
+
+.btw
+	line-height: 18px
+
+.btn
+	background-color: var(--jade-bg)
+	color: var(--jade-aqua)
+	border: 1px solid var(--jade-dragon)
+	text-shadow: none
+	box-shadow: none
+	background-image: unset
+	font-family: "Roboto Condensed"
+	&.repcontrol_move
+		font-size: 16px
+	&:hover
+		background-color: var(--jade-golden)
+		color: var(--jade-bg)
+
+.boxbox
+	border: 2px solid var(--jade-dragon)
+	text-align: center
+	vertical-align: middle
+	padding-right: 2px
+	margin-top: -1px
+	padding-top: 6px
+	padding-bottom: 0px
+
+.ui-dialog .charsheet
+	.smallnote, input.smallnote, textarea.smallnote
+		font-family: "Roboto Condensed"
+		font-weight: 400
+		font-size: 14px
+
+.italic
+	font-style: italic
