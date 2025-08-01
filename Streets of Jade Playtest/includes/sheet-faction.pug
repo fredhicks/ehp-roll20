@@ -1,0 +1,472 @@
+.faction
+	.c3
+		.left-part
+			.identity
+				+lozenge("faction-name","Faction Name").golden
+		.spacer
+		.middle-part
+			.pathos
+				.boxbox
+					each box in [1,2,3,4,5,6,7,8,9,10]
+						+cbox("pathos"+box)
+				.tag
+					+t("Pathos")
+		.spacer
+		.right-part
+			.scandal
+				.boxbox
+					each box in [1,2,3,4,5,6,7,8,9,10]
+						+cbox("scandal"+box)
+				.tag
+					+t("Scandal")
+
+	.sections
+	
+			+tshower("show-command")
+			button(type="action" name="act_mark" class="goldroll" value="show-command")
+				+t("Show Command")
+
+			+thider("show-command")
+			button(type="action" name="act_unmark" class="jaderoll" value="show-command")
+				+t("Hide Command")
+	
+			+tshower("show-officers")
+			button(type="action" name="act_mark" class="goldroll" value="show-officers")
+				+t("Show Officers")
+
+			+thider("show-officers")
+			button(type="action" name="act_unmark" class="jaderoll" value="show-officers")
+				+t("Hide Officers")
+
+			+tshower("show-assets")
+			button(type="action" name="act_mark" class="goldroll" value="show-assets")
+				+t("Show Assets")
+
+			+thider("show-assets")
+			button(type="action" name="act_unmark" class="jaderoll" value="show-assets")
+				+t("Hide Assets")
+
+			+tshower("show-gifts")
+			button(type="action" name="act_mark" class="goldroll" value="show-gifts")
+				+t("Show Gifts")
+
+			+thider("show-gifts")
+			button(type="action" name="act_unmark" class="jaderoll" value="show-gifts")
+				+t("Hide Gifts")
+
+			+tshower("show-favors")
+			button(type="action" name="act_mark" class="goldroll" value="show-favors")
+				+t("Show Favors")
+
+			+thider("show-favors")
+			button(type="action" name="act_unmark" class="jaderoll" value="show-favors")
+				+t("Hide Favors")
+
+			+tshower("show-goals")
+			button(type="action" name="act_mark" class="goldroll" value="show-goals")
+				+t("Show Goals")
+
+			+thider("show-goals")
+			button(type="action" name="act_unmark" class="jaderoll" value="show-goals")
+				+t("Hide Goals")
+
+			+tshower("show-boons")
+			button(type="action" name="act_mark" class="goldroll" value="show-boons")
+				+t("Show Boons")
+
+			+thider("show-boons")
+			button(type="action" name="act_unmark" class="jaderoll" value="show-boons")
+				+t("Hide Boons")
+
+			+tshower("show-notes")
+			button(type="action" name="act_mark" class="goldroll" value="show-notes")
+				+t("Show Notes")
+
+			+thider("show-notes")
+			button(type="action" name="act_unmark" class="jaderoll" value="show-notes")
+				+t("Hide Notes")
+
+	.command
+
+		+thider("show-command")
+		.command
+			.topstrip
+				.toptag
+					+t("Command")
+				.sideblock
+					+thider("show-command")
+					button(type="action" name="act_unmark" class="goldroll" value="show-command")
+						+t("Hide Command")
+			.bordered
+				+fieldset("command")
+					.csection.bordered
+						.topstrip
+							.available-dice
+								.c4
+									each bit in [1,2,3,4]
+										if bit > 1
+											.spacer
+										.command-die
+											+cbox("diemark"+bit)
+											+die("die"+bit).smalldie
+							+text("name").namefield
+							.sideblock
+								+tshower("show-hide")
+								button(type="action" name="act_mark" class="goldroll" value="show-hide")
+									+t("Hide")
+								+thider("show-hide")
+								button(type="action" name="act_unmark" class="goldroll" value="show-hide")
+									+t("Show")
+								+skirmishbutton
+						+thider("skirmish")
+						.skirmish-box.rolling
+							.choices
+								.choice
+									.choicegrid
+										.text
+											+t("Dice")
+										.action
+											.vessel
+												+smalldie("die1")
+											.vessel
+												+smalldie("die2")
+											.vessel
+												+smalldie("die3")
+											.vessel
+												+smalldie("die4")
+										.text
+											+t("Jade")
+										.action
+											+select("faction-roll-jade")
+												+option("(Choose)","")
+												each ability in ["Channeling","Deflection","Lightness","Perception","Steel","Strength"]
+													+option(ability,ability)
+											each dn in [1,2,3]
+												span
+													+smalldie("roll-jade-die-"+dn)
+										.text
+											+thider("rollskirmish")
+											button(type="action" name="act_unmark" class="jaderoll" value="rollskirmish")
+												+t("Hide Skirmish")
+											button(type="action" name="act_resetskirmish" class="goldroll")
+												+t("Reset")
+											button(type="action" name="act_skirmishroll" class="redroll")
+												+t("Roll")
+
+						+tshower("show-hide")
+						.showzone
+							.available-jade
+								.weetitle
+									+t("Jade").smallnote
+								.c6
+									- bit = 1
+									each ability in ["Channeling","Deflection","Lightness","Perception","Steel","Strength"]
+										if bit > 1
+											.spacer
+										.ability
+											.ability-dice
+												+hidden("jade-dice-"+ability).chosendie
+												+select("jade-dice-"+ability)
+													option(value="0") 0
+													option(value="1") 1
+													option(value="2") 2
+													option(value="3") 3
+												.dicezone
+													.number
+														+display("jade-dice-"+ability)
+													.d4.df-d4-4
+											.ability-top
+												+t(ability)
+										- bit++
+							.weetitle
+								+t("Description").smallnote
+							.desc
+								+textarea("desc").smallnote.squat
+
+	.c3-2
+
+		.left-part
+
+			+thider("show-officers")
+			.officers
+				.topstrip
+					.toptag
+						+t("Officers")
+					.sideblock
+						+thider("show-officers")
+						button(type="action" name="act_unmark" class="goldroll" value="show-officers")
+							+t("Hide Officers")
+				.bordered
+					+fieldset("officers")
+						.officer.bordered
+							.topstrip
+								.nameblock
+									.name-die
+										+cbox("diemark")
+										+die("die1").smalldie
+									.connect-line
+									.lozenge.namefield
+										+text("name")
+								.sideblock
+									+tshower("show-hide")
+									button(type="action" name="act_mark" class="goldroll" value="show-hide")
+										+t("Hide")
+									+thider("show-hide")
+									button(type="action" name="act_unmark" class="goldroll" value="show-hide")
+										+t("Show")
+									+skirmishbutton
+
+							+thider("skirmish")
+							.skirmish-box.rolling
+								.choices
+									.choice
+										.choicegrid
+											.action
+												.vessel
+													+smalldie("die1")
+											.text
+												+t("Jade")
+											.action
+												+select("faction-roll-jade")
+													+option("(Choose)","")
+													each ability in ["Channeling","Deflection","Lightness","Perception","Steel","Strength"]
+														+option(ability,ability)
+												each dn in [1,2,3]
+													span
+														+smalldie("roll-jade-die-"+dn)
+											.text.buttons
+												+thider("rollskirmish")
+												button(type="action" name="act_unmark" class="jaderoll" value="rollskirmish")
+													+t("Hide Skirmish")
+												button(type="action" name="act_resetskirmish" class="goldroll")
+													+t("Reset")
+												button(type="action" name="act_skirmishroll" class="redroll")
+													+t("Roll")
+
+							+tshower("show-hide")
+							.showzone
+								.available-jade
+									.weetitle
+										+t("Jade").smallnote
+									.c6
+										- bit = 1
+										each ability in ["Channeling","Deflection","Lightness","Perception","Steel","Strength"]
+											if bit > 1
+												.spacer
+											.ability
+												.ability-dice
+													+hidden("jade-dice-"+ability).chosendie
+													+select("jade-dice-"+ability)
+														option(value="0") 0
+														option(value="1") 1
+														option(value="2") 2
+														option(value="3") 3
+													.dicezone
+														.number
+															+display("jade-dice-"+ability)
+														.d4.df-d4-4
+												.ability-top
+													+t(ability)
+											- bit++
+								.weetitle
+									+t("Description").smallnote
+								.desc
+									+textarea("desc").smallnote.squat
+
+			+thider("show-assets")
+			.assets
+				.topstrip
+					.toptag
+						+t("Assets")
+					.sideblock
+						+thider("show-assets")
+						button(type="action" name="act_unmark" class="goldroll" value="show-assets")
+							+t("Hide Assets")
+				.bordered
+					+fieldset("assets")
+						.asset
+							.name
+								.die.smalldie
+									// not really a die
+									+select("asset-value")
+										option(value="")
+										option(value=4) 4
+										option(value=5) 5
+										option(value=6) 6
+									.die-display
+										+display("asset-value")
+								.connect-line
+								.namefield
+									+text("name")
+									.bottomline
+										.text.golden
+											+t("Stress")
+										each box in [1,2,3]
+											+cbox("stress"+box)
+								.spacer
+								.righthand
+									+tshower("show-hide")
+									button(type="action" name="act_mark" class="goldroll" value="show-hide")
+										+t("Hide")
+									+thider("show-hide")
+									button(type="action" name="act_unmark" class="goldroll" value="show-hide")
+										+t("Show")
+									+skirmishbutton
+
+							+thider("skirmish")
+							.skirmish-box.rolling
+								.choices
+									.choice
+										.choicegrid
+											.action
+												.vessel
+													+display("asset-value")
+													.smallnote
+														+t("(fixed&nbsp;value)")
+											.text.buttons
+												+thider("rollskirmish")
+												button(type="action" name="act_unmark" class="jaderoll" value="rollskirmish")
+													+t("Hide Skirmish")
+												button(type="action" name="act_skirmishroll" class="redroll")
+													+t("Roll")
+
+							+tshower("show-hide")
+							.desc.bordered 
+								+textarea("asset-description").smallnote
+
+			+thider("show-gifts")
+			.gifts
+				.topstrip
+					.toptag
+						+t("Gifts")
+					.sideblock
+						+thider("show-gifts")
+						button(type="action" name="act_unmark" class="goldroll" value="show-gifts")
+							+t("Hide Gifts")
+				.bordered
+					+fieldset("factionGifts")
+						.gift.bordered
+							.topstrip
+								+text("name").blankline
+								.sideblock
+									+tshower("show-hide")
+									span.lockup
+										+tshower("show-edit")
+										button(type="action" name="act_mark" class="goldroll" value="show-edit")
+											+t("Edit")
+										+thider("show-edit")
+										button(type="action" name="act_unmark" class="goldroll" value="show-edit")
+											+t("Lock")
+									+tshower("show-hide")
+									button(type="action" name="act_mark" class="goldroll" value="show-hide")
+										+t("Hide")
+									+thider("show-hide")
+									button(type="action" name="act_unmark" class="goldroll" value="show-hide")
+										+t("Show")
+							+tshower("show-hide")
+							.showzone
+								+thider("show-edit")
+								.editzone
+									.weetitle
+										+t("Description").smallnote
+									.giftbox
+										+textarea("desc").smallnote.squat
+									.weetitle
+										+t("Usage").smallnote
+									.giftbox
+										+textarea("usage").smallnote.squat
+									.weetitle
+										+t("Counters").smallnote
+									.giftbox
+										+textarea("counters").smallnote.squat
+									.weetitle
+										+t("Weak to").smallnote
+									.giftbox
+										+textarea("weakness").smallnote.squat
+								+tshower("show-edit")
+								.displayzone
+									.weetitle
+										+t("Description").smallnote
+									.giftbox
+										+display("desc").smallnote.golden
+									.weetitle
+										+t("Usage").smallnote
+									.giftbox
+										+display("usage").smallnote.golden
+									.weetitle
+										+t("Counters").smallnote
+									.giftbox
+										+display("counters").smallnote.golden
+									.weetitle
+										+t("Weak to").smallnote
+									.giftbox
+										+display("weakness").smallnote.golden
+
+		.spacer
+
+		.right-part
+
+			+thider("show-favors")
+			.favors
+				.topstrip
+					.toptag
+						+t("Favors")
+					.sideblock
+						+thider("show-favors")
+						button(type="action" name="act_unmark" class="goldroll" value="show-favors")
+							+t("Hide Favors")
+				.bordered
+					+fieldset("factionfavors")
+						+ffavor
+
+			+thider("show-goals")
+			.goals
+				.topstrip
+					.toptag
+						+t("Goals")
+					.sideblock
+						+thider("show-goals")
+						button(type="action" name="act_unmark" class="goldroll" value="show-goals")
+							+t("Hide Goals")
+				.bordered
+					+fieldset("goals")
+						+goal
+
+			+thider("show-boons")
+			.boons
+				.topstrip
+					.toptag
+						+t("Boons")
+					.sideblock
+						+thider("show-boons")
+						button(type="action" name="act_unmark" class="goldroll" value="show-boons")
+							+t("Hide Boons")
+				.bordered
+					+fieldset("factionboons")
+						// +textarea("boons").smallnote
+						.boon
+							.bullet &bull;
+							+select("boon-options")
+								+option("(Choose)","")
+								+toption("increase a command’s number of dice by 1d6 (max 4 dice per section)")
+								+toption("improve one of a command’s dice by 1 step (max d12)")
+								+toption("improve an asset by +1 (max 6)")
+								+toption("step up an officer’s Name die (max d12)")
+								+toption("step up a PC’s family Name die (max d12); multiple PCs from the same family all get the benefit")
+								+toption("add 2d4 to a command’s or officer’s jade (max 3d4 per discipline)")
+								+toption("recruit a new command section at 2d6")
+								+toption("acquire a new asset at rank 4")
+								+toption("nominate a new officer at d6")
+								+toption("acquire a gift")
+
+			+thider("show-notes")
+			.notes
+				.topstrip
+					.toptag
+						+t("Notes")
+					.sideblock
+						+thider("show-notes")
+						button(type="action" name="act_unmark" class="goldroll" value="show-notes")
+							+t("Hide Notes")
+				.bordered
+					+textarea("notes").smallnote

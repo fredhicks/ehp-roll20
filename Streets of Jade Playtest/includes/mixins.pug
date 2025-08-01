@@ -1,6 +1,41 @@
 - 
 	var translations = { 
+		"rolls": "rolls",
 		"Streets of Jade": "Streets of Jade",
+		"arts-oration": "Arts and Oration",
+		"blood-valor": "Blood and Valor",
+		"craft-reason": "Craft and Reason",
+		"resolve-spirit": "Resolve and Spirit",
+		"family-name": "Name Die",
+		"main-skill": "First Skill",
+		"second-skill": "Second Skill",
+		"reputation": "Reputation",
+		"reputation2": "Reputation",
+		"advantage1": "Advantage",
+		"advantage2": "Advantage",
+		"advantage3": "Advantage",
+		"advantage4": "Advantage",
+		"advantage5": "Advantage",
+		"advantage6": "Advantage",
+		"advantage7": "Advantage",
+		"advantage8": "Advantage",
+		"advantage9": "Advantage",
+		"advantage10": "Advantage",
+		"support": "Support",
+		"backing": "Backing",
+		"backing-asset": "Asset",
+		"skirmishes": "skirmishes",
+		"family-name-die": "Name",
+		"skill-arts-oration-die": "Arts and Oration",
+		"skill-blood-valor-die": "Blood and Valor",
+		"skill-craft-reason-die": "Craft and Reason",
+		"skill-resolve-spirit-die": "Resolve and Spirit",
+		"reputation-die": "Reputation",
+		"reputation-plus-die": "Reputation",
+		"other": "Other",
+		"Asset": "Asset",
+		"Command": "Command",
+		"Officer": "Officer",
 	};
 
 // Translation
@@ -40,9 +75,17 @@ mixin option(t,v)
 	else
 		option(value=v data-i18n=t)
 
+mixin toption(t)
+	- if ( typeof(translations[t]) == "undefined" ) { translations[t] = t; }
+	option(value=t data-i18n=t)
+
 mixin hidden(f,v)
 	- if ( typeof(v) == "undefined" ) { v = ""; }
 	input(type='hidden' name='attr_'+f value=v class!=attributes.class)
+
+mixin number(f,v,min,max)
+	- if ( typeof(v) == "undefined" ) { v = "0"; }
+	input(type='number' name='attr_'+f value=v min=min max!=max class!=attributes.class)
 
 mixin text(f)
 	input(type='text' name='attr_'+f class!=attributes.class)
@@ -100,92 +143,83 @@ mixin ibox(f)
 mixin cbox(f,v)
 	- if ( typeof(v) == "undefined" ) { v = "0"; }
 	+thider(f,v)
-	button(type="action" name="act_unmark" value=f).cbox.marked
+	button(type="action" name="act_unmark" value=f class!=attributes.class).cbox.marked
 	+tshower(f,v)
-	button(type="action" name="act_mark" value=f).cbox.unmarked
+	button(type="action" name="act_mark" value=f class!=attributes.class).cbox.unmarked
 
 mixin togglebox(f)
 	div
 		+cbox(f)
 	input(name="attr_toggle_"+f type="hidden" class="state" value="0")
 
+// Quick Format Structures for Streets of Jade
 
-// STEWPOT STUFF BELOW HERE -- UNSURE WHICH STUFF WE'LL NEED JUST YET
-mixin flabel(t)
-	div.flabel
-		+translate(t)
+mixin lozenge(f,t)
+	.lozenge(class!=attributes.class)
+		+text(f)
+		.tag
+			+t(t)
 		if block
-			block
+			.sideblock
+				block
 
-mixin bflabel(t)
-	div.flabel.big
-		+translate(t)
-		if block
-			block
+mixin dielabel(t)
+	.dielabel(class!=attributes.class)
+		+t(t)
 
-- var rads = {};
+mixin die(f,dlist)
+	- if ( typeof(dlist) == "undefined" ) { dlist = [4,6,8,10,12]; }
+	.die(class!=attributes.class)
+		+hidden(f).chosendie
+		+select(f)
+			option(value="")
+			each val in dlist
+				option(value=val)= val
+		.polyhedral.d4.df-d4-4
+		.polyhedral.d6.df-d6-6
+		.polyhedral.d8.df-d8-8
+		.polyhedral.d10.df-d10-10
+		.polyhedral.d12.df-d12-12
 
-mixin radbox(f)
-	- 
-		if ( typeof(rads[f]) === "undefined" ) {
-			rads[f] = 1;
-		} else {
-			rads[f]++;
-		}
-	div
-		+rbox(f)
-	input(name="attr_radio_"+f type="hidden" class="state" value=1)
-	input(type="hidden" class="highlighter" value=rads[f])
+mixin favor
+	.favor
+		.favorbox
+			+textarea("favored-name").favored
+			+t("I owe them...").owe.smallnote.italic
+			+t("They owe me...").owed.smallnote.italic
+		.favormarks
+			each o in [1,2,3]
+				+cbox("favor-owe-"+o).brightgold
+			each o in [1,2,3]
+				+cbox("favor-owed-"+o).darkgold
 
-mixin rbox(f)
-	+rhider(f,rads[f])
-	button(type="action" name="act_unmark_"+f value=rads[f]).rbox.marked
-	+rshower(f,rads[f])
-	button(type="action" name="act_mark_"+f value=rads[f]).rbox.unmarked
+mixin ffavor
+	.favor
+		.favorbox
+			+textarea("favored-name").favored
+			+t("I owe them...").owe.smallnote.italic
+			+t("They owe me...").owed.smallnote.italic
+		.favormarks
+			each o in [1,2,3,4,5]
+				+cbox("favor-owe-"+o).brightgold
+			each o in [1,2,3,4,5]
+				+cbox("favor-owed-"+o).darkgold
 
-mixin lhider(f)
-	input(name="attr_toggle_"+f type="hidden" class="lhider" value="1")
+mixin goal
+	.goal.bordered
+		.desc
+			+textarea("goal").squat
+		.goalmarks
+			each o in [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
+				+cbox("favor-owe-"+o).jade
 
-mixin lshower(f)
-	input(name="attr_toggle_"+f type="hidden" class="lshower" value="1")
+// Used in fieldsets, so there's no need to give it different attribute names from use to use
 
-mixin editbox(f)
-	div
-		+ebox(f)
-	input(name="attr_toggle_"+f type="hidden" class="state" value="0")
-
-mixin ebox(f)
-	+lhider(f)
-	span
-		button(type="action" name="act_unmark" value=f).ebox.marked
-			+translate("Display").eboxtext
-	+lshower(f)
-	span
-		button(type="action" name="act_mark" value=f).ebox.unmarked
-			+translate("Edit").eboxtext
-
-mixin editoggle(f)
-	.togglemode
-		+editbox(f)
-		+lhider(f)
-		.content
-			+fieldset(f)
-				+textarea("detail")
-		+lshower(f)
-		.readonly
-			ul
-				+fieldset(f)
-					li
-						+display("detail")
-
-mixin rhider(f)
-	input(name="attr_radio_"+f type="hidden" class="rhider" value="1")
-
-mixin rshower(f)
-	input(name="attr_radio_"+f type="hidden" class="rshower" value="1")
-
-mixin hideunless(f)
-	input(name="attr_"+f type="hidden" class="hideunless" value="")
-
-
+mixin skirmishbutton
+	+thider("skirmish")
+	button(type="action" name="act_unmark" class="redroll" value="skirmish")
+		+t("Close")
+	+tshower("skirmish")
+	button(type="action" name="act_mark" class="redroll" value="skirmish")
+		+t("Skirmish")
 

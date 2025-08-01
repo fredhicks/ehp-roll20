@@ -1,0 +1,185 @@
+mixin rtTotal(f,v)
+	| {{#rollTotal() #{f} #{v}}}
+	block
+	| {{/rollTotal() #{f} #{v}}}
+
+mixin rtCheck(f)
+	| {{##{f}}}
+	block
+	| {{/#{f}}}
+
+mixin rtNot(f)
+	| {{^#{f}}}
+	block
+	| {{/#{f}}}
+
+mixin rtVerify(f,v)
+	| {{##{f} #{v}}} 
+	block
+	| {{/#{f} #{v}}}
+
+rolltemplate.sheet-rolltemplate-skirmish
+	.sheet-bordered
+		h1
+			span.sheet-nameblock
+				| {{name}} 
+			span.sheet-diceblock
+				+rtCheck("jade-name")
+					+rtCheck("die-name")
+						span.sheet-contributors
+							| {{computed::die-total}} + 
+							span.sheet-jaded
+								| {{computed::jadedie-total}} = 
+						| {{computed::total}}
+					+rtNot("die-name")
+						span.sheet-jaded
+							| {{computed::total}}
+				+rtNot("jade-name")
+					+rtCheck("die-name")
+						| {{computed::total}}
+		.sheet-smallnote.sheet-composition
+			+rtCheck("die-name")
+				span.sheet-golden
+					| {{die-name}}
+				+rtCheck("jade-name")
+					|&nbsp;+&nbsp;
+			+rtCheck("jade-name")
+				|{{jade-name}}
+		.sheet-results-container
+			.sheet-results.sheet-results-grid
+				+rtNot("skirmish-die1")
+					+rtNot("asset-value")
+						+rtCheck("die-name")
+							.sheet-text
+								| {{die-name}}
+							.sheet-droll d{{die-size}} = 
+							.sheet-result {{computed::die-total}}
+				+rtCheck("skirmish-die1")
+					.sheet-text
+						| {{die-name}}
+					.sheet-droll d{{skirmish-die1-size}} = 
+					.sheet-result {{skirmish-die1}}
+				+rtCheck("skirmish-die2")
+					.sheet-text
+					.sheet-droll d{{skirmish-die2-size}} = 
+					.sheet-result {{skirmish-die2}}
+				+rtCheck("skirmish-die3")
+					.sheet-droll d{{skirmish-die3-size}} = 
+					.sheet-result {{skirmish-die3}}
+				+rtCheck("skirmish-die4")
+					.sheet-droll d{{skirmish-die4-size}} = 
+					.sheet-result {{skirmish-die4}}
+				+rtCheck("jade1")
+					.sheet-text.sheet-jade
+						| {{jade-name}}
+					.sheet-droll.sheet-jade {{jade-count}}d4 = 
+					.sheet-result.sheet-jade
+						each jade in [1,2,3]
+							| {{jade#{jade}}} 
+				+rtCheck("asset-value")
+					.sheet-droll {{asset-size}} = 
+					.sheet-result {{asset-value}}
+		.sheet-results
+			+rtTotal("computed::itches",1)
+				.sheet-itchy
+					+t("Jade doubles! You get the Itches.")
+
+rolltemplate.sheet-rolltemplate-jaderoll
+	.sheet-bordered
+		h1
+			span.sheet-nameblock
+				| {{name}} 
+			span.sheet-diceblock
+				span.sheet-contributors
+					| {{computed::firstdie-total}} 
+					| + {{computed::seconddie-total}} 
+					+rtCheck("jade1")
+						span.sheet-jaded
+							| + {{computed::jadedie-total}}
+				| = {{computed::total}}
+		.sheet-smallnote.sheet-composition
+			+rtCheck("computed::firstdie-name")
+				| {{computed::firstdie-name}}
+			+rtCheck("computed::seconddie-name")
+				|+{{computed::seconddie-name}}
+			+rtCheck("jade1")
+				|+&nbsp;
+				+t("Jade")
+		.sheet-results-container
+			.sheet-results.sheet-results-grid
+				+rtCheck("family-name")
+					.sheet-text
+						+t("Name Die")
+					.sheet-droll d{{family-name-size}} = 
+					.sheet-result {{family-name}}
+				+rtCheck("main-skill")
+					.sheet-text
+						| {{main-skill-name}}
+						.sheet-smallnote
+							+t("First Skill")
+					.sheet-droll d{{main-skill-size}} = 
+					.sheet-result {{main-skill}}
+				+rtCheck("second-skill")
+					.sheet-text
+						| {{second-skill-name}}
+						.sheet-smallnote
+							+t("Second Skill")
+					.sheet-droll d{{second-skill-size}} = 
+					.sheet-result {{second-skill}}
+				+rtCheck("reputation")
+					.sheet-text
+						| {{reputation-name}}
+						.sheet-smallnote
+							+t("Reputation")
+					.sheet-droll d{{reputation-size}} = 
+					.sheet-result {{reputation}}
+				+rtCheck("reputation2")
+					.sheet-text
+						| {{reputation2-name}}
+						.sheet-smallnote
+							+t("Reputation")
+					.sheet-droll d{{reputation2-size}} = 
+					.sheet-result {{reputation2}}
+				each adv in [1,2,3,4,5,6,7,8,9,10]
+					+rtCheck("advantage"+adv)
+						.sheet-text
+							+t("Advantage")
+						.sheet-droll d{{advantage#{adv}-size}} =
+						.sheet-result {{advantage#{adv}}}
+				+rtCheck("support")
+					.sheet-text
+						+t("Support")
+					.sheet-droll d{{support-size}} = 
+					.sheet-result {{support}}
+				+rtCheck("backing")
+					.sheet-text
+						+t("Backing")
+					.sheet-droll d{{backing-size}} = 
+					.sheet-result {{backing}}
+				+rtCheck("backing-asset")
+					.sheet-text
+						+t("Asset")
+					.sheet-droll {{backing-asset-size}} = 
+					.sheet-result {{backing-asset}}
+				+rtCheck("jade1")
+					.sheet-text.sheet-jade
+						| {{jade-names}}
+						.sheet-smallnote
+							+t("Jade")
+					.sheet-droll.sheet-jade {{jade-count}}d4 = 
+					.sheet-result.sheet-jade
+						each jade in [1,2,3,4,5,6]
+							| {{jade#{jade}}} 
+		.sheet-results
+			+rtTotal("computed::itches",1)
+				.sheet-itchy
+					+t("Jade doubles! You get the Itches.")
+
+
+
+
+
+
+
+
+

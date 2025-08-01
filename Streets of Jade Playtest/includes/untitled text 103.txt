@@ -1,0 +1,94 @@
+xxxx Implement actual skirmish roll PC
+
+xxxx Implement Skirmish dialog for Command
+xxxx Implement Skirmish dialog for Officer
+Implement Skirmish dialog for Asset
+xxxx Implement actual skirmish roll Faction
+
+DE-ELEVATE HIDE COMMAND BUTTON
+
+<div class="die smalldie">
+	<select name="attr_asset-value">
+		<option value="4">4</option>
+		<option value="5">5</option>
+		<option value="6">6</option>
+	</select>
+	<div class="die-display"><span name="attr_asset-value">6</span>
+	</div>
+</div>
+
+<div class="die smalldie">
+	<input class="chosendie" type="hidden" name="attr_die1" value="">
+	<select name="attr_die1">
+		<option value=""></option>
+		<option value="4">4</option>
+		<option value="6">6</option>
+		<option value="8">8</option>
+		<option value="10">10</option>
+		<option value="12">12</option>
+	</select>
+	<div class="polyhedral d4 df-d4-4"></div>
+	<div class="polyhedral d6 df-d6-6"></div>
+	<div class="polyhedral d8 df-d8-8"></div>
+	<div class="polyhedral d10 df-d10-10"></div>
+	<div class="polyhedral d12 df-d12-12"></div>
+</div>
+
+
+		select
+			opacity: 0
+			width: 50px
+			&:hover, &:focus
+				opacity: 1.0
+				~ .polyhedral
+					opacity: 0
+
+			select
+				opacity: 0
+				width: 100%
+				&:hover, &:focus
+					opacity: 1.0
+					~ .dicezone
+						opacity: 0
+			input.chosendie[value="0"], input.chosendie[value=""] 
+				~ .dicezone
+					display: none
+
+
+
+						position: absolute
+						top: 0px
+						left: 0px
+						opacity: 1
+						color: var(--jade-golden)
+						text-align: center
+						width: 36px
+						font-size: 140%
+
+
+
+
+					position: relative
+					select
+						width: 36px
+						height: 36px
+						padding: 0px
+						border: 0.5px solid red
+						margin-top: -3px
+						text-align: center
+						opacity: 0.0
+					select
+						&:hover, &:focus
+							opacity: 1
+							~ .die-display
+								// opacity: 0
+								color: var(--jade-red)
+					.die-display
+						position: absolute
+						top: 0px
+						left: 0px
+						opacity: 1
+						color: var(--jade-golden)
+						text-align: center
+						width: 36px
+						font-size: 140%

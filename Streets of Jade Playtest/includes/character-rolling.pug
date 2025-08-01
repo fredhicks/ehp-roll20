@@ -1,0 +1,217 @@
+mixin smalldie(f)
+	+hidden(f).chosendie
+	.d4.df-d4-4.small
+	.d6.df-d6-6.small
+	.d8.df-d8-8.small
+	.d10.df-d10-10.small
+	.d12.df-d12-12.small
+
+mixin diceoptions
+	each val in [4,6,8,10,12]
+		option(value=val)= val
+
++tshower("rolldice")
+button(type="action" name="act_mark" class="redroll" value="rolldice")
+	+t("Contest")
++thider("rolldice")
+button(type="action" name="act_unmark" class="jaderoll" value="rolldice")
+	+t("Hide Contest")
+
++tshower("rollskirmish")
+button(type="action" name="act_mark" class="redroll" value="rollskirmish")
+	+t("Skirmish")
++thider("rollskirmish")
+button(type="action" name="act_unmark" class="jaderoll" value="rollskirmish")
+	+t("Hide Skirmish")
+
+// Skirmish
+
++thider("rollskirmish")
+.toptag.red
+	+t("Skirmish")
++thider("rollskirmish")
+.rolling.bordered.red
+	.choices
+		.choice
+			.choicegrid
+				.text
+					+t("Which die?")
+				.action
+					+select("skirmish-die-choice")
+						+option("(Choose)","")
+						+option("Name","family-name-die")
+						+option("Arts and Oration","skill-arts-oration-die")
+						+option("Blood and Valor","skill-blood-valor-die")
+						+option("Craft and Reason","skill-craft-reason-die")
+						+option("Resolve and Spirit","skill-resolve-spirit-die")
+						+option("Main Reputation","reputation-die")
+						+option("Second Reputation","reputation-plus-die")
+						+option("Other","other")
+					+thider("other-die-show")
+					.if-you-are-selecting-other
+						+select("skirmish-die").slim
+							option(value="")
+							each sopt in [4,6,8,10,12]
+								option(value=sopt) #{sopt}
+					+smalldie("skirmish-die")
+				.text
+					+t("Jade")
+				.action
+					+select("roll-jade")
+						+option("(Choose)","")
+						each ability in ["Channeling","Deflection","Lightness","Perception","Steel","Strength"]
+							+option(ability,ability)
+					each dn in [1,2,3]
+						span
+							+smalldie("roll-jade-die-"+dn)
+				.text.span4
+					+thider("rollskirmish")
+					button(type="action" name="act_unmark" class="jaderoll" value="rollskirmish")
+						+t("Hide Skirmish")
+					button(type="action" name="act_resetskirmish" class="goldroll")
+						+t("Reset")
+					button(type="action" name="act_skirmishroll" class="redroll")
+						+t("Roll")
+
+// Contest
+
++thider("rolldice")
+.toptag.red
+	+t("Contest")
++thider("rolldice")
+.rolling.bordered.red
+	.choices
+		// IF YOU'RE WOUNDED, REMOVE ONE DIE BEFORE ROLLING.
+		.choice
+			.choicegrid
+				// Name die - always, unless you deliberately remove it
+				.text
+					+t("Name Die")
+				.action.span3
+					+cbox("roll-family-die","1")
+					div
+						+t("Included")
+					+tdimmer("roll-family-die")
+					span
+						+smalldie("family-name-die")
+				.text
+				.action.span3
+					div.smallnote
+						+t("You always get your name die, but may remove it if wounded.").smallnote
+				// Main skill - always pick one
+				.text
+					+t("Skill")
+				.action 
+					+select("roll-main-skill")
+						+option("(Choose)","")
+						+option("Arts and Oration","arts-oration")
+						+option("Blood and Valor","blood-valor")
+						+option("Craft and Reason","craft-reason")
+						+option("Resolve and Spirit","resolve-spirit")
+					+smalldie("roll-main-skill-die")
+				// Second skill - pick one, but only if you mark 1 pathos
+				.action.span2
+					+select("roll-second-skill")
+						+option("(Spend 1 Pathos to choose)","")
+						+option("Arts and Oration","arts-oration")
+						+option("Blood and Valor","blood-valor")
+						+option("Craft and Reason","craft-reason")
+						+option("Resolve and Spirit","resolve-spirit")
+					+smalldie("roll-second-skill-die")
+				.text
+				.action.span3
+					div.smallnote
+						+t("The faction decides the main skill you must roll. Optionally, mark 1 pathos to push yourself and add another skill of your choice.")
+				// Reputation die (if warranted; optional)
+				.text
+					+t("Reputation")
+				div.span3
+					.action
+						.action
+							+cbox("roll-reputation","0")
+							div
+								+display("reputation")
+								+tdimmer("roll-reputation","0")
+								span
+									+smalldie("reputation-die")
+						+hider("reputation-plus-die")
+						.action
+							+cbox("roll-reputation2","0")
+							div
+								+display("reputation-plus")
+								+tdimmer("roll-reputation2","0")
+								span
+									+smalldie("reputation-plus-die")
+					.smallnote
+						+t("Can you draw on the weight of your reputation or the experiences which gave it to you?")
+				// Advantage dice (d6, d8, d10, arbitrary number of them)
+				.text
+					+t("Advantage")
+				.action.span3
+						div
+							each adv in [1,2,3,4,5,6,7,8,9,10]
+								if ( adv > 1 )
+									+hidden("roll-advantage"+(adv-1),"").complexhider
+									+hidden("roll-advantage"+(adv),"").complexhider
+									// +hider("roll-advantage"+(adv-1),"")
+								+select("roll-advantage"+adv).diesel
+									option(value="")
+									+diceoptions
+						each adv in [1,2,3,4,5,6,7,8,9,10]
+							div
+								+smalldie("roll-advantage"+adv)
+				.text
+				.smallnote.span3
+					+t("You may expend any number of relevant advantage dice to roll them in this pool.")
+				// Support (any die, a name, a reputation, or a skill die from a supporter)
+				.text
+					+t("Support")
+				.action.span3
+					+select("roll-support").assetdiesel
+						+option("(Choose)","")
+						+diceoptions
+					+smalldie("roll-support")
+				.text
+				.smallnote.span3
+					+t("Ask your supporter for a name, reputation, or skill die.")
+				// Faction (or Neighborhood) Backing (an asset, neighborhood, or command die no one else is using)
+				.text
+					+t("Backing")
+				div.span3
+					.action
+						+select("roll-backing").assetdiesel
+							+option("(Choose)","")
+							+diceoptions
+							+option("Asset","asset")
+						+smalldie("roll-backing")
+						+hidden("roll-backing","").hideasset
+						.action
+							div
+								+t("Asset value")
+							div
+								+number("roll-asset-value",0,0,12)
+					.smallnote
+						+t("Take an asset, neighborhood, or command die no one else is using. Don’t roll assets; they count as a die that always rolls the same number. You only get one die from a command section, not all of them (and not their jade).")
+				// First Jade discipline dice
+				// Second Jade discipline dice
+				.text
+					+t("Jade")
+				each instance in [1,2]
+					.action(class="span"+instance)
+						+select("roll-jade-"+instance)
+							+option("(Choose)","")
+							each ability in ["Channeling","Deflection","Lightness","Perception","Steel","Strength"]
+								+option(ability,ability)
+						each dn in [1,2,3]
+							span
+								+smalldie("roll-jade-"+instance+"-die-"+dn)
+				.span4.smallnote.text
+					+t("If you’re wounded, remove 1 die from your pool before rolling. If you have a gift, check its effects now.").italic
+				.text.span4
+					+thider("rolldice")
+					button(type="action" name="act_unmark" class="jaderoll" value="rolldice")
+						+t("Hide Contest")
+					button(type="action" name="act_rollreset" class="goldroll")
+						+t("Reset")
+					button(type="action" name="act_jaderoll" class="redroll")
+						+t("Roll Your Dice")

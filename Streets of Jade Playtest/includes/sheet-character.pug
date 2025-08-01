@@ -1,138 +1,7 @@
-mixin lozenge(f,t)
-	.lozenge(class!=attributes.class)
-		+text(f)
-		.tag
-			+t(t)
-
-mixin dielabel(t)
-	.dielabel(class!=attributes.class)
-		+t(t)
-
-mixin die(f,dlist)
-	- if ( typeof(dlist) == "undefined" ) { dlist = [4,6,8,10,12]; }
-	.die(class!=attributes.class)
-		+hidden(f).chosendie
-		+select(f)
-			option(value="")
-			each val in dlist
-				option(value=val)= val
-		.polyhedral.d4.df-d4-4
-		.polyhedral.d6.df-d6-6
-		.polyhedral.d8.df-d8-8
-		.polyhedral.d10.df-d10-10
-		.polyhedral.d12.df-d12-12
-
-mixin favor
-	.favor
-		.favorbox
-			+textarea("favored-name").favored
-			+t("I owe them...").owe.smallnote.italic
-			+t("They owe me...").owed.smallnote.italic
-		.favormarks
-			each o in [1,2,3]
-				+cbox("favor-owe-"+o)
-			each o in [1,2,3]
-				+cbox("favor-owed-"+o)
-
 .character
-	.rolling.bordered
-		.choices
-			// IF YOU'RE WOUNDED, REMOVE ONE DIE BEFORE ROLLING.
-			.choice
-				.toptag
-					+t("Build Your Pool")
-				.bordered
-					// Name die - always, unless you deliberately remove it
-					+t("Name Die")
-					+cbox("roll-family-die","1")
-					// Main skill - always pick one
-					+t("Main Skill")
-					// Second skill - pick one, but only if you mark 1 pathos
-					+select("roll-main-skill")
-						+option("(Choose)","")
-						+option("Arts and Oration","arts-oration")
-						+option("Blood and Valor","blood-valor")
-						+option("Craft and Reason","craft-reason")
-						+option("Resolve and Spirit","resolve-spirit")
-					+t("Second Skill")
-					+select("roll-second-skill")
-						+option("(Spend 1 Pathos)","")
-						+option("Arts and Oration","arts-oration")
-						+option("Blood and Valor","blood-valor")
-						+option("Craft and Reason","craft-reason")
-						+option("Resolve and Spirit","resolve-spirit")
-					// Reputation die (if warranted; optional)
-					// ZOD ZOD ZOD ZOD ZOD LEFT OFF HERE ZOD ZOD ZOD ZOD ZOD
-					+t("Reputation")
-					// First Jade discipline dice
-					// Second Jade discipline dice
-					+t("Jade")
-					// Advantage dice (d6, d8, d10, arbitrary number of them)
-					+t("Advantage")
-					// Support (any die, a name, a reputation, or a skill die from a supporter)
-					+t("Support")
-					// Faction (or Neighborhood) Backing (an asset, neighborhood, or command die no one else is using)
-					+t("Faction/Neighborhood")
-		.dice
-			// Display all the dice you've queued up
-			// Click to roll them
-			// Sum the two highest results plus your highest jade die if any.
-			// If any jade dice rolled doubles, mark an itch.
-			// If you met or exceeded the challenge level, you prevail!
-			// Name Die - always, unless you deliberately remove it
-			.choice
-				.toptag
-					+t("Name Die")
-				.bordered
-					+tdimmer("roll-family-die","1")
-					.diebox 
-						+hidden("family-name-die").chosendie
-						.polyhedral.d4.df-d4-4
-						.polyhedral.d6.df-d6-6
-						.polyhedral.d8.df-d8-8
-						.polyhedral.d10.df-d10-10
-						.polyhedral.d12.df-d12-12
-			// Main skill
-			.choice
-				.toptag
-					+t("Main Skill")
-				.bordered
-			// Second skill (if you mark 1 pathos to push yourself)
-			.choice
-				.toptag
-					+t("Second Skill")
-				.bordered
-			// Reputation die (if warranted; optional)
-			.choice
-				.toptag
-					+t("Reputation")
-				.bordered
-			// First Jade discipline dice
-			// Second Jade discipline dice
-			.choice
-				.toptag
-					+t("Jade")
-				.bordered
-			// Advantage dice (d6, d8, d10, arbitrary number of them)
-			.choice
-				.toptag
-					+t("Advantage")
-				.bordered
-			// Support (any die, a name, a reputation, or a skill die from a supporter)
-			.choice
-				.toptag
-					+t("Support")
-				.bordered
-			// Faction (or Neighborhood) Backing (an asset, neighborhood, or command die no one else is using)
-			.choice
-				.toptag
-					+t("Faction/Neighborhood")
-				.bordered
-			.choice
-				.toptag.golden
-					+t("Roll!")
-				.bordered.golden
-					| Button goes here
+
+	include character-rolling.pug
+
 	.c2-1
 		.bio
 			.player
@@ -170,6 +39,18 @@ mixin favor
 				.spacer
 				+lozenge("fighting-style","Fighting Style")
 			.c2.wounds-pathos
+				.pathos
+					.toptag
+						+t("Pathos")
+					.boxbox
+						each box in [1,2,3,4,5,6,7,8,9,10]
+							+ibox("pathos"+box)
+						.itches
+							each box in [1,2,3,4,5,6,7,8,9,10]
+								+hidden("toggle_pathos"+box).itchider
+							.itchy
+								+t("Itched!")
+				.spacer
 				.wounds
 					.toptag
 						+t("Wounds")
@@ -183,18 +64,6 @@ mixin favor
 								+t("Itched!")
 					.btw
 						+t("While you have any wounds marked, lose one die from all pools before rolling in a contest.").smallnote.italic
-				.spacer
-				.pathos
-					.toptag
-						+t("Pathos")
-					.boxbox
-						each box in [1,2,3,4,5,6,7,8,9,10]
-							+ibox("pathos"+box)
-						.itches
-							each box in [1,2,3,4,5,6,7,8,9,10]
-								+hidden("toggle_pathos"+box).itchider
-							.itchy
-								+t("Itched!")
 			.glory
 				.toptag
 					+t("Glory")
@@ -231,25 +100,66 @@ mixin favor
 							each box in [1,2,3,4]
 								+cbox("boon-gift-"+box)
 						+t("Acquire a gift")
+
 			.gifts
-				.toptag
-					+t("Gifts")
+				.topstrip
+					.toptag
+						+t("Gifts")
+					.sideblock
+						+thider("show-gifts")
+						button(type="action" name="act_unmark" class="goldroll" value="show-gifts")
+							+t("Hide Gifts")
 				.bordered
 					+fieldset("gifts")
-						.gift
-							+text("name").blankline.overline
-							.weetitle
-								+t("Usage").smallnote
-							.giftbox
-								+textarea("usage").smallnote
-							.weetitle
-								+t("Counters").smallnote
-							.giftbox
-								+textarea("counters").smallnote
-							.weetitle
-								+t("Weak to").smallnote
-							.giftbox
-								+textarea("weakness").smallnote
+						.gift.bordered
+							.topstrip
+								+text("name").blankline
+								.sideblock
+									+tshower("show-hide")
+									span.lockup
+										+tshower("show-edit")
+										button(type="action" name="act_mark" class="goldroll" value="show-edit")
+											+t("Edit")
+										+thider("show-edit")
+										button(type="action" name="act_unmark" class="goldroll" value="show-edit")
+											+t("Lock")
+									+tshower("show-hide")
+									button(type="action" name="act_mark" class="goldroll" value="show-hide")
+										+t("Hide")
+									+thider("show-hide")
+									button(type="action" name="act_unmark" class="goldroll" value="show-hide")
+										+t("Show")
+							+tshower("show-hide")
+							.showzone
+								+thider("show-edit")
+								.editzone
+									.weetitle
+										+t("Usage").smallnote
+									.giftbox
+										+textarea("usage").smallnote.squat
+									.weetitle
+										+t("Counters").smallnote
+									.giftbox
+										+textarea("counters").smallnote.squat
+									.weetitle
+										+t("Weak to").smallnote
+									.giftbox
+										+textarea("weakness").smallnote.squat
+								+tshower("show-edit")
+								.showzone
+									.weetitle
+										+t("Usage").smallnote
+									.giftbox
+										+display("usage").smallnote.golden
+									.weetitle
+										+t("Counters").smallnote
+									.giftbox
+										+display("counters").smallnote.golden
+									.weetitle
+										+t("Weak to").smallnote
+									.giftbox
+										+display("weakness").smallnote.golden
+
 		.spacer
 		.abilities
 			.skills
@@ -274,7 +184,7 @@ mixin favor
 			.jade
 				.bighead
 						+t("Jade")
-				each ability in ["Channeling","Deflection","Lightness","Steel","Strength","Perception"]
+				each ability in ["Channeling","Deflection","Lightness","Perception","Steel","Strength"]
 					.c2-die-jade
 						+dielabel(ability)
 						each num in [1,2,3]

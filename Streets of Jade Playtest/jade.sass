@@ -9,6 +9,7 @@ $gold: #d2c762
 $golddark: #999047
 $darkbg: #1f1f1f
 $lightbg: #ffffff
+$red: #810530
 
 // STYLESHEET ==============================================
 // Begin actual CSS render
@@ -20,7 +21,7 @@ $lightbg: #ffffff
 @import url('https://cdn.rawgit.com/fponticelli/dicefont/fc6b8c47/dist/dicefont/dicefont.css')
 
 // Establish CSS variables
-:root, .sheet-rolltemplate-ANYTEMPLATE
+:root, .sheet-rolltemplate-jaderoll, .sheet-rolltemplate-skirmish
 	--jade-fg: #{$jadedragon}
 	--jade-bg: #{$lightbg}
 	--jade-golden: #{$golddark}
@@ -28,9 +29,10 @@ $lightbg: #ffffff
 	--jade-darkgold: #{$golddark}
 	--jade-dragon: #{$jadedragon}
 	--jade-aqua: #{$jadeaqua}
+	--jade-red: #{$red}
 	font-family: #{$font}
 
-.sheet-darkmode, .sheet-rolltemplate-darkmode
+.sheet-darkmode, .sheet-rolltemplate-jaderoll.sheet-rolltemplate-darkmode, .sheet-rolltemplate-skirmish.sheet-rolltemplate-darkmode
 	--jade-fg: #{$jadeaqua}
 	--jade-bg: #{$darkbg}
 	--jade-golden: #{$gold}
@@ -38,8 +40,15 @@ $lightbg: #ffffff
 	--jade-darkgold: #{$golddark}
 	--jade-dragon: #{$jadedragon}
 	--jade-aqua: #{$jadeaqua}
+	--jade-red: #{$red}
 
 // Sheetwide Font and Color Defaults
+
+.ui-dialog .charsheet
+	border: 1px solid var(--jade-brightgold)
+	margin-top: -15px
+
+// Sitewide setups
 
 .wrapper p,
 .ui-dialog .charsheet
@@ -60,26 +69,173 @@ $lightbg: #ffffff
 		padding-top: 0px
 		padding-bottom: 0px
 
+// Adjustments to surrounding UI
+
+.ui-dialog .nav-tabs
+	border-bottom: 1px solid var(--jade-brightgold)
+	margin-bottom: 14px
+	> li.active >
+		a, a:hover, a:focus
+			border-color: var(--jade-brightgold)
+			border-bottom-color: transparent
+
+.sheet-darkmode .ui-dialog .nav-tabs
+	> li.active >
+		a, a:hover, a:focus
+			color: var(--jade-brightgold)
+			text-decoration: none
+			background-color: var(--jade-bg)
+			border-color: var(--jade-brightgold)
+			border-bottom-color: transparent
+
+// Let's try recoloring some scrollbars
+
+*
+	scrollbar-width: auto
+	scrollbar-color: var(--jade-dragon) var(--jade-bg)
+
+.sheet-darkmode
+	*
+		scrollbar-width: auto
+		scrollbar-color: var(--jade-dragon) var(--jade-bg)
+
+// Rolltemplate Styling -- all classes within MUST start with "sheet-"
+
+.sheet-rolltemplate-jaderoll, .sheet-rolltemplate-skirmish
+	color: var(--jade-fg) !important
+	background-color: var(--jade-bg)
+	font-family: #{$font}
+	font-size: 21px
+	.sheet-bordered
+		border: 2px solid var(--jade-bg)
+		box-shadow: 3px 3px 6px var(--jade-dragon)
+		h1
+			font-family: #{$font}
+			color: white
+			background-color: var(--jade-dragon)
+			padding-left: 6px
+			display: flex
+			flex-direction: row
+			flex-wrap: wrap
+			// grid-template-columns: 1fr auto
+			margin-bottom: 6px
+			.inlinerollresult
+				box-shadow: 2px 2px var(--jade-bg)
+			.sheet-nameblock
+				flex-grow: 1
+				flex-shrink: 1
+			.sheet-diceblock
+				text-align: right
+				white-space: nowrap
+				flex-grow: 1
+				flex-shrink: 0
+				padding-right: 6px
+			.sheet-contributors
+				font-size: 80%
+			.sheet-jaded
+				.inlinerollresult
+					color: var(--jade-aqua)
+					border-color: var(--jade-aqua)
+					box-shadow: 2px 2px var(--jade-bg) 
+		.sheet-composition
+			text-align: center
+			padding-bottom: 6px
+			.sheet-golden
+				color: var(--jade-golden)
+			.inlinerollresult
+				border: none
+				font-weight: normal
+				font-size: 14px
+		.sheet-results
+			padding: 6px
+		.sheet-results-grid
+			display: grid
+			grid-template-columns: 2fr auto 1fr
+			grid-column-gap: 6px
+			grid-row-gap: 14px
+			.sheet-text
+				grid-column-start: 1
+				text-align: right
+				color: var(--jade-golden)
+				line-height: 0.96
+				&.sheet-jade
+					color: var(--jade-fg)
+			.sheet-droll
+				grid-column-start: 2
+				text-align: right
+				line-height: 0.96
+				&.sheet-jade
+					color: var(--jade-golden)
+			.sheet-result
+				grid-column-start: 3
+				display: flex
+				flex-flow: row
+				gap: 3px
+				.inlinerollresult
+					height: 20px
+					width: 15px
+					margin-top: -2px
+					padding-top: 3px
+					padding-bottom: 0px
+					display: block
+					vertical-align: middle
+					text-align: center
+				&.sheet-jade
+					color: var(--jade-fg)
+					.inlinerollresult
+						color: var(--jade-fg)
+						border-color: var(--jade-fg)
+		.inlinerollresult
+			background-color: var(--jade-bg)
+			color: var(--jade-golden)
+			border: 2px solid var(--jade-golden)
+		.sheet-results-grid .sheet-result .inlinerollresult
+			background-color: var(--jade-bg)
+			border: 2px solid var(--jade-golden)
+			color: var(--jade-golden)
+		.sheet-itchy
+			background-color: var(--jade-red)
+			color: var(--jade-brightgold)
+			padding: 3px
+			padding-bottom: 4px
+			margin-left: -6px
+			margin-right: -6px
+			margin-top: -6px
+			text-align: center
+		div.sheet-smallnote
+			margin-top: 3px
+		.sheet-smallnote
+			font-family: "Roboto Condensed"
+			font-weight: 400
+			font-size: 14px
+			line-height: 14px
+
 // Visibility Controls
 
-input.tshower[value="1"], input.tshower[value="2"], input.shower:not([value=""])
-	+ *
-		display: none
-		
-input.thider[value="0"], input.thider[value="2"], input.hider[value=""], input.mhider[value=""], input.mhider[value="character"], input.mhider[value="faction"]
-	+ *
-		display: none
+.ui-dialog .charsheet
+	input.tshower[value="1"], input.tshower[value="2"], input.shower:not([value=""])
+		+ *
+			display: none
+			
+	input.thider[value="0"], input.thider[value="2"], input.hider[value=""], input.mhider[value=""], input.mhider[value="character"], input.mhider[value="faction"]
+		+ *
+			display: none
 
-input.tdimmer[value="0"]
-	+ *
-		opacity: 0.25
-
-input.titcher[value="0"], input.titcher[value="1"]
-	+ *
-		display: none
-
-input.mhider[value="character"] + .character, input.mhider[value="faction"] + .faction
-	display: initial
+	// Ridiculous specificity in order to allow temporary hiding of something in a specific context that is getting overridden by a more specific display: property declaration if this isn't done
+	.wrapper .character .rolling .choices .choice input.hider[value=""]
+		+ *
+			display: none
+	
+	input.tdimmer[value="0"]
+		+ *
+			opacity: 0.25
+	
+	input.titcher[value="0"], input.titcher[value="1"]
+		+ *
+			display: none
+	
+	input.mhider[value="character"] + .character, input.mhider[value="faction"] + .faction
+		display: initial
 
 // Itches!
 
@@ -98,10 +254,338 @@ input.itchider[value="2"] ~ .itchy
 // Overall Layout
 
 .ui-dialog .charsheet .wrapper
+
+	// Just to define overall modeblock containment
 	.modeblock
 		// No specific styling
+
+	// Column stuff
+	.span3
+		grid-column-start: span 3
+	.span4
+		grid-column-start: span 4
+	.span2
+		grid-column-start: span 2
+
+	.c3
+		display: grid
+		gap: 0px
+		grid-template-columns: 1fr 24px 1fr 24px 1fr
+	.c4
+		display: grid
+		gap: 0px
+		grid-template-columns: 1fr 12px 1fr 12px 1fr 12px 1fr
+	.c6
+		display: grid
+		gap: 0px
+		grid-template-columns: 1fr 12px 1fr 12px 1fr 12px 1fr 12px 1fr 12px 1fr
+	.c2
+		margin-top: 8px
+		display: grid
+		gap: 0px
+		grid-template-columns: 1fr 24px 1fr
+	.c2-1
+		margin-top: 8px
+		display: grid
+		gap: 0px
+		grid-template-columns: 2fr 24px 1fr
+	.c3-2
+		margin-top: 8px
+		display: grid
+		gap: 0px
+		grid-template-columns: 3fr 24px 2fr
+	.c1-2
+		margin-top: 8px
+		display: grid
+		gap: 0px
+		grid-template-columns: 1fr 24px 2fr
+	.c2-die
+		display: grid
+		gap: 0px
+		grid-template-columns: 1fr 12px 56px
+	.c2-die-jade
+		display: grid
+		gap: 0px
+		grid-template-columns: 1fr 12px 36px 12px 36px 12px 36px
+		.connect-line.margin-fix
+			margin-left: 4px
+
+	// Shared Formats
+
+	// Bordered stuff
+	.bordered
+		margin-top: -1px
+		border: 2px solid var(--jade-dragon)
+	.bordered.golden
+		border-color: var(--jade-darkgold)
+	.bordered.red
+		border-color: var(--jade-red)
+
+	// Display of a Gift (in a repeating fieldset)
+	.gifts .bordered
+		padding: 6px
+	.gift
+		margin-bottom: 4px
+		.weetitle
+			margin-bottom: 0px
+			line-height: 1
+		.giftbox
+			padding-left: 6px
+			padding-top: 0px
+			line-height: 1
+			.golden
+				color: var(--jade-golden)
+		textarea
+			width: calc(100% - 12px)
+			height: 72px
+			resize: none
+			// overflow: hidden
+			margin-bottom: 0px
+			&.squat
+				height: 36px
+		input[type="text"]
+			width: 100%
+			padding-top: 0px
+			margin-bottom: 0px
+
+	// Input-field-and-label "lozenges"
+	.lozenge
+		display: grid
+		grid-template-columns: auto 1fr
+		.tag
+			grid-column: 1
+		.sideblock
+			grid-column: 2
+			text-align: right
+		input[type="text"]
+			grid-column: 1 / span 2
+			border: 2px solid var(--jade-dragon)
+			background-color: var(--jade-bg)
+			border-radius: 0
+			width: 100%
+			margin-bottom: 0px
+
+	.lozenge.golden
+		input[type="text"]
+			border-color: var(--jade-darkgold)
+		.tag
+			span
+				color: white
+				background: var(--jade-golden) /* fallback */
+				background: linear-gradient(135deg, transparent 0px, var(--jade-darkgold) 0) top left, linear-gradient(225deg, transparent 0px, var(--jade-darkgold) 0) top right, linear-gradient(315deg, transparent 3px, var(--jade-darkgold) 0) bottom right, linear-gradient(45deg, transparent 3px, var(--jade-darkgold) 0) bottom left
+				background-size: 51% 51%
+				background-repeat: no-repeat
+
+	.topstrip
+		display: flex
+		flex-direction: row
+		align-items: flex-end
+		justify-content: flex-end
+		gap: 6px
+		.sideblock
+			flex-grow: 1
+			text-align: right
+			white-space: nowrap
+
+	.tag
+		padding-top: 0px
+		margin-top: -5px
+		letter-spacing: .5px
+		span
+			color: white
+			background: var(--jade-dragon) /* fallback */
+			background: linear-gradient(135deg, transparent 0px, var(--jade-dragon) 0) top left, linear-gradient(225deg, transparent 0px, var(--jade-dragon) 0) top right, linear-gradient(315deg, transparent 3px, var(--jade-dragon) 0) bottom right, linear-gradient(45deg, transparent 3px, var(--jade-dragon) 0) bottom left
+			background-size: 51% 51%
+			background-repeat: no-repeat
+			margin-top: 0px
+			padding-top: 0px
+			padding-left: 3px
+			padding-right: 6px
+			padding-bottom: 3px
+			font-size: 90%
+
+	.toptag
+		padding-top: 0px
+		margin-top: 5px
+		letter-spacing: .5px
+		span
+			color: white
+			background: var(--jade-dragon) /* fallback */
+			background: linear-gradient(135deg, transparent 3px, var(--jade-dragon) 0) top left, linear-gradient(225deg, transparent 3px, var(--jade-dragon) 0) top right, linear-gradient(315deg, transparent 0px, var(--jade-dragon) 0) bottom right, linear-gradient(45deg, transparent 0px, var(--jade-dragon) 0) bottom left
+			background-size: 51% 51%
+			background-repeat: no-repeat
+			margin-top: 0px
+			padding-top: 0px
+			padding-left: 3px
+			padding-right: 6px
+			padding-bottom: 3px
+			font-size: 90%
+		&.golden
+			span
+				color: white
+				background: var(--jade-golden) /* fallback */
+				background: linear-gradient(135deg, transparent 3px, var(--jade-darkgold) 0) top left, linear-gradient(225deg, transparent 3px, var(--jade-darkgold) 0) top right, linear-gradient(315deg, transparent 0px, var(--jade-darkgold) 0) bottom right, linear-gradient(45deg, transparent 0px, var(--jade-darkgold) 0) bottom left
+				background-size: 51% 51%
+				background-repeat: no-repeat
+		&.red
+			span
+				color: white
+				background: var(--jade-red) /* fallback */
+				background: linear-gradient(135deg, transparent 3px, var(--jade-red) 0) top left, linear-gradient(225deg, transparent 3px, var(--jade-red) 0) top right, linear-gradient(315deg, transparent 0px, var(--jade-red) 0) bottom right, linear-gradient(45deg, transparent 0px, var(--jade-red) 0) bottom left
+				background-size: 51% 51%
+				background-repeat: no-repeat
+
+	.connect-line
+		margin-top: 16px
+		border-top: 2px solid var(--jade-dragon)
+		&.golden
+			border-top: 2px solid var(--jade-golden)
+
+
+	// Dice
+
+	.dielabel
+		border: 2px solid var(--jade-dragon)
+		text-align: center
+		vertical-align: middle
+		height: 36px
+		font-size: 24px
+		line-height: 36px
+		&.golden
+			border: 2px solid var(--jade-darkgold)
+			color: var(--jade-golden)
+	.die.smalldie
+		width: 36px
+		height: 36px
+		line-height: 36px
+		select
+			width: 34px
+			height: 34px
+		.d4, .d6, .d8, .d10, .d12
+			font-size: 32px
+			top: -42px
+	.die
+		width: 52px
+		height: 52px
+		line-height: 52px
+		text-align: center
+		vertical-align: middle
+		border: 2px solid var(--jade-aqua)
+		padding: 0px
+		select
+			opacity: 0
+			width: 50px
+			&:hover, &:focus
+				opacity: 1.0
+				~ .polyhedral
+					opacity: 0
+		input.chosendie[value=""] ~ select
+			opacity: 1
+		.d4, .d6, .d8, .d10, .d12
+			position: relative
+			top: -50px
+			padding: 0px
+			margin: 0px
+			display: none
+			font-size: 44px
+			color: var(--jade-golden)
+		input.chosendie[value="4"] ~ .d4
+			display: initial
+		input.chosendie[value="6"] ~ .d6
+			display: initial
+		input.chosendie[value="8"] ~ .d8
+			display: initial
+		input.chosendie[value="10"] ~ .d10
+			display: initial
+		input.chosendie[value="12"] ~ .d12
+			display: initial
+		&:hover
+			border-color: var(--jade-golden)
+			select
+				display: initial
+				width: 50px
+			input.chosendie ~ 
+				.d4, .d6, .d8, .d10, .d12
+					display: none
+
+	// Choices
+	
+	.rolling .choices, .rolling .dice
+		display: flex
+		flex-direction: row
+		padding: 6px
+		padding-left: 0px
+		input.hideasset:not([value="asset"]) + div
+			display: none
+		.choice
+			margin-left: 6px
+			width: 100%
+			.bordered
+				padding: 6px
+				&.choicegrid
+					width: calc( 100% - 15px )
+			.text
+				text-align: right
+			.action
+				text-align: left
+				vertical-align: top
+				display: flex
+				flex-direction: row
+				align-items: start
+				gap: 6px
+				select, input
+					border: 1px solid var(--jade-golden)
+				select
+					margin-bottom: 2px
+					&.slim
+						width: 50px
+				input[type="number"]
+					width: 50px
+					margin-top: 0px
+					margin-bottom: 2px
+					padding-top: 0px
+				.smallnote
+					margin-bottom: 6px
+			.choicegrid
+				width: 100%
+				display: grid
+				grid-template-columns: auto 1fr auto 1fr
+				grid-column-gap: 6px
+			.toptag
+				white-space: nowrap
+			.diebox
+				height: 50px
+				text-align: center
+			.d4, .d6, .d8, .d10, .d12
+				line-height: 44px
+				padding: 0px
+				margin: 0px
+				display: none
+				font-size: 44px
+				color: var(--jade-golden)
+				&.small
+					line-height: 24px
+					font-size: 24px
+			input.chosendie[value="4"] ~ .d4
+				display: initial
+			input.chosendie[value="6"] ~ .d6
+				display: initial
+			input.chosendie[value="8"] ~ .d8
+				display: initial
+			input.chosendie[value="10"] ~ .d10
+				display: initial
+			input.chosendie[value="12"] ~ .d12
+				display: initial
+			select.diesel
+				width: 42px
+			.complexhider[value=""] + .complexhider[value=""] + select
+				border: 1px solid red
+				display: none
+			select.assetdiesel
+				width: 96px
+
+	// Character mode
 	.character
-		// Character mode
 		.player
 			display: flex
 			flex-direction: row
@@ -115,168 +599,12 @@ input.itchider[value="2"] ~ .itchy
 			display: grid
 			gap: 0px
 			grid-template-columns: 2fr 12px 56px 12px 3fr 12px 1fr
-		.connect-line
-			margin-top: 16px
-			border-top: 2px solid var(--jade-dragon)
-			&.golden
-				border-top: 2px solid var(--jade-golden)
-		.lozenge.golden
-			input[type="text"]
-				border-color: var(--jade-darkgold)
-			.tag
-				span
-					color: white
-					background: var(--jade-golden) /* fallback */
-					background: linear-gradient(135deg, transparent 0px, var(--jade-darkgold) 0) top left, linear-gradient(225deg, transparent 0px, var(--jade-darkgold) 0) top right, linear-gradient(315deg, transparent 3px, var(--jade-darkgold) 0) bottom right, linear-gradient(45deg, transparent 3px, var(--jade-darkgold) 0) bottom left
-					background-size: 51% 51%
-					background-repeat: no-repeat
-		.lozenge
-			input[type="text"]
-				border: 2px solid var(--jade-dragon)
-				background-color: var(--jade-bg)
-				border-radius: 0
-				width: 100%
-				margin-bottom: 0px
-		.tag
-			padding-top: 0px
-			margin-top: -5px
-			// text-transform: uppercase
-			letter-spacing: .5px
-			span
-				color: white
-				background: var(--jade-dragon) /* fallback */
-				background: linear-gradient(135deg, transparent 0px, var(--jade-dragon) 0) top left, linear-gradient(225deg, transparent 0px, var(--jade-dragon) 0) top right, linear-gradient(315deg, transparent 3px, var(--jade-dragon) 0) bottom right, linear-gradient(45deg, transparent 3px, var(--jade-dragon) 0) bottom left
-				background-size: 51% 51%
-				background-repeat: no-repeat
-				margin-top: 0px
-				padding-top: 0px
-				padding-left: 3px
-				padding-right: 6px
-				padding-bottom: 3px
-				font-size: 90%
-		.toptag
-			padding-top: 0px
-			margin-top: 5px
-			// text-transform: uppercase
-			letter-spacing: .5px
-			span
-				color: white
-				background: var(--jade-dragon) /* fallback */
-				background: linear-gradient(135deg, transparent 3px, var(--jade-dragon) 0) top left, linear-gradient(225deg, transparent 3px, var(--jade-dragon) 0) top right, linear-gradient(315deg, transparent 0px, var(--jade-dragon) 0) bottom right, linear-gradient(45deg, transparent 0px, var(--jade-dragon) 0) bottom left
-				background-size: 51% 51%
-				background-repeat: no-repeat
-				margin-top: 0px
-				padding-top: 0px
-				padding-left: 3px
-				padding-right: 6px
-				padding-bottom: 3px
-				font-size: 90%
-			&.golden
-				span
-					color: white
-					background: var(--jade-golden) /* fallback */
-					background: linear-gradient(135deg, transparent 3px, var(--jade-darkgold) 0) top left, linear-gradient(225deg, transparent 3px, var(--jade-darkgold) 0) top right, linear-gradient(315deg, transparent 0px, var(--jade-darkgold) 0) bottom right, linear-gradient(45deg, transparent 0px, var(--jade-darkgold) 0) bottom left
-					background-size: 51% 51%
-					background-repeat: no-repeat
-		.dielabel
-			border: 2px solid var(--jade-dragon)
-			text-align: center
-			vertical-align: middle
-			height: 36px
-			font-size: 24px
-			line-height: 36px
-			&.golden
-				border: 2px solid var(--jade-golden)
-				color: var(--jade-golden)
-		.die.smalldie
-			width: 36px
-			height: 36px
-			line-height: 36px
-			select
-				width: 34px
-				height: 34px
-			.d4, .d6, .d8, .d10, .d12
-				font-size: 32px
-				top: -42px
-		.die
-			width: 52px
-			height: 52px
-			line-height: 52px
-			text-align: center
-			vertical-align: middle
-			border: 2px solid var(--jade-aqua)
-			padding: 0px
-			select
-				// display: none
-				opacity: 0
-				width: 50px
-				&:hover, &:focus
-					opacity: 1.0
-					~ .polyhedral
-						opacity: 0
-			input.chosendie[value=""] ~ select
-				opacity: 1
-			.d4, .d6, .d8, .d10, .d12
-				position: relative
-				top: -50px
-				padding: 0px
-				margin: 0px
-				display: none
-				font-size: 44px
-				color: var(--jade-golden)
-			input.chosendie[value="4"] ~ .d4
-				display: initial
-			input.chosendie[value="6"] ~ .d6
-				display: initial
-			input.chosendie[value="8"] ~ .d8
-				display: initial
-			input.chosendie[value="10"] ~ .d10
-				display: initial
-			input.chosendie[value="12"] ~ .d12
-				display: initial
-			&:hover
-				border-color: var(--jade-golden)
-				select
-					display: initial
-					width: 50px
-				input.chosendie ~ 
-					.d4, .d6, .d8, .d10, .d12
-						display: none
 
-		.rolling .choices, .rolling .dice
-			display: flex
-			flex-direction: row
-			.choice
-				margin-left: 6px
-				margin-bottom: 6px
-				.bordered
-					text-align: center
-					// ZOD
-				.toptag
-					white-space: nowrap
-				.diebox
-					height: 50px
-					text-align: center
-				.d4, .d6, .d8, .d10, .d12
-					line-height: 44px
-					padding: 0px
-					margin: 0px
-					display: none
-					font-size: 44px
-					color: var(--jade-golden)
-				input.chosendie[value="4"] ~ .d4
-					display: initial
-				input.chosendie[value="6"] ~ .d6
-					display: initial
-				input.chosendie[value="8"] ~ .d8
-					display: initial
-				input.chosendie[value="10"] ~ .d10
-					display: initial
-				input.chosendie[value="12"] ~ .d12
-					display: initial
-				.bordered.golden
-					border-color: var(--jade-darkgold)
-
+		.skills .c2-die
+			grid-template-columns: 1fr 12px 36px
+		.skills, .jade
+			.c2-die, .c2-die-jade
+				margin-bottom: 8px
 
 		.favor
 			display: flex
@@ -347,50 +675,288 @@ input.itchider[value="2"] ~ .itchy
 				height: 300px
 				margin-bottom: 0px
 
-		.c2
-			margin-top: 8px
-			display: grid
-			gap: 0px
-			grid-template-columns: 1fr 24px 1fr
-		.bordered
+	// Faction mode
+
+	.faction
+		.skirmish-box
+			border: 2px solid var(--jade-red)
+			margin-top: 10px
+			padding: 4px
+		.command .skirmish-box .choicegrid
+			grid-template-columns: auto 1fr auto 2fr auto
+		.sections
+			text-align: center
+		.identity
 			margin-top: -1px
-			border: 2px solid var(--jade-dragon)
-		.c2-1
-			margin-top: 8px
-			display: grid
-			gap: 0px
-			grid-template-columns: 2fr 24px 1fr
-		.c2-die
-			display: grid
-			gap: 0px
-			grid-template-columns: 1fr 12px 56px
-		.c2-die-jade
-			display: grid
-			gap: 0px
-			grid-template-columns: 1fr 12px 36px 12px 36px 12px 36px
-			.connect-line.margin-fix
-				margin-left: 4px
-		.skills .c2-die
-			grid-template-columns: 1fr 12px 36px
-		.skills, .jade
-			.c2-die, .c2-die-jade
-				margin-bottom: 8px
-		.gift
-			.giftbox
-				line-height: 14px
-				.golden
-					color: var(--jade-golden)
+			.lozenge input[type="text"]
+				height: 44px
+				font-size: 120%
+		.notes
 			textarea
 				width: calc(100% - 12px)
-				height: 60px
+				height: 400px
 				resize: none
 				margin-bottom: 0px
-			input[type="text"]
+				padding-top: 3px
+		.command, .officers, .assets, .favors, .goals, .gifts
+			.bordered
+				padding: 6px
+		.boons .bordered
+			padding: 3px
+		.boon
+			display: flex
+			flex-flow: row
+			flex-wrap: nowrap
+			gap: 3px
+			.bullet
+				font-size: 80%
+			select
 				width: 100%
-				padding-top: 0px
+				font-size: 80%
+				margin-bottom: 3px
+				border: 2px solid var(--jade-dragon)
+				border-radius: 0px
+		.gifts .gift.bordered
+			margin-bottom: 4px
+		.command
+			.command-die
+				display: flex
+				flex-direction: row
+				flex-wrap: nowrap
+				gap: 4px
+			input[type="text"].namefield
+				height: 40px
+				width: 100%
+				border: 2px solid var(--jade-dragon)
+				background-color: var(--jade-bg)
+				border-radius: 0
+			.sideblock
+				height: 40px
+				vertical-align: bottom
+				line-height: 1
+		.command .csection .sideblock, .officer .sideblock, .asset .righthand
+				display: flex
+				flex-direction: column
+				gap: 1px
+		.csection, .officer
+			margin-bottom: 3px
+		.officer
+			.buttons
+				white-space: nowrap
+		.favor
+			display: flex
+			flex-direction: row
+			.favorbox
+				flex-grow: 1
+				display: grid
+				grid-template-columns: 1fr auto
+				border: 2px solid var(--jade-darkgold)
+				margin-top: -1px
+				height: 54px
+				textarea.favored
+					grid-column: 1 / 1
+					grid-row: 1 / span 2
+					width: calc(100% - 12px)
+					height: 100%
+					vertical-align: middle
+					padding-top: 3px
+					resize: none
+					height: 50px
+					background: transparent
+				.owe, .owed
+					grid-column: 2 / 2
+					height: 25px
+					white-space: nowrap
+					text-align: right
+			.favormarks
+				flex-grow: 0
+				flex-shrink: 0
+				display: grid
+				grid-template-columns: 1fr 1fr 1fr 1fr 1fr
+		.goal
+			margin-bottom: 6px
+			textarea
+				border: 1px solid var(--jade-fg)
+				border-radius: 0px
+				width: calc(100% - 12px)
+				height: 96px
+				resize: none
 				margin-bottom: 0px
-	.faction
-		// Faction mode
+				line-height: 1
+				&.squat
+					height: 48px
+			.goalmarks
+				flex-grow: 0
+				flex-shrink: 0
+				display: grid
+				grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr
+		.officer
+			textarea
+				width: calc(100% - 12px)
+				height: 72px
+				resize: none
+				margin-bottom: 0px
+				&.squat
+					height: 36px
+			.topstrip
+				display: grid
+				grid-template-columns: 1fr auto
+				.sideblock
+					height: 40px
+					vertical-align: top
+					line-height: 1
+			.name-die
+				display: flex
+				flex-direction: row
+				flex-wrap: nowrap
+				gap: 4px
+				flex-grow: 0
+				flex-shrink: 1000
+			.namefield
+				flex-grow: 1
+				flex-shrink: 0
+				width: 100%
+				input[type="text"]
+					width: 100%
+			.nameblock
+				flex-grow: 1
+				display: grid
+				gap: 0px
+				grid-template-columns: auto 12px 1fr
+			.sideblock
+				height: 40px
+				vertical-align: bottom
+				line-height: 1
+		.ability
+			text-align: center
+			.ability-top
+				text-align: center
+		.ability-dice
+			width: 100%
+			height: 36px
+			line-height: 36px
+			text-align: center
+			vertical-align: middle
+			border: 2px solid var(--jade-aqua)
+			padding: 0px
+			select
+				opacity: 0
+				width: 100%
+				&:hover, &:focus
+					opacity: 1.0
+					~ .dicezone
+						opacity: 0
+			input.chosendie[value="0"], input.chosendie[value=""] 
+				~ .dicezone
+					display: none
+			.dicezone
+				position: relative
+				top: -36px
+				width: 100%
+				text-align: center
+				padding: 0px
+				margin: 0px
+				display: flex
+				flex-direction: row
+				justify-content: center
+				align-items: center
+				height: 32px
+				font-size: 24px
+				color: var(--jade-golden)
+				.number
+					margin-top: -3px
+				.d4
+					font-size: 36px
+					margin-top: 3px
+			&:hover
+				border-color: var(--jade-golden)
+				select
+					display: initial
+					width: 50px
+				input.chosendie ~ 
+					.dicezone
+						display: none
+		.asset
+			.namefield
+				flex-grow: 1
+				flex-shrink: 0
+				width: 100%
+				input[type="text"]
+					margin-top: -6px
+					width: 100%
+					border: 2px solid var(--jade-dragon)
+					background-color: var(--jade-bg)
+					border-radius: 0
+					margin-bottom: 2px
+			.name
+				margin-top: 4px
+				display: grid
+				gap: 0px
+				grid-template-columns: 40px 12px 1fr 12px auto
+				.die
+					position: relative
+					select
+						position: absolute
+						top: 0px
+						left: 0px
+						opacity: 0
+						z-index: 1
+						&:hover, &:focus
+							opacity: 1
+					.die-display
+						z-index: 0
+						position: absolute
+						top: 0px
+						left: 0px
+						opacity: 1
+						color: var(--jade-golden)
+						text-align: center
+						width: 36px
+						font-size: 140%
+				.connect-line
+					margin-top: 14px
+				.righthand
+					vertical-align: top
+					text-align: right
+					flex-grow: 1
+					flex-shrink: 0
+					line-height: 1
+			.bottomline
+				padding-right: 6px
+				height: 30px
+				display: flex
+				flex-direction: row
+				align-items: stretch
+				width: 100%
+				.text
+					line-height: 1
+					flex-grow: 0
+					vertical-align: top
+					&.golden
+						color: var(--jade-golden)
+			.desc
+				margin-top: 1px
+				margin-bottom: 8px
+				padding-bottom: 0px
+				textarea
+					width: calc(100% - 9px)
+					height: 60px
+					resize: none
+					margin-bottom: 0px
+					padding-top: 3px
+			.skirmish-box
+			.vessel
+				color: var(--jade-golden)
+				text-align: center
+				width: 100%
+				font-size: 140%
+		.asset .skirmish-box .choicegrid
+			grid-template-columns: 1fr auto
+			.smallnote
+				line-height: 1
+			.buttons
+				text-align: left
+				vertical-align: middle
 
 // Checkboxes
 
@@ -419,6 +985,12 @@ input.itchider[value="2"] ~ .itchy
 		padding: 0px
 		margin-left: 0px
 		margin-right: 0px
+	&.brightgold::before
+		color: var(--jade-brightgold)
+	&.darkgold::before
+		color: var(--jade-darkgold)
+	&.jade::before
+		color: var(--jade-fg)
 
 .cbox::before
 	content: 'check_box_outline_blank'
@@ -460,7 +1032,7 @@ input[type="text"].overline
 .btw
 	line-height: 18px
 
-.btn
+.btn, button.goldroll, button.jaderoll, button.redroll
 	background-color: var(--jade-bg)
 	color: var(--jade-aqua)
 	border: 1px solid var(--jade-dragon)
@@ -473,6 +1045,21 @@ input[type="text"].overline
 	&:hover
 		background-color: var(--jade-golden)
 		color: var(--jade-bg)
+
+button.goldroll
+	color: var(--jade-golden)
+	border: 1px solid var(--jade-golden)
+
+button.redroll
+	color: white
+	background-color: var(--jade-red)
+	border: 1px solid var(--jade-golden)
+
+button.jaderoll
+	color: var(--jade-aqua)
+	border: 1px solid var(--jade-aqua)
+	&:hover
+		background-color: var(--jade-aqua)
 
 .boxbox
 	border: 2px solid var(--jade-dragon)
