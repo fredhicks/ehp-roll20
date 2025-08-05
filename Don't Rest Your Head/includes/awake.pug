@@ -1,0 +1,78 @@
+.pc
+	.name
+		+d("character_name")
+	.description
+		+d("description")
+	.dice
+		.header
+			+t("Dice")
+		.dicetype
+			.header
+				+t("Discipline")
+			+d("discipline")
+		.dicetype
+			.header
+				+t("Madness")
+			+d("madness")
+			+t("(Permanent)")
+		.dicetype
+			.header
+				+t("Exhaustion")
+			+d("exhaustion")
+			+t("(Current)")
+	.responses
+		.header
+			+t("Responses")
+		.response
+			.data
+				each r in [1,2,3]
+					+d("response"+r)
+			.header
+				+t("Fight")
+			.header
+				+t("Flight")
+			// These are other modes I've contemplated after the release
+			.header
+				+t("Freeze")
+			.header
+				+t("Fawn")
+			.header
+				+t("Feast")
+	.talents
+		.header
+			+t("Talents")
+		.talent
+			.header
+				+t("Exhaustion Talent")
+			+d("exhaustiontal")
+		.talent
+			.header
+				+t("Madness Talent")
+			+d("madnesstal")
+	.scars
+		.header
+			+t("Scars")
+		// should be a fieldset, but we have legacy data
+		.data
+			each s in [1,2,3,4]
+				+d("scarbox"+s)
+				+d("scardescription"+s)
+	.questionnaire
+		.header
+			+t("Questions")
+		// should probably also be a fieldset, but with the ability to preload either the standard questions or the Bad Man scenario questions
+		.question
+			+t("What’s been keeping you awake?")
+			+d("qawake")
+		.question
+			+t("What just happened to you?")
+			+d("qhappening")
+		.question
+			+t("What’s on the surface?")
+			+d("qsurface")
+		.question
+			+t("What lies beneath?")
+			+d("qbeneath")
+		.question
+			+t("What’s your path?")
+			+d("qpath")

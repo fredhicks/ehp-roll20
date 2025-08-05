@@ -1,0 +1,27 @@
+- Keep the same attributes
+- Make a "Pain Sheet" for a GM to roll their side of things, keep track of Nightmares, attach Pain and descriptions to them, and make it possible to roll Pain etc.
+- Custom dice parsing bullshit
+- Translation support
+- Redo layout
+
+response1 = "fight"
+response2 = "fight"
+response3 = "flight"
+scarbox1 = "on"
+scardescription1 = "Scar"
+scardescription2 = "Scar"
+scarbox2 = "on"
+scardescription3 = "Scar"
+scarbox3 = "on"
+scardescription4 = "Scar"
+scarbox4 = "on"
+madnesstal = "Madness Talent"
+exhaustiontal = "Exhaustion Talent"
+qsurface = "Surface"
+qbeneath = "Beneath"
+qawake = "Awake"
+qhappening = "Happened"
+discipline = "3"
+exhaustion = "1"
+madness = "3"
+description = "Concept"

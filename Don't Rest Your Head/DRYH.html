@@ -1,0 +1,94 @@
+
+<!-- Load things up-->
+<!-- Translation: +translate, +t, +translations-->
+<!-- Attribute Display: +display, +d-->
+<script type="text/worker"></script>
+<div class="wrapper">
+  <!-- .modeblock
+  +shower("sheetmode")
+  +select("sheetmode")
+  	+option("Which kind of sheet?","")
+  	+option("Character","character")
+  	+option("Faction","faction")
+  -->
+  <!-- +mhider("sheetmode")-->
+  <div class="pc">
+    <div class="name"><span name="attr_character_name"></span>
+    </div>
+    <div class="description"><span name="attr_description"></span>
+    </div>
+    <div class="dice">
+      <div class="header"><span data-i18n="Dice">Dice</span> 
+      </div>
+      <div class="dicetype">
+        <div class="header"><span data-i18n="Discipline">Discipline</span> 
+        </div><span name="attr_discipline"></span>
+      </div>
+      <div class="dicetype">
+        <div class="header"><span data-i18n="Madness">Madness</span> 
+        </div><span name="attr_madness"></span><span data-i18n="(Permanent)">(Permanent)</span> 
+      </div>
+      <div class="dicetype">
+        <div class="header"><span data-i18n="Exhaustion">Exhaustion</span> 
+        </div><span name="attr_exhaustion"></span><span data-i18n="(Current)">(Current)</span> 
+      </div>
+    </div>
+    <div class="responses">
+      <div class="header"><span data-i18n="Responses">Responses</span> 
+      </div>
+      <div class="response">
+        <div class="data"><span name="attr_response1"></span><span name="attr_response2"></span><span name="attr_response3"></span>
+        </div>
+        <div class="header"><span data-i18n="Fight">Fight</span> 
+        </div>
+        <div class="header"><span data-i18n="Flight">Flight</span> 
+        </div>
+        <!-- These are other modes I've contemplated after the release-->
+        <div class="header"><span data-i18n="Freeze">Freeze</span> 
+        </div>
+        <div class="header"><span data-i18n="Fawn">Fawn</span> 
+        </div>
+        <div class="header"><span data-i18n="Feast">Feast</span> 
+        </div>
+      </div>
+    </div>
+    <div class="talents">
+      <div class="header"><span data-i18n="Talents">Talents</span> 
+      </div>
+      <div class="talent">
+        <div class="header"><span data-i18n="Exhaustion Talent">Exhaustion Talent</span> 
+        </div><span name="attr_exhaustiontal"></span>
+      </div>
+      <div class="talent">
+        <div class="header"><span data-i18n="Madness Talent">Madness Talent</span> 
+        </div><span name="attr_madnesstal"></span>
+      </div>
+    </div>
+    <div class="scars">
+      <div class="header"><span data-i18n="Scars">Scars</span> 
+      </div>
+      <!-- should be a fieldset, but we have legacy data-->
+      <div class="data"><span name="attr_scarbox1"></span><span name="attr_scardescription1"></span><span name="attr_scarbox2"></span><span name="attr_scardescription2"></span><span name="attr_scarbox3"></span><span name="attr_scardescription3"></span><span name="attr_scarbox4"></span><span name="attr_scardescription4"></span>
+      </div>
+    </div>
+    <div class="questionnaire">
+      <div class="header"><span data-i18n="Questions">Questions</span> 
+      </div>
+      <!-- should probably also be a fieldset, but with the ability to preload either the standard questions or the Bad Man scenario questions-->
+      <div class="question"><span data-i18n="What’s been keeping you awake?">What’s been keeping you awake?</span> <span name="attr_qawake"></span>
+      </div>
+      <div class="question"><span data-i18n="What just happened to you?">What just happened to you?</span> <span name="attr_qhappening"></span>
+      </div>
+      <div class="question"><span data-i18n="What’s on the surface?">What’s on the surface?</span> <span name="attr_qsurface"></span>
+      </div>
+      <div class="question"><span data-i18n="What lies beneath?">What lies beneath?</span> <span name="attr_qbeneath"></span>
+      </div>
+      <div class="question"><span data-i18n="What’s your path?">What’s your path?</span> <span name="attr_qpath"></span>
+      </div>
+    </div>
+  </div>
+  <!-- +mhider("sheetmode")-->
+  <!-- include includes/nightmare.pug-->
+</div>
+<!-- Eventually a roll template here-->
+<!-- include includes/roll-templates.pug-->

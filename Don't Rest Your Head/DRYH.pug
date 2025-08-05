@@ -1,0 +1,23 @@
+// Load things up
+
+include includes/mixins.pug
+
+script(type='text/worker')
+	include includes/sheet-worker.js 
+
+.wrapper
+	// .modeblock
+		+shower("sheetmode")
+		+select("sheetmode")
+			+option("Which kind of sheet?","")
+			+option("Character","character")
+			+option("Faction","faction")
+	// +mhider("sheetmode")
+	include includes/awake.pug
+	// +mhider("sheetmode")
+	// include includes/nightmare.pug
+
+// Eventually a roll template here
+// include includes/roll-templates.pug
+
++translations

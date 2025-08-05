@@ -1,0 +1,31 @@
+- 
+	var translations = { 
+	};
+
+// Translation: +translate, +t, +translations
+
+mixin translate(text)
+	- if ( typeof(translations[text]) == "undefined" ) { translations[text] = text; }
+	span(data-i18n=text)&attributes(attributes) #{text}
+	| 
+
+mixin t(text)
+	+translate(text)&attributes(attributes)
+
+mixin translations
+	- var contents = JSON.stringify(translations,null,"\t");
+	//
+		translation.json:
+		!{contents}
+
+// Attribute Display: +display, +d
+
+mixin display(f)
+	span(name="attr_"+f class!=attributes.class)
+		if block
+			block
+
+mixin d(f)
+	span(name="attr_"+f class!=attributes.class)
+		if block
+			block
