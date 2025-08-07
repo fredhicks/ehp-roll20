@@ -11,6 +11,7 @@ $lightbg: #ffffff
 $lightfg: #000000
 $darkred: #910530
 $brightred: #aa0530
+$intensered: #ff0000
 $darkshade: rgba(255,0,0,0.1)
 $lightshade: rgba(102,0,0,0.1)
 $darkstrike: rgba(204,0,0,0.75)
@@ -29,6 +30,7 @@ $lightstrike: rgba(153,0,0,0.75)
 	--dryh-red: #{$darkred}
 	--dryh-shade: #{$lightshade}
 	--dryh-strike: #{$lightstrike}
+	--dryh-intensered: #{$brightred}
 	font-family: #{$font}
 
 .sheet-darkmode, .sheet-rolltemplate-pcroll.sheet-rolltemplate-darkmode
@@ -37,6 +39,7 @@ $lightstrike: rgba(153,0,0,0.75)
 	--dryh-red: #{$brightred}
 	--dryh-shade: #{$darkshade}
 	--dryh-strike: #{$darkstrike}
+	--dryh-intensered: #{$intensered}
 
 // Overall architecture
 
@@ -474,7 +477,7 @@ $lightstrike: rgba(153,0,0,0.75)
 			font-weight: 900
 			width: calc( 100% - 6px)
 	.dice.pain .d6
-		color: var(--dryh-red)
+		color: var(--dryh-intensered)
 		font-size: 30px
 	.dice
 		width: calc( 100% - 16px )
@@ -597,15 +600,24 @@ $lightstrike: rgba(153,0,0,0.75)
 			height: 60px
 
 .sheet-rolltemplate-pcroll
-	margin-bottom: 6px
-	font-family: #{$handwrite}
-	font-size: 16px
-	line-height: 1.2
-	background: var(--dryh-bg)
-	color: var(--dryh-fg)
-	border: 1px solid var(--dryh-red)
-	padding: 6px
-	box-shadow: 2px 2px 2px black, -1px -1px 2px white
+	.sheet-rollbox
+		margin-bottom: 6px
+		font-family: #{$handwrite}
+		font-size: 16px
+		line-height: 1.2
+		background: var(--dryh-bg)
+		color: var(--dryh-fg)
+		border: 1px solid var(--dryh-red)
+		padding: 6px
+		box-shadow: 2px 2px 2px black, -1px -1px 2px white
+	.sheet-pained + .sheet-rollbox
+		border: 1px solid var(--dryh-fg)
+		.sheet-nameblock
+			background: black
+			margin-left: -6px
+			margin-right: -6px
+		.sheet-dominated + .sheet-result, .sheet-effect
+			border-color: var(--dryh-fg)
 	.sheet-tag
 		padding-right: 6px
 	.sheet-nameblock
@@ -649,8 +661,10 @@ $lightstrike: rgba(153,0,0,0.75)
 		font-family: dicefontd6
 		font-size: 30px
 		line-height: 1
-		&.sheet-madness, &.sheet-pain
+		&.sheet-madness
 			color: var(--dryh-red)
+		&.sheet-pain
+			color: var(--dryh-intensered)
 	.sheet-effect
 		margin-top: 6px
 		font-family: #{$font}

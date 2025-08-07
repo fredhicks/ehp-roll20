@@ -5,6 +5,7 @@
 	--dryh-red: #910530;
 	--dryh-shade: rgba(102, 0, 0, 0.1);
 	--dryh-strike: rgba(153, 0, 0, 0.75);
+	--dryh-intensered: #aa0530;
 	font-family: Roboto Condensed, sans-serif;
 }
 
@@ -14,6 +15,7 @@
 	--dryh-red: #aa0530;
 	--dryh-shade: rgba(255, 0, 0, 0.1);
 	--dryh-strike: rgba(204, 0, 0, 0.75);
+	--dryh-intensered: #ff0000;
 }
 
 .ui-dialog .charsheet {
@@ -1439,7 +1441,7 @@
 	width: calc(100% - 6px);
 }
 .ui-dialog .charsheet .wrapper .gm .dice.pain .d6 {
-	color: var(--dryh-red);
+	color: var(--dryh-intensered);
 	font-size: 30px;
 }
 .ui-dialog .charsheet .wrapper .gm .dice {
@@ -1653,7 +1655,7 @@
 	height: 60px;
 }
 
-.sheet-rolltemplate-pcroll {
+.sheet-rolltemplate-pcroll .sheet-rollbox {
 	margin-bottom: 6px;
 	font-family: Walter Turncoat, serif;
 	font-size: 16px;
@@ -1664,6 +1666,17 @@
 	padding: 6px;
 	-webkit-box-shadow: 2px 2px 2px black, -1px -1px 2px white;
 	        box-shadow: 2px 2px 2px black, -1px -1px 2px white;
+}
+.sheet-rolltemplate-pcroll .sheet-pained + .sheet-rollbox {
+	border: 1px solid var(--dryh-fg);
+}
+.sheet-rolltemplate-pcroll .sheet-pained + .sheet-rollbox .sheet-nameblock {
+	background: black;
+	margin-left: -6px;
+	margin-right: -6px;
+}
+.sheet-rolltemplate-pcroll .sheet-pained + .sheet-rollbox .sheet-dominated + .sheet-result, .sheet-rolltemplate-pcroll .sheet-pained + .sheet-rollbox .sheet-effect {
+	border-color: var(--dryh-fg);
 }
 .sheet-rolltemplate-pcroll .sheet-tag {
 	padding-right: 6px;
@@ -1723,8 +1736,11 @@
 	font-size: 30px;
 	line-height: 1;
 }
-.sheet-rolltemplate-pcroll .sheet-d6.sheet-madness, .sheet-rolltemplate-pcroll .sheet-d6.sheet-pain {
+.sheet-rolltemplate-pcroll .sheet-d6.sheet-madness {
 	color: var(--dryh-red);
+}
+.sheet-rolltemplate-pcroll .sheet-d6.sheet-pain {
+	color: var(--dryh-intensered);
 }
 .sheet-rolltemplate-pcroll .sheet-effect {
 	margin-top: 6px;

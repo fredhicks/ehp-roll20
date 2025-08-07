@@ -887,7 +887,8 @@ on("clicked:pcroll", function(event) {
   </div>
 </div>
 <!-- Template!-->
-<rolltemplate class="sheet-rolltemplate-pcroll">
+<rolltemplate class="sheet-rolltemplate-pcroll">{{#rollTotal() computed::dominates 3}}
+  <div class="sheet-pained"></div>{{/rollTotal() computed::dominates 3}}
   <div class="sheet-rollbox">
     <div class="sheet-nameblock">{{name}} </div>
     <div class="sheet-results sheet-degree">{{#computed::successes}}

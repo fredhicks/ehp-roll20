@@ -24,6 +24,8 @@ mixin rtVerify(f,v)
 	| {{/#{f} #{v}}}
 
 rolltemplate.sheet-rolltemplate-pcroll
+	+rtTotal("computed::dominates",3)
+		.sheet-pained
 	.sheet-rollbox
 		.sheet-nameblock
 			| {{name}} 
