@@ -1,5 +1,24 @@
 - 
 	var translations = { 
+		"What’s been keeping you awake?": "What’s been keeping you awake?",
+		"What just happened to you?": "What just happened to you?",
+		"What’s on the surface?": "What’s on the surface?",
+		"What lies beneath?": "What lies beneath?",
+		"What’s your path?": "What’s your path?",
+		"Why can’t you sleep?": "Why can’t you sleep?",
+		"What do the other kids think of you?": "What do the other kids think of you?",
+		"What is home really like?": "What is home really like?",
+		"Why do you deserve to be punished?": "Why do you deserve to be punished?",
+		"What do you wish upon a star for?": "What do you wish upon a star for?",
+		"rolls": "rolls",
+		"Preload character questions": "Preload character questions",
+		"Don't Pre-Configure": "Don't Pre-Configure",
+		"Standard": "Standard",
+		"Bad Man": "Bad Man",
+		"preload-desc": "Set which starting questionnaire new characters begin with.",
+		"Starting Exhaustion level": "Starting Exhaustion level",
+		"startex-desc": "Set the level of exhaustion new characters start with",
+		"Pain from": "Pain from",
 	};
 
 // Translation: +translate, +t, +translations
@@ -29,3 +48,115 @@ mixin d(f)
 	span(name="attr_"+f class!=attributes.class)
 		if block
 			block
+
+// Input Elements: +select, +option, +toption, +hidden, +text, +textarea
+
+mixin select(f)
+	select(name='attr_'+f class!=attributes.class)
+		if block
+			block
+
+mixin option(t,v)
+	- if ( typeof(translations[t]) == "undefined" ) { translations[t] = t; }
+	if ( typeof(v) == "undefined" )
+		option(data-i18n=t)
+	else
+		option(value=v data-i18n=t)
+
+mixin toption(t)
+	- if ( typeof(translations[t]) == "undefined" ) { translations[t] = t; }
+	option(value=t data-i18n=t)
+
+mixin hidden(f,v)
+	- if ( typeof(v) == "undefined" ) { v = ""; }
+	input(type='hidden' name='attr_'+f value=v class!=attributes.class)
+
+mixin number(f,v,min,max)
+	- if ( typeof(v) == "undefined" ) { v = "0"; }
+	input(type='number' name='attr_'+f value=v min=min max!=max class!=attributes.class)
+
+mixin text(f,p)
+	- if ( typeof(p) !== "undefined" && typeof(translations[p]) == "undefined" ) { translations[p] = p; }
+	input(type='text' name='attr_'+f class!=attributes.class data-i18n-placeholder!=p)
+
+mixin textarea(f,p)
+	- if ( typeof(p) !== "undefined" && typeof(translations[p]) == "undefined" ) { translations[p] = p; }
+	textarea(name='attr_'+f class!=attributes.class placeholder!=p data-i18n-placeholder!=p)
+		if block
+			block
+
+// Visibility Controls: +hider, +shower, +mhider, +thider, +tdimmer, +tshower, +hideif
+
+mixin hider(f)
+	input(name="attr_"+f type="hidden" class="hider" value="")
+
+mixin shower(f)
+	input(name="attr_"+f type="hidden" class="shower" value="")
+
+mixin mhider(f)
+	input(name="attr_"+f type="hidden" class="mhider" value="")
+
+mixin thider(f,v)
+	- if ( typeof(v) == "undefined" ) { v = "0"; }
+	input(name="attr_toggle_"+f type="hidden" class="thider" value=v)
+
+mixin tdimmer(f,v)
+	- if ( typeof(v) == "undefined" ) { v = "0"; }
+	input(name="attr_toggle_"+f type="hidden" class="tdimmer" value=v)
+
+mixin tshower(f,v)
+	- if ( typeof(v) == "undefined" ) { v = "0"; }
+	input(name="attr_toggle_"+f type="hidden" class="tshower" value=v)
+
+mixin hideif(f,n,d)
+	+hidden(f,d)(class="hideif-"+n)
+
+mixin tstriker(f,v)
+	- if ( typeof(v) == "undefined" ) { v = "0"; }
+	input(name="attr_toggle_"+f type="hidden" class="tstriker" value=v)
+
+// Checkboxes: +cbox, +stbox
+
+mixin cbox(f,v)
+	- if ( typeof(v) == "undefined" ) { v = "0"; }
+	+thider(f,v)
+	button(type="action" name="act_unmark" value=f class!=attributes.class).cbox.marked
+	+tshower(f,v)
+	button(type="action" name="act_mark" value=f class!=attributes.class).cbox.unmarked
+
+mixin stbox(f)
+	span
+		+thider(f)
+		button(type="action" name="act_strike" value=f).cbox.marked
+		+tshower(f)
+		button(type="action" name="act_mark" value=f).cbox.unmarked
+		+tstriker(f)
+		button(type="action" name="act_unmark" value=f).cbox.struck
+
+// Fieldset structure: +fieldset
+
+mixin fieldset(f)
+	fieldset(class="repeating_"+f)
+		if block
+			block
+
+// Layout conveniences: +d6, +advisory
+
+mixin d6(t)
+	span.die.d6 #{t}
+
+- var advisories = 0;
+mixin advisory(f)
+	- if ( typeof(f) == "undefined" ) { advisories++; f = "advisory"+advisories; }
+	- var v = 0;
+	.outer
+		+thider(f,v)
+		button(type="action" name="act_unmark" value=f class!=attributes.class).cbox.info.marked
+		+tshower(f,v)
+		button(type="action" name="act_mark" value=f class!=attributes.class).cbox.info.unmarked
+	+thider(f,v)
+	if block
+		.advisory
+			block
+	
+	

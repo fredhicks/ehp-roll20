@@ -1,0 +1,42 @@
+.gm
+	.coins
+		.header.with-info
+			+t("Coins")
+			+advisory
+				+t("<b>Despair</b> coins are gained when pain dominates. The GM may spend a coin of despair to <b>cast a shadow</b> over an outcome, to either... <ul><li><b>add</b> a six to any of the pools in play, or<li><b>remove</b> a six from any of the pools in play.</ul>")
+				+t("<b>Hope</b> coins are gained when the GM spends despair, one for one. Hope is a communal pool available to the players. Players may spend hope coins in a few different ways:<ul><li><b>Get a break:</b> Spend one hope to remove a check mark from their response, or instead reduce their current exhaustion by one.<li><b>Improve success:</b> Spend one or more coins of hope to add successes to a result, one for one.<li><b>Restore discipline:</b> Spend five minus their current discipline level in hope coins to remove one permanent madness and restore one point of lost discipline.</ul>")
+		.coin
+			.header
+				+t("Despair")
+			+number("despair",0,0,99)
+		.coin
+			.header
+				+t("Hope")
+			+number("hope",0,0,99)
+	.header
+		+t("Nightmares and Other Pains")
+	.nightmare-grid
+		+fieldset("nightmares")
+			.nightmare-entry
+				+text("name")
+				.dice.pain
+					.con
+						.controls
+							+hideif("pain",0,0)
+							button(type="action" name="act_decrement" value="pain")
+								| do_not_disturb_on
+							+d("pain").number.pain
+							+hideif("pain",15,0)
+							button(type="action" name="act_increment" value="pain")
+								| add_circle
+						.conhead
+							+t("Pain")
+					.alldice
+						+hidden("pain",0).d6display
+						each die in ["g","h","i","j","k","l","g","h","i","j","k","l","g","h","i"]
+							+d6(die)
+						button(type="action" name="act_painroll")
+							+t("Roll")
+
+				+textarea("description")
+			

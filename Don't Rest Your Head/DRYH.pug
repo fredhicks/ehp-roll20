@@ -6,18 +6,18 @@ script(type='text/worker')
 	include includes/sheet-worker.js 
 
 .wrapper
-	// .modeblock
+	.modeblock
 		+shower("sheetmode")
 		+select("sheetmode")
 			+option("Which kind of sheet?","")
-			+option("Character","character")
-			+option("Faction","faction")
-	// +mhider("sheetmode")
+			+option("Awake PC","character")
+			+option("GM's Nightmares","nightmare")
+	+mhider("sheetmode")
 	include includes/awake.pug
-	// +mhider("sheetmode")
-	// include includes/nightmare.pug
+	+mhider("sheetmode")
+	include includes/nightmare.pug
 
-// Eventually a roll template here
-// include includes/roll-templates.pug
+// Template!
+include includes/roll-templates.pug
 
 +translations

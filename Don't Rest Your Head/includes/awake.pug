@@ -1,78 +1,161 @@
 .pc
-	.name
+	.name.span2
 		+d("character_name")
-	.description
-		+d("description")
-	.dice
-		.header
-			+t("Dice")
-		.dicetype
-			.header
-				+t("Discipline")
-			+d("discipline")
-		.dicetype
-			.header
-				+t("Madness")
-			+d("madness")
-			+t("(Permanent)")
-		.dicetype
-			.header
-				+t("Exhaustion")
-			+d("exhaustion")
-			+t("(Current)")
-	.responses
-		.header
-			+t("Responses")
-		.response
-			.data
+	.description.span2
+		+text("description","Character concept")
+	.c2
+		.left
+			.dice
+				.header.with-info.discipline
+					+t("Discipline")
+					+advisory("adv-d")
+				.data.discipline
+					.controls
+						+hideif("discipline",0,3)
+						button(type="action" name="act_decrement" value="discipline")
+							| do_not_disturb_on
+						+d("discipline").number
+						+hideif("discipline",3,3)
+						button(type="action" name="act_increment" value="discipline")
+							| add_circle
+					+hidden("discipline",3).d6display
+					each die in ["g","h","i","j","k","l"]
+						+d6(die)
+				+thider("adv-d",0)
+				.advisory
+					+t("<b>If you lose all discipline, you become a Nightmare:</b> You become an NPC with a Pain rating equal to the total number of dice you rolled when you snapped.<br><br>Always rolled.")
+				.header.with-info
+					+t("Madness")
+					.smallnote
+						+t("(Permanent)")
+					+advisory("adv-m")
+				.data.madness
+					.controls
+						+hideif("madness",0,0)
+						button(type="action" name="act_decrement" value="madness")
+							| do_not_disturb_on
+						+d("madness").number
+						+hideif("madness",3,0)
+						button(type="action" name="act_increment" value="madness")
+							| add_circle
+					+hidden("madness",0).d6display
+					each die in ["G","H","I","J","K","L","O","L"]
+						+d6(die)
+				+thider("adv-m",0)
+				.advisory
+					+t("<b>Permanent Madness</b> is gained from snapping (see Responses).<br><br>Always rolled.")
+				.header.with-info.exhaustion
+					+t("Exhaustion")
+					.smallnote
+						+t("(Current)")
+					+advisory("adv-e")
+				.data.exhaustion
+					.controls
+						+hideif("exhaustion",0,0)
+						button(type="action" name="act_decrement" value="exhaustion")
+							| do_not_disturb_on
+						+d("exhaustion").number
+						+hideif("exhaustion",6,0)
+						button(type="action" name="act_increment" value="exhaustion")
+							| add_circle
+					div
+						+hidden("exhaustion",0).d6display
+						each die in ["G","H","I","J","K","L"]
+							+d6(die)
+						div
+							+t("Talent:")
+							+hidden("use-etalent","0").selert
+							+select("use-etalent")
+								+option("No",0)
+								+option("Minor",1)
+								+option("Major",2)
+				+thider("adv-e",0)
+				.advisory
+					+t("Once per roll, you may increase your exhaustion by one.<br><br><b>If exhaustion would increase above 6, you crash.</b> When you crash, you fall asleep for at least one day, or face some other serious defeat (like death). Clear out your response boxes and set your exhaustion to 0. When you reawaken, set your discipline to 1 and lose access to your talents until you stay awake for at least as long as you slept. While vulnerable, the Nightmares can find you.<br><br>Always rolled.")
+				.header.tmadness.with-info
+					+t("Madness")
+					.smallnote
+						+t("(Temporary)")
+					+advisory("adv-tm")
+				.data.additional
+					.madness
+						.controls
+							+hideif("tmadness",0,0)
+							button(type="action" name="act_decrement" value="tmadness")
+								| do_not_disturb_on
+							+d("tmadness").number
+							+hideif("tmadness",6,0)
+							button(type="action" name="act_increment" value="tmadness")
+								| add_circle
+						div
+							+hidden("tmadness","0").d6display
+							each die in ["G","H","I","J","K","L","O","L","O"]
+								+d6(die)
+							div.micro
+								+t("Talent:")
+								+hidden("use-mtalent","0").selert
+								+select("use-mtalent")
+									+option("No",0)
+									+option("Yes",1)
+
+					button(type="action" name="act_pcroll")
+						+t("Roll Dice")
+				+thider("adv-tm",0)
+				.advisory
+					+t("Any time you roll, you may add one to six dice of temporary madness to your roll.")
+			.talents
+				.header
+					+t("Talents")
+				.talent
+					.header.with-info
+						+t("Exhaustion Talent")
+						+advisory
+							ul
+								li
+									+t("<b>To make minor use of an exhaustion talent</b>, your exhaustion must be at least one. On the affected roll, your minimum number of successes is equal to your current level of exhaustion.")
+								li
+									+t("<b>To make major use of an exhaustion talent</b>, you must <b>increase</b> your exhaustion by one, and you may <b>add</b> your current level of exhaustion to the roll as successes.")
+					+textarea("exhaustiontal","A talent that allows your character to be thoroughly exceptional (supernaturally so) at a particular thing you can already do.")
+				.talent
+					.header
+						+t("Madness Talent")
+					+textarea("madnesstal","A talent that allows your character to do something a person simply can't normally do, something which is normally outside of the realm of human possibility.")
+		.right
+			.responses
+				.header.with-info
+					+t("Responses")
+					+advisory
+						+t("<b>If you must check off a response, but can’t, you snap:</b> you go mad for a time, clear out your responses, lose one discipline, and gain one permanent madness.")
 				each r in [1,2,3]
-					+d("response"+r)
-			.header
-				+t("Fight")
-			.header
-				+t("Flight")
-			// These are other modes I've contemplated after the release
-			.header
-				+t("Freeze")
-			.header
-				+t("Fawn")
-			.header
-				+t("Feast")
-	.talents
-		.header
-			+t("Talents")
-		.talent
-			.header
-				+t("Exhaustion Talent")
-			+d("exhaustiontal")
-		.talent
-			.header
-				+t("Madness Talent")
-			+d("madnesstal")
-	.scars
-		.header
-			+t("Scars")
-		// should be a fieldset, but we have legacy data
-		.data
-			each s in [1,2,3,4]
-				+d("scarbox"+s)
-				+d("scardescription"+s)
-	.questionnaire
-		.header
-			+t("Questions")
-		// should probably also be a fieldset, but with the ability to preload either the standard questions or the Bad Man scenario questions
-		.question
-			+t("What’s been keeping you awake?")
-			+d("qawake")
-		.question
-			+t("What just happened to you?")
-			+d("qhappening")
-		.question
-			+t("What’s on the surface?")
-			+d("qsurface")
-		.question
-			+t("What lies beneath?")
-			+d("qbeneath")
-		.question
-			+t("What’s your path?")
-			+d("qpath")
+					.response
+						+hidden("response"+r).hideif-0
+						.box
+							+cbox("responseuse"+r)
+						+select("response"+r)
+							option(value="")
+							each t in ["fight","flight","freeze","fawn","feast"]
+								+option(String(t).charAt(0).toUpperCase() + String(t).slice(1),t)
+						+hidden("toggle_responseuse"+r,0).ractivate
+						+hidden("response"+r).rindicate
+						+t("React with <b>total fear.</b>").flight
+						+t("React with <b>consuming rage.</b>").fight
+						+t("React with <b>debilitating inaction.</b>").freeze
+						+t("React with <b>solicitous appeasement.</b>").fawn
+						+t("React with <b>extreme appetite.</b>").feast
+			.scars
+				.header.with-info
+					+t("Scars")
+					+advisory
+						+t("A scar is a short description of an important experience the character has had during play.<br><br><b>At any time, once per session or at the session’s conclusion,</b> the player may indicate an experience from the session that has left a scar on the character (not always literal).<br><br>You may <b>mark a scar</b> to <b>recall</b> it, allowing you to reroll one of your three dice pools (discipline, madness, or fear). All such marks clear at the end of the session.<br><br>You may instead <b>cross out</b> (two clicks) a scar to <b>transform</b> it, and select one of the following three benefits:<ul><li>Change your madness talent to another one, either for one scene or permanently.<li>Change your exhaustion talent to another one, either for one scene or permanently.<li>Use up to five coins of hope without taking them from the hope coffer, with immediate effect.</ul>")
+				+fieldset("scars")
+					.scar
+						+stbox("box")
+						+hidden("toggle_box",0).strike-if
+						+text("description").strikeout
+			.questionnaire
+				.header
+					+t("Questions")
+				+fieldset("questions")
+					.question
+						+text("query")
+						+textarea("response")

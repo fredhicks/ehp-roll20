@@ -1,3 +1,696 @@
-// Define Colors
+// SASS DEFINITIONS =========================================
+// Font setup
+$font: 'Roboto Condensed', sans-serif
+$distress: 'Road Rage', sans-serif
+$handwrite: 'Walter Turncoat', serif
+
+// Color definitions
+$darkbg: #1f1f1f
+$darkfg: #ffffff
+$lightbg: #ffffff
+$lightfg: #000000
+$darkred: #910530
+$brightred: #aa0530
+$darkshade: rgba(255,0,0,0.1)
+$lightshade: rgba(102,0,0,0.1)
+$darkstrike: rgba(204,0,0,0.75)
+$lightstrike: rgba(153,0,0,0.75)
+
+// STYLESHEET ==============================================
+// Begin actual CSS render
+
+// Grab Google Fonts
+@import url('https://fonts.googleapis.com/css2?family=Walter+Turncoat&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Road+Rage&family=Material+Symbols+Outlined&display=swap')
+
+// Define Colors, Establish CSS variables
+:root, .sheet-rolltemplate-pcroll
+	--dryh-fg: #{$lightfg}
+	--dryh-bg: #{$lightbg}
+	--dryh-red: #{$darkred}
+	--dryh-shade: #{$lightshade}
+	--dryh-strike: #{$lightstrike}
+	font-family: #{$font}
+
+.sheet-darkmode, .sheet-rolltemplate-pcroll.sheet-rolltemplate-darkmode
+	--dryh-fg: #{$darkfg}
+	--dryh-bg: #{$darkbg}
+	--dryh-red: #{$brightred}
+	--dryh-shade: #{$darkshade}
+	--dryh-strike: #{$darkstrike}
 
 // Overall architecture
+
+.ui-dialog .charsheet
+	border: 1px solid var(--dryh-red)
+	margin-top: -15px
+
+// Sitewide setups & defaults
+
+.wrapper p,
+.ui-dialog .charsheet
+	font-family: #{$font}
+	font-size: 18px
+	font-weight: 400
+	color: var(--dryh-fg) !important
+	background-color: var(--dryh-bg)
+	line-height: unset
+
+.ui-dialog .charsheet
+	input, select, textarea
+		font-family: #{$font}
+		font-size: 18px
+		line-height: 1
+		color: var(--dryh-fg)
+		background-color: var(--dryh-bg)
+		border: none
+		padding-top: 0px
+		padding-bottom: 0px
+
+// Adjustments to surrounding UI
+
+.ui-dialog .nav-tabs
+	border-bottom: 1px solid var(--dryh-red)
+	margin-bottom: 14px
+	> li.active >
+		a, a:hover, a:focus
+			border-color: var(--dryh-red)
+			border-bottom-color: transparent
+	> li
+		a:hover
+			color: white
+			background-color: var(--dryh-red)
+			border-color: var(--dryh-red)
+
+.sheet-darkmode .ui-dialog .nav-tabs
+	> li
+		a:hover
+			color: white
+			background-color: var(--dryh-red)
+			border-color: var(--dryh-red)
+	> li.active >
+		a, a:hover, a:focus
+			color: var(--dryh-fg)
+			text-decoration: none
+			background-color: var(--dryh-bg)
+			border-color: var(--dryh-red)
+			border-bottom-color: transparent
+
+// Let's try recoloring some scrollbars
+
+*
+	scrollbar-width: auto
+	scrollbar-color: var(--dryh-red) var(--dryh-bg)
+
+.sheet-darkmode
+	*
+		scrollbar-width: auto
+		scrollbar-color: var(--dryh-red) var(--dryh-bg)
+
+// Buttons
+
+.btn, button
+	background-color: var(--dryh-bg)
+	color: var(--dryh-fg)
+	border: 1px solid var(--dryh-red)
+	text-shadow: none
+	box-shadow: none
+	background-image: unset
+	font-family: "Roboto Condensed"
+	&.repcontrol_move
+		font-size: 16px
+	&:hover
+		background-color: var(--dryh-red)
+		color: white
+	&.pictos
+		font-family: "Pictos"
+
+// Columns
+
+.c2
+	width: 100%
+	display: grid
+	grid-template-columns: 50% 50%
+
+.span2
+	grid-column: span 2
+
+// Visibility Controls
+
+.ui-dialog .charsheet
+	input.tshower[value="1"], input.tshower[value="2"], input.shower:not([value=""])
+		+ *
+			display: none
+			
+	input.thider[value="0"], input.thider[value="2"], input.hider[value=""], input.mhider[value=""], input.mhider[value="character"], input.mhider[value="nightmare"]
+		+ *
+			display: none
+
+	// Ridiculous specificity in order to allow temporary hiding of something in a specific context that is getting overridden by a more specific display: property declaration if this isn't done
+	.wrapper .pc .rolling .choices .choice input.hider[value=""]
+		+ *
+			display: none
+	
+	input.tdimmer[value="0"]
+		+ *
+			opacity: 0.25
+
+	input.mhider[value="character"] + .pc, input.mhider[value="nightmare"] + .gm
+		display: initial
+
+	.hideif-0[value=""] + *
+		opacity: 0
+	@for $v from 0 through 20
+		.hideif-#{$v}[value="#{$v}"]
+			+ *
+				opacity: 0
+
+	input.tstriker[value="0"], input.tstriker[value="1"]
+		+ *
+			display: none
+	
+	input.strike-if[value="2"] ~ .strikeout
+		text-decoration: line-through
+		text-decoration-color: var(--dryh-strike)
+		text-decoration-thickness: 5px
+		text-decoration-style: solid
+
+// Checkboxes
+
+.cbox
+	background: none
+	color: none
+	border: none
+	padding: 0px
+	margin-left: 0px
+	width: 22px
+	line-height: 1
+	&:hover
+		background: none
+		&::before
+			color: var(--dryh-fg)
+	&::before
+		font-family: 'Material Symbols Outlined'
+		font-weight: normal
+		font-style: normal
+		font-size: 26px
+		width: 22px
+		color: var(--dryh-red)
+		display: inline-block
+		line-height: 1
+		text-transform: none
+		margin-left: -8px
+		padding-left: 0px
+		word-wrap: normal
+		white-space: nowrap
+		direction: ltr
+		padding: 0px
+		margin-left: 0px
+		margin-right: 0px
+
+.cbox::before
+	content: 'check_box_outline_blank'
+
+.cbox.marked::before
+	content: 'dialogs'
+
+.cbox.struck::before
+	// pages, nfc_off, indeterminate_check_box, format_strikethrough, strikethrough_s
+	content: 'nfc_off'
+
+.cbox.info::before
+	content: 'info'
+
+.cbox.info.marked::before
+	content: 'cancel'
+
+
+// SHARED ==============================================
+
+.ui-dialog .charsheet .wrapper
+	.pc, .gm
+		// Defining behavior of general elements
+		input[type="text"]
+			border-bottom: 1px solid var(--dryh-red)
+			&:hover
+				border-color: var(--dryh-fg)
+		textarea
+			border: 1px solid var(--dryh-red)
+			width: calc( 100% - 30px )
+			margin-top: 6px
+			&:hover
+				border-color: var(--dryh-fg)
+		input[type="text"], textarea
+			font-family: #{$handwrite}
+		.header
+			font-size: 36px
+			font-family: #{$distress}
+			font-weight: 400
+			font-style: normal
+			line-height: 1
+			// line-height: 36px
+			margin-top: 0px
+		.header.with-info
+			display: grid
+			grid-template-columns: auto 1fr
+			// flex-direction: row
+			// align-items: flex-start
+			// align-content: stretch
+			.outer
+				text-align: right
+				vertical-align: bottom
+				line-height: 1
+				flex-grow: 1
+				flex-shrink: 0
+			.info
+				margin-top: 4px
+				&::before
+					font-size: 20px
+		.smallnote
+			font-size: 18px
+			font-family: #{$font}
+			line-height: 1
+		// Instructional advisories
+		.advisory
+			// display: none
+			font-family: #{$font}
+			font-size: 15px
+			line-height: 1.2
+			padding: 6px
+			margin-left: 0px
+			margin-bottom: 3px
+			max-width: 100%
+			border: 1px solid var(--dryh-fg)
+			color: white
+			background: var(--dryh-red)
+			box-shadow: 0px 0px 6px var(--dryh-red)
+			border-radius: 5px
+			grid-column: span 2
+	// Dice Traits Section
+	.dice 
+		.discipline, .header.discipline, .exhaustion, .header.exhaustion
+			background: var(--dryh-shade)
+			padding: 6px
+			margin: -6px
+		.header.discipline, .header.exhaustion
+			margin-right: 0px
+		.header.exhaustion, .data.exhaustion
+			margin-top: 0px
+			height: 60px
+		.header.madness
+			height: 60px
+	.dice .header.with-info
+		grid-template-columns: auto 1fr
+		grid-column-gap: 3px
+		line-height: 1
+		> span
+			grid-column: 2
+			grid-row: 1
+		.smallnote
+			grid-row: 2
+			grid-column: 2
+		.outer
+			grid-column: 1
+			grid-row: span 2
+		.info
+			margin-top: 4px
+		// > *
+			// border: 1px solid green
+	.dice
+		border: 1px solid var(--dryh-red)
+		padding: 6px
+		margin-right: 18px
+		display: grid
+		grid-template-columns: auto 1fr
+		gap: 6px
+		grid-gap-row: 0px
+		.data
+			display: flex
+			flex-direction: row
+			align-items: center
+			height: 100%
+			select
+				width: auto
+				padding: 0px
+				border: 1px solid var(--dryh-red)
+				font-size: 14px
+				line-height: 1
+			input.selert + select
+				color: var(--dryh-red)
+			input.selert[value="1"] + select, input.selert[value="2"] + select
+				border: 1px solid var(--dryh-fg)
+				background: var(--dryh-bg)
+				color: var(--dryh-fg)
+			select:hover, input.selert + select:hover
+				border: 1px solid var(--dryh-fg)
+				background: var(--dryh-red)
+				color: white
+			.micro
+				margin-top: 0px
+				margin-bottom: 0px
+				line-height: 14px
+				select
+					margin-bottom: 0px
+		.madness .d6
+			color: var(--dryh-red)
+		.header
+			margin: 0px
+			text-align: right
+		.header.tmadness
+			// font-size: 30px
+			.smallnote
+				// font-size: 12px
+		.die
+			font-size: 36px
+			line-height: 1
+		.number
+			font-family: #{$handwrite}
+			font-size: 24px
+			margin-left: 4px
+			margin-right: -2px
+			width: 16px
+			text-align: center
+		.number.pain
+			width: 32px
+		.controls
+			height: 100%
+			padding-right: 6px
+			display: flex
+			flex-direction: row
+			flex-wrap: nowrap
+			align-items: center
+			column-gap: 0px
+			button
+				font-size: 20px
+				line-height: 1
+				height: 24px
+				width: 18px
+				border: none
+				color: var(--dryh-red)
+				background: transparent
+				font-family: 'Material Symbols Outlined'
+				padding: 0px
+				margin-left: 6px
+				&:hover
+					color: var(--dryh-fg)
+		.additional
+			height: 100%
+			button[name="act_pcroll"]
+				margin-left: 6px
+		.data.additional .madness
+			display: flex
+			flex-direction: row
+			align-items: center
+			.controls
+				height: 100%
+			.die
+				font-size: 24px
+				line-height: 1
+		.roller
+			text-align: right
+			justify-content: flex-end
+		.d6
+			font-family: dicefontd6
+	// Getting d6es to display conditionally
+	input.d6display ~ .d6
+		display: none
+	input.d6display
+		@for $v from 1 through 20
+			&[value="#{$v}"]
+				$reps: ""
+				@for $n from 1 through $v
+					$reps: "+ .d6" + $reps
+					#{$reps}
+						display: initial
+						/* when the value is #{$v} and #{$n} */
+
+// GM SHEET ==============================================
+
+.ui-dialog .charsheet .wrapper .gm
+	.coins
+		display: grid
+		grid-template-columns: 1fr auto auto
+		grid-column-gap: 12px
+		.coin
+			text-align: center
+			input[type="number"]
+				font-family: #{$handwrite}
+				font-size: 48px
+				width: auto
+				text-align: center
+				margin-left: 18px
+	.nightmare-grid
+		display: flex
+		flex-flow: column-reverse
+	.nightmare-entry
+		display: flex
+		flex-flow: column
+		height: 100%
+		textarea
+			flex-shrink: 0
+			flex-grow: 1
+			margin-bottom: 0px
+	.nightmare-grid .repcontainer
+		display: flex
+		flex-flow: row
+		flex-wrap: wrap-reverse
+		width: 100%
+		gap: 12px
+		margin-top: 6px
+		.repitem
+			border: 1px solid var(--dryh-red)
+			flex-grow: 0
+			flex-shrink: 0
+			width: calc( 33% - 6px )
+			padding: 6px
+			background: var(--dryh-bg)
+			box-shadow: 1px 1px 4px var(--dryh-red)
+		textarea
+			font-family: #{$font}
+			border-color: var(--dryh-shade)
+			line-height: 1.2
+			width: calc( 100% - 12px)
+		input[type="text"]
+			font-family: #{$font}
+			font-weight: 900
+			width: calc( 100% - 6px)
+	.dice.pain .d6
+		color: var(--dryh-red)
+		font-size: 30px
+	.dice
+		width: calc( 100% - 16px )
+		margin-top: 3px
+		border: unset
+	.alldice
+		display: grid
+		grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr
+		button
+			grid-column: span 3
+			height: 17px
+			margin-top: 5.5px
+			margin-right: 3px
+			margin-left: 1px
+			border-radius: 2px
+	.controls
+		height: auto
+	.conhead
+		text-align: center
+		font-family: #{$distress}
+		font-size: 30px
+		line-height: 1
+		height: 24px
+
+// PC SHEET ==============================================
+
+.ui-dialog .charsheet .wrapper .pc
+	// Styling of the name at the very top
+	> .name
+		font-size: 48px
+		line-height: 48px
+		height: 54px
+		font-family: #{$distress}
+		font-weight: 400
+		font-style: normal
+		margin-bottom: -6px
+	// Top-line character concept description
+	.description
+		margin-bottom: 6px
+		input[type="text"]
+			width: 100%
+			padding: 0px
+			margin-bottom: 0px
+	// Single talent entry
+	.talents > .header
+		margin-top: 12px
+	.talent
+		.header
+			margin-top: 0px
+			font-size: 27px
+			line-height: 30px
+			&.with-info
+				margin-right: 18px
+		textarea
+			line-height: 1.2
+			height: 90px
+	// Responses layout
+	.responses
+		// Nothing yet
+	// Single response entry
+	.response
+		min-height: 36px
+		margin-bottom: 6px
+		line-height: 1
+		display: flex
+		flex-direction: row
+		gap: 6px
+		align-items: center
+		select
+			height: 28px
+			margin-bottom: 0px
+			padding: 0px
+			width: auto
+			font-family: #{$handwrite}
+			border: 1px solid var(--dryh-red)
+			&:hover
+				border-color: var(--dryh-fg)
+				background-color: var(--dryh-red)
+				color: white
+		@each $v in flight, fight, freeze, fawn, feast
+			.#{$v}
+				font-family: #{$handwrite}
+				font-size: 16px
+			.rindicate
+				~ .#{$v}
+					display: none
+				&[value="#{$v}"] ~ .#{$v}
+					display: initial
+			.ractivate
+				~ .#{$v}
+					color: var(--dryh-red)
+				&[value="1"] ~ .#{$v} b
+					color: var(--dryh-fg)
+	// Single scar entry
+	.scar
+		display: flex
+		flex-direction: row
+		gap: 6px
+		margin-bottom: 6px
+		align-items: flex-start
+		input[type="text"]
+			flex-grow: 1
+			padding-top: 0px
+			height: 28px
+			line-height: 1
+			margin-top: 0px
+			margin-bottom: 0px
+		.cbox::before
+			padding: 0px
+			margin: 0px
+			margin-bottom: -6px
+			line-height: 1
+	// Single question entry
+	.question
+		input[type="text"]
+			width: 100%
+			font-family: #{$font}
+		textarea
+			width: calc( 100% - 6px)
+			height: 60px
+
+.sheet-rolltemplate-pcroll
+	margin-bottom: 6px
+	font-family: #{$handwrite}
+	font-size: 16px
+	line-height: 1.2
+	background: var(--dryh-bg)
+	color: var(--dryh-fg)
+	border: 1px solid var(--dryh-red)
+	padding: 6px
+	box-shadow: 2px 2px 2px black, -1px -1px 2px white
+	.sheet-tag
+		padding-right: 6px
+	.sheet-nameblock
+		font-family: #{$font}
+		line-height: 1.2
+		font-size: 24px
+		font-weight: 900
+		background: var(--dryh-red)
+		color: white
+		margin-left: -7px
+		padding-left: 6px
+		margin-right: -7px
+		padding-right: 6px
+		margin-top: -6px
+	.sheet-dominated + .sheet-result, .sheet-effect
+		background: var(--dryh-bg)
+		box-shadow: 2px 2px 2px black, -1px -1px 2px white
+		border: 1px solid var(--dryh-red)
+		margin-right: -14px
+		padding-right: 13px
+		margin-left: -14px
+		padding-left: 13px
+		padding-bottom: 3px
+		padding-top: 3px
+	.sheet-result
+		display: grid
+		grid-template-columns: 110px 1fr
+		min-height: 24px
+		margin-top: 6px
+	.sheet-success
+		font-size: 200%
+	.sheet-success-result
+		display: grid
+		grid-template-columns: auto auto
+		grid-column-gap: 6px
+		line-height: 1
+	.sheet-data
+		display: grid
+		grid-template-columns: 1fr 1fr 1fr 1fr 1fr
+	.sheet-d6
+		font-family: dicefontd6
+		font-size: 30px
+		line-height: 1
+		&.sheet-madness, &.sheet-pain
+			color: var(--dryh-red)
+	.sheet-effect
+		margin-top: 6px
+		font-family: #{$font}
+		font-size: 13.5px
+		.sheet-preamble
+			font-weight: 900
+		.sheet-attention
+			font-weight: 900
+			font-style: italic
+		.sheet-action
+			font-weight: 400
+	.sheet-effect .sheet-advisory
+		margin-left: -13px
+		padding-left: 12px
+		margin-right: -13px
+		padding-right: 12px
+	.sheet-handwritten, .sheet-advisory.sheet-handwritten
+		font-family: #{$handwrite}
+	div.sheet-handwritten
+		padding-top: 6px
+	.sheet-advisory
+		text-indent: -1em
+		margin-top: 3px
+		padding-top: 9px
+		margin-bottom: -6px
+		padding-bottom: 6px
+		font-family: #{$font}
+		font-size: 13.5px
+		background: var(--dryh-shade)
+		margin-left: -7px
+		padding-left: calc( 6px + 1em )
+		margin-right: -7px
+		padding-right: 6px
+	.sheet-degree
+		margin-top: -6px
+		padding-top: 6px
+		padding-bottom: 6px
+		background: var(--dryh-shade)
+		margin-left: -7px
+		padding-left: 6px
+		margin-right: -7px
+		padding-right: 6px
+

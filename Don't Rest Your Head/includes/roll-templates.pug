@@ -1,0 +1,147 @@
+mixin rtTotal(f,v)
+	| {{#rollTotal() #{f} #{v}}}
+	block
+	| {{/rollTotal() #{f} #{v}}}
+
+mixin rtLess(f,v)
+	| {{#rollLess() #{f} #{v}}}
+	block
+	| {{/rollLess() #{f} #{v}}}
+
+mixin rtCheck(f)
+	| {{##{f}}}
+	block
+	| {{/#{f}}}
+
+mixin rtNot(f)
+	| {{^#{f}}}
+	block
+	| {{/#{f}}}
+
+mixin rtVerify(f,v)
+	| {{##{f} #{v}}} 
+	block
+	| {{/#{f} #{v}}}
+
+rolltemplate.sheet-rolltemplate-pcroll
+	.sheet-rollbox
+		.sheet-nameblock
+			| {{name}} 
+		.sheet-results.sheet-degree
+			+rtCheck("computed::successes")
+				.sheet-result
+					.sheet-tag
+						+t("Degree")
+					.sheet-success-result
+						each j in [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30]
+							+rtTotal("computed::successes",j)
+								.sheet-success #{j}
+						+rtCheck("computed::dominates")
+							+rtTotal("computed::dominates",-1)
+								+t("Uncertain (full tie)")
+							+rtTotal("computed::dominates",0)
+								+t("Discipline dominates")
+							+rtTotal("computed::dominates",1)
+								+t("Madness dominates")
+							+rtTotal("computed::dominates",2)
+								+t("Exhaustion dominates")
+							+rtTotal("computed::dominates",3)
+								+t("Pain dominates")
+			.sheet-effect
+				+rtTotal("computed::dominates",0)
+					+t("If Discipline dominates:").sheet-preamble
+					+t("Things stay under control.").sheet-attention
+					+t("You may remove a response check-mark or decrease your exhaustion by one.").sheet-action
+				+rtTotal("computed::dominates",1)
+					+t("If Madness dominates:").sheet-preamble
+					+t("Things get more chaotic.").sheet-attention
+					+t("Check off a response and behave accordingly.")
+				+rtTotal("computed::dominates",2).sheet-action
+					+t("If Exhaustion dominates:").sheet-preamble
+					+t("Your resources are taxed.").sheet-attention
+					+t("Increase exhaustion by one.").sheet-action
+				+rtTotal("computed::dominates",3).sheet-action
+					+t("If Pain dominates:").sheet-preamble
+					+t("You pay a greater price.").sheet-attention
+					+t("The GM gains one coin of despair.").sheet-action
+		+rtTotal("computed::dominates",3)
+			.sheet-results
+				.sheet-dominated
+				.sheet-result
+					.sheet-tag
+						+t("Pain")
+						|*
+					.sheet-data
+						- var dd = ["g","h","i","j","k","l"];
+						each n in [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
+							+rtCheck("computed::pain"+n)
+								each j in [1,2,3,4,5,6]
+									+rtTotal("computed::pain"+n,j)
+										.sheet-d6.sheet-pain #{dd[j-1]}
+		+rtLess("computed::dominates",3)
+			.sheet-results 
+				+rtTotal("computed::dominates",0)
+					.sheet-dominated
+				.sheet-result
+					.sheet-tag
+						+t("Discipline")
+						+rtTotal("computed::dominates",0)
+							|*
+					.sheet-data
+						- var dd = ["g","h","i","j","k","l"];
+						each n in [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
+							+rtCheck("computed::discipline"+n)
+								each j in [1,2,3,4,5,6]
+									+rtTotal("computed::discipline"+n,j)
+										.sheet-d6 #{dd[j-1]}
+				+rtTotal("computed::dominates",1)
+					.sheet-dominated
+				.sheet-result
+					.sheet-tag
+						+t("Madness")
+						+rtTotal("computed::dominates",1)
+							|*
+					.sheet-data
+						- var dd = ["G","H","I","J","K","L"];
+						each n in [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
+							+rtCheck("computed::madness"+n)
+								each j in [1,2,3,4,5,6]
+									+rtTotal("computed::madness"+n,j)
+										.sheet-d6.sheet-madness #{dd[j-1]}
+				// Set up a CSS thing where .sheet-dominated + .sheet-result styles the .sheet-result
+				+rtTotal("usemtal",1)
+					.sheet-effect
+						+t("Madness talent:").sheet-preamble
+						+t("Something impossible happens...")
+						.sheet-handwritten
+							| {{mtal}}
+				+rtTotal("computed::dominates",2)
+					.sheet-dominated
+				.sheet-result
+					.sheet-tag
+						+t("Exhaustion")
+						+rtTotal("computed::dominates",2)
+							|*
+					.sheet-data
+						- var dd = ["G","H","I","J","K","L"];
+						each n in [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
+							+rtCheck("computed::exhaustion"+n)
+								each j in [1,2,3,4,5,6]
+									+rtTotal("computed::exhaustion"+n,j)
+										.sheet-d6 #{dd[j-1]}
+				+rtTotal("useetal",1)
+					.sheet-effect
+						+t("Minor exhaustion use:").sheet-preamble
+						+t("Minimum degree is equal to number of Exhaustion dice ")
+						| ({{exhaustion}}).
+						.sheet-handwritten
+							| {{etal}}
+				+rtTotal("useetal",2)
+					.sheet-effect
+						+t("Major exhaustion use:").sheet-preamble
+						+t("Degree is increased by the number of Exhaustion dice ")
+						| ({{exhaustion}}).
+		// Here we exit the big +rtLess
+		.sheet-advisory
+			|* 
+			+t("The dominant player pool must be compared to the GM’s pain pool to determine what actually dominates the roll.")
