@@ -429,6 +429,9 @@ $lightstrike: rgba(153,0,0,0.75)
 // GM SHEET ==============================================
 
 .ui-dialog .charsheet .wrapper .gm
+	.buttonbox
+		padding: 6px
+		text-align: center
 	.coins
 		display: grid
 		grid-template-columns: 1fr auto auto
@@ -454,11 +457,12 @@ $lightstrike: rgba(153,0,0,0.75)
 			margin-bottom: 0px
 	.nightmare-grid .repcontainer
 		display: flex
-		flex-flow: row
+		flex-flow: row-reverse // The flow and wrap arrangements make it so when you create new entries they start at the top rather than requiring you to scroll
 		flex-wrap: wrap-reverse
 		width: 100%
 		gap: 12px
 		margin-top: 6px
+		justify-content: center
 		.repitem
 			border: 1px solid var(--dryh-red)
 			flex-grow: 0

@@ -549,3 +549,57 @@ on("clicked:pcroll", function(event) {
 			});
 	});
 });
+
+on("clicked:upsort clicked:downsort", function(event) {
+	var field = event.htmlAttributes.value;
+	var direction = event.triggerName;
+	log(event);
+	getSectionIDs("repeating_nightmares", function(ids) {
+		var sorted = []; var ats = [];
+		log(ids); log(field);
+		if ( field == "creation" ) {
+			ids.sort(function(one,two) { 
+				if ( direction == "clicked:upsort" ) {
+					return one.localeCompare(two); 
+				} else {
+					return two.localeCompare(one); 
+				}
+			});
+			log(ids);
+			setSectionOrder("nightmares",ids);
+		} else {
+			for(i = 0; i < ids.length; i++) {
+				ats[i] = "repeating_nightmares_"+ids[i]+"_"+field;
+			}
+			getAttrs(ats, function(a) {
+				log(a);
+				if ( field == "name" ) {
+					ids.sort(function(one,two) { 
+						var first = a["repeating_nightmares_"+one+"_"+field].toLowerCase();
+						var second = a["repeating_nightmares_"+two+"_"+field].toLowerCase();
+						if ( direction == "clicked:upsort" ) {
+							return first.localeCompare(second); 
+						} else {
+							return second.localeCompare(first); 
+						}
+					});
+					log(ids);
+				} else if ( field == "pain" ) {
+					ids.sort(function(one,two) {
+						var first = Number(a["repeating_nightmares_"+one+"_"+field]);
+						var second = Number(a["repeating_nightmares_"+two+"_"+field]);
+						log(first+" vs "+second);
+						if ( direction == "clicked:upsort" ) {
+							return(first - second); 
+						} else {
+							return(second - first); 
+						}
+						
+					});
+					log(ids);
+				}
+				setSectionOrder("nightmares",ids);
+			});
+		}
+	});
+});

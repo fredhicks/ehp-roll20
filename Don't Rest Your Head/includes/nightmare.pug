@@ -16,6 +16,21 @@
 	.header
 		+t("Nightmares and Other Pains")
 	.nightmare-grid
+		.buttonbox
+			b
+				+t("Sorting")
+			button(type="action" name="act_downsort" value="name")
+				+t("Name (ascending)")
+			button(type="action" name="act_upsort" value="name")
+				+t("Name (descending)")
+			button(type="action" name="act_downsort" value="pain")
+				+t("Pain (ascending)")
+			button(type="action" name="act_upsort" value="pain")
+				+t("Pain (descending)")
+			button(type="action" name="act_downsort" value="creation")
+				+t("Creation (ascending)")
+			button(type="action" name="act_upsort" value="creation")
+				+t("Creation (descending)")
 		+fieldset("nightmares")
 			.nightmare-entry
 				+text("name")
@@ -39,4 +54,3 @@
 							+t("Roll")
 
 				+textarea("description")
-			
