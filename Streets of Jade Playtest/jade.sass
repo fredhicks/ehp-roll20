@@ -217,7 +217,7 @@ $red: #810530
 		+ *
 			display: none
 			
-	input.thider[value="0"], input.thider[value="2"], input.hider[value=""], input.mhider[value=""], input.mhider[value="character"], input.mhider[value="faction"]
+	input.stress-hider[value="0"], input.stress-hider[value=""], input.thider[value="0"], input.thider[value="2"], input.hider[value=""], input.mhider[value=""], input.mhider[value="character"], input.mhider[value="faction"]
 		+ *
 			display: none
 
@@ -644,11 +644,13 @@ input.itchider[value="2"] ~ .itchy
 					width: calc(100% - 12px)
 			.cbox::before
 				color: var(--jade-fg)
-		.glory .bordered
+		.glory .boxbox, .jade-glory .boxbox
 			display: grid
+			width: 100%
+			grid-column: 1 / span 2
 			grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr
-			.cbox::before
-				color: var(--jade-fg)
+			// .cbox::before
+				// color: var(--jade-fg)
 		.boons
 			display: grid
 			grid-template-columns: auto 1fr
@@ -801,6 +803,8 @@ input.itchider[value="2"] ~ .itchy
 			.topstrip
 				display: grid
 				grid-template-columns: 1fr auto
+				justify-items: stretch
+				align-items: start
 				.sideblock
 					height: 40px
 					vertical-align: top
@@ -825,7 +829,7 @@ input.itchider[value="2"] ~ .itchy
 				grid-template-columns: auto 12px 1fr
 			.sideblock
 				height: 40px
-				vertical-align: bottom
+				vertical-align: top
 				line-height: 1
 		.ability
 			text-align: center
@@ -921,6 +925,29 @@ input.itchider[value="2"] ~ .itchy
 					flex-grow: 1
 					flex-shrink: 0
 					line-height: 1
+			.desc
+				margin-top: 1px
+				margin-bottom: 8px
+				padding-bottom: 0px
+				textarea
+					width: calc(100% - 9px)
+					height: 60px
+					resize: none
+					margin-bottom: 0px
+					padding-top: 3px
+			.vessel
+				color: var(--jade-golden)
+				text-align: center
+				width: 100%
+				font-size: 140%
+		.asset .skirmish-box .choicegrid
+			grid-template-columns: 1fr auto
+			.smallnote
+				line-height: 1
+			.buttons
+				text-align: left
+				vertical-align: middle
+		.asset, .officer
 			.bottomline
 				padding-right: 6px
 				height: 30px
@@ -934,30 +961,15 @@ input.itchider[value="2"] ~ .itchy
 					vertical-align: top
 					&.golden
 						color: var(--jade-golden)
-			.desc
-				margin-top: 1px
-				margin-bottom: 8px
-				padding-bottom: 0px
-				textarea
-					width: calc(100% - 9px)
-					height: 60px
-					resize: none
-					margin-bottom: 0px
-					padding-top: 3px
-			.skirmish-box
-			.vessel
-				color: var(--jade-golden)
-				text-align: center
-				width: 100%
-				font-size: 140%
-		.asset .skirmish-box .choicegrid
-			grid-template-columns: 1fr auto
-			.smallnote
-				line-height: 1
-			.buttons
-				text-align: left
-				vertical-align: middle
-
+				.effective
+					color: var(--jade-red)
+					text-align: center
+					flex-grow: 0
+					min-width: 1.5em
+		.officer .lozenge
+			width: 100%
+			.bottomline
+				grid-column: 1 / span 2
 // Checkboxes
 
 .cbox
@@ -996,10 +1008,13 @@ input.itchider[value="2"] ~ .itchy
 	content: 'check_box_outline_blank'
 
 .cbox.marked::before
-	content: 'dialogs'
+	// content: 'dialogs'
+	// content: 'check_box'
+	content: 'select_check_box'
 
 .cbox.itched::before
-	// content: 'disabled_by_default'
+	content: 'disabled_by_default'
+	color: var(--jade-aqua)
 	// content: 'dataset'
 	// content: 'square_dot'
 	// content: 'image'
@@ -1008,7 +1023,7 @@ input.itchider[value="2"] ~ .itchy
 	// content: 'escalator'
 	// content: 'grid_guides'
 	// content: 'background_dot_small'
-	content: 'grid_on'
+	// content: 'grid_on'
 	// content: 'data_thresholding'
 	// content: 'add_box'
 	// content: 'indeterminate_check_box'
@@ -1028,6 +1043,9 @@ input[type="text"].overline
 	&.golden
 		color: var(--jade-golden)
 	// text-transform: uppercase
+.stress-section .bighead
+	line-height: 1
+	margin-top: 8px
 
 .btw
 	line-height: 18px
@@ -1069,6 +1087,19 @@ button.jaderoll
 	margin-top: -1px
 	padding-top: 6px
 	padding-bottom: 0px
+.golden .boxbox, .boxbox.golden
+	border: 2px solid var(--jade-darkgold)
+
+.elastics
+	white-space: nowrap
+	input.elastic ~ .box
+		display: none
+	@for $i from 1 through 12
+		$boxes: ""
+		@for $j from 1 through $i
+			$boxes: "+ .box" + $boxes
+			input.elastic[value="#{$i}"] #{$boxes}
+				display: initial
 
 .ui-dialog .charsheet
 	.smallnote, input.smallnote, textarea.smallnote
@@ -1078,3 +1109,21 @@ button.jaderoll
 
 .italic
 	font-style: italic
+	
+.jade-glory
+	margin-top: 8px
+	.boxbox
+		grid-column: 1 / span 4
+
+.ui-dialog .charsheet .wrapper .character .jade-glory .cbox::before
+	color: var(--jade-fg)
+
+.ui-dialog .charsheet .wrapper .character .boons .bordered .boxes + span.jade, .span.jade
+	color: var(--jade-fg)
+
+.ui-dialog .charsheet .wrapper .character .boons .bordered
+	div, span
+		// border: 1px solid magenta
+
+.ui-dialog .charsheet .wrapper .character .boons .bordered .sequestered
+	grid-column: 1 / span 2

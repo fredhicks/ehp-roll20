@@ -11,7 +11,7 @@
 						+cbox("pathos"+box)
 				.tag
 					+t("Pathos")
-		.spacer
+		.connect-line
 		.right-part
 			.scandal
 				.boxbox
@@ -202,18 +202,29 @@
 							.topstrip
 								.nameblock
 									.name-die
-										+cbox("diemark")
-										+die("die1").smalldie
+										+die("die1",[6,8,10,12]).smalldie
 									.connect-line
 									.lozenge.namefield
 										+text("name")
+										.bottomline
+											// .text.golden
+												+t("Stress")
+											.text.effective
+												span &nbsp;d
+												+display("die1-effective")
+											.elastics
+												+hidden("die1").elastic
+												each box in [1,2,3,4,5,6,7,8,9,10,11,12]
+													span.box
+														+cbox("stress"+box)
+
 								.sideblock
 									+tshower("show-hide")
 									button(type="action" name="act_mark" class="goldroll" value="show-hide")
 										+t("Hide")
 									+thider("show-hide")
-									button(type="action" name="act_unmark" class="goldroll" value="show-hide")
-										+t("Show")
+									button(type="action" name="act_unmark" class="jaderoll" value="show-hide")
+										+t("Details")
 									+skirmishbutton
 
 							+thider("skirmish")
@@ -223,7 +234,7 @@
 										.choicegrid
 											.action
 												.vessel
-													+smalldie("die1")
+													+smalldie("die1-effective")
 											.text
 												+t("Jade")
 											.action
@@ -290,19 +301,29 @@
 									// not really a die
 									+select("asset-value")
 										option(value="")
-										option(value=4) 4
-										option(value=5) 5
+										option(value=7) 7
 										option(value=6) 6
+										option(value=5) 5
+										option(value=4) 4
+										// option(value=3) 3
 									.die-display
 										+display("asset-value")
 								.connect-line
 								.namefield
 									+text("name")
 									.bottomline
-										.text.golden
+										// .text.golden
 											+t("Stress")
-										each box in [1,2,3]
-											+cbox("stress"+box)
+										// +hidden("stress-marked").stress-hider
+										.text.effective
+											// +t("Effective Value:")
+											+display("asset-value-effective")
+										.elastics
+											+hidden("asset-value-track").elastic
+											each box in [1,2,3,4]
+												span.box
+													+cbox("stress"+box)
+
 								.spacer
 								.righthand
 									+tshower("show-hide")
@@ -320,9 +341,9 @@
 										.choicegrid
 											.action
 												.vessel
-													+display("asset-value")
+													+display("asset-value-effective")
 													.smallnote
-														+t("(fixed&nbsp;value)")
+														+t("(effective&nbsp;value)")
 											.text.buttons
 												+thider("rollskirmish")
 												button(type="action" name="act_unmark" class="jaderoll" value="rollskirmish")

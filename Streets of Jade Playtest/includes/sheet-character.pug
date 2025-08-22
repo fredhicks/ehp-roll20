@@ -38,10 +38,13 @@
 				+lozenge("personal-style","Personal Style")
 				.spacer
 				+lozenge("fighting-style","Fighting Style")
+			.stress-section
+				.bighead
+					+t("Stress")
+				.btw
+					+t("While you have any wounds marked, lose one die from all pools before rolling in a contest. Click once to mark a box; click again to mark it as Itched. ").smallnote.italic
 			.c2.wounds-pathos
-				.pathos
-					.toptag
-						+t("Pathos")
+				.pathos.lozenge
 					.boxbox
 						each box in [1,2,3,4,5,6,7,8,9,10]
 							+ibox("pathos"+box)
@@ -50,10 +53,10 @@
 								+hidden("toggle_pathos"+box).itchider
 							.itchy
 								+t("Itched!")
-				.spacer
-				.wounds
-					.toptag
-						+t("Wounds")
+					.tag
+						+t("Pathos")
+				.connect-line
+				.wounds.lozenge
 					.boxbox
 						each box in [1,2,3,4,5,6,7,8,9,10]
 							+ibox("wound"+box)
@@ -62,21 +65,36 @@
 								+hidden("toggle_wound"+box).itchider
 							.itchy
 								+t("Itched!")
-					.btw
-						+t("While you have any wounds marked, lose one die from all pools before rolling in a contest.").smallnote.italic
-			.glory
-				.toptag
+					.tag
+						+t("Wounds")
+			.stress-section.glory-section
+				.bighead
+					+t("Jade Points")
+				.smallnote.italic
+					+t("When you fill the jade points track, clear it and add a d4 to a jade discipline permanently. You receive 1 jade point when you strip jade from a defeated foe, or 2 from a slain foe. When an enemy defeats you and takes your jade, you lose 1 jade point. Every jade point you lose inflicts an Itch.")
+				.jade-glory.lozenge
+					.boxbox
+						- var g = 1;
+						while g <= 20
+							+cbox("jadeglory"+g)
+							- g++;
+					// .tag
+						+t("Jade Points")
+				.bighead.golden
 					+t("Glory")
-				.bordered
+				.smallnote.italic
+					+t("When you fill the glory track, clear it and take a Boon.")
+			.glory.lozenge.golden
+				.boxbox
 					- var g = 1;
 					while g <= 40
 						+cbox("glory"+g)
 						- g++;
+				// .tag
+					+t("Glory")
 			.boons
 				.toptag.golden
 					+t("Boons")
-				.tagnote.smallnote.italic
-					+t("When you fill the glory track, clear it and take a Boon.")
 				.bordered
 						.boxes
 							+cbox("boon-new-rep")
@@ -90,26 +108,22 @@
 						+t("Step up a reputation")
 						.boxes
 							each box in [1,2,3,4]
-								+cbox("boon-jade-"+box)
-						+t("Add 1d4 to a jade ability")
-						.boxes
-							each box in [1,2,3,4]
 								+cbox("boon-skill-"+box)
 						+t("Step up a skill")
 						.boxes
 							each box in [1,2,3,4]
 								+cbox("boon-gift-"+box)
 						+t("Acquire a gift")
+						// .sequestered
+							.boxes
+								each box in [1,2,3,4,5,6]
+									+cbox("boon-jade-"+box).jade
+							+t("Add 1d4 to a jade ability").jade
 
 			.gifts
-				.topstrip
-					.toptag
-						+t("Gifts")
-					.sideblock
-						+thider("show-gifts")
-						button(type="action" name="act_unmark" class="goldroll" value="show-gifts")
-							+t("Hide Gifts")
-				.bordered
+				.bighead
+					+t("Gifts")
+				.gifts-section
 					+fieldset("gifts")
 						.gift.bordered
 							.topstrip

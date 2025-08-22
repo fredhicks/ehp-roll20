@@ -167,14 +167,16 @@ mixin dielabel(t)
 	.dielabel(class!=attributes.class)
 		+t(t)
 
-mixin die(f,dlist)
+mixin die(f,dlist,sel)
 	- if ( typeof(dlist) == "undefined" ) { dlist = [4,6,8,10,12]; }
+	- if ( typeof(sel) == "undefined" ) { sel = true; }
 	.die(class!=attributes.class)
 		+hidden(f).chosendie
-		+select(f)
-			option(value="")
-			each val in dlist
-				option(value=val)= val
+		if sel
+			+select(f)
+				option(value="")
+				each val in dlist
+					option(value=val)= val
 		.polyhedral.d4.df-d4-4
 		.polyhedral.d6.df-d6-6
 		.polyhedral.d8.df-d8-8
@@ -209,9 +211,16 @@ mixin goal
 	.goal.bordered
 		.desc
 			+textarea("goal").squat
+		.smallnote
+			+t("Glory")
 		.goalmarks
 			each o in [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
-				+cbox("favor-owe-"+o).jade
+				+cbox("goal-glory-"+o).golden
+		.smallnote
+			+t("Jade Points")
+		.goalmarks
+			each o in [1,2,3,4,5,6,7,8,9,10]
+				+cbox("goal-jade-"+o).jade
 
 // Used in fieldsets, so there's no need to give it different attribute names from use to use
 

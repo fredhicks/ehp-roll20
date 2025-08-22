@@ -1,12 +1,17 @@
 // Behold, the Script Worker for Streets of Jade
 
 on("clicked:mark clicked:repeating_goals:mark clicked:repeating_favors:mark clicked:repeating_assets:mark clicked:repeating_factiongifts:mark clicked:repeating_gifts:mark clicked:repeating_command:mark clicked:repeating_officers:mark clicked:repeating_goals:mark clicked:repeating_favors:mark clicked:repeating_factionfavors:mark", function(event) {
+	log(event);
 	log("clicked:mark (of some sort)");
 	var what = event.htmlAttributes.value;
 	var ats = {};
 	var rowprefix = "";
+	var asscheck = "";
+	var offcheck = "";
 	if ( typeof(event.sourceAttribute) !== "undefined" ) {
 		rowprefix = (event.sourceAttribute).slice(0,-4); // Strips off the 'mark'
+		asscheck = (event.sourceAttribute).slice(10,15); // 'asset' or not
+		offcheck = (event.sourceAttribute).slice(10,17); // 'officer' or not
 	}
 	var atname = rowprefix + "toggle_" + what;
 	ats[atname] = 1;
@@ -14,7 +19,7 @@ on("clicked:mark clicked:repeating_goals:mark clicked:repeating_favors:mark clic
 	var numfound = numfind.exec(atname);
 	var namefind = /^.*[^0-9]/;
 	var namefound = namefind.exec(atname);
-	if ( numfound[0] == "" || numfound[0] == "1" ) { 
+	if ( numfound[0] == "" ) { 
 		setAttrs(ats);
 		log(what + " mark");
 		log(numfound);
@@ -24,19 +29,85 @@ on("clicked:mark clicked:repeating_goals:mark clicked:repeating_favors:mark clic
 		log("we have a potential sequence");
 		var seq = Number(numfound[0]);
 		var seqs = []; var s = 0;
+		var all = []; 
 		while(seq > 1) {
 			seq--;
 			seqs[s] = namefound+seq;
+			all[s] = namefound+seq;
 			s++;
 		}
-		log("sequences to retrieve...")
-		log(seqs);
-		getAttrs(seqs,function(a) {
+		log(all.length);
+		if ( asscheck == "asset" && s < 4 ) {
+			log('asset');
+			for(var i = s+1; i <= 4; i++) {
+				log("i="+i+" therefore "+namefound+i);
+				all[s] = namefound+i;
+				s++;
+			}
+			all[s] = rowprefix+"asset-value";
+		}
+		if ( offcheck == "officer" && s < 12 ) {
+			log('officer');
+			for(var i = s+1; i <= 12; i++) {
+				log("i="+i+" therefore "+namefound+i);
+				all[s] = namefound+i;
+				s++;
+			}
+			all[s] = rowprefix+"die1";
+		}
+		log(all.length);
+		log("all...");
+		log(all);
+		getAttrs(all,function(a) {
+			log("sequences to retrieve...")
+			log(seqs);
+			var stressed = {}; stressed[atname] = 1; // Gotta include the actual to-be-set attribute itself, dammit
+			log("\n\n\n\n\n"+atname+"\n\n\n\n\n");
 			for(var i = 0; i < seqs.length; i++) {
 				var val = a[seqs[i]];
 				if ( val == "0" ) { // We only auto-mark empty boxes, not "itched" ones (val == 2)
 					ats[seqs[i]] = "1";
+					if ( typeof(stressed[seqs[i]]) == "undefined" ) { stressed[seqs[i]] = 1; }
 				}
+			}
+			if ( asscheck == "asset" ) {
+				// need to fill out stressed for the stuff not covered
+				for(var i = 0; i < all.length; i++) {
+					if ( typeof(stressed[all[i]]) == "undefined" ) { stressed[all[i]] = a[all[i]]; }
+				}
+				log("stressed"); log(stressed);
+				var effective = 0;
+				if ( typeof(a[rowprefix+"asset-value"]) !== "undefined" && a[rowprefix+"asset-value"] !== "" && a[rowprefix+"asset-value"] !== "0" ) {
+					effective = Number(a[rowprefix+"asset-value"]);
+				}
+				for(var i = 1; i <= 4; i++) {
+					log(namefound+i+"="+stressed[namefound+i]); // use stressed because we're looking at the changes to come, not the current pre-write state.
+					var stresscheck = stressed[namefound+i];
+					if ( typeof(stresscheck) !== "undefined" & stresscheck == "1") {
+						effective--;
+					}
+				}
+				ats[rowprefix+"asset-value-effective"] = effective;
+			}
+			if ( offcheck == "officer" ) {
+				// need to fill out stressed for the stuff not covered
+				for(var i = 0; i < all.length; i++) {
+					if ( typeof(stressed[all[i]]) == "undefined" ) { stressed[all[i]] = a[all[i]]; }
+				}
+				log("stressed"); log(stressed);
+				var effective = 0;
+				if ( typeof(a[rowprefix+"die1"]) !== "undefined" && a[rowprefix+"die1"] !== "" && a[rowprefix+"die1"] !== "0" ) {
+					effective = Number(a[rowprefix+"die1"]);
+				}
+				for(var i = 1; i <= 12; i++) {
+					log(namefound+i+"="+stressed[namefound+i]); // use stressed because we're looking at the changes to come, not the current pre-write state.
+					var stresscheck = stressed[namefound+i];
+					if ( typeof(stresscheck) !== "undefined" & stresscheck == "1") {
+						effective--;
+					}
+				}
+				if ( effective < 6 ) { effective = 6; } else if ( effective == 7 ) { effective = 8; } else if ( effective == 9 ) { effective = 10; } else if ( effective == 11 ) { effective = 12; }
+				ats[rowprefix+"die1-effective"] = effective;
 			}
 			setAttrs(ats);
 			log(namefound);
@@ -53,8 +124,12 @@ on("clicked:unmark clicked:repeating_goals:unmark clicked:repeating_favors:unmar
 	var what = event.htmlAttributes.value;
 	var ats = {};
 	var rowprefix = "";
+	var asscheck = "";
+	var offcheck = "";
 	if ( typeof(event.sourceAttribute) !== "undefined" ) {
 		rowprefix = (event.sourceAttribute).slice(0,-6); // Strips off the 'unmark'
+		asscheck = (event.sourceAttribute).slice(10,15); // 'asset' or not
+		offcheck = (event.sourceAttribute).slice(10,17); // 'officer' or not
 	}
 	var atname = rowprefix + "toggle_" + what;
 	ats[atname] = 0;
@@ -72,20 +147,59 @@ on("clicked:unmark clicked:repeating_goals:unmark clicked:repeating_favors:unmar
 	} else {
 		log("we have a potential sequence");
 		var seq = Number(numfound[0]);
-		var seqs = []; var s = 0;
+		var seqs = []; var s = 0; var all = []; var alls = 0;
+		while(alls < seq) {
+			alls++;
+			all[alls-1] = namefound+alls;
+		}
 		while(seq < 41) {
 			seq++;
+			alls++; all[alls-1] = namefound+seq;
 			seqs[s] = namefound+seq;
 			s++;
 		}
-		log(seqs);
-		getAttrs(seqs,function(a) {
-			log(a);
+		if ( asscheck == "asset" ) { all[seq] = rowprefix+"asset-value"; seq++; }
+		if ( offcheck == "officer" ) { all[seq] = rowprefix+"die1"; seq++; }
+		// log(seqs);
+		// log(all);
+		getAttrs(all,function(a) {
+			var stressed = a; stressed[atname] = 0; 
+			// log(a);
 			for(var i = 0; i < seqs.length; i++) {
 				var val = a[seqs[i]];
 				if ( val == "1" ) { // We only change it to unmarked if it's normal-marked. If val == "2", then it's "itched" and requires special attention.
 					ats[seqs[i]] = "0";
+					stressed[seqs[i]] = 0;
 				}
+			}
+			if ( asscheck == "asset" ) {
+				var effective = 0;
+				if ( typeof(a[rowprefix+"asset-value"]) !== "undefined" ) {
+					effective = Number(a[rowprefix+"asset-value"]);
+				}
+				log("stressed"); log(stressed);
+				for(var i = 0; i < all.length; i++) {
+					if ( typeof(stressed[all[i]]) !== "undefined" && stressed[all[i]] == "1" ) {
+						effective--;
+					}
+				}
+				log("effective"); log(effective);
+				ats[rowprefix+"asset-value-effective"] = effective;
+			}
+			if ( offcheck == "officer" ) {
+				var effective = 0;
+				if ( typeof(a[rowprefix+"die1"]) !== "undefined" ) {
+					effective = Number(a[rowprefix+"die1"]);
+				}
+				log("stressed"); log(stressed);
+				for(var i = 0; i < all.length; i++) {
+					if ( typeof(stressed[all[i]]) !== "undefined" && stressed[all[i]] == "1" ) {
+						effective--;
+					}
+				}
+				if ( effective < 6 ) { effective = 6; } else if ( effective == 7 ) { effective = 8; } else if ( effective == 9 ) { effective = 10; } else if ( effective == 11 ) { effective = 12; }
+				log("effective"); log(effective);
+				ats[rowprefix+"die1-effective"] = effective;
 			}
 			setAttrs(ats);
 			log(namefound);
@@ -106,6 +220,73 @@ on("clicked:itch", function(event) {
 	setAttrs(ats);
 	log(what + " itch");
 });
+
+// Asset value determines track length but has to be asset-value minus 3.
+
+on("change:repeating_assets:asset-value", function(e) {
+	log("change:repeating_assets:asset-value"); log(e);
+	var track = 0;
+	var ats = {};
+	var rowprefix = (e.sourceAttribute).slice(0,-11); // Strips off the 'asset-value'
+	log(rowprefix);
+	if ( typeof(e.newValue) !== "undefined" ) {
+		track = Number(e.newValue) - 3;
+	}
+	ats[e.sourceAttribute + "-track"] = track;
+	log(ats);
+	setAttrs(ats);
+});
+
+// Effective value changes when stress is marked or unmarked — but that's handled in the mark/unmark handler
+
+// Lotta shit to initialize on all assets on open, just to make sure it's all in correct shape -- but we might not actually need this so I'm commenting it out for the nonce
+
+/*
+on("sheet:opened", function(e) {
+	var gets = [];
+	getSectionIDs("repeating_assets", function(ids) {
+		log("sheet:opened for repeating_assets - id list");
+		log(ids);
+		for(i = 0; i < ids.length; i++) {
+			gets[gets.length] = "repeating_assets_"+ids[i]+"_"+"asset-value";
+			for(j = 1; j <= 4; j++) {
+				gets[gets.length] = "repeating_assets_"+ids[i]+"_"+"toggle_stress"+j;
+			}
+		}
+		log(gets);
+		getAttrs(gets, function(got) {
+			log("got");
+			log(got);
+			ats = {};
+			for(i = 0; i < ids.length; i++) {
+				var track = 0;
+				var pre = "repeating_assets_"+ids[i]+"_";
+				var effective = 0;
+				var stress = 0;
+				var key = pre+"asset-value";
+				if ( typeof(got[key]) !== "undefined" && got[key] !== "" ) {
+					track = Number(got[key]) - 3;
+					effective = Number(got[key]);
+				}
+				ats[key + "-track"] = track;
+				for(j = 1; j <= 4; j++) {
+					skey = pre+"toggle_stress"+j;
+					log(got[skey]);
+					if ( typeof(got[skey]) !== "undefined" && got[skey] == "1" ) {
+						effective--; stress++;
+					}
+				}
+				ats[key + "-effective"] = effective;
+				ats[pre + "stress-marked"] = stress;
+			}
+			log(ats);
+			setAttrs(ats);
+		});
+	});
+});
+*/
+
+// Skill roll selection
 
 on("change:roll-main-skill change:roll-second-skill", function(e) {
 	log("change:roll-main-skill change:roll-second-skill");
@@ -282,10 +463,12 @@ on("clicked:repeating_command:skirmishroll clicked:repeating_officers:skirmishro
 	var rt = "&{template:"+template+"} {{name=@{"+rowprefix+"name} ^{skirmishes}}} {{total=[[0]]}} {{itches=[[0]]}} {{die-total=[[0]]}} {{jadedie-total=[[0]]}} {{die-size=@{skirmish-die}}} {{jade-count}}";
 	var alist = [
 		rowprefix+"die1",
+		rowprefix+"die1-effective",
 		rowprefix+"die2",
 		rowprefix+"die3",
 		rowprefix+"die4",
 		rowprefix+"asset-value",
+		rowprefix+"asset-value-effective",
 		rowprefix+"faction-roll-jade", // the discipline indicator
 		rowprefix+"roll-jade-die-1", // the actual dice
 		rowprefix+"roll-jade-die-2",
@@ -293,14 +476,19 @@ on("clicked:repeating_command:skirmishroll clicked:repeating_officers:skirmishro
 	];
 	getAttrs(alist, function(a) {
 
-		if ( typeof(a[rowprefix+"asset-value"]) !== "undefined" && a[rowprefix+"asset-value"] !== "" ) {
+		if ( typeof(a[rowprefix+"asset-value-effective"]) !== "undefined" && a[rowprefix+"asset-value-effective"] !== "" ) {
+			rt += " {{die-name=^{"+ftype+"}}} {{asset-size="+a[rowprefix+"asset-value-effective"]+"}}{{asset-value=[["+a[rowprefix+"asset-value-effective"]+"]]}}";
+		} else if ( typeof(a[rowprefix+"asset-value"]) !== "undefined" && a[rowprefix+"asset-value"] !== "" ) {
 			rt += " {{die-name=^{"+ftype+"}}} {{asset-size="+a[rowprefix+"asset-value"]+"}}{{asset-value=[["+a[rowprefix+"asset-value"]+"]]}}";
 		}
 
 		if ( typeof(a[rowprefix+"die1"]) !== "undefined" && a[rowprefix+"die1"] !== "" ) {
 			rt += " {{die-name=^{"+ftype+"}}}";
 			[1,2,3,4].forEach( (dice) => {
-				if ( typeof(a[rowprefix+"die"+dice]) !== "undefined" && a[rowprefix+"die"+dice] !== "" ) {
+				if ( typeof(a[rowprefix+"die"+dice+"-effective"]) !== "undefined" && a[rowprefix+"die"+dice+"-effective"] !== "") {
+					rt += " {{skirmish-die"+dice+"-size="+a[rowprefix+"die"+dice+"-effective"]+"}}";
+					rt += " {{skirmish-die"+dice+"=[[d"+a[rowprefix+"die"+dice+"-effective"]+"]]}}";
+				} else if ( typeof(a[rowprefix+"die"+dice]) !== "undefined" && a[rowprefix+"die"+dice] !== "" ) {
 					rt += " {{skirmish-die"+dice+"-size="+a[rowprefix+"die"+dice]+"}}";
 					rt += " {{skirmish-die"+dice+"=[[d"+a[rowprefix+"die"+dice]+"]]}}";
 				}
