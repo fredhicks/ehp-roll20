@@ -293,10 +293,17 @@ mixin makeupgrade(label, numboxes, def, desc)
 					+roll("Wanted", "{{type=vice}} {{short=short}} {{title-entanglement=1}} {{title=^{entanglement}}} {{subtitle=^{wantedroll1}@{heat}&nbsp;@{setting_heat_label}^{wantedroll2}}} @{wanted_formula}").sheet-label.inherit.rollbutton
 						span(name="attr_setting_wanted_label")
 					+hidden-input("wanted_formula")(value=zerodiceFormula)
+				+hidden-input("setting_wanted_5th")(value="0").hider-inverted
 				.wantedholder.flex
 					+radio("wanted")(value="0", checked).tooth.zero
 					each num in range(1,4)
 						+radio("wanted")(value=num).tooth.regulartooth
+				+hidden-input("setting_wanted_5th")(value="0").hider
+				.wantedholder.flex
+					+radio("wantedDC")(value="0", checked).tooth.zero
+					each num in range(1,5)
+						+radio("wantedDC")(value=num).tooth.regulartooth
+
 		//- Coin
 		// setting_dc_downtime
 		+hidden-input("setting_dc_downtime")(value="0").hider-inverted
