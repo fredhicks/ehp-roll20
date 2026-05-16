@@ -1,21 +1,17 @@
 #!/usr/bin/perl
 
-print "should only be run the once\n"; exit;
+print "should only be run the once\n"; # exit;
 
-@playbooks = qw(hauntbusters armyofone squareone doomedworld monsterrevs lineage thrillseekers);
+@playbooks = qw(passingthetorch);
 @files = qw(style moves enemies allies assets);
 %pbs = (
-	'hauntbusters' => 'Hauntbusters',
-	'armyofone' => 'ArmyOfOne',
-	'squareone' => 'SquareOne',
-	'doomedworld' => 'DoomedWorld',
-	'monsterrevs' => 'MonsterRevs',
-	'lineage' => 'Lineage',
-	'thrillseekers' => 'ThrillSeekers',
+	'passingthetorch' => 'PassingTheTorch',
 );
 
 foreach $f ( @files ) {
+	print "#", $f, "\n";
 	foreach $pb ( @playbooks ) {
+		print $pb, "\n";
 		`touch team-${f}-${pb}.pug`;
 		`cp team-${f}-survivors.pug team-${f}-${pb}.pug`;
 		my $file = "team-${f}-${pb}.pug";

@@ -141,6 +141,7 @@ span.sheet-Band, div.sheet-Band,
 span.sheet-Whistleblowers, div.sheet-Whistleblowers,
 span.sheet-Fugitives, div.sheet-Fugitives,
 span.sheet-Hauntbusters, div.sheet-Hauntbusters,
+span.sheet-PassingTheTorch, div.sheet-PassingTheTorch,
 span.sheet-ArmyOfOne, div.sheet-ArmyOfOne,
 span.sheet-SquareOne, div.sheet-SquareOne,
 span.sheet-DoomedWorld, div.sheet-DoomedWorld,
@@ -282,6 +283,7 @@ span.sheet-Custom, div.sheet-Custom
 .sheet-TeamCheck[value="29"] ~ div.sheet-RadioStation,
 .sheet-TeamCheck[value="30"] ~ div.sheet-ResearchLab,
 .sheet-TeamCheck[value="31"] ~ div.sheet-SwipeToSlay,
+.sheet-TeamCheck[value="32"] ~ div.sheet-PassingTheTorch,
 .sheet-TeamCheck[value="99"] ~ div.sheet-CustomTeam
 {
 	display: block;
@@ -493,6 +495,8 @@ span.sheet-Custom, div.sheet-Custom
 .sheet-TeamCheck[value="30"] ~ div > span.sheet-ResearchLab,
 .sheet-TeamCheck[value="31"] ~ div > span > span.sheet-SwipeToSlay,
 .sheet-TeamCheck[value="31"] ~ div > span.sheet-SwipeToSlay,
+.sheet-TeamCheck[value="32"] ~ div > span > span.sheet-PassingTheTorch,
+.sheet-TeamCheck[value="32"] ~ div > span.sheet-PassingTheTorch,
 .sheet-TeamCheck[value="99"] ~  div > span > span.sheet-CustomTeam,
 .sheet-TeamCheck[value="99"] ~  div > span.sheet-CustomTeam
 {
