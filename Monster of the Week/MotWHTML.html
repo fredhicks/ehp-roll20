@@ -1378,6 +1378,449 @@ on("change:repeating_hunterstory:story", function(e) {
           </div>
         </div>
         <div class="sheet-isolator">
+          <input class="sheet-checkbox sheet-RefToggle" type="checkbox" name="attr_Toggle-Zoom-In-Combat" value="1"/><span class="sheet-anglebox"></span> <span class="sheet-MinorHead"><span data-i18n="Zoomed-In Combat"></span> </span>
+          <div class="sheet-Reference"><span data-i18n="Use these moves when you want a more detailed, duel-style combat scene. (From Mystic Marginalia, pages 107-112)"></span> 
+            <div class="sheet-isolator">
+              <input class="sheet-checkbox sheet-RefToggle" type="checkbox" name="attr_Toggle-Zoom-In-KeeperMoves" value="1"/><span class="sheet-anglebox"></span> <span class="sheet-MinorHead"><span data-i18n="Keeper’s Zoomed-In Moves"></span> </span>
+              <div class="sheet-Reference"><span data-i18n="Although the zoomed-in moves specify what happens for each result level, the Keeper may still make a normal Keeper or threat move after resolving the zoomed-in combat move."></span> <span data-i18n="As Keeper, you may use these extra Keeper moves during zoomed-in combat scenes."></span> 
+                <div class="sheet-isolator">
+                  <input class="sheet-checkbox sheet-RefToggle" type="checkbox" name="attr_Toggle-Zoom-In-MonsterMoves" value="1"/><span class="sheet-anglebox"></span> <span class="sheet-MinorHead"><span data-i18n="Zoomed-in combat moves for monsters, minions, and villains"></span> </span>
+                  <div class="sheet-Reference">
+                    <ul>
+                      <li><span data-i18n="Attack the hunter it thinks most dangerous."></span> 
+                      </li>
+                      <li><span data-i18n="Attack the hunter it thinks most vulnerable."></span> 
+                      </li>
+                      <li><span data-i18n="Attack a bystander."></span> 
+                      </li>
+                      <li><span data-i18n="Defend another monster, minion, or villain."></span> 
+                      </li>
+                      <li><span data-i18n="Advance a nefarious plan."></span> 
+                      </li>
+                      <li><span data-i18n="Interfere with something the hunters need to do."></span> 
+                      </li>
+                      <li><span data-i18n="Scan for other dangers."></span> 
+                      </li>
+                      <li><span data-i18n="Reveal a new tactic, power, attack, or defence."></span> 
+                      </li>
+                      <li><span data-i18n="Taunt the hunters."></span> 
+                      </li>
+                      <li><span data-i18n="Reveal an important fact or secret, perhaps unintentionally."></span> 
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="sheet-isolator">
+                  <input class="sheet-checkbox sheet-RefToggle" type="checkbox" name="attr_Toggle-Zoom-In-LocationMoves" value="1"/><span class="sheet-anglebox"></span> <span class="sheet-MinorHead"><span data-i18n="Zoomed-in combat moves for the fight location"></span> </span>
+                  <div class="sheet-Reference">
+                    <ul>
+                      <li><span data-i18n="A way is opened or closed. Examples: a locked door opens, an open door is barred, a passageway is cleared."></span> 
+                      </li>
+                      <li><span data-i18n="Something is broken. Examples: a door is smashed, a wall comes down, machinery explodes."></span> 
+                      </li>
+                      <li><span data-i18n="Reveal a danger. Examples: a fire starts, a trap activates, poison gas sprays."></span> 
+                      </li>
+                      <li><span data-i18n="A danger inflicts harm."></span> 
+                      </li>
+                      <li><span data-i18n="Reveal a new area. Examples: a balcony, air vents, a portal to another place opens."></span> 
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="sheet-isolator">
+              <input class="sheet-checkbox sheet-RefToggle" type="checkbox" name="attr_Toggle-Zoom-In-HunterMoves" value="1"/><span class="sheet-anglebox"></span> <span class="sheet-MinorHead"><span data-i18n="Hunter’s Zoomed-In Moves"></span> </span>
+              <div class="sheet-Reference">
+                <div class="sheet-isolator">
+                  <input class="sheet-checkbox sheet-RefToggle" type="checkbox" name="attr_Toggle-Zoom-In-HunterMoves-Overview" value="1"/><span class="sheet-anglebox"></span> <span class="sheet-MinorHead"><span data-i18n="How These Work"></span> </span>
+                  <div class="sheet-Reference"><span data-i18n="Here’s a quick description of the moves available:"></span> 
+                    <ul>
+                      <li><span data-i18n="Apply Weakness: If you need to do something special to activate an enemy’s weakness."></span> 
+                      </li>
+                      <li><span data-i18n="Balanced Strike: A basic attack on an enemy."></span> 
+                      </li>
+                      <li><span data-i18n="Cautious Strike: A weaker attack on an enemy, not exposing yourself to much danger."></span> 
+                      </li>
+                      <li><span data-i18n="Distract: Change who or what your enemies are focused on."></span> 
+                      </li>
+                      <li><span data-i18n="Expose Vulnerability: Provides one-use reductions to an enemy’s armour rating, or boosts attacks against them."></span> 
+                      </li>
+                      <li><span data-i18n="Flanking Strike: A strong attack available when an enemy is unaware of or ignoring you."></span> 
+                      </li>
+                      <li><span data-i18n="Maneuver: Move around the field of battle."></span> 
+                      </li>
+                      <li><span data-i18n="Quick First Aid: Simple, midst-of-combat healing."></span> 
+                      </li>
+                      <li><span data-i18n="Reckless Strike: A strong attack that exposes yourself to more danger."></span> 
+                      </li>
+                      <li><span data-i18n="Restrain: Hold or pin an enemy."></span> 
+                      </li>
+                      <li><span data-i18n="Setup Combo: Prepare an ally for a stronger strike on an enemy."></span> 
+                      </li>
+                    </ul>
+                    <div class="sheet-isolator">
+                      <input class="sheet-checkbox sheet-RefToggle" type="checkbox" name="attr_Toggle-Zoom-In-AllKSA" value="1"/><span class="sheet-anglebox"></span> <span class="sheet-MinorHead"><span data-i18n="It’s All “Kick Some Ass”"></span> </span>
+                      <div class="sheet-Reference"><span data-i18n="When using these moves for a fight scene, the kick some ass move will not be available. Hunters with moves altering kick some ass should have the same or equivalent adjustments made to the zoomed-in combat moves. In particular:"></span> 
+                        <ul>
+                          <li><span data-i18n="Anything that directly enhances harm applies to the strike moves."></span> 
+                          </li>
+                          <li><span data-i18n="Anything that gives you more options applies to similar moves."></span> 
+                          </li>
+                          <li><span data-i18n="If you have advanced kick some ass, pick three zoomed-in combat moves that count as advanced for you."></span> 
+                          </li>
+                        </ul><span data-i18n="For help out, the basic move remains available, but setup combo will often be more useful."></span> <span data-i18n="The other basic moves all work as usual. In particular, protect someone and use magic remain good options during a fight scene."></span> <span data-i18n="Effects that apply to “a strike” mean a single use of any moves with “strike” in their name: balanced strike, cautious strike, flanking strike, and reckless strike."></span> 
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="sheet-isolator">
+                  <input class="sheet-checkbox sheet-RefToggle" type="checkbox" name="attr_Toggle-Zoom-In-ApplyWeakness" value="1"/><span class="sheet-anglebox"></span> <span class="sheet-MinorHead"><span data-i18n="Apply Weakness"></span> </span>
+                  <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Apply Weakness}} {{Roll=[[2d6+?{Apply Weakness with|Sharp (Default),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_refroller"></button> 
+                  <div class="sheet-Reference"><span data-i18n="Use this if you need to do something special to apply a threat’s weakness. Roll +Sharp (using a cunning plan), +Tough (you need to injure it a particular way), or +Weird (you need to use magic or its mystical weakness):"></span> 
+                    <ul>
+                      <li><span data-i18n="On a 12+, if you’ve advanced this move, apply the weakness and inflict harm as established."></span> 
+                      </li>
+                      <li><span data-i18n="On a 10+, you apply the weakness."></span> 
+                      </li>
+                      <li><span data-i18n="On a 7–9, you apply the weakness but suffer harm from an enemy in the process."></span> 
+                      </li>
+                      <li><span data-i18n="On a 6–, you suffer terrible harm (+1) from an enemy."></span> 
+                      </li><span data-i18n="If the threat’s weakness can be activated without special action, this move isn’t needed—if you hit with a weapon made of the weakness, or if you’re fighting in a location that is the weakness. Use this move when the weakness needs a specific action, like poisoning a particular organ, or maneuvering the creature onto a magic circle."></span> 
+                    </ul>
+                  </div>
+                </div>
+                <div class="sheet-isolator">
+                  <input class="sheet-checkbox sheet-RefToggle" type="checkbox" name="attr_Toggle-Zoom-In-BalancedStrike" value="1"/><span class="sheet-anglebox"></span> <span class="sheet-MinorHead"><span data-i18n="Balanced Strike"></span> </span>
+                  <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Balanced Strike}} {{Roll=[[2d6+?{Balanced Strike with|Tough (Default),@{Tough}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_refroller"></button> 
+                  <div class="sheet-Reference"><span data-i18n="Use this move to inflict harm on an enemy without particular caution or foolhardiness. Roll +Tough (using skill) or +Cool (using grit):"></span> 
+                    <ul>
+                      <li><span data-i18n="On a 12+, if you’ve advanced this move, inflict terrible harm (+1) as per your attack."></span> 
+                      </li>
+                      <li><span data-i18n="On a 10+, inflict harm as per your attack."></span> 
+                      </li>
+                      <li><span data-i18n="On a 7–9, inflict harm as per your attack. An enemy either inflicts reduced harm (–1) or makes another move."></span> 
+                      </li>
+                      <li><span data-i18n="On a 6–, suffer harm from an enemy’s attack."></span> 
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="sheet-isolator">
+                  <input class="sheet-checkbox sheet-RefToggle" type="checkbox" name="attr_Toggle-Zoom-In-CautiousStrike" value="1"/><span class="sheet-anglebox"></span> <span class="sheet-MinorHead"><span data-i18n="Cautious Strike"></span> </span>
+                  <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Cautious Strike}} {{Roll=[[2d6+?{Cautious Strike with|Tough (Default),@{Tough}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_refroller"></button> 
+                  <div class="sheet-Reference"><span data-i18n="Cautious Strike: Use this move to inflict harm on an enemy exposing yourself to little danger. Roll +Tough (using skill) or +Sharp (waiting for your moment):"></span> 
+                    <ul>
+                      <li><span data-i18n="On a 12+, if you’ve advanced this move, inflict harm as per your attack. Hold 2 you can spend to avoid 1 harm per hold from this foe."></span> 
+                      </li>
+                      <li><span data-i18n="On a 10+, inflict reduced harm (–1) as per your attack. Hold 1 you can spend to avoid 1 harm from this foe."></span> 
+                      </li>
+                      <li><span data-i18n="On a 7–9, inflict reduced harm (–1) as per your attack."></span> 
+                      </li>
+                      <li><span data-i18n="On a 6–, suffer trivial harm (–2) from an enemy’s attack."></span> 
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="sheet-isolator">
+                  <input class="sheet-checkbox sheet-RefToggle" type="checkbox" name="attr_Toggle-Zoom-In-Distract" value="1"/><span class="sheet-anglebox"></span> <span class="sheet-MinorHead"><span data-i18n="Distract"></span> </span>
+                  <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Distract}} {{Roll=[[2d6+?{Distract with|Charm (Default),@{Charm}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_refroller"></button> 
+                  <div class="sheet-Reference"><span data-i18n="Use this move to get the enemy’s attention where you want it. Roll +Charm (taunts), +Cool (being badass), +Sharp (trickery), or +Weird (magic):"></span> 
+                    <ul>
+                      <li><span data-i18n="On a 12+, if you’ve advanced this move, pick three distraction options."></span> 
+                      </li>
+                      <li><span data-i18n="On a 10–12, pick two distraction options."></span> 
+                      </li>
+                      <li><span data-i18n="On a 7–9, pick one distraction option."></span> 
+                      </li>
+                      <li><span data-i18n="On a 6–, you draw an enemy’s attention and suffer harm from their attack."></span> 
+                      </li>
+                    </ul><span data-i18n="Distraction options:"></span> 
+                    <ul>
+                      <li><span data-i18n="All enemies focus on you or one of your allies."></span> 
+                      </li>
+                      <li><span data-i18n="An enemy pays no attention to you. You may make a flanking strike, until they notice you. You may use this multiple times to affect multiple enemies."></span> 
+                      </li>
+                      <li><span data-i18n="An enemy pays no attention to another hunter, giving them the option to make a flanking strike, until the enemy notices them."></span> 
+                      </li>
+                      <li><span data-i18n="An enemy ignores something important (such as someone casting a spell, an escaping bystander, or someone using a gadget). May be selected multiple times to affect multiple enemies."></span> 
+                      </li>
+                      <li><span data-i18n="An enemy moves away from, or towards, a particular place."></span> 
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="sheet-isolator">
+                  <input class="sheet-checkbox sheet-RefToggle" type="checkbox" name="attr_Toggle-Zoom-In-ExposeVulnerability" value="1"/><span class="sheet-anglebox"></span> <span class="sheet-MinorHead"><span data-i18n="Expose Vulnerability"></span> </span>
+                  <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Expose Vulnerability}} {{Roll=[[2d6+?{Expose Vulnerability with|Sharp (Default),@{Sharp}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_refroller"></button> 
+                  <div class="sheet-Reference"><span data-i18n="Use this to make an enemy an easier target for yourself and your allies. Roll +Sharp (observation) or +Weird (mystical):"></span> 
+                    <ul>
+                      <li><span data-i18n="On a 12+, if you’ve advanced this move, hold 4."></span> 
+                      </li>
+                      <li><span data-i18n="On a 10+, hold 3."></span> 
+                      </li>
+                      <li><span data-i18n="On a 7–9, hold 2."></span> 
+                      </li>
+                      <li><span data-i18n="On a 6–, hold 1 and an enemy gets a shot at you."></span> 
+                      </li>
+                    </ul><span data-i18n="Spend your hold during this fight to:"></span> 
+                    <ul>
+                      <li><span data-i18n="Give a hunter +1 forward on a strike against this enemy."></span> 
+                      </li>
+                      <li><span data-i18n="Reduce the enemy’s armour by 1 for a single strike. You may spend multiple holds for this."></span> 
+                      </li>
+                      <li><span data-i18n="Give a hunter +1 harm for a single strike. You may spend multiple holds for this."></span> 
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="sheet-isolator">
+                  <input class="sheet-checkbox sheet-RefToggle" type="checkbox" name="attr_Toggle-Zoom-In-FlankingStrike" value="1"/><span class="sheet-anglebox"></span> <span class="sheet-MinorHead"><span data-i18n="Flanking Strike"></span> </span>
+                  <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Flanking Strike}} {{Roll=[[2d6+?{Flanking Strike with|Tough (Default),@{Tough}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_refroller"></button> 
+                  <div class="sheet-Reference"><span data-i18n="Use this move when your enemy is unaware of you or distracted. This includes when a hunter has engaged it and you’ve worked your way behind. Roll +Tough (full force) or +Cool (cold-blooded):"></span> 
+                    <ul>
+                      <li><span data-i18n="On a 12+, if you’ve advanced this move, inflict terrible harm (+1) as per your attack. If other hunters are engaged with this enemy, they may also inflict their attack’s harm."></span> 
+                      </li>
+                      <li><span data-i18n="On a 10+, inflict terrible harm (+1) as per your attack."></span> 
+                      </li>
+                      <li><span data-i18n="On a 7–9, inflict harm as per your attack."></span> 
+                      </li>
+                      <li><span data-i18n="On a 6–, inflict reduced harm (–1) as per your attack, and take –1 forward."></span> 
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="sheet-isolator">
+                  <input class="sheet-checkbox sheet-RefToggle" type="checkbox" name="attr_Toggle-Zoom-In-Maneuver" value="1"/><span class="sheet-anglebox"></span> <span class="sheet-MinorHead"><span data-i18n="Maneuver"></span> </span>
+                  <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Maneuver}} {{Roll=[[2d6+?{Maneuver with|Tough (Default),@{Tough}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_refroller"></button> 
+                  <div class="sheet-Reference"><span data-i18n="Use this move to get yourself a better position against an enemy. Roll +Charm (intuit intentions) or +Sharp (situational awareness):"></span> 
+                    <ul>
+                      <li><span data-i18n="On a 12+, if you’ve advanced this move, you’re where you want to be without attracting undue attention. Take +1 forward, or give +1 forward to an ally. You may make a flanking strike while in this position."></span> 
+                      </li>
+                      <li><span data-i18n="On a 10+, you’re where you want to be without attracting undue attention. You may make a flanking strike while in this position."></span> 
+                      </li>
+                      <li><span data-i18n="On a 7–9, you’re where you want to be."></span> 
+                      </li>
+                      <li><span data-i18n="On a 6–, an enemy stops you getting where you want to be."></span> 
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="sheet-isolator">
+                  <input class="sheet-checkbox sheet-RefToggle" type="checkbox" name="attr_Toggle-Zoom-In-QuickFirstAid" value="1"/><span class="sheet-anglebox"></span> <span class="sheet-MinorHead"><span data-i18n="Quick First Aid"></span> </span>
+                  <div class="sheet-Reference"><span data-i18n="Use this to aid an injured ally. If they’re unstable, clear it. Otherwise, they clear 1 harm."></span> 
+                  </div>
+                </div>
+                <div class="sheet-isolator">
+                  <input class="sheet-checkbox sheet-RefToggle" type="checkbox" name="attr_Toggle-Zoom-In-RecklessStrike" value="1"/><span class="sheet-anglebox"></span> <span class="sheet-MinorHead"><span data-i18n="Reckless Strike"></span> </span>
+                  <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Reckless Strike}} {{Roll=[[2d6+?{Reckless Strike with|Tough (Default),@{Tough}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_refroller"></button> 
+                  <div class="sheet-Reference"><span data-i18n="Use this move to inflict extreme harm on an enemy, whatever the cost. Roll +Tough (purely physical) or +Weird (magically enhanced):"></span> 
+                    <ul>
+                      <li><span data-i18n="On a 12+, if you’ve advanced this move, inflict critical harm (+2) as per your attack and take +1 forward."></span> 
+                      </li>
+                      <li><span data-i18n="On a 10–12, inflict critical harm (+2) as per your attack and take +1 forward. An enemy gets the opportunity to hit you back."></span> 
+                      </li>
+                      <li><span data-i18n="On a 7–9, inflict terrible harm (+1) as per your attack. An enemy gets the opportunity to hit you back for terrible harm (+1)."></span> 
+                      </li>
+                      <li><span data-i18n="On a 6–, suffer critical harm (+2) from an enemy’s counterattack."></span> 
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="sheet-isolator">
+                  <input class="sheet-checkbox sheet-RefToggle" type="checkbox" name="attr_Toggle-Zoom-In-Restrain" value="1"/><span class="sheet-anglebox"></span> <span class="sheet-MinorHead"><span data-i18n="Restrain"></span> </span>
+                  <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Restrain}} {{Roll=[[2d6+?{Restrain with|Tough (Default),@{Tough}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_refroller"></button> 
+                  <div class="sheet-Reference"><span data-i18n="Use this move to disarm or pin an enemy. Roll +Tough (pin) or +Cool (disarm):"></span> 
+                    <ul>
+                      <li><span data-i18n="On a 12+, if you’ve advanced this move, pick three restrain options."></span> 
+                      </li>
+                      <li><span data-i18n="On a 10+, pick two restrain options."></span> 
+                      </li>
+                      <li><span data-i18n="On a 7–9, pick one restrain option, and the enemy gets a shot at you in the process."></span> 
+                      </li>
+                      <li><span data-i18n="On a 6–, suffer harm from the enemy’s attack."></span> 
+                      </li>
+                    </ul><span data-i18n="Restrain options:"></span> 
+                    <ul>
+                      <li><span data-i18n="(Counts as two picks) Fully restrain a humanoid foe, or fully restrain three limbs of anything else. These limbs cannot attack or move."></span> 
+                      </li>
+                      <li><span data-i18n="Fully restrain one limb. That limb cannot attack or move."></span> 
+                      </li>
+                      <li><span data-i18n="Hold your enemy in place."></span> 
+                      </li>
+                      <li><span data-i18n="Throw or trip your enemy."></span> 
+                      </li>
+                      <li><span data-i18n="Disarm your enemy. One item is dropped, thrown, or in your hand."></span> 
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="sheet-isolator">
+                  <input class="sheet-checkbox sheet-RefToggle" type="checkbox" name="attr_Toggle-Zoom-In-SetupCombo" value="1"/><span class="sheet-anglebox"></span> <span class="sheet-MinorHead"><span data-i18n="Setup Combo"></span> </span>
+                  <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Setup Combo}} {{Roll=[[2d6+?{Setup Combo with|Charm (Default),@{Charm}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_refroller"></button> 
+                  <div class="sheet-Reference"><span data-i18n="Use this move to prepare an ally for a stronger strike. Roll +Charm:"></span> 
+                    <ul>
+                      <li><span data-i18n="On a 12+, if you’ve advanced this move, your ally gets +1 forward to strike, and +1 harm when they do it. You may add your attack’s harm when they strike."></span> 
+                      </li>
+                      <li><span data-i18n="On a 10+, your ally gets +1 forward to strike. You may add your attack’s harm when they strike."></span> 
+                      </li>
+                      <li><span data-i18n="On a 7–9, your ally gets +1 forward to strike."></span> 
+                      </li>
+                      <li><span data-i18n="On a 6–, you suffer harm from an enemy’s attack."></span> 
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="sheet-isolator">
+          <input class="sheet-checkbox sheet-RefToggle" type="checkbox" name="attr_Toggle-Zoom-Out-Combat" value="1"/><span class="sheet-anglebox"></span> <span class="sheet-MinorHead"><span data-i18n="Zoomed-Out Combat"></span> </span>
+          <div class="sheet-Reference"><span data-i18n="These moves allow you to resolve a combat quickly, with only one roll per hunter. Action is resolved in a back-and-forth of hold spends. (From Mystic Marginalia, pages 104-106)"></span> 
+            <div class="sheet-isolator">
+              <input class="sheet-checkbox sheet-RefToggle" type="checkbox" name="attr_Toggle-Zoom-Out-Setup" value="1"/><span class="sheet-anglebox"></span> <span class="sheet-MinorHead"><span data-i18n="Setup"></span> </span>
+              <div class="sheet-Reference"><span data-i18n="Hunters pick which rating to roll. Tough is the default, but hunters with specific moves may swap for a different rating.You can always use +Tough.You can use +Weird if you have mystical moves that are useful in a fight.You can use +Cool if you have moves that support the team in a fight.You can use +Sharp if you have moves that give you greater combat awareness.If your hunter has reached their advanced improvements, take +1 forward.If your hunter has 2 or more points of armour and/or harm mitigation moves, take +1 forward.If one side ambushed the other, they start with +2 hold."></span> 
+              </div>
+            </div>
+            <div class="sheet-isolator">
+              <input class="sheet-checkbox sheet-RefToggle" type="checkbox" name="attr_Toggle-Zoom-Out-KeeperHold" value="1"/><span class="sheet-anglebox"></span> <span class="sheet-MinorHead"><span data-i18n="Keeper Hold"></span> </span>
+              <div class="sheet-Reference"><span data-i18n="The Keeper starts with hold based on the danger level of all enemies involved in the fight, plus a bonus if the hunters are outnumbered. Refer to the following table for the hold total:"></span> 
+                <table>
+                  <tr>
+                    <th><span data-i18n="Danger Level"></span> 
+                    </th>
+                    <th><span data-i18n="Starting Hold"></span> 
+                    </th>
+                  </tr>
+                  <tr>
+                    <td><span data-i18n="Minor"></span> 
+                    </td>
+                    <td>0</td>
+                  </tr>
+                  <tr>
+                    <td><span data-i18n="Moderate"></span> 
+                    </td>
+                    <td>1</td>
+                  </tr>
+                  <tr>
+                    <td><span data-i18n="Typical"></span> 
+                    </td>
+                    <td>2</td>
+                  </tr>
+                  <tr>
+                    <td><span data-i18n="Serious"></span> 
+                    </td>
+                    <td>3</td>
+                  </tr>
+                  <tr>
+                    <td><span data-i18n="Deadly"></span> 
+                    </td>
+                    <td>4</td>
+                  </tr>
+                  <tr>
+                    <td><span data-i18n="Nigh Impossible"></span> 
+                    </td>
+                    <td>5</td>
+                  </tr>
+                  <tr>
+                    <td><span data-i18n="Hunters outnumbered"></span> 
+                    </td>
+                    <td>+1</td>
+                  </tr>
+                  <tr>
+                    <td><span data-i18n="Hunters highly outnumbered"></span> 
+                    </td>
+                    <td>+2</td>
+                  </tr>
+                </table><span data-i18n="For example, if the hunters are up against:A serious vampire (3) with three typical dhampir minions (2 each), the Keeper holds 9. If less than four hunters, the Keeper gets +1 hold.A moderate swarm of zombie rats (1, +2 for highly outnumbering the hunters), the Keeper holds 3."></span> 
+              </div>
+            </div>
+            <div class="sheet-isolator">
+              <input class="sheet-checkbox sheet-RefToggle" type="checkbox" name="attr_Toggle-Zoom-Out-HunterRoll" value="1"/><span class="sheet-anglebox"></span> <span class="sheet-MinorHead"><span data-i18n="Hunters Roll"></span> </span>
+              <button class="sheet-2d6-button" type="roll" value="&amp;{template:motw-dieroll} {{CharName=@{character_name}}} {{title=Zoomed-Out Hunter Roll}} {{Roll=[[2d6+?{Zoomed-Out Hunter Roll with|Tough (Default),@{Tough}|Charm,@{Charm}|Cool,@{Cool}|Sharp,@{Sharp}|Tough,@{Tough}|Weird,@{Weird}}+?{+/- forward?|0}]]}}" name="roll_refroller"></button> 
+              <div class="sheet-Reference"><span data-i18n="Every hunter makes their roll:On a 12+, hold 3.On a 10–11, hold 2.On a 7–9, hold 1 and the Keeper gets +1 hold.On a 6–, hold 1 and the Keeper gets +2 hold."></span> 
+              </div>
+            </div>
+            <div class="sheet-isolator">
+              <input class="sheet-checkbox sheet-RefToggle" type="checkbox" name="attr_Toggle-Zoom-Out-Resolution" value="1"/><span class="sheet-anglebox"></span> <span class="sheet-MinorHead"><span data-i18n="Resolution"></span> </span>
+              <div class="sheet-Reference">
+                <p><span data-i18n="Now take turns, first a hunter spending a hold, then the Keeper, back and forth. Once each combatant has taken a turn, they can’t act again until all other fighters on their side—with hold left—have taken a turn as well."></span> 
+                </p>
+                <p><span data-i18n="Don’t overthink it! The whole point of zoomed-out combat is to resolve the scene quickly. If you can’t decide, default to inflicting harm with an attack or defeating a minion."></span> 
+                </p>
+                <div class="sheet-isolator">
+                  <input class="sheet-checkbox sheet-RefToggle" type="checkbox" name="attr_Toggle-Zoom-Out-HunterSpend" value="1"/><span class="sheet-anglebox"></span> <span class="sheet-MinorHead"><span data-i18n="Hunters may spend 1 hold to:"></span> </span>
+                  <div class="sheet-Reference">
+                    <ul>
+                      <li><span data-i18n="Inflict harm on a monster or villain using one of their attacks."></span> 
+                      </li>
+                      <li><span data-i18n="Defeat one regular minion."></span> 
+                      </li>
+                      <li><span data-i18n="Spend 2 hold: Defeat a tough minion. Two hunters may each contribute hold."></span> 
+                      </li>
+                      <li><span data-i18n="Defeat two weak minions, or a swarm of individually trivial minions."></span> 
+                      </li>
+                      <li><span data-i18n="Apply a weakness (if appropriate for a fight scene)."></span> 
+                      </li>
+                      <li><span data-i18n="Reduce a hunter’s harm suffered by 2."></span> 
+                      </li>
+                      <li><span data-i18n="Get a bystander to safety."></span> 
+                      </li>
+                      <li><span data-i18n="Have a hunter escape the fight."></span> 
+                      </li>
+                      <li><span data-i18n="Neutralise one aspect of a nefarious plot (interfere with a ritual, break a device, etc.)."></span> 
+                      </li>
+                      <li><span data-i18n="Use a move that isn’t directly about fighting."></span> 
+                      </li>
+                      <li><span data-i18n="Make some other useful action or maneuver, with group agreement."></span> 
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="sheet-isolator">
+                  <input class="sheet-checkbox sheet-RefToggle" type="checkbox" name="attr_Toggle-Zoom-Out-KeeperSpend" value="1"/><span class="sheet-anglebox"></span> <span class="sheet-MinorHead"><span data-i18n="The Keeper may spend 1 hold to:"></span> </span>
+                  <div class="sheet-Reference">
+                    <ul>
+                      <li><span data-i18n="Inflict harm on a hunter using an attack from any threat in the fight."></span> 
+                      </li>
+                      <li><span data-i18n="Kill (or otherwise take out) a bystander."></span> 
+                      </li>
+                      <li><span data-i18n="A monster, minion, phenomenon, or villain uses a power."></span> 
+                      </li>
+                      <li><span data-i18n="A monster, minion, or villain escapes the fight. For the main threat of the mystery, this costs 1 hold per active hunter (hunters who have escaped or are out of action don’t count)."></span> 
+                      </li>
+                      <li><span data-i18n="Inflict massive collateral damage."></span> 
+                      </li>
+                      <li><span data-i18n="Advance a nefarious plot (next step of ritual, activate a device, etc.)."></span> 
+                      </li>
+                      <li><span data-i18n="Use a move that isn’t directly about fighting."></span> 
+                      </li>
+                      <li><span data-i18n="Make some other useful action or maneuver, with group agreement."></span> 
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="sheet-isolator">
+              <input class="sheet-checkbox sheet-RefToggle" type="checkbox" name="attr_Toggle-Zoom-Out-Aftermath" value="1"/><span class="sheet-anglebox"></span> <span class="sheet-MinorHead"><span data-i18n="Aftermath"></span> </span>
+              <div class="sheet-Reference"><span data-i18n="Once all hold is spent, the fight is over. If both sides have survivors, the Keeper decides if:"></span> 
+                <ul>
+                  <li><span data-i18n="The hunters finish off any remaining monsters, minions, and villains. This is the default if the hunters managed to deal with most of their enemies."></span> 
+                  </li>
+                  <li><span data-i18n="The hunters retreat. Use this when the enemies end up in a stronger position."></span> 
+                  </li>
+                  <li><span data-i18n="The monsters, minions, and villains retreat. Use this when the hunters end up in a stronger position."></span> 
+                  </li>
+                  <li><span data-i18n="Both sides disengage and retreat."></span> 
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="sheet-isolator">
           <input class="sheet-checkbox sheet-RefToggle" type="checkbox" name="attr_Toggle-OTopics" value="1"/><span class="sheet-anglebox"></span> <span class="sheet-MinorHead" data-i18n="other-topics">Other Topics</span>
           <div class="sheet-Reference">
             <input class="sheet-SettingCheck" type="hidden" name="attr_Game-World" value="0"/>
