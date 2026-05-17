@@ -1,5 +1,234 @@
 - 
 	var hstories = {
+		"Abandoned": [
+			{
+				"title": "A Link to the Past",
+				"desc": "Against all odds, the Abandoned has met someone or something from their past. This is someone who either had a part in their abandonment or knew them from before they were abandoned. In either case, they have brought old troubles back into the hunter’s life and possibly created new ones. The story is about your unresolved feelings about the people from your past and whether you will ultimately choose to move on with your life or get some closure from this fraught reunion.",
+				"entryintro": "A perfect opportunity to start this hunter story is when:",
+				"entries": [
+					"You have spent Luck recently.",
+					"You talked about someone from your past.",
+				],
+				"choices": [
+					{
+						"prompt": "Choose who the Link is:",
+						"options": [
+							{
+								"option": "A relative.",
+							}, 
+							{
+								"option": "A friend.",
+							}, 
+							{
+								"option": "A witness.",
+							}, 
+							{
+								"option": "A creature.",
+							}, 
+							{
+								"option": "A rival or enemy.",
+							},
+							{
+								"option": "Something else:",
+								"hasblank": true,
+							},
+						],
+					},
+					{
+						"prompt": "Choose the unresolved issue they have with you:",
+						"options": [
+							{
+								"option": "They were complicit in your abandonment.",
+							}, 
+							{
+								"option": "They’ve obsessed over your abandonment.",
+							}, 
+							{
+								"option": "They were blamed for your abandonment.",
+							}, 
+							{
+								"option": "Your abandonment left them in danger.",
+							}, 
+							{
+								"option": "They could have helped you but didn’t.",
+							}, 
+							{
+								"option": "They’ve repressed thoughts about your abandonment.",
+							},
+						],
+					},
+					{
+						"prompt": "Choose the new trouble they bring to your life:",
+						"options": [
+							{
+								"option": "They want something from you: information, an object, or an act.",
+							}, 
+							{
+								"option": "They want to “rescue” you and go back to how things used to be.",
+							}, 
+							{
+								"option": "Something has targeted them and they need help.",
+							}, 
+							{
+								"option": "They’re lying about something. Also choose what they claim to be reaching out for.",
+							},
+						],
+					},
+				],
+				"beats": [
+					"You and the Link spend significant time either talking about the past or actively avoiding talking about the past.",
+					"You talk honestly with someone else about how you think of your past with the Link.",
+					"You or the Link does something to show how much things have changed.",
+					"You or the Link unintentionally puts the other in danger.",
+					"You and the Link come into major conflict.",
+				],
+				"resolutionintro": "After each session, consider if this story has been resolved. If so, tell the other players. You can take one of the resolution moves to show how this story changed you.",
+				"resolutions": [
+					{
+						"mname": "Move On",
+						"mdesc": "That isn’t your life anymore, those old problems aren’t yours. Take –1 forward when you lean on memories or contacts from your past. Mark experience when you disregard the past and that causes problems.",
+					},
+					{
+						"mname": "Closure",
+						"mdesc": "You’ve finally closed the book on that chapter of your life. Take +1 forward when you make a move related to a past experience. Take –1 ongoing when forced to deal with a problem you thought resolved.",
+					},
+				],
+			},
+			{
+				"title": "History Repeats Itself",
+				"desc": "The Abandoned comes across another person who is at risk of finding themself alone in the world like the hunter once was. This story revolves around the hunter’s understanding of how valuable connection and family can be, and the hope to spare someone from the trauma they experienced. The situations they’re seeing may not be exactly the same as what happened to them and they definitely aren’t seeing all the information, but the risk of someone being left alone in the world is clear.",
+				"entryintro": "A perfect opportunity to start this hunter story is when:",
+				"entries": [
+					"The hunters meet someone who doesn’t value the life they have.",
+					"You wonder what life would be like if you weren’t abandoned.",
+				],
+				"choices": [
+					{
+						"prompt": "Choose your Ward:",
+						"options": [
+							{
+								"option": "A child.",
+							},
+							{
+								"option": "A teenager.",
+							},
+							{
+								"option": "A created being.",
+							},
+							{
+								"option": "A bonded spirit.",
+							},
+							{
+								"option": "The spirit of a place.",
+							},
+							{
+								"option": "An exceptional animal.",
+							},
+							{
+								"option": "A supernatural being.",
+							},
+							{
+								"option": "Someone else:",
+								"hasblank": true,
+							},
+						],
+					},
+					{
+						"prompt": "Choose your Risk:",
+						"options": [
+							{
+								"option": "A tragedy will occur, leaving the Ward isolated.",
+							},
+							{
+								"option": "The Ward is going to run away from their home.",
+							},
+							{
+								"option": "A malevolent supernatural force wants the Ward for its own purposes.",
+							},
+							{
+								"option": "The Ward is a pawn of contention in a bitter argument, such as a divorce.",
+							},
+							{
+								"option": "A monster or phenomenon threatens to kill those around the Ward.",
+							},
+							{
+								"option": "Something else:",
+								"hasblank": true,
+							},
+						],
+					},
+					{
+						"prompt": "Choose how you learned about the situation:",
+						"options": [
+							{
+								"option": "You know and care about the Ward.",
+							},
+							{
+								"option": "You saw signs of trouble and investigated.",
+							},
+							{
+								"option": "You received a vision of future tragedy.",
+							},
+							{
+								"option": "Someone came to you for advice or help.",
+							},
+							{
+								"option": "You know the current guardian is in a dangerous situation or taking bigger risks.",
+							},
+							{
+								"option": "Something else:",
+								"hasblank": true,
+							},
+						],
+					},
+					{
+						"prompt": "Choose one or two important people in the Ward’s life:",
+						"options": [
+							{
+								"option": "The Ward’s parents or creators.",
+							},
+							{
+								"option": "A member of the Ward’s extended family.",
+							},
+							{
+								"option": "A neighbourhood friend.",
+							},
+							{
+								"option": "A coworker or school friend.",
+							},
+							{
+								"option": "An unrelated adult.",
+							},
+							{
+								"option": "Spirits or other supernatural creatures.",
+							},
+							{
+								"option": "Someone else:",
+								"hasblank": true,
+							},
+						],
+					},
+				],
+				"beats": [
+					"The Ward opens up to you about their fears.",
+					"You confront the face of the Risk.",
+					"You open up to the Ward about how it feels to be alone.",
+					"A potential or current guardian honestly opens up to you.",
+					"The Ward is left significantly alone and at risk.",
+				],
+				"resolutionintro": "After each session, consider if this story has been resolved. If so, tell the other players. You can take one of the resolution moves to show how this story changed you.",
+				"resolutions": [
+					{
+						"mname": "Doing My Best",
+						"mdesc": "You can’t help everyone, so focus on what you can do. When you prioritise helping a bystander or ally, take +1 ongoing to help or protect them. Take –1 forward when you choose to turn away from your priority to help someone else.",
+					},
+					{
+						"mname": "No One Left Behind",
+						"mdesc": "You can’t accept that anybody else lives through what you did. Take –1 forward when you must choose between people who need your help. Mark experience when you protect or help people without sacrificing anyone else.",
+					},
+				],
+			},
+		],
 		"Action Scientist": [
 			{
 				"title": "Uncanny Nemesis",
@@ -1782,6 +2011,195 @@
 						"mname": "A Humble Servant",
 						"mdesc": "When you neglect your own needs and desires to better fulfil your divine mission, take –1 forward and mark experience.",
 	
+					},
+				],
+			},
+		],
+		"Elemental": [
+			{
+				"title": "The Poison Garden",
+				"desc": "In this story, the Elemental’s Foe attempts to trap them, so the Elemental is cut off from its power and unable to work against the Foe any longer. The story will steadily build towards the final closing of the Trap, and then you’ll discover if the hunter evaded it or not. This story will emphasise the efforts your Foe puts into messing with you (and any other Elementals on the team). If you have multiple Elementals on your team, you may choose to collectively go through this story—if you do, answer the hunter choices together. Each of you chooses your resolution individually (and not necessarily at the same time).",
+				"entryintro": "A perfect opportunity to start this hunter story is when:",
+				"entries": [
+					"You encounter one of your Foe’s plots in the course of a mystery.",
+					"You wonder what your Foe is up to.",
+				],
+				"choices": [
+					{
+						"prompt": "Choose why your Foe is making the effort to neutralise you now:",
+						"options": [
+							{
+								"option": "A confluence of cosmic events.",
+							},
+							{
+								"option": "You made a mistake that gave them an opening.",
+							},
+							{
+								"option": "Their other plans are coming to fruition and they need you out of the way.",
+							},
+							{
+								"option": "A mortal did something that provided the means.",
+							},
+							{
+								"option": "Something else:",
+								"hasblank": true,
+							},
+						],
+					},
+					{
+						"prompt": "Choose why the other Elementals (those not on the team) can’t help:",
+						"options": [
+							{
+								"option": "They don’t believe it’s happening.",
+							},
+							{
+								"option": "You’ve been isolated from them somehow.",
+							},
+							{
+								"option": "When you tell them, it’s as if they don’t hear you and don’t realise they missed it.",
+							},
+							{
+								"option": "It’s odd. For normal missions they’re there, but when working against the Foe, they’re unavailable.",
+							},
+							{
+								"option": "Something else:",
+								"hasblank": true,
+							},
+						],
+					},
+					{
+						"prompt": "Choose how you expect your Foe to take you down:",
+						"options": [
+							{
+								"option": "Lure you into a pocket dimension with no escape.",
+							},
+							{
+								"option": "Eliminate your powers, so you’re just like a regular mortal.",
+							},
+							{
+								"option": "Unleash a cosmic horror to destroy you.",
+							},
+							{
+								"option": "Trap you in a doomed timeline, where the multiverse is collapsing.",
+							},
+							{
+								"option": "Something else:",
+								"hasblank": true,
+							},
+						],
+					},
+				],
+				"beats": [
+					"You encounter your Foe’s machinations.",
+					"You investigate what your Foe is planning.",
+					"You knowingly enter a situation where your Foe has influence.",
+					"You discuss your fears about your Foe.",
+					"You encounter a situation in which a bystander is being hunted or imprisoned.",
+				],
+				"resolutionintro": "After each session, consider if this story has been resolved. If so, tell the other players. You can take one of the resolution moves to show how this story changed you. If you ended the story with your hunter trapped, you can instead choose to retire your hunter, and create a new hunter in their place. If you do this, the new hunter starts with two extra Luck.",
+				"resolutions": [
+					{
+						"mname": "Look Before You Leap",
+						"mdesc": "When you carefully consider the options before taking action, get +1 forward. When you dive straight in unheeding, mark 1 experience and take –1 forward.",
+					},
+					{
+						"mname": "It’s About Them, Not Me",
+						"mdesc": "When you put yourself in danger to help bystanders, take +1 forward. When you protect yourself first, take –1 ongoing until you make up for your selfishness.",
+					},
+				],
+			},
+			{
+				"title": "Stolen Moments",
+				"desc": "This hunter story has the Elemental trying out life as a regular mortal to maintain a relationship. How do they get on doing the things regular people do? What costs does this pursuit create?",
+				"entryintro": "A perfect opportunity to start this hunter story is when:",
+				"entries": [
+					"You meet a new bystander you like.",
+					"You meet an old acquaintance and renew the relationship.",
+				],
+				"choices": [
+					{
+						"prompt": "Choose the relationship motivating this:",
+						"options": [
+							{
+								"option": "A friend you’re curious to get to know better.",
+							},
+							{
+								"option": "A romantic relationship.",
+							},
+							{
+								"option": "Someone who needs a parent, guardian, or mentor.",
+							},
+							{
+								"option": "A friend who you enjoy spending time with.",
+							},
+							{
+								"option": "Something else:",
+								"hasblank": true,
+							},
+						],
+					},
+					{
+						"prompt": "Choose what draws you to the mortal world:",
+						"options": [
+							{
+								"option": "Curiosity.",
+							},
+							{
+								"option": "Feeling like you’re missing out on a central part of existence.",
+							},
+							{
+								"option": "You need a break from missions and monster hunts.",
+							},
+							{
+								"option": "You’re dissatisfied with how things are now.",
+							},
+							{
+								"option": "The person needs you.",
+							},
+							{
+								"option": "Something else:",
+								"hasblank": true,
+							},
+						],
+					},
+					{
+						"prompt": "Choose the biggest problem this will cause:",
+						"options": [
+							{
+								"option": "Time you spend in the mortal world is stolen from other timelines.",
+							},
+							{
+								"option": "You are absent from your duties, allowing threats to grow unchecked.",
+							},
+							{
+								"option": "Too much time in the mortal world will transform you into a normal human, losing your Elemental powers.",
+							},
+							{
+								"option": "Your presence draws dangers.",
+							},
+							{
+								"option": "Something else:",
+								"hasblank": true,
+							},
+						],
+					},
+				],
+				"beats": [
+					"You do some normal human activities, unrelated to the current mystery.",
+					"A mystery pulls you away from your relationship.",
+					"Your non-human nature comes up in the mortal world (includes obvious use of your powers).",
+					"Your relationship deepens.",
+					"You experience difficulties or complications in the relationship.",
+				],
+				"resolutionintro": "After each session, consider if this story has been resolved. If so, tell the other players. You can take one of the resolution moves to show how this story changed you. Optionally, on resolution, you may retire this hunter and create a new one, if they decide to live as a normal mortal from now on.",
+				"resolutions": [
+					{
+						"mname": "Deeper Understanding",
+						"mdesc": "When you investigate a mystery by talking to people, get +1 forward. When using mystical or technical approaches, get –1 forward.",
+					},
+					{
+						"mname": "Divided Motivation",
+						"mdesc": "When you blow off a mystery for a mortal relationship, mark experience. When you blow off a mortal relationship for a mystery, take –1 ongoing for the current situation.",
 					},
 				],
 			},

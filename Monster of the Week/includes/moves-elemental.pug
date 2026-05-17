@@ -1,0 +1,18 @@
+.sheet-OPBHead.sheet-MinorHead.sheet-space-above
+	+t("The Elemental")
+.sheet-Elemental
+	i
+		+t('You get all the basic moves, plus two Elemental moves. Pick two of these:')
+.sheet-Elemental.sheet-OPB
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-MovesUnused', value='1', checked='')
+	+move("Elemental-Move","<b>Cold Read:</b> With a touch, you can telepathically review a human’s memories. Ask the Keeper for your first impressions. Later, careful analysis of this life may be used to aid other moves, such as <b>investigate</b>.",true)
+	+move("Elemental-Move","<b>Cosmic Perspective:</b> When you <b>use magic</b>, you may choose one of these effects as well as the usual options: <ul><li>Enter another place or time.<li>Pause, slow, or speed the passage of time.</ul>",true)
+	+move("Elemental-Move","<b>Call for Backup:</b> Once per mystery, call another Elemental for help. The Keeper decides if they are available or if a substitute is assigned instead. In either case, they are your ally for the remainder of the mystery.",true)
+	+move("Elemental-Move","<b>Come with Me:</b> You may travel into an alternate timeline. You may take others along with you. <b>Roll +Weird</b>:<ul><li><b>On a 10+,</b> you arrive where you intended.<li><b>On a 7–9,</b> this is not exactly the right timeline, or one of you is altered as you travel.<li><b>On a 6–,</b> you arrive where your foe has the advantage over you.</ul>",true)
+		+2d6("Come with Me","Weird","comewithme")
+	+move("Elemental-Move","<b>Imbue:</b> You may share your elemental power with another entity, for a short time.",true)
+	+move("Elemental-Move","<b>Psychometry:</b> When you handle an object, you sense significant events that happened to, or around, it.",true)
+	+move("Elemental-Move","<b>Unphysical:</b> You may ignore physical objects for a few minutes. You’re still present, you just don’t interact with the physical world. Magic or other supernatural abilities still affect you.",true)
+	+move("Elemental-Move","<b>Echoes:</b> You may observe events in your location that took place up to a week in the past or future. While doing so, you are unaware of present-moment events.",true)
+	+move("Elemental-Move","<b>Sidestep:</b> When you move to another location within visual range in a single step, <b>roll +Sharp</b>:<ul><li><b>On a 10+,</b> you’re there, noticed only by those watching that location.<li><b>On a 7–9,</b> you’re there, but most notice your move.<li><b>On a 6–,</b> your movement causes ripples in this universe.</ul>",true)
+		+2d6("Sidestep","Sharp","sidestep")

@@ -1,0 +1,16 @@
+.sheet-OPBHead.sheet-MinorHead.sheet-space-above
+	+t("The Abandoned")
+.sheet-Abandoned
+	i
+		+t('You get all the basic moves, plus two Abandoned moves. Pick two of these:')
+.sheet-Abandoned.sheet-OPB
+	input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-MovesUnused', value='1', checked='')
+	+move("Abandoned-Move","<b>Underdog:</b> While you’re unstable, you have +1 ongoing. While you have –1 forward or ongoing, you suffer 1 less harm.", true)
+	+move("Abandoned-Move","<b>There’s Always Tomorrow:</b> When you cheer up or rally a group, when used on bystanders and allies, <b>roll +Charm</b>. <ul><li><b>On a 10+,</b> they are considered an ally until the end of the scene.<li><b>On a 7–9,</b> either they’re still hesitant or they’re overconfident.</ul>When used on the hunters, <b>roll +Charm</b>.<ul><li><b>On a 10+,</b> everyone present has +1 forward.<li><b>On a 7–9,</b> give one hunter other than yourself +1 forward.</ul>", true)
+		+2d6("There’s Always Tomorrow","Charm","theresalwaystomorrow")
+	+move("Abandoned-Move","<b>Trust Issues:</b> You have +1 ongoing to resist mind control or emotional manipulation. When your reluctance to trust someone causes you to miss an opportunity, mark experience.", true)
+	+move("Abandoned-Move","<b>Somewhere Out There:</b> You have +1 ongoing to <b>help out</b> or <b>manipulate someone</b> by encouraging them. When trusting someone you shouldn’t interferes with the mystery or puts hunters in danger, mark experience.", true)
+	+move("Abandoned-Move","<b>The Glass Is Half-Full:</b> You always look for the silver lining. When you <b>read a bad situation</b>, add the following questions to the list you can ask:<ul><li>“Are there any resources we’ve overlooked?”<li>“Who wants to help us?”</ul>", true)
+	+move("Abandoned-Move","<b>Mostly at Night:</b> You’ve learned about monster habits. When you <b>investigate a mystery</b>, add the following questions to the list you can ask:<ul><li>“What can I tell about its behaviour?”<li>“What places does it tend to avoid?”</ul>", true)
+	+move("Abandoned-Move","<b>“Get away from them”:</b> At the start of the session, take 2 hold. When a nearby hunter is fighting a monster with you, spend 1 hold to:<ul><li>Grant +1 forward to the hunter through inspired protectiveness.<li>Increase the harm dealt by the hunter by 1.<li>Reduce harm dealt to you by 1.</ul>", true)
+	+move("Abandoned-Move","<b>Come and Get Me:</b> When you lead an enemy through dangerous terrain or traps, you may <b>kick some ass</b> by rolling <b>+Cool</b>.", true)

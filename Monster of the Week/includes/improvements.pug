@@ -9,10 +9,12 @@
 	.sheet-Expander
 		input.sheet-SkinCheck(type='hidden', name='attr_SkinCheck', value='0')
 		// BASIC Improvements
-		div(data-i18n='improvements-description')
+		div(data-i18n='improvements-description').sheet-NoElemental
 			| Once you have 5 
 			i Experience
 			|  you may choose one of these: (Check off any you&apos;ve already taken)
+		.sheet-Elemental
+			+t("When you have filled all 10 experience boxes, you level up. Erase the marks and pick an improvement from the following list.")
 		input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Improvements-Hider', value='1', checked='')
 		span.sheet-anglebox
 		|  
@@ -25,22 +27,22 @@
 				input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Improvements-Hider', value='1', checked='')
 				+move('Gothic-Curse-Improve','I find a clear, but maybe difficult, way to break my curse')
 		// CHARM
-		+movelegacy("Imp-Charm-1","")(class="sheet-Spooktacular sheet-Actionscientist sheet-Spooky sheet-Professional sheet-Mundane sheet-Monstrous sheet-Flake sheet-Chosen sheet-Crooked sheet-Divine sheet-Expert sheet-Gumshoe sheet-Hex sheet-Pararomantic sheet-Searcher sheet-Luchador sheet-Meddlingkid sheet-Sidekick sheet-Snoop sheet-Summoned sheet-Traveler sheet-Custom sheet-CurseEater sheet-Celebrity sheet-Changeling sheet-Covenant sheet-Envoy sheet-Forged sheet-Host sheet-Visitor")
+		+movelegacy("Imp-Charm-1","")(class="sheet-Spooktacular sheet-Actionscientist sheet-Spooky sheet-Professional sheet-Mundane sheet-Monstrous sheet-Flake sheet-Chosen sheet-Crooked sheet-Divine sheet-Expert sheet-Gumshoe sheet-Hex sheet-Pararomantic sheet-Searcher sheet-Luchador sheet-Meddlingkid sheet-Sidekick sheet-Snoop sheet-Summoned sheet-Traveler sheet-Custom sheet-CurseEater sheet-Celebrity sheet-Changeling sheet-Covenant sheet-Envoy sheet-Forged sheet-Host sheet-Visitor sheet-Abandoned")
 			| +1 
 			span(data-i18n='charm') Charm
 			span.sheet-Actionscientist.sheet-Spooky.sheet-Professional.sheet-Monstrous.sheet-Flake.sheet-Expert.sheet-Crooked.sheet-Divine.sheet-Hex.sheet-Searcher.sheet-Luchador.sheet-Summoned.sheet-CurseEater.sheet-Changeling.sheet-Envoy.sheet-Host.sheet-Visitor
 				| &nbsp;(
 				span(data-i18n='max') max
 				|  +2)
-			span.sheet-Spooktacular.sheet-Mundane.sheet-Chosen.sheet-Gumshoe.sheet-Pararomantic.sheet-Meddlingkid.sheet-Sidekick.sheet-Snoop.sheet-Traveler.sheet-Celebrity.sheet-Covenant.sheet-Forged
+			span.sheet-Spooktacular.sheet-Mundane.sheet-Chosen.sheet-Gumshoe.sheet-Pararomantic.sheet-Meddlingkid.sheet-Sidekick.sheet-Snoop.sheet-Traveler.sheet-Celebrity.sheet-Covenant.sheet-Forged.sheet-Abandoned
 				| &nbsp;(
 				span(data-i18n='max') max
 				|  +3)
 		// COOL
-		+movelegacy("Imp-Cool-1","")(class="sheet-Hardcase2020 sheet-Constructed sheet-Spooktacular sheet-Wronged sheet-Spooky sheet-Spellslinger sheet-Professional sheet-Mundane sheet-Monstrous sheet-Initiate sheet-Flake sheet-Chosen sheet-Crooked sheet-Divine sheet-Expert sheet-Gumshoe sheet-Hex sheet-Pararomantic sheet-Searcher sheet-Exile sheet-Hardcase sheet-Luchador sheet-Meddlingkid sheet-Sidekick sheet-Snoop sheet-Summoned sheet-Traveler sheet-Custom sheet-ActionScientistSSK sheet-Celebrity sheet-Changeling sheet-Covenant sheet-Envoy sheet-Forged sheet-Host sheet-Interface sheet-Visitor")
+		+movelegacy("Imp-Cool-1","")(class="sheet-Hardcase2020 sheet-Constructed sheet-Spooktacular sheet-Wronged sheet-Spooky sheet-Spellslinger sheet-Professional sheet-Mundane sheet-Monstrous sheet-Initiate sheet-Flake sheet-Chosen sheet-Crooked sheet-Divine sheet-Expert sheet-Gumshoe sheet-Hex sheet-Pararomantic sheet-Searcher sheet-Exile sheet-Hardcase sheet-Luchador sheet-Meddlingkid sheet-Sidekick sheet-Snoop sheet-Summoned sheet-Traveler sheet-Custom sheet-ActionScientistSSK sheet-Celebrity sheet-Changeling sheet-Covenant sheet-Envoy sheet-Forged sheet-Host sheet-Interface sheet-Visitor sheet-Abandoned")
 			| +1 
 			span(data-i18n='cool') Cool
-			span.sheet-Spooktacular.sheet-Hardcase2020.sheet-Wronged.sheet-Spooky.sheet-Spellslinger.sheet-Mundane.sheet-Monstrous.sheet-Initiate.sheet-Flake.sheet-Expert.sheet-Crooked.sheet-Divine.sheet-Gumshoe.sheet-Hex.sheet-Pararomantic.sheet-Searcher.sheet-Hardcase.sheet-Luchador.sheet-Meddlingkid.sheet-Sidekick.sheet-Snoop.sheet-Summoned.sheet-ActionScientistSSK.sheet-Celebrity.sheet-Changeling.sheet-Covenant.sheet-Forged.sheet-Interface.sheet-Visitor
+			span.sheet-Spooktacular.sheet-Hardcase2020.sheet-Wronged.sheet-Spooky.sheet-Spellslinger.sheet-Mundane.sheet-Monstrous.sheet-Initiate.sheet-Flake.sheet-Expert.sheet-Crooked.sheet-Divine.sheet-Gumshoe.sheet-Hex.sheet-Pararomantic.sheet-Searcher.sheet-Hardcase.sheet-Luchador.sheet-Meddlingkid.sheet-Sidekick.sheet-Snoop.sheet-Summoned.sheet-ActionScientistSSK.sheet-Celebrity.sheet-Changeling.sheet-Covenant.sheet-Forged.sheet-Interface.sheet-Visitor.sheet-Abandoned
 				| &nbsp;(
 				span(data-i18n='max') max
 				|  +2)
@@ -49,10 +51,10 @@
 				span(data-i18n='max') max
 				|  +3)
 		// SHARP
-		+movelegacy("Imp-Sharp-1","")(class="sheet-Hardcase2020 sheet-Constructed sheet-Spooktacular sheet-Actionscientist sheet-Wronged sheet-Spooky sheet-Spellslinger sheet-Professional sheet-Mundane sheet-Monstrous sheet-Initiate sheet-Flake sheet-Chosen sheet-Crooked sheet-Divine sheet-Expert sheet-Gumshoe sheet-Hex sheet-Pararomantic sheet-Searcher sheet-Exile sheet-Hardcase sheet-Luchador sheet-Meddlingkid sheet-Sidekick sheet-Snoop sheet-Summoned sheet-Traveler sheet-Custom sheet-CurseEater sheet-ActionScientistSSK sheet-Celebrity sheet-Changeling sheet-Covenant sheet-Envoy sheet-Forged sheet-Interface sheet-Visitor")
+		+movelegacy("Imp-Sharp-1","")(class="sheet-Hardcase2020 sheet-Constructed sheet-Spooktacular sheet-Actionscientist sheet-Wronged sheet-Spooky sheet-Spellslinger sheet-Professional sheet-Mundane sheet-Monstrous sheet-Initiate sheet-Flake sheet-Chosen sheet-Crooked sheet-Divine sheet-Expert sheet-Gumshoe sheet-Hex sheet-Pararomantic sheet-Searcher sheet-Exile sheet-Hardcase sheet-Luchador sheet-Meddlingkid sheet-Sidekick sheet-Snoop sheet-Summoned sheet-Traveler sheet-Custom sheet-CurseEater sheet-ActionScientistSSK sheet-Celebrity sheet-Changeling sheet-Covenant sheet-Envoy sheet-Forged sheet-Interface sheet-Visitor sheet-Abandoned")
 			| +1 
 			span(data-i18n='sharp') Sharp
-			span.sheet-Constructed.sheet-Hardcase2020.sheet-Spooktacular.sheet-Wronged.sheet-Spooky.sheet-Spellslinger.sheet-Professional.sheet-Mundane.sheet-Monstrous.sheet-Initiate.sheet-Divine.sheet-Hex.sheet-Pararomantic.sheet-Hardcase.sheet-Luchador.sheet-Meddlingkid.sheet-Snoop.sheet-Summoned.sheet-Celebrity.sheet-Changeling.sheet-Covenant.sheet-Envoy.sheet-Forged
+			span.sheet-Constructed.sheet-Hardcase2020.sheet-Spooktacular.sheet-Wronged.sheet-Spooky.sheet-Spellslinger.sheet-Professional.sheet-Mundane.sheet-Monstrous.sheet-Initiate.sheet-Divine.sheet-Hex.sheet-Pararomantic.sheet-Hardcase.sheet-Luchador.sheet-Meddlingkid.sheet-Snoop.sheet-Summoned.sheet-Celebrity.sheet-Changeling.sheet-Covenant.sheet-Envoy.sheet-Forged.sheet-Abandoned
 				| &nbsp;(
 				span(data-i18n='max') max
 				|  +2)
@@ -73,10 +75,10 @@
 				span(data-i18n='max') max
 				|  +3)
 		// WEIRD
-		+movelegacy("Imp-Weird-1","")(class="sheet-Hardcase2020 sheet-Constructed sheet-Spooktacular sheet-Actionscientist sheet-Wronged sheet-Spooky sheet-Spellslinger sheet-Initiate sheet-Flake sheet-Chosen sheet-Hex sheet-Divine sheet-Expert sheet-Pararomantic sheet-Searcher sheet-Exile sheet-Hardcase sheet-Meddlingkid sheet-Snoop sheet-Summoned sheet-Traveler sheet-Custom sheet-CurseEater sheet-ActionScientistSSK sheet-Changeling sheet-Covenant sheet-Envoy sheet-Forged sheet-Host sheet-Interface sheet-Visitor")
+		+movelegacy("Imp-Weird-1","")(class="sheet-Hardcase2020 sheet-Constructed sheet-Spooktacular sheet-Actionscientist sheet-Wronged sheet-Spooky sheet-Spellslinger sheet-Initiate sheet-Flake sheet-Chosen sheet-Hex sheet-Divine sheet-Expert sheet-Pararomantic sheet-Searcher sheet-Exile sheet-Hardcase sheet-Meddlingkid sheet-Snoop sheet-Summoned sheet-Traveler sheet-Custom sheet-CurseEater sheet-ActionScientistSSK sheet-Changeling sheet-Covenant sheet-Envoy sheet-Forged sheet-Host sheet-Interface sheet-Visitor sheet-Abandoned")
 			| +1 
 			span(data-i18n='weird') Weird
-			span.sheet-Constructed.sheet-Actionscientist.sheet-Wronged.sheet-Flake.sheet-Divine.sheet-Expert.sheet-Pararomantic.sheet-Hardcase.sheet-Hardcase2020.sheet-Meddlingkid.sheet-Snoop.sheet-Traveler.sheet-CurseEater.sheet-ActionScientistSSK.sheet-Covenant.sheet-Envoy.sheet-Host.sheet-Interface.sheet-Visitor
+			span.sheet-Constructed.sheet-Actionscientist.sheet-Wronged.sheet-Flake.sheet-Divine.sheet-Expert.sheet-Pararomantic.sheet-Hardcase.sheet-Hardcase2020.sheet-Meddlingkid.sheet-Snoop.sheet-Traveler.sheet-CurseEater.sheet-ActionScientistSSK.sheet-Covenant.sheet-Envoy.sheet-Host.sheet-Interface.sheet-Visitor.sheet-Abandoned
 				| &nbsp;(
 				span(data-i18n='max') max
 				|  +2)
@@ -84,11 +86,13 @@
 				| &nbsp;(
 				span(data-i18n='max') max
 				|  +3)
-		+movelegacy("Imp-PlaybookMove-1","")(class="sheet-Hardcase2020 sheet-Constructed sheet-Spooktacular sheet-Actionscientist sheet-Chosen sheet-Crooked sheet-Divine sheet-Expert sheet-Flake sheet-Initiate sheet-Monstrous sheet-Mundane sheet-Professional sheet-Spellslinger sheet-Spooky sheet-Wronged sheet-Gumshoe sheet-Hex sheet-Pararomantic sheet-Searcher sheet-Exile sheet-Hardcase sheet-Luchador sheet-Meddlingkid sheet-Sidekick sheet-Snoop sheet-Summoned sheet-Traveler sheet-Custom sheet-CurseEater sheet-ActionScientistSSK sheet-Celebrity sheet-Changeling sheet-Covenant sheet-Envoy sheet-Forged sheet-Host sheet-Interface sheet-Visitor")
+		+movelegacy("Imp-PlaybookMove-1","")(class="sheet-Hardcase2020 sheet-Constructed sheet-Spooktacular sheet-Actionscientist sheet-Chosen sheet-Crooked sheet-Divine sheet-Expert sheet-Flake sheet-Initiate sheet-Monstrous sheet-Mundane sheet-Professional sheet-Spellslinger sheet-Spooky sheet-Wronged sheet-Gumshoe sheet-Hex sheet-Pararomantic sheet-Searcher sheet-Exile sheet-Hardcase sheet-Luchador sheet-Meddlingkid sheet-Sidekick sheet-Snoop sheet-Summoned sheet-Traveler sheet-Custom sheet-CurseEater sheet-ActionScientistSSK sheet-Celebrity sheet-Changeling sheet-Covenant sheet-Envoy sheet-Forged sheet-Host sheet-Interface sheet-Visitor sheet-Abandoned sheet-Elemental")
 			span(data-i18n='another') Take another
 			|  
 			span.sheet-Spooktacular(data-i18n='spooktacular') Spooktacular
 			span.sheet-Constructed(data-i18n='constructed') Constructed
+			span.sheet-Abandoned
+				+t("Abandoned")
 			span.sheet-Actionscientist(data-i18n='actionscientist') Action Scientist
 			span.sheet-ActionScientistSSK
 				+translate("Action Scientist")
@@ -107,6 +111,8 @@
 				input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
 				+translate('Divine').sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 				+translate('Spirit-Touched').sheet-Setting-Bone
+			span.sheet-Elemental
+				+t("Elemental")
 			span.sheet-Envoy
 				+t("Envoy")
 			span.sheet-Expert
@@ -158,11 +164,13 @@
 			input.sheet-triggerbox(type='checkbox', name='attr_Imp-PlaybookMove-1')
 			span.sheet-triggertext
 				input(type='text', name='attr_Imp-PlaybookMove-1-Choice')
-		+movelegacy("Imp-PlaybookMove-2","")(class="sheet-Constructed sheet-Spooktacular sheet-Actionscientist sheet-Chosen sheet-Crooked sheet-Divine sheet-Expert sheet-Flake sheet-Initiate sheet-Monstrous sheet-Mundane sheet-Professional sheet-Spellslinger sheet-Spooky sheet-Wronged sheet-Gumshoe sheet-Hex sheet-Pararomantic sheet-Searcher sheet-Exile sheet-Hardcase sheet-Hardcase2020 sheet-Luchador sheet-Meddlingkid sheet-Sidekick sheet-Summoned sheet-Traveler sheet-Custom sheet-CurseEater sheet-ActionScientistSSK sheet-Celebrity sheet-Changeling sheet-Covenant sheet-Envoy sheet-Forged sheet-Host sheet-Interface sheet-Visitor")
+		+movelegacy("Imp-PlaybookMove-2","")(class="sheet-Constructed sheet-Spooktacular sheet-Actionscientist sheet-Chosen sheet-Crooked sheet-Divine sheet-Expert sheet-Flake sheet-Initiate sheet-Monstrous sheet-Mundane sheet-Professional sheet-Spellslinger sheet-Spooky sheet-Wronged sheet-Gumshoe sheet-Hex sheet-Pararomantic sheet-Searcher sheet-Exile sheet-Hardcase sheet-Hardcase2020 sheet-Luchador sheet-Meddlingkid sheet-Sidekick sheet-Summoned sheet-Traveler sheet-Custom sheet-CurseEater sheet-ActionScientistSSK sheet-Celebrity sheet-Changeling sheet-Covenant sheet-Envoy sheet-Forged sheet-Host sheet-Interface sheet-Visitor sheet-Abandoned")
 			span(data-i18n='another') Take another
 			|  
 			span.sheet-Constructed(data-i18n='constructed') Constructed
 			span.sheet-Spooktacular(data-i18n='spooktacular') Spooktacular
+			span.sheet-Abandoned
+				+t("Abandoned")
 			span.sheet-Actionscientist(data-i18n='actionscientist') Action Scientist
 			span.sheet-ActionScientistSSK
 				+translate("Action Scientist")
@@ -232,19 +240,19 @@
 			input.sheet-triggerbox(type='checkbox', name='attr_Imp-PlaybookMove-2')
 			span.sheet-triggertext
 				input(type='text', name='attr_Imp-PlaybookMove-2-Choice')
-		+movelegacy("Imp-PlaybookMove-Other1","")(class="sheet-Hardcase2020 sheet-Constructed sheet-Spooktacular sheet-Actionscientist sheet-Chosen sheet-Crooked sheet-Divine sheet-Expert sheet-Flake sheet-Initiate sheet-Monstrous sheet-Mundane sheet-Professional sheet-Spellslinger sheet-Spooky sheet-Wronged sheet-Hex sheet-Pararomantic sheet-Searcher sheet-Exile sheet-Hardcase sheet-Luchador sheet-Meddlingkid sheet-Sidekick sheet-Snoop sheet-Summoned sheet-Traveler sheet-Custom sheet-CurseEater sheet-ActionScientistSSK sheet-Celebrity sheet-Changeling sheet-Covenant sheet-Envoy sheet-Forged sheet-Host sheet-Interface sheet-Visitor")
+		+movelegacy("Imp-PlaybookMove-Other1","")(class="sheet-Hardcase2020 sheet-Constructed sheet-Spooktacular sheet-Actionscientist sheet-Chosen sheet-Crooked sheet-Divine sheet-Expert sheet-Flake sheet-Initiate sheet-Monstrous sheet-Mundane sheet-Professional sheet-Spellslinger sheet-Spooky sheet-Wronged sheet-Hex sheet-Pararomantic sheet-Searcher sheet-Exile sheet-Hardcase sheet-Luchador sheet-Meddlingkid sheet-Sidekick sheet-Snoop sheet-Summoned sheet-Traveler sheet-Custom sheet-CurseEater sheet-ActionScientistSSK sheet-Celebrity sheet-Changeling sheet-Covenant sheet-Envoy sheet-Forged sheet-Host sheet-Interface sheet-Visitor sheet-Abandoned sheet-Elemental")
 			span(data-i18n='playbook-move') Take a move from another playbook
 			input.sheet-triggerbox(type='checkbox', name='attr_Imp-PlaybookMove-Other1')
 			span.sheet-triggertext
 				input(type='text', name='attr_Imp-PlaybookMove-Other1-Choice')
-		+movelegacy("Imp-PlaybookMove-Other2","")(class="sheet-Hardcase2020 sheet-Constructed sheet-Spooktacular sheet-Actionscientist sheet-Chosen sheet-Crooked sheet-Divine sheet-Expert sheet-Flake sheet-Initiate sheet-Monstrous sheet-Mundane sheet-Professional sheet-Spellslinger sheet-Spooky sheet-Wronged sheet-Pararomantic sheet-Searcher sheet-Exile sheet-Hardcase sheet-Luchador sheet-Meddlingkid sheet-Sidekick sheet-Snoop sheet-Summoned sheet-Traveler sheet-Custom sheet-CurseEater sheet-ActionScientistSSK sheet-Celebrity sheet-Changeling sheet-Covenant sheet-Envoy sheet-Forged sheet-Host sheet-Interface sheet-Visitor")
+		+movelegacy("Imp-PlaybookMove-Other2","")(class="sheet-Hardcase2020 sheet-Constructed sheet-Spooktacular sheet-Actionscientist sheet-Chosen sheet-Crooked sheet-Divine sheet-Expert sheet-Flake sheet-Initiate sheet-Monstrous sheet-Mundane sheet-Professional sheet-Spellslinger sheet-Spooky sheet-Wronged sheet-Pararomantic sheet-Searcher sheet-Exile sheet-Hardcase sheet-Luchador sheet-Meddlingkid sheet-Sidekick sheet-Snoop sheet-Summoned sheet-Traveler sheet-Custom sheet-CurseEater sheet-ActionScientistSSK sheet-Celebrity sheet-Changeling sheet-Covenant sheet-Envoy sheet-Forged sheet-Host sheet-Interface sheet-Visitor sheet-Abandoned")
 			span(data-i18n='playbook-move') Take a move from another playbook
 			input.sheet-triggerbox(type='checkbox', name='attr_Imp-PlaybookMove-Other2')
 			span.sheet-triggertext
 				input(type='text', name='attr_Imp-PlaybookMove-Other2-Choice')
 
 		// Playbook Specific Options
-		+movelegacy("Imp-Ally","")(class="sheet-Constructed sheet-Spooktacular sheet-Actionscientist sheet-Chosen sheet-Crooked sheet-Divine sheet-Pararomantic sheet-Searcher sheet-Exile sheet-Hardcase sheet-Hardcase2020 sheet-Luchador sheet-Meddlingkid sheet-Sidekick sheet-Snoop sheet-Summoned sheet-Traveler sheet-ActionScientistSSK sheet-Celebrity sheet-Changeling sheet-Covenant sheet-Envoy sheet-Host sheet-Visitor")
+		+movelegacy("Imp-Ally","")(class="sheet-Constructed sheet-Spooktacular sheet-Actionscientist sheet-Chosen sheet-Crooked sheet-Divine sheet-Pararomantic sheet-Searcher sheet-Exile sheet-Hardcase sheet-Hardcase2020 sheet-Luchador sheet-Meddlingkid sheet-Sidekick sheet-Snoop sheet-Summoned sheet-Traveler sheet-ActionScientistSSK sheet-Celebrity sheet-Changeling sheet-Covenant sheet-Envoy sheet-Host sheet-Visitor sheet-Abandoned")
 			span.sheet-Actionscientist
 				span(data-i18n='as-team') Gain a team of action scientists under your command.
 			span.sheet-ActionScientistSSK
@@ -261,6 +269,8 @@
 				+t("Gain an ally, either another with a symbiote like yours or someone who helps you manage the condition")
 			span.sheet-Visitor
 				+t("Gain an ally: alien, local animal, or local friend")
+			span.sheet-Abandoned
+				+t("Find someone like you who is alone in the world, and take them as an ally")
 			span.sheet-Crooked
 				span(data-i18n='ally') Gain an ally
 				| : 
@@ -414,7 +424,7 @@
 		+movelegacy("Imp-TimeCache","")(class="sheet-Exile")
 			span(data-i18n='exile-advance1')
 				| Find a cache of objects left for you by your comrades in the past. The Keeper will decide what&apos;s in it, but it will be things that they expected you would need in the future
-		+movelegacy("Imp-Luck1","")(class="sheet-Meddlingkid sheet-Mundane")
+		+movelegacy("Imp-Luck1","")(class="sheet-Meddlingkid sheet-Mundane sheet-Abandoned")
 			input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
 			span(data-i18n='erase-luck').sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 				| Erase one used 
@@ -449,6 +459,8 @@
 		.sheet-triggerframe
 			.sheet-advmoves
 				include improvements-basics-adv-weird.pug
+		+move("Imp-Elemental","Reveal a new aspect of your elemental power. Define it as you did the first effect.").sheet-Elemental
+			+itext("Imp-Elemental-New-Power-Aspect")
 		+move("Imp-Envoy","Pick a second resource item from the Envoy’s gear options")(class="sheet-Envoy")
 		+move("Imp-Envoy","Change your Task to another option")(class="sheet-Envoy")
 		+move("Imp-Forged","Pick another benefit for your weapon form")(class="sheet-Forged")
@@ -469,8 +481,10 @@
 			span(data-i18n='advanced') Advanced
 			|  
 			span(data-i18n='improvements') Improvements
-		div
+		div.sheet-NoElemental
 			span(data-i18n='advanced-improvements')
+		.sheet-Elemental
+			+t("After you have leveled up three times, you qualify for advanced improvements in addition to these, from the following list.")
 		input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Improvements-Hider', value='1', checked='')
 		span.sheet-anglebox
 		|  
@@ -482,7 +496,7 @@
 			.sheet-DarkPast-Curse
 				input.sheet-triggerbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Improvements-Hider', value='1', checked='')
 				+move('Gothic-Curse-Advanced-Improve','I break my curse')
-		+movelegacy("AdvImp-Any-1","")(class="sheet-Hardcase2020 sheet-Constructed sheet-Spooktacular sheet-Actionscientist sheet-Chosen sheet-Crooked sheet-Divine sheet-Expert sheet-Flake sheet-Initiate sheet-Monstrous sheet-Mundane sheet-Professional sheet-Spellslinger sheet-Spooky sheet-Wronged sheet-Gumshoe sheet-Hex sheet-Pararomantic sheet-Searcher sheet-Exile sheet-Hardcase sheet-Luchador sheet-Meddlingkid sheet-Sidekick sheet-Snoop sheet-Summoned sheet-Traveler sheet-Custom sheet-CurseEater sheet-ActionScientistSSK sheet-Celebrity sheet-Changeling sheet-Covenant sheet-Envoy sheet-Forged sheet-Host sheet-Interface sheet-Visitor")
+		+movelegacy("AdvImp-Any-1","")(class="sheet-Hardcase2020 sheet-Constructed sheet-Spooktacular sheet-Actionscientist sheet-Chosen sheet-Crooked sheet-Divine sheet-Expert sheet-Flake sheet-Initiate sheet-Monstrous sheet-Mundane sheet-Professional sheet-Spellslinger sheet-Spooky sheet-Wronged sheet-Gumshoe sheet-Hex sheet-Pararomantic sheet-Searcher sheet-Exile sheet-Hardcase sheet-Luchador sheet-Meddlingkid sheet-Sidekick sheet-Snoop sheet-Summoned sheet-Traveler sheet-Custom sheet-CurseEater sheet-ActionScientistSSK sheet-Celebrity sheet-Changeling sheet-Covenant sheet-Envoy sheet-Forged sheet-Host sheet-Interface sheet-Visitor sheet-Abandoned")
 			| +1 
 			span(data-i18n='rating') to any rating
 			|  (
@@ -491,16 +505,16 @@
 			input.sheet-triggerbox(type='checkbox', name='attr_AdvImp-Any-1')
 			span.sheet-triggertext
 				input(type='text', name='attr_AdvImp-Any-1-Choice')
-		+movelegacy("AdvImp-ChangePB","")(class="sheet-Hardcase2020 sheet-Constructed sheet-Spooktacular sheet-Actionscientist sheet-Chosen sheet-Crooked sheet-Divine sheet-Expert sheet-Flake sheet-Initiate sheet-Monstrous sheet-Mundane sheet-Professional sheet-Spellslinger sheet-Spooky sheet-Wronged sheet-Gumshoe sheet-Hex sheet-Pararomantic sheet-Searcher sheet-Exile sheet-Hardcase sheet-Luchador sheet-Meddlingkid sheet-Sidekick sheet-Snoop sheet-Summoned sheet-Traveler sheet-Custom sheet-CurseEater sheet-ActionScientistSSK sheet-Celebrity sheet-Changeling sheet-Covenant sheet-Envoy sheet-Forged sheet-Host sheet-Interface")
+		+movelegacy("AdvImp-ChangePB","")(class="sheet-Hardcase2020 sheet-Constructed sheet-Spooktacular sheet-Actionscientist sheet-Chosen sheet-Crooked sheet-Divine sheet-Expert sheet-Flake sheet-Initiate sheet-Monstrous sheet-Mundane sheet-Professional sheet-Spellslinger sheet-Spooky sheet-Wronged sheet-Gumshoe sheet-Hex sheet-Pararomantic sheet-Searcher sheet-Exile sheet-Hardcase sheet-Luchador sheet-Meddlingkid sheet-Sidekick sheet-Snoop sheet-Summoned sheet-Traveler sheet-Custom sheet-CurseEater sheet-ActionScientistSSK sheet-Celebrity sheet-Changeling sheet-Covenant sheet-Envoy sheet-Forged sheet-Host sheet-Interface sheet-Abandoned")
 			span(data-i18n='new-playbook') Change playbooks
 		+movelegacy("AdvImp-ChangePB","").sheet-Visitor
 			+t("This is my home now, and I’ll protect it. Change this hunter to a new playbook.")
-		+movelegacy("AdvImp-2ndHunter","")(class="sheet-Hardcase2020 sheet-Constructed sheet-Spooktacular sheet-Actionscientist sheet-Chosen sheet-Crooked sheet-Divine sheet-Expert sheet-Flake sheet-Initiate sheet-Monstrous sheet-Mundane sheet-Professional sheet-Spellslinger sheet-Spooky sheet-Wronged sheet-Gumshoe sheet-Hex sheet-Pararomantic sheet-Searcher sheet-Exile sheet-Hardcase sheet-Luchador sheet-Meddlingkid sheet-Sidekick sheet-Snoop sheet-Summoned sheet-Traveler sheet-Custom sheet-CurseEater sheet-ActionScientistSSK sheet-Celebrity sheet-Changeling sheet-Covenant sheet-Envoy sheet-Forged sheet-Host sheet-Interface sheet-Visitor")
+		+movelegacy("AdvImp-2ndHunter","")(class="sheet-Hardcase2020 sheet-Constructed sheet-Spooktacular sheet-Actionscientist sheet-Chosen sheet-Crooked sheet-Divine sheet-Expert sheet-Flake sheet-Initiate sheet-Monstrous sheet-Mundane sheet-Professional sheet-Spellslinger sheet-Spooky sheet-Wronged sheet-Gumshoe sheet-Hex sheet-Pararomantic sheet-Searcher sheet-Exile sheet-Hardcase sheet-Luchador sheet-Meddlingkid sheet-Sidekick sheet-Snoop sheet-Summoned sheet-Traveler sheet-Custom sheet-CurseEater sheet-ActionScientistSSK sheet-Celebrity sheet-Changeling sheet-Covenant sheet-Envoy sheet-Forged sheet-Host sheet-Interface sheet-Visitor sheet-Abandoned sheet-Elemental")
 			span(data-i18n='second-hunter') Create a second hunter to play
 		+move("AdvImp-Host","Create a second hunter by symbiotic fission: they are either a non-human hunter or a symbiote bonded to another Host").sheet-Host
 		+movelegacy("AdvImp-Forged-AdvBasic","").sheet-Forged
 			span(data-i18n='basic-moves') Advance 2 basic moves
-		+movelegacy("AdvImp-AdvBasic","")(class="sheet-Hardcase2020 sheet-Constructed sheet-Spooktacular sheet-Actionscientist sheet-Chosen sheet-Crooked sheet-Divine sheet-Expert sheet-Flake sheet-Initiate sheet-Monstrous sheet-Mundane sheet-Professional sheet-Spellslinger sheet-Spooky sheet-Wronged sheet-Gumshoe sheet-Hex sheet-Pararomantic sheet-Searcher sheet-Exile sheet-Hardcase sheet-Luchador sheet-Meddlingkid sheet-Sidekick sheet-Snoop sheet-Summoned sheet-Traveler sheet-Custom sheet-CurseEater sheet-ActionScientistSSK sheet-Celebrity sheet-Changeling sheet-Covenant sheet-Envoy sheet-Host sheet-Interface sheet-Visitor")
+		+movelegacy("AdvImp-AdvBasic","")(class="sheet-Hardcase2020 sheet-Constructed sheet-Spooktacular sheet-Actionscientist sheet-Chosen sheet-Crooked sheet-Divine sheet-Expert sheet-Flake sheet-Initiate sheet-Monstrous sheet-Mundane sheet-Professional sheet-Spellslinger sheet-Spooky sheet-Wronged sheet-Gumshoe sheet-Hex sheet-Pararomantic sheet-Searcher sheet-Exile sheet-Hardcase sheet-Luchador sheet-Meddlingkid sheet-Sidekick sheet-Snoop sheet-Summoned sheet-Traveler sheet-Custom sheet-CurseEater sheet-ActionScientistSSK sheet-Celebrity sheet-Changeling sheet-Covenant sheet-Envoy sheet-Host sheet-Interface sheet-Visitor sheet-Abandoned sheet-Elemental")
 			span(data-i18n='basic-moves') Advance 2 basic moves
 		input.sheet-triggerbox(type='checkbox', name='attr_AdvImp-AdvBasic')
 		+movelegacy("AdvImp-AdvBasic2","")(class="sheet-triggerframe")
@@ -516,14 +530,14 @@
 				input.sheet-triggerbox(type='checkbox', name='attr_AdvImp-Forged-AdvBasic-Wield-Another')
 				span.sheet-triggertext
 					input(type="text", name="attr_AdvImp-Forged-AdvBasic-Wield-AdvMoves")
-		+movelegacy("AdvImp-Retire","")(class="sheet-Hardcase2020 sheet-Constructed sheet-Spooktacular sheet-Actionscientist sheet-Chosen sheet-Crooked sheet-Divine sheet-Expert sheet-Flake sheet-Initiate sheet-Monstrous sheet-Mundane sheet-Professional sheet-Spellslinger sheet-Spooky sheet-Wronged sheet-Gumshoe sheet-Hex sheet-Pararomantic sheet-Searcher sheet-Exile sheet-Hardcase sheet-Luchador sheet-Meddlingkid sheet-Sidekick sheet-Snoop sheet-Summoned sheet-Traveler sheet-Custom sheet-CurseEater sheet-ActionScientistSSK sheet-Celebrity sheet-Changeling sheet-Covenant sheet-Envoy sheet-Forged sheet-Host sheet-Interface")
+		+movelegacy("AdvImp-Retire","")(class="sheet-Hardcase2020 sheet-Constructed sheet-Spooktacular sheet-Actionscientist sheet-Chosen sheet-Crooked sheet-Divine sheet-Expert sheet-Flake sheet-Initiate sheet-Monstrous sheet-Mundane sheet-Professional sheet-Spellslinger sheet-Spooky sheet-Wronged sheet-Gumshoe sheet-Hex sheet-Pararomantic sheet-Searcher sheet-Exile sheet-Hardcase sheet-Luchador sheet-Meddlingkid sheet-Sidekick sheet-Snoop sheet-Summoned sheet-Traveler sheet-Custom sheet-CurseEater sheet-ActionScientistSSK sheet-Celebrity sheet-Changeling sheet-Covenant sheet-Envoy sheet-Forged sheet-Host sheet-Interface sheet-Abandoned sheet-Elemental")
 			span(data-i18n='retire') Retire this hunter to safety
 			| . 
 			span.sheet-Exile(data-i18n='exile-return') Optionally, you may return home to the past
 		// Playbook-Specific Choices
 		+move("AdvImp-Celebrity","Retire this hunter to increased fame")(class="sheet-Celebrity")
 		+move("AdvImp-Interface","Retire as an uploaded consciousness. Are you now a threat, an ally, or wholly disinterested in meatspace?")(class="sheet-Interface")
-		+movelegacy("AdvImp-Luck1","")(class="sheet-Hardcase2020 sheet-Constructed sheet-Spooktacular sheet-Actionscientist sheet-Chosen sheet-Crooked sheet-Divine sheet-Expert sheet-Flake sheet-Initiate sheet-Monstrous sheet-Mundane sheet-Professional sheet-Spellslinger sheet-Spooky sheet-Wronged sheet-Gumshoe sheet-Hex sheet-Searcher sheet-Exile sheet-Hardcase sheet-Luchador sheet-Meddlingkid sheet-Sidekick sheet-Snoop sheet-Summoned sheet-Traveler sheet-CurseEater sheet-ActionScientistSSK sheet-Celebrity sheet-Changeling sheet-Envoy sheet-Host")
+		+movelegacy("AdvImp-Luck1","")(class="sheet-Hardcase2020 sheet-Constructed sheet-Spooktacular sheet-Actionscientist sheet-Chosen sheet-Crooked sheet-Divine sheet-Expert sheet-Flake sheet-Initiate sheet-Monstrous sheet-Mundane sheet-Professional sheet-Spellslinger sheet-Spooky sheet-Wronged sheet-Gumshoe sheet-Hex sheet-Searcher sheet-Exile sheet-Hardcase sheet-Luchador sheet-Meddlingkid sheet-Sidekick sheet-Snoop sheet-Summoned sheet-Traveler sheet-CurseEater sheet-ActionScientistSSK sheet-Celebrity sheet-Changeling sheet-Envoy sheet-Host sheet-Abandoned")
 			input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
 			span(data-i18n='erase-luck').sheet-Setting-Default.sheet-Setting-Gothic.sheet-Setting-Dreaming.sheet-Setting-Marches
 				| Erase one used 
@@ -657,6 +671,8 @@
 				| . You have learnt to deal with the supernatural, no longer receiving any penalties for it
 		+move('CurseEaterAdvImprovement','Make a consumed magic into a permanent custom move (with the group’s agreement), then clear it.')(class="sheet-CurseEater")
 		+move('CurseEaterAdvImprovement','Clear all corruption, without clearing consumed magics. Don’t erase the excess magics now, but you can’t gain more until you release some of them.')(class="sheet-CurseEater")
+		+movelegacy("Imp-Haven","Get a haven like the Expert has, it is hidden and has two other options")(class="sheet-Abandoned")
+		+movelegacy("AdvImp-Abandoned","The next mystery gives you the chance to resolve your abandonment")(class="sheet-Abandoned")
 		+move("AdvImp-ActionScientistSSK","Get +1 Cool, max +3")(class="sheet-ActionScientistSSK")
 		+move("AdvImp-ActionScientistSSK","New interest: add a second area of study")(class="sheet-ActionScientistSSK")
 		+move("AdvImp-Changeling","Remove one Unknown Heritage tag. You’ve now integrated well enough to avoid issues.")(class="sheet-Changeling")
@@ -682,6 +698,8 @@
 		+move("AdvImp-Celebrity","Your fame skyrockets, bringing you lots of new benefits and obligations to match")(class="sheet-Celebrity")
 		+move("AdvImp-Covenant","Your Covenant now works twice per session")(class="sheet-Covenant")
 		+move("AdvImp-Covenant","Create a hunter based on one of your allies to play in addition to this one. If you die, they have +1 ongoing on tasks leading toward avenging or resurrecting the Covenant.")(class="sheet-Covenant")
+		+move("AdvImp-Elemental","Reveal a new aspect of your elemental power. Define it as you did the first effect.").sheet-Elemental
+			+itext("AdvImp-Elemental-New-Power-Aspect")
 		+move("AdvImp-Envoy","Pick a secondary Task as well as your first")(class="sheet-Envoy")
 		+move("AdvImp-Envoy","Change any or all of the Overseers’ Values and Concerns. What’s changed?")(class="sheet-Envoy")
 		+move("AdvImp-Forged","Choose to be either human or weapon permanently from now on. Either retire to safety or change playbooks.")(class="sheet-Forged")
