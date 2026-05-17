@@ -6,6 +6,7 @@
 		| /
 		span(name='attr_Harm-TotalCapacity')
 		| )
+	input.sheet-SkinCheck(type='hidden', name='attr_SkinCheck', value='0')
 	.sheet-nowrap(align='center')
 		b.sheet-statelabel
 			span(data-i18n='okay') Okay
@@ -22,13 +23,23 @@
 		// Constructed does not have an okay/dying divide
 		input.sheet-inverted-triggerbox(type='checkbox', name='attr_Moves-Constructed1')
 		span.sheet-triggertext
-			b |
+			input.sheet-SkinCheck(type='hidden', name='attr_SkinCheck', value='0')
+			span.sheet-NoElemental
+				b |
+			span.sheet-Elemental &nbsp;
 		input.sheet-checkbox(type='checkbox', name='attr_Harm4')
 		span.sheet-altbox
 		input.sheet-checkbox(type='checkbox', name='attr_Harm5')
 		span.sheet-altbox
 		input.sheet-checkbox(type='checkbox', name='attr_Harm6')
 		span.sheet-altbox
+		input.sheet-SkinCheck(type='hidden', name='attr_SkinCheck', value='0')
+		span.sheet-Elemental
+			| &nbsp;
+			input.sheet-checkbox(type='checkbox', name='attr_Elemental-Harm1')
+			span.sheet-altbox
+			input.sheet-checkbox(type='checkbox', name='attr_Elemental-Harm2')
+			span.sheet-altbox
 		// The Constructed gets a whopping 3 extra Harm boxes
 		input.sheet-triggerbox(type='checkbox', name='attr_Moves-Constructed1')
 		input.sheet-checkbox(type='checkbox', name='attr_Constructed-Harm1')
@@ -56,18 +67,25 @@
 		input.sheet-checkbox(type='checkbox', name='attr_Harm7')
 		span.sheet-altbox
 		| 
-		b.sheet-statelabel
-			span(data-i18n='dying') Dying
-		input.sheet-inverted-triggerbox(type='checkbox', name='attr_Moves-Constructed1')
-		span.sheet-triggertext
-			br
-			input.sheet-checkbox(type='checkbox', name='attr_Unstable')
-			span.sheet-altbox
-			| 
+		input.sheet-SkinCheck(type='hidden', name='attr_SkinCheck', value='0')
+		span.sheet-NoElemental
 			b.sheet-statelabel
-				span(data-i18n='unstable') Unstable
+				span(data-i18n='dying') Dying
+		span.sheet-Elemental
+			b.sheet-statelabel
+				+t('Eject')
+		input.sheet-SkinCheck(type='hidden', name='attr_SkinCheck', value='0')
+		.sheet-NoElemental
+			input.sheet-inverted-triggerbox(type='checkbox', name='attr_Moves-Constructed1')
+			span.sheet-triggertext
+				// br
+				input.sheet-checkbox(type='checkbox', name='attr_Unstable')
+				span.sheet-altbox
+				| 
+				b.sheet-statelabel
+					span(data-i18n='unstable') Unstable
 
-	.sheet-isolator
+	.sheet-isolator.sheet-NoElemental
 		input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-Harm-Wounds', value='1', checked='')
 		span.sheet-anglebox
 		|  
@@ -85,8 +103,14 @@
 	.sheet-Expander
 		input.sheet-inverted-triggerbox(type='checkbox', name='attr_Moves-Constructed1')
 		span.sheet-triggertext
-			span(data-i18n='harm-instructions')
+			input.sheet-SkinCheck(type='hidden', name='attr_SkinCheck', value='0')
+			span(data-i18n='harm-instructions').sheet-NoElemental
 				| When you reach 4 or more, mark unstable. Unstable injuries worsen as time passes.
+			.sheet-Elemental
+				p
+					+t('When you suffer harm, mark the number of boxes equal to harm suffered. You don’t become unstable.')
+				p
+					+t('When harm causes you to de-materialise, you’re ejected from the universe. You return a matter of hours, the Keeper decides exactly when.')
 		input.sheet-triggerbox(type='checkbox', name='attr_Moves-Constructed1')
 		span.sheet-triggertext
 			span(data-i18n='constructed-unstable')

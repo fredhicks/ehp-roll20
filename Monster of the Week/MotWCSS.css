@@ -123,6 +123,8 @@ span.sheet-Forged, div.sheet-Forged,
 span.sheet-Host, div.sheet-Host,
 span.sheet-Interface, div.sheet-Interface,
 span.sheet-Visitor, div.sheet-Visitor,
+span.sheet-Abandoned, div.sheet-Abandoned,
+span.sheet-Elemental, div.sheet-Elemental,
 span.sheet-ActionScientistSSK, div.sheet-ActionScientistSSK,
 span.sheet-TeamPick, div.sheet-TeamPick,
 span.sheet-Agents, div.sheet-Agents,
@@ -166,6 +168,12 @@ span.sheet-Custom, div.sheet-Custom
 .sheet-SkinCheck[value="30"] ~ div.sheet-NoSurvivor,
 .sheet-SkinCheck[value="30"] ~ div > span > span.sheet-NoSurvivor,
 .sheet-SkinCheck[value="30"] ~ div > span.sheet-NoSurvivor {
+	display: none;
+}
+
+.sheet-SkinCheck[value="41"] ~ div.sheet-NoElemental,
+.sheet-SkinCheck[value="41"] ~ div > span > span.sheet-NoElemental,
+.sheet-SkinCheck[value="41"] ~ div > span.sheet-NoElemental {
 	display: none;
 }
 
@@ -334,6 +342,8 @@ span.sheet-Custom, div.sheet-Custom
 .sheet-SkinCheck[value="37"] ~ div.sheet-Interface,
 .sheet-SkinCheck[value="38"] ~ div.sheet-Visitor,
 .sheet-SkinCheck[value="39"] ~ div.sheet-ActionScientistSSK,
+.sheet-SkinCheck[value="40"] ~ div.sheet-Abandoned,
+.sheet-SkinCheck[value="41"] ~ div.sheet-Elemental,
 .sheet-SkinCheck[value="99"] ~ div.sheet-Custom
 {
 	display: block;
@@ -427,6 +437,10 @@ span.sheet-Custom, div.sheet-Custom
 .sheet-SkinCheck[value="38"] ~  div > span.sheet-Visitor,
 .sheet-SkinCheck[value="39"] ~  div > span > span.sheet-ActionScientistSSK,
 .sheet-SkinCheck[value="39"] ~  div > span.sheet-ActionScientistSSK,
+.sheet-SkinCheck[value="40"] ~  div > span > span.sheet-Abandoned,
+.sheet-SkinCheck[value="40"] ~  div > span.sheet-Abandoned,
+.sheet-SkinCheck[value="41"] ~  div > span > span.sheet-Elemental,
+.sheet-SkinCheck[value="41"] ~  div > span.sheet-Elemental,
 .sheet-SkinCheck[value="99"] ~  div > span > span.sheet-Custom,
 .sheet-SkinCheck[value="99"] ~  div > span.sheet-Custom
 {

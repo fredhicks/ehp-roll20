@@ -50,14 +50,17 @@ on("change:startingstats", function() {
 		});
 });
 
-on("sheet:opened change:harm1 change:harm2 change:harm3 change:harm4 change:harm5 change:harm6 change:harm7 change:moves-constructed1 change:constructed-harm1 change:constructed-harm2 change:constructed-harm3 change:imp-dying change:extra-harm1 change:advimp-dying change:extra-harm2 change:extra-okayharm1", function() {
-	const alist = [ "Harm1", "Harm2", "Harm3", "Harm4", "Harm5", "Harm6", "Harm7", "Moves-Constructed1", "Constructed-Harm1", "Constructed-Harm2", "Constructed-Harm3", "Imp-Dying", "Extra-Harm1", "AdvImp-Dying", "Extra-Harm2", "Extra-OkayHarm1", "Imp-OkayHarm" ];
+on("sheet:opened change:skinname change:harm1 change:harm2 change:harm3 change:harm4 change:harm5 change:harm6 change:harm7 change:moves-constructed1 change:constructed-harm1 change:constructed-harm2 change:constructed-harm3 change:imp-dying change:extra-harm1 change:advimp-dying change:extra-harm2 change:extra-okayharm1", function() {
+	const alist = [ "Harm1", "Harm2", "Harm3", "Harm4", "Harm5", "Harm6", "Harm7", "Moves-Constructed1", "Constructed-Harm1", "Constructed-Harm2", "Constructed-Harm3", "Imp-Dying", "Extra-Harm1", "AdvImp-Dying", "Extra-Harm2", "Extra-OkayHarm1", "Imp-OkayHarm", "Elemental-Harm1", "Elemental-Harm2", "SkinName" ];
 	getAttrs(alist,function(a) {
 
 		// Values are "0" if not checked, "on" if checked. First we must adapt for this, as we want them numeric, 0 or 1.
 		for(var i = 0; i < alist.length; i++) {
 			var val = a[alist[i]];
-			if ( val == "on" || val == "1" || val == "true" || val === true ) {
+			if ( val == "41") {
+				// Then it's the Elemental identifier, y'know, so don't mess it up
+				val = 41;
+			} else if ( val == "on" || val == "1" || val == "true" || val === true ) {
 				val = 1;
 			} else {
 				val = 0;
@@ -65,14 +68,22 @@ on("sheet:opened change:harm1 change:harm2 change:harm3 change:harm4 change:harm
 			a[alist[i]] = val;
 		}
 
+		log(a);
+
 		var atts = {};
 		var capacity = 7;
 		var constructed = false; if ( a["Moves-Constructed1"] == 1 ) { constructed = true; capacity += 3; }
 		var dying = false; if ( a["Imp-Dying"] == 1 ) { dying = true; capacity += 1; }
 		var advdying = false; if ( a["AdvImp-Dying"] == 1 ) { advdying = true; capacity += 1; }
 		var okay = false; if ( a["Imp-OkayHarm"] == 1 ) { okay = true; capacity += 1; }
+		log("Elemental Check");
+		log(a["SkinName"]);
+		var elemental = false; if ( a["SkinName"] == 41 ) {
+			elemental = true; capacity += 2;
+		}
 		var taken = a["Harm1"] + a["Harm2"] + a["Harm3"] + a["Harm4"] + a["Harm5"] + a["Harm6"] + a["Harm7"];
 		if ( constructed ) { taken += a["Constructed-Harm1"] + a["Constructed-Harm2"] + a["Constructed-Harm3"]; }
+		if ( elemental ) { taken += a["Elemental-Harm1"] + a["Elemental-Harm2"]; }
 		if ( dying ) { taken += a["Extra-Harm1"]; }
 		if ( okay ) { taken += a["Extra-OkayHarm1"]; }
 		if ( advdying ) { taken += a["Extra-Harm2"]; }
@@ -441,6 +452,10 @@ on("change:repeating_hunterstory:story", function(e) {
             <option class="sheet-SkinSelect" value="36" data-i18n="The Host">The Host</option>
             <option class="sheet-SkinSelect" value="37" data-i18n="The Interface">The Interface</option>
             <option class="sheet-SkinSelect" value="38" data-i18n="The Visitor">The Visitor</option>
+            <option disabled="disabled" value=""></option>
+            <option class="sheet-OptgroupHeader" disabled="disabled" data-i18n="Mystic Marginalia"></option>
+            <option class="sheet-SkinSelect" value="40" data-i18n="The Abandoned">The Abandoned</option>
+            <option class="sheet-SkinSelect" value="41" data-i18n="The Elemental">The Elemental</option>
             <option disabled="disabled" value=""></option>
             <option class="sheet-OptgroupHeader" disabled="disabled" data-i18n="reinforcements"></option>
             <option class="sheet-SkinSelect" value="17" data-i18n="the-exile">The Exile</option>
@@ -2634,6 +2649,13 @@ on("change:repeating_hunterstory:story", function(e) {
     </div>
     <div class="sheet-move">
       <input type="radio" name="attr_SkinName" value="30"/> <b><span data-i18n="The Survivor"></span> :</b> <span data-i18n="A regular person caught in a bad situation—one where they might not make it out alive. For use with the Wait, Monsters Are Real? toolkit."></span> 
+    </div>
+    <div class="sheet-Subsection" data-i18n="Mystic Marginalia"></div>
+    <div class="sheet-move">
+      <input type="radio" name="attr_SkinName" value="40"/> <b><span data-i18n="The Abandoned"></span> :</b> <span data-i18n="You were left alone, and the efforts it took to survive being alone in the world has shaped or changed who you are."></span> 
+    </div>
+    <div class="sheet-move">
+      <input type="radio" name="attr_SkinName" value="41"/> <b><span data-i18n="The Elemental"></span> :</b> <span data-i18n="Elementals are not human and do not (usually) have a life outside of mysteries. Elementals are simply there when the mystery begins. These hunters start more powerful than most, but have limited options to improve or change. This makes them suitable for one-shot or short-term games, or for players who are likely to miss sessions. Elementals are often assigned in pairs. Unlike most playbooks, you may create two Elemental hunters on the same team."></span> 
     </div>
     <div class="sheet-Subsection" data-i18n="reinforcements-3pp-books">Reinforcements and Third Party Playbooks</div>
     <div class="sheet-move">
@@ -11018,6 +11040,26 @@ on("change:repeating_hunterstory:story", function(e) {
               <option value="3 -2 0 1 1" data-i18n="starting-stats-choices" data-i18n-vars="+3|-2|=0|+1|+1">Charm{{0}}, Cool{{1}}, Sharp{{2}}, Tough{{3}}, Weird{{4}}</option>
             </select>
           </div>
+          <div class="sheet-Abandoned">
+            <select class="sheet-StartingStats" name="attr_StartingStats">
+              <option value="" checked="" data-i1n="" data-i18n="choose-starting-stats">Choose a set</option>
+              <option value="2 1 -1 0 1" data-i18n="starting-stats-choices" data-i18n-vars="+2|+1|-1|=0|+1">Charm{{0}}, Cool{{1}}, Sharp{{2}}, Tough{{3}}, Weird{{4}} </option>
+              <option value="1 2 0 1 -1" data-i18n="starting-stats-choices" data-i18n-vars="+1|+2|=0|+1|-1">Charm{{0}}, Cool{{1}}, Sharp{{2}}, Tough{{3}}, Weird{{4}} </option>
+              <option value="0 1 1 -1 2" data-i18n="starting-stats-choices" data-i18n-vars="=0|+1|+1|-1|+2">Charm{{0}}, Cool{{1}}, Sharp{{2}}, Tough{{3}}, Weird{{4}} </option>
+              <option value="-1 2 1 0 1" data-i18n="starting-stats-choices" data-i18n-vars="-1|+2|+1|=0|+1">Charm{{0}}, Cool{{1}}, Sharp{{2}}, Tough{{3}}, Weird{{4}} </option>
+              <option value="1 1 2 0 -1" data-i18n="starting-stats-choices" data-i18n-vars="+1|+1|+2|=0|-1">Charm{{0}}, Cool{{1}}, Sharp{{2}}, Tough{{3}}, Weird{{4}} </option>
+            </select>
+          </div>
+          <div class="sheet-Elemental">
+            <select class="sheet-StartingStats" name="attr_StartingStats">
+              <option value="" checked="" data-i1n="" data-i18n="choose-starting-stats">Choose a set</option>
+              <option value="-1 3 1 0 1" data-i18n="starting-stats-choices" data-i18n-vars="-1|+3|+1|=0|+1">Charm{{0}}, Cool{{1}}, Sharp{{2}}, Tough{{3}}, Weird{{4}} </option>
+              <option value="3 -1 1 0 1" data-i18n="starting-stats-choices" data-i18n-vars="+3|-1|+1|=0|+1">Charm{{0}}, Cool{{1}}, Sharp{{2}}, Tough{{3}}, Weird{{4}} </option>
+              <option value="-1 0 3 -1 2" data-i18n="starting-stats-choices" data-i18n-vars="-1|=0|+3|-1|+2">Charm{{0}}, Cool{{1}}, Sharp{{2}}, Tough{{3}}, Weird{{4}} </option>
+              <option value="-1 1 1 0 3" data-i18n="starting-stats-choices" data-i18n-vars="-1|+1|+1|=0|+3">Charm{{0}}, Cool{{1}}, Sharp{{2}}, Tough{{3}}, Weird{{4}} </option>
+              <option value="-1 1 1 3 0" data-i18n="starting-stats-choices" data-i18n-vars="-1|+1|+1|+3|=0">Charm{{0}}, Cool{{1}}, Sharp{{2}}, Tough{{3}}, Weird{{4}} </option>
+            </select>
+          </div>
         </div>
       </div>
       <!-- End Starting Stats Sidebar Section-->
@@ -11033,7 +11075,9 @@ on("change:repeating_hunterstory:story", function(e) {
             <div class="sheet-Subsection sheet-Setting-Default sheet-Setting-Gothic sheet-Setting-Dreaming sheet-Setting-Marches"><span data-i18n="luck">Luck</span></div>
             <div class="sheet-Subsection sheet-Setting-Bone"><span data-i18n="Ancestral Favour"></span> 
             </div>
-            <div class="sheet-NoSurvivor">
+            <div class="sheet-Elemental"><span data-i18n="Luck and chance have no hold over you. You have no Luck, cannot spend it, and cannot become Doomed."></span> 
+            </div>
+            <div class="sheet-NoSurvivor sheet-NoElemental">
               <input class="sheet-SettingCheck" type="hidden" name="attr_Game-World" value="0"/>
               <p align="center"><b class="sheet-statelabel"><span data-i18n="okay">Okay</span></b>
                 <input class="sheet-checkbox" type="checkbox" name="attr_Luck1"/><span class="sheet-altbox"></span>
@@ -11173,6 +11217,10 @@ on("change:repeating_hunterstory:story", function(e) {
                   <div class="sheet-Luchador sheet-Traveler sheet-Custom">
                     <textarea name="attr_Luck-Special" rows="4" cols="40" placeholder="(Optional) Write your own Luck Special Move"></textarea>
                   </div>
+                  <div class="sheet-Abandoned"><span data-i18n="When you mark a Luck, you find something or someone you thought was lost forever, or someone or something you hoped you’d never see again."></span> 
+                  </div>
+                  <div class="sheet-Elemental"><span data-i18n="Whenever you make an honest emotional connection with a mortal, another hunter may mark experience."></span> 
+                  </div>
                 </div>
               </div>
               <!-- .sheet-Luck-Specials-->
@@ -11182,6 +11230,7 @@ on("change:repeating_hunterstory:story", function(e) {
         <div class="sheet-col sheet-Track-Harm">
           <div class="sheet-Harm">
             <div class="sheet-Subsection"><span data-i18n="harm">Harm</span>&nbsp;(<span name="attr_Harm-Remaining"></span>/<span name="attr_Harm-TotalCapacity"></span>)</div>
+            <input class="sheet-SkinCheck" type="hidden" name="attr_SkinCheck" value="0"/>
             <div class="sheet-nowrap" align="center"><b class="sheet-statelabel"><span data-i18n="okay">Okay</span></b>
               <input class="sheet-checkbox" type="checkbox" name="attr_Harm1"/><span class="sheet-altbox"></span>
               <input class="sheet-checkbox" type="checkbox" name="attr_Harm2"/><span class="sheet-altbox"></span>
@@ -11190,10 +11239,14 @@ on("change:repeating_hunterstory:story", function(e) {
               <input class="sheet-triggerbox" type="checkbox" name="attr_Imp-OkayHarm"/>
               <input class="sheet-checkbox" type="checkbox" name="attr_Extra-OkayHarm1"/><span class="sheet-altbox"></span>
               <!-- Constructed does not have an okay/dying divide-->
-              <input class="sheet-inverted-triggerbox" type="checkbox" name="attr_Moves-Constructed1"/><span class="sheet-triggertext"><b>|</b></span>
+              <input class="sheet-inverted-triggerbox" type="checkbox" name="attr_Moves-Constructed1"/><span class="sheet-triggertext">
+                <input class="sheet-SkinCheck" type="hidden" name="attr_SkinCheck" value="0"/><span class="sheet-NoElemental"><b>|</b></span><span class="sheet-Elemental">&nbsp;</span></span>
               <input class="sheet-checkbox" type="checkbox" name="attr_Harm4"/><span class="sheet-altbox"></span>
               <input class="sheet-checkbox" type="checkbox" name="attr_Harm5"/><span class="sheet-altbox"></span>
               <input class="sheet-checkbox" type="checkbox" name="attr_Harm6"/><span class="sheet-altbox"></span>
+              <input class="sheet-SkinCheck" type="hidden" name="attr_SkinCheck" value="0"/><span class="sheet-Elemental">&nbsp;
+                <input class="sheet-checkbox" type="checkbox" name="attr_Elemental-Harm1"/><span class="sheet-altbox"></span>
+                <input class="sheet-checkbox" type="checkbox" name="attr_Elemental-Harm2"/><span class="sheet-altbox"></span></span>
               <!-- The Constructed gets a whopping 3 extra Harm boxes-->
               <input class="sheet-triggerbox" type="checkbox" name="attr_Moves-Constructed1"/>
               <input class="sheet-checkbox" type="checkbox" name="attr_Constructed-Harm1"/><span class="sheet-altbox"></span>
@@ -11211,11 +11264,16 @@ on("change:repeating_hunterstory:story", function(e) {
               <input class="sheet-triggerbox" type="checkbox" name="attr_AdvImp-Dying"/>
               <input class="sheet-checkbox" type="checkbox" name="attr_Extra-Harm2"/><span class="sheet-altbox"></span>
               <!-- Final box is always the Harm7 box in case we want to tie behavior to that-->
-              <input class="sheet-checkbox" type="checkbox" name="attr_Harm7"/><span class="sheet-altbox"></span> <b class="sheet-statelabel"><span data-i18n="dying">Dying</span></b>
-              <input class="sheet-inverted-triggerbox" type="checkbox" name="attr_Moves-Constructed1"/><span class="sheet-triggertext"><br/>
-                <input class="sheet-checkbox" type="checkbox" name="attr_Unstable"/><span class="sheet-altbox"></span> <b class="sheet-statelabel"><span data-i18n="unstable">Unstable</span></b></span>
+              <input class="sheet-checkbox" type="checkbox" name="attr_Harm7"/><span class="sheet-altbox"></span> 
+              <input class="sheet-SkinCheck" type="hidden" name="attr_SkinCheck" value="0"/><span class="sheet-NoElemental"><b class="sheet-statelabel"><span data-i18n="dying">Dying</span></b></span><span class="sheet-Elemental"><b class="sheet-statelabel"><span data-i18n="Eject"></span> </b></span>
+              <input class="sheet-SkinCheck" type="hidden" name="attr_SkinCheck" value="0"/>
+              <div class="sheet-NoElemental">
+                <input class="sheet-inverted-triggerbox" type="checkbox" name="attr_Moves-Constructed1"/><span class="sheet-triggertext">
+                  <!-- br-->
+                  <input class="sheet-checkbox" type="checkbox" name="attr_Unstable"/><span class="sheet-altbox"></span> <b class="sheet-statelabel"><span data-i18n="unstable">Unstable</span></b></span>
+              </div>
             </div>
-            <div class="sheet-isolator">
+            <div class="sheet-isolator sheet-NoElemental">
               <input class="sheet-checkbox sheet-ExpToggle" type="checkbox" name="attr_Toggle-Harm-Wounds" value="1" checked=""/><span class="sheet-anglebox"></span> <span class="sheet-ExpHeader" data-i18n="Wounds"></span> 
               <div class="sheet-Expander"><span data-i18n="If you’re tracking wounds, track them here."></span> 
                 <fieldset class="repeating_wounds">
@@ -11225,7 +11283,14 @@ on("change:repeating_hunterstory:story", function(e) {
             </div>
             <input class="sheet-checkbox sheet-ExpToggle" type="checkbox" name="attr_Toggle-Unstable-Instructions" value="1" checked=""/><span class="sheet-anglebox"></span> <span class="sheet-ExpHeader"><span data-i18n="instructions">Instructions</span></span>
             <div class="sheet-Expander">
-              <input class="sheet-inverted-triggerbox" type="checkbox" name="attr_Moves-Constructed1"/><span class="sheet-triggertext"><span data-i18n="harm-instructions">When you reach 4 or more, mark unstable. Unstable injuries worsen as time passes.</span></span>
+              <input class="sheet-inverted-triggerbox" type="checkbox" name="attr_Moves-Constructed1"/><span class="sheet-triggertext">
+                <input class="sheet-SkinCheck" type="hidden" name="attr_SkinCheck" value="0"/><span class="sheet-NoElemental" data-i18n="harm-instructions">When you reach 4 or more, mark unstable. Unstable injuries worsen as time passes.</span>
+                <div class="sheet-Elemental">
+                  <p><span data-i18n="When you suffer harm, mark the number of boxes equal to harm suffered. You don’t become unstable."></span> 
+                  </p>
+                  <p><span data-i18n="When harm causes you to de-materialise, you’re ejected from the universe. You return a matter of hours, the Keeper decides exactly when."></span> 
+                  </p>
+                </div></span>
               <input class="sheet-triggerbox" type="checkbox" name="attr_Moves-Constructed1"/><span class="sheet-triggertext"><span data-i18n="constructed-unstable"></span></span>
             </div>
           </div>
@@ -11234,16 +11299,37 @@ on("change:repeating_hunterstory:story", function(e) {
           <div class="sheet-XP">
             <input class="sheet-SkinCheck" type="hidden" name="attr_SkinCheck" value="0"/>
             <div class="sheet-Subsection"><span data-i18n="experience">Experience</span></div>
-            <p align="center">
-              <input class="sheet-checkbox" type="checkbox" name="attr_XP1"/><span class="sheet-altbox"></span>
-              <input class="sheet-checkbox" type="checkbox" name="attr_XP2"/><span class="sheet-altbox"></span>
-              <input class="sheet-checkbox" type="checkbox" name="attr_XP3"/><span class="sheet-altbox"></span>
-              <input class="sheet-checkbox" type="checkbox" name="attr_XP4"/><span class="sheet-altbox"></span>
-              <input class="sheet-checkbox" type="checkbox" name="attr_XP5"/><span class="sheet-altbox"></span>
-            </p>
-            <div class="sheet-NoSurvivor">
+            <div class="sheet-NoElemental">
+              <p align="center">
+                <input class="sheet-checkbox" type="checkbox" name="attr_XP1"/><span class="sheet-altbox"></span>
+                <input class="sheet-checkbox" type="checkbox" name="attr_XP2"/><span class="sheet-altbox"></span>
+                <input class="sheet-checkbox" type="checkbox" name="attr_XP3"/><span class="sheet-altbox"></span>
+                <input class="sheet-checkbox" type="checkbox" name="attr_XP4"/><span class="sheet-altbox"></span>
+                <input class="sheet-checkbox" type="checkbox" name="attr_XP5"/><span class="sheet-altbox"></span>
+              </p>
+            </div>
+            <div class="sheet-Elemental">
+              <p align="center">
+                <input class="sheet-checkbox" type="checkbox" name="attr_XP1"/><span class="sheet-altbox"></span>
+                <input class="sheet-checkbox" type="checkbox" name="attr_XP2"/><span class="sheet-altbox"></span>
+                <input class="sheet-checkbox" type="checkbox" name="attr_XP3"/><span class="sheet-altbox"></span>
+                <input class="sheet-checkbox" type="checkbox" name="attr_XP4"/><span class="sheet-altbox"></span>
+                <input class="sheet-checkbox" type="checkbox" name="attr_XP5"/><span class="sheet-altbox"></span>&nbsp;
+                <input class="sheet-checkbox" type="checkbox" name="attr_XP6"/><span class="sheet-altbox"></span>
+                <input class="sheet-checkbox" type="checkbox" name="attr_XP7"/><span class="sheet-altbox"></span>
+                <input class="sheet-checkbox" type="checkbox" name="attr_XP8"/><span class="sheet-altbox"></span>
+                <input class="sheet-checkbox" type="checkbox" name="attr_XP9"/><span class="sheet-altbox"></span>
+                <input class="sheet-checkbox" type="checkbox" name="attr_XP10"/><span class="sheet-altbox"></span>
+              </p>
+            </div>
+            <div class="sheet-NoSurvivor sheet-NoElemental">
               <input class="sheet-checkbox sheet-ExpToggle" type="checkbox" name="attr_Toggle-XP-Instructions" value="1" checked=""/><span class="sheet-anglebox"></span> <span class="sheet-ExpHeader"><span data-i18n="instructions">Instructions</span></span>
               <div class="sheet-Expander"><span data-i18n="experience-description">Mark <i>Experience</i> when a roll totals 6 or less; or when a move tells you to do so</span>. <span data-i18n="xp-description">Once you have filled all 5 boxes, uncheck them and choose an <i>Improvement</i> option</span>.</div>
+            </div>
+            <div class="sheet-Elemental">
+              <input class="sheet-checkbox sheet-ExpToggle" type="checkbox" name="attr_Toggle-XP-Instructions" value="1" checked=""/><span class="sheet-anglebox"></span> <span class="sheet-ExpHeader"><span data-i18n="instructions">Instructions</span></span>
+              <div class="sheet-Expander"><span data-i18n="Mark Experience when a roll totals 6 or less; or when a move tells you to do so."></span> <span data-i18n="Once you have filled all ten boxes, uncheck them and choose an improvement."></span> 
+              </div>
             </div>
             <div class="sheet-Survivor">
               <input class="sheet-checkbox sheet-ExpToggle" type="checkbox" name="attr_Toggle-XP-Instructions" value="1" checked=""/><span class="sheet-anglebox"></span> <span class="sheet-ExpHeader"><span data-i18n="instructions">Instructions</span></span>
@@ -12060,6 +12146,10 @@ on("change:repeating_hunterstory:story", function(e) {
                   <div class="sheet-Custom"><span class="sheet-highlights" data-i18n="luck-special-custom">You may come up with a Luck Special move for this playbook with help from the Keeper.</span></div>
                   <div class="sheet-Luchador sheet-Traveler sheet-Custom">
                     <textarea name="attr_Luck-Special" rows="4" cols="40" placeholder="(Optional) Write your own Luck Special Move"></textarea>
+                  </div>
+                  <div class="sheet-Abandoned"><span data-i18n="When you mark a Luck, you find something or someone you thought was lost forever, or someone or something you hoped you’d never see again."></span> 
+                  </div>
+                  <div class="sheet-Elemental"><span data-i18n="Whenever you make an honest emotional connection with a mortal, another hunter may mark experience."></span> 
                   </div>
                 </div>
               </div>
@@ -14263,6 +14353,96 @@ on("change:repeating_hunterstory:story", function(e) {
                 <div class="sheet-move">
                   <input class="sheet-checkbox" type="checkbox" name="attr_Visitor-Expat-Pull5"/><span class="sheet-mainbox"></span><span class="sheet-grayable"><span data-i18n="Something else:"></span> 
                     <input type="text" name="attr_Visitor-Expat-Pull-Else"/></span>
+                </div>
+              </div>
+            </div>
+            <!-- Abandoned-->
+            <div class="sheet-Abandoned">
+              <div class="sheet-Subsection"><span data-i18n="Abandonment"></span> 
+              </div>
+              <input class="sheet-checkbox sheet-ExpToggle" type="checkbox" name="attr_Toggle-Abandoned-Abandonment-All" value="1" checked=""/><span class="sheet-anglebox"></span><span class="sheet-ExpHeader"><span data-i18n="all">All</span></span>
+              <div class="sheet-Expander">
+                <input class="sheet-checkbox sheet-ExpToggle" type="checkbox" name="attr_Toggle-Abandoned-Abandonment-Unused" value="1" checked=""/><span class="sheet-anglebox"></span><span class="sheet-ExpHeader"><span data-i18n="unused">Unused</span></span>
+                <div><span data-i18n="Describe how you were abandoned and what survival skills you had to pick up to get through it."></span> 
+                </div>
+                <div class="sheet-move">
+                  <input class="sheet-checkbox" type="checkbox" name="attr_Abandoned-AbandonmentMove1"/><span class="sheet-mainbox"></span><span class="sheet-grayable"><span data-i18n="Sole Survivor: You were left to survive in the wake of a monster attack. Gain +1 forward when you act under pressure to avoid a monster attack or protect someone from a monster attack. When you enter a location, you know if a monster or minion has been there recently."></span> </span>
+                </div>
+                <div class="sheet-move">
+                  <input class="sheet-checkbox" type="checkbox" name="attr_Abandoned-AbandonmentMove2"/><span class="sheet-mainbox"></span><span class="sheet-grayable"><span data-i18n="Urchin: You’ve lived on the streets for as long as you can remember. When you investigate a mystery on entering a new location, you can ask “Is this a safe place to hole up?” in addition to your normal questions. You gain +1 ongoing when palming objects or performing childish pranks."></span> </span>
+                </div>
+                <div class="sheet-move">
+                  <input class="sheet-checkbox" type="checkbox" name="attr_Abandoned-AbandonmentMove3"/><span class="sheet-mainbox"></span><span class="sheet-grayable"><span data-i18n="Lost in the System: You faced a childhood of compassionless guardianship. You always know when someone is masking their true intentions, but not necessarily what those intentions are."></span> </span>
+                </div>
+                <div class="sheet-move">
+                  <input class="sheet-checkbox" type="checkbox" name="attr_Abandoned-AbandonmentMove4"/><span class="sheet-mainbox"></span><span class="sheet-grayable"><span data-i18n="Exploited Heir: Your parents left you an inheritance someone wanted to control. Whenever you investigate a mystery, you can add the following questions to those you can choose. “Who has the most power in this relationship?”“What is _______ getting out of this situation?”"></span> </span>
+                </div>
+                <div class="sheet-move">
+                  <input class="sheet-checkbox" type="checkbox" name="attr_Abandoned-AbandonmentMove5"/><span class="sheet-mainbox"></span><span class="sheet-grayable"><span data-i18n="Neglected: Your guardians were there, but might as well not have been, and you’re used to organizing things yourself. Once per session, you may use trust your gut to get a sense of priorities. If trust your gut is your basic weird move, you may instead use tradecraft."></span> </span>
+                </div>
+                <div class="sheet-move">
+                  <input class="sheet-checkbox" type="checkbox" name="attr_Abandoned-AbandonmentMove6"/><span class="sheet-mainbox"></span><span class="sheet-grayable"><span data-i18n="Stolen Away: You were drawn into a strange world as a child. You may use Weird to read a bad situation. If you do so, add “Is there any hidden wonder?” to the list of questions you can choose."></span> </span>
+                </div>
+                <div class="sheet-move">
+                  <input class="sheet-checkbox" type="checkbox" name="attr_Abandoned-AbandonmentMove7"/><span class="sheet-mainbox"></span><span class="sheet-grayable"><span data-i18n="Castaway: An accident left you stranded far from civilisation. You take +1 ongoing to act under pressure when dealing with environmental hazards. You always know if something is safe to eat or drink, even if a contaminant is normally invisible."></span> </span>
+                </div>
+              </div>
+            </div>
+            <!-- Elemental-->
+            <div class="sheet-Elemental">
+              <div class="sheet-Subsection"><span data-i18n="Elemental Power"></span> 
+              </div>
+              <div>
+                <input class="sheet-checkbox sheet-ExpToggle" type="checkbox" name="attr_Toggle-Elemental-Power" value="1" checked=""/><span class="sheet-anglebox"></span><span class="sheet-ExpHeader"></span>
+                <div class="sheet-Expander">
+                  <p><span data-i18n="Pick an element or mineral you embody, such as: Gold, Lead, Obsidian, Sapphire, Steel."></span> 
+                  </p>
+                  <p><b><span data-i18n="I am"></span> </b>
+                    <input type="text" name="attr_Elemental-IAm"/>
+                  </p>
+                  <p><span data-i18n="You have a specific power with a thematic tie to your element. Decide on a theme, such as: gold: warmth, lead: mass, obsidian: cutting, sapphire: time, steel: cold."></span> 
+                  </p>
+                  <p><b><span data-i18n="My elemental power is:"></span> </b>
+                    <textarea name="attr_Elemental-PowerDesc"></textarea>
+                  </p>
+                  <p><span data-i18n="Your elemental power might allow you to, as long as it applies:"></span> 
+                    <ul>
+                      <li><span data-i18n="Alter your surroundings. Such as: add warmth, alter the flow of time, make something lighter."></span> 
+                      </li>
+                      <li><span data-i18n="Act in ways impossible for a human. Such as: lift something incredibly heavy, cut something uncuttable, experience what will happen in 10 minutes."></span> 
+                      </li>
+                      <li><span data-i18n="Resist any danger or harm from it. Such as: withstand deadly cold, be unaffected by a sword, be unchanged by a sequence of events."></span> 
+                      </li>
+                    </ul><span data-i18n="Examples: cool something to absolute zero, turn metals to liquid, read the emotions from an object, make something much less dense, make something burst into flame."></span> 
+                  </p>
+                  <p><span data-i18n="Get the group’s agreement for your elemental power’s effect."></span> 
+                  </p>
+                </div>
+              </div>
+              <div class="sheet-Subsection"><span data-i18n="Foe"></span> 
+              </div>
+              <input class="sheet-checkbox sheet-ExpToggle" type="checkbox" name="attr_Toggle-Elemental-Foe-All" value="1" checked=""/><span class="sheet-anglebox"></span><span class="sheet-ExpHeader"><span data-i18n="all">All</span></span>
+              <div class="sheet-Expander">
+                <input class="sheet-checkbox sheet-ExpToggle" type="checkbox" name="attr_Toggle-Elemental-Foe-Unused" value="1" checked=""/><span class="sheet-anglebox"></span><span class="sheet-ExpHeader"><span data-i18n="unused">Unused</span></span>
+                <p><span data-i18n="You work against an implacable foe that seeks to destroy or corrupt the multiverse. If you’re part of a team of Elementals, pick together (the foe hates all of you)."></span> 
+                </p>
+                <p><span data-i18n="My foe is (pick one):"></span> 
+                </p>
+                <div class="sheet-move">
+                  <input class="sheet-checkbox" type="checkbox" name="attr_Elemental-Foe-Opt1"/><span class="sheet-mainbox"></span><span class="sheet-grayable"><span data-i18n="Ever-gnawing entropy."></span> </span>
+                </div>
+                <div class="sheet-move">
+                  <input class="sheet-checkbox" type="checkbox" name="attr_Elemental-Foe-Opt2"/><span class="sheet-mainbox"></span><span class="sheet-grayable"><span data-i18n="Corruption that turns all to rot and failure."></span> </span>
+                </div>
+                <div class="sheet-move">
+                  <input class="sheet-checkbox" type="checkbox" name="attr_Elemental-Foe-Opt3"/><span class="sheet-mainbox"></span><span class="sheet-grayable"><span data-i18n="A group of rogue Elementals."></span> </span>
+                </div>
+                <div class="sheet-move">
+                  <input class="sheet-checkbox" type="checkbox" name="attr_Elemental-Foe-Opt4"/><span class="sheet-mainbox"></span><span class="sheet-grayable"><span data-i18n="Hostile entities from outside the universe."></span> </span>
+                </div>
+                <div class="sheet-move">
+                  <input class="sheet-checkbox" type="checkbox" name="attr_Elemental-Foe-Opt5"/><span class="sheet-mainbox"></span><span class="sheet-grayable"><span data-i18n="Something else:"></span> 
+                    <input type="text" name="attr_Elemental-Foe-Opt-Else"/></span>
                 </div>
               </div>
             </div>
@@ -28583,6 +28763,10 @@ on("change:repeating_hunterstory:story", function(e) {
                     <div class="sheet-Interface"><span data-i18n="They knew you before your abilities really took off. Ask them what they think about the change.You’ve learned a secret about them. Decide together what it is and if they’re aware you know.They’re a relative—cousins or closer. Ask them what part they played in you becoming what you are.They always give you the space you need. What method do they use when they really need to get through to you?Why can’t you ever say the right thing to them no matter how much you want to? Ask them if they’ve noticed your struggle.You suspect they know more about you than they’re saying. Ask them what they suspect.You share a surprising hobby. What is it?How did you ruin an important day in their life?"></span> 
                     </div>
                     <div class="sheet-Visitor"><span data-i18n="They were the first local resident you ever had a conversation with. Was there a language barrier? What was the conversation about?This hunter seems to know things about the history of your homeland you only vaguely know about.Tests indicate that one of their ancestors was from your people. Did you know this was possible? Have you told them?You frequently have deep conversations with this hunter about your respective cultures.It especially bothers you to be misunderstood by this hunter. You don’t understand why. Ask them if they’ve noticed.One of the hunters has had a past experience with your people. Ask them whether it was a good experience or a bad one? Were you there?How have you and this hunter shared hobbies from each other’s upbringings?One of you mistook the other for a threat people needed to be protected from. Decide together how that played out."></span> 
+                    </div>
+                    <div class="sheet-Abandoned"><span data-i18n="You blame this hunter for your abandonment. Is it deserved?This hunter blames themself for your abandonment. Is it deserved?This hunter has always supported you. In what capacity?Your antics always annoy them. Is it deliberate?You and this hunter have a mutually beneficial relationship. Do you both have the same expectations of the relationship?You think this hunter might replace those who abandoned you. What gets in the way of this happening? Ask them if they know about this thought and what they think about it.This hunter always encourages you to go outside your comfort zone. How do you respond to this?You and this hunter were once friends. Why isn’t that true anymore?You and this hunter were once rivals or even enemies. What event made you both friends?This hunter looks up to you. Ask them why.You and this hunter are rival practical jokers. What’s the biggest trick each has pulled on the other?"></span> 
+                    </div>
+                    <div class="sheet-Elemental"><span data-i18n="Elemental history:You have worked together frequently, and are firm friends.You have worked together often. However, their last few assignments were with another Elemental, and you feel jealous. Ask them who that Elemental is.You’ve worked together frequently, but the last assignment went horribly wrong. Decide between you what happened. Both of you have doubts about the other’s ability or motivation after that fiasco.You’ve never worked together and know each other only by reputation. Tell each other what their reputation is.On your last assignment, everything went horribly wrong and they were called in to clean up the mess. Decide together what happened, then ask their opinion of you after all that."></span> <span data-i18n="Mortal history:You appeared on assignment as they investigated. The mystery was solved in a generally satisfactory way. Ask them what they think you are.You appeared on assignment as they investigated. The mystery went horribly wrong. Ask them what they think your motivations are.They remember meeting you when they were much younger. Tell them what they might remember about your assignment back then.They remember you, but you don’t remember them. Ask them what that version of you was to them.You really like them. Tell them what you admire."></span> 
                     </div>
                   </div>
                   <!-- hx expander-->

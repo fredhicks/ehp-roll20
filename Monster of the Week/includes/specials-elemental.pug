@@ -1,0 +1,46 @@
+.sheet-Elemental
+	+subsection("Elemental Power")
+	+expander("Elemental-Power")
+		p
+			+t('Pick an element or mineral you embody, such as: Gold, Lead, Obsidian, Sapphire, Steel.')
+		p
+			b
+				+t("I am")
+			+itext("Elemental-IAm")
+		p
+			+t("You have a specific power with a thematic tie to your element. Decide on a theme, such as: gold: warmth, lead: mass, obsidian: cutting, sapphire: time, steel: cold.")
+		p
+			b
+				+t("My elemental power is:")
+			+textarea("Elemental-PowerDesc")
+		p
+			+t("Your elemental power might allow you to, as long as it applies:")
+			ul
+				li
+					+t("Alter your surroundings. Such as: add warmth, alter the flow of time, make something lighter.")
+				li
+					+t("Act in ways impossible for a human. Such as: lift something incredibly heavy, cut something uncuttable, experience what will happen in 10 minutes.")
+				li
+					+t("Resist any danger or harm from it. Such as: withstand deadly cold, be unaffected by a sword, be unchanged by a sequence of events.")
+			+t("Examples: cool something to absolute zero, turn metals to liquid, read the emotions from an object, make something much less dense, make something burst into flame.")
+		p
+			+t("Get the group’s agreement for your elemental power’s effect.")
+
+	+subsection("Foe")
+	+expanderMoveSection("Elemental-Foe")
+		p
+			+t("You work against an implacable foe that seeks to destroy or corrupt the multiverse. If you’re part of a team of Elementals, pick together (the foe hates all of you).")
+		p
+			+t("My foe is (pick one):")
+		+move("Elemental-Foe-Opt","Ever-gnawing entropy.")
+		+move("Elemental-Foe-Opt","Corruption that turns all to rot and failure.")
+		+move("Elemental-Foe-Opt","A group of rogue Elementals.")
+		+move("Elemental-Foe-Opt","Hostile entities from outside the universe.")
+		+move("Elemental-Foe-Opt","Something else:")
+			+itext("Elemental-Foe-Opt-Else")
+
+		
+		
+		
+		
+		

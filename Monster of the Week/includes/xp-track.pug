@@ -2,18 +2,43 @@
 	input.sheet-SkinCheck(type='hidden', name='attr_SkinCheck', value='0')
 	.sheet-Subsection
 		span(data-i18n='experience') Experience
-	p(align='center')
-		input.sheet-checkbox(type='checkbox', name='attr_XP1')
-		span.sheet-altbox
-		input.sheet-checkbox(type='checkbox', name='attr_XP2')
-		span.sheet-altbox
-		input.sheet-checkbox(type='checkbox', name='attr_XP3')
-		span.sheet-altbox
-		input.sheet-checkbox(type='checkbox', name='attr_XP4')
-		span.sheet-altbox
-		input.sheet-checkbox(type='checkbox', name='attr_XP5')
-		span.sheet-altbox
-	.sheet-NoSurvivor
+	.sheet-NoElemental
+		p(align='center')
+			input.sheet-checkbox(type='checkbox', name='attr_XP1')
+			span.sheet-altbox
+			input.sheet-checkbox(type='checkbox', name='attr_XP2')
+			span.sheet-altbox
+			input.sheet-checkbox(type='checkbox', name='attr_XP3')
+			span.sheet-altbox
+			input.sheet-checkbox(type='checkbox', name='attr_XP4')
+			span.sheet-altbox
+			input.sheet-checkbox(type='checkbox', name='attr_XP5')
+			span.sheet-altbox
+	.sheet-Elemental
+		p(align='center')
+			input.sheet-checkbox(type='checkbox', name='attr_XP1')
+			span.sheet-altbox
+			input.sheet-checkbox(type='checkbox', name='attr_XP2')
+			span.sheet-altbox
+			input.sheet-checkbox(type='checkbox', name='attr_XP3')
+			span.sheet-altbox
+			input.sheet-checkbox(type='checkbox', name='attr_XP4')
+			span.sheet-altbox
+			input.sheet-checkbox(type='checkbox', name='attr_XP5')
+			span.sheet-altbox
+			| &nbsp;
+			input.sheet-checkbox(type='checkbox', name='attr_XP6')
+			span.sheet-altbox
+			input.sheet-checkbox(type='checkbox', name='attr_XP7')
+			span.sheet-altbox
+			input.sheet-checkbox(type='checkbox', name='attr_XP8')
+			span.sheet-altbox
+			input.sheet-checkbox(type='checkbox', name='attr_XP9')
+			span.sheet-altbox
+			input.sheet-checkbox(type='checkbox', name='attr_XP10')
+			span.sheet-altbox
+
+	.sheet-NoSurvivor.sheet-NoElemental
 		input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-XP-Instructions', value='1', checked='')
 		span.sheet-anglebox
 		|  
@@ -30,6 +55,15 @@
 				i Improvement
 				|  option
 			| .
+	.sheet-Elemental
+		input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-XP-Instructions', value='1', checked='')
+		span.sheet-anglebox
+		|  
+		span.sheet-ExpHeader
+			span(data-i18n='instructions') Instructions
+		.sheet-Expander
+			+t("Mark Experience when a roll totals 6 or less; or when a move tells you to do so.")
+			+t("Once you have filled all ten boxes, uncheck them and choose an improvement.")
 	.sheet-Survivor
 		input.sheet-checkbox.sheet-ExpToggle(type='checkbox', name='attr_Toggle-XP-Instructions', value='1', checked='')
 		span.sheet-anglebox

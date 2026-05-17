@@ -5,7 +5,9 @@
 		span(data-i18n='luck') Luck
 	.sheet-Subsection.sheet-Setting-Bone
 		+translate('Ancestral Favour')
-	.sheet-NoSurvivor
+	.sheet-Elemental
+		+t("Luck and chance have no hold over you. You have no Luck, cannot spend it, and cannot become Doomed.")
+	.sheet-NoSurvivor.sheet-NoElemental
 		input.sheet-SettingCheck(type='hidden', name='attr_Game-World', value='0')
 		p(align='center')
 			b.sheet-statelabel
