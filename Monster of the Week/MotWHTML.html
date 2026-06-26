@@ -171,7 +171,7 @@ on("change:repeating_hunterstory:story", function(e) {
 		<div class="sheet-dieroll-title" align="right">
 			<span data-i18n="hit">Hit</span>: <span data-i18n="advsuccess">Advanced Success</span>!
 		</div>
-		<div>
+		<div class="sheet-dieroll-reminder">
 			<i><span data-i18n="treat-regular">Treat as a regular success if you do not have the advanced improvement for this move.</span></i>
 		</div>
 			{{/rollGreater() Roll 11}}
@@ -198,7 +198,7 @@ on("change:repeating_hunterstory:story", function(e) {
 		<div class="sheet-dieroll-title" align="right">
 			<span data-i18n="failure">Failure</span>.
 		</div>
-		<div>
+		<div class="sheet-dieroll-reminder">
 			<i><span data-i18n="mark-xp-remind">Make sure to mark experience!</span></i>
 		</div>
 			{{/rollLess() Roll 7}}
