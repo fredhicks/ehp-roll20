@@ -1,0 +1,330 @@
+// Font defs
+$font: 'Laila', serif
+$lfont: 'Berkshire Swash', serif
+$symbols: 'Material Symbols Outlined'
+$nsymbols: 'Noto Sans Symbols 2'
+$fsize: 16px
+$hsize: 20px
+$lsize: 14px
+$ssize: 12px
+$bsize: 30px
+$cgap: 8px
+$rgap: 12px
+$ttime: 0.333s
+
+// Color defs
+$lighttext: rgba(0, 0, 0, 1)
+$lightbg: rgba(255, 255, 255, 1)
+$lightlit: rgba(0, 153, 153, 1)
+$lightfaint: rgba(0, 153, 153, 0.5)
+$lightshade: rgba(0, 153, 153, 0.1)
+$lightwarn: rgba(178, 109, 123, 1)
+$lightinstruct: rgba(0, 102, 102, 1)
+$darktext: rgba(255, 255, 255, 1)
+$darkbg: rgba(31, 31, 31, 1)
+$darklit: rgba(0, 238, 204, 1)
+$darkfaint: rgba(0, 238, 204, 0.5)
+$darkshade: rgba(0, 238, 204, 0.1)
+$darkwarn: rgba(255, 145, 164, 1)
+$darkinstruct: rgba(153, 204, 204, 1)
+$seethru: rgba(0, 0, 0, 0)
+
+// Begin actual CSS render
+
+@import url('https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Laila:wght@300;400;500;600;700&family=Noto+Sans+Symbols+2&display=swap&family=Material+Symbols+Outlined&display=swap')
+
+// Replace/Iterate ANYTEMPLATE if you've got any of them
+
+:root, .sheet-rolltemplate-ANYTEMPLATE
+	--rangers-fg: #{$lighttext}
+	--rangers-bg: #{$lightbg}
+	--rangers-lit: #{$lightlit}
+	--rangers-faint: #{$lightfaint}
+	--rangers-shade: #{$lightshade}
+	--rangers-warn: #{$lightwarn}
+	--rangers-instruct: #{$lightinstruct}
+	font-family: #{$font}
+	font-weight: 400
+
+.sheet-darkmode, .sheet-rolltemplate-darkmode
+	--rangers-fg: #{$darktext}
+	--rangers-bg: #{$darkbg}
+	--rangers-lit: #{$darklit}
+	--rangers-faint: #{$darkfaint}
+	--rangers-shade: #{$darkshade}
+	--rangers-warn: #{$darkwarn}
+	--rangers-instruct: #{$darkinstruct}
+
+.wrapper p,
+.ui-dialog .charsheet
+	font-family: #{$font}
+	font-size: #{$fsize}
+	font-weight: 400
+	color: var(--rangers-fg) !important
+	background-color: var(--rangers-bg)
+	line-height: unset
+
+.ui-dialog .charsheet
+
+	div
+		&.lefted
+			text-align: left
+		&.centered
+			text-align: center
+		&.righted
+			text-align: right
+		&.spaceunder
+			margin-bottom: #{$rgap}
+
+		&.rightflex
+			display: flex
+			flex-direction: row
+			flex-wrap: none
+			justify-content: right
+			align-items: center
+			column-gap: 1px
+
+	.repcontainer
+		padding: 0px
+	// .repitem
+		// border: 1px solid var(--stew-keepb)
+		// border-radius: 5px
+		// margin-bottom: 5px
+	.btn
+		background-color: var(--rangers-bg)
+		color: var(--rangers-faint)
+		border: 1px solid var(--rangers-shade)
+		text-shadow: none
+		box-shadow: none
+		background-image: unset
+		font-family: #{$lfont}
+		font-size: #{$ssize}
+		&.pictos
+			font-family: Pictos
+		&.repcontrol_move
+			font-size: #{$fsize}
+		&:hover
+			color: var(--rangers-fg)
+			border: 1px solid var(--rangers-fg)
+			font-weight: 600
+		&:active
+			color: var(--rangers-bg)
+			background: var(--rangers-lit)
+
+	.shaded
+		padding: #{$rgap}
+		background-color: var(--rangers-shade)
+		border-radius: #{$rgap}
+		&.flatbottom
+			padding-bottom: 0
+		input, select
+			border-bottom: 1px solid #{$seethru}
+		textarea
+			border: 1px solid #{$seethru}
+
+	.bordered
+		padding: #{$rgap}
+		border-radius: #{$rgap}
+		border: 1px solid var(--rangers-faint)
+		margin-bottom: 3px
+		&.flatbottom
+			padding-bottom: 0
+
+	.fillblank
+		border-bottom: 1px solid var(--rangers-faint)
+		margin-bottom: 3px
+
+	.bolded
+		font-weight: bold
+
+	input, select, textarea
+		font-family: #{$font}
+		font-size: #{$fsize}
+		color: var(--rangers-fg) 
+		background-color: #{$seethru}
+		border: none
+		padding-top: 0px
+		padding-bottom: 0px
+		transition: all #{$ttime} ease-in
+		border-bottom: 1px solid var(--rangers-bg)
+		line-height: calc( #{$fsize} + #{$rgap} )
+		&:focus
+			border: none
+	input, select
+		width: calc( 100% - 2px )
+	textarea
+		border: 1px solid var(--rangers-bg)
+		width: calc( 100% - #{$cgap} - 20px )
+		margin-bottom: 0px
+		height: calc( #{$rgap} * 4 + #{$fsize} * 3 )
+		resize: none
+		&.shorter
+			height: calc( #{$rgap} * 3 + #{$fsize} * 2 )
+		&.taller
+			height: calc( #{$rgap} * 10 + #{$fsize} * 3 )
+		&.resize
+			resize: vertical
+	.nameblock
+		text-align: center
+		input[type="text"]
+			text-align: center
+			width: 100%
+			font-family: #{$lfont}
+			font-size: #{$bsize}
+			font-weight: 800
+			letter-spacing: 1px
+
+	.hlabel
+		font-family: #{$lfont}
+		font-size: #{$hsize}
+		font-weight: 600
+		color: var(--rangers-fg) 
+		transition: all #{$ttime} ease-in
+		color: var(--rangers-lit)
+	.hlabel.bigger
+		margin-top: 6px
+		font-size: #{$bsize}
+
+	.column .hlabel.bigger:first-child
+		margin-top: 0px
+
+	.instruct, .warning
+		font-family: #{$font}
+		font-size: calc( #{$fsize} * .8 )
+		font-weight: 400
+		font-style: italic
+	.instruct
+		color: var(--rangers-instruct)
+	.warning, .warncolor
+		color: var(--rangers-warn)
+
+	.flabel
+		font-family: #{$lfont}
+		font-size: #{$lsize}
+		font-weight: 500
+		color: var(--rangers-fg) 
+		letter-spacing: 1px
+		transition: all #{$ttime} ease-in
+		padding: 1px
+
+	.fcon
+		&:hover, &:focus, &:focus-within
+			.flabel
+				font-weight: 700
+				letter-spacing: 1px
+				color: var(--rangers-lit)
+			.hlabel
+				font-weight: 800
+				letter-spacing: 2px
+				color: var(--rangers-lit)
+			input, select, textarea
+				color: var(--rangers-lit)
+				border-bottom: 1px solid var(--rangers-lit)
+			textarea
+				border: 1px solid var(--rangers-lit)
+
+	.symbol
+		font-family: #{$symbols}
+		color: var(--rangers-lit)
+		&.targeted::before
+			content: 'brightness_5'
+		&.killed::before
+			content: 'close' // block
+		&.spared::before
+			content: 'wb_sunny'
+
+	.cbox, .dbox
+		background: none
+		border: none
+		padding: 0
+		&::before
+			display: inline-block
+			line-height: 1
+			text-transform: none
+			letter-spacing: normal
+			word-wrap: normal
+			white-space: nowrap
+			direction: ltr
+			padding-top: 5px
+	.cbox
+		&::before
+			font-size: calc( #{$fsize} + 2px )
+			content: 'check_box_outline_blank'
+			font-family: #{$symbols}
+	.cbox.unmarked::before
+		content: 'check_box_outline_blank'
+	.cbox.marked::before
+		content: 'select_check_box'
+
+	.cboxtext
+		margin-top: -8px
+
+	.cbox.bigger::before
+		font-size: calc( #{$bsize} - 8px )
+
+	.dbox
+		&::before
+			font-size: calc( #{$bsize} + 8px )
+			content: '\25C6'
+			font-family: #{$nsymbols}
+			text-shadow: 0px 2px 0px var(--rangers-lit), 0px -2px 0px var(--rangers-lit), 2px 0px 0px var(--rangers-lit), -2px 0px 0px var(--rangers-lit)
+	.dbox.unmarked::before
+		color: var(--rangers-bg)
+
+	.nopadding
+		padding: 0px
+		padding-bottom: calc( #{$rgap} / 2 )
+
+	input.tshower[value="1"], input.shower:not([value=""])
+		+ *
+			display: none
+	input.thider[value="0"]
+		+ *
+			display: none
+
+	.glowing
+		// text-shadow: 1px 1px 0px var(--rangers-lit), -1px 1px 0px var(--rangers-lit), 1px -1px 0px var(--rangers-lit), -1px -1px 0px var(--rangers-lit), 0px 2px 0px var(--rangers-lit), 0px -1px 0px var(--rangers-lit), 1px 0px 0px var(--rangers-lit), -1px 0px 1px var(--rangers-lit), 0px 0px 9px var(--rangers-lit)
+		color: var(--rangers-lit)
+		font-weight: 700
+	.fcon
+		&:hover, &:focus, &:focus-within
+			.glowing
+				color: var(--rangers-lit)
+				font-weight: 700
+
+	.rangers
+
+		.columns
+			display: flex
+			flex-direction: row
+			flex-wrap: wrap
+			justify-content: space-between
+			align-items: flex-start
+			column-gap: #{$cgap}
+			margin-bottom: #{$rgap}
+			.column
+				width: calc( 50% - #{$cgap} / 2 - 2px)
+				flex-grow: 0
+				flex-shrink: 0
+				// border: 0.5px solid green
+
+		.facetGrid
+			display: grid
+			grid-template-columns: 160px 1fr
+			grid-row-gap: 0px
+
+		.flexfield
+			display: flex
+			flex-direction: row
+			flex-wrap: none
+			justify-content: space-between
+			align-items: center
+			column-gap: 1px
+			.flabel, button
+				flex-grow: 0
+				flex-shrink: 0
+			input[type="text"], .cboxtext, .boxTrack
+				flex-grow: 1
+				flex-shrink: 1
+			.cboxtext
+				padding-top: 9px

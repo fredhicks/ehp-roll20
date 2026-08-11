@@ -1,4 +1,96 @@
+// New Sheet
 .rangers
+	.identifiers
+		.name
+			+t("Name/Pronouns").rlab
+			+text("character_name")
+		.rclass
+			+t("Ranger Class").rlab
+			+text("class")
+		.ally
+			+t("Ally").rlab
+			+text("ally")
+		.season
+			+t("Season").rlab
+			+number("season")(min=1 max=5 value=1)
+	.facets
+		+t("Facets").rhead
+		.facetgrid
+			each facet in ['Daring','Understanding','Sensitivity','Subtlety','Adaptability']
+				.name
+					+t(facet)
+				.rating
+					+sboxMarked(facet+"Facet1")
+					each val in [2, 3, 4, 5]
+						+sbox(facet+"Facet"+val)
+	+t("Scatter")
+	+number("scatter")(value=0 min=0)
+	+number("scatter_max")(value=5 min=0)
+	+t("At Max, lose consciousness")
+	+t("Blur")
+	+number("blur")(value=0 min=0)
+	+number("blur_max")(value=5 min=0)
+	+t("At 3 or higher, see Backlash")
+	+t("Spell Notes")
+	+t("Personal Spell Notes")
+	+t("Gain Scatter when used.")
+	+text("personalnotes")
+	+t("Blur Spell Notes")
+	+t("Gain Blur when used.")
+	+text("blurnotes")
+	+t("Key")
+	+t("These Notes can be used as Terrain Notes as well as Personal Notes.")
+	each val in [1, 2, 3, 4, 5]
+		.flexfield
+			+cbox("key"+val)
+			+text("motive"+val)
+	+t("Signature Spell Notes")
+	+t("If all five of your motives of your Key are marked off, gain access to your Signature Spell Notes")
+	+text("signatureNote1")
+	+text("signatureNote2")
+	+t("Miss Questions")
+	ul
+		li
+			+t("How will this get worse?")
+		li
+			+t("Why was this approach wrong?")
+		li
+			+text("missQuestion")
+	+t("Hits")
+	+cbox("hits1")
+	+t("Lose access to your highest facet.")
+	+cbox("hits2")
+	+t("You can no longer use Blur Abilities.")
+	+cbox("hits3")
+	+t("Lose your next action.")
+	+cbox("hits4")
+	+t("The next Crisis action is inevitable.")
+	+cbox("hits5")
+	+t("You are removed from the scene.")
+	+t("Lesson")
+	+text("lesson")
+	+t("Skills")
+	+t("When using a skill, add 1 die for each Season")
+	// Consider stating the current season value after above text.
+	.columns
+		each val in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+			.column
+				+text("skill"+val).fillblank
+	+t("Survival Specialty")
+	+text("survivalSpecialty")
+	+t("Crisis Specialty")
+	+text("crisisSpecialty")
+	+t("Backlash")
+	+t("When you gain Blur.")
+	+textarea("backlash")
+	+t("Starting Blur Abilities")
+	+t("Gain Blur to use.")
+	// Consider figuring out how or if to use the cheat box (skill check, help, casting a spell, chord); but also refer to it for dice hooks when it's time
+	+t("Season Abilities")
+	
+// Old Sheet
+
+.rangers-old
 	// .topline
 		.nameblock.fcon.spaceunder.hlabel.bigger
 			+display("character_name")
@@ -57,9 +149,9 @@
 						.hlabel
 							+t(facet)
 						.facetTrack
-							+dboxMarked(facet+"Facet1")
+							+sboxMarked(facet+"Facet1")
 							each val in [2, 3, 4, 5]
-								+dbox(facet+"Facet"+val)
+								+sbox(facet+"Facet"+val)
 
 			.spellnotes
 				.hlabel.bigger

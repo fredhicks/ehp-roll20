@@ -1,32 +1,67 @@
-Name (text)
-Pronouns (text)
-Class (text, but it's a menu selection to populate) {Beckoning Infiltrators, Enduring Legionnaires, Tidal Navigators, Volcanic Trackers, Wailing Arcanists, Wandering Magi, Windswept Cavaliers}
-Season (text)
+Fonts
+- ASAP Condensed for general body-work https://fonts.google.com/specimen/Asap+Condensed?preview.script=Latn
+- Amarante a likely good substitute for pro/pay header font Aquavit https://fonts.google.com/specimen/Amarante?preview.layout=grid&preview.script=Latn&categoryFilters=Feeling:%2FExpressive%2FArtistic;Appearance:%2FTheme%2FArt+Nouveau
 
-Scatter (10 checkmarks, sequence, mark multiple at once)
-Blur (5 checkmarks, sequence, mark multiple at once)
+Vectors/SVGs to Consider
+- I'll need filled and unfilled four-point curvestars, light and dark modes.
+- Treble clef
+- Figure how you're doing the "Music Bar" thing; lines at 0%, 25%, 50%, 75%, 100%.
 
-Facets (5 star-boxes, but one is always marked to start, so really 4)
+Color palette
+- Peach/Rose: 225, 171, 151 — e1ab97
+- Darker Peach/Rose: 204, 109, 97 — cc6d61
+- Palest Gold: 247, 245, 233 — f7f5e9
+- Pale Gold: 221, 217, 170 — ddd9aa
+- Muted Teal: 131, 166, 168 — 83a6a8
+
+Dice fundtion: 5 or 6 is a success; 4, 3, 2 are ignored unless you use certain special abilities; 1 is an Edge Success.
+
+Name (text) / Pronouns (text)
+Ranger Class (text, but it's a menu selection to populate) {Beckoning Infiltrators, Enduring Legionnaires, Tidal Navigators, Volcanic Trackers, Wailing Arcanists, Wandering Magi, Windswept Cavaliers}
+Ally (text, part of the "pilgrimage", page 20; ultimately it's just the name for the entity/entities tied to your starting blur abilities)
+Season (text, numeric, starts one, goes to five)
+
+Facets (5 four-point-star-boxes, but one is always marked to start, so really 4)
 	{Daring, Understanding, Sensitivity, Subtlety, Adaptability}
 
+Scatter (Gained/Max USED TO BE 10 checkmarks, sequence, mark multiple at once)
+Blur (Gained/Max USED TO BE 5 checkmarks, sequence, mark multiple at once)
+
 Spell Notes (there's a 'ranger class list' to pick from, consider a hook)
-	Personal — list of words
-	Ally — list of words
-
-Survival Specialty (text, multi-line)
-
-Crisis Specialty (text, multi-line)
-
-Abilities (text, multi-line)
-
-Skills (multi-field, short text per field; at least ten; many populated based on class choice, consider a hook)
+	Personal Spell Notes (gain Scatter when used) — list of words - "choose six of the Personal Spell Notes listed in your Ranger class section"
+	Blur Spell Notes  (gain Blur when used) — list of words
 
 Key
-	Musical scale nice-to-have, but really, five fields, five checkboxes
-	Signature Spell (two text fields, made of separate spell notes — see if you can figure a way to make those 'auto' but nbd if not)
+	Musical scale nice-to-have, but really, five fields, five checkboxes, rendered as curved four-point stars — "a list of five motives that drive their actions"
+	Signature Spell Notes (two text fields, made of separate spell notes — see if you can figure a way to make those 'auto' but nbd if not — it can be two words or a two-word phrase, e.g., Grand Machine; Destiny/Weave)
+
+Miss Question (text, no insight on how this works)
+- There are miss questions, page 25, that are standard (two: How will this get worse? Why was this approach wrong?) plus a specific one based on your class selection.
 
 Hits
 	Series of checkboxes with static text for each one. Might consider sheet triggers for the ones that apply
+
+Lesson (text, a lesson they must learn, page 46 — nothing on page 46. Page 38 talks about it, and references random tables for lessons on page 46 and there are none there, or at least it's not clear to me how "try using the random tables on page 46 for inspiration!" is supposed to work)
+
+Survival Specialty (text, multi-line)
+
+Crisis Specialty (text, multi-line, choose any one of the ones from page 37, there are 14 options)
+
+Backlash (text, multiline, "when you gain Blur")
+
+Starting Blur Abilities (text, multi-line, "gain Blur to use")
+
+Skills (multi-field, short text per field; at least ten; many populated based on class choice, consider a hook — record five starting based on class, then select four additional skills)
+	- 18 skills: Art, Athletics, Engineering, Fashion, Finances, Focus, Humanity, Medicine, Navigation, Performance, Politics, Riding, Spirits, Survival, Tactics, Tinkering, Tracking, Weapons
+
+[[[[ BOX at the bottom here talking about Skill Check, Help, Casting a Spell, Chord ]]]]
+
+Season Abilities (text, long multi-line container, no guidance text)
+
+Character Description & Notes (text, multi-line), not part of the actual sheet but why not have it
+
+========
+GONE:
 
 Ally Pool
 	Name field
@@ -35,4 +70,3 @@ Ally Pool
 Consequence
 	text, multi-line, single-entry, has a label field e.g. The Wild Speech
 
-Character Description & Notes (text, multi-line)
