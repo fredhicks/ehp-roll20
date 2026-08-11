@@ -40,173 +40,245 @@ on("clicked:unmark", function(event) {
         <input type="number" name="attr_season" min="1" max="5" value="1"/>
       </div>
     </div>
-    <div class="facets"><span class="rhead" data-i18n="Facets">Facets</span> 
-      <div class="facetgrid">
-        <div class="name"><span data-i18n="Daring">Daring</span> 
-        </div>
-        <div class="rating">
-          <input class="thider" name="attr_toggle_DaringFacet1" type="hidden" value="1"/>
-          <button class="starbox marked" type="action" name="act_unmark" value="DaringFacet1"></button>
-          <input class="tshower" name="attr_toggle_DaringFacet1" type="hidden" value="1"/>
-          <button class="starbox unmarked" type="action" name="act_mark" value="DaringFacet1"></button>
-          <input class="thider" name="attr_toggle_DaringFacet2" type="hidden" value="0"/>
-          <button class="starbox marked" type="action" name="act_unmark" value="DaringFacet2"></button>
-          <input class="tshower" name="attr_toggle_DaringFacet2" type="hidden" value="0"/>
-          <button class="starbox unmarked" type="action" name="act_mark" value="DaringFacet2"></button>
-          <input class="thider" name="attr_toggle_DaringFacet3" type="hidden" value="0"/>
-          <button class="starbox marked" type="action" name="act_unmark" value="DaringFacet3"></button>
-          <input class="tshower" name="attr_toggle_DaringFacet3" type="hidden" value="0"/>
-          <button class="starbox unmarked" type="action" name="act_mark" value="DaringFacet3"></button>
-          <input class="thider" name="attr_toggle_DaringFacet4" type="hidden" value="0"/>
-          <button class="starbox marked" type="action" name="act_unmark" value="DaringFacet4"></button>
-          <input class="tshower" name="attr_toggle_DaringFacet4" type="hidden" value="0"/>
-          <button class="starbox unmarked" type="action" name="act_mark" value="DaringFacet4"></button>
-          <input class="thider" name="attr_toggle_DaringFacet5" type="hidden" value="0"/>
-          <button class="starbox marked" type="action" name="act_unmark" value="DaringFacet5"></button>
-          <input class="tshower" name="attr_toggle_DaringFacet5" type="hidden" value="0"/>
-          <button class="starbox unmarked" type="action" name="act_mark" value="DaringFacet5"></button>
-        </div>
-        <div class="name"><span data-i18n="Understanding">Understanding</span> 
-        </div>
-        <div class="rating">
-          <input class="thider" name="attr_toggle_UnderstandingFacet1" type="hidden" value="1"/>
-          <button class="starbox marked" type="action" name="act_unmark" value="UnderstandingFacet1"></button>
-          <input class="tshower" name="attr_toggle_UnderstandingFacet1" type="hidden" value="1"/>
-          <button class="starbox unmarked" type="action" name="act_mark" value="UnderstandingFacet1"></button>
-          <input class="thider" name="attr_toggle_UnderstandingFacet2" type="hidden" value="0"/>
-          <button class="starbox marked" type="action" name="act_unmark" value="UnderstandingFacet2"></button>
-          <input class="tshower" name="attr_toggle_UnderstandingFacet2" type="hidden" value="0"/>
-          <button class="starbox unmarked" type="action" name="act_mark" value="UnderstandingFacet2"></button>
-          <input class="thider" name="attr_toggle_UnderstandingFacet3" type="hidden" value="0"/>
-          <button class="starbox marked" type="action" name="act_unmark" value="UnderstandingFacet3"></button>
-          <input class="tshower" name="attr_toggle_UnderstandingFacet3" type="hidden" value="0"/>
-          <button class="starbox unmarked" type="action" name="act_mark" value="UnderstandingFacet3"></button>
-          <input class="thider" name="attr_toggle_UnderstandingFacet4" type="hidden" value="0"/>
-          <button class="starbox marked" type="action" name="act_unmark" value="UnderstandingFacet4"></button>
-          <input class="tshower" name="attr_toggle_UnderstandingFacet4" type="hidden" value="0"/>
-          <button class="starbox unmarked" type="action" name="act_mark" value="UnderstandingFacet4"></button>
-          <input class="thider" name="attr_toggle_UnderstandingFacet5" type="hidden" value="0"/>
-          <button class="starbox marked" type="action" name="act_unmark" value="UnderstandingFacet5"></button>
-          <input class="tshower" name="attr_toggle_UnderstandingFacet5" type="hidden" value="0"/>
-          <button class="starbox unmarked" type="action" name="act_mark" value="UnderstandingFacet5"></button>
-        </div>
-        <div class="name"><span data-i18n="Sensitivity">Sensitivity</span> 
-        </div>
-        <div class="rating">
-          <input class="thider" name="attr_toggle_SensitivityFacet1" type="hidden" value="1"/>
-          <button class="starbox marked" type="action" name="act_unmark" value="SensitivityFacet1"></button>
-          <input class="tshower" name="attr_toggle_SensitivityFacet1" type="hidden" value="1"/>
-          <button class="starbox unmarked" type="action" name="act_mark" value="SensitivityFacet1"></button>
-          <input class="thider" name="attr_toggle_SensitivityFacet2" type="hidden" value="0"/>
-          <button class="starbox marked" type="action" name="act_unmark" value="SensitivityFacet2"></button>
-          <input class="tshower" name="attr_toggle_SensitivityFacet2" type="hidden" value="0"/>
-          <button class="starbox unmarked" type="action" name="act_mark" value="SensitivityFacet2"></button>
-          <input class="thider" name="attr_toggle_SensitivityFacet3" type="hidden" value="0"/>
-          <button class="starbox marked" type="action" name="act_unmark" value="SensitivityFacet3"></button>
-          <input class="tshower" name="attr_toggle_SensitivityFacet3" type="hidden" value="0"/>
-          <button class="starbox unmarked" type="action" name="act_mark" value="SensitivityFacet3"></button>
-          <input class="thider" name="attr_toggle_SensitivityFacet4" type="hidden" value="0"/>
-          <button class="starbox marked" type="action" name="act_unmark" value="SensitivityFacet4"></button>
-          <input class="tshower" name="attr_toggle_SensitivityFacet4" type="hidden" value="0"/>
-          <button class="starbox unmarked" type="action" name="act_mark" value="SensitivityFacet4"></button>
-          <input class="thider" name="attr_toggle_SensitivityFacet5" type="hidden" value="0"/>
-          <button class="starbox marked" type="action" name="act_unmark" value="SensitivityFacet5"></button>
-          <input class="tshower" name="attr_toggle_SensitivityFacet5" type="hidden" value="0"/>
-          <button class="starbox unmarked" type="action" name="act_mark" value="SensitivityFacet5"></button>
-        </div>
-        <div class="name"><span data-i18n="Subtlety">Subtlety</span> 
-        </div>
-        <div class="rating">
-          <input class="thider" name="attr_toggle_SubtletyFacet1" type="hidden" value="1"/>
-          <button class="starbox marked" type="action" name="act_unmark" value="SubtletyFacet1"></button>
-          <input class="tshower" name="attr_toggle_SubtletyFacet1" type="hidden" value="1"/>
-          <button class="starbox unmarked" type="action" name="act_mark" value="SubtletyFacet1"></button>
-          <input class="thider" name="attr_toggle_SubtletyFacet2" type="hidden" value="0"/>
-          <button class="starbox marked" type="action" name="act_unmark" value="SubtletyFacet2"></button>
-          <input class="tshower" name="attr_toggle_SubtletyFacet2" type="hidden" value="0"/>
-          <button class="starbox unmarked" type="action" name="act_mark" value="SubtletyFacet2"></button>
-          <input class="thider" name="attr_toggle_SubtletyFacet3" type="hidden" value="0"/>
-          <button class="starbox marked" type="action" name="act_unmark" value="SubtletyFacet3"></button>
-          <input class="tshower" name="attr_toggle_SubtletyFacet3" type="hidden" value="0"/>
-          <button class="starbox unmarked" type="action" name="act_mark" value="SubtletyFacet3"></button>
-          <input class="thider" name="attr_toggle_SubtletyFacet4" type="hidden" value="0"/>
-          <button class="starbox marked" type="action" name="act_unmark" value="SubtletyFacet4"></button>
-          <input class="tshower" name="attr_toggle_SubtletyFacet4" type="hidden" value="0"/>
-          <button class="starbox unmarked" type="action" name="act_mark" value="SubtletyFacet4"></button>
-          <input class="thider" name="attr_toggle_SubtletyFacet5" type="hidden" value="0"/>
-          <button class="starbox marked" type="action" name="act_unmark" value="SubtletyFacet5"></button>
-          <input class="tshower" name="attr_toggle_SubtletyFacet5" type="hidden" value="0"/>
-          <button class="starbox unmarked" type="action" name="act_mark" value="SubtletyFacet5"></button>
-        </div>
-        <div class="name"><span data-i18n="Adaptability">Adaptability</span> 
-        </div>
-        <div class="rating">
-          <input class="thider" name="attr_toggle_AdaptabilityFacet1" type="hidden" value="1"/>
-          <button class="starbox marked" type="action" name="act_unmark" value="AdaptabilityFacet1"></button>
-          <input class="tshower" name="attr_toggle_AdaptabilityFacet1" type="hidden" value="1"/>
-          <button class="starbox unmarked" type="action" name="act_mark" value="AdaptabilityFacet1"></button>
-          <input class="thider" name="attr_toggle_AdaptabilityFacet2" type="hidden" value="0"/>
-          <button class="starbox marked" type="action" name="act_unmark" value="AdaptabilityFacet2"></button>
-          <input class="tshower" name="attr_toggle_AdaptabilityFacet2" type="hidden" value="0"/>
-          <button class="starbox unmarked" type="action" name="act_mark" value="AdaptabilityFacet2"></button>
-          <input class="thider" name="attr_toggle_AdaptabilityFacet3" type="hidden" value="0"/>
-          <button class="starbox marked" type="action" name="act_unmark" value="AdaptabilityFacet3"></button>
-          <input class="tshower" name="attr_toggle_AdaptabilityFacet3" type="hidden" value="0"/>
-          <button class="starbox unmarked" type="action" name="act_mark" value="AdaptabilityFacet3"></button>
-          <input class="thider" name="attr_toggle_AdaptabilityFacet4" type="hidden" value="0"/>
-          <button class="starbox marked" type="action" name="act_unmark" value="AdaptabilityFacet4"></button>
-          <input class="tshower" name="attr_toggle_AdaptabilityFacet4" type="hidden" value="0"/>
-          <button class="starbox unmarked" type="action" name="act_mark" value="AdaptabilityFacet4"></button>
-          <input class="thider" name="attr_toggle_AdaptabilityFacet5" type="hidden" value="0"/>
-          <button class="starbox marked" type="action" name="act_unmark" value="AdaptabilityFacet5"></button>
-          <input class="tshower" name="attr_toggle_AdaptabilityFacet5" type="hidden" value="0"/>
-          <button class="starbox unmarked" type="action" name="act_mark" value="AdaptabilityFacet5"></button>
+    <div class="stats">
+      <div class="facets"><span class="rhead" data-i18n="Facets">Facets</span> 
+        <div class="facetgrid">
+          <div class="name"><span data-i18n="Daring">Daring</span> 
+          </div>
+          <div class="rating">
+            <input class="thider" name="attr_toggle_DaringFacet1" type="hidden" value="1"/>
+            <button class="starbox marked" type="action" name="act_unmark" value="DaringFacet1"></button>
+            <input class="tshower" name="attr_toggle_DaringFacet1" type="hidden" value="1"/>
+            <button class="starbox unmarked" type="action" name="act_mark" value="DaringFacet1"></button>
+            <input class="thider" name="attr_toggle_DaringFacet2" type="hidden" value="0"/>
+            <button class="starbox marked" type="action" name="act_unmark" value="DaringFacet2"></button>
+            <input class="tshower" name="attr_toggle_DaringFacet2" type="hidden" value="0"/>
+            <button class="starbox unmarked" type="action" name="act_mark" value="DaringFacet2"></button>
+            <input class="thider" name="attr_toggle_DaringFacet3" type="hidden" value="0"/>
+            <button class="starbox marked" type="action" name="act_unmark" value="DaringFacet3"></button>
+            <input class="tshower" name="attr_toggle_DaringFacet3" type="hidden" value="0"/>
+            <button class="starbox unmarked" type="action" name="act_mark" value="DaringFacet3"></button>
+            <input class="thider" name="attr_toggle_DaringFacet4" type="hidden" value="0"/>
+            <button class="starbox marked" type="action" name="act_unmark" value="DaringFacet4"></button>
+            <input class="tshower" name="attr_toggle_DaringFacet4" type="hidden" value="0"/>
+            <button class="starbox unmarked" type="action" name="act_mark" value="DaringFacet4"></button>
+            <input class="thider" name="attr_toggle_DaringFacet5" type="hidden" value="0"/>
+            <button class="starbox marked" type="action" name="act_unmark" value="DaringFacet5"></button>
+            <input class="tshower" name="attr_toggle_DaringFacet5" type="hidden" value="0"/>
+            <button class="starbox unmarked" type="action" name="act_mark" value="DaringFacet5"></button>
+          </div>
+          <div class="name"><span data-i18n="Understanding">Understanding</span> 
+          </div>
+          <div class="rating">
+            <input class="thider" name="attr_toggle_UnderstandingFacet1" type="hidden" value="1"/>
+            <button class="starbox marked" type="action" name="act_unmark" value="UnderstandingFacet1"></button>
+            <input class="tshower" name="attr_toggle_UnderstandingFacet1" type="hidden" value="1"/>
+            <button class="starbox unmarked" type="action" name="act_mark" value="UnderstandingFacet1"></button>
+            <input class="thider" name="attr_toggle_UnderstandingFacet2" type="hidden" value="0"/>
+            <button class="starbox marked" type="action" name="act_unmark" value="UnderstandingFacet2"></button>
+            <input class="tshower" name="attr_toggle_UnderstandingFacet2" type="hidden" value="0"/>
+            <button class="starbox unmarked" type="action" name="act_mark" value="UnderstandingFacet2"></button>
+            <input class="thider" name="attr_toggle_UnderstandingFacet3" type="hidden" value="0"/>
+            <button class="starbox marked" type="action" name="act_unmark" value="UnderstandingFacet3"></button>
+            <input class="tshower" name="attr_toggle_UnderstandingFacet3" type="hidden" value="0"/>
+            <button class="starbox unmarked" type="action" name="act_mark" value="UnderstandingFacet3"></button>
+            <input class="thider" name="attr_toggle_UnderstandingFacet4" type="hidden" value="0"/>
+            <button class="starbox marked" type="action" name="act_unmark" value="UnderstandingFacet4"></button>
+            <input class="tshower" name="attr_toggle_UnderstandingFacet4" type="hidden" value="0"/>
+            <button class="starbox unmarked" type="action" name="act_mark" value="UnderstandingFacet4"></button>
+            <input class="thider" name="attr_toggle_UnderstandingFacet5" type="hidden" value="0"/>
+            <button class="starbox marked" type="action" name="act_unmark" value="UnderstandingFacet5"></button>
+            <input class="tshower" name="attr_toggle_UnderstandingFacet5" type="hidden" value="0"/>
+            <button class="starbox unmarked" type="action" name="act_mark" value="UnderstandingFacet5"></button>
+          </div>
+          <div class="name"><span data-i18n="Sensitivity">Sensitivity</span> 
+          </div>
+          <div class="rating">
+            <input class="thider" name="attr_toggle_SensitivityFacet1" type="hidden" value="1"/>
+            <button class="starbox marked" type="action" name="act_unmark" value="SensitivityFacet1"></button>
+            <input class="tshower" name="attr_toggle_SensitivityFacet1" type="hidden" value="1"/>
+            <button class="starbox unmarked" type="action" name="act_mark" value="SensitivityFacet1"></button>
+            <input class="thider" name="attr_toggle_SensitivityFacet2" type="hidden" value="0"/>
+            <button class="starbox marked" type="action" name="act_unmark" value="SensitivityFacet2"></button>
+            <input class="tshower" name="attr_toggle_SensitivityFacet2" type="hidden" value="0"/>
+            <button class="starbox unmarked" type="action" name="act_mark" value="SensitivityFacet2"></button>
+            <input class="thider" name="attr_toggle_SensitivityFacet3" type="hidden" value="0"/>
+            <button class="starbox marked" type="action" name="act_unmark" value="SensitivityFacet3"></button>
+            <input class="tshower" name="attr_toggle_SensitivityFacet3" type="hidden" value="0"/>
+            <button class="starbox unmarked" type="action" name="act_mark" value="SensitivityFacet3"></button>
+            <input class="thider" name="attr_toggle_SensitivityFacet4" type="hidden" value="0"/>
+            <button class="starbox marked" type="action" name="act_unmark" value="SensitivityFacet4"></button>
+            <input class="tshower" name="attr_toggle_SensitivityFacet4" type="hidden" value="0"/>
+            <button class="starbox unmarked" type="action" name="act_mark" value="SensitivityFacet4"></button>
+            <input class="thider" name="attr_toggle_SensitivityFacet5" type="hidden" value="0"/>
+            <button class="starbox marked" type="action" name="act_unmark" value="SensitivityFacet5"></button>
+            <input class="tshower" name="attr_toggle_SensitivityFacet5" type="hidden" value="0"/>
+            <button class="starbox unmarked" type="action" name="act_mark" value="SensitivityFacet5"></button>
+          </div>
+          <div class="name"><span data-i18n="Subtlety">Subtlety</span> 
+          </div>
+          <div class="rating">
+            <input class="thider" name="attr_toggle_SubtletyFacet1" type="hidden" value="1"/>
+            <button class="starbox marked" type="action" name="act_unmark" value="SubtletyFacet1"></button>
+            <input class="tshower" name="attr_toggle_SubtletyFacet1" type="hidden" value="1"/>
+            <button class="starbox unmarked" type="action" name="act_mark" value="SubtletyFacet1"></button>
+            <input class="thider" name="attr_toggle_SubtletyFacet2" type="hidden" value="0"/>
+            <button class="starbox marked" type="action" name="act_unmark" value="SubtletyFacet2"></button>
+            <input class="tshower" name="attr_toggle_SubtletyFacet2" type="hidden" value="0"/>
+            <button class="starbox unmarked" type="action" name="act_mark" value="SubtletyFacet2"></button>
+            <input class="thider" name="attr_toggle_SubtletyFacet3" type="hidden" value="0"/>
+            <button class="starbox marked" type="action" name="act_unmark" value="SubtletyFacet3"></button>
+            <input class="tshower" name="attr_toggle_SubtletyFacet3" type="hidden" value="0"/>
+            <button class="starbox unmarked" type="action" name="act_mark" value="SubtletyFacet3"></button>
+            <input class="thider" name="attr_toggle_SubtletyFacet4" type="hidden" value="0"/>
+            <button class="starbox marked" type="action" name="act_unmark" value="SubtletyFacet4"></button>
+            <input class="tshower" name="attr_toggle_SubtletyFacet4" type="hidden" value="0"/>
+            <button class="starbox unmarked" type="action" name="act_mark" value="SubtletyFacet4"></button>
+            <input class="thider" name="attr_toggle_SubtletyFacet5" type="hidden" value="0"/>
+            <button class="starbox marked" type="action" name="act_unmark" value="SubtletyFacet5"></button>
+            <input class="tshower" name="attr_toggle_SubtletyFacet5" type="hidden" value="0"/>
+            <button class="starbox unmarked" type="action" name="act_mark" value="SubtletyFacet5"></button>
+          </div>
+          <div class="name"><span data-i18n="Adaptability">Adaptability</span> 
+          </div>
+          <div class="rating">
+            <input class="thider" name="attr_toggle_AdaptabilityFacet1" type="hidden" value="1"/>
+            <button class="starbox marked" type="action" name="act_unmark" value="AdaptabilityFacet1"></button>
+            <input class="tshower" name="attr_toggle_AdaptabilityFacet1" type="hidden" value="1"/>
+            <button class="starbox unmarked" type="action" name="act_mark" value="AdaptabilityFacet1"></button>
+            <input class="thider" name="attr_toggle_AdaptabilityFacet2" type="hidden" value="0"/>
+            <button class="starbox marked" type="action" name="act_unmark" value="AdaptabilityFacet2"></button>
+            <input class="tshower" name="attr_toggle_AdaptabilityFacet2" type="hidden" value="0"/>
+            <button class="starbox unmarked" type="action" name="act_mark" value="AdaptabilityFacet2"></button>
+            <input class="thider" name="attr_toggle_AdaptabilityFacet3" type="hidden" value="0"/>
+            <button class="starbox marked" type="action" name="act_unmark" value="AdaptabilityFacet3"></button>
+            <input class="tshower" name="attr_toggle_AdaptabilityFacet3" type="hidden" value="0"/>
+            <button class="starbox unmarked" type="action" name="act_mark" value="AdaptabilityFacet3"></button>
+            <input class="thider" name="attr_toggle_AdaptabilityFacet4" type="hidden" value="0"/>
+            <button class="starbox marked" type="action" name="act_unmark" value="AdaptabilityFacet4"></button>
+            <input class="tshower" name="attr_toggle_AdaptabilityFacet4" type="hidden" value="0"/>
+            <button class="starbox unmarked" type="action" name="act_mark" value="AdaptabilityFacet4"></button>
+            <input class="thider" name="attr_toggle_AdaptabilityFacet5" type="hidden" value="0"/>
+            <button class="starbox marked" type="action" name="act_unmark" value="AdaptabilityFacet5"></button>
+            <input class="tshower" name="attr_toggle_AdaptabilityFacet5" type="hidden" value="0"/>
+            <button class="starbox unmarked" type="action" name="act_mark" value="AdaptabilityFacet5"></button>
+          </div>
         </div>
       </div>
-    </div><span data-i18n="Scatter">Scatter</span> 
-    <input type="number" name="attr_scatter" value="0" min="0"/>
-    <input type="number" name="attr_scatter_max" value="5" min="0"/><span data-i18n="At Max, lose consciousness">At Max, lose consciousness</span> <span data-i18n="Blur">Blur</span> 
-    <input type="number" name="attr_blur" value="0" min="0"/>
-    <input type="number" name="attr_blur_max" value="5" min="0"/><span data-i18n="At 3 or higher, see Backlash">At 3 or higher, see Backlash</span> <span data-i18n="Spell Notes">Spell Notes</span> <span data-i18n="Personal Spell Notes">Personal Spell Notes</span> <span data-i18n="Gain Scatter when used.">Gain Scatter when used.</span> 
-    <input type="text" name="attr_personalnotes"/><span data-i18n="Blur Spell Notes">Blur Spell Notes</span> <span data-i18n="Gain Blur when used.">Gain Blur when used.</span> 
-    <input type="text" name="attr_blurnotes"/><span data-i18n="Key">Key</span> <span data-i18n="These Notes can be used as Terrain Notes as well as Personal Notes.">These Notes can be used as Terrain Notes as well as Personal Notes.</span> 
-    <div class="flexfield">
-      <input class="thider" name="attr_toggle_key1" type="hidden" value="0"/>
-      <button class="cbox marked" type="action" name="act_unmark" value="key1"></button>
-      <input class="tshower" name="attr_toggle_key1" type="hidden" value="0"/>
-      <button class="cbox unmarked" type="action" name="act_mark" value="key1"></button>
-      <input type="text" name="attr_motive1"/>
+      <div class="scatter"><span class="rhead" data-i18n="Scatter">Scatter</span> 
+        <div class="scatbox"><span class="rlab" data-i18n="Gained/Max">Gained/Max</span> 
+          <input type="number" name="attr_scatter" value="0" min="0"/>
+          <div class="divider"></div>
+          <input type="number" name="attr_scatter_max" value="5" min="0"/>
+        </div><span class="advisory" data-i18n="At Max, lose consciousness">At Max, lose consciousness</span> 
+      </div>
+      <div class="blur"><span class="rhead" data-i18n="Blur">Blur</span> 
+        <div class="blurbox"><span class="rlab" data-i18n="Gained/Max">Gained/Max</span> 
+          <input type="number" name="attr_blur" value="0" min="0"/>
+          <div class="divider"></div>
+          <input type="number" name="attr_blur_max" value="5" min="0"/>
+        </div><span class="advisory" data-i18n="At 3 or higher, see Backlash">At 3 or higher, see Backlash</span> 
+      </div>
+      <div class="skills">
+        <div class="top"><span class="rhead" data-i18n="Skills">Skills</span> <span class="advisory" data-i18n="When using a skill, add 1 die for each Season">When using a skill, add 1 die for each Season</span> 
+        </div>
+        <div class="skillbox">
+          <div class="skill">
+            <input class="fillblank fillblank" type="text" name="attr_skill1"/>
+          </div>
+          <div class="skill">
+            <input class="fillblank fillblank" type="text" name="attr_skill2"/>
+          </div>
+          <div class="skill">
+            <input class="fillblank fillblank" type="text" name="attr_skill3"/>
+          </div>
+          <div class="skill">
+            <input class="fillblank fillblank" type="text" name="attr_skill4"/>
+          </div>
+          <div class="skill">
+            <input class="fillblank fillblank" type="text" name="attr_skill5"/>
+          </div>
+          <div class="skill">
+            <input class="fillblank fillblank" type="text" name="attr_skill6"/>
+          </div>
+          <div class="skill">
+            <input class="fillblank fillblank" type="text" name="attr_skill7"/>
+          </div>
+          <div class="skill">
+            <input class="fillblank fillblank" type="text" name="attr_skill8"/>
+          </div>
+          <div class="skill">
+            <input class="fillblank fillblank" type="text" name="attr_skill9"/>
+          </div>
+          <div class="skill">
+            <input class="fillblank fillblank" type="text" name="attr_skill10"/>
+          </div>
+        </div>
+        <!-- Consider stating the current season value after above text.-->
+      </div>
     </div>
-    <div class="flexfield">
-      <input class="thider" name="attr_toggle_key2" type="hidden" value="0"/>
-      <button class="cbox marked" type="action" name="act_unmark" value="key2"></button>
-      <input class="tshower" name="attr_toggle_key2" type="hidden" value="0"/>
-      <button class="cbox unmarked" type="action" name="act_mark" value="key2"></button>
-      <input type="text" name="attr_motive2"/>
-    </div>
-    <div class="flexfield">
-      <input class="thider" name="attr_toggle_key3" type="hidden" value="0"/>
-      <button class="cbox marked" type="action" name="act_unmark" value="key3"></button>
-      <input class="tshower" name="attr_toggle_key3" type="hidden" value="0"/>
-      <button class="cbox unmarked" type="action" name="act_mark" value="key3"></button>
-      <input type="text" name="attr_motive3"/>
-    </div>
-    <div class="flexfield">
-      <input class="thider" name="attr_toggle_key4" type="hidden" value="0"/>
-      <button class="cbox marked" type="action" name="act_unmark" value="key4"></button>
-      <input class="tshower" name="attr_toggle_key4" type="hidden" value="0"/>
-      <button class="cbox unmarked" type="action" name="act_mark" value="key4"></button>
-      <input type="text" name="attr_motive4"/>
-    </div>
-    <div class="flexfield">
-      <input class="thider" name="attr_toggle_key5" type="hidden" value="0"/>
-      <button class="cbox marked" type="action" name="act_unmark" value="key5"></button>
-      <input class="tshower" name="attr_toggle_key5" type="hidden" value="0"/>
-      <button class="cbox unmarked" type="action" name="act_mark" value="key5"></button>
-      <input type="text" name="attr_motive5"/>
-    </div><span data-i18n="Signature Spell Notes">Signature Spell Notes</span> <span data-i18n="If all five of your motives of your Key are marked off, gain access to your Signature Spell Notes">If all five of your motives of your Key are marked off, gain access to your Signature Spell Notes</span> 
-    <input type="text" name="attr_signatureNote1"/>
-    <input type="text" name="attr_signatureNote2"/><span data-i18n="Miss Questions">Miss Questions</span> 
+    <div class="spellnotes">
+      <div class="notes">
+        <div class="personal">
+          <div class="top"><span class="rhead" data-i18n="Personal Spell Notes">Personal Spell Notes</span> <span class="advisory" data-i18n="Gain Scatter when used.">Gain Scatter when used.</span> 
+          </div>
+          <textarea name="attr_personalnotes" rows="6"></textarea>
+        </div>
+        <div class="blur">
+          <div class="top"><span class="rhead" data-i18n="Blur Spell Notes">Blur Spell Notes</span> <span class="advisory" data-i18n="Gain Blur when used.">Gain Blur when used.</span> 
+          </div>
+          <textarea name="attr_blurnotes" rows="2"></textarea>
+        </div>
+      </div>
+      <div class="keysig">
+        <div class="key">
+          <div class="top"><span class="rhead" data-i18n="Key">Key</span> <span class="advisory" data-i18n="These Notes, also called motives, can be used as Terrain Notes as well as Personal Notes.">These Notes, also called motives, can be used as Terrain Notes as well as Personal Notes.</span> 
+          </div>
+          <div class="motives">
+            <div class="motive">
+              <input class="thider" name="attr_toggle_key1" type="hidden" value="0"/>
+              <button class="starbox marked" type="action" name="act_unmark" value="key1"></button>
+              <input class="tshower" name="attr_toggle_key1" type="hidden" value="0"/>
+              <button class="starbox unmarked" type="action" name="act_mark" value="key1"></button>
+              <input type="text" name="attr_motive1"/>
+            </div>
+            <div class="motive">
+              <input class="thider" name="attr_toggle_key2" type="hidden" value="0"/>
+              <button class="starbox marked" type="action" name="act_unmark" value="key2"></button>
+              <input class="tshower" name="attr_toggle_key2" type="hidden" value="0"/>
+              <button class="starbox unmarked" type="action" name="act_mark" value="key2"></button>
+              <input type="text" name="attr_motive2"/>
+            </div>
+            <div class="motive">
+              <input class="thider" name="attr_toggle_key3" type="hidden" value="0"/>
+              <button class="starbox marked" type="action" name="act_unmark" value="key3"></button>
+              <input class="tshower" name="attr_toggle_key3" type="hidden" value="0"/>
+              <button class="starbox unmarked" type="action" name="act_mark" value="key3"></button>
+              <input type="text" name="attr_motive3"/>
+            </div>
+            <div class="motive">
+              <input class="thider" name="attr_toggle_key4" type="hidden" value="0"/>
+              <button class="starbox marked" type="action" name="act_unmark" value="key4"></button>
+              <input class="tshower" name="attr_toggle_key4" type="hidden" value="0"/>
+              <button class="starbox unmarked" type="action" name="act_mark" value="key4"></button>
+              <input type="text" name="attr_motive4"/>
+            </div>
+            <div class="motive">
+              <input class="thider" name="attr_toggle_key5" type="hidden" value="0"/>
+              <button class="starbox marked" type="action" name="act_unmark" value="key5"></button>
+              <input class="tshower" name="attr_toggle_key5" type="hidden" value="0"/>
+              <button class="starbox unmarked" type="action" name="act_mark" value="key5"></button>
+              <input type="text" name="attr_motive5"/>
+            </div>
+          </div>
+        </div>
+        <div class="sig">
+          <div class="top"><span class="rhead" data-i18n="Signature Spell Notes">Signature Spell Notes</span> <span class="advisory" data-i18n="If all five of your motives of your Key are marked off, gain access to your Signature Spell Notes">If all five of your motives of your Key are marked off, gain access to your Signature Spell Notes</span> 
+          </div>
+          <textarea name="attr_signaturenotes" rows="2"></textarea>
+        </div>
+      </div>
+    </div><span data-i18n="Miss Questions">Miss Questions</span> 
     <ul>
       <li><span data-i18n="How will this get worse?">How will this get worse?</span> 
       </li>
@@ -236,40 +308,7 @@ on("clicked:unmark", function(event) {
     <button class="cbox marked" type="action" name="act_unmark" value="hits5"></button>
     <input class="tshower" name="attr_toggle_hits5" type="hidden" value="0"/>
     <button class="cbox unmarked" type="action" name="act_mark" value="hits5"></button><span data-i18n="You are removed from the scene.">You are removed from the scene.</span> <span data-i18n="Lesson">Lesson</span> 
-    <input type="text" name="attr_lesson"/><span data-i18n="Skills">Skills</span> <span data-i18n="When using a skill, add 1 die for each Season">When using a skill, add 1 die for each Season</span> 
-    <!-- Consider stating the current season value after above text.-->
-    <div class="columns">
-      <div class="column">
-        <input class="fillblank fillblank" type="text" name="attr_skill1"/>
-      </div>
-      <div class="column">
-        <input class="fillblank fillblank" type="text" name="attr_skill2"/>
-      </div>
-      <div class="column">
-        <input class="fillblank fillblank" type="text" name="attr_skill3"/>
-      </div>
-      <div class="column">
-        <input class="fillblank fillblank" type="text" name="attr_skill4"/>
-      </div>
-      <div class="column">
-        <input class="fillblank fillblank" type="text" name="attr_skill5"/>
-      </div>
-      <div class="column">
-        <input class="fillblank fillblank" type="text" name="attr_skill6"/>
-      </div>
-      <div class="column">
-        <input class="fillblank fillblank" type="text" name="attr_skill7"/>
-      </div>
-      <div class="column">
-        <input class="fillblank fillblank" type="text" name="attr_skill8"/>
-      </div>
-      <div class="column">
-        <input class="fillblank fillblank" type="text" name="attr_skill9"/>
-      </div>
-      <div class="column">
-        <input class="fillblank fillblank" type="text" name="attr_skill10"/>
-      </div>
-    </div><span data-i18n="Survival Specialty">Survival Specialty</span> 
+    <input type="text" name="attr_lesson"/><span data-i18n="Survival Specialty">Survival Specialty</span> 
     <input type="text" name="attr_survivalSpecialty"/><span data-i18n="Crisis Specialty">Crisis Specialty</span> 
     <input type="text" name="attr_crisisSpecialty"/><span data-i18n="Backlash">Backlash</span> <span data-i18n="When you gain Blur.">When you gain Blur.</span> 
     <textarea name="attr_backlash"></textarea><span data-i18n="Starting Blur Abilities">Starting Blur Abilities</span> <span data-i18n="Gain Blur to use.">Gain Blur to use.</span> 

@@ -11,6 +11,8 @@
 	--rangers-bg: rgb(255, 255, 255);
 	--rangers-head: rgb(131, 166, 168);
 	--rangers-border: rgb(221, 217, 170);
+	--rangers-sbox-mark: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/art/blackstar-filled.svg);
+	--rangers-sbox-unmark: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/art/blackstar-empty.svg);
 }
 
 .sheet-darkmode, .sheet-rolltemplate-darkmode {
@@ -18,6 +20,8 @@
 	--rangers-bg: rgb(31, 31, 31);
 	--rangers-head: rgb(131, 166, 168);
 	--rangers-border: rgb(221, 217, 170);
+	--rangers-sbox-mark: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/art/goldstar-filled.svg);
+	--rangers-sbox-unmark: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/art/goldstar-empty.svg);
 }
 
 .wrapper p,
@@ -28,7 +32,7 @@ textarea {
 	font-family: ASAP Condensed, sans-serif;
 	font-size: 1rem;
 	font-weight: 400;
-	color: var(--rangers-fg) !important;
+	color: var(--rangers-fg);
 	background-color: var(--rangers-bg);
 	line-height: unset;
 }
@@ -58,15 +62,73 @@ textarea {
 .ui-dialog .charsheet .starbox::before {
 	width: 1rem;
 	height: 1rem;
-	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/art/goldstar-filled.svg);
+	content: var(--rangers-sbox-mark);
 }
 .ui-dialog .charsheet .starbox.unmarked::before {
-	content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/art/goldstar-empty.svg);
+	content: var(--rangers-sbox-unmark);
 }
 
+.ui-dialog .charsheet .facets {
+	display: -ms-grid;
+	display: grid;
+	-ms-grid-rows: auto 1fr;
+	grid-template-rows: auto 1fr;
+}
 .ui-dialog .charsheet .facets .facetgrid {
 	display: -ms-grid;
 	display: grid;
+	-ms-grid-columns: auto 1rem 1fr;
+	grid-template-columns: auto 1fr;
+	-ms-grid-rows: 1fr 0.25rem 1fr 0.25rem 1fr 0.25rem 1fr 0.25rem 1fr;
+	grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+	gap: 0.25rem 1rem;
+	-webkit-box-align: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+}
+.ui-dialog .charsheet .facets .facetgrid > *:nth-child(1) {
+	-ms-grid-row: 1;
+	-ms-grid-column: 1;
+}
+.ui-dialog .charsheet .facets .facetgrid > *:nth-child(2) {
+	-ms-grid-row: 1;
+	-ms-grid-column: 3;
+}
+.ui-dialog .charsheet .facets .facetgrid > *:nth-child(3) {
+	-ms-grid-row: 3;
+	-ms-grid-column: 1;
+}
+.ui-dialog .charsheet .facets .facetgrid > *:nth-child(4) {
+	-ms-grid-row: 3;
+	-ms-grid-column: 3;
+}
+.ui-dialog .charsheet .facets .facetgrid > *:nth-child(5) {
+	-ms-grid-row: 5;
+	-ms-grid-column: 1;
+}
+.ui-dialog .charsheet .facets .facetgrid > *:nth-child(6) {
+	-ms-grid-row: 5;
+	-ms-grid-column: 3;
+}
+.ui-dialog .charsheet .facets .facetgrid > *:nth-child(7) {
+	-ms-grid-row: 7;
+	-ms-grid-column: 1;
+}
+.ui-dialog .charsheet .facets .facetgrid > *:nth-child(8) {
+	-ms-grid-row: 7;
+	-ms-grid-column: 3;
+}
+.ui-dialog .charsheet .facets .facetgrid > *:nth-child(9) {
+	-ms-grid-row: 9;
+	-ms-grid-column: 1;
+}
+.ui-dialog .charsheet .facets .facetgrid > *:nth-child(10) {
+	-ms-grid-row: 9;
+	-ms-grid-column: 3;
+}
+.ui-dialog .charsheet .facets .facetgrid .name {
+	-ms-grid-column: 1;
+	grid-column: 1;
 }
 .ui-dialog .charsheet .identifiers {
 	display: -ms-grid;
@@ -101,27 +163,249 @@ textarea {
 .ui-dialog .charsheet .identifiers .name input[type=text], .ui-dialog .charsheet .identifiers .name input[type=number], .ui-dialog .charsheet .identifiers .rclass input[type=text], .ui-dialog .charsheet .identifiers .rclass input[type=number], .ui-dialog .charsheet .identifiers .ally input[type=text], .ui-dialog .charsheet .identifiers .ally input[type=number], .ui-dialog .charsheet .identifiers .season input[type=text], .ui-dialog .charsheet .identifiers .season input[type=number] {
 	width: unset;
 }
+.ui-dialog .charsheet .scatter .scatbox, .ui-dialog .charsheet .blur .blurbox {
+	display: -ms-grid;
+	display: grid;
+	-ms-grid-columns: auto 1px auto;
+	grid-template-columns: auto 1px auto;
+	justify-items: center;
+}
+.ui-dialog .charsheet .scatter .scatbox .rlab, .ui-dialog .charsheet .blur .blurbox .rlab {
+	-ms-grid-column: 1;
+	-ms-grid-column-span: 3;
+	grid-column: 1/span 3;
+}
+.ui-dialog .charsheet .skills {
+	display: -ms-grid;
+	display: grid;
+	-ms-grid-rows: auto 1fr;
+	grid-template-rows: auto 1fr;
+}
+.ui-dialog .charsheet .skills .top {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	    -ms-flex-direction: row;
+	        flex-direction: row;
+	-webkit-box-pack: stretch;
+	    -ms-flex-pack: stretch;
+	        justify-content: stretch;
+	-webkit-box-align: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+	gap: 0.5rem;
+}
+.ui-dialog .charsheet .skillbox {
+	display: -ms-grid;
+	display: grid;
+	-ms-grid-columns: auto 0.5rem auto;
+	grid-template-columns: auto auto;
+	gap: 0.5rem;
+	-webkit-box-align: stretch;
+	    -ms-flex-align: stretch;
+	        align-items: stretch;
+}
+.ui-dialog .charsheet .skillbox input[type=text] {
+	width: 100%;
+}
+.ui-dialog .charsheet .spellnotes {
+	display: -ms-grid;
+	display: grid;
+	-ms-grid-columns: 1fr 1rem 1fr;
+	grid-template-columns: 1fr 1fr;
+	gap: 1rem;
+}
+.ui-dialog .charsheet .spellnotes > div {
+	border: 1px solid red;
+}
+.ui-dialog .charsheet .spellnotes .notes {
+	-ms-grid-column: 1;
+	grid-column: 1;
+}
+.ui-dialog .charsheet .spellnotes .keysig {
+	-ms-grid-column: 2;
+	grid-column: 2;
+}
+.ui-dialog .charsheet .spellnotes .notes, .ui-dialog .charsheet .spellnotes .keysig {
+	display: -ms-grid;
+	display: grid;
+	gap: 0.5rem;
+}
+.ui-dialog .charsheet .spellnotes .personal, .ui-dialog .charsheet .spellnotes .blur, .ui-dialog .charsheet .spellnotes .key, .ui-dialog .charsheet .spellnotes .sig {
+	display: -ms-grid;
+	display: grid;
+	-ms-grid-rows: auto 0.25rem 1fr;
+	grid-template-rows: auto 1fr;
+	gap: 0.25rem;
+}
+.ui-dialog .charsheet .spellnotes .personal textarea, .ui-dialog .charsheet .spellnotes .blur textarea, .ui-dialog .charsheet .spellnotes .key textarea, .ui-dialog .charsheet .spellnotes .sig textarea {
+	height: unset;
+	width: unset;
+	-ms-grid-column: 1;
+	-ms-grid-column-span: 2;
+	grid-column: 1/span 2;
+	-ms-grid-row: 2;
+	grid-row: 2;
+}
+.ui-dialog .charsheet .spellnotes .personal .top, .ui-dialog .charsheet .spellnotes .blur .top, .ui-dialog .charsheet .spellnotes .key .top, .ui-dialog .charsheet .spellnotes .sig .top {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	    -ms-flex-direction: column;
+	        flex-direction: column;
+	-webkit-box-align: start;
+	    -ms-flex-align: start;
+	        align-items: start;
+	gap: 0;
+}
+.ui-dialog .charsheet .stats {
+	display: -ms-grid;
+	display: grid;
+	-ms-grid-columns: auto 1rem auto 1rem 1fr;
+	grid-template-columns: auto auto 1fr;
+	gap: 1rem;
+	justify-items: stretch;
+}
+.ui-dialog .charsheet .stats .facets {
+	-ms-grid-column: 1;
+	grid-column: 1;
+	-ms-grid-row: 1;
+	-ms-grid-row-span: 2;
+	grid-row: 1/span 2;
+}
+.ui-dialog .charsheet .stats .scatter {
+	-ms-grid-column: 2;
+	grid-column: 2;
+	-ms-grid-row: 1;
+	grid-row: 1;
+}
+.ui-dialog .charsheet .stats .blur {
+	-ms-grid-column: 2;
+	grid-column: 2;
+	-ms-grid-row: 2;
+	grid-row: 2;
+}
+.ui-dialog .charsheet .stats .skills {
+	-ms-grid-column: 3;
+	grid-column: 3;
+	-ms-grid-row: 1;
+	-ms-grid-row-span: 2;
+	grid-row: 1/span 2;
+}
 
 .ui-dialog .charsheet input[type=text], .ui-dialog .charsheet input[type=number], .ui-dialog .charsheet textarea {
 	border: 1px solid var(--rangers-border);
 }
-.ui-dialog .charsheet .facets {
-	margin-top: 0.5rem;
+@-webkit-keyframes focusPulse {
+	0% {
+		-webkit-box-shadow: 0px 0px 5px var(--rangers-border);
+		        box-shadow: 0px 0px 5px var(--rangers-border);
+	}
+	50% {
+		-webkit-box-shadow: 0px 0px 10px var(--rangers-border);
+		        box-shadow: 0px 0px 10px var(--rangers-border);
+	}
+	100% {
+		-webkit-box-shadow: 0px 0px 5px var(--rangers-border);
+		        box-shadow: 0px 0px 5px var(--rangers-border);
+	}
+}
+@keyframes focusPulse {
+	0% {
+		-webkit-box-shadow: 0px 0px 5px var(--rangers-border);
+		        box-shadow: 0px 0px 5px var(--rangers-border);
+	}
+	50% {
+		-webkit-box-shadow: 0px 0px 10px var(--rangers-border);
+		        box-shadow: 0px 0px 10px var(--rangers-border);
+	}
+	100% {
+		-webkit-box-shadow: 0px 0px 5px var(--rangers-border);
+		        box-shadow: 0px 0px 5px var(--rangers-border);
+	}
+}
+.ui-dialog .charsheet input[type=text]:focus-visible, .ui-dialog .charsheet input[type=number]:focus-visible, .ui-dialog .charsheet textarea:focus-visible {
+	outline: unset;
+	-webkit-animation-name: focusPulse;
+	        animation-name: focusPulse;
+	-webkit-animation-duration: 4s;
+	        animation-duration: 4s;
+	-webkit-animation-iteration-count: infinite;
+	        animation-iteration-count: infinite;
+	border-color: var(--rangers-fg);
+	color: var(--rangers-bg);
+	background-color: var(--rangers-fg);
+}
+.ui-dialog .charsheet .advisory {
+	font-style: italic;
+	font-weight: 300;
+	line-height: normal;
+}
+.ui-dialog .charsheet .blurbox, .ui-dialog .charsheet .scatbox {
+	border: 1px solid var(--rangers-border);
+	padding: 0;
+	padding-bottom: 0.25rem;
+	border-radius: 0.5rem;
+}
+.ui-dialog .charsheet .blurbox .rlab, .ui-dialog .charsheet .scatbox .rlab {
+	display: block;
+	color: rgb(0, 0, 0);
+	background: var(--rangers-border);
+	border: 1px solid var(--rangers-border);
+	border-top-right-radius: 0.5rem;
+	border-top-left-radius: 0.5rem;
+	width: 100%;
+	margin-bottom: 0.25rem;
+	margin-top: -1px;
+	text-align: center;
+}
+.ui-dialog .charsheet .divider {
+	border-color: var(--rangers-border);
+	padding: 0;
+	margin: 0;
+	margin-top: -0.25rem;
+	margin-bottom: -0.25rem;
+	height: auto;
 }
 .ui-dialog .charsheet .facets .facetgrid {
 	border: 1px solid var(--rangers-border);
 	border-radius: 0.5rem;
 	padding: 0.5rem;
 }
+.ui-dialog .charsheet .facets .facetgrid .name {
+	font-size: 1.25rem;
+}
 .ui-dialog .charsheet .identifiers .name, .ui-dialog .charsheet .identifiers .rclass, .ui-dialog .charsheet .identifiers .ally, .ui-dialog .charsheet .identifiers .season {
 	border: 1px solid var(--rangers-border);
 	border-radius: 0.5rem;
 	padding: 0.5rem;
 }
+.ui-dialog .charsheet .skills .skillbox {
+	border: 1px solid var(--rangers-border);
+	border-radius: 0.5rem;
+	padding: 0.5rem;
+}
+.ui-dialog .charsheet .spellnotes {
+	margin-top: 0.5rem;
+}
+.ui-dialog .charsheet .spellnotes textarea {
+	border: 1px solid var(--rangers-border);
+	border-radius: 0.5rem;
+	padding: 0.5rem;
+	margin-bottom: unset;
+}
+.ui-dialog .charsheet .stats {
+	margin-top: 0.5rem;
+}
 .ui-dialog .charsheet .rhead {
 	font-family: Amarante, serif;
 	font-size: 1.5rem;
 	text-transform: uppercase;
+	line-height: normal;
 	color: var(--rangers-head);
 }
 .ui-dialog .charsheet .rlab {

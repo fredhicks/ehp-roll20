@@ -47,12 +47,16 @@ $dbord: #{$palegold}
 	--rangers-bg: #{$lbg}
 	--rangers-head: #{$lhead}
 	--rangers-border: #{$lbord}
+	--rangers-sbox-mark: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/art/blackstar-filled.svg)
+	--rangers-sbox-unmark: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/art/blackstar-empty.svg)
 
 .sheet-darkmode, .sheet-rolltemplate-darkmode
 	--rangers-fg: #{$dtext}
 	--rangers-bg: #{$dbg}
 	--rangers-head: #{$dhead}
 	--rangers-border: #{$dbord}
+	--rangers-sbox-mark: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/art/goldstar-filled.svg)
+	--rangers-sbox-unmark: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/art/goldstar-empty.svg)
 
 .wrapper p,
 .ui-dialog .charsheet,
@@ -62,7 +66,7 @@ textarea
 	font-family: #{$bfont}
 	font-size: 1rem
 	font-weight: 400
-	color: var(--rangers-fg) !important
+	color: var(--rangers-fg)
 	background-color: var(--rangers-bg)
 	line-height: unset
 
@@ -96,16 +100,24 @@ textarea
 		&::before
 			width: 1rem
 			height: 1rem
-			content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/art/goldstar-filled.svg);
+			content: var(--rangers-sbox-mark)
 	.starbox.unmarked::before
-			content: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/art/goldstar-empty.svg);
+			content: var(--rangers-sbox-unmark)
 
 // Layout - Grids and Flexes
 .ui-dialog .charsheet
 
 	.facets
+		display: grid
+		grid-template-rows: auto 1fr
 		.facetgrid
 			display: grid
+			grid-template-columns: auto 1fr
+			grid-template-rows: 1fr 1fr 1fr 1fr 1fr
+			gap: 0.25rem 1rem
+			align-items: center
+			.name
+				grid-column: 1
 
 	.identifiers
 		display: grid
@@ -123,18 +135,138 @@ textarea
 			input[type=text], input[type=number]
 				width: unset
 
+	.scatter .scatbox, .blur .blurbox
+		display: grid
+		grid-template-columns: auto 1px auto
+		justify-items: center
+		.rlab
+			grid-column: 1 / span 3
+
+	.skills
+		display: grid
+		grid-template-rows: auto 1fr
+		.top
+			display: flex
+			flex-direction: row
+			justify-content: stretch
+			align-items: center
+			gap: 0.5rem
+
+	.skillbox
+		display: grid
+		grid-template-columns: auto auto
+		gap: 0.5rem
+		align-items: stretch
+		input[type=text]
+			width: 100%
+
+	.spellnotes
+		display: grid
+		grid-template-columns: 1fr 1fr
+		gap: 1rem
+		> div
+			border: 1px solid red
+		.notes
+			grid-column: 1
+		.keysig
+			grid-column: 2
+		.notes, .keysig
+			display: grid
+			gap: 0.5rem
+		.personal, .blur, .key, .sig
+			display: grid
+			grid-template-rows: auto 1fr
+			gap: 0.25rem
+			textarea
+				height: unset
+				width: unset
+				grid-column: 1 / span 2
+				grid-row: 2
+			.top
+				display: flex
+				flex-direction: column
+				align-items: start
+				gap: 0
+
+	.stats
+		display: grid
+		grid-template-columns: auto auto 1fr
+		gap: 1rem
+		justify-items: stretch
+		.facets
+			grid-column: 1
+			grid-row: 1 / span 2
+		.scatter
+			grid-column: 2
+			grid-row: 1
+		.blur
+			grid-column: 2
+			grid-row: 2
+		.skills
+			grid-column: 3
+			grid-row: 1 / span 2
+
 // Appearances
 .ui-dialog .charsheet
 
 	input[type=text], input[type=number], textarea
 		border: 1px solid var(--rangers-border)
 
+	@keyframes focusPulse
+		0%
+			box-shadow: 0px 0px 5px var(--rangers-border)
+		50%
+			box-shadow: 0px 0px 10px var(--rangers-border)
+		100%
+			box-shadow: 0px 0px 5px var(--rangers-border)
+
+	input[type=text], input[type=number], textarea
+		&:focus-visible
+			outline: unset
+			animation-name: focusPulse
+			animation-duration: 4s
+			animation-iteration-count: infinite
+			border-color: var(--rangers-fg)
+			color: var(--rangers-bg)
+			background-color: var(--rangers-fg)
+
+	.advisory
+		font-style: italic
+		font-weight: 300
+		line-height: normal
+
+	.blurbox, .scatbox
+		border: 1px solid var(--rangers-border)
+		padding: 0
+		padding-bottom: 0.25rem
+		border-radius: 0.5rem
+		.rlab
+			display: block
+			color: #{$black}
+			background: var(--rangers-border)
+			border: 1px solid var(--rangers-border)
+			border-top-right-radius: 0.5rem
+			border-top-left-radius: 0.5rem
+			width: 100%
+			margin-bottom: 0.25rem
+			margin-top: -1px
+			text-align: center
+
+	.divider
+		border-color: var(--rangers-border)
+		padding: 0
+		margin: 0
+		margin-top: -0.25rem
+		margin-bottom: -0.25rem
+		height: auto
+
 	.facets
-		margin-top: 0.5rem
 		.facetgrid
 			border: 1px solid var(--rangers-border)
 			border-radius: 0.5rem
 			padding: 0.5rem
+			.name
+				font-size: 1.25rem
 
 	.identifiers
 		.name, .rclass, .ally, .season
@@ -142,10 +274,28 @@ textarea
 			border-radius: 0.5rem
 			padding: 0.5rem
 
+	.skills
+		.skillbox
+			border: 1px solid var(--rangers-border)
+			border-radius: 0.5rem
+			padding: 0.5rem
+	
+	.spellnotes
+		margin-top: 0.5rem
+		textarea
+			border: 1px solid var(--rangers-border)
+			border-radius: 0.5rem
+			padding: 0.5rem
+			margin-bottom: unset
+
+	.stats
+		margin-top: 0.5rem
+
 	.rhead
 		font-family: #{$hfont}
 		font-size: $hsize
 		text-transform: uppercase
+		line-height: normal
 		color: var(--rangers-head)
 	
 	.rlab
@@ -155,4 +305,4 @@ textarea
 		text-transform: uppercase
 		color: var(--rangers-fg)
 
-// End Headers
+// End Appearances

@@ -13,41 +13,70 @@
 		.season
 			+t("Season").rlab
 			+number("season")(min=1 max=5 value=1)
-	.facets
-		+t("Facets").rhead
-		.facetgrid
-			each facet in ['Daring','Understanding','Sensitivity','Subtlety','Adaptability']
-				.name
-					+t(facet)
-				.rating
-					+sboxMarked(facet+"Facet1")
-					each val in [2, 3, 4, 5]
-						+sbox(facet+"Facet"+val)
-	+t("Scatter")
-	+number("scatter")(value=0 min=0)
-	+number("scatter_max")(value=5 min=0)
-	+t("At Max, lose consciousness")
-	+t("Blur")
-	+number("blur")(value=0 min=0)
-	+number("blur_max")(value=5 min=0)
-	+t("At 3 or higher, see Backlash")
-	+t("Spell Notes")
-	+t("Personal Spell Notes")
-	+t("Gain Scatter when used.")
-	+text("personalnotes")
-	+t("Blur Spell Notes")
-	+t("Gain Blur when used.")
-	+text("blurnotes")
-	+t("Key")
-	+t("These Notes can be used as Terrain Notes as well as Personal Notes.")
-	each val in [1, 2, 3, 4, 5]
-		.flexfield
-			+cbox("key"+val)
-			+text("motive"+val)
-	+t("Signature Spell Notes")
-	+t("If all five of your motives of your Key are marked off, gain access to your Signature Spell Notes")
-	+text("signatureNote1")
-	+text("signatureNote2")
+	.stats
+		.facets
+			+t("Facets").rhead
+			.facetgrid
+				each facet in ['Daring','Understanding','Sensitivity','Subtlety','Adaptability']
+					.name
+						+t(facet)
+					.rating
+						+sboxMarked(facet+"Facet1")
+						each val in [2, 3, 4, 5]
+							+sbox(facet+"Facet"+val)
+		.scatter
+			+t("Scatter").rhead
+			.scatbox
+				+t("Gained/Max").rlab
+				+number("scatter")(value=0 min=0)
+				.divider
+				+number("scatter_max")(value=5 min=0)
+			+t("At Max, lose consciousness").advisory
+		.blur
+			+t("Blur").rhead
+			.blurbox
+				+t("Gained/Max").rlab
+				+number("blur")(value=0 min=0)
+				.divider
+				+number("blur_max")(value=5 min=0)
+			+t("At 3 or higher, see Backlash").advisory
+		.skills
+			.top
+				+t("Skills").rhead
+				+t("When using a skill, add 1 die for each Season").advisory
+			.skillbox
+				each val in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+					.skill
+						+text("skill"+val).fillblank
+			// Consider stating the current season value after above text.
+	.spellnotes
+		.notes
+			.personal
+				.top
+					+t("Personal Spell Notes").rhead
+					+t("Gain Scatter when used.").advisory
+				+textarea("personalnotes")(rows=6)
+			.blur
+				.top
+					+t("Blur Spell Notes").rhead
+					+t("Gain Blur when used.").advisory
+				+textarea("blurnotes")(rows=2)
+		.keysig
+			.key
+				.top
+					+t("Key").rhead
+					+t("These Notes, also called motives, can be used as Terrain Notes as well as Personal Notes.").advisory
+				.motives
+					each val in [1, 2, 3, 4, 5]
+						.motive
+							+sbox("key"+val)
+							+text("motive"+val)
+			.sig
+				.top
+					+t("Signature Spell Notes").rhead
+					+t("If all five of your motives of your Key are marked off, gain access to your Signature Spell Notes").advisory
+				+textarea("signaturenotes")(rows=2)
+
 	+t("Miss Questions")
 	ul
 		li
@@ -69,13 +98,6 @@
 	+t("You are removed from the scene.")
 	+t("Lesson")
 	+text("lesson")
-	+t("Skills")
-	+t("When using a skill, add 1 die for each Season")
-	// Consider stating the current season value after above text.
-	.columns
-		each val in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-			.column
-				+text("skill"+val).fillblank
 	+t("Survival Specialty")
 	+text("survivalSpecialty")
 	+t("Crisis Specialty")
