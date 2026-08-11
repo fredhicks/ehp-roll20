@@ -10,39 +10,30 @@
 	<!ENTITY ns_custom "http://ns.adobe.com/GenericCustomNamespace/1.0/">
 	<!ENTITY ns_adobe_xpath "http://ns.adobe.com/XPath/1.0/">
 ]>
-<svg version="1.1" id="Layer_1" xmlns:x="&ns_extend;" xmlns:i="&ns_ai;" xmlns:graph="&ns_graphs;"
-	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="11.57px" height="11.57px"
-	 viewBox="0 0 11.57 11.57" enable-background="new 0 0 11.57 11.57" xml:space="preserve">
+<svg version="1.1"
+	 id="Layer_1" xmlns:x="&ns_extend;" xmlns:i="&ns_ai;" xmlns:graph="&ns_graphs;" xmlns:x="http://ns.adobe.com/Extensibility/1.0/"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16px" height="16px"
+	 viewBox="0 0 16 16" enable-background="new 0 0 16 16" xml:space="preserve">
 <metadata>
 	<sfw  xmlns="&ns_sfw;">
 		<slices></slices>
-		<sliceSourceBounds  bottomLeftOrigin="true" height="11.57" width="11.57" x="1.558" y="-12.759"></sliceSourceBounds>
+		<sliceSourceBounds  bottomLeftOrigin="true" height="16" width="16" x="-2.215" y="-2.215"></sliceSourceBounds>
 	</sfw>
 </metadata>
 <g>
-	<defs>
-		<rect id="SVGID_1_" width="11.57" height="11.57"/>
-	</defs>
-	<clipPath id="SVGID_00000136399950661997599850000012059228544208984977_">
-		<use xlink:href="#SVGID_1_"  overflow="visible"/>
-	</clipPath>
-	<path clip-path="url(#SVGID_00000136399950661997599850000012059228544208984977_)" d="M7.219,7.189
-		c-0.636,0.636-1.112,1.39-1.43,2.261C5.471,8.584,4.995,7.833,4.361,7.197C3.728,6.561,2.981,6.089,2.12,5.781
-		c1.815-0.677,3.038-1.898,3.669-3.664c0.672,1.771,1.893,2.992,3.664,3.664C8.599,6.084,7.854,6.553,7.219,7.189 M0,6.164
-		c1.724,0.083,3.089,0.717,4.094,1.901c0.807,0.944,1.242,2.113,1.304,3.505h0.774C6.26,9.839,6.893,8.469,8.07,7.463
-		c0.938-0.798,2.104-1.231,3.5-1.299V5.391c-1.396-0.068-2.56-0.5-3.492-1.297C6.922,3.115,6.289,1.75,6.18,0H5.406
-		C5.318,1.729,4.684,3.094,3.505,4.094C2.561,4.896,1.393,5.328,0,5.391V6.164z"/>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
+	<g>
+		<defs>
+			<rect id="SVGID_1_" y="0" width="16" height="16"/>
+		</defs>
+		<clipPath id="SVGID_00000154390707285413747670000011565998322309321608_">
+			<use xlink:href="#SVGID_1_"  overflow="visible"/>
+		</clipPath>
+		<path clip-path="url(#SVGID_00000154390707285413747670000011565998322309321608_)" d="M9.983,9.942
+			c-0.88,0.88-1.538,1.922-1.978,3.127c-0.44-1.198-1.098-2.236-1.975-3.116C5.155,9.073,4.122,8.42,2.932,7.994
+			c2.51-0.936,4.201-2.625,5.074-5.067c0.929,2.449,2.618,4.138,5.067,5.067C11.891,8.413,10.861,9.062,9.983,9.942 M0,8.524
+			c2.384,0.115,4.272,0.992,5.662,2.629C6.778,12.458,7.379,14.075,7.465,16h1.07c0.122-2.394,0.997-4.288,2.625-5.68
+			c1.297-1.104,2.91-1.702,4.84-1.796V7.455c-1.931-0.094-3.54-0.691-4.829-1.794C9.572,4.308,8.697,2.42,8.546,0h-1.07
+			C7.354,2.391,6.477,4.279,4.847,5.662C3.542,6.771,1.926,7.368,0,7.455V8.524z"/>
+	</g>
 </g>
 </svg>
