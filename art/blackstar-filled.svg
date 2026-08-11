@@ -10,28 +10,28 @@
 	<!ENTITY ns_custom "http://ns.adobe.com/GenericCustomNamespace/1.0/">
 	<!ENTITY ns_adobe_xpath "http://ns.adobe.com/XPath/1.0/">
 ]>
-<svg version="1.1"
-	 id="Layer_1" xmlns:x="&ns_extend;" xmlns:i="&ns_ai;" xmlns:graph="&ns_graphs;" xmlns:x="http://ns.adobe.com/Extensibility/1.0/"
+<svg version="1.1" id="Layer_1" xmlns:x="&ns_extend;" xmlns:i="&ns_ai;" xmlns:graph="&ns_graphs;"
 	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16px" height="16px"
 	 viewBox="0 0 16 16" enable-background="new 0 0 16 16" xml:space="preserve">
 <metadata>
 	<sfw  xmlns="&ns_sfw;">
 		<slices></slices>
-		<sliceSourceBounds  bottomLeftOrigin="true" height="16" width="16" x="-2.215" y="-2.215"></sliceSourceBounds>
+		<sliceSourceBounds  bottomLeftOrigin="true" height="16" width="16" x="-0.8" y="-15.2"></sliceSourceBounds>
 	</sfw>
 </metadata>
+<path d="M0,8.524c2.384,0.115,4.272,0.992,5.662,2.629C6.778,12.458,7.379,14.075,7.465,16h1.07c0.122-2.394,0.997-4.288,2.625-5.68
+	c1.297-1.104,2.91-1.702,4.84-1.796V7.455c-1.931-0.094-3.54-0.691-4.829-1.794C9.572,4.308,8.697,2.42,8.546,0h-1.07
+	C7.354,2.391,6.477,4.279,4.847,5.662C3.542,6.771,1.926,7.368,0,7.455V8.524z"/>
 <g>
-	<g>
-		<defs>
-			<rect id="SVGID_1_" y="0" width="16" height="16"/>
-		</defs>
-		<clipPath id="SVGID_00000026147193756112866840000003727307041715250094_">
-			<use xlink:href="#SVGID_1_"  overflow="visible"/>
-		</clipPath>
-		<path clip-path="url(#SVGID_00000026147193756112866840000003727307041715250094_)" d="M0,8.524
-			c2.384,0.115,4.272,0.992,5.662,2.629C6.778,12.458,7.379,14.075,7.465,16h1.07c0.122-2.394,0.997-4.288,2.625-5.68
-			c1.297-1.104,2.91-1.702,4.84-1.796V7.455c-1.931-0.094-3.54-0.691-4.829-1.794C9.572,4.308,8.697,2.42,8.546,0h-1.07
-			C7.354,2.391,6.477,4.279,4.847,5.662C3.542,6.771,1.926,7.368,0,7.455V8.524z"/>
-	</g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
 </g>
 </svg>

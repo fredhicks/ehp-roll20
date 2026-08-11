@@ -10,30 +10,30 @@
 	<!ENTITY ns_custom "http://ns.adobe.com/GenericCustomNamespace/1.0/">
 	<!ENTITY ns_adobe_xpath "http://ns.adobe.com/XPath/1.0/">
 ]>
-<svg version="1.1"
-	 id="Layer_1" xmlns:x="&ns_extend;" xmlns:i="&ns_ai;" xmlns:graph="&ns_graphs;" xmlns:x="http://ns.adobe.com/Extensibility/1.0/"
+<svg version="1.1" id="Layer_1" xmlns:x="&ns_extend;" xmlns:i="&ns_ai;" xmlns:graph="&ns_graphs;"
 	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16px" height="16px"
 	 viewBox="0 0 16 16" enable-background="new 0 0 16 16" xml:space="preserve">
 <metadata>
 	<sfw  xmlns="&ns_sfw;">
 		<slices></slices>
-		<sliceSourceBounds  bottomLeftOrigin="true" height="16" width="16" x="-2.215" y="-2.215"></sliceSourceBounds>
+		<sliceSourceBounds  bottomLeftOrigin="true" height="16" width="16" x="-0.8" y="-15.2"></sliceSourceBounds>
 	</sfw>
 </metadata>
+<path fill="#DDD9AA" d="M9.983,9.942c-0.88,0.88-1.538,1.922-1.978,3.127c-0.44-1.198-1.098-2.236-1.975-3.116
+	C5.155,9.073,4.122,8.42,2.932,7.994c2.51-0.936,4.201-2.625,5.074-5.067c0.929,2.449,2.618,4.138,5.067,5.067
+	C11.891,8.413,10.861,9.062,9.983,9.942 M0,8.524c2.384,0.115,4.272,0.992,5.662,2.629C6.778,12.458,7.379,14.075,7.465,16h1.07
+	c0.122-2.394,0.997-4.288,2.625-5.68c1.297-1.104,2.91-1.702,4.84-1.796V7.455c-1.931-0.094-3.54-0.691-4.829-1.794
+	C9.572,4.308,8.697,2.42,8.546,0h-1.07C7.354,2.391,6.477,4.279,4.847,5.662C3.542,6.771,1.926,7.368,0,7.455V8.524z"/>
 <g>
-	<g>
-		<defs>
-			<rect id="SVGID_1_" y="0" width="16" height="16"/>
-		</defs>
-		<clipPath id="SVGID_00000168109447978592945630000012763246959041918142_">
-			<use xlink:href="#SVGID_1_"  overflow="visible"/>
-		</clipPath>
-		<path clip-path="url(#SVGID_00000168109447978592945630000012763246959041918142_)" fill="#DDD9AA" d="M9.983,9.942
-			c-0.88,0.88-1.538,1.922-1.978,3.127c-0.44-1.198-1.098-2.236-1.975-3.116C5.155,9.073,4.122,8.42,2.932,7.994
-			c2.51-0.936,4.201-2.625,5.074-5.067c0.929,2.449,2.618,4.138,5.067,5.067C11.891,8.413,10.861,9.062,9.983,9.942 M0,8.524
-			c2.384,0.115,4.272,0.992,5.662,2.629C6.778,12.458,7.379,14.075,7.465,16h1.07c0.122-2.394,0.997-4.288,2.625-5.68
-			c1.297-1.104,2.91-1.702,4.84-1.796V7.455c-1.931-0.094-3.54-0.691-4.829-1.794C9.572,4.308,8.697,2.42,8.546,0h-1.07
-			C7.354,2.391,6.477,4.279,4.847,5.662C3.542,6.771,1.926,7.368,0,7.455V8.524z"/>
-	</g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
 </g>
 </svg>
