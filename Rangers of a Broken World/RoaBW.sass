@@ -1,11 +1,12 @@
 // Imports
-@import url('https://fonts.googleapis.com/css2?family=Amarante&family=Asap+Condensed:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap')
+@import url('https://fonts.googleapis.com/css2?family=Amarante&family=Asap+Condensed:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Material+Symbols+Outlined&display=swap')
 
 // Font Definitions
 $bfont: 'ASAP Condensed', sans-serif
 $bsize: 16px
 $hfont: 'Amarante', serif
 $hsize: 1.5rem
+$symbols: 'Material Symbols Outlined'
 
 // Color Definitions
 $black: rgba(0, 0, 0, 1)
@@ -16,6 +17,7 @@ $darkpeach: rgba(204, 109, 97, 1)
 $palestgold: rgba(247, 245, 233, 1)
 $palegold: rgba(221, 217, 170, 1)
 $mutedteal: rgba(131, 166, 168, 1)
+$springreen: rgba(135, 187, 105, 1)
 $seethru: rgba(0, 0, 0, 0)
 
 // Color Applications - Light
@@ -23,23 +25,21 @@ $ltext: #{$black}
 $lbg: #{$white}
 $lhead: #{$mutedteal}
 $lbord: #{$palegold}
+$lshade: rgba(221, 217, 170, 0.125)
 
 // Color Applications - Dark
 $dtext: #{$palestgold}
 $dbg: #{$offblack}
 $dhead: #{$mutedteal}
 $dbord: #{$palegold}
-
-// Hide old version of sheet while working with hybrid file
-.rangers-old
-	display: none
+$dshade: rgba(221, 217, 170, 0.075)
 
 // Wide, Whole-Page Formatting
-// Note, 849px width is .tab-content, relevant for @media-aware stuff for handling dynamic widths.
+// Note, 849px width is .tab-content, relevant for @media only screen and -aware stuff for handling dynamic widths.
 
 // Replace/Iterate ANYTEMPLATE if you've got any of them
 
-:root, .sheet-rolltemplate-ANYTEMPLATE
+:root, .sheet-rolltemplate-pcroll, .sheet-rolltemplate-ANYTEMPLATE
 	font-family: #{$bfont}
 	font-weight: 400
 	font-size: #{$bsize}
@@ -47,6 +47,7 @@ $dbord: #{$palegold}
 	--rangers-bg: #{$lbg}
 	--rangers-head: #{$lhead}
 	--rangers-border: #{$lbord}
+	--rangers-shade: #{$lshade}
 	--rangers-sbox-mark: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/art/blackstar-filled.svg)
 	--rangers-sbox-unmark: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/art/blackstar-empty.svg)
 
@@ -55,11 +56,12 @@ $dbord: #{$palegold}
 	--rangers-bg: #{$dbg}
 	--rangers-head: #{$dhead}
 	--rangers-border: #{$dbord}
+	--rangers-shade: #{$dshade}
 	--rangers-sbox-mark: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/art/goldstar-filled.svg)
 	--rangers-sbox-unmark: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/art/goldstar-empty.svg)
 
 .wrapper p,
-.ui-dialog .charsheet,
+.rangers,
 input[type=text], 
 input[type=number],
 textarea
@@ -67,23 +69,88 @@ textarea
 	font-size: 1rem
 	font-weight: 400
 	color: var(--rangers-fg)
-	background-color: var(--rangers-bg)
 	line-height: unset
 
-// Hide and Show Mechanism
+.wrapper p,
 .ui-dialog .charsheet
+	background-color: var(--rangers-bg)
 
-	input.tshower[value="1"], input.shower:not([value=""])
+input[type=text], 
+input[type=number],
+textarea
+	background-color: var(--rangers-shade)
+
+// Rolltemplate styling
+
+.sheet-rolltemplate-pcroll .sheet-rangerroll
+	border: 1px solid var(--rangers-border)
+	border-radius: 0.5rem
+	background-color: #{$black}
+	padding: 0.5rem
+	.sheet-title
+		font-family: #{$hfont}
+		font-size: #{$hsize}
+		text-transform: uppercase
+		line-height: normal
+		color: var(--rangers-head)
+	.sheet-anatomy
+		font-weight: 600
+		color: #{$palegold}
+	.sheet-sixes, .sheet-fives, .sheet-fours, .sheet-threes, .sheet-twos, .sheet-ones
+		font-family: dicefontd6
+		font-size: 2rem
+		line-height: normal
+	.sheet-data-success
+		color: #{$springreen}
+	.sheet-data-others
+		color: #{$palegold}
+	.sheet-data-edges
+		color: #{$darkpeach}
+	.inlinerollresult
+		background-color: #{$black}
+		border: unset
+		font-size: 1rem
+	.sheet-smalldice
+		font-family: dicefontd6
+		font-size: 1.125rem
+		line-height: normal
+	.sheet-red
+		color: #{$darkpeach}
+	.sheet-green
+		color: #{$springreen}
+
+// Hide and Show Mechanisms
+.rangers
+	input.tshower[value="1"], input.ashower:not([value=""])
 		+ *
 			display: none
-	input.thider[value="0"]
+	input.thider[value="0"], input.zhider[value="0"], input.ahider[value=""]
 		+ *
 			display: none
+
+	input.cshower:not([value="Beckoning Infiltrator"]) ~ .infiltrator-class,
+	input.cshower:not([value="Enduring Legionnaire"]) ~ .legionnaire-class,
+	input.cshower:not([value="Tidal Navigator"]) ~ .navigator-class,
+	input.cshower:not([value="Volcanic Tracker"]) ~ .tracker-class,
+	input.cshower:not([value="Wailing Arcanist"]) ~ .arcanist-class,
+	input.cshower:not([value="Wandering Magus"]) ~ .magus-class,
+	input.cshower:not([value="Windswept Cavalier"]) ~ .cavalier-class
+		display: none
+
+	@for $i from 0 through 20
+		input.oshower:not([value="#{$i}"]) ~ .option#{$i}
+			display: none
+
+	// $j has to end 1 higher than $i for this to work right
+	@for $i from 0 through 20
+		@for $j from $i+1 through 21
+			input.uptoshower[value="#{$i}"] ~ .upto#{$j}
+				display: none
 
 // Markable Box Definitions
-.ui-dialog .charsheet
+.rangers
 
-	.starbox
+	.starbox, .cbox
 		background: none
 		border: none
 		padding: 0
@@ -96,16 +163,87 @@ textarea
 			white-space: nowrap
 			direction: ltr
 			padding-top: 5px
+
 	.starbox
 		&::before
 			width: 1rem
 			height: 1rem
 			content: var(--rangers-sbox-mark)
+
 	.starbox.unmarked::before
-			content: var(--rangers-sbox-unmark)
+		content: var(--rangers-sbox-unmark)
+
+	.cbox
+		&::before
+			font-size: 1.25rem
+			font-family: #{$symbols}
+	.cbox.unmarked::before
+		content: 'check_box_outline_blank'
+	.cbox.marked::before
+		content: 'select_check_box'
 
 // Layout - Grids and Flexes
-.ui-dialog .charsheet
+
+.rangers
+
+	.abilities
+		.top
+			display: grid
+			grid-template-columns: 1fr auto
+			gap: 0.5rem
+			justify-content: stretch
+			align-items: center
+		.blurb
+			display: flex
+			flex-direction: row
+
+	.action
+		.top
+			display: grid
+			grid-template-columns: auto auto 1fr
+			gap: 0.25rem
+			align-items: center
+		.body
+			display: grid
+			grid-template-columns: 50% 50%
+			grid-template-rows: auto auto
+			.skillcheck
+				grid-row: 1
+				grid-column: 1
+			.help
+				grid-row: 2
+				grid-column: 1
+			.casting
+				grid-row: 1
+				grid-column: 2
+			.chord
+				grid-row: 2
+				grid-column: 2
+			.skillcheck
+				.tallyline
+					display: grid
+					grid-template-columns: auto 1fr
+					gap: 0.25rem
+				.interface
+					display: grid
+					grid-template-columns: 1fr auto 1fr
+				.keyroll
+					display: grid
+					grid-template-columns: auto auto 1fr
+					gap: 0.5rem
+
+	.backlash
+		.top
+			display: flex
+			flex-direction: row
+			justify-content: stretch
+			align-items: center
+			gap: 0.5rem
+
+	.columns
+		display: grid
+		gap: 1rem
+		grid-template-columns: auto auto
 
 	.facets
 		display: grid
@@ -118,28 +256,41 @@ textarea
 			align-items: center
 			.name
 				grid-column: 1
+			.rating
+				min-width: 96px
+				max-width: 120px
+
+	.hits
+		display: grid
+		grid-template-columns: auto 1fr
+		align-items: center
+		column-gap: 0.25rem
+		row-gap: 0
 
 	.identifiers
 		display: grid
-		grid-template-columns: 5fr 3fr 1fr
+		grid-template-columns: 5fr 5fr 3fr 1fr
 		gap: 1rem
-		.name
-			grid-row: 1
-			grid-column: 1 / 4
-		.rclass, .ally, .season
-			grid-row: 2
 		.name, .rclass, .ally, .season
 			display: flex
 			flex-direction: column-reverse
 			align-items: stretch
-			input[type=text], input[type=number]
+			justify-content: flex-end
+			input[type=text], input[type=number], select
 				width: unset
+
+	.lesson
+		display: flex
+		flex-direction: row
+		gap: 0.5rem
 
 	.scatter .scatbox, .blur .blurbox
 		display: grid
 		grid-template-columns: auto 1px auto
 		justify-items: center
 		.rlab
+			justify-self: stretch
+			width: unset
 			grid-column: 1 / span 3
 
 	.skills
@@ -154,30 +305,38 @@ textarea
 
 	.skillbox
 		display: grid
-		grid-template-columns: auto auto
-		gap: 0.5rem
+		grid-template-columns: 1fr
+		gap: 0.25rem
 		align-items: stretch
-		input[type=text]
-			width: 100%
+		.advisory
+			grid-column: 1 / span 2
+
 
 	.spellnotes
 		display: grid
-		grid-template-columns: 1fr 1fr
+		grid-template-rows: auto auto
 		gap: 1rem
-		> div
-			border: 1px solid red
 		.notes
 			grid-column: 1
 		.keysig
-			grid-column: 2
+			grid-column: 1
 		.notes, .keysig
 			display: grid
 			gap: 0.5rem
+		.motives
+			display: grid
+			gap: 0.25rem
+			.motive
+				display: grid
+				grid-template-columns: auto 1fr
+				gap: 0.5rem
+				input[type=text]
+					width: 100%
 		.personal, .blur, .key, .sig
 			display: grid
 			grid-template-rows: auto 1fr
 			gap: 0.25rem
-			textarea
+			textarea, input[type=text].signotes
 				height: unset
 				width: unset
 				grid-column: 1 / span 2
@@ -190,7 +349,7 @@ textarea
 
 	.stats
 		display: grid
-		grid-template-columns: auto auto 1fr
+		grid-template-columns: 1fr auto
 		gap: 1rem
 		justify-items: stretch
 		.facets
@@ -202,38 +361,186 @@ textarea
 		.blur
 			grid-column: 2
 			grid-row: 2
-		.skills
-			grid-column: 3
-			grid-row: 1 / span 2
 
 // Appearances
-.ui-dialog .charsheet
+.rangers
 
 	input[type=text], input[type=number], textarea
 		border: 1px solid var(--rangers-border)
 
 	@keyframes focusPulse
 		0%
-			box-shadow: 0px 0px 5px var(--rangers-border)
+			box-shadow: 0px 0px 10px #{$palegold}, 0px 0px 5px #{$palegold}
+			border-color: #{$palegold}
+		5%
+			box-shadow: 1px 0px 10px #{$palegold}, 1px 0px 5px #{$palegold}
+		10%
+			box-shadow: 0px 1px 10px #{$palegold}, 0px 1px 5px #{$palegold}
+		15%
+			box-shadow: -1px 0px 10px #{$palegold}, -1px 0px 5px #{$palegold}
+		20%
+			box-shadow: 0px -1px 10px #{$palegold}, 0px -1px 5px #{$palegold}
+		// Color shift rose
+		25%
+			box-shadow: 0px 0px 10px #{$rosepeach}, 0px 0px 5px #{$rosepeach}
+			border-color: #{$rosepeach}
+		30%
+			box-shadow: 1px 0px 10px #{$rosepeach}, 1px 0px 5px #{$rosepeach}
+		35%
+			box-shadow: 0px 1px 10px #{$rosepeach}, 0px 1px 5px #{$rosepeach}
+		40%
+			box-shadow: -1px 0px 10px #{$rosepeach}, -1px 0px 5px #{$rosepeach}
+		45%
+			box-shadow: 0px -1px 10px #{$rosepeach}, 0px -1px 5px #{$rosepeach}
+		// Color shift teal
 		50%
-			box-shadow: 0px 0px 10px var(--rangers-border)
+			box-shadow: 0px 0px 10px #{$mutedteal}, 0px 0px 5px #{$mutedteal}
+			border-color: #{$mutedteal}
+		55%
+			box-shadow: 1px 0px 10px #{$mutedteal}, 1px 0px 5px #{$mutedteal}
+		60%
+			box-shadow: 0px 1px 10px #{$mutedteal}, 0px 1px 5px #{$mutedteal}
+		65%
+			box-shadow: -1px 0px 10px #{$mutedteal}, -1px 0px 5px #{$mutedteal}
+		70%
+			box-shadow: 0px -1px 10px #{$mutedteal}, 0px -1px 5px #{$mutedteal}
+		// Color shift green
+		75%
+			box-shadow: 0px 0px 10px #{$springreen}, 0px 0px 5px #{$springreen}
+			border-color: #{$springreen}
+		80%
+			box-shadow: 1px 0px 10px #{$springreen}, 1px 0px 5px #{$springreen}
+		85%
+			box-shadow: 0px 1px 10px #{$springreen}, 0px 1px 5px #{$springreen}
+		90%
+			box-shadow: -1px 0px 10px #{$springreen}, -1px 0px 5px #{$springreen}
+		95%
+			box-shadow: 0px -1px 10px #{$springreen}, 0px -1px 5px #{$springreen}
+		// Loop
 		100%
-			box-shadow: 0px 0px 5px var(--rangers-border)
+			box-shadow: 0px 0px 10px #{$palegold}, 0px 0px 5px #{$palegold}
+			border-color: #{$palegold}
 
-	input[type=text], input[type=number], textarea
+	input[type=text], input[type=number], select, textarea, 
+	.identifiers .rclass select, .specialty.crisis select, 
+	.action .skillcheck .interface select, 
+	.skillbox .skill select, .abilities .ability select, 
+	.abilities .season input[type=number]
 		&:focus-visible
 			outline: unset
 			animation-name: focusPulse
-			animation-duration: 4s
+			animation-duration: 10s
 			animation-iteration-count: infinite
 			border-color: var(--rangers-fg)
 			color: var(--rangers-bg)
 			background-color: var(--rangers-fg)
+		&:hover
+			border: 1px solid #{$rosepeach} !important
+
+	.action
+		margin-top: 0.5rem
+		.bold
+			color: #{$springreen}
+		.top
+			.rhead
+				color: #{$springreen}
+		.body
+			border: 1px solid #{$springreen}
+			border-radius: 0.5rem
+			padding: 0.5rem
+			.skillcheck
+				padding-right: 0.5rem
+				.interface, .keyroll
+					select
+						width: unset
+						background-color: var(--rangers-shade)
+						color: var(--rangers-fg)
+						border: 1px solid var(--rangers-border)
+						margin: 0rem
+						margin-bottom: 0.25rem
+						padding: 0rem
+						font-size: 1rem
+						height: 2rem
+					input[type="number"]
+						width: 2.75rem
+						text-align: right
+
+			.help
+				padding-left: 0rem
+				border-top: 1px solid #{$springreen}
+				padding-right: 0.5rem
+			.casting
+				padding-left: 0.5rem
+				border-left: 1px solid #{$springreen}
+				padding-right: 0.5rem
+			.chord
+				padding-left: 0.5rem
+				border-left: 1px solid #{$springreen}
+				border-top: 1px solid #{$springreen}
+
+	.abilities
+		margin-top: 0.5rem
+		.ability select
+			border: 0
+			margin: 0
+			margin-left: calc(-0.25rem - 1px)
+			border: 1px solid #{$seethru}
+			padding: 0
+			background: var(--rangers-bg)
+			color: var(--rangers-fg)
+			width: 100%
+		.repitem, .ability
+			border: 1px solid var(--rangers-border)
+			padding: 0
+			padding-bottom: 0rem
+			border-radius: 0.5rem
+			margin-bottom: 0.5rem
+		.season
+			border-top-right-radius: 0.5rem
+			border-top-left-radius: 0.5rem
+			margin-top: -0.5rem
+			margin-left: -0.5rem
+			margin-right: -0.5rem
+			margin-bottom: 0.25rem
+			background: var(--rangers-border)
+			color: #{$black}
+			text-align: center
+			text-transform: uppercase
+			font-weight: 700
+			input[type=number]
+				font-weight: 700
+				width: unset
+				height: unset
+				padding: 0rem
+				padding-left: 1rem
+				margin: 0rem
+				margin-top: -3px
+				line-height: normal
+				background: #{$black}
+				color: var(--rangers-border)
+				text-align: center
+		.top
+			margin-top: 0
+			white-space: nowrap
+			input[type=text]
+				width: unset
+				&.name
+					width: 100%
+				&.blur
+					width: 3.5rem
+					padding: 0rem
+					padding-right: 0.25rem
+					margin: 0rem
+					line-height: normal
+					text-align: right
 
 	.advisory
 		font-style: italic
 		font-weight: 300
 		line-height: normal
+		
+	.backlash
+		margin-top: 0.5rem
 
 	.blurbox, .scatbox
 		border: 1px solid var(--rangers-border)
@@ -241,16 +548,39 @@ textarea
 		padding-bottom: 0.25rem
 		border-radius: 0.5rem
 		.rlab
-			display: block
 			color: #{$black}
 			background: var(--rangers-border)
 			border: 1px solid var(--rangers-border)
 			border-top-right-radius: 0.5rem
 			border-top-left-radius: 0.5rem
-			width: 100%
 			margin-bottom: 0.25rem
 			margin-top: -1px
 			text-align: center
+		input[type=number]
+			width: 3rem
+			margin-left: 0.25rem
+			margin-right: 0.25rem
+
+	.btn, .pcroller
+		background-color: var(--rangers-bg)
+		color: #{$rosepeach}
+		border: 1px solid #{$rosepeach}
+		text-shadow: none
+		box-shadow: none
+		background-image: unset
+		font-family: #{$bfont}
+		font-size: 1rem
+		border-radius: 0.5rem
+		&:hover
+			color: var(--rangers-bg)
+			background-color: var(--rangers-fg)
+			font-weight: 600
+		&:active
+			color: var(--rangers-bg)
+			background-color: var(--rangers-fg)
+
+	.columns
+		margin-top: 0.5rem
 
 	.divider
 		border-color: var(--rangers-border)
@@ -268,18 +598,144 @@ textarea
 			.name
 				font-size: 1.25rem
 
+	.bold
+		font-weight: 500
+	.heavy
+		font-weight: 700
+
 	.identifiers
 		.name, .rclass, .ally, .season
 			border: 1px solid var(--rangers-border)
 			border-radius: 0.5rem
 			padding: 0.5rem
+			select
+				background-color: var(--rangers-shade)
+				color: var(--rangers-fg)
+				border: 1px solid var(--rangers-border)
+				margin: 0rem
+				padding: 0rem
+				font-size: 1rem
+				height: 2rem
+
+	.journal
+		margin-top: 0.5rem
+		textarea
+			border-radius: 0.5rem
+			width: calc( 100% - 0.75rem)
+
+	.lesson
+		input[type=text]
+			width: 100%
+			border: 1px solid var(--rangers-border)
+			border-radius: 0.5rem
+
+	.miss
+		ul
+			input[type=text]
+				width: 100%
+				margin-left: -5px
+
+	.lesson
+		margin-top: 0.5rem
+
+	.motives
+		padding: 0.5rem
+		border: 1px solid var(--rangers-border)
+		border-radius: 0.5rem
+		padding-left: 66px
+		background-image: url(https://raw.githubusercontent.com/fredhicks/ehp-roll20/master/art/trebleclef.svg)
+		background-repeat: no-repeat
+		background-size: 60px
+		background-position-y: center
+
+	.signotes
+		border-radius: 0.5rem
 
 	.skills
-		.skillbox
+		margin-top: 0.5rem
+
+	.skills .skillbox, .misses, .hits
 			border: 1px solid var(--rangers-border)
 			border-radius: 0.5rem
 			padding: 0.5rem
-	
+	.misses
+		margin-left: 0
+		li
+			margin-left: 1rem
+
+	.hits input[type=text]
+		width: 100%
+
+	.skills .skillbox
+		input[type=text], select
+			width: 100%
+			margin-bottom: 0
+			font-size: 1.125rem
+			height: 2.25rem
+			background: var(--rangers-bg)
+			color: var(--rangers-fg)
+
+	.scatter, .blur
+		.advisory
+			white-space: nowrap
+
+	.specialties .specialty .details, .backlash .details
+		padding: 0.5rem
+		border: 1px solid var(--rangers-border)
+		border-radius: 0.5rem
+
+	.specialty.crisis select
+		border: 0
+		margin: 0
+		margin-left: calc(-0.25rem - 1px)
+		border: 1px solid #{$seethru}
+		padding: 0
+		background: var(--rangers-bg)
+		color: var(--rangers-fg)
+		width: 100%
+
+	.specialties .specialty, .backlash, .abilities .repitem, .abilities .ability
+		.top
+			margin-top: 0.0rem
+		.heavy
+			font-size: 1.25rem
+		.body
+			font-size: 1.125rem
+		textarea
+			margin-bottom: 1.0rem
+			padding: unset
+			border: 1px solid #{$seethru}
+			width: 100%
+			height: unset
+			&:focus
+				padding: 0.5rem
+				margin-bottom: 0rem
+		&.survival
+			margin-top: 0.5rem
+			.top input[type=text]
+				width: 100%
+				padding: unset
+				border: 1px solid #{$seethru}
+				font-family: #{$hfont}
+				font-size: $hsize
+				text-transform: uppercase
+				line-height: normal
+				color: var(--rangers-head)
+		&.crisis
+			margin-top: 0.5rem
+		input[type=text]
+			padding: unset
+			border: 1px solid #{$seethru}
+			font-size: 1.25rem
+			&.blur
+				font-size: 1rem
+
+	.abilities .repitem, .abilities .ability
+		padding: 0.5rem
+		padding-bottom: 0rem
+		border: 1px solid var(--rangers-border)
+		border-radius: 0.5rem
+
 	.spellnotes
 		margin-top: 0.5rem
 		textarea
@@ -287,13 +743,15 @@ textarea
 			border-radius: 0.5rem
 			padding: 0.5rem
 			margin-bottom: unset
+		input[type=text], textarea
+			font-size: 1.25rem
 
-	.stats
-		margin-top: 0.5rem
+	.rose, .rhead.rose
+		color: #{$darkpeach}
 
 	.rhead
 		font-family: #{$hfont}
-		font-size: $hsize
+		font-size: #{$hsize}
 		text-transform: uppercase
 		line-height: normal
 		color: var(--rangers-head)
@@ -306,3 +764,137 @@ textarea
 		color: var(--rangers-fg)
 
 // End Appearances
+
+// Responsive layouts
+
+// Make sure to express as max-width and min-width, *not* width [greater-than] or [less-than] as the CSS sanitization barfs if you use those angle brackets apparently?
+
+// width less-than values need to go in descending order in order to take over properly -- remember, css parses things in order if they otherwise have identical specificity
+
+.rangers
+	@media only screen and  ( max-width: 800px ) 
+		// Point at which skill boxes in a 3x3 doesn't work
+		.skillbox
+			grid-template-columns: 1fr
+			.advisory
+				grid-column: 1 / span 2
+	
+	@media only screen and  ( max-width: 750px ) 
+		// Point at which widths get a little too tight
+		.columns
+			grid-template-columns: 1fr
+		.identifiers
+			grid-template-columns: 1fr 1fr
+	
+	@media only screen and  ( max-width: 680px )
+		// Point at which Action section needs some rearrangement
+		.action
+			.body
+				display: grid
+				grid-template-columns: auto
+				grid-template-rows: auto auto
+				.skillcheck
+					grid-row: 1
+					grid-column: 1
+				.help
+					grid-row: 2
+					grid-column: 1
+				.casting
+					grid-row: 3
+					grid-column: 1
+				.chord
+					grid-row: 4
+					grid-column: 1
+				.skillcheck
+					.interface
+						display: grid
+						grid-template-columns: 1fr auto 1fr
+					.keyroll
+						display: grid
+						grid-template-columns: auto 1fr
+						gap: 0.5rem
+		.action
+			.body
+				.skillcheck, .help, .casting, .chord
+					padding-left: 0rem
+					padding-right: 0rem
+				.help, .casting, .chord
+					border-top: 1px solid #{$springreen}
+					border-left: none
+	
+	@media only screen and  ( max-width: 479px ) 
+		// Smartphone - Currently identical to the above media context, but keeping it called out in case we need to do something else here.
+		.columns
+			grid-template-columns: 1fr
+		.identifiers
+			grid-template-columns: 1fr 1fr
+		// we start to smash into a situation where Scatter & Blur don't sit side by side with the facets very well in the .stats block
+		.stats
+			grid-template-columns: auto auto
+			.facets
+				grid-column: 1 / span 2
+				grid-row: 1
+			.scatter
+				grid-column: 1
+				grid-row: 2
+			.blur
+				grid-column: 2
+				grid-row: 2
+	
+	@media only screen and  ( max-width: 400px ) 
+		// We really shouldn't ever get this narrow, but if we do, let's go single-columned with grace. I'm still not fully satisfied with this but I'm also at a point of diminishing returns.
+		.columns
+			grid-template-columns: 1fr
+		.identifiers
+			grid-template-columns: 1fr
+		.stats
+			grid-template-columns: auto
+			max-width: 300px
+			.facets
+				grid-column: 1
+				grid-row: 1
+			.scatter
+				grid-column: 1
+				grid-row: 2
+			.blur
+				grid-column: 1
+				grid-row: 3
+	
+	// Greater-than should go in ascending order
+	
+	@media only screen and ( min-width: 1243px )
+		// We should have room for a third column at this point, so let's bring those abilities up
+		.columns
+			.column.left
+				display: grid
+				grid-template-columns: auto auto
+				grid-template-rows: auto 1fr
+				column-gap: 1rem
+				align-items: start
+				.stats
+					grid-column: 1
+					grid-row: 1
+				.spellnotes
+					grid-column: 1
+					grid-row: 2
+				.abilities
+					margin-top: 0px
+					grid-column: 2
+					grid-row: 1 / span 2
+	
+	@media only screen and  ( min-width: 1800px )
+		// We should have room for a FOURTH column at this point; rearrange the right side?
+		.columns
+			.column.right
+				display: grid
+				grid-template-columns: auto auto
+				column-gap: 1rem
+				align-items: start
+				.sec1
+					grid-column: 1
+					grid-row: 1
+				.sec2
+					grid-column: 2
+					grid-row: 1
+			.specialties .specialty.survival
+				margin-top: 0rem

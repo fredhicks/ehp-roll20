@@ -1,0 +1,15 @@
+.keysig
+	.key
+		.top
+			+t("Key").rhead
+			+t("These Notes, also called motives, can be used as Terrain Notes as well as Personal Notes.").advisory
+		.motives
+			each val in [1, 2, 3, 4, 5]
+				.motive
+					+sbox("key"+val)
+					+text("motive"+val)
+	.sig
+		.top
+			+t("Signature Spell Notes").rhead
+			+t("If all five of your motives of your Key are marked off, gain access to your Signature Spell Notes").advisory
+		+textarea("signaturenotes")(rows=1).signotes

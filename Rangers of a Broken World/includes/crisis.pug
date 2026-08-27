@@ -1,0 +1,45 @@
+-
+	var crises = {
+		"Clear-Headed": "While you have 0 Scatter, you always add 3 additional Successes when you roll to form the Advantage Pool.",
+		"Coordinated": "When you take an action in a Crisis, the next person to take the same action gets one additional die to their roll. (This effect stacks until someone takes a different action.)",
+		"Counterstriker": "When you buy off a Crisis action with Successes from the Advantage Pool, add a die to your next roll. (This effect stacks.)",
+		"Endurance": "When you take a Hit in a Crisis, you may make a Focus roll and clear 1 Scatter per Success.",
+		"First Blood": "The first time you take a Hit in a Crisis, add 3 Successes to the Advantage Pool.",
+		"Inspiring": "When you advance a Goal, a party member may activate part of their Key and gain two additional dice on their next roll.",
+		"Leader": "You may skip your action in a Crisis. If you do, a Ranger of your choice may take two actions.",
+		"Pacifist": "You cannot advance Destroy except against inanimate hazards. The difficulty for you to Redirect is reduced by 2.",
+		"Shield": "When another party member, even an NPC, takes a Hit, you may take the Hit instead without spending additional Successes.",
+		"Stealth": "When you are concealed from a target, the Conductor cannot offer “You are noticed” as a condition of an Edge Success.",
+		"Strategist": "When you roll Tactics to add to the Advantage Pool, you add an additional Success.",
+		"Too Quick": "When an opponent takes an action that only targets you, the cost to prevent the action is reduced by 1.",
+		"Under Pressure": "In a Crisis, you roll one additional die on rolls to advance a Goal for every time the Threat track has been advanced.",
+		"Vengeance": "When a Crisis deals you a Hit, the difficulty for you to Destroy is reduced by 1 until after your next action. (This effect stacks.)"
+	};
+
+mixin crisis-menu
+	+select("crisisname").heavy.name
+		+option("Choose a specialty","0")
+		- var step = 0;
+		each desc, name in crises
+			- step++
+			+option(name,step)
+
+.specialty.crisis
+	.top
+		+t("Crisis Specialty").rhead
+	.details
+		+hidden("crisisname")(value="0").oshower
+		.option0
+			.top
+				.heavy.name
+					+crisis-menu
+		- var step = 0;
+		each desc, name in crises
+			- step++;
+			div(class="option"+step)
+				.top
+					.heavy.name
+						<!-- #{name} -->
+						+crisis-menu
+				.body
+					+t(desc)

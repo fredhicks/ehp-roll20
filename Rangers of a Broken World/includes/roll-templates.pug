@@ -1,0 +1,83 @@
+mixin rtTotal(f,v)
+	| {{#rollTotal() #{f} #{v}}}
+	block
+	| {{/rollTotal() #{f} #{v}}}
+
+mixin rtLess(f,v)
+	| {{#rollLess() #{f} #{v}}}
+	block
+	| {{/rollLess() #{f} #{v}}}
+
+mixin rtCheck(f)
+	| {{##{f}}}
+	block
+	| {{/#{f}}}
+
+mixin rtNot(f)
+	| {{#^#{f}}}
+	block
+	| {{/^#{f}}}
+
+mixin rtVerify(f,v)
+	| {{##{f} #{v}}} 
+	block
+	| {{/#{f} #{v}}}
+
+mixin dicesplode(f,n)
+	- var val = 0;
+	while val < 30
+		- val++;
+		- inval = val;
+		+rtTotal(f,val)
+			while inval > 0
+				- inval--
+				if n == 1
+					span A
+				else if n == 2
+					span B
+				else if n == 3
+					span C
+				else if n == 4
+					span D
+				else if n == 5
+					span E
+				else if n == 6
+					span F
+
+rolltemplate.sheet-rolltemplate-pcroll
+	.sheet-rangerroll
+		.sheet-title
+			| {{name}}
+		.sheet-anatomy
+			| {{anatomy}}
+		span.sheet-data-success
+			span.sheet-sixes
+				+dicesplode("computed::rolled6",6)
+			span.sheet-fives
+				+dicesplode("computed::rolled5",5)
+		span.sheet-data-others
+			span.sheet-fours
+				+dicesplode("computed::rolled4",4)
+			span.sheet-threes
+				+dicesplode("computed::rolled3",3)
+			span.sheet-twos
+				+dicesplode("computed::rolled2",2)
+		span.sheet-data-edges
+			span.sheet-ones
+				+dicesplode("computed::rolled1",1)
+		.sheet-anatomy
+			|{{computed::successes}}
+			+rtTotal("computed::successes",1)
+				+t("Success").sheet-green
+			+rtNot("rollTotal() computed::successes 1")
+				+t("Successes").sheet-green
+			|(
+			span.sheet-smalldice.sheet-green FE
+			|), {{computed::edges}}
+			+rtTotal("computed::edges",1)
+				+t("Edge").sheet-red
+			+rtNot("rollTotal() computed::edges 1")
+				+t("Edges").sheet-red
+			|(
+			span.sheet-smalldice.sheet-red A
+			|)

@@ -1,0 +1,102 @@
+.action
+	.top
+		+sbox("actionpane")
+		.rhead
+			+t("Action")
+		.advisory
+			+t("Click the star for procedures to roll dice, give help, cast spells.")
+	+thider("actionpane")
+	.body
+		.skillcheck
+			.heavy.tallyline
+				+t("SKILL CHECK")
+				// Should mean this is hidden when rolldice = 0
+				+zhider("rolldice")
+				.dice
+					|( 
+					+display("rolldice")
+					| 
+					+t("dice")
+					|)
+			.details
+				.interface
+					+facetmenu("roll")
+					|+
+					+skillmenu("roll")
+				.keyroll
+					+select("keyroll")
+						+option("Key not marked","0")
+						+option("Key marked","2")
+					.bonus
+						|+
+						+number("bonusroll")(value=0 min=0 max=17)
+						+t("bonus dice")
+					button(
+						type="action"
+						name="act_pcroll"
+						class="pcroller"
+						value="&{template:default} {{facet=^{@{facetroll}}}} {{skill=^{@{skillroll}}}} {{keymarked=@{keyroll}}} {{charname=@{character_name}}} {{Roll=[[@{rolldice}d6]]}}"
+					)
+						+t("Roll all the dice!")
+						| (
+						+display("rolldice")
+						|)
+				+t("Choose a")
+				+t("facet").heavy
+				+t("and a")
+				+t("skill.").heavy
+				ul
+					li
+						+t("1 die for every point in the facet")
+					li
+						+t("Add 1 die per Season if you have the skill")
+					li
+						+t("Add 2 dice if you mark off part of your Key")
+					li
+						+t("Ask for another Ranger help if needed.")
+				+t("If you are receiving help, you can swap one of your dice for a helper’s die.")
+		.help
+			.heavy
+				+t("HELP")
+			.details
+				+t("Before rolling a skill check, another Ranger can make a roll to help:")
+				ul
+					li
+						+t("Helper rolls")
+						+t("facet + skill.").bold
+					li
+						+t("After you roll, you can swap one of your dice for a helper’s die.")
+					li
+						+t("Everyone involved faces the consequences,").bold
+						+t("even if you don’t end up using one of their dice.")
+		.casting
+			.heavy
+				+t("CASTING A SPELL")
+			.details
+				.heavy
+					+t("Step 1: Plan")
+				.bold
+					+t("Combine Personal Spell Note + Terrain Spell Notes")
+				+t("Ask the Conductor what Spell Notes are available, and see what combinations you can create.")
+				+t("You can use one of your Blur Notes instead of a Personal Spell Note, but you’ll gain a point of Blur if you do!").bold
+				.heavy
+					+t("Step 2: Negotiate")
+				+t("Let the Conductor know what you intend for the spell to do. The Conductor proposes a Scatter cost.")
+				.heavy
+					+t("Step 3: Cast")
+				+t("If you pay the cost, the spell happens.")
+		.chord
+			.heavy
+				+t("CHORD")
+			.details
+				+t("To cast a Chord, all the")
+				+t("Rangers taking part must be acting at the same time and close to one another").bold
+				+t("(a few steps away at most).")
+				ul
+					li
+						+t("Combine words").bold
+						+t("from all Rangers on the Chord, folowing the")
+						+t("Casting a Spell").bold
+						+t("steps.")
+					li
+						+t("Share the Scatter cost.").bold

@@ -1,0 +1,55 @@
+// relies on abilitydata.pug
+
+mixin ability-menu(pc,season)
+	+select("ability-"+pc+"-s"+season).heavy.name
+		+option("Choose an ability","0")
+		- var step = 0;
+		- var abs = seasonals[pc][season]
+		each ability in seasonals[pc][season]
+			- step++
+			+option(ability.name,step)
+
+mixin ability-display
+	each seasons, pc in seasonals
+		each list, season in seasons
+			- var step = 0;
+			div(class = "ability " + pc + "-class upto" + season)
+				.season
+					+t("Season")
+					if season == "1"
+						+t("One")
+					else if season == "2"
+						+t("Two")
+					else if season == "3"
+						+t("Three")
+					else if season == "4"
+						+t("Four")
+					else if season == "5"
+						+t("Five")
+				+hidden("ability-"+pc+"-s"+season)(value="0").oshower
+				.option0
+					.top
+						.heavy.name
+							+ability-menu(pc,season)
+				each ability in list
+					- step++;
+					div(class="option"+step)
+						.top
+							.heavy.name
+								<!-- #{ability.name} -->
+								+ability-menu(pc,season)
+							if ability.blur !== ""
+								.blurb
+									+t(ability.blur + " Blur")
+						.body
+							+t(ability.desc)
+
+.top
+	+t("Season Abilities").rhead
+	span.advisory
+		+t("Your current Season is")
+		+display("season").heavy
+		|.
++hidden("season")(value="1").uptoshower
++hidden("class").cshower
++ability-display

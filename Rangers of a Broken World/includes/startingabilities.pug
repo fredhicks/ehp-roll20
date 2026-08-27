@@ -1,0 +1,166 @@
+.rhead
+	+t("Starting Blur Abilities:")
+	+hidden("class").cshower
+	+t("Network").infiltrator-class
+	+t("The Fallen").legionnaire-class
+	+t("The Winds").navigator-class
+	+t("The Coral Spirit").tracker-class
+	+t("Familiar Daemon").arcanist-class
+	+t("The Watching Stars").magus-class
+	+t("Cloud Elk").cavalier-class
++t("Gain Blur to use.").advisory
++hidden("class").cshower
+.infiltrator-class
+	.ability
+		.top
+			+t("Direct Line").name.heavy
+			.blurb
+				+t("1 Blur")
+		.body
+			+t("You silently send a message to a person you know. It should be no more than a single sentence, or a quick thought. They can send a similar message back to you.")
+	.ability
+		.top
+			+t("Long Reach").name.heavy
+			.blurb
+				+t("1 Blur")
+		.body
+			+t("(Blur gained in addition to Scatter gained from the spell.) You can cast a Chord with someone who is not in the scene you’re currently in. You can also use an ability to join another Chord or invite your network to contribute to yours.")
+	.ability
+		.top
+			+t("Parallel").name.heavy
+			.blurb
+				+t("2 Blur")
+		.body
+			+t("For a short time, no longer than half a minute, you enter a trance in which you can observe the world through a friend’s senses instead of your own, as long as that friend gives you permission.")
+.legionnaire-class
+	.ability
+		.top
+			+t("Haunted Blade").name.heavy
+			.blurb
+				+t("2 Blur")
+		.body
+			+t("When you miss an opponent with an attack, the dead correct your strike. Any time you roll a Weapons skill and get no Successes, use this ability to reroll the attack with two additional dice.")
+	.ability
+		.top
+			+t("Ghostly Shield").name.heavy
+			.blurb
+				+t("3 Blur")
+		.body
+			+t("The dead defend you and your companions, shoulder to shoulder as they would have in life. The spirits prevent an attack without needing you to take Successes from the Advantage Pool.")
+	.ability
+		.top
+			+t("Call Specter").name.heavy
+			.blurb
+				+t("4 Blur")
+		.body
+			+t("A phantom appears to aid you. For the next three rounds, this ghost can make attacks, using the same skills and facets as you do. The phantom is no one you recognize. They are a fallen warrior from the place’s history, and they do not speak.")
+.navigator-class
+	.ability
+		.top
+			+t("Wind At Your Back").name.heavy
+			.blurb
+				+t("1 Blur")
+		.body
+			+t("You call on a favorable wind to help with an action. Maybe it blows against you as you row a small craft, or moves a curtain to conceal someone. It blows with enough force to carry a banner away, and adds a die to your roll. You can use this ability after you have already made the roll.")
+	.ability
+		.top
+			+t("Gale").name.heavy
+			.blurb
+				+t("2 Blur")
+		.body
+			+t("You call a powerful wind, one strong enough to knock a grown adult off their feet, to act on a person or object you can see. The gust is temporary, pushing against the target until the end of your next turn.")
+	.ability
+		.top
+			+t("Ray of Sunlight").name.heavy
+			.blurb
+				+t("2 Blur")
+		.body
+			+t("You briefly call on the clouds to part, illuminating someone in the scene with the soothing warmth of the sun. They can clear 3 Scatter or 1 Hit.")
+.tracker-class
+	.ability
+		.top
+			+t("Herbal Empathy").name.heavy
+			.blurb
+				+t("1 Blur")
+		.body
+			+t("Until the end of the scene, you can talk to plants. They have a limited understanding of human thoughts or behaviors, but they notice things people often fail to see.")
+	.ability
+		.top
+			+t("Symbiosis").name.heavy
+			.blurb
+				+t("1 Blur")
+		.body
+			+t("Calling on your bond with the Coral Spirit, you can be transformed. Your body is intertwined with, or changes to mimic, something natural, like an animal, insect, or plant while you undertake a challenge, and its aid grants you two additional dice for one roll.")
+	.ability
+		.top
+			+t("Interfere").name.heavy
+			.blurb
+				+t("2 Blur")
+		.body
+			+t("You call on the land to close off a path. There might be a rockslide, or the plants might overgrow, covering the ground. On the Coral Coast, your friend the Coral Spirit can intervene.")
+.arcanist-class
+	.ability
+		.top
+			+t("Soul Gathering").name.heavy
+			.blurb
+				+t("1 Blur")
+		.body
+			+t("Your Daemon can help you retrieve pieces of yourself lost to Scatter. When you use this ability, you clear 2 Scatter.")
+	.ability
+		.top
+			+t("Sticky Fingers").name.heavy
+			.blurb
+				+t("1 Blur")
+		.body
+			+t("Your Daemon can filch a small object without being caught and bring it to you.")
+	.ability
+		.top
+			+t("Wicked Advisor").name.heavy
+			.blurb
+				+t("2 Blur")
+		.body
+			+t("With the input from the literal demon on your shoulder, you can approach a problem from a different direction. You can retry any roll using either Understanding or Adaptability, instead of the facet you initially used.")
+.magus-class
+	.ability
+		.top
+			+t("Perfection").name.heavy
+			.blurb
+				+t("1 Blur")
+		.body
+			+t("The stars guide you toward perfection and certainty. When you use this ability (you can use it multiple times a roll), you can count a 3 or 4 as a Success.")
+	.ability
+		.top
+			+t("Clarity").name.heavy
+			.blurb
+				+t("2 Blur")
+		.body
+			+t("You make a minor prediction about events yet to unfold, such as where a person will be found or what kind of creature will attack. (You might need to negotiate with your Conductor for this.) Your prediction comes true.")
+	.ability
+		.top
+			+t("Icy Ray").name.heavy
+			.blurb
+				+t("Variable Blur")
+		.body
+			+t("You strike an opponent from above with a ray of cold starlight. This action automatically has a number of Successes equal to the Blur gained +1 to advance Destroy.")
+.cavalier-class
+	.ability
+		.top
+			+t("Soothing Presence").name.heavy
+			.blurb
+				+t("1 Blur")
+		.body
+			+t("Your Cloud Elk spreads its beautiful wings, sheltering everyone within its wingspan. Anyone who is being prevented from using a facet due to effects of a Crisis action can use that facet again.")
+	.ability
+		.top
+			+t("Lightning Field").name.heavy
+			.blurb
+				+t("2 Blur")
+		.body
+			+t("Your Cloud Elk creates a strong electric charge between its antlers. If you fire an arrow through this charge, it carries with it a bolt of lightning, adding 4 additional Successes to your Long-Range Weapons roll.")
+	.ability
+		.top
+			+t("Escape Route").name.heavy
+			.blurb
+				+t("3 Blur")
+		.body
+			+t("Your Cloud Elk carries you far up and away from danger, preventing you from being impacted by a Crisis action. You can only use this ability while mounted.")

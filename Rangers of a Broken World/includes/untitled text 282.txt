@@ -1,0 +1,20 @@
+.wrapper is 829px wide at default
+1244 is 150% width
+1659 is 200% width
+414px is 50% width
+
+
+@media screen and (max-width: 991px) {
+/* start of large tablet styles */
+
+}
+
+@media screen and (max-width: 767px) {
+/* start of medium tablet styles */
+
+}
+
+@media screen and (max-width: 479px) {
+/* start of phone styles */
+
+}

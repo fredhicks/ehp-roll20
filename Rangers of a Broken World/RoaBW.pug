@@ -1,9 +1,15 @@
+// Loads mixins as well as a couple key data structures
+
 include includes/mixins.pug
 
 script(type='text/worker')
 	include includes/sheet-worker.js 
+	include includes/responsiveabilities.pug
 
 .wrapper
 	include includes/sheet.pug
+
+// Template!
+include includes/roll-templates.pug
 
 +translations

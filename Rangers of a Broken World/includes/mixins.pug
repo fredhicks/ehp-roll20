@@ -1,24 +1,5 @@
-- 
-	var translations = { 
-		"Rangers of a Broken World": "Rangers of a Broken World",
-	};
-
-mixin t(text)
-	- if ( typeof(translations[text]) == "undefined" ) { translations[text] = text; }
-	span(data-i18n=text)&attributes(attributes) #{text}
-	| 
-
-mixin select(f)
-	select(name='attr_'+f class!=attributes.class)&attributes(attributes)
-		if block
-			block
-
-mixin option(t,v)
-	- if ( typeof(translations[t]) == "undefined" ) { translations[t] = t; }
-	if ( typeof(v) == "undefined" )
-		option(data-i18n=t)&attributes(attributes)
-	else
-		option(value=v data-i18n=t)&attributes(attributes)
+include abilitydata.pug
+include translations.pug
 
 mixin translations
 	- var contents = JSON.stringify(translations,null,"\t");
@@ -26,19 +7,39 @@ mixin translations
 		translation.json:
 		!{contents}
 
+mixin t(text)
+	- if ( typeof(translations[text]) == "undefined" ) { translations[text] = text; }
+	span(data-i18n=text)&attributes(attributes) #{text}
+	| 
+
+mixin select(f)
+	select(name='attr_'+f)&attributes(attributes)
+		if block
+			block
+
+mixin option(t,v)
+	- if ( typeof(translations[t]) == "undefined" ) { translations[t] = t; }
+	if ( typeof(v) == "undefined" )
+		option(value=t data-i18n=t)&attributes(attributes)
+	else
+		option(value=v data-i18n=t)&attributes(attributes)
+
 mixin number(f)
-	input(type='number' name='attr_'+f class!=attributes.class)&attributes(attributes)
+	input(type='number' name='attr_'+f)&attributes(attributes)
 
 mixin text(f)
-	input(type='text' name='attr_'+f class!=attributes.class)&attributes(attributes)
+	input(type='text' name='attr_'+f)&attributes(attributes)
+
+mixin hidden(f)
+	input(type='hidden' name='attr_'+f)&attributes(attributes)
 
 mixin textarea(f)
-	textarea(name='attr_'+f class!=attributes.class)&attributes(attributes)
+	textarea(name='attr_'+f)&attributes(attributes)
 		if block
 			block
 
 mixin display(f)
-	span(name="attr_"+f class!=attributes.class)
+	span(name="attr_"+f)&attributes(attributes)
 		if block
 			block
 
@@ -55,19 +56,30 @@ mixin fieldset(f)
 
 // Hide or Show
 
+
+mixin ahider(f)
+	+hidden(f)(value="").ahider&attributes(attributes)
+
+mixin ashower(f)
+	+hidden(f)(value="").ashower&attributes(attributes)
+
+mixin zhider(f)
+	// Hide if Zero only
+	+hidden(f)(value="0").thider&attributes(attributes)
+
 mixin thider(f)
-	input(name="attr_toggle_"+f type="hidden" class="thider" value="0")
+	+hidden("toggle_"+f)(value="0").thider&attributes(attributes)
 
 mixin tshower(f)
-	input(name="attr_toggle_"+f type="hidden" class="tshower" value="0")
+	+hidden("toggle_"+f)(value="0").tshower&attributes(attributes)
 
 mixin thiderMarked(f)
-	input(name="attr_toggle_"+f type="hidden" class="thider" value="1")
+	+hidden("toggle_"+f)(value="1").thider&attributes(attributes)
 
 mixin tshowerMarked(f)
-	input(name="attr_toggle_"+f type="hidden" class="tshower" value="1")
+	+hidden("toggle_"+f)(value="1").tshower&attributes(attributes)
 
-// Starboxes
+// Toggleboxes
 
 mixin sbox(f)
 	+thider(f)
@@ -81,18 +93,52 @@ mixin sboxMarked(f)
 	+tshowerMarked(f)
 	button(type="action" name="act_mark" value=f).starbox.unmarked
 
-// Do we need the below? Find out.
-
 mixin cbox(f)
 	+thider(f)
 	button(type="action" name="act_unmark" value=f).cbox.marked
 	+tshower(f)
 	button(type="action" name="act_mark" value=f).cbox.unmarked
 
-mixin bigbox(f)
-	+thider(f)
-	button(type="action" name="act_unmark" value=f).cbox.bigger.marked
-	+tshower(f)
-	button(type="action" name="act_mark" value=f).cbox.bigger.unmarked
+// Shorthands
 
+mixin skillmenu(n)
+	+select("skill"+n)
+		+option("(Skill)","")
+		+option("Art")
+		+option("Athletics")
+		+option("Engineering")
+		+option("Fashion")
+		+option("Finances")
+		+option("Focus")
+		+option("Humanity")
+		+option("Medicine")
+		+option("Navigation")
+		+option("Performance")
+		+option("Politics")
+		+option("Riding")
+		+option("Spirits")
+		+option("Survival")(disabled)
+		+option("Survival (Arid)","Survival (Arid)")
+		+option("Survival (Boreal)","Survival (Boreal)")
+		+option("Survival (High-Altitude)","Survival (High-Altitude)")
+		+option("Survival (Nautical)","Survival (Nautical)")
+		+option("Survival (Tropical)","Survival (Tropical)")
+		+option("Survival (Tundra)","Survival (Tundra)")
+		+option("Survival (Urban/Ruins)","Survival (Urban/Ruins)")
+		+option("Tactics")
+		+option("Tinkering")
+		+option("Tracking")
+		+option("Weapons")(disabled)
+		+option("Weapons")
+		+option("Weapons (Melee)", "Weapons (Melee)")
+		+option("Weapons (Mid-Range)", "Weapons (Mid-Range)")
+		+option("Weapons (Long-Range)", "Weapons (Long-Range)")
 
+mixin facetmenu(n)
+	+select("facet"+n)
+		+option("(Facet)","")
+		+option("Adaptability")
+		+option("Daring")
+		+option("Sensitivity")
+		+option("Subtlety")
+		+option("Understanding")

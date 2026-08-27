@@ -1,0 +1,28 @@
+.stats
+	.facets
+		+t("Facets").rhead
+		.facetgrid
+			each facet in ['Daring','Understanding','Sensitivity','Subtlety','Adaptability']
+				.name
+					+t(facet)
+				.rating
+					+hidden("toggle_"+facet+"Facet1")(value="1")
+					+sboxMarked(facet+"Facet1")
+					each val in [2, 3, 4, 5]
+						+sbox(facet+"Facet"+val)
+	.scatter
+		+t("Scatter").rhead
+		.scatbox
+			+t("Gained/Max").rlab
+			+number("scatter")(value=0 min=0)
+			.divider
+			+number("scatter_max")(value=5 min=0)
+		+t("At Max, lose consciousness").advisory
+	.blur
+		+t("Blur").rhead
+		.blurbox
+			+t("Gained/Max").rlab
+			+number("blur")(value=0 min=0)
+			.divider
+			+number("blur_max")(value=5 min=0)
+		+t("At 3 or higher, see Backlash").advisory

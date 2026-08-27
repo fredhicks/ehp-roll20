@@ -1,0 +1,578 @@
+-
+	var seasonals = {
+		"infiltrator": {
+			1: [
+				{
+					"name": "Blur Ability: Expanded Lexicon",
+					"blur": "1",
+					"desc": "You can use any Spell Note that a party member can use.",
+				},
+				{
+					"name": "Heart's Eye",
+					"blur": "",
+					"desc": "When you use your Direct Line ability, the person you communicate with can show you an image or a scene instead of speaking with you verbally, and you can do the same for them.",
+				},
+				{
+					"name": "Risk-Taker",
+					"blur": "",
+					"desc": "Once per session, you may take 2s as Edge Successes, in addition to 1s. You can make this choice after you have seen the results of a roll.",
+				},
+			],
+			2: [
+				{
+					"name": "Blur Ability: I Know Who You Are",
+					"blur": "1",
+					"desc": "You use your bond with your teammates to help them regain themselves when they are absent from their bodies. Cause a teammate to clear 2 Scatter.",
+				},
+				{
+					"name": "Blur Ability: Same Breath, Same Heartbeat",
+					"blur": "2",
+					"desc": "If you and another Ranger perform the same action in a Crisis, you both use whoever’s roll is higher, even if that roll has been augmented by a Key or other abilities.",
+				},
+				{
+					"name": "Sympathy",
+					"blur": "",
+					"desc": "When you Scatter in a Crisis, whether it is forced or voluntary, you can roll Understanding/Focus, and add those Successes to the Advantage Pool.",
+				},
+			],
+			3: [
+				{
+					"name": "Limitless",
+					"blur": "",
+					"desc": "Your max Scatter is 10 instead of 5.",
+				},
+				{
+					"name": "Single Spark",
+					"blur": "",
+					"desc": "You may gain 2 Scatter to cause a scene to descend into complete chaos. You make a small action, and the reactions to it will begin to spiral out of control. This situation will be beyond your control once started, but not beyond your understanding—until the end of the scene, you can stay one step ahead of the chaos.",
+				},
+				{
+					"name": "The Unexpected",
+					"blur": "",
+					"desc": "Roll two additional dice when you make an attack, as long as you don’t use your Daring facet.",
+				},
+			],
+			4: [
+				{
+					"name": "Blur Ability: The Monarch's Knife",
+					"blur": "3",
+					"desc": "You can call on your acquaintance with the Shadow Monarch to borrow some of their mysterious power. For the next five minutes or so, you can reach, or even attack, through any wall or barrier thinner than arm’s length.",
+				},
+				{
+					"name": "To Cut a Shadow",
+					"blur": "",
+					"desc": "During a Crisis, the cost for you to avoid a Crisis action that only targets you is reduced by 3.",
+				},
+				{
+					"name": "Where the Heart Is",
+					"blur": "",
+					"desc": "When you gain 4 or more Scatter, you may instantly move somewhere within visual range, even to places that are difficult to get to, in a manner akin to teleportation.",
+				},
+			],
+			5: [
+				{
+					"name": "Blur Ability: Dragon's Mask",
+					"blur": "3",
+					"desc": "You can call on your bond with the mysterious Shadow Monarch to change your shape. You can assume any other (human) shape you like, and remain in that shape until the end of the day.",
+				},
+				{
+					"name": "Shadow Counter",
+					"blur": "",
+					"desc": "When you avoid a Crisis action that only targets you, you gain five additional dice on your next attempt to advance Destroy.",
+				},
+			]
+		},
+		"legionnaire": {
+			1: [
+				{
+					"name": "Blur Ability: Call On Aid",
+					"blur": "Variable",
+					"desc": "When you cast a spell, if the Scatter costs exceeds your remaining capacity, you may take 1 Hit to call on the dead and use Blur to cover the additional Scatter needed. You must always fill up your Scatter first, so using this ability means losing consciousness, but with your allies, you can potentially cast incredibly powerful spells.",
+				},
+				{
+					"name": "Mazemaster",
+					"blur": "",
+					"desc": "You have an unerring sense of direction and cannot get lost as long as you have some way to observe your surroundings, using your senses such as sight, sound, or even scent.",
+				},
+				{
+					"name": "Weaponsmith",
+					"blur": "",
+					"desc": "Provided you have access to materials and a forge, you can create a custom weapon for another Ranger once per arc. As long as it is used by the person it was built for, it adds two additional dice on attacks made to advance Destroy in a Crisis.",
+				},
+			],
+			2: [
+				{
+					"name": "Blur Ability: Grave’s Chill",
+					"blur": "2",
+					"desc": "You cause the area around you to drop to below freezing temperatures. Liquids will freeze, snow will fall instead of rain, and for the rest of the day, the area will effectively be Tundra terrain. When the sun next rises, the effect is dismissed.",
+				},
+				{
+					"name": "Nightmare to the Nightmares",
+					"blur": "",
+					"desc": "Against a Horror, the difficulty for you to Destroy is reduced by 2.",
+				},
+				{
+					"name": "Supporter",
+					"blur": "",
+					"desc": "You may gain 2 Scatter to gain one additional action in a round, provided you use both your actions to add to the Advantage Pool.",
+				},
+			],
+			3: [
+				{
+					"name": "Blur Ability: Necromancer",
+					"blur": "2",
+					"desc": "You can call forth the spirit of a deceased person, as long as either you or someone else present knew them personally in life. For 10 minutes, they will be able to speak to the living, answer questions, and even move some light objects, like a pen.",
+				},
+				{
+					"name": "Dauntless",
+					"blur": "",
+					"desc": "You add a new Hit to your list, one with no consequence attached. Like any Hit, it can only be marked off once and must be cleared before it can be used again.",
+				},
+				{
+					"name": "Lead the Charge",
+					"blur": "",
+					"desc": "After you have made a skill roll in a Crisis (after the Advantage Pool has already been rolled), any party member who rolls the same skill until your next action gains two additional dice to the roll.",
+				},
+			],
+			4: [
+				{
+					"name": "Fortify",
+					"blur": "",
+					"desc": "Given time and supplies, you can fortify a position against attack. Any Tactics or Weapons roll made by another Ranger from your position gains four additional dice.",
+				},
+				{
+					"name": "Gallantry",
+					"blur": "",
+					"desc": "If a helpless person is nearby, you gain an extra action in a Crisis to protect them. This can be an NPC or an incapacitated Ranger.",
+				},
+				{
+					"name": "Last Hope",
+					"blur": "",
+					"desc": "Once per arc, if you would mark your last Hit, you may first activate your Key and take one additional action.",
+				},
+			],
+			5: [
+				{
+					"name": "Blur Ability: Blade of the Fallen",
+					"blur": "3",
+					"desc": "You summon an ethereal blade of vengeance wielded by the spirits of the lost. This attack advances Destroy by 1.",
+				},
+				{
+					"name": "Grim Determination",
+					"blur": "",
+					"desc": "When you fail to advance a Goal, are outnumbered (two to one or more) at the end of your action, or when you take your fourth Hit, clear 3 Scatter.",
+				},
+			],
+		},
+		"navigator": {
+			1: [
+				{
+					"name": "Anchor Note",
+					"blur": "",
+					"desc": "When you cast a spell or Chord, if you do so while playing music, you gain 1 fewer Scatter (to a minimum of 1).",
+				},
+				{
+					"name": "Greedy Eye",
+					"blur": "",
+					"desc": "Once per scene, you may gain 1 Scatter in exchange for knowing what the most valuable item in the scene is, not just to you, but to at least one other person in the same scene.",
+				},
+				{
+					"name": "Swashbuckler",
+					"blur": "",
+					"desc": "When you roll Daring/Athletics, the Conductor cannot offer any kind of Hit or other injury as a condition of an Edge Success.",
+				},
+			],
+			2: [
+				{
+					"name": "Blur Ability: Call On Aid",
+					"blur": "Variable",
+					"desc": "When you cast a spell, if the Scatter cost exceeds your remaining capacity, you may take 1 Hit to call on the winds and use Blur to cover the additional Scatter needed. You must always fill up your Scatter first, so using this ability means losing consciousness, but with your ally, you can potentially cast incredibly powerful spells.",
+				},
+				{
+					"name": "Crescendo",
+					"blur": "",
+					"desc": "Music has a way of touching a person’s essential nature. You can Scatter 4 to activate part of someone’s Key for them (chosen by them) and bring it to new heights, which grants two additional dice to their next action when they use the Key (total of four bonus dice).",
+				},
+				{
+					"name": "Windy Heart",
+					"blur": "",
+					"desc": "Once per arc, you may deactivate a word from your Key in exchange for losing 2 from your Blur Pool. If you have fully activated your Key, you may not use this ability until the next arc.",
+				},
+			],
+			3: [
+				{
+					"name": "Dauntless",
+					"blur": "",
+					"desc": "You add a new Hit to your list, one with no consequence attached. Like any Hit, it can only be marked off once and must be cleared before it can be used again.",
+				},
+				{
+					"name": "Invisible Chains",
+					"blur": "",
+					"desc": "When you are in the same room as someone, you can gain 2 Scatter to learn what other power holds sway over them. This ability will not give you a name, but a concept, such as “Money” or “Reputation.”",
+				},
+				{
+					"name": "Stormy Soul",
+					"blur": "",
+					"desc": "Your max Blur Pool increases to 7.",
+				},
+			],
+			4: [
+				{
+					"name": "Blur Ability: Stormfriend",
+					"blur": "4",
+					"desc": "You leverage your connection to the winds to make a deal with the weather. You can set the weather in the scene as you see fit. In a Crisis, using your action to do this advances Outlast or Redirect by 1.",
+				},
+				{
+					"name": "Dashing Hero",
+					"blur": "",
+					"desc": "When rolling Daring, you can count 4s as Successes.",
+				},
+				{
+					"name": "Fast Learner",
+					"blur": "",
+					"desc": "When you fail a roll, you may gain 2 Scatter to reroll with two additional dice, provided the circumstances allow a second attempt.",
+				},
+			],
+			5: [
+				{
+					"name": "Blur Ability: Stormcaller",
+					"blur": "4",
+					"desc": "You call down a lightning bolt to strike a single target, advancing Destroy by 2.",
+				},
+				{
+					"name": "Press the Advantage",
+					"blur": "",
+					"desc": "When a Goal is advanced in a Crisis, you roll four additional dice on your next attempt to advance the same Goal.",
+				},
+			],
+		},
+		"tracker": {
+			1: [
+				{
+					"name": "Alert Eye",
+					"blur": "",
+					"desc": "At the beginning of a Crisis, the Conductor will tell you if there are any environmental hazards or volatile terrain. If you gain 1 Scatter, the Conductor will then tell you what and where they are.",
+				},
+				{
+					"name": "Expert Predator",
+					"blur": "",
+					"desc": "When you use your Symbiosis Blur Ability, you can add one additional die to your rolls for each additional Blur gained.",
+				},
+				{
+					"name": "Lava Flow",
+					"blur": "",
+					"desc": "When you cast a spell, you may take two actions in a Crisis to cast it. If you do, it is twice as effective—adding twice as many Successes to either the Advantage Pool or a Goal. The spell is not completed until the end of your second action. Narrative effects can also be dramatically more impressive.",
+				},
+			],
+			2: [
+				{
+					"name": "Blur Ability: Transform",
+					"blur": "2",
+					"desc": "Change a natural detail about the scene. For example, add or remove a tree or boulder, cause a certain flower to bloom, or introduce a wild animal. This effect lasts until the scenery changes again (of its own accord or yours).",
+				},
+				{
+					"name": "Forest Whisper",
+					"blur": "",
+					"desc": "You can communicate with animals, even strange beasts, as if they speak your language.",
+				},
+				{
+					"name": "Herbalist",
+					"blur": "",
+					"desc": "If you are outdoors, when someone in the party is healed (even if it’s through magic), the difficulty or Scatter cost is determined as if they have 1 fewer Hits marked.",
+				},
+			],
+			3: [
+				{
+					"name": "Dauntless",
+					"blur": "",
+					"desc": "You add a new Hit to your list, one with no consequence attached. Like any Hit, it can only be marked off once and must be cleared before it can be used again.",
+				},
+				{
+					"name": "Expert Survivalist",
+					"blur": "",
+					"desc": "Against a natural disaster, the difficulty for you to Outlast is reduced by 2.",
+				},
+				{
+					"name": "Volcano Heart",
+					"blur": "",
+					"desc": "Your max Blur Pool increases to 7.",
+				},
+			],
+			4: [
+				{
+					"name": "Blur Ability: Coral Call",
+					"blur": "2",
+					"desc": "You cause the area to be overgrown with dense vegetation and flooded with heat and humidity. For the rest of the day, the area is a jungle akin to the Coral Coast in addition to its existing region type.",
+				},
+				{
+					"name": "Expert Eye",
+					"blur": "",
+					"desc": "Every time you see an enemy take an action in a Crisis, the cost to prevent that particular action is reduced by 1 for the party.",
+				},
+				{
+					"name": "Surround",
+					"blur": "",
+					"desc": "When you Scatter, you gain a small amount of control over the natural world around you until your next turn ends. You can control plants and animals in the nearby area.",
+				},
+			],
+			5: [
+				{
+					"name": "Blur Ability: World’s Memory",
+					"blur": "",
+					"desc": "You return the surrounding area to the way it once was. You might revive an old natural disaster, restore lost vegetation, or remember burnt-down buildings. It remains that way until the end of the week.",
+				},
+				{
+					"name": "Apex Predator",
+					"blur": "",
+					"desc": "Every time you see an enemy’s action, you gain one additional die on all rolls to advance a Goal until the end of the Crisis. These bonus dice stack and are only removed when the Crisis ends.",
+				},
+			],
+		},
+		"arcanist": {
+			1: [
+				{
+					"name": "Demonologist",
+					"blur": "",
+					"desc": "You can always recognize a Demon or the work of a Demon, even if it is in the guise of another creature.",
+				},
+				{
+					"name": "Iron Will",
+					"blur": "",
+					"desc": "You don’t fall unconscious when your Scatter fills. You are borderline catatonic—capable of limited verbal response and movement, but you can’t perform more complicated actions than that.",
+				},
+				{
+					"name": "Soul Siphon",
+					"blur": "",
+					"desc": "When someone around you Scatters, you may clear 1 Scatter from your own total.",
+				},
+			],
+			2: [
+				{
+					"name": "Blur Ability: Call On Aid",
+					"blur": "Variable",
+					"desc": "When you cast a spell, if the Scatter cost exceeds your remaining capacity, you may take 1 Hit to call on your Daemon and use Blur to cover the additional Scatter needed. You must always fill up your Scatter first, so using this ability means losing consciousness, but with your ally, you can potentially cast incredibly powerful spells.",
+				},
+				{
+					"name": "Determination",
+					"blur": "",
+					"desc": "When you make a roll, you may gain 2 Scatter. If you do, you may immediately make the same roll again, rolling one additional die, provided the circumstances allow a second attempt.",
+				},
+				{
+					"name": "Infernal Dodge",
+					"blur": "",
+					"desc": "When an adversary makes a Crisis action against you or a party member, you may reduce the cost to avoid the attack by gaining 1 Scatter per Success required.",
+				},
+			],
+			3: [
+				{
+					"name": "Advisor",
+					"blur": "",
+					"desc": "You may gain 2 Scatter to allow a party member to reroll any roll, using your Understanding instead of the facet they originally used.",
+				},
+				{
+					"name": "Limitless",
+					"blur": "",
+					"desc": "Your max Scatter is 10 instead of 5.",
+				},
+				{
+					"name": "Master Diplomat",
+					"blur": "",
+					"desc": "Against a Noble Demon or its Lesser Daemons, the difficulty for you to Redirect is reduced by 2.",
+				},
+			],
+			4: [
+				{
+					"name": "Blur Ability: Mysterious Body",
+					"blur": "3",
+					"desc": "Your connections to the Demon world pull you closer to their own reality. Until the scene ends, you are a wisp of smoke, phantasm, or other mysterious and borderline-corporeal entity.",
+				},
+				{
+					"name": "Calm Heart",
+					"blur": "",
+					"desc": "When you activate part of your Key, you clear 2 Scatter and gain access to one of your Signature Spell Notes. Add three more words to your Signature Spell Notes.",
+				},
+				{
+					"name": "Font of Magic",
+					"blur": "",
+					"desc": "Your fellow Rangers can use your Personal Spell Notes as if they were Terrain Spell Notes and you can use theirs in the same way.",
+				},
+			],
+			5: [
+				{
+					"name": "Blur Ability: Diabolical Gift",
+					"blur": "5",
+					"desc": "You are given an item by a Lesser Daemon or even a Noble Demon of your acquaintance in the form of a Memoria. You can use this ability once per arc.",
+				},
+				{
+					"name": "Blur Ability: Noble Voice",
+					"blur": "5",
+					"desc": "Summon a Lesser Daemon to aid you in combat. This Daemon can act as if it were a party member, and gets its own action in a Crisis. It rolls six dice for whatever action you require, but prefers to solve problems with violence. Talk to your Conductor about other specifics, such as appearance, thematic abilities, and specific attacks.",
+				},
+			],
+		},
+		"magus": {
+			1: [
+				{
+					"name": "Blur Ability: Call On Aid",
+					"blur": "Variable",
+					"desc": "When you cast a spell, if the Scatter cost exceeds your remaining capacity, you may take 1 Hit to call on the stars and use Blur to cover the additional Scatter needed. You must always fill up your Scatter first, so using this ability means losing consciousness, but with your ally, you can potentially cast incredibly powerful spells.",
+				},
+				{
+					"name": "Good Omen",
+					"blur": "",
+					"desc": "You may gain 1 Scatter in exchange for a clear sign of what to do, where to go, or who to talk to next.",
+				},
+				{
+					"name": "The Way of the Dunes",
+					"blur": "",
+					"desc": "Once per day when you tell a story, sing a song, or recite a parable, people find their hearts soothed. Anyone listening to you may clear 1 Scatter or 1 Blur. You cannot do this in a Crisis.",
+				},
+			],
+			2: [
+				{
+					"name": "Fuzzy Clarity",
+					"blur": "",
+					"desc": "Every time you gain Scatter, you may request information about the scene from the Conductor, even information you have no other way of knowing.",
+				},
+				{
+					"name": "Patience",
+					"blur": "",
+					"desc": "When your party goes the entire round of a Crisis without advancing a Goal, you gain one additional die to all rolls until a Goal is advanced.",
+				},
+				{
+					"name": "Specialist",
+					"blur": "",
+					"desc": "Choose a creature type when you take this ability (Dragon, Demon, Horror, Beast, Automaton). You can automatically recognize this creature’s handiwork. When in a Crisis involving one, the difficulty to advance a Goal is reduced by 1.",
+				},
+			],
+			3: [
+				{
+					"name": "Blur Ability: Glittering Wisdom",
+					"blur": "2",
+					"desc": "You call down a Star Spirit from the sky, a humanoid flower with great waving petals. It speaks your language, and it has a great deal of knowledge about the world it has seen from the sky, but it struggles to understand the point of view from the earth. It also knows, from one point of view, how things are fated to unfold.",
+				},
+				{
+					"name": "Dauntless",
+					"blur": "",
+					"desc": "You add a new Hit to your list, one with no consequence attached. Like any Hit, it can only be marked off once and must be cleared before it can be used again.",
+				},
+				{
+					"name": "Sandstorm’s Speed",
+					"blur": "",
+					"desc": "You walk at a normal human’s running speed, and run as fast as an antelope.",
+				},
+			],
+			4: [
+				{
+					"name": "Contemplation",
+					"blur": "",
+					"desc": "If you spend at least an hour in silent contemplation, you can activate a part of your Key. After you have done this, you gain two additional dice on your next action.",
+				},
+				{
+					"name": "Limitless",
+					"blur": "",
+					"desc": "Your max Scatter is 10 instead of 5.",
+				},
+				{
+					"name": "No Safe Haven",
+					"blur": "",
+					"desc": "You may gain 4 Scatter to immediately become aware of a creature’s home, lair, or other resting place. This includes humans.",
+				},
+			],
+			5: [
+				{
+					"name": "Blur Ability: Glittering Judgment",
+					"blur": "4",
+					"desc": "You call down a Star Spirit from the sky, a brilliant whirl of petals, light, and vengeance. It chooses its target on its own from among those it perceives to have wronged you. Once it has a target, it will remain in combat with its target, adding 5 Successes to the Advantage Pool every turn just before you take an action. It continues until its target is annihilated.",
+				},
+				{
+					"name": "Indestructible",
+					"blur": "",
+					"desc": "Once per arc, you may mark the same Hit twice without clearing it.",
+				},
+			],
+		},
+		"cavalier": {
+			1: [
+				{
+					"name": "Forest Whisper",
+					"blur": "",
+					"desc": "You can communicate with animals, even strange beasts, as if they speak your language.",
+				},
+				{
+					"name": "Minor Miracle",
+					"blur": "",
+					"desc": "If you use your full action in a Crisis giving medical aid, you may clear 4 Scatter or 2 Blur for another person.",
+				},
+				{
+					"name": "Pine Needle",
+					"blur": "",
+					"desc": "You can use Terrain Spell Notes as Personal Spell Notes.",
+				},
+			],
+			2: [
+				{
+					"name": "Blur Ability: Call On Aid",
+					"blur": "Variable",
+					"desc": "When you cast a spell, if the Scatter cost exceeds your remaining capacity, you may take 1 Hit to call on your Cloud Elk and use Blur to cover the additional Scatter needed. You must always fill up your Scatter first, so using this ability means losing consciousness, but with your ally, you can potentially cast incredibly powerful spells.",
+				},
+				{
+					"name": "Sympathy",
+					"blur": "",
+					"desc": "When a party member takes a Hit, you may regain 2 Scatter.",
+				},
+				{
+					"name": "Warmhearted",
+					"blur": "",
+					"desc": "When you join in a Chord, one other caster can clear 1 Hit.",
+				},
+			],
+			3: [
+				{
+					"name": "Blur Ability: Thunderhoof Kick",
+					"blur": "2",
+					"desc": "You and your mount call down the electric heart of the clouds, summoning a bolt of lightning and driving it into an opponent. It adds Successes to Destroy equal to three times the amount in your Blur Pool (after using the ability).",
+				},
+				{
+					"name": "Misty Bond",
+					"blur": "",
+					"desc": "Your max Blur Pool increases to 7.",
+				},
+				{
+					"name": "View From Above",
+					"blur": "",
+					"desc": "You roll four additional dice on Tactics rolls during a Crisis if you are airborne.",
+				},
+			],
+			4: [
+				{
+					"name": "Blur Ability: Eyes of the Woods",
+					"blur": "2",
+					"desc": "You have a bond not only with your Cloud Elk, but with all the small and harmless creatures of the woods. You can call out to birds, rabbits, goats, and other herbivores, and they will tell you what they have seen in a large nearby area. They can tell you about anything unusual happening within a day’s travel. For the rest of the day, they will alert you to any new threats they detect.",
+				},
+				{
+					"name": "Gallantry",
+					"blur": "",
+					"desc": "If there is a helpless person nearby, you gain an extra action in a Crisis to protect them. This can be an NPC or incapacitated Ranger.",
+				},
+				{
+					"name": "Limitless",
+					"blur": "",
+					"desc": "Your max Scatter is 10 instead of 5.",
+				},
+			],
+			5: [
+				{
+					"name": "Blur Ability: Call to the Woods",
+					"blur": "3",
+					"desc": "You have a bond with all the harmless creatures of the woods. If there is something in the area that you need, be it a certain plant, an object, or even a trusting person, you can ask the local creatures to bring it to you, and they will as long as they can. If they cannot, they will lead you to it. Their knowledge of the area is infinitely better than yours, and they give perfect directions to the lost or questing.",
+				},
+				{
+					"name": "Resonant Heart",
+					"blur": "",
+					"desc": "When you play off your Key, someone nearby can clear either 2 Hits or 3 Scatter.",
+				},
+			],
+		},
+	};
+

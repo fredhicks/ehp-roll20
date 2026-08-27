@@ -1,0 +1,21 @@
+.notes
+	.personal
+		.top
+			+t("Personal Spell Notes").rhead
+			+t("Gain Scatter when used.").advisory
+		+textarea("personalnotes")(rows=2)
+	.advisory
+		+t("Pick six personal spell notes from your class list:")
+		+hidden("class").cshower
+		+t("Changing, Darkness, End, Hidden, Hunting, Knife, Lurking, Me, Mysterious, Revolution, Ruin, Watching").infiltrator-class
+		+t("Advancing, Allies, Armor, Battlefield, Endless, Enemies, Fearless, Grim, Protecting, Striking, Victory, Weapon").legionnaire-class
+		+t("Command, Crew, Joyous, Lifting, Moving, Note, Rallying, Rope, Singing, United, Water, Wind").navigator-class
+		+t("Changing, Chaos, Coral, Dazzling, Erupting, Flower, Fruit, Predator, Shifting, Toxin, Treacherous, Waiting").tracker-class
+		+t("Ascent, Clouded, Cold, Dangerous, Freezing, Judgment, Nightmares, Scream, Seeing, Sharp, Spirits, Summoning").arcanist-class
+		+t("Finding, Heat, Moving, Respite, Sands, Searching, Searing, Speaking, Strength, Sun, Water, Wise").magus-class
+		+t("Arrow, Beautiful, Encouraging, Feather, Flying, Heart, Journey, Restoring, Sky, Soft, Wind, Wondrous").cavalier-class
+	.blur
+		.top
+			+t("Blur Spell Notes").rhead
+			+t("Gain Blur when used.").advisory
+		+textarea("blurnotes")(rows=1)

@@ -1,0 +1,62 @@
+- 
+	// This is where we need to ensure the thing acts correctly when certain abilities are selected. mixins.pug should already load abilitydata.pug's seasonals JSON object.
+
+each seasons, pc in seasonals
+	each list, season in seasons
+		- var step = 0;
+		each ability in list
+			- 
+				step++;
+				var selector = "ability-"+pc+"-s"+season;
+				var optval = step;
+				var aname = ability.name;
+			if aname == "Dauntless"
+				.
+					// Selecting or unselecting a Dauntless ability should cause action
+					on("change:#{selector}", function(event) {
+						if ( typeof(event.newValue) !== "undefined" ) {
+							var sets = {};
+							if ( event.newValue == #{optval} ) {
+								// Then Dauntless was selected
+								sets.toggle_newhit = 1;
+							} else {
+								// Then Dauntless was not selected
+								sets.toggle_newhit = 0;
+							}
+							setAttrs(sets);
+						}
+					});
+			else if aname == "Limitless"
+				.
+					// Selecting or unselecting a Limitless ability should cause action
+					on("change:#{selector}", function(event) {
+						if ( typeof(event.newValue) !== "undefined" ) {
+							var sets = {};
+							if ( event.newValue == #{optval} ) {
+								// Then Limitless was selected
+								sets.scatter_max = 10;
+							} else {
+								// Then Limitless was not selected
+								sets.scatter_max = 5;
+							}
+							log(sets);
+							setAttrs(sets);
+						}
+					});
+			else if ( aname == "Stormy Soul" || aname == "Volcano Heart" || aname == "Misty Bond" )
+				.
+					// Selecting or unselecting a #{aname} ability should cause action
+					on("change:#{selector}", function(event) {
+						if ( typeof(event.newValue) !== "undefined" ) {
+							var sets = {};
+							if ( event.newValue == #{optval} ) {
+								// Then #{aname} was selected
+								sets.blur_max = 7;
+							} else {
+								// Then #{aname} was not selected
+								sets.blur_max = 5;
+							}
+							log(sets);
+							setAttrs(sets);
+						}
+					});
